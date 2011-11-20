@@ -1,0 +1,61 @@
+<?page title="Atletas por Representante" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Atletas por Representante" border="normal"
+		width="520px" closable="true" maximizable="true" minimizable="true">
+		<panel title="">
+			<panelchildren>
+				<grid style="border:none;" oddRowSclass="none">
+					<columns>
+						<column width="12%" />
+						<column width="25%" />
+						<column width="20%" />
+						<column width="45%" />
+						<column />
+					</columns>
+					<rows>
+						<row>
+							<label value="Cédula " />
+							<div>
+								<textbox maxlength="40" width="90%"
+									disabled="true" />
+							</div>
+							<label value="Representante" />
+							<textbox maxlength="40" width="95%"
+								disabled="true" />
+						</row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column label="Nombre del Atleta" width="40%" />
+						<column label="Categoría" width="40%" />
+					</columns>
+					<rows>
+						<row>
+							<label value="Alberto Gómez" />
+							<label value="Junior A" />
+						</row>
+						<row>
+							<label value="Juan Luis Camacho" />
+							<label value="Junior B" />
+						</row>
+						<row>
+							<label value="Carlos Perez" />
+							<label value="Juvenil A" />
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<space />
+			<button label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+			<space />
+		</div>
+	</window>
+</zk>

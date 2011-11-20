@@ -1,0 +1,174 @@
+<?page title="Registro Plan Vacacional" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="" border="none"
+		width="660px" closable="true" maximizable="true" minimizable="true">
+		<div align="left">
+			<div >
+				<panel title="Atleta" >
+					<panelchildren>
+					   <grid>
+						<columns>
+							<column width="22%" />
+							<column width="31%" />
+							<column width="11%" />
+							<column width="39%" />
+						</columns>
+						<rows>
+							<row>
+							  
+								<label value="Tipo de Alumno" />
+								<cell colspan="3">
+									<combobox value="-Seleccione-"
+										width="33%" focus="true">
+										<comboitem label="Regular" />
+										<comboitem label="No Regular" />
+									</combobox>
+									<label value="(*)" style="color:red" />
+								</cell>
+							</row>
+							
+							<row>
+								<label value="Nombre" />
+								<div>
+									<textbox maxlength="40" width="88%" />
+									<label value="(*)"
+										style="color:red" />
+								</div>
+								<label value="Apellido"
+									width="90%" />
+								<div>
+									<textbox maxlength="40" width="70%" />
+									<label value="(*)"
+										style="color:red" />
+									<button image="./Recursos/Imagenes/consultar.ico" orient="horizontal" />
+								</div>
+							</row>
+									<row>
+							<label value="Fecha de Nacimiento " />
+							<div>
+								<datebox constraint="no future"
+									format="dd/MM/yyyy" width="89%" />
+								<label value="(*)" style="color:red" />
+							</div>
+							<label value="Categoria" />
+							<div>
+								<combobox value="-Seleccione-"
+									width="70%">
+									<comboitem
+										label="Preparatorio Nivel 1" />
+									<comboitem
+										label="Preparatorio Nivel 2" />
+									<comboitem label="Pre-Infantil" />
+									<comboitem label="Infantil" />
+									<comboitem label="Pre-Junior" />
+									<comboitem label="Junior" />
+									<comboitem label="Juvenil" />
+								</combobox>
+								<label value="(*)" style="color:red" />
+							</div>
+
+						</row>
+							<row>
+								<label value="Talla de Camisa" />
+								<div>
+									<combobox value="-Seleccione-"
+										width="88%">
+										<comboitem label="SS" />
+										<comboitem label="S" />
+										<comboitem label="M" />
+										<comboitem label="L" />
+										<comboitem label="XL" />
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</div>
+							</row>
+					
+						</rows>
+					   </grid>
+					    </panelchildren>
+					   </panel>
+					   </div>
+					   <div >
+			 <panel title="Representante" >
+				<panelchildren>
+					<grid>
+						<columns>
+							<column width="22%" />
+							<column width="31%" />
+							<column width="11%" />
+							<column width="39%" />
+						</columns>
+						<rows>
+								<row>
+									<label value="Cédula" />
+								<cell colspan="3">
+									<combobox value="-" width="10%">
+										<comboitem label="V" />
+										<comboitem label="E" />
+									</combobox>
+									<space />
+									<intbox constraint="no negative"
+										width="19%" />
+								   	<label value="(*)"
+										style="color:red" />
+									
+								</cell>
+							</row>
+							<row>
+								<label value="Nombre" />
+								<div>
+									<textbox width="89%"></textbox>
+									<label value="(*)"
+										style="color:red" />
+								</div>
+								<label value="Apellido" />
+								<div>
+									<textbox width="70%"></textbox>
+									<label value="(*)"
+										style="color:red" />
+								</div>
+
+							</row>
+							<row>
+								<label value="Teléfono Celular" />
+
+								<cell colspan="4">
+									<combobox width="12%"
+										value="0412">
+										<comboitem label="0414" />
+										<comboitem label="0416" />
+										<comboitem label="0424" />
+										<comboitem label="0426" />
+									</combobox>
+									<space />
+									<textbox width="19%" />
+									<label value="(*)"
+										style="color:red" />
+								</cell>
+
+							</row>		
+
+						</rows>
+					</grid>
+					</panelchildren>
+				  </panel>
+				</div>		
+			<space /><space />
+			<div align="right">
+			<button label="Guardar" image="./Recursos/Imagenes/guardar.ico"
+				orient="horizontal" width="15%" />
+			<space />
+			<button label="Cancelar" image="./Recursos/Imagenes/cancelar.ico"
+				orient="horizontal" width="15%" />
+			<space />
+			<button label="Salir" image="./Recursos/Imagenes/salir.png"
+				orient="horizontal" width="15%" />
+			<space />
+		</div>
+		<label value="(*) Estos campos son obligatorios"
+			style="color:red" />
+					 
+       </div>
+	</window>
+</zk>

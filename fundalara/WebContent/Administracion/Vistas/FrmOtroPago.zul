@@ -1,0 +1,48 @@
+
+<zk>
+	<window id="winPOP" title="Otro Pago" border="modal">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void nose() {
+		String var = c.getSelectedItem().getValue().toString();
+
+		if (c.getSelectedItem().getValue().equals("Uniform")) {
+			Window window = (Window) Executions.createComponents(
+					"FrmSolUniforme.zul", null, null);
+			winSU.doModal();
+
+		} else {
+			Window window = (Window) Executions.createComponents(
+					"FrmMensualidad.zul", null, null);
+			winM.doModal();
+		}
+
+	}
+]]></zscript>
+
+		<panel title="Otro Pago" collapsible="true">
+			<panelchildren>
+				<combobox id="c" onSelect="nose()"
+					autocomplete="true">
+					<comboitem label="Nuevo Uniforme" value="Uniform" />
+					<comboitem label="Mensualidad" value="Mensu" />
+				</combobox>
+				<div align="right">
+				<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" >
+					<attribute name="onClick">
+							{
+								winPOP.onClose();
+							}
+						</attribute>
+				</button>
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

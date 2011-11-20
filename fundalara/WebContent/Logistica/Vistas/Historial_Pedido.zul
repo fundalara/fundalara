@@ -1,0 +1,72 @@
+<?page title="Historial Prestamos" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Historial de Prestamos" border="normal" width="90%"
+		height="90%" mode="modal" closable="true">
+		<grid>
+			<columns>
+					<column width="20%" align="center">
+						<label style="font-weight:bold;">
+							Material
+						</label>
+					</column>
+					<column width="20%" align="center">
+						<label style="font-weight:bold;">
+							Cantidad
+						</label>
+					</column>
+					<column width="20%" align="center">
+						<label style="font-weight:bold;">
+							Actividad
+						</label>
+					</column>
+					<column width="20%" align="center">
+						<label style="font-weight:bold;">
+							Fecha De Asignación
+						</label>
+					</column>
+					<column width="20%" align="center">
+						<label style="font-weight:bold;">
+							Intervalo de Uso
+						</label>
+					</column>
+			</columns>
+			<rows>
+					<row>
+						<label>
+							Guantes
+						</label>
+						<label>
+							2
+						</label>
+						<label>
+							Entrenamiento
+						</label>	
+						<label>
+							01/11/2011
+						</label>
+						<label>
+							12:00pm - 4:00pm
+						</label>
+					</row>
+					<row>
+						<label>
+							Guantes
+						</label>
+						<label>
+							6
+						</label>
+						<label>
+							Competencia
+						</label>	
+						<label>
+							01/11/2011
+						</label>
+						<label>
+							2:00pm - 6:00pm
+						</label>
+					</row>					
+			</rows>
+		
+		</grid>
+	</window>
+</zk>

@@ -1,0 +1,184 @@
+<?page title=""?>
+<zk>
+	<!-- zscript><![CDATA[
+		public void enlace(String cad) {
+		cuerpo.setSrc(cad);
+		}
+		]]></zscript-->
+
+	<window title="Registro de Sanciones" border="normal" width="640px"
+		closable="true">
+		<groupbox>
+			<caption label="Atleta"></caption>
+			<grid>
+				<columns>
+					<column width="15%" />
+					<column width="30%" />
+					<column width="15%" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Nombre" />
+						<hbox>
+							<button
+								image="../../Recursos/Imagenes/consultar.ico">
+								<attribute name="onClick"><![CDATA[
+									Window nuevaVentana = (Window) Executions.createComponents(
+											"Atleta/Vista/Busquedatleta.zul", null, null);
+									try {
+										nuevaVentana.doModal();
+									} catch (Exception e) {
+									}
+								]]></attribute>
+							</button>
+							<textbox disabled="true" maxlength="40" />
+						</hbox>
+						<label value="Apellido" />
+						<div>
+							<textbox disabled="true" maxlength="40" />
+						</div>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<panel title="Datos de Sancion " collapsible="false"
+			open="true">
+			<panelchildren>
+				<groupbox>
+					<grid oddRowSclass="none">
+						<columns>
+							<column width="20%" />
+							<column width="36%" />
+							<column width="20%" />
+							<column width="30%" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Actividad" />
+								<cell colspan="3">
+									<hbox>
+										<combobox
+											value="-Seleccione-">
+											<comboitem
+												label="Competencia" />
+											<comboitem
+												label="Entrenamiento" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+										<space />
+										<toolbarbutton
+											image="../../Recursos/Imagenes/agregar.ico"
+											tooltiptext="Agregar actividad">
+											<attribute name="onClick"><![CDATA[
+												Window nuevaVentana = (Window) Executions.createComponents(
+														"Atleta/Vista/Busquedatleta.zul", null, null);
+												try {
+													nuevaVentana.doModal();
+												} catch (Exception e) {
+												}
+											]]></attribute>
+										</toolbarbutton>
+									</hbox>
+								</cell>
+							</row>
+							<row>
+								<label value="Motivo de Sancion" />
+								<cell colspan="3">
+									<hbox>
+										<combobox
+											value="-Seleccione-">
+											<comboitem
+												label="Agresion al adversario" />
+											<comboitem
+												label="Agresion al arbitro" />
+											<comboitem
+												label="Agresion al tecnico" />
+											<comboitem
+												label="Jugador ilegal" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+										<space />
+										<toolbarbutton
+											image="../../Recursos/Imagenes/agregar.ico"
+											tooltiptext="Agregar motivo">
+										</toolbarbutton>
+									</hbox>
+								</cell>
+							</row>
+							<row>
+								<label value="Periodo" />
+								<hbox>
+									<combobox id="combo"
+										value="-Seleccione-">
+										<comboitem label="Juego"
+											value="Juego" />
+										<comboitem label="Tiempo"
+											value="Tiempo" />
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+								<label value="Inicio de Sancion" />
+								<hbox>
+									<datebox id="nacimientobox"
+										constraint="no future" format="dd/MM/yyyy" />
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+							<row></row>
+							<row align="left">
+								<label value="Cantidad" />
+								<cell colspan="3">
+									<hbox>
+										<decimalbox></decimalbox>
+										<label id="ayu"
+											visible="false">
+										</label>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</cell>
+							</row>
+							<row>
+								<label value="Documentos"></label>
+								<cell colspan="3">
+									<hbox>
+										<checkbox
+											label="Informe Técnico de Sanción" />
+										<checkbox
+											label="Recepción de Memo de Sanción" />
+									</hbox>
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<div height="55%">
+			<label value="(*) Estos campos son obligatorios"
+				style="color:red">
+			</label>
+		</div>
+		<div align="right">
+			<button label="Guardar"
+				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" />
+			<space />
+			<button label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<space />
+			<button label="Salir" image="./Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px" />
+			<space />
+		</div>
+	</window>
+
+	<!-- div style="display:inline">
+		<include id="cuerpo" />
+		</div-->
+</zk>

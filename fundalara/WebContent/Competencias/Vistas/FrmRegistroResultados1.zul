@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><?page title="Registro de Resultados" contentType="text/html;charset=UTF-8"?>
+<zk>
+<zscript>
+<![CDATA[
+     void resultados(){
+    	 Executions.createComponents("/Competencias/Vistas/FrmResultados.zul", null, null); 
+     }
+ ]]>
+ </zscript>
+<div id="Dregresult" align="Center">
+		<window title="REGISTRO DE RESULTADOS" border="normal"
+			id="FrmRresultados" width="75%" height="auto">
+			<panel border="normal">
+				<caption label="Datos de la Competencia" />
+				<panelchildren>
+					<grid>
+						<columns>
+							<column width="40px" align="left" />
+							<column width="40px" />
+							<column width="60px" />
+							<column width="60px" />
+							<column width="50px" />
+							<column width="60px" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Competencia" />
+
+								<textbox cols="20" />
+								<button
+									image="../../Recursos/Imagenes/consultar.ico" />
+
+
+								<label value="Fecha Inicio" />
+								<textbox cols="10" />
+								<label value="Fecha Fin" />
+								<textbox cols="10" />
+							</row>
+
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel>
+				<caption label="Datos Basicos del Juego" />
+				<panelchildren>
+					<grid>
+						<columns>
+							<column label="" />
+							<column label="" width="200px" />
+							<column label="" />
+							<column label="" />
+							<column label="" />
+							<column label="" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Juego" />
+								<hbox>
+									<textbox cols="20" />
+									<button
+										image="../../Recursos/Imagenes/consultar.ico" />
+
+								</hbox>
+								<label value="Fecha" />
+								<textbox cols="11" />
+								<label value="Hora" />
+								<textbox cols="11" />
+							</row>
+							<row>
+								<label value="Campo" />
+								<textbox cols="20" />
+								<label value="Innigs" />
+								<spinner cols="9" />
+								<label value="Tiempo" />
+								<textbox cols="11" />
+							</row>
+							<row>
+								<label value="Umpire"></label>
+								<hbox>
+									<textbox cols="20" />
+									<button
+										image="../../Recursos/Imagenes/consultar.ico" />
+								</hbox>
+								<label value="Anotador"></label>
+								<textbox cols="11" />
+							</row>
+						</rows>
+					</grid>
+
+
+				</panelchildren>
+			</panel>
+			<panel>
+				<caption label="Resultados Colectivos" />
+				<panelchildren>
+					<grid>
+						<columns>
+							<column align="center" label="Equipos" />
+							<column align="center" label="1" />
+							<column align="center" label="2" />
+							<column align="center" label="3" />
+							<column align="center" label="4" />
+							<column align="center" label="5" />
+							<column align="center" label="6" />
+							<column align="center" label="7" />
+							<column align="center" label="8" />
+							<column align="center" label="9" />
+							<column align="center" label="C" />
+							<column align="center" label="H" />
+							<column align="center" label="E" />
+
+
+						</columns>
+						<rows>
+							<row>
+								<label value="Equipo A"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+							</row>
+							<row>
+								<label value="Equipo B"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+								<label value="0"></label>
+							</row>
+
+						</rows>
+
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel>
+			  <panelchildren>
+				  <div align="right">
+				    <button image="" label="Resultados Individuales"  onClick="resultados()" ></button>
+				    <button image="../../Recursos/Imagenes/guardar.ico" label="Guardar" ></button>
+					<button image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar" ></button>
+					<button image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"></button>
+					<button image="../../Recursos/Imagenes/salir.png" label="Salir" ></button>
+				  </div>
+			  </panelchildren>
+			</panel>
+
+		</window>
+
+	</div>
+</zk>

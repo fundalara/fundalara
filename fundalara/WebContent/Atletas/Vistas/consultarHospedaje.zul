@@ -1,0 +1,103 @@
+<?page title="Consulta Hospedaje" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Consulta de Hospedaje" border="normal" width="670px"
+		closable="true" maximizable="true" minimizable="true">
+
+		<zscript>
+							<![CDATA[
+	//@IMPORT
+	import org.zkoss.lang.Strings;
+	import org.zkoss.lang.Objects;
+]]><![CDATA[
+	//@DECLARATION
+	public void enlace(String cad) {
+		cuerpo.setSrc(cad);
+	}
+	public void changeWindowRA() {
+		String valor = tipoI.getSelectedItem().getValue();
+		enlace("");
+		if (Objects.equals(valor, "1")) {
+			//tipoA.setButtonVisible(true); // 
+			tipoB.setVisible(false);
+			tipoD.setVisible(false);
+			tipoE.setVisible(false);
+			tipoA.setVisible(true);
+			tipoC.setVisible(true);
+
+		} else {
+			tipoA.setVisible(false);
+			tipoC.setVisible(false);
+			tipoB.setVisible(true);
+			tipoD.setVisible(true);
+			tipoE.setVisible(true);
+			//enlace("registrarPlanVacacional.zul");
+		}
+	}
+	public void changeWindow() {
+		String valor1 = tipoA.getSelectedItem().getValue();
+		enlace("");
+		if (Objects.equals(valor1, "1")) {
+			enlace("Atleta/Vista/contenidoHospedajeCompetencia.zul");
+		} else
+			enlace("Atleta/Vista/contenidoHospedajeCompetencia.zul");
+	}
+]]></zscript>
+			<grid width="100%" style="border:none;" oddRowSclass="none">
+			<columns>
+				<column width="20%" />
+				<column width="30%" />
+				<column width="25%" />
+				<column width="25%" />
+			</columns>
+			<rows >
+				<row style="border:none;" >
+				<hbox>
+					<label value="Tipo de Consulta"/>
+				</hbox>
+		
+				<hbox>
+					
+						<combobox value="-Seleccione-" width="70%"
+							id="tipoI" focus="true" onChange="changeWindowRA()">
+							<comboitem label="Competencia" value="1" />
+							<comboitem label="Representante" value="2" />
+						</combobox>
+				</hbox>
+				<hbox>
+					
+						<label id="tipoB" visible="false" >Cédula Representante</label>
+						<label id="tipoC" visible="false" >Competencia</label>
+				</hbox>
+				<hbox>
+						<textbox width="85%" id="tipoD" visible="false"></textbox>
+						<button visible="false" id="tipoE" onClick=""
+							image="../../Recursos/Imagenes/consultar.ico">
+							<attribute name="onClick"><![CDATA[
+							enlace("Atleta/Vista/contenidoHospedajeRepresentante.zul");
+]]></attribute>
+						</button>
+
+						<combobox value="-Seleccione-" width="80%"
+							id="tipoA" visible="false" onChange="changeWindow()">
+							<comboitem label="2010-2011" value="1"></comboitem>
+							<comboitem label="2009-2010" value="2"></comboitem>
+						</combobox>
+					</hbox>
+				</row>
+			</rows>
+
+		</grid>
+
+		<space />
+
+		<div style="display:inline">
+			<include id="cuerpo" />
+		</div>
+
+		<div align="right">
+			<button label="Salir" image="../../Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px" />
+			<space />
+		</div>
+	</window>
+</zk>

@@ -1,0 +1,230 @@
+<?page title="Pago de Nómina por Empleado" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="regresa"  title="Pago de Nómina por Empleado"
+		border="normal" mode="modal" position="center" width="650px">
+		<zscript>
+<![CDATA[ 
+]]></zscript>
+
+
+		<zscript>
+<![CDATA[
+	//@IMPORT
+	import org.zkoss.lang.Strings;
+]]><![CDATA[
+	//@DECLARATION
+	public void regresa() {
+		Window window = (Window) Executions.createComponents("Nomina.zul",
+				null, null);
+	}
+	public void salir() {
+		regresa.onClose();
+	}
+]]><![CDATA[
+		                		
+		                		]]></zscript>
+		<groupbox>
+			<caption>Datos del Empleado</caption>
+			<grid>
+				<columns>
+					<column label="" width="110px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Cédula" />
+						<textbox width="193px" value="14392830" />
+					</row>
+					<row>
+						<label value="Nombres" />
+						<textbox width="193px" value="Diego Alberto" />
+					</row>
+					<row>
+						<label value="Apellidos" />
+						<textbox width="193px" value="Alves Guaita" />
+					</row>
+					<row>
+						<label value="Cargo" />
+						<textbox width="193px" value="Técnico" />
+					</row>
+					<row>
+						<label value="Sueldo Base" />
+						<textbox width="193px" value="1500 Bs." />
+					</row>
+				</rows>
+			</grid>
+			<separator></separator>
+			<separator></separator>
+		</groupbox>
+		<groupbox>
+			<caption>Período</caption>
+			<separator></separator>
+			<space></space>
+			<label>Fecha</label>
+			<textbox value=" 16/11/2011" width="9%" disabled="true">
+			</textbox>
+			<label>-</label>
+			<textbox value=" 30/11/2011" width="9%" disabled="true">
+			</textbox>
+			<separator></separator>
+			<space></space>
+			<label>Estado</label>
+			<textbox value=" Actual" width="5%" disabled="true"></textbox>
+		</groupbox>
+		<panel title="Asignaciones" collapsible="true" open="false">
+			<panelchildren>
+				<groupbox>
+					<grid>
+						<rows>
+							<row>
+								<listbox>
+									<listhead>
+										<listheader
+											label="Concepto de Asignación" sort="auto" />
+										<listheader
+											label="Monto a Pagar" sort="auto" />
+									</listhead>
+									<listitem>
+										<listcell label="Cesta Ticket" />
+										<listcell label="270 Bs." />
+									</listitem>
+									<listitem>
+										<listcell
+											label="Bono Vacacional" />
+										<listcell label=" 0 Bs." />
+									</listitem>
+									<listitem>
+										<listcell
+											label="Prima por hijos" />
+										<listcell label="0 Bs." />
+									</listitem>
+								</listbox>
+							</row>
+						</rows>
+					</grid>
+					<groupbox>
+						<div align="right">
+							<label value="Monto a Pagar" />
+							<textbox value="270 Bs." />
+						</div>
+					</groupbox>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<panel title="Deducciones" collapsible="true" open="false">
+			<panelchildren>
+				<groupbox>
+					<grid>
+						<rows>
+							<row>
+								<listbox>
+									<listhead>
+										<listheader
+											label="Concepto de Deducción" sort="auto" />
+										<listheader
+											label="Monto a Pagar" sort="auto" />
+									</listhead>
+									<listitem>
+										<listcell
+											label="Seguro Social (1% del Sueldo Base)" />
+										<listcell label="15 Bs." />
+									</listitem>
+									<listitem>
+										<listcell
+											label="Ley de Política Habitacional" />
+										<listcell label="0 Bs." />
+									</listitem>
+								</listbox>
+							</row>
+						</rows>
+					</grid>
+					<groupbox>
+						<div align="right">
+							<label value="Monto a Pagar" />
+							<textbox value="15 Bs." />
+						</div>
+					</groupbox>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<panel title="Horas Extras" collapsible="true" open="false">
+			<panelchildren>
+				<groupbox>
+					<grid>
+						<rows>
+							<row>
+								<listbox>
+									<listhead>
+										<listheader label=""
+											width="25%" />
+										<listheader
+											label="Cantidad de Horas" />
+										<listheader
+											label="Monto a Pagar" />
+									</listhead>
+									<listitem>
+										<listcell
+											label="Horas Extras Trabajadas" />
+										<listcell label="0" />
+										<listcell label="0 Bs." />
+									</listitem>
+								</listbox>
+							</row>
+						</rows>
+					</grid>
+					<groupbox>
+						<div align="right">
+							<label value="Monto a Pagar" />
+							<textbox value="0 Bs." />
+						</div>
+					</groupbox>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<panel title="Inasistencias" collapsible="true" open="false">
+			<panelchildren>
+				<groupbox>
+					<grid>
+						<rows>
+							<row>
+								<listbox>
+									<listhead>
+										<listheader label=""
+											width="25%" />
+										<listheader
+											label="Cantidad de Horas" />
+										<listheader
+											label="Monto a Pagar" />
+									</listhead>
+									<listitem>
+										<listcell
+											label="Cantidad de Horas Incumplidas" />
+										<listcell label="2" />
+										<listcell label="75 Bs." />
+									</listitem>
+								</listbox>
+							</row>
+						</rows>
+					</grid>
+					<groupbox>
+						<div align="right">
+							<label value="Monto a Descontar" />
+							<textbox value="75 Bs." />
+						</div>
+					</groupbox>
+				</groupbox>
+
+			</panelchildren>
+		</panel>
+		<panel>
+			<panelchildren>
+				<div align="right">
+					<separator></separator>
+					<button image="/Recursos/Imagenes/atras.ico"
+						label="Salir" onClick="salir()">
+
+					</button>
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

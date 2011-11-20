@@ -1,0 +1,66 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<separator height="15px" />
+	<window closable="true" title="Datos Basicos"
+		border="normal" width="320px" height="">
+		<grid>
+			<rows>
+				<row>
+					<grid>
+						<columns>
+							<column width="110px" align="left" />
+							<column width="160px" align="center" />
+							
+
+						</columns>
+						<rows>
+							<row height="30px">
+							
+								<label value="Tipo de Dato " width="140px" />
+	
+								<combobox value="--Seleccione--" width="140px">
+									<comboitem label="Ascenso Atleta" />
+									<comboitem label="Comisiones " />
+									<comboitem label="Compromiso" />									
+									<comboitem label="Inscripción Atleta" />
+									<comboitem label="Posicion en el Campo" />
+									<comboitem label="Sanción" />
+									<comboitem label="Lesion" />
+									<comboitem label="Fase de Entrenamiento" />
+									<comboitem label="Parametro Evaluativo" />									
+									<comboitem label="Test Evaluativo" />
+									<comboitem label="Escala de Medicion" />
+									
+								</combobox>
+							</row>
+						</rows>
+					</grid>
+				</row>
+			</rows>
+		</grid>
+
+
+		<separator />
+
+
+		<grid>
+		<columns>
+		
+			<column  width="145px" align="center"/>
+			
+
+		</columns>
+		<rows>	
+			<row height="15px">
+				
+				<button image="../Recursos/Imagenes/aceptar.ico" label ="Aceptar" width="110px"/>		
+				
+				
+			</row>	
+		</rows>		
+	</grid>
+
+
+
+	</window>
+</div>

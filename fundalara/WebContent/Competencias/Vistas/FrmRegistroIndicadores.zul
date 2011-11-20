@@ -1,0 +1,275 @@
+<?page title="Auto Generated index.zul"?>
+<zk>
+<div align="center">
+<window title="REGISTRO DE INDICADORES " border="normal" width="50%" height="80%"  >
+	<zscript><![CDATA[//@DECLARATION
+	public void Seleccion(){
+//		formula.setText(formula.getText() +  );
+
+	}
+	public void Operador(){		
+		formula.setText(formula.getText() + cmbOperador.getText());
+	}
+	public void Cambio(){		
+		if (cmbValidador.getText().equals("Cualitativo ")){
+			Cualitativo.setVisible(true);
+			Cuantitativo.setVisible(false);
+		}else{
+			Cualitativo.setVisible(false);
+			Cuantitativo.setVisible(true);		
+		}		
+	}
+	public void Agregar(){
+//		if (id1.toString().isEmpty()){
+			
+//		}
+	}
+	public void Quitar(){		
+	}
+	]]>
+	
+	</zscript>
+	
+	
+	
+<tabbox>
+	<tabs>
+		<tab id="TabIndicadoresSencillos"  label="Indicadores Sencillos" />	
+		<tab id="TabIndicadoresCompuestos" label="Indicadores Compuestos" />	
+	</tabs>
+	<tabpanels>
+			<tabpanel height="220px" width="100%"> <!--Indicadores sencillos  -->
+				<borderlayout height="219px" width="100%">
+	      	<west  border="normal" width="50%" >            
+	    		<grid>  					    			
+			 		<rows>
+			 		<row align="left">
+			 			<label value="Seleccione el Tipo " ></label>
+			 			<combobox id="cmbTipo"  width="80%">
+			   			<comboitem label="Seleccione"/>
+			   			<comboitem label="Por Jugador"/>
+			   			<comboitem label="Por Equipo"/>
+			   			<comboitem label="Divisa"/>
+			   		</combobox>			 			    	    	 
+			   		</row>			   		
+			   		<row align="left">
+			   			<label value="Seleccione Los Campos"></label>
+			   			<combobox id="cmbDetalle" width="80%">
+				   			<comboitem label="Ofensivo"/>
+				   			<comboitem label="Defensivo"/>			   					   
+				   		</combobox>				  			   		
+			   		</row>			   		
+			   		<row align="left">
+			   			<label value="Nombre del Indicador"></label>
+			   			<textbox width="90%" />
+			   		</row>
+			   				
+			   		<row align="left">
+			   			<label value="Descripcion del Indicador"></label>
+			   			<textbox width="90%" />
+			   		</row>			   					   		
+			     </rows>
+			</grid>
+	     </west>
+	     <center border="normal"  >
+	     	<div>	  
+	     	<grid width="100%">	     			
+		 		<rows>
+		 			<row align="left">
+						<label value="Forma de Medir" width="40%"></label>
+						<combobox id="cmbValidador" width="60%" onChange="Cambio()">
+				   			<comboitem label="Cualitativo "/>
+				   			<comboitem label="Cuantitativo"/>			   					   
+				   		</combobox>				  
+					</row>									
+		 		</rows>		    			
+	 		</grid>	 		
+	 		<panel id="Cuantitativo" title="Cuantitativo " visible="false" width="100%">
+	 			<panelchildren>	 		
+			 			<grid>							
+							<rows>												
+									<row height="19px" align="center">	
+									<label value="Valor Menor" ></label>
+									<textbox id="txtValormenor" width="70%"></textbox>										
+									</row>
+									<row height="19px" align="center">	
+										<label value="Valor Mayor" ></label>
+										<textbox id="txtValormayor" width="70%"></textbox>
+									</row>									
+							</rows>
+						</grid>				
+				</panelchildren>
+	 		</panel>
+	 		<panel id="Cualitativo" title="Cualitativo " visible="false" width="100%">
+	 			<panelchildren>
+	 			 <div>
+	 			 <grid>
+	 			 	<rows>
+	 			 		<row align="center">
+		 			 		<label value="Valor" width="100%" ></label>
+		 			 		<textbox id="txtValor" width="90%" ></textbox>	 			 		
+	 			 		</row>
+	 			 		<row align="center">	 			 			
+	 			 			<label value="Descripcion" width="100%"></label>
+	 			 			<textbox id="txtDescripcion" width="90%"></textbox>
+	 			 		</row>
+	 			 		<row align="center">
+	 			 			<button label="Agregar" onClick="Agregar()" width="40px" />
+	 			 			<button label="Quitar"  onClick="Quitar()"   width="40px"  />
+	 			 		</row>	 			 		
+	 			 	</rows>
+	 			 </grid>
+			 		<grid id= "gribIndicadores" >
+						<columns >
+							<column id="Valores" label="Valor" width="30%" />
+							<column id="Descripciones" label="Descripcion" width="70%" />
+						</columns>
+						<rows >
+							<row id="id1" height="18px">
+								<label value ="  " ></label>
+								<label value ="  " ></label>
+							</row>
+							<row id="id2" height="18px">
+								<label value ="  " ></label>						
+								<label value ="  " ></label>
+							</row>
+							<row id="id3" height="18px">
+								<label value ="  "></label>	
+								<label value ="  " ></label>					
+							</row>							
+						</rows>
+					</grid>
+					</div>	 	
+				</panelchildren>		
+	 		</panel>
+	 	</div>
+	     </center>
+	  </borderlayout>
+	  		</tabpanel>	
+			<tabpanel height="220px"> <!--Indicadores Compuestos  -->
+					<borderlayout height="219px" >	      	     	
+				     	<west  border="normal" width="55%">            
+					    		<grid width="100%">		    			
+						 		<rows>
+						 		<row >
+						 			<label value="Seleccione el Tipo " ></label>
+						 				<combobox width="80%">
+						   			<comboitem label="Seleccione"/>
+						   			<comboitem label="Por Jugador"/>
+						   			<comboitem label="Por Equipo"/>
+						   			<comboitem label="Divisa"/>
+						   		</combobox>		    	    	 
+						   		</row>			   	
+						   		<row>
+						   		<label value="Seleccione"></label>
+						   		<listbox id="lista" onSelect="Seleccion()" width="90%" style="align:left">
+						   									   					
+											<listitem>
+												<listcell>
+												<checkbox/>
+												</listcell>
+												<listcell label="Sencillos"/>									
+											</listitem>
+											<listitem>
+												<listcell>
+												<checkbox/>
+												</listcell>
+												<listcell label="Dobles" />									
+											</listitem>
+											<listitem>
+												<listcell>
+												<checkbox/>
+												</listcell>
+												<listcell label="Triples"/>									
+											</listitem>
+											<listitem>
+												<listcell>
+												<checkbox/>
+												</listcell>
+												<listcell label="Ponches" />									
+											</listitem>
+											<listitem>
+												<listcell>
+												<checkbox/>
+												</listcell>
+												<listcell label="Carreras Impulsadas" />									
+											</listitem>
+											<listitem>
+												<listcell>
+												<checkbox/>
+												</listcell>
+												<listcell label="Carreras Anotadas" />									
+											</listitem>					
+									</listbox>				   		
+						   		</row>
+						   			<row >				   					   				 
+						     			
+						   			</row>		
+						     </rows>
+						</grid>
+				     </west>
+				     	<center border="normal"  >	  
+			     	<grid width="98%">	  
+			     				
+						 	<rows>
+						 		<row align="left">
+						 			<label value="Nombre del Indicador " ></label>
+						 			<textbox  width="90%" />
+						 		</row>				 		
+						 		<row align="left">
+						 			<label value="Tipo de Operador " ></label>
+						 			<combobox id="cmbOperador"  onChange="Operador()" width="80%">
+						   				<comboitem label="="/>
+						   				<comboitem label="/"/>
+						   				<comboitem label="*"/>
+						   				<comboitem label="+"/>
+						   				<comboitem label="-"/>			   				
+						   			</combobox>				  
+						 		</row>		 	
+						 						   		
+						 		<row align="left">
+						 			<label value="Formula del Indicador " ></label>
+						 			<textbox id="formula" width="90%"/>		     				
+								</row>
+								
+								<row align="left">				 			
+				     				<label value ="Tipo " ></label>
+				     					<combobox width="80%">
+							   			<comboitem label="Seleccione"/>
+							   			<comboitem label="Por Jugador"/>
+							   			<comboitem label="Por Equipo"/>
+							   			<comboitem label="Divisa"/>
+							   		</combobox>
+								</row>						
+							 </rows>
+					</grid>
+			     	</center>
+			    </borderlayout>					
+			  </tabpanel>
+
+
+
+   				
+</tabpanels>
+</tabbox>
+
+	<div >
+ 		<div align="right"  height="30px">    	
+					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+							orient="horizontal"  ></button>
+					<button image="/Recursos/Imagenes/quitar.ico" label="Eliminar"
+							orient="horizontal"  >
+							
+							</button>
+					<button image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal" >
+							</button>
+					<button image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal" >
+							</button>											
+		
+ 		</div>
+    </div>	
+</window>
+</div>
+</zk>

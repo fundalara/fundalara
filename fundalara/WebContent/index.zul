@@ -1,0 +1,827 @@
+<?page title="Auto Generated index.zul"?>
+<zk>
+	<zscript><![CDATA[
+	public void enlace(String cad) {
+		cuerpo.setSrc(cad);
+	}
+]]></zscript>
+	<style>
+		.z-tab-accordion, .z-tab-accordion-seld{ width:260px; }
+	</style>
+	<popup id="nombre" width="300px">
+		<html>		
+			<![CDATA[ <font color="black">Permite introducir la
+			informacion necesaria para llevar a cabo las actividades
+			deportivas y administrativas de la empresa </font>.<br />
+			]]>
+		
+		</html>
+	</popup>
+	<div style="display:inline">
+		<div style="float:left">
+			<tabbox mold="accordion">
+				<tabs>
+					<tab label="Registros" tooltip="nombre" />
+					<tab label="Funcionalidades Deportivas" />
+					<tab label="Funcionalidades Operativas" />
+					<tab label="Reportes" />
+					<tab label="Agenda" />
+					<tab label="Configuracion del Sistema" />
+					<tab label="Configuracion Web" />
+				</tabs>
+				<tabpanels width="260px">
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Datos Basicos" />
+									</treerow>
+									<treechildren>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Configurables" 
+													onClick='enlace("General/Datos_Basicos_C.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="No Configurables"
+													onClick='enlace("General/Datos_Basicos_NC.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Reglas"
+													onClick='enlace("/Competencias/Vistas/FrmReglas.zul")' />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Deportivos"
+											onClick='enlace("Atleta/registrarSanciones.zul")' />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Organizacion de Entrenamiento" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Actividades"
+															onClick='enlace("Entrenamiento/Actividades_Entrenamiento.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Indicadores de Evaluacion" 
+															onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Bloques de Horario"
+															onClick='enlace("Entrenamiento/Horarios_Entrenamiento.zul")' />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Organizacion de Competencia" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Ligas" onClick='enlace("/Competencias/Vistas/FrmLigas.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Indicadores de Evaluacion" 
+															 onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Tipos de Competencia" 
+															onClick='enlace("/Competencias/Vistas/FrmTipoCompetencia.zul")' />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell
+											label="Administrativos" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Personal" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Contratar" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Actualizar Conceptos de Nomina" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Registrar Incidencias" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Despedir" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Proveedor" />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Materiales" />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Clientes" />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Alquiler de Vallas" />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Mantenimiento" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Tarea" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Instalacion" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+							</treechildren>
+						</tree>
+					</tabpanel>
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Atleta" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Inscribir" />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Registrar Padres y Representantes" />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Ascenso de Categoria" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Edad" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Especial" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Sancion" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Registrar" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Seguimiento y Control" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell label="Pase" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+							</treechildren>
+						</tree>
+					</tabpanel>
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem open="false">
+									<treerow>
+										<treecell
+											label="Administracion" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Ingresos" />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Egresos" />
+											</treerow>
+
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Generar Compromisos de Pago" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Logistica" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Listado de Solicitudes" />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Materiales" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Distribucion" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+							</treechildren>
+						</tree>
+					</tabpanel>
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Deportivos" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Atleta" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Inscritos" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Sancionados" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Lesionados" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Desempeño" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Expediente" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Equipo" />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Categoria" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Gerenciales" />
+									</treerow>
+									<treechildren>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Representantes Insolventes" />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Catalogo de Inventario" />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Financieros" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Balance General" />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Estado de Ganancias y Perdidas" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+
+									</treechildren>
+								</treeitem>
+							</treechildren>
+						</tree>
+					</tabpanel>
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Planificacion" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Entrenamiento" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Plan de Temporada" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Plan de Entrenamiento" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Asignar Instalacion" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Competencia" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Nueva Competencia" 
+															onClick='enlace("/Competencias/Vistas/FrmNuevaCompetencia.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Equipos Participantes" 
+															onClick='enlace("/Competencias/Vistas/FrmRegistroEquipo.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Indicadores por Competencia"
+															onClick='enlace("/Competencias/Vistas/FrmIndicadores.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Compromisos de Pago"
+															onClick='enlace("/Competencias/Vistas/FrmCompromiso.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Rosters" 
+															onClick='enlace("/Competencias/Vistas/FrmRoster.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Calendario"
+															onClick='enlace("/Competencias/Vistas/FrmCalendario.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Apertura de Competencia"
+															onClick='enlace("/Competencias/Vistas/FrmAperturarCompetencia.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Line-Up"
+															onClick='enlace("/Competencias/Vistas/FrmLineUp.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Solicitud de Materiales"
+															onClick='enlace("/Competencias/Vistas/FrmRecursos.zul")'/>
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Logistica" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Actividades Complementarias" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Mantenimiento" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell
+											label="Registro de Resultados"/>
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Entrenamiento" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Desempeño de Atletas" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Test Aplicados" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Competencia" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Registro de Resultados" 
+															onClick='enlace("/Competencias/Vistas/FrmRegistroResultados.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Sanciones" 
+															onClick='enlace("/Competencias/Vistas/FrmSanciones.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Lesiones" 
+															onClick='enlace("/Competencias/Vistas/FrmLesiones.zul")' />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Logistica" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Actividades Complementarias" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Mantenimiento" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
+
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell
+											label="Seguimiento y Control" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Entrenamiento" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Cumplimiento de Entrenamiento" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Control de Inventario" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Competencia" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Control de Inventario" 
+															onClick='enlace("/Competencias/Vistas/FrmControlInventario.zul")'/>
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Clausura de Competencia"
+															onClick='enlace("/Competencias/Vistas/FrmCulminacion.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Jugadores Claves"
+															onClick='enlace("/Competencias/Vistas/FrmJugadoresClaves.zul")'  />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Logistica" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Actividades Complementarias" />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Mantenimiento" />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
+
+								</treeitem>
+
+							</treechildren>
+						</tree>
+					</tabpanel>
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem>
+									<treerow>
+										<treecell
+											label="Seguridad Funcional" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell label="Respaldo" />
+									</treerow>
+								</treeitem>
+							</treechildren>
+						</tree>
+					</tabpanel>
+					<tabpanel>
+						<tree>
+							<treechildren>
+								<treeitem>
+									<treerow>
+										<treecell label="Eventos" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell label="Estadisticas" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell label="Encuestas" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell label="Enlaces" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell
+											label="Noticias Recientes" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell
+											label="Redes Sociales" />
+									</treerow>
+								</treeitem>
+							</treechildren>
+						</tree>
+					</tabpanel>
+
+				</tabpanels>
+			</tabbox>
+		</div>
+		<div style="display:inline">
+			<include id="cuerpo" />
+		</div>
+	</div>
+</zk>

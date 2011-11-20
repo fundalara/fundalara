@@ -1,0 +1,60 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+    <div align="center" style="top-margin:200px">
+	<window id="winB" title="Asociar Personal" border="normal" width="650px" mode="modal" >
+<zscript>
+<![CDATA[
+	import org.zkoss.Version;
+	void setOn(){
+		
+	if(on.isChecked()){
+			Sec.setChecked(true);
+			Tec.setChecked(true);
+			Obr.setChecked(true);
+	}else{
+			Sec.setChecked(false);
+			Tec.setChecked(false);
+			Obr.setChecked(false);
+	}
+	}
+]]>
+</zscript>
+
+
+		<groupbox>
+			<grid>
+				<columns>
+					<column>
+						<checkbox id="on"  onCheck="setOn()" ></checkbox>
+					</column>
+					<column label="Cargo Empleado" width="90%" />
+				</columns>
+				<rows>
+					<row>
+						<checkbox id="Sec"/>
+						<label  id="ISec" value="Secretaria"></label>
+					</row>
+					<row>
+						<checkbox id="Tec"/>
+						<label value="Técnico"></label>
+					</row>
+					<row>
+						<checkbox id="Obr"/>
+						<label value="Obrero"></label>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+   
+      <div align="right"><button label="Aceptar" image="/Recursos/Imagenes/aceptar.ico" >
+	     <attribute name="onClick">
+									<![CDATA[
+									         winB.detach();
+									]]>
+									</attribute>       
+      </button>
+       </div>		
+		
+	</window>
+</div>
+</zk>

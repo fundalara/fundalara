@@ -1,0 +1,225 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window width="700px" height="500px">
+		<zscript><![CDATA[
+	//@DECLARATION
+	public int nivel = 1, nivel1 = 0, nivel2 = 0, nivel3 = 0;
+	public void limpiarnivel2() {
+		grbCompetencia.setVisible(false);
+		lblCompetencia.setVisible(false);
+		lblCompetencia.setStyle("color: black");
+		grbEntrenamiento.setVisible(false);
+		lblEntrenamiento.setVisible(false);
+		lblEntrenamiento.setStyle("color: black");
+		grbLogistica.setVisible(false);
+		lblLogistica.setVisible(false);
+		lblLogistica.setStyle("color: black");
+		lblPlan.setStyle("color: black");
+		lblRr.setStyle("color: black");
+		lblSc.setStyle("color: black");
+	}
+	public void limpiarnivel3() {
+		grbC1.setVisible(false);
+		lblC1.setVisible(false);
+		lblC1.setStyle("color: black");
+		grbC2.setVisible(false);
+		lblC2.setVisible(false);
+		lblC2.setStyle("color: black");
+		grbC3.setVisible(false);
+		lblC3.setVisible(false);
+		lblC3.setStyle("color: black");
+		lblEntrenamiento.setStyle("color: black");
+		lblLogistica.setStyle("color: black");
+		lblCompetencia.setStyle("color: black");
+	}
+	public void generarNivel3(int n1, int n2) {
+		if (n2 == 1) {
+			if (n1 == 1) {
+				lblC1.setValue("Plan de temporada");
+				lblC1.setContext("Planificacion.zul");						
+				lblC2.setValue("Plan de entrenamiento");
+				lblC2.setContext("Plan_Entrenamiento.zul");
+				lblC3.setValue("Asignar instalacion");
+				lblC3.setContext("Planificacion.zul");
+			} else if (n1 == 2) {
+				lblC1.setValue("Desempeño del atletas");
+				lblC1.setContext("Datos_Equipo.zul");
+				lblC2.setValue("Test aplicado");
+				lblC2.setContext("Datos_Equipo.zul");
+				lblC3.setValue("");
+				grbC3.setVisible(false);
+			} else {
+				lblC1.setValue("Cumplimiento de actividades");
+				lblC1.setContext("Datos_Equipo.zul");
+				lblC2.setValue("Control de inventario");
+				lblC2.setContext("Datos_Equipo.zul");
+				lblC3.setValue("");
+				grbC3.setVisible(false);
+			}
+		}
+	}
+	public void nivel2(int n) {
+		if (nivel == 1) {
+			grbCompetencia.setVisible(true);
+			lblCompetencia.setVisible(true);
+			grbEntrenamiento.setVisible(true);
+			lblEntrenamiento.setVisible(true);
+			grbLogistica.setVisible(true);
+			lblLogistica.setVisible(true);
+			if (n == 1) {
+				nivel1 = 1;
+				lblPlan.setStyle("color:#FF9200");
+				lblRr.setStyle("color: black");
+				lblSc.setStyle("color: black");
+			} else if (n == 2) {
+				nivel1 = 2;
+				lblPlan.setStyle("color: black");
+				lblRr.setStyle("color:#FF9200");
+				lblSc.setStyle("color: black");
+			} else {
+				nivel1 = 3;
+				lblPlan.setStyle("color: black");
+				lblRr.setStyle("color: black");
+				lblSc.setStyle("color:#FF9200");
+			}
+			nivel = 2;
+		} else {
+			limpiarnivel2();
+			limpiarnivel3();
+			nivel = 1;
+		}
+	}
+	public void nivel3(int n) {
+		if (nivel == 2) {
+			if (n == 1) {
+				lblEntrenamiento.setStyle("color:#FF9200");
+				lblCompetencia.setStyle("color: black");
+				lblLogistica.setStyle("color: black");
+				nivel2 = 1;
+			} else if (n == 2) {
+				lblEntrenamiento.setStyle("color: black");
+				lblCompetencia.setStyle("color:#FF9200");
+				lblLogistica.setStyle("color: black");
+				nivel2 = 2;
+			} else {
+				lblEntrenamiento.setStyle("color: black");
+				lblCompetencia.setStyle("color: black");
+				lblLogistica.setStyle("color:#FF9200");
+				nivel2 = 3;
+			}
+			if (nivel2 == 1) {
+				grbC1.setVisible(true);
+				lblC1.setVisible(true);
+				grbC2.setVisible(true);
+				lblC2.setVisible(true);
+				grbC3.setVisible(true);
+				lblC3.setVisible(true);
+				generarNivel3(nivel1, nivel2);
+			}
+			nivel = 3;
+		} else {
+			limpiarnivel3();
+			nivel = 2;
+		}
+	}
+	public void llamado(String cad, int n) {
+		String valor = "";
+		if (n == 1) {
+			lblC1.setStyle("color:#FF9200");
+			lblC2.setStyle("color: black");
+			lblC3.setStyle("color: black");
+		} else if (n == 2) {
+			lblC1.setStyle("color: black");
+			lblC2.setStyle("color: #FF9200");
+			lblC3.setStyle("color: black");
+		} else {
+			lblC1.setStyle("color: black");
+			lblC2.setStyle("color: black");
+			lblC3.setStyle("color: #FF9200");
+		}
+		if (nivel2 == 1)
+			valor = "Entrenamiento/";
+		else if (nivel2 == 2)
+			valor = "Competencia/";
+		else
+			valor = "Logistica/";
+		frmAgenda.setSrc(valor + cad);		
+	}
+]]></zscript>
+		<borderlayout width="700px">
+			<north title="Basico" height="150px">
+				<grid style="">
+					<columns>
+						<column label="" />
+						<column label="" />
+						<column label="" />
+					</columns>
+					<rows>
+						<row>
+							<groupbox id="grbPlan" mold="3d"
+								onClick="nivel2(1)">
+								<label id="lblPlan"
+									value="Planificacion" onClick="nivel2(1)" />
+							</groupbox>
+							<groupbox id="grbEntrenamiento" mold="3d"
+								visible="false" onClick="nivel3(1)">
+								<label id="lblEntrenamiento"
+									value="Entrenamiento" onClick="nivel3(1)" />
+							</groupbox>
+							<groupbox id="grbC1" mold="3d"
+								visible="false">
+								<label id="lblC1" value=""
+									onClick="llamado(lblC1.getContext(),1)" />
+							</groupbox>
+						</row>
+						<row>
+							<groupbox mold="3d" id="grbRr"
+								onClick="nivel2(2)">
+								<label id="lblRr"
+									value="Registro de resultados" onClick="nivel2(2)" />
+							</groupbox>
+							<groupbox id="grbCompetencia" mold="3d"
+								visible="false" onClick="nivel3(2)">
+								<label id="lblCompetencia"
+									value="Competencia" visible="false" onClick="nivel3(2)" />
+							</groupbox>
+							<groupbox id="grbC2" mold="3d"
+								visible="false">
+								<label id="lblC2" value=""
+									onClick="llamado(lblC2.getContext(),2)" />
+							</groupbox>
+						</row>
+						<row>
+							<groupbox mold="3d" id="grbSc"
+								onClick="nivel2(3)">
+								<label id="lblSc"
+									value="Seguimiento y Control" onClick="nivel2(3)" />
+							</groupbox>
+							<groupbox id="grbLogistica" mold="3d"
+								visible="false" onClick="nivel3(3)">
+								<label id="lblLogistica"
+									value="Logistica" visible="false" onClick="nivel3(3)" />
+							</groupbox>
+							<groupbox id="grbC3" mold="3d"
+								visible="false">
+								<label id="lblC3" value=""
+									onClick="llamado(lblC3.getContext(),3)" />
+							</groupbox>
+						</row>
+					</rows>
+				</grid>
+
+			</north>
+			<center title="Agenda">
+			   <div>
+			   <calendars id="calendario" height="100%" mold="default"
+					days="7" readonly="false" timeZone="Venezuela=GMT-4.5"/>
+				</div>
+			</center>
+			<east size="170px" title="Variable" collapsible="true">
+				<include id="frmAgenda" src="" />
+			</east>
+		</borderlayout>
+	</window>
+</zk>

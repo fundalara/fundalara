@@ -1,0 +1,54 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Inscripción" border="normal" width="682px"
+		closable="true" maximizable="true" minimizable="true">
+		<zscript>
+							<![CDATA[
+	//@IMPORT
+	import org.zkoss.lang.Strings;
+	import org.zkoss.lang.Objects;
+	]]><![CDATA[
+		//@DECLARATION
+		public void enlace(String cad) {
+			cuerpo.setSrc(cad);
+		}
+		public void changeWindowRA() {
+			String valor = tipoI.getSelectedItem().getValue();
+			if (Objects.equals(valor, "1")) {
+				enlace("Atleta/Vista/registrarJugador.zul");
+			} else if (Objects.equals(valor, "2"))
+				enlace("");
+			else
+				enlace("Atleta/Vista/registrarPlanVacacional.zul");
+		}
+	]]></zscript>
+		<grid style="border:none;" oddRowSclass="none">
+			<columns>
+				<column />
+				<column />
+				<column />
+				<column />
+				<column width="15%" />
+			</columns>
+			<rows>
+				<row>
+					<label value="Tipo Inscripción" />
+					<cell colspan="4">
+						<combobox value="-Seleccione-" id="tipoI"
+							width="130px" focus="true" onChange="changeWindowRA()">
+							<comboitem label="Nuevo Ingreso" value="1" />
+							<comboitem label="Reingreso" value="2" />
+							<comboitem label="Plan vacacional"
+								value="3" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+					</cell>
+				</row>
+
+			</rows>
+		</grid>
+		<div style="display:inline">
+			<include id="cuerpo" />
+		</div>
+	</window>
+</zk>

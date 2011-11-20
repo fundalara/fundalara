@@ -1,0 +1,112 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Consulta de Atletas" border="normal" width="63%"
+		closable="true">
+		<panel title="Atletas">
+			<panelchildren>
+				<!--vlayout-->
+				<grid>
+					<columns>
+						<column width="14%" />
+						<column width="30%" />
+						<column width="11%" />
+						<column width="30%" />
+					</columns>
+					<rows>
+						<row>
+							<label>Categoría</label>
+							<combobox value="TODAS">
+								<comboitem
+									label="Preparatorio nivel 1">
+								</comboitem>
+								<comboitem
+									label="Preparatorio nivel 2">
+								</comboitem>
+								<comboitem label="Pre-infantil">
+								</comboitem>
+								<comboitem label="Infantil"></comboitem>
+								<comboitem label="Pre-Junior"></comboitem>
+								<comboitem label="Junior"></comboitem>
+								<comboitem label="Juvenil"></comboitem>
+							</combobox>
+							<label>Equipo</label>
+							<combobox value="TODOS">
+								<comboitem label="A"></comboitem>
+								<comboitem label="B"></comboitem>
+								<comboitem label="C"></comboitem>
+								<comboitem label="D"></comboitem>
+								<comboitem label="E"></comboitem>
+							</combobox>
+							<button tooltiptext="Consultar"
+								image="../../Recursos/Imagenes/consultar.ico">
+							</button>
+						</row>
+					</rows>
+				</grid>
+				<toolbar align="end">
+					<toolbarbutton id="agregar"
+						image="../../Recursos/Imagenes/pdf.png" orient="horizontal"
+						tooltiptext="Documento Pdf" />
+				</toolbar>
+				<grid id="grid" mold="paging" pageSize="5">
+					<columns menupopup="auto">
+						<column sort="auto" label="Dorsal" />
+						<column sort="auto" label="Apellido" />
+						<column sort="auto" label="Nombre" />
+					</columns>
+					<rows>
+						<group label="Equipo: Compotica A" />
+						<row>
+							<label value="1" />
+							<label value="García" />
+							<label value="Victor" />
+						</row>
+						<row>
+							<label value="6" />
+							<label value="Saavedra" />
+							<label value="Benjamin" />
+						</row>
+						<row>
+							<label value="7" />
+							<label value="Dávila" />
+							<label value="Luis" />
+						</row>
+						<row>
+							<label value="22" />
+							<label value="Laguna" />
+							<label value="Germán" />
+						</row>
+						<row>
+							<label value="13" />
+							<label value="Luzardo" />
+							<label value="Edgar" />
+						</row>
+						<row>
+							<label value="15" />
+							<label value="Hernández" />
+							<label value="Ramir" />
+						</row>
+						<group label="Equipo: Compotica B" />
+						<row>
+							<label value="19" />
+							<label value="Perdomo" />
+							<label value="César" />
+						</row>
+						<row>
+							<label value="3" />
+							<label value="Perozo" />
+							<label value="Alberto" />
+						</row>
+					</rows>
+				</grid>
+				<!--/vlayout-->
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+			<space />
+		</div>
+	</window>
+</zk>

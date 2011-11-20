@@ -1,0 +1,165 @@
+<?page title="Cálculo de Liquidaciones" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Calcular Liquidación" border="normal" width="650px">
+
+		<groupbox>			
+				<groupbox>
+				<caption> Datos del Empleado</caption>
+				<grid>
+					<rows>
+
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="130px" />
+									<column label="" width="200px" />
+									<column label="" width="130px" />
+									<column label="" width="200px" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Nombre" />
+										<bandbox width="80%"></bandbox>
+										<label value="Cédula" />
+										<bandbox width="80%"></bandbox>
+									</row>
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			
+			<groupbox>
+			<caption> Datos Laborales</caption>
+					<grid>
+					<rows>
+
+
+						<row>
+
+							<groupbox mold="3d" closable="false"
+								style="padding: 10px;" width="390
+		">
+
+								<div>
+									<grid>
+										<columns>
+											<column label=""
+												width="25%">
+											</column>
+											<column label=""
+												width="25%">
+											</column>
+											<column label=""
+												width="25%">
+											</column>
+											<column label=""
+												width="25%">
+											</column>
+										</columns>
+										<rows>
+											<row>
+												Fecha Ingreso
+												<textbox />
+												Tipo Empleado
+												<textbox />
+											</row>
+
+
+											<row>
+												Sueldo Base
+												<textbox />
+												Periodo de Pago
+												<textbox />
+											</row>
+
+											<row>
+												Horario de trabajo
+												<textbox />
+											</row>
+										</rows>
+
+									</grid>
+
+
+
+								</div>
+							</groupbox>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			
+					
+			<groupbox>
+			<caption>Datos de Liquidación</caption>	
+				  <grid>
+					<rows>
+
+						<row>
+
+							<grid>
+
+								<columns>
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Monto" />
+										<textbox width="50%" />
+									</row>
+									<row>
+											<label value="Documento de pago"/>
+											<combobox >
+												<comboitem label="Depósito" />
+												<comboitem label="Efectivo" />
+												<comboitem label="Cheque" />
+											</combobox>
+									</row>
+									<row>
+										<label value="Código Documento" />
+										<textbox width="50%" />
+									</row>
+								</rows>
+							</grid>
+							
+						</row>
+						
+					</rows>
+				</grid>
+			
+				<grid>
+					<rows>
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="180px" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Observaciones" />
+										<textbox rows="6" cols="81"/>
+									</row>
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+				
+			</groupbox>
+			
+		</groupbox>
+
+		<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				tooltiptext="Aceptar" label="Registrar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" />
+
+		</div>
+	</window>
+</zk>

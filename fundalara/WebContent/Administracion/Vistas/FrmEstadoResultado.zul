@@ -1,0 +1,260 @@
+<?page title="GananciasYPerdidas" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winGYP" title="Estado de Ganancias Y Pérdidas" border="normal"
+		width="650px">
+		<panel title="16 de Noviembre 2011, 10:00am">
+			<panelchildren>
+				<groupbox>
+
+					<grid>
+						<columns></columns>
+						<rows>
+							<row>
+								<label>E.B.M FUNDALARA</label>
+							</row>
+							<row>
+								<label>
+									DEL 30 DE NOVIEMBRE AL 30 DE
+									DICIEMBRE DE 2011
+								</label>
+							</row>
+						</rows>
+					
+				    </grid>
+                       </groupbox>
+
+
+                 </panelchildren>
+
+		</panel>
+               <panel title="INGRESOS OPERACIONALES" >
+			<panelchildren>
+			<groupbox>
+
+				<grid>
+					
+						<columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+							
+							<row>
+								<label>Plan Vacacional</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Inscripción</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Mensualidades</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+
+							<row>
+								<label>Reinscripción</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+
+							<row>
+								<label>OTROS INGRESOS</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>Publicidad</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Donaciones</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Otros</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL INGRESOS</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+
+                                   </rows>
+
+	                         </grid>
+                      </groupbox>
+
+
+                 </panelchildren>
+
+		</panel>
+
+                  <panel title="GASTOS OPERACIONALES" >
+			<panelchildren>
+			<groupbox>
+
+
+				<grid>
+
+
+                                      <columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+							
+							<row>
+								<label> GASTOS GENERALES</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									Salario Técnicos Y Obreros
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>Pago de Cesta ticket</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									Pago de Prestaciones Y Liquidaciones
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									Bono Fin de Semana Y Viáticos
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+                                            <row>
+								<label>Materiales de Limpieza</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>CANTV Y servicios Varios</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>Mantenimiento</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>Reintegros</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>Pagos a Ligas</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>Pago a Nacional Juvenil</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label> GASTOS ADMINISTRATIVOS</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>Talonarios Y Papelería</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									Materiales Y Varios de Oficina
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							
+							<row>
+								<label>Otros Pagos</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+							<row>
+								<label>TOTAL GASTOS</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+
+                                   </rows>
+
+	                         </grid>
+                      </groupbox>
+
+
+                 </panelchildren>
+
+		</panel>
+
+			<panel  >
+			<panelchildren>
+			<groupbox>
+
+
+				<grid>
+
+
+                                      <columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+				         
+							 <row>
+								<label>Utilidad o Perdida</label>
+								<label></label>
+								<label></label>
+							</row>
+							
+
+						</rows>
+					</grid>
+				</groupbox>
+				<div align="right">
+					<button image="/Recursos/Imagenes/imprimir.ico"
+						onClick="" tooltiptext="/Aceptar" label="Imprimir" />
+					
+					<button image="/Recursos/Imagenes/atras.ico"
+						onClick="" tooltiptext="Salir" label="Salir" >
+						<attribute name="onClick">
+							winGYP.onClose();
+						</attribute>
+						</button>
+				</div>
+
+			</panelchildren>
+
+		</panel>
+	</window>
+</zk>

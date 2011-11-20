@@ -1,0 +1,80 @@
+<?page title="Ascender Equipos" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Ascender Equipos" border="normal" width="500px"
+		maximizable="true" minimizable="true" closable="true">
+		<groupbox>
+			<grid>
+				<rows>
+					<row>
+						<label>Categoria</label>
+						<combobox value="--Seleccione--" width="100%">
+							<comboitem label="Preparatorio nivel 1"></comboitem>
+							<comboitem label="Preparatorio nivel 2"></comboitem>
+							<comboitem label="Pre-infantil"></comboitem>
+							<comboitem label="Infantil"></comboitem>
+							<comboitem label="Pre-Junior"></comboitem>
+							<comboitem label="Junior"></comboitem>
+							<comboitem label="Juvenil"></comboitem>
+						</combobox>
+						<label>Equipo</label>
+						<combobox value="--Seleccione--" width="100%">
+							<comboitem label="A"></comboitem>
+							<comboitem label="B"></comboitem>
+							<comboitem label="C"></comboitem>
+							<comboitem label="D"></comboitem>
+							<comboitem label="E"></comboitem>
+						</combobox>
+					</row>
+					<row spans="4">
+						<div align="right">
+							<button label="Buscar"></button>
+						</div>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<listbox>
+			<listhead>
+				<listheader width="20%">Cedula</listheader>
+				<listheader width="20%">Codigo</listheader>
+				<listheader width="30%">Nombre</listheader>
+				<listheader width="30%">Apellido</listheader>
+			</listhead>
+			<listitem>
+				<listcell>--</listcell>
+				<listcell>10</listcell>
+				<listcell>Hernandez</listcell>
+				<listcell>Ramir</listcell>
+			</listitem>
+			<listitem>
+				<listcell>21326547</listcell>
+				<listcell>22</listcell>
+				<listcell>Orozco</listcell>
+				<listcell>Andrea</listcell>
+			</listitem>
+			<listitem>
+				<listcell>26468963</listcell>
+				<listcell>05</listcell>
+				<listcell>Calicchio</listcell>
+				<listcell>Domingo</listcell>
+			</listitem>
+		</listbox>
+		<groupbox>
+			<div align="right">
+				<button onClick="" label="Seleccionar">
+					<attribute name="onClick"><![CDATA[
+						Window nuevaVentana = (Window) Executions.createComponents(
+						"Atleta/Vista/ascensoPruebaTecnica.zul", null, null);
+						try {
+							nuevaVentana.doModal();
+						} catch (Exception e) {
+						}
+					]]></attribute>
+				</button>
+				<button label="Salir"
+					image="../../Recursos/Imagenes/salir.png">
+				</button>
+			</div>
+		</groupbox>
+	</window>
+</zk>

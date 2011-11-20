@@ -1,0 +1,433 @@
+<?page title="Registro de Equipo" contentType="text/html;charset=UTF-8"?>
+<zk>
+<div align="center">
+	<window title="Equipos" border="normal" width="auto" height="auto"
+		onClose="VerRoster()">
+
+
+		<!-- DATOS COMPETENCIA -->
+		<panel border="normal" width="580px">
+			<caption label="Datos de la Competencia"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40px"></column>
+						<column width="40px"></column>
+						<column width="60px"></column>
+						<column width="60px"></column>
+						<column width="50px"></column>
+						<column width="60px"></column>
+					</columns>
+					<rows>
+						<row style="border-style:none">
+							<label value="Competencia"></label>
+							<hbox>
+								<textbox cols="11"></textbox>
+								<button
+									image="../../Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+							<label value="Fecha Inicio"></label>
+							<textbox cols="10"></textbox>
+							<label value="Fecha Fin"></label>
+							<textbox cols="10"></textbox>
+						</row>
+						<row style="border-style:none">
+
+							<label value="Sede"></label>
+							<textbox></textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+		<borderlayout width="580px" height="580px">
+			<center>
+				<div>
+					<!-- TABLA REGISTRO DE EQUIPOS -->
+					<div id="PrincipalEquipos">
+						<panel title="Equipos Internos"
+							collapsible="true">
+							<panelchildren>
+								<grid>
+									<columns>
+										<column width="10%"
+											align="right">
+										</column>
+										<column width="10%"></column>
+										<column width="10%"
+											align="right">
+										</column>
+										<column width="10%"
+											align="right">
+										</column>
+										<column width="10%"
+											align="right">
+										</column>
+										<column width="10%"></column>
+										<column width="10%"></column>
+										<column width="10%"></column>
+										<column width="8%"></column>
+										<column width="12%"></column>
+									</columns>
+									<rows></rows>
+								</grid>
+
+								<div>
+									<grid width="auto" height="auto">
+										<columns>
+											<column width="15%"></column>
+											<column width="20%"></column>
+											<column></column>
+											<column></column>
+										</columns>
+										<rows>
+											<row
+												style="border-style:none">
+												<label
+													value="Categoría">
+												</label>
+												<combobox>
+													<comboitem
+														label="Infantil" />
+													<comboitem
+														label="Pre-Junior" />
+													<comboitem
+														label="Juvenil" />
+												</combobox>
+											</row>
+											<row
+												style="border-style:none">
+												<label
+													value="Mostrar Equipos por:">
+												</label>
+												<combobox
+													value="Seleccione" id="Filtro" onChange="Cambio()">
+													<comboitem
+														value="Por Categoria">
+													</comboitem>
+												</combobox>
+												<label value=""></label>
+												<label value=""></label>
+											</row>
+										</rows>
+									</grid>
+								</div>
+
+								<div>
+									<listbox height="auto"
+										id="ListaEquipos">
+										<listhead>
+											<listheader label="N°"
+												width="10%" align="center">
+											</listheader>
+											<listheader
+												label="Equipo Seleccionados" width="25%" align="center"
+												id="Equipo">
+											</listheader>
+											<listheader label="Divisa"
+												width="15%" align="center" id="Divisa">
+											</listheader>
+											<listheader label="Delegado"
+												width="15%" align="center" id="Delegado">
+											</listheader>
+											<listheader
+												label="Entrenador" width="15%" align="center"
+												id="Entrenador">
+											</listheader>
+											<listheader label="Roster"
+												width="10%" align="center" id="Roster">
+											</listheader>
+
+
+										</listhead>
+										<listitem>
+											<listcell>1</listcell>
+											<listcell>
+												Nombre Equipo 1
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 1
+											</listcell>
+										
+											<listcell>
+												Entrenador 1
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+
+										</listitem>
+										<listitem>
+											<listcell>2</listcell>
+											<listcell>
+												Nombre Equipo 2
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 2
+											</listcell>
+								
+											<listcell>
+												Entrenador 2
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell>3</listcell>
+											<listcell>
+												Nombre Equipo 3
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 3
+											</listcell>
+										
+											<listcell>
+												Entrenador 3
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell>4</listcell>
+											<listcell>
+												Nombre Equipo 4
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 4
+											</listcell>
+										
+											<listcell>
+												Entrenador 4
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+										</listitem>
+
+										<listitem>
+											<listcell>5</listcell>
+											<listcell>
+												Nombre Equipo 5
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 5
+											</listcell>
+										
+											<listcell>
+												Entrenador 5
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell>6</listcell>
+											<listcell>
+												Nombre Equipo 6
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 6
+											</listcell>
+										
+											<listcell>
+												Entrenador 6
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell>7</listcell>
+											<listcell>
+												Nombre Equipo 7
+											</listcell>
+											<listcell>
+												Fundalara
+											</listcell>
+											<listcell>
+												Delegado 7
+											</listcell>
+										
+											<listcell>
+												Entrenador 7
+											</listcell>
+											<listcell>
+												<checkbox></checkbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell>10</listcell>
+											<listcell>...</listcell>
+										</listitem>
+
+									</listbox>
+								</div>
+
+
+								<div align="right"
+									style="margin-top:5px ">
+									<button label="Quitar Equipo"></button>
+									<button
+										label="Procesar Roster Oficial"
+										onClick='Enlace("/Competencias/Vistas/FrmRoster.zul")'>
+									</button>
+								</div>
+							</panelchildren>
+						</panel>
+					</div>
+
+					<div>
+						<panel border="normal" collapsible="true">
+							<caption label="Equipos Externos"></caption>
+							<panelchildren>
+								<grid>
+									<columns>
+										<column width="40px"></column>
+										<column width="40px"></column>
+										<column width="60px"></column>
+										<column width="60px"></column>
+										<column width="50px"></column>
+										<column width="60px"></column>
+									</columns>
+									<rows>
+										<row
+											style="border-style:none">
+											<label
+												value="Nombre Equipo">
+											</label>
+											<textbox cols="25"></textbox>
+											<label value="Categoria"></label>
+											<combobox cols="23">
+												<comboitem
+													label="Infantil" />
+												<comboitem
+													label="Pre-Junior" />
+												<comboitem
+													label="Juvenil" />
+											</combobox>
+											<label value="Divisa"></label>
+											<textbox cols="25"></textbox>
+										</row>
+										<row
+											style="border-style:none">
+
+											<label value="Entrenador"></label>
+											<textbox cols="25"></textbox>
+
+											<label value="Delegado"></label>
+											<textbox cols="25"></textbox>
+											<button label="" image="/Recursos/Imagenes/agregar.ico"></button>
+										</row>
+									</rows>
+								</grid>
+
+								<div>
+									<grid>
+										<columns>
+											<column label=" Equipo"
+												width="20%" align="center" />
+											<column label=" Divisa"
+												width="20%" align="center" />
+											<column label=" Delegado"
+												width="20%" align="center" />
+											<column label=" Categoria"
+												align="center" width="20%" />
+											<column label=" Entrenador"
+												width="20%" align="center" />
+
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Fundalara A" />
+												<label
+													value="Fundalara" />
+												<label
+													value="Eduardo Ochoa" />
+												<label value="Juvenil" />
+												<label
+													value="Jesus Rojas" />
+											</row>
+											
+										</rows>
+									</grid>
+								</div>
+							</panelchildren>
+						</panel>
+
+					</div>
+                
+					
+				</div>
+				
+     
+
+			</center>
+			<south>
+			    <div>
+			  	<panel>
+						<panelchildren style="margin-top:20px ">
+							<div align="right">
+								<button
+									image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+								</button>
+								<button
+									image="../../Recursos/Imagenes/editar.ico" label="Eliminar">
+								</button>
+								<button
+									image="../../Recursos/Imagenes/cancelar.ico"
+									label="Cancelar">
+								</button>
+								<button
+									image="../../Recursos/Imagenes/salir.png" label="Salir">
+								</button>
+							</div>
+						</panelchildren>
+					</panel> 
+				 </div>
+			</south>
+	</borderlayout>
+
+
+
+
+		<include id="Rost"></include>
+
+
+		<zscript>
+	
+	<![CDATA[
+	public void Enlace(String cad) {
+
+		Rost.setSrc(cad);
+		PrincipalEquipos.setVisible(false);
+	}
+]]>
+</zscript>
+
+
+	</window>
+	</div>
+</zk>

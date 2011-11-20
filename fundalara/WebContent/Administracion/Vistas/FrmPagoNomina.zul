@@ -1,0 +1,130 @@
+<?page title="Pago Nómina" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="Volver" title="Pago Nómina" border="normal" mode="modal"
+		position="center" width="650px">
+		<zscript>
+<![CDATA[ 
+]]></zscript>
+		<zscript>
+<![CDATA[
+	//@IMPORT
+	import org.zkoss.lang.Strings;
+	import org.zkoss.Version;
+]]><![CDATA[
+	//@DECLARATION
+	public void Volver() {
+		Window window = (Window) Executions.createComponents("Nomina.zul",
+				null, null);
+		//loginDiv.setVisible(false);
+		Volver.setVisible(false);
+	}
+	public void salir() {
+		Volver.onClose();
+	}
+	public void mostrar(){
+		String var = A.getSelectedItem().getValue().toString();
+			
+		if (var.equals("2")){
+			M1.setVisible(true);
+			M2.setVisible(true);
+			M3.setVisible(true);
+			M4.setVisible(true);
+			M5.setVisible(true);
+			M6.setVisible(true);
+			M7.setVisible(true);
+
+		}}
+]]><![CDATA[
+		                		
+		                		]]></zscript>
+		<groupbox>
+			<caption>Período</caption>
+			<separator></separator>
+			<space></space>
+			<label>Fecha</label>
+			<textbox value="    16/11/2011" width="9%"
+				disabled="true">
+			</textbox>
+			<label>-</label>
+			<textbox value="    31/11/2011" width="9%"
+				disabled="true">
+			</textbox>
+			<separator></separator>
+			<space></space>
+			<label>Tipo de Pago</label>
+			<combobox id="A" onSelect="mostrar()">
+				<comboitem value="1" label="Contado"></comboitem>
+				<comboitem value="2" label="Cheque"></comboitem>
+			</combobox>
+			<space></space>
+			<label id="M1" visible="false">Entidad Bancaria</label>
+			<combobox id="M2" visible="false">
+				<comboitem>Banesco</comboitem>
+				<comboitem>BOD</comboitem>
+				<comboitem>Mercantil</comboitem>
+				<comboitem>Provincial</comboitem>
+				<comboitem>Venezuela</comboitem>
+			</combobox>
+			<separator></separator>
+		</groupbox>
+		<groupbox>
+			<caption>Lista de Empleados</caption>
+			<div align="center">
+			<grid width="70%">
+				<columns>
+					<column align="center" width="20%">Nombres</column>
+					<column align="center" width="20%">
+						Apellidos
+					</column>
+				
+					<column align="center" id="M3" visible="false" width="20%">N° de Cheque</column>
+					<column align="center" width="20%">Fecha</column>
+					<column align="center" width="20%">Total</column>
+				</columns>
+				<rows>
+					<row>
+						<label>Diego Alberto</label>
+						<label>Alves Guaita</label>
+						<textbox id="M4" visible="false"></textbox>
+						<label>30/11/2011</label>
+						<label>1645 Bs.</label>
+					</row>
+					<row>
+						<label>Antonio José</label>
+						<label>Barragan Saltor</label>
+						<textbox id="M5" visible="false"></textbox>
+						<label>30/11/2011</label>
+						<label>1410 Bs.</label>
+					</row>
+					<row>
+						<label>Ricardo Antonio</label>
+						<label>Costa Rodríguez</label>
+						<textbox id="M6" visible="false"></textbox>
+						<label>30/11/2011</label>
+						<label>1410 Bs.</label>
+					</row>
+					<row>
+						<label>Dominguez Sosa</label>
+						<label>Federico</label>
+						<textbox id="M7" visible="false"></textbox>
+						<label>30/11/2011</label>
+						<label>1645 Bs.</label>
+					</row>
+				</rows>
+			</grid>
+			</div>
+			<separator></separator>
+			<separator></separator>
+		</groupbox>
+		<panel>
+			<panelchildren>
+				<div align="right">
+					<button image="/Recursos/Imagenes/guardar.ico"
+						label="Guardar" onClick="" />
+					<button image="/Recursos/Imagenes/atras.ico"
+						label="Salir" onClick="salir()" />
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

@@ -1,0 +1,129 @@
+<?page title="Calendario Interno" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Calendario Interno" border="normal" width="70%" height="80%">
+
+		<borderlayout>
+			<north>
+				<div style="margin-top: 10px" width="95%">
+					<grid>
+						<columns>
+							<column label="Categoría:" width="50%"
+								style="border-style:none" />
+							<column label="Equipo 1"
+								style="border-style:none" align="center" />
+							<column label="" style="border-style:none"
+								align="center" />
+							<column label="Equipo 2"
+								style="border-style:none" align="center" />
+							<column label="" style="border-style:none"
+								align="center" />
+						</columns>
+						<rows>
+
+							<row style="border-style:none">
+								<combobox>
+									<comboitem label="Infantil" />
+									<comboitem label="Pre-Junior" />
+									<comboitem label="Juvenil" />
+								</combobox>
+								<combobox>
+									<comboitem label="Fundalara A" />
+									<comboitem label="Fundalara B" />
+									<comboitem label="Fundalara C" />
+								</combobox>
+								<label value="VS"></label>
+								<combobox>
+									<comboitem label="Fundalara A" />
+									<comboitem label="Fundalara B" />
+									<comboitem label="Fundalara C" />
+								</combobox>
+								<button label="Agregar" onClick="" />
+							</row>
+
+						</rows>
+					</grid>
+				</div>
+
+
+
+			</north>
+			<west>
+				<div width="95%" style="margin-top:15px">
+					<grid>
+						<columns>
+							<column label=" Equipo 1" align="center" />
+							<column label=" Equipo 2" align="center" />
+							<column label=" Fecha" width="10%"
+								align="center" />
+							<column label=" Lugar" align="center" />
+							<column label=" Hora" width="10%"
+								align="center" />
+							<column label=" Estatus" width="10%"
+								align="center" />
+							<column label="" width="10%" align="center" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Fundalara A" />
+								<label value="Fundalara B" />
+								<label value="08/11/2011" />
+								<label value="Estadio Fundalara - Lara" />
+								<label value="9:00 AM" />
+								<label value="Finalizado" />
+								<button label="Ver Resultados"></button>
+							</row>
+							<row>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<button label="Ver Resultados"
+									disabled="true">
+								</button>
+							</row>
+							<row>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<button label="Ver Resultados"
+									disabled="true">
+								</button>
+							</row>
+							<row>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<button label="Ver Resultados"
+									disabled="true">
+								</button>
+							</row>
+						</rows>
+					</grid>
+
+				</div>
+			</west>
+			<south style="margin-top:-200px"><div style="margin-top:10px" align="right">
+			<hbox>
+			    <button label="Modificar" onClick=""
+					image="/icono/guardar.ico" />
+				<button label="Guardar" onClick=""
+					image="/icono/guardar.ico" />
+				<button label="Cancelar" onClick=""
+					image="/icono/cancelar.ico" />
+				<button label="Salir" onClick="" />
+
+			</hbox>
+		</div></south>
+
+		</borderlayout>
+		
+	</window>
+</zk>

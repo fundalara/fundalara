@@ -1,0 +1,49 @@
+<?page title="Tipo de Actividad" contentType="text/html;charset=UTF-8"?>
+<window title="Tipo de Actividad" border="normal" width="450px"
+	maximizable="true" minimizable="true" closable="true" sizable="true" mode="modal">
+	<panel title="Actividad" collapsible="false">
+		<panelchildren>
+			<hbox width="100%">
+				<div>
+					<grid>
+						<columns>
+							<column width="30%" />
+							<column  />
+						</columns>
+						<rows>
+							<row align="left">
+								<label value="Codigo" />
+								<textbox width="90%" value="123456"
+									disabled="true" />
+							</row>
+							<row>
+								<label value="Nombre " />
+								<textbox width="90%" maxlength="80"
+									disabled="false" value="Religiosa" />
+							</row>
+						</rows>
+					</grid>
+				</div>
+				<div>
+					<label value="Descripcion " />
+					<textbox width="90%" disabled="false" multiline="true"
+					height="40px"
+						value = "Se Refiere a las Actividad que permiten congregar a un grupo" />
+				</div>
+			</hbox>
+		</panelchildren>
+	</panel>
+
+	<div align="right">
+		<button label="Guardar" image="./Recursos/Imagenes/guardar.ico"
+			orient="horizontal" width="100px" />
+		<space />
+		<button label="Cancelar"
+			image="./Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<space />
+		<button label="Salir" image="./Recursos/Imagenes/salir.png"
+			orient="horizontal" width="100px" />
+		<space />
+	</div>
+</window>

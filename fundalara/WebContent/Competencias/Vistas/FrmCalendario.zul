@@ -1,0 +1,521 @@
+<?page title="CALENDARIO" contentType="text/html;charset=UTF-8"?>
+<zk>
+ <div align="center">
+	<window title="CALENDARIO" border="normal" width="65%"
+		height="70%">
+
+		<!-- DATOS COMPETENCIA -->
+		<panel border="normal">
+			<caption label="Datos de la Competencia"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40px" align="left"></column>
+						<column width="40px"></column>
+						<column width="60px"></column>
+						<column width="60px"></column>
+						<column width="50px"></column>
+						<column width="60px"></column>
+					</columns>
+					<rows>
+						<row style="border-style:none">
+							<label value="Competencia"></label>
+							<hbox>
+								<textbox cols="11"></textbox>
+								<button
+									image="../../Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+							<label value="Fecha Inicio"></label>
+							<textbox cols="10"></textbox>
+							<label value="Fecha Fin"></label>
+							<textbox cols="10"></textbox>
+						</row>
+						<row style="border-style:none">
+							<label value="Categoría:"></label>
+							<combobox>
+								<comboitem label="Infantil" />
+								<comboitem label="Pre-Junior" />
+								<comboitem label="Juvenil" />
+							</combobox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+
+		<!-- AGREGAR ENFERNTAMIENTOS -->
+		<panel collapsible="true">
+			<caption label="Agregar Enfrentamientos"></caption>
+			<panelchildren>
+				<div>
+					<grid>
+						<columns>
+							<column label="" style="border-style:none"
+								align="center" />
+							<column label="" style="border-style:none"
+								align="center" />
+							<column label="" style="border-style:none"
+								align="center" />
+						</columns>
+						<rows>
+							<row style="border-style:none">
+								<label value="Home Club" />
+								<label value="VS"></label>
+								<label value="Visitante" />
+							</row>
+							<row style="border-style:none">
+								<combobox>
+									<comboitem label="Fundalara A" />
+									<comboitem label="Fundalara B" />
+									<comboitem label="Fundalara C" />
+								</combobox>
+								<label value="" />
+								<combobox>
+									<comboitem label="Fundalara A" />
+									<comboitem label="Fundalara B" />
+									<comboitem label="Fundalara C" />
+								</combobox>
+								<button label="Agregar" onClick="" />
+							</row>
+						</rows>
+					</grid>
+				</div>
+			</panelchildren>
+		</panel>
+
+
+		<!-- TABLA DE ENFRENTAMIENTOS -->
+		<div>
+			<tabbox>
+				<tabs>
+					<tab label="Una Sola Ronda" />
+					<tab label="Ronda Eliminatoria" />
+					<tab label="Ronda Semifinal" />
+					<tab label="Ronda Final Tipo A" />
+					<tab label="Ronda Final Tipo B" />
+				</tabs>
+
+				<!-- UNA SOLA RONDA -->
+				<tabpanels height="50%">
+					<tabpanel>
+						<div width="100%">
+							<panel border="normal">
+								<caption label="Enfrentamientos"></caption>
+								<panelchildren>
+									<grid>
+										<columns>
+											<column label=" Home Club"
+												align="center" />
+											<column label=" Visitante"
+												align="center" />
+											<column label=" Fecha"
+												width="10%" align="center" />
+											<column label=" Lugar"
+												align="center" />
+											<column label=" Hora"
+												width="10%" align="center" />
+											<column label=" Estatus"
+												width="10%" align="center" />											
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Fundalara" />
+												<label value="Delfines" />
+												<label
+													value="08/11/2011" />
+												<label
+													value="Estadio Fundalara - Lara" />
+												<label value="9:00 AM" />
+												<label
+													value="Finalizado" />
+											</row>
+											<row>
+												<label value="UCLA" />
+												<label
+													value="Fundalara" />
+												<label
+													value="11/11/2011" />
+												<label
+													value="Estadio UCLA - Lara" />
+												<label value="9:00 AM" />
+												<label
+													value="Finalizado" />												
+											</row>
+											<row>
+												<label
+													value="Pelicanos" />
+												<label
+													value="Antonio Alvarez" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />												
+											</row>
+											<row>
+												<label value="Delfines" />
+												<label value="UCLA" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />												
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</tabpanel>
+
+
+					<!-- RONDA ELIMINATORIA -->
+					<tabpanel>
+						<div width="100%">
+							<panel border="normal">
+								<caption label="Enfrentamientos"></caption>
+								<panelchildren>
+									<grid>
+										<columns>
+											<column label=" Home Club"
+												align="center" />
+											<column label=" Visitante"
+												align="center" />
+											<column label=" Fecha"
+												width="10%" align="center" />
+											<column label=" Lugar"
+												align="center" />
+											<column label=" Hora"
+												width="10%" align="center" />
+											<column label=" Estatus"
+												width="10%" align="center" />
+											<column label="" width="10%"
+												align="center" />
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Fundalara" />
+												<label value="UCLA" />
+												<label
+													value="06/12/2011" />
+												<label
+													value="Estadio Fundalara - Lara" />
+												<label value="10:00 AM" />
+												<label
+													value="Finalizado" />
+												<checkbox></checkbox>
+											</row>
+											<row>
+												<label value="Pericos" />
+												<label value="Delfines" />
+												<label
+													value="12/01/2012" />
+												<label
+													value="Estadio Pericos - Lara" />
+												<label value="9:00 AM" />
+												<label
+													value="Finalizado" />
+												<checkbox></checkbox>
+											</row>
+											<row>
+												<label
+													value="Fundalara" />
+												<label
+													value="Antonio Alvarez" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<checkbox
+													disabled="true">
+												</checkbox>
+											</row>
+											<row>
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<checkbox
+													disabled="true">
+												</checkbox>
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</tabpanel>
+
+
+					<!-- RONDA SEMIFINAL -->
+					<tabpanel>
+						<div width="100%">
+							<panel border="normal">
+								<caption label="Enfrentamientos"></caption>
+								<panelchildren>
+									<grid>
+										<columns>
+											<column label=" Home Club"
+												align="center" />
+											<column label=" Visitante"
+												align="center" />
+											<column label=" Fecha"
+												width="10%" align="center" />
+											<column label=" Lugar"
+												align="center" />
+											<column label=" Hora"
+												width="10%" align="center" />
+											<column label=" Estatus"
+												width="10%" align="center" />
+											<column label="" width="10%"
+												align="center" />
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Fundalara" />
+												<label
+													value="Pelicanos" />
+												<label
+													value="20/02/2012" />
+												<label
+													value="Estadio Fundalara - Lara" />
+												<label value="9:00 AM" />
+												<label
+													value="Finalizado" />
+												<checkbox></checkbox>
+											</row>
+											<row>
+												<label value="UCLA" />
+												<label value="Pericos" />
+												<label
+													value="03/03/2012" />
+												<label
+													value="Estadio UCLA - Lara" />
+												<label value="11:00 AM" />
+												<label
+													value="Finalizado" />
+												<checkbox></checkbox>
+											</row>
+											<row>
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<checkbox
+													disabled="true">
+												</checkbox>
+											</row>
+											<row>
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<checkbox
+													disabled="true">
+												</checkbox>
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</tabpanel>
+
+
+					<!-- RONDA FINAL TIPO A -->
+					<tabpanel>
+						<div width="100%">
+							<panel border="normal">
+								<caption label="Enfrentamientos"></caption>
+								<panelchildren>
+									<grid>
+										<columns>
+											<column label=" Home Club"
+												align="center" />
+											<column label=" Visitante"
+												align="center" />
+											<column label=" Fecha"
+												width="10%" align="center" />
+											<column label=" Lugar"
+												align="center" />
+											<column label=" Hora"
+												width="10%" align="center" />
+											<column label=" Estatus"
+												width="10%" align="center" />
+										
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Fundalara" />
+												<label value="Delfines" />
+												<label
+													value="08/11/2011" />
+												<label
+													value="Estadio Fundalara - Lara" />
+												<label value="10:00 AM" />
+												<label
+													value="Finalizado" />
+												
+											</row>
+											<row>
+												<label value="UCLA" />
+												<label
+													value="Fundalara" />
+												<label
+													value="11/11/2011" />
+												<label
+													value="Estadio UCLA - Lara" />
+												<label value="9:00 AM" />
+												<label 
+													value="Finalizado" />
+											
+											</row>
+											<row>
+												<label
+													value="Fundalara" />
+												<label
+													value="Antonio Alvarez" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+											
+											</row>
+											<row>
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+											
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</tabpanel>
+
+
+					<!-- RONDA FINAL TIPO B -->
+					<tabpanel>
+						<div width="100%">
+							<panel border="normal">
+								<caption label="Enfrentamientos"></caption>
+								<panelchildren>
+									<grid>
+										<columns>
+											<column label=" Home Club"
+												align="center" />
+											<column label=" Visitante"
+												align="center" />
+											<column label=" Fecha"
+												width="10%" align="center" />
+											<column label=" Lugar"
+												align="center" />
+											<column label=" Hora"
+												width="10%" align="center" />
+											<column label=" Estatus"
+												width="10%" align="center" />
+											<column label="" width="10%"
+												align="center" />
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Fundalara" />
+												<label value="UCLA" />
+												<label
+													value="08/11/2011" />
+												<label
+													value="Estadio Fundalara - Lara" />
+												<label value="9:00 AM" />
+												<label
+													value="Finalizado" />
+												<checkbox></checkbox>
+											</row>
+											<row>
+												<label value="UCLA" />
+												<label
+													value="Delfines" />
+												<label
+													value="11/11/2011" />
+												<label
+													value="Estadio UCLA - Lara" />
+												<label value="9:00 AM" />
+												<label
+													value="Finalizado" />
+												<checkbox></checkbox>
+											</row>
+											<row>
+												<label
+													value="Fundalara" />
+												<label
+													value="Antonio Alvarez" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<checkbox
+													disabled="true">
+												</checkbox>
+											</row>
+											<row>
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<checkbox
+													disabled="true">
+												</checkbox>
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+		</div>
+
+
+		<!-- BOTON RESULTADOS -->
+		
+
+
+		<!-- BOTONES -->
+		<panel>
+			<panelchildren style="margin-top:20px ">
+				<div align="right">
+					<button image="../../Recursos/Imagenes/guardar.ico"
+						label="Guardar">
+					</button>
+					<button image="../../Recursos/Imagenes/editar.ico"
+						label="Modificar">
+					</button>
+					<button image="../../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar">
+					</button>
+					<button image="../../Recursos/Imagenes/salir.png"
+						label="Salir">
+					</button>
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+	</div>
+</zk>

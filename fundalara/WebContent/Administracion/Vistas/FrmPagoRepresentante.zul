@@ -1,0 +1,574 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winPR" title="Gestionar Pago" border="normal">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	void setOn() {
+		tres.setChecked(true);
+		cuatro.setChecked(true);
+	}
+	void setOn1() {
+		uno.setChecked(true);
+		dos.setChecked(true);
+		cinco.setChecked(true);
+		seis.setChecked(true);
+	}
+	public void doLogin() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/FrmOtroPago.zul", null, null);
+		winPOP.doModal();
+		//loginDiv.setVisible(false);"ConsulViaticos.zul"
+		//click.setVisible(false);
+	}
+	public void mostrar() {
+		String var = CB1.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+
+		}
+
+	}
+]]></zscript>
+
+		<groupbox>
+			<caption>Datos Personales</caption>
+			<groupbox>
+				<caption>Representante</caption>
+				<grid>
+					<rows>
+						<row>
+							<label value="Cedula" />
+							<bandbox>
+								<bandpopup>
+									<listbox width="20%">
+										<listitem>
+											<listcell label="18862641" />
+										</listitem>
+										<listitem>
+											<listcell label="20050288" />
+										</listitem>
+									</listbox>
+								</bandpopup>
+							</bandbox>
+						</row>
+						<row>
+							<label value="Nombre del Representante" />
+							<bandbox>
+								<bandpopup>
+									<listbox width="20%">
+										<listhead>
+											<listheader
+												label="Nombre" />
+										</listhead>
+										<listitem>
+											<listcell label="Yo" />
+
+										</listitem>
+										<listitem>
+											<listcell label="el" />
+										</listitem>
+									</listbox>
+								</bandpopup>
+							</bandbox>
+						</row>
+						<row>
+							<label value="Teléfono Movil" />
+							<textbox />
+						</row>
+					</rows>
+				</grid>
+
+				<grid>
+					<rows>
+
+						<row>
+							<grid>
+
+								<columns>
+									<column label="" width="20%" />
+
+								</columns>
+								<rows>
+									<row>
+										<label value="Dirección" />
+										<textbox width="96%" />
+
+									</row>
+
+								</rows>
+
+							</grid>
+						</row>
+					</rows>
+				</grid>
+
+			</groupbox>
+			<groupbox>
+				<caption>Atletas Asociados</caption>
+				<grid>
+
+					<columns>
+						<column>
+							<checkbox id="on" onCheck="setOn()"></checkbox>
+						</column>
+						<column label="Código" width="10%" />
+						<column label="Nombre Atlera" width="50%" />
+						<column label="Categoria" width="15%" />
+						<column label="Equipo" width="15%" />
+					</columns>
+					<rows>
+						<row>
+							<checkbox id="tres"></checkbox>
+							<label value="012354" />
+							<label value="Felix Rivas" />
+							<label value="Junior" />
+							<label value="C" />
+						</row>
+						<row>
+							<checkbox id="cuatro"></checkbox>
+							<label value="045587" />
+							<label value="Augusto Salas" />
+							<label value="Compota" />
+							<label value="A" />
+						</row>
+
+					</rows>
+
+				</grid>
+			</groupbox>
+		</groupbox>
+		<panel title="Datos de Pago" collapsible="true" open="false">
+			<panelchildren>
+				<groupbox>
+					<caption>Compromisos Pendientes</caption>
+					<grid>
+						<columns>
+							<column width="10%">
+								<checkbox onCheck=" setOn1()"></checkbox>
+							</column>
+							<column label="Descripcion" width="50%" />
+							<column label="Cantidad" width="20%" />
+							<column label="Monto" width="20%" />
+						</columns>
+						<rows>
+							<row>
+								<checkbox id="uno"></checkbox>
+								<label value="Cuota Octubre" />
+								<label value="1" />
+								<label value="90.00" />
+
+							</row>
+							<row>
+								<checkbox id="dos"></checkbox>
+								<label value="Cuota Noviembre" />
+								<label value="1" />
+								<label value="90.00" />
+							</row>
+							<row>
+								<checkbox id="cinco"></checkbox>
+								<label
+									value="Compra de Uniforme Paquete Completo" />
+								<label value="1" />
+								<label value="200.00" />
+							</row>
+							<row>
+								<checkbox id="seis"></checkbox>
+								<label value="Compra de Gorra" />
+								<label value="1" />
+								<label value="90.00" />
+							</row>
+							<row spans="4" align="center">
+								<groupbox>
+									<div align="right">
+										<label
+											value="Monto Pendiente a Pagar" />
+										<textbox />
+									</div>
+								</groupbox>
+							</row>
+						</rows>
+					</grid>
+					<div align="right">
+						<button label="Otro Pago" onClick="doLogin()">
+						 
+						
+						</button>
+						<button
+							image="/Recursos/Imagenes/agregar.ico" label="" onClick="" />
+						<button
+							image="/Recursos/Imagenes/quitar.ico" onClick=""
+							tooltiptext="Quitar" />
+					</div>
+				</groupbox>
+				<groupbox>
+					<caption>Pagos a Realizar</caption>
+					<grid>
+						<columns>
+							<column label="Descripción" width="70%" />
+							<column label="Cantidad" width="15%" />
+							<column label="Monto" width="15%" />
+						</columns>
+						<rows>
+							<row>
+								<label
+									value="Compra de Uniforme Paquete Completo" />
+								<label value="1" />
+								<label value="200" />
+							</row>
+
+
+							<row>
+								<label value="Cuota Octubre" />
+								<label value="1" />
+								<label value="90" />
+							</row>
+
+							<row spans="4" align="center">
+
+								<groupbox>
+									<div align="right">
+										<label
+											value="Total Bsf a Pagar" />
+										<textbox />
+									</div>
+
+								</groupbox>
+
+							</row>
+
+						</rows>
+
+
+					</grid>
+					<panel collapsible="true" title="Datos del Pago"
+					open="false">
+					<panelchildren>
+
+
+						<div>
+							<grid>
+
+								<rows>
+
+									<row>
+										<grid>
+											<columns>
+												<column label=""
+													width="220px">
+												</column>
+												<column label=""
+													width="252px">
+												</column>
+												<column label=""
+													width="180px">
+												</column>
+												<column label=""
+													width="180px">
+												</column>
+
+
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Forma de Pago">
+													</label>
+													<combobox id="CB1"
+														onSelect="mostrar()" width="180px">
+														<comboitem
+															value="1" label="Efectivo">
+														</comboitem>
+														<comboitem
+															value="2" label="Débito">
+														</comboitem>
+														<comboitem
+															value="3" label="Crédito">
+														</comboitem>
+														<comboitem
+															value="4" label="Transferencia">
+														</comboitem>
+														<comboitem
+															value="5" label="Cheque">
+														</comboitem>
+													</combobox>
+													<label
+														value="Monto Cancelado">
+													</label>
+													<textbox
+														width="180px">
+													</textbox>
+
+
+												</row>
+												<row id="row1"
+													visible="false">
+													<label
+														value="Nro. de Documento">
+													</label>
+													<textbox
+														width="180px">
+													</textbox>
+
+													<label
+														value="Entidad Bancaria">
+													</label>
+													<combobox
+														width="180px">
+														<comboitem
+															label="Banesco">
+														</comboitem>
+														<comboitem
+															label="Mercantil">
+														</comboitem>
+														<comboitem
+															label="BOD">
+														</comboitem>
+														<comboitem
+															label="Provincial">
+														</comboitem>
+														<comboitem
+															label="Venezuela">
+														</comboitem>
+													</combobox>
+
+												</row>
+												<row id="row2"
+													visible="false">
+													<label
+														value="Tipo de Tarjeta">
+													</label>
+													<combobox
+														width="180px">
+														<comboitem
+															label="Visa">
+														</comboitem>
+														<comboitem
+															label="MarterCard">
+														</comboitem>
+														<comboitem
+															label="American Express">
+														</comboitem>
+													</combobox>
+												</row>
+											</rows>
+										</grid>
+									</row>
+									<row>
+										<div align="right">
+											<hbox>
+												<button
+													image="/Recursos/Imagenes/agregar.ico" onClick=""
+													label="" tooltiptext="Agregar a la Lista" />
+												<button
+													image="/Recursos/Imagenes/quitar.ico" onClick=""
+													label="" tooltiptext="Quitar de la Lista" />
+											</hbox>
+										</div>
+									</row>
+								</rows>
+
+							</grid>
+
+						</div>
+
+
+						<separator></separator>
+						<groupbox width="700px">
+							<caption>
+								Diferentes Métodos de Pago
+							</caption>
+
+							<div>
+								<grid>
+
+									<rows>
+
+										<row>
+											<grid width="690px">
+												<columns>
+													<column label=""
+														width="20px">
+														<checkbox
+															onCheck="setOn1()">
+														</checkbox>
+													</column>
+													<column label="Item"
+														width="60px">
+													</column>
+													<column
+														label="Forma de Pago" width="100px">
+													</column>
+													<column
+														label="Tipo de Tarjeta">
+													</column>
+													<column
+														label="Monto Cancelado" width="120px">
+													</column>
+													<column
+														label="Entidad Bancaria" width="100px">
+													</column>
+													<column
+														label="Nro. de Documento" width="140px">
+													</column>
+
+
+												</columns>
+												<rows>
+													<row>
+														<checkbox
+															id="c4">
+														</checkbox>
+														<label
+															value="1">
+														</label>
+														<label
+															value="Efectivo">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="2,5Bs">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="N/A">
+														</label>
+
+													</row>
+													<row>
+														<checkbox
+															id="c5">
+														</checkbox>
+														<label
+															value="2">
+														</label>
+														<label
+															value="Cheque">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="20Bs">
+														</label>
+														<label
+															value="Mercantil">
+														</label>
+														<label
+															value="001299300019920">
+														</label>
+
+													</row>
+												</rows>
+											</grid>
+
+										</row>
+									</rows>
+								</grid>
+								<separator></separator>
+								<div align="right">
+									<grid width="300px">
+										<rows>
+											<row>
+												<label
+													value="Sub-Total">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+											<row>
+												<label
+													value="Valor IVA">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+											<row>
+												<label
+													value="Monto IVA">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+											<row>
+
+												<label
+													value="Monto Total">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+
+											<row>
+												<label
+													value="Monto Restante a Pagar">
+												</label>
+												<textbox width="90px"></textbox>
+											</row>
+
+										</rows>
+									</grid>
+								</div>
+
+							</div>
+						</groupbox>
+						<separator></separator>
+					</panelchildren>
+				</panel>
+				</groupbox>
+				<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico"
+				onClick="" tooltiptext="Aceptar" label="Pagar" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				onClick="" tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico"
+				onClick="" tooltiptext="Salir" label="Salir" >
+				<attribute name="onClick">
+				winPR.onClose();
+				</attribute>
+				
+				</button>
+		</div>
+			</panelchildren>
+		</panel>
+
+
+	</window>
+</zk>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

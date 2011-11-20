@@ -1,0 +1,103 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<div align="center">
+	<window title="APERTURAR COMPETENCIA" width="50%" height="100%"
+		border="normal">
+
+		<grid style="margin-top:10px">
+			<columns>
+				<column label="" align="left" width="40%" />
+				<column label="" width="50%" />
+			</columns>
+			<rows>
+				<row>
+
+					<label value="Competencia"></label>
+					<bandbox>
+						<bandpopup></bandpopup>
+					</bandbox>
+				</row>
+				<row>
+
+					<label value="Tipo de Competencia"></label>
+					<bandbox>
+						<bandpopup></bandpopup>
+					</bandbox>
+				</row>
+				<row>
+
+					<label value="Categoria"></label>
+					<bandbox>
+						<bandpopup></bandpopup>
+					</bandbox>
+				</row>
+
+			</rows>
+		</grid>
+
+		<div style="margin-top: 10px">
+			<label
+				value="Seleccione la Competencia que desea aperturar">
+			</label>
+
+			<listbox>
+				<listhead>
+					<listheader label="Competencias" sort="auto" />
+					<listheader label="Descripcion" sort="auto" />
+				</listhead>
+				<listitem>
+					<listcell label="Copa Cer" />
+					<listcell label="Copa Homenaje la  mayor " />
+				</listitem>
+				<listitem>
+					<listcell label="Copa Mana" />
+					<listcell label="Copa homenaje a las estrellas  " />
+				</listitem>
+				<listitem>
+					<listcell label="Copa Tinaja " />
+					<listcell label="Homenaje a la B" />
+				</listitem>
+			</listbox>
+
+
+		</div>
+
+		<div style="margin-top:15px">
+			<grid>
+				<columns>
+					<column label="Equipos" width="25%"/>
+					<column label="Rosters" width="25%"/>
+					<column label="Indicadores" width="25%"/>
+					<column label="Calendario" width="25%"/>
+				</columns>
+				<rows>
+					<row>					
+						
+						<label value="0/4 " >
+						
+						</label>
+												
+						<label value="25/25" />
+						<label value="10" />
+						<button label="Ver Calendario" onClick="" />
+					</row>
+					<row>
+					<label value="" />
+						<label value="" />
+						<label value="" />
+						<button label="Ver Calendario" onClick="" disabled="true" /></row>
+					<row></row>
+				</rows>
+			</grid>
+
+		</div>
+		<div align="right">
+			<button image="/Recursos/Imagenes/apertura.png" label="Aperturar" ></button>
+			<button image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal" ></button>
+					<button image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal" ></button> 
+		</div>
+	</window>
+	</div>
+</zk>

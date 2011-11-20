@@ -1,0 +1,39 @@
+<?page title="Parentesco" contentType="text/html;charset=UTF-8"?>
+<window title="Registro del Parentesco" border="normal" width="695px"
+	maximizable="true" minimizable="true" closable="true" sizable="true">
+	<panel title="Parentesco">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column width="10%" />
+					<column width="40%" />
+					<column width="10%" />
+					<column width="40%" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Código Parentesco" />
+						<textbox width="90%" maxlength="5"
+							disabled="true" />
+						<label value="Nombre del Parentesco" />
+						<textbox width="90%" maxlength="80"
+							disabled="false" />
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<div align="right">
+		<button label="Guardar"
+			image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+			width="100px" />
+		<space />
+		<button label="Cancelar"
+			image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<space />
+		<button label="Salir" image="../../Recursos/Imagenes/salir.png"
+			orient="horizontal" width="100px" />
+		<space />
+	</div>
+</window>

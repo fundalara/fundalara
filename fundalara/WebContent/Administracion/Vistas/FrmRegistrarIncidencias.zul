@@ -1,0 +1,137 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="win" title="Registrar Incidencias Laborales" border="normal"
+		width="650px">
+		<panel>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="15%"></column>
+						<column width="85%"></column>
+					</columns>
+					<rows>
+						<row>
+							<label>Cédula</label>
+							<bandbox width="20%"></bandbox>
+						</row>
+					</rows>
+				</grid>
+
+				<grid>
+					<columns>
+						<column width="15%"></column>
+						<column width="35%"></column>
+						<column width="15%"></column>
+						<column width="35%"></column>
+					</columns>
+					<rows>
+						<row>
+							<label>Nombres</label>
+							<bandbox width="90%"></bandbox>
+						</row>
+					</rows>
+				</grid>
+
+				<grid>
+					<columns>
+						<column width="15%"></column>
+						<column width="35%"></column>
+						<column width="15%"></column>
+						<column width="35%"></column>
+					</columns>
+					<rows>
+						<row>
+							<label>Cargo</label>
+							<textbox width="90%"></textbox>
+							<label>Período</label>
+							<datebox width="50%"></datebox>
+						</row>
+					</rows>
+				</grid>
+
+				<grid>
+					<rows>
+						<row>
+							<div align="right">
+								<button
+									image="/Recursos/Imagenes/agregar.ico">
+									<attribute name="onClick">
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmAgregarIncidencia.zul", null, null);
+	 winA.doModal();
+]]>
+								</attribute>
+								</button>
+
+								<button
+									image="/Recursos/Imagenes/quitar.ico">
+								</button>
+							</div>
+						</row>
+						<row>
+							<grid>
+								<columns>
+									<column  width="8%">
+										<checkbox id="on"
+											onClick="setOn()">
+										</checkbox>
+									</column>
+									<column label="Incidencias"
+										width="40%">
+									</column>
+									<column label="Fecha" width="10%"
+										align="center">
+									</column>
+									<column label="Horas" width="10%"
+										align="center">
+									</column>
+									<column label="Pago" width="10%"
+										align="center">
+									</column>
+									<column label="Observación"
+										width="25%" align="center">
+									</column>
+								</columns>
+								<rows>
+									<row>
+										<checkbox></checkbox>
+										<label>
+											Inasistencia Justificada
+										</label>
+										<label>21/09/2011</label>
+										<label>8</label>
+										<checkbox checked="true"></checkbox>
+										<label>Enfermedad</label>
+									</row>
+									<row>
+										<checkbox></checkbox>
+										<label>Trabajo Extra</label>
+										<label>23/09/2011</label>
+										<label>3</label>
+										<checkbox checked="true"></checkbox>
+										<label>Trabajo nocturno</label>
+									</row>
+								</rows>
+							</grid>
+						</row>
+						<row>
+							<div align="right">
+								<button
+									image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
+								</button>
+								<button
+									image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+									<attribute name="onClick">
+									<![CDATA[
+									         win.detach();
+									]]>
+									</attribute>
+								</button>
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

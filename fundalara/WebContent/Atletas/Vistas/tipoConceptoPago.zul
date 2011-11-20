@@ -1,0 +1,32 @@
+<?page title="Concepto de Pago" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Concepto de Pago" border="normal" width="45%">
+		<grid>
+			<columns>
+				<column width="20%" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label value="Nombre" />
+					<textbox width="50%" focus="true"/>
+				</row>
+				<row>
+					<label value="Monto" />
+					<intbox width="30%" />
+				</row>
+			</rows>
+		</grid>
+		<div align="right">
+			<button label="Guardar" image="../../Recursos/Imagenes/guardar.ico"
+				orient="horizontal" width="100px" />
+			<space />
+			<button label="Cancelar" image="../../Recursos/Imagenes/cancelar.ico"
+				orient="horizontal" width="100px" />
+			<space />
+			<button label="Salir" image="../../Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px" />
+			<space />
+		</div>
+	</window>
+</zk>

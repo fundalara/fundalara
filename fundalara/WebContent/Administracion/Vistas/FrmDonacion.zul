@@ -1,0 +1,135 @@
+<?page title="Donaciones" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winD" title="Donaciones" border="normal" width="100%"
+		>
+
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	void setOn1() {
+		c1.setChecked(true);
+		c2.setChecked(true);
+
+	}
+]]></zscript>
+		<div>
+			<grid>
+				<columns>
+					<column label="" width="200px"></column>
+					<column label="" width="200px"></column>
+				</columns>
+				<rows>
+					<row>
+						Cedula o RIF
+						<hbox>
+							<bandbox id="bd">
+								<bandpopup></bandpopup>
+							</bandbox>
+							<button label=""
+								image="/Administracion/images/proveedor.png"
+								tooltiptext="Nuevo Benefactor" />
+
+
+						</hbox>
+						Nombre
+						<textbox id="tb" disabled="true"></textbox>
+					</row>
+
+					<row>
+						Fecha
+						<datebox></datebox>
+						Monto a donar
+						<hbox>
+							<decimalbox value="0"></decimalbox>
+							<label>BsF</label>
+						</hbox>
+					</row>
+
+				</rows>
+			</grid>
+		</div>
+		<panel collapsible="true" title="Materiales a Donar">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40%">
+							<hbox>
+								<label>Codigo de Material</label>
+								<bandbox></bandbox>
+								<button label=""
+									image="/Recursos/Imagenes/basket_add.png"
+									tooltiptext="Nuevo Artículo" />
+
+
+							</hbox>
+						</column>
+						<column width="20%">
+							Descripcion
+							<textbox disabled="true"></textbox>
+						</column>
+						<column width="20%">
+							Cantidad
+							<spinner></spinner>
+						</column>
+						<column width="10%">
+							<button label=""
+								image="/Recursos/Imagenes/agregar.ico"
+								tooltiptext="Agregar Artículo a la Grid" />
+
+							<button label=""
+								image="/Recursos/Imagenes/quitar.ico"
+								tooltiptext="Quitar Artículo de la Grid" />
+						</column>
+					</columns>
+				</grid>
+				<grid>
+					<columns>
+						<column>
+							<checkbox onCheck="setOn1()"></checkbox>
+						</column>
+						<column label="Item"></column>
+						<column>Codigo</column>
+						<column>Descripcion</column>
+						<column>Cantidad</column>
+
+					</columns>
+					<rows>
+						<row>
+							<checkbox id="c1"></checkbox>
+							<label value="1"></label>
+							<label>ba23</label>
+							<label>Bate 23"</label>
+							<label>10</label>
+
+						</row>
+						<row>
+							<checkbox id="c2"></checkbox>
+							<label value="1"></label>
+
+							<label>ca20</label>
+							<label>Careta 20"</label>
+							<label>5</label>
+
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico"
+				onClick="" tooltiptext="Aceptar" label="Registrar" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				onClick="" tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" />
+				<attribute name="onClick">
+				winPR.onClose();
+				</attribute>
+				
+		</div>
+	</window>
+</zk>

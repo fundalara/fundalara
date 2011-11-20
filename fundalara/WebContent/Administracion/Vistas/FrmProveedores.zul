@@ -1,0 +1,190 @@
+<?page title="Proveedores" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<!-- <div align="center"> -->
+	<window title="Proveedores" border="normal" width="650px">
+		<!-- <groupbox> -->
+			<panel title="Datos del Proveedor" collapsible="true" open="true">
+				<panelchildren>
+					<groupbox>
+						<caption>Datos del Proveedor</caption>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column width="110px" /> 
+											<column width="300px" />
+											<column width="120px" />
+											<column width="300px" />
+										</columns>
+										<rows>
+											<row align="left">
+												<label value="* Nombre" />
+												<bandbox width="90%"/>
+												<!--<textbox width="96%" />-->
+												<label value="* R.I.F" />
+												<bandbox width="90%"/>
+												<!--<textbox width="96%" />-->
+											</row>
+											<row>
+												<label value="Teléfono" />
+												<hbox>
+													<combobox
+														width="60px">
+														<comboitem
+															label="0251">
+														</comboitem>
+														<comboitem
+															label="0252">
+														</comboitem>
+														<comboitem
+															label="0253">
+														</comboitem>
+													</combobox>
+													<textbox
+														width="96%">
+													</textbox>
+												</hbox>
+												<label value="Numero de Fax" />
+												<hbox>
+													<combobox
+														width="60px">
+														<comboitem
+															label="0251">
+														</comboitem>
+														<comboitem
+															label="0252">
+														</comboitem>
+														<comboitem
+															label="0253">
+														</comboitem>
+													</combobox>
+													<textbox
+														width="96%">
+													</textbox>
+												</hbox>
+											</row>
+											<row>
+													<label value="Email" />
+													<textbox width="96%" />
+													<label value="Pagina Web" />
+													<textbox width="96%" />
+											</row>
+											<row>
+												
+													<label value="Cuenta Twitter @" />
+													<textbox width="96%" />
+													<label value="Cuenta Facebook" />
+													<textbox width="96%" />
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column label="" width="120px" />
+										</columns>
+										<rows>
+											<row>
+												<label value="* Dirección" />
+												<textbox width="96%" />
+												
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					</panelchildren>
+				</panel>
+				
+				<panel title="Datos Bancarios" collapsible="true" open="false">
+				<panelchildren>
+				<groupbox>
+					<caption>Datos Bancarios</caption>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column width="120px" />
+											<column width="300px" />
+											<column width="95px" />
+											<column width="300px" />
+										</columns>
+										<rows>
+											<row>
+												<label value="Nombre del Banco" />
+												<textbox width="96%" />
+												<label value="Nro de Cuenta" />
+												<textbox width="96%" />
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column label="" width="90px" />
+										</columns>
+										<rows>
+											<row>
+												<label value="Titular de la Cuenta" />
+												<textbox width="96%" />
+												<button image="/Recursos/Imagenes/agregar.ico" onClick="" tooltiptext="Agregar" label="" />
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column label="Nombre del Banco" width="25%" />
+											<column label="Nro de Cuenta" width="25%" />
+											<column label="Titular de la Cuenta" width="50%" />
+										</columns>
+										<rows>
+											<row>
+												<label value="Mercantil" />
+												<label value="0134-0326-14-3263-04-0653" />
+												<label value="Pedro Pérez" />
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+				</groupbox>
+				</panelchildren>
+				</panel>
+				
+		<!-- </groupbox> -->
+		<label value=" * Información Obligatoria"/>
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Registrar" label="Registrar" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				tooltiptext="Modificar" label="Modificar" />
+			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
+				tooltiptext="Eliminar" label="Eliminar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" />
+		</div>
+		
+	</window>
+	<!-- </div> -->
+</zk>

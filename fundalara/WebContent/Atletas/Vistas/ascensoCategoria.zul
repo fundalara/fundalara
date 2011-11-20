@@ -1,0 +1,113 @@
+<?page title="Ascender Equipos" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Ascender Equipos" border="normal" width="500px"
+		maximizable="true" minimizable="true" closable="true">
+	<panel title="">
+						<panelchildren>
+						<groupbox>
+						  <caption label="Actual" />
+							<grid style="border:none;" oddRowSclass="none" >
+								<columns>
+									<column width="20%"/>
+									<column width="40%"/>
+									<column width="20%"/>
+									<column width="20%"/>
+									<column/>
+								</columns>
+								<rows>
+									<row>
+										<label value="Categoría"/>
+										<textbox width="70%" value="Juvenil" disabled="true"/>
+										<label value="Equipo"/>
+										<textbox width="40%" value="A" disabled="true"/>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+						<space/>
+						<groupbox>
+			 			<caption label="Ascenso"/>
+			 			<grid style="border:none;" oddRowSclass="none" >
+								<columns>
+									<column width="20%"/>
+									<column width="40%"/>
+									<column width="20%"/>
+									<column width="20%"/>
+									<column/>
+								</columns>
+								<rows>
+									<row>
+										<label value="Categoría"/>
+										<textbox width="70%" value="Juvenil" disabled="true"/>
+										<label value="Equipo"/>
+										<textbox width="40%" value="A" disabled="true"/>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+						</panelchildren>
+					</panel>
+			<toolbar align="end">
+				<toolbarbutton id="ascenderGr" image="../../Recursos/Imagenes/arriba.png" />
+				<toolbarbutton id="modificarGr" image="../../Recursos/Imagenes/editar.ico" />
+				<toolbarbutton id="removerGr" image="../../Recursos/Imagenes/quitar.ico" />
+			</toolbar>
+			<grid id="grid" mold="paging">
+				<columns menupopup="auto">
+					<column sort="auto" label="Nro" width="10%" />
+					<column sort="auto" label="Nombre" width="40%"/>
+					<column sort="auto" label="Apellido" width="40%" />
+					<column sort="auto" label="Edad" width="10%" />
+				</columns>
+				<rows>
+					<row>
+						<label value="88" />
+						<label value="Pedro Augusto" />
+						<label value="Perez" />
+						<label value="10" />
+					</row>
+					<row>
+						<label value="02" />
+						<label value="Pablo Jesus" />
+						<label value="Oshiro" />
+						<label value="10" />
+					</row>
+					<row>
+						<label value="10" />
+						<label value="Gabriel" />
+						<label value="Valenzuela" />
+						<label value="10" />
+					</row>
+					<row>
+						<label value="14" />
+						<label value="Romel" />
+						<label value="Rodriguez" />
+						<label value="10" />
+					</row>
+					<row>
+						<label value="46" />
+						<label value="David" />
+						<label value="Monsalve Chavez" />
+						<label value="11" />
+					</row>
+					<row>
+						<label value="55" />
+						<label value="Miguel" />
+						<label value="Orozco" />
+						<label value="10" />
+					</row>
+				</rows>
+			</grid>
+	<div align="right">
+		<button label="Guardar" image="../../Recursos/Imagenes/guardar.ico"
+			orient="horizontal" width="100px"/>
+		<space/>
+		<button label="Cancelar" image="../../Recursos/Imagenes/cancelar.ico"
+			orient="horizontal" width="100px"/>
+		<space/>
+		<button label="Salir" image="../../Recursos/Imagenes/salir.png"
+			orient="horizontal" width="100px"/>
+		<space/>
+	</div>
+</window>
+</zk>

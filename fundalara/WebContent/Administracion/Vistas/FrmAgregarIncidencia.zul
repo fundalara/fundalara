@@ -1,0 +1,73 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winA" title="Agregar Incidencia" border="normal"
+		width="450px">
+		<attribute name="onClick">
+	<![CDATA[
+	winA.doModal();
+]]>
+								</attribute>
+
+		<panel>
+			<panelchildren>
+				<grid>
+					<rows>
+						<row>
+							<grid>
+								<columns>
+									<column width="30%"></column>
+									<column width="70%"></column>
+								</columns>
+								<rows>
+									<row>
+										<label>Incidencia</label>
+										<combobox width="90%">
+										<comboitem label="Inasistencia Justificada"></comboitem>
+										<comboitem label="Inasistencia no Justificada"></comboitem>
+										<comboitem label="Trabajo Extra"></comboitem>
+										</combobox>
+									</row>
+									<row>
+										<label>Fecha</label>
+										<datebox width="40%"></datebox>
+									</row>
+									<row>
+										<label>Horas Laborales</label>
+										<textbox width="15%"></textbox>
+									</row>
+									<row>
+										<label>Pago</label>
+										<radiogroup>
+											<radio label="Sí  "></radio>
+											<radio label="No"></radio>
+										</radiogroup>
+									</row>
+									<row>
+										<label>Observación</label>
+										<textbox width="95%" height="40px"></textbox>
+									</row>
+								</rows>
+							</grid>
+
+						</row>
+						<row>
+							<div align="right">
+								<button
+									image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
+								</button>
+								<button
+									image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+									<attribute name="onClick">
+									<![CDATA[
+									         winA.detach();
+									]]>
+									</attribute>
+								</button>
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

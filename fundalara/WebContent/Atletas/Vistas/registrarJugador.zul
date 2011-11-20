@@ -1,0 +1,1652 @@
+<?page title="Registrar Jugador"?>
+<div align="left">
+	<window border="none" width="671px" height="750px">
+		<zscript>
+							<![CDATA[
+	//@IMPORT
+	import org.zkoss.lang.Strings;
+	import org.zkoss.lang.Objects;
+]]><![CDATA[
+	//@DECLARATION
+	public void moveStep(boolean flag) {
+		tabRA.setVisible(!flag);
+		tabRF.setVisible(flag);
+		if (flag)
+			tabRF.setSelected(flag);
+		else
+			tabRA.setSelected(!flag);
+		btnAntes.setVisible(flag);
+		btnGuardar.setVisible(flag);
+		btnDesp.setVisible(!flag);
+	}
+	public void showRegistroFamiliar() {
+		Window nuevaVentana = (Window) Executions.createComponents(
+				"registrarFamiliarRA.zul", null, null);
+		try {
+			nuevaVentana.doModal();
+		} catch (Exception e) {
+
+		}
+	}
+]]></zscript>
+
+		<tabbox id="pestanas">
+			<tabs>
+				<tab label="Paso 01- Registro Jugador" id="tabRA" />
+				<tab label="Paso 02- Registro Familiar" visible="false"
+					id="tabRF" />
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+
+					<groupbox>
+						<caption label="Jugador" />
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column />
+								<column />
+								<column />
+								<column />
+								<column width="15%" />
+							</columns>
+							<rows>
+
+								<row>
+									<label value="Cédula" />
+									<cell colspan="3">
+										<combobox value="-"
+											width="12%">
+											<comboitem label="V" />
+											<comboitem label="E" />
+										</combobox>
+										<space />
+										<intbox constraint="no negative"
+											width="22%" />
+										<button
+											image="/images/consultar.ico" />
+									</cell>
+									<cell align="center" rowspan="3">
+
+										<image src="/images/jug.png"
+											height="80px" width="80px" tooltiptext="Seleccionar Foto" />
+									</cell>
+								</row>
+								<row>
+									<label value="Primer Nombre" />
+									<div>
+										<textbox maxlength="40"
+											width="85%" />
+										<label value="(*)"
+											style="color:red" />
+									</div>
+									<label value="Segundo Nombre" />
+									<textbox maxlength="40" width="85%" />
+								</row>
+								<row>
+									<label value="Primer Apellido"
+										width="90%" />
+									<div>
+										<textbox maxlength="40"
+											width="85%" />
+										<label value="(*)"
+											style="color:red" />
+									</div>
+									<label value="Segundo Apellido"
+										width="90%" />
+									<textbox maxlength="40" width="85%" />
+								</row>
+								<row>
+									<label value="Género" />
+									<cell colspan="5">
+										<radiogroup>
+											<radio label="Masculino"
+												checked="true" />
+											<space />
+											<radio label="Femenino" />
+										</radiogroup>
+										<label value="(*)"
+											style="color:red" />
+									</cell>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+
+					<panel title="Detalle Jugador">
+						<panelchildren>
+							<vlayout>
+
+
+
+
+								<tabbox id="detalleBasico"
+									orient="vertical" height="420px">
+									<tabs id="tabs" width="90px">
+										<tab id="A" label="Personales" />
+										<tab id="B" label="Médicos" />
+										<tab id="C" label="Académicos" />
+										<tab id="D" label="Sociales" />
+										<tab label="Deportivos" />
+									</tabs>
+									<tabpanels>
+										<tabpanel>
+											<grid style="border:none;"
+												oddRowSclass="none">
+												<rows>
+													<row>
+														<groupbox>
+															<caption
+																label="Datos de nacimiento" />
+															<grid
+																style="border:none;" oddRowSclass="none">
+																<columns>
+																	<column
+																		width="18%" />
+																	<column
+																		width="32%" />
+																	<column
+																		width="18%" />
+																	<column
+																		width="32%" />
+																</columns>
+																<rows>
+																	<row>
+																		<label
+																			value="Fecha " />
+																		<div>
+																			<datebox
+																				constraint="no future" format="dd/MM/yyyy" />
+																			<label
+																				value="(*)" style="color:red" />
+																		</div>
+																		<label
+																			value="Edad" />
+																		<hlayout>
+																			<intbox
+																				disabled="true" width="25px" />
+																			<space />
+
+																			<label
+																				value="años" />
+																		</hlayout>
+																	</row>
+																	<row>
+																		<label
+																			value="Lugar " />
+
+																		<cell
+																			colspan="3">
+																			<textbox />
+																		</cell>
+
+																	</row>
+																</rows>
+															</grid>
+														</groupbox>
+													</row>
+
+													<row>
+														<groupbox>
+															<caption
+																label="Datos Residencia" />
+															<grid
+																style="border:none;" oddRowSclass="none">
+																<columns>
+																	<column
+																		width="18%" />
+																	<column
+																		width="32%" />
+																	<column
+																		width="18%" />
+																	<column
+																		width="32%" />
+																</columns>
+																<rows>
+																	<row>
+																		<label
+																			value="Estado" />
+
+																		<div>
+																			<combobox
+																				value="-Seleccione-" width="80%">
+																				<comboitem
+																					label="Lara" />
+																				<comboitem
+																					label="Portuguesa" />
+																				<comboitem
+																					label="Yaracuy" />
+																			</combobox>
+																			<label
+																				value="(*)" style="color:red" />
+																		</div>
+																		<label
+																			value="Municipio" />
+																		<div>
+																			<combobox
+																				value="-Seleccione-" width="80%">
+																				<comboitem
+																					label="Andrés Eloy Blanco" />
+																				<comboitem
+																					label="Crespo" />
+																				<comboitem
+																					label="Iribarren" />
+																				<comboitem
+																					label="Jiménez" />
+																				<comboitem
+																					label="Morán" />
+																				<comboitem
+																					label="Palavecino" />
+																				<comboitem
+																					label="Simón Planas" />
+																				<comboitem
+																					label="Torres" />
+																				<comboitem
+																					label="Urdaneta" />
+																			</combobox>
+																			<label
+																				value="(*)" style="color:red" />
+																		</div>
+																	</row>
+																	<row>
+																		<label
+																			value="Ciudad" />
+																		<cell
+																			colspan="3">
+																			<div>
+																				<combobox
+																					value="-Seleccione-" width="30%">
+																					<comboitem
+																						label="Barquisimeto" />
+																					<comboitem
+																						label="Cabudare" />
+																					<comboitem
+																						label="Carora" />
+																					<comboitem
+																						label="Duaca" />
+																					<comboitem
+																						label="El Cují" />
+																					<comboitem
+																						label="El Tocuyo" />
+																					<comboitem
+																						label="Quibor" />
+																				</combobox>
+																				<label
+																					value="(*)" style="color:red" />
+																			</div>
+																		</cell>
+																	</row>
+																	<row>
+																		<label
+																			value="Dirección de habitacón" />
+																		<cell
+																			colspan="5">
+																			<textbox
+																				maxlength="200" height="40px" width="90%"
+																				multiline="true" />
+																			<label
+																				value="(*)" style="color:red" />
+																		</cell>
+																	</row>
+
+																</rows>
+															</grid>
+														</groupbox>
+													</row>
+													<row>
+														<groupbox>
+															<caption
+																label="Datos de contacto" />
+															<grid
+																style="border:none;" oddRowSclass="none">
+																<columns>
+																	<column
+																		width="18%" />
+																	<column
+																		width="32%" />
+																	<column
+																		width="18%" />
+																	<column
+																		width="32%" />
+																</columns>
+																<rows>
+
+																	<row>
+																		<label
+																			value="Teléfono Habitación" />
+																		<div>
+																			<combobox
+																				value="0251" width="40%">
+																				<comboitem
+																					label="0252" />
+																				<comboitem
+																					label="0253" />
+																				<comboitem
+																					label="0254" />
+																				<comboitem
+																					label="0255" />
+																			</combobox>
+
+																			<intbox
+																				constraint="no negative" width="50%" />
+																		</div>
+																		<label
+																			value="Teléfono Celular" />
+																		<div>
+																			<combobox
+																				value="0416" width="40%">
+																				<comboitem
+																					label="0416" />
+																				<comboitem
+																					label="0426" />
+																				<comboitem
+																					label="0414" />
+																				<comboitem
+																					label="0424" />
+																				<comboitem
+																					label="0412" />
+																			</combobox>
+
+																			<intbox
+																				constraint="no negative" width="50%" />
+																		</div>
+																	</row>
+																	<row>
+																		<label
+																			value="Correo Electrónico" />
+
+																		<textbox
+																			width="90%" />
+
+																		<label
+																			value="Twitter" />
+																		<div>
+																			<label
+																				value="@" />
+
+																			<textbox
+																				width="80%" />
+																		</div>
+																	</row>
+																</rows>
+															</grid>
+														</groupbox>
+													</row>
+												</rows>
+											</grid>
+										</tabpanel>
+										<tabpanel>
+											<grid style="border:none;"
+												oddRowSclass="none">
+												<columns>
+													<column width="18%" />
+													<column width="32%" />
+													<column width="18%" />
+													<column width="32%" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Grupo Sanguíneo" />
+														<cell
+															colspan="3">
+															<combobox
+																value="-Seleccione-">
+																<comboitem
+																	label="O+" />
+																<comboitem
+																	label="O-" />
+																<comboitem
+																	label="A+" />
+																<comboitem
+																	label="A-" />
+																<comboitem
+																	label="B+" />
+																<comboitem
+																	label="B-" />
+																<comboitem
+																	label="AB+" />
+																<comboitem
+																	label="AB-" />
+															</combobox>
+															<label
+																value="(*)" style="color:red" />
+														</cell>
+
+													</row>
+													<row>
+														<cell
+															colspan="4">
+															<groupbox>
+																<caption
+																	label="Datos revisión médica" />
+																<grid
+																	style="border:none;" oddRowSclass="none">
+																	<columns>
+																		<column
+																			width="19%" />
+																		<column
+																			width="31%" />
+																		<column
+																			width="18%" />
+																		<column
+																			width="32%" />
+																	</columns>
+																	<rows>
+																		<row>
+																			<label
+																				value="Fecha" />
+																			<datebox
+																				constraint="no future" format="dd/MM/yyyy" />
+																		</row>
+																		<row>
+																			<label
+																				value="Matrícula" />
+																			<div>
+																				<textbox
+																					width="50%" />
+																				<space />
+																				<button
+																					image="/images/consultar.ico" orient="horizontal" />
+																			</div>
+																			<label
+																				value="Médico" />
+																			<textbox
+																				maxlength="40" width="90%" disabled="true" />
+																		</row>
+																		<!-- <row>
+																			<label
+																			value="Condición" />
+																			<combobox
+																			value="-Seleccione-" width="90%">
+																			<comboitem
+																			label="Alérgia a medicamentos" />
+																			<comboitem
+																			label="Alérgia a picaduras de insectos" />
+																			<comboitem
+																			label="Asma" />
+																			<comboitem
+																			label="Insolación" />
+																			</combobox>
+																			</row> -->
+																		<row
+																			>
+<label
+																			value="Condición(es)" />
+																			<cell colspan="3">
+																			<listbox
+																				id="left" multiple="true" oddRowSclass="non-odd"
+																				fixedLayout="true" checkmark="true" mold="paging"
+																				pageSize="4">
+																				<listitem
+																					selected="true">
+																					<listcell
+																						label="Alérgia a medicamentos" />
+																				</listitem>
+																				<listitem>
+																					<listcell
+																						label="Alérgia a picaduras de insectos" />
+																				</listitem>
+																				<listitem>
+																					<listcell
+																						label="Asma" />
+																				</listitem>
+																				<listitem
+																					selected="true">
+																					<listcell
+																						label="Insolación" />
+																				</listitem>
+																				<listitem
+																					selected="true">
+																					<listcell
+																						label="Afección cardiaca" />
+																				</listitem>
+																			</listbox>
+																			</cell>
+																		</row>
+																		<row>
+																			<label
+																				value="Observaciones" />
+																			<cell
+																				colspan="3">
+																				<textbox
+																					maxlength="200" height="40px" width="95%"
+																					multiline="true" />
+
+																			</cell>
+																		</row>
+
+																	</rows>
+																</grid>
+
+															</groupbox>
+														</cell>
+													</row>
+												</rows>
+											</grid>
+
+
+
+										</tabpanel>
+										<tabpanel>
+											<groupbox>
+												<caption
+													label="Datos de Institución" />
+												<grid
+													style="border:none;" oddRowSclass="none">
+													<columns>
+														<column
+															width="18%" />
+														<column
+															width="32%" />
+														<column
+															width="18%" />
+														<column
+															width="32%" />
+													</columns>
+													<rows>
+														<row>
+															<label
+																value="Institución" />
+															<cell
+																colspan="3">
+																<textbox
+																	width="80%" />
+																<button
+																	image="/images/consultar.ico" />
+															</cell>
+														</row>
+														<!-- 
+															<row>
+															<label
+															value="Dirección Institución" />
+															<cell colspan="4">
+															<textbox
+															height="40px" width="90%" maxlength="200"
+															multiline="true" />
+															</cell>
+															</row>
+														-->
+														<row>
+															<label
+																value="Curso" />
+															<combobox
+																value="-Seleccione-">
+																<comboitem
+																	label="1er Nivel" />
+																<comboitem
+																	label="2do Nivel" />
+																<comboitem
+																	label="3er Nivel" />
+																<comboitem
+																	label="Preparatorio" />
+																<comboitem
+																	label="1er Grado" />
+																<comboitem
+																	label="2do Grado" />
+																<comboitem
+																	label="3er Grado" />
+																<comboitem
+																	label="4to Grado" />
+																<comboitem
+																	label="5to Grado" />
+																<comboitem
+																	label="6to Grado" />
+																<comboitem
+																	label="7mo Grado" />
+																<comboitem
+																	label="8vo Grado" />
+																<comboitem
+																	label="9no Grado" />
+																<comboitem
+																	label="4to Año" />
+																<comboitem
+																	label="5to Año" />
+																<comboitem
+																	label="6to Año" />
+															</combobox>
+															<label
+																value="Año escolar" />
+															<combobox
+																value="-Seleccione-" width="80%">
+																<comboitem
+																	label="2009-2010" />
+																<comboitem
+																	label="2010-2011" />
+																<comboitem
+																	label="2011-2012" />
+															</combobox>
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+
+										</tabpanel>
+										<tabpanel>
+											<groupbox>
+												<caption
+													label="Datos de actividades extra-académicas" />
+												<grid
+													style="border:none;" oddRowSclass="none">
+													<columns>
+														<column
+															width="18%" />
+														<column
+															width="32%" />
+														<column
+															width="18%" />
+														<column
+															width="32%" />
+													</columns>
+													<rows>
+														<row>
+															<label
+																value="Institución" />
+															<cell
+																colspan="3">
+																<textbox
+																	maxlength="50" width="80%" />
+																<button
+																	image="/images/consultar.ico" />
+															</cell>
+														</row>
+														<row>
+															<label
+																value="Actividad" />
+
+															<combobox
+																value="-Seleccione-" width="80%">
+																<comboitem
+																	label="Danza" />
+																<comboitem
+																	label="Música" />
+																<comboitem
+																	label="Pintura" />
+																<comboitem
+																	label="Otro Deporte" />
+															</combobox>
+
+															<label
+																value="Horas" />
+															<div>
+																<textbox
+																	width="20%" />
+																<space />
+																<label
+																	value="Semanales" />
+															</div>
+														</row>
+														<row>
+															<label
+																value="Fecha inicio" />
+															<cell
+																colspan="3">
+																<datebox
+																	format="dd/MM/yyyy" />
+															</cell>
+														</row>
+
+													</rows>
+												</grid>
+											</groupbox>
+											<toolbar align="end">
+												<toolbarbutton
+													id="agregar" image="/images/agregar.ico"
+													orient="horizontal" />
+												<toolbarbutton
+													id="editar" image="/images/editar.ico" orient="horizontal" />
+												<toolbarbutton
+													id="quitar" image="/images/quitar.ico" orient="horizontal" />
+											</toolbar>
+											<grid>
+												<columns>
+													<column
+														label="Actividad" width="20%" />
+													<column
+														label="Institución" width="55%" />
+													<column
+														label="Horas" width="10%" />
+													<column
+														label="Fecha" width="15%" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Música" />
+														<label
+															value="Conservatorio Vicente Emilio Sojo" />
+														<label
+															value="3" />
+														<label
+															value="01/01/2007" />
+													</row>
+													<row>
+														<label
+															value="Otro Deporte" />
+														<label
+															value="Escuela de Fútbol Menor Polideportivo Máximo Viloria" />
+														<label
+															value="2" />
+														<label
+															value="01/01/2009" />
+													</row>
+												</rows>
+											</grid>
+
+										</tabpanel>
+
+										<tabpanel>
+											<vlayout>
+												<groupbox>
+													<caption
+														label="Datos de asignación" />
+													<grid
+														style="border:none;" oddRowSclass="none">
+														<columns>
+															<column
+																width="18%" />
+															<column
+																width="32%" />
+															<column
+																width="18%" />
+															<column
+																width="32%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	value="Categoria" />
+																<div>
+																	<combobox
+																		value="-Seleccione-" width="80%">
+																		<comboitem
+																			label="Preparatorio Nivel 1" />
+																		<comboitem
+																			label="Preparatorio Nivel 2" />
+																		<comboitem
+																			label="Pre-Infantil" />
+																		<comboitem
+																			label="Infantil" />
+																		<comboitem
+																			label="Pre-Junior" />
+																		<comboitem
+																			label="Junior" />
+																		<comboitem
+																			label="Juvenil" />
+																	</combobox>
+																	<label
+																		value="(*)" style="color:red" />
+																</div>
+																<label
+																	value="Equipo" />
+																<div>
+																	<combobox
+																		value="-Seleccione-" width="80%">
+																		<comboitem
+																			label="Equipo A" />
+																		<comboitem
+																			label="Equipo B" />
+																		<comboitem
+																			label="Equipo C" />
+																		<comboitem
+																			label="Equipo D" />
+																		<comboitem
+																			label="Equipo E" />
+																	</combobox>
+																	<label
+																		value="(*)" style="color:red" />
+																</div>
+															</row>
+															<row>
+
+															</row>
+															<row>
+																<label
+																	value="Número" />
+																<cell
+																	colspan="3">
+																	<div>
+																		<intbox
+																			maxlength="2" />
+																		<button
+																			image="/images/consultar.ico" />
+																		<label
+																			value="(*)" style="color:red" />
+																	</div>
+																</cell>
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
+												<groupbox>
+													<caption
+														label="Datos físicos" />
+													<grid
+														style="border:none;" oddRowSclass="none">
+														<columns>
+
+															<column
+																width="18%" />
+															<column
+																width="32%" />
+															<column
+																width="18%" />
+															<column
+																width="32%" />
+														</columns>
+
+														<rows>
+															<row>
+																<label
+																	value="Peso" />
+																<div>
+																	<decimalbox
+																		constraint="no negative" />
+																	<label
+																		value="Kg." />
+																	<label
+																		value="(*)" style="color:red" />
+																</div>
+																<label
+																	value="Altura" />
+																<div>
+																	<decimalbox
+																		constraint="no negative" />
+																	<label
+																		value="mts." />
+																	<label
+																		value="(*)" style="color:red" />
+																</div>
+
+															</row>
+															<row>
+																<label
+																	value="Brazo Lanzar" />
+																<radiogroup
+																	orient="vertical">
+																	<radio
+																		label="Zurdo" checked="true" />
+																	<radio
+																		label="Derecho" />
+																	<radio
+																		label="Ambidiestro" />
+																</radiogroup>
+																<label
+																	value="Posición de Bateo" />
+																<radiogroup
+																	orient="vertical">
+																	<radio
+																		label="Zurdo" checked="true" />
+																	<radio
+																		label="Derecho" />
+																	<radio
+																		label="Ambidiestro" />
+																</radiogroup>
+															</row>
+
+														</rows>
+													</grid>
+												</groupbox>
+												<groupbox>
+													<caption
+														label="Datos de tallas" />
+													<grid
+														style="border:none;" oddRowSclass="none">
+														<columns>
+															<column
+																width="18%" />
+															<column
+																width="32%" />
+															<column
+																width="18%" />
+															<column
+																width="32%" />
+														</columns>
+														<rows>
+															<row>
+																<label
+																	value="Camisa" />
+																<div>
+																	<combobox
+																		value="-Seleccione-" width="80%">
+																		<comboitem
+																			label="SS" />
+																		<comboitem
+																			label="S" />
+																		<comboitem
+																			label="M" />
+																		<comboitem
+																			label="L" />
+																		<comboitem
+																			label="XL" />
+																	</combobox>
+																	<label
+																		value="(*)" style="color:red" />
+																</div>
+																<label
+																	value="Pantalon" />
+																<div>
+																	<combobox
+																		value="-Seleccione-" width="80%">
+																		<comboitem
+																			label="XS" />
+																		<comboitem
+																			label="S-7" />
+																		<comboitem
+																			label="M-8/10" />
+																		<comboitem
+																			label="L-12/14" />
+																		<comboitem
+																			label="XL-16" />
+																		<comboitem
+																			label="XXL" />
+																	</combobox>
+																	<label
+																		value="(*)" style="color:red" />
+																</div>
+															</row>
+															<row>
+																<label
+																	value="Calzado" />
+																<cell
+																	colspan="3">
+																	<combobox
+																		value="-Seleccione-" width="30%">
+																		<comboitem
+																			label="25" />
+																		<comboitem
+																			label="26" />
+																		<comboitem
+																			label="27" />
+																		<comboitem
+																			label="28" />
+																		<comboitem
+																			label="29" />
+																	</combobox>
+																	<label
+																		value="(*)" style="color:red" />
+																</cell>
+															</row>
+														</rows>
+													</grid>
+												</groupbox>
+											</vlayout>
+										</tabpanel>
+									</tabpanels>
+								</tabbox>
+
+
+							</vlayout>
+						</panelchildren>
+					</panel>
+
+
+
+				</tabpanel>
+				<tabpanel height="560px">
+<groupbox>
+						<caption label="Jugador" />
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column />
+							<column />
+							<column />
+							<column />
+							<column width="15%" />
+						</columns>
+						<rows>
+
+							<row>
+								<label value="Cédula" />
+								<cell colspan="3">
+									<combobox value="-" width="12%"
+										disabled="true">
+										<comboitem label="V" />
+										<comboitem label="E" />
+									</combobox>
+									<space />
+									<intbox constraint="no negative"
+										width="22%" disabled="true" />
+
+								</cell>
+								<cell align="center" rowspan="3">
+									<image src="/images/jug.png"
+										height="80px" width="80px" tooltiptext="Seleccionar Foto" />
+								</cell>
+							</row>
+							<row>
+								<label value="Primer Nombre" />
+								<div>
+									<textbox maxlength="40" width="85%"
+										disabled="true" />
+									<label value="(*)"
+										style="color:red" />
+								</div>
+								<label value="Segundo Nombre" />
+								<textbox maxlength="40" width="85%"
+									disabled="true" />
+							</row>
+							<row>
+								<label value="Primer Apellido"
+									width="90%" />
+								<div>
+									<textbox maxlength="40" width="85%"
+										disabled="true" />
+									<label value="(*)"
+										style="color:red" />
+								</div>
+								<label value="Segundo Apellido"
+									width="90%" />
+								<textbox maxlength="40" width="85%"
+									disabled="true" />
+							</row>
+							<!-- 	<row>
+								<label value="Genero" />
+								<cell colspan="5">
+								<radiogroup>
+								<radio label="Masculino" checked="true" disabled="true"/>
+								<space />
+								<radio label="Femenino" disabled="true"/>
+								</radiogroup>
+								<label value="(*)" style="color:red" />
+								</cell>
+								</row> -->
+						</rows>
+					</grid>
+</groupbox>
+				<!-- 	<groupbox>
+						<caption label="Familiares" />
+					 -->
+					 <panel title="Familiares">
+					 <panelchildren>
+					 <vlayout>
+					 
+					
+						
+						<tabbox orient="vertical" height="260px">
+							<tabs width="90px">
+								<tab label="Básicos" />
+								<tab label="Ubicación" />
+								<tab label="Comisiones" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<groupbox>
+										<caption label="Datos Básicos" />
+										<grid oddRowSclass="none">
+											<columns>
+												<column width="23%" />
+												<column width="29%" />
+												<column width="20%" />
+												<column width="30%" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Parentesco" />
+													<div>
+														<combobox
+															value="-Seleccione-" width="80%">
+															<comboitem
+																label="Abuelo(a)" />
+															<comboitem
+																label="Hermano(a)" />
+															<comboitem
+																label="Madre" />
+															<comboitem
+																label="Padre" />
+															<comboitem
+																label="Primo(a)" />
+															<comboitem
+																label="Tio(a)" />
+															<comboitem
+																label="Otro" />
+														</combobox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<!-- 	<toolbarbutton id="agregar"	image="/images/agregar.ico" tooltiptext="Agregar Nuevo Parentezco"/> -->
+
+												</row>
+												<row>
+													<label
+														value="Cédula" />
+													<div>
+														<combobox
+															value="-" width="25%">
+															<comboitem
+																label="V" />
+															<comboitem
+																label="E" />
+														</combobox>
+														<intbox
+															constraint="no negative" width="55%" />
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label value="RIF" />
+													<div>
+														<combobox
+															value="-" width="25%">
+															<comboitem
+																label="J" />
+															<comboitem
+																label="G" />
+														</combobox>
+														<textbox
+															width="61%">
+														</textbox>
+
+													</div>
+
+
+												</row>
+												<row>
+													<label
+														value="Primer nombre" />
+													<div>
+														<textbox
+															width="80%">
+														</textbox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Segundo nombre" />
+													<textbox
+														width="80%">
+													</textbox>
+
+												</row>
+												<row>
+													<label
+														value="Primer apellido" />
+													<div>
+														<textbox
+															width="80%">
+														</textbox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Segundo apellido" />
+													<textbox
+														width="80%">
+													</textbox>
+												</row>
+												<!-- 	<row>
+													<label value="Fecha de Nacimiento" />
+													<hbox>
+													<datebox id="nacimientobox"
+													constraint="no future" format="dd/MM/yyyy" />
+													<label value="(*)" style="color:red" />
+													</hbox>
+													<label value="Edad" />
+													<div>
+													<textbox width="30%" disabled="true"></textbox>
+													<label value="años" />
+													</div>
+													</row> -->
+												<row>
+													<label
+														value="Profesión/Ocupación" />
+													<div>
+														<combobox
+															value="-Seleccione-" width="80%">
+															<comboitem
+																label="Abogado" />
+															<comboitem
+																label="Administrador" />
+															<comboitem
+																label="Agricultor" />
+															<comboitem
+																label="Albañil" />
+															<comboitem
+																label="Analista" />
+															<comboitem
+																label="Arquitecto" />
+															<comboitem
+																label="Artesano" />
+															<comboitem
+																label="Asistente" />
+															<comboitem
+																label="Atleta" />
+															<comboitem
+																label="Auxiliar" />
+															<comboitem
+																label="Bachiller" />
+															<comboitem
+																label="Bailarin" />
+															<comboitem
+																label="Biólogo" />
+															<comboitem
+																label="Bionalista" />
+															<comboitem
+																label="Bombero" />
+															<comboitem
+																label="Botánico" />
+															<comboitem
+																label="Cajero" />
+															<comboitem
+																label="Cantante" />
+															<comboitem
+																label="Carnicero" />
+															<comboitem
+																label="Carpintero" />
+															<comboitem
+																label="Chef" />
+															<comboitem
+																label="Comerciante" />
+															<comboitem
+																label="Cosmetología" />
+															<comboitem
+																label="Computación" />
+															<comboitem
+																label="Comunicador Social" />
+															<comboitem
+																label="Conductor" />
+															<comboitem
+																label="Del Hogar" />
+															<comboitem
+																label="Docente" />
+															<comboitem
+																label="Dibujante" />
+															<comboitem
+																label="Economista" />
+															<comboitem
+																label="Electricista" />
+															<comboitem
+																label="Enfermera" />
+															<comboitem
+																label="Estudiante" />
+															<comboitem
+																label="Farmaceutico" />
+															<comboitem
+																label="Gerente" />
+															<comboitem
+																label="Ingeniero" />
+															<comboitem
+																label="Licenciado" />
+															<comboitem
+																label="Médico" />
+														</combobox>
+													</div>
+													<label
+														value="Función del familiar en la Escuela" />
+													<combobox
+														value="-Seleccione-" width="80%">
+														<comboitem
+															label="Directivo" />
+														<comboitem
+															label="Técnico" />
+														<comboitem
+															label="Ninguno" />
+													</combobox>
+												</row>
+												<!--   <row>
+													<label value="Función del familiar en la Escuela" />
+													<cell colspan="3">
+													<div>
+													<vbox>
+													<radiogroup onCheck="t.value = self.selectedItem.label">
+													<div><radio label="Directivo" />
+													<space /><space /> <space /><space /> 
+													<radio label="Técnico" />
+													<space /><space /> <space /><space /> 
+													<radio label="Ninguno" />
+													</div>
+													</radiogroup>
+													</vbox>
+													</div>
+													</cell>
+													</row>-->
+											</rows>
+										</grid>
+									</groupbox>
+
+
+								</tabpanel>
+
+								<tabpanel>
+									<groupbox>
+										<caption
+											label="Datos de Residencia" />
+										<grid oddRowSclass="none">
+											<columns>
+												<column width="23%" />
+												<column width="29%" />
+												<column width="20%" />
+												<column width="30%" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Estado" />
+													<div>
+														<combobox
+															value="-Seleccione-" width="85%">
+															<comboitem
+																label="Lara" />
+															<comboitem
+																label="Portuguesa" />
+															<comboitem
+																label="Yaracuy" />
+														</combobox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Municipio" />
+													<div>
+														<combobox
+															value="-Seleccione-" width="85%">
+															<comboitem
+																label="Andrés Eloy Blanco" />
+															<comboitem
+																label="Crespo" />
+															<comboitem
+																label="Iribarren" />
+															<comboitem
+																label="Jiménez" />
+															<comboitem
+																label="Morán" />
+															<comboitem
+																label="Palavecino" />
+															<comboitem
+																label="Simón Planas" />
+															<comboitem
+																label="Torres" />
+															<comboitem
+																label="Urdaneta" />
+														</combobox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+
+												</row>
+												<row>
+													<label
+														value="Ciudad" />
+													<div>
+														<combobox
+															value="-Seleccione-" width="85%">
+															<comboitem
+																label="Barquisimeto" />
+															<comboitem
+																label="Cabudare" />
+															<comboitem
+																label="Carora" />
+															<comboitem
+																label="Duaca" />
+															<comboitem
+																label="El Cují" />
+															<comboitem
+																label="El Tocuyo" />
+															<comboitem
+																label="Quibor" />
+														</combobox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+												</row>
+
+												<row>
+
+													<label
+														value="Dirección Habitación" />
+													<cell colspan="3">
+														<div>
+															<textbox
+																maxlength="180" height="20px" width="90%"
+																multiline="true" />
+															<label
+																value="(*)" style="color:red" />
+														</div>
+													</cell>
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+									<groupbox>
+										<caption
+											label="Datos de Contacto" />
+										<grid oddRowSclass="none">
+											<columns>
+												<column width="23%" />
+												<column width="29%" />
+												<column width="20%" />
+												<column width="30%" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Teléfono Habitación" />
+													<div>
+														<combobox
+															width="32%" value="0251">
+															<comboitem
+																label="0252" />
+															<comboitem
+																label="0253" />
+															<comboitem
+																label="0254" />
+															<comboitem
+																label="0255" />
+														</combobox>
+
+														<textbox
+															width="50%" />
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Teléfono Celular" />
+
+													<div>
+														<combobox
+															width="32%" value="0412">
+															<comboitem
+																label="0414" />
+															<comboitem
+																label="0416" />
+															<comboitem
+																label="0424" />
+															<comboitem
+																label="0426" />
+														</combobox>
+
+														<textbox
+															width="50%" />
+														<label
+															value="(*)" style="color:red" />
+													</div>
+
+												</row>
+												<row>
+													<label
+														value="Correo Electrónico" />
+													<textbox value=""
+														width="88%" />
+													<label
+														value="Twitter" />
+													<hlayout>
+														<label
+															value="@" />
+														<textbox
+															value="" width="98%" />
+													</hlayout>
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+
+								</tabpanel>
+
+								<tabpanel>
+
+									<groupbox>
+										<caption label="Comisión/es" />
+								
+					<grid>
+						<columns>
+							<column width="25%" />
+							<column width="75%" />
+						</columns>
+						<rows>
+							<row>
+
+								<label value="Comisión" />
+								<combobox value="-Seleccione-">
+									<comboitem label="Disciplina" />
+									<comboitem
+										label="Información y Medios" />
+									<comboitem
+										label="Eventos Especiales" />
+									<comboitem label="Campo" />
+								</combobox>
+								
+							</row>
+							<row spans="2">
+								<div>
+									<toolbar align="end">
+										<toolbarbutton 
+											image="/images/agregar.ico" orient="horizontal" />
+										<toolbarbutton 
+											image="/images/editar.ico" orient="horizontal" />
+										<toolbarbutton 
+											image="/images/quitar.ico" orient="horizontal" />
+									</toolbar>
+									<grid>
+										<columns>
+											<column label="Comisiones"
+												width="30%" />
+										
+											<column label="Descripción"
+												width="70%" />
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Disciplina" />
+												
+												<label
+													value="Evaluar comportamiento de los atletas" />
+											</row>
+											<row>
+												<label
+													value="Información y Medios" />
+												 
+												<label
+													value="Difundir información de eventos" />
+											</row>
+
+										</rows>
+									</grid>
+							</div></row></rows></grid>
+							
+									</groupbox>
+
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+ </vlayout>
+					 </panelchildren>
+					 </panel>	
+					<!--  </groupbox>  -->
+
+					<div>
+						<toolbar align="end">
+							<toolbarbutton id="agregarF" onClick=""
+								image="/images/agregar.ico">
+
+							</toolbarbutton>
+
+							<toolbarbutton id="editarF"
+								image="/images/editar.ico" orient="horizontal" />
+							<toolbarbutton id="quitarF"
+								image="/images/quitar.ico" orient="horizontal" />
+						</toolbar>
+
+					</div>
+
+					<grid mold="paging" pageSize="2">
+						<columns>
+							<column label="Cédula" width="15%" />
+							<column label="Nombres" width="25%" />
+							<column label="Apellidos" width="25%" />
+							<column label="Afinidad" width="20%" />
+							<column label="Representante" width="15%" />
+						</columns>
+						<rows>
+							<row>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<checkbox />
+							</row>
+							<row>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<checkbox />
+							</row>
+						
+							<!-- 			<row>
+								<label value="V-4597698" />
+								<label value="Josefa" />
+								<label value="De Jimenez" />
+								<label value="Madre" />
+								<checkbox 
+								checked="true" />
+								</row>
+								
+							-->
+						</rows>
+					</grid>
+
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+
+
+
+
+		<div align="right">
+			<button id="btnDesp" label="Siguiente" image=""
+				orient="horizontal" width="100px" onClick="moveStep(true)" />
+
+			<button id="btnAntes" label="Anterior"
+				image="/images/atras.ico" orient="horizontal" width="100px"
+				onClick="moveStep(false)" visible="false" />
+
+
+			<button id="btnGuardar" label="Guardar"
+				image="/images/guardar.ico" orient="horizontal" width="100px"
+				visible="false">
+				<attribute name="onClick"><![CDATA[
+	Window nuevaVentana = (Window) Executions.createComponents(
+			"confirmarCompromisoPago.zul", null, null);
+	try {
+		nuevaVentana.doModal();
+	} catch (Exception e) {
+
+	}
+]]></attribute>
+			</button>
+			<space />
+			<button label="Cancelar" image="/images/cancelar.ico"
+				orient="horizontal" width="100px" />
+			<space />
+			<button label="Salir" image="/images/salir.png"
+				orient="horizontal" width="100px" />
+			<space />
+		</div>
+		<label value="(*) Estos campos son obligatorios"
+			style="color:red" />
+	</window>
+</div>

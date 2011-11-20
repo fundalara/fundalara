@@ -1,0 +1,106 @@
+<?page title="Buscador Representante"?>
+<zk xmlns:c="client">
+	<window title="Buscador Representante" border="normal" width="60%"
+		closable="true">
+		<style>
+	    .z-label { 
+	      display: block; 
+	    } 
+	    tr.z-row td.z-row-inner { 
+	      padding: 2px 5px; 
+	    } 
+	    .z-row-cnt, .z-column-cnt {
+	      text-align: center; 
+	    } 
+	    .category-center .z-auxheader-cnt { 
+	      text-align: center; 
+	    }
+	    .footer_right .z-footer-cnt {
+	          text-align: right;
+	          font-weight: bold; 
+	        }
+		</style>
+		<groupbox>
+			<grid>
+				<rows>
+					<row>
+						<label>Categoria</label>
+						<combobox value="--Seleccione--" width="100%">
+							<comboitem label="Preparatorio nivel 1"></comboitem>
+							<comboitem label="Preparatorio nivel 2"></comboitem>
+							<comboitem label="Pre-infantil"></comboitem>
+							<comboitem label="Infantil"></comboitem>
+							<comboitem label="Pre-Junior"></comboitem>
+							<comboitem label="Junior"></comboitem>
+							<comboitem label="Juvenil"></comboitem>
+						</combobox>
+						<label>Equipo</label>
+						<combobox value="--Seleccione--" width="100%">
+							<comboitem label="A"></comboitem>
+							<comboitem label="B"></comboitem>
+							<comboitem label="C"></comboitem>
+							<comboitem label="D"></comboitem>
+							<comboitem label="E"></comboitem>
+						</combobox>
+					</row>
+					<row spans="4">
+						<div align="right">
+							<button label="Buscar"></button>
+						</div>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<listbox>
+			<auxhead sclass="category-center">
+				<auxheader label="Listado Familiares" colspan="4"></auxheader>
+			</auxhead>
+			<auxhead>
+				<auxheader colspan="1">
+					<image src="../../Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter1" width="69%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="../../Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter2" width="40%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="../../Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter3" width="80%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="../../Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter4" width="80%" />
+				</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader width="60%">Cedula</listheader>
+				<listheader width="100%">Nombre</listheader>
+				<listheader width="100%">Apellido</listheader>
+			</listhead>
+			<listitem>
+				<listcell>15365489</listcell>
+				<listcell>Perez</listcell>
+				<listcell>Jose</listcell>
+			</listitem>
+			<listitem>
+				<listcell>21326547</listcell>
+				<listcell>Saavedra</listcell>
+				<listcell>Marcos</listcell>
+			</listitem>
+			<listitem>
+				<listcell>26468963</listcell>
+				<listcell>Hernadez</listcell>
+				<listcell>Jesus</listcell>
+			</listitem>
+		</listbox>
+		<groupbox>
+			<div align="right">
+				<button label="Seleccionar"></button>
+				<button label="Salir"
+					image="../../Recursos/Imagenes/salir.png">
+				</button>
+			</div>
+		</groupbox>
+	</window>
+</zk>

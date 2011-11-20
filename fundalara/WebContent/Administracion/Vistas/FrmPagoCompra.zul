@@ -1,0 +1,487 @@
+<div align="left">
+	<window id="PCompra" title=" Cuentas por pagar" border="normal" width="690px">
+		<zk>
+			<zscript><![CDATA[
+	public void mostrar() {
+		String var = CB.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+
+		}
+
+	}
+]]></zscript>
+			<panel collapsible="true" title="Compras" open="true">
+				<panelchildren>
+					<groupbox>
+						<!--  <caption>Compras</caption> -->
+						<grid>
+							<columns>
+								<column label="" width="180px"
+									align="left">
+								</column>
+								<column label="" width="200px"
+									align="left">
+								</column>
+								<column label="" width="180px"
+									align="left">
+								</column>
+								<column label="" width="200px"
+									align="left">
+								</column>
+							</columns>
+							<rows>
+								<row>
+									<label>Proveedor</label>
+									<bandbox width="53%">
+										<bandpopup>
+											<vbox>
+												<hbox>
+													<label>
+														Buscar
+													</label>
+													<textbox></textbox>
+												</hbox>
+												<listbox
+													width="370px">
+													<listhead>
+														<listheader
+															label="Proveedor" width="80px" />
+														<listheader
+															label="Nº Factura" width="80px" />
+														<listheader
+															label="Fecha" width="80px" />
+													</listhead>
+
+													<listitem>
+														<listcell
+															label="X" />
+														<listcell
+															label="56203" />
+														<listcell
+															label="12/02/2011" />
+													</listitem>
+													<listitem>
+														<listcell
+															label="Y" />
+														<listcell
+															label="73504" />
+														<listcell
+															label="29/10/2011" />
+													</listitem>
+												</listbox>
+											</vbox>
+										</bandpopup>
+									</bandbox>
+									<label>Nro Factura</label>
+									<bandbox width="53%">
+										<bandpopup>
+											<vbox>
+												<hbox>
+													<label>
+														Buscar
+													</label>
+													<textbox></textbox>
+												</hbox>
+												<listbox
+													width="370px">
+													<listhead>
+														<listheader
+															label="Nº Factura" width="80px" />
+														<listheader
+															label="Proveedor" width="80px" />
+														<listheader
+															label="Fecha" width="80px" />
+													</listhead>
+
+													<listitem>
+														<listcell
+															label="56203" />
+														<listcell
+															label="X" />
+														<listcell
+															label="12/02/2011" />
+													</listitem>
+													<listitem>
+														<listcell
+															label="73504" />
+														<listcell
+															label="Y" />
+														<listcell
+															label="29/10/2011" />
+													</listitem>
+												</listbox>
+											</vbox>
+										</bandpopup>
+									</bandbox>
+
+								</row>
+								<row>
+									<label>Rif</label>
+									<bandbox width="53%"></bandbox>
+									<label>Fecha Emisión</label>
+									<div>
+										<datebox width="53%"></datebox>
+
+
+									</div>
+
+								</row>
+								<row spans="4">
+									<groupbox>
+										<caption>
+											Datos de Materiales
+										</caption>
+										<div align="center">
+											<grid width="660px">
+												<columns>
+													<column label="Item"
+														width="60px" align="center">
+													</column>
+													<column
+														label="Nombre" width="200px" align="center">
+													</column>
+													<column
+														label="Cantidad" width="80px" align="center">
+													</column>
+													<column
+														label="Precio" width="100px" align="center">
+													</column>
+													<column
+														label="Total" width="100px" align="center">
+													</column>
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="1">
+														</label>
+														<label
+															value="Bolsa de Basura">
+														</label>
+														<label
+															value="3">
+														</label>
+														<label
+															value="0,5Bs">
+														</label>
+														<label
+															value="2,5Bs">
+														</label>
+													</row>
+													<row>
+														<label
+															value="2">
+														</label>
+														<label
+															value="Desinfectaten">
+														</label>
+														<label
+															value="4">
+														</label>
+														<label
+															value="15Bs">
+														</label>
+														<label
+															value="4Bs">
+														</label>
+													</row>
+												</rows>
+											</grid>
+										</div>
+									</groupbox>
+								</row>
+
+
+
+
+
+							</rows>
+						</grid>
+
+
+					</groupbox>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" title="Datos del Pago"
+				open="false">
+				<panelchildren>
+					<div>
+						<grid>
+
+							<rows>
+
+								<row>
+									<grid>
+										<columns>
+											<column label=""
+												width="220px">
+											</column>
+											<column label=""
+												width="252px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+
+
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Forma de Pago">
+												</label>
+												<combobox id="CB"
+													onSelect="mostrar()" width="180px">
+													<comboitem value="1"
+														label="Efectivo">
+													</comboitem>
+													<comboitem value="2"
+														label="Débito">
+													</comboitem>
+													<comboitem value="3"
+														label="Crédito">
+													</comboitem>
+													<comboitem value="4"
+														label="Transferencia">
+													</comboitem>
+													<comboitem value="5"
+														label="Cheque">
+													</comboitem>
+												</combobox>
+												<label
+													value="Monto Cancelado">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+
+
+											</row>
+											<row id="row1"
+												visible="false">
+												<label
+													value="Nro. de Documento">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+												<label
+													value="Entidad Bancaria">
+												</label>
+												<combobox
+													width="180px">
+													<comboitem
+														label="Banesco">
+													</comboitem>
+													<comboitem
+														label="Mercantil">
+													</comboitem>
+													<comboitem
+														label="BOD">
+													</comboitem>
+													<comboitem
+														label="Provincial">
+													</comboitem>
+													<comboitem
+														label="Venezuela">
+													</comboitem>
+												</combobox>
+
+											</row>
+											<row id="row2"
+												visible="false">
+												<label
+													value="Tipo de Tarjeta">
+												</label>
+												<combobox
+													width="180px">
+													<comboitem
+														label="Visa">
+													</comboitem>
+													<comboitem
+														label="MarterCard">
+													</comboitem>
+													<comboitem
+														label="American Express">
+													</comboitem>
+												</combobox>
+
+											</row>
+										</rows>
+									</grid>
+								</row>
+								<row>
+									<div align="right">
+										<hbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												label="" tooltiptext="Agregar a la Lista" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick=""
+												label="" tooltiptext="Quitar de la Lista" />
+										</hbox>
+									</div>
+								</row>
+							</rows>
+
+						</grid>
+
+					</div>
+
+
+					<separator></separator>
+					<groupbox width="690px">
+						<caption>Diferentes Métodos de Pago</caption>
+
+						<div>
+							<grid>
+
+								<rows>
+
+									<row>
+										<grid width="690px">
+											<columns>
+												<column label="Item"
+													width="20px">
+												</column>
+												<column
+													label="Forma de Pago" width="100px">
+												</column>
+												<column
+													label="Tipo de Tarjeta">
+												</column>
+												<column
+													label="Monto Cancelado" width="120px">
+												</column>
+												<column
+													label="Entidad Bancaria" width="100px">
+												</column>
+												<column
+													label="Nro. de Documento" width="140px">
+												</column>
+
+
+											</columns>
+											<rows>
+												<row>
+													<label value="1">
+													</label>
+													<label
+														value="Efectivo">
+													</label>
+													<label
+														value="2,5Bs">
+													</label>
+													<label
+														value="N/A">
+													</label>
+													<label
+														value="N/A">
+													</label>
+
+												</row>
+												<row>
+													<label value="2">
+													</label>
+													<label
+														value="Cheque">
+													</label>
+													<label
+														value="20Bs">
+													</label>
+													<label
+														value="Mercantil">
+													</label>
+													<label
+														value="001299300019920">
+													</label>
+
+												</row>
+											</rows>
+										</grid>
+
+									</row>
+								</rows>
+							</grid>
+							<separator></separator>
+							<div align="right">
+								<grid width="300px">
+									<rows>
+										<row>
+											<label value="Sub-Total">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+											<label value="Valor IVA">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+											<label value="Monto IVA">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+
+											<label
+												value="Monto Total">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+
+										<row>
+											<label
+												value="Monto Restante a Pagar">
+											</label>
+											<textbox width="90px"></textbox>
+										</row>
+
+									</rows>
+								</grid>
+							</div>
+
+						</div>
+					</groupbox>
+					<separator></separator>
+				</panelchildren>
+			</panel>
+			<div align="right">
+				<button image="/Recursos/Imagenes/guardar.ico"
+					onClick="" label="Pagar" />
+				<button image="/Recursos/Imagenes/cancelar.ico"
+					onClick="" label="Cancelar" />
+				<button image="/Recursos/Imagenes/atras.ico"
+				onClick="" tooltiptext="Salir" label="Salir" >
+				<attribute name="onClick">
+				PCompra.onClose();
+				</attribute>
+				
+				</button>
+			</div>
+		</zk>
+	</window>
+</div>
+

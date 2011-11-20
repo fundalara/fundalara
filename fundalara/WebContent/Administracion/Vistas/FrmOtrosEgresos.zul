@@ -1,0 +1,369 @@
+<?page title="Otros Egresos" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div>
+		<window id="OtrosEgresos" title="Registrar otros egresos" border="normal" 
+			width="690px">
+			<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+			<zscript><![CDATA[
+	//@DECLARATION
+	
+	public void mostrar() {
+		String var = comboPago.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+
+		}
+
+	}
+	void setOn1() {
+		ch1.setChecked(true);
+		ch2.setChecked(true);
+	}
+]]></zscript>
+			<div>
+				<panel collapsible="true" title="Datos Básicos"
+					open="true">
+					<panelchildren>
+
+						<grid>
+							<rows>
+
+								<row>
+									<grid>
+										<columns>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="200px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="200px">
+											</column>
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Nro. Transacción">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+												<label value="Fecha">
+												</label>
+												<datebox
+													width="180px">
+												</datebox>
+											</row>
+											<row>
+												<label
+													value="Monto">
+												</label>
+												<doublebox width="180px"></doublebox>
+												<label
+													value="Concepto">
+												</label>
+												<textbox rows="5" cols="40"></textbox>
+											</row>
+											<row>
+
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+				<panel collapsible="true" title="Datos del Pago"
+					open="false">
+					<panelchildren>
+						<div>
+							<grid>
+
+								<rows>
+
+									<row>
+										<grid>
+											<columns>
+												<column label=""
+													width="220px">
+												</column>
+												<column label=""
+													width="252px">
+												</column>
+												<column label=""
+													width="180px">
+												</column>
+												<column label=""
+													width="180px">
+												</column>
+
+
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Forma de Pago">
+													</label>
+													<combobox id="comboPago" onSelect="mostrar()" width="180px">
+														<comboitem
+															value="1" label="Efectivo">
+														</comboitem>
+														<comboitem
+															value="2" label="Débito">
+														</comboitem>
+														<comboitem
+															value="3" label="Crédito">
+														</comboitem>
+														<comboitem
+															value="4" label="Transferencia">
+														</comboitem>
+														<comboitem
+															value="5" label="Cheque">
+														</comboitem>
+													</combobox>
+													<label
+														value="Monto Cancelado">
+													</label>
+													<textbox
+														width="180px">
+													</textbox>
+
+
+												</row>
+												<row id="row1"
+													visible="false">
+													<label
+														value="Nro. de Documento">
+													</label>
+													<textbox
+														width="180px">
+													</textbox>
+
+													<label
+														value="Entidad Bancaria">
+													</label>
+													<combobox
+														width="180px">
+														<comboitem
+															label="Banesco">
+														</comboitem>
+														<comboitem
+															label="Mercantil">
+														</comboitem>
+														<comboitem
+															label="BOD">
+														</comboitem>
+														<comboitem
+															label="Provincial">
+														</comboitem>
+														<comboitem
+															label="Venezuela">
+														</comboitem>
+													</combobox>
+
+												</row>
+												<row id="row2"
+													visible="false">
+													<label
+														value="Tipo de Tarjeta">
+													</label>
+													<combobox
+														width="180px">
+														<comboitem
+															label="Visa">
+														</comboitem>
+														<comboitem
+															label="MarterCard">
+														</comboitem>
+														<comboitem
+															label="American Express">
+														</comboitem>
+													</combobox>
+												</row>
+											</rows>
+										</grid>
+									</row>
+									<row>
+										<div align="right">
+											<hbox>
+												<button
+													image="/Recursos/Imagenes/agregar.ico" onClick=""
+													label="" tooltiptext="Agregar a la Lista" />
+												<button
+													image="/Administracion/images/quitar.ico" onClick=""
+													label="" tooltiptext="Quitar de la Lista" />
+											</hbox>
+										</div>
+									</row>
+								</rows>
+
+							</grid>
+
+						</div>
+
+
+						<separator></separator>
+						<groupbox width="700px">
+							<caption>
+								Diferentes Métodos de Pago
+							</caption>
+
+							<div>
+								<grid>
+
+									<rows>
+
+										<row>
+											<grid width="690px">
+												<columns>
+													<column label=""
+														width="20px">
+														<checkbox
+															onCheck="setOn1()">
+														</checkbox>
+													</column>
+													<column label="Item"
+														width="60px">
+													</column>
+													<column
+														label="Forma de Pago" width="100px">
+													</column>
+													<column
+														label="Tipo de Tarjeta">
+													</column>
+													<column
+														label="Monto Cancelado" width="120px">
+													</column>
+													<column
+														label="Entidad Bancaria" width="100px">
+													</column>
+													<column
+														label="Nro. de Documento" width="140px">
+													</column>
+
+
+												</columns>
+												<rows>
+													<row>
+														<checkbox
+															id="ch1">
+														</checkbox>
+														<label
+															value="1">
+														</label>
+														<label
+															value="Efectivo">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="2,5Bs">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="N/A">
+														</label>
+
+													</row>
+													<row>
+														<checkbox
+															id="ch2">
+														</checkbox>
+														<label
+															value="2">
+														</label>
+														<label
+															value="Cheque">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="20Bs">
+														</label>
+														<label
+															value="Mercantil">
+														</label>
+														<label
+															value="001299300019920">
+														</label>
+
+													</row>
+												</rows>
+											</grid>
+
+										</row>
+									</rows>
+								</grid>
+								<separator></separator>
+								<div align="right">
+									<grid width="300px">
+										<rows>
+											
+											<row>
+
+												<label
+													value="Monto Total">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+
+											<row>
+												<label
+													value="Monto Restante a Pagar">
+												</label>
+												<textbox width="90px"></textbox>
+											</row>
+
+										</rows>
+									</grid>
+								</div>
+
+							</div>
+						</groupbox>
+						<separator></separator>
+					</panelchildren>
+				</panel>
+			</div>
+			<div align="right">
+				<button image="/Recursos/Imagenes/guardar.ico"
+					onClick="" label="Guardar" />
+				<button image="/Recursos/Imagenes/cancelar.ico"
+					onClick="" label="Cancelar" />
+				<button image="/Recursos/Imagenes/atras.ico"
+				onClick="" tooltiptext="Salir" label="Salir" >
+				<attribute name="onClick">
+				OtrosEgresos.onClose();
+				</attribute>
+				
+				</button>
+			</div>
+		</window>
+	</div>
+</zk>

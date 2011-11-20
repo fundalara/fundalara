@@ -1,0 +1,165 @@
+<?page title="Compromiso Publicidad" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<!-- <div align="center"> -->
+	<window  title="Compromiso Publicidad" border="normal" width="650px">
+		<!-- <groupbox> -->
+			<panel title="Datos del Cliente" collapsible="true" open="true">
+				<panelchildren>
+					<groupbox>
+						<caption>Datos del Cliente</caption>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column width="110px" /> 
+											<column width="300px" />
+											<column width="120px" />
+											<column width="300px" />
+										</columns>
+										<rows>
+											<row align="left">
+												<label value="* Nombre" />
+												<bandbox width="90%"/>
+												<!--<textbox width="96%" />-->
+												<label value="* R.I.F" />
+												<bandbox width="90%"/>
+												<!--<textbox width="96%" />-->
+											</row>
+											<row>
+												<label value="Teléfono" />
+												<hbox>
+													<combobox
+														width="60px">
+														<comboitem
+															label="0251">
+														</comboitem>
+														<comboitem
+															label="0252">
+														</comboitem>
+														<comboitem
+															label="0253">
+														</comboitem>
+													</combobox>
+													<textbox
+														width="96%">
+													</textbox>
+												</hbox>
+												<label value="Numero de Fax" />
+												<hbox>
+													<combobox
+														width="60px">
+														<comboitem
+															label="0251">
+														</comboitem>
+														<comboitem
+															label="0252">
+														</comboitem>
+														<comboitem
+															label="0253">
+														</comboitem>
+													</combobox>
+													<textbox
+														width="96%">
+													</textbox>
+												</hbox>
+											</row>
+											<row>
+													<label value="Email" />
+													<textbox width="96%" />
+													<label value="Pagina Web" />
+													<textbox width="96%" />
+											</row>
+											<row>
+												
+													<label value="Cuenta Twitter @" />
+													<textbox width="96%" />
+													<label value="Cuenta Facebook" />
+													<textbox width="96%" />
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column label="" width="120px" />
+										</columns>
+										<rows>
+											<row>
+												<label value="* Dirección" />
+												<textbox width="96%" />
+												
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+				</panelchildren>
+			</panel>
+			
+			<panel title="Datos del Compromiso" collapsible="true" open="false">
+			<panelchildren>
+			<groupbox>
+				<caption>Datos del Compromiso</caption>
+					<grid>
+						<rows>
+							<row>
+								<grid>
+									<columns>
+										<column width="190px" />
+										<column width="220px" />
+										<column width="100px" />
+										<column width="100px" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Tipo de Compromiso"/>
+											<combobox width="80%">
+												<comboitem label="Alquiler de Pared Publicitaria"/>
+												<comboitem label="Publicidad en Uniformes"/>
+											</combobox>
+											<label value="Fecha"/>
+											<datebox width="80%"/>
+										</row>
+										<row>
+											<label value="Periodo de Alquiler"/>
+											<textbox />
+										</row>
+										<row>
+											<label value="Cuota Mensual"/>
+											<textbox width="45%"/>
+											<label value="Monto Total"/>
+											<textbox width="96%"/>
+										</row>
+									</rows>
+								</grid>
+							</row>
+						</rows>
+					</grid>
+			</groupbox>
+			</panelchildren>
+			</panel>
+		
+		<!-- </groupbox> -->
+		<label value=" * Información Obligatoria"/>
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Registrar" label="Registrar" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				tooltiptext="Modificar" label="Modificar" />
+			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
+				tooltiptext="Eliminar" label="Eliminar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" />
+		</div>
+		
+	</window>
+	<!-- </div> -->
+</zk>

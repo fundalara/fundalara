@@ -1,0 +1,165 @@
+<?page title="Categorías" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Categorías" border="normal" width="695px"
+		maximizable="true" minimizable="true" closable="true">
+		<panel title="">
+			<panelchildren>
+				<groupbox>
+					<caption label="Datos Categoría" />
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="12%" />
+							<column width="44%" />
+							<column />
+						</columns>
+						<rows>
+							<row>
+								<label value="Nombre" />
+								<div>
+									<textbox width="80%" focus="true" />
+								</div>
+								<div>
+									<label value="Cantidad de Equipos" />
+									<space />
+									<spinner width="15%" />
+								</div>
+							</row>
+							<row>
+								<label value="Edad" />
+								<div>
+									<label value="Inferior" />
+									<space />
+									<spinner maxlength="2" value="3"
+										width="23%" />
+									<label value="años" />
+								</div>
+								<div>
+									<label value="Superior" />
+									<space />
+									<spinner maxlength="2" value="3"
+										width="23%" />
+									<label value="años" />
+								</div>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<panel title="">
+			<panelchildren>
+				<groupbox>
+					<caption label="Jugadores por Categoría" />
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="12%" />
+							<column width="23%" />
+							<column width="12%" />
+							<column />
+						</columns>
+						<rows>
+							<row>
+								<label value="Mínimo" />
+								<spinner width="50%" maxlength="2"
+									value="12" />
+								<label value="Máximo" />
+								<spinner width="20%" maxlength="2"
+									value="20" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<toolbar align="end">
+			<toolbarbutton id="agregarGr"
+				image="../../Recursos/Imagenes/agregar.ico" />
+			<toolbarbutton id="modificarGr"
+				image="../../Recursos/Imagenes/editar.ico" />
+			<toolbarbutton id="removerGr"
+				image="../../Recursos/Imagenes/quitar.ico" />
+		</toolbar>
+		<grid id="grid" mold="paging" pageSize="7">
+			<columns menupopup="auto">
+				<column sort="auto" label="Código" width="10%" />
+				<column sort="auto" label="Nombre" width="20%" />
+				<column sort="auto" label="Edad Inferior" width="15%" />
+				<column sort="auto" label="Edad Superior" width="15%" />
+				<column sort="auto" label="Cant equipos" width="14%" />
+				<column sort="auto" label="Min Jugador" width="14%" />
+				<column sort="auto" label="Max Jugador" width="14%" />
+			</columns>
+			<rows>
+				<row>
+					<label value="CAT01" />
+					<label value="Preparatorio Nivel 1" />
+					<label value="3" />
+					<label value="5" />
+					<label value="5" />
+					<label value="12" />
+					<label value="20" />
+				</row>
+				<row>
+					<label value="CAT02" />
+					<label value="Preparatorio Nivel 2" />
+					<label value="6" />
+					<label value="7" />
+					<label value="5" />
+					<label value="12" />
+					<label value="20" />
+				</row>
+				<row>
+					<label value="CAT03" />
+					<label value="Infantil" />
+					<label value="8" />
+					<label value="9" />
+					<label value="5" />
+					<label value="12" />
+					<label value="20" />
+				</row>
+				<row>
+					<label value="CAT04" />
+					<label value="Prejunior" />
+					<label value="10" />
+					<label value="11" />
+					<label value="5" />
+					<label value="12" />
+					<label value="20" />
+				</row>
+				<row>
+					<label value="CAT05" />
+					<label value="Junior" />
+					<label value="12" />
+					<label value="14" />
+					<label value="5" />
+					<label value="12" />
+					<label value="20" />
+				</row>
+				<row>
+					<label value="CAT06" />
+					<label value="Juvenil" />
+					<label value="15" />
+					<label value="17" />
+					<label value="5" />
+					<label value="12" />
+					<label value="20" />
+				</row>
+			</rows>
+		</grid>
+
+		<div align="right">
+			<button label="Guardar"
+				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" />
+			<space />
+			<button label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<space />
+			<button label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+			<space />
+		</div>
+	</window>
+</zk>

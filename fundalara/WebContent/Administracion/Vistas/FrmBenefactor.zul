@@ -1,0 +1,185 @@
+<?page title="Benefactores" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Benefactores" border="normal" width="75%">
+		<zscript><![CDATA[
+	public void mostrar() {
+		String var = cb.getSelectedItem().getValue().toString();
+
+		if (cb.getSelectedItem().getValue().equals("1")) {
+			gb.setVisible(true);
+			gb2.setVisible(false);
+		} else {
+
+			gb.setVisible(false);
+			gb2.setVisible(true);
+		}
+	}
+]]></zscript>
+
+
+		<panel collapsible="true">
+			<panelchildren>
+				<div>
+					Tipo de Persona
+					<combobox id="cb" onSelect="mostrar()">
+						<comboitem label="Natural" value="1"></comboitem>
+						<comboitem label="Juridica" value="2"></comboitem>
+					</combobox>
+				</div>
+				<groupbox id="gb" visible="false">
+					<grid>
+						<columns>
+							<column label="" width="25%"></column>
+							<column label="" width="25%"></column>
+							<column label="" width="25%"></column>
+							<column label="" width="25%"></column>
+						</columns>
+						<rows>
+
+
+							<row>
+								Cédula
+
+								<hbox>
+									<bandbox>
+										<bandpopup></bandpopup>
+									</bandbox>
+								</hbox>
+
+							</row>
+							<row>
+								<label>Primer Nombre</label>
+								<textbox></textbox>
+								<label>Segundo Nombre</label>
+								<textbox></textbox>
+							</row>
+							<row>
+								<label>Primer Apellido</label>
+								<textbox></textbox>
+								<label>Segundo Apellido</label>
+								<textbox></textbox>
+							</row>
+							<row>
+								Telefono Celular
+								<hbox>
+									<combobox width="40px">
+										<comboitem label="0414"></comboitem>
+										<comboitem label="0424"></comboitem>
+										<comboitem label="0416"></comboitem>
+										<comboitem label="0426"></comboitem>
+										<comboitem label="0412"></comboitem>
+									</combobox>
+									<intbox></intbox>
+								</hbox>
+								Telefono de Habitacion
+								<hbox>
+									<combobox width="40px">
+										<comboitem label="0251"></comboitem>
+									</combobox>
+									<intbox></intbox>
+								</hbox>
+							</row>
+							<row>
+								Correo Electronico
+								<textbox width="96%"></textbox>
+								Twitter @
+								<textbox></textbox>
+							</row>
+
+						</rows>
+					</grid>
+					<separator></separator>
+					<grid>
+						<columns>
+							<column width="22%"></column>
+							<column width="79%"></column>
+						</columns>
+						<rows>
+							<row>
+								<label>Direccion</label>
+								<textbox width="96%"></textbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox id="gb2" visible="false">
+					<grid>
+						<columns>
+							<column width="25%"></column>
+							<column width="75%"></column>
+						</columns>
+						<rows>
+							<row>
+								RIF
+								<bandbox>
+									<bandpopup></bandpopup>
+								</bandbox>
+							</row>
+							<row>
+								Nombre
+								<textbox></textbox>
+							</row>
+							<row>
+								Correo Electronico
+								<textbox></textbox>
+							</row>
+							<row>
+								Telefono
+								<hbox>
+									<combobox width="40px">
+										<comboitem label="0414"></comboitem>
+										<comboitem label="0424"></comboitem>
+										<comboitem label="0416"></comboitem>
+										<comboitem label="0426"></comboitem>
+										<comboitem label="0412"></comboitem>
+										<comboitem label="0251"></comboitem>
+									</combobox>
+									<intbox></intbox>
+								</hbox>
+							</row>
+							<row>
+								Fax
+								<hbox>
+									<combobox width="40px">
+										<comboitem label="0251"></comboitem>
+									</combobox>
+									<intbox></intbox>
+								</hbox>
+							</row>
+							<row>
+								Twitter @
+								<textbox></textbox>
+							</row>
+							<row>
+								Direccion
+								<textbox width="96%"></textbox>
+							</row>
+
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+
+
+
+
+
+
+		<div align="right">
+
+			<button image="/Administracion/images/guardar.ico"
+				onClick="" label="Guardar" />
+			<button image="/Administracion/images/editar.ico" onClick=""
+				label="Editar" />
+			<button image="/Administracion/images/quitar.ico"
+				label="Eliminar">
+			</button>
+			<button image="/Administracion/images/cancelar.ico"
+				onClick="" label="Cancelar" />
+			<button image="/Administracion/images/atras.ico" onClick=""
+				label="Salir" />
+		</div>
+
+	</window>
+</zk>

@@ -1,0 +1,278 @@
+<?page title="Balance General" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="WinB" title="Balance General" border="normal"
+		width="650px">
+		<panel title="16 de Noviembre 2011, 10:00am">
+			<panelchildren>
+				<groupbox>
+
+					<grid>
+						<columns></columns>
+						<rows>
+							<row>
+								<label>E.B.M FUNDALARA</label>
+							</row>
+							<row>
+								<label>
+									DEL 30 DE NOVIEMBRE 2011 AL 30 DE
+									DICIEMBRE 2011
+								</label>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
+
+		</panel>
+
+		<panel title="ACTIVOS">
+			<panelchildren>
+				<groupbox>
+
+
+					<grid>
+						<columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+							<row>
+								<label>ACTIVOS CORRIENTES:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>Caja</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Banco</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Cuentas por Cobrar</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Inventario</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL ACTIVOS CORRIENTES:</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>ACTIVOS FIJOS:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>Maquinaria y Equipos</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Muebles y Enseres</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Equipos de Oficina</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+						winPR			Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+
+							<row>
+								<label>Costrucciones</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>Terrenos</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL ACTIVOS FIJOS:</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL ACTIVOS:</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+						</rows>
+
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
+
+		</panel>
+		<panel title="PASIVOS">
+			<panelchildren>
+				<groupbox>
+
+
+					<grid>
+						<columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+
+							<row>
+								<label>PASIVOS CORRIENTES:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									Cuentas por Pagar a Proveedores
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>TOTAL PASIVOS CORRIENTE:</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>PASIVOS A LARGO PLAZO:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									Prestaciones y Liquidaciones
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									Obligaciones o Bonos por pagar
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									TOTAL PASIVOS A LARGO PLAZO:
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+						winPR		<label>TOTAL PASIVOS:</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+						</rows>
+
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
+
+		</panel>
+		<panel title="PATRIMONIO">
+			<panelchildren>
+				<groupbox>
+
+
+					<grid>
+						<columns>
+							<column width="50%" align="left"></column>
+						winPR	<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+
+							<row>
+								<label>Capital</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>Utilidad</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+							<row>
+								<label>TOTAL PATRIMONIO:</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+							<row>
+								<label>
+									TOTAL PATRIMONIO Y PASIVOS:
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<div align="right">
+					<button image="/Recursos/Imagenes/imprimir.ico"
+						onClick="" tooltiptext="/Aceptar" label="Imprimir" />
+
+							<button image="/Recursos/Imagenes/atras.ico"
+								onClick="" tooltiptext="Salir" label="Salir">
+								<attribute name="onClick">
+									WinB.onClose();
+								</attribute>
+							</button>
+				</div>
+			</panelchildren>
+
+		</panel>
+	</window>
+</zk>

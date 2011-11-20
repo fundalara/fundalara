@@ -1,0 +1,43 @@
+<?page title="Tipo de Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<window title="Tipo de Mantenimiento" border="normal" width="370px"
+	maximizable="true" minimizable="true" closable="true" sizable="true" mode="modal">
+	<panel title="Mantenimiento" collapsible="false">
+		<panelchildren>
+			<hbox width="100%">
+				<div>
+					<grid>
+						<columns>
+							<column width="30%" />
+						</columns>
+						<rows>
+							<row align="left">
+								<label value="Codigo" />
+								<textbox width="90%" value="123456"
+									disabled="true" />
+							</row>
+							<row>
+								<label value="Descripcion " />
+								<textbox width="90%" disabled="false"
+									multiline="true" height="40px"
+									value="Mantenimiento de Campo" />
+							</row>
+						</rows>
+					</grid>
+				</div>
+			</hbox>
+		</panelchildren>
+	</panel>
+
+	<div align="right">
+		<button label="Guardar" image="./Recursos/Imagenes/guardar.ico"
+			orient="horizontal" width="100px" />
+		<space />
+		<button label="Cancelar"
+			image="./Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<space />
+		<button label="Salir" image="./Recursos/Imagenes/salir.png"
+			orient="horizontal" width="100px" />
+		<space />
+	</div>
+</window>

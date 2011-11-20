@@ -1,0 +1,299 @@
+<?page title="Pago de Nómina" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winNO" title="Pago de Nómina" border="normal">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void doLogin() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/FrmDetalleNomina.zul", null, null);
+	}
+	public void RegPago() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/FrmPagoNomina.zul", null, null);
+	}
+]]></zscript>
+		<tabbox>
+			<tabs>
+				<tab label="Quincenal"></tab>
+				<tab label="Semanal"></tab>
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+					<groupbox>
+						<caption>Consultar Períodos Anteriores</caption>
+						<separator></separator>
+						<space></space>
+						<label>Días</label>
+						<combobox>
+							<comboitem label="Primera Quincena"
+								value="Primera Quincena">
+							</comboitem>
+							<comboitem label="Primera Quincena"
+								value="Segunda Quincena">
+							</comboitem>
+						</combobox>
+						<space></space>
+						<label>Mes</label>
+						<combobox>
+							<comboitem label="Enero" value="Enero"></comboitem>
+							<comboitem label="Febrero"
+								value="Febrero">
+							</comboitem>
+							<comboitem label="Marzo" value="Marzo"></comboitem>
+							<comboitem label="Abril" value="Abril"></comboitem>
+							<comboitem label="Mayo" value="Mayo"></comboitem>
+							<comboitem label="Junio" value="Junio"></comboitem>
+							<comboitem label="Julio" value="Julio"></comboitem>
+							<comboitem label="Agosto" value="Agosto"></comboitem>
+							<comboitem label="Septiembre"
+								value="Septiembre">
+							</comboitem>
+							<comboitem label="Octubre"
+								value="Octubre">
+							</comboitem>
+							<comboitem label="Noviembre"
+								value="Noviembre">
+							</comboitem>
+							<comboitem label="Diciembre"
+								value="Diciembre">
+							</comboitem>
+						</combobox>
+						<space></space>
+						<label>Año</label>
+						<combobox>
+							<comboitem label="2011" value="2011"></comboitem>
+							<comboitem label="2010" value="2010"></comboitem>
+							<comboitem label="2009" value="2009"></comboitem>
+							<comboitem label="2008" value="2008"></comboitem>
+						</combobox>
+						<space></space>
+						<button image="/Recursos/Imagenes/consultar.ico"
+							label="Buscar" onClick="" />
+						<separator></separator>
+						<separator></separator>
+					</groupbox>
+					<groupbox>
+						<caption>Período</caption>
+						<separator></separator>
+						<space></space>
+						<label>Fecha</label>
+						<textbox value="    15/11/2011" width="9%"
+							disabled="true">
+						</textbox>
+						<label>-</label>
+						<textbox value="    30/11/2011" width="9%"
+							disabled="true">
+						</textbox>
+						<separator></separator>
+						<space></space>
+						<label>Estado</label>
+						<textbox value=" Actual" width="4%"
+							disabled="true">
+						</textbox>
+						<separator></separator>
+						<separator></separator>
+					</groupbox>
+					<groupbox>
+						<caption>Lista de Empleados</caption>
+						<grid>
+							<columns>
+								<column align="center" width="12%">
+									Nombres
+								</column>
+								<column align="center" width="14%">
+									Apellidos
+								</column>
+								<column align="center">
+									Sueldo Base
+								</column>
+								<column align="center">
+									Asignaciones
+								</column>
+								<column align="center">
+									Deducciones
+								</column>
+								<column align="center">
+									Bonificaciones
+								</column>
+								<column align="center">
+									Penalizaciones
+								</column>
+								<column align="center">Total</column>
+							</columns>
+							<rows>
+								<row>
+									<label>Diego Alberto</label>
+									<label>Alves Guaita</label>
+									<label>1500 Bs.</label>
+									<label>270 Bs.</label>
+									<label>15 Bs.</label>
+									<label>0 Bs.</label>
+									<label>75 Bs.</label>
+									<toolbarbutton label="1680 Bs."
+										onClick="doLogin()" />
+								</row>
+								<row>
+									<label>Antonio José</label>
+									<label>Barragán Saltor</label>
+									<label>1200 Bs.</label>
+									<label>270 Bs.</label>
+									<label>12 Bs.</label>
+									<label>60 Bs.</label>
+									<label>0 Bs.</label>
+									<toolbarbutton label="1518 Bs."
+										onClick="" />
+								</row>
+								<row>
+									<label>Ricardo Antonio</label>
+									<label>Costa Rodríguez</label>
+									<label>1200 Bs.</label>
+									<label>270 Bs.</label>
+									<label>12 Bs.</label>
+									<label>60 Bs.</label>
+									<label>0 Bs.</label>
+									<toolbarbutton label="1518 Bs."
+										onClick="" />
+								</row>
+								<row>
+									<label>Federico</label>
+									<label>Dominguez Sosa</label>
+									<label>1500 Bs.</label>
+									<label>270 Bs.</label>
+									<label>15 Bs.</label>
+									<label>0 Bs.</label>
+									<label>75 Bs.</label>
+									<toolbarbutton label="1680 Bs."
+										onClick="" />
+								</row>
+							</rows>
+						</grid>
+						<separator></separator>
+						<separator></separator>
+					</groupbox>
+					<panel>
+						<panelchildren>
+							<div align="right">
+								<button
+									image="/Recursos/Imagenes/reporte.ico" label="Registrar Pago"
+									onClick="RegPago()" />
+								<button
+									image="/Recursos/Imagenes/atras.ico" label="Salir" onClick="" />
+							</div>
+						</panelchildren>
+					</panel>
+				</tabpanel>
+				<tabpanel>
+					<groupbox>
+						<caption>Consultar Períodos Anteriores</caption>
+						<separator></separator>
+						<space></space>
+						<label>Seleccionar Período</label>
+						<space></space>
+						<datebox></datebox>
+						<space></space>
+						<button image="/Recursos/Imagenes/consultar.ico"
+							label="Buscar" onClick="" />
+						<separator></separator>
+						<separator></separator>
+					</groupbox>
+					<groupbox>
+						<caption>Período</caption>
+						<separator></separator>
+						<space></space>
+						<label>Fecha</label>
+						<textbox value="    14/11/2011" width="9%"
+							disabled="true">
+						</textbox>
+						<label>-</label>
+						<textbox value="    20/11/2011" width="9%"
+							disabled="true">
+						</textbox>
+						<separator></separator>
+						<space></space>
+						<label>Estado</label>
+						<textbox value=" Actual" width="4%"
+							disabled="true">
+						</textbox>
+						<separator></separator>
+						<separator></separator>
+					</groupbox>
+					<groupbox>
+						<caption>Lista de Empleados</caption>
+						<grid>
+							<columns>
+								<column align="center" width="12%">
+									Nombres
+								</column>
+								<column align="center" width="14%">
+									Apellidos
+								</column>
+								<column align="center">
+									Sueldo Base
+								</column>
+								<column align="center">
+									Asignaciones
+								</column>
+								<column align="center">
+									Deducciones
+								</column>
+								<column align="center">
+									Bonificaciones
+								</column>
+								<column align="center">
+									Penalizaciones
+								</column>
+								<column align="center">Total</column>
+							</columns>
+							<rows>
+								<row>
+									<label>David</label>
+									<label>Silva Jimenez</label>
+									<label>700 Bs.</label>
+									<label>90 Bs.</label>
+									<label>7 Bs.</label>
+									<label>0 Bs.</label>
+									<label>0 Bs.</label>
+									<toolbarbutton label="783 Bs." />
+								</row>
+								<row>
+									<label>David Andres</label>
+									<label>Villa Sánchez</label>
+									<label>600 Bs.</label>
+									<label>90 Bs.</label>
+									<label>6 Bs.</label>
+									<label>0 Bs.</label>
+									<label>0 Bs.</label>
+									<toolbarbutton label="684 Bs."
+										onClick="" />
+								</row>
+							</rows>
+						</grid>
+						<separator></separator>
+						<separator></separator>
+					</groupbox>
+					<panel>
+						<panelchildren>
+							<div align="center">
+								<button
+									image="/Recursos/Imagenes/reporte.ico" label="Registrar Pago"
+									onClick="RegPago()" />
+								<button
+									image="/Recursos/Imagenes/atras.ico" label="Salir" onClick="" />
+								<attribute name="onClick">
+	                            winNO.onClose();
+                                </attribute>
+                                
+							</div>
+						</panelchildren>
+					</panel>
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+
+	</window>
+</zk>

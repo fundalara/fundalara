@@ -1,0 +1,112 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<div align="center">
+<window title="REGLAS POR CATEGORIAS" border="normal" width="60%">
+	<panel height="50%"> 
+		
+			<panelchildren>
+				<grid>
+					<rows>
+						<row height="50px">
+						<div align="left">
+							<label value="Regla:"></label>
+							<bandbox></bandbox>
+						</div>
+						</row>
+
+					</rows>
+				</grid>
+			</panelchildren>
+		
+
+	</panel>
+	
+	
+	<panel>
+		<panelchildren>
+	<listbox style="align:left">
+	<listhead >
+		<listheader width="30%" label="Reglas"  style="align:left"/>
+		<listheader width="10%" label="Pre I N"  align="center" />
+		<listheader width="10%" label="Pre II N" align="center" />
+		<listheader width="10%" label="Preinfantil"  align="center"/>
+		<listheader width="10%" label="Infantil"  align="center"/>
+		<listheader width="10%" label="Prejunior"  align="center"/>
+		<listheader width="10%" label="Junior"  align="center"/>
+		<listheader width="10%" label="Juvenil"  align="center"/>
+	</listhead>
+	<listitem>
+		<listcell label="Porcentaje Mínimo de Participación" />
+		<listcell > <textbox width="50%" value="N/A"/> </listcell>
+		<listcell > <textbox width="50%" value="0.45"/> </listcell>
+		<listcell > <textbox width="50%" value="0.45"/> </listcell>
+		<listcell > <textbox width="50%" value="0.45"/> </listcell>
+		<listcell > <textbox width="50%" value="0.40"/> </listcell>
+		<listcell > <textbox width="50%" value="0.35"/> </listcell>
+		<listcell > <textbox width="50%" value="0.30"/> </listcell>
+	</listitem>
+	<listitem>
+		<listcell label="Máximos de Lanzamientos Permitidos" />
+		<listcell > <textbox width="50%" value="N/A" /> </listcell>
+		<listcell > <textbox width="50%" value="40"/> </listcell>
+		<listcell > <textbox width="50%" value="50"/> </listcell>
+		<listcell > <textbox width="50%" value="60"/> </listcell>
+		<listcell > <textbox width="50%" value="70"/> </listcell>
+		<listcell > <textbox width="50%" value="80"/> </listcell>
+		<listcell > <textbox width="50%" value="90"/> </listcell>
+	</listitem>
+	<listitem>
+		<listcell label="Días de Decanzo por Lanzador" />
+		<listcell > <textbox width="50%" value="N/A"/> </listcell>
+		<listcell > <textbox width="50%" value="3"/> </listcell>
+		<listcell > <textbox width="50%" value="3"/> </listcell>
+		<listcell > <textbox width="50%" value="3"/> </listcell>
+		<listcell > <textbox width="50%" value="3"/> </listcell>
+		<listcell > <textbox width="50%" value="3"/> </listcell>
+		<listcell > <textbox width="50%" value="3"/> </listcell>
+	</listitem>
+	<listitem>
+		<listcell label="Máximos de Outs por Receptor" />
+		<listcell > <textbox width="50%" value="2"/> </listcell>
+		<listcell > <textbox width="50%" value="6"/> </listcell>
+		<listcell > <textbox width="50%" value="12"/> </listcell>
+		<listcell > <textbox width="50%" value="21"/> </listcell>
+		<listcell > <textbox width="50%" value="21"/> </listcell>
+		<listcell > <textbox width="50%" value="N/A"/> </listcell>
+		<listcell > <textbox width="50%" value="N/A"/> </listcell>
+	</listitem>
+	<listitem>
+		
+		<listcell label="Días de Decanzo por Receptor" />
+		<listcell > <textbox width="50%" value="2"/> </listcell>
+		<listcell > <textbox width="50%" value="2"/> </listcell>
+		<listcell > <textbox width="50%" value="2"/> </listcell>
+		<listcell > <textbox width="50%" value="2"/> </listcell>
+		<listcell > <textbox width="50%" value="2"/> </listcell>
+		<listcell > <textbox width="50%" value="N/A"/> </listcell>
+		<listcell > <textbox width="50%" value="N/A"/> </listcell>
+	</listitem>
+</listbox>
+</panelchildren>
+</panel>
+	<div >
+ 		<div align="right"  height="30px">    	
+					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+							orient="horizontal"  ></button>
+					<button image="/Recursos/Imagenes/quitar.ico" label="Eliminar"
+							orient="horizontal"  >
+							
+							</button>
+					<button image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal" >
+							</button>
+					<button image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal" >
+							</button>											
+		
+ 		</div>
+    </div>	
+
+</window>
+</div>
+</zk>

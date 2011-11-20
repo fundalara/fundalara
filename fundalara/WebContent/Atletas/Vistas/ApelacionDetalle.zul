@@ -1,0 +1,64 @@
+<?page title="Atletas Hospedados" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Apelacion de Jugador" border="normal" width="520px"
+		closable="true" maximizable="true" minimizable="true">
+		<groupbox>
+			<caption label="Jugador"></caption>
+			<grid>
+				<columns>
+					<column width="37%" />
+					<column width="60%" />
+				</columns>
+				<rows>
+					<row align="left">
+						<label value="Representante Disciplinario" />
+						<hbox align="start">
+							<textbox disabled="true" maxlength="50" />
+						</hbox>
+					</row>
+					<row align="left">
+						<label value="Fecha de Apelacion" />
+						<hbox align="start">
+							<datebox id="nacimientobox"
+								constraint="no future" format="dd/MM/yyyy" />
+						</hbox>
+					</row>
+					<row align="left">
+						<label value="Observaciones" />
+						<hbox align="start">
+							<textbox multiline="true" cols="40" rows="4" />
+						</hbox>
+					</row>
+					<row align="left">
+						<label value="Documento"></label>
+						<hbox align="start">
+							<checkbox label="Informe de la apelacion" />
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<div>
+			<grid>
+				<columns>
+					<column width="20%" />
+					<column width="25%" />
+					<column width="20%" />
+					<column width="25%" />
+				</columns>
+				<rows>
+					<row></row>
+					<row></row>
+				</rows>
+			</grid>
+		</div>
+		<div align="right">
+			<button label="Guardar"
+				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+				height="25px" />
+			<button label="Salir" image="../../Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px" />
+			<space />
+		</div>
+	</window>
+</zk>

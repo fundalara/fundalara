@@ -1,0 +1,51 @@
+<?page title="Comision" contentType="text/html;charset=UTF-8"?>
+<window title="Registro Comision" border="normal" width="695px"
+	maximizable="true" minimizable="true" closable="true" sizable="true" mode="modal">
+	<panel title="Comision" collapsible="false">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column width="30%" />
+					<column width="20%" />
+					<column width="15%" />
+					<column width="35%" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Código Comision" />
+						<textbox width="90%" maxlength="5"
+							disabled="true" value="CO001"/>
+						<label value="Nombre " />
+						<textbox width="90%" maxlength="80"
+							disabled="false" value="Eventos Especiales"/>
+					</row>
+					<row>
+						<label value="Cantidad Maxima de Integrantes">
+						</label>
+						<spinner value="12" />
+						<label value="Descripcion"></label>
+						<textbox multiline="true" height="100px" value="" width="90%" ></textbox>
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<panel>
+		<panelchildren>
+
+		</panelchildren>
+	</panel>
+
+	<div align="right">
+		<button label="Guardar" image="./Recursos/Imagenes/guardar.ico"
+			orient="horizontal" width="100px" />
+		<space />
+		<button label="Cancelar"
+			image="./Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<space />
+		<button label="Salir" image="./Recursos/Imagenes/salir.png"
+			orient="horizontal" width="100px" />
+		<space />
+	</div>
+</window>

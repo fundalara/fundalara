@@ -1,0 +1,462 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Registrar Personal" border="normal" width="650px">
+
+		<div>
+			<panel collapsible="true">
+				<panelchildren>
+					<grid>
+						<rows>
+
+							<row>
+								<grid>
+									<columns>
+										<column label="" width="25%">
+										</column>
+										<column label="" width="25%">
+										</column>
+										<column label="" width="25%">
+										</column>
+										<column label="" width="25%">
+										</column>
+									</columns>
+									<rows>
+
+										<row>
+											Cédula
+
+											<hbox>
+												<bandbox
+													width="70%">
+													<bandpopup></bandpopup>
+												</bandbox> 
+												
+											</hbox>
+										</row>
+										<row>
+											Primer Nombre
+											<textbox width="85%"></textbox>
+											Segundo Nombre
+											<textbox width="85%"></textbox>
+										</row>
+										<row>
+											Primer Apellido
+											<textbox width="85%"></textbox>
+											Segundo Apellido
+											<textbox width="85%"></textbox>
+
+										</row>
+										<row>
+											Fecha de Nacimiento
+											<datebox width="78%"
+												format="dd/mm/yyyy">
+											</datebox>
+											Genero
+											<hbox>
+												<radio label="Masculino" />
+												<radio
+													label="Femenino" />
+											</hbox>
+
+										</row>
+									</rows>
+								</grid>
+							</row>
+						</rows>
+					</grid>
+					<grid>
+						<rows>
+
+							<row>
+								<grid>
+
+									<columns>
+										<column label="" width="25%" />
+										<column label="" width="75%" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Dirección" />
+											<textbox width="95%" />
+
+										</row>
+
+									</rows>
+
+								</grid>
+							</row>
+						</rows>
+					</grid>
+					<grid>
+						<rows>
+
+							<row>
+								<grid>
+
+									<columns>
+										<column label="" width="25%" />
+										<column label="" width="25%" />
+										<column label="" width="25%" />
+										<column label="" width="25%" />
+									</columns>
+									<rows>
+										<row>
+											Teléfono de Habitación
+											<hbox>
+												<combobox
+													width="50px">
+													<comboitem
+														label="0251">
+													</comboitem>
+													<comboitem
+														label="0252">
+													</comboitem>
+													<comboitem
+														label="0253">
+													</comboitem>
+												</combobox>
+												<textbox
+													width="90%">
+												</textbox>
+											</hbox>
+
+											Teléfono Celular
+											<hbox>
+												<combobox width="50px">
+													<comboitem
+														label="0424">
+													</comboitem>
+													<comboitem
+														label="0414">
+													</comboitem>
+													<comboitem
+														label="0426">
+													</comboitem>
+													<comboitem
+														label="0416">
+													</comboitem>
+													<comboitem
+														label="0412">
+													</comboitem>
+												</combobox>
+
+												<textbox width="90%">
+												</textbox>
+											</hbox>
+
+
+										</row>
+
+										<row>
+											Estado Civil
+											<combobox width="79%">
+												<comboitem
+													label="Soltero(a)">
+												</comboitem>
+												<comboitem
+													label="Casado(a)">
+												</comboitem>
+												<comboitem
+													label="Divorciado(a)">
+												</comboitem>
+												<comboitem
+													label="Viudo(a)">
+												</comboitem>
+											</combobox>
+											Nro. Hijos
+											<combobox width="23%">
+												<comboitem label="1"></comboitem>
+												<comboitem label="2"></comboitem>
+												<comboitem label="3"></comboitem>
+												<comboitem label="4"></comboitem>
+												<comboitem label="5"></comboitem>
+												<comboitem label="6"></comboitem>
+											</combobox>
+
+
+										</row>
+										<row>
+											Correo Electrónico
+											<textbox width="85%"></textbox>
+											Cuenta Twitter @
+											<textbox width="85%"></textbox>
+										</row>
+
+										<row>
+											Tipo de Sangre
+											<combobox width="50px">
+												<comboitem label="O-"></comboitem>
+												<comboitem label="O+"></comboitem>
+												<comboitem label="A-"></comboitem>
+												<comboitem label="A+"></comboitem>
+												<comboitem label="B-"></comboitem>
+												<comboitem label="B+"></comboitem>
+												<comboitem
+													label="AB-">
+												</comboitem>
+												<comboitem
+													label="AB+">
+												</comboitem>
+											</combobox>
+											Alergias
+											<textbox width="85%"></textbox>
+										</row>
+
+										<row>
+											Grado de Instrucción
+											<combobox width="79%">
+												<comboitem
+													label="Primaria">
+												</comboitem>
+												<comboitem
+													label="Media">
+												</comboitem>
+												<comboitem
+													label="Diversificada">
+												</comboitem>
+												<comboitem
+													label="Técnico Medio">
+												</comboitem>
+												<comboitem
+													label="Técnico superior">
+												</comboitem>
+												<comboitem
+													label="Universitaria">
+												</comboitem>
+												<comboitem
+													label="Ninguna">
+												</comboitem>
+
+											</combobox>
+
+										</row>
+
+
+									</rows>
+
+								</grid>
+							</row>
+						</rows>
+					</grid>
+					<grid>
+
+					</grid>
+
+
+				</panelchildren>
+			</panel>
+
+
+
+		</div>
+
+		<!-- GRID DE DATOS LABORALES -->
+		<panel title="Datos Laborales" collapsible="true"
+			open="false">
+			<panelchildren>
+				<grid>
+					<rows>
+
+
+						<row>
+
+							<groupbox mold="3d" closable="false"
+								style="padding: 10px;" width="390
+		">
+
+								<div>
+									<grid>
+										<columns>
+											<column label=""
+												width="25%">
+											</column>
+											<column label=""
+												width="25%">
+											</column>
+											<column label=""
+												width="25%">
+											</column>
+											<column label=""
+												width="25%">
+											</column>
+										</columns>
+										<rows>
+											<row>
+												Fecha Ingreso
+												<datebox width="80%"
+													format="dd/mm/yyyy" />
+												Tipo Empleado
+												<combobox width="80%">
+													<comboitem
+														label="Técnico">
+													</comboitem>
+													<comboitem
+														label="Secretaria">
+													</comboitem>
+													<comboitem
+														label="Obrero(a)">
+													</comboitem>
+													<comboitem
+														label="Otro">
+													</comboitem>
+												</combobox>
+											</row>
+
+
+											<row>
+												Sueldo Base
+												<textbox width="87%" />
+												Periodo de Pago
+												<combobox width="80%">
+													<comboitem
+														label="Diario">
+													</comboitem>
+													<comboitem
+														label="Semanal">
+													</comboitem>
+													<comboitem
+														label="Quincenal">
+													</comboitem>
+													<comboitem
+														label="Mensual">
+													</comboitem>
+												</combobox>
+											</row>
+
+											<row>
+												Horario de trabajo
+												<combobox width="80%">
+													<comboitem
+														label="Tiempo convencional">
+													</comboitem>
+													<comboitem
+														label="Medio Tiempo">
+													</comboitem>
+													<comboitem
+														label="Tiempo Completo">
+													</comboitem>
+												</combobox>
+											</row>
+										</rows>
+
+									</grid>
+
+
+
+								</div>
+							</groupbox>
+						</row>
+					</rows>
+				</grid>
+
+				<!-- Asignaciones y deducciones -->
+				
+				<groupbox>
+				
+				<caption>Asignaciones y deducciones</caption>
+				
+				<grid>
+					<columns>
+						<column label="" width="50%" />
+						<column label="" width="50%" />
+					</columns>
+					<rows>
+						<row>
+							<groupbox>
+								<div align="center">
+									Asignaciones
+									<combobox width="35%">
+									
+										<comboitem
+											label="Cesta Ticket">
+										</comboitem>
+
+									</combobox>
+									<button label="" onClick=""
+										image="/Recursos/Imagenes/agregar.ico" />
+									<button label="" onClick=""
+										image="/Recursos/Imagenes/quitar.ico" />
+
+
+								</div>
+								<div align="center">
+									<grid width="50%">
+										<columns>
+											<column
+												label="Asignaciones asociadas" />
+
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Cesta Tickets" />
+
+											</row>
+
+	
+
+										</rows>
+									</grid>
+								</div>
+
+							</groupbox>
+
+
+							<groupbox>
+								<div align="center">
+									Deducciones
+									<combobox width="35%">
+										<comboitem label="SSO"></comboitem>
+										
+
+									</combobox>
+									<button label="" onClick=""
+										image="/Recursos/Imagenes/agregar.ico" />
+									<button label="" onClick=""
+										image="/Recursos/Imagenes/quitar.ico" />
+
+
+								</div>
+								<div align="center">
+									<grid width="50%">
+										<columns>
+											<column
+												label="Deducciones asociadas" />
+
+										</columns>
+										<rows>
+										
+											<row>
+												<label value="SSO" />
+
+											</row>
+
+										</rows>
+									</grid>
+								</div>
+
+							</groupbox>
+
+						</row>
+						
+					</rows>
+				</grid>
+				</groupbox>
+
+			</panelchildren>
+		</panel>
+
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico"
+				onClick="" label="Guardar" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				label="Editar" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				onClick="" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				label="Salir" />
+				
+		</div>
+
+	</window>
+</zk>

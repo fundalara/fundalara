@@ -1,0 +1,70 @@
+<?page title="Auto Generated index.zul"?>
+<window id="winA" title="Actualizar Concepto de Nómina" border="normal"
+	width="650px">
+
+	<zscript>
+<![CDATA[
+	import org.zkoss.Version;
+	void seleccion() {
+
+		if (cmb.getSelectedItem().getValue().equals("Asignacion")) {
+			Lmonto.setValue("Monto");
+		} else {
+			Lmonto.setValue("Porcentaje");
+
+		}
+
+	}
+	public void AsPersonal() {
+		Executions.createComponents("/Administracion/FrmAsociarPersonal.zul", winA, null);
+		//winB.doModal();
+	}
+]]>
+</zscript>
+	<groupbox>
+		<grid fixedLayout="true">
+			<columns>
+				<column width="30%" />
+			</columns>
+			<rows>
+				<row>
+					<label value="Concepto" width="50px"></label>
+					<combobox id="cmb" value="Seleccione" width="40%"
+						onSelect="seleccion()">
+						<comboitem value="Asignacion"
+							label="Asignación" />
+						<comboitem value="Deduccion" label="Deducción" />
+					</combobox>
+
+				</row>
+				<row align="left">
+					<label value="Código" width="100px" />
+					<textbox width="40%" />
+				</row>
+				<row align="left">
+					<label value="Descripción" width="100%" />
+					<textbox width="90%" />
+				</row>
+				<row align="left">
+					<label id="Lmonto" value="Valor" width="100px" />
+					<textbox width="20%"></textbox>
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+
+
+
+	<div align="right">
+		<button image="/Recursos/Imagenes/guardar.ico"
+			label="Registrar" />
+		<button image="/Recursos/Imagenes/editar.ico" label="Modificar" />
+		<button image="/Recursos/Imagenes/agregar.ico"
+			label="Asociar Personal" onClick="AsPersonal()">
+		</button>
+
+		<button image="/Recursos/Imagenes/atras.ico" label="Salir" />
+	</div>
+</window>
+
