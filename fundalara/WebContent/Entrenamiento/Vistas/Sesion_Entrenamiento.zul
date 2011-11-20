@@ -1,0 +1,306 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<separator height="15px" />
+	<window closable="true" title="Sesion de Entrenamiento"
+		border="normal" width="600px" mode ="embedded">
+		<grid>
+			<rows>
+				
+				<row>
+					<panel
+						title="Asignacion de Actividades de Entrenamiento"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<rows>
+									<row>
+										<grid>
+											<columns>
+												<column width="110px"
+													align="left" />
+												<column width="160px"
+													align="center" />
+												<column width="120px"
+													align="left" />
+												<column width="160px"
+													align="center" />
+
+											</columns>
+											<rows>
+												<row height="35px">
+													<label value="Fase"
+														width="100px" />
+													<combobox
+														value="--Seleccione--" width="120px">
+														<comboitem
+															label="CALENTAMIENTO" />
+														<comboitem
+															label="TECNICA" />
+														<comboitem
+															label="ENFRIAMIENTO" />
+													</combobox>
+													<label
+														value="Actividad" width="100px" />
+													<combobox
+														value="--Seleccione--" width="120px">
+														<comboitem
+															label="BATEO" />
+														<comboitem
+															label="TROTE" />
+														<comboitem
+															label="LANZAMIENTO" />
+													</combobox>
+
+												</row>
+												<row height="30px">
+													<label
+														value="Tiempo" width="100px" />
+													<hbox
+														width="100px">
+														<timebox width="70px"/>
+														
+														<label
+															value=" min" width="20px" />
+													</hbox>
+													<button
+														image="../Recursos/Imagenes/agregar.ico" />
+												</row>
+											</rows>
+										</grid>
+									</row>
+
+									<row>
+									
+										<hbox width="100px">
+											<grid height="110px"
+												width="500px">
+												<columns
+													sizable="true">
+
+													<column label="Fase"
+														width="140px" align="center" />
+													<column
+														label="Actividad" width="230px" align="center" />
+													<column
+														Label="Tiempo (Min)" width="110px" align="center" />
+												</columns>
+
+												<rows>
+
+													<row
+														height="25px">
+														<label
+															value="Calentamiento" />
+														<label
+															value="Sentadillas" />
+														<label
+															value="5" />
+													</row>
+													<row
+														height="25px">
+														<label
+															value="Tecnica" />
+														<label
+															value="Lanzamiento" />
+														<label
+															value="20" />
+													</row>
+													<row
+														height="25px">
+														<label value="" />
+														<label value="" />
+														<label value="" />
+													</row>
+													<row
+														height="25px">
+														<label />
+														<label />
+														<label />
+													</row>
+													<row
+														height="15px">
+														<label />
+														<label />
+														<label />
+													</row>
+												</rows>
+											</grid>
+											<button
+												image="../Recursos/Imagenes/quitar.ico">
+												<attribute name="onClick">
+	{
+		Messagebox.show("Actividad Retirada", "Fundalara", Messagebox.OK,
+				Messagebox.INFORMATION);
+	}
+</attribute>
+											</button>
+										</hbox>
+
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>
+
+
+				<row>
+					<panel
+						title="Asignacion de Materiales de Entrenamiento"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<rows>
+									<row>
+										<grid>
+											<columns>
+												<column width="110px"
+													align="left" />
+												<column width="140px"
+													align="center" />
+												<column width="110px"
+													align="left" />
+												<column width="130px"
+													align="center" />
+												<column align="center" />
+
+											</columns>
+											<rows>
+												<row height="35px">
+													<label value="Material"
+														width="100px" />
+													<combobox
+														value="--Seleccione--" width="120px">
+														<comboitem
+															label="Bate" />
+														<comboitem
+															label="Guante" />
+														<comboitem
+															label="Base" />
+														<comboitem
+															label="Pelota" />
+													</combobox>
+													<label
+														value="Cantidad" width="100px" />
+													<combobox
+														width="80px">
+														<comboitem
+															label="5" />
+														<comboitem
+															label="10" />
+														<comboitem
+															label="15" />
+														<comboitem
+															label="20" />
+													</combobox>
+													<button
+														image="../Recursos/Imagenes/agregar.ico" />
+
+												</row>												
+											</rows>
+										</grid>
+									</row>
+
+									<row>
+									
+										<hbox width="100px">
+											<grid height="110px"
+												width="500px">
+												<columns
+													sizable="true">
+
+													<column label="Material"
+														width="240px" align="center" />
+													<column
+														label="Cantidad" width="240px" align="center" />
+													
+												</columns>
+
+												<rows>
+
+													<row
+														height="25px">
+														<label
+															value="Calentamiento" />
+														<label
+															value="Sentadillas" />
+														
+													</row>
+													<row
+														height="25px">
+														<label
+															value="Tecnica" />
+														<label
+															value="Lanzamiento" />
+														
+													</row>
+													<row
+														height="25px">
+														<label value="" />
+														<label value="" />
+										
+													</row>
+													<row
+														height="25px">
+														<label />
+														<label />
+													
+													</row>
+													<row
+														height="15px">
+														<label />
+														<label />
+												
+													</row>
+												</rows>
+											</grid>
+											<button
+												image="../Recursos/Imagenes/quitar.ico">
+												<attribute name="onClick">
+	{
+		Messagebox.show("Material Retirado", "Fundalara", Messagebox.OK,
+				Messagebox.INFORMATION);
+	}
+</attribute>
+											</button>
+										</hbox>
+
+									</row>
+								</rows>
+							</grid>							
+						</panelchildren>
+					</panel>
+				</row>
+
+			</rows>
+		</grid>
+
+
+		<separator />
+
+
+		<grid height="50px">
+			<columns>
+
+				<column width="245px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+
+			</columns>
+			<rows>
+
+				<row height="">
+					<label value="" />
+					<button image="../Recursos/Imagenes/guardar.ico" label="Guardar" width="100px" />				
+					<button image="../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" />
+					<button image="../Recursos/Imagenes/salir.png" label="Salir" width="100px" />
+				</row>
+			</rows>
+		</grid>
+
+
+
+	</window>
+</div>

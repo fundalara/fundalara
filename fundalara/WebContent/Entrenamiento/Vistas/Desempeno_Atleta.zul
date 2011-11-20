@@ -1,0 +1,799 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<separator height="15px" />
+	<window title="Desempeño de Atleta" border="normal" width="600px"
+		height="">
+		<grid>
+
+			<rows>
+				
+
+
+				<row height="350px">
+					<grid height="400px">
+						<columns sizable="true"></columns>
+						<rows>
+							<row>
+								<listbox multiple="true"
+									checkmark="true" height="385px" >
+									<listhead>
+										<listheader label="Numero"
+											width="75px" />
+										<listheader label="Nombre"
+											align="center" width="150px" />
+										<listheader label="Eventualidad"
+											align="center" width="130px" />
+										<listheader label="Observacion"
+											align="center" width="140px" />
+										<listheader label="Fildeo"
+											align="center" width="115px" />
+										<listheader label="Trote"
+											align="center" width="115px" />
+										<listheader label="Correr las Bases"
+											align="center" width="110px" />
+									</listhead>
+									<listitem>
+										<listcell label="5" />
+										<listcell label="Javier Perez" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="7" />
+										<listcell label="Luis Villa" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="9" />
+										<listcell
+											label="Carlos Rodriguez" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="12" />
+										<listcell
+											label="Manuel Martinez" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="17" />
+										<listcell
+											label="Ricardo Avendaño" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="1" />
+										<listcell
+											label="Leyner Castillo" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="2" />
+										<listcell label="Taner Moron" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="8" />
+										<listcell
+											label="Javier Alarcon" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="11" />
+										<listcell
+											label="Laura Colmenarez" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="21" />
+										<listcell label="Jerica Garcia" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="27" />
+										<listcell label="Jesus Rojas" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="37" />
+										<listcell label="Jose Rojas" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="31" />
+										<listcell
+											label="Gregorio Rioja" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="22" />
+										<listcell label="Maria Flores" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="26" />
+										<listcell
+											label="Carlos Ramirez" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell label="32" />
+										<listcell label="Iris Campos" />
+										<listcell>
+											<combobox width="120px">
+												<comboitem
+													label="Sancion" />
+												<comboitem
+													label="Lesion" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<textbox />
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+										<listcell>
+											<combobox width="80px"
+												value="Bueno">
+												<comboitem
+													label="Bueno" />
+												<comboitem
+													label="Regular" />
+												<comboitem label="Malo" />
+											</combobox>
+										</listcell>
+									</listitem>
+								</listbox>
+							</row>
+
+						</rows>
+					</grid>
+				</row>
+			</rows>
+		</grid>
+		<separator />
+
+
+		<grid>
+			<columns>
+				<column width="220px" align="center" />
+				<column width="115px" align="center" />
+				<column width="115px" align="center" />
+				<column width="115px" align="center" />
+
+
+			</columns>
+			<rows>
+
+				<row height="15px">
+					<label value="" />
+					<button image="../Recursos/Imagenes/guardar.ico" label="Guardar"
+						width="100px" />
+					<button image="../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" />
+					<button image="../Recursos/Imagenes/salir.png" label="Salir"
+						width="100px" />
+				</row>
+			</rows>
+		</grid>
+
+
+	</window>
+</div>

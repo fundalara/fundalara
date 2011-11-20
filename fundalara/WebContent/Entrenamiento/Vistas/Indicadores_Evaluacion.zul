@@ -1,0 +1,539 @@
+<zk xmlns:h="xhtml" xmlns:zk="zk">
+
+	<?page title="Auto Generated index.zul"?>
+	<div align="center">
+		<separator height="15px" />
+		<window title="Indicadores de Evaluacion" border="normal"
+			width="650px" height="">
+			<grid>
+				<rows>
+
+					<row width="480px">
+						<grid width="630px">
+							<columns>
+								<column align="left" width="160px" />
+								<column align="left" width="230px" />
+								<column align="center" width="140px" />
+							</columns>
+							<rows>
+								<row height="20px">
+									<tree>
+										<treechildren>
+											<treeitem>
+												<treerow>
+													<treecell
+														label="Categoria" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Preparatorio Nivel I" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Preparatorio Nivel II" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="PreInfantil" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Infantil" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="PreJunior" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Junior" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Juvenil" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Parametro" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Catcher" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Velocidad" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Disposicion" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+										</treechildren>
+									</tree>
+
+									<h:ul id="ul">
+										<h:li>Brazo       (Discreta (1-2-3-4))</h:li>
+										<h:li>Tiempo H2B  (Discreta (1-2-3-4))</h:li>
+										<h:li>Fuerza      (Discreta (1-2-3-4))</h:li>
+									</h:ul>
+									<zscript>
+	import org.zkoss.zhtml.Li;
+	import org.zkoss.zhtml.Text;
+
+	void addItem() {
+		Li li = new Li();
+		li.setParent(ul);
+		new Text(text.getText()+"  ("+combo.getText()+")").setParent(li);
+	}
+</zscript>
+									<vbox align="center">
+										<label value="Descripcion" />
+										<textbox id="text" height="25px"
+											width="135px" />
+										<label
+											value="Escala de Medicion" width="100px" />
+										<combobox id = "combo" value="--Seleccione--"
+											width="115px" >
+											<comboitem
+												label="Dicotomica (SI-NO)" />
+											<comboitem
+												label="Discreta (1-2-3-4)" />
+
+										</combobox>
+
+
+									</vbox>
+
+
+
+
+								</row>
+							</rows>
+						</grid>
+
+					</row>
+
+
+
+				</rows>
+			</grid>
+			<separator />
+
+			<grid height="50px">
+				<columns>
+
+					<column width="130px" align="center" />
+					<column width="135px" align="center" />
+					<column width="135px" align="center" />
+					<column width="135px" align="center" />
+
+
+				</columns>
+				<rows>
+
+					<row height="">
+
+						<button image="../Recursos/Imagenes/guardar.ico"
+							label="Guardar" width="100px" onClick="addItem()" />
+						<button image="../Recursos/Imagenes/editar.ico"
+							label="Modificar" width="110px" />
+						<button image="../Recursos/Imagenes/eliminar.ico"
+							label="Eliminar" width="110px" />
+						<button image="../Recursos/Imagenes/cancelar.ico"
+							label="Cancelar" width="100px" />
+						<button image="../Recursos/Imagenes/salir.png" label="Salir"
+							width="100px" />
+					</row>
+				</rows>
+			</grid>
+
+		</window>
+	</div>
+
+</zk>

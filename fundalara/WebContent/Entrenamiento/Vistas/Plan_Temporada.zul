@@ -1,0 +1,393 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<separator height="15px" />
+	<window title="Planificacion de Temporada" border="normal"
+		width="600px" height="">
+		<grid>
+			<rows>
+				<row>
+					<grid>
+						<columns>
+							<column width="110px" />
+							<column width="160px" align="center" />
+							<column width="110px" />
+							<column width="160px" align="center" />
+
+						</columns>
+						<rows>
+							<row height="30px">
+								
+								<label value="Temporada" width="100px" />
+								<combobox value="--Seleccione--"
+									width="130px">
+									<comboitem label="2011-2012" />
+									<comboitem label="2012-2013" />
+									<comboitem label="2013-2014" />
+								</combobox>
+								
+							</row>
+							
+						</rows>
+					</grid>
+				</row>
+
+				<row>
+					<panel title="Asignacion de Personal Tecnico"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<rows>
+									<row>
+										<grid>
+											<columns>
+												<column width="110px"
+													align="left" />
+												<column width="160px"
+													align="center" />
+												<column width="110px"
+													align="left" />
+												<column width="160px"
+													align="center" />
+												<column align="center" />
+
+											</columns>
+											<rows>
+												<row height="35px">
+													<label
+														value="Equipo" width="100px" height="25" />
+													<combobox
+														value="--Seleccione--" width="130px">
+														<comboitem
+															label="A" />
+														<comboitem
+															label="B" />
+														<comboitem
+															label="C" />
+														<comboitem
+															label="D" />
+														<comboitem
+															label="E" />
+														<comboitem
+															label="F" />
+													</combobox>
+													<label
+														value="Tipo de Personal" width="100px" />
+													<combobox
+														value="--Seleccione--" width="130px">
+														<comboitem
+															label="Manager" />
+														<comboitem
+															label="Monitor" />
+													</combobox>
+
+
+
+												</row>
+												<row>
+													<label
+														value="Entrenador" width="100px" />
+													<combobox
+														value="--Seleccione--" width="130px">
+														<comboitem
+															label="Emmanuel Ortega" />
+														<comboitem
+															label="Jose Gutierrez" />
+														<comboitem
+															label="Yovanny Mendoza" />
+													</combobox>
+													<button
+														image="../Recursos/Imagenes/agregar.ico">
+														<attribute name="onClick">
+	{
+		Messagebox.show("Manager Asignado al Equipo", "Fundalara",
+				Messagebox.OK, Messagebox.INFORMATION);
+	}
+</attribute>
+													</button>
+													
+												</row>
+												
+											</rows>
+										</grid>
+									</row>
+
+									<row>
+
+										<hbox >
+											<grid height="110px"
+												width="480px">
+												<columns
+													sizable="true">
+
+													<column
+														label="Equipo" width="100px" align="center" />
+													<column
+														label="Tipo Personal" width="150px" align="center" />
+													<column
+														label="Tecnico" width="200px" align="center" />													
+												</columns>
+
+												<rows>
+
+													<row
+														height="25px">
+														<label
+															value="A" />
+														<label
+															value="Manager" />
+														<label
+															value="Pedro Jose Grifol" />
+
+													</row>
+													<row
+														height="25px">
+														<label
+															value="A" />
+														<label
+															value="Monitor" />
+														<label
+															value="Jose Antonio Lopez" />
+
+													</row>
+													<row
+														height="25px">
+														<label
+															value="B" />
+														<label
+															value="Manager" />
+														<label
+															value="Aaron Chacon" />
+
+													</row>
+													<row
+														height="25px">
+														<label value="" />
+														<label value="" />
+														<label />
+
+													</row>
+													<row
+														height="25px">
+														<label />
+														<label />
+														<label />
+
+													</row>
+													<row
+														height="15px">
+														<label />
+														<label />
+														<label />
+
+													</row>
+												</rows>
+											</grid>
+											<grid width="55px">
+												<columns
+													sizable="true">
+													<column
+														align="center" />
+
+												</columns>
+												<rows>
+													<row>
+														<button
+															image="../Recursos/Imagenes/editar.ico" />
+													</row>
+													<row>
+														<button
+															image="../Recursos/Imagenes/quitar.ico" />
+													</row>
+												</rows>
+											</grid>
+										</hbox>
+
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>
+
+				<row>
+					<panel title="Asignacion de Horario"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<rows>
+									<row>
+										<grid>
+											<columns>
+												<column width="100px"
+													align="left" />
+												<column width="140px"
+													align="center" />
+												<column width="100px"
+													align="left" />
+												<column width="140px"
+													align="center" />
+												<column width="55px" align="center"  />
+
+											</columns>
+											<rows>
+												<row height="35px">
+													<label value="Dia"
+														width="100px" />
+													<combobox
+														value="--Seleccione--" width="130px">
+														<comboitem
+															label="Lunes" />
+														<comboitem
+															label="Martes" />
+														<comboitem
+															label="Miercoles" />
+														<comboitem
+															label="Jueves" />
+														<comboitem
+															label="Viernes" />
+														<comboitem
+															label="Sabado" />
+														<comboitem
+															label="Domingo" />
+													</combobox>
+													<label
+														value="Bloque" width="100px" />
+													<combobox
+														value="--Seleccione--" width="130px">
+														<comboitem
+															label="2:00pm - 3:30pm" />
+														<comboitem
+															label="3:30pm - 5:00pm" />
+														<comboitem
+															label="5:00pm - 6:30pm" />
+														<comboitem
+															label="6:30pm - 8:30pm" />
+														<comboitem
+															label="8:30pm - 10:00pm" />
+													</combobox>
+
+													<button
+														image="../Recursos/Imagenes/agregar.ico">
+														<attribute name="onClick">
+	{
+		Messagebox.show("Manager Asignado al Equipo", "Fundalara",
+				Messagebox.OK, Messagebox.INFORMATION);
+	}
+</attribute>
+													</button>
+
+												</row>
+
+
+
+											</rows>
+										</grid>
+									</row>
+
+									<row>
+
+										<hbox>
+											<grid height="130px"
+												width="480px">
+												<columns
+													sizable="true">
+													<column label="Dia"
+														width="230px" align="center" />
+													<column
+														label="Bloque" width="230px" align="center" />
+												</columns>
+												<rows>
+
+													<row
+														height="25px">
+														<label
+															value="Lunes" />
+														<label
+															value="2:00 pm - 3:30 pm" />
+
+													</row>
+
+													<row
+														height="25px">
+														<label
+															value="Miercoles" />
+														<label
+															value="2:00 pm - 3:30 pm" />
+													</row>
+
+													<row
+														height="25px">
+														<label />
+														<label />
+													</row>
+													<row
+														height="25px">
+														<label />
+														<label />
+													</row>
+												</rows>
+											</grid>
+											<grid>
+												<columns
+													sizable="true">
+													<column />
+
+												</columns>
+												<rows>
+													<row>
+														<button
+															image="../Recursos/Imagenes/editar.ico" />
+													</row>
+													<row>
+														<button
+															image="../Recursos/Imagenes/quitar.ico" />
+													</row>
+												</rows>
+											</grid>
+
+
+
+										</hbox>
+
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>
+
+			</rows>
+		</grid>
+
+		<grid height="50px">
+			<columns>
+
+				<column width="20px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+
+			</columns>
+			<rows>
+
+				<row height="">
+					<label value="" />
+					<button image="../Recursos/Imagenes/guardar.ico" label="Guardar"
+						width="95px" />
+					<button image="../Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="95px" />
+					<button image="../Recursos/Imagenes/eliminar.ico"
+						label="Eliminar" width="95px" />
+					<button image="../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" />
+					<button image="../Recursos/Imagenes/salir.png" label="Salir"
+						width="95px" />
+				</row>
+			</rows>
+		</grid>
+
+
+	</window>
+</div>
