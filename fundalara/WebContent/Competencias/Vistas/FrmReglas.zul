@@ -56,7 +56,7 @@
 		<listcell > <textbox width="50%" value="90"/> </listcell>
 	</listitem>
 	<listitem>
-		<listcell label="Días de Decanzo por Lanzador" />
+		<listcell label="Días de Descanso por Lanzador" />
 		<listcell > <textbox width="50%" value="N/A"/> </listcell>
 		<listcell > <textbox width="50%" value="3"/> </listcell>
 		<listcell > <textbox width="50%" value="3"/> </listcell>
@@ -77,7 +77,7 @@
 	</listitem>
 	<listitem>
 		
-		<listcell label="Días de Decanzo por Receptor" />
+		<listcell label="Días de Descanso por Receptor" />
 		<listcell > <textbox width="50%" value="2"/> </listcell>
 		<listcell > <textbox width="50%" value="2"/> </listcell>
 		<listcell > <textbox width="50%" value="2"/> </listcell>

@@ -67,73 +67,74 @@
 			
 					<listbox width="100%" >
 							<listhead>
+								<listheader label="Numero" width="10%"	></listheader>							
 								<listheader label="Nombre" width="30%"></listheader>
 								<listheader label="Edad" align="center"></listheader>
-								<listheader label="Solvencia" align="center" width="80px" sort="" ></listheader>
-								<listheader label="Alojamiento" align="center" width="80px" sort="" ></listheader>
+						    	<listheader label="Alojamiento" align="center" width="80px" sort="" ></listheader> 
 								<listheader label="Inscrito (4/20)" align="center"></listheader>
 								
 							</listhead>
 								<listitem>
+									<listcell> <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 1 </listcell>
 									<listcell>14 </listcell>							
 									<listcell>Si </listcell>
-									<listcell>Si </listcell>
 									<listcell><checkbox checked="true"></checkbox> </listcell>
 
 								</listitem>
 								<listitem>
+									<listcell > <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 2 </listcell>
 									<listcell>15 </listcell>
 									<listcell>Si </listcell>
-									<listcell>Si </listcell>
 									<listcell><checkbox checked="true"></checkbox> </listcell>
 
-								</listitem>
+								</listitem>							
 									<listitem>
+									<listcell > <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 3 </listcell>
 									<listcell>15 </listcell>
 									<listcell>Si </listcell>
-									<listcell>Si </listcell>
 									<listcell><checkbox checked="true"></checkbox> </listcell>
 
 								</listitem>
 									<listitem>
+									<listcell> <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 4 </listcell>
 									<listcell>15 </listcell>
-									<listcell>Si </listcell>
 									<listcell>Si </listcell>
 									<listcell><checkbox checked="true"></checkbox> </listcell>
 
 								</listitem>
 								<listitem>
+									<listcell> <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 5 </listcell>
 									<listcell>15 </listcell>
-									<listcell>Si </listcell>
 									<listcell>No </listcell>
 									<listcell><checkbox></checkbox> </listcell>
 
 								</listitem>
 									<listitem>
+									<listcell> <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 6 </listcell>
 									<listcell>15 </listcell>
-									<listcell>Si </listcell>
 									<listcell>No </listcell>
 									<listcell><checkbox></checkbox> </listcell>
 
 								</listitem>
 									<listitem>
+									<listcell> <combobox width="50%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 									<listcell>Nombre Jugador 7 </listcell>
 									<listcell>15 </listcell>
-									<listcell>Si </listcell>
 									<listcell>No</listcell>
 									<listcell><checkbox></checkbox> </listcell>
 
 								</listitem>
 								
 						</listbox>
-				
-			
+							<div align="right">
+							<button label=" Agregar otro jugador " image="/Recursos/Imagenes/agregar.ico"></button>
+							</div>
 			</panelchildren>
 		</panel>
 		<panel collapsible="true"  >
@@ -143,7 +144,7 @@
 			       <columns>
 			          <column label=""></column>
 			          <column label="" width="100px"></column>
-			          <column label="" width="100px"></column>
+			          <column label="" width="80px"></column>
 			          <column label=""></column>
 			       </columns>
 			       <rows>
@@ -154,9 +155,14 @@
 		                 <combobox cols="12"></combobox> 
 			          </row>
 			          <row> 
-			             <label value="Nombre"></label>
-		                 <textbox cols="20"></textbox>	
-		                 <button label="" image="/Recursos/Imagenes/agregar.ico"></button>
+			             <label value="Cedula"></label>
+		                 <textbox cols="10"></textbox>	
+			             <label value="Nombre"></label>	
+		               <hbox>
+		               <textbox cols="20"></textbox>      
+		               <button image="/Recursos/Imagenes/agregar.ico"></button>  
+		               </hbox>			             	                 
+		              <!--   <button label="" image="/Recursos/Imagenes/agregar.ico"></button> -->
 			          </row>
 			       </rows>
 			    </grid>
@@ -164,21 +170,29 @@
 					<listhead>
 					    <listheader label="Divisa" sort="auto" width="100px" />
 					    <listheader label="Equipo" sort="auto" width="100px" />
+						<listheader label="Numero" sort="auto" width="100px" />	
+						<listheader label="Cedula" sort="auto" width="100px" />				    
 						<listheader label="Nombre" sort="auto" />
 						
 					</listhead>
 					<listitem>
 					    <listcell label="" />
 					    <listcell label="" />
-					    <listcell label="" />
-					</listitem>
-					<listitem>
-						<listcell label="" />
+					    <listcell > <combobox width="30%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 					    <listcell label="" />
 					    <listcell label="" />
 					</listitem>
 					<listitem>
 						<listcell label="" />
+					    <listcell label="" />
+				    <listcell > <combobox width="30%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
+					    <listcell label="" />
+					    <listcell label="" />
+					</listitem>
+					<listitem>
+						<listcell label="" />
+					    <listcell label="" />
+				    <listcell > <combobox width="30%" ><comboitem label=""/><comboitem label=""/></combobox> </listcell>
 					    <listcell label="" />
 					    <listcell label="" />
 					</listitem>

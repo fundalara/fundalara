@@ -174,13 +174,13 @@
 									<grid>
 										<columns>
 											<column width="33%"
-												align="center">
+												>
 											</column>
 											<column width="33%"
-												align="center">
+												>
 											</column>
 											<column width="33%"
-												align="center">
+												>
 											</column>
 										</columns>
 										<rows>
@@ -254,6 +254,21 @@
 
 											</textbox>
 										</row>
+										<row align="left">
+											<label
+												value="Adjuntar Documento ">
+											</label>
+											
+											<hbox>
+											<textbox width="100%"
+												height="100%" >
+											</textbox>
+											<space width="1px"></space>
+											<button label="Examinar" > </button>
+											</hbox>
+											
+										</row>
+										
 									</rows>
 								</grid>
 							</panelchildren>

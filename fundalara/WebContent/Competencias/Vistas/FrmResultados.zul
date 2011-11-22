@@ -35,6 +35,7 @@
 								</hbox>
 
 							</div>
+							<!-- Registro Bateo por Ininngs -->
 							<div align="right" width="25%"
 								style="margin-top:30px;float:left">
 
@@ -44,10 +45,13 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de la Camisa">
 												</column>
 												<column label="Nombre"
 													align="left" tooltiptext="Nombre y Apellido">
+												</column>
+												<column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
 												</column>
 
 												<column label="Pos"
@@ -60,7 +64,7 @@
 													<label
 														value="Rafael Escobar">
 													</label>
-
+                                                    <label value="22"></label>
 													<label value="SS"></label>
 												</row>
 												<row>
@@ -68,7 +72,7 @@
 													<label
 														value="Eduardo Ochoa">
 													</label>
-
+                                                      <label value="10"></label>
 													<label value="RF"></label>
 												</row>
 												<row>
@@ -76,7 +80,7 @@
 													<label
 														value="Francisco Machado">
 													</label>
-
+                                                     <label value="17"></label>
 													<label value="CF"></label>
 												</row>
 												<row>
@@ -84,7 +88,7 @@
 													<label
 														value="Yovanny Mansalva">
 													</label>
-
+                                                    <label value="20"></label>
 													<label value="LF"></label>
 												</row>
 												<row>
@@ -92,7 +96,7 @@
 													<label
 														value="Jesus Rojas">
 													</label>
-
+                                                     <label value="1"></label>
 													<label value="3B"></label>
 												</row>
 												<row>
@@ -100,7 +104,7 @@
 													<label
 														value="Jesus Castillo">
 													</label>
-
+                                                      <label value="26"></label>
 													<label value="2B"></label>
 												</row>
 												<row>
@@ -108,7 +112,7 @@
 													<label
 														value="Jhoinnel Liscano">
 													</label>
-
+                                                       <label value="32"></label>
 													<label value="1B"></label>
 												</row>
 												<row>
@@ -116,7 +120,7 @@
 													<label
 														value="Juan Hernandez">
 													</label>
-
+                                                     <label value="2"></label>
 													<label value="P"></label>
 												</row>
 												<row>
@@ -124,7 +128,7 @@
 													<label
 														value="Ana Vargas">
 													</label>
-
+                                                     <label value="28"></label>
 													<label value="C"></label>
 												</row>
 											</rows>
@@ -138,12 +142,15 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de Camisa">
+													width="30px" height="30px" tooltiptext="Numero de Camisa">
 												</column>
 												<column label="Nombre"
 													align="left" tooltiptext="Nombre y Apellido">
 												</column>
-
+                                                 <column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
+												</column>
+                                                 
 												<column label="Pos"
 													width="30px" tooltiptext="Posicion">
 												</column>
@@ -152,17 +159,17 @@
 												<row>
 													<label value="1"></label>
 													<label
-														value="Rafael Escobar">
+														value="Armary Buergo">
 													</label>
-
+                                                     <label value="27"></label> 
 													<label value=""></label>
 												</row>
 												<row>
 													<label value="2"></label>
 													<label
-														value="Eduardo Ochoa">
+														value="Eva Maria Gonzalez">
 													</label>
-
+                                                    <label value="64"></label>
 													<label value=""></label>
 												</row>
 											</rows>
@@ -171,14 +178,15 @@
 								</panel>
 
 							</div>
-							<div style="float:left;margin-top:31px"
+							<!-- indicadores lineup de bateo por inning -->
+							<div style="float:left;margin-top:30px"
 								width="75%">
 								<panel border="normal">
 									<caption label="INDICADORES"></caption>
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="H"
+												<column label="H" height="30px"
 													align="center" tooltiptext="Hits Conectados" />
 												<column label="VB"
 													align="center" tooltiptext="Veces al Bate" />
@@ -198,117 +206,118 @@
 													align="center" tooltiptext="Ponches Recibidos" />
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+												<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 											</rows>
 										</grid>
 									</panelchildren>
 								</panel>
 							</div>
+							<!-- Indicadores de Bateo Reserva por innigs -->
 							<div align="right" width="75%"
 								style="float:left;margin-top:25px">
 								<panel>
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="H"
+												<column label="H" height="30px"
 													align="center" tooltiptext="Hits Conectados" />
 												<column label="VB"
 													align="center" tooltiptext="Veces al Bate" />
@@ -328,29 +337,28 @@
 													align="center" tooltiptext="Ponches Recibidos" />
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+											<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
-
 											</rows>
 										</grid>
 
@@ -367,7 +375,7 @@
 							</div>
 						</div>
 					</tabpanel>
-					<tabpanel><!-- Fildeo -->
+					<tabpanel><!-- Registro Fildeo por Innings  -->
 						<div>
 							<div width="40%">
 								<hbox>
@@ -400,10 +408,13 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de la Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
+												</column>
+												<column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
 												</column>
 
 												<column label="Pos"
@@ -416,7 +427,7 @@
 													<label
 														value="Rafael Escobar">
 													</label>
-
+                                                    <label value="22"></label>
 													<label value="SS"></label>
 												</row>
 												<row>
@@ -424,7 +435,7 @@
 													<label
 														value="Eduardo Ochoa">
 													</label>
-
+                                                      <label value="10"></label>
 													<label value="RF"></label>
 												</row>
 												<row>
@@ -432,7 +443,7 @@
 													<label
 														value="Francisco Machado">
 													</label>
-
+                                                     <label value="17"></label>
 													<label value="CF"></label>
 												</row>
 												<row>
@@ -440,7 +451,7 @@
 													<label
 														value="Yovanny Mansalva">
 													</label>
-
+                                                    <label value="20"></label>
 													<label value="LF"></label>
 												</row>
 												<row>
@@ -448,7 +459,7 @@
 													<label
 														value="Jesus Rojas">
 													</label>
-
+                                                     <label value="1"></label>
 													<label value="3B"></label>
 												</row>
 												<row>
@@ -456,7 +467,7 @@
 													<label
 														value="Jesus Castillo">
 													</label>
-
+                                                      <label value="26"></label>
 													<label value="2B"></label>
 												</row>
 												<row>
@@ -464,7 +475,7 @@
 													<label
 														value="Jhoinnel Liscano">
 													</label>
-
+                                                       <label value="32"></label>
 													<label value="1B"></label>
 												</row>
 												<row>
@@ -472,7 +483,7 @@
 													<label
 														value="Juan Hernandez">
 													</label>
-
+                                                     <label value="2"></label>
 													<label value="P"></label>
 												</row>
 												<row>
@@ -480,26 +491,29 @@
 													<label
 														value="Ana Vargas">
 													</label>
-
+                                                     <label value="28"></label>
 													<label value="C"></label>
 												</row>
 											</rows>
 										</grid>
 									</panelchildren>
 								</panel>
-								<panel collapsible="True"
+                                 <panel collapsible="True"
 									border="normal">
 									<caption label="RESERVA"></caption>
 									<panelchildren>
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
 												</column>
-
+                                                 <column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
+												</column>
+                                                 
 												<column label="Pos"
 													width="30px" tooltiptext="Posicion">
 												</column>
@@ -508,17 +522,17 @@
 												<row>
 													<label value="1"></label>
 													<label
-														value="Rafael Escobar">
+														value="Armary Buergo">
 													</label>
-
+                                                     <label value="27"></label> 
 													<label value=""></label>
 												</row>
 												<row>
 													<label value="2"></label>
 													<label
-														value="Eduardo Ochoa">
+														value="Eva Maria Gonzalez">
 													</label>
-
+                                                    <label value="64"></label>
 													<label value=""></label>
 												</row>
 											</rows>
@@ -527,6 +541,7 @@
 								</panel>
 
 							</div>
+							<!-- Indicadores de fildeo por innings  -->
 							<div style="float:left;margin-top:31px"
 								width="75%">
 								<panel border="normal">
@@ -534,7 +549,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="JJ"
+												<column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -553,104 +568,104 @@
 
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+												<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+												
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 											</rows>
 										</grid>
@@ -663,7 +678,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="JJ"
+												<column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -682,29 +697,28 @@
 
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+												<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+												
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
-
 											</rows>
 										</grid>
 
@@ -724,7 +738,7 @@
 
 
 					</tabpanel>
-					<tabpanel><!-- Pitcheo -->
+					<tabpanel><!-- Registro Pitcheo por Innings -->
 						<div>
 							<div width="40%">
 								<hbox>
@@ -748,6 +762,7 @@
 								</hbox>
 
 							</div>
+							
 							<div align="right" width="25%"
 								style="margin-top:30px;float:left">
 
@@ -757,10 +772,13 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de la Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
+												</column>
+												<column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
 												</column>
 
 												<column label="Pos"
@@ -773,7 +791,7 @@
 													<label
 														value="Rafael Escobar">
 													</label>
-
+                                                    <label value="22"></label>
 													<label value="SS"></label>
 												</row>
 												<row>
@@ -781,7 +799,7 @@
 													<label
 														value="Eduardo Ochoa">
 													</label>
-
+                                                      <label value="10"></label>
 													<label value="RF"></label>
 												</row>
 												<row>
@@ -789,7 +807,7 @@
 													<label
 														value="Francisco Machado">
 													</label>
-
+                                                     <label value="17"></label>
 													<label value="CF"></label>
 												</row>
 												<row>
@@ -797,7 +815,7 @@
 													<label
 														value="Yovanny Mansalva">
 													</label>
-
+                                                    <label value="20"></label>
 													<label value="LF"></label>
 												</row>
 												<row>
@@ -805,7 +823,7 @@
 													<label
 														value="Jesus Rojas">
 													</label>
-
+                                                     <label value="1"></label>
 													<label value="3B"></label>
 												</row>
 												<row>
@@ -813,7 +831,7 @@
 													<label
 														value="Jesus Castillo">
 													</label>
-
+                                                      <label value="26"></label>
 													<label value="2B"></label>
 												</row>
 												<row>
@@ -821,7 +839,7 @@
 													<label
 														value="Jhoinnel Liscano">
 													</label>
-
+                                                       <label value="32"></label>
 													<label value="1B"></label>
 												</row>
 												<row>
@@ -829,7 +847,7 @@
 													<label
 														value="Juan Hernandez">
 													</label>
-
+                                                     <label value="2"></label>
 													<label value="P"></label>
 												</row>
 												<row>
@@ -837,7 +855,7 @@
 													<label
 														value="Ana Vargas">
 													</label>
-
+                                                     <label value="28"></label>
 													<label value="C"></label>
 												</row>
 											</rows>
@@ -851,12 +869,15 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
 												</column>
-
+                                                 <column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
+												</column>
+                                                 
 												<column label="Pos"
 													width="30px" tooltiptext="Posicion">
 												</column>
@@ -865,17 +886,17 @@
 												<row>
 													<label value="1"></label>
 													<label
-														value="Rafael Escobar">
+														value="Armary Buergo">
 													</label>
-
+                                                     <label value="27"></label> 
 													<label value=""></label>
 												</row>
 												<row>
 													<label value="2"></label>
 													<label
-														value="Eduardo Ochoa">
+														value="Eva Maria Gonzalez">
 													</label>
-
+                                                    <label value="64"></label>
 													<label value=""></label>
 												</row>
 											</rows>
@@ -884,6 +905,7 @@
 								</panel>
 
 							</div>
+							<!-- Valores de indicadores del lineup pitcheo por ininngs -->
 							<div style="float:left;margin-top:31px"
 								width="75%">
 								<panel border="normal">
@@ -891,7 +913,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="JJ"
+												<column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -913,177 +935,140 @@
 													align="center" tooltiptext="Juegos Perdidos" />
 												<column label="JS"
 													align="center" tooltiptext="Juegos Salvados" />
-												<column label="EFE"
-													align="center" tooltiptext="Efectividad" />
+											
 
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.50">
-													</label>
-
+												<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.75">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.00">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="1.98">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="2.31">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="5.31">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.25">
-													</label>
-
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.36">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.98">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 											</rows>
 										</grid>
 									</panelchildren>
 								</panel>
 							</div>
+							<!-- Registro indicadores Reserva de pitcheo por innings -->
 							<div align="right" width="75%"
 								style="float:left;margin-top:25px">
 								<panel>
 									<panelchildren>
 										<grid>
 											<columns>
-	<column label="JJ"
+	                                             <column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -1105,45 +1090,36 @@
 													align="center" tooltiptext="Juegos Perdidos" />
 												<column label="JS"
 													align="center" tooltiptext="Juegos Salvados" />
-												<column label="EFE"
-													align="center" tooltiptext="Efectividad" />
+												
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.50">
-													</label>
-
-
+												<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+												   <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="2.12">
-													</label>
-
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 
 											</rows>
@@ -1186,7 +1162,7 @@
 				<tabpanels>
 					<tabpanel>
 						<div>
-				
+				             <!-- Registro Bateo por Juego -->
 							<div align="right" width="25%"
 								style="margin-top:30px;float:left">
 
@@ -1196,10 +1172,13 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de la Camisa">
 												</column>
 												<column label="Nombre"
 													align="left" tooltiptext="Nombre y Apellido">
+												</column>
+												<column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
 												</column>
 
 												<column label="Pos"
@@ -1212,7 +1191,7 @@
 													<label
 														value="Rafael Escobar">
 													</label>
-
+                                                    <label value="22"></label>
 													<label value="SS"></label>
 												</row>
 												<row>
@@ -1220,7 +1199,7 @@
 													<label
 														value="Eduardo Ochoa">
 													</label>
-
+                                                      <label value="10"></label>
 													<label value="RF"></label>
 												</row>
 												<row>
@@ -1228,7 +1207,7 @@
 													<label
 														value="Francisco Machado">
 													</label>
-
+                                                     <label value="17"></label>
 													<label value="CF"></label>
 												</row>
 												<row>
@@ -1236,7 +1215,7 @@
 													<label
 														value="Yovanny Mansalva">
 													</label>
-
+                                                    <label value="20"></label>
 													<label value="LF"></label>
 												</row>
 												<row>
@@ -1244,7 +1223,7 @@
 													<label
 														value="Jesus Rojas">
 													</label>
-
+                                                     <label value="1"></label>
 													<label value="3B"></label>
 												</row>
 												<row>
@@ -1252,7 +1231,7 @@
 													<label
 														value="Jesus Castillo">
 													</label>
-
+                                                      <label value="26"></label>
 													<label value="2B"></label>
 												</row>
 												<row>
@@ -1260,7 +1239,7 @@
 													<label
 														value="Jhoinnel Liscano">
 													</label>
-
+                                                       <label value="32"></label>
 													<label value="1B"></label>
 												</row>
 												<row>
@@ -1268,7 +1247,7 @@
 													<label
 														value="Juan Hernandez">
 													</label>
-
+                                                     <label value="2"></label>
 													<label value="P"></label>
 												</row>
 												<row>
@@ -1276,7 +1255,7 @@
 													<label
 														value="Ana Vargas">
 													</label>
-
+                                                     <label value="28"></label>
 													<label value="C"></label>
 												</row>
 											</rows>
@@ -1290,12 +1269,15 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de Camisa">
+													width="30px" height="30px" tooltiptext="Numero de Camisa">
 												</column>
 												<column label="Nombre"
 													align="left" tooltiptext="Nombre y Apellido">
 												</column>
-
+                                                 <column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
+												</column>
+                                                 
 												<column label="Pos"
 													width="30px" tooltiptext="Posicion">
 												</column>
@@ -1304,17 +1286,17 @@
 												<row>
 													<label value="1"></label>
 													<label
-														value="Rafael Escobar">
+														value="Armary Buergo">
 													</label>
-
+                                                     <label value="27"></label> 
 													<label value=""></label>
 												</row>
 												<row>
 													<label value="2"></label>
 													<label
-														value="Eduardo Ochoa">
+														value="Eva Maria Gonzalez">
 													</label>
-
+                                                    <label value="64"></label>
 													<label value=""></label>
 												</row>
 											</rows>
@@ -1323,6 +1305,7 @@
 								</panel>
 
 							</div>
+							<!-- Valores indicadores Reserva Bateo por Juego -->
 							<div style="float:left;margin-top:31px"
 								width="75%">
 								<panel border="normal">
@@ -1330,7 +1313,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="H"
+												<column label="H" height="30px"
 													align="center" tooltiptext="Hits Conectados" />
 												<column label="VB"
 													align="center" tooltiptext="Veces al Bate" />
@@ -1350,104 +1333,104 @@
 													align="center" tooltiptext="Ponches Recibidos" />
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+										<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 											</rows>
 										</grid>
@@ -1460,7 +1443,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="H"
+												<column label="H" height="30px"
 													align="center" tooltiptext="Hits Conectados" />
 												<column label="VB"
 													align="center" tooltiptext="Veces al Bate" />
@@ -1480,30 +1463,29 @@
 													align="center" tooltiptext="Ponches Recibidos" />
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+											<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
-
-											</rows>
+												</rows>
 										</grid>
 
 
@@ -1519,7 +1501,7 @@
 							</div>
 						</div>
 					</tabpanel>
-					<tabpanel><!-- Fildeo -->
+					<tabpanel><!-- Registro Fildeo por Juego -->
 						<div>
 							
 							<div align="right" width="25%"
@@ -1531,10 +1513,13 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de la Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
+												</column>
+												<column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
 												</column>
 
 												<column label="Pos"
@@ -1547,7 +1532,7 @@
 													<label
 														value="Rafael Escobar">
 													</label>
-
+                                                    <label value="22"></label>
 													<label value="SS"></label>
 												</row>
 												<row>
@@ -1555,7 +1540,7 @@
 													<label
 														value="Eduardo Ochoa">
 													</label>
-
+                                                      <label value="10"></label>
 													<label value="RF"></label>
 												</row>
 												<row>
@@ -1563,7 +1548,7 @@
 													<label
 														value="Francisco Machado">
 													</label>
-
+                                                     <label value="17"></label>
 													<label value="CF"></label>
 												</row>
 												<row>
@@ -1571,7 +1556,7 @@
 													<label
 														value="Yovanny Mansalva">
 													</label>
-
+                                                    <label value="20"></label>
 													<label value="LF"></label>
 												</row>
 												<row>
@@ -1579,7 +1564,7 @@
 													<label
 														value="Jesus Rojas">
 													</label>
-
+                                                     <label value="1"></label>
 													<label value="3B"></label>
 												</row>
 												<row>
@@ -1587,7 +1572,7 @@
 													<label
 														value="Jesus Castillo">
 													</label>
-
+                                                      <label value="26"></label>
 													<label value="2B"></label>
 												</row>
 												<row>
@@ -1595,7 +1580,7 @@
 													<label
 														value="Jhoinnel Liscano">
 													</label>
-
+                                                       <label value="32"></label>
 													<label value="1B"></label>
 												</row>
 												<row>
@@ -1603,7 +1588,7 @@
 													<label
 														value="Juan Hernandez">
 													</label>
-
+                                                     <label value="2"></label>
 													<label value="P"></label>
 												</row>
 												<row>
@@ -1611,7 +1596,7 @@
 													<label
 														value="Ana Vargas">
 													</label>
-
+                                                     <label value="28"></label>
 													<label value="C"></label>
 												</row>
 											</rows>
@@ -1625,12 +1610,15 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
 												</column>
-
+                                                 <column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
+												</column>
+                                                 
 												<column label="Pos"
 													width="30px" tooltiptext="Posicion">
 												</column>
@@ -1639,17 +1627,17 @@
 												<row>
 													<label value="1"></label>
 													<label
-														value="Rafael Escobar">
+														value="Armary Buergo">
 													</label>
-
+                                                     <label value="27"></label> 
 													<label value=""></label>
 												</row>
 												<row>
 													<label value="2"></label>
 													<label
-														value="Eduardo Ochoa">
+														value="Eva Maria Gonzalez">
 													</label>
-
+                                                    <label value="64"></label>
 													<label value=""></label>
 												</row>
 											</rows>
@@ -1658,6 +1646,7 @@
 								</panel>
 
 							</div>
+							<!-- Inidicadores Lineup Fildeo por Juego -->
 							<div style="float:left;margin-top:31px"
 								width="75%">
 								<panel border="normal">
@@ -1665,7 +1654,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="JJ"
+												<column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -1684,117 +1673,118 @@
 
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+											<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+												
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 											</rows>
 										</grid>
 									</panelchildren>
 								</panel>
 							</div>
+							<!-- Indicadores de Reserva Fildeo por Juego -->
 							<div align="right" width="75%"
 								style="float:left;margin-top:25px">
 								<panel>
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="JJ"
+												<column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -1813,27 +1803,27 @@
 
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+											<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													
 												</row>
 
 											</rows>
@@ -1855,7 +1845,7 @@
 
 
 					</tabpanel>
-					<tabpanel><!-- Pitcheo -->
+					<tabpanel><!-- Registro de Pitcheo por Juego -->
 						<div>
 						
 							<div align="right" width="25%"
@@ -1867,10 +1857,13 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de la Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
+												</column>
+												<column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
 												</column>
 
 												<column label="Pos"
@@ -1883,7 +1876,7 @@
 													<label
 														value="Rafael Escobar">
 													</label>
-
+                                                    <label value="22"></label>
 													<label value="SS"></label>
 												</row>
 												<row>
@@ -1891,7 +1884,7 @@
 													<label
 														value="Eduardo Ochoa">
 													</label>
-
+                                                      <label value="10"></label>
 													<label value="RF"></label>
 												</row>
 												<row>
@@ -1899,7 +1892,7 @@
 													<label
 														value="Francisco Machado">
 													</label>
-
+                                                     <label value="17"></label>
 													<label value="CF"></label>
 												</row>
 												<row>
@@ -1907,7 +1900,7 @@
 													<label
 														value="Yovanny Mansalva">
 													</label>
-
+                                                    <label value="20"></label>
 													<label value="LF"></label>
 												</row>
 												<row>
@@ -1915,7 +1908,7 @@
 													<label
 														value="Jesus Rojas">
 													</label>
-
+                                                     <label value="1"></label>
 													<label value="3B"></label>
 												</row>
 												<row>
@@ -1923,7 +1916,7 @@
 													<label
 														value="Jesus Castillo">
 													</label>
-
+                                                      <label value="26"></label>
 													<label value="2B"></label>
 												</row>
 												<row>
@@ -1931,7 +1924,7 @@
 													<label
 														value="Jhoinnel Liscano">
 													</label>
-
+                                                       <label value="32"></label>
 													<label value="1B"></label>
 												</row>
 												<row>
@@ -1939,7 +1932,7 @@
 													<label
 														value="Juan Hernandez">
 													</label>
-
+                                                     <label value="2"></label>
 													<label value="P"></label>
 												</row>
 												<row>
@@ -1947,7 +1940,7 @@
 													<label
 														value="Ana Vargas">
 													</label>
-
+                                                     <label value="28"></label>
 													<label value="C"></label>
 												</row>
 											</rows>
@@ -1961,12 +1954,15 @@
 										<grid>
 											<columns>
 												<column label="N°"
-													width="30px" tooltiptext="Numero de la Camisa">
+													width="30px" height="30px" tooltiptext="Numero de Camisa">
 												</column>
 												<column label="Nombre"
-													align="left" tooltiptext="Nombres y Apellidos">
+													align="left" tooltiptext="Nombre y Apellido">
 												</column>
-
+                                                 <column label="Num"
+													width="35px" tooltiptext="Numero de la Camisa">
+												</column>
+                                                 
 												<column label="Pos"
 													width="30px" tooltiptext="Posicion">
 												</column>
@@ -1975,17 +1971,17 @@
 												<row>
 													<label value="1"></label>
 													<label
-														value="Rafael Escobar">
+														value="Armary Buergo">
 													</label>
-
+                                                     <label value="27"></label> 
 													<label value=""></label>
 												</row>
 												<row>
 													<label value="2"></label>
 													<label
-														value="Eduardo Ochoa">
+														value="Eva Maria Gonzalez">
 													</label>
-
+                                                    <label value="64"></label>
 													<label value=""></label>
 												</row>
 											</rows>
@@ -1994,6 +1990,7 @@
 								</panel>
 
 							</div>
+							<!-- Valores Indicadores Lineup de Pitcheo por Juego -->
 							<div style="float:left;margin-top:31px"
 								width="75%">
 								<panel border="normal">
@@ -2001,7 +1998,7 @@
 									<panelchildren>
 										<grid>
 											<columns>
-												<column label="JJ"
+												<column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -2023,177 +2020,140 @@
 													align="center" tooltiptext="Juegos Perdidos" />
 												<column label="JS"
 													align="center" tooltiptext="Juegos Salvados" />
-												<column label="EFE"
-													align="center" tooltiptext="Efectividad" />
+											
 
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.50">
-													</label>
-
+												<row>											    
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.75">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.00">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="1.98">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="2.31">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="5.31">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+												    <spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.25">
-													</label>
-
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.36">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.98">
-													</label>
-
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 											</rows>
 										</grid>
 									</panelchildren>
 								</panel>
 							</div>
+							<!-- Valores Indicadores Reserva Pitcheo por Juego -->
 							<div align="right" width="75%"
 								style="float:left;margin-top:25px">
 								<panel>
 									<panelchildren>
 										<grid>
 											<columns>
-	<column label="JJ"
+	                                     <column label="JJ" height="30px"
 													align="center" tooltiptext="Juegos Jugados" />
 												<column label="JI"
 													align="center" tooltiptext="Juegos Iniciados" />
@@ -2215,45 +2175,34 @@
 													align="center" tooltiptext="Juegos Perdidos" />
 												<column label="JS"
 													align="center" tooltiptext="Juegos Salvados" />
-												<column label="EFE"
-													align="center" tooltiptext="Efectividad" />
+												
 											</columns>
 											<rows>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="0.50">
-													</label>
-
-
+											<row>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
-												<row>
-													<label value="0"></label>
-													<label value="1"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="3"></label>
-													<label value="2"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label value="0"></label>
-													<label
-														value="2.12">
-													</label>
-
-
+											<row>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
+													<spinner cols="2" value="1"></spinner>
 												</row>
 
 											</rows>

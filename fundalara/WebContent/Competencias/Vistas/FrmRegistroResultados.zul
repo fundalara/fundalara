@@ -84,6 +84,8 @@
 								</hbox>
 								<label value="Anotador"></label>
 								<textbox cols="11" />
+								<label value="Anotador Oficial"></label>
+								<textbox cols="11" />
 							</row>
 						</rows>
 					</grid>

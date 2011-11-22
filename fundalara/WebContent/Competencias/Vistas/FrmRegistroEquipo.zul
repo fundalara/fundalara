@@ -123,21 +123,19 @@
 												width="10%" align="center">
 											</listheader>
 											<listheader
-												label="Equipo Seleccionados" width="25%" align="center"
+												label="Equipo Seleccionados" width="30%" align="center"
 												id="Equipo">
 											</listheader>
-											<listheader label="Divisa"
-												width="15%" align="center" id="Divisa">
-											</listheader>
+
 											<listheader label="Delegado"
-												width="15%" align="center" id="Delegado">
+												width="20%" align="center" id="Delegado">
 											</listheader>
 											<listheader
-												label="Entrenador" width="15%" align="center"
+												label="Entrenador" width="30%" align="center"
 												id="Entrenador">
 											</listheader>
 											<listheader label="Roster"
-												width="10%" align="center" id="Roster">
+												width="20%" align="center" id="Roster">
 											</listheader>
 
 
@@ -147,9 +145,7 @@
 											<listcell>
 												Nombre Equipo 1
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 1
 											</listcell>
@@ -167,9 +163,7 @@
 											<listcell>
 												Nombre Equipo 2
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 2
 											</listcell>
@@ -186,9 +180,7 @@
 											<listcell>
 												Nombre Equipo 3
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 3
 											</listcell>
@@ -205,9 +197,7 @@
 											<listcell>
 												Nombre Equipo 4
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 4
 											</listcell>
@@ -225,9 +215,7 @@
 											<listcell>
 												Nombre Equipo 5
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 5
 											</listcell>
@@ -244,9 +232,7 @@
 											<listcell>
 												Nombre Equipo 6
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 6
 											</listcell>
@@ -263,9 +249,7 @@
 											<listcell>
 												Nombre Equipo 7
 											</listcell>
-											<listcell>
-												Fundalara
-											</listcell>
+
 											<listcell>
 												Delegado 7
 											</listcell>
