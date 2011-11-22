@@ -1,0 +1,71 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window title="Divisa Externas" width="40%" height="30%"
+		border="normal">
+
+		<panel border="normal">
+			<caption label="Datos de la Divisa"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40px" align="left"></column>
+						<column width="40px"></column>
+						<column width="60px"></column>
+						<column width="60px"></column>
+						<column width="50px"></column>
+					</columns>
+					<rows>
+						<row style="border-style:none">
+							<label value="Nombre:"></label>
+							<hbox>
+								<textbox cols="25"></textbox>
+								<button
+									image="../../Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+							<label value="Logo:"></label>
+							<textbox cols="15"></textbox>
+							  <button label="Examinar"></button>
+								<!-- <image src="../../Recursos/Imagenes/menu2.jpg" width="25px" height="35px"/>
+-->
+
+						</row>
+						<row style="border-style:none">
+							<label value="Localidad:"></label>
+							<textbox cols="25"></textbox>
+						</row>
+						<row style="border-style:none">
+							<label value="Presidente:"></label>
+							<textbox cols="25"></textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+		<div>
+
+			<!-- BOTONES -->
+
+			<panel>
+				<panelchildren style="margin-top:20px ">
+					<div align="right">
+						<button
+							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/editar.ico" label="Eliminar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+	</window>
+</zk>
