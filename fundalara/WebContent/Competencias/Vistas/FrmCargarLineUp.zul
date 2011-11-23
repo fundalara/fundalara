@@ -1,7 +1,18 @@
 <?page title="Lineup" contentType="text/html;charset=UTF-8"?>
 <div align="center">
-<window title="Lineup" border="normal" width="auto" height="auto">
-
+<window id= "win" title="Lineup" border="normal" width="auto" height="auto" closable="true" mode="modal">
+<zscript>
+<![CDATA[
+    void individuales(){  
+    	win.setVisible(false);
+    	Executions.createComponents("/Competencias/Vistas/FrmResultados.zul", null, null); 
+    }
+    
+    void salir(){
+    	win.detach();	    	
+    }
+]]>
+</zscript>
 
 <hbox width="100%">	
 
@@ -93,11 +104,18 @@
 						</columns>
 						<rows>
 							<row>
-								<button image="/Recursos/Imagenes/leftarrow_g.png"></button>
+								<button image="/Recursos/Imagenes/rightrightarrow_g.png"></button>
 							</row>
 							<row>
 								<button image= "/Recursos/Imagenes/rightarrow_g.png"></button>
 							</row>
+							<row>
+								<button image= "/Recursos/Imagenes/leftarrow_g.png"></button>
+							</row>
+							<row>
+								<button image= "/Recursos/Imagenes/leftleftarrow_g.png"></button>
+							</row>
+							
 						</rows>
 					</grid>
 				</panelchildren>	
@@ -298,10 +316,10 @@
 						</columns>
 						<rows>
 							<row>
-								<button image="../../Recursos/Imagenes/1uparrow.ico"></button>
+								<button image="/Recursos/Imagenes/1uparrow.ico"></button>
 							</row>
 							<row>
-								<button image="../../Recursos/Imagenes/1downarrow.ico"></button>
+								<button image="/Recursos/Imagenes/1downarrow.ico"></button>
 							</row>
 						</rows>
 					</grid>
@@ -314,8 +332,8 @@
 		
 </hbox>
 	<div align="right">
-		<button label="Cargar LineUp"></button>
-		<button image="/Recursos/Imagenes/salir.png" label="Salir"
+		<button label="Cargar LineUp" onClick="individuales()" ></button>
+		<button image="/Recursos/Imagenes/salir.png" label="Salir" onClick="salir()"
 				orient="horizontal" >
 		</button>
 	</div>

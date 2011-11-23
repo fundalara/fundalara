@@ -1,6 +1,6 @@
 <?page title="Line-up"?>
 <div align="center">
-<window title="Gestionar Lineup" border="normal" width="auto" height="auto">
+<window title="Gestionar Lineup" border="normal" width="auto" height="auto" >
 
 	
 	<panel border="normal">

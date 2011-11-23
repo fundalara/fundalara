@@ -4,7 +4,7 @@
          <zscript>
 			<![CDATA[
 			     void resultados(){
-			    	 Executions.createComponents("/Competencias/Vistas/FrmResultados.zul", null, null); 
+			    	 Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul", null, null); 
 			     }
 			 ]]>
          </zscript>
