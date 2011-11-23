@@ -1,7 +1,7 @@
 <?page title="REGISTRO DE DIVISAS" contentType="text/html;charset=UTF-8"?>
 <zk>
     <div align="center">
-	<window title="REGISTRO DE DIVISAS" width="68%"	border="normal">
+	<window title="REGISTRO DE DIVISAS" width="68%"	border="normal" closable="true">
 
 		<panel border="normal">
 			<caption label="Datos de la Divisa"></caption>

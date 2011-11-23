@@ -1,6 +1,6 @@
 <?page title="Auto Generated index.zul"?>
 <div align="center" >
-<window title="Control de Inventario" border="normal" width="65%" height="">
+<window title="Control de Inventario" border="normal" width="65%" height="" closable="true">
 	<panel border="normal">
 		  <caption label="Datos de la Competencia"></caption>
 		    <panelchildren>

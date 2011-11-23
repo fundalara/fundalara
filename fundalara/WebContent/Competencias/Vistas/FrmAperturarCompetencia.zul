@@ -2,7 +2,7 @@
 <zk>
 <div align="center">
 	<window title="APERTURAR COMPETENCIA" width="50%" height="100%"
-		border="normal">
+		border="normal" closable="true">
 
 		<grid style="margin-top:10px">
 			<columns>

@@ -1,6 +1,6 @@
 <?page title="Lineup" contentType="text/html;charset=UTF-8"?>
 <div align="center">
-<window id= "win" title="Lineup" border="normal" width="auto" height="auto" closable="true" mode="modal">
+<window id= "win" title="Lineup" border="normal" width="auto" height="auto" closable="true" mode="modal" closable="true">
 <zscript>
 <![CDATA[
     void individuales(){  

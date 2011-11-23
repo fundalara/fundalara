@@ -1,6 +1,6 @@
 <?page title="Calendario Externo" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Calendario Externo" border="normal" width="55%" height="70%">
+	<window title="Calendario Externo" border="normal" width="55%" height="70%" closable="true">
 		<div style="margin-top:10px" >
 			<tabbox>
 				<tabs>

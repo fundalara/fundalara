@@ -1,7 +1,7 @@
 <?page title="Auto Generated index.zul"?>
 <zk>
 <div align="Center">
-<window title="CULMINACION DE COMPETENCIA" border="normal" width="55%" height="50%">
+<window title="CULMINACION DE COMPETENCIA" border="normal" width="55%" height="50%" closable="true">
 
 		<grid style="margin-top:10px">
 			<columns>
