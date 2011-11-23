@@ -1,7 +1,15 @@
 <?page title="Auto Generated index.zul"?>
-
+<zk>
+<zscript>
+	<![CDATA[
+	     void cargarLineUp(){
+	    	 Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul", null, null); 
+	     }
+	 ]]>
+ </zscript>
 <window title="Resultados Individuales" border="normal" height="auto"
 	width="auto" mode="modal" closable="true">
+	
 	<panel border="normal" collapsible="true" >
 		<caption label="RESULTADOS INDIVIDUALES POR INNING"></caption>
 		<panelchildren>
@@ -36,9 +44,12 @@
 
 							</div>
 							<!-- Registro Bateo por Ininngs -->
+							<div align="left" style="margin-top:30px">
+							<button label="Cargar Line-Up" onClick="cargarLineUp()"></button>
+							</div>
 							<div align="right" width="25%"
-								style="margin-top:30px;float:left">
-
+								style="margin-top:0px;float:left">
+                               
 								<panel border="normal">
 									<caption label="LINE-UP"></caption>
 									<panelchildren>
@@ -179,7 +190,7 @@
 
 							</div>
 							<!-- indicadores lineup de bateo por inning -->
-							<div style="float:left;margin-top:30px"
+							<div style="float:left;margin-top:0px"
 								width="75%">
 								<panel border="normal">
 									<caption label="INDICADORES"></caption>
@@ -2236,3 +2247,4 @@
 	
 
 </window>
+</zk>

@@ -87,6 +87,7 @@
 															onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")' />
 													</treerow>
 												</treeitem>
+												
 												<treeitem>
 													<treerow>
 														<treecell
@@ -102,6 +103,13 @@
 													label="Organizacion de Competencia" />
 											</treerow>
 											<treechildren>
+											    <treeitem>
+													<treerow>
+														<treecell
+															label="Divisas" 
+															onClick='enlace("/Competencias/Vistas/FrmDivisa.zul")' />
+													</treerow>
+												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell

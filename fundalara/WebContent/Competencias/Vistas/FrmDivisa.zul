@@ -1,8 +1,7 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="REGISTRO DE DIVISAS" contentType="text/html;charset=UTF-8"?>
 <zk>
-
-	<window title="Divisa Externas" width="40%" height="30%"
-		border="normal">
+    <div align="center">
+	<window title="REGISTRO DE DIVISAS" width="65%"	border="normal">
 
 		<panel border="normal">
 			<caption label="Datos de la Divisa"></caption>
@@ -68,4 +67,5 @@
 			</panel>
 		</div>
 	</window>
+	</div>
 </zk>

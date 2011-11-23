@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><?page title="Registro de Resultados" contentType="text/html;charset=UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="Registro de Resultados"?>
 <zk>
-<zscript>
-<![CDATA[
-     void resultados(){
-    	 Executions.createComponents("/Competencias/Vistas/FrmResultados.zul", null, null); 
-     }
- ]]>
- </zscript>
+         <zscript>
+			<![CDATA[
+			     void resultados(){
+			    	 Executions.createComponents("/Competencias/Vistas/FrmResultados.zul", null, null); 
+			     }
+			 ]]>
+         </zscript>
+		
 <div id="Dregresult" align="Center">
 		<window title="REGISTRO DE RESULTADOS" border="normal"
-			id="FrmRresultados" width="75%" height="auto">
+		 id="FrmRresultados" width="75%" height="auto">
+		
+		
 			<panel border="normal">
 				<caption label="Datos de la Competencia" />
 				<panelchildren>

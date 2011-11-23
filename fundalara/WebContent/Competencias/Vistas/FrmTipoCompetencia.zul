@@ -30,7 +30,7 @@
 						<row align="left">
 							<label value="Tipo de Organización"></label>
 							<combobox id="cmbTipoCompetencia"
-								width="80%" onChange="seleccionarTipo()" value="Seleccione">
+								width="80%" onChange="" value="Seleccione">
 								<comboitem label="Categoria" />
 								<comboitem label="Liga" />
 							</combobox>
