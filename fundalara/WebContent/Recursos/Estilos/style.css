@@ -564,7 +564,6 @@ ul.art-menu
 {
   position: relative;
   min-height: 34px;
-  z-index: 100;
 }
 
 .art-nav .l, .art-nav .r
