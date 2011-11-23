@@ -1,7 +1,7 @@
 <?page title="REGISTRO DE DIVISAS" contentType="text/html;charset=UTF-8"?>
 <zk>
     <div align="center">
-	<window title="REGISTRO DE DIVISAS" width="65%"	border="normal">
+	<window title="REGISTRO DE DIVISAS" width="68%"	border="normal">
 
 		<panel border="normal">
 			<caption label="Datos de la Divisa"></caption>
@@ -16,30 +16,47 @@
 					</columns>
 					<rows>
 						<row style="border-style:none">
-							<label value="Nombre:"></label>
+							<label value="Nombre"></label>
 							<hbox>
 								<textbox cols="25"></textbox>
+								<space></space>
 								<button
 									image="../../Recursos/Imagenes/consultar.ico">
 								</button>
 							</hbox>
-							<label value="Logo:"></label>
+							<label value="Logo"></label>
+							<hbox>
+							    <textbox cols="10"></textbox>
+							    <space></space>
+								<button label="Examinar"></button>
+							</hbox>						
+						</row>
+						<row style="border-style:none">
+							<label value="Dirección"></label>
+							<textbox cols="25"></textbox>
+							<label value="Ciudad"></label>
+							<combobox cols="13"></combobox>
+						</row>
+						<row style="border-style:none">
+						    <label value="Estado"></label>
+							<combobox cols="13"></combobox>
+							<label value="Teléfono"></label>
 							<textbox cols="15"></textbox>
-							  <button label="Examinar"></button>
-								<!-- <image src="../../Recursos/Imagenes/menu2.jpg" width="25px" height="35px"/>
--->
-
 						</row>
 						<row style="border-style:none">
-							<label value="Localidad:"></label>
-							<textbox cols="25"></textbox>
+						  <label value="Presidente"></label>
+						  <textbox cols="25"></textbox>
+						  <label value="Contacto"></label>
+						  <textbox cols="25"></textbox>
 						</row>
 						<row style="border-style:none">
-							<label value="Presidente:"></label>
-							<textbox cols="25"></textbox>
-						</row>
+						  <label value="Correo"></label>
+						  <textbox cols="25"></textbox>
+						 
+						</row>				
 					</rows>
 				</grid>
+				
 			</panelchildren>
 		</panel>
 

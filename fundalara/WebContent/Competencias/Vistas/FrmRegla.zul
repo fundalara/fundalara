@@ -1,6 +1,6 @@
 <?page title="Regla" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Reglas" border="normal" width="55%" height="90%">
+	<window title="Reglas" border="normal" width="68%" height="auto">
 
 
 		<panel>
@@ -38,10 +38,12 @@
 							</textbox>
 							<label value="Variable de Comparación:">
 							</label>
-							<textbox></textbox>
+							<hbox>
+							<textbox cols="10"></textbox>
 							<button
 								image="../../Recursos/Imagenes/consultar.ico">
 							</button>
+							</hbox>
 						</row>
 						<row style="border-style:none">
 							<label value="Criterio:"></label>
@@ -130,58 +132,10 @@
 								</listitem>
 
 							</listbox>
+                            
+						
 
-							<grid>
-								<rows>
-									<row>
-										<button onClick=""
-											image="/Recursos/Imagenes/rightrightarrow_g.png" />
-									</row>
-									<row>
-										<button onClick=""
-											image="/Recursos/Imagenes/rightarrow_g.png" />
-									</row>
-									<row>
-										<button onClick=""
-											image="/Recursos/Imagenes/leftarrow_g.png" />
-									</row>
-									<row>
-										<button onClick=""
-											image="/Recursos/Imagenes/leftleftarrow_g.png" />
-									</row>
-								</rows>
-							</grid>
-
-							<listbox>
-								<listhead>
-									<listheader label="" sort="auto"
-										width="20%">
-										<checkbox></checkbox>
-									</listheader>
-									<listheader
-										label="Categorías Seleccionados" sort="auto" />
-								</listhead>
-								<listitem>
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Preparatorio Nivel 1" />
-								</listitem>
-								<listitem>
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell
-										label="Preparatrio Nivel 2" />
-								</listitem>
-								<listitem>
-									<listcell>
-										<checkbox />
-									</listcell>
-									<listcell label="Pre-Infantil" />
-								</listitem>
-							</listbox>
+							
 						</row>
 
 					</rows>
@@ -193,46 +147,31 @@
 
 
 		<panel collapsible="true">
-			<caption label="Reglas por categoría"></caption>
+			<caption label="Valores por categoría"></caption>
 			<panelchildren>
-				<grid>
-					<rows>
-						<row height="50px">
-							<div align="left">
-								<label value="Regla:"></label>
-								<textbox></textbox>
-								<button
-									image="../../Recursos/Imagenes/consultar.ico">
-								</button>
-							</div>
-						</row>
-
-					</rows>
-				</grid>
+			
 		
 		
 				<listbox style="align:left">
 					<listhead>
-						<listheader width="30%" label="Reglas"
-							style="align:left" />
-						<listheader width="10%" label="Pre I N"
+						
+						<listheader width="" label="Pre I N"
 							align="center" />
-						<listheader width="10%" label="Pre II N"
+						<listheader width="" label="Pre II N"
 							align="center" />
-						<listheader width="10%" label="Preinfantil"
+						<listheader width="" label="Preinfantil"
 							align="center" />
-						<listheader width="10%" label="Infantil"
+						<listheader width="" label="Infantil"
 							align="center" />
-						<listheader width="10%" label="Prejunior"
+						<listheader width="" label="Prejunior"
 							align="center" />
-						<listheader width="10%" label="Junior"
+						<listheader width="" label="Junior"
 							align="center" />
-						<listheader width="10%" label="Juvenil"
+						<listheader width="" label="Juvenil"
 							align="center" />
 					</listhead>
 					<listitem>
-						<listcell
-							label="Porcentaje Mínimo de Participación" />
+						
 						<listcell>
 							<textbox width="50%" value="N/A" />
 						</listcell>
