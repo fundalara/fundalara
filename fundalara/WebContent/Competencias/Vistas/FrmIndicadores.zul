@@ -2,7 +2,7 @@
 <zk>
 	<div align="center">
 		<window title="Registrar Indicadores" border="normal" closable="true"
-			width="600px" position="center">
+			width="600px" position="center" closable="true">
 			<panel border="normal">
 				<caption label="Datos de la Competencia"></caption>
 				<panelchildren>

@@ -2,7 +2,7 @@
 <zk>
 	<div align="center">
 		<window title="REGISTRO DE INDICADORES " border="normal"
-			width="50%" height="80%">
+			width="50%" height="80%" closable="true">
 			<zscript><![CDATA[
 	//@DECLARATION
 	public void Seleccion() {

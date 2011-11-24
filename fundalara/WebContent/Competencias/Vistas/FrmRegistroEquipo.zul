@@ -2,7 +2,7 @@
 <zk>
 <div align="center">
 	<window title="Equipos" border="normal" width="auto" height="auto"
-		onClose="VerRoster()">
+		onClose="VerRoster()" closable="true">
 
 
 		<!-- DATOS COMPETENCIA -->

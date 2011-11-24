@@ -1,7 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 <div align="center">
-<window title="REGLAS POR CATEGORIAS" border="normal" width="60%">
+<window title="REGLAS POR CATEGORIAS" border="normal" width="60%" closable="true">
 	<panel height="50%"> 
 		
 			<panelchildren>

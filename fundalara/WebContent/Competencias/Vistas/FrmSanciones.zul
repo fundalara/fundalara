@@ -1,7 +1,7 @@
 <?page title="Sanciones" contentType="text/html;charset=UTF-8"?>
 <zk>
 <div align="center" >
-<window title="REGISTRO DE SANCIONES" border="normal" style="margin-left:20px" width="70%">
+<window title="REGISTRO DE SANCIONES" border="normal" style="margin-left:20px" width="70%" closable="true">
   
  <panel border="normal">
 		  <caption label="Datos de la Competencia"></caption>

@@ -11,7 +11,7 @@
 		
 <div id="Dregresult" align="Center">
 		<window title="REGISTRO DE RESULTADOS" border="normal"
-		 id="FrmRresultados" width="75%" height="auto">
+		 id="FrmRresultados" width="75%" height="auto" closable="true">
 		
 		
 			<panel border="normal">

@@ -1,6 +1,6 @@
 <?page title="Auto Generated index.zul"?>
 <div align="center">
-<window title="LIGA" border="normal" width="40%">
+<window title="LIGA" border="normal" width="40%" closable="true">
 
 	<panel>
 		<panelchildren>

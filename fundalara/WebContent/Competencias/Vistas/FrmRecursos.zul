@@ -1,6 +1,6 @@
 <?page title="Auto Generated index.zul"?>
 <div align="center" >
-<window title="SOLICITUD DE RECURSOS" border="normal" width="65%" height="100%">
+<window title="SOLICITUD DE RECURSOS" border="normal" width="65%" height="100%" closable="true">
 
 		<panel border="normal">
 		  <caption label="Datos de la Competencia"></caption>

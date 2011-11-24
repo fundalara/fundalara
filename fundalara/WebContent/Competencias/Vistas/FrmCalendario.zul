@@ -2,7 +2,7 @@
 <zk>
  <div align="center">
 	<window title="CALENDARIO" border="normal" width="65%"
-		height="70%">
+		height="70%" closable="true">
 
 		<!-- DATOS COMPETENCIA -->
 		<panel border="normal">
