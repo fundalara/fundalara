@@ -1,46 +1,54 @@
 <?page title="Line-up"?>
 <div align="center">
-<window title="Gestionar Lineup" border="normal" width="auto" height="auto" closable="true" >
+<zscript>
+			<![CDATA[
+			     void lineUp(){
+			    	 Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul", null, null); 
+			     }
+			 ]]>
+ </zscript>
+<window title="Gestionar Lineup" border="normal" width="auto" height="auto" closable="true" style="">
 
 	
 	<panel border="normal">
 		  <caption label="Datos de la Competencia"></caption>
 		    <panelchildren>
 		      <grid>
-		         <columns>
+		         <!-- <columns>
 		           <column width="40px" align="left"></column>
 		           <column width="40px"></column>
 		           <column width="60px"></column>
 		           <column width="60px"></column>
 		           <column width="50px"></column>
 		           <column width="60px"></column>
-		         </columns>
+		         </columns> -->
 		         <rows>
 		            <row>
 		               <label value="Competencia" ></label>
 		               <hbox>
-		               <textbox cols="11"></textbox>      
-		               <button image="../../Recursos/Imagenes/consultar.ico"></button>  
+		               <textbox cols="11"></textbox> 	
+		                <button image="" label="Calendario" onClick="lineUp()" ></button>	                 
 		               </hbox>  
-		               <label value="Fecha Inicio"></label>
+		               <label value="Fecha Inicio de Competencia"></label>
 		               <textbox cols="10"></textbox> 
-		               <label value="Fecha Fin"></label>
+		               <label value="Fecha Fin de Competencia"></label>
 		               <textbox cols="10"></textbox>
 		                
 		            </row>		              
 		            <row >
 		                <label value="Juego"></label>     
 		                <hbox>
-		                <textbox cols="20"></textbox> 
-		                <button image="../../Recursos/Imagenes/consultar.ico"></button>
+		                <textbox cols="20"></textbox>		                
 		                </hbox>
-		                <label value="Fecha"></label>
-		                <textbox cols="10"></textbox>  
+		                <label value="Fecha de Juego"></label>
+		                <textbox cols="10"></textbox>
+		                <label value="Hora de Juego"></label>
+		                <textbox cols="10"></textbox>	                 
 		                
 		            </row>
 		            <row>
 		               <label value="Equipo" ></label>
-                       <combobox cols="11"></combobox>   
+		               <textbox cols="11"></textbox>   
                        <label value="Categoria" ></label>
                        <textbox cols="11"></textbox>                             
 		            </row>
@@ -48,7 +56,7 @@
 		            
 		         </rows>
 		      </grid>
-		    </panelchildren>
+		    </panelchildren>		    
 		  </panel>
 	
 	<panel height="1%"></panel>
@@ -61,8 +69,8 @@
 
 					<listbox width="300px">
 						<listhead>
-							<listheader width="2%">#</listheader>
-							<listheader width="15%">Nombre</listheader>
+							<listheader label="#" width="5%"></listheader>
+							<listheader label="Nombre" width="35%"></listheader>
 							
 
 						</listhead>
@@ -73,7 +81,7 @@
 
 						<listitem>
 							<listcell>8</listcell>
-							<listcell>Alix Villanueva</listcell>
+							<listcell>Alex Villanueva</listcell>
 						</listitem>
 
 						<listitem>
@@ -142,7 +150,7 @@
 						</columns>
 						<rows>
 							<row>
-								<button image="/Recursos/Imagenes/leftarrow_g.png"></button>
+								<button image="./Recursos/Imagenes/leftarrow_g.png"></button>
 							</row>
 							<row>
 								<button image= "/Recursos/Imagenes/rightarrow_g.png"></button>
@@ -411,8 +419,9 @@
 						</textbox>
 						<textbox width="90%" value="4"
 							readonly="true">
-						</textbox>
+						</textbox>						
 					</row>
+					
 				</rows>
 			</grid>
 		</panelchildren>
@@ -455,7 +464,7 @@
 	<panel> <!-- Botones -->
 		<panelchildren>
 		    <div align="right">
-				<button image="../../Recursos/Imagenes/guardar.ico" label="Guardar" ></button>
+				<button image="../../Recursos/Imagenes/guardar.ico" label="Guardar" ></button>				
 				<button image="../../Recursos/Imagenes/editar.ico"	label="Modificar" ></button>
 				<button image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"></button>
 				<button image="../../Recursos/Imagenes/salir.png" label="Salir" ></button>

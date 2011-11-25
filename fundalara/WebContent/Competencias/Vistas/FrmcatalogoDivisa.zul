@@ -11,12 +11,12 @@
 						</columns>
 						<rows>
 							<row>
-								<label value="Filtro"></label>
+								<label value="Buscar"></label>
 								<textbox></textbox>
 							</row>
 						</rows>
 					</grid>
-					<listbox>
+					<listbox mold="paging" pageSize="10">
 						<listhead>
 							<listheader label="Nombre" align="center"
 								width="25%">
@@ -64,13 +64,12 @@
 						</listitem>
 					</listbox>
 					<div align="right">
-						<button
-							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						<button image="/Recursos/Imagenes/aceptar.ico"
+						label="Aceptar">
 						</button>
 						<button
 							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
-
 					</div>
 
 
