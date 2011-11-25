@@ -2,9 +2,8 @@
 <zk>
 <div align="Center">
 <window title="REGISTRO DE ROSTER" border="normal" id="FrmRoster" width="60%" closable="true">
-<div id="Roster">
-<panel border="normal">
-		  <caption label="Datos de la Competencia"></caption>
+<div id="Roster" align="left">
+<panel border="normal" title="Datos de la Competencia">		 
 		    <panelchildren>
 		      <grid>
 		         <columns>
@@ -35,9 +34,8 @@
 		      </grid>
 		    </panelchildren>
 		  </panel>
-		  <panel border="normal" >
-		  <caption label="Datos del Equipo"></caption>
-			  <panelchildren>
+		  <panel border="normal" title="Datos del Equipo">
+		    <panelchildren>
 			     <grid>
 			        <columns> 
 			          <column label=""></column>
@@ -61,9 +59,8 @@
 			     </grid>
 			  </panelchildren>
 		  </panel>
-<panel border="normal">
-<caption label="Jugadores"></caption>
-			<panelchildren>
+<panel border="normal" title="Jugadores">
+	<panelchildren>
 			
 					<listbox width="100%" >
 							<listhead>
@@ -137,8 +134,7 @@
 							</div>
 			</panelchildren>
 		</panel>
-		<panel collapsible="true"  >
-		<caption label="Refuerzos"></caption>
+		<panel collapsible="true" title="Refuerzos" >		
 			<panelchildren>
 			    <grid>
 			       <columns>
