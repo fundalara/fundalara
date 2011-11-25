@@ -1,0 +1,83 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<window title="Divisas Existentes" border="normal"
+			width="50%">
+			<panel width="100%">
+				<panelchildren>
+					<grid>
+						<columns>
+							<column width="10%"></column>
+						</columns>
+						<rows>
+							<row>
+								<label value="Filtro"></label>
+								<textbox></textbox>
+							</row>
+						</rows>
+					</grid>
+					<listbox>
+						<listhead>
+							<listheader label="Nombre" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Estado" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Ciudad" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Teléfono" align="center"
+								width="25%">
+							</listheader>
+						</listhead>
+
+						<listitem>
+							<listcell>Fundalara</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2331897</listcell>
+						</listitem>
+						<listitem>
+							<listcell>Ucla</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+					</listbox>
+					<div align="right">
+						<button
+							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+
+					</div>
+
+
+				</panelchildren>
+
+
+			</panel>
+		</window>
+	</div>
+</zk>

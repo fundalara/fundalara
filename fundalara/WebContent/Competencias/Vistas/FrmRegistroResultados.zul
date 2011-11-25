@@ -11,10 +11,10 @@
 		
 <div id="Dregresult" align="Center">
 		<window title="REGISTRO DE RESULTADOS" border="normal"
-		 id="FrmRresultados" width="75%" height="auto" closable="true">
+		 id="FrmRresultados" width="80%" height="auto" closable="true">
 		
 		
-			<panel border="normal">
+	<!--  		<panel border="normal">
 				<caption label="Datos de la Competencia" />
 				<panelchildren>
 					<grid>
@@ -44,8 +44,8 @@
 						</rows>
 					</grid>
 				</panelchildren>
-			</panel>
-			<panel>
+			</panel> -->
+			<panel> 
 				<caption label="Datos Basicos del Juego" />
 				<panelchildren>
 					<grid>
@@ -53,43 +53,51 @@
 							<column label="" />
 							<column label="" width="200px" />
 							<column label="" />
-							<column label="" />
+							<column label="" width="150px"/>
 							<column label="" />
 							<column label="" />
 						</columns>
 						<rows>
 							<row>
 								<label value="Juego" />
-								<hbox>
+								<label value="Fuandalara A Vs Titanes" />
+								<!--  <hbox>
 									<textbox cols="20" />
 									<button
 										image="../../Recursos/Imagenes/consultar.ico" />
 
-								</hbox>
+								</hbox> -->
 								<label value="Fecha" />
-								<textbox cols="11" />
+								<label value="22-10-2011"/>
+								<!--  <textbox cols="11" />-->
 								<label value="Hora" />
-								<textbox cols="11" />
+								<label value="10:00 AM"></label>
+								<!--  <textbox cols="11" /> -->
 							</row>
 							<row>
 								<label value="Campo" />
-								<textbox cols="20" />
-								<label value="Innigs" />
-								<spinner cols="9" />
+								<label value="Fundalara" />
+								<!--  <textbox cols="20" /> -->
+								<label value="Innings" />
+								<label value="7" />
+								<!--  <spinner cols="9" /> -->
 								<label value="Tiempo" />
-								<textbox cols="11" />
+								<label value="2 Horas"></label>
+								<!--  <textbox cols="11" /> -->
 							</row>
 							<row>
 								<label value="Umpire"></label>
-								<hbox>
+								<label value="Rafael Pernía"></label>
+								<!--  <hbox>
 									<textbox cols="20" />
 									<button
 										image="../../Recursos/Imagenes/consultar.ico" />
-								</hbox>
+								</hbox> -->
 								<label value="Anotador"></label>
-								<textbox cols="11" />
+								<label value="Eduardo Quintero"></label>
+								<!--  <textbox cols="11" />
 								<label value="Anotador Oficial"></label>
-								<textbox cols="11" />
+								<textbox cols="11" /> -->
 							</row>
 						</rows>
 					</grid>
@@ -98,7 +106,7 @@
 				</panelchildren>
 			</panel>
 			<panel>
-				<caption label="Resultados Colectivos" />
+				<caption label="Resultados" />
 				<panelchildren>
 					<grid>
 						<columns>
@@ -121,38 +129,66 @@
 						<rows>
 							<row>
 								<label style="color:blue;text-decoration:underline" onClick="resultados()" value="Equipo A"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+							    <spinner cols="1"> </spinner>
+							    <spinner cols="1"> </spinner>
+							    <spinner cols="1"> </spinner>
+								
+								
 							</row>
 							<row>
 								<label value="Equipo B"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
-								<label value="0"></label>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+								<spinner cols="1"> </spinner>
+							    <spinner cols="1"> </spinner>
+							    <spinner cols="1"> </spinner>
+							    <spinner cols="1"> </spinner>
 							</row>
 
 						</rows>
 
 					</grid>
+					<grid>
+					<columns>
+							<column label="" />
+							<column label="" />
+							<column label="" />
+							<column label="" />
+							<column label="" />
+							<column label="" />
+						</columns>
+						<rows>
+						 <row>
+						 <label value="Pitcher Ganador:" style="text-decoration:underline"></label>
+						 <label value="Frank Machado"></label>
+						 <label value="Pitcher Perdedor:" style="text-decoration:underline"></label>
+						 <label value="Domingo Calvicio"></label>
+						 </row>
+						 <row>
+						 <label value="Juego Salvado:" style="text-decoration:underline"></label>
+						 <label value="Anibal Moreno"></label>
+						 <label value="Mejor Jugador:" style="text-decoration:underline"></label>
+						 <label value="Alberto Perozo"></label>
+						 </row>
+						</rows>
+					
+					</grid>
+														
 				</panelchildren>
 			</panel>
 			<panel>
