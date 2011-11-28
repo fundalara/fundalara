@@ -1,143 +1,161 @@
-<?page title="ATLETAS EN UNA CATEGORÍA" contentType="text/html;charset=UTF-8"?>
+<?page title="Catalogo Jugador" contentType="text/html;charset=UTF-8"?>
 <zk>
-	
-		<window title="ATLETAS EN UNA CATEGORÍA" border="normal"
-			width="50%" mode="modal" closable="true" >
 
-			<div align="left">
-				<panel width="100%" title="Datos del Equipo">
-					<panelchildren>
-						<grid>
-							<columns>
-								<column width="10%"></column>
-								<column width="40%"></column>
-							</columns>
-							<rows>
-								<row>
-									<label value="Categoría"></label>
-									<textbox width="45%"></textbox>
-								</row>
-								<row>
-									<label value="Equipo"></label>
-									<combobox width="41%"></combobox>
-								</row>
-							</rows>
-						</grid>
-					</panelchildren>
-				</panel>
-			</div>
+	<window id="FrmCatalogoJugador" title="Atletas en un categoria"
+		border="normal" width="50%" mode="modal" closable="true">
 
-			<div align="left">
-				<panel border="normal" title="Jugadores">
-					<panelchildren>
-						<listbox width="100%">
-							<listhead>
-								<listheader label="#" width="10%"
-									align="center">
-								</listheader>
-								<listheader label="Nombre"
-									width="30%">
-								</listheader>
-								<listheader label="Edad"
-									align="center">
-								</listheader>
-								<listheader label="Alojamiento"
-									align="center" width="80px" sort="">
-								</listheader>
-								<listheader label="Seleccionar"
-									align="center">
-								</listheader>
+		<div align="left">
+			<panel width="100%" title="Datos del Equipo">
+				<panelchildren>
+					<grid>
+						<columns>
+							<column width=""></column>
+							<column width=""></column>
+							<column width=""></column>
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Categoría"></label>
+								<combobox width="50%"></combobox>
+								<label value="Equipo"></label>
+								<combobox width="50%"></combobox>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+		</div>
 
-							</listhead>
-							<listitem>
-								<listcell>1</listcell>
-								<listcell>Nombre Jugador 1</listcell>
-								<listcell>14</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
+		<div align="left">
+			<panel border="normal" title="Jugadores">
+				<panelchildren>
+					<listbox mold="paging" pageSize="10" >
 
-							</listitem>
-							<listitem>
-								<listcell>15</listcell>
-								<listcell>Nombre Jugador 2</listcell>
-								<listcell>15</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
+						<listhead>
+							<listheader label="Nombre" width="25%" align="center">
+							</listheader>
 
-							</listitem>
-							<listitem>
-								<listcell>23</listcell>
-								<listcell>Nombre Jugador 3</listcell>
-								<listcell>15</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
+							<listheader label="Edad" align="center">
+							</listheader>
 
-							</listitem>
-							<listitem>
-								<listcell>16</listcell>
-								<listcell>Nombre Jugador 4</listcell>
-								<listcell>15</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
+							<listheader label="Alojamiento"
+								align="center">
+							</listheader>
 
-							</listitem>
-							<listitem>
-								<listcell>25</listcell>
-								<listcell>Nombre Jugador 5</listcell>
-								<listcell>15</listcell>
-								<listcell>No</listcell>
-								<listcell>
-									<checkbox></checkbox>
-								</listcell>
+						</listhead>
+						<auxhead>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+							</auxheader>
 
-							</listitem>
-							<listitem>
-								<listcell>22</listcell>
-								<listcell>Nombre Jugador 6</listcell>
-								<listcell>15</listcell>
-								<listcell>No</listcell>
-								<listcell>
-									<checkbox></checkbox>
-								</listcell>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+							</auxheader>
 
-							</listitem>
-							<listitem>
-								<listcell>11</listcell>
-								<listcell>Nombre Jugador 7</listcell>
-								<listcell>15</listcell>
-								<listcell>No</listcell>
-								<listcell>
-									<checkbox></checkbox>
-								</listcell>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+							</auxheader>
 
-							</listitem>
-						</listbox>
-						<div align="right">
-							<button
-								image="/Recursos/Imagenes/guardar.ico" label="Guardar">
-							</button>
-							<button
-								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
-							</button>
+						</auxhead>
+						
+						<listitem>
+							<listcell>Nombre Jugador 1</listcell>
+							<listcell>14</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
 
-						</div>
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 2</listcell>
+							<listcell>15</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
 
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 3</listcell>
+							<listcell>15</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
 
-					</panelchildren>
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 4</listcell>
+							<listcell>15</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
 
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 5</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
 
-				</panel>
-			</div>
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 6</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
 
-		</window>
-	
-	
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 7</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 8</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 9</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 10</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 11</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+					</listbox>
+				<div align="right">
+						<button image="/Recursos/Imagenes/aceptar.ico"
+							label="Aceptar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							onClick="Salir()" />
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+		
+					<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoJugador.onClose();
+	}
+]]></zscript>
+	</window>
 </zk>

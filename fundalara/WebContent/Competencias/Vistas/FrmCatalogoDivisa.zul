@@ -1,0 +1,145 @@
+<?page title="Catalogo Divisa" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<window id="FrmCatalogoDivisa" title="Divisas Existentes"
+			border="normal" mode="modal" closable="true" width="80%">
+			<panel width="100%">
+				<panelchildren>
+
+					<listbox mold="paging" pageSize="10">
+						<listhead>
+							<listheader label="Nombre" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Estado" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Ciudad" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Teléfono" align="center"
+								width="25%">
+							</listheader>
+						</listhead>
+						
+						<auxhead>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+
+							</auxheader>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+
+							</auxheader>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+
+							</auxheader>
+							<auxheader colspan="1"
+								image="../../Recursos/Imagenes/consultar.ico">
+								<textbox cols="10"></textbox>
+
+							</auxheader>
+
+						</auxhead>
+						<listitem>
+							<listcell>Fundalara</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2331897</listcell>
+						</listitem>
+						<listitem>
+							<listcell>Ucla</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						<listitem>
+							<listcell>xxxxx</listcell>
+							<listcell>Lara</listcell>
+							<listcell>Barquisimeto</listcell>
+							<listcell>0251-2558877</listcell>
+						</listitem>
+						
+						
+					</listbox>
+					<div align="right">
+						<button
+							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							onClick="Salir()">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+
+
+			<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoDivisa.onClose();
+	}
+]]></zscript>
+
+
+		</window>
+	</div>
+</zk>
