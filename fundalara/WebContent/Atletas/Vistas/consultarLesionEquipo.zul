@@ -1,0 +1,137 @@
+<?page title="Consulta de lesiones por equipo" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window>
+		<panel title="">
+			<panelchildren>
+				
+	<grid style="border:none">
+					<columns>
+						<column width="14%" />
+						<column width="30%" />
+						<column width="14%" />
+						<column width="30%" />
+						<column  width="12%"/>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<div>
+								<space/>
+								<label value="Categoría"/>
+							</div>
+							<combobox value="TODAS" width="75%" readonly="true">
+								<comboitem
+									label="Preparatorio nivel 1">
+								</comboitem>
+								<comboitem
+									label="Preparatorio nivel 2">
+								</comboitem>
+								<comboitem label="Pre-infantil">
+								</comboitem>
+								<comboitem label="Infantil"></comboitem>
+								<comboitem label="Pre-Junior"></comboitem>
+								<comboitem label="Junior"></comboitem>
+								<comboitem label="Juvenil"></comboitem>
+							</combobox>
+							<div>
+								<space/>
+								<label value="Equipo"/>
+							</div>
+							<combobox value="TODOS" width="75%" readonly="true">
+								<comboitem label="Pre-infantil A"/>
+								<comboitem label="Pre-infantil B"/>
+								<comboitem label="Pre-infantil C"/>
+								<comboitem label="Pre-infantil D"/>
+								<comboitem label="Pre-infantil E"/>
+								
+							</combobox>
+							<button tooltiptext="Consultar"
+								image="../../Recursos/Imagenes/consultar.ico">
+							</button>
+						</row>
+					</rows>
+				</grid>
+				<space height="10px"/>
+				<grid id="grid" mold="paging" pageSize="5">
+					<columns menupopup="auto">
+						<column sort="auto" label="Número" width="10%" />
+						<column sort="auto" label="Apellido" width="15%" />
+						<column sort="auto" label="Nombre" width="15%" />
+						<column sort="auto" label="Lesión" width="20%" />
+						<column sort="auto" label="Fecha lesión" width="18%" />
+						<column sort="auto" label="Fecha recuperación" />
+					</columns>
+					<rows>
+						<group label="Equipo: Preparatorio I Nivel A" />
+						<row>
+							<label value="1" />
+							<label value="García" />
+							<label value="Victor" />
+							<label value="Fractura" />
+							<label value="20/11/2011" />
+							<label value="20/03/2012" />
+						</row>
+						<row>
+							<label value="6" />
+							<label value="Saavedra" />
+							<label value="Benjamin" />
+							<label value="Torcedura" />
+							<label value="15/11/2011" />
+							<label value="15/01/2012" />
+						</row>
+						<row>
+							<label value="7" />
+							<label value="Dávila" />
+							<label value="Luis" />
+							<label value="Tirón" />
+							<label value="02/10/2011" />
+							<label value="02/02/2012" />
+						</row>
+						<row>
+							<label value="22" />
+							<label value="Laguna" />
+							<label value="Germán" />
+							<label value="Esguince" />
+							<label value="25/09/2011" />
+							<label value="25/12/2011" />
+						</row>
+						<row>
+							<label value="13" />
+							<label value="Luzardo" />
+							<label value="Edgar" />
+							<label value="Fractura" />
+							<label value="01/08/2011" />
+							<label value="01/02/2012" />
+						</row>
+						<row>
+							<label value="15" />
+							<label value="Hernández" />
+							<label value="Ramir" />
+							<label value="Tendinitis" />
+							<label value="16/09/2011" />
+							<label value="16/12/2011" />
+						</row>
+						<group label="Equipo: Preparatorio I Nivel B" />
+						<row>
+							<label value="19" />
+							<label value="Perdomo" />
+							<label value="César" />
+							<label value="Epicondinitis" />
+							<label value="08/06/2011" />
+							<label value="08/12/2011" />
+						</row>
+						<row>
+							<label value="3" />
+							<label value="Perozo" />
+							<label value="Alberto" />
+							<label value="Esguince" />
+							<label value="21/10/2011" />
+							<label value="21/01/2012" />
+						</row>
+					</rows>
+				</grid>
+			
+			
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

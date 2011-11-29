@@ -1,0 +1,145 @@
+<?page title="Compromiso" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Compromiso de pago" border="normal" width="77%"
+		closable="true">
+		<panel title="Representante" >
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="14%" />
+						<column width="%20" />
+						<column width="13%" />
+						<column width="20%" />
+						<column width="13%" />
+						<column width="%20" />
+					</columns>
+					<rows>
+						<row>
+							<label value="Cédula" />
+							<textbox readonly="true" value="V-8.346.895"></textbox>
+							<label value="Nombre" />
+							<textbox readonly="true" value="Sofia"></textbox>
+							<label value="Apellido" />
+							<textbox readonly="true" value="Pérez"></textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+		<panel title="Jugador">
+			<panelchildren>
+				<grid>
+					<columns>
+							<column width="14%" />
+						<column width="%20" />
+						<column width="13%" />
+						<column width="20%" />
+						<column width="13%" />
+						<column width="%20" />
+					</columns>
+					<rows>
+						<row>
+							<label value="Cédula" />
+							<textbox readonly="true" value="V-17.626.665"></textbox>
+							<label value="Nombre" />
+							<textbox readonly="true" value="Juán"></textbox>
+							<label value="Apellido" />
+							<textbox readonly="true" value="Hernández"></textbox>
+						</row>
+						<row>
+							<label value="Categoría" />
+								<textbox readonly="true" value="Juvenil"></textbox>
+							<label value="Equipo" />
+							<textbox readonly="true" value="A"></textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+		<panel title="Detalle Compromiso">
+			<panelchildren>
+			<grid>
+			<columns>
+			 	<column width="14%" />
+						<column width="%20" />
+						<column width="13%" />
+						<column width="20%" />
+						<column width="13%" />
+						<column width="%20" />
+				</columns>
+			  <rows>
+			    <row spans="1,2,1,2">
+				    <label value="Fecha Inicio " />
+				   	<textbox readonly="true" value="06/06/2011"></textbox>
+					<label value="Fecha Limite" />
+					<textbox readonly="true" value="06/08/2011"></textbox>
+				</row>
+			 </rows>			   
+		  </grid>  	
+				
+			<grid id="grid">
+				  <columns>
+						<column width="6%" label="Nro." />
+						<column width="40%" label="Concepto" />
+						<column width="12%" label="Cantidad" />
+						<column width="18%" align="right">
+							<div>
+								<label value="Precio Unit. (Bs)"/>
+							</div>
+						</column>
+						<column align="right">
+							<div align="left">
+								<label value="Sub-total (Bs)"/>
+							</div>
+						</column>
+					</columns>
+					<rows>
+						<row>
+							<label value="1" />
+							<label value="Inscripción" />
+							<label value="1" />
+							<label value="100,00" />
+							<label value="100,00" />
+						</row>
+						<row>
+							<label value="2" />
+							<label value="Mensualidad" />
+							<label value="3" />
+							<label value="200,00" />
+							<label value="600,00" />
+						</row>
+						<row>
+							<label value="3" />
+							<label value="Uniforme" />
+							<label value="1" />
+							<label value="150,00" />
+							<label value="150,00" />
+						</row>
+					</rows>
+					<foot>
+						<footer span="4">
+							<div align="right">
+								<label value="Total (Bs)" style="font-weight:bold;"/>
+							</div>
+						</footer>
+						<footer>
+							<div align="right">
+								<label value="850,00" style="font-weight:bold;"/>
+							</div>
+						</footer>
+					</foot>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+		<checkbox label="Imprimir compromiso de pago."></checkbox>
+		<div align="right">
+			<button label="Aceptar" image="Recursos/Imagenes/aceptar.ico"
+				orient="horizontal" width="15%" />
+			<button label="Cancelar" image="Recursos/Imagenes/cancelar.ico"
+				orient="horizontal" width="15%" />
+		</div>
+	</window>
+</zk>

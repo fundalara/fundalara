@@ -1,0 +1,1412 @@
+<?page title="Auto Generated index.zul"?>
+<zk>
+	<window title="Expediente del Jugador" border="normal" width="695px"
+		closable="true">
+		<div align="left">
+			<groupbox style="border-color:orange">
+				<caption label="Perfil Actual del Jugador" />
+
+				<grid style="border:none;" oddRowSclass="none">
+					<columns>
+						<column width="90%" />
+						<column width="10%" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<grid style="Border:none;"
+								oddRowSclass="none">
+								<columns>
+									<column width="20%" />
+									<column width="30%" />
+									<column width="20%" />
+									<column width="30%" />
+								</columns>
+								<rows>
+
+									<row spans="1,3"
+										style="border:none">
+
+										<label value="Cédula" />
+
+										<div>
+
+											<combobox value="-"
+												width="4%" readonly="true">
+
+												<comboitem label="V" />
+
+												<comboitem label="E" />
+
+											</combobox>
+
+
+											<intbox
+												constraint="no negative" width="19%" disabled="false" />
+
+											<button id="Jugador" focus="true"
+												tooltiptext="Consultar Jugador"
+												image="../../Recursos/Imagenes/consultar.ico">
+
+												<attribute name="onClick"><![CDATA[
+	Window nuevaVentana = (Window) Executions.createComponents(
+			"Atleta/Vistas/buscarJugador.zul", null, null);
+	try {
+		nuevaVentana.doModal();
+
+	} catch (Exception e) {
+	}
+]]></attribute>
+
+											</button>
+
+										</div>
+									</row>
+
+
+									<row style="border:none">
+										<label value="Nombres" />
+										<div>
+											<textbox maxlength="40"
+												width="70%" disabled="true" />
+										</div>
+										<label value="Apellidos" />
+										<textbox maxlength="40"
+											width="70%" disabled="true" />
+
+									</row>
+
+									<row style="border:none">
+										<label value="Fecha Nacimiento"
+											width="90%" />
+										<div>
+																<datebox
+																			id="dtboxFechaNac" constraint="no future" disabled="true"
+																			format="dd/MM/yyyy"
+																			style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+										</div>
+										<label value="Edad" width="90%" />
+										<textbox maxlength="40"
+											width="20%" disabled="true" />
+									</row>
+									<row style="border:none">
+										<label value="Fecha Ingreso"
+											width="100%" />
+										<div>
+																<datebox
+																			id="dtboxFechaIng" constraint="no future" disabled="true"
+																			format="dd/MM/yyyy"
+																			style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+										</div>
+										<label value="Categoría"
+											width="100%" />
+										<div>
+											<textbox maxlength="40"
+												width="70%" disabled="true" />
+										</div>
+									</row>
+
+									<row style="border:none">
+										<label value="Equipo"
+											width="100%" />
+										<div>
+											<textbox maxlength="40"
+												width="70%" disabled="true" />
+										</div>
+										<label value="Número"
+											width="100%" />
+										<div>
+											<textbox maxlength="40"
+												width="20%" disabled="true" />
+										</div>
+									</row>
+								</rows>
+
+							</grid>
+							<grid style="border:none;"
+								oddRowSclass="none">
+								<rows>
+
+									<row height="80%" align="center"
+										style="border:none">
+										<groupbox mold="3d">
+											<image id="imgJugador"
+												src="../../Recursos/Imagenes/jug.png" height="90px"
+												width="80px" />
+										</groupbox>
+
+									</row>
+
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<space />
+
+			<panel title="Expedientes">
+				<panelchildren>
+					<tabbox id="pestanna">
+						<tabs>
+							<tab label="Deportivo" />
+							<tab label="Académico" />
+							<tab label="Social" />
+							<tab label="Médico" />
+							<tab label="Conducta" />
+						</tabs>
+
+						<tabpanels>
+							<tabpanel id="deportivo">
+								<div width="100%">
+
+									<panel title="Ofensiva"
+										collapsible="true" open="false">
+										<panelchildren>
+											<space />
+											<grid id="grid"
+												mold="paging" pageSize="2">
+												<columns
+													menupopup="auto">
+													<column
+														label="Temporada" width="4%" align="center"
+														/>
+													<column
+														label="Categoría" width="12%" align="center" />
+													<column
+														label="Equipo" width="8%" align="center" />
+													<column label="VB"
+														width="4%" align="center" tooltiptext="Veces al Bate" />
+													<column label="HC"
+														width="4%" align="center" tooltiptext="Hits Conectados" />
+													<column label="2B"
+														width="4%" align="center" tooltiptext="Dobles Conectados" />
+													<column label="3B"
+														width="4%" align="center"
+														tooltiptext="Triples Conectados" />
+													<column label="HR"
+														width="4%" align="center"
+														tooltiptext="Home Runs Conectados" />
+													<column label="AVG"
+														width="5%" align="center" tooltiptext="Average" />
+													<column label="CA"
+														width="4%" align="center" tooltiptext="Carreras Anotadas" />
+													<column label="CI"
+														width="4%" align="center"
+														tooltiptext="Carreras Impulsadas" />
+													<column label="SLG"
+														width="5%" align="center" tooltiptext="Slugging" />
+													<column label="DPB"
+														width="5%" align="center"
+														tooltiptext="Porcentaje de Embasados" />
+													<column label="BR"
+														width="4%" align="center" tooltiptext="Bases Robadas" />
+													<column label="BA"
+														width="4%" align="center" tooltiptext="Bases Alcanzadas" />
+													<column label="K"
+														width="4%" align="center" tooltiptext="Ponches Recibidos" />
+													<column label="BB"
+														width="4%" align="center"
+														tooltiptext="Bases por Bolas Recibidas" />
+													<column label="SAC"
+														width="5%" align="center"
+														tooltiptext="Sacrificios Efectuados" />
+													<column label="CB"
+														width="4%" align="center"
+														tooltiptext="Veces que ha sido Golpeado" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="2006-2007" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="D" />
+														<label
+															value="72" />
+														<label
+															value="36" />
+														<label
+															value="14" />
+														<label
+															value="10" />
+														<label
+															value="8" />
+														<label
+															value=".346" />
+														<label
+															value="15" />
+														<label
+															value="23" />
+														<label
+															value=".370" />
+														<label
+															value="56%" />
+														<label
+															value="12" />
+														<label
+															value="20" />
+														<label
+															value="14" />
+														<label
+															value="12" />
+														<label
+															value="9" />
+														<label
+															value="8" />
+													</row>
+													<row>
+														<label
+															value="2007-2008" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="B" />
+														<label
+															value="92" />
+														<label
+															value="34" />
+														<label
+															value="11" />
+														<label
+															value="9" />
+														<label
+															value="17" />
+														<label
+															value=".296" />
+														<label
+															value="14" />
+														<label
+															value="10" />
+														<label
+															value=".280" />
+														<label
+															value="43%" />
+														<label
+															value="14" />
+														<label
+															value="20" />
+														<label
+															value="19" />
+														<label
+															value="11" />
+														<label
+															value="8" />
+														<label
+															value="7" />
+													</row>
+													<row>
+														<label
+															value="2008-2009" />
+														<label
+															value="Junior" />
+														<label
+															value="E" />
+														<label
+															value="80" />
+														<label
+															value="20" />
+														<label
+															value="10" />
+														<label
+															value="7" />
+														<label
+															value="15" />
+														<label
+															value=".250" />
+														<label
+															value="19" />
+														<label
+															value="10" />
+														<label
+															value=".370" />
+														<label
+															value="56%" />
+														<label
+															value="12" />
+														<label
+															value="20" />
+														<label
+															value="19" />
+														<label
+															value="8" />
+														<label
+															value="9" />
+														<label
+															value="5" />
+													</row>
+													<row>
+														<label
+															value="2009-2010" />
+														<label
+															value="Junior" />
+														<label
+															value="B" />
+														<label
+															value="87" />
+														<label
+															value="29" />
+														<label
+															value="15" />
+														<label
+															value="12" />
+														<label
+															value="18" />
+														<label
+															value=".320" />
+														<label
+															value="19" />
+														<label
+															value="10" />
+														<label
+															value=".380" />
+														<label
+															value="66%" />
+														<label
+															value="12" />
+														<label
+															value="20" />
+														<label
+															value="23" />
+														<label
+															value="8" />
+														<label
+															value="11" />
+														<label
+															value="5" />
+													</row>
+												</rows>
+											</grid>
+
+											<space />
+											<groupbox
+												style="border-color:orange">
+												<caption
+													label="Totales" />
+
+												<grid>
+													<columns>
+														<column
+															label="Al día de hoy" width="10%" align="center" />
+														<column
+															label="VB" width="5%" align="center"  tooltiptext="Veces al Bate" />
+														<column
+															label="HC" width="5%" align="center" tooltiptext="Hits Conectados" />
+														<column
+															label="2B" width="5%" align="center" tooltiptext="Dobles Conectados" />
+														<column
+															label="3B" width="5%" align="center" tooltiptext="Triples Conectados" />
+														<column
+															label="HR" width="5%" align="center" tooltiptext="Home Runs Conectados" />
+														<column
+															label="AVG" width="6%" align="center" tooltiptext="Average" />
+														<column
+															label="CA" width="5%" align="center" tooltiptext="Carreras Anotadas" />
+														<column
+															label="CI" width="5%" align="center" tooltiptext="carreras Impulsadas" />
+														<column
+															label="SLG" width="6%" align="center" tooltiptext="Slugging" />
+														<column
+															label="DPB" width="6%" align="center" tooltiptext="Porcentaje de Embasados" />
+														<column
+															label="BR" width="5%" align="center" tooltiptext="Bases Robadas" />
+														<column
+															label="BA" width="5%" align="center" tooltiptext="Bases Alcanzadas" />
+														<column
+															label="K" width="5%" align="center" tooltiptext="Ponches Recibidos" />
+														<column
+															label="BB" width="5%" align="center" tooltiptext="Bases por Bolas Recibidas" />
+														<column
+															label="SAC" width="6%" align="center" tooltiptext="Sacrificios Realizados" />
+														<column
+															label="CB" width="5%" align="center" tooltiptext="Veces que ha sido Golpeado" />
+													</columns>
+													<rows>
+														<row>
+															<label
+																value="25/11/2011" />
+															<label
+																value="75" />
+															<label
+																value="20" />
+															<label
+																value="10" />
+															<label
+																value="7" />
+															<label
+																value="13" />
+															<label
+																value=".240" />
+															<label
+																value="18" />
+															<label
+																value="9" />
+															<label
+																value=".360" />
+															<label
+																value="53%" />
+															<label
+																value="10" />
+															<label
+																value="19" />
+															<label
+																value="17" />
+															<label
+																value="9" />
+															<label
+																value="10" />
+															<label
+																value="8" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+											<space />
+											<groupbox
+												style="border-color:orange">
+												<caption
+													label="Nomenclatura" />
+												<grid>
+													<columns>
+														<column
+															label="Abreviatura" width="15%" />
+														<column
+															label="Siginificado" width="35%" />
+														<column
+															label="Abreviatura" width="15%" />
+														<column
+															label="Siginificado" width="35%" />
+													</columns>
+													<rows>
+														<row
+															style="border:none;">
+															<label
+																value="VB" style="font-size:10px" />
+															<label
+																value="Veces al Bate" style="font-size:10px;" />
+															<label
+																value="HC" style="font-size:10px" />
+															<label
+																value="Hits Conectados" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="2B" style="font-size:10px" />
+															<label
+																value="Dobles Conectados" style="font-size:10px" />
+															<label
+																value="3B" style="font-size:10px" />
+															<label
+																value="Triples Conectados" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="HR" style="font-size:10px" />
+															<label
+																value="Homes Runs Conectados" style="font-size:10px" />
+															<label
+																value="AVG" style="font-size:10px" />
+															<label
+																value="Average" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="CA" style="font-size:10px" />
+															<label
+																value="Carreras Anotadas" style="font-size:10px" />
+															<label
+																value="CI" style="font-size:10px" />
+															<label
+																value="Carreras Impulsadas" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="SLG" style="font-size:10px" />
+															<label
+																value="Slugging" style="font-size:10px" />
+															<label
+																value="OBP" style="font-size:10px" />
+															<label
+																value="Porcetaje de Embasados" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="BR" style="font-size:10px" />
+															<label
+																value="Bases Robadas" style="font-size:10px" />
+															<label
+																value="BA" style="font-size:10px" />
+															<label
+																value="Bases Alcanzadas" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="K" style="font-size:10px" />
+															<label
+																value="Ponches Recibidos" style="font-size:10px" />
+															<label
+																value="BB" style="font-size:10px" />
+															<label
+																value="Bases por Bola Recibidas" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="SAC" style="font-size:10px" />
+															<label
+																value="Sacrificios Realizados" style="font-size:10px" />
+															<label
+																value="CB" style="font-size:10px" />
+															<label
+																value="Veces que ha sido Golpeado"
+																style="font-size:10px" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+											<space />
+										</panelchildren>
+									</panel>
+								</div>
+
+								<div width="100%">
+									<panel title="Defensiva"
+										collapsible="true" open="false">
+										<panelchildren>
+											<space />
+											<grid id="grid2"
+												mold="paging" pageSize="2">
+												<columns
+													menupopup="auto">
+													<column
+														label="Temporada" width="10%" align="center" />
+													<column
+														label="Categoría" width="15%" align="center" />
+													<column
+														label="Equipo" width="12%" align="center" />
+													<column label="LE"
+														width="8%" align="center" tooltiptext="Lances Efectuados" />
+													<column label="E"
+														width="8%" align="center" tooltiptext="Errores Cometidos" />
+													<column label="ASIS"
+														width="9%" align="center" tooltiptext="Asistencias Realizadas" />
+													<column label="DP"
+														width="8%" align="center" tooltiptext="Doble Plays Efectuados" />
+													<column label="PFIL"
+														width="9%" align="center" tooltiptext="Porcentaje de Fildeo" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="2006-2007" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="D" />
+														<label
+															value="50" />
+														<label
+															value="10" />
+														<label
+															value="20" />
+														<label
+															value="15" />
+														<label
+															value="73%" />
+													</row>
+													<row>
+														<label
+															value="2007-2008" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="C" />
+														<label
+															value="24" />
+														<label
+															value="8" />
+														<label
+															value="10" />
+														<label
+															value="16" />
+														<label
+															value="45%" />
+													</row>
+													<row>
+														<label
+															value="2008-2009" />
+														<label
+															value="Junior" />
+														<label
+															value="E" />
+														<label
+															value="60" />
+														<label
+															value="20" />
+														<label
+															value="16" />
+														<label
+															value="23" />
+														<label
+															value="67%" />
+													</row>
+													<row>
+														<label
+															value="2009-2010" />
+														<label
+															value="Junior" />
+														<label
+															value="B" />
+														<label
+															value="70" />
+														<label
+															value="27" />
+														<label
+															value="19" />
+														<label
+															value="29" />
+														<label
+															value="68%" />
+													</row>
+												</rows>
+											</grid>
+
+											<space />
+											<groupbox
+												style="border-color:orange">
+												<caption
+													label="Totales" />
+												<grid>
+													<columns>
+														<column
+															label="Al día de hoy" width="8%" align="center" />
+														<column
+															label="LE" width="10%" align="center" tooltiptext="Lances Efectuados" />
+														<column
+															label="E" width="10%" align="center" tooltiptext="Errores Cometidos" />
+														<column
+															label="ASIS" width="12%" align="center" tooltiptext="Asistencias Realizadas" />
+														<column
+															label="DP" width="10%" align="center" tooltiptext="Doble Plays Efectuados" />
+														<column
+															label="PFIL" width="12%" align="center" tooltiptext="Porcentaje de Fildeo" />
+													</columns>
+													<rows>
+														<row>
+															<label
+																value="25/11/2011" />
+															<label
+																value="25" />
+															<label
+																value="16" />
+															<label
+																value="27" />
+															<label
+																value="17" />
+															<label
+																value="66%" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+											<space />
+											<groupbox
+												style="border-color:orange">
+												<caption
+													label="Nomenclatura" />
+												<grid>
+													<columns>
+														<column
+															label="Abreviatura" width="15%" />
+														<column
+															label="Siginificado" width="35%" />
+														<column
+															label="Abreviatura" width="15%" />
+														<column
+															label="Siginificado" width="35%" />
+													</columns>
+													<rows>
+														<row
+															style="border:none;" >
+															<label
+																value="LE" style="font-size:10px" />
+															<label
+																value="Lances Efectuados" style="font-size:10px" />
+															<label
+																value="E" style="font-size:10px" />
+															<label
+																value="Errores Cometidos" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="ASIS" style="font-size:10px" />
+															<label
+																value="Asistencias Realizadas" style="font-size:10px" />
+															<label
+																value="DP" style="font-size:10px" />
+															<label
+																value="Doble Plays Conectados" style="font-size:10px" />
+														</row>
+														<row
+															style="border:none;">
+															<label
+																value="PFIL" style="font-size:10px" />
+															<label
+																value="Porcentaje de Fildeo" style="font-size:10px" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+											<space />
+										</panelchildren>
+									</panel>
+								</div>
+								<div width="100%">
+									<panel title="Pitcheo"
+										collapsible="true" open="false">
+										<panelchildren>
+
+											<space />
+											<grid id="grid3"
+												mold="paging" pageSize="2">
+												<columns
+													menupopup="auto">
+													<column
+														label="Temporada" width="12%" align="center" />
+													<column
+														label="Categoría" width="12%" align="center" />
+													<column
+														label="Equipo" width="8%" align="center" />
+													<column label="JG"
+														width="6%" align="center" tooltiptext="Juegos Ganados" />
+													<column label="JP"
+														width="6%" align="center" tooltiptext="Juegos Perdidos" />
+													<column label="JS"
+														width="6%" align="center" tooltiptext="Juegos Salvados" />
+													<column label="IL"
+														width="6%" align="center" tooltiptext="Innings Lanzados" />
+													<column label="HP"
+														width="6%" align="center" tooltiptext="Hits Permitidos" />
+													<column label="CP"
+														width="6%" align="center" tooltiptext="Carreras Permitidas" />
+													<column label="CL"
+														width="6%" align="center" tooltiptext="Carreras Límpias" />
+													<column label="K"
+														width="6%" align="center" tooltiptext="Ponches Propinados" />
+													<column label="BB"
+														width="6%" align="center" tooltiptext="Bases por Bolas" />
+													<column label="EFE"
+														width="8%" align="center" tooltiptext="Efectividad" />
+													<column label="WHIP"
+														width="8%" align="center" tooltiptext="Boletos y Hits por cada 9 Entradas" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="2006-2007" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="D" />
+														<label
+															value="15" />
+														<label
+															value="5" />
+														<label
+															value="23" />
+														<label
+															value="40" />
+														<label
+															value="13" />
+														<label
+															value="15" />
+														<label
+															value="13" />
+														<label
+															value="7" />
+														<label
+															value="4" />
+														<label
+															value=".010 " />
+														<label
+															value="2" />
+													</row>
+													<row>
+														<label
+															value="2007-2008" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="C" />
+														<label
+															value="9" />
+														<label
+															value="1" />
+														<label
+															value="8" />
+														<label
+															value="50" />
+														<label
+															value="23" />
+														<label
+															value="32" />
+														<label
+															value="10" />
+														<label
+															value="27" />
+														<label
+															value="12" />
+														<label
+															value="1.23 " />
+														<label
+															value="4" />
+													</row>
+													<row>
+														<label
+															value="2008/2009" />
+														<label
+															value="Junior" />
+														<label
+															value="E" />
+														<label
+															value="12" />
+														<label
+															value="10" />
+														<label
+															value="4" />
+														<label
+															value="50" />
+														<label
+															value="30" />
+														<label
+															value="20" />
+														<label
+															value="10" />
+														<label
+															value="27" />
+														<label
+															value="12" />
+
+														<label
+															value=".45 " />
+														<label
+															value="4" />
+													</row>
+													<row>
+														<label
+															value="2009/2010" />
+														<label
+															value="Junior" />
+														<label
+															value="B" />
+														<label
+															value="17" />
+														<label
+															value="14" />
+														<label
+															value="6" />
+														<label
+															value="40" />
+														<label
+															value="50" />
+														<label
+															value="27" />
+														<label
+															value="10" />
+														<label
+															value="22" />
+														<label
+															value="11" />
+														<label
+															value="1.10 " />
+														<label
+															value="6" />
+													</row>
+												</rows>
+											</grid>
+
+											<space />
+											<groupbox
+												style="border-color:orange">
+												<caption
+													label="Totales" />
+												<grid>
+													<columns>
+														<column
+															label="Al día de hoy" width="10%" align="center" />
+														<column
+															label="JG" width="7%" align="center" tooltiptext="Juegos Ganados" />
+														<column
+															label="JP" width="7%" align="center" tooltiptext="Juegos Perdidos" />
+														<column
+															label="JS" width="7%" align="center" tooltiptext="Juegos Salvados" />
+														<column
+															label="IL" width="7%" align="center" tooltiptext="Innings Lanzados" />
+														<column
+															label="HP" width="7%" align="center" tooltiptext="Hits Permitidos" />
+														<column
+															label="CP" width="7%" align="center" tooltiptext="Carreras Permitidas" />
+														<column
+															label="CL" width="7%" align="center" tooltip="Carreras Límpias" />
+														<column
+															label="K" width="7%" align="center" tooltiptext="Ponches Propinados" />
+														<column
+															label="BB" width="7%" align="center" tooltiptext="Bases por Bolas" />
+														<column
+															label="EFE" width="8%" align="center" tooltiptext="Efectividad" />
+														<column
+															label="WHIP" width="7%" align="center" tooltiptext="Boletos y Hits por cada 9 Entradas" />
+													</columns>
+													<rows>
+														<row>
+															<label
+																value="25/11/2011" />
+															<label
+																value="15" />
+															<label
+																value="13" />
+															<label
+																value="7" />
+															<label
+																value="38" />
+															<label
+																value="47" />
+															<label
+																value="26" />
+															<label
+																value="10" />
+															<label
+																value="24" />
+															<label
+																value="12" />
+															<label
+																value=".280 " />
+															<label
+																value="5" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+											<space />
+											<groupbox
+												style="border-color:orange">
+												<caption
+													label="Nomenclatura" />
+												<grid>
+													<columns>
+														<column
+															label="Abreviatura" width="15%" />
+														<column
+															label="Siginificado" width="35%" />
+														<column
+															label="Abreviatura" width="15%" />
+														<column
+															label="Siginificado" width="35%" />
+													</columns>
+													<rows>
+														<row style="border:none;">
+															<label
+																value="JG" style="font-size:10px" />
+															<label
+																value="Juegos Ganados" style="font-size:10px" />
+															<label
+																value="JP" style="font-size:10px" />
+															<label
+																value="Juegos Perdidos" style="font-size:10px" />
+														</row>
+														<row style="border:none;">
+															<label
+																value="JS" style="font-size:10px" />
+															<label
+																value="Juegos Salvados" style="font-size:10px" />
+															<label
+																value="HP" style="font-size:10px" />
+															<label
+																value="Hits Permitidos" style="font-size:10px" />
+														</row>
+														<row style="border:none;">
+															<label
+																value="CP" style="font-size:10px" />
+															<label
+																value="Carreras Permitidas" style="font-size:10px" />
+															<label
+																value="CL" style="font-size:10px" />
+															<label
+																value="Carreras Limpias" style="font-size:10px" />
+														</row>
+														<row style="border:none;">
+															<label
+																value="K" style="font-size:10px" />
+															<label
+																value="Ponches Propinados" style="font-size:10px" />
+															<label
+																value="BB" style="font-size:10px" />
+															<label
+																value="Bases por Bolas Otorgadas"
+																style="font-size:10px" />
+														</row>
+														<row style="border:none;">
+															<label
+																value="EFE" style="font-size:10px" />
+															<label
+																value="Efectividad" style="font-size:10px" />
+															<label
+																value="WHIP" style="font-size:10px" />
+															<label
+																value="Boletos y hits por cada nueve entradas"
+																style="font-size:10px" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+											<space />
+										</panelchildren>
+									</panel>
+								</div>
+
+								<div width="100%">
+									<panel title="Logros"
+										collapsible="true" open="false">
+										<panelchildren>
+											<space />
+											<grid id="grid4"
+												mold="paging" pageSize="2">
+												<columns
+													menupopup="auto">
+													<column
+														label="Logro(s)" width="15%" align="center" />
+													<column
+														label="Competencia" width="20%" align="center" />
+													<column
+														label="Temporada" width="18%" align="center" />
+													<column
+														label="Categoría" width="18%" align="center" />
+													<column
+														label="Equipo" width="15%" align="center" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Campeón bate" />
+														<label
+															value="Copa Lara" />
+														<label
+															value="2007-2008" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="E" />
+													</row>
+													<row>
+														<label
+															value="Campeon hit" />
+														<label
+															value="Copa Lara" />
+														<label
+															value="2007-2008" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="E" />
+													</row>
+													<row>
+														<label
+															value="Jugador Màs Valioso" />
+														<label
+															value="liga" />
+														<label
+															value="2009-2010" />
+														<label
+															value="Junior" />
+														<label
+															value="B" />
+													</row>
+													<row>
+														<label
+															value="Mejor Segunda Base" />
+														<label
+															value="liga" />
+														<label
+															value="2009-2010" />
+														<label
+															value="Junior" />
+														<label
+															value="B" />
+													</row>
+												</rows>
+											</grid>
+											<space />
+										</panelchildren>
+									</panel>
+
+								</div>
+							</tabpanel>
+							<tabpanel id="Académico">
+								<space />
+								<grid id="grid5" mold="paging"
+									pageSize="2">
+									<columns menupopup="auto">
+										<column label="Año Escolar"
+											width="100px" />
+										<column label="Institución"
+											width="290px" />
+										<column label="Curso"
+											width="130px" />
+									</columns>
+									<rows>
+										<row>
+											<label value="2008-2009" />
+											<label
+												value="Colegio Andrés Bello" />
+											<label value="5to Grado" />
+										</row>
+										<row>
+											<label value="2009-2010" />
+											<label
+												value="Colegio Coto Paul" />
+											<label value="6to  Grado" />
+										</row>
+									</rows>
+								</grid>
+								<space />
+							</tabpanel>
+
+							<tabpanel id="Social">
+								<space />
+								<grid id="grid6" mold="paging"
+									pageSize="2">
+									<columns menupopup="auto">
+										<column label="Actividad"
+											width="20%" />
+										<column label="Institución"
+											width="55%" />
+										<column label="Horas/Sem"
+											width="12%" />
+										<column label="Fecha"
+											width="13%" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Música" />
+											<label
+												value="Conservatorio Vicente Emilio Sojo" />
+											<label value="3" />
+											<label value="01/01/2007" />
+										</row>
+										<row>
+											<label value="Otro Deporte" />
+											<label
+												value="Escuela de Fútbol Menor Polideportivo Máximo Viloria" />
+											<label value="2" />
+											<label value="01/01/2009" />
+										</row>
+									</rows>
+								</grid>
+								<space />
+							</tabpanel>
+
+							<tabpanel id="HistorialMedico">
+								<div width="100%">
+									<panel title="Lesiones"
+										collapsible="true" open="false">
+										<panelchildren>
+											<space />
+											<grid id="grid7"
+												mold="paging" pageSize="2">
+												<columns
+													menupopup="auto">
+													<column
+														label="Lesión" width="12%" align="center" />
+													<column
+														label="Fecha" width="12%" align="center" />
+													<column
+														label="Médico" width="12%" align="center" />
+													<column
+														label="Categoría" width="10%" align="center" />
+													<column
+														label="Equipo" width="8%" align="center" />
+													<column
+														label="Actividad" width="14%" align="center" />
+													<column
+														label="T. Recuperación" width="16%" align="center"
+														height="5%" />
+													<column
+														label="Observación" width="20%" align="center" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Fractura" />
+														<label
+															value="12/10/2008" />
+														<label
+															value="Fernando Montilla" />
+														<label
+															value="Junior" />
+														<label
+															value="E" />
+
+														<label
+															value="Competencia" />
+														<label
+															value="80 días" />
+														<label
+															value="Se fracturó la mano al atrapar una pelota" />
+													</row>
+													<row>
+														<label
+															value="Esguince" />
+														<label
+															value="20/09/2009" />
+														<label
+															value="Fernando Montilla" />
+														<label
+															value="Junior" />
+														<label
+															value="B" />
+														<label
+															value="Entrenamiento" />
+														<label
+															value="30 días" />
+														<label
+															value="Sufrió un esguince de tobillo al pisar mal" />
+													</row>
+												</rows>
+											</grid>
+											<space />
+										</panelchildren>
+									</panel>
+								</div>
+								<div width="100%">
+									<panel title="Enfermedad"
+										collapsible="true" open="false">
+										<panelchildren>
+											<space />
+											<grid id="grid8"
+												mold="paging" pageSize="2">
+												<columns
+													menupopup="auto">
+													<column
+														label="Enfermedad" width="15%" align="center" />
+													<column
+														label="Fecha" width="13%" align="center" />
+													<column
+														label="Médico" width="15%" align="center" />
+													<column
+														label="Categoría" width="12%" align="center" />
+													<column
+														label="Equipo" width="9%" align="center" />
+													<column
+														label="Observación" width="26%" align="center" />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Asma" />
+														<label
+															value="04/04/2007" />
+														<label
+															value="Luis Rodriguez" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="D" />
+
+														<label
+															value="En caso de ataque usar inhalador" />
+													</row>
+													<row>
+														<label
+															value="Hipertención" />
+														<label
+															value="30/07/2008" />
+														<label
+															value="Antonio Jimenez" />
+														<label
+															value="Pre-Junior" />
+														<label
+															value="B" />
+
+														<label
+															value="En caso de fatiga descansar" />
+													</row>
+												</rows>
+											</grid>
+											<space />
+										</panelchildren>
+									</panel>
+								</div>
+							</tabpanel>
+							<tabpanel id="HistorialConducta">
+								<space />
+								<grid id="grid9" mold="paging"
+									pageSize="2">
+									<columns menupopup="auto">
+										<column
+											label="Motivo Sanción" width="15%" />
+										<column label="Actividad"
+											width="14%" />
+										<column label="Fecha Inicio"
+											width="16%" />
+										<column
+											label="Fecha Culminación" 
+											width="22%" />
+										<column label="Período"
+											width="10%" />
+										<column label="Observación"
+											width="10%" />
+									</columns>
+
+									<rows>
+										<row>
+											<label
+												value="Jugador ilegal" />
+											<label value="Competencia" />
+											<label value="04/02/2008" />
+											<label value="04/03/2008" />
+											<label value="30 días" />
+											<label
+												value="El jugador no tenia permitido jugar el partido" />
+										</row>
+										<row>
+											<label
+												value="Agresión al árbitro" />
+											<label value="Competencia" />
+											<label value="10/11/2009" />
+											<label value="10/18/2009" />
+											<label value="1 Juego" />
+											<label
+												value="El jugador tuvo un comportamiento indebido" />
+										</row>
+
+									</rows>
+								</grid>
+								<space />
+							</tabpanel>
+						</tabpanels>
+					</tabbox>
+				</panelchildren>
+			</panel>
+
+			<div align="right">
+				<button label="Imprimir"
+					image="../../Recursos/Imagenes/imprimir.ico" orient="horizontal"
+					width="100px" />
+				<button label="Salir"
+					image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+					width="100px" />
+				<space />
+					</div>
+					</div>
+	</window>
+</zk>

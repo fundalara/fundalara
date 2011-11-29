@@ -1,0 +1,43 @@
+<?page title="Actividad"?>
+<window id="win" title="Actividad" border="normal" width="45%"
+	closable="true">
+
+	<grid id="gridActividad" style="border:none;" oddRowSclass="none">
+		<columns>
+			<column width="8%" />
+			<column width="20%" />
+		</columns>
+		<rows>
+			<row>
+				<label value="Código" />
+				<textbox id="txtCodigo" width="90%" maxlength="5"
+					disabled="true" />
+			</row>
+			<row>
+				<label value="Nombre" />
+				<div>
+					<textbox id="txtNombre" width="90%" maxlength="80"
+						constraint="no empty" focus="true" />
+					<label value="(*)" style="color:red" />
+				</div>
+			</row>
+		</rows>
+	</grid>
+	<div align="right">
+		<button id="btnGuardar" label="Guardar"
+			image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
+			width="100px" />
+		<button id="btnCancelar" label="Cancelar"
+			image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<button id="btnSalir" label="Salir"
+			image="Recursos/Imagenes/salir.png" orient="horizontal"
+			width="100px">
+			<attribute name="onClick"><![CDATA[
+				win.detach();
+			]]></attribute>
+		</button>
+	</div>
+
+	<label value="(*) Estos campos son obligatorios" style="color:red" />
+</window>

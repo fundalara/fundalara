@@ -1,0 +1,134 @@
+<?page title="Anuario" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Anuario" border="normal" closable="true" width="695px">
+	<panel title="Configuración">
+		<panelchildren>
+			<grid style="border:none;">
+				<columns>
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />		
+				</columns>
+				<rows>
+					<row style="border:none">
+						<label value="Categoría" />
+						<combobox value="TODAS" focus="true" width="70%">
+							<comboitem label="Preparatorio Nivel 1">
+							</comboitem>
+							<comboitem label="Preparatorio Nivel 2">
+							</comboitem>
+							<comboitem label="Pre-Infantil">
+							</comboitem>
+							<comboitem label="Infantil">
+							</comboitem>
+							<comboitem label="Pre-Junior">
+							</comboitem>
+							<comboitem label="Junior">
+							</comboitem>
+							<comboitem label="Juvenil">
+							</comboitem>
+						</combobox>
+						<label value="Equipo" />
+						<combobox value="TODOS" width="70%">
+							<comboitem label="A">
+							</comboitem>
+							<comboitem label="B">
+							</comboitem>
+							<comboitem label="C">
+							</comboitem>
+							<comboitem label="D">
+							</comboitem>
+							<comboitem label="E">
+							</comboitem>
+							<comboitem label="F">
+							</comboitem>					
+						</combobox>
+						<label value="Temporada" />
+						<combobox value="TODAS" width="70%">
+							<comboitem label="2008-2009">
+							</comboitem>
+							<comboitem label="2009-2010">
+							</comboitem>
+							<comboitem label="2010-2011">
+							</comboitem>
+							<comboitem label="2011-2012">
+							</comboitem>									
+						</combobox>						
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>	
+	<panel title="Anuario">
+		<panelchildren>	
+			<grid id="grid" mold="paging" pageSize="6" style="border-color:orange;">
+				<columns>
+					<column label="" align="center" width="25%" />
+					<column label="" align="center" width="25%" />
+					<column label="" align="center" width="25%" />
+					<column label="" align="center" width="25%" />
+				</columns>
+				<rows>
+					<row style="background-color:white;border-color:orange">
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+					</row>
+					<row style="background-color;border-color:orange">
+						<label value="Francisco Alvarado #12" />
+						<label value="Ángel Manzanarez #14" />
+						<label value="Diego Giménez #11" />
+						<label value="Cornelio Navas #25 " />
+					</row>					
+					<row style="background-color:white;border-color:orange">
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+					</row>
+					<row style="background-color;border-color:orange">
+						<label value="Freddy González #6" />
+						<label value="Rubén Córdova #32" />
+						<label value="Pastor Sánchez #40" />
+						<label value="Luís Guédez #17" />
+					</row>
+					<row style="background-color:white;border-color:orange">
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+					</row>
+					<row style="background-color;border-color:orange">
+						<label value="Rodrigo Cortez #7" />
+						<label value="Kelvin Mendoza #57" />
+						<label value="Luís Masiruby #18" />
+						<label value="Rafael Majano #9" />
+					</row>	
+					<row style="background-color:white;border-color:orange">
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+						<image src="/Recursos/Imagenes/jug.png"/>
+					</row>
+					<row style="background-color;border-color:orange">
+						<label value="Andrés Yépez #2" />
+						<label value="Ángel Osorio #5" />
+						<label value="Pedro Giménez #3" />
+						<label value="Esteban Sánchez #1 " />
+					</row>									
+				</rows>	
+			</grid>
+			<div align="right">
+				<button label="Imprimir" image="../../Recursos/Imagenes/imprimir.ico" orient="horizontal" width="100px"/>
+				<button label="Salir" image="../../Recursos/Imagenes/salir.png" orient="horizontal" width="100px"/>
+			</div>
+		</panelchildren>
+	</panel>		
+</window>
+</zk>
