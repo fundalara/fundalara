@@ -1,0 +1,27 @@
+<?page title="Inscribir" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Inscribir" border="normal" width="677px"
+		closable="true" apply="vista.atleta.InscribirJugadorCtrl">
+
+		<grid style="border:none;" oddRowSclass="none">
+			<columns>
+				<column width="30%" />
+				<column />
+			</columns>
+			<rows>
+				<row style="border:none;">
+					<label value="Tipo Inscripción" />
+					<combobox value="--Seleccione--" id="cmbTipoInscrip"
+						readonly="true" focus="true">
+						<comboitem label="Nuevo Ingreso" value="1" />
+						<comboitem label="Reingreso" value="2" />
+						<comboitem label="Plan Vacacional" value="3" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<div style="display:inline">
+			<include id="incCuerpo" />
+		</div>
+	</window>
+</zk>

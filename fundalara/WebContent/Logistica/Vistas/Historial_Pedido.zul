@@ -1,34 +1,45 @@
 <?page title="Historial Prestamos" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Historial de Prestamos" border="normal" width="90%"
-		height="90%" mode="modal" closable="true">
+	<window title="Historial de Prestamos" border="normal" 
+		height="50%" mode="modal" closable="true">
 		<grid>
 			<columns>
-					<column width="20%" align="center">
+					<column width="15%" align="center">
 						<label style="font-weight:bold;">
-							Material
+			                                                              				Material
 						</label>
 					</column>
-					<column width="20%" align="center">
+					<column width="10%" align="center">
 						<label style="font-weight:bold;">
 							Cantidad
 						</label>
 					</column>
-					<column width="20%" align="center">
+					<column width="15%" align="center">
 						<label style="font-weight:bold;">
 							Actividad
 						</label>
 					</column>
-					<column width="20%" align="center">
+					<column width="10%" align="center">
 						<label style="font-weight:bold;">
-							Fecha De Asignación
+							Solicitado
 						</label>
 					</column>
-					<column width="20%" align="center">
+					<column width="10%" align="center">
+						<label style="font-weight:bold;">
+							Asignado
+						</label>
+					</column>
+					<column width="10%" align="center">
+						<label style="font-weight:bold;">
+							Usado
+						</label>
+					</column>
+					<column width="25%" align="center">
 						<label style="font-weight:bold;">
 							Intervalo de Uso
 						</label>
 					</column>
+					
 			</columns>
 			<rows>
 					<row>
@@ -45,7 +56,13 @@
 							01/11/2011
 						</label>
 						<label>
-							12:00pm - 4:00pm
+							01/11/2011
+						</label>
+						<label>
+							01/11/2011
+						</label>
+						<label>
+							01/11/2011 - 01/11/2011
 						</label>
 					</row>
 					<row>
@@ -62,7 +79,12 @@
 							01/11/2011
 						</label>
 						<label>
-							2:00pm - 6:00pm
+							01/11/2011
+						</label><label>
+							01/11/2011
+						</label>
+						<label>
+							01/11/2011 - 01/11/2011
 						</label>
 					</row>					
 			</rows>

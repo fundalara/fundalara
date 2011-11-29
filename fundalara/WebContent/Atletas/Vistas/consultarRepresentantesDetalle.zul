@@ -1,7 +1,7 @@
 <?page title="Atletas por Representante" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Atletas por Representante" border="normal"
-		width="520px" closable="true" maximizable="true" minimizable="true">
+	<window title="Jugadores por Representante" border="normal"
+		width="520px" closable="true">
 		<panel title="">
 			<panelchildren>
 				<grid style="border:none;" oddRowSclass="none">
@@ -27,7 +27,7 @@
 				</grid>
 				<grid>
 					<columns>
-						<column label="Nombre del Atleta" width="40%" />
+						<column label="Jugadores" width="40%" />
 						<column label="Categoría" width="40%" />
 					</columns>
 					<rows>
@@ -47,15 +47,14 @@
 				</grid>
 			</panelchildren>
 		</panel>
+		
 		<div align="right">
-			<button label="Cancelar"
-				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
-				width="100px" />
-			<space />
+				<button label="Imprimir"
+					image="/Recursos/Imagenes/imprimir.ico" orient="horizontal"
+					width="100px" />
 			<button label="Salir"
-				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				image="/Recursos/Imagenes/salir.png" orient="horizontal"
 				width="100px" />
-			<space />
 		</div>
 	</window>
 </zk>

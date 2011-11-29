@@ -1,6 +1,6 @@
 <?page title="Registro Material" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="Registro  de Material" border="normal" width="600px" maximizable="true" minimizable="true">
+<window title="Registro  de Material" border="normal" width="690px" maximizable="true" minimizable="true">
 	<panel width="100%" height="100%">
 		<panelchildren>
 			<grid height="100%" width="100%">
@@ -12,10 +12,10 @@
 					<rows>
 						<row>
 							<div>
-								<label value="Codigo: "></label>
+								<label value="Código: "></label>
 								<textbox width="7%"></textbox>
 								<space width="3%"></space>
-								<label value="Categoria: "></label>
+								<label value="Categoría: "></label>
 								<combobox width="15%"></combobox>
 								<space width="3%"></space>
 								<label value="Tipo de Material: "></label>
@@ -24,31 +24,36 @@
 						</row>
 						<row height="100px">
 							<div>
-								<label value="Descripcion: "></label>
+								<label value="Descripción: "></label>
 								<textbox multiline="true" height="120px" width="100%"></textbox>
 							</div>
 						</row>
 						<row>
 							<div>
-								<label value="Cantidad: "></label>
-								<textbox></textbox>
-								<space width="3%"></space>
-								<label value="Unidad de Medida"></label>
-								<textbox></textbox>		
+								<label value="Cantidad: " width="10%"></label>
+								<space  width="3%"></space>
+								<textbox width="" ></textbox>
+								<space width="1%"></space>
+								<label value="Presentación: " width="15%"></label>
+								<combobox value="--Seleccione--" width="30%" id="combo">
+									<comboitem label="Kilogramos" />
+									<comboitem label="Gramos " id="C"/>
+									<comboitem label="Litros" id="Com" />									
+									<comboitem label="Mililitros" />								
+								</combobox>
 							</div>
 						</row>	
 						<row>
 							<div>
-								<label value="Stock Minimo:"></label>
+								<label value="Stock Mínimo:"></label>
 								<textbox></textbox>
-								<space width="3%"></space>
-								<label value="Stock Maximo:"></label>
+								<space width="1%"></space>
+								<label value="Stock Máximo:"></label>
 								<textbox></textbox>
-								<separator height="10px"></separator>
-								<hbox>
-									<label value="Reutilizable"></label>
+								<space  width="2%"></space>
+								<label value="Reutilizable"></label>
 									<checkbox></checkbox>
-								</hbox>
+								<separator height="10px"></separator>
 							</div>
 						</row>
 						<row>

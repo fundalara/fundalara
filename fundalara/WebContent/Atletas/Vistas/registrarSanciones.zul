@@ -1,184 +1,283 @@
-<?page title=""?>
+<?page title="Registrar Sanciones"?>
 <zk>
-	<!-- zscript><![CDATA[
-		public void enlace(String cad) {
-		cuerpo.setSrc(cad);
-		}
-		]]></zscript-->
+	<window id="win" title="Registro de Sanciones" border="normal"
+		width="640px" closable="true">
 
-	<window title="Registro de Sanciones" border="normal" width="640px"
-		closable="true">
-		<groupbox>
-			<caption label="Atleta"></caption>
-			<grid>
+		<zscript><![CDATA[
+			import org.zkoss.lang.Strings;
+			import org.zkoss.lang.Objects;
+			public void validar() {
+				if (cmbtipoSancion.getSelectedItem().getValue().toString()
+						.equals("Juegos")) {
+					lbcantidad.setVisible(true);
+					lbcantidad.setValue("Juegos");
+				} else {
+					if (cmbtipoSancion.getSelectedItem().getValue().equals("Dias")) {
+						lbcantidad.setVisible(true);
+						lbcantidad.setValue("Días");
+					}
+				}
+			}
+		]]></zscript>
+
+		<groupbox style="border-color:orange">
+			<caption style="font-weight: bold" label="Jugador" />
+			<grid style="border:none;" oddRowSclass="none">
 				<columns>
-					<column width="15%" />
-					<column width="30%" />
-					<column width="15%" />
+					<column width="90%" />
+					<column width="10%" />
 				</columns>
 				<rows>
-					<row>
-						<label value="Nombre" />
-						<hbox>
-							<button
-								image="../../Recursos/Imagenes/consultar.ico">
-								<attribute name="onClick"><![CDATA[
-									Window nuevaVentana = (Window) Executions.createComponents(
-											"Atleta/Vista/Busquedatleta.zul", null, null);
-									try {
-										nuevaVentana.doModal();
-									} catch (Exception e) {
-									}
-								]]></attribute>
-							</button>
-							<textbox disabled="true" maxlength="40" />
-						</hbox>
-						<label value="Apellido" />
-						<div>
-							<textbox disabled="true" maxlength="40" />
-						</div>
-					</row>
-				</rows>
-			</grid>
-		</groupbox>
-		<panel title="Datos de Sancion " collapsible="false"
-			open="true">
-			<panelchildren>
-				<groupbox>
-					<grid oddRowSclass="none">
-						<columns>
-							<column width="20%" />
-							<column width="36%" />
-							<column width="20%" />
-							<column width="30%" />
-						</columns>
-						<rows>
-							<row>
-								<label value="Actividad" />
-								<cell colspan="3">
-									<hbox>
-										<combobox
-											value="-Seleccione-">
-											<comboitem
-												label="Competencia" />
-											<comboitem
-												label="Entrenamiento" />
+					<row style="border:none">
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="21%" />
+								<column width="32%" />
+								<column />
+								<column width="32%" />
+							</columns>
+							<rows>
+								<row spans="1,3" style="border:none">
+									<label value="Cédula" />
+									<div>
+										<combobox value="-" width="4%"
+											readonly="true">
+											<comboitem label="V" />
+											<comboitem label="E" />
 										</combobox>
-										<label value="(*)"
-											style="color:red" />
-										<space />
-										<toolbarbutton
-											image="../../Recursos/Imagenes/agregar.ico"
-											tooltiptext="Agregar actividad">
+										<intbox constraint="no negative"
+											width="19%" disabled="false" />
+										<button id="Jugador"
+											tooltiptext="Consultar Jugador"
+											image="../../Recursos/Imagenes/consultar.ico">
 											<attribute name="onClick"><![CDATA[
 												Window nuevaVentana = (Window) Executions.createComponents(
-														"Atleta/Vista/Busquedatleta.zul", null, null);
+														"Atleta/Vistas/buscarJugador.zul", null, null);
 												try {
 													nuevaVentana.doModal();
 												} catch (Exception e) {
 												}
 											]]></attribute>
-										</toolbarbutton>
-									</hbox>
-								</cell>
-							</row>
-							<row>
-								<label value="Motivo de Sancion" />
-								<cell colspan="3">
-									<hbox>
-										<combobox
-											value="-Seleccione-">
-											<comboitem
-												label="Agresion al adversario" />
-											<comboitem
-												label="Agresion al arbitro" />
-											<comboitem
-												label="Agresion al tecnico" />
-											<comboitem
-												label="Jugador ilegal" />
-										</combobox>
-										<label value="(*)"
-											style="color:red" />
-										<space />
-										<toolbarbutton
-											image="../../Recursos/Imagenes/agregar.ico"
-											tooltiptext="Agregar motivo">
-										</toolbarbutton>
-									</hbox>
-								</cell>
-							</row>
-							<row>
-								<label value="Periodo" />
-								<hbox>
-									<combobox id="combo"
-										value="-Seleccione-">
-										<comboitem label="Juego"
-											value="Juego" />
-										<comboitem label="Tiempo"
-											value="Tiempo" />
-									</combobox>
-									<label value="(*)"
-										style="color:red" />
-								</hbox>
-								<label value="Inicio de Sancion" />
-								<hbox>
-									<datebox id="nacimientobox"
-										constraint="no future" format="dd/MM/yyyy" />
-									<label value="(*)"
-										style="color:red" />
-								</hbox>
-							</row>
-							<row></row>
-							<row align="left">
-								<label value="Cantidad" />
-								<cell colspan="3">
-									<hbox>
-										<decimalbox></decimalbox>
-										<label id="ayu"
-											visible="false">
-										</label>
-										<label value="(*)"
-											style="color:red" />
-									</hbox>
-								</cell>
-							</row>
-							<row>
-								<label value="Documentos"></label>
-								<cell colspan="3">
-									<hbox>
-										<checkbox
-											label="Informe Técnico de Sanción" />
-										<checkbox
-											label="Recepción de Memo de Sanción" />
-									</hbox>
-								</cell>
-							</row>
-						</rows>
-					</grid>
-				</groupbox>
+										</button>
+									</div>
+								</row>
+								<row style="border:none">
+									<label value="Nombres" />
+									<textbox maxlength="50" width="95%"
+										constraint="no empty" disabled="true" />
+									<label value="Apellidos" />
+									<textbox maxlength="40" width="95%"
+										disabled="true" />
+								</row>
+								<row style="border:none">
+									<label value="Fecha Nacimiento"
+										width="95%" />
+									<datebox id="dtboxFechaNac"
+										constraint="no future" format="dd/MM/yyyy"
+										style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
+										disabled="true" width="85%" />
+									<label value="Categoría"
+										width="95%" />
+									<textbox maxlength="40" width="95%"
+										disabled="true" />
+								</row>
+								<row style="border:none">
+									<label value="Equipo" width="95%" />
+									<textbox maxlength="40" width="95%"
+										disabled="true" />
+									<label value="Número" width="95%" />
+									<textbox maxlength="2" width="15%"
+										disabled="true" />
+								</row>
+							</rows>
+						</grid>
+
+						<grid style="border:none" oddRowSclass="none">
+							<rows>
+								<row style="border:none" height="80%"
+									align="center" valign="middle">
+									<groupbox mold="3d">
+										<image
+											src="../../Recursos/Imagenes/jug.png" height="80px"
+											width="80px" tooltiptext="Seleccionar Foto" />
+									</groupbox>
+								</row>
+							</rows>
+						</grid>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<space height="10px" />
+
+		<panel title="Datos de Sanción ">
+			<panelchildren>
+				<grid oddRowSclass="none">
+					<columns>
+						<column width="15%" />
+						<column />
+						<column width="9%" />
+						<column />
+					</columns>
+					<rows>
+						<row style="border:none;">
+							<div>
+								<space width="2%"/>
+								<label value="Actividad" />
+							</div>
+							<div>
+								<combobox value="-Seleccione-">
+									<comboitem label="Competencia" />
+									<comboitem label="Entrenamiento" />
+								</combobox>
+								<label value="(*)" style="color:red" />
+							</div>
+						</row>
+						<row style="border:none;">
+							<div>
+								<space width="2%"/>
+								<label value="Motivo" maxlength="30" width="100%" />
+							</div>
+							<div>
+								<combobox value="-Seleccione-">
+									<comboitem
+										label="Agresión al adversario" />
+									<comboitem
+										label="Agresión al árbitro" />
+									<comboitem
+										label="Agresión al técnico" />
+									<comboitem label="Jugador ilegal" />
+								</combobox>
+								<label value="(*)" style="color:red" />
+							</div>
+						</row>
+						<row spans="1,3" style="border:none">
+							<label/>
+							<grid style="border:none" width="90%">
+								<columns>
+									<column width="95%"/>
+								</columns>
+								<rows>
+									<row style="border:none" >
+										<grid>
+											<columns>
+												<column label="Motivo"/>
+											</columns>
+											<rows>
+												<row>
+													<label value="Agresión al adversario" />
+												</row>
+												<row>
+													<label value="Agresión al árbitro" />
+												</row>
+											</rows>
+										</grid>
+										<vbox>
+											<button image="../../Recursos/Imagenes/agregar.ico" />
+											<button image="../../Recursos/Imagenes/editar.ico" />
+											<button image="../../Recursos/Imagenes/quitar.ico" />
+										</vbox>		
+									</row>
+								</rows>
+							</grid>
+						</row>
+						<row style="border:none;">
+							<div>
+								<space width="2%"/>
+								<label value="Tipo Sanción" />
+							</div>
+							<div>
+								<combobox id="cmbtipoSancion"
+									value="-Seleccione-" onChange="validar()">
+									<comboitem label="Juegos"
+										value="Juegos" />
+									<comboitem label="Días"
+										value="Dias" />
+								</combobox>
+								<label value="(*)" style="color:red" />
+							</div>
+							<label value="Cantidad" />
+							<div>
+								<spinner width="25%"/>
+								<label id="lbcantidad" visible="false" />
+								<label value="(*)" style="color:red" />
+							</div>
+						</row>
+						<row spans="1,3" style="border:none;">
+							<div>
+								<space width="2%"/>
+								<label value="Fecha Inicio" />
+							</div>
+							<div>
+								<datebox constraint="no future" format="dd/MM/yyyy"
+									style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+								<label value="(*)" style="color:red" />
+							</div>
+						</row>
+						<row spans="1,3" style="border:none;">
+							<div>
+								<space width="2%"/>
+								<label value="Documentos" />
+							</div>
+							<grid width="97%">
+								<columns>
+									<column label="Nombre" width="70%"/>
+									<column label=" Entregado" align="center" width="15%" />
+									<column label="Documento" align="center" width="15%" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Informe Técnico de Sanción" />
+										<checkbox />
+										<button label="Subir">
+											<attribute name="onClick"><![CDATA[
+												Object media = Fileupload.get();
+											]]></attribute>
+										</button>
+									</row>
+									<row>
+										<label value="Memorandum de Sanción" />
+										<checkbox />
+										<button label="Subir">
+											<attribute name="onClick"><![CDATA[
+												Object media = Fileupload.get();
+											]]></attribute>
+										</button>
+									</row>
+								</rows>
+							</grid>
+						</row>
+						<row spans="1,3" style="border:none;">
+							<div>
+								<space width="2%"/>
+								<label value="Observación"/>
+							</div>
+							<textbox multiline="true" height="40px" width="96.5%"/>
+						</row>
+					</rows>
+				</grid>
 			</panelchildren>
 		</panel>
+
 		<div height="55%">
-			<label value="(*) Estos campos son obligatorios"
-				style="color:red">
-			</label>
+			<label value="(*) Campo Obligatorio" style="color:red" />
 		</div>
+
 		<div align="right">
 			<button label="Guardar"
 				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
 				width="100px" />
-			<space />
 			<button label="Cancelar"
 				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
 				width="100px" />
-			<space />
-			<button label="Salir" image="./Recursos/Imagenes/salir.png"
-				orient="horizontal" width="100px" />
-			<space />
+			<button label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px">
+				<attribute name="onClick"><![CDATA[
+					win.detach();
+				]]></attribute>
+			</button>
 		</div>
 	</window>
-
-	<!-- div style="display:inline">
-		<include id="cuerpo" />
-		</div-->
 </zk>

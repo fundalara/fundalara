@@ -1,7 +1,7 @@
 <?page title="Registro Resultados" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="Registro Resultados" border="normal" width="670px" id="formResultados"
-	height="700px" apply="">
+<window title="Registro Resultados" border="normal" width="690px" id="formResultados" mode="embedded"
+	 apply="">
 <tabbox height="100%" width="100%">
 		<tabs>
 			<tab label="Mantenimiento"></tab>
@@ -15,14 +15,14 @@
 				<menuitem label="Lugar" style="font-weight:bold"/>
 				<menuitem label="Tipo" style="font-weight:bold"/>	
 			</menubar>
-			<panel collapsible="false" width="100%" height="30%" title="Listado de Actividades en Ejecución">
+			<panel collapsible="false" width="100%" title="Listado de Actividades en Ejecución">
 				<panelchildren>
 				<grid width="100%" height="120px">
 					<columns>
-						<column label="Codigo" width="10%"/>
+						<column label="Código" width="10%"/>
 						<column label="Descripción" width="30%"/>
 						<column label="Tipo" width="20%"/>
-						<column label="Periodico" width="20%"/>
+						<column label="Periódico" width="20%"/>
 						<column label="Fecha" width="20%"/>
 					</columns>
 					<rows>
@@ -63,7 +63,7 @@
 			id="PanelDetalle2" movable="true">
 				<panelchildren>
 						<div width="100%" height="100%">
-							<label style="font-weight:bold">Codigo:</label>
+							<label style="font-weight:bold">Código:</label>
 							<label>001</label>
 							<space width="15%"/>
 							<label style="font-weight:bold">Descripción:</label>
@@ -108,7 +108,7 @@
 												</grid>
 		
 													<div>
-													<space width="67%"/>											
+													<space width="55%"/>											
 													<button label="Guardar" image="../Recursos/Imagenes/guardar.ico"/>
 													<button label="Cancelar" image="../Recursos/Imagenes/cancelar.ico" />
 													<button label="Salir" image="../Recursos/Imagenes/atras.ico" />
@@ -129,11 +129,11 @@
 			<menuitem label="Lugar" style="font-weight:bold"/>
 			<menuitem label="Tipo" style="font-weight:bold"/>	
 		</menubar>
-		<panel collapsible="false" width="100%" height="30%" title="Listado de Actividades en Ejecución">
+		<panel collapsible="false" width="100%"  title="Listado de Actividades en Ejecución">
 			<panelchildren>
 			<grid width="100%" height="120px">
 				<columns>
-					<column label="Codigo" width="20%"/>
+					<column label="Código" width="20%"/>
 					<column label="Descripción" width="30%"/>
 					<column label="Tipo" width="30%"/>
 					<column label="Fecha" width="20%"/>
@@ -168,11 +168,11 @@
 			</panelchildren>
 		</panel>
 	
-		<panel collapsible="True" width="100%" height="100%" title="Detalle de Act. Complementaria" 
+		<panel collapsible="True" width="100%" title="Detalle de Act. Complementaria" 
 		id="PanelDetalle" movable="true">
 			<panelchildren>
 					<div width="100%" height="100%">
-						<label style="font-weight:bold">Codigo:</label>
+						<label style="font-weight:bold">Código:</label>
 						<label>001</label>
 						<space width="15%"/>
 						<label style="font-weight:bold">Descripción:</label>
@@ -217,7 +217,7 @@
 											</grid>
 	
 												<div>
-												<space width="67%"/>											
+												<space width="55%"/>											
 												<button label="Guardar" image="../Recursos/Imagenes/guardar.ico"/>
 												<button label="Cancelar" image="../Recursos/Imagenes/cancelar.ico" />
 												<button label="Salir" image="../Recursos/Imagenes/atras.ico" />
