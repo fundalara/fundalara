@@ -1,9 +1,8 @@
 <?page title="Auto Generated index.zul"?>
 <?component name="Calen" macro-uri="index.zul" inline="true"?>
-<div align="center">
-	<separator height="15px" />
-	<window title="Registro de Resultados" border="normal" width="170px"
-		height="">
+
+	<window id="wndPlanificacion" apply="calendario.planificacion" title="Planificacion" border="normal" width="180px"
+		height="" closable="true" >
 		<grid>
 			<rows>
 				<row>
@@ -53,24 +52,15 @@
 			<rows>
 
 				<row>
-					<button image="../Recursos/Imagenes/guardar.ico"
+					<button id="btnAceptar" image="Recursos/Imagenes/aceptar.ico"
 						width="45px" />
-					<button image="../Recursos/Imagenes/imprimir.ico"
+					<button image="Recursos/Imagenes/cancelar.ico"
 						width="45px" />
-					<button image="../Recursos/Imagenes/eliminar.ico"
+					<button image="Recursos/Imagenes/salir.png"
 						width="45px" />
 
-				</row>
-				<row>
-					<button image="../Recursos/Imagenes/editar.ico"
-						width="45px" />
-					<button image="../Recursos/Imagenes/cancelar.ico"
-						width="45px" />
-					<button image="../Recursos/Imagenes/salir.png"
-						width="45px" />
 				</row>
 			</rows>
 		</grid>
 		<include id="ventana" />
 	</window>
-</div>

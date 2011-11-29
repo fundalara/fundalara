@@ -1,14 +1,12 @@
 <?page title="Auto Generated index.zul"?>
-<div align="center">
-	<separator height="15px" />
-	<window title="Asignar Instalacion" border="normal"
-		width="600px" height="">
+	<window title="Asignar Instalacion - PREINFANTIL" border="normal" width="550px"
+		height="" closable="true">
 
 		<grid>
 			<columns>
-				<column width="110px" align="left"/>
+				<column width="110px" align="left" />
 				<column width="125px" align="center" />
-				<column width="115px" align="left"/>
+				<column width="115px" align="left" />
 				<column width="140px" align="center" />
 				<column width="80px" />
 			</columns>
@@ -22,10 +20,10 @@
 						<comboitem label="CenterField" />
 						<comboitem label="RightField" />
 					</combobox>
-					
+
 				</row>
-				
-				<row>
+
+				<row height="30px">
 					<label value="Equipo" width="100px" height="25" />
 					<combobox value="--Seleccione--" width="120px">
 						<comboitem label="A" />
@@ -36,16 +34,7 @@
 						<comboitem label="F" />
 					</combobox>
 					<label value="Manager" width="100px" />
-					<textbox value="Pedro Jose Grifol" width="120px"/>
-					
-					<button image="../Recursos/Imagenes/agregar.ico">
-						<attribute name="onClick">
-							{
-								Messagebox.show("Manager Asignado al Equipo", "Fundalara",
-										Messagebox.OK, Messagebox.INFORMATION);
-							}
-						</attribute>
-					</button>
+					<textbox value="Pedro Jose Grifol" width="120px" />
 				</row>
 			</rows>
 		</grid>
@@ -54,94 +43,66 @@
 		<separator />
 
 
-		<hbox >
-											<grid height="110px"
-												width="520px">
-												<columns
-													sizable="true">
+		<hbox>
+			<grid height="110px" >
+				<columns sizable="true">
 
-													<column
-														label="Instalacion" width="180px" align="center" />
-													<column
-														label="Equipo" width="90px" align="center" />
-													<column
-														label="Manager" width="200px" align="center" />													
-												</columns>
+					<column label="Instalacion" width="200px"
+						align="center" />
+					<column label="Equipo" width="100px" align="center" />
+					<column label="Manager" width="200px"
+						align="center" />
+				</columns>
 
-												<rows>
+				<rows>
 
-													<row
-														height="25px">
-														<label
-															value="Jaula de Bateo" />
-														<label
-															value="A" />
-														<label
-															value="Pedro Jose Grifol" />
+					<row height="25px">
+						<label value="Jaula de Bateo" />
+						<label value="A" />
+						<label value="Pedro Jose Grifol" />
 
-													</row>
-													<row
-														height="25px">
-														<label
-															value="Infield" />
-														<label
-															value="B" />
-														<label
-															value="Jose Antonio Lopez" />
+					</row>
+					<row height="25px">
+						<label value="Infield" />
+						<label value="B" />
+						<label value="Jose Antonio Lopez" />
 
-													</row>
-													<row
-														height="25px">
-														<label
-															value="LeftField" />
-														<label
-															value="C" />
-														<label
-															value="Aaron Chacon" />
+					</row>
+					<row height="25px">
+						<label value="LeftField" />
+						<label value="C" />
+						<label value="Aaron Chacon" />
 
-													</row>
-													<row
-														height="25px">
-														<label value="" />
-														<label value="" />
-														<label />
+					</row>
+					<row height="25px">
+						<label value="" />
+						<label value="" />
+						<label />
 
-													</row>
-													<row
-														height="25px">
-														<label />
-														<label />
-														<label />
+					</row>
+					<row height="25px">
+						<label />
+						<label />
+						<label />
 
-													</row>
-													<row
-														height="15px">
-														<label />
-														<label />
-														<label />
+					</row>
+					<row height="15px">
+						<label />
+						<label />
+						<label />
 
-													</row>
-												</rows>
-											</grid>
-											<grid width="55px">
-												<columns
-													sizable="true">
-													<column
-														align="center" />
+					</row>
+				</rows>
+			</grid>
+			<vbox>
 
-												</columns>
-												<rows>
-													<row>
-														<button
-															image="../Recursos/Imagenes/editar.ico" />
-													</row>
-													<row>
-														<button
-															image="../Recursos/Imagenes/quitar.ico" />
-													</row>
-												</rows>
-											</grid>
-										</hbox>
+				<button image="Recursos/Imagenes/agregar.ico" />
+				<separator height="5px" />
+				<button image="Recursos/Imagenes/editar.ico" />
+				<separator height="5px" />
+				<button image="Recursos/Imagenes/quitar.ico" />
+			</vbox>
+		</hbox>
 
 
 		<separator />
@@ -150,7 +111,7 @@
 
 
 
-		
+
 		<separator />
 
 		<grid height="50px">
@@ -166,19 +127,18 @@
 
 				<row height="">
 					<label value="" />
-					<button image="../Recursos/Imagenes/guardar.ico" label="Guardar"
-						width="95px" />
-					<button image="../Recursos/Imagenes/imprimir.ico"
+					<button image="Recursos/Imagenes/guardar.ico"
+						label="Guardar" width="95px" />
+					<button image="Recursos/Imagenes/imprimir.ico"
 						label="Imprimir" width="95px" />
-					
-					<button image="../Recursos/Imagenes/cancelar.ico"
+
+					<button image="Recursos/Imagenes/cancelar.ico"
 						label="Cancelar" width="100px" />
-					<button image="../Recursos/Imagenes/salir.png" label="Salir"
-						width="95px" />
+					<button image="Recursos/Imagenes/salir.png"
+						label="Salir" width="95px" />
 				</row>
 			</rows>
 		</grid>
 
 
 	</window>
-</div>

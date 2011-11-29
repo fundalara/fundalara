@@ -1,33 +1,99 @@
 <?page title="Auto Generated index.zul"?>
-<div align="center">
-	<separator height="15px" />
-	<window closable="true" title="Cumplimiento de Entrenamiento"
-		border="normal" width="650px">
+
+	<window closable="true" title="Cumplimiento de Entrenamiento - EQUIPO A - PREINFANTIL"
+		border="normal" width="600px" >
 		<grid>
 			<rows>
+			<row>
+			<grid>
+								<columns>
+									<column label="" width="110PX" />
+									<column label="" width="130PX" align="center"/>
+									<column label="" width="110PX" />
+									<column label="" width="180PX" align="center"/>
+									
+
+								</columns>
+								<rows>
+									<row height="40px">
+										<label value="Realizado"
+											width="100px" />
+										<hbox>
+											<radiogroup>
+												<radio checked="true"
+													label="SI" />
+												<space />
+												<radio label="NO" />
+											</radiogroup>
+										</hbox>
+										<label value="Observacion"></label>
+										<textbox width="200px"/>
+										
+									</row>
+									
+								</rows>
+							</grid>
+			</row>
 				<row>
-					<panel title="Manager Encargado"
+					<panel title="Horario de Entrenamiento"
 						collapsible="true">
 						<panelchildren>
 
 							<grid>
 								<columns>
-									<column label="" width="80PX" />
-									<column label="" width="180PX" />
-									<column label="" width="80PX" />
-									<column label="" width="200PX" />
+									<column label="" width="110PX" />
+									<column label="" width="130PX" align="center"/>
+									<column label="" width="110PX" />
+									<column label="" width="180PX" align="center"/>
+									
+
 								</columns>
 								<rows>
-									<row>
-										<label value="Instalacion"></label>
-										<combobox value="Jaula de Bateo"
-											width="140px">
+									
+									<row height="40px">
+										
+										<label value="Fecha"></label>
+										<datebox width="120px" />
+										<label value="Hora"></label>
+										<hbox>
+										<timebox />
+										<space />
+										<label value="---"></label>
+										<space />
+										<timebox />
+										</hbox>
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>				
+				<row>
+					<panel title="Manager Encargado"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<columns>
+									<column label="" width="110PX" />
+									<column label="" width="130PX" align="center"/>
+									<column label="" width="110PX" />
+									<column label="" width="180PX" align="center"/>
+								</columns>
+								<rows>
+									<row height="40px">
+										<label value="Manager"
+											width="100px" />
+										<combobox
+											value="Francisco Perez" width="120px">
 											<comboitem
-												label="Tunel Derecho" />
-											<comboitem label="Infield" />
+												label="Emmanuel Ortega" />
+											<comboitem
+												label="Jose Gutierrez" />
+											<comboitem
+												label="Yovanny Mendoza" />
 										</combobox>
 										<label value="Observacion"></label>
-										<textbox width="190px" />
+										<textbox width="200px" />
 									</row>
 								</rows>
 							</grid>
@@ -38,111 +104,33 @@
 					<panel title="Instalacion Utilizada"
 						collapsible="true">
 						<panelchildren>
-
 							<grid>
 								<columns>
-									<column label="" width="80PX" />
-									<column label="" width="180PX" />
-									<column label="" width="80PX" />
-									<column label="" width="200PX" />
-								
+									<column label="" width="110PX" />
+									<column label="" width="130PX" align="center" />
+									<column label="" width="110PX" />
+									<column label="" width="200PX" align="center" />
 								</columns>
 								<rows>
-									<row>
-										<label
-														value="Manager" width="100px" />
-													<combobox
-														value="Francisco Perez" width="130px">
-														<comboitem
-															label="Emmanuel Ortega" />
-														<comboitem
-															label="Jose Gutierrez" />
-														<comboitem
-															label="Yovanny Mendoza" />
-													</combobox>
+									<row height="40px">
+										<label value="Instalacion"></label>
+										<combobox value="Jaula de Bateo"
+											width="120px">
+											<comboitem
+												label="Tunel Derecho" />
+											<comboitem label="Infield" />
+										</combobox>
 										<label value="Observacion"></label>
-										<textbox width="190px" />
+										<textbox width="200px" />
 									</row>
 								</rows>
 							</grid>
+
 						</panelchildren>
 					</panel>
 				</row>
-				<row>
-					<panel title="Actividades Realizadas"
-						collapsible="true">
-						<panelchildren>
-							<grid height="150px">
-								<columns sizable="true">
-									<column width="520px"
-										align="center" />
-									<column width="60px" align="center" />
-								</columns>
-								<rows>
-									<row height="15px">
-										<listbox checkmark="true"
-											multiple="true" height="150px">
-											<listhead>
-												<listheader label=""
-													sort="auto" width="28px" />
-												<listheader
-													label="Actividad" sort="auto" align="center" />
-												<listheader
-													label="Tiempo (min)" sort="auto" align="center" />
-											</listhead>
-											<listitem>
-												<listcell label="" />
-												<listcell label="Bateo" />
-												<listcell label="10" />
-											</listitem>
-											<listitem>
-												<listcell label="" />
-												<listcell
-													label="Fildeo" />
-												<listcell label="30" />
-											</listitem>
-										</listbox>
-										<button
-											image="../Recursos/Imagenes/quitar.ico" />
-									</row>
-								</rows>
-							</grid>
-							<grid>
-								<columns>
-									<column label="" width="80PX" />
-									<column label="" width="170PX" />
-									<column label="" width="80PX" />
-									<column label="" width="140PX" />
-									<column label="" width="40PX" align="left" />
-								</columns>
-								<rows>
-									<row>
-										<label value="Actividad"></label>
-										<combobox
-														value="--Seleccione--" width="120px">
-														<comboitem
-															label="BATEO" />
-														<comboitem
-															label="TROTE" />
-														<comboitem
-															label="LANZAMIENTO" />
-													</combobox>
-										<label value="Tiempo"></label>
-										<hbox
-														width="100px">
-														<timebox width="70px"/>
-														
-														<label
-															value=" min" width="20px" />
-													</hbox>
-										<button
-											image="../Recursos/Imagenes/agregar.ico" />
-									</row>
-								</rows>
-							</grid>
-						</panelchildren>
-					</panel>
-				</row>
+				
+				
 			</rows>
 		</grid>
 
@@ -160,15 +148,16 @@
 
 				<row height="15px">
 					<label />
-					<button image="../Recursos/Imagenes/guardar.ico"
+					<button image="Recursos/Imagenes/guardar.ico"
 						label="Guardar" width="100px" />
-					<button image="../Recursos/Imagenes/cancelar.ico"
+					<button image="Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="100px" />
+					<button image="Recursos/Imagenes/cancelar.ico"
 						label="Cancelar" width="100px" />
-					<button image="../Recursos/Imagenes/salir.png"
+					<button image="Recursos/Imagenes/salir.png"
 						label="Salir" width="100px" />
 				</row>
 			</rows>
 		</grid>
 
 	</window>
-</div>

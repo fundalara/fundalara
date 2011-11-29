@@ -1,20 +1,10 @@
 <zk xmlns:h="xhtml" xmlns:zk="zk">
-
-
 				<h:ul id="ul">
 					<h:li>Nestle Coffee</h:li>
 					<h:li>Evian Water</h:li>
-				</h:ul>	
-
-
-
-
-	
-	<textbox id = "text"/>
-	
-	<button label ="Add Item" zk:onClick="addItem()" />
-
-	
+				</h:ul>		
+	<textbox id = "text"/>	
+	<button label ="Add Item" zk:onClick="addItem()" />	
 	<zscript>
 		import org.zkoss.zhtml.Li;
 		import org.zkoss.zhtml.Text;
@@ -24,4 +14,5 @@
 			new Text(text.getText()).setParent(li);
 		}
 	</zscript>
-</zk><!-- hola mundo! -->
+</zk>
+		

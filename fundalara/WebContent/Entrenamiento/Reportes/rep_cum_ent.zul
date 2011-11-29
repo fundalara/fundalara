@@ -1,0 +1,70 @@
+<div align="center">
+	<separator height="15px" />
+	<window title="Cumplimiento de Entrenamiento" border="normal"
+		width="600px" height="" closable="true">
+		<grid>
+			<columns>
+				<column width="110px" align="left" />
+				<column width="125px" align="center" />
+				<column width="115px" align="left" />
+				<column width="140px" align="center" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label value="Fecha Inicio:" width="120px" />
+					<datebox width="125px" />
+					<label value="Fecha Final:" width="120px" />
+					<datebox width="125px" />
+				</row>
+				<row height="30px">
+					<label value="Categoria:" width="120px" />
+					<combobox value="--TODOS--" width="125px">
+						<comboitem label="PREPA NIVEL I" />
+						<comboitem label="PREPA NIVEL II" />
+						<comboitem label="PREINFANTIL" />
+						<comboitem label="INFANTIL" />
+						<comboitem label="PREJUNIOR" />
+						<comboitem label="JUNIOR" />
+						<comboitem label="JUVENIL" />
+					</combobox>
+
+					<label value="Equipo:" width="120px" />
+					<combobox value="--TODOS--" width="120px">
+						<comboitem label="A" />
+						<comboitem label="B" />
+						<comboitem label="C" />
+						<comboitem label="D" />
+						<comboitem label="E" />
+						<comboitem label="F" />
+					</combobox>
+
+
+				</row>
+
+				<row height="30px">
+					<label value="Entrenador:" width="120px"></label>
+					<combobox value="--TODOS--" width="120px">
+						<comboitem label="Pedro Perez" />
+						<comboitem label="Mario Fernández" />
+						<comboitem label="Carlos Chirinos" />
+					</combobox>
+					<button label="Catálogo" onClick="" />
+				</row>
+			</rows>
+		</grid>
+		<separator />
+
+		<grid height="50px">
+
+			<rows>
+				<row align="right" height="">
+
+
+					<button image="../Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="95px" />
+
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>

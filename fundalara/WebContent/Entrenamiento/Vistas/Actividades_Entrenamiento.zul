@@ -1,381 +1,411 @@
 <zk xmlns:h="xhtml" xmlns:zk="zk">
-
+<div align="center">
+	<separator height="15px" />
 	<?page title="Auto Generated index.zul"?>
-	<div align="center">
-		<separator height="15px" />
 		<window title="Actividades de Entrenamiento" border="normal"
-			width="600px" height="">
+			width="500px" height="" closable="true">
+			<separator />
 			<grid>
+				<columns>
+					<column align="center" />
+				</columns>
 				<rows>
-
 					<row width="480px">
-						<grid width="580px">
-							<columns>
-								<column align="left" width="180px" />
-								<column align="left" width="160px" />
-								<column align="center" width="180px" />
-							</columns>
-							<rows>
-								<row height="20px">
-									<tree>
+						<hbox>
+							<tree width="200px" height="330px">
+								<treechildren>
+									<treeitem>
+										<treerow height="30px">
+											<treecell label="Categoría" />
+										</treerow>
 										<treechildren>
-											<treeitem>
-												<treerow>
+											<treeitem open="false">
+												<treerow
+													height="30px">
 													<treecell
-														label="Categoria" />
+														label="Preparatorio Nivel I" />
 												</treerow>
 												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="Preparatorio Nivel I" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="Preparatorio Nivel II" />
+												</treerow>
+												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="Preparatorio Nivel II" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="PreInfantil" />
+												</treerow>
+												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="PreInfantil" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="Infantil" />
+												</treerow>
+												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="Infantil" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="PreJunior" />
+												</treerow>
+												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="PreJunior" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="Junior" />
+												</treerow>
+												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="Junior" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="Juvenil" />
+												</treerow>
+												<treechildren>
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="Juvenil" />
+																label="Fase" />
 														</treerow>
 														<treechildren>
 															<treeitem
 																open="false">
 																<treerow>
 																	<treecell
-																		label="Fase" />
+																		label="Calentamiento" />
 																</treerow>
-																<treechildren>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Calentamiento" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Tecnico" />
-																		</treerow>
-																	</treeitem>
-																	<treeitem
-																		open="false">
-																		<treerow>
-																			<treecell
-																				label="Enfriamiento" />
-																		</treerow>
-																	</treeitem>
-																</treechildren>
 															</treeitem>
-
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Técnico" />
+																</treerow>
+															</treeitem>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Enfriamiento" />
+																</treerow>
+															</treeitem>
 														</treechildren>
 													</treeitem>
+
 												</treechildren>
 											</treeitem>
 										</treechildren>
-									</tree>
-
-									<h:ul id="ul">
-										<h:li>Fildeo</h:li>
-										<h:li>Trote</h:li>
-										<h:li>Bateo en la Maquina</h:li>
-									</h:ul>
-									<zscript>
-	import org.zkoss.zhtml.Li;
-	import org.zkoss.zhtml.Text;
-	void addItem() {
-		Li li = new Li();
-		li.setParent(ul);
-		new Text(text.getText()).setParent(li);
-	}
-</zscript>
-									<vbox align="center">
-										<label value="Descripcion" />
-										<textbox id="text" height="25px"
-											width="150px" />
-
-									
-									</vbox>
+									</treeitem>
+								</treechildren>
+							</tree>
+							<space width="5px" />
 
 
+							<vbox align="center">
+								<grid width="200px">
+									<auxhead>
+										<auxheader align="center"
+											label="Actividades" colspan="6" />
+									</auxhead>
+									<auxhead sclass="category-center">
+										<auxheader align="center"
+											colspan="1">
+											<hbox align="center">
+												<image
+													src="../Recursos/Imagenes/filtro.png" />
+												<textbox width="160px"
+													height="20px" />
+											</hbox>
+										</auxheader>
+									</auxhead>
+									<columns>
+										<column width="200px"
+											align="center" />
+									</columns>
+									<rows>
 
+										<row height="25px">
+											<label
+												value="Bateo en la Maquina" />
+										</row>
+										<row height="25px">
+											<label value="Trote" />
+										</row>
+										<row height="25px">
+											<label value="Fildeo" />
+										</row>
+										<row height="25px">
+											<label value="" />
+										</row>
+										<row height="25px">
+											<label />
+										</row>
+										<row height="25px">
+											<label value="" />
+										</row>
+										<row height="25px">
+											<label />
+										</row>
+										<row height="25px">
+											<label value="" />
+										</row>
+										<row height="25px">
+											<label />
+										</row>
+										<row height="25px">
+											<label value="" />
+										</row>
+										<row height="25px">
+											<label />
+										</row>
+									</rows>
+								</grid>
+							</vbox>
+							<vbox>
+								<separator height="20px" />
+								<button
+									image="../Recursos/Imagenes/agregar.ico" />
+									<separator height="5px" />
+								<button
+									image="../Recursos/Imagenes/editar.ico" />
+									<separator height="5px" />
+								<button
+									image="../Recursos/Imagenes/quitar.ico" />
+							</vbox>
 
-								</row>
-							</rows>
-						</grid>
-
+						</hbox>
 					</row>
-
-
 
 				</rows>
 			</grid>
-			<separator />
+			
 
-			<grid height="50px">
+
+			<grid>
 				<columns>
 
-					<column width="120px" align="center" />
-					<column width="115px" align="center" />
-					<column width="115px" align="center" />
-					<column width="115px" align="center" />
-
+					<column width="200px" align="center" />
+					<column width="110px" align="center" />
+					<column width="110px" align="center" />
 
 				</columns>
 				<rows>
 
 					<row height="">
-
-						<button image="../Recursos/Imagenes/guardar.ico"
-							label="Guardar" width="100px" onClick="addItem()" />
-						<button image="../Recursos/Imagenes/editar.ico"
-							label="Modificar" width="110px" />
-						<button image="../Recursos/Imagenes/eliminar.ico"
-							label="Eliminar" width="110px" />
-						<button image="../Recursos/Imagenes/cancelar.ico"
-							label="Cancelar" width="100px" />
-						<button image="../Recursos/Imagenes/salir.png" label="Salir"
+						<label value="" />
+						<button
+							image="../Recursos/Imagenes/cancelar.ico" label="Cancelar"
 							width="100px" />
+						<button image="../Recursos/Imagenes/salir.png"
+							label="Salir" width="100px" />
 					</row>
 				</rows>
 			</grid>
-
 		</window>
-	</div>
-
+		</div>
 </zk>

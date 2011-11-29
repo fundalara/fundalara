@@ -1,9 +1,8 @@
 <?page title="Auto Generated index.zul"?>
 <?component name="Calen" macro-uri="index.zul" inline="true"?>
-<div align="center">
-	<separator height="15px" />
+
 	<window title="Plan de Entrenamiento"
-		border="normal" width="170px" height="">
+		border="normal" width="180px" height="" closable="true">
 		<grid>
 			<rows>
 				<row>
@@ -14,21 +13,7 @@
 							
 						</columns>
 						<rows>
-							<row height="30px">
-								<label value="Categoria" width="160px" />							
-							</row>
-							<row height="30px">																
-								<combobox value="--Seleccione--"
-									width="125px">
-									<comboitem label="PREPA NIVEL I" />
-									<comboitem label="PREPA NIVEL II" />
-									<comboitem label="PREINFANTIL" />
-									<comboitem label="INFANTIL" />
-									<comboitem label="PREJUNIOR" />
-									<comboitem label="JUNIOR" />
-									<comboitem label="JUVENIL" />
-								</combobox>
-							</row>
+							
 							<row height="30px">
 
 								<label value="Fecha Inicio"
@@ -71,24 +56,15 @@
 			<rows>
 
 				<row>
-					<button image="../Recursos/Imagenes/guardar.ico"
+					<button image="Recursos/Imagenes/aceptar.ico"
 						width="45px" />
-					<button image="../Recursos/Imagenes/imprimir.ico"
-						 width="45px" />
-					<button image="../Recursos/Imagenes/eliminar.ico"
-						 width="45px" />
-					
-				</row>
-				<row>
-					<button image="../Recursos/Imagenes/editar.ico" 
+					<button image="Recursos/Imagenes/cancelar.ico"
 						width="45px" />
-					<button image="../Recursos/Imagenes/cancelar.ico"
-						 width="45px" />
-					<button image="../Recursos/Imagenes/salir.png" 
+					<button image="Recursos/Imagenes/salir.png"
 						width="45px" />
+
 				</row>
 			</rows>
 		</grid>
 		<include id="ventana"/>
 	</window>
-</div>

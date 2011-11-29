@@ -1,11 +1,34 @@
 <?page title="Auto Generated index.zul"?>
-<div align="center">
-	<separator height="15px" />
-	<window closable="true" title="Sesion de Entrenamiento"
-		border="normal" width="600px" mode ="embedded">
+	<window closable="true"
+		title="Sesion de Entrenamiento - PREINFANTIL" border="normal"
+		width="600px" >
 		<grid>
+			<columns sizable="true">
+				<column align="left" />
+			</columns>
 			<rows>
-				
+
+				<row>
+					<grid>
+						<columns>
+							<column label="" width="120PX" />
+							<column label="" width="160PX"
+								align="center" />
+							<column label="" width="120PX" />
+							<column label="" width="160PX"
+								align="center" />
+						</columns>
+						<rows>
+							<row height="30px">
+								<label value="Desde" />
+								<textbox width="120px" />
+								<label value="Hasta" />
+								<textbox width="120px" />
+							</row>
+						</rows>
+					</grid>
+				</row>
+
 				<row>
 					<panel
 						title="Asignacion de Actividades de Entrenamiento"
@@ -16,7 +39,7 @@
 									<row>
 										<grid>
 											<columns>
-												<column width="110px"
+												<column width="120px"
 													align="left" />
 												<column width="160px"
 													align="center" />
@@ -27,7 +50,7 @@
 
 											</columns>
 											<rows>
-												<row height="35px">
+												<row height="30px">
 													<label value="Fase"
 														width="100px" />
 													<combobox
@@ -57,20 +80,20 @@
 														value="Tiempo" width="100px" />
 													<hbox
 														width="100px">
-														<timebox width="70px"/>
-														
+														<timebox
+															width="70px" />
+
 														<label
 															value=" min" width="20px" />
 													</hbox>
-													<button
-														image="../Recursos/Imagenes/agregar.ico" />
+
 												</row>
 											</rows>
 										</grid>
 									</row>
 
 									<row>
-									
+
 										<hbox width="100px">
 											<grid height="110px"
 												width="500px">
@@ -125,15 +148,13 @@
 													</row>
 												</rows>
 											</grid>
-											<button
-												image="../Recursos/Imagenes/quitar.ico">
-												<attribute name="onClick">
-	{
-		Messagebox.show("Actividad Retirada", "Fundalara", Messagebox.OK,
-				Messagebox.INFORMATION);
-	}
-</attribute>
-											</button>
+											<vbox>
+												<button
+													image="Recursos/Imagenes/agregar.ico" />
+												<separator height="5px" />
+												<button
+													image="Recursos/Imagenes/quitar.ico" />
+											</vbox>
 										</hbox>
 
 									</row>
@@ -167,8 +188,8 @@
 											</columns>
 											<rows>
 												<row height="35px">
-													<label value="Material"
-														width="100px" />
+													<label
+														value="Material" width="100px" />
 													<combobox
 														value="--Seleccione--" width="120px">
 														<comboitem
@@ -192,28 +213,25 @@
 															label="15" />
 														<comboitem
 															label="20" />
-													</combobox>
-													<button
-														image="../Recursos/Imagenes/agregar.ico" />
-
-												</row>												
+													</combobox>													
+												</row>
 											</rows>
 										</grid>
 									</row>
 
 									<row>
-									
+
 										<hbox width="100px">
 											<grid height="110px"
 												width="500px">
 												<columns
 													sizable="true">
 
-													<column label="Material"
-														width="240px" align="center" />
+													<column
+														label="Material" width="240px" align="center" />
 													<column
 														label="Cantidad" width="240px" align="center" />
-													
+
 												</columns>
 
 												<rows>
@@ -221,53 +239,51 @@
 													<row
 														height="25px">
 														<label
-															value="Calentamiento" />
+															value="Guante" />
 														<label
-															value="Sentadillas" />
-														
+															value="10" />
+
 													</row>
 													<row
 														height="25px">
 														<label
-															value="Tecnica" />
+															value="Pelota" />
 														<label
-															value="Lanzamiento" />
-														
+															value="10" />
+
 													</row>
 													<row
 														height="25px">
 														<label value="" />
 														<label value="" />
-										
+
 													</row>
 													<row
 														height="25px">
 														<label />
 														<label />
-													
+
 													</row>
 													<row
 														height="15px">
 														<label />
 														<label />
-												
+
 													</row>
 												</rows>
 											</grid>
-											<button
-												image="../Recursos/Imagenes/quitar.ico">
-												<attribute name="onClick">
-	{
-		Messagebox.show("Material Retirado", "Fundalara", Messagebox.OK,
-				Messagebox.INFORMATION);
-	}
-</attribute>
-											</button>
+											<vbox>
+												<button
+													image="Recursos/Imagenes/agregar.ico" />
+												<separator height="5px" />
+												<button
+													image="Recursos/Imagenes/quitar.ico" />
+											</vbox>
 										</hbox>
 
 									</row>
 								</rows>
-							</grid>							
+							</grid>
 						</panelchildren>
 					</panel>
 				</row>
@@ -292,10 +308,14 @@
 
 				<row height="">
 					<label value="" />
-					<button image="../Recursos/Imagenes/guardar.ico" label="Guardar" width="100px" />				
-					<button image="../Recursos/Imagenes/cancelar.ico"
+					<button image="Recursos/Imagenes/guardar.ico"
+						label="Guardar" width="100px" />
+					<button image="Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="100px" />
+					<button image="Recursos/Imagenes/cancelar.ico"
 						label="Cancelar" width="100px" />
-					<button image="../Recursos/Imagenes/salir.png" label="Salir" width="100px" />
+					<button image="Recursos/Imagenes/salir.png"
+						label="Salir" width="100px" />
 				</row>
 			</rows>
 		</grid>
@@ -303,4 +323,3 @@
 
 
 	</window>
-</div>
