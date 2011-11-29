@@ -1,0 +1,85 @@
+<window title="Instalación" border="normal" width="690px">
+		<grid>
+			<columns>
+				<column></column>
+				<column></column>
+				<column></column>
+				<column></column>
+			</columns>
+
+			<rows>
+				<row>
+					<label value="Código"></label>
+					<textbox value="0003"></textbox>
+				</row>
+				<row>
+					<label value="Nombre"></label>
+					<textbox value="Oficina A3"></textbox>
+				</row>
+				<row>
+					<label value="Descripción"></label>
+					<textbox multiline="true" height="40px"
+						width="300px">
+					</textbox>
+				</row>
+				<row>
+					<label value="Tipo de Instalación"></label>
+					<combobox value="--Seleccione--">
+						<comboitem label="Deportiva"></comboitem>
+						<comboitem label="Oficina"></comboitem>
+					</combobox>
+				</row>
+				<row>
+					<label value="Fecha"></label>
+					<textbox value="24/11/2001"></textbox>
+				</row>
+
+				<row>
+					<label value="Responsable del Registro"></label>
+					<div>
+						<textbox value="Gabriela Hernandez"></textbox>
+						<button
+							image="/Recursos/Imagenes/consultar.ico">
+						</button>
+					</div>
+				</row>
+
+			</rows>
+
+		</grid>
+		<div align="right">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+		<panel title="Instalaciones Registradas" collapsible="true">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="Código" />
+						<column label="Nombre" />
+
+					</columns>
+					<rows>
+						<row>
+							<label value="001"></label>
+							<label value="Oficina 3B"></label>
+						</row>
+						<row>
+							<label value="002"></label>
+							<label value="Campo zona este"></label>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+
+	</window>

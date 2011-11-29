@@ -1,24 +1,24 @@
 <zk>
 <window title="Repetir Actividad" border="normal" mode="modal"
-  closable="true" width="65%">
+  closable="true" width="42%">
   <panel title="Hora de la Actividad">
  	<panelchildren>
 		<grid>
 			<columns>
-				<column></column>
-				<column></column>
+				<column width="40%"></column>
+				<column width="60%"></column>
 			</columns>
 			<rows>
-				<row>
+				<row style="border:none">
 					<label value="Hora de Inicio"></label>
 					<combobox value="00:00pm"></combobox>
 				</row>
-				<row>
+				<row style="border:none">
 					<label value="Hora Final"></label>
 					<combobox value="00:00pm"></combobox>
 				</row>
-				<row>
-					<label value="Duracion"></label>
+				<row style="border:none">
+					<label value="Duración"></label>
 					<div>
 						<spinner value="0"></spinner>
 						<label value="minutos"></label>
@@ -32,38 +32,44 @@
 	<panelchildren>
 		<grid>
 			<columns>
-				<column width="20%"></column>
-				<column width="80%"></column>
+				<column width="40%"></column>
+				<column width="60%"></column>
 			</columns>
 			<rows>
-				<row>
-					<div>
-						<hbox><checkbox id="dia" label="Diariamente" onCheck='enlace("/Logistica/Tiempo/dia.zul",1)'></checkbox></hbox>
-						<hbox><checkbox id="sema" label="Semanal" onCheck='enlace("/Logistica/Tiempo/sema.zul",2)'></checkbox></hbox>
-						<hbox><checkbox id="mes" label="Mensual" onCheck='enlace("/Logistica/Tiempo/mes.zul",3)' ></checkbox></hbox>
-						<hbox><checkbox id="anno" label="Anual" onCheck='enlace("/Logistica/Tiempo/anno.zul",4)' ></checkbox></hbox>
-					</div>
-					<div>
+				<row style="border:none">
+						<vbox>
+						   <checkbox id="dia" label="Diariamente" onCheck='enlace("/Logistica/Tiempo/dia.zul",1)'></checkbox>
+						   <checkbox id="sema" label="Semanal" onCheck='enlace("/Logistica/Tiempo/sema.zul",2)'></checkbox>
+						</vbox>
+						<vbox>
+						   <checkbox id="mes" label="Mensual" onCheck='enlace("/Logistica/Tiempo/mes.zul",3)' ></checkbox>
+						   <checkbox id="anno" label="Anual" onCheck='enlace("/Logistica/Tiempo/anno.zul",4)' ></checkbox>
+						</vbox>
+			        		
+
+						
+				</row>
+				<row spans="2">
+				  <div>
 						<include id="cuerpo"></include>
-					</div>	
-				</row>
-				<row>
-					<div align="center">
-						<label value="Inicio:"></label>
-						<datebox></datebox>
-					</div>
-					<div>
-						<hbox>
-							<label value="Finalizar despues de:"></label>
-							<spinner width="50px"></spinner>
-							<label value="Repeticiones"></label>
-						</hbox>
-						<hbox>
-							<label value="Finalizar el:"></label>
-							<datebox></datebox>
-						</hbox>
 					</div>
 				</row>
+				<row style="border:none">
+				    <label value="Inicio:"></label>
+					<datebox></datebox>
+				</row>
+				
+				<row style="border:none">
+				    <label value="Finalizar después de:"></label>
+   					<hbox>
+	   					<spinner width="50px"></spinner>
+						<label value="Repeticiones"></label>	
+					</hbox>		
+				</row>
+				<row style="border:none">
+				  <label value="Finalizar el:"></label>
+				  <datebox></datebox>	
+				</row>						
 			</rows>
 		</grid>
 		<grid>

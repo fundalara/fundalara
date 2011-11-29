@@ -1,7 +1,8 @@
 <?page title="Manejo de Materiales" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="Manejo de Materiales" border="normal" width="675px"  height="700px" id="formDistribucion" apply="">
-<tabbox width="100%" height="100%">
+<window title="Manejo de Materiales" border="normal" width="690px" id="formDistribucion"
+	height="auto" apply="">
+<tabbox >
 	<tabs>
 		<tab label="Distribución"/>
 		<tab label="Devolución"/>
@@ -17,17 +18,17 @@
 	<menuitem label="Eventos" style="font-weight:bold"/>
 	<menuitem label="Mantenimiento" style="font-weight:bold"/>
 	</menubar>	
-	<panel width="100%" height="35%" collapsible="True" title="Listado de Solicitudes" open="true">
+	<panel width="100%"  collapsible="True" title="Listado de Solicitudes" open="true">
 		<panelchildren>
 			<grid width="100%" height="120px">
 				<columns>
-					<column label="Articulo" width="12%"/>
-					<column label="Cantidad" width="12%"/>
-					<column label="Disponible" width="12%"/>
+					<column label="Artículo" width="12%"/>
+					<column label="Cantidad Solicitada" width="13%"/>
+					<column label="Disponible" width="11%"/>
 					<column label="Fecha" width="13%"/>
 					<column label="Hora Requerida" width="13%"/>
 					<column label="   " width="12%"/>
-					<column label="Disponer" width="20%"/>
+					<column label="Disponer" width="26%"/>
 				</columns>
 				<rows>
 					<row>
@@ -38,9 +39,9 @@
 						<label>3:00pm</label>
 						<label>Asignado</label>
 						<div>
-							<button image="../Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="true"/>
-							<button image="../Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/cancelar.ico" orient="vertical" disabled="true"/>
+							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="true"/>
+							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical" disabled="true"/>
 						</div>
 					</row>
 					<row>
@@ -51,9 +52,9 @@
 						<label>3:00pm</label>
 						<label>Insuficiente Para Asignar</label>
 						<div>
-							<button image="../Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="True"/>
-							<button image="../Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/cancelar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="True"/>
+							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
 						</div>
 					</row>
 					<row>
@@ -64,9 +65,9 @@
 						<label>3:00pm</label>
 						<label>Por Asignar</label>
 						<div>
-							<button image="../Recursos/Imagenes/aceptar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/cancelar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
 						</div>
 					</row>
 				</rows>
@@ -74,7 +75,7 @@
 		</panelchildren>
 	</panel>
 	
-	<panel collapsible="true" title="Detalle del Prestamo" width="100%" height="29	%"
+	<panel collapsible="true" title="Detalle del Prestamo" 
 		style="font-weight:bold;" open="false">
 		<panelchildren>
 			
@@ -82,7 +83,7 @@
 				<columns>
 					<column width="10%" align="left"></column>
 					<column width="25%" align="left"></column>
-					<column width="12%" align="left"></column>
+					<column width="15%" align="left"></column>
 					<column width="25%" align="left"></column>
 				</columns>
 				<rows>
@@ -142,8 +143,8 @@
 						<div>
 							<intbox value="8"></intbox>
 							<space width="5%"></space>
-							<button image="../Recursos/Imagenes/agregar.ico" orient="vertical"></button>
-							<button image="../Recursos/Imagenes/quitar.ico" orient="vertical"></button>
+							<button image="/Recursos/Imagenes/agregar.ico" orient="vertical"></button>
+							<button image="/Recursos/Imagenes/quitar.ico" orient="vertical"></button>
 						</div>
 						<label style="font-weight:bold;">
 							Cantidad Faltante Por Asignar:
@@ -151,7 +152,7 @@
 						<div>
 							<intbox value="2"></intbox>
 							<space width="5%"></space>
-							<button label="Generar Requisición" image="../Recursos/Imagenes/agregar.ico"></button>
+							<button label="Generar Requisición" image="/Recursos/Imagenes/agregar.ico"/>
 						</div>
 					</row>
 				</rows>
@@ -159,7 +160,7 @@
 			
 		</panelchildren>
 	</panel>
-	<panel  collapsible="true" title="Requisición" width="100%" height="38%"
+	<panel  collapsible="true" title="Requisición" width="100%" 
 		style="font-weight:bold;" open="false">
 		<panelchildren>
 			<grid width="100%" height="90px">
@@ -173,7 +174,7 @@
 					<column width="35%" align="left">
 					<label>Descripción</label>
 					</column>
-					<column width="25%" align="left"/>
+					<column width="35%" align="left"/>
 				</columns>
 				<rows>
 					<row>
@@ -181,7 +182,7 @@
 						<label>3</label>
 						<label>Medida Estandar Para PreInfantil</label>
 						<div>
-							<button image="../Recursos/Imagenes/quitar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/quitar.ico" orient="vertical"/>
 						</div>
 					</row>
 					<row>
@@ -189,17 +190,17 @@
 						<label>2</label>
 						<label>De tamaño regular para diestros</label>
 						<div>
-							<button image="../Recursos/Imagenes/quitar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/quitar.ico" orient="vertical"/>
 						</div>
 					</row>
 				</rows>
 			</grid>
 			<div width="100%" height="45%">
 				<groupbox>
-					<space width="70%"></space>
-					<button label="Guardar" image="../Recursos/Imagenes/guardar.ico"/>
-					<button label="Cancelar" image="../Recursos/Imagenes/cancelar.ico"/>
-					<button label="Salir" image="../Recursos/Imagenes/atras.ico"/>
+					<space width="55%"></space>
+					<button label="Guardar" image="/Recursos/Imagenes/guardar.ico" onClick="verRequisicion()"/>
+					<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"/>
+					<button label="Salir" image="/Recursos/Imagenes/atras.ico"/>
 				</groupbox>
 			</div>
 		</panelchildren>
@@ -215,11 +216,11 @@
 	<menuitem label="Eventos" style="font-weight:bold"/>
 	<menuitem label="Mantenimiento" style="font-weight:bold"/>
 	</menubar>	
-	<panel width="100%" height="50%" collapsible="True" title="Listado de Prestamos" open="true">
+	<panel width="100%"  collapsible="True" title="Listado de Prestamos" open="true">
 		<panelchildren>
-			<grid width="100%" height="220px">
+			<grid width="100%">
 				<columns>
-					<column label="Articulo" width="20%"/>
+					<column label="Artículo" width="20%"/>
 					<column label="Cantidad" width="20%"/>
 					<column label="Actividad" width="20%"/>
 					<column label="Fecha Asignación" width="20%"/>
@@ -232,9 +233,9 @@
 						<label>Entrenamiento</label>
 						<label>01/11/2011</label>
 						<div>
-							<button image="../Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="true"/>
-							<button image="../Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/cancelar.ico" orient="vertical" disabled="true"/>
+							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="true"/>
+							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical" disabled="true"/>
 						</div>
 					</row>
 					<row>
@@ -243,9 +244,9 @@
 						<label>Mantenimiento</label>
 						<label>01/11/2011</label>
 						<div>
-							<button image="../Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="True"/>
-							<button image="../Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/cancelar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="True"/>
+							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
 						</div>
 					</row>
 					<row>
@@ -254,16 +255,16 @@
 						<label>Entrenamiento</label>
 						<label>01/11/2011</label>
 						<div>
-							<button image="../Recursos/Imagenes/aceptar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="../Recursos/Imagenes/cancelar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
+							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
 						</div>
 					</row>
 				</rows>
 			</grid>			
 		</panelchildren>
 	</panel>
-	<panel collapsible="true" title="Detalle Devolucion" width="100%" height="50%"
+	<panel collapsible="true" title="Detalle Devolución" width="100%" height="50%"
 		style="font-weight:bold;" open="true">
 		<panelchildren>
 			
@@ -337,7 +338,7 @@
 							</label>
 							<textbox value="Escriba aqui sus observaciones" width="200px" height="50px"></textbox>
 						</div>
-						<button label="Procesar Devolución" image="../Recursos/Imagenes/agregar.ico"></button>
+						<button label="Procesar Devolución" image="/Recursos/Imagenes/agregar.ico"/>
 					</row>
 				</rows>
 			</grid>
@@ -363,7 +364,12 @@
 		alert("Registro Guardado!");
 	}
    </zscript>
-
+	
+	<zscript>
+	public void verRequisicion() {
+		Executions.createComponents("/Logistica/requisicion.zul",formDistribucion, null);
+	}
+   </zscript>
 
 </window>
 </zk>
