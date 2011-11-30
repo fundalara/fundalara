@@ -9,11 +9,19 @@
 		.z-tab-accordion, .z-tab-accordion-seld{ width:260px; }
 	</style>
 	<popup id="nombre" width="300px">
-		<html>		
+		<html>
+
+
+
+			
 			<![CDATA[ <font color="black">Permite introducir la
 			informacion necesaria para llevar a cabo las actividades
 			deportivas y administrativas de la empresa </font>.<br />
 			]]>
+			
+			
+			
+			
 		
 		</html>
 	</popup>
@@ -25,7 +33,8 @@
 					<tab label="Funcionalidades Deportivas" />
 					<tab label="Funcionalidades Operativas" />
 					<tab label="Reportes" />
-					<tab label="Agenda" onClick='enlace("/General/Agenda.zul")'/>
+					<tab label="Agenda"
+						onClick='enlace("/General/Agenda.zul")' />
 					<tab label="Configuracion del Sistema" />
 					<tab label="Configuracion Web" />
 				</tabs>
@@ -41,7 +50,7 @@
 										<treeitem>
 											<treerow>
 												<treecell
-													label="Configurables" 
+													label="Configurables"
 													onClick='enlace("General/Datos_Basicos_C.zul")' />
 											</treerow>
 										</treeitem>
@@ -54,8 +63,7 @@
 										</treeitem>
 										<treeitem>
 											<treerow>
-												<treecell
-													label="Reglas"
+												<treecell label="Reglas"
 													onClick='enlace("/Competencias/Vistas/FrmReglas.zul")' />
 											</treerow>
 										</treeitem>
@@ -77,22 +85,14 @@
 													<treerow>
 														<treecell
 															label="Actividades"
-															onClick='enlace("Entrenamiento/Actividades_Entrenamiento.zul")' />
+															onClick='enlace("/Entrenamiento/Vistas/Actividades_Entrenamiento.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Indicadores de Evaluacion" 
-															onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")' />
-													</treerow>
-												</treeitem>
-												
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Bloques de Horario"
-															onClick='enlace("Entrenamiento/Horarios_Entrenamiento.zul")' />
+															label="Indicadores de Evaluacion"
+															onClick='enlace("/Entrenamiento/Vistas/Indicadores_Evaluacion.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -103,30 +103,31 @@
 													label="Organizacion de Competencia" />
 											</treerow>
 											<treechildren>
-											    <treeitem>
+												<treeitem>
 													<treerow>
 														<treecell
-															label="Divisas" 
+															label="Divisas"
 															onClick='enlace("/Competencias/Vistas/FrmDivisa.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Ligas" onClick='enlace("/Competencias/Vistas/FrmLigas.zul")' />
+															label="Ligas"
+															onClick='enlace("/Competencias/Vistas/FrmLigas.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Indicadores de Evaluacion" 
-															 onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")'/>
+															label="Indicadores de Evaluacion"
+															onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Tipos de Competencia" 
+															label="Tipos de Competencia"
 															onClick='enlace("/Competencias/Vistas/FrmTipoCompetencia.zul")' />
 													</treerow>
 												</treeitem>
@@ -149,25 +150,32 @@
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Contratar" />
+															label="Contratación"
+															onClick='enlace("/Administracion/Vistas/FrmRegistrarPersonal.zul")' />
+													</treerow>
+												</treeitem>
+
+
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Registrar Incidencias"
+															onClick='enlace("/Administracion/Vistas/FrmRegistrarIncidencias.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Actualizar Conceptos de Nomina" />
+															label="Calcular Liquidacion  "
+															onClick='enlace("/Administracion/Vistas/FrmCalcularLiquidacion.zul")' />
 													</treerow>
+
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Registrar Incidencias" />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Despedir" />
+															label="Datos Laborables"
+															onClick='enlace("/Administracion/Vistas/FrmConfigDatosLaborales.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -175,7 +183,9 @@
 										<treeitem>
 											<treerow>
 												<treecell
-													label="Proveedor" />
+													label="Proveedor"
+													onClick='enlace("/Administracion/Vistas/FrmProveedores.zul")' />
+
 											</treerow>
 										</treeitem>
 										<treeitem>
@@ -187,13 +197,29 @@
 										<treeitem>
 											<treerow>
 												<treecell
-													label="Clientes" />
+													label="Clientes"
+													onClick='enlace("/Administracion/Vistas/FrmClientes.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem>
 											<treerow>
 												<treecell
-													label="Alquiler de Vallas" />
+													label="Alquiler de Vallas"
+													onClick='enlace("/Administracion/Vistas/FrmCompromisoPublicidad.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Factura"
+													onClick='enlace("/Administracion/Vistas/FrmCompras.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem>
+											<treerow>
+												<treecell
+													label="Benefactor"
+													onClick='enlace("/Administracion/Vistas/FrmBenefactor.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
@@ -303,13 +329,15 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Ingresos" />
+													label="Ingresos"
+													onClick='enlace("/Administracion/Vistas/FrmTipoIngreso.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Egresos" />
+													label="Egresos"
+													onClick='enlace("/Administracion/Vistas/FrmTipoEgreso.zul")' />
 											</treerow>
 
 										</treeitem>
@@ -318,6 +346,9 @@
 												<treecell
 													label="Generar Compromisos de Pago" />
 											</treerow>
+										</treeitem>
+										<treeitem open="false">
+
 										</treeitem>
 									</treechildren>
 								</treeitem>
@@ -409,6 +440,28 @@
 													label="Categoria" />
 											</treerow>
 										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Entrenamiento" />
+											</treerow>
+											<treechildren>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Cumplimiento de Actividades"
+															onClick='enlace("/Entrenamiento/Reportes/rep_cum_ent.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Test Evaluativos"
+															onClick='enlace("/Entrenamiento/Reportes/rep_test_ent.zul")' />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
 									</treechildren>
 								</treeitem>
 								<treeitem open="false">
@@ -431,24 +484,27 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Financieros" />
+													label="Financieros"
+													onClick='enlace("/Administracion/Reportes/FrmTipoReporte.zul")' />
 											</treerow>
 											<treechildren>
 												<treeitem>
-													<treerow>
+													<!--
+														<treerow>
 														<treecell
-															label="Balance General" />
-													</treerow>
+														label="Balance General" 
+														onClick='enlace("/Administracion/Reportes/FrmBalance.zul")' />
+														</treerow>-->
 												</treeitem>
 												<treeitem>
-													<treerow>
+													<!--
+														<treerow>
 														<treecell
-															label="Estado de Ganancias y Perdidas" />
-													</treerow>
+														label="Estado de Ganancias y Perdidas" />
+														</treerow>-->
 												</treeitem>
 											</treechildren>
 										</treeitem>
-
 									</treechildren>
 								</treeitem>
 							</treechildren>
@@ -501,16 +557,16 @@
 													open="false">
 													<treerow>
 														<treecell
-															label="Nueva Competencia" 
-															onClick='enlace("/Competencias/Vistas/FrmNuevaCompetencia.zul")'/>
+															label="Nueva Competencia"
+															onClick='enlace("/Competencias/Vistas/FrmNuevaCompetencia.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
 													open="false">
 													<treerow>
 														<treecell
-															label="Equipos Participantes" 
-															onClick='enlace("/Competencias/Vistas/FrmRegistroEquipo.zul")'/>
+															label="Equipos Participantes"
+															onClick='enlace("/Competencias/Vistas/FrmRegistroEquipo.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
@@ -518,7 +574,7 @@
 													<treerow>
 														<treecell
 															label="Indicadores por Competencia"
-															onClick='enlace("/Competencias/Vistas/FrmIndicadores.zul")'/>
+															onClick='enlace("/Competencias/Vistas/FrmIndicadores.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
@@ -526,15 +582,15 @@
 													<treerow>
 														<treecell
 															label="Compromisos de Pago"
-															onClick='enlace("/Competencias/Vistas/FrmCompromiso.zul")'/>
+															onClick='enlace("/Competencias/Vistas/FrmCompromiso.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
 													open="false">
 													<treerow>
 														<treecell
-															label="Rosters" 
-															onClick='enlace("/Competencias/Vistas/FrmRoster.zul")'/>
+															label="Rosters"
+															onClick='enlace("/Competencias/Vistas/FrmRoster.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
@@ -542,7 +598,7 @@
 													<treerow>
 														<treecell
 															label="Calendario"
-															onClick='enlace("/Competencias/Vistas/FrmCalendario.zul")'/>
+															onClick='enlace("/Competencias/Vistas/FrmCalendario.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
@@ -558,7 +614,7 @@
 													<treerow>
 														<treecell
 															label="Line-Up"
-															onClick='enlace("/Competencias/Vistas/FrmLineUp.zul")'/>
+															onClick='enlace("/Competencias/Vistas/FrmLineUp.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
@@ -566,7 +622,7 @@
 													<treerow>
 														<treecell
 															label="Solicitud de Materiales"
-															onClick='enlace("/Competencias/Vistas/FrmRecursos.zul")'/>
+															onClick='enlace("/Competencias/Vistas/FrmRecursos.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -598,7 +654,7 @@
 								<treeitem open="false">
 									<treerow>
 										<treecell
-											label="Registro de Resultados"/>
+											label="Registro de Resultados" />
 									</treerow>
 									<treechildren>
 										<treeitem open="false">
@@ -633,7 +689,7 @@
 													open="false">
 													<treerow>
 														<treecell
-															label="Registro de Resultados" 
+															label="Registro de Resultados"
 															onClick='enlace("/Competencias/Vistas/FrmRegistroResultados.zul")' />
 													</treerow>
 												</treeitem>
@@ -641,7 +697,7 @@
 													open="false">
 													<treerow>
 														<treecell
-															label="Sanciones" 
+															label="Sanciones"
 															onClick='enlace("/Competencias/Vistas/FrmSanciones.zul")' />
 													</treerow>
 												</treeitem>
@@ -649,7 +705,7 @@
 													open="false">
 													<treerow>
 														<treecell
-															label="Lesiones" 
+															label="Lesiones"
 															onClick='enlace("/Competencias/Vistas/FrmLesiones.zul")' />
 													</treerow>
 												</treeitem>
@@ -718,8 +774,8 @@
 													open="false">
 													<treerow>
 														<treecell
-															label="Control de Inventario" 
-															onClick='enlace("/Competencias/Vistas/FrmControlInventario.zul")'/>
+															label="Control de Inventario"
+															onClick='enlace("/Competencias/Vistas/FrmControlInventario.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem
@@ -735,7 +791,7 @@
 													<treerow>
 														<treecell
 															label="Jugadores Claves"
-															onClick='enlace("/Competencias/Vistas/FrmJugadoresClaves.zul")'  />
+															onClick='enlace("/Competencias/Vistas/FrmJugadoresClaves.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -781,6 +837,20 @@
 								<treeitem>
 									<treerow>
 										<treecell label="Respaldo" />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell
+											label="Configurar Items"
+											onClick='enlace("Administracion/FrmRegistrarNuevoItem.zul")' />
+									</treerow>
+								</treeitem>
+								<treeitem>
+									<treerow>
+										<treecell
+											label="Actualizar Concepto de Nómina"
+											onClick='enlace("Administracion/FrmActualizarConcepto.zul")' />
 									</treerow>
 								</treeitem>
 							</treechildren>
