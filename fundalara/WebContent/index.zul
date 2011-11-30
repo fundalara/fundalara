@@ -25,7 +25,7 @@
 					<tab label="Funcionalidades Deportivas" />
 					<tab label="Funcionalidades Operativas" />
 					<tab label="Reportes" />
-					<tab label="Agenda" />
+					<tab label="Agenda" onClick='enlace("/General/Agenda.zul")'/>
 					<tab label="Configuracion del Sistema" />
 					<tab label="Configuracion Web" />
 				</tabs>
