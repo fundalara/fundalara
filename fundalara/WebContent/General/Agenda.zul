@@ -1,7 +1,6 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-
-	<window width="700px" height="500px" apply="vista.general.agenda">
+	<window width="690px" height="500px" apply="vista.general.agenda">
 		<zscript><![CDATA[
 	//@DECLARATION
 	public int nivel = 1, nivel1 = 0, nivel2 = 0, nivel3 = 0;
@@ -36,23 +35,24 @@
 	public void generarNivel3(int n1, int n2) {
 		if (n2 == 1) {
 			if (n1 == 1) {
-				lblC1.setValue("Plan de temporada");
+				lblC1.setValue("Plan de Temporada");
 				lblC1.setContext("Planificacion.zul");						
-				lblC2.setValue("Plan de entrenamiento");
+				lblC2.setValue("Plan de Entrenamiento");
 				lblC2.setContext("Plan_Entrenamiento.zul");
-				lblC3.setValue("Asignar instalacion");
+				lblC3.setValue("Asignar Instalacion");
 				lblC3.setContext("Planificacion.zul");
 			} else if (n1 == 2) {
-				lblC1.setValue("Desempeño del atletas");
+				lblC1.setValue("Cumplimiento de Actividades");
 				lblC1.setContext("Datos_Equipo.zul");
-				lblC2.setValue("Test aplicado");
+				lblC2.setValue("Rendimiento de los Atletas");
 				lblC2.setContext("Datos_Equipo.zul");
-				lblC3.setValue("");
-				grbC3.setVisible(false);
+				lblC3.setValue("Test Aplicado");
+				lblC3.setContext("Resultados_Evaluativos.zul");
+				
 			} else {
-				lblC1.setValue("Cumplimiento de actividades");
+				lblC1.setValue("Cumplimiento de Entrenamiento");
 				lblC1.setContext("Datos_Equipo.zul");
-				lblC2.setValue("Control de inventario");
+				lblC2.setValue("Control de Inventario");
 				lblC2.setContext("Datos_Equipo.zul");
 				lblC3.setValue("");
 				grbC3.setVisible(false);
@@ -177,7 +177,7 @@
 							<groupbox mold="3d" id="grbRr"
 								onClick="nivel2(2)">
 								<label id="lblRr"
-									value="Registro de resultados" onClick="nivel2(2)" />
+									value="Registro de Resultados" onClick="nivel2(2)" />
 							</groupbox>
 							<groupbox id="grbCompetencia" mold="3d"
 								visible="false" onClick="nivel3(2)">
@@ -217,7 +217,7 @@
 					days="7" readonly="false" timeZone="Venezuela=GMT-4.5"/>
 				</div>
 			</center>
-			<east size="170px" title="Variable" collapsible="true">
+			<east size="1px" title="Variable" collapsible="true">
 				<include id="frmAgenda" src="" />
 			</east>
 		</borderlayout>
