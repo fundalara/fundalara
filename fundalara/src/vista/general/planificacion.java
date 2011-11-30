@@ -9,7 +9,7 @@ public class planificacion extends GenericForwardComposer {
 	String pantalla;
 	
 	public void onClick$btnAceptar(){
-		pantalla = "Entrenamiento/Vista/Plan_Temporada.zul";
+		pantalla = "Entrenamiento/Vistas/Plan_Temporada.zul";
 		//onClose$wndPlanificacion();
 		form = (Window)Executions.createComponents(pantalla, null, null);
 		form.doHighlighted();
