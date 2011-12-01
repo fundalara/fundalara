@@ -1,129 +1,148 @@
 <?page title="Auto Generated index.zul"?>
 <div align="center">
 	<separator height="15px" />
-	<window closable="true" title="Datos Basicos"
-		border="normal" width="320px" height="">
+	<window closable="true" title="Datos Basicos" border="normal"
+		width="690px" height="">
 		<grid>
 			<rows>
 				<row>
-					<grid>
-						<columns>
-							<column width="110px" align="left" />
-							<column width="160px" align="center" />
-							
-
-						</columns>
-						<rows>
-							<row height="30px">
-							
-								<label value="Tipo de Dato " width="140px" />
-	
-								<combobox value="--Seleccione--" width="140px">
-									<comboitem label="Ascenso Atleta" />
-									<comboitem label="Comisiones " />
-									<comboitem label="Compromiso" />									
-									<comboitem label="Inscripción Atleta" />
-									<comboitem label="Posicion en el Campo" />
-									<comboitem label="Sanción" />
-									<comboitem label="Lesion" />
-									<comboitem label="Fase de Entrenamiento" />
-									<comboitem label="Parametro Evaluativo" />									
-									<comboitem label="Test Evaluativo" />
-									<comboitem label="Escala de Medicion" />
-									
-								</combobox>
-							</row>
-						</rows>
-					</grid>
-				</row>
-				
-				<row>
-				<hbox>
-					<grid height="280px" width="280px">
-								<columns sizable="true">
-									<column width="260px"
-										align="center" />
-
-
-								</columns>
-								<rows >
-								<row>
-								<label value="Dato" />
-								</row>
-								
-									<row>
-										<listbox >
-											<listhead sizable="true" >
-
-												<listheader sort="auto"
-													width="245px" align="center">
-													<bandbox width="230px"/>
-												</listheader>
-
-											</listhead>
-											<listitem>
-												<listcell
-													label="Fildeo" />
-											</listitem>
-											<listitem>
-												<listcell
-													label="Bateo en la Maquina" />
-											</listitem>
-											<listitem>
-												<listcell
-													label="Trote" />
-											</listitem>
-											<listitem>
-												<listcell
-													label="Correr las Bases" />
-											</listitem>
-											<listitem>
-												<listcell
-													label="Lanzamiento a las Bases" />
-											</listitem>
-										</listbox>
-									</row>
-
-								</rows>
-							</grid>
-												
-					
+					<hbox height="30px" align="center">
+						<label value="Tipo de Dato " width="140px" />
+						<space />
+						<combobox value="--Seleccione--"
+							width="140px">
+							<comboitem label="Ascenso Atleta" />
+							<comboitem label="Comisiones " />
+							<comboitem label="Compromiso" />
+							<comboitem label="Inscripción Atleta" />
+							<comboitem label="Posicion en el Campo" />
+							<comboitem label="Sanción" />
+							<comboitem label="Lesion" />
+							<comboitem label="Fase de Entrenamiento" />
+							<comboitem label="Parametro Evaluativo" />
+							<comboitem label="Test Evaluativo" />
+							<comboitem label="Escala de Medicion" />
+						</combobox>
 					</hbox>
 				</row>
-	
+				<row>
+					<hbox>
+
+						<grid mold="paging" pageSize="10" width="630px">
+							<auxhead>
+								<auxheader align="center"
+									label="Nombre"/>
+								<auxheader align="center"
+									label="Descripción" />
+
+							</auxhead>
+
+							<columns>
+								<column width="150px" align="center">
+									<hbox align="center">
+										<image
+											src="../Recursos/Imagenes/filtro.png" />
+										<textbox width="120px"
+											height="20px" />
+									</hbox>
+								</column>
+								<column width="150px" align="center">
+									<hbox align="center">
+										<image
+											src="../Recursos/Imagenes/filtro.png" />
+										<textbox width="120px"
+											height="20px" />
+									</hbox>
+								</column>
+
+							</columns>
+							<rows>
+								<row height="25px">
+									<label value="Calentamiento" />
+									<label />
+								</row>
+								<row height="25px">
+									<label value="Tecnico" />
+									<label />
+								</row>
+								<row height="25px">
+									<label value="Enfriamiento" />
+									<label />
+								</row>
+								<row height="25px">
+									<label value="" />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label value="" />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label value="" />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label value="" />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+								</row>
+							</rows>
+						</grid>
+
+						<vbox height="50px">
+							<button
+								image="../Recursos/Imagenes/agregar.ico" />
+							<separator height="5px" />
+							<button
+								image="../Recursos/Imagenes/editar.ico" />
+							<separator height="5px" />
+							<button
+								image="../Recursos/Imagenes/quitar.ico" />
+						</vbox>
+					</hbox>
+				</row>
 			</rows>
 		</grid>
-
-
 		<separator />
-
-
-		<grid height = "100px">
-		<columns>
 		
-			<column  width="145px" align="center"/>
-			<column  width="145px" align="center"/>
+			<grid>
+				<columns>
 
-		</columns>
-		<rows>
-			
-			<row height="15px">
-				
-				<button image="../Recursos/Imagenes/guardar.ico" label ="Guardar" width="110px"/>
-				<button image="../Recursos/Imagenes/cancelar.ico" label ="Cancelar" width="110px"/>
-				
-				
-			</row>	
-			<row height="15px">
-				
-				<button image="../Recursos/Imagenes/eliminar.ico" label ="Eliminar" width="110px"/>		
-				<button image="../Recursos/Imagenes/salir.png" label ="Salir" width="110px"/>
-				
-			</row>	
-		</rows>		
-	</grid>
+					<column width="500px" align="center" />
+					<column width="110px" align="center" />
+					<column width="110px" align="center" />
 
+				</columns>
+				<rows>
 
-
+					<row height="">
+						<label value="" />
+						<button
+							image="../Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							width="100px" />
+						<button image="../Recursos/Imagenes/salir.png"
+							label="Salir" width="100px" />
+					</row>
+				</rows>
+			</grid>
 	</window>
 </div>
