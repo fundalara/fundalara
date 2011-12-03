@@ -1,5 +1,4 @@
-<div align="left">
-	<window id="PCompra" title=" Cuentas por pagar" border="normal" width="690px">
+	<window id="PCompra" title="Facturas por pagar" border="normal" width="690px">
 		<zk>
 			<zscript><![CDATA[
 	public void mostrar() {
@@ -25,10 +24,10 @@
 
 	}
 ]]></zscript>
-			<panel collapsible="true" title="Compras" open="true">
+			<panel collapsible="false" title="Datos Básicos" open="true">
 				<panelchildren>
 					<groupbox>
-						<!--  <caption>Compras</caption> -->
+						<caption label="Facturas por Proveedor"></caption>
 						<grid>
 							<columns>
 								<column label="" width="180px"
@@ -47,63 +46,50 @@
 							<rows>
 								<row>
 									<label>Proveedor</label>
-									<bandbox width="53%">
+									<bandbox width="180px">
 										<bandpopup>
 											<vbox>
-												<hbox>
-													<label>
-														Buscar
-													</label>
-													<textbox></textbox>
-												</hbox>
+												
 												<listbox
 													width="370px">
 													<listhead>
 														<listheader
-															label="Proveedor" width="80px" />
+															label="Código" width="80px" />
 														<listheader
-															label="Nº Factura" width="80px" />
-														<listheader
-															label="Fecha" width="80px" />
+															label="Nombre" width="80px" />
+														
 													</listhead>
 
 													<listitem>
 														<listcell
-															label="X" />
+															label="019282" />
 														<listcell
-															label="56203" />
-														<listcell
-															label="12/02/2011" />
+															label="Distribuidor Uniformes" />
+														
 													</listitem>
 													<listitem>
 														<listcell
-															label="Y" />
+															label="127333" />
 														<listcell
-															label="73504" />
-														<listcell
-															label="29/10/2011" />
+															label="Distribuidor Arcilla" />
+														
 													</listitem>
 												</listbox>
 											</vbox>
 										</bandpopup>
 									</bandbox>
 									<label>Nro Factura</label>
-									<bandbox width="53%">
+									<bandbox width="180px">
 										<bandpopup>
 											<vbox>
-												<hbox>
-													<label>
-														Buscar
-													</label>
-													<textbox></textbox>
-												</hbox>
+												
 												<listbox
 													width="370px">
 													<listhead>
 														<listheader
 															label="Nº Factura" width="80px" />
-														<listheader
-															label="Proveedor" width="80px" />
+															<listheader
+															label="Monto" width="80px" />
 														<listheader
 															label="Fecha" width="80px" />
 													</listhead>
@@ -112,7 +98,7 @@
 														<listcell
 															label="56203" />
 														<listcell
-															label="X" />
+															label="4000Bs" />
 														<listcell
 															label="12/02/2011" />
 													</listitem>
@@ -120,7 +106,7 @@
 														<listcell
 															label="73504" />
 														<listcell
-															label="Y" />
+															label="350Bs" />
 														<listcell
 															label="29/10/2011" />
 													</listitem>
@@ -130,91 +116,97 @@
 									</bandbox>
 
 								</row>
-								<row>
-									<label>Rif</label>
-									<bandbox width="53%"></bandbox>
-									<label>Fecha Emisión</label>
-									<div>
-										<datebox width="53%"></datebox>
+								
+							</rows>
+								</grid>
+								<separator></separator>	
+								<div align="right">
+						<hbox>
+							<button
+								image="/Recursos/Imagenes/agregar.ico" onClick="" label=""
+								tooltiptext="Agregar a la Lista" />
+							<button
+								image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+								tooltiptext="Quitar de la Lista" />
+						</hbox>
+					</div>
 
-
-									</div>
-
-								</row>
-								<row spans="4">
-									<groupbox>
+					</groupbox>
+									<groupbox width="390">
 										<caption>
-											Datos de Materiales
+											Facturas a Pagar
 										</caption>
 										<div align="center">
-											<grid width="660px">
+											<grid width="380px">
 												<columns>
+												<column label=""
+														width="20px">
+														<checkbox
+															id="on" onCheck="setOn()">
+														</checkbox>
+													</column>
 													<column label="Item"
-														width="60px" align="center">
+														width="40px" align="center">
 													</column>
 													<column
-														label="Nombre" width="200px" align="center">
+														label="Nro. Factura" width="100px" align="center">
 													</column>
 													<column
-														label="Cantidad" width="80px" align="center">
+														label="Monto" width="80px" align="center">
 													</column>
 													<column
-														label="Precio" width="100px" align="center">
+														label="Fecha" width="100px" align="center">
 													</column>
 													<column
-														label="Total" width="100px" align="center">
+														label="" width="30px" align="center">
 													</column>
 												</columns>
 												<rows>
 													<row>
+													<checkbox
+															id="c1">
+														</checkbox>
 														<label
 															value="1">
 														</label>
 														<label
-															value="Bolsa de Basura">
+															value="56203">
 														</label>
 														<label
-															value="3">
+															value="4000Bs">
 														</label>
 														<label
-															value="0,5Bs">
+															value="12/02/2011">
 														</label>
-														<label
-															value="2,5Bs">
-														</label>
+														<button
+															image="/Recursos/Imagenes/consultar.ico"
+															tooltiptext="Consultar Factura">
+															<attribute name="onClick" >
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmConsultaMaterialesFact.zul", null,
+			null);
+]]>
+								</attribute>
+
+
+													
+														</button>
 													</row>
-													<row>
-														<label
-															value="2">
-														</label>
-														<label
-															value="Desinfectaten">
-														</label>
-														<label
-															value="4">
-														</label>
-														<label
-															value="15Bs">
-														</label>
-														<label
-															value="4Bs">
-														</label>
-													</row>
+													
 												</rows>
 											</grid>
 										</div>
 									</groupbox>
-								</row>
+								<separator></separator>
 
 
 
 
 
-							</rows>
-						</grid>
+							
+					
 
 
-					</groupbox>
 				</panelchildren>
 			</panel>
 			<panel collapsible="true" title="Datos del Pago"
@@ -348,7 +340,7 @@
 
 
 					<separator></separator>
-					<groupbox width="690px">
+					<groupbox width="660px">
 						<caption>Diferentes Métodos de Pago</caption>
 
 						<div>
@@ -357,63 +349,58 @@
 								<rows>
 
 									<row>
-										<grid width="690px">
+										<grid width="650px">
 											<columns>
-												<column label="Item"
+											<column label=""
 													width="20px">
+													<checkbox id="on1"
+														onCheck="setOn()">
+													</checkbox>
+												</column>
+												<column label="Item"
+													width="40px">
 												</column>
 												<column
 													label="Forma de Pago" width="100px">
 												</column>
 												<column
-													label="Tipo de Tarjeta">
+													label="Tarjeta" width="80px">
 												</column>
+												
 												<column
-													label="Monto Cancelado" width="120px">
-												</column>
-												<column
-													label="Entidad Bancaria" width="100px">
+													label="Banco" width="100px">
 												</column>
 												<column
 													label="Nro. de Documento" width="140px">
+												</column>
+												<column
+													label="Monto Cancelado" width="120px">
 												</column>
 
 
 											</columns>
 											<rows>
+											
 												<row>
+												<checkbox>
+													</checkbox>
 													<label value="1">
-													</label>
-													<label
-														value="Efectivo">
-													</label>
-													<label
-														value="2,5Bs">
-													</label>
-													<label
-														value="N/A">
-													</label>
-													<label
-														value="N/A">
-													</label>
-
-												</row>
-												<row>
-													<label value="2">
 													</label>
 													<label
 														value="Cheque">
 													</label>
 													<label
-														value="20Bs">
-													</label>
+														value="N/A"/>
+													
 													<label
 														value="Mercantil">
 													</label>
 													<label
 														value="001299300019920">
 													</label>
-
+												<label
+														value="4000Bs">
+													</label>
 												</row>
 											</rows>
 										</grid>
@@ -452,12 +439,7 @@
 
 										</row>
 
-										<row>
-											<label
-												value="Monto Restante a Pagar">
-											</label>
-											<textbox width="90px"></textbox>
-										</row>
+										
 
 									</rows>
 								</grid>
@@ -483,5 +465,5 @@
 			</div>
 		</zk>
 	</window>
-</div>
+
 

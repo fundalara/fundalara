@@ -1,7 +1,7 @@
 <?page title="GananciasYPerdidas" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="winGYP" title="Estado de Ganancias Y Pérdidas" border="normal"
-		width="650px">
+	<window id="winGYP" title="Estado de Ganancias Y Pérdidas"
+		border="normal" width="650px">
 		<panel title="16 de Noviembre 2011, 10:00am">
 			<panelchildren>
 				<groupbox>
@@ -19,66 +19,88 @@
 								</label>
 							</row>
 						</rows>
-					
-				    </grid>
-                       </groupbox>
+
+					</grid>
+				</groupbox>
 
 
-                 </panelchildren>
+			</panelchildren>
 
 		</panel>
-               <panel title="INGRESOS OPERACIONALES" >
+		<panel title="4. INGRESOS">
 			<panelchildren>
-			<groupbox>
+				<groupbox>
 
-				<grid>
-					
+					<grid>
+
 						<columns>
 							<column width="50%" align="left"></column>
 							<column width="25%" align="center"></column>
 							<column width="25%" align="center"></column>
 						</columns>
 						<rows>
-							
+
 							<row>
-								<label>Plan Vacacional</label>
+								<label>4.1 INGRESOS ORDINARIOS</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
 							<row>
-								<label>Inscripción</label>
+								<label>4.1.1 Plan Vacacional</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
 							<row>
-								<label>Mensualidades</label>
+								<label>4.1.2 Inscripción</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>4.1.3 Mensualidades</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
 
 							<row>
-								<label>Reinscripción</label>
+								<label>4.1.4 Reinscripción</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
 
 							<row>
-								<label>OTROS INGRESOS</label>
+								<label>4.2 INGRESOS POR VENTAS</label>
 								<label></label>
 								<label></label>
 							</row>
 							<row>
-								<label>Publicidad</label>
+								<label>4.2.1 Ventas de Uniformes</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
 							<row>
-								<label>Donaciones</label>
+								<label>
+									4.3 INGRESOS XTRAORDINARIOS
+								</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>4.3.1 Publicidad</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
 							<row>
-								<label>Otros</label>
+								<label>4.3.2 Donaciones</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>4.3.3 Aportes Especiales</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>4.3.4 Otros</label>
 								<label>xxx</label>
 								<label></label>
 							</row>
@@ -88,155 +110,180 @@
 								<label></label>
 							</row>
 
-                                   </rows>
+						</rows>
 
-	                         </grid>
-                      </groupbox>
+					</grid>
+				</groupbox>
 
 
-                 </panelchildren>
+			</panelchildren>
 
 		</panel>
 
-                  <panel title="GASTOS OPERACIONALES" >
+		<panel title="5. EGRESOS">
 			<panelchildren>
-			<groupbox>
+				<groupbox>
 
 
-				<grid>
+					<grid>
 
 
-                                      <columns>
+						<columns>
 							<column width="50%" align="left"></column>
 							<column width="25%" align="center"></column>
 							<column width="25%" align="center"></column>
 						</columns>
 						<rows>
 
-							
+
 							<row>
-								<label> GASTOS GENERALES</label>
+								<label>5.1 GASTOS DE PERSONAL</label>
 								<label></label>
 								<label></label>
 							</row>
 							<row>
 								<label>
-									Salario Técnicos Y Obreros
-								</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>Pago de Cesta ticket</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>
-									Pago de Prestaciones Y Liquidaciones
+									5.1.1 Salario Técnicos Y Obreros
 								</label>
 								<label></label>
 								<label>xxx</label>
 							</row>
 							<row>
 								<label>
-									Bono Fin de Semana Y Viáticos
+									5.1.2 Pago de Cesta ticket
 								</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-                                            <row>
-								<label>Materiales de Limpieza</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>CANTV Y servicios Varios</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>Mantenimiento</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>Reintegros</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>Pagos a Ligas</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label>Pago a Nacional Juvenil</label>
-								<label></label>
-								<label>xxx</label>
-							</row>
-							<row>
-								<label> GASTOS ADMINISTRATIVOS</label>
-								<label></label>
-								<label></label>
-							</row>
-							<row>
-								<label>Talonarios Y Papelería</label>
 								<label></label>
 								<label>xxx</label>
 							</row>
 							<row>
 								<label>
-									Materiales Y Varios de Oficina
+									5.1.3 Pago de Prestaciones Y
+									Liquidaciones
 								</label>
 								<label></label>
 								<label>xxx</label>
 							</row>
-							
 							<row>
-								<label>Otros Pagos</label>
+								<label>5.1.4 Bono Fin de Semana</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>5.1.5 Viáticos</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>5.2 GASTOS BASICOS</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									5.2.1 Talonarios Y Papelería
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									5.2.2 Materiales Y Varios de Oficina
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									5.2.3 CANTV Y servicios Varios
+								</label>
 								<label></label>
 								<label>xxx</label>
 							</row>
 
 							<row>
-								<label>TOTAL GASTOS</label>
+								<label>
+									5.3 GASTOS DE MANTENIMIENTO
+								</label>
+								<label></label>
+								<label></label>
+							</row>
+
+							<row>
+								<label>
+									5.3.1 Materiales de Limpieza
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+							<row>
+								<label>
+									5.3.2 Mantenimiento en General
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>5.4 GASTOS GENERALES</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>5.4.1 Reintegros</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>5.4.2 Pagos a Ligas</label>
 								<label></label>
 								<label>xxx</label>
 							</row>
 
 
-                                   </rows>
+							<row>
+								<label>5.4.3 Otros Pagos</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
 
-	                         </grid>
-                      </groupbox>
+							<row>
+								<label>TOTAL EGRESOS</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
 
 
-                 </panelchildren>
+						</rows>
+
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
 
 		</panel>
 
-			<panel  >
+		<panel>
 			<panelchildren>
-			<groupbox>
+				<groupbox>
 
 
-				<grid>
+					<grid>
 
 
-                                      <columns>
+						<columns>
 							<column width="50%" align="left"></column>
 							<column width="25%" align="center"></column>
 							<column width="25%" align="center"></column>
 						</columns>
 						<rows>
-				         
-							 <row>
-								<label>Utilidad o Perdida</label>
+
+							<row>
+								<label>UTILIDAD O PERDIDA</label>
 								<label></label>
 								<label></label>
 							</row>
-							
+
 
 						</rows>
 					</grid>
@@ -244,13 +291,13 @@
 				<div align="right">
 					<button image="/Recursos/Imagenes/imprimir.ico"
 						onClick="" tooltiptext="/Aceptar" label="Imprimir" />
-					
+
 					<button image="/Recursos/Imagenes/atras.ico"
-						onClick="" tooltiptext="Salir" label="Salir" >
+						onClick="" tooltiptext="Salir" label="Salir">
 						<attribute name="onClick">
-							winGYP.onClose();
-						</attribute>
-						</button>
+	winGYP.onClose();
+</attribute>
+					</button>
 				</div>
 
 			</panelchildren>

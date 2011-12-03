@@ -1,14 +1,9 @@
 <?page title="Clientes" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<!-- <div align="center"> -->
-	<window title="Clientes" border="normal" width="650px">
+
+	<window id="RegC" title="Clientes" border="normal" width="690px" mode="popup" left="460px" top="200px" closable="true">
 		<panel title="Datos del Cliente" collapsible="true" open="true">
 			<panelchildren>
-				<groupbox>
-					<caption>Datos del Cliente</caption>
-						<grid>
-							<rows>
-								<row>
 									<grid>
 										<columns>
 											<column width="110px" /> 
@@ -17,16 +12,18 @@
 											<column width="300px" />
 										</columns>
 										<rows>
-											<row align="left">
-												<label value="* Nombre" />
-												<bandbox width="90%"/>
+											<row align="left" style=" border:none">
+												<label value="R.I.F"></label>
+												<hbox><textbox width="90%"/><button image="/Recursos/Imagenes/consultar.ico" onClick=""
+				tooltiptext="Consultar"></button><label style="color:red" Value="(*)"></label> </hbox>
 												<!--<textbox width="96%" />-->
-												<label value="* R.I.F" />
-												<bandbox width="90%"/>
+												<label value="Nombre"></label>
+												<hbox><textbox width="90%"/><button image="/Recursos/Imagenes/consultar.ico" onClick=""
+				tooltiptext="Consultar"></button><label style="color:red" Value="(*)"></label> </hbox>
 												<!--<textbox width="96%" />-->
 											</row>
-											<row>
-												<label value="Teléfono" />
+											<row style=" border:none">
+												<label value="Teléfono"></label>
 												<hbox>
 													<combobox
 														width="60px">
@@ -44,7 +41,7 @@
 														width="96%">
 													</textbox>
 												</hbox>
-												<label value="Numero de Fax" />
+												<label value="Fax"></label>
 												<hbox>
 													<combobox
 														width="60px">
@@ -63,58 +60,48 @@
 													</textbox>
 												</hbox>
 											</row>
-											<row>
-													<label value="Email" />
+											<row style=" border:none">
+													<label value="Correo Electrónico"></label>
 													<textbox width="96%" />
-													<label value="Pagina Web" />
+													<label value="Página Web"></label>
 													<textbox width="96%" />
 											</row>
-											<row>
+											<row style=" border:none">
 												
-													<label value="Cuenta Twitter @" />
+													<label value="Cuenta Twitter @"></label>
 													<textbox width="96%" />
-													<label value="Cuenta Facebook" />
+													<label value="Cuenta Facebook"></label>
 													<textbox width="96%" />
+											</row>
+											<row spans="4" style=" border:none">
+											<div>
+												<hbox><label value="Dirección"></label>
+												<textbox width="500px"/><label style="color:red" Value="(*)"></label> </hbox>
+											</div>	
 											</row>
 										</rows>
 									</grid>
-								</row>
-							</rows>
-						</grid>
-						<grid>
-							<rows>
-								<row>
-									<grid>
-										<columns>
-											<column label="" width="120px" />
-										</columns>
-										<rows>
-											<row>
-												<label value="* Dirección" />
-												<textbox width="96%" />
-												
-											</row>
-										</rows>
-									</grid>
-								</row>
-							</rows>
-						</grid>
-					</groupbox>
+								
 				</panelchildren>
 			</panel>
 		
-		<label value=" * Información Obligatoria"/>
+		<label style="color:red" value="(*) Información Obligatoria"></label>
+		
 		<div align="right">
 			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
-				tooltiptext="Registrar" label="Registrar" />
+				tooltiptext="Guardar" label="Guardar" />
 			<button image="/Recursos/Imagenes/editar.ico" onClick=""
 				tooltiptext="Modificar" label="Modificar" />
 			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
 				tooltiptext="Eliminar" label="Eliminar" />
 			<button image="/Recursos/Imagenes/atras.ico" onClick=""
-				tooltiptext="Salir" label="Salir" />
+				tooltiptext="Salir" label="Salir">
+				<attribute name="onClick">
+					RegC.onClose();
+				</attribute>	
+			</button>
 		</div>
 		
 	</window>
-	<!--  </div> -->
+
 </zk>

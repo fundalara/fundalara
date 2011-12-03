@@ -1,10 +1,9 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="winA" title="Agregar Incidencia" border="normal"
-		width="450px">
+	<window id="winA" title="Agregar Incidencia" border="normal" mode="popup" top="200px" left="450px" width="450px">
 		<attribute name="onClick">
 	<![CDATA[
-	winA.doModal();
+	
 ]]>
 								</attribute>
 
@@ -21,19 +20,20 @@
 								<rows>
 									<row>
 										<label>Incidencia</label>
-										<combobox width="90%">
+										<hbox><combobox width="170px">
 										<comboitem label="Inasistencia Justificada"></comboitem>
 										<comboitem label="Inasistencia no Justificada"></comboitem>
 										<comboitem label="Trabajo Extra"></comboitem>
-										</combobox>
+										</combobox><label style="color:red" Value="(*)"></label>
+										</hbox>
 									</row>
 									<row>
 										<label>Fecha</label>
-										<datebox width="40%"></datebox>
+										<hbox><datebox width="100px"/><label style="color:red" Value="(*)"></label> </hbox>
 									</row>
 									<row>
 										<label>Horas Laborales</label>
-										<textbox width="15%"></textbox>
+										<hbox><textbox width="115px"/><label style="color:red" Value="(*)"></label> </hbox>
 									</row>
 									<row>
 										<label>Pago</label>

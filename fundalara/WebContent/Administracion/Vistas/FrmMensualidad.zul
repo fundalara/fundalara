@@ -1,6 +1,6 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="winM" title="new page title" mode="overlapped">
+	<window id="winM" title="new page title"  mode="popup" top="250px" left="460px">
 		<zscript><![CDATA[
 	//@IMPORT
 	import org.zkoss.Version;

@@ -1,6 +1,6 @@
 
 <zk>
-	<window id="winPOP" title="Otro Pago" border="modal">
+	<window id="winOtroP" title="Otro Pago" border="modal" width="300px" mode="popup" left="460px" top="250px">
 		<zscript><![CDATA[ ]]></zscript>
 		<zscript><![CDATA[
 	//@IMPORT
@@ -13,13 +13,13 @@
 
 		if (c.getSelectedItem().getValue().equals("Uniform")) {
 			Window window = (Window) Executions.createComponents(
-					"FrmSolUniforme.zul", null, null);
-			winSU.doModal();
+					"/Administracion/FrmSolUniforme.zul", null, null);
+			
 
 		} else {
 			Window window = (Window) Executions.createComponents(
-					"FrmMensualidad.zul", null, null);
-			winM.doModal();
+					"/Administracion/FrmMensualidad.zul", null, null);
+			
 		}
 
 	}
@@ -37,7 +37,7 @@
 				tooltiptext="Salir" label="Salir" >
 					<attribute name="onClick">
 							{
-								winPOP.onClose();
+								winOtroP.onClose();
 							}
 						</attribute>
 				</button>

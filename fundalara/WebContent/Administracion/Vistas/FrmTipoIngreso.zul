@@ -12,22 +12,24 @@
 		String var = c.getSelectedItem().getValue().toString();
 
 		if (c.getSelectedItem().getValue().equals("Dona")) {
-			Executions.createComponents("/Administracion/FrmDonacion.zul", winPOP, null);
+			Executions.createComponents("/Administracion/Vistas/FrmDonacion.zul", winPOP, null);
 		} else if (c.getSelectedItem().getValue().equals("Publi")) {
 			Window window = (Window) Executions.createComponents(
-					"/Administracion/FrmIngresoPublicidad.zul", null, null);
+					"/Administracion/Vistas/FrmIngresoPublicidad.zul", null, null);
 
 		} else if (c.getSelectedItem().getValue().equals("PagoRe")) {
 			Window window = (Window) Executions.createComponents(
-					"/Administracion/FrmPagoRepresentante.zul", null, null);
+					"/Administracion/Vistas/FrmPagoRepre.zul", null, null);
 			
 		} else if (c.getSelectedItem().getValue().equals("Pago")) {
 			Window window = (Window) Executions.createComponents(
-					"/Administracion/FrmAportesEspeciales.zul", null, null);
-		
-
+					"/Administracion/Vistas/FrmAportesEspeciales.zul", null, null);
+			
+		} else if (c.getSelectedItem().getValue().equals("Valla")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmIngresoPublicidad.zul", null, null);
+	
 		}
-
 	}
 ]]></zscript>
 
@@ -41,6 +43,7 @@
 					<comboitem label="Pago Representante"
 						value="PagoRe" />
 					<comboitem label="Aporte Especial" value="Pago" />
+					<comboitem label="Servicios de Publicidad" value="Valla" />
 					
 				</combobox>
 			</panelchildren>

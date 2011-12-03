@@ -119,16 +119,19 @@
 				</grid>
 			</panelchildren>
 		</panel>
-		<div align="right">
-			<button image="/Recursos/Imagenes/guardar.ico"
-				onClick="" tooltiptext="Aceptar" label="Registrar" />
-			<button image="/Recursos/Imagenes/cancelar.ico"
-				onClick="" tooltiptext="Cancelar" label="Cancelar" />
+			<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				tooltiptext="Aceptar" label="Registrar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
 			<button image="/Recursos/Imagenes/atras.ico" onClick=""
-				tooltiptext="Salir" label="Salir" />
+				tooltiptext="Salir" label="Salir" >
 				<attribute name="onClick">
-				winPR.onClose();
-				</attribute>
+							{
+								winD.onClose();
+							}
+						</attribute>
+				</button>
 				
 		</div>
 	</window>

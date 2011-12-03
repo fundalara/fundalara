@@ -1,7 +1,8 @@
 <?page title="Otros Egresos" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<div>
-		<window id="OtrosEgresos" title="Registrar otros egresos" border="normal" 
+	<div align="center">
+		<separator height="15px" />
+		<window id="otrosegresos" closable="true" title="Registrar otros egresos" border="normal" 
 			width="690px">
 			<zscript><![CDATA[
 	//@IMPORT
@@ -98,7 +99,7 @@
 				<panel collapsible="true" title="Datos del Pago"
 					open="false">
 					<panelchildren>
-						<div>
+						<hbox>
 							<grid>
 
 								<rows>
@@ -126,7 +127,7 @@
 													<label
 														value="Forma de Pago">
 													</label>
-													<combobox id="comboPago" onSelect="mostrar()" width="180px">
+													<combobox id="comboPago" onSelect="mostrar()" value="--Seleccione--" width="140px">
 														<comboitem
 															value="1" label="Efectivo">
 														</comboitem>
@@ -142,13 +143,16 @@
 														<comboitem
 															value="5" label="Cheque">
 														</comboitem>
+														<comboitem
+															value="6" label="CestaTicket">
+														</comboitem>
 													</combobox>
 													<label
 														value="Monto Cancelado">
 													</label>
-													<textbox
+													<doublebox
 														width="180px">
-													</textbox>
+													</doublebox>
 
 
 												</row>
@@ -164,8 +168,8 @@
 													<label
 														value="Entidad Bancaria">
 													</label>
-													<combobox
-														width="180px">
+													<combobox value="--Seleccione--"
+														width="140px">
 														<comboitem
 															label="Banesco">
 														</comboitem>
@@ -189,8 +193,8 @@
 													<label
 														value="Tipo de Tarjeta">
 													</label>
-													<combobox
-														width="180px">
+													<combobox value="--Seleccione--"
+														width="140px">
 														<comboitem
 															label="Visa">
 														</comboitem>
@@ -205,27 +209,34 @@
 											</rows>
 										</grid>
 									</row>
-									<row>
+									<!-- <row>
 										<div align="right">
 											<hbox>
 												<button
 													image="/Recursos/Imagenes/agregar.ico" onClick=""
 													label="" tooltiptext="Agregar a la Lista" />
 												<button
-													image="/Administracion/images/quitar.ico" onClick=""
+													image="/Recursos/Imagenes/quitar.ico" onClick=""
 													label="" tooltiptext="Quitar de la Lista" />
 											</hbox>
 										</div>
-									</row>
+									</row>  -->
 								</rows>
 
-							</grid>
-
-						</div>
+								</grid>
+								<vbox height="50px">							
+								<button
+								image="/Recursos/Imagenes/agregar.ico" />
+								<separator height="5px" />
+								<button image="/Recursos/Imagenes/editar.ico" />
+								<separator height="5px" />
+								<button image="/Recursos/Imagenes/quitar.ico" />
+								</vbox>
+						</hbox>
 
 
 						<separator></separator>
-						<groupbox width="700px">
+						<groupbox width="650px">
 							<caption>
 								Diferentes Métodos de Pago
 							</caption>
@@ -236,7 +247,7 @@
 									<rows>
 
 										<row>
-											<grid width="690px">
+											<grid width="650px">
 												<columns>
 													<column label=""
 														width="20px">
@@ -330,7 +341,7 @@
 												<label
 													value="Monto Total">
 												</label>
-												<textbox width="90px"></textbox>
+												<doublebox width="90px"></doublebox>
 
 											</row>
 
@@ -338,7 +349,7 @@
 												<label
 													value="Monto Restante a Pagar">
 												</label>
-												<textbox width="90px"></textbox>
+												<doublebox width="90px"></doublebox>
 											</row>
 
 										</rows>
@@ -357,12 +368,7 @@
 				<button image="/Recursos/Imagenes/cancelar.ico"
 					onClick="" label="Cancelar" />
 				<button image="/Recursos/Imagenes/atras.ico"
-				onClick="" tooltiptext="Salir" label="Salir" >
-				<attribute name="onClick">
-				OtrosEgresos.onClose();
-				</attribute>
-				
-				</button>
+					onClick="" label="Salir" />
 			</div>
 		</window>
 	</div>

@@ -1,56 +1,77 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 
-	<window id="PagoBV" title="Pagar Bonos y Viaticos" border="normal" width="690px" >
+	<window id="PagoBV" title="Pagar Bonos y Viaticos" border="normal"
+		width="690px">
 		<zscript><![CDATA[ ]]></zscript>
-		<zscript><![CDATA[//@IMPORT 
-
-		                  import org.zkoss.Version;
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
 ]]></zscript>
-<zscript><![CDATA[//@DECLARATION 
-                  public void mostrar() {
-              		String var = CB1.getSelectedItem().getValue().toString();
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void mostrar() {
+		String var = CB1.getSelectedItem().getValue().toString();
 
-              		if (var.equals("1")) {
-              			row1.setVisible(false);
-              			row2.setVisible(false);
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			
 
-              		} else if (var.equals("2")) {
-              			row1.setVisible(true);
-              			row2.setVisible(true);
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+	
 
-              		} else if (var.equals("3")) {
-              			row1.setVisible(true);
-              			row2.setVisible(true);
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			
+		} else {
+			row1.setVisible(true);
+		
 
-              		} else {
-              			row1.setVisible(true);
-              			row2.setVisible(false);
+		}
 
-              		}
-
-              	}
-
+	}
 ]]></zscript>
-		<panel>
+		<panel title="Datos Básicos">
 			<panelchildren>
-				<groupbox>
-					<space></space>
-					<label value="Cédula" />
-					<bandbox width="20%"></bandbox>
-					<space></space>
-					<label value="Nombres" />
-					<bandbox width="20%"></bandbox>
-					<space></space>
-					<label>Filtrar Desde</label>
-					<space></space>
-					<datebox width="10%"/>
-					<space></space>
-					<label>A</label>
-					<space></space>
-					<datebox width="10%" />
-				</groupbox>
+				<grid>
+					<rows>
 
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="180px">
+									</column>
+									<column label="" width="200px">
+									</column>
+									<column label="" width="180px">
+									</column>
+									<column label="" width="200px">
+									</column>
+								</columns>
+								<rows>
+									<row>
+
+										<label value="Cédula" />
+										<bandbox width="180px"></bandbox>
+
+										<label value="Nombres" />
+										<bandbox width="180px"></bandbox>
+									</row>
+									<row>
+										<label>Filtrar Desde</label>
+
+										<datebox width="180px" />
+
+										<label>Hasta</label>
+
+										<datebox width="180px" />
+									</row>
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
 			</panelchildren>
 
 		</panel>
@@ -59,264 +80,193 @@
 			open="false">
 			<panelchildren>
 				<groupbox>
+					<caption>Lista de Bonos y Viáticos</caption>
 					<grid>
 						<columns>
 							<column>
 								<checkbox></checkbox>
 							</column>
-							<column label="Nombre" align="center"></column>
-							<column label="Cédula" align="center"></column>
-							<column label="Cargo" align="center"></column>
+							<column label="Item" align="center" width="40px"></column>
+							<!--  <column label="Nombre" align="center"></column>
+								<column label="Cédula" align="center"></column>
+								<column label="Cargo" align="center"></column>-->
 							<column label="Ubicación" align="center"></column>
-							<column label="Viatico" align="center"></column>
-							<column label="Bono" align="center"></column>
+							<column label="Monto" align="center"></column>
+							<column label="Tipo Bonificación"
+								align="center">
+							</column>
 							<column label="Fecha" align="center"></column>
 						</columns>
 						<rows>
 							<row>
 								<checkbox></checkbox>
-								<label>
+								<label>1</label>
+								<!--<label>
 									Juan Andrés Rincón Hernández
-								</label>
-								<label>7543869</label>
-								<label>Técnico</label>
+									</label>
+									<label>7543869</label>
+									<label>Técnico</label>-->
 								<label>Ayacucho</label>
 								<label>30Bs</label>
-								<label>30Bs</label>
+								<!--<label>30Bs</label>  -->
+								<label>Viatico</label>
 								<label>07/10/2011</label>
 							</row>
 							<row>
 								<checkbox></checkbox>
-								<label>
+								<label>2</label>
+								<!-- <label>
 									Juan Andrés Rincón Hernández
-								</label>
-								<label>7543869</label>
-								<label>Técnico</label>
+									</label>
+									<label>7543869</label>
+									<label>Técnico</label> -->
 								<label>Patarata</label>
 								<label>15Bs</label>
-								<label>45Bs</label>
+								<!--  <label>45Bs</label>-->
+								<label>Bono por Juego</label>
 								<label>08/10/2011</label>
 							</row>
 						</rows>
 					</grid>
 				</groupbox>
+			
+				<div align="right">
+					<groupbox>
+
+						<label value="Total Bsf a Pagar" />
+						<textbox />
+
+					</groupbox>
+				</div>
+
+
 			</panelchildren>
 		</panel>
 		<panel title="Datos del Pago de Bonos y Viaticos"
 			collapsible="true" open="false">
 			<panelchildren>
-				<groupbox>
-					<grid>
-						<rows>
-							<row align="left">
-								<label>Número de Transacción</label>
-								<textbox></textbox>
-							</row>
-							<row>
-								<label>Fecha Pago</label>
-								<datebox width="23.5%"></datebox>
-							</row>
-							<row>
-								<label>Forma de Pago</label>
-								<combobox width="23.5%">
-									<comboitem>Efectivo</comboitem>
-									<comboitem>Cheque</comboitem>
-								</combobox>
-							</row>
-							<row>
-								<label>Monto BsF.</label>
-								<textbox></textbox>
-							</row>
-							<row>
-								<label>Observaciones</label>
-								<textbox></textbox>
-							</row>
-						</rows>
+		
 
 
-					</grid>
+
+				
 
 
-				</groupbox>
-
-			
-		<groupbox>
-					<caption>Pagos a Realizar</caption>
-					<grid>
-						<columns>
-							<column label="Descripción" width="30%" />
-							<column label="Cantidad" width="15%" />
-							<column label="Monto" width="15%" />
-						</columns>
-						<rows>
-							<row>
-								<label
-									value="Compra de Uniforme Paquete Completo" />
-								<label value="1" />
-								<label value="200" />
-							</row>
 
 
-							<row>
-								<label value="Cuota Octubre" />
-								<label value="1" />
-								<label value="90" />
-							</row>
+					<div>
+						<grid>
 
-							<row spans="4" align="center">
+							<rows>
 
-								<groupbox>
+								<row>
+									<grid>
+										<columns>
+											<column label=""
+												width="220px">
+											</column>
+											<column label=""
+												width="252px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+
+
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Forma de Pago">
+												</label>
+												<combobox id="CB1"
+													onSelect="mostrar()" width="180px">
+													<comboitem value="1"
+														label="Efectivo">
+													</comboitem>
+													<!--  <comboitem
+														value="2" label="Débito">
+														</comboitem>
+														<comboitem
+														value="3" label="Crédito">
+														</comboitem>
+														<comboitem
+														value="4" label="Transferencia">
+														</comboitem>-->
+													<comboitem value="5"
+														label="Cheque">
+													</comboitem>
+												</combobox>
+												<label
+													value="Monto Cancelado">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+
+
+											</row>
+											<row id="row1"
+												visible="false">
+												<label
+													value="Nro. de Documento">
+												</label>
+												<textbox
+													width="100px">
+												</textbox>
+
+												<label
+													value="Entidad Bancaria">
+												</label>
+												<combobox
+													width="100px">
+													<comboitem
+														label="Banesco">
+													</comboitem>
+													<comboitem
+														label="Mercantil">
+													</comboitem>
+													<comboitem
+														label="BOD">
+													</comboitem>
+													<comboitem
+														label="Provincial">
+													</comboitem>
+													<comboitem
+														label="Venezuela">
+													</comboitem>
+												</combobox>
+
+											</row>
+											
+										</rows>
+									</grid>
+								</row>
+								<row>
 									<div align="right">
-										<label
-											value="Total Bsf a Pagar" />
-										<textbox />
+										<hbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick="" label=""
+												tooltiptext="Agregar a la Lista" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+												tooltiptext="Quitar de la Lista" />
+										</hbox>
 									</div>
+								</row>
+							</rows>
 
-								</groupbox>
+						</grid>
 
-							</row>
-
-						</rows>
-
-
-					</grid>
-					<groupbox>
-						<caption>Detalle de Pago</caption>
-					
-					
-					
+					</div>
 
 
-						<div>
-							<grid>
-
-								<rows>
-
-									<row>
-										<grid>
-											<columns>
-												<column label=""
-													width="220px">
-												</column>
-												<column label=""
-													width="252px">
-												</column>
-												<column label=""
-													width="180px">
-												</column>
-												<column label=""
-													width="180px">
-												</column>
-
-
-											</columns>
-											<rows>
-												<row>
-													<label
-														value="Forma de Pago">
-													</label>
-													<combobox id="CB1"
-														onSelect="mostrar()" width="180px">
-														<comboitem
-															value="1" label="Efectivo">
-														</comboitem>
-														<comboitem
-															value="2" label="Débito">
-														</comboitem>
-														<comboitem
-															value="3" label="Crédito">
-														</comboitem>
-														<comboitem
-															value="4" label="Transferencia">
-														</comboitem>
-														<comboitem
-															value="5" label="Cheque">
-														</comboitem>
-													</combobox>
-													<label
-														value="Monto Cancelado">
-													</label>
-													<textbox
-														width="180px">
-													</textbox>
-
-
-												</row>
-												<row id="row1"
-													visible="false">
-													<label
-														value="Nro. de Documento">
-													</label>
-													<textbox
-														width="100px">
-													</textbox>
-
-													<label
-														value="Entidad Bancaria">
-													</label>
-													<combobox
-														width="100px">
-														<comboitem
-															label="Banesco">
-														</comboitem>
-														<comboitem
-															label="Mercantil">
-														</comboitem>
-														<comboitem
-															label="BOD">
-														</comboitem>
-														<comboitem
-															label="Provincial">
-														</comboitem>
-														<comboitem
-															label="Venezuela">
-														</comboitem>
-													</combobox>
-
-												</row>
-												<row id="row2"
-													visible="false">
-													<label
-														value="Tipo de Tarjeta">
-													</label>
-													<combobox
-														width="180px">
-														<comboitem
-															label="Visa">
-														</comboitem>
-														<comboitem
-															label="MarterCard">
-														</comboitem>
-														<comboitem
-															label="American Express">
-														</comboitem>
-													</combobox>
-												</row>
-											</rows>
-										</grid>
-									</row>
-									<row>
-										<div align="right">
-											<hbox>
-												<button
-													image="/Recursos/Imagenes/agregar.ico" onClick=""
-													label="" tooltiptext="Agregar a la Lista" />
-												<button
-													image="/Recursos/Imagenes/quitar.ico" onClick=""
-													label="" tooltiptext="Quitar de la Lista" />
-											</hbox>
-										</div>
-									</row>
-								</rows>
-
-							</grid>
-
-						</div>
-
-
-						<separator></separator>
-						<div align="center">
-						<groupbox width="650px">
+					<separator></separator>
+					<div align="center">
+						<groupbox width="660px">
 							<caption>
 								Diferentes Métodos de Pago
 							</caption>
@@ -327,7 +277,7 @@
 									<rows>
 
 										<row>
-											<grid width="690px">
+											<grid width="650px">
 												<columns>
 													<column label=""
 														width="20px">
@@ -336,19 +286,19 @@
 														</checkbox>
 													</column>
 													<column label="Item"
-														width="60px">
+														width="40px">
 													</column>
 													<column
 														label="Forma de Pago" width="100px">
 													</column>
 													<column
-														label="Tipo de Tarjeta">
+														label="Tarjeta" width="80px">
 													</column>
 													<column
 														label="Monto Cancelado" width="120px">
 													</column>
 													<column
-														label="Entidad Bancaria" width="100px">
+														label="Banco" width="100px">
 													</column>
 													<column
 														label="Nro. de Documento" width="140px">
@@ -381,30 +331,30 @@
 														</label>
 
 													</row>
-													<row>
+													<!--  <row>
 														<checkbox
-															id="c5">
+														id="c5">
 														</checkbox>
 														<label
-															value="2">
+														value="2">
 														</label>
 														<label
-															value="Cheque">
+														value="Cheque">
 														</label>
 														<label
-															value="N/A">
+														value="N/A">
 														</label>
 														<label
-															value="20Bs">
+														value="20Bs">
 														</label>
 														<label
-															value="Mercantil">
+														value="Mercantil">
 														</label>
 														<label
-															value="001299300019920">
+														value="001299300019920">
 														</label>
-
-													</row>
+														
+														</row>-->
 												</rows>
 											</grid>
 
@@ -444,26 +394,26 @@
 
 							</div>
 						</groupbox>
-						</div>
-						<separator></separator>
-						</groupbox>
-					
-				</groupbox>
-				</panelchildren>
+					</div>
+					<separator></separator>
+			
+
+
+			</panelchildren>
 
 		</panel>
 		<div align="right">
-			<button image="/Recursos/Imagenes/aceptar.ico"
-				onClick="" tooltiptext="Aceptar" label="Pagar" />
-			<button image="/Recursos/Imagenes/cancelar.ico"
-				onClick="" tooltiptext="Cancelar" label="Cancelar" />
-			<button image="/Recursos/Imagenes/atras.ico"
-				onClick="" tooltiptext="Salir" label="Salir" >
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				tooltiptext="Aceptar" label="Pagar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir">
 				<attribute name="onClick">
-				PagoBV.onClose();
-				</attribute>
-				
-				</button>
+	PagoBV.onClose();
+</attribute>
+
+			</button>
 		</div>
 	</window>
 </zk>

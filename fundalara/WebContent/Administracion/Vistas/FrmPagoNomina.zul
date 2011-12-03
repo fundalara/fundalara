@@ -1,7 +1,6 @@
 <?page title="Pago Nómina" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="Volver" title="Pago Nómina" border="normal" mode="modal"
-		position="center" width="650px">
+	<window id="TipoN" title="Pago Nómina" border="normal" width="650px" mode="popup" left="460px" top="200px">
 		<zscript>
 <![CDATA[ 
 ]]></zscript>
@@ -12,15 +11,7 @@
 	import org.zkoss.Version;
 ]]><![CDATA[
 	//@DECLARATION
-	public void Volver() {
-		Window window = (Window) Executions.createComponents("Nomina.zul",
-				null, null);
-		//loginDiv.setVisible(false);
-		Volver.setVisible(false);
-	}
-	public void salir() {
-		Volver.onClose();
-	}
+	
 	public void mostrar(){
 		String var = A.getSelectedItem().getValue().toString();
 			
@@ -122,7 +113,12 @@
 					<button image="/Recursos/Imagenes/guardar.ico"
 						label="Guardar" onClick="" />
 					<button image="/Recursos/Imagenes/atras.ico"
-						label="Salir" onClick="salir()" />
+						label="Salir">
+						<attribute name="onClick">
+				TipoN.onClose();
+		
+				</attribute>
+				</button>
 				</div>
 			</panelchildren>
 		</panel>

@@ -1,6 +1,6 @@
 <?page title="Benefactores" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Benefactores" border="normal" width="75%">
+	<window id="Bene" title="Benefactores" border="normal" width="690px">
 		<zscript><![CDATA[
 	public void mostrar() {
 		String var = cb.getSelectedItem().getValue().toString();
@@ -168,17 +168,21 @@
 
 		<div align="right">
 
-			<button image="/Administracion/images/guardar.ico"
+			<button image="/Recursos/Imagenes/guardar.ico"
 				onClick="" label="Guardar" />
-			<button image="/Administracion/images/editar.ico" onClick=""
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
 				label="Editar" />
-			<button image="/Administracion/images/quitar.ico"
+			<button image="/Recursos/Imagenes/quitar.ico"
 				label="Eliminar">
 			</button>
-			<button image="/Administracion/images/cancelar.ico"
+			<button image="/Recursos/Imagenes/cancelar.ico"
 				onClick="" label="Cancelar" />
-			<button image="/Administracion/images/atras.ico" onClick=""
-				label="Salir" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				label="Salir">
+				<attribute name="onClick">
+				Bene.onClose();
+				</attribute>
+				</button>
 		</div>
 
 	</window>
