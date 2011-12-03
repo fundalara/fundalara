@@ -8,8 +8,8 @@
 			<div>
 				<button mold="os" label="Hoy" />
 				<span id="FDOW">
-					Filtrar por:
-					<listbox mold="select">
+					<label value="Filtrar por:"/>					
+					<listbox mold="select" id="filtro">
 						<listitem label="${each}"
 							forEach="Entrenamiento,Competencia,Mantenimiento,Actividad Complementaria" />							
 					</listbox>

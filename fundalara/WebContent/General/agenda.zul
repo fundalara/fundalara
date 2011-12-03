@@ -7,9 +7,8 @@
 <?component name="toolbar" macro-uri="Calendario/toolbar.zul" inline="true"?>
 <?page title="Calendario" contentType="text/html;charset=UTF-8"?>
 <zk>
-<separator/>
 	<window title="Calendario" border="none" mode="embedded" closable="true"
-		width="690px" height="600px" apply="vista.general.agenda">
+		width="690px" height="600px" apply="vista.general.Agenda">
 		<borderlayout>
 			<north>
 				<toolbar />
