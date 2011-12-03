@@ -45,4 +45,11 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>index.zul</welcome-file>
   </welcome-file-list>
+	<context-param>
+	  <param-name>contextConfigLocation</param-name>
+	  <param-value>classpath:ApplicationContext*.xml</param-value>
+	</context-param>
+	<listener>
+	  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

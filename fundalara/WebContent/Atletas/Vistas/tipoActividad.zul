@@ -1,4 +1,20 @@
 <?page title="Actividad"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+<zscript>
+<![CDATA[ 
+   modelo.TipoActividadSocial tA = new modelo.TipoActividadSocial();
+   void guardar(){
+	     tA.setCodigoActividadSocial("1");
+	     tA.setEstatus("A");
+	     servicioTipoActividadSocial.agregar(tA);
+	     tA = new modelo.TipoActividadSocial();
+	     binder.loadAll();
+	     
+   }
+]]>
+</zscript>
 <window id="win" title="Actividad" border="normal" width="45%"
 	closable="true">
 
@@ -11,13 +27,13 @@
 			<row>
 				<label value="Código" />
 				<textbox id="txtCodigo" width="90%" maxlength="5"
-					disabled="true" />
+					disabled="true" value="@{tA.codigoActividadSocial}" />
 			</row>
 			<row>
 				<label value="Nombre" />
 				<div>
 					<textbox id="txtNombre" width="90%" maxlength="80"
-						constraint="no empty" focus="true" />
+						constraint="no empty" focus="true" value="@{tA.nombre}" />
 					<label value="(*)" style="color:red" />
 				</div>
 			</row>
@@ -26,7 +42,7 @@
 	<div align="right">
 		<button id="btnGuardar" label="Guardar"
 			image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
-			width="100px" />
+			width="100px" onClick="guardar()" />
 		<button id="btnCancelar" label="Cancelar"
 			image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
 			width="100px" />
@@ -41,3 +57,4 @@
 
 	<label value="(*) Estos campos son obligatorios" style="color:red" />
 </window>
+</zk>
