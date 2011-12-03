@@ -34,7 +34,7 @@
 					<tab label="Funcionalidades Operativas" />
 					<tab label="Reportes" />
 					<tab label="Agenda"
-						onClick='enlace("/General/Agenda.zul")' />
+						onClick='enlace("/General/agenda.zul")' />
 					<tab label="Configuracion del Sistema" />
 					<tab label="Configuracion Web" />
 				</tabs>
