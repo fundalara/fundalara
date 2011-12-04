@@ -1,6 +1,6 @@
 <?page title="Consulta de Equipos por Categoria"?>
 
-	<window id="consultarEquiposxCategoria" title="Consulta de  Equipos" border="normal" width="550px"
+	<window id="consultarEquiposxCategoria" title="Consulta de  Equipos" border="normal" width="550px" apply="controlador.atleta.ConsultarEquiposCtrl"
 		closable="true">		
 			<grid style="border:none" oddRowSclass="none">
 				<columns>
@@ -11,7 +11,7 @@
 					<row style="border:none;">
 						<label value="Categoría" />
 						<hbox>
-							<combobox
+							<combobox id="cmbCategoria"
 								value="-Seleccione-" width="87%" readonly="true">
 								<comboitem label="Preparatorio Nivel 1" />
 								<comboitem label="Preparatorio Nivel 2" />
@@ -56,16 +56,7 @@
 									<label value="0" />
 									<label value="0" />
 									<div align="center">
-										<button image="../../Recursos/Imagenes/reporte.ico" orient="horizontal">
-											<attribute name="onClick"><![CDATA[
-											Window nuevaVentana = (Window) Executions.createComponents(
-											"Atleta/Vistas/consultarEquiposDetalle.zul", null, null);
-											try {
-												nuevaVentana.doModal();
-											} catch (Exception e) {
-											}
-											]]></attribute>
-										</button>
+										<button id="btnDetalle" image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"/>
 									</div>									
 								</row>
 								<row>
@@ -74,16 +65,7 @@
 									<label value="1" />
 									<label value="1" />
 									<div align="center">
-										<button image="../../Recursos/Imagenes/reporte.ico" orient="horizontal">
-											<attribute name="onClick"><![CDATA[
-											Window nuevaVentana = (Window) Executions.createComponents(
-											"Atleta/Vistas/consultarEquiposDetalle.zul", null, null);
-											try {
-												nuevaVentana.doModal();
-											} catch (Exception e) {
-											}
-											]]></attribute>
-										</button>
+										<button id="btnDetalle2" image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"/>
 									</div>									
 								</row>
 								<row>
@@ -92,16 +74,7 @@
 									<label value="3" />
 									<label value="1" />
 									<div align="center">
-										<button image="../../Recursos/Imagenes/reporte.ico" orient="horizontal">
-											<attribute name="onClick"><![CDATA[
-											Window nuevaVentana = (Window) Executions.createComponents(
-											"Atleta/Vistas/consultarEquiposDetalle.zul", null, null);
-											try {
-												nuevaVentana.doModal();
-											} catch (Exception e) {
-											}
-											]]></attribute>
-										</button>
+										<button id="btnDetalle3" image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"/>
 									</div>									
 								</row>
 								<row>
@@ -110,16 +83,7 @@
 									<label value="2" />
 									<label value="0" />
 									<div align="center">
-										<button image="../../Recursos/Imagenes/reporte.ico" orient="horizontal">
-											<attribute name="onClick"><![CDATA[
-											Window nuevaVentana = (Window) Executions.createComponents(
-											"Atleta/Vistas/consultarEquiposDetalle.zul", null, null);
-											try {
-												nuevaVentana.doModal();
-											} catch (Exception e) {
-											}
-											]]></attribute>
-										</button>
+										<button id="btnDetalle4" image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"/>
 									</div>									
 								</row>								
 							</rows>
@@ -130,7 +94,7 @@
 		<space  height="7px"/>
 				
 		<div align="right">
-					<button id="imprimir" label="Imprimir" 
+					<button label="Imprimir" 
 					image="/Recursos/Imagenes/imprimir.ico" orient="horizontal"
 					width="100px" />
 			<button label="Salir" image="../../Recursos/Imagenes/salir.png"

@@ -1,7 +1,7 @@
 <?page title="Reingresar Jugador"?>
 <div align="left">
 	<window border="none" width="670px" height="800px"
-		apply="vista.atleta.ReingresarJugadorCtrl">
+		apply="controlador.atleta.ReingresarJugadorCtrl">
 		<tabbox id="pestanas">
 			<tabs>
 				<tab label="Paso 01- Registro Jugador" id="tabRA" />
@@ -123,8 +123,7 @@
 					<space height="10px" />
 					<panel title="Detalle Jugador">
 						<panelchildren>
-							<tabbox id="detalleBasico" orient="vertical"
-								height="480px">
+							<tabbox id="detalleBasico" height="480px">
 								<tabs id="tabs" width="90px">
 									<tab id="A" label="Personales" />
 									<tab id="B" label="Médicos" />
@@ -1666,7 +1665,7 @@
 					<space height="10px" />
 					<panel title="Familiares">
 						<panelchildren>
-							<tabbox orient="vertical" height="380px">
+							<tabbox height="380px">
 								<tabs width="90px">
 									<tab label="Básicos" />
 									<tab label="Ubicación" />

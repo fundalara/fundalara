@@ -1,6 +1,6 @@
 <?page title="Plan Vacacional" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="win" title="" border="none" width="670px" apply="vista.atleta.RegistrarPlanVacacionalCtrl">
+	<window id="win" title="" border="none" width="670px" apply="controlador.atleta.RegistrarPlanVacacionalCtrl">
 
 		<panel title="Plan Vacacional">
 			<panelchildren>

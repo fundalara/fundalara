@@ -1,7 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 
 <window title="Actualizar Familiar" id="win" border="normal"
-	apply="vista.atleta.ActualizarFamiliarCtrl"
+	apply="controlador.atleta.ActualizarFamiliarCtrl"
 	closable="true">
 	<groupbox style="border-color:orange">
 		<caption style="font-weight: bold" label="Jugador" />
@@ -157,7 +157,7 @@
 
 	<panel title="Familiar">
 		<panelchildren>
-			<tabbox orient="vertical" height="350px">
+			<tabbox height="350px">
 				<tabs width="90px">
 					<tab label="Básicos" />
 					<tab label="Ubicación" />
@@ -646,7 +646,6 @@
 			</tabbox>
 		</panelchildren>
 	</panel>
-
 
 	<div align="right">
 		<button id="btnGuardar" label="Guardar"

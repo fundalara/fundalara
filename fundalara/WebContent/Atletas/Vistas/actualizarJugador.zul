@@ -1,7 +1,7 @@
 <?page title="Registrar Jugador"?>
 <div align="left">
 	<window title="Actualizar Jugador" id="win1" border="normal"
-		width="677px" apply="vista.atleta.ActualizarJugadorCtrl"
+		width="677px" apply="controlador.atleta.ActualizarJugadorCtrl"
 		closable="true">
 		<zscript>
 		<![CDATA[
@@ -108,8 +108,7 @@
 		<separator height="5px" />
 		<panel title="Detalle de Jugador">
 			<panelchildren>
-				<tabbox id="detalleBasico" orient="vertical"
-					height="380px">
+				<tabbox id="detalleBasico" height="380px">
 					<tabs id="tabs" width="90px">
 						<tab id="A" label="Personales" />
 						<tab id="B" label="Médicos" />
