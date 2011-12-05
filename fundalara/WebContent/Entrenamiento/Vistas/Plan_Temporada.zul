@@ -1,9 +1,8 @@
 <?page title="Auto Generated index.zul"?>
-
-	<window id = "plan" title="Planificacion de Temporada - PREINFATIL" border="normal"
-		width="550px" height="" closable="true"  >
-
-		
+<zk>
+	<window id="pTemporada" apply="vista.entrenamiento.PlanTemporada"
+		title="Planificacion de Temporada - PREINFATIL" border="normal"
+		width="550px" closable="true">
 		<grid>
 			<rows>
 				<row>
@@ -13,21 +12,17 @@
 							<column width="160px" align="center" />
 							<column width="110px" />
 							<column width="160px" align="center" />
-
 						</columns>
 						<rows>
 							<row height="30px">
-
 								<label value="Temporada" width="100px" />
 								<combobox value="--Seleccione--"
-									width="130px">
+									width="130px" id="cmbTemporada">
 									<comboitem label="2011-2012" />
 									<comboitem label="2012-2013" />
 									<comboitem label="2013-2014" />
 								</combobox>
-
 							</row>
-
 						</rows>
 					</grid>
 				</row>
@@ -35,71 +30,37 @@
 					<panel title="Asignacion de Horario"
 						collapsible="true">
 						<panelchildren>
-							<grid>
-								<rows>
-									
-									<row>
-
-										<hbox>
-											<grid height="125px"
-												width="480px">
-												<columns
-													sizable="true">
-													<column label="Dia"
-														width="230px" align="center" />
-													<column
-														label="Bloque" width="230px" align="center" />
-												</columns>
-												<rows>
-
-													<row
-														height="25px">
-														<label
-															value="Lunes" />
-														<label
-															value="2:00 pm - 3:30 pm" />
-
-													</row>
-
-													<row
-														height="25px">
-														<label
-															value="Miercoles" />
-														<label
-															value="2:00 pm - 3:30 pm" />
-													</row>
-
-													<row
-														height="25px">
-														<label />
-														<label />
-													</row>
-													<row
-														height="25px">
-														<label />
-														<label />
-													</row>
-												</rows>
-											</grid>
-											<vbox>
-								
-								<button
-									image="Recursos/Imagenes/agregar.ico" />
+							<hbox>
+								<listbox id="listHorario">
+									<listhead>
+										<listheader label="Dia"
+											width="140px" align="Center" sort="auto" />
+										<listheader label="Bloque"
+											width="140px" align="Center" sort="auto" />
+									</listhead>
+									<listitem>
+										<listcell
+											label="Lunes y Miercoles" />
+										<listcell
+											label="2:00 a 4:00 pm" />
+									</listitem>
+									<listitem>
+										<listcell
+											label="Martes y Jueves " />
+										<listcell label="3:00 a 5:00pm" />
+									</listitem>
+								</listbox>
+								<vbox>
+									<button
+										image="Recursos/Imagenes/agregar.ico" id="btnAgregarHorario" />
 									<separator height="5px" />
-								<button
-									image="Recursos/Imagenes/editar.ico" />
+									<button
+										image="Recursos/Imagenes/editar.ico" id="btnEditarHorario" />
 									<separator height="5px" />
-								<button
-									image="Recursos/Imagenes/quitar.ico" />
-							</vbox>
-
-
-
-										</hbox>
-
-									</row>
-								</rows>
-							</grid>
+									<button
+										image="Recursos/Imagenes/quitar.ico" id="btnQuitarHorario" />
+								</vbox>
+							</hbox>
 						</panelchildren>
 					</panel>
 				</row>
@@ -121,14 +82,13 @@
 												<column width="150px"
 													align="center" />
 												<column align="center" />
-
 											</columns>
 											<rows>
 												<row height="35px">
 													<label
 														value="Equipo" width="100px" height="25" />
 													<combobox
-														value="--Seleccione--" width="110px">
+														value="--Seleccione--" width="110px" id="cmbEquipo">
 														<comboitem
 															label="A" />
 														<comboitem
@@ -145,21 +105,19 @@
 													<label
 														value="Tipo de Personal" width="100px" />
 													<combobox
-														value="--Seleccione--" width="110px">
+														value="--Seleccione--" width="110px"
+														id="cmbTipoPersonal">
 														<comboitem
 															label="Manager" />
 														<comboitem
 															label="Monitor" />
 													</combobox>
-
-
-
 												</row>
 												<row>
 													<label
-														value="Entrenador" width="100px" />
+														value="Nombre" width="100px" />
 													<combobox
-														value="--Seleccione--" width="110px">
+														value="--Seleccione--" width="110px" id="cmbNombre">
 														<comboitem
 															label="Emmanuel Ortega" />
 														<comboitem
@@ -167,135 +125,68 @@
 														<comboitem
 															label="Yovanny Mendoza" />
 													</combobox>
-													
-
 												</row>
-
 											</rows>
 										</grid>
 									</row>
-
 									<row>
-
 										<hbox>
-											<grid height="110px"
-												width="480px">
-												<columns
-													sizable="true">
+											<listbox id="list">
+												<listhead>
+													<listheader
+														label="Equipo" width="140px" align="Center" sort="auto" />
+													<listheader
+														label="Tipo Personal" width="140px" align="Center"
+														sort="auto" />
+													<listheader
+														label="Tecnico" width="140px" align="Center" sort="auto" />
+												</listhead>
+											</listbox>
+											<vbox
+												id="btnModificarPersTecnico">
 
-													<column
-														label="Equipo" width="100px" align="center" />
-													<column
-														label="Tipo Personal" width="150px" align="center" />
-													<column
-														label="Tecnico" width="200px" align="center" />
-												</columns>
-
-												<rows>
-
-													<row
-														height="25px">
-														<label
-															value="A" />
-														<label
-															value="Manager" />
-														<label
-															value="Pedro Jose Grifol" />
-
-													</row>
-													<row
-														height="25px">
-														<label
-															value="A" />
-														<label
-															value="Monitor" />
-														<label
-															value="Jose Antonio Lopez" />
-
-													</row>
-													<row
-														height="25px">
-														<label
-															value="B" />
-														<label
-															value="Manager" />
-														<label
-															value="Aaron Chacon" />
-
-													</row>
-													<row
-														height="25px">
-														<label value="" />
-														<label value="" />
-														<label />
-
-													</row>
-													<row
-														height="25px">
-														<label />
-														<label />
-														<label />
-
-													</row>
-													<row
-														height="15px">
-														<label />
-														<label />
-														<label />
-
-													</row>
-												</rows>
-											</grid>
-											<vbox>
-						
-								<button
-									image="Recursos/Imagenes/agregar.ico" />
-									<separator height="5px" />
-								<button
-									image="Recursos/Imagenes/editar.ico" />
-									<separator height="5px" />
-								<button
-									image="Recursos/Imagenes/quitar.ico" />
-							</vbox>
+												<button
+													image="Recursos/Imagenes/agregar.ico"
+													id="btnAgregarPersTecnico" />
+												<separator height="5px" />
+												<button
+													image="Recursos/Imagenes/editar.ico"
+													id="btnEditarPersTecnico" />
+												<separator height="5px" />
+												<button
+													image="Recursos/Imagenes/quitar.ico"
+													id="btnQuitarPersTecnico" />
+											</vbox>
 										</hbox>
-
 									</row>
 								</rows>
 							</grid>
 						</panelchildren>
 					</panel>
 				</row>
-
-
-
 			</rows>
 		</grid>
-
 		<grid height="50px">
 			<columns>
-
 				<column width="220px" align="center" />
 				<column width="110px" align="center" />
 				<column width="110px" align="center" />
 				<column width="110px" align="center" />
 				<column width="110px" align="center" />
-
 			</columns>
 			<rows>
-
 				<row height="">
 					<label value="" />
 					<button image="Recursos/Imagenes/guardar.ico"
-						label="Guardar" width="95px" />
+						label="Guardar" width="95px" id="btnGuardar" />
 					<button image="Recursos/Imagenes/imprimir.ico"
-						label="Imprimir" width="95px" />
+						label="Imprimir" width="95px" id="btnImprimir" />
 					<button image="Recursos/Imagenes/cancelar.ico"
-						label="Cancelar" width="100px" />
+						label="Cancelar" width="100px" id="btnCancelar" />
 					<button image="Recursos/Imagenes/salir.png"
-						label="Salir" width="95px" />
+						label="Salir" width="95px" id="btnSalir" />
 				</row>
 			</rows>
 		</grid>
-
-
 	</window>
+</zk>

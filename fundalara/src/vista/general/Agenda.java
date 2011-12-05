@@ -17,6 +17,6 @@ public class Agenda extends GenericForwardComposer{
 	Calendars calendars;
 	Span FDOW;
 	Listbox filtro;
-	Label label;	
+	Label label;
 	
 }
