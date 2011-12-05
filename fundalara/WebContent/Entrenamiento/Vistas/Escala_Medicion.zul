@@ -1,0 +1,116 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<separator height="15px" />
+	<window id="wndEscalaMedicion" closable="true" title="Escala de Medición" border="normal"
+		width="550px" height="" apply="vista.entrenamiento.Escala_Medicion">
+		<grid>
+			<rows>
+
+				<row>
+					<hbox height="30px" align="center">
+						<label value="Escala " />
+						<space width="40px" />
+						<textbox id="txtEscala" width="120px" />
+						<button id="btnConsultar"
+							image="../../Recursos/Imagenes/consultar.ico" />
+						<space width="20px" />
+						<label value="Descripción " />
+						<space width="10px" />
+						<textbox id="txtDescripcionEscala"/>
+					</hbox>
+				</row>
+				<row>
+					<hbox height="30px" align="center">
+						<label value="Tipo Escala " />
+						<space width="12px" />
+						<combobox id="cmbTipoEscala" value="--Seleccione--"
+							width="140px">
+							<comboitem label="Cualitativa" />
+							<comboitem label="Cuantitativa " />
+						</combobox>
+						
+					</hbox>
+				</row>
+				<row>
+					<panel title="Valores de la Escala de Medición"
+						collapsible="true">
+						<panelchildren>
+							<separator />
+							<hbox height="30px" align="center">
+								<label value="Valor " />
+								<space width="50px" />
+								<textbox id="txtValorEscala" width="155px" />
+								<space width="20px" />
+								<label  value="Descripción " />
+								<space width="10px" />
+								<textbox id="txtDescripcionValor"/>
+							</hbox>
+							<separator />
+							<hbox>
+
+								<listbox id="lbValoresEscala" multiple="true" mold="paging"
+									pageSize="10" width="480px" height="150px">
+									<listhead>
+										<listheader label="Valor"
+											width="75px" align="center"/>
+										<listheader label="Descripción"
+											align="center" width="150px" />
+									</listhead>
+									<listitem>
+										<listcell label="5" />
+										<listcell label="Javier Perez" />
+									</listitem>
+									<listitem>
+										<listcell label="7" />
+										<listcell label="Luis Villa" />
+									</listitem>
+									<listitem>
+										<listcell label="9" />
+										<listcell
+											label="Carlos Rodriguez" />
+									</listitem>
+									
+									
+								</listbox>
+								
+								
+
+								<vbox height="50px">
+									<button id = "btnAgregar"
+										image="../../Recursos/Imagenes/agregar.ico" />
+									<separator height="5px" />
+									<button id = "btnModificar"
+										image="../../Recursos/Imagenes/editar.ico" />
+									<separator height="5px" />
+									<button id = "btnQuitar"
+										image="../../Recursos/Imagenes/quitar.ico" />
+								</vbox>
+							</hbox>
+						</panelchildren>
+					</panel>
+				</row>
+			</rows>
+		</grid>
+		<separator />
+
+		<grid>
+			<columns>
+
+				<column width="500px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+
+			</columns>
+			<rows>
+
+				<row height="">
+					<label value="" />
+					<button id = "btnCancelar" image="../../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" />
+					<button id = "btnSalir" image="../../Recursos/Imagenes/salir.png"
+						label="Salir" width="100px" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>
