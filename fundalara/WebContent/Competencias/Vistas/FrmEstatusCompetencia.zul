@@ -1,0 +1,192 @@
+<?page title="Estatus Competencia"?>
+<zk>
+	<div align="Center">
+		<window title="ESTATUS DE LA COMPETENCIA" border="normal"
+			width="650px" closable="true">
+			<div align="left">
+				<panel width="100%" title="Filtros">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label="" />
+								<column label="" />
+							</columns>
+							<rows>
+								<row style="border:none;">
+									<label
+										value="Nombre de la Competencia">
+									</label>
+									<hbox>
+										<textbox cols="15"></textbox>
+										<button
+											image="../../Recursos/Imagenes/consultar.ico">
+										</button>
+									</hbox>
+								</row>
+								<row style="border:none;">
+									<label
+										value="Tipo de Competencia">
+									</label>
+									<hbox>
+										<textbox cols="15"></textbox>
+										<button
+											image="../../Recursos/Imagenes/consultar.ico">
+										</button>
+									</hbox>
+								</row>
+								<row style="border:none;">
+									<label value="Categoria"></label>
+									<hbox>
+										<textbox cols="15"></textbox>
+										<button
+											image="../../Recursos/Imagenes/consultar.ico">
+										</button>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</div>
+			<div align="left">
+				<panel width="100%"
+					title="Información de la Competencia">
+					<panelchildren>
+						<listbox mold="paging" pageSize="10">
+							<listhead>
+								<listheader label="Nombre Competencia"
+									width="150px" />
+								<listheader label="Descripción"
+									width="180px" />
+								<listheader label="JP" width="50px" align="center"/>
+								<listheader label="JR" width="50px" align="center"/>
+								<listheader label="FI"
+									width="80px" align="center"/>
+								<listheader label="FC"
+									width="120px" align="center"/>
+							</listhead>
+							<listitem>
+								<listcell label="Copa Cer" />
+								<listcell
+									label="Copa Homenaje a la  mayor " />
+								<listcell>25</listcell>
+								<listcell>20</listcell>
+								<listcell>11-11-11</listcell>
+								<listcell>15-12-11</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Mana" />
+								<listcell
+									label="Copa Homenaje a la  mayor" />
+								<listcell>60</listcell>
+								<listcell>52</listcell>
+								<listcell>16-04-12</listcell>
+								<listcell>23-07-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Tinaja " />
+								<listcell label="Homenaje a la  tinaja" />
+								<listcell>41</listcell>
+								<listcell>46</listcell>
+								<listcell>24-02-12</listcell>
+								<listcell>30-02-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Navidad " />
+								<listcell label="Fin de Año" />
+								<listcell>51</listcell>
+								<listcell>56</listcell>
+								<listcell>22-02-12</listcell>
+								<listcell>26-02-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Vacaciones" />
+								<listcell label="" />
+								<listcell>12</listcell>
+								<listcell>16</listcell>
+								<listcell>30-02-12</listcell>
+								<listcell>23-03-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Tinaja " />
+								<listcell label="Homenaje a la  tinaja" />
+								<listcell>41</listcell>
+								<listcell>46</listcell>
+								<listcell>24-02-12</listcell>
+								<listcell>30-02-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Tinaja " />
+								<listcell label="Homenaje a la  tinaja" />
+								<listcell>41</listcell>
+								<listcell>46</listcell>
+								<listcell>24-02-12</listcell>
+								<listcell>30-02-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Tinaja " />
+								<listcell label="Homenaje a la  tinaja" />
+								<listcell>41</listcell>
+								<listcell>46</listcell>
+								<listcell>24-02-12</listcell>
+								<listcell>30-02-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Cer" />
+								<listcell
+									label="Copa Homenaje a la  mayor " />
+								<listcell>26</listcell>
+								<listcell>36</listcell>
+								<listcell>31-03-12</listcell>
+								<listcell>16-04-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Cer" />
+								<listcell
+									label="Copa Homenaje a la  mayor " />
+								<listcell>14</listcell>
+								<listcell>26</listcell>
+								<listcell>05-04-12</listcell>
+								<listcell>16-04-12</listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Copa Cer" />
+								<listcell
+									label="Copa Homenaje a la  mayor " />
+								<listcell>10</listcell>
+								<listcell>20</listcell>
+								<listcell>11-05-12</listcell>
+								<listcell>20-05-12</listcell>
+							</listitem>
+
+						</listbox>
+						<grid>
+							<rows>
+								<row>
+									<label value="JP: Juegos Programados"></label>
+									<label value="JR: Juegos Registrados"></label>
+									<label value="FI: Fecha de Inicio"></label>
+									<label value="FC: Fecha de Culminación"></label>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</div>
+
+			<div>
+				<div align="right" style="margin-top:5px">
+					<button image="/Recursos/Imagenes/apertura.png"
+						label="Culminar">
+					</button>
+					<button image="/Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" orient="horizontal">
+					</button>
+					<button image="/Recursos/Imagenes/salir.png"
+						label="Salir" orient="horizontal">
+					</button>
+				</div>
+			</div>
+		</window>
+	</div>
+</zk>

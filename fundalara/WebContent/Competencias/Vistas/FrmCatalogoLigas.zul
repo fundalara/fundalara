@@ -2,49 +2,31 @@
 <zk>
 
 	<div align="center">
-		<window id="FrmCatalogoLigas" title="Ligas Existentes" border="normal" width="80%" mode="modal" closable="true">
+		<window id="FrmCatalogoLigas" title="Ligas Existentes" border="normal" width="400px" mode="modal" closable="true">
 			<panel width="100%">
 				<panelchildren>
-
-					<listbox mold="paging" pageSize="10">
+					<div style="margin-top:5px">
+					<label value="Filtro"></label>
+					<textbox></textbox>
+					<button label="Buscar"></button>
+					</div>
+					<listbox mold="paging" pageSize="10" style="margin-top:5px">
 						<listhead>
 							<listheader label="Nombre" align="center"
-								width="25%">
+								width="30%">
 							</listheader>
 							<listheader label="Categoria" align="center"
-								width="25%">
+								width="22%">
 							</listheader>
 							<listheader label="Localidad" align="center"
-								width="25%">
+								width="23%">
 							</listheader>
 							<listheader label="Teléfono" align="center"
 								width="25%">
 							</listheader>
 						</listhead>
 						
-						<auxhead>
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-						</auxhead>
+						
 						
 						<listitem>
 							<listcell>Manuel Monsalve</listcell>

@@ -2,41 +2,22 @@
 <zk>
 	<div align="center">
 		<window id="FrmCatalogoEstadios" title="Estadios existentes" border="normal" mode="modal" closable="true"
-			width="80%">
+			width="400px">
 			<panel title="Datos del Estadio" width="100%">
 				<panelchildren>
-					<listbox mold="paging" pageSize="10">
+				
+					<div style="margin-top:5px">
+					<label value="Filtro"></label>
+					<textbox></textbox>
+					<button label="Buscar"></button>
+					</div>
+					<listbox mold="paging" pageSize="10" style="margin-top:5px">
 						<listhead>
 							<listheader label="Nombre" width="25%" align="center"/>
 							<listheader label="Estado" width="25%" align="center"/>
 							<listheader label="Municipio" width="25%" align="center"/>
 							<listheader label="Ciudad" width="25%" align="center"/>
 						</listhead>
-						<auxhead>
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-						</auxhead>
-						
 						
 						<listitem>
 							<listcell label="Fundalara" />

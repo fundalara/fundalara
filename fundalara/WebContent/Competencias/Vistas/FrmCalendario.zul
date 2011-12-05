@@ -1,7 +1,16 @@
 <?page title="CALENDARIO" contentType="text/html;charset=UTF-8"?>
 <zk>
+
+<zscript>
+			<![CDATA[
+			     void TablaPosiciones(){
+			    	 win.setVisible(false);
+			    	 Executions.createComponents("/Competencias/Vistas/FrmTablaPosiciones.zul", null, null); 
+			     }
+			 ]]>
+ </zscript>
 	<div align="center">
-		<window title="CALENDARIO" border="normal" width="70%"
+		<window title="CALENDARIO" border="normal" width="690px"
 			height="70%" closable="true">
 
 			<!-- DATOS COMPETENCIA -->
@@ -19,34 +28,33 @@
 						</columns>
 						<rows>
 							<row style="border-style:none">
-								
-								<label
-									value="Nombre de la Competencia">
+
+								<label value="Nombre Competencia">
 								</label>
-								
+
 								<textbox cols="15" width="95%"></textbox>
 								<button
 									image="../../Recursos/Imagenes/consultar.ico" width="100%">
 								</button>
-								
 
-								<label value="Fecha Inicio"></label>
-								<textbox cols="10"></textbox>
+
+								<label value="Fecha Inicio "></label>
+								<datebox />
 
 								<label value="Fecha Fin"></label>
-								<textbox cols="10"></textbox>
+								<datebox />
 
 
 							</row>
-							
+
 
 							<row style="border-style:none">
 
-								
 
-								
+
+
 								<label value="Categoría"></label>
-								<combobox>
+								<combobox value="--Seleccione--">
 									<comboitem label="Infantil" />
 									<comboitem label="Pre-Junior" />
 									<comboitem label="Juvenil" />
@@ -62,562 +70,542 @@
 			<!-- TABLA DE ENFRENTAMIENTOS -->
 			<div>
 				<tabbox>
+
 					<tabs>
-						<tab label="Ronda " />
-						<tab label="Una Sola Ronda" />
-						<tab label="Ronda Eliminatoria" />
-						<tab label="Ronda Semifinal" />
-						<tab label="Ronda Final Tipo A" />
-						<tab label="Ronda Final Tipo B" />
-						
+						<tab label="Ronda Uno" />
+						<tab label="Ronda Dos" />
+						<tab label="Ronda Tres" />
+
+
 					</tabs>
 
 					<!-- RONDA -->
+
 					<tabpanels height="50%">
 						<tabpanel>
+
 							<div width="100%">
-								<panel border="normal">
+
+								<panel border="normal" height="100px">
+
 									<caption
 										label="Agregar Enfrentamientos">
 									</caption>
-									<panelchildren>
-										<grid>
-											<columns>
-												<column />
-												<column />
-												<column />
-												<column />
-												
-										
-											</columns>
-											
-											<rows>
-												<row>												
-													<label value="Home Club"></label>																										
-													<hbox>
-													<textbox></textbox>
-													<button
-														image="../../Recursos/Imagenes/consultar.ico">
-													</button>
-													</hbox>													
-													<label value="Visitante"></label>																										
-													<hbox>
-													<textbox></textbox>
-													<button
-														image="../../Recursos/Imagenes/consultar.ico">
-													</button>													
-													</hbox>
-																																							
-												</row>
-												
-												<row>
-												
-													<label value="Fecha"></label>
-													<datebox />
-													<label value="Lugar"></label>
-													<textbox></textbox>
-													<hbox>
-													<label value="Hora"></label>
-													<timebox />																							 	
-													</hbox>
-																																																													
-												</row>
-												
 
-											</rows>
-										</grid>
-																																								
-										
-												<div align="right">
-													<button label="Agregar"
+									<panelchildren>
+										<hbox width="100%"><!-- General -->
+											<hbox height="100px">
+												<grid>
+
+													<columns>
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+													</columns>
+
+													<rows>
+
+														<row
+															style="border-style:none">
+
+															<label
+																value="Home Club">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="../../Recursos/Imagenes/consultar.ico">
+																</button>
+															</hbox>
+															<label
+																value="Visitante">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="../../Recursos/Imagenes/consultar.ico">
+																</button>
+
+															</hbox>
+
+														</row>
+
+														<row
+															style="border-style:none">
+
+															<label
+																value="Fecha">
+															</label>
+															<datebox />
+
+															<label
+																value="Lugar">
+															</label>
+															<textbox></textbox>
+
+															<label
+																value="Hora">
+															</label>
+															<hbox>
+																<timebox />
+															</hbox>
+
+														</row>
+
+
+													</rows>
+												</grid>
+											</hbox>
+
+											<div align="right"
+												height="100px">
+												<vbox>
+													<button label=""
 														image="/Recursos/Imagenes/agregar.ico">
 													</button>
-													
-													<button label="Quitar"
+													<separator
+														width="5%">
+													</separator>
+													<button label=""
 														image="/Recursos/Imagenes/quitar.ico">
 													</button>
-												</div>
+												</vbox>
+											</div>
+										</hbox><!-- fin General -->
 									</panelchildren>
 								</panel>
 							</div>
 
 							<div width="100%">
 								<panel border="normal">
+
 									<caption label="Enfrentamientos"></caption>
 									<panelchildren>
-										<grid>
-											<columns>
-												<column
-													label=" Home Club" align="center" />
-												<column
-													label=" Visitante" align="center" />
-												<column label=" Fecha"
+
+										<listbox>
+											<listhead>
+												<listheader
+													label="Home Club" width="17%" align="center" />
+												<listheader
+													label="Visitante" width="17%" align="center" />
+												<listheader
+													label="Fecha" width="10%" align="center" />
+												<listheader
+													label="Lugar" width="31%" align="center" />
+												<listheader label="Hora"
 													width="10%" align="center" />
-												<column label=" Lugar"
-													align="center" />
-												<column label=" Hora"
-													width="10%" align="center" />
-												<column label=" Estatus"
-													width="10%" align="center" />
-											</columns>
-											<rows>
-												<row>
-													<label
-														value="Fundalara" />
-													<label
-														value="Delfines" />
-													<label
-														value="08/11/2011" />
-													<label
-														value="Estadio Fundalara - Lara" />
-													<label
-														value="9:00 AM" />
-													<label
-														value="Finalizado" />
-												</row>
-												<row>
-													<label value="UCLA" />
-													<label
-														value="Fundalara" />
-													<label
-														value="11/11/2011" />
-													<label
-														value="Estadio UCLA - Lara" />
-													<label
-														value="9:00 AM" />
-													<label
-														value="Finalizado" />
-												</row>
-												<row>
-													<label
-														value="Pelicanos" />
-													<label
-														value="Antonio Alvarez" />
-													<label value="" />
-													<label value="" />
-													<label value="" />
-													<label value="" />
-												</row>
-												<row>
-													<label
-														value="Delfines" />
-													<label value="UCLA" />
-													<label value="" />
-													<label value="" />
-													<label value="" />
-													<label value="" />
-												</row>
-											</rows>
-										</grid>
+												<listheader
+													label="Estatus" align="center" />
+											</listhead>
+											<listitem>
+												<listcell
+													label="Fundalara" />
+												<listcell
+													label="Delfines" />
+												<listcell
+													label="08/11/2011" />
+												<listcell
+													label="Estadio Fundalara - Lara" />
+												<listcell
+													label="9:00 AM" />
+												<listcell
+													label="Finalizado" />
+											</listitem>
+											<listitem>
+												<listcell label="UCLA" />
+												<listcell
+													label="Fundalara" />
+												<listcell
+													label="11/11/2011" />
+												<listcell
+													label="Estadio UCLA - Lara" />
+												<listcell
+													label="9:00 AM" />
+												<listcell
+													label="Finalizado" />
+											</listitem>
+											<listitem>
+												<listcell label="UCLA" />
+												<listcell
+													label="Delfines" />
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+										</listbox>
+
+
+
+
+
+
+
+
+
+
+
 									</panelchildren>
-								</panel>																
+								</panel>
+
 							</div>
+							<separator height="4px"></separator>
 							<div align="right">
 								<button label="Tabla de Posiciones "></button>
-								<button label="Ver Calendario "></button>							
+								<button label="Ver Calendario "></button>
 							</div>
-							
+
 						</tabpanel>
 
 
-						<!-- UNA SOLA RONDA -->
+
+
+
+						<!-- RONDA 2 -->
 						<tabpanel>
-						<div width="100%">
-							<panel border="normal">
-								<caption label="Enfrentamientos"></caption>
-								<panelchildren>
-									<grid>
-										<columns>
-											<column label=" Home Club"
-												align="center" />
-											<column label=" Visitante"
-												align="center" />
-											<column label=" Fecha"
-												width="10%" align="center" />
-											<column label=" Lugar"
-												align="center" />
-											<column label=" Hora"
-												width="10%" align="center" />
-											<column label=" Estatus"
-												width="10%" align="center" />											
-										</columns>
-										<rows>
-											<row>
-												<label
-													value="Fundalara" />
-												<label value="Delfines" />
-												<label
-													value="08/11/2011" />
-												<label
-													value="Estadio Fundalara - Lara" />
-												<label value="9:00 AM" />
-												<label
-													value="Finalizado" />
-											</row>
-											<row>
-												<label value="UCLA" />
-												<label
-													value="Fundalara" />
-												<label
-													value="11/11/2011" />
-												<label
-													value="Estadio UCLA - Lara" />
-												<label value="9:00 AM" />
-												<label
-													value="Finalizado" />												
-											</row>
-											<row>
-												<label
-													value="Pelicanos" />
-												<label
-													value="Antonio Alvarez" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />												
-											</row>
-											<row>
-												<label value="Delfines" />
-												<label value="UCLA" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />												
-											</row>
-										</rows>
-									</grid>
-								</panelchildren>
-							</panel>
-						</div>
-						
+<div width="100%">
+
+								<panel border="normal" height="100px">
+
+									<caption
+										label="Agregar Enfrentamientos">
+									</caption>
+
+									<panelchildren>
+										<hbox width="100%"><!-- General -->
+											<hbox height="100px">
+												<grid>
+
+													<columns>
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+													</columns>
+
+													<rows>
+
+														<row
+															style="border-style:none">
+
+															<label
+																value="Home Club">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="../../Recursos/Imagenes/consultar.ico">
+																</button>
+															</hbox>
+															<label
+																value="Visitante">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="../../Recursos/Imagenes/consultar.ico">
+																</button>
+
+															</hbox>
+
+														</row>
+
+														<row
+															style="border-style:none">
+
+															<label
+																value="Fecha">
+															</label>
+															<datebox />
+
+															<label
+																value="Lugar">
+															</label>
+															<textbox></textbox>
+
+															<label
+																value="Hora">
+															</label>
+															<hbox>
+																<timebox />
+															</hbox>
+
+														</row>
+
+
+													</rows>
+												</grid>
+											</hbox>
+
+											<div align="right"
+												height="100px">
+												<vbox>
+													<button label=""
+														image="/Recursos/Imagenes/agregar.ico">
+													</button>
+													<separator
+														width="5%">
+													</separator>
+													<button label=""
+														image="/Recursos/Imagenes/quitar.ico">
+													</button>
+												</vbox>
+											</div>
+										</hbox><!-- fin General -->
+									</panelchildren>
+								</panel>
+							</div>
+
+							<div width="100%">
+								<panel border="normal">
+
+									<caption label="Enfrentamientos"></caption>
+									<panelchildren>
+
+										<listbox>
+											<listhead>
+												<listheader
+													label="Home Club" width="17%" align="center" />
+												<listheader
+													label="Visitante" width="17%" align="center" />
+												<listheader
+													label="Fecha" width="10%" align="center" />
+												<listheader
+													label="Lugar" width="31%" align="center" />
+												<listheader label="Hora"
+													width="10%" align="center" />
+												<listheader
+													label="Estatus" align="center" />
+											</listhead>
+											<listitem>
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell
+													label="" />
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+										</listbox>
+
+									</panelchildren>
+								</panel>
+
+							</div>
+							<separator height="4px"></separator>
+							<div align="right">
+								<button label="Tabla de Posiciones " ></button>
+								<button label="Ver Calendario "></button>
+							</div>
+
 						</tabpanel>
 
 
-						<!-- RONDA ELIMINATORIA -->
+						<!-- RONDA 3 -->
 						<tabpanel>
-						<div width="100%">
-							<panel border="normal">
-								<caption label="Enfrentamientos"></caption>
-								<panelchildren>
-									<grid>
-										<columns>
-											<column label=" Home Club"
-												align="center" />
-											<column label=" Visitante"
-												align="center" />
-											<column label=" Fecha"
-												width="10%" align="center" />
-											<column label=" Lugar"
-												align="center" />
-											<column label=" Hora"
-												width="10%" align="center" />
-											<column label=" Estatus"
-												width="10%" align="center" />
-											<column label="" width="10%"
-												align="center" />
-										</columns>
-										<rows>
-											<row>
-												<label
-													value="Fundalara" />
-												<label value="UCLA" />
-												<label
-													value="06/12/2011" />
-												<label
-													value="Estadio Fundalara - Lara" />
-												<label value="10:00 AM" />
-												<label
-													value="Finalizado" />
-												<checkbox></checkbox>
-											</row>
-											<row>
-												<label value="Pericos" />
-												<label value="Delfines" />
-												<label
-													value="12/01/2012" />
-												<label
-													value="Estadio Pericos - Lara" />
-												<label value="9:00 AM" />
-												<label
-													value="Finalizado" />
-												<checkbox></checkbox>
-											</row>
-											<row>
-												<label
-													value="Fundalara" />
-												<label
-													value="Antonio Alvarez" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<checkbox
-													disabled="true">
-												</checkbox>
-											</row>
-											<row>
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<checkbox
-													disabled="true">
-												</checkbox>
-											</row>
-										</rows>
-									</grid>
-								</panelchildren>
-							</panel>
-						</div>
-						
-						</tabpanel>
+							<div width="100%">
+
+								<panel border="normal" height="100px">
+
+									<caption
+										label="Agregar Enfrentamientos">
+									</caption>
+
+									<panelchildren>
+										<hbox width="100%"><!-- General -->
+											<hbox height="100px">
+												<grid>
+
+													<columns>
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+														<column />
+													</columns>
+
+													<rows>
+
+														<row
+															style="border-style:none">
+
+															<label
+																value="Home Club">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="../../Recursos/Imagenes/consultar.ico">
+																</button>
+															</hbox>
+															<label
+																value="Visitante">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="../../Recursos/Imagenes/consultar.ico">
+																</button>
+
+															</hbox>
+
+														</row>
+
+														<row
+															style="border-style:none">
+
+															<label
+																value="Fecha">
+															</label>
+															<datebox />
+
+															<label
+																value="Lugar">
+															</label>
+															<textbox></textbox>
+
+															<label
+																value="Hora">
+															</label>
+															<hbox>
+																<timebox />
+															</hbox>
+
+														</row>
 
 
-						<!-- RONDA SEMIFINAL -->
-						<tabpanel>
-						<div width="100%">
-							<panel border="normal">
-								<caption label="Enfrentamientos"></caption>
-								<panelchildren>
-									<grid>
-										<columns>
-											<column label=" Home Club"
-												align="center" />
-											<column label=" Visitante"
-												align="center" />
-											<column label=" Fecha"
-												width="10%" align="center" />
-											<column label=" Lugar"
-												align="center" />
-											<column label=" Hora"
-												width="10%" align="center" />
-											<column label=" Estatus"
-												width="10%" align="center" />
-											<column label="" width="10%"
-												align="center" />
-										</columns>
-										<rows>
-											<row>
-												<label
-													value="Fundalara" />
-												<label
-													value="Pelicanos" />
-												<label
-													value="20/02/2012" />
-												<label
-													value="Estadio Fundalara - Lara" />
-												<label value="9:00 AM" />
-												<label
-													value="Finalizado" />
-												<checkbox></checkbox>
-											</row>
-											<row>
-												<label value="UCLA" />
-												<label value="Pericos" />
-												<label
-													value="03/03/2012" />
-												<label
-													value="Estadio UCLA - Lara" />
-												<label value="11:00 AM" />
-												<label
-													value="Finalizado" />
-												<checkbox></checkbox>
-											</row>
-											<row>
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<checkbox
-													disabled="true">
-												</checkbox>
-											</row>
-											<row>
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<checkbox
-													disabled="true">
-												</checkbox>
-											</row>
-										</rows>
-									</grid>
-								</panelchildren>
-							</panel>
-						</div>
-						
-						</tabpanel>
+													</rows>
+												</grid>
+											</hbox>
 
-						<!-- RONDA FINAL TIPO A -->
-						<tabpanel>
-						<div width="100%">
-							<panel border="normal">
-								<caption label="Enfrentamientos"></caption>
-								<panelchildren>
-									<grid>
-										<columns>
-											<column label=" Home Club"
-												align="center" />
-											<column label=" Visitante"
-												align="center" />
-											<column label=" Fecha"
-												width="10%" align="center" />
-											<column label=" Lugar"
-												align="center" />
-											<column label=" Hora"
-												width="10%" align="center" />
-											<column label=" Estatus"
-												width="10%" align="center" />
-										
-										</columns>
-										<rows>
-											<row>
-												<label
-													value="Fundalara" />
-												<label value="Delfines" />
-												<label
-													value="08/11/2011" />
-												<label
-													value="Estadio Fundalara - Lara" />
-												<label value="10:00 AM" />
-												<label
-													value="Finalizado" />
-												
-											</row>
-											<row>
-												<label value="UCLA" />
-												<label
-													value="Fundalara" />
-												<label
-													value="11/11/2011" />
-												<label
-													value="Estadio UCLA - Lara" />
-												<label value="9:00 AM" />
-												<label 
-													value="Finalizado" />
-											
-											</row>
-											<row>
-												<label
-													value="Fundalara" />
-												<label
-													value="Antonio Alvarez" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-											
-											</row>
-											<row>
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-											
-											</row>
-										</rows>
-									</grid>
-								</panelchildren>
-							</panel>
-						</div>
-						
-						</tabpanel>
-						
-						<!-- RONDA FINAL TIPO B-->
-						<tabpanel>
-						<div width="100%">
-							<panel border="normal">
-								<caption label="Enfrentamientos"></caption>
-								<panelchildren>
-									<grid>
-										<columns>
-											<column label=" Home Club"
-												align="center" />
-											<column label=" Visitante"
-												align="center" />
-											<column label=" Fecha"
-												width="10%" align="center" />
-											<column label=" Lugar"
-												align="center" />
-											<column label=" Hora"
-												width="10%" align="center" />
-											<column label=" Estatus"
-												width="10%" align="center" />
-										
-										</columns>
-										<rows>
-											<row>
-												<label
-													value="Fundalara" />
-												<label value="Delfines" />
-												<label
-													value="08/11/2011" />
-												<label
-													value="Estadio Fundalara - Lara" />
-												<label value="10:00 AM" />
-												<label
-													value="Finalizado" />
-												
-											</row>
-											<row>
-												<label value="UCLA" />
-												<label
-													value="Fundalara" />
-												<label
-													value="11/11/2011" />
-												<label
-													value="Estadio UCLA - Lara" />
-												<label value="9:00 AM" />
-												<label 
-													value="Finalizado" />
-											
-											</row>
-											<row>
-												<label
-													value="Fundalara" />
-												<label
-													value="Antonio Alvarez" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-											
-											</row>
-											<row>
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-												<label value="" />
-											
-											</row>
-										</rows>
-									</grid>
-								</panelchildren>
-							</panel>
-						</div>
-						
+											<div align="right"
+												height="100px">
+												<vbox>
+													<button label=""
+														image="/Recursos/Imagenes/agregar.ico">
+													</button>
+													<separator
+														width="5%">
+													</separator>
+													<button label=""
+														image="/Recursos/Imagenes/quitar.ico">
+													</button>
+												</vbox>
+											</div>
+										</hbox><!-- fin General -->
+									</panelchildren>
+								</panel>
+							</div>
+
+							<div width="100%">
+								<panel border="normal">
+
+									<caption label="Enfrentamientos"></caption>
+									<panelchildren>
+
+										<listbox>
+											<listhead>
+												<listheader
+													label="Home Club" width="17%" align="center" />
+												<listheader
+													label="Visitante" width="17%" align="center" />
+												<listheader
+													label="Fecha" width="10%" align="center" />
+												<listheader
+													label="Lugar" width="31%" align="center" />
+												<listheader label="Hora"
+													width="10%" align="center" />
+												<listheader
+													label="Estatus" align="center" />
+											</listhead>
+											<listitem>
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+												<listcell
+													label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell
+													label="" />
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+										</listbox>
+
+									</panelchildren>
+								</panel>
+
+							</div>
+							<separator height="4px"></separator>
+							<div align="right">
+								<button label="Tabla de Posiciones "  onClick="TablaPosiciones()" ></button>
+								<button label="Ver Calendario "></button>
+							</div>
 						</tabpanel>
 
 					</tabpanels>
 				</tabbox>
 			</div>
-
-
-			<!-- BOTON RESULTADOS -->
-
-
-
 			<!-- BOTONES -->
 			<panel>
 				<panelchildren style="margin-top:20px ">
@@ -625,9 +613,7 @@
 						<button
 							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
-						<button
-							image="../../Recursos/Imagenes/editar.ico" label="Modificar">
-						</button>
+
 						<button
 							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>

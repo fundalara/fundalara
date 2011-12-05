@@ -2,11 +2,15 @@
 <zk>
 	<div align="center">
 		<window id="FrmCatalogoDivisa" title="Divisas Existentes"
-			border="normal" mode="modal" closable="true" width="80%">
-			<panel width="100%">
+			border="normal" mode="modal" closable="true" width="420px">
+			<panel width="100%" border="normal">
 				<panelchildren>
-
-					<listbox mold="paging" pageSize="10">
+					<div style="margin-top:5px">
+					<label value="Filtro"></label>
+					<textbox></textbox>
+					<button label="Buscar"></button>
+					</div>
+					<listbox mold="paging" pageSize="10" style="margin-top:5px">
 						<listhead>
 							<listheader label="Nombre" align="center"
 								width="25%">
@@ -22,29 +26,6 @@
 							</listheader>
 						</listhead>
 						
-						<auxhead>
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-
-							</auxheader>
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-
-							</auxheader>
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-
-							</auxheader>
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-
-							</auxheader>
-
-						</auxhead>
 						<listitem>
 							<listcell>Fundalara</listcell>
 							<listcell>Lara</listcell>

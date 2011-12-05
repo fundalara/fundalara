@@ -2,7 +2,7 @@
 <zk>
 
 	<window id="FrmCatalogoJugador" title="Atletas en un categoria"
-		border="normal" width="50%" mode="modal" closable="true">
+		border="normal" width="400px" mode="modal" closable="true">
 
 		<div align="left">
 			<panel width="100%" title="Datos del Equipo">
@@ -12,15 +12,20 @@
 							<column width=""></column>
 							<column width=""></column>
 							<column width=""></column>
+							<column width=""></column>
 						</columns>
+
 						<rows>
 							<row style="border:none;">
+
 								<label value="Categoría"></label>
-								<combobox width="50%"></combobox>
+								<textbox cols="12"></textbox>
 								<label value="Equipo"></label>
-								<combobox width="50%"></combobox>
+								<combobox width="65%"></combobox>
+
 							</row>
 						</rows>
+
 					</grid>
 				</panelchildren>
 			</panel>
@@ -29,10 +34,17 @@
 		<div align="left">
 			<panel border="normal" title="Jugadores">
 				<panelchildren>
-					<listbox mold="paging" pageSize="10" >
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox></textbox>
+						<button label="Buscar"></button>
+					</div>
+					<listbox mold="paging" pageSize="10"
+						style="margin-top:5px">
 
 						<listhead>
-							<listheader label="Nombre" width="25%" align="center">
+							<listheader label="Nombre" width="45%"
+								align="center">
 							</listheader>
 
 							<listheader label="Edad" align="center">
@@ -43,24 +55,7 @@
 							</listheader>
 
 						</listhead>
-						<auxhead>
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
 
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-							<auxheader colspan="1"
-								image="../../Recursos/Imagenes/consultar.ico">
-								<textbox cols="10"></textbox>
-							</auxheader>
-
-						</auxhead>
-						
 						<listitem>
 							<listcell>Nombre Jugador 1</listcell>
 							<listcell>14</listcell>
@@ -140,7 +135,7 @@
 						</listitem>
 
 					</listbox>
-				<div align="right">
+					<div align="right">
 						<button image="/Recursos/Imagenes/aceptar.ico"
 							label="Aceptar">
 						</button>
@@ -151,8 +146,8 @@
 				</panelchildren>
 			</panel>
 		</div>
-		
-					<zscript><![CDATA[
+
+		<zscript><![CDATA[
 	public void Salir() {
 		FrmCatalogoJugador.onClose();
 	}
