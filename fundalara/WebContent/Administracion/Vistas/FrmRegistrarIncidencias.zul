@@ -1,151 +1,212 @@
 <zk>
 	<window id="win" title="Registrar Incidencias " border="normal"
-		width="650px">
-		<groupbox>
+		width="690px">
+		<groupbox closable="false" style="border-color:orange">
 			<caption>Datos Personales</caption>
-			<panel>
-				<panelchildren>
-					<grid>
-						<columns>
-							<column label="" width="180px"></column>
-							<column label="" width="200px"></column>
-							<column label="" width="180px"></column>
-							<column label="" width="200px"></column>
-						</columns>
-						<rows>
-							<row>
+			<grid oddRowSclass="none" style="border:none;">
+				<columns>
+					<column label="" width="90px"></column>
+					<column label="" width="250px"></column>
+					<column label="" width="90px"></column>
+					<column label="" width="250px"></column>
+				</columns>
+				<rows>
+					<row height="30px" style="border:none;">
+						<label value="Cédula" />
+						<hbox height="40px" align="center">
+							<combobox value="-" width="20px"
+								height="20px">
+								<comboitem label="V" />
+								<comboitem label="E" />
+							</combobox>
+							<space></space>
+							<textbox width="120px" height="20px">
+							</textbox>
+							<space></space>
+							<button
+								image="/Recursos/Imagenes/consultar.ico">
+							</button>
+						</hbox>
+					</row>
 
-								<label value="Cédula" />
-								<bandbox width="180px"></bandbox>
+					<row style="border:none;">
+						<label>Nombres</label>
+						<textbox width="230px" height="20px" />
+						<label>Apellidos</label>
+						<textbox width="230px" height="20px" />
+					</row>
+					<row spans="1,4" style="border:none;">
+						<label>Cargo</label>
+						<textbox width="230px" height="20px" />
+					</row>
+					<row style="border:none;">
+						<label>Desde</label>
 
-								<label value="Nombres" />
-								<bandbox width="180px"></bandbox>
-							</row>
-							<row>
-								<label>Filtrar Desde</label>
+						<datebox width="100px" />
+						<label>Hasta</label>
+						<datebox width="100px" />
 
-								<datebox width="180px" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox closable="false" style="border-color:orange">
+			<caption>Datos de Registro</caption>
+			<grid oddRowSclass="none" style="border:none;">
+				<columns>
+					<column width="80px"></column>
+					<column width="250px"></column>
+					<column width="90px"></column>
+					<column width="250px"></column>
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label>Incidencia</label>
+						<hbox align="center">
+							<combobox width="170px">
+								<comboitem
+									label="Inasistencia Justificada">
+								</comboitem>
+								<comboitem
+									label="Inasistencia no Justificada">
+								</comboitem>
+								<comboitem label="Trabajo Extra">
+								</comboitem>
+							</combobox>
+							<label style="color:red" Value="(*)">
+							</label>
+						</hbox>
+					</row>
+					<row style="border:none;">
+						<label>Fecha</label>
+						<hbox align="center">
+							<datebox width="100px" height="20px" />
+							<label style="color:red" Value="(*)">
+							</label>
+						</hbox>
+						<label>Horas Laborales</label>
+						<hbox align="center">
+							<textbox width="115px" height="20px" />
+							<label style="color:red" Value="(*)">
+							</label>
+						</hbox>
+					</row>
 
-								<label>Hasta</label>
+					<row spans="1,3" style="border:none;">
+						<label>Observación</label>
+						<textbox width="560px" height="20px"></textbox>
+					</row>
+					<row style="border:none;">
+						<separator></separator>
+					</row>
+					<row spans="4" style="border:none;">
+						<hbox>
+							<grid mold="paging" pageSize="5">
+								<columns>
+									<column width="8%">
+										<checkbox id="on"
+											onClick="setOn()">
+										</checkbox>
+									</column>
+									<column label="Incidencias"
+										width="35%">
+									</column>
+									<column label="Fecha" width="10%"
+										align="center">
+									</column>
+									<column label="Horas" width="10%"
+										align="center">
+									</column>
+									<column label="Observación"
+										width="40%" align="center">
+									</column>
+								</columns>
+								<rows>
+									<row height="25px">
+										<checkbox></checkbox>
+										<label>
+											Inasistencia Justificada
+										</label>
+										<label>21/09/2011</label>
+										<label>8</label>
+										<label>Enfermedad</label>
+									</row>
+									<row height="25px">
+										<checkbox></checkbox>
+										<label>Trabajo Extra</label>
+										<label>23/09/2011</label>
+										<label>3</label>
+										<label>Trabajo nocturno</label>
+									</row>
+									<row height="25px">
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+									</row>
+									<row height="25px">
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+									</row>
+									<row height="25px">
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+									</row>
+									<row height="25px">
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+									</row>
+									<row height="25px">
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+										<label></label>
+									</row>
+								</rows>
+							</grid>
+							<vbox>
+								<button
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
 
-								<datebox width="180px" />
-							</row>
-						</rows>
-					</grid>
+								<button
+									image="/Recursos/Imagenes/quitar.ico">
+								</button>
 
-					<grid>
-						<columns>
-							<column width="15%"></column>
-							<column width="35%"></column>
-							<column width="15%"></column>
-							<column width="35%"></column>
-						</columns>
-
-					</grid>
-
-					<grid>
-						<columns>
-							<column width="15%"></column>
-							<column width="35%"></column>
-							<column width="15%"></column>
-							<column width="35%"></column>
-						</columns>
-						<rows>
-							<row>
-								<label>Cargo</label>
-								<textbox width="200px"></textbox>
-								<label>Período</label>
-								<datebox width="50%"></datebox>
-							</row>
-						</rows>
-					</grid>
-
-					<grid>
-						<rows>
-							<row>
-								<div align="right">
-									<button
-										image="/Recursos/Imagenes/agregar.ico">
-										<attribute name="onClick">
-								<![CDATA[
-	Executions.createComponents("/Administracion/FrmAgregarIncidencia.zul",
-			null, null);
-]]>
-								</attribute>
-									</button>
-
-									<button
-										image="/Recursos/Imagenes/quitar.ico">
-									</button>
-								</div>
-							</row>
-							<row>
-								<grid>
-									<columns>
-										<column width="8%">
-											<checkbox id="on"
-												onClick="setOn()">
-											</checkbox>
-										</column>
-										<column label="Incidencias"
-											width="40%">
-										</column>
-										<column label="Fecha"
-											width="10%" align="center">
-										</column>
-										<column label="Horas"
-											width="10%" align="center">
-										</column>
-										<column label="Pago" width="10%"
-											align="center">
-										</column>
-										<column label="Observación"
-											width="25%" align="center">
-										</column>
-									</columns>
-									<rows>
-										<row>
-											<checkbox></checkbox>
-											<label>
-												Inasistencia Justificada
-											</label>
-											<label>21/09/2011</label>
-											<label>8</label>
-											<checkbox checked="true"></checkbox>
-											<label>Enfermedad</label>
-										</row>
-										<row>
-											<checkbox></checkbox>
-											<label>Trabajo Extra</label>
-											<label>23/09/2011</label>
-											<label>3</label>
-											<checkbox checked="true"></checkbox>
-											<label>
-												Trabajo nocturno
-											</label>
-										</row>
-									</rows>
-								</grid>
-							</row>
-							<row>
-								<div align="right">
-									<button
-										image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
-									</button>
-									<button
-										image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
-										<attribute name="onClick">
+							</vbox>
+						</hbox>
+					</row>
+					<row style="border:none;">
+						<separator></separator>
+					</row>
+					<row align="right" spans="4" style="border:none;">
+						<hbox>
+							<button
+								image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
+							</button>
+							<button
+								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+								<attribute name="onClick">
 									<![CDATA[
 	win.detach();
 ]]>
 									</attribute>
-									</button>
-								</div>
-							</row>
-						</rows>
-					</grid>
-				</panelchildren>
-			</panel>
+							</button>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
 		</groupbox>
 	</window>
 </zk>

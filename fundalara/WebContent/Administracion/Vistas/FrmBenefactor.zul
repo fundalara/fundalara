@@ -1,6 +1,175 @@
 <?page title="Benefactores" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="Bene" title="Benefactores" border="normal" width="690px">
+	<window id="Bene" title="Benefactores" border="normal"
+		width="690px">
+<zscript>
+		<![CDATA[
+			public void MostrarCatalogoBenefactor() {
+				Window window = (Window) Executions.createComponents(
+						"/Administracion/FrmCatalogoBenefactor.zul", null, null);
+				}
+		
+		
+		]]>
+	</zscript>
+		<groupbox style="border:none;" closable="false">
+			<grid width="100%" oddRowSclass="none"
+				style="border:none;">
+				<columns>
+					<column width="110px" />
+					<column width="225px" />
+					<column width="110px" />
+					<column width="225px" />
+				</columns>
+				<rows>
+					<row align="left" style="border:none;">
+						<label value="R.I.F" />
+						<hbox align="center">
+							<textbox width="150px" />
+							<label value="(*)" style="color:red" />
+							<button
+								image="/Recursos/Imagenes/consultar.ico"
+								onClick="MostrarCatalogoBenefactor()"
+								tooltiptext="Listado de Benefactores" />
+						</hbox>
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Razón Social" />
+						<hbox align="center">
+							<textbox width="350px" />
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox style="border-color:orange" closable="false">
+			<caption label="Datos de Contacto"></caption>
+			<grid oddRowSclass="none" style="border:none;">
+				<columns>
+					<column width="110px" />
+					<column width="225px" />
+					<column width="110px" />
+					<column width="225px" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Teléfono" />
+						<hbox>
+							<combobox width="40px" readonly="true">
+								<comboitem label="0251"></comboitem>
+								<comboitem label="0252"></comboitem>
+								<comboitem label="0253"></comboitem>
+							</combobox>
+							<textbox width="120px"></textbox>
+							<label value="(*)" style="color:red" />
+						</hbox>
+						<label value="Numero de Fax" />
+						<hbox>
+							<combobox width="40px" readonly="true">
+								<comboitem label="0251"></comboitem>
+								<comboitem label="0252"></comboitem>
+								<comboitem label="0253"></comboitem>
+							</combobox>
+							<textbox width="120px"></textbox>
+						</hbox>
+					</row>
+					<row style="border:none;">
+						<label value="Correo Electrónico" />
+						<textbox width="210px" />
+						<label value="Twitter" />
+						<textbox width="185px" />
+					</row>
+					<row style="border:none;" spans="1,3">
+						<label value="Pagina Web" />
+						<textbox width="320px" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox style="border-color:orange" closable="false">
+			<caption label="Datos de Residencia" />
+			<grid style="border:none;" oddRowSclass="none"
+				width="100%">
+				<columns>
+					<column width="110px" />
+					<column width="225px" />
+					<column width="110px" />
+					<column width="225px" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Estado" />
+						<hbox>
+							<combobox readonly="true"
+								value="--Seleccione--" width="160px">
+								<comboitem label="Lara" />
+								<comboitem label="Portuguesa" />
+								<comboitem label="Yaracuy" />
+							</combobox>
+							<label value="(*)" style="color:red" />
+						</hbox>
+						<label value="Municipio" />
+						<hbox>
+							<combobox readonly="true"
+								value="--Seleccione--" width="160px">
+								<comboitem label="Andrés Eloy Blanco" />
+								<comboitem label="Crespo" />
+								<comboitem label="Iribarren" />
+								<comboitem label="Jiménez" />
+								<comboitem label="Morán" />
+								<comboitem label="Palavecino" />
+								<comboitem label="Simón Planas" />
+								<comboitem label="Torres" />
+								<comboitem label="Urdaneta" />
+							</combobox>
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Parroquia" />
+						<hbox>
+							<combobox readonly="true"
+								value="--Seleccione--" width="160px">
+								<comboitem label="Barquisimeto" />
+								<comboitem label="Cabudare" />
+								<comboitem label="Carora" />
+								<comboitem label="Duaca" />
+								<comboitem label="El Cují" />
+								<comboitem label="El Tocuyo" />
+								<comboitem label="Quibor" />
+							</combobox>
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Dirección Habitación" />
+						<hbox align="center">
+							<textbox maxlength="200" height="40px"
+								width="505px" multiline="true" />
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<label value=" (*) Campo Obligatorio" style="color:red" />
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Guardar Nuevo Benefactor" label="Guardar" width="100px" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				tooltiptext="Modificar Datos del Benefactor" label="Modificar"
+				width="100px" />
+			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
+				tooltiptext="Eliminar Benefactor" label="Eliminar" width="100px" />
+			<button image="/Recursos/Imagenes/salir.png" onClick=""
+				tooltiptext="Salir de la Ventana" label="Salir" width="100px" >
+				<attribute name="onClick">
+				Bene.onClose();
+			</attribute>	
+			</button>
+		</div>
 		<zscript><![CDATA[
 	public void mostrar() {
 		String var = cb.getSelectedItem().getValue().toString();
@@ -15,175 +184,6 @@
 		}
 	}
 ]]></zscript>
-
-
-		<panel collapsible="true">
-			<panelchildren>
-				<div>
-					Tipo de Persona
-					<combobox id="cb" onSelect="mostrar()">
-						<comboitem label="Natural" value="1"></comboitem>
-						<comboitem label="Juridica" value="2"></comboitem>
-					</combobox>
-				</div>
-				<groupbox id="gb" visible="false">
-					<grid>
-						<columns>
-							<column label="" width="25%"></column>
-							<column label="" width="25%"></column>
-							<column label="" width="25%"></column>
-							<column label="" width="25%"></column>
-						</columns>
-						<rows>
-
-
-							<row>
-								Cédula
-
-								<hbox>
-									<bandbox>
-										<bandpopup></bandpopup>
-									</bandbox>
-								</hbox>
-
-							</row>
-							<row>
-								<label>Primer Nombre</label>
-								<textbox></textbox>
-								<label>Segundo Nombre</label>
-								<textbox></textbox>
-							</row>
-							<row>
-								<label>Primer Apellido</label>
-								<textbox></textbox>
-								<label>Segundo Apellido</label>
-								<textbox></textbox>
-							</row>
-							<row>
-								Telefono Celular
-								<hbox>
-									<combobox width="40px">
-										<comboitem label="0414"></comboitem>
-										<comboitem label="0424"></comboitem>
-										<comboitem label="0416"></comboitem>
-										<comboitem label="0426"></comboitem>
-										<comboitem label="0412"></comboitem>
-									</combobox>
-									<intbox></intbox>
-								</hbox>
-								Telefono de Habitacion
-								<hbox>
-									<combobox width="40px">
-										<comboitem label="0251"></comboitem>
-									</combobox>
-									<intbox></intbox>
-								</hbox>
-							</row>
-							<row>
-								Correo Electronico
-								<textbox width="96%"></textbox>
-								Twitter @
-								<textbox></textbox>
-							</row>
-
-						</rows>
-					</grid>
-					<separator></separator>
-					<grid>
-						<columns>
-							<column width="22%"></column>
-							<column width="79%"></column>
-						</columns>
-						<rows>
-							<row>
-								<label>Direccion</label>
-								<textbox width="96%"></textbox>
-							</row>
-						</rows>
-					</grid>
-				</groupbox>
-				<groupbox id="gb2" visible="false">
-					<grid>
-						<columns>
-							<column width="25%"></column>
-							<column width="75%"></column>
-						</columns>
-						<rows>
-							<row>
-								RIF
-								<bandbox>
-									<bandpopup></bandpopup>
-								</bandbox>
-							</row>
-							<row>
-								Nombre
-								<textbox></textbox>
-							</row>
-							<row>
-								Correo Electronico
-								<textbox></textbox>
-							</row>
-							<row>
-								Telefono
-								<hbox>
-									<combobox width="40px">
-										<comboitem label="0414"></comboitem>
-										<comboitem label="0424"></comboitem>
-										<comboitem label="0416"></comboitem>
-										<comboitem label="0426"></comboitem>
-										<comboitem label="0412"></comboitem>
-										<comboitem label="0251"></comboitem>
-									</combobox>
-									<intbox></intbox>
-								</hbox>
-							</row>
-							<row>
-								Fax
-								<hbox>
-									<combobox width="40px">
-										<comboitem label="0251"></comboitem>
-									</combobox>
-									<intbox></intbox>
-								</hbox>
-							</row>
-							<row>
-								Twitter @
-								<textbox></textbox>
-							</row>
-							<row>
-								Direccion
-								<textbox width="96%"></textbox>
-							</row>
-
-						</rows>
-					</grid>
-				</groupbox>
-			</panelchildren>
-		</panel>
-
-
-
-
-
-
-		<div align="right">
-
-			<button image="/Recursos/Imagenes/guardar.ico"
-				onClick="" label="Guardar" />
-			<button image="/Recursos/Imagenes/editar.ico" onClick=""
-				label="Editar" />
-			<button image="/Recursos/Imagenes/quitar.ico"
-				label="Eliminar">
-			</button>
-			<button image="/Recursos/Imagenes/cancelar.ico"
-				onClick="" label="Cancelar" />
-			<button image="/Recursos/Imagenes/atras.ico" onClick=""
-				label="Salir">
-				<attribute name="onClick">
-				Bene.onClose();
-				</attribute>
-				</button>
-		</div>
 
 	</window>
 </zk>

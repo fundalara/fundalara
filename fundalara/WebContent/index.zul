@@ -129,7 +129,7 @@
 													open="false">
 													<treerow>
 														<treecell
-															label="Personal"
+															label="Ingreso de Personal"
 															onClick='enlace("Administracion/Vistas/FrmRegistrarPersonal.zul")' />
 													</treerow>
 												</treeitem>
@@ -341,14 +341,14 @@
 											<treerow>
 												<treecell
 													label="Ingresos"
-													onClick='enlace("/Administracion/Vistas/Vistas/FrmTipoIngreso.zul")' />
+													onClick='enlace("/Administracion/Vistas/FrmTipoIngreso.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Egresos"
-													onClick='enlace("/Administracion/Vistas/Vistas/FrmTipoEgreso.zul")' />
+													onClick='enlace("/Administracion/Vistas/FrmTipoEgreso.zul")' />
 											</treerow>
 
 										</treeitem>
