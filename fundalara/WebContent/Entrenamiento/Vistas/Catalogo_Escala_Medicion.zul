@@ -1,0 +1,46 @@
+<?page title="Auto Generated index.zul"?>
+
+	<window id="wndCatalogoEscalaMedicion" closable="true"
+		title="Escala de Medición" border="normal" width="360px" height="">
+		
+		<listbox id="lbValoresEscala" multiple="true" mold="paging"
+			pageSize="10" width="350px" height="150px">
+			<listhead>
+				<listheader label="Valor" width="75px" align="center" />
+				<listheader label="Descripción" align="center"
+					width="150px" />
+			</listhead>
+			<listitem>
+				<listcell label="5" />
+				<listcell label="Javier Perez" />
+			</listitem>
+			<listitem>
+				<listcell label="7" />
+				<listcell label="Luis Villa" />
+			</listitem>
+			<listitem>
+				<listcell label="9" />
+				<listcell label="Carlos Rodriguez" />
+			</listitem>
+		</listbox>
+		<grid>
+			<columns>
+
+				<column width="500px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+			</columns>
+			<rows>
+				<row height="">
+					<label value="" />
+					<button id="btnAceptar"
+						image="../../Recursos/Imagenes/aceptar.ico" label="Cancelar"
+						width="100px" />
+					<button id="btnSalir"
+						image="../../Recursos/Imagenes/salir.png" label="Salir"
+						width="100px" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+
