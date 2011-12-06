@@ -1,283 +1,159 @@
 <?page title="Registro de Equipo" contentType="text/html;charset=UTF-8"?>
 <zk>
-<div align="center">
-	<window title="Equipos" border="normal" width="auto" height="auto"
+<div align="left">
+	<window title="Equipos" border="normal" width="600px" height="auto"
 		onClose="VerRoster()" closable="true">
 
 
 		<!-- DATOS COMPETENCIA -->
-		<panel border="normal" width="580px">
+		<panel border="normal" width="600px">
 			<caption label="Datos de la Competencia"></caption>
 			<panelchildren>
 				<grid>
 					<columns>
-						<column width="40px"></column>
-						<column width="40px"></column>
-						<column width="60px"></column>
-						<column width="60px"></column>
-						<column width="50px"></column>
-						<column width="60px"></column>
+						<column width="25%"></column>
+						<column width="25%"></column>
+						<column width="25%"></column>
+						<column width="25%"></column>
 					</columns>
 					<rows>
 						<row style="border-style:none">
-							<label value="Competencia"></label>
+							<label value="Tipo de Competencia"></label>
 							<hbox>
 								<textbox cols="11"></textbox>
 								<button
 									image="../../Recursos/Imagenes/consultar.ico">
 								</button>
 							</hbox>
-							<label value="Fecha Inicio"></label>
-							<textbox cols="10"></textbox>
-							<label value="Fecha Fin"></label>
-							<textbox cols="10"></textbox>
+							<label value="Nombre de Competencia"></label>
+							<textbox cols="14"></textbox>
 						</row>
 						<row style="border-style:none">
-
-							<label value="Sede"></label>
-							<textbox></textbox>
+							<label value="Fecha de Inicio"></label>
+							<datebox width="85%"></datebox>
+							<label value="Fecha de Finalización"></label>
+							<datebox width="85%"></datebox>
+							
 						</row>
 					</rows>
 				</grid>
 			</panelchildren>
 		</panel>
 
-		<borderlayout width="580px" height="580px">
-			<center>
-				<div>
+		<div>
 					<!-- TABLA REGISTRO DE EQUIPOS -->
 					<div id="PrincipalEquipos">
 						<panel title="Equipos Internos"
 							collapsible="true">
 							<panelchildren>
-								<grid>
-									<columns>
-										<column width="10%"
-											align="right">
-										</column>
-										<column width="10%"></column>
-										<column width="10%"
-											align="right">
-										</column>
-										<column width="10%"
-											align="right">
-										</column>
-										<column width="10%"
-											align="right">
-										</column>
-										<column width="10%"></column>
-										<column width="10%"></column>
-										<column width="10%"></column>
-										<column width="8%"></column>
-										<column width="12%"></column>
-									</columns>
-									<rows></rows>
-								</grid>
+							<grid width="auto" height="auto">
+								<columns>
+									<column width="25%"></column>
+									<column></column>
+								</columns>
+								<rows>
+									<row style="border-style:none">
+										<label 
+											value="Buscar por Categoría">
+										</label>
+										<combobox width="120px">
+											<comboitem label="Infantil" />
+											<comboitem label="Pre-Junior" />
+											<comboitem label="Juvenil" />
+										</combobox>
+									</row>
+								</rows>
+							</grid>
 
 								<div>
-									<grid width="auto" height="auto">
-										<columns>
-											<column width="15%"></column>
-											<column width="20%"></column>
-											<column></column>
-											<column></column>
-										</columns>
-										<rows>
-											<row
-												style="border-style:none">
-												<label
-													value="Categoría">
-												</label>
-												<combobox>
-													<comboitem
-														label="Infantil" />
-													<comboitem
-														label="Pre-Junior" />
-													<comboitem
-														label="Juvenil" />
-												</combobox>
-											</row>
-											<row
-												style="border-style:none">
-												<label
-													value="Mostrar Equipos por:">
-												</label>
-												<combobox
-													value="Seleccione" id="Filtro" onChange="Cambio()">
-													<comboitem
-														value="Por Categoria">
-													</comboitem>
-												</combobox>
-												<label value=""></label>
-												<label value=""></label>
-											</row>
-										</rows>
-									</grid>
-								</div>
-
-								<div>
-									<listbox height="auto"
-										id="ListaEquipos">
+									<listbox height="auto" id="ListaEquipos" mold="paging" pageSize="8">
 										<listhead>
-											<listheader label="N°"
-												width="10%" align="center">
-											</listheader>
-											<listheader
-												label="Equipo Seleccionados" width="30%" align="center"
-												id="Equipo">
-											</listheader>
-
-											<listheader label="Delegado"
-												width="20%" align="center" id="Delegado">
-											</listheader>
-											<listheader
-												label="Entrenador" width="30%" align="center"
-												id="Entrenador">
-											</listheader>
-											<listheader label="Roster"
-												width="20%" align="center" id="Roster">
-											</listheader>
-
-
+											<listheader label="Seleccionar" width="15%" align="center"/>
+											<listheader label="Categoria" width="20%" align="center"/>
+											<listheader label="Equipo" width="25%" align="center" id="Equipo"/>
+											<listheader label="Delegado" width="25%" align="center" id="Delegado"/>
+											<listheader label="Entrenador" width="25%" align="center" id="Entrenador"/>
 										</listhead>
 										<listitem>
-											<listcell>1</listcell>
-											<listcell>
-												Nombre Equipo 1
-											</listcell>
-
-											<listcell>
-												Delegado 1
-											</listcell>
-										
-											<listcell>
-												Entrenador 1
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
-
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 1 </listcell>
+											<listcell> Delegado 1 </listcell>
+											<listcell> Entrenador 1 </listcell>
 										</listitem>
 										<listitem>
-											<listcell>2</listcell>
-											<listcell>
-												Nombre Equipo 2
-											</listcell>
-
-											<listcell>
-												Delegado 2
-											</listcell>
-								
-											<listcell>
-												Entrenador 2
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 2 </listcell>
+											<listcell> Delegado 2 </listcell>
+											<listcell> Entrenador 2 </listcell>
 										</listitem>
 										<listitem>
-											<listcell>3</listcell>
-											<listcell>
-												Nombre Equipo 3
-											</listcell>
-
-											<listcell>
-												Delegado 3
-											</listcell>
-										
-											<listcell>
-												Entrenador 3
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 3 </listcell>
+											<listcell> Delegado 3 </listcell>
+											<listcell> Entrenador 3 </listcell>
 										</listitem>
 										<listitem>
-											<listcell>4</listcell>
-											<listcell>
-												Nombre Equipo 4
-											</listcell>
-
-											<listcell>
-												Delegado 4
-											</listcell>
-										
-											<listcell>
-												Entrenador 4
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
-										</listitem>
-
-										<listitem>
-											<listcell>5</listcell>
-											<listcell>
-												Nombre Equipo 5
-											</listcell>
-
-											<listcell>
-												Delegado 5
-											</listcell>
-										
-											<listcell>
-												Entrenador 5
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 4 </listcell>
+											<listcell> Delegado 4 </listcell>
+											<listcell> Entrenador 4 </listcell>
 										</listitem>
 										<listitem>
-											<listcell>6</listcell>
-											<listcell>
-												Nombre Equipo 6
-											</listcell>
-
-											<listcell>
-												Delegado 6
-											</listcell>
-										
-											<listcell>
-												Entrenador 6
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 5 </listcell>
+											<listcell> Delegado 5 </listcell>
+											<listcell> Entrenador 5 </listcell>
 										</listitem>
 										<listitem>
-											<listcell>7</listcell>
-											<listcell>
-												Nombre Equipo 7
-											</listcell>
-
-											<listcell>
-												Delegado 7
-											</listcell>
-										
-											<listcell>
-												Entrenador 7
-											</listcell>
-											<listcell>
-												<checkbox></checkbox>
-											</listcell>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 6 </listcell>
+											<listcell> Delegado 6 </listcell>
+											<listcell> Entrenador 6 </listcell>
 										</listitem>
 										<listitem>
-											<listcell>10</listcell>
-											<listcell>...</listcell>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 7 </listcell>
+											<listcell> Delegado 7 </listcell>
+											<listcell> Entrenador 7 </listcell>
 										</listitem>
-
+										<listitem>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 8 </listcell>
+											<listcell> Delegado 8 </listcell>
+											<listcell> Entrenador 8 </listcell>
+										</listitem>
+										<listitem>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 9 </listcell>
+											<listcell> Delegado 9 </listcell>
+											<listcell> Entrenador 9 </listcell>
+										</listitem>
+										<listitem>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 10 </listcell>
+											<listcell> Delegado 10 </listcell>
+											<listcell> Entrenador 10 </listcell>
+										</listitem>
+										<listitem>
+											<listcell> <checkbox></checkbox> </listcell>
+											<listcell> Juvenil </listcell>
+											<listcell> Nombre Equipo 11 </listcell>
+											<listcell> Delegado 11 </listcell>
+											<listcell> Entrenador 11 </listcell>
+										</listitem>
 									</listbox>
 								</div>
-
-
-								<div align="right"
-									style="margin-top:5px ">
-									<button label="Quitar Equipo"></button>
-									<button
-										label="Procesar Roster Oficial"
-										onClick='Enlace("/Competencias/Vistas/FrmRoster.zul")'>
-									</button>
-								</div>
+								
 							</panelchildren>
 						</panel>
 					</div>
@@ -288,59 +164,31 @@
 							<panelchildren>
 								<grid>
 									<columns>
-										<column width="40px"></column>
-										<column width="40px"></column>
-										<column width="60px"></column>
-										<column width="60px"></column>
-										<column width="50px"></column>
-										<column width="60px"></column>
+										<column label="" width="18.5%" align="right"/>
+										<column label=""/>
 									</columns>
 									<rows>
-										<row
-											style="border-style:none">
-											<label
-												value="Nombre Equipo">
-											</label>
-											<textbox cols="25"></textbox>
-											<label value="Categoria"></label>
-											<combobox cols="23">
-												<comboitem
-													label="Infantil" />
-												<comboitem
-													label="Pre-Junior" />
-												<comboitem
-													label="Juvenil" />
-											</combobox>
-											<label value="Divisa"></label>
-											<textbox cols="25"></textbox>
-										</row>
-										<row
-											style="border-style:none">
-
-											<label value="Entrenador"></label>
-											<textbox cols="25"></textbox>
-
-											<label value="Delegado"></label>
-											<textbox cols="25"></textbox>
-											<button label="" image="/Recursos/Imagenes/agregar.ico"></button>
+										<row style="border-style:none">
+											<label value="Buscar Equipos" />
+											<button label="" image="/Recursos/Imagenes/consultar.ico"></button>
 										</row>
 									</rows>
 								</grid>
-
 								<div>
-									<grid>
+									<grid mold="paging" pageSize="8">
 										<columns>
-											<column label=" Equipo"
-												width="20%" align="center" />
+											<column label="Nombre Equipo"
+												width="18.5%" align="center" />
 											<column label=" Divisa"
-												width="20%" align="center" />
+												width="18.5%" align="center" />
 											<column label=" Delegado"
-												width="20%" align="center" />
+												width="18.5%" align="center" />
 											<column label=" Categoria"
-												align="center" width="20%" />
+												align="center" width="18.5%" />
 											<column label=" Entrenador"
-												width="20%" align="center" />
-
+												width="18.5%" align="center" />
+											<column label="" align="center"
+												width="" />
 										</columns>
 										<rows>
 											<row>
@@ -351,8 +199,34 @@
 												<label
 													value="Eduardo Ochoa" />
 												<label value="Juvenil" />
+													<label value="Jesus Rojas" />
+												
+											</row>
+											<row>
 												<label
-													value="Jesus Rojas" />
+													value="Fundalara A" />
+												<label
+													value="Fundalara" />
+												<label
+													value="Eduardo Ochoa" />
+												<label value="Juvenil" />
+													<label value="Jesus Rojas" />
+												
+											</row>
+											<row>
+												<textbox width="95%"/>
+												<combobox cols="10"/>
+												<textbox width="95%"/>
+												<combobox cols="10">
+												<comboitem
+													label="Infantil" />
+												<comboitem
+													label="Pre-Junior" />
+												<comboitem
+													label="Juvenil" />
+												</combobox>
+													<textbox width="95%"/>
+												<button label="" image="/Recursos/Imagenes/agregar.ico"></button>
 											</row>
 											
 										</rows>
@@ -360,19 +234,12 @@
 								</div>
 							</panelchildren>
 						</panel>
-
 					</div>
-                
-					
 				</div>
-				
-     
 
-			</center>
-			<south>
 			    <div>
 			  	<panel>
-						<panelchildren style="margin-top:20px ">
+						<panelchildren style="margin-top:5px ">
 							<div align="right">
 								<button
 									image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
@@ -391,27 +258,16 @@
 						</panelchildren>
 					</panel> 
 				 </div>
-			</south>
-	</borderlayout>
-
-
-
 
 		<include id="Rost"></include>
-
-
 		<zscript>
-	
-	<![CDATA[
-	public void Enlace(String cad) {
-
-		Rost.setSrc(cad);
-		PrincipalEquipos.setVisible(false);
-	}
-]]>
-</zscript>
-
-
+		<![CDATA[
+			public void Enlace(String cad) {
+			Rost.setSrc(cad);
+			PrincipalEquipos.setVisible(false);
+			}
+		]]>
+		</zscript>
 	</window>
 	</div>
 </zk>

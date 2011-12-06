@@ -1,53 +1,46 @@
 <?page title="Regla" contentType="text/html;charset=UTF-8"?>
 <zk>
+	<div align="center">
 	<window title="Reglas" border="normal" width="68%" height="auto" closable="true">
-
-
 		<panel>
 			<caption label="Creación de Reglas"></caption>
 			<panelchildren>
 				<grid>
 					<columns>
-						<column label="" width="12%"
-							style="border-style:none" />
-						<column label="" width="40%"
-							style="border-style:none" align="left" />
-						<column label="" style="border-style:none"
+						<column label="" width="15%" style="border-style:none" />
+						<column label="" width="35%" style="border-style:none" align="left" />
+						<column label="" width="15%" style="border-style:none"
 							align="left" />
-						<column label="" style="border-style:none"
-							align="left" />
-						<column label="" style="border-style:none"
-							align="left" />
-
+						<column label="" width="35%" style="border-style:none" align="left" />
 					</columns>
 					<rows>
-						<row style="border-style:none">
+						<row style="border-style:none" align="left">
 							<label value="Regla:"></label>
-							<textbox cols="43"></textbox>
+							<textbox width="97%"></textbox>
 							<label value="Variable de Medición:">
 							</label>
-							<combobox cols="10">
+							<combobox width="97%">
 								<comboitem label="%" />
 								<comboitem label="Unidades" />
 							</combobox>
 						</row>
-						<row style="border-style:none">
+						<row style="border-style:none" align="left">
 							<label value="Descripción:"></label>
-							<textbox multiline="true" height="50px"
+							<textbox multiline="true" height="50px" width="97%"
 								cols="40">
 							</textbox>
 							<label value="Variable de Comparación:">
 							</label>
 							<hbox>
-							<textbox cols="10"></textbox>
+							<textbox width="100px"></textbox>
 							<button
 								image="../../Recursos/Imagenes/consultar.ico">
 							</button>
 							</hbox>
 						</row>
-						<row style="border-style:none">
+						<row style="border-style:none" align="left">
 							<label value="Criterio:"></label>
-							<combobox>
+							<combobox width="97%">
 								<comboitem label=" Mayor " />
 								<comboitem label=" Menor " />
 								<comboitem label=" Mayor Igual " />
@@ -66,8 +59,6 @@
 		<panel>
 			<caption label="Selección de Categorías"></caption>
 			<panelchildren>
-
-
 				<grid>
 					<columns>
 						<column width="45%"></column>
@@ -223,4 +214,5 @@
 
 
 	</window>
+	</div>
 </zk>
