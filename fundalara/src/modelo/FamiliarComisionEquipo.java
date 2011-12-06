@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,7 +21,8 @@ import javax.persistence.Table;
 public class FamiliarComisionEquipo implements java.io.Serializable {
 
 	private FamiliarComisionEquipoId id;
-	private FamiliarJugador familiarJugador;
+	private FamiliarJugador familiarJugadorByFke079614752b2d13c;
+	private FamiliarJugador familiarJugadorByFamiliarJugadorFamiliarComisionFk;
 	private ComisionEquipo comisionEquipo;
 	private char estatus;
 
@@ -29,10 +30,12 @@ public class FamiliarComisionEquipo implements java.io.Serializable {
 	}
 
 	public FamiliarComisionEquipo(FamiliarComisionEquipoId id,
-			FamiliarJugador familiarJugador, ComisionEquipo comisionEquipo,
-			char estatus) {
+			FamiliarJugador familiarJugadorByFke079614752b2d13c,
+			FamiliarJugador familiarJugadorByFamiliarJugadorFamiliarComisionFk,
+			ComisionEquipo comisionEquipo, char estatus) {
 		this.id = id;
-		this.familiarJugador = familiarJugador;
+		this.familiarJugadorByFke079614752b2d13c = familiarJugadorByFke079614752b2d13c;
+		this.familiarJugadorByFamiliarJugadorFamiliarComisionFk = familiarJugadorByFamiliarJugadorFamiliarComisionFk;
 		this.comisionEquipo = comisionEquipo;
 		this.estatus = estatus;
 	}
@@ -53,14 +56,28 @@ public class FamiliarComisionEquipo implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
-			@JoinColumn(name = "cedula_jugador", referencedColumnName = "cedula_jugador", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "cedula_familiar", referencedColumnName = "cedula_familiar", nullable = false, insertable = false, updatable = false) })
-	public FamiliarJugador getFamiliarJugador() {
-		return this.familiarJugador;
+			@JoinColumn(name = "cedula_familiar", referencedColumnName = "cedula_jugador", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "cedula_jugador", referencedColumnName = "cedula_familiar", nullable = false, insertable = false, updatable = false) })
+	public FamiliarJugador getFamiliarJugadorByFke079614752b2d13c() {
+		return this.familiarJugadorByFke079614752b2d13c;
 	}
 
-	public void setFamiliarJugador(FamiliarJugador familiarJugador) {
-		this.familiarJugador = familiarJugador;
+	public void setFamiliarJugadorByFke079614752b2d13c(
+			FamiliarJugador familiarJugadorByFke079614752b2d13c) {
+		this.familiarJugadorByFke079614752b2d13c = familiarJugadorByFke079614752b2d13c;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+			@JoinColumn(name = "cedula_jugador", referencedColumnName = "cedula_jugador", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "cedula_familiar", referencedColumnName = "cedula_familiar", nullable = false, insertable = false, updatable = false) })
+	public FamiliarJugador getFamiliarJugadorByFamiliarJugadorFamiliarComisionFk() {
+		return this.familiarJugadorByFamiliarJugadorFamiliarComisionFk;
+	}
+
+	public void setFamiliarJugadorByFamiliarJugadorFamiliarComisionFk(
+			FamiliarJugador familiarJugadorByFamiliarJugadorFamiliarComisionFk) {
+		this.familiarJugadorByFamiliarJugadorFamiliarComisionFk = familiarJugadorByFamiliarJugadorFamiliarComisionFk;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

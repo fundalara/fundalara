@@ -1,4 +1,4 @@
-package vista.entrenamiento;
+package controlador.entrenamiento;
 
 import java.sql.Date;
 

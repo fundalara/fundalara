@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class AnnoEscolar implements java.io.Serializable {
 	private String nombre;
 	private char estatus;
 	private Set<DatoAcademico> datoAcademicos = new HashSet<DatoAcademico>(0);
+	private Set<DatoAcademico> datoAcademicos_1 = new HashSet<DatoAcademico>(0);
 
 	public AnnoEscolar() {
 	}
@@ -33,11 +34,13 @@ public class AnnoEscolar implements java.io.Serializable {
 	}
 
 	public AnnoEscolar(String codigoAnnoEscolar, String nombre, char estatus,
-			Set<DatoAcademico> datoAcademicos) {
+			Set<DatoAcademico> datoAcademicos,
+			Set<DatoAcademico> datoAcademicos_1) {
 		this.codigoAnnoEscolar = codigoAnnoEscolar;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.datoAcademicos = datoAcademicos;
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 	@Id
@@ -75,6 +78,15 @@ public class AnnoEscolar implements java.io.Serializable {
 
 	public void setDatoAcademicos(Set<DatoAcademico> datoAcademicos) {
 		this.datoAcademicos = datoAcademicos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "annoEscolar")
+	public Set<DatoAcademico> getDatoAcademicos_1() {
+		return this.datoAcademicos_1;
+	}
+
+	public void setDatoAcademicos_1(Set<DatoAcademico> datoAcademicos_1) {
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 }

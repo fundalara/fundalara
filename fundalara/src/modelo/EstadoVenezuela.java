@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class EstadoVenezuela implements java.io.Serializable {
 	private String codigoEstado;
 	private String nombre;
 	private Set<Municipio> municipios = new HashSet<Municipio>(0);
+	private Set<Municipio> municipios_1 = new HashSet<Municipio>(0);
 
 	public EstadoVenezuela() {
 	}
@@ -31,10 +32,11 @@ public class EstadoVenezuela implements java.io.Serializable {
 	}
 
 	public EstadoVenezuela(String codigoEstado, String nombre,
-			Set<Municipio> municipios) {
+			Set<Municipio> municipios, Set<Municipio> municipios_1) {
 		this.codigoEstado = codigoEstado;
 		this.nombre = nombre;
 		this.municipios = municipios;
+		this.municipios_1 = municipios_1;
 	}
 
 	@Id
@@ -63,6 +65,15 @@ public class EstadoVenezuela implements java.io.Serializable {
 
 	public void setMunicipios(Set<Municipio> municipios) {
 		this.municipios = municipios;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoVenezuela")
+	public Set<Municipio> getMunicipios_1() {
+		return this.municipios_1;
+	}
+
+	public void setMunicipios_1(Set<Municipio> municipios_1) {
+		this.municipios_1 = municipios_1;
 	}
 
 }

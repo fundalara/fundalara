@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,6 +32,8 @@ public class ConceptoNomina implements java.io.Serializable {
 	private char estatus;
 	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas = new HashSet<EmpleadoConceptoNomina>(
 			0);
+	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1 = new HashSet<EmpleadoConceptoNomina>(
+			0);
 
 	public ConceptoNomina() {
 	}
@@ -52,7 +54,8 @@ public class ConceptoNomina implements java.io.Serializable {
 	public ConceptoNomina(String codigoConceptoNomina,
 			TipoConceptoNomina tipoConceptoNomina, boolean tipoAplicacion,
 			double valor, boolean aplicableSueldo, Date fechaActivacion,
-			char estatus, Set<EmpleadoConceptoNomina> empleadoConceptoNominas) {
+			char estatus, Set<EmpleadoConceptoNomina> empleadoConceptoNominas,
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1) {
 		this.codigoConceptoNomina = codigoConceptoNomina;
 		this.tipoConceptoNomina = tipoConceptoNomina;
 		this.tipoAplicacion = tipoAplicacion;
@@ -61,6 +64,7 @@ public class ConceptoNomina implements java.io.Serializable {
 		this.fechaActivacion = fechaActivacion;
 		this.estatus = estatus;
 		this.empleadoConceptoNominas = empleadoConceptoNominas;
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 	}
 
 	@Id
@@ -137,6 +141,16 @@ public class ConceptoNomina implements java.io.Serializable {
 	public void setEmpleadoConceptoNominas(
 			Set<EmpleadoConceptoNomina> empleadoConceptoNominas) {
 		this.empleadoConceptoNominas = empleadoConceptoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "conceptoNomina")
+	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas_1() {
+		return this.empleadoConceptoNominas_1;
+	}
+
+	public void setEmpleadoConceptoNominas_1(
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1) {
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 	}
 
 }

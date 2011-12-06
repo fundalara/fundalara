@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,8 @@ public class TipoEscalaMedicion implements java.io.Serializable {
 	private char estatus;
 	private String nombre;
 	private Set<EscalaMedicion> escalaMedicions = new HashSet<EscalaMedicion>(0);
+	private Set<EscalaMedicion> escalaMedicions_1 = new HashSet<EscalaMedicion>(
+			0);
 
 	public TipoEscalaMedicion() {
 	}
@@ -34,11 +36,13 @@ public class TipoEscalaMedicion implements java.io.Serializable {
 	}
 
 	public TipoEscalaMedicion(String idTipoEscalaMedicion, char estatus,
-			String nombre, Set<EscalaMedicion> escalaMedicions) {
+			String nombre, Set<EscalaMedicion> escalaMedicions,
+			Set<EscalaMedicion> escalaMedicions_1) {
 		this.idTipoEscalaMedicion = idTipoEscalaMedicion;
 		this.estatus = estatus;
 		this.nombre = nombre;
 		this.escalaMedicions = escalaMedicions;
+		this.escalaMedicions_1 = escalaMedicions_1;
 	}
 
 	@Id
@@ -76,6 +80,15 @@ public class TipoEscalaMedicion implements java.io.Serializable {
 
 	public void setEscalaMedicions(Set<EscalaMedicion> escalaMedicions) {
 		this.escalaMedicions = escalaMedicions;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoEscalaMedicion")
+	public Set<EscalaMedicion> getEscalaMedicions_1() {
+		return this.escalaMedicions_1;
+	}
+
+	public void setEscalaMedicions_1(Set<EscalaMedicion> escalaMedicions_1) {
+		this.escalaMedicions_1 = escalaMedicions_1;
 	}
 
 }

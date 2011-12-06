@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class Municipio implements java.io.Serializable {
 	private EstadoVenezuela estadoVenezuela;
 	private String nombre;
 	private Set<Parroquia> parroquias = new HashSet<Parroquia>(0);
+	private Set<Parroquia> parroquias_1 = new HashSet<Parroquia>(0);
 
 	public Municipio() {
 	}
@@ -36,11 +37,13 @@ public class Municipio implements java.io.Serializable {
 	}
 
 	public Municipio(String codigoMunicipio, EstadoVenezuela estadoVenezuela,
-			String nombre, Set<Parroquia> parroquias) {
+			String nombre, Set<Parroquia> parroquias,
+			Set<Parroquia> parroquias_1) {
 		this.codigoMunicipio = codigoMunicipio;
 		this.estadoVenezuela = estadoVenezuela;
 		this.nombre = nombre;
 		this.parroquias = parroquias;
+		this.parroquias_1 = parroquias_1;
 	}
 
 	@Id
@@ -79,6 +82,15 @@ public class Municipio implements java.io.Serializable {
 
 	public void setParroquias(Set<Parroquia> parroquias) {
 		this.parroquias = parroquias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "municipio")
+	public Set<Parroquia> getParroquias_1() {
+		return this.parroquias_1;
+	}
+
+	public void setParroquias_1(Set<Parroquia> parroquias_1) {
+		this.parroquias_1 = parroquias_1;
 	}
 
 }

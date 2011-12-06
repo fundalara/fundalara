@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,8 @@ public class EstadoMantenimiento implements java.io.Serializable {
 	private char estatus;
 	private Set<ResultadoMantenimiento> resultadoMantenimientos = new HashSet<ResultadoMantenimiento>(
 			0);
+	private Set<ResultadoMantenimiento> resultadoMantenimientos_1 = new HashSet<ResultadoMantenimiento>(
+			0);
 
 	public EstadoMantenimiento() {
 	}
@@ -40,12 +42,14 @@ public class EstadoMantenimiento implements java.io.Serializable {
 
 	public EstadoMantenimiento(String codigoEstadoMantenimiento, Estado estado,
 			Mantenimiento mantenimiento, char estatus,
-			Set<ResultadoMantenimiento> resultadoMantenimientos) {
+			Set<ResultadoMantenimiento> resultadoMantenimientos,
+			Set<ResultadoMantenimiento> resultadoMantenimientos_1) {
 		this.codigoEstadoMantenimiento = codigoEstadoMantenimiento;
 		this.estado = estado;
 		this.mantenimiento = mantenimiento;
 		this.estatus = estatus;
 		this.resultadoMantenimientos = resultadoMantenimientos;
+		this.resultadoMantenimientos_1 = resultadoMantenimientos_1;
 	}
 
 	@Id
@@ -95,6 +99,16 @@ public class EstadoMantenimiento implements java.io.Serializable {
 	public void setResultadoMantenimientos(
 			Set<ResultadoMantenimiento> resultadoMantenimientos) {
 		this.resultadoMantenimientos = resultadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoMantenimiento")
+	public Set<ResultadoMantenimiento> getResultadoMantenimientos_1() {
+		return this.resultadoMantenimientos_1;
+	}
+
+	public void setResultadoMantenimientos_1(
+			Set<ResultadoMantenimiento> resultadoMantenimientos_1) {
+		this.resultadoMantenimientos_1 = resultadoMantenimientos_1;
 	}
 
 }

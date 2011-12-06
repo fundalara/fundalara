@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +35,10 @@ public class Material implements java.io.Serializable {
 	private Set<MaterialMantenimiento> materialMantenimientos = new HashSet<MaterialMantenimiento>(
 			0);
 	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados = new HashSet<MaterialMantenimientoPlanificado>(
+			0);
+	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados_1 = new HashSet<MaterialMantenimientoPlanificado>(
+			0);
+	private Set<MaterialMantenimiento> materialMantenimientos_1 = new HashSet<MaterialMantenimiento>(
 			0);
 
 	public Material() {
@@ -73,7 +77,9 @@ public class Material implements java.io.Serializable {
 			int stockMaximo,
 			char estatus,
 			Set<MaterialMantenimiento> materialMantenimientos,
-			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados) {
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados,
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados_1,
+			Set<MaterialMantenimiento> materialMantenimientos_1) {
 		this.codigoMaterial = codigoMaterial;
 		this.unidadMedida = unidadMedida;
 		this.tipoMaterial = tipoMaterial;
@@ -88,6 +94,8 @@ public class Material implements java.io.Serializable {
 		this.estatus = estatus;
 		this.materialMantenimientos = materialMantenimientos;
 		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
+		this.materialMantenimientoPlanificados_1 = materialMantenimientoPlanificados_1;
+		this.materialMantenimientos_1 = materialMantenimientos_1;
 	}
 
 	@Id
@@ -219,6 +227,26 @@ public class Material implements java.io.Serializable {
 	public void setMaterialMantenimientoPlanificados(
 			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados) {
 		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
+	public Set<MaterialMantenimientoPlanificado> getMaterialMantenimientoPlanificados_1() {
+		return this.materialMantenimientoPlanificados_1;
+	}
+
+	public void setMaterialMantenimientoPlanificados_1(
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados_1) {
+		this.materialMantenimientoPlanificados_1 = materialMantenimientoPlanificados_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
+	public Set<MaterialMantenimiento> getMaterialMantenimientos_1() {
+		return this.materialMantenimientos_1;
+	}
+
+	public void setMaterialMantenimientos_1(
+			Set<MaterialMantenimiento> materialMantenimientos_1) {
+		this.materialMantenimientos_1 = materialMantenimientos_1;
 	}
 
 }

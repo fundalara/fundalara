@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,8 @@ public class DatoMedico implements java.io.Serializable {
 	private char estatus;
 	private Set<AfeccionJugador> afeccionJugadors = new HashSet<AfeccionJugador>(
 			0);
+	private Set<AfeccionJugador> afeccionJugadors_1 = new HashSet<AfeccionJugador>(
+			0);
 
 	public DatoMedico() {
 	}
@@ -44,7 +46,8 @@ public class DatoMedico implements java.io.Serializable {
 
 	public DatoMedico(String codigoRegistro, Medico medico, Jugador jugador,
 			String factorSanguineo, String observacion, char estatus,
-			Set<AfeccionJugador> afeccionJugadors) {
+			Set<AfeccionJugador> afeccionJugadors,
+			Set<AfeccionJugador> afeccionJugadors_1) {
 		this.codigoRegistro = codigoRegistro;
 		this.medico = medico;
 		this.jugador = jugador;
@@ -52,6 +55,7 @@ public class DatoMedico implements java.io.Serializable {
 		this.observacion = observacion;
 		this.estatus = estatus;
 		this.afeccionJugadors = afeccionJugadors;
+		this.afeccionJugadors_1 = afeccionJugadors_1;
 	}
 
 	@Id
@@ -118,6 +122,15 @@ public class DatoMedico implements java.io.Serializable {
 
 	public void setAfeccionJugadors(Set<AfeccionJugador> afeccionJugadors) {
 		this.afeccionJugadors = afeccionJugadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoMedico")
+	public Set<AfeccionJugador> getAfeccionJugadors_1() {
+		return this.afeccionJugadors_1;
+	}
+
+	public void setAfeccionJugadors_1(Set<AfeccionJugador> afeccionJugadors_1) {
+		this.afeccionJugadors_1 = afeccionJugadors_1;
 	}
 
 }

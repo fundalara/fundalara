@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +33,8 @@ public class Proveedor implements java.io.Serializable {
 	private char estatus;
 	private String fax;
 	private Set<ProveedorBanco> proveedorBancos = new HashSet<ProveedorBanco>(0);
+	private Set<ProveedorBanco> proveedorBancos_1 = new HashSet<ProveedorBanco>(
+			0);
 
 	public Proveedor() {
 	}
@@ -52,7 +54,8 @@ public class Proveedor implements java.io.Serializable {
 			String cuentaFacebook, String cuentaTwitter,
 			String correoElectronico, String direccion, String nombre,
 			String telefono1, String telefono2, char estatus, String fax,
-			Set<ProveedorBanco> proveedorBancos) {
+			Set<ProveedorBanco> proveedorBancos,
+			Set<ProveedorBanco> proveedorBancos_1) {
 		this.rifNic = rifNic;
 		this.parroquia = parroquia;
 		this.codMunicipio = codMunicipio;
@@ -66,6 +69,7 @@ public class Proveedor implements java.io.Serializable {
 		this.estatus = estatus;
 		this.fax = fax;
 		this.proveedorBancos = proveedorBancos;
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 	@Id
@@ -185,6 +189,15 @@ public class Proveedor implements java.io.Serializable {
 
 	public void setProveedorBancos(Set<ProveedorBanco> proveedorBancos) {
 		this.proveedorBancos = proveedorBancos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proveedor")
+	public Set<ProveedorBanco> getProveedorBancos_1() {
+		return this.proveedorBancos_1;
+	}
+
+	public void setProveedorBancos_1(Set<ProveedorBanco> proveedorBancos_1) {
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 }

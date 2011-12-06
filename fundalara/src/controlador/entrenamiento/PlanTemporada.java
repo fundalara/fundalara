@@ -1,4 +1,4 @@
-package vista.entrenamiento;
+package controlador.entrenamiento;
 
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;

@@ -1,172 +1,126 @@
 <?page title="Auto Generated index.zul"?>
-	<window closable="true"
-		title="Sesion de Entrenamiento - PREINFANTIL" border="normal"
-		width="600px" >
-		<grid>
-			<columns sizable="true">
-				<column align="left" />
-			</columns>
-			<rows>
+<window closable="true" id="wSesionEntrenamiento"
+	apply="controlador.entrenamiento.Sesion_Entrenamiento"
+	title="Sesion de Entrenamiento - PREINFANTIL" border="normal"
+	width="600px">
+	<grid>
+		<columns sizable="true">
+			<column align="left" />
+		</columns>
+		<rows>
 
-				<row>
-					<grid>
-						<columns>
-							<column label="" width="120PX" />
-							<column label="" width="160PX"
-								align="center" />
-							<column label="" width="120PX" />
-							<column label="" width="160PX"
-								align="center" />
-						</columns>
-						<rows>
-							<row height="30px">
-								<label value="Desde" />
-								<textbox width="120px" />
-								<label value="Hasta" />
-								<textbox width="120px" />
-							</row>
-						</rows>
-					</grid>
-				</row>
+			<row>
+				<grid>
+					<columns>
+						<column label="" width="120PX" />
+						<column label="" width="160PX" align="center" />
+						<column label="" width="120PX" />
+						<column label="" width="160PX" align="center" />
+					</columns>
+					<rows>
+						<row height="30px">
+							<label value="Desde" />
+							<datebox width="125px" id="dtbox1" />
+							<label value="Hasta" />
+							<datebox width="125px" id="dtbox2" />
+						</row>
+					</rows>
+				</grid>
+			</row>
 
-				<row>
-					<panel
-						title="Asignacion de Actividades de Entrenamiento"
-						collapsible="true">
-						<panelchildren>
-							<grid>
-								<rows>
-									<row>
-										<grid>
-											<columns>
-												<column width="120px"
-													align="left" />
-												<column width="160px"
-													align="center" />
-												<column width="120px"
-													align="left" />
-												<column width="160px"
-													align="center" />
+			<row>
+				<panel
+					title="Asignacion de Actividades de Entrenamiento"
+					collapsible="true">
+					<panelchildren>
+						<grid>
+							<rows>
+								<row>
+									<grid>
+										<columns>
+											<column width="120px"
+												align="left" />
+											<column width="160px"
+												align="center" />
+											<column width="120px"
+												align="left" />
+											<column width="160px"
+												align="center" />
 
-											</columns>
-											<rows>
-												<row height="30px">
-													<label value="Fase"
-														width="100px" />
-													<combobox
-														value="--Seleccione--" width="120px">
-														<comboitem
-															label="CALENTAMIENTO" />
-														<comboitem
-															label="TECNICA" />
-														<comboitem
-															label="ENFRIAMIENTO" />
-													</combobox>
-													<label
-														value="Actividad" width="100px" />
-													<combobox
-														value="--Seleccione--" width="120px">
-														<comboitem
-															label="BATEO" />
-														<comboitem
-															label="TROTE" />
-														<comboitem
-															label="LANZAMIENTO" />
-													</combobox>
+										</columns>
+										<rows>
+											<row height="30px">
+												<label value="Fase"
+													width="100px" />
+												<combobox id="cmbFase"
+													value="--Seleccione--" width="120px">
+													<comboitem
+														label="CALENTAMIENTO" />
+													<comboitem
+														label="TECNICA" />
+													<comboitem
+														label="ENFRIAMIENTO" />
+												</combobox>
+												<label value="Actividad"
+													width="100px" />
+												<combobox
+													id="cmbActividad" value="--Seleccione--" width="120px">
+													<comboitem
+														label="BATEO" />
+													<comboitem
+														label="TROTE" />
+													<comboitem
+														label="LANZAMIENTO" />
+												</combobox>
 
-												</row>
-												<row height="30px">
-													<label
-														value="Tiempo" width="100px" />
-													<hbox
-														width="100px">
-														<timebox
-															width="70px" />
+											</row>
+											<row height="30px">
+												<label value="Tiempo"
+													width="100px" />
+												<hbox width="100px">
+													<intbox
+														id="ibTiempo" width="70px" />
 
-														<label
-															value=" min" width="20px" />
-													</hbox>
+													<label value=" min"
+														width="20px" />
+												</hbox>
 
-												</row>
-											</rows>
-										</grid>
-									</row>
-
-									<row>
-
-										<hbox width="100px">
-											<grid height="110px"
-												width="500px">
-												<columns
-													sizable="true">
-
-													<column label="Fase"
-														width="140px" align="center" />
-													<column
-														label="Actividad" width="230px" align="center" />
-													<column
-														Label="Tiempo (Min)" width="110px" align="center" />
-												</columns>
-
-												<rows>
-
-													<row
-														height="25px">
-														<label
-															value="Calentamiento" />
-														<label
-															value="Sentadillas" />
-														<label
-															value="5" />
-													</row>
-													<row
-														height="25px">
-														<label
-															value="Tecnica" />
-														<label
-															value="Lanzamiento" />
-														<label
-															value="20" />
-													</row>
-													<row
-														height="25px">
-														<label value="" />
-														<label value="" />
-														<label value="" />
-													</row>
-													<row
-														height="25px">
-														<label />
-														<label />
-														<label />
-													</row>
-													<row
-														height="15px">
-														<label />
-														<label />
-														<label />
-													</row>
-												</rows>
-											</grid>
-											<vbox>
-												<button
-													image="Recursos/Imagenes/agregar.ico" />
-												<separator height="5px" />
-												<button
-													image="Recursos/Imagenes/quitar.ico" />
-											</vbox>
-										</hbox>
-
-									</row>
-								</rows>
-							</grid>
-						</panelchildren>
-					</panel>
-				</row>
+											</row>
+										</rows>
+									</grid>
+								</row>
 
 
-				<row>
-					<panel
+								<row>
+
+									<hbox width="100px">
+										<listbox id="lbActividades">
+											<listhead>
+												<listheader label="Fase"
+													width="140px" align="Center" />
+												<listheader
+													label="Actividad" width="280px" align="Center" />
+												<listheader
+													label="Tiempo(Min)" width="110px" align="Center" />
+											</listhead>
+										</listbox>
+										<vbox>
+											<button id="btnAgregar1"
+												image="../../Recursos/Imagenes/agregar.ico" />
+											<separator height="5px" />
+											<button id="btnQuitar1"
+												image="../../Recursos/Imagenes/quitar.ico" />
+										</vbox>
+									</hbox>
+
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</row>
+			<row>
+			<panel
 						title="Asignacion de Materiales de Entrenamiento"
 						collapsible="true">
 						<panelchildren>
@@ -190,9 +144,9 @@
 												<row height="35px">
 													<label
 														value="Material" width="100px" />
-													<combobox
+													<combobox id="cmbMaterial"
 														value="--Seleccione--" width="120px">
-														<comboitem
+														<comboitem id="cmbi"
 															label="Bate" />
 														<comboitem
 															label="Guante" />
@@ -203,10 +157,10 @@
 													</combobox>
 													<label
 														value="Cantidad" width="100px" />
-													<combobox
+													<combobox id="cmbCantidad"
 														width="80px">
 														<comboitem
-															label="5" />
+															label="5" id="cmbi2" />
 														<comboitem
 															label="10" />
 														<comboitem
@@ -222,6 +176,15 @@
 									<row>
 
 										<hbox width="100px">
+										<listbox id ="lsb">
+	<listhead>
+		<listheader label="Material" align="center" width="265px"  />
+		<listheader label="Cantidad" align="center" width="265px" />
+	</listhead>
+</listbox>
+
+										
+										<!--  
 											<grid height="110px"
 												width="500px">
 												<columns
@@ -272,12 +235,13 @@
 													</row>
 												</rows>
 											</grid>
+											-->
 											<vbox>
 												<button
-													image="Recursos/Imagenes/agregar.ico" />
+													image="../../Recursos/Imagenes/agregar.ico" id="btnAgregar2" />
 												<separator height="5px" />
 												<button
-													image="Recursos/Imagenes/quitar.ico" />
+													image="../../Recursos/Imagenes/quitar.ico" id="btnQuitar2" />
 											</vbox>
 										</hbox>
 
@@ -286,40 +250,42 @@
 							</grid>
 						</panelchildren>
 					</panel>
-				</row>
+		
+							
+							</row>
 
-			</rows>
-		</grid>
-
-
-		<separator />
-
-
-		<grid height="50px">
-			<columns>
-
-				<column width="245px" align="center" />
-				<column width="105px" align="center" />
-				<column width="105px" align="center" />
-				<column width="105px" align="center" />
-
-			</columns>
-			<rows>
-
-				<row height="">
-					<label value="" />
-					<button image="Recursos/Imagenes/guardar.ico"
-						label="Guardar" width="100px" />
-					<button image="Recursos/Imagenes/imprimir.ico"
-						label="Imprimir" width="100px" />
-					<button image="Recursos/Imagenes/cancelar.ico"
-						label="Cancelar" width="100px" />
-					<button image="Recursos/Imagenes/salir.png"
-						label="Salir" width="100px" />
-				</row>
-			</rows>
-		</grid>
+		</rows>
+	</grid>
 
 
+	<separator />
 
-	</window>
+
+	<grid height="50px">
+		<columns>
+
+			<column width="245px" align="center" />
+			<column width="105px" align="center" />
+			<column width="105px" align="center" />
+			<column width="105px" align="center" />
+
+		</columns>
+		<rows>
+
+			<row height="">
+				<label value="" />
+				<button image="../../Recursos/Imagenes/guardar.ico"
+					id="btnGuardar" label="Guardar" width="100px" />
+				<button image="../../Recursos/Imagenes/imprimir.ico"
+					id="btnImprimir" label="Imprimir" width="100px" />
+				<button image="Recursos/Imagenes/cancelar.ico" id="btnCancelar"
+					label="Cancelar" width="100px" />
+				<button image="Recursos/Imagenes/salir.png"
+					id="btnSalir" label="Salir" width="100px" />
+			</row>
+		</rows>
+	</grid>
+
+
+
+</window>

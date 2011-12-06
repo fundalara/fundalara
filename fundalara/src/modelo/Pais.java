@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class Pais implements java.io.Serializable {
 	private String codigoPais;
 	private String nombre;
 	private Set<Jugador> jugadors = new HashSet<Jugador>(0);
+	private Set<Jugador> jugadors_1 = new HashSet<Jugador>(0);
 
 	public Pais() {
 	}
@@ -30,10 +31,12 @@ public class Pais implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	public Pais(String codigoPais, String nombre, Set<Jugador> jugadors) {
+	public Pais(String codigoPais, String nombre, Set<Jugador> jugadors,
+			Set<Jugador> jugadors_1) {
 		this.codigoPais = codigoPais;
 		this.nombre = nombre;
 		this.jugadors = jugadors;
+		this.jugadors_1 = jugadors_1;
 	}
 
 	@Id
@@ -62,6 +65,15 @@ public class Pais implements java.io.Serializable {
 
 	public void setJugadors(Set<Jugador> jugadors) {
 		this.jugadors = jugadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pais")
+	public Set<Jugador> getJugadors_1() {
+		return this.jugadors_1;
+	}
+
+	public void setJugadors_1(Set<Jugador> jugadors_1) {
+		this.jugadors_1 = jugadors_1;
 	}
 
 }

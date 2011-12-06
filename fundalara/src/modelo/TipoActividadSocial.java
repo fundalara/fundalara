@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,9 @@ public class TipoActividadSocial implements java.io.Serializable {
 	private String codigoActividadSocial;
 	private String nombre;
 	private char estatus;
+	private String descripcion;
 	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
+	private Set<DatoSocial> datoSocials_1 = new HashSet<DatoSocial>(0);
 
 	public TipoActividadSocial() {
 	}
@@ -34,11 +36,14 @@ public class TipoActividadSocial implements java.io.Serializable {
 	}
 
 	public TipoActividadSocial(String codigoActividadSocial, String nombre,
-			char estatus, Set<DatoSocial> datoSocials) {
+			char estatus, String descripcion, Set<DatoSocial> datoSocials,
+			Set<DatoSocial> datoSocials_1) {
 		this.codigoActividadSocial = codigoActividadSocial;
 		this.nombre = nombre;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 		this.datoSocials = datoSocials;
+		this.datoSocials_1 = datoSocials_1;
 	}
 
 	@Id
@@ -69,6 +74,15 @@ public class TipoActividadSocial implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
+	@Column(name = "descripcion")
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoActividadSocial")
 	public Set<DatoSocial> getDatoSocials() {
 		return this.datoSocials;
@@ -76,6 +90,15 @@ public class TipoActividadSocial implements java.io.Serializable {
 
 	public void setDatoSocials(Set<DatoSocial> datoSocials) {
 		this.datoSocials = datoSocials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoActividadSocial")
+	public Set<DatoSocial> getDatoSocials_1() {
+		return this.datoSocials_1;
+	}
+
+	public void setDatoSocials_1(Set<DatoSocial> datoSocials_1) {
+		this.datoSocials_1 = datoSocials_1;
 	}
 
 }

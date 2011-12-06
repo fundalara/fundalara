@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class TipoModalidadCompetencia implements java.io.Serializable {
 	private TipoCompetencia tipoCompetencia;
 	private ModalidadCompetencia modalidadCompetencia;
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
+	private Set<Competencia> competencias_1 = new HashSet<Competencia>(0);
 
 	public TipoModalidadCompetencia() {
 	}
@@ -39,11 +40,12 @@ public class TipoModalidadCompetencia implements java.io.Serializable {
 	public TipoModalidadCompetencia(String codigoTipoModalidadCompetencia,
 			TipoCompetencia tipoCompetencia,
 			ModalidadCompetencia modalidadCompetencia,
-			Set<Competencia> competencias) {
+			Set<Competencia> competencias, Set<Competencia> competencias_1) {
 		this.codigoTipoModalidadCompetencia = codigoTipoModalidadCompetencia;
 		this.tipoCompetencia = tipoCompetencia;
 		this.modalidadCompetencia = modalidadCompetencia;
 		this.competencias = competencias;
+		this.competencias_1 = competencias_1;
 	}
 
 	@Id
@@ -85,6 +87,15 @@ public class TipoModalidadCompetencia implements java.io.Serializable {
 
 	public void setCompetencias(Set<Competencia> competencias) {
 		this.competencias = competencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoModalidadCompetencia")
+	public Set<Competencia> getCompetencias_1() {
+		return this.competencias_1;
+	}
+
+	public void setCompetencias_1(Set<Competencia> competencias_1) {
+		this.competencias_1 = competencias_1;
 	}
 
 }

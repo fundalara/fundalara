@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,6 +26,7 @@ public class Cargo implements java.io.Serializable {
 	private Date fechaActualizacion;
 	private char estatus;
 	private Set<EmpleadoCargo> empleadoCargos = new HashSet<EmpleadoCargo>(0);
+	private Set<EmpleadoCargo> empleadoCargos_1 = new HashSet<EmpleadoCargo>(0);
 
 	public Cargo() {
 	}
@@ -40,12 +41,14 @@ public class Cargo implements java.io.Serializable {
 
 	public Cargo(String codigoCargo, String descripcion,
 			Date fechaActualizacion, char estatus,
-			Set<EmpleadoCargo> empleadoCargos) {
+			Set<EmpleadoCargo> empleadoCargos,
+			Set<EmpleadoCargo> empleadoCargos_1) {
 		this.codigoCargo = codigoCargo;
 		this.descripcion = descripcion;
 		this.fechaActualizacion = fechaActualizacion;
 		this.estatus = estatus;
 		this.empleadoCargos = empleadoCargos;
+		this.empleadoCargos_1 = empleadoCargos_1;
 	}
 
 	@Id
@@ -93,6 +96,15 @@ public class Cargo implements java.io.Serializable {
 
 	public void setEmpleadoCargos(Set<EmpleadoCargo> empleadoCargos) {
 		this.empleadoCargos = empleadoCargos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo")
+	public Set<EmpleadoCargo> getEmpleadoCargos_1() {
+		return this.empleadoCargos_1;
+	}
+
+	public void setEmpleadoCargos_1(Set<EmpleadoCargo> empleadoCargos_1) {
+		this.empleadoCargos_1 = empleadoCargos_1;
 	}
 
 }

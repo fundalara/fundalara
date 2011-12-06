@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,10 @@ public class Tarea implements java.io.Serializable {
 			0);
 	private Set<TareaMantenimiento> tareaMantenimientos = new HashSet<TareaMantenimiento>(
 			0);
+	private Set<TareaMantenimiento> tareaMantenimientos_1 = new HashSet<TareaMantenimiento>(
+			0);
+	private Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados_1 = new HashSet<TareaMantenimientoPlanificado>(
+			0);
 
 	public Tarea() {
 	}
@@ -41,13 +45,17 @@ public class Tarea implements java.io.Serializable {
 	public Tarea(String codigoTarea, String nombre, String descripcion,
 			char estatus,
 			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados,
-			Set<TareaMantenimiento> tareaMantenimientos) {
+			Set<TareaMantenimiento> tareaMantenimientos,
+			Set<TareaMantenimiento> tareaMantenimientos_1,
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados_1) {
 		this.codigoTarea = codigoTarea;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tareaMantenimientoPlanificados = tareaMantenimientoPlanificados;
 		this.tareaMantenimientos = tareaMantenimientos;
+		this.tareaMantenimientos_1 = tareaMantenimientos_1;
+		this.tareaMantenimientoPlanificados_1 = tareaMantenimientoPlanificados_1;
 	}
 
 	@Id
@@ -105,6 +113,26 @@ public class Tarea implements java.io.Serializable {
 	public void setTareaMantenimientos(
 			Set<TareaMantenimiento> tareaMantenimientos) {
 		this.tareaMantenimientos = tareaMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tarea")
+	public Set<TareaMantenimiento> getTareaMantenimientos_1() {
+		return this.tareaMantenimientos_1;
+	}
+
+	public void setTareaMantenimientos_1(
+			Set<TareaMantenimiento> tareaMantenimientos_1) {
+		this.tareaMantenimientos_1 = tareaMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tarea")
+	public Set<TareaMantenimientoPlanificado> getTareaMantenimientoPlanificados_1() {
+		return this.tareaMantenimientoPlanificados_1;
+	}
+
+	public void setTareaMantenimientoPlanificados_1(
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados_1) {
+		this.tareaMantenimientoPlanificados_1 = tareaMantenimientoPlanificados_1;
 	}
 
 }

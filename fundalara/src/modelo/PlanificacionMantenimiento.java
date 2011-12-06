@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,13 +26,21 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 	private String estatus;
 	private boolean mantenimientoPeriodico;
 	private boolean mantenimientoPlantilla;
-	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados = new HashSet<MaterialMantenimientoPlanificado>(
-			0);
-	private Set<Periodicidad> periodicidads = new HashSet<Periodicidad>(0);
-	private Set<Mantenimiento> mantenimientos = new HashSet<Mantenimiento>(0);
 	private Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados = new HashSet<EmpleadoMantenimientoPlanificado>(
 			0);
+	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados = new HashSet<MaterialMantenimientoPlanificado>(
+			0);
+	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados_1 = new HashSet<MaterialMantenimientoPlanificado>(
+			0);
+	private Set<Periodicidad> periodicidads = new HashSet<Periodicidad>(0);
+	private Set<Periodicidad> periodicidads_1 = new HashSet<Periodicidad>(0);
+	private Set<Mantenimiento> mantenimientos = new HashSet<Mantenimiento>(0);
+	private Set<Mantenimiento> mantenimientos_1 = new HashSet<Mantenimiento>(0);
+	private Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1 = new HashSet<EmpleadoMantenimientoPlanificado>(
+			0);
 	private Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados = new HashSet<TareaMantenimientoPlanificado>(
+			0);
+	private Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados_1 = new HashSet<TareaMantenimientoPlanificado>(
 			0);
 
 	public PlanificacionMantenimiento() {
@@ -57,22 +65,32 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 			String estatus,
 			boolean mantenimientoPeriodico,
 			boolean mantenimientoPlantilla,
-			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados,
-			Set<Periodicidad> periodicidads,
-			Set<Mantenimiento> mantenimientos,
 			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados,
-			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados) {
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados,
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados_1,
+			Set<Periodicidad> periodicidads,
+			Set<Periodicidad> periodicidads_1,
+			Set<Mantenimiento> mantenimientos,
+			Set<Mantenimiento> mantenimientos_1,
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1,
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados,
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados_1) {
 		this.codigoPlanificacionMantenimiento = codigoPlanificacionMantenimiento;
 		this.instalacion = instalacion;
 		this.tipoMantenimiento = tipoMantenimiento;
 		this.estatus = estatus;
 		this.mantenimientoPeriodico = mantenimientoPeriodico;
 		this.mantenimientoPlantilla = mantenimientoPlantilla;
-		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
-		this.periodicidads = periodicidads;
-		this.mantenimientos = mantenimientos;
 		this.empleadoMantenimientoPlanificados = empleadoMantenimientoPlanificados;
+		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
+		this.materialMantenimientoPlanificados_1 = materialMantenimientoPlanificados_1;
+		this.periodicidads = periodicidads;
+		this.periodicidads_1 = periodicidads_1;
+		this.mantenimientos = mantenimientos;
+		this.mantenimientos_1 = mantenimientos_1;
+		this.empleadoMantenimientoPlanificados_1 = empleadoMantenimientoPlanificados_1;
 		this.tareaMantenimientoPlanificados = tareaMantenimientoPlanificados;
+		this.tareaMantenimientoPlanificados_1 = tareaMantenimientoPlanificados_1;
 	}
 
 	@Id
@@ -134,6 +152,16 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
+	public Set<EmpleadoMantenimientoPlanificado> getEmpleadoMantenimientoPlanificados() {
+		return this.empleadoMantenimientoPlanificados;
+	}
+
+	public void setEmpleadoMantenimientoPlanificados(
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados) {
+		this.empleadoMantenimientoPlanificados = empleadoMantenimientoPlanificados;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
 	public Set<MaterialMantenimientoPlanificado> getMaterialMantenimientoPlanificados() {
 		return this.materialMantenimientoPlanificados;
 	}
@@ -141,6 +169,16 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 	public void setMaterialMantenimientoPlanificados(
 			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados) {
 		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
+	public Set<MaterialMantenimientoPlanificado> getMaterialMantenimientoPlanificados_1() {
+		return this.materialMantenimientoPlanificados_1;
+	}
+
+	public void setMaterialMantenimientoPlanificados_1(
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados_1) {
+		this.materialMantenimientoPlanificados_1 = materialMantenimientoPlanificados_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
@@ -153,6 +191,15 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
+	public Set<Periodicidad> getPeriodicidads_1() {
+		return this.periodicidads_1;
+	}
+
+	public void setPeriodicidads_1(Set<Periodicidad> periodicidads_1) {
+		this.periodicidads_1 = periodicidads_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
 	public Set<Mantenimiento> getMantenimientos() {
 		return this.mantenimientos;
 	}
@@ -162,13 +209,22 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
-	public Set<EmpleadoMantenimientoPlanificado> getEmpleadoMantenimientoPlanificados() {
-		return this.empleadoMantenimientoPlanificados;
+	public Set<Mantenimiento> getMantenimientos_1() {
+		return this.mantenimientos_1;
 	}
 
-	public void setEmpleadoMantenimientoPlanificados(
-			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados) {
-		this.empleadoMantenimientoPlanificados = empleadoMantenimientoPlanificados;
+	public void setMantenimientos_1(Set<Mantenimiento> mantenimientos_1) {
+		this.mantenimientos_1 = mantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
+	public Set<EmpleadoMantenimientoPlanificado> getEmpleadoMantenimientoPlanificados_1() {
+		return this.empleadoMantenimientoPlanificados_1;
+	}
+
+	public void setEmpleadoMantenimientoPlanificados_1(
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1) {
+		this.empleadoMantenimientoPlanificados_1 = empleadoMantenimientoPlanificados_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
@@ -179,6 +235,16 @@ public class PlanificacionMantenimiento implements java.io.Serializable {
 	public void setTareaMantenimientoPlanificados(
 			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados) {
 		this.tareaMantenimientoPlanificados = tareaMantenimientoPlanificados;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionMantenimiento")
+	public Set<TareaMantenimientoPlanificado> getTareaMantenimientoPlanificados_1() {
+		return this.tareaMantenimientoPlanificados_1;
+	}
+
+	public void setTareaMantenimientoPlanificados_1(
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados_1) {
+		this.tareaMantenimientoPlanificados_1 = tareaMantenimientoPlanificados_1;
 	}
 
 }

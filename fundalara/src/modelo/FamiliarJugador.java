@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,7 +32,9 @@ public class FamiliarJugador implements java.io.Serializable {
 	private boolean representante;
 	private char estatus;
 	private Date fechaIngreso;
-	private Set<FamiliarComisionEquipo> familiarComisionEquipos = new HashSet<FamiliarComisionEquipo>(
+	private Set<FamiliarComisionEquipo> familiarComisionEquiposForFke079614752b2d13c = new HashSet<FamiliarComisionEquipo>(
+			0);
+	private Set<FamiliarComisionEquipo> familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk = new HashSet<FamiliarComisionEquipo>(
 			0);
 
 	public FamiliarJugador() {
@@ -50,10 +52,16 @@ public class FamiliarJugador implements java.io.Serializable {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public FamiliarJugador(FamiliarJugadorId id, Jugador jugador,
-			Familiar familiar, String parentesco, boolean representante,
-			char estatus, Date fechaIngreso,
-			Set<FamiliarComisionEquipo> familiarComisionEquipos) {
+	public FamiliarJugador(
+			FamiliarJugadorId id,
+			Jugador jugador,
+			Familiar familiar,
+			String parentesco,
+			boolean representante,
+			char estatus,
+			Date fechaIngreso,
+			Set<FamiliarComisionEquipo> familiarComisionEquiposForFke079614752b2d13c,
+			Set<FamiliarComisionEquipo> familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk) {
 		this.id = id;
 		this.jugador = jugador;
 		this.familiar = familiar;
@@ -61,7 +69,8 @@ public class FamiliarJugador implements java.io.Serializable {
 		this.representante = representante;
 		this.estatus = estatus;
 		this.fechaIngreso = fechaIngreso;
-		this.familiarComisionEquipos = familiarComisionEquipos;
+		this.familiarComisionEquiposForFke079614752b2d13c = familiarComisionEquiposForFke079614752b2d13c;
+		this.familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk = familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk;
 	}
 
 	@EmbeddedId
@@ -133,14 +142,24 @@ public class FamiliarJugador implements java.io.Serializable {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "familiarJugador")
-	public Set<FamiliarComisionEquipo> getFamiliarComisionEquipos() {
-		return this.familiarComisionEquipos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "familiarJugadorByFke079614752b2d13c")
+	public Set<FamiliarComisionEquipo> getFamiliarComisionEquiposForFke079614752b2d13c() {
+		return this.familiarComisionEquiposForFke079614752b2d13c;
 	}
 
-	public void setFamiliarComisionEquipos(
-			Set<FamiliarComisionEquipo> familiarComisionEquipos) {
-		this.familiarComisionEquipos = familiarComisionEquipos;
+	public void setFamiliarComisionEquiposForFke079614752b2d13c(
+			Set<FamiliarComisionEquipo> familiarComisionEquiposForFke079614752b2d13c) {
+		this.familiarComisionEquiposForFke079614752b2d13c = familiarComisionEquiposForFke079614752b2d13c;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "familiarJugadorByFke079614752b2d13c")
+	public Set<FamiliarComisionEquipo> getFamiliarComisionEquiposForFamiliarJugadorFamiliarComisionFk() {
+		return this.familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk;
+	}
+
+	public void setFamiliarComisionEquiposForFamiliarJugadorFamiliarComisionFk(
+			Set<FamiliarComisionEquipo> familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk) {
+		this.familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk = familiarComisionEquiposForFamiliarJugadorFamiliarComisionFk;
 	}
 
 }

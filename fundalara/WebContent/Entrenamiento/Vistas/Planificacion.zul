@@ -1,7 +1,7 @@
 <?page title="Auto Generated index.zul"?>
 <?component name="Calen" macro-uri="index.zul" inline="true"?>
 
-	<window id="wndPlanificacion" apply="vista.general.planificacion" title="Planificacion" border="normal" width="180px"
+	<window id="wndPlanificacion" apply="controlador.general.planificacion" title="Planificacion" border="normal" width="180px"
 		height="" closable="true" >
 		<grid>
 			<rows>

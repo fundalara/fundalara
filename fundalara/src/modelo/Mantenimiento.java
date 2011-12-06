@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,11 +30,19 @@ public class Mantenimiento implements java.io.Serializable {
 	private Date fechaCulminacion;
 	private Set<MaterialMantenimiento> materialMantenimientos = new HashSet<MaterialMantenimiento>(
 			0);
+	private Set<MaterialMantenimiento> materialMantenimientos_1 = new HashSet<MaterialMantenimiento>(
+			0);
 	private Set<TareaMantenimiento> tareaMantenimientos = new HashSet<TareaMantenimiento>(
 			0);
 	private Set<EmpleadoMantenimiento> empleadoMantenimientos = new HashSet<EmpleadoMantenimiento>(
 			0);
+	private Set<EmpleadoMantenimiento> empleadoMantenimientos_1 = new HashSet<EmpleadoMantenimiento>(
+			0);
+	private Set<TareaMantenimiento> tareaMantenimientos_1 = new HashSet<TareaMantenimiento>(
+			0);
 	private Set<EstadoMantenimiento> estadoMantenimientos = new HashSet<EstadoMantenimiento>(
+			0);
+	private Set<EstadoMantenimiento> estadoMantenimientos_1 = new HashSet<EstadoMantenimiento>(
 			0);
 
 	public Mantenimiento() {
@@ -54,18 +62,26 @@ public class Mantenimiento implements java.io.Serializable {
 			PlanificacionMantenimiento planificacionMantenimiento,
 			char estatus, Date fechaInicio, Date fechaCulminacion,
 			Set<MaterialMantenimiento> materialMantenimientos,
+			Set<MaterialMantenimiento> materialMantenimientos_1,
 			Set<TareaMantenimiento> tareaMantenimientos,
 			Set<EmpleadoMantenimiento> empleadoMantenimientos,
-			Set<EstadoMantenimiento> estadoMantenimientos) {
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1,
+			Set<TareaMantenimiento> tareaMantenimientos_1,
+			Set<EstadoMantenimiento> estadoMantenimientos,
+			Set<EstadoMantenimiento> estadoMantenimientos_1) {
 		this.codigoMantenimiento = codigoMantenimiento;
 		this.planificacionMantenimiento = planificacionMantenimiento;
 		this.estatus = estatus;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.materialMantenimientos = materialMantenimientos;
+		this.materialMantenimientos_1 = materialMantenimientos_1;
 		this.tareaMantenimientos = tareaMantenimientos;
 		this.empleadoMantenimientos = empleadoMantenimientos;
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+		this.tareaMantenimientos_1 = tareaMantenimientos_1;
 		this.estadoMantenimientos = estadoMantenimientos;
+		this.estadoMantenimientos_1 = estadoMantenimientos_1;
 	}
 
 	@Id
@@ -129,6 +145,16 @@ public class Mantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<MaterialMantenimiento> getMaterialMantenimientos_1() {
+		return this.materialMantenimientos_1;
+	}
+
+	public void setMaterialMantenimientos_1(
+			Set<MaterialMantenimiento> materialMantenimientos_1) {
+		this.materialMantenimientos_1 = materialMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
 	public Set<TareaMantenimiento> getTareaMantenimientos() {
 		return this.tareaMantenimientos;
 	}
@@ -149,6 +175,26 @@ public class Mantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos_1() {
+		return this.empleadoMantenimientos_1;
+	}
+
+	public void setEmpleadoMantenimientos_1(
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1) {
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<TareaMantenimiento> getTareaMantenimientos_1() {
+		return this.tareaMantenimientos_1;
+	}
+
+	public void setTareaMantenimientos_1(
+			Set<TareaMantenimiento> tareaMantenimientos_1) {
+		this.tareaMantenimientos_1 = tareaMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
 	public Set<EstadoMantenimiento> getEstadoMantenimientos() {
 		return this.estadoMantenimientos;
 	}
@@ -156,6 +202,16 @@ public class Mantenimiento implements java.io.Serializable {
 	public void setEstadoMantenimientos(
 			Set<EstadoMantenimiento> estadoMantenimientos) {
 		this.estadoMantenimientos = estadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<EstadoMantenimiento> getEstadoMantenimientos_1() {
+		return this.estadoMantenimientos_1;
+	}
+
+	public void setEstadoMantenimientos_1(
+			Set<EstadoMantenimiento> estadoMantenimientos_1) {
+		this.estadoMantenimientos_1 = estadoMantenimientos_1;
 	}
 
 }

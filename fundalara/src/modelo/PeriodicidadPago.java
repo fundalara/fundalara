@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class PeriodicidadPago implements java.io.Serializable {
 	private String descripcion;
 	private char estatus;
 	private Set<TipoNomina> tipoNominas = new HashSet<TipoNomina>(0);
+	private Set<TipoNomina> tipoNominas_1 = new HashSet<TipoNomina>(0);
 
 	public PeriodicidadPago() {
 	}
@@ -34,11 +35,13 @@ public class PeriodicidadPago implements java.io.Serializable {
 	}
 
 	public PeriodicidadPago(String codigoPeriodicidadPago, String descripcion,
-			char estatus, Set<TipoNomina> tipoNominas) {
+			char estatus, Set<TipoNomina> tipoNominas,
+			Set<TipoNomina> tipoNominas_1) {
 		this.codigoPeriodicidadPago = codigoPeriodicidadPago;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tipoNominas = tipoNominas;
+		this.tipoNominas_1 = tipoNominas_1;
 	}
 
 	@Id
@@ -76,6 +79,15 @@ public class PeriodicidadPago implements java.io.Serializable {
 
 	public void setTipoNominas(Set<TipoNomina> tipoNominas) {
 		this.tipoNominas = tipoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "periodicidadPago")
+	public Set<TipoNomina> getTipoNominas_1() {
+		return this.tipoNominas_1;
+	}
+
+	public void setTipoNominas_1(Set<TipoNomina> tipoNominas_1) {
+		this.tipoNominas_1 = tipoNominas_1;
 	}
 
 }

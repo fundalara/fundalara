@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,7 @@ public class TipoMaterial implements java.io.Serializable {
 	private String descripcion;
 	private char estatus;
 	private Set<Material> materials = new HashSet<Material>(0);
+	private Set<Material> materials_1 = new HashSet<Material>(0);
 
 	public TipoMaterial() {
 	}
@@ -38,12 +39,14 @@ public class TipoMaterial implements java.io.Serializable {
 	}
 
 	public TipoMaterial(String codigoTipoMaterial, ClaseMaterial claseMaterial,
-			String descripcion, char estatus, Set<Material> materials) {
+			String descripcion, char estatus, Set<Material> materials,
+			Set<Material> materials_1) {
 		this.codigoTipoMaterial = codigoTipoMaterial;
 		this.claseMaterial = claseMaterial;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.materials = materials;
+		this.materials_1 = materials_1;
 	}
 
 	@Id
@@ -91,6 +94,15 @@ public class TipoMaterial implements java.io.Serializable {
 
 	public void setMaterials(Set<Material> materials) {
 		this.materials = materials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoMaterial")
+	public Set<Material> getMaterials_1() {
+		return this.materials_1;
+	}
+
+	public void setMaterials_1(Set<Material> materials_1) {
+		this.materials_1 = materials_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class Liga implements java.io.Serializable {
 	private String nombre;
 	private byte[] logo;
 	private Set<Categoria> categorias = new HashSet<Categoria>(0);
+	private Set<Categoria> categorias_1 = new HashSet<Categoria>(0);
 
 	public Liga() {
 	}
@@ -35,11 +36,12 @@ public class Liga implements java.io.Serializable {
 	}
 
 	public Liga(String codigoLiga, String nombre, byte[] logo,
-			Set<Categoria> categorias) {
+			Set<Categoria> categorias, Set<Categoria> categorias_1) {
 		this.codigoLiga = codigoLiga;
 		this.nombre = nombre;
 		this.logo = logo;
 		this.categorias = categorias;
+		this.categorias_1 = categorias_1;
 	}
 
 	@Id
@@ -78,6 +80,16 @@ public class Liga implements java.io.Serializable {
 
 	public void setCategorias(Set<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "liga_categoria", joinColumns = { @JoinColumn(name = "codigo_liga", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_categoria", nullable = false, updatable = false) })
+	public Set<Categoria> getCategorias_1() {
+		return this.categorias_1;
+	}
+
+	public void setCategorias_1(Set<Categoria> categorias_1) {
+		this.categorias_1 = categorias_1;
 	}
 
 }

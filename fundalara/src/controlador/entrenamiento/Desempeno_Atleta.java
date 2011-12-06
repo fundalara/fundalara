@@ -1,4 +1,4 @@
-package vista.entrenamiento;
+package controlador.entrenamiento;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.zkoss.zk.ui.util.GenericForwardComposer;

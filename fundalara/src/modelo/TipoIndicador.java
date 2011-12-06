@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class TipoIndicador implements java.io.Serializable {
 	private String nombre;
 	private char estatus;
 	private Set<Indicador> indicadors = new HashSet<Indicador>(0);
+	private Set<Indicador> indicadors_1 = new HashSet<Indicador>(0);
 
 	public TipoIndicador() {
 	}
@@ -33,11 +34,12 @@ public class TipoIndicador implements java.io.Serializable {
 	}
 
 	public TipoIndicador(String codTipoIndicador, String nombre, char estatus,
-			Set<Indicador> indicadors) {
+			Set<Indicador> indicadors, Set<Indicador> indicadors_1) {
 		this.codTipoIndicador = codTipoIndicador;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.indicadors = indicadors;
+		this.indicadors_1 = indicadors_1;
 	}
 
 	@Id
@@ -75,6 +77,15 @@ public class TipoIndicador implements java.io.Serializable {
 
 	public void setIndicadors(Set<Indicador> indicadors) {
 		this.indicadors = indicadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIndicador")
+	public Set<Indicador> getIndicadors_1() {
+		return this.indicadors_1;
+	}
+
+	public void setIndicadors_1(Set<Indicador> indicadors_1) {
+		this.indicadors_1 = indicadors_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,14 +23,22 @@ public class Parroquia implements java.io.Serializable {
 	private String codigoParroquia;
 	private Municipio municipio;
 	private String nombre;
-	private Set<Benefactor> benefactors = new HashSet<Benefactor>(0);
-	private Set<Proveedor> proveedors = new HashSet<Proveedor>(0);
+	private Set<Empleado> empleados = new HashSet<Empleado>(0);
 	private Set<Institucion> institucions = new HashSet<Institucion>(0);
+	private Set<Proveedor> proveedors = new HashSet<Proveedor>(0);
+	private Set<Familiar> familiars = new HashSet<Familiar>(0);
 	private Set<Cliente> clientes = new HashSet<Cliente>(0);
 	private Set<Divisa> divisas = new HashSet<Divisa>(0);
-	private Set<Empleado> empleados = new HashSet<Empleado>(0);
+	private Set<Empleado> empleados_1 = new HashSet<Empleado>(0);
 	private Set<Jugador> jugadors = new HashSet<Jugador>(0);
-	private Set<Familiar> familiars = new HashSet<Familiar>(0);
+	private Set<Benefactor> benefactors = new HashSet<Benefactor>(0);
+	private Set<Benefactor> benefactors_1 = new HashSet<Benefactor>(0);
+	private Set<Proveedor> proveedors_1 = new HashSet<Proveedor>(0);
+	private Set<Institucion> institucions_1 = new HashSet<Institucion>(0);
+	private Set<Cliente> clientes_1 = new HashSet<Cliente>(0);
+	private Set<Divisa> divisas_1 = new HashSet<Divisa>(0);
+	private Set<Jugador> jugadors_1 = new HashSet<Jugador>(0);
+	private Set<Familiar> familiars_1 = new HashSet<Familiar>(0);
 
 	public Parroquia() {
 	}
@@ -42,22 +50,34 @@ public class Parroquia implements java.io.Serializable {
 	}
 
 	public Parroquia(String codigoParroquia, Municipio municipio,
-			String nombre, Set<Benefactor> benefactors,
-			Set<Proveedor> proveedors, Set<Institucion> institucions,
-			Set<Cliente> clientes, Set<Divisa> divisas,
-			Set<Empleado> empleados, Set<Jugador> jugadors,
-			Set<Familiar> familiars) {
+			String nombre, Set<Empleado> empleados,
+			Set<Institucion> institucions, Set<Proveedor> proveedors,
+			Set<Familiar> familiars, Set<Cliente> clientes,
+			Set<Divisa> divisas, Set<Empleado> empleados_1,
+			Set<Jugador> jugadors, Set<Benefactor> benefactors,
+			Set<Benefactor> benefactors_1, Set<Proveedor> proveedors_1,
+			Set<Institucion> institucions_1, Set<Cliente> clientes_1,
+			Set<Divisa> divisas_1, Set<Jugador> jugadors_1,
+			Set<Familiar> familiars_1) {
 		this.codigoParroquia = codigoParroquia;
 		this.municipio = municipio;
 		this.nombre = nombre;
-		this.benefactors = benefactors;
-		this.proveedors = proveedors;
+		this.empleados = empleados;
 		this.institucions = institucions;
+		this.proveedors = proveedors;
+		this.familiars = familiars;
 		this.clientes = clientes;
 		this.divisas = divisas;
-		this.empleados = empleados;
+		this.empleados_1 = empleados_1;
 		this.jugadors = jugadors;
-		this.familiars = familiars;
+		this.benefactors = benefactors;
+		this.benefactors_1 = benefactors_1;
+		this.proveedors_1 = proveedors_1;
+		this.institucions_1 = institucions_1;
+		this.clientes_1 = clientes_1;
+		this.divisas_1 = divisas_1;
+		this.jugadors_1 = jugadors_1;
+		this.familiars_1 = familiars_1;
 	}
 
 	@Id
@@ -90,12 +110,21 @@ public class Parroquia implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
-	public Set<Benefactor> getBenefactors() {
-		return this.benefactors;
+	public Set<Empleado> getEmpleados() {
+		return this.empleados;
 	}
 
-	public void setBenefactors(Set<Benefactor> benefactors) {
-		this.benefactors = benefactors;
+	public void setEmpleados(Set<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Institucion> getInstitucions() {
+		return this.institucions;
+	}
+
+	public void setInstitucions(Set<Institucion> institucions) {
+		this.institucions = institucions;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
@@ -108,12 +137,12 @@ public class Parroquia implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
-	public Set<Institucion> getInstitucions() {
-		return this.institucions;
+	public Set<Familiar> getFamiliars() {
+		return this.familiars;
 	}
 
-	public void setInstitucions(Set<Institucion> institucions) {
-		this.institucions = institucions;
+	public void setFamiliars(Set<Familiar> familiars) {
+		this.familiars = familiars;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
@@ -135,12 +164,12 @@ public class Parroquia implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
-	public Set<Empleado> getEmpleados() {
-		return this.empleados;
+	public Set<Empleado> getEmpleados_1() {
+		return this.empleados_1;
 	}
 
-	public void setEmpleados(Set<Empleado> empleados) {
-		this.empleados = empleados;
+	public void setEmpleados_1(Set<Empleado> empleados_1) {
+		this.empleados_1 = empleados_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
@@ -153,12 +182,75 @@ public class Parroquia implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
-	public Set<Familiar> getFamiliars() {
-		return this.familiars;
+	public Set<Benefactor> getBenefactors() {
+		return this.benefactors;
 	}
 
-	public void setFamiliars(Set<Familiar> familiars) {
-		this.familiars = familiars;
+	public void setBenefactors(Set<Benefactor> benefactors) {
+		this.benefactors = benefactors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Benefactor> getBenefactors_1() {
+		return this.benefactors_1;
+	}
+
+	public void setBenefactors_1(Set<Benefactor> benefactors_1) {
+		this.benefactors_1 = benefactors_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Proveedor> getProveedors_1() {
+		return this.proveedors_1;
+	}
+
+	public void setProveedors_1(Set<Proveedor> proveedors_1) {
+		this.proveedors_1 = proveedors_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Institucion> getInstitucions_1() {
+		return this.institucions_1;
+	}
+
+	public void setInstitucions_1(Set<Institucion> institucions_1) {
+		this.institucions_1 = institucions_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Cliente> getClientes_1() {
+		return this.clientes_1;
+	}
+
+	public void setClientes_1(Set<Cliente> clientes_1) {
+		this.clientes_1 = clientes_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Divisa> getDivisas_1() {
+		return this.divisas_1;
+	}
+
+	public void setDivisas_1(Set<Divisa> divisas_1) {
+		this.divisas_1 = divisas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Jugador> getJugadors_1() {
+		return this.jugadors_1;
+	}
+
+	public void setJugadors_1(Set<Jugador> jugadors_1) {
+		this.jugadors_1 = jugadors_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parroquia")
+	public Set<Familiar> getFamiliars_1() {
+		return this.familiars_1;
+	}
+
+	public void setFamiliars_1(Set<Familiar> familiars_1) {
+		this.familiars_1 = familiars_1;
 	}
 
 }

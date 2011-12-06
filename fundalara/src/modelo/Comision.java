@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,8 @@ public class Comision implements java.io.Serializable {
 	private String objetivo;
 	private String estatus;
 	private Set<ComisionEquipo> comisionEquipos = new HashSet<ComisionEquipo>(0);
+	private Set<ComisionEquipo> comisionEquipos_1 = new HashSet<ComisionEquipo>(
+			0);
 
 	public Comision() {
 	}
@@ -36,12 +38,14 @@ public class Comision implements java.io.Serializable {
 	}
 
 	public Comision(String codigoComision, String descripcion, String objetivo,
-			String estatus, Set<ComisionEquipo> comisionEquipos) {
+			String estatus, Set<ComisionEquipo> comisionEquipos,
+			Set<ComisionEquipo> comisionEquipos_1) {
 		this.codigoComision = codigoComision;
 		this.descripcion = descripcion;
 		this.objetivo = objetivo;
 		this.estatus = estatus;
 		this.comisionEquipos = comisionEquipos;
+		this.comisionEquipos_1 = comisionEquipos_1;
 	}
 
 	@Id
@@ -88,6 +92,15 @@ public class Comision implements java.io.Serializable {
 
 	public void setComisionEquipos(Set<ComisionEquipo> comisionEquipos) {
 		this.comisionEquipos = comisionEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comision")
+	public Set<ComisionEquipo> getComisionEquipos_1() {
+		return this.comisionEquipos_1;
+	}
+
+	public void setComisionEquipos_1(Set<ComisionEquipo> comisionEquipos_1) {
+		this.comisionEquipos_1 = comisionEquipos_1;
 	}
 
 }

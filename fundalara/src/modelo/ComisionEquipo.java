@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +30,8 @@ public class ComisionEquipo implements java.io.Serializable {
 	private char estatus;
 	private Set<FamiliarComisionEquipo> familiarComisionEquipos = new HashSet<FamiliarComisionEquipo>(
 			0);
+	private Set<FamiliarComisionEquipo> familiarComisionEquipos_1 = new HashSet<FamiliarComisionEquipo>(
+			0);
 
 	public ComisionEquipo() {
 	}
@@ -47,7 +49,8 @@ public class ComisionEquipo implements java.io.Serializable {
 
 	public ComisionEquipo(ComisionEquipoId id, Comision comision,
 			Equipo equipo, int maximoComision, int cantidadComision,
-			char estatus, Set<FamiliarComisionEquipo> familiarComisionEquipos) {
+			char estatus, Set<FamiliarComisionEquipo> familiarComisionEquipos,
+			Set<FamiliarComisionEquipo> familiarComisionEquipos_1) {
 		this.id = id;
 		this.comision = comision;
 		this.equipo = equipo;
@@ -55,6 +58,7 @@ public class ComisionEquipo implements java.io.Serializable {
 		this.cantidadComision = cantidadComision;
 		this.estatus = estatus;
 		this.familiarComisionEquipos = familiarComisionEquipos;
+		this.familiarComisionEquipos_1 = familiarComisionEquipos_1;
 	}
 
 	@EmbeddedId
@@ -124,6 +128,16 @@ public class ComisionEquipo implements java.io.Serializable {
 	public void setFamiliarComisionEquipos(
 			Set<FamiliarComisionEquipo> familiarComisionEquipos) {
 		this.familiarComisionEquipos = familiarComisionEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionEquipo")
+	public Set<FamiliarComisionEquipo> getFamiliarComisionEquipos_1() {
+		return this.familiarComisionEquipos_1;
+	}
+
+	public void setFamiliarComisionEquipos_1(
+			Set<FamiliarComisionEquipo> familiarComisionEquipos_1) {
+		this.familiarComisionEquipos_1 = familiarComisionEquipos_1;
 	}
 
 }

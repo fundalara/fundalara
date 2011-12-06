@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,16 +21,18 @@ public class ValorEscalaMedicion implements java.io.Serializable {
 	private EscalaMedicion escalaMedicion;
 	private String valor;
 	private String descripcion;
+	private Character estatus;
 
 	public ValorEscalaMedicion() {
 	}
 
 	public ValorEscalaMedicion(String codValor, EscalaMedicion escalaMedicion,
-			String valor, String descripcion) {
+			String valor, String descripcion, Character estatus) {
 		this.codValor = codValor;
 		this.escalaMedicion = escalaMedicion;
 		this.valor = valor;
 		this.descripcion = descripcion;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -70,5 +72,12 @@ public class ValorEscalaMedicion implements java.io.Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	@Column(name = "estatus", nullable = false, length=1)
+	public Character getEstatus() {
+		return this.estatus;
+	}
 
+	public void setEstatus(Character estatus) {
+		this.estatus = estatus;
+	}
 }

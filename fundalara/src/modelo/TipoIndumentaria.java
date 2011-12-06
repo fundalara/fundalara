@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class TipoIndumentaria implements java.io.Serializable {
 	private String nombre;
 	private char estatus;
 	private Set<Talla> tallas = new HashSet<Talla>(0);
+	private Set<Talla> tallas_1 = new HashSet<Talla>(0);
 
 	public TipoIndumentaria() {
 	}
@@ -34,11 +35,12 @@ public class TipoIndumentaria implements java.io.Serializable {
 	}
 
 	public TipoIndumentaria(String codigoIndumentaria, String nombre,
-			char estatus, Set<Talla> tallas) {
+			char estatus, Set<Talla> tallas, Set<Talla> tallas_1) {
 		this.codigoIndumentaria = codigoIndumentaria;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.tallas = tallas;
+		this.tallas_1 = tallas_1;
 	}
 
 	@Id
@@ -76,6 +78,15 @@ public class TipoIndumentaria implements java.io.Serializable {
 
 	public void setTallas(Set<Talla> tallas) {
 		this.tallas = tallas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIndumentaria")
+	public Set<Talla> getTallas_1() {
+		return this.tallas_1;
+	}
+
+	public void setTallas_1(Set<Talla> tallas_1) {
+		this.tallas_1 = tallas_1;
 	}
 
 }

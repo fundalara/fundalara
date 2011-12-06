@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class EstadoCompetencia implements java.io.Serializable {
 	private String nombre;
 	private String descripcion;
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
+	private Set<Competencia> competencias_1 = new HashSet<Competencia>(0);
 
 	public EstadoCompetencia() {
 	}
@@ -34,11 +35,13 @@ public class EstadoCompetencia implements java.io.Serializable {
 	}
 
 	public EstadoCompetencia(String codigoEstadoCompetencia, String nombre,
-			String descripcion, Set<Competencia> competencias) {
+			String descripcion, Set<Competencia> competencias,
+			Set<Competencia> competencias_1) {
 		this.codigoEstadoCompetencia = codigoEstadoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.competencias = competencias;
+		this.competencias_1 = competencias_1;
 	}
 
 	@Id
@@ -76,6 +79,15 @@ public class EstadoCompetencia implements java.io.Serializable {
 
 	public void setCompetencias(Set<Competencia> competencias) {
 		this.competencias = competencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoCompetencia")
+	public Set<Competencia> getCompetencias_1() {
+		return this.competencias_1;
+	}
+
+	public void setCompetencias_1(Set<Competencia> competencias_1) {
+		this.competencias_1 = competencias_1;
 	}
 
 }

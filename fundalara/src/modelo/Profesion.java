@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class Profesion implements java.io.Serializable {
 	private String nombre;
 	private char estatus;
 	private Set<Familiar> familiars = new HashSet<Familiar>(0);
+	private Set<Familiar> familiars_1 = new HashSet<Familiar>(0);
 
 	public Profesion() {
 	}
@@ -33,11 +34,12 @@ public class Profesion implements java.io.Serializable {
 	}
 
 	public Profesion(String codigoProfesion, String nombre, char estatus,
-			Set<Familiar> familiars) {
+			Set<Familiar> familiars, Set<Familiar> familiars_1) {
 		this.codigoProfesion = codigoProfesion;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.familiars = familiars;
+		this.familiars_1 = familiars_1;
 	}
 
 	@Id
@@ -75,6 +77,15 @@ public class Profesion implements java.io.Serializable {
 
 	public void setFamiliars(Set<Familiar> familiars) {
 		this.familiars = familiars;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesion")
+	public Set<Familiar> getFamiliars_1() {
+		return this.familiars_1;
+	}
+
+	public void setFamiliars_1(Set<Familiar> familiars_1) {
+		this.familiars_1 = familiars_1;
 	}
 
 }

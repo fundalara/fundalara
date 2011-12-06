@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +26,9 @@ public class EmpleadoMantenimientoPlanificado implements java.io.Serializable {
 	private PlanificacionMantenimiento planificacionMantenimiento;
 	private Empleado empleado;
 	private char estatus;
-	private Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados = new HashSet<TareaMantenimientoPlanificado>(
+	private Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8 = new HashSet<TareaMantenimientoPlanificado>(
+			0);
+	private Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573 = new HashSet<TareaMantenimientoPlanificado>(
 			0);
 
 	public EmpleadoMantenimientoPlanificado() {
@@ -45,13 +47,16 @@ public class EmpleadoMantenimientoPlanificado implements java.io.Serializable {
 	public EmpleadoMantenimientoPlanificado(
 			EmpleadoMantenimientoPlanificadoId id,
 			PlanificacionMantenimiento planificacionMantenimiento,
-			Empleado empleado, char estatus,
-			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados) {
+			Empleado empleado,
+			char estatus,
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8,
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573) {
 		this.id = id;
 		this.planificacionMantenimiento = planificacionMantenimiento;
 		this.empleado = empleado;
 		this.estatus = estatus;
-		this.tareaMantenimientoPlanificados = tareaMantenimientoPlanificados;
+		this.tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8 = tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8;
+		this.tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573 = tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
 	}
 
 	@EmbeddedId
@@ -96,14 +101,24 @@ public class EmpleadoMantenimientoPlanificado implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleadoMantenimientoPlanificado")
-	public Set<TareaMantenimientoPlanificado> getTareaMantenimientoPlanificados() {
-		return this.tareaMantenimientoPlanificados;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8")
+	public Set<TareaMantenimientoPlanificado> getTareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8() {
+		return this.tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8;
 	}
 
-	public void setTareaMantenimientoPlanificados(
-			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificados) {
-		this.tareaMantenimientoPlanificados = tareaMantenimientoPlanificados;
+	public void setTareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8(
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8) {
+		this.tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8 = tareaMantenimientoPlanificadosForFk6b2b18d580e2ecc8;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8")
+	public Set<TareaMantenimientoPlanificado> getTareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573() {
+		return this.tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
+	}
+
+	public void setTareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573(
+			Set<TareaMantenimientoPlanificado> tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573) {
+		this.tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573 = tareaMantenimientoPlanificadosForEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
 	}
 
 }

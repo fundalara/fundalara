@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,6 +30,8 @@ public class TipoNomina implements java.io.Serializable {
 	private char estatus;
 	private Set<EmpleadoTipoNomina> empleadoTipoNominas = new HashSet<EmpleadoTipoNomina>(
 			0);
+	private Set<EmpleadoTipoNomina> empleadoTipoNominas_1 = new HashSet<EmpleadoTipoNomina>(
+			0);
 
 	public TipoNomina() {
 	}
@@ -47,13 +49,15 @@ public class TipoNomina implements java.io.Serializable {
 	public TipoNomina(String codigoTipoNomina,
 			PeriodicidadPago periodicidadPago, String descripcion,
 			Date fechaActualizacion, char estatus,
-			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
+			Set<EmpleadoTipoNomina> empleadoTipoNominas,
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1) {
 		this.codigoTipoNomina = codigoTipoNomina;
 		this.periodicidadPago = periodicidadPago;
 		this.descripcion = descripcion;
 		this.fechaActualizacion = fechaActualizacion;
 		this.estatus = estatus;
 		this.empleadoTipoNominas = empleadoTipoNominas;
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
 	}
 
 	@Id
@@ -112,6 +116,16 @@ public class TipoNomina implements java.io.Serializable {
 	public void setEmpleadoTipoNominas(
 			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
 		this.empleadoTipoNominas = empleadoTipoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoNomina")
+	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas_1() {
+		return this.empleadoTipoNominas_1;
+	}
+
+	public void setEmpleadoTipoNominas_1(
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1) {
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
 	}
 
 }

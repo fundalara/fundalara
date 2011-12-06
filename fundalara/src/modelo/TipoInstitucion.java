@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class TipoInstitucion implements java.io.Serializable {
 	private String nombre;
 	private char estatus;
 	private Set<Institucion> institucions = new HashSet<Institucion>(0);
+	private Set<Institucion> institucions_1 = new HashSet<Institucion>(0);
 
 	public TipoInstitucion() {
 	}
@@ -33,11 +34,12 @@ public class TipoInstitucion implements java.io.Serializable {
 	}
 
 	public TipoInstitucion(String codigoTipo, String nombre, char estatus,
-			Set<Institucion> institucions) {
+			Set<Institucion> institucions, Set<Institucion> institucions_1) {
 		this.codigoTipo = codigoTipo;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.institucions = institucions;
+		this.institucions_1 = institucions_1;
 	}
 
 	@Id
@@ -75,6 +77,15 @@ public class TipoInstitucion implements java.io.Serializable {
 
 	public void setInstitucions(Set<Institucion> institucions) {
 		this.institucions = institucions;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoInstitucion")
+	public Set<Institucion> getInstitucions_1() {
+		return this.institucions_1;
+	}
+
+	public void setInstitucions_1(Set<Institucion> institucions_1) {
+		this.institucions_1 = institucions_1;
 	}
 
 }

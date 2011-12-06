@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,8 @@ public class Banco implements java.io.Serializable {
 	private char estatus;
 	private String descripcion;
 	private Set<ProveedorBanco> proveedorBancos = new HashSet<ProveedorBanco>(0);
+	private Set<ProveedorBanco> proveedorBancos_1 = new HashSet<ProveedorBanco>(
+			0);
 
 	public Banco() {
 	}
@@ -33,11 +35,13 @@ public class Banco implements java.io.Serializable {
 	}
 
 	public Banco(String codigoBanco, char estatus, String descripcion,
-			Set<ProveedorBanco> proveedorBancos) {
+			Set<ProveedorBanco> proveedorBancos,
+			Set<ProveedorBanco> proveedorBancos_1) {
 		this.codigoBanco = codigoBanco;
 		this.estatus = estatus;
 		this.descripcion = descripcion;
 		this.proveedorBancos = proveedorBancos;
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 	@Id
@@ -75,6 +79,15 @@ public class Banco implements java.io.Serializable {
 
 	public void setProveedorBancos(Set<ProveedorBanco> proveedorBancos) {
 		this.proveedorBancos = proveedorBancos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "banco")
+	public Set<ProveedorBanco> getProveedorBancos_1() {
+		return this.proveedorBancos_1;
+	}
+
+	public void setProveedorBancos_1(Set<ProveedorBanco> proveedorBancos_1) {
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 }

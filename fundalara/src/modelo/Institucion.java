@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,8 @@ public class Institucion implements java.io.Serializable {
 	private char estatus;
 	private Set<DatoAcademico> datoAcademicos = new HashSet<DatoAcademico>(0);
 	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
+	private Set<DatoSocial> datoSocials_1 = new HashSet<DatoSocial>(0);
+	private Set<DatoAcademico> datoAcademicos_1 = new HashSet<DatoAcademico>(0);
 
 	public Institucion() {
 	}
@@ -46,7 +48,8 @@ public class Institucion implements java.io.Serializable {
 	public Institucion(String codigoInstitucion,
 			TipoInstitucion tipoInstitucion, Parroquia parroquia,
 			String nombre, String direccion, char estatus,
-			Set<DatoAcademico> datoAcademicos, Set<DatoSocial> datoSocials) {
+			Set<DatoAcademico> datoAcademicos, Set<DatoSocial> datoSocials,
+			Set<DatoSocial> datoSocials_1, Set<DatoAcademico> datoAcademicos_1) {
 		this.codigoInstitucion = codigoInstitucion;
 		this.tipoInstitucion = tipoInstitucion;
 		this.parroquia = parroquia;
@@ -55,6 +58,8 @@ public class Institucion implements java.io.Serializable {
 		this.estatus = estatus;
 		this.datoAcademicos = datoAcademicos;
 		this.datoSocials = datoSocials;
+		this.datoSocials_1 = datoSocials_1;
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 	@Id
@@ -130,6 +135,24 @@ public class Institucion implements java.io.Serializable {
 
 	public void setDatoSocials(Set<DatoSocial> datoSocials) {
 		this.datoSocials = datoSocials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion")
+	public Set<DatoSocial> getDatoSocials_1() {
+		return this.datoSocials_1;
+	}
+
+	public void setDatoSocials_1(Set<DatoSocial> datoSocials_1) {
+		this.datoSocials_1 = datoSocials_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion")
+	public Set<DatoAcademico> getDatoAcademicos_1() {
+		return this.datoAcademicos_1;
+	}
+
+	public void setDatoAcademicos_1(Set<DatoAcademico> datoAcademicos_1) {
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 }

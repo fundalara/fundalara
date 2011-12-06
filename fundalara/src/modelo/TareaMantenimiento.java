@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -23,21 +23,26 @@ public class TareaMantenimiento implements java.io.Serializable {
 	private TareaMantenimientoId id;
 	private Tarea tarea;
 	private Mantenimiento mantenimiento;
-	private EmpleadoMantenimiento empleadoMantenimiento;
+	private EmpleadoMantenimiento empleadoMantenimientoByFk2be9c788a2d2a5db;
+	private EmpleadoMantenimiento empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk;
 	private String codigoTareaMantenimiento;
 	private char estatus;
 
 	public TareaMantenimiento() {
 	}
 
-	public TareaMantenimiento(TareaMantenimientoId id, Tarea tarea,
+	public TareaMantenimiento(
+			TareaMantenimientoId id,
+			Tarea tarea,
 			Mantenimiento mantenimiento,
-			EmpleadoMantenimiento empleadoMantenimiento,
+			EmpleadoMantenimiento empleadoMantenimientoByFk2be9c788a2d2a5db,
+			EmpleadoMantenimiento empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk,
 			String codigoTareaMantenimiento, char estatus) {
 		this.id = id;
 		this.tarea = tarea;
 		this.mantenimiento = mantenimiento;
-		this.empleadoMantenimiento = empleadoMantenimiento;
+		this.empleadoMantenimientoByFk2be9c788a2d2a5db = empleadoMantenimientoByFk2be9c788a2d2a5db;
+		this.empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk = empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk;
 		this.codigoTareaMantenimiento = codigoTareaMantenimiento;
 		this.estatus = estatus;
 	}
@@ -76,15 +81,28 @@ public class TareaMantenimiento implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
-			@JoinColumn(name = "codigo_mantenimiento", referencedColumnName = "codigo_mantenimiento", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "cedula", referencedColumnName = "cedula", nullable = false, insertable = false, updatable = false) })
-	public EmpleadoMantenimiento getEmpleadoMantenimiento() {
-		return this.empleadoMantenimiento;
+			@JoinColumn(name = "cedula", referencedColumnName = "codigo_mantenimiento", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "codigo_mantenimiento", referencedColumnName = "cedula", nullable = false, insertable = false, updatable = false) })
+	public EmpleadoMantenimiento getEmpleadoMantenimientoByFk2be9c788a2d2a5db() {
+		return this.empleadoMantenimientoByFk2be9c788a2d2a5db;
 	}
 
-	public void setEmpleadoMantenimiento(
-			EmpleadoMantenimiento empleadoMantenimiento) {
-		this.empleadoMantenimiento = empleadoMantenimiento;
+	public void setEmpleadoMantenimientoByFk2be9c788a2d2a5db(
+			EmpleadoMantenimiento empleadoMantenimientoByFk2be9c788a2d2a5db) {
+		this.empleadoMantenimientoByFk2be9c788a2d2a5db = empleadoMantenimientoByFk2be9c788a2d2a5db;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+			@JoinColumn(name = "codigo_mantenimiento", referencedColumnName = "codigo_mantenimiento", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "cedula", referencedColumnName = "cedula", nullable = false, insertable = false, updatable = false) })
+	public EmpleadoMantenimiento getEmpleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk() {
+		return this.empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk;
+	}
+
+	public void setEmpleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk(
+			EmpleadoMantenimiento empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk) {
+		this.empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk = empleadoMantenimientoByEmpleadoMantenimientoTareaMantenimientoFk;
 	}
 
 	@Column(name = "codigo_tarea_mantenimiento", nullable = false)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class TipoInstalacion implements java.io.Serializable {
 	private String descripcion;
 	private String estatus;
 	private Set<Instalacion> instalacions = new HashSet<Instalacion>(0);
+	private Set<Instalacion> instalacions_1 = new HashSet<Instalacion>(0);
 
 	public TipoInstalacion() {
 	}
@@ -34,11 +35,13 @@ public class TipoInstalacion implements java.io.Serializable {
 	}
 
 	public TipoInstalacion(String codigoTipoInstalacion, String descripcion,
-			String estatus, Set<Instalacion> instalacions) {
+			String estatus, Set<Instalacion> instalacions,
+			Set<Instalacion> instalacions_1) {
 		this.codigoTipoInstalacion = codigoTipoInstalacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.instalacions = instalacions;
+		this.instalacions_1 = instalacions_1;
 	}
 
 	@Id
@@ -76,6 +79,15 @@ public class TipoInstalacion implements java.io.Serializable {
 
 	public void setInstalacions(Set<Instalacion> instalacions) {
 		this.instalacions = instalacions;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoInstalacion")
+	public Set<Instalacion> getInstalacions_1() {
+		return this.instalacions_1;
+	}
+
+	public void setInstalacions_1(Set<Instalacion> instalacions_1) {
+		this.instalacions_1 = instalacions_1;
 	}
 
 }

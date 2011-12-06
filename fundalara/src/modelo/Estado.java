@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,8 @@ public class Estado implements java.io.Serializable {
 	private char estatus;
 	private Set<EstadoMantenimiento> estadoMantenimientos = new HashSet<EstadoMantenimiento>(
 			0);
+	private Set<EstadoMantenimiento> estadoMantenimientos_1 = new HashSet<EstadoMantenimiento>(
+			0);
 
 	public Estado() {
 	}
@@ -34,11 +36,13 @@ public class Estado implements java.io.Serializable {
 	}
 
 	public Estado(String codigoEstado, String descripcion, char estatus,
-			Set<EstadoMantenimiento> estadoMantenimientos) {
+			Set<EstadoMantenimiento> estadoMantenimientos,
+			Set<EstadoMantenimiento> estadoMantenimientos_1) {
 		this.codigoEstado = codigoEstado;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.estadoMantenimientos = estadoMantenimientos;
+		this.estadoMantenimientos_1 = estadoMantenimientos_1;
 	}
 
 	@Id
@@ -77,6 +81,16 @@ public class Estado implements java.io.Serializable {
 	public void setEstadoMantenimientos(
 			Set<EstadoMantenimiento> estadoMantenimientos) {
 		this.estadoMantenimientos = estadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estado")
+	public Set<EstadoMantenimiento> getEstadoMantenimientos_1() {
+		return this.estadoMantenimientos_1;
+	}
+
+	public void setEstadoMantenimientos_1(
+			Set<EstadoMantenimiento> estadoMantenimientos_1) {
+		this.estadoMantenimientos_1 = estadoMantenimientos_1;
 	}
 
 }

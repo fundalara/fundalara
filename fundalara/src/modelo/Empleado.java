@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -41,20 +41,35 @@ public class Empleado implements java.io.Serializable {
 	private String tipoSangre;
 	private char estatus;
 	private String telefono1;
-	private Set<EmpleadoAlergia> empleadoAlergias = new HashSet<EmpleadoAlergia>(
+	private Set<EmpleadoSueldo> empleadoSueldos = new HashSet<EmpleadoSueldo>(0);
+	private Set<EmpleadoTipoNomina> empleadoTipoNominas = new HashSet<EmpleadoTipoNomina>(
 			0);
 	private Set<EmpleadoMantenimiento> empleadoMantenimientos = new HashSet<EmpleadoMantenimiento>(
+			0);
+	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas = new HashSet<EmpleadoConceptoNomina>(
 			0);
 	private Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados = new HashSet<EmpleadoMantenimientoPlanificado>(
 			0);
 	private Set<DatoAcademicoEmpleado> datoAcademicoEmpleados = new HashSet<DatoAcademicoEmpleado>(
 			0);
-	private Set<EmpleadoTipoNomina> empleadoTipoNominas = new HashSet<EmpleadoTipoNomina>(
+	private Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1 = new HashSet<EmpleadoMantenimientoPlanificado>(
 			0);
-	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas = new HashSet<EmpleadoConceptoNomina>(
+	private Set<EmpleadoTipoNomina> empleadoTipoNominas_1 = new HashSet<EmpleadoTipoNomina>(
 			0);
-	private Set<EmpleadoSueldo> empleadoSueldos = new HashSet<EmpleadoSueldo>(0);
+	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1 = new HashSet<EmpleadoConceptoNomina>(
+			0);
 	private Set<EmpleadoCargo> empleadoCargos = new HashSet<EmpleadoCargo>(0);
+	private Set<EmpleadoAlergia> empleadoAlergias = new HashSet<EmpleadoAlergia>(
+			0);
+	private Set<EmpleadoSueldo> empleadoSueldos_1 = new HashSet<EmpleadoSueldo>(
+			0);
+	private Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1 = new HashSet<DatoAcademicoEmpleado>(
+			0);
+	private Set<EmpleadoCargo> empleadoCargos_1 = new HashSet<EmpleadoCargo>(0);
+	private Set<EmpleadoMantenimiento> empleadoMantenimientos_1 = new HashSet<EmpleadoMantenimiento>(
+			0);
+	private Set<EmpleadoAlergia> empleadoAlergias_1 = new HashSet<EmpleadoAlergia>(
+			0);
 
 	public Empleado() {
 	}
@@ -94,14 +109,22 @@ public class Empleado implements java.io.Serializable {
 			String tipoSangre,
 			char estatus,
 			String telefono1,
-			Set<EmpleadoAlergia> empleadoAlergias,
+			Set<EmpleadoSueldo> empleadoSueldos,
+			Set<EmpleadoTipoNomina> empleadoTipoNominas,
 			Set<EmpleadoMantenimiento> empleadoMantenimientos,
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas,
 			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados,
 			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados,
-			Set<EmpleadoTipoNomina> empleadoTipoNominas,
-			Set<EmpleadoConceptoNomina> empleadoConceptoNominas,
-			Set<EmpleadoSueldo> empleadoSueldos,
-			Set<EmpleadoCargo> empleadoCargos) {
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1,
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1,
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1,
+			Set<EmpleadoCargo> empleadoCargos,
+			Set<EmpleadoAlergia> empleadoAlergias,
+			Set<EmpleadoSueldo> empleadoSueldos_1,
+			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1,
+			Set<EmpleadoCargo> empleadoCargos_1,
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1,
+			Set<EmpleadoAlergia> empleadoAlergias_1) {
 		this.cedula = cedula;
 		this.parroquia = parroquia;
 		this.primerApellido = primerApellido;
@@ -120,14 +143,22 @@ public class Empleado implements java.io.Serializable {
 		this.tipoSangre = tipoSangre;
 		this.estatus = estatus;
 		this.telefono1 = telefono1;
-		this.empleadoAlergias = empleadoAlergias;
+		this.empleadoSueldos = empleadoSueldos;
+		this.empleadoTipoNominas = empleadoTipoNominas;
 		this.empleadoMantenimientos = empleadoMantenimientos;
+		this.empleadoConceptoNominas = empleadoConceptoNominas;
 		this.empleadoMantenimientoPlanificados = empleadoMantenimientoPlanificados;
 		this.datoAcademicoEmpleados = datoAcademicoEmpleados;
-		this.empleadoTipoNominas = empleadoTipoNominas;
-		this.empleadoConceptoNominas = empleadoConceptoNominas;
-		this.empleadoSueldos = empleadoSueldos;
+		this.empleadoMantenimientoPlanificados_1 = empleadoMantenimientoPlanificados_1;
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 		this.empleadoCargos = empleadoCargos;
+		this.empleadoAlergias = empleadoAlergias;
+		this.empleadoSueldos_1 = empleadoSueldos_1;
+		this.datoAcademicoEmpleados_1 = datoAcademicoEmpleados_1;
+		this.empleadoCargos_1 = empleadoCargos_1;
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
 
 	@Id
@@ -296,12 +327,22 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	public Set<EmpleadoAlergia> getEmpleadoAlergias() {
-		return this.empleadoAlergias;
+	public Set<EmpleadoSueldo> getEmpleadoSueldos() {
+		return this.empleadoSueldos;
 	}
 
-	public void setEmpleadoAlergias(Set<EmpleadoAlergia> empleadoAlergias) {
-		this.empleadoAlergias = empleadoAlergias;
+	public void setEmpleadoSueldos(Set<EmpleadoSueldo> empleadoSueldos) {
+		this.empleadoSueldos = empleadoSueldos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas() {
+		return this.empleadoTipoNominas;
+	}
+
+	public void setEmpleadoTipoNominas(
+			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
+		this.empleadoTipoNominas = empleadoTipoNominas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
@@ -312,6 +353,16 @@ public class Empleado implements java.io.Serializable {
 	public void setEmpleadoMantenimientos(
 			Set<EmpleadoMantenimiento> empleadoMantenimientos) {
 		this.empleadoMantenimientos = empleadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas() {
+		return this.empleadoConceptoNominas;
+	}
+
+	public void setEmpleadoConceptoNominas(
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas) {
+		this.empleadoConceptoNominas = empleadoConceptoNominas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
@@ -335,32 +386,33 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas() {
-		return this.empleadoTipoNominas;
+	public Set<EmpleadoMantenimientoPlanificado> getEmpleadoMantenimientoPlanificados_1() {
+		return this.empleadoMantenimientoPlanificados_1;
 	}
 
-	public void setEmpleadoTipoNominas(
-			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
-		this.empleadoTipoNominas = empleadoTipoNominas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas() {
-		return this.empleadoConceptoNominas;
-	}
-
-	public void setEmpleadoConceptoNominas(
-			Set<EmpleadoConceptoNomina> empleadoConceptoNominas) {
-		this.empleadoConceptoNominas = empleadoConceptoNominas;
+	public void setEmpleadoMantenimientoPlanificados_1(
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1) {
+		this.empleadoMantenimientoPlanificados_1 = empleadoMantenimientoPlanificados_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	public Set<EmpleadoSueldo> getEmpleadoSueldos() {
-		return this.empleadoSueldos;
+	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas_1() {
+		return this.empleadoTipoNominas_1;
 	}
 
-	public void setEmpleadoSueldos(Set<EmpleadoSueldo> empleadoSueldos) {
-		this.empleadoSueldos = empleadoSueldos;
+	public void setEmpleadoTipoNominas_1(
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1) {
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas_1() {
+		return this.empleadoConceptoNominas_1;
+	}
+
+	public void setEmpleadoConceptoNominas_1(
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1) {
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
@@ -370,6 +422,62 @@ public class Empleado implements java.io.Serializable {
 
 	public void setEmpleadoCargos(Set<EmpleadoCargo> empleadoCargos) {
 		this.empleadoCargos = empleadoCargos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoAlergia> getEmpleadoAlergias() {
+		return this.empleadoAlergias;
+	}
+
+	public void setEmpleadoAlergias(Set<EmpleadoAlergia> empleadoAlergias) {
+		this.empleadoAlergias = empleadoAlergias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoSueldo> getEmpleadoSueldos_1() {
+		return this.empleadoSueldos_1;
+	}
+
+	public void setEmpleadoSueldos_1(Set<EmpleadoSueldo> empleadoSueldos_1) {
+		this.empleadoSueldos_1 = empleadoSueldos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<DatoAcademicoEmpleado> getDatoAcademicoEmpleados_1() {
+		return this.datoAcademicoEmpleados_1;
+	}
+
+	public void setDatoAcademicoEmpleados_1(
+			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1) {
+		this.datoAcademicoEmpleados_1 = datoAcademicoEmpleados_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoCargo> getEmpleadoCargos_1() {
+		return this.empleadoCargos_1;
+	}
+
+	public void setEmpleadoCargos_1(Set<EmpleadoCargo> empleadoCargos_1) {
+		this.empleadoCargos_1 = empleadoCargos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos_1() {
+		return this.empleadoMantenimientos_1;
+	}
+
+	public void setEmpleadoMantenimientos_1(
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1) {
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoAlergia> getEmpleadoAlergias_1() {
+		return this.empleadoAlergias_1;
+	}
+
+	public void setEmpleadoAlergias_1(Set<EmpleadoAlergia> empleadoAlergias_1) {
+		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
 
 }

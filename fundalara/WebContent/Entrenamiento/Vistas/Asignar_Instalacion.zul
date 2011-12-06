@@ -2,7 +2,7 @@
 <zk>
 	<window id="win" title="Asignar Instalacion - PREINFANTIL"
 		border="normal" width="550px" height="" closable="true"
-		apply="vista.entrenamiento.Asignar_Instalacion">
+		apply="controlador.entrenamiento.Asignar_Instalacion">
 		<grid>
 			<columns>
 				<column width="110px" align="left" />

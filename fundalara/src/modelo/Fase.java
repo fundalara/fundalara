@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,8 @@ public class Fase implements java.io.Serializable {
 	private char estatus;
 	private Set<ActividadEntrenamiento> actividadEntrenamientos = new HashSet<ActividadEntrenamiento>(
 			0);
+	private Set<ActividadEntrenamiento> actividadEntrenamientos_1 = new HashSet<ActividadEntrenamiento>(
+			0);
 
 	public Fase() {
 	}
@@ -37,12 +39,14 @@ public class Fase implements java.io.Serializable {
 	}
 
 	public Fase(String codFaseEntrenamiento, String nombre, String descripcion,
-			char estatus, Set<ActividadEntrenamiento> actividadEntrenamientos) {
+			char estatus, Set<ActividadEntrenamiento> actividadEntrenamientos,
+			Set<ActividadEntrenamiento> actividadEntrenamientos_1) {
 		this.codFaseEntrenamiento = codFaseEntrenamiento;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.actividadEntrenamientos = actividadEntrenamientos;
+		this.actividadEntrenamientos_1 = actividadEntrenamientos_1;
 	}
 
 	@Id
@@ -90,6 +94,16 @@ public class Fase implements java.io.Serializable {
 	public void setActividadEntrenamientos(
 			Set<ActividadEntrenamiento> actividadEntrenamientos) {
 		this.actividadEntrenamientos = actividadEntrenamientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fase")
+	public Set<ActividadEntrenamiento> getActividadEntrenamientos_1() {
+		return this.actividadEntrenamientos_1;
+	}
+
+	public void setActividadEntrenamientos_1(
+			Set<ActividadEntrenamiento> actividadEntrenamientos_1) {
+		this.actividadEntrenamientos_1 = actividadEntrenamientos_1;
 	}
 
 }

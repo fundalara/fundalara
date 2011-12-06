@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,7 @@ public class UnidadMedida implements java.io.Serializable {
 	private String descripcion;
 	private char estatus;
 	private Set<Material> materials = new HashSet<Material>(0);
+	private Set<Material> materials_1 = new HashSet<Material>(0);
 
 	public UnidadMedida() {
 	}
@@ -34,11 +35,12 @@ public class UnidadMedida implements java.io.Serializable {
 	}
 
 	public UnidadMedida(String codigoUnidadMedida, String descripcion,
-			char estatus, Set<Material> materials) {
+			char estatus, Set<Material> materials, Set<Material> materials_1) {
 		this.codigoUnidadMedida = codigoUnidadMedida;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.materials = materials;
+		this.materials_1 = materials_1;
 	}
 
 	@Id
@@ -76,6 +78,15 @@ public class UnidadMedida implements java.io.Serializable {
 
 	public void setMaterials(Set<Material> materials) {
 		this.materials = materials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadMedida")
+	public Set<Material> getMaterials_1() {
+		return this.materials_1;
+	}
+
+	public void setMaterials_1(Set<Material> materials_1) {
+		this.materials_1 = materials_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,7 @@ public class Talla implements java.io.Serializable {
 	private String talla;
 	private char estatus;
 	private Set<Jugador> jugadors = new HashSet<Jugador>(0);
+	private Set<Jugador> jugadors_1 = new HashSet<Jugador>(0);
 
 	public Talla() {
 	}
@@ -38,12 +39,14 @@ public class Talla implements java.io.Serializable {
 	}
 
 	public Talla(String codigoTalla, TipoIndumentaria tipoIndumentaria,
-			String talla, char estatus, Set<Jugador> jugadors) {
+			String talla, char estatus, Set<Jugador> jugadors,
+			Set<Jugador> jugadors_1) {
 		this.codigoTalla = codigoTalla;
 		this.tipoIndumentaria = tipoIndumentaria;
 		this.talla = talla;
 		this.estatus = estatus;
 		this.jugadors = jugadors;
+		this.jugadors_1 = jugadors_1;
 	}
 
 	@Id
@@ -91,6 +94,15 @@ public class Talla implements java.io.Serializable {
 
 	public void setJugadors(Set<Jugador> jugadors) {
 		this.jugadors = jugadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "talla")
+	public Set<Jugador> getJugadors_1() {
+		return this.jugadors_1;
+	}
+
+	public void setJugadors_1(Set<Jugador> jugadors_1) {
+		this.jugadors_1 = jugadors_1;
 	}
 
 }

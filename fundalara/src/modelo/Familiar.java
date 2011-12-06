@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -40,6 +40,8 @@ public class Familiar implements java.io.Serializable {
 	private char estatus;
 	private Set<FamiliarJugador> familiarJugadors = new HashSet<FamiliarJugador>(
 			0);
+	private Set<FamiliarJugador> familiarJugadors_1 = new HashSet<FamiliarJugador>(
+			0);
 
 	public Familiar() {
 	}
@@ -65,7 +67,8 @@ public class Familiar implements java.io.Serializable {
 			String direccionHabitacion, String email, String twitter,
 			String telefonoHabitacion, String telefonoCelular, byte[] foto,
 			Date fechaIngreso, char estatus,
-			Set<FamiliarJugador> familiarJugadors) {
+			Set<FamiliarJugador> familiarJugadors,
+			Set<FamiliarJugador> familiarJugadors_1) {
 		this.cedulaFamiliar = cedulaFamiliar;
 		this.profesion = profesion;
 		this.parroquia = parroquia;
@@ -82,6 +85,7 @@ public class Familiar implements java.io.Serializable {
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 		this.familiarJugadors = familiarJugadors;
+		this.familiarJugadors_1 = familiarJugadors_1;
 	}
 
 	@Id
@@ -230,6 +234,15 @@ public class Familiar implements java.io.Serializable {
 
 	public void setFamiliarJugadors(Set<FamiliarJugador> familiarJugadors) {
 		this.familiarJugadors = familiarJugadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "familiar")
+	public Set<FamiliarJugador> getFamiliarJugadors_1() {
+		return this.familiarJugadors_1;
+	}
+
+	public void setFamiliarJugadors_1(Set<FamiliarJugador> familiarJugadors_1) {
+		this.familiarJugadors_1 = familiarJugadors_1;
 	}
 
 }

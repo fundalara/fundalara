@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,8 +26,11 @@ public class Equipo implements java.io.Serializable {
 	private Divisa divisa;
 	private String nombre;
 	private char estatus;
-	private Set<Roster> rosters = new HashSet<Roster>(0);
 	private Set<ComisionEquipo> comisionEquipos = new HashSet<ComisionEquipo>(0);
+	private Set<Roster> rosters = new HashSet<Roster>(0);
+	private Set<Roster> rosters_1 = new HashSet<Roster>(0);
+	private Set<ComisionEquipo> comisionEquipos_1 = new HashSet<ComisionEquipo>(
+			0);
 
 	public Equipo() {
 	}
@@ -44,15 +47,18 @@ public class Equipo implements java.io.Serializable {
 
 	public Equipo(String codigoEquipo, ClasificacionEquipo clasificacionEquipo,
 			Categoria categoria, Divisa divisa, String nombre, char estatus,
-			Set<Roster> rosters, Set<ComisionEquipo> comisionEquipos) {
+			Set<ComisionEquipo> comisionEquipos, Set<Roster> rosters,
+			Set<Roster> rosters_1, Set<ComisionEquipo> comisionEquipos_1) {
 		this.codigoEquipo = codigoEquipo;
 		this.clasificacionEquipo = clasificacionEquipo;
 		this.categoria = categoria;
 		this.divisa = divisa;
 		this.nombre = nombre;
 		this.estatus = estatus;
-		this.rosters = rosters;
 		this.comisionEquipos = comisionEquipos;
+		this.rosters = rosters;
+		this.rosters_1 = rosters_1;
+		this.comisionEquipos_1 = comisionEquipos_1;
 	}
 
 	@Id
@@ -114,6 +120,15 @@ public class Equipo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<ComisionEquipo> getComisionEquipos() {
+		return this.comisionEquipos;
+	}
+
+	public void setComisionEquipos(Set<ComisionEquipo> comisionEquipos) {
+		this.comisionEquipos = comisionEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
 	public Set<Roster> getRosters() {
 		return this.rosters;
 	}
@@ -123,12 +138,21 @@ public class Equipo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<ComisionEquipo> getComisionEquipos() {
-		return this.comisionEquipos;
+	public Set<Roster> getRosters_1() {
+		return this.rosters_1;
 	}
 
-	public void setComisionEquipos(Set<ComisionEquipo> comisionEquipos) {
-		this.comisionEquipos = comisionEquipos;
+	public void setRosters_1(Set<Roster> rosters_1) {
+		this.rosters_1 = rosters_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<ComisionEquipo> getComisionEquipos_1() {
+		return this.comisionEquipos_1;
+	}
+
+	public void setComisionEquipos_1(Set<ComisionEquipo> comisionEquipos_1) {
+		this.comisionEquipos_1 = comisionEquipos_1;
 	}
 
 }

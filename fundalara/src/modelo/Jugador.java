@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -44,13 +44,20 @@ public class Jugador implements java.io.Serializable {
 	private String posicionBateo;
 	private Date fechaIngreso;
 	private char estatus;
+	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
 	private Set<Roster> rosters = new HashSet<Roster>(0);
-	private Set<DatoDeportivo> datoDeportivos = new HashSet<DatoDeportivo>(0);
 	private Set<FamiliarJugador> familiarJugadors = new HashSet<FamiliarJugador>(
 			0);
 	private Set<DatoAcademico> datoAcademicos = new HashSet<DatoAcademico>(0);
-	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
+	private Set<DatoDeportivo> datoDeportivos = new HashSet<DatoDeportivo>(0);
+	private Set<DatoDeportivo> datoDeportivos_1 = new HashSet<DatoDeportivo>(0);
+	private Set<FamiliarJugador> familiarJugadors_1 = new HashSet<FamiliarJugador>(
+			0);
+	private Set<Roster> rosters_1 = new HashSet<Roster>(0);
+	private Set<DatoAcademico> datoAcademicos_1 = new HashSet<DatoAcademico>(0);
+	private Set<DatoSocial> datoSocials_1 = new HashSet<DatoSocial>(0);
 	private Set<DatoMedico> datoMedicos = new HashSet<DatoMedico>(0);
+	private Set<DatoMedico> datoMedicos_1 = new HashSet<DatoMedico>(0);
 
 	public Jugador() {
 	}
@@ -83,11 +90,14 @@ public class Jugador implements java.io.Serializable {
 			Date fechaNacimiento, String direccion, String telefonoHabitacion,
 			String telefonoCelular, String email, String twitter, byte[] foto,
 			int numero, String brazoLanzar, String posicionBateo,
-			Date fechaIngreso, char estatus, Set<Roster> rosters,
+			Date fechaIngreso, char estatus, Set<DatoSocial> datoSocials,
+			Set<Roster> rosters, Set<FamiliarJugador> familiarJugadors,
+			Set<DatoAcademico> datoAcademicos,
 			Set<DatoDeportivo> datoDeportivos,
-			Set<FamiliarJugador> familiarJugadors,
-			Set<DatoAcademico> datoAcademicos, Set<DatoSocial> datoSocials,
-			Set<DatoMedico> datoMedicos) {
+			Set<DatoDeportivo> datoDeportivos_1,
+			Set<FamiliarJugador> familiarJugadors_1, Set<Roster> rosters_1,
+			Set<DatoAcademico> datoAcademicos_1, Set<DatoSocial> datoSocials_1,
+			Set<DatoMedico> datoMedicos, Set<DatoMedico> datoMedicos_1) {
 		this.cedulaJugador = cedulaJugador;
 		this.talla = talla;
 		this.pais = pais;
@@ -109,12 +119,18 @@ public class Jugador implements java.io.Serializable {
 		this.posicionBateo = posicionBateo;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
+		this.datoSocials = datoSocials;
 		this.rosters = rosters;
-		this.datoDeportivos = datoDeportivos;
 		this.familiarJugadors = familiarJugadors;
 		this.datoAcademicos = datoAcademicos;
-		this.datoSocials = datoSocials;
+		this.datoDeportivos = datoDeportivos;
+		this.datoDeportivos_1 = datoDeportivos_1;
+		this.familiarJugadors_1 = familiarJugadors_1;
+		this.rosters_1 = rosters_1;
+		this.datoAcademicos_1 = datoAcademicos_1;
+		this.datoSocials_1 = datoSocials_1;
 		this.datoMedicos = datoMedicos;
+		this.datoMedicos_1 = datoMedicos_1;
 	}
 
 	@Id
@@ -313,21 +329,21 @@ public class Jugador implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoSocial> getDatoSocials() {
+		return this.datoSocials;
+	}
+
+	public void setDatoSocials(Set<DatoSocial> datoSocials) {
+		this.datoSocials = datoSocials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
 	public Set<Roster> getRosters() {
 		return this.rosters;
 	}
 
 	public void setRosters(Set<Roster> rosters) {
 		this.rosters = rosters;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
-	public Set<DatoDeportivo> getDatoDeportivos() {
-		return this.datoDeportivos;
-	}
-
-	public void setDatoDeportivos(Set<DatoDeportivo> datoDeportivos) {
-		this.datoDeportivos = datoDeportivos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
@@ -349,12 +365,57 @@ public class Jugador implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
-	public Set<DatoSocial> getDatoSocials() {
-		return this.datoSocials;
+	public Set<DatoDeportivo> getDatoDeportivos() {
+		return this.datoDeportivos;
 	}
 
-	public void setDatoSocials(Set<DatoSocial> datoSocials) {
-		this.datoSocials = datoSocials;
+	public void setDatoDeportivos(Set<DatoDeportivo> datoDeportivos) {
+		this.datoDeportivos = datoDeportivos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoDeportivo> getDatoDeportivos_1() {
+		return this.datoDeportivos_1;
+	}
+
+	public void setDatoDeportivos_1(Set<DatoDeportivo> datoDeportivos_1) {
+		this.datoDeportivos_1 = datoDeportivos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<FamiliarJugador> getFamiliarJugadors_1() {
+		return this.familiarJugadors_1;
+	}
+
+	public void setFamiliarJugadors_1(Set<FamiliarJugador> familiarJugadors_1) {
+		this.familiarJugadors_1 = familiarJugadors_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<Roster> getRosters_1() {
+		return this.rosters_1;
+	}
+
+	public void setRosters_1(Set<Roster> rosters_1) {
+		this.rosters_1 = rosters_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoAcademico> getDatoAcademicos_1() {
+		return this.datoAcademicos_1;
+	}
+
+	public void setDatoAcademicos_1(Set<DatoAcademico> datoAcademicos_1) {
+		this.datoAcademicos_1 = datoAcademicos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoSocial> getDatoSocials_1() {
+		return this.datoSocials_1;
+	}
+
+	public void setDatoSocials_1(Set<DatoSocial> datoSocials_1) {
+		this.datoSocials_1 = datoSocials_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
@@ -364,6 +425,15 @@ public class Jugador implements java.io.Serializable {
 
 	public void setDatoMedicos(Set<DatoMedico> datoMedicos) {
 		this.datoMedicos = datoMedicos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoMedico> getDatoMedicos_1() {
+		return this.datoMedicos_1;
+	}
+
+	public void setDatoMedicos_1(Set<DatoMedico> datoMedicos_1) {
+		this.datoMedicos_1 = datoMedicos_1;
 	}
 
 }

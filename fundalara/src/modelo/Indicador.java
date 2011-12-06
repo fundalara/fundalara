@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +27,8 @@ public class Indicador implements java.io.Serializable {
 	private char estatus;
 	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
 			0);
+	private Set<IndicadorActividadEscala> indicadorActividadEscalas_1 = new HashSet<IndicadorActividadEscala>(
+			0);
 
 	public Indicador() {
 	}
@@ -42,13 +44,15 @@ public class Indicador implements java.io.Serializable {
 
 	public Indicador(String codIndicador, TipoIndicador tipoIndicador,
 			String nombre, String descripcion, char estatus,
-			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
+			Set<IndicadorActividadEscala> indicadorActividadEscalas,
+			Set<IndicadorActividadEscala> indicadorActividadEscalas_1) {
 		this.codIndicador = codIndicador;
 		this.tipoIndicador = tipoIndicador;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
+		this.indicadorActividadEscalas_1 = indicadorActividadEscalas_1;
 	}
 
 	@Id
@@ -106,6 +110,16 @@ public class Indicador implements java.io.Serializable {
 	public void setIndicadorActividadEscalas(
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "indicador")
+	public Set<IndicadorActividadEscala> getIndicadorActividadEscalas_1() {
+		return this.indicadorActividadEscalas_1;
+	}
+
+	public void setIndicadorActividadEscalas_1(
+			Set<IndicadorActividadEscala> indicadorActividadEscalas_1) {
+		this.indicadorActividadEscalas_1 = indicadorActividadEscalas_1;
 	}
 
 }

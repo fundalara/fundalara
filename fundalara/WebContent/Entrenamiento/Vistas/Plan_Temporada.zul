@@ -1,6 +1,6 @@
 <?page title="Auto Generated index.zul"?>
 <zk>
-	<window id="pTemporada" apply="vista.entrenamiento.PlanTemporada"
+	<window id="pTemporada" apply="controlador.entrenamiento.PlanTemporada"
 		title="Planificacion de Temporada - PREINFATIL" border="normal"
 		width="550px" closable="true">
 		<grid>

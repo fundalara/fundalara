@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,9 +30,15 @@ public class Categoria implements java.io.Serializable {
 	private Set<Liga> ligas = new HashSet<Liga>(0);
 	private Set<CategoriaCompetencia> categoriaCompetencias = new HashSet<CategoriaCompetencia>(
 			0);
+	private Set<Liga> ligas_1 = new HashSet<Liga>(0);
+	private Set<Equipo> equipos = new HashSet<Equipo>(0);
+	private Set<CategoriaCompetencia> categoriaCompetencias_1 = new HashSet<CategoriaCompetencia>(
+			0);
 	private Set<ActividadEntrenamiento> actividadEntrenamientos = new HashSet<ActividadEntrenamiento>(
 			0);
-	private Set<Equipo> equipos = new HashSet<Equipo>(0);
+	private Set<ActividadEntrenamiento> actividadEntrenamientos_1 = new HashSet<ActividadEntrenamiento>(
+			0);
+	private Set<Equipo> equipos_1 = new HashSet<Equipo>(0);
 
 	public Categoria() {
 	}
@@ -53,9 +59,12 @@ public class Categoria implements java.io.Serializable {
 	public Categoria(String codigoCategoria, String nombre, int edadInferior,
 			int edadSuperior, int cantidadEquipo, int minimoJugador,
 			int maximoJugador, char estatus, Set<Liga> ligas,
-			Set<CategoriaCompetencia> categoriaCompetencias,
+			Set<CategoriaCompetencia> categoriaCompetencias, Set<Liga> ligas_1,
+			Set<Equipo> equipos,
+			Set<CategoriaCompetencia> categoriaCompetencias_1,
 			Set<ActividadEntrenamiento> actividadEntrenamientos,
-			Set<Equipo> equipos) {
+			Set<ActividadEntrenamiento> actividadEntrenamientos_1,
+			Set<Equipo> equipos_1) {
 		this.codigoCategoria = codigoCategoria;
 		this.nombre = nombre;
 		this.edadInferior = edadInferior;
@@ -66,8 +75,12 @@ public class Categoria implements java.io.Serializable {
 		this.estatus = estatus;
 		this.ligas = ligas;
 		this.categoriaCompetencias = categoriaCompetencias;
-		this.actividadEntrenamientos = actividadEntrenamientos;
+		this.ligas_1 = ligas_1;
 		this.equipos = equipos;
+		this.categoriaCompetencias_1 = categoriaCompetencias_1;
+		this.actividadEntrenamientos = actividadEntrenamientos;
+		this.actividadEntrenamientos_1 = actividadEntrenamientos_1;
+		this.equipos_1 = equipos_1;
 	}
 
 	@Id
@@ -162,6 +175,34 @@ public class Categoria implements java.io.Serializable {
 		this.categoriaCompetencias = categoriaCompetencias;
 	}
 
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categorias")
+	public Set<Liga> getLigas_1() {
+		return this.ligas_1;
+	}
+
+	public void setLigas_1(Set<Liga> ligas_1) {
+		this.ligas_1 = ligas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<Equipo> getEquipos() {
+		return this.equipos;
+	}
+
+	public void setEquipos(Set<Equipo> equipos) {
+		this.equipos = equipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<CategoriaCompetencia> getCategoriaCompetencias_1() {
+		return this.categoriaCompetencias_1;
+	}
+
+	public void setCategoriaCompetencias_1(
+			Set<CategoriaCompetencia> categoriaCompetencias_1) {
+		this.categoriaCompetencias_1 = categoriaCompetencias_1;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
 	public Set<ActividadEntrenamiento> getActividadEntrenamientos() {
 		return this.actividadEntrenamientos;
@@ -173,12 +214,22 @@ public class Categoria implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-	public Set<Equipo> getEquipos() {
-		return this.equipos;
+	public Set<ActividadEntrenamiento> getActividadEntrenamientos_1() {
+		return this.actividadEntrenamientos_1;
 	}
 
-	public void setEquipos(Set<Equipo> equipos) {
-		this.equipos = equipos;
+	public void setActividadEntrenamientos_1(
+			Set<ActividadEntrenamiento> actividadEntrenamientos_1) {
+		this.actividadEntrenamientos_1 = actividadEntrenamientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<Equipo> getEquipos_1() {
+		return this.equipos_1;
+	}
+
+	public void setEquipos_1(Set<Equipo> equipos_1) {
+		this.equipos_1 = equipos_1;
 	}
 
 }

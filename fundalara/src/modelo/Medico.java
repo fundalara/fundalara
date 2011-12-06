@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,6 +29,7 @@ public class Medico implements java.io.Serializable {
 	private Date fechaIngreso;
 	private char estatus;
 	private Set<DatoMedico> datoMedicos = new HashSet<DatoMedico>(0);
+	private Set<DatoMedico> datoMedicos_1 = new HashSet<DatoMedico>(0);
 
 	public Medico() {
 	}
@@ -46,7 +47,7 @@ public class Medico implements java.io.Serializable {
 
 	public Medico(String matricula, String numeroColegio, String cedulaMedico,
 			String nombre, String apellido, Date fechaIngreso, char estatus,
-			Set<DatoMedico> datoMedicos) {
+			Set<DatoMedico> datoMedicos, Set<DatoMedico> datoMedicos_1) {
 		this.matricula = matricula;
 		this.numeroColegio = numeroColegio;
 		this.cedulaMedico = cedulaMedico;
@@ -55,6 +56,7 @@ public class Medico implements java.io.Serializable {
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 		this.datoMedicos = datoMedicos;
+		this.datoMedicos_1 = datoMedicos_1;
 	}
 
 	@Id
@@ -129,6 +131,15 @@ public class Medico implements java.io.Serializable {
 
 	public void setDatoMedicos(Set<DatoMedico> datoMedicos) {
 		this.datoMedicos = datoMedicos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "medico")
+	public Set<DatoMedico> getDatoMedicos_1() {
+		return this.datoMedicos_1;
+	}
+
+	public void setDatoMedicos_1(Set<DatoMedico> datoMedicos_1) {
+		this.datoMedicos_1 = datoMedicos_1;
 	}
 
 }

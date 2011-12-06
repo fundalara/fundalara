@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 05/12/2011 10:49:17 AM by Hibernate Tools 3.4.0.CR1
+// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,7 @@ public class ClasificacionEquipo implements java.io.Serializable {
 	private String descripcion;
 	private char estatus;
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
+	private Set<Equipo> equipos_1 = new HashSet<Equipo>(0);
 
 	public ClasificacionEquipo() {
 	}
@@ -36,12 +37,14 @@ public class ClasificacionEquipo implements java.io.Serializable {
 	}
 
 	public ClasificacionEquipo(String codigoClasificacion, String nombre,
-			String descripcion, char estatus, Set<Equipo> equipos) {
+			String descripcion, char estatus, Set<Equipo> equipos,
+			Set<Equipo> equipos_1) {
 		this.codigoClasificacion = codigoClasificacion;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.equipos = equipos;
+		this.equipos_1 = equipos_1;
 	}
 
 	@Id
@@ -88,6 +91,15 @@ public class ClasificacionEquipo implements java.io.Serializable {
 
 	public void setEquipos(Set<Equipo> equipos) {
 		this.equipos = equipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "clasificacionEquipo")
+	public Set<Equipo> getEquipos_1() {
+		return this.equipos_1;
+	}
+
+	public void setEquipos_1(Set<Equipo> equipos_1) {
+		this.equipos_1 = equipos_1;
 	}
 
 }
