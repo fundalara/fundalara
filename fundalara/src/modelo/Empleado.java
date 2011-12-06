@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
+// Generated 06/12/2011 05:27:34 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -61,11 +61,11 @@ public class Empleado implements java.io.Serializable {
 	private Set<EmpleadoCargo> empleadoCargos = new HashSet<EmpleadoCargo>(0);
 	private Set<EmpleadoAlergia> empleadoAlergias = new HashSet<EmpleadoAlergia>(
 			0);
-	private Set<EmpleadoSueldo> empleadoSueldos_1 = new HashSet<EmpleadoSueldo>(
-			0);
 	private Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1 = new HashSet<DatoAcademicoEmpleado>(
 			0);
 	private Set<EmpleadoCargo> empleadoCargos_1 = new HashSet<EmpleadoCargo>(0);
+	private Set<EmpleadoSueldo> empleadoSueldos_1 = new HashSet<EmpleadoSueldo>(
+			0);
 	private Set<EmpleadoMantenimiento> empleadoMantenimientos_1 = new HashSet<EmpleadoMantenimiento>(
 			0);
 	private Set<EmpleadoAlergia> empleadoAlergias_1 = new HashSet<EmpleadoAlergia>(
@@ -120,9 +120,9 @@ public class Empleado implements java.io.Serializable {
 			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1,
 			Set<EmpleadoCargo> empleadoCargos,
 			Set<EmpleadoAlergia> empleadoAlergias,
-			Set<EmpleadoSueldo> empleadoSueldos_1,
 			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1,
 			Set<EmpleadoCargo> empleadoCargos_1,
+			Set<EmpleadoSueldo> empleadoSueldos_1,
 			Set<EmpleadoMantenimiento> empleadoMantenimientos_1,
 			Set<EmpleadoAlergia> empleadoAlergias_1) {
 		this.cedula = cedula;
@@ -154,9 +154,9 @@ public class Empleado implements java.io.Serializable {
 		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 		this.empleadoCargos = empleadoCargos;
 		this.empleadoAlergias = empleadoAlergias;
-		this.empleadoSueldos_1 = empleadoSueldos_1;
 		this.datoAcademicoEmpleados_1 = datoAcademicoEmpleados_1;
 		this.empleadoCargos_1 = empleadoCargos_1;
+		this.empleadoSueldos_1 = empleadoSueldos_1;
 		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
 		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
@@ -434,15 +434,6 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	public Set<EmpleadoSueldo> getEmpleadoSueldos_1() {
-		return this.empleadoSueldos_1;
-	}
-
-	public void setEmpleadoSueldos_1(Set<EmpleadoSueldo> empleadoSueldos_1) {
-		this.empleadoSueldos_1 = empleadoSueldos_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
 	public Set<DatoAcademicoEmpleado> getDatoAcademicoEmpleados_1() {
 		return this.datoAcademicoEmpleados_1;
 	}
@@ -459,6 +450,15 @@ public class Empleado implements java.io.Serializable {
 
 	public void setEmpleadoCargos_1(Set<EmpleadoCargo> empleadoCargos_1) {
 		this.empleadoCargos_1 = empleadoCargos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoSueldo> getEmpleadoSueldos_1() {
+		return this.empleadoSueldos_1;
+	}
+
+	public void setEmpleadoSueldos_1(Set<EmpleadoSueldo> empleadoSueldos_1) {
+		this.empleadoSueldos_1 = empleadoSueldos_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")

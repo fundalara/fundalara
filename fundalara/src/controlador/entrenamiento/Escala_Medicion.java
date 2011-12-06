@@ -115,7 +115,7 @@ public class Escala_Medicion extends GenericForwardComposer {
 		valor.setEscalaMedicion(escala);
 		valor.setValor(txtValorEscala.getValue().toString());
 		valor.setDescripcion(txtDescripcionValor.getValue().toString());
-		valor.setEstatus('A');
+		//valor.setEstatus('A');
 		servicioValorEscalaMedicion.agregar(valor);
 	}
 
@@ -160,7 +160,7 @@ public class Escala_Medicion extends GenericForwardComposer {
 			if ((lista.get(i).getEscalaMedicion().getCodEscalaMedicion() == escala
 					.getCodEscalaMedicion())
 					&& lista.get(i).getValor() == lbValoresEscala.getSelectedItem().getLabel()) {
-				lista.get(i).setEstatus('E');
+				//lista.get(i).setEstatus('E');
 				servicioValorEscalaMedicion.actualizar(lista.get(i));
 				break;
 			}

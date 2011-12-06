@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
+// Generated 06/12/2011 05:27:34 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class Divisa implements java.io.Serializable {
 
 	private String codigoDivisa;
-	private Parroquia parroquia;
+	private EstadoVenezuela estadoVenezuela;
 	private String nombre;
 	private String direccion;
 	private String telefono;
@@ -34,25 +34,22 @@ public class Divisa implements java.io.Serializable {
 	public Divisa() {
 	}
 
-	public Divisa(String codigoDivisa, Parroquia parroquia, String nombre,
-			String direccion, String telefono, String correoElectronico,
-			String personaContacto, byte[] logo) {
+	public Divisa(String codigoDivisa, String nombre, String direccion,
+			String telefono, String correoElectronico, String personaContacto) {
 		this.codigoDivisa = codigoDivisa;
-		this.parroquia = parroquia;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.correoElectronico = correoElectronico;
 		this.personaContacto = personaContacto;
-		this.logo = logo;
 	}
 
-	public Divisa(String codigoDivisa, Parroquia parroquia, String nombre,
-			String direccion, String telefono, String correoElectronico,
-			String personaContacto, byte[] logo, Set<Equipo> equipos,
-			Set<Equipo> equipos_1) {
+	public Divisa(String codigoDivisa, EstadoVenezuela estadoVenezuela,
+			String nombre, String direccion, String telefono,
+			String correoElectronico, String personaContacto, byte[] logo,
+			Set<Equipo> equipos, Set<Equipo> equipos_1) {
 		this.codigoDivisa = codigoDivisa;
-		this.parroquia = parroquia;
+		this.estadoVenezuela = estadoVenezuela;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
@@ -74,13 +71,13 @@ public class Divisa implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_parroquia", nullable = false)
-	public Parroquia getParroquia() {
-		return this.parroquia;
+	@JoinColumn(name = "codigo_estado")
+	public EstadoVenezuela getEstadoVenezuela() {
+		return this.estadoVenezuela;
 	}
 
-	public void setParroquia(Parroquia parroquia) {
-		this.parroquia = parroquia;
+	public void setEstadoVenezuela(EstadoVenezuela estadoVenezuela) {
+		this.estadoVenezuela = estadoVenezuela;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -128,7 +125,7 @@ public class Divisa implements java.io.Serializable {
 		this.personaContacto = personaContacto;
 	}
 
-	@Column(name = "logo", nullable = false)
+	@Column(name = "logo")
 	public byte[] getLogo() {
 		return this.logo;
 	}

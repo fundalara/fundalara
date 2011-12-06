@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
+// Generated 06/12/2011 05:27:34 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 06-dic-2011 15:00:16 by Hibernate Tools 3.4.0.CR1
+// Generated 06/12/2011 05:27:34 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,6 @@ public class TipoActividadSocial implements java.io.Serializable {
 	private String codigoActividadSocial;
 	private String nombre;
 	private char estatus;
-	private String descripcion;
 	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
 	private Set<DatoSocial> datoSocials_1 = new HashSet<DatoSocial>(0);
 
@@ -36,12 +35,11 @@ public class TipoActividadSocial implements java.io.Serializable {
 	}
 
 	public TipoActividadSocial(String codigoActividadSocial, String nombre,
-			char estatus, String descripcion, Set<DatoSocial> datoSocials,
+			char estatus, Set<DatoSocial> datoSocials,
 			Set<DatoSocial> datoSocials_1) {
 		this.codigoActividadSocial = codigoActividadSocial;
 		this.nombre = nombre;
 		this.estatus = estatus;
-		this.descripcion = descripcion;
 		this.datoSocials = datoSocials;
 		this.datoSocials_1 = datoSocials_1;
 	}
@@ -72,15 +70,6 @@ public class TipoActividadSocial implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Column(name = "descripcion")
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoActividadSocial")
