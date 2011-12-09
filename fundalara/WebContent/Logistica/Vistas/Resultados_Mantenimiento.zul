@@ -1,0 +1,266 @@
+<?page title="Ejecucion Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Ejecución Mantenimiento" border="normal" width="690px"  mode="embedded"
+	 apply="" id="ejecucionMantenimiento">
+<tabbox height="100%" width="100%">
+		<tabs>
+			<tab label="Mantenimiento"></tab>
+			<tab label="Act. Complementarias"></tab>
+		</tabs>
+		<tabpanels height="100%" width="100%">
+			<tabpanel height="100%">				
+			
+			<panel collapsible="false" width="100%" title="Listado de Actividades en Ejecución">
+				<panelchildren>
+						<div width="100%" height="100%">
+							<space width="15%"/>
+							<label style="font-weight:bold">Descripción:</label>
+							<label>Mantenimiento del Campo</label>
+					<grid height="30%" style="boder:none">
+							<columns>
+								<column width="17%"></column>
+								<column width="30%"></column>
+								<column width="17%"></column>
+								<column width="36%"></column>
+							</columns>
+							<rows style="border:none">
+
+							<row style="border:none">
+								<label style="font-weight: bold;"
+									value="Fecha de inicio">
+								</label>
+								 <textbox disabled="true" value="21/12/2011" width=" 50%" style="color:black !important;"></textbox>
+								
+								<label style="font-weight: bold;"
+									value="Hora de Inicio">
+								</label>
+									<timebox/>
+							</row>
+				
+							<row style="border:none">
+								<label style="font-weight: bold;"
+									value="Fecha de Culminación">
+								</label>
+								<datebox id="ppend" width="80%" />
+								<label style="font-weight: bold;"
+									value="Hora de Culminación">
+								</label>
+								<timebox />
+							</row>
+
+							<row style="border:none">
+								<label value="Estado" style="font-weight: bold;"></label>
+								<progressmeter width="90%" value="27"></progressmeter>
+								<label style="font-weight: bold;" value="Instalación"></label>
+							    <textbox disabled="true" value="Campo" width=" 80%" style="color:black !important;"></textbox>
+							</row>
+
+							<row style="border:none">
+									 <label style="font-weight: bold;" value="Responsable" visible="false"></label>
+									<!-- Estos campos de codigo no son visibles porque es para el control de la base de datos -->
+								<label value="codigo" style="font-weight: bold" visible=" false" > </label>
+									<textbox visible="false"></textbox>
+							</row>
+						</rows>
+	      </grid>
+							<panel collapsible="false" title="Lista de Tareas" width="100%" height="100%">
+								<panelchildren>
+												<grid width="100%" height="150px">
+													<columns>
+														<column label="Tarea" width="35%"/>
+														<column label="Personal Asignado" width="35%"/>
+														<column label="Ejecutada" width="15%"/>
+													</columns>
+													<rows droppable="true" >
+														<row>
+															<label>Quitar Hierba</label>
+															<hbox>
+																<textbox value="Anibal Moreno"> </textbox>
+																<button image="/Recursos/Imagenes/consultar.ico"></button>
+															</hbox>
+															<div align="center">
+																<button image="../Recursos/Imagenes/aceptar.ico"/>
+															</div>
+														</row>
+														<row>
+															<label>Rastrillar el campo</label>
+															<hbox>
+																<textbox value="Eduardo Quintero"> </textbox>
+																<button image="/Recursos/Imagenes/consultar.ico"></button>
+															</hbox>
+															<div align="center">
+				
+																<button image="../Recursos/Imagenes/cancelar.ico"/>
+															</div>
+														</row>
+														<row>
+															<label>Regar el campo</label>
+															<hbox>
+																<textbox value="Pedro Pérez"> </textbox>
+																<button image="/Recursos/Imagenes/consultar.ico"></button>
+															</hbox>
+															<div align="center">
+																
+																<button image="../Recursos/Imagenes/cancelar.ico"/>
+															</div>
+														</row>
+														<row>
+															<label>Cortar grama</label>
+															<hbox>
+																<textbox value="Juan González"> </textbox>
+																<button image="/Recursos/Imagenes/consultar.ico"></button>
+															</hbox>
+															<div align="center">
+																<button image="../Recursos/Imagenes/aceptar.ico"/>
+															
+															</div>
+														</row>
+													</rows>
+												</grid>
+		
+								</panelchildren>
+							</panel>
+							</div>
+							
+		
+		
+				</panelchildren>
+			</panel>
+			
+					<div align="center">
+				<hbox>
+					<label>Desea Agregar Tareas</label>
+					<checkbox onCheck="mostrarTareas()"
+						id="check">
+					</checkbox>
+
+				</hbox>
+			</div>
+			
+		
+		
+			
+	</tabpanel>
+
+</tabpanels>
+</tabbox>
+<window title="Materiales Requeridos">
+				<grid>
+
+					<columns>
+						<column></column>
+						<column></column>
+					</columns>
+
+					<rows>
+						<row>
+							<window title="Lista de Materiales"
+								height="150px" width="100%">
+								<listbox width="100%" height="100%"
+									vflex="true">
+									<listhead>
+										<listheader label="Material"
+											width="30%">
+										</listheader>
+										<listheader label="Descripcion"
+											width="55%">
+										</listheader>
+										<listheader label="Cantidad"
+											width="15%">
+										</listheader>
+
+									</listhead>
+									<listitem>
+										<listcell label="Cal"></listcell>
+										<listcell label="Saco de 1kg"></listcell>
+										<listcell>
+											<doublebox width="80%"
+												value="1">
+											</doublebox>
+										</listcell>
+
+									</listitem>
+									<listitem>
+										<listcell
+											label="Arcilla calcinada">
+										</listcell>
+										<listcell label="Saco de 1kg"></listcell>
+										<listcell>
+											<doublebox width="80%"
+												value="1">
+											</doublebox>
+										</listcell>
+									</listitem>
+
+								</listbox>
+							</window>
+							
+						</row>
+					</rows>
+				</grid>
+
+			</window>
+				<div align="center">
+				<hbox>
+					<label>Desea Agregar Materiales</label>
+					<checkbox onCheck="mostrarMateriales()"
+						id="seleccionar">
+					</checkbox>
+
+				</hbox>
+			</div>
+			
+
+			
+	<grid>
+		<columns>
+			<column width="100%"></column>
+		</columns>
+		<rows>
+			<row width="100%">
+				<div align="right">
+					<button id="guardar" label="Guardar"
+						image="/Recursos/Imagenes/guardar.ico">
+					</button>
+					<button id="modificar" label="Modificar"
+						image="/Recursos/Imagenes/editar.ico">
+					</button>
+					<button id="imprimir" label="Imprimir"
+						image="/Recursos/Imagenes/imprimir.ico">
+					</button>
+					<button id="cancelar" label="Cancelar"
+						image="/Recursos/Imagenes/cancelar.ico">
+					</button>
+					<button id="salir" label="Salir"
+						image="/Recursos/Imagenes/salir.png">
+					</button>
+				</div>
+
+			</row>
+		</rows>
+	</grid>
+
+   	<zscript>
+	public void Alerta() {
+		PanelDetalle.setOpen(true);
+	}
+	public void mostrarPanelTareas() {
+		if (check.isChecked() == true)
+			panelTarea.setVisible(true);
+		else
+			panelTarea.setVisible(false);
+
+	}
+		public void mostrarTareas() {
+		Executions.createComponents("/Logistica/Tareas_Mantenimiento.zul",
+				ejecucionMantenimiento, null);
+	}
+		public void mostrarMateriales() {
+		Executions.createComponents("/Logistica/Materiales_Mantenimiento.zul",
+				ejecucionMantenimiento, null);
+	}
+   </zscript>
+   
+	
+</window>
+</zk>
