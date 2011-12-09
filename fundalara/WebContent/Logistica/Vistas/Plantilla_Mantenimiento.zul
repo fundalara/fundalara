@@ -6,12 +6,13 @@
 		<panelchildren>
 			<div align="left"></div>
 			<hbox>
-				<label value="Código: "></label>
-				<textbox width="60"></textbox>
 
 				<label value="Descripción: "></label>
 				<textbox></textbox>
+				<space width="90"></space>
 				<label value="Tipo: "></label>
+				<label value="Código: " visible="false"></label>
+				<textbox width="5"  visible="false"></textbox>
 				<combobox></combobox>
 			</hbox>
 			<grid>

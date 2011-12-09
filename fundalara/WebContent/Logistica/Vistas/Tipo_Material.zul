@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?page title="Tipo de Material" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Tipo de Material" border="normal" width="690px" id="tipoMaterial" apply="controlador.logistica.TipoMaterialControlador">
+		<grid>
+			<columns>
+				<column></column>
+				<column></column>
+				<column></column>
+				<column></column>
+			</columns>
+
+			<rows>
+
+				<row>
+					<label value="Nombre"></label>
+					<textbox id="txtNombre" value="@{Clase.descripcion}"></textbox>
+				</row>
+				<row>
+					<label value="Clasificación del Material"></label>
+					<combobox width="15%" id="cmbClases"
+						constraint="no empty"
+						model="@{tipoMaterial$composer.getClasesMateriales}">
+						<comboitem self="@{each=cm}"
+							label="@{cm.descripcion }" />
+					</combobox>
+				</row>
+
+			</rows>
+
+		</grid>
+
+
+		<panel title="Tipos de Materiales Registrados"
+			collapsible="true">
+			<panelchildren>
+				<listbox  id="lista" model="@{tipoMaterial$composer.getTiposMateriales}" selectedItem="@{Clase}">
+					<listitem self="@{each='tm'}" value="@{tm}">
+						<listcell  label="@{tm.getDescripcion}" ></listcell>
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Guardar" id="btnGuardar"
+				image="/Recursos/Imagenes/guardar.ico">
+			</button>
+			<button label="Eliminar"
+				image="/Recursos/Imagenes/guardar.ico" id="btnEliminar">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+	</window>
+</zk>

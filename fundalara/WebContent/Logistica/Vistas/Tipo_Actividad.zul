@@ -1,6 +1,6 @@
 <?page title="Tipo de Actividad" contentType="text/html;charset=UTF-8"?>
 <window title="Tipo de Actividad" border="normal" width="600px" 
-	maximizable="true" minimizable="true" closable="true" sizable="true" mode="modal">
+	 sizable="true" mode="modal">
 	<panel title="Actividad" collapsible="false">
 		<panelchildren>
 			<hbox width="100%">
@@ -38,7 +38,7 @@
 			</panelchildren>
 			</panel>
 			<panel title="Lista de Actividades Disponibles" open="true"
-			width="100%">
+			width="100%" collapsible="true">
 			<panelchildren>
 			<grid width="100%">
 					<columns >
@@ -72,17 +72,7 @@
 						 
 					</rows>
 				</grid>
-			<space height="4px"></space>
-				<div align="right">
-			<hbox>
-			<label value="Creada el:"></label>
-			<datebox></datebox>
-			<label value="A las:"></label>
-			<timebox></timebox>
-			<label value="Por:"></label>
-			<textbox></textbox>
-			</hbox>
-			</div>
+			
 			
 			<space height="1%"></space>
 		</panelchildren>

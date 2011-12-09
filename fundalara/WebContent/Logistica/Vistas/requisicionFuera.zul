@@ -4,9 +4,9 @@
 		id="formRequisicion" mode="embedded" closable="true">
 		<panel height="12%">
 			<panelchildren>
-				<label>Id Requisición</label>
-				<intbox value="001" />
-				<space width="10%" />
+				<label visible="false">Id Requisición</label>
+				<intbox visible="false" value="001" />
+				<space visible = "false"/>
 				<label>Fecha</label>
 				<datebox />
 				<space width="40%" />

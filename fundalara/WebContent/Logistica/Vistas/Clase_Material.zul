@@ -1,0 +1,55 @@
+<?page title="Clasificación del Material" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?page title="Clasificación de Mantenimiento" contentType="text/html;charset=UTF-8"?>
+
+
+<zk>
+	<window title="Clasificación del Material" border="normal" width="690px" id="clasificacionMaterial" apply="controlador.logistica.ClaseMaterialControlador">
+		<grid>
+			<columns>
+				<column></column>
+				<column></column>
+				<column></column>
+				<column></column>
+			</columns>
+
+			<rows>
+				
+				<row>
+					<label value="Nombre"></label>
+					<textbox id="txtNombre" value="@{Clase.descripcion}"></textbox>
+				</row>
+				
+						</rows>
+
+		</grid>
+
+
+		<panel title="Clasificación de Materiales Registrados" collapsible="true">
+			<panelchildren>
+				
+				<listbox  id="lista" model="@{clasificacionMaterial$composer.clasesMateriales}" selectedItem="@{Clase}">
+					<listitem self="@{each='cm'}" value="@{cm}">
+						<listcell  label="@{cm.getDescripcion}" ></listcell>
+					</listitem>
+				</listbox>
+				
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico" id="btnGuardar">
+			</button>
+			<button label="Eliminar"
+				image="/Recursos/Imagenes/guardar.ico" id="btnEliminar">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+	</window>
+</zk>

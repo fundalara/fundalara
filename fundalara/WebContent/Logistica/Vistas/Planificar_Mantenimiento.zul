@@ -7,74 +7,50 @@
 	<grid height="30%" style="boder:none">
 		<columns>
 			<column width="17%"></column>
-			<column width="30%"></column>
+			<column width="40%"></column>
 			<column width="17%"></column>
 			<column width="36%"></column>
 		</columns>
 		<rows style="border:none">
 			<row style="border:none">
-				<label style="font-weight: bold;" value="Código"></label>
-				<textbox disabled="true" width="90%"></textbox>
 				<label style="font-weight: bold;" value="Descripción"></label>
-				<textbox disabled="true" width="95%"></textbox>
-			</row>
+			<hbox>
+				<combobox >
+					<comboitem label="Mantenimiento de Campo" />
+					<comboitem label="Mantenimiento de Oficinas" />
+				</combobox>
 
-			<row style="border:none">
-				<label style="font-weight: bold;"
-					value="Fecha de inicio">
-				</label>
-				<datebox id="ppbegin" width="80%" />
-				<label style="font-weight: bold;"
-					value="Hora de Inicio">
-				</label>
-				<hbox>
-					<timebox />
 					<button label="Periodicidad"
 						onClick="verPeriodicidad()"
 						image="/Recursos/Imagenes/calendario.ico">
 					</button>
+				
 				</hbox>
-			</row>
-
-			<row style="border:none">
-				<label style="font-weight: bold;"
-					value="Fecha de Culminación">
-				</label>
-				<datebox id="ppend" width="80%" />
-				<label style="font-weight: bold;"
-					value="Hora de Culminación">
-				</label>
-				<timebox />
-			</row>
-
-			<row style="border:none">
-				<label value="Estado" style="font-weight: bold;"></label>
-				<progressmeter width="90%" value="27"></progressmeter>
-				<label style="font-weight: bold;" value="Responsable"></label>
-				<hbox>
-					<textbox></textbox>
-					<button image="/Recursos/Imagenes/consultar.ico"></button>
-				</hbox>
-			</row>
-
-			<row style="border:none">
 				<label value="Tipo" style="font-weight: bold;"></label>
 				<combobox width="80%">
 					<comboitem label="Preventivo" />
 					<comboitem label="Correctivo" />
 				</combobox>
+				
+			</row>
+
+			<row style="border:none">
 				<label value="Prediseñada" style="font-weight: bold;"></label>
 				<hbox>
 					<textbox></textbox>
 					<button image="/Recursos/Imagenes/consultar.ico"></button>
 				</hbox>
-			</row>
-			<row style="border:none">
-				<label style="font-weight: bold;" value="Ubicación"></label>
+				<label style="font-weight: bold;" value="Instalación"></label>
 				<hbox>
 					<textbox></textbox>
 					<button image="/Recursos/Imagenes/consultar.ico"></button>
 				</hbox>
+			</row>
+			<row> 
+			<!-- Estos campos de codigo no son visibles porque es para el control de la base de datos -->
+				<label value="Codigo" style="font-weight: bold"  visible="false"> </label>
+				<textbox value=" " visible="false">  </textbox>
+			
 			</row>
 		</rows>
 	</grid>
@@ -96,11 +72,12 @@
 								<listbox width="100%" height="100%">
 									<listhead>
 										<listheader label="Tarea"
-											width="50%">
+											width="30%">
 										</listheader>
 										<listheader
 											label="Descripción">
 										</listheader>
+										
 									</listhead>
 									<listitem>
 										<listcell
@@ -109,6 +86,7 @@
 										<listcell
 											label="Mantener la altura del cesped">
 										</listcell>
+									
 									</listitem>
 									<listitem>
 										<listcell
@@ -117,6 +95,7 @@
 										<listcell
 											label="Agregar nutrientes al campo">
 										</listcell>
+										
 									</listitem>
 									<listitem>
 										<listcell
@@ -125,6 +104,7 @@
 										<listcell
 											label="Regar el campo">
 										</listcell>
+										
 									</listitem>
 									<listitem>
 										<listcell
@@ -133,6 +113,7 @@
 										<listcell
 											label="Alisar áreas sin cesped">
 										</listcell>
+										
 									</listitem>
 
 								</listbox>
@@ -151,13 +132,16 @@
 							</div>
 							<window title="Lista de Tareas Agregadas"
 								height="150px" width="100%">
-								<listbox width="100%">
+									<listbox width="100%" height="100%">
 									<listhead>
 										<listheader label="Tarea"
-											width="50%">
+											width="30%">
 										</listheader>
 										<listheader
-											label="Responsable">
+											label="Descripción">
+										</listheader>
+										<listheader
+											label="Personal">
 										</listheader>
 									</listhead>
 									<listitem>
@@ -165,17 +149,37 @@
 											label="Cortar Cesped">
 										</listcell>
 										<listcell
-											label="Aníbal Moreno">
+											label="Mantener la altura del cesped">
+										</listcell>
+											<listcell>
+											<hbox>
+											   <textbox value="Juan González"> </textbox>
+											   <button image="/Recursos/Imagenes/consultar.ico"></button>
+											</hbox>
 										</listcell>
 									</listitem>
 									<listitem>
 										<listcell
-											label="Irrigar Campo">
+											label="Fertilizar Campo">
 										</listcell>
 										<listcell
-											label="Eduardo Quintero">
+											label="Agregar nutrientes al campo">
+										</listcell>
+											<listcell>
+											<hbox>
+											   <textbox value="Pedro Pérez"> </textbox>
+											   <button image="/Recursos/Imagenes/consultar.ico"></button>
+											</hbox>
 										</listcell>
 									</listitem>
+									<listitem>
+
+									
+									</listitem>
+									<listitem>
+					
+									</listitem>
+
 								</listbox>
 							</window>
 						</row>
@@ -186,19 +190,6 @@
 						<column width="100%"></column>
 					</columns>
 					<rows>
-						<row id="fila4">
-							<div align="right">
-								<label value="Responsable por tarea "></label>
-								<textbox width="25%"></textbox>
-								<button label="Buscar Responsable"
-									image="/Recursos/Imagenes/consultar.ico">
-								</button>
-								<button label="Asignar Tarea(s)"
-									image="/Recursos/Imagenes/consultar.ico"
-									onClick="asigPersoanlxTarea()">
-								</button>
-							</div>
-						</row>
 					</rows>
 				</grid>
 			</window>
@@ -206,68 +197,77 @@
 
 			<window title="Materiales Requeridos">
 				<grid>
-
-					<columns>
-						<column></column>
-						<column></column>
-					</columns>
-
-					<rows>
-						<row>
-							<window title="Lista de Materiales"
-								height="150px" width="100%">
-								<listbox width="100%" height="100%"
-									vflex="true">
-									<listhead>
-										<listheader label="Material"
-											width="30%">
-										</listheader>
-										<listheader label="Descripcion"
-											width="55%">
-										</listheader>
-										<listheader label="Cantidad"
-											width="15%">
-										</listheader>
-
-									</listhead>
-									<listitem>
-										<listcell label="Cal"></listcell>
-										<listcell label="Saco de 1kg"></listcell>
-										<listcell>
-											<doublebox width="80%"
-												value="1">
-											</doublebox>
-										</listcell>
-
-									</listitem>
-									<listitem>
-										<listcell
-											label="Arcilla calcinada">
-										</listcell>
-										<listcell label="Saco de 1kg"></listcell>
-										<listcell>
-											<doublebox width="80%"
-												value="1">
-											</doublebox>
-										</listcell>
-									</listitem>
-
-								</listbox>
-							</window>
-							<div align="center">
-								<vbox>
-									<button
-										image="/Recursos/Imagenes/agregar.ico"
-										onClick="solicitudMaterial()">
-									</button>
-									<button
-										image="/Recursos/Imagenes/quitar.ico">
-									</button>
-								</vbox>
-							</div>
-						</row>
-					</rows>
-				</grid>
+	
+			<columns>
+			    <column width="40%"></column>
+			  	<column width="5%"></column>
+			  	<column width="40%"></column>
+			</columns>
+			
+			<rows>
+			   <row id="fila5" visible="true">
+					<window title="Lista de Materiales" height="150px" width="100%">
+						<listbox width="100%" height="100%">
+							<listhead>
+								<listheader label="Material" width="30%"></listheader>
+								<listheader label="Descripción"></listheader>
+							</listhead>
+							<listitem>
+								<listcell label="Cal"></listcell>
+							    <listcell label="Saco de 1kg"></listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Arcilla calcinada"></listcell>
+								<listcell label="Saco de 1kg"></listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Rastillo"></listcell>
+							    <listcell label="Para Jardín"></listcell>
+							</listitem>
+							<listitem>
+							    <listcell label="Apisonador"></listcell>
+								<listcell label="Modelo MT74-F"></listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Pulverizador"></listcell>
+								<listcell label="Pequeño estilo mochila"></listcell>
+							</listitem>
+					   </listbox>
+				    </window>
+					  <div align="center">
+						   <button id="agregarM" image="/Recursos/Imagenes/agregar.ico">
+						   </button>
+						   <button image="/Recursos/Imagenes/quitar.ico">
+						   </button>
+					  </div>
+					  <window title="Lista de Materiales Solicitados"
+							height="150px" width="100%">
+							<listbox width="100%">
+								<listhead>
+									<listheader label="Material" width="20%"></listheader>
+									<listheader label="Descripción" width="45%"></listheader>
+									<listheader label="Cant. Solicitada"></listheader>
+								</listhead>
+								<listitem>
+								    <listcell label="Cal"></listcell>
+							        <listcell label="Saco de 1kg"></listcell>
+									<listcell >
+									<doublebox width="80%" value="1">  </doublebox>
+									</listcell>
+								</listitem>
+								<listitem>
+								    <listcell label="Arcilla calcinada"></listcell>
+								    <listcell label="Saco de 1kg"></listcell>
+									<listcell >
+									<doublebox width="80%" value="1">  </doublebox>
+									</listcell>
+								</listitem>
+							</listbox>
+						</window>
+			      </row>
+					
+		  </rows>
+	</grid>	
 
 			</window>
 

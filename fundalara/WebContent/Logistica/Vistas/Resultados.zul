@@ -19,7 +19,7 @@
 				<panelchildren>
 				<grid width="100%" height="120px">
 					<columns>
-						<column label="Código" width="10%"/>
+						<column label="Código" width="10%" visible="false"/>
 						<column label="Descripción" width="30%"/>
 						<column label="Tipo" width="20%"/>
 						<column label="Periódico" width="20%"/>
@@ -63,9 +63,8 @@
 			id="PanelDetalle2" movable="true">
 				<panelchildren>
 						<div width="100%" height="100%">
-							<label style="font-weight:bold">Código:</label>
-							<label>001</label>
-							<space width="15%"/>
+							<label style="font-weight:bold" visible="false">Código:</label>
+							<label visible="false">001</label>
 							<label style="font-weight:bold">Descripción:</label>
 							<label>Mantenimiento del Campo</label>
 							<panel collapsible="false" title="Lista de Tareas" width="100%" height="100%">
