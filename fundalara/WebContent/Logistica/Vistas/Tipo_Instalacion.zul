@@ -1,0 +1,60 @@
+<?page title="Tipo de Intalación" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Tipo de Intalación" border="normal" width="690px">
+		<grid>
+			<columns>
+				<column></column>
+				<column></column>
+				
+			</columns>
+
+			<rows>
+				
+				<row>
+					<label value="Nombre"></label>
+					<textbox value="Deportiva"></textbox>
+				</row>
+				<row>
+					<label value="Descripción"></label>
+					<textbox multiline="true" height="40px"
+						width="300px" value="Instalación donde se realizan las actividades deportivas">
+					</textbox>
+
+				</row>
+				
+						</rows>
+
+		</grid>
+
+
+		<panel title="Tipo de Instalaciones Registradas" collapsible="true">
+			<panelchildren>
+				<grid>
+					<columns>
+					
+						<column label="Nombre" />
+
+					</columns>
+					<rows>
+						<row>
+							
+							<label value="Oficina"></label>
+						</row>
+					
+				</grid>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+	</window>
+</zk>

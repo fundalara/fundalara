@@ -10,10 +10,11 @@
 		</columns>
 		<rows style="border:none">
 			<row style="border:none">
-				<label style="font-weight: bold;" value="Código"></label>
-				<textbox disabled="true" width="90%"></textbox>
 				<label style="font-weight: bold;" value="Descripción"></label>
 				<textbox disabled="true" width="95%"></textbox>
+				<label style="font-weight: bold;" value="Código" visible="false"></label>
+				<textbox disabled="true" width="90%" visible="false"></textbox>
+				
 			</row>
 
 			<row style="border:none">
@@ -41,22 +42,19 @@
 				<label style="font-weight: bold;"
 					value="Hora de Culminación">
 				</label>
-				<timebox />
-			</row>
-
-			<row style="border:none">
-				<label value="Estado" style="font-weight: bold;"></label>
-				<progressmeter width="90%" value="27"></progressmeter>
-				<label style="font-weight: bold;" value="Responsable"></label>
+				<timebox width="50%" />
+				<label style="font-weight: bold;" value="Responsable" visible="true"></label>
 				<hbox>
-					<textbox></textbox>
-					<button image="/Recursos/Imagenes/consultar.ico"></button>
+					<textbox ></textbox>
+					<button image="/Recursos/Imagenes/consultar.ico" visible="true"></button>
 				</hbox>
 			</row>
 
 			<row style="border:none">
+				<label value="Estado" style="font-weight: bold;"></label>
+				<progressmeter width="50%" value="27"></progressmeter>
 				<label value="Tipo" style="font-weight: bold;"></label>
-				<combobox width="80%">
+				<combobox width="40%">
 					<comboitem label="Preventivo" />
 					<comboitem label="Correctivo" />
 				</combobox>
@@ -66,6 +64,13 @@
 					<button image="/Recursos/Imagenes/consultar.ico"></button>
 				</hbox>
 			</row>
+			
+			
+
+			<row style="border:none">
+			</row>
+			
+			
 		</rows>
 	</grid>
 

@@ -23,36 +23,13 @@
 					<textbox multiline="true" height="40px"
 						width="300px">
 					</textbox>
-				</row>
-				<row>
-					<label value="Fecha"></label>
-					<textbox value="24/11/2001"></textbox>
-				</row>
 
-				<row>
-					<label value="Responsable del Registro"></label>
-					<div>
-						<textbox value="Gabriela Hernandez"></textbox>
-						<button
-							image="/Recursos/Imagenes/consultar.ico">
-						</button>
-					</div>
 				</row>
 
 			</rows>
 
 		</grid>
-		<div align="right">
-			<button label="Guardar"
-				image="/Recursos/Imagenes/guardar.ico">
-			</button>
-			<button label="Cancelar"
-				image="/Recursos/Imagenes/cancelar.ico">
-			</button>
-			<button label="Salir"
-				image="/Recursos/Imagenes/atras.ico">
-			</button>
-		</div>
+
 
 		<panel title="Tareas Registradas" collapsible="true">
 			<panelchildren>
@@ -75,7 +52,17 @@
 				</grid>
 			</panelchildren>
 		</panel>
-
+		<div align="right">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
 
 	</window>
 </zk>

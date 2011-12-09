@@ -1,6 +1,6 @@
 <?page title="Tipo de Mantenimiento" contentType="text/html;charset=UTF-8"?>
-<window title="Tipo de Mantenimiento" border="normal" width="550px"
-	maximizable="true" minimizable="true" closable="true" sizable="true" mode="modal">
+<window title="Tipo de Mantenimiento" border="normal" width="550px" apply="controlador.logistica.TipoMantenimientoControlador"
+	sizable="true" mode="modal" id="TipoMantenimiento">
 	<panel title="Mantenimiento" collapsible="false">
 		<panelchildren>
 			<hbox width="100%">
@@ -10,79 +10,67 @@
 							<column width="30%" />
 						</columns>
 						<rows>
-							<row align="left">
-								<label value="Codigo" />
-								<textbox width="90%" value="123456"
-									disabled="true" />
-							</row>
+
+							
 							<row>
-								<label value="Descripcion " />
+								<label value="Nombre" />
 								<textbox width="90%" disabled="false"
-									multiline="true" height="40px"
-									value="Preventivo" />
+									multiline="true" height="40px" value="" id="txtDescripcion" />
 							</row>
+							
 						</rows>
 					</grid>
 				</div>
-				
-				
+
+
 			</hbox>
 			<space height="4px"></space>
 			<panel title="Lista de Actividades Disponibles" open="true"
-			width="100%">
-			<panelchildren>
-			<grid width="100%">
-					<columns >
-						<column label="Codigo" width="15%"  />
-						<column label="Descripción" width="60%" />
+				width="100%" collapsible="true">
+				<panelchildren>
+					<grid width="100%">
+						<columns>
 
-					</columns>
-					<rows>
-						 <row>
-						   
-						 	<label> 123456</label>
-						 	<label>Preventivo</label>
+							<column label="Descripción" width="60%"  />
+
+						</columns>
+						<rows>
+							<row>
 
 
-						 </row>
-						 <row>
-						    
-						 	<label> 789123</label>
-						 	<label>Correctivo</label>
+								<label>Preventivo</label>
 
 
-						 </row>
-						 <row>
-						 	
-						 	<label> 456789</label>
-						 	<label>de Rutina</label>
+							</row>
+							<row>
 
-						 </row>
-						 
-					</rows>
-					
-				</grid>
 
-		</panelchildren>
-	</panel>
-	<space height="1%"></space>
-				<div align="right">
-			<hbox>
-			<label value="Creada el:"></label>
-			<datebox></datebox>
-			<label value="A las:"></label>
-			<timebox></timebox>
-			<label value="Por:"></label>
-			<textbox></textbox>
-			</hbox>
-			</div>
+								<label>Correctivo</label>
+
+
+							</row>
+							<row>
+
+
+								<label>de Rutina</label>
+
+							</row>
+
+						</rows>
+
+					</grid>
+
+				</panelchildren>
+
+			</panel>
+			<space height="1%"></space>
+
 			<space height="1%"></space>
 		</panelchildren>
 	</panel>
-
 	<div align="right">
 		<button label="Guardar" image="./Recursos/Imagenes/guardar.ico"
-			orient="horizontal" width="100px" />
+			orient="horizontal" width="100px" id="btnGuardar" />
 		<space />
 		<button label="Cancelar"
 			image="./Recursos/Imagenes/cancelar.ico" orient="horizontal"
