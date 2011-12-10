@@ -1,0 +1,289 @@
+<?page title="Balance General" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="WinB" title="Balance General" border="normal"
+		width="650px">
+		<panel title="16 de Noviembre 2011, 10:00am">
+			<panelchildren>
+				<groupbox>
+
+					<grid>
+						<columns></columns>
+						<rows>
+							<row>
+								<label>E.B.M FUNDALARA</label>
+							</row>
+							<row>
+								<label>
+									DEL 30 DE NOVIEMBRE 2011 AL 30 DE
+									DICIEMBRE 2011
+								</label>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
+
+		</panel>
+
+		<panel title=" 1. ACTIVOS">
+			<panelchildren>
+				<groupbox>
+
+
+					<grid>
+						<columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+							<row>
+								<label>1.1 ACTIVOS CORRIENTES:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.1.1 Caja Chica</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.1.2 Caja</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.1.3 Banco</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									1.1.4 Cuentas por Cobrar a
+									Representantes
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									1.1.5 Inventario de Uniformes
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL ACTIVOS CORRIENTES:</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.2 ACTIVOS FIJOS:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									1.2.1 Maquinaria y Equipos
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>- Menos Depreciacion Acumulada</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.2.2 Muebles y Enseres</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									- Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.2.3 Equipos de Oficina</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									-  Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+
+							<row>
+								<label>1.2.4 Costrucciones</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									- Menos Depreciacion Acumulada
+								</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>1.2.5 Terrenos</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL ACTIVOS FIJOS:</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+							<row>
+								<label>TOTAL ACTIVOS:</label>
+								<label>xxx</label>
+								<label></label>
+							</row>
+						</rows>
+
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
+
+		</panel>
+		<panel title="2. PASIVOS">
+			<panelchildren>
+				<groupbox>
+
+
+					<grid>
+						<columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+
+							<row>
+								<label>2.1 PASIVOS CORRIENTES:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									2.1.1 Cuentas por Pagar a Proveedores
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>TOTAL PASIVOS CORRIENTE:</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>2.2 PASIVOS A LARGO PLAZO:</label>
+								<label></label>
+								<label></label>
+							</row>
+							<row>
+								<label>
+									2.2.1 Prestaciones y Liquidaciones
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									2.2.2 Bonos por pagar
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>
+									TOTAL PASIVOS A LARGO PLAZO:
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+							
+								<label>TOTAL PASIVOS:</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+						</rows>
+
+					</grid>
+				</groupbox>
+
+
+			</panelchildren>
+
+		</panel>
+		<panel title="3. PATRIMONIO">
+			<panelchildren>
+				<groupbox>
+
+
+					<grid>
+						<columns>
+							<column width="50%" align="left"></column>
+							<column width="25%" align="center"></column>
+							<column width="25%" align="center"></column>
+						</columns>
+						<rows>
+
+
+							<row>
+								<label>3.1 Capital</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+							<row>
+								<label>3.2 Utilidad</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+							<row>
+								<label>TOTAL PATRIMONIO:</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+
+							<row>
+								<label>
+									TOTAL PATRIMONIO Y PASIVOS:
+								</label>
+								<label></label>
+								<label>xxx</label>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<div align="right">
+					<button image="/Recursos/Imagenes/imprimir.ico"
+						onClick="" tooltiptext="/Aceptar" label="Imprimir" />
+
+					<button image="/Recursos/Imagenes/atras.ico"
+						onClick="" tooltiptext="Salir" label="Salir">
+						<attribute name="onClick">
+	WinB.onClose();
+</attribute>
+					</button>
+				</div>
+			</panelchildren>
+
+		</panel>
+	</window>
+</zk>

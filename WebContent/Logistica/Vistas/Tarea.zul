@@ -1,0 +1,68 @@
+<?page title="Tarea" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Tarea" border="normal" width="690px">
+		<grid>
+			<columns>
+				<column></column>
+				<column></column>
+				<column></column>
+				<column></column>
+			</columns>
+
+			<rows>
+				<row>
+					<label value="Código"></label>
+					<textbox value="0003"></textbox>
+				</row>
+				<row>
+					<label value="Nombre"></label>
+					<textbox value="Marcar Campo"></textbox>
+				</row>
+				<row>
+					<label value="Descripción"></label>
+					<textbox multiline="true" height="40px"
+						width="300px">
+					</textbox>
+
+				</row>
+
+			</rows>
+
+		</grid>
+
+
+		<panel title="Tareas Registradas" collapsible="true">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="Código" />
+						<column label="Nombre" />
+
+					</columns>
+					<rows>
+						<row>
+							<label>001</label>
+							<label>Rastrillar el Campo</label>
+						</row>
+						<row>
+							<label>002</label>
+							<label>Regar Campo</label>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+	</window>
+</zk>

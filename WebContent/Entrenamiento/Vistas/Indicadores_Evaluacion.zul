@@ -1,0 +1,382 @@
+<zk xmlns:h="xhtml" xmlns:zk="zk">
+	<div align="center">
+		<separator height="15px" />
+		<?page title="Auto Generated index.zul"?>
+		<div align="center">
+			<separator height="15px" />
+			<window id="wndIndicadorEvaluacion"
+				title="Indicadores de Evaluación" border="normal" width="675px"
+				height="" closable="true"
+				apply="controlador.entrenamiento.IndicadorEvaluacion">
+				<grid>
+					<rows>
+						<row width=".350px">
+							<hbox>
+								<vbox>
+									<tree width="250px" height="300px"
+										id="treeCategoria">
+										<treechildren>
+											<treeitem open="false">
+												<treerow
+													height="30px">
+													<treecell
+														label="Categoría" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="Preparatorio Nivel I" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="Preparatorio Nivel II" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="PreInfantil" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="Infantil" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="PreJunior" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="Junior" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+														</treechildren>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow
+															height="30px">
+															<treecell
+																label="Juvenil" />
+														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Actividad de Entrenamiento" />
+																</treerow>
+																<treechildren>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Pitcheo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Bateo" />
+																		</treerow>
+																	</treeitem>
+																	<treeitem
+																		open="false">
+																		<treerow>
+																			<treecell
+																				label="Defensiva" />
+																		</treerow>
+																	</treeitem>
+																</treechildren>
+															</treeitem>
+														</treechildren>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+										</treechildren>
+									</tree>
+									<hbox>
+										<combobox id="cmbCategoria"
+											value="-Categoria-" width="150px" height="20px"
+											autocomplete="true">
+											<comboitem
+												label="PreNivelI" />
+											<comboitem label="Infantil" />
+											<comboitem label="Juvenil" />
+										</combobox>
+									</hbox>
+									<combobox  id="cmbActividad"
+										value="-Actividades-" width="150px" height="20px"
+										autocomplete="true">
+										<comboitem label="Pitcheo" />
+										<comboitem label="Fildeo" />
+										<comboitem label="Velocidad" />
+									</combobox>
+								</vbox>
+								<space width="5px" />
+								<vbox>
+									<hbox align="center">
+										<label value="Indicador" />
+										<textbox id="txtIndicador"
+											width="130px" height="20px" />
+										<combobox id="cmbEscala"
+											value="-Escala de Medicion-" width="150px" height="20px"
+											autocomplete="true">
+											<comboitem label="ABC" />
+											<comboitem label="DEF" />
+											<comboitem label="GHI" />
+										</combobox>
+									</hbox>
+									<vbox align="center">
+										<listbox width="360px"
+											id="lbIndicador" height="330px" >
+											<listhead>
+												<listheader
+													label="Indicador" width="80px" align="center" />
+												<listheader
+													label="Escala" width="80px" align="center" />
+												<listheader
+													label="Valores" width="120px" align="center" />
+											</listhead>
+										</listbox>
+									</vbox>
+								</vbox>
+								<vbox>
+									<separator height="23px" />
+									<button
+										image="../../Recursos/Imagenes/agregar.ico" id="btnAgregar" />
+									<separator height="5px" />
+									<button
+										image="../../Recursos/Imagenes/editar.ico" id="btnModificar" />
+									<separator height="5px" />
+									<button
+										image="../../Recursos/Imagenes/quitar.ico" id="btnQuitar" />
+								</vbox>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+				<separator />
+				<div align="right">
+					<button image="../../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" id="btnCancelar" onClick="" />
+					<button image="../../Recursos/Imagenes/salir.png"
+						label="Salir" width="100px" id="btnSalir" />
+				</div>
+			</window>
+		</div>
+	</div>
+</zk>

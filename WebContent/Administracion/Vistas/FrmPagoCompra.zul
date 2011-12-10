@@ -1,0 +1,469 @@
+	<window id="PCompra" title="Facturas por pagar" border="normal" width="690px">
+		<zk>
+			<zscript><![CDATA[
+	public void mostrar() {
+		String var = CB.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+
+		}
+
+	}
+]]></zscript>
+			<panel collapsible="false" title="Datos Básicos" open="true">
+				<panelchildren>
+					<groupbox>
+						<caption label="Facturas por Proveedor"></caption>
+						<grid>
+							<columns>
+								<column label="" width="180px"
+									align="left">
+								</column>
+								<column label="" width="200px"
+									align="left">
+								</column>
+								<column label="" width="180px"
+									align="left">
+								</column>
+								<column label="" width="200px"
+									align="left">
+								</column>
+							</columns>
+							<rows>
+								<row>
+									<label>Proveedor</label>
+									<bandbox width="180px">
+										<bandpopup>
+											<vbox>
+												
+												<listbox
+													width="370px">
+													<listhead>
+														<listheader
+															label="Código" width="80px" />
+														<listheader
+															label="Nombre" width="80px" />
+														
+													</listhead>
+
+													<listitem>
+														<listcell
+															label="019282" />
+														<listcell
+															label="Distribuidor Uniformes" />
+														
+													</listitem>
+													<listitem>
+														<listcell
+															label="127333" />
+														<listcell
+															label="Distribuidor Arcilla" />
+														
+													</listitem>
+												</listbox>
+											</vbox>
+										</bandpopup>
+									</bandbox>
+									<label>Nro Factura</label>
+									<bandbox width="180px">
+										<bandpopup>
+											<vbox>
+												
+												<listbox
+													width="370px">
+													<listhead>
+														<listheader
+															label="Nº Factura" width="80px" />
+															<listheader
+															label="Monto" width="80px" />
+														<listheader
+															label="Fecha" width="80px" />
+													</listhead>
+
+													<listitem>
+														<listcell
+															label="56203" />
+														<listcell
+															label="4000Bs" />
+														<listcell
+															label="12/02/2011" />
+													</listitem>
+													<listitem>
+														<listcell
+															label="73504" />
+														<listcell
+															label="350Bs" />
+														<listcell
+															label="29/10/2011" />
+													</listitem>
+												</listbox>
+											</vbox>
+										</bandpopup>
+									</bandbox>
+
+								</row>
+								
+							</rows>
+								</grid>
+								<separator></separator>	
+								<div align="right">
+						<hbox>
+							<button
+								image="/Recursos/Imagenes/agregar.ico" onClick="" label=""
+								tooltiptext="Agregar a la Lista" />
+							<button
+								image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+								tooltiptext="Quitar de la Lista" />
+						</hbox>
+					</div>
+
+					</groupbox>
+									<groupbox width="390">
+										<caption>
+											Facturas a Pagar
+										</caption>
+										<div align="center">
+											<grid width="380px">
+												<columns>
+												<column label=""
+														width="20px">
+														<checkbox
+															id="on" onCheck="setOn()">
+														</checkbox>
+													</column>
+													<column label="Item"
+														width="40px" align="center">
+													</column>
+													<column
+														label="Nro. Factura" width="100px" align="center">
+													</column>
+													<column
+														label="Monto" width="80px" align="center">
+													</column>
+													<column
+														label="Fecha" width="100px" align="center">
+													</column>
+													<column
+														label="" width="30px" align="center">
+													</column>
+												</columns>
+												<rows>
+													<row>
+													<checkbox
+															id="c1">
+														</checkbox>
+														<label
+															value="1">
+														</label>
+														<label
+															value="56203">
+														</label>
+														<label
+															value="4000Bs">
+														</label>
+														<label
+															value="12/02/2011">
+														</label>
+														<button
+															image="/Recursos/Imagenes/consultar.ico"
+															tooltiptext="Consultar Factura">
+															<attribute name="onClick" >
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmConsultaMaterialesFact.zul", null,
+			null);
+]]>
+								</attribute>
+
+
+													
+														</button>
+													</row>
+													
+												</rows>
+											</grid>
+										</div>
+									</groupbox>
+								<separator></separator>
+
+
+
+
+
+							
+					
+
+
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" title="Datos del Pago"
+				open="false">
+				<panelchildren>
+					<div>
+						<grid>
+
+							<rows>
+
+								<row>
+									<grid>
+										<columns>
+											<column label=""
+												width="220px">
+											</column>
+											<column label=""
+												width="252px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+
+
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Forma de Pago">
+												</label>
+												<combobox id="CB"
+													onSelect="mostrar()" width="180px">
+													<comboitem value="1"
+														label="Efectivo">
+													</comboitem>
+													<comboitem value="2"
+														label="Débito">
+													</comboitem>
+													<comboitem value="3"
+														label="Crédito">
+													</comboitem>
+													<comboitem value="4"
+														label="Transferencia">
+													</comboitem>
+													<comboitem value="5"
+														label="Cheque">
+													</comboitem>
+												</combobox>
+												<label
+													value="Monto Cancelado">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+
+
+											</row>
+											<row id="row1"
+												visible="false">
+												<label
+													value="Nro. de Documento">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+												<label
+													value="Entidad Bancaria">
+												</label>
+												<combobox
+													width="180px">
+													<comboitem
+														label="Banesco">
+													</comboitem>
+													<comboitem
+														label="Mercantil">
+													</comboitem>
+													<comboitem
+														label="BOD">
+													</comboitem>
+													<comboitem
+														label="Provincial">
+													</comboitem>
+													<comboitem
+														label="Venezuela">
+													</comboitem>
+												</combobox>
+
+											</row>
+											<row id="row2"
+												visible="false">
+												<label
+													value="Tipo de Tarjeta">
+												</label>
+												<combobox
+													width="180px">
+													<comboitem
+														label="Visa">
+													</comboitem>
+													<comboitem
+														label="MarterCard">
+													</comboitem>
+													<comboitem
+														label="American Express">
+													</comboitem>
+												</combobox>
+
+											</row>
+										</rows>
+									</grid>
+								</row>
+								<row>
+									<div align="right">
+										<hbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												label="" tooltiptext="Agregar a la Lista" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick=""
+												label="" tooltiptext="Quitar de la Lista" />
+										</hbox>
+									</div>
+								</row>
+							</rows>
+
+						</grid>
+
+					</div>
+
+
+					<separator></separator>
+					<groupbox width="660px">
+						<caption>Diferentes Métodos de Pago</caption>
+
+						<div>
+							<grid>
+
+								<rows>
+
+									<row>
+										<grid width="650px">
+											<columns>
+											<column label=""
+													width="20px">
+													<checkbox id="on1"
+														onCheck="setOn()">
+													</checkbox>
+												</column>
+												<column label="Item"
+													width="40px">
+												</column>
+												<column
+													label="Forma de Pago" width="100px">
+												</column>
+												<column
+													label="Tarjeta" width="80px">
+												</column>
+												
+												<column
+													label="Banco" width="100px">
+												</column>
+												<column
+													label="Nro. de Documento" width="140px">
+												</column>
+												<column
+													label="Monto Cancelado" width="120px">
+												</column>
+
+
+											</columns>
+											<rows>
+											
+												<row>
+												<checkbox>
+													</checkbox>
+													<label value="1">
+													</label>
+													<label
+														value="Cheque">
+													</label>
+													<label
+														value="N/A"/>
+													
+													<label
+														value="Mercantil">
+													</label>
+													<label
+														value="001299300019920">
+													</label>
+												<label
+														value="4000Bs">
+													</label>
+												</row>
+											</rows>
+										</grid>
+
+									</row>
+								</rows>
+							</grid>
+							<separator></separator>
+							<div align="right">
+								<grid width="300px">
+									<rows>
+										<row>
+											<label value="Sub-Total">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+											<label value="Valor IVA">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+											<label value="Monto IVA">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+
+											<label
+												value="Monto Total">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+
+										
+
+									</rows>
+								</grid>
+							</div>
+
+						</div>
+					</groupbox>
+					<separator></separator>
+				</panelchildren>
+			</panel>
+			<div align="right">
+				<button image="/Recursos/Imagenes/guardar.ico"
+					onClick="" label="Pagar" />
+				<button image="/Recursos/Imagenes/cancelar.ico"
+					onClick="" label="Cancelar" />
+				<button image="/Recursos/Imagenes/atras.ico"
+				onClick="" tooltiptext="Salir" label="Salir" >
+				<attribute name="onClick">
+				PCompra.onClose();
+				</attribute>
+				
+				</button>
+			</div>
+		</zk>
+	</window>
+
+

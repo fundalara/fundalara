@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/calendar.css"?>
+<?component name="calendario" macro-uri="Calendario/Calendario.zul" inline="true"?>
+<!-- <?component name="leftPanel" macro-uri="Calendario/Left_Panel.zul" inline="true"?> -->
+<?component name="create" macro-uri="Calendario/createEvent.zul" inline="true"?>
+<?component name="edit" macro-uri="Calendario/editEvent.zul" inline="true"?>
+<?component name="toolbar" macro-uri="Calendario/toolbar.zul" inline="true"?>
+<?page title="Calendario" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Calendario" border="none" mode="embedded" closable="true"
+		width="690px" height="600px" apply="vista.general.Agenda">
+		<borderlayout>
+			<north>
+				<toolbar />
+			</north>
+			<west border="none">
+			</west>
+			<center border="none">
+				<calendario />
+			</center>
+			<east title="Tareas" width="15%" splittable="true" border="none"
+				collapsible="true" open="false">
+				<div>
+					<grid>
+						<rows>
+							<row>
+								<label value="Regar Campo" />
+							</row>
+							<row>
+								<label value="Limpiar Oficina A3" />
+							</row>
+							<row>
+								<label value="Barrer Sala de Reuniones" />
+							</row>
+							<row>
+								<label value="Vender Entradas" />
+							</row>
+							<row>
+								<label value="Realizar Copias para Reunion" />
+							</row>
+						</rows>
+					</grid>
+				</div>
+			</east>
+		</borderlayout>
+		<popup id="updateMsg" width="320px">
+			<label id="popupLabel" />
+			<timer id="timer" delay="1000" running="false" onTimer="updateMsg.close()" />
+		</popup>
+	</window>
+</zk>

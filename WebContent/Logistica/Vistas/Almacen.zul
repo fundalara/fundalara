@@ -1,0 +1,86 @@
+<?page title="Actualizar Almacén" contentType="text/html;charset=UTF-8"?>
+<zk>
+<zscript><![CDATA[
+	public void enlace(String cad) {
+		cuerpo.setSrc(cad);
+	}
+]]></zscript>
+
+<window title="Actualizar Almacén" border="normal" width="690px" height=""  >
+	<panel width="100%" height="100%">
+		<panelchildren>
+				<grid height="100%" width="100%">
+					<columns>
+						<column>
+						<label>Almacén</label>
+						</column>
+					</columns>
+					<rows>
+					<row>
+							<div>
+								<grid width="100%" height="130px">
+									<columns>
+										<column label="Código"></column>
+										<column label="Descripción"></column>
+										<column label="Cant. Añadida"></column>
+										<column label="U. Medida"></column>
+									</columns>
+								</grid>
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Código: "></label>
+								<space width="3%"></space>
+								<textbox width="10%"></textbox>
+								<space width="1%"></space>
+								<label value="Clasificación: "></label>
+								<combobox width="20%"></combobox>
+								<space width="1%"></space>
+								<label value="Tipo de Material: "></label>
+								<combobox width="14%"></combobox>
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Descripción: "></label>
+								<textbox multiline="true" height="30px" width="47%"></textbox>
+								<space width=""></space>
+								<label value="Almacén: "></label>
+								<textbox></textbox>
+							</div>
+							
+						</row>
+						<row>
+							<div>
+								<label value="Cantidad a Añadir: "></label>
+								<textbox></textbox>
+								<space width="1%"></space>
+								<label value="Unidad de Medida"></label>
+								<textbox></textbox>
+								<space width="1%"></space>
+								<button image="/Recursos/Imagenes/agregar.ico"></button>
+								<space width="1%"></space>
+								<button image="/Recursos/Imagenes/quitar.ico"></button>		
+							</div>
+						</row>	
+						
+						<row>
+							<hbox align="end" width="100%" pack="end">
+								<button label="Guardar" image="/Recursos/Imagenes/guardar.ico"></button>
+								<space width="1%"></space>
+								<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"></button>
+								<space width="1%"></space>
+								<button label="Salir" image="/Recursos/Imagenes/atras.ico"></button>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+		</panelchildren>
+	</panel>
+	
+	<div style="display:inline">
+			<include id="cuerpo" />
+	</div>
+</window>
+</zk>

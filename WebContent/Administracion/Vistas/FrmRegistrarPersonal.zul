@@ -1,0 +1,748 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window closable="true" id="RegPers" title="Ingreso de Personal"
+		border="normal" width="690px">
+
+		<zscript><![CDATA[
+	public void verformulario(String cad) {
+		Executions.createComponents(cad, RegPers, null);
+	}
+	public void enlace(String cad) {
+		cuerpo.setSrc(cad);
+	}
+	public void HistLab() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/FrmHistoricoLaboral.zul", null, null);
+	}
+]]></zscript>
+
+		<tabbox>
+			<tabs>
+				<tab label="Datos Personales"></tab>
+				<tab label="Datos Académicos"></tab>
+				<tab label="Datos Laborales"></tab>
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+					<groupbox style="border:none;" closable="false">
+						<grid style="border:none;" oddRowSclass="none"
+							width="100%">
+							<columns>
+								<column label="" width="110px"></column>
+								<column label="" width="225px"></column>
+								<column label="" width="130px"></column>
+								<column label="" width="225px"></column>
+							</columns>
+							<rows style="border:none;">
+								<row style="border:none" spans="1,3">
+									<label value="Cédula" />
+									<hbox align="center">
+										<combobox value=" " width="20px"
+											readonly="true">
+											<comboitem label="V">
+											</comboitem>
+											<comboitem label="E">
+											</comboitem>
+										</combobox>
+										<textbox width="95px"></textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+										<space width="5px"></space>
+										<button label="" onClick=""
+											image="/Recursos/Imagenes/consultar.ico" />
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Primer Nombre" />
+									<hbox>
+										<textbox>
+											</textbox>
+											<label value="(*)"
+												style="color:red">
+											</label>
+									</hbox>
+									<label value="Segundo Nombre" />
+									<textbox></textbox>
+								</row>
+								<row style="border:none">
+									<label value="Primer Apellido" />
+									<hbox>
+										<textbox></textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Segundo Apellido" />
+									<textbox></textbox>
+
+								</row>
+								<row style="border:none">
+									<label value="Fecha Nacimiento" />
+									<hbox>
+										<datebox width="80px"
+											format="dd/MM/yyyy">
+										</datebox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Género" />
+									<hbox>
+										<radiogroup>
+											<radio label="Masculino" />
+											<radio label="Femenino" />
+										</radiogroup>
+
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Estado Civil" />
+									<hbox>
+										<combobox value="--Seleccione--"
+											readonly="true">
+											<comboitem
+												label="Soltero(a)">
+											</comboitem>
+											<comboitem
+												label="Casado(a)">
+											</comboitem>
+											<comboitem
+												label="Divorciado(a)">
+											</comboitem>
+											<comboitem
+												label="Viudo(a)">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Nro Hijos" />
+									<hbox>
+										<spinner width="30px"></spinner>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox style=" border-color:orange "
+						closable="false">
+						<caption label="Datos de Contacto"></caption>
+						<grid oddRowSclass="none" style="border:none">
+							<columns>
+								<column width="110px"></column>
+								<column width="225px"></column>
+								<column width="110px"></column>
+								<column width="225px"></column>
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Teléfono Habitación" />
+									<hbox>
+										<combobox value="-" width="40px"
+											readonly="true">
+											<comboitem label="0251"></comboitem>
+											<comboitem label="0252"></comboitem>
+											<comboitem label="0253"></comboitem>
+										</combobox>
+										<textbox width="100px"></textbox>
+									</hbox>
+
+									<label value="Teléfono Celular" />
+									<hbox>
+										<combobox value="-" width="40px"
+											readonly="true">
+											<comboitem label="0424"></comboitem>
+											<comboitem label="0414"></comboitem>
+											<comboitem label="0426"></comboitem>
+											<comboitem label="0416"></comboitem>
+											<comboitem label="0412"></comboitem>
+										</combobox>
+
+										<textbox width="100px"></textbox>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Correo Electrónico" />
+									<textbox width="95%"></textbox>
+									<label value="Twitter" />
+									<textbox width="165px"></textbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox style="border-color:orange"
+						closable="false">
+						<caption label="Datos de Residencia" />
+						<grid style="border:none;" oddRowSclass="none"
+							width="100%">
+							<columns>
+								<column width="110px" />
+								<column width="225px" />
+								<column width="110px" />
+								<column width="225px" />
+							</columns>
+							<rows>
+								<row style="border:none;">
+									<label value="Estado" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem label="Lara" />
+											<comboitem
+												label="Portuguesa" />
+											<comboitem label="Yaracuy" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+									<label value="Municipio" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem
+												label="Andrés Eloy Blanco" />
+											<comboitem label="Crespo" />
+											<comboitem
+												label="Iribarren" />
+											<comboitem label="Jiménez" />
+											<comboitem label="Morán" />
+											<comboitem
+												label="Palavecino" />
+											<comboitem
+												label="Simón Planas" />
+											<comboitem label="Torres" />
+											<comboitem label="Urdaneta" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Parroquia" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem
+												label="Barquisimeto" />
+											<comboitem label="Cabudare" />
+											<comboitem label="Carora" />
+											<comboitem label="Duaca" />
+											<comboitem label="El Cují" />
+											<comboitem
+												label="El Tocuyo" />
+											<comboitem label="Quibor" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Dirección Habitación" />
+									<hbox align="center">
+										<textbox maxlength="200"
+											height="40px" width="510px" multiline="true" />
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+					<groupbox style="border-color:orange;"
+						closable="false">
+						<caption label="Datos Médicos"></caption>
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="110px"></column>
+								<column width="225px"></column>
+								<column width="110px"></column>
+								<column width="225px"></column>
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Grupo Sanguíneo" />
+									<hbox>
+										<combobox value="-"
+											readonly="true">
+											<comboitem
+												label="Grupo A">
+											</comboitem>
+											<comboitem
+												label="Grupo B">
+											</comboitem>
+											<comboitem
+												label="Grupo O">
+											</comboitem>
+											<comboitem
+												label="Grupo AB">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Factor" />
+									<hbox>
+										<combobox width="130px"
+											value="-" readonly="true">
+											<comboitem label="Positivo" />
+											<comboitem label="Negativo" />
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Alergia"></label>
+									<combobox>
+										<comboitem label="Ampicilina"></comboitem>
+										<comboitem label="Animales"></comboitem>
+										<comboitem label="Productos"></comboitem>
+									</combobox>
+								</row>
+								<row style="border:none" spans="1,3">
+									<space></space>
+									<hbox width="400px">
+										<grid oddRowSclass="none"
+											mold="paging" pageSize="3">
+											<columns>
+												<column
+													label="Alergias">
+												</column>
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Ampicilina">
+													</label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+											</rows>
+										</grid>
+										<separator></separator>
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												tooltip="Agregar Alergia" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick=""
+												tooltip="Eliminar Alergia" />
+										</vbox>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<separator></separator>
+					<div align="left">
+						<label value="(*) Campo Obligarorio"
+							style="color:red">
+						</label>
+					</div>
+					<div align="right">
+						<button image="/Recursos/Imagenes/guardar.ico"
+							onClick="" label="Guardar" width="100px" />
+						<button image="/Recursos/Imagenes/editar.ico"
+							label="Modificar" width="100px" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							onClick="" label="Cancelar" width="100px" />
+						<button image="/Recursos/Imagenes/salir.png"
+							onClick="" label="Salir" width="100px">
+							<attribute name="onClick">
+	RegPers.onClose();
+</attribute>
+						</button>
+					</div>
+
+				</tabpanel>
+
+				<tabpanel>
+					<groupbox style="border:none;">
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="25%"></column>
+								<column width="35%"></column>
+								<column width="15%"></column>
+								<column width="35%"></column>
+							</columns>
+							<rows>
+								<row spans="1,3" style="border:none;">
+									<label value="Instituto" />
+									<hbox>
+										<textbox width="300px" />
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Título Obtenido" />
+									<hbox>
+										<textbox width="300px" />
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Fecha de Egreso" />
+									<hbox>
+										<datebox format="dd/MM/yyyy"
+											width="80px" />
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none;">
+									<space></space>
+								</row>
+								<row spans="4" style="border:none;">
+									<hbox>
+										<listbox mold="paging"
+											pageSize="3">
+											<listhead>
+												<listheader
+													label="Instituto" width="40%" sort="auto" />
+												<listheader
+													label="Título" width="40%" sort="auto" />
+												<listheader
+													label="Fecha Egreso" sort="auto" />
+											</listhead>
+											<listitem>
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+											<listitem>
+												<listcell label="" />
+												<listcell label="" />
+												<listcell label="" />
+											</listitem>
+										</listbox>
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												tooltip="Agregar" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" tooltip="Quitar" />
+										</vbox>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<div align="left">
+							<label value="(*) Campo Obligarorio"
+							style="color:red">
+							</label>
+					</div>
+
+					<div align="right">
+						<button image="/Recursos/Imagenes/guardar.ico"
+							onClick="" label="Guardar" width="100px" />
+						<button image="/Recursos/Imagenes/editar.ico"
+							label="Modificar" width="100px" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							onClick="" label="Cancelar" width="100px" />
+						<button image="/Recursos/Imagenes/salir.png"
+							onClick="" label="Salir" width="100px">
+							<attribute name="onClick">
+	RegPers.onClose();
+</attribute>
+						</button>
+					</div>
+
+				</tabpanel>
+				<tabpanel>
+					<groupbox closable="false" style="border:none;">
+						<grid oddRowSclass="none"
+							style="border:none;">
+							<columns>
+								<column label="" width="20%"></column>
+								<column label="" width="30%"></column>
+								<column label="" width="20%"></column>
+								<column label="" width="30%"></column>
+							</columns>
+							<rows>
+
+								<row style="border:none">
+									<label value="Cargo" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem
+												label="Técnico">
+											</comboitem>
+											<comboitem
+												label="Entrenador">
+											</comboitem>
+											<comboitem
+												label="Secretaria">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Tipo Empleado" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem label="Fijo"></comboitem>
+											<comboitem
+												label="Contratado">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Tipo de Nómina" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem
+												label="Semanal">
+											</comboitem>
+											<comboitem
+												label="Quincenal">
+											</comboitem>
+											<comboitem
+												label="Mensual">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Horario de Trabajo" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--">
+											<comboitem
+												label="Tiempo Completo">
+											</comboitem>
+											<comboitem
+												label="Medio Tiempo">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Sueldo Base" />
+									<hbox>
+										<doublebox disabled="true"
+											value="2700" />
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+
+									<label
+										value="Fecha Ingreso a la Escuela" />
+									<hbox>
+										<datebox width="70px"></datebox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+
+
+								</row>
+								<row style="border:none">
+									<label
+										value="Fecha Ingreso al Sistema" />
+									<hbox>
+										<datebox width="70px"></datebox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+
+									<label
+										value="Fecha Egreso a la Escuela" />
+									<datebox width="70px"></datebox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+					<!-- Asignaciones y deducciones -->
+
+					<groupbox style="border-color:orange;" closable="false">
+						<caption label="Asignaciones y Deducciones"></caption>
+						<grid oddRowSclass="none" style="border:none;"
+							width="100%">
+							<columns>
+								<column label="" width="50%" />
+								<column label="" width="50%" />
+							</columns>
+							<rows>
+								<row style="border:none;">
+									<hbox>
+										<label value="Asignación"></label>
+										<space></space>
+										<combobox width="200px">
+											<comboitem
+												label="Cesta Ticket">
+											</comboitem>
+											<comboitem
+												label="Bono Especial">
+											</comboitem>
+										</combobox>
+									</hbox>
+									<hbox>
+										<label value="Deducción"></label>
+										<space></space>
+										<combobox width="200px">
+											<comboitem label="S.S.O."></comboitem>
+											<comboitem label="L.P.H."></comboitem>
+										</combobox>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<hbox>
+										<grid width="260px"
+											mold="paging" pageSize="3">
+											<columns>
+												<column
+													label="Asignaciones asociadas" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Cesta Tickets" />
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+											</rows>
+										</grid>
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												tooltip="Agregar" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" tooltip="Quitar" />
+										</vbox>
+									</hbox>
+									<hbox>
+										<grid width="260px"
+											mold="paging" pageSize="3">
+											<columns>
+												<column
+													label="Deducciones asociadas" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="S.S.O." />
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+												<row height="20px">
+													<label></label>
+												</row>
+											</rows>
+										</grid>
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												tooltip="Agregar" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" tooltip="Quitar" />
+										</vbox>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<label value="(*) Campo Obligarorio"
+						style="color:red">
+					</label>
+					<div align="right">
+						<label value="Salario a Pagar" />
+						<space width="10px"></space>
+						<textbox width="100px" />
+					</div>
+					<separator></separator>
+					<div align="right">
+						<button image="/Recursos/Imagenes/consultar.ico"
+							label="Historial Laboral" width="100px"
+							onClick='verformulario("/Administracion/FrmHistoricoLaboral.zul")'>
+						</button>
+						<button image="/Recursos/Imagenes/guardar.ico"
+							width="100px" onClick="" label="Guardar" />
+						<button image="/Recursos/Imagenes/editar.ico"
+							label="Modificar" width="100px"
+							onClick='verformulario("/Administracion/FrmModificarDatosLaborales.zul")' />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							width="100px" onClick="" label="Cancelar" />
+						<button image="/Recursos/Imagenes/salir.png"
+							width="100px" onClick="" label="Salir">
+							<attribute name="onClick">
+	RegPers.onClose();
+</attribute>
+						</button>
+
+					</div>
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+		<!-- 	<div style="display:inline">
+			<include id="cuerpo" />
+			</div>
+			
+			<div align="left">
+			<label value="(*) Campo Obligarorio" style="color:red"></label>
+			</div>
+		-->
+	</window>
+</zk>

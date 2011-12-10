@@ -1,0 +1,58 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?page title="Clasificación de Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="clasificacionMantenimiento" title="Clasificación de Mantenimiento" border="normal"
+		width="690px" apply="controlador.logistica.ClaseMantenimientoControlador" >
+		
+		<grid>
+			<columns>
+				<column></column>
+				<column></column>
+
+			</columns>
+			<rows>
+
+
+				<row >
+					<label value="Nombre"></label>
+					<textbox multiline="true" height="40px"
+						width="300px" id="txtNombre" value="@{Clase.descripcion}">
+					</textbox>
+
+				</row>
+
+			</rows>
+
+		</grid>
+
+
+		<panel title="Clasificación de Mantenimientos Registrados"
+			collapsible="true">
+			<panelchildren>
+			
+				<listbox id="lista" model="@{clasificacionMantenimiento$composer.clasesMantenimientos}" selectedItem="@{Clase}">
+					<listitem self="@{each='m'}" value="@{m}">
+						<listcell  label="@{m.getDescripcion}" ></listcell>
+					</listitem>
+				</listbox>
+			
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico" id="btnGuardar">
+			</button>
+			<button label="Eliminar"
+				image="/Recursos/Imagenes/guardar.ico" id="btnEliminar">
+			</button>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+	</window>
+</zk>

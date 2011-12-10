@@ -1,0 +1,77 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winM" title="new page title"  mode="popup" top="250px" left="460px">
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	void setOn1() {
+		uno.setChecked(true);
+		dos.setChecked(true);
+		cinco.setChecked(true);
+		seis.setChecked(true);
+	}
+]]></zscript>
+
+		<groupbox>
+			<caption>Mensualidad</caption>
+			<grid>
+				<columns>
+					<column width="10%">
+						<checkbox onCheck=" setOn1()"></checkbox>
+					</column>
+					<column label="Descripcion" width="50%" />
+					<column label="Cantidad" width="20%" />
+					<column label="Monto" width="20%" />
+				</columns>
+				<rows>
+					<row>
+						<checkbox id="uno"></checkbox>
+						<label value="Cuota Octubre" />
+						<label value="1" />
+						<label value="90.00" />
+
+					</row>
+					<row>
+						<checkbox id="dos"></checkbox>
+						<label value="Cuota Noviembre" />
+						<label value="1" />
+						<label value="90.00" />
+					</row>
+					<row>
+						<checkbox id="cinco"></checkbox>
+						<label value="Cuota Diciembre" />
+						<label value="1" />
+						<label value="90.00" />
+					</row>
+					<row>
+						<checkbox id="seis"></checkbox>
+						<label value="Cuota Enero" />
+						<label value="1" />
+						<label value="90.00" />
+					</row>
+					<row spans="4" align="center">
+						<groupbox>
+							<div align="right">
+								<label value="Monto a Pagar" />
+								<textbox />
+							</div>
+						</groupbox>
+					</row>
+				</rows>
+			</grid>
+			<div align="right">
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" >
+					<attribute name="onClick">
+							{
+								winM.onClose();
+							}
+						</attribute>
+			</button>
+			</div>
+		</groupbox>
+	</window>
+</zk>

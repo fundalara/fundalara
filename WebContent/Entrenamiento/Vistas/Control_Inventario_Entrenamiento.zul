@@ -1,0 +1,203 @@
+<?page title="Auto Generated index.zul"?>
+	<window title="Control de Inventario - PREINFANTIL - EQUIPO A" border="normal" width="600px"
+		height="" closable="true">
+		<separator />
+		<grid height="250px">
+			<columns sizable="true">
+				<column width="555px" align="left" />
+			</columns>
+			<rows>
+				<row>
+					<grid>
+						<columns>
+							<column label="" width="80PX" />
+						</columns>
+						<rows>
+							<row height="40px">
+								<hbox>
+									<label value="Fecha"></label>
+									<space />
+									<textbox width="120px"/>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</row>
+				<row>
+					<listbox>
+						<listhead>
+							<listheader label="Descripcion"
+								width="145px" align="center" />
+							<listheader label="Planificada"
+								width="100px" align="center" />
+							<listheader label="Asignada" width="100px"
+								align="center" />
+							<listheader label="Devuelta" width="100px"
+								align="center" />
+						</listhead>
+						<listitem>
+							<listcell label="Bate # 5" />
+							<listcell label="12" />
+							<listcell label="7" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+						<listitem>
+							<listcell label="Bate # 7" />
+							<listcell label="12" />
+							<listcell label="7" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+						<listitem>
+							<listcell label="Guante # 3" />
+							<listcell label="10" />
+							<listcell label="5" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+						<listitem>
+							<listcell label="Bases" />
+							<listcell label="4" />
+							<listcell label="4" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+						<listitem>
+							<listcell label="Guante # 5" />
+							<listcell label="3" />
+							<listcell label="3" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+						<listitem>
+							<listcell label="Pelota # 1" />
+							<listcell label="10" />
+							<listcell label="7" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+						<listitem>
+							<listcell label="Cono" />
+							<listcell label="10" />
+							<listcell label="7" />
+							<listcell>
+								<combobox width="50px">
+									<comboitem label="1" />
+									<comboitem label="2" />
+									<comboitem label="3" />
+									<comboitem label="4" />
+									<comboitem label="5" />
+									<comboitem label="6" />
+									<comboitem label="7" />
+									<comboitem label="8" />
+									<comboitem label="9" />
+									<comboitem label="10" />
+								</combobox>
+							</listcell>
+						</listitem>
+					</listbox>
+				</row>
+
+			</rows>
+		</grid>
+
+
+		<separator />
+
+
+		<grid>
+			<columns>
+				<column width="220px" />
+				<column width="115px" align="right" />
+				<column width="115px" align="right" />
+				<column width="115px" align="right" />
+			</columns>
+			<rows>
+
+				<row height="15px">
+					<label />
+					<button image="Recursos/Imagenes/guardar.ico"
+						label="Guardar" width="100px" />
+					<button image="Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="100px" />
+					<button image="Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" />
+					<button image="Recursos/Imagenes/eliminar.ico"
+						label="Salir" width="100px" />
+				</row>
+			</rows>
+		</grid>
+	</window>

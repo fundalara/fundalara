@@ -1,0 +1,86 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+<window title="LIGA" border="normal" width="40%" closable="true">
+
+	<panel>
+		<panelchildren>
+
+			<grid>
+				<columns>
+					<column label="" width="10%"></column>
+					<column label="" width="90%"></column>
+				</columns>
+
+				<rows>
+
+					<row>
+						<label value="Nombre:"></label>
+						<textbox width="50%"></textbox>
+					</row>
+					<row>
+						<label value="Localidad:"></label>
+						<textbox width="50%"></textbox>
+					</row>
+					<row>
+						<label value="Logo:"></label>
+						<div>
+							<textbox width="50%"></textbox>
+							<button label="Examinar"></button>
+						</div>
+					</row>
+					<row>
+						<label value="Categorias:"></label>
+						<listbox height="100%" width="50%">
+							<listitem>
+								<listcell>
+									<checkbox></checkbox>
+									<label value="Pre-Infantil"></label>
+								</listcell>
+							</listitem>
+							<listitem>
+								<listcell>
+									<checkbox></checkbox>
+									<label value="Infantil"></label>
+								</listcell>
+							</listitem>
+							<listitem>
+								<listcell>
+									<checkbox></checkbox>
+									<label value="Pre-Junior"></label>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>
+									<checkbox></checkbox>
+									<label value="Junior"></label>
+								</listcell>
+							</listitem>
+							
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+				<div >
+ 		<div align="right"  height="30px">    	
+					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+							orient="horizontal"  ></button>
+					<button image="/Recursos/Imagenes/quitar.ico" label="Eliminar"
+							orient="horizontal"  >
+							
+							</button>
+					<button image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal" >
+							</button>
+					<button image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal" >
+							</button>											
+		
+ 		</div>
+    </div>	
+		</panelchildren>
+	</panel>
+
+
+</window>
+</div>

@@ -1,0 +1,436 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+
+<window title="Test Evaluativo - EQUIPO A - PREINFANTIL" border="normal"
+	width="680px" height="" closable="true">
+	<grid>
+		<columns sizable="true">
+			<column align="left" />
+		</columns>
+		<rows>
+
+			<row>
+				<grid>
+					<columns>
+						<column label="" width="80PX" />
+					</columns>
+					<rows>
+						<row height="40px">
+							<hbox>
+								<label value="Fecha"></label>
+								<space />
+								<textbox width="120px"/>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</row>
+
+			<row>
+				<listbox multiple="true" checkmark="true" mold="paging"
+					pageSize="10" width="660px">
+					<listhead>
+						<listheader label="Número" width="75px" />
+						<listheader label="Nombre" width="180px" />
+						<listheader label="Brazo" align="center"
+							width="115px" />
+						<listheader label="Tiempo H-2B" align="center"
+							width="115px" />
+						<listheader label="Fuerza" align="center"
+							width="110px" />
+					</listhead>
+
+					<auxhead>
+						<auxheader label="" />
+						<auxheader label="" />
+
+						<auxheader label="" align="center">
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</auxheader>
+						<auxheader label="" align="center">
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</auxheader>
+						<auxheader label="" align="center">
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</auxheader>
+
+
+					</auxhead>
+					<listitem>
+						<listcell label="05" />
+						<listcell label="Javier Perez" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+					</listitem>
+
+
+					<listitem>
+						<listcell label="37" />
+						<listcell label="Jose Rojas" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="31" />
+						<listcell label="Gregorio Rioja" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="57" />
+						<listcell label="Francisco Flores" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="5" />
+						<listcell label="Leopoldo Gil" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="19" />
+						<listcell label="Tony Cordero" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="22" />
+						<listcell label="Carlos Montero" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="10" />
+						<listcell label="Damian Uzcategui" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="15" />
+						<listcell label="Leonel Silva" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="23" />
+						<listcell label="David Navarro" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+					<listitem>
+						<listcell label="33" />
+						<listcell label="Manuel Flores" />
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+						<listcell>
+							<combobox width="80px" value="4">
+								<comboitem label="4" />
+								<comboitem label="1" />
+								<comboitem label="2" />
+								<comboitem label="3" />
+							</combobox>
+
+						</listcell>
+
+					</listitem>
+				</listbox>
+			</row>
+
+		</rows>
+	</grid>
+
+	<separator height="10px" />
+
+	<grid>
+		<columns>
+			<column width="230px" align="center" />
+			<column width="115px" align="center" />
+			<column width="115px" align="center" />
+			<column width="115px" align="center" />
+
+
+		</columns>
+		<rows>
+
+			<row height="15px">
+				<label value="" />
+				<button image="Recursos/Imagenes/guardar.ico"
+					label="Guardar" width="100px" />
+				<button image="Recursos/Imagenes/imprimir.ico"
+					label="Imprimir" width="100px" />
+				<button image="Recursos/Imagenes/cancelar.ico"
+					label="Cancelar" width="100px" />
+				<button image="Recursos/Imagenes/salir.png"
+					label="Salir" width="100px" />
+			</row>
+		</rows>
+	</grid>
+</window>

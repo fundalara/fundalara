@@ -1,0 +1,97 @@
+<?page title="Auto Generated index.zul"?>
+<zk>
+<div align="Center">
+<window title="CULMINACION DE COMPETENCIA" border="normal" width="55%" height="50%" closable="true">
+
+		<grid style="margin-top:10px">
+			<columns>
+				<column label="" align="left" width="40%" />
+				<column label="" width="50%" />
+			</columns>
+			<rows>
+				<row>
+
+					<label value="Competencia"></label>
+					<bandbox>
+						<bandpopup></bandpopup>
+					</bandbox>
+				</row>
+				<row>
+
+					<label value="Tipo de Competencia"></label>
+					<bandbox>
+						<bandpopup></bandpopup>
+					</bandbox>
+				</row>
+				<row>
+
+					<label value="Categoria"></label>
+					<bandbox>
+						<bandpopup></bandpopup>
+					</bandbox>
+				</row>
+
+			</rows>
+		</grid>
+
+		<div style="margin-top: 10px">
+			<label
+				value="Seleccione la Competencia que desea culminar">
+			</label>
+
+			<listbox>
+				<listhead>
+					<listheader label="Competencias" sort="auto" />
+					<listheader label="Descripcion" sort="auto" />
+				</listhead>
+				<listitem>
+					<listcell label="Copa Cer" />
+					<listcell label="Copa Homenaje a la  mayor " />
+				</listitem>
+				<listitem>
+					<listcell label="Copa Mana" />
+					<listcell label="Copa homenaje a las estrellas  " />
+				</listitem>
+				<listitem>
+					<listcell label="Copa Tinaja " />
+					<listcell label="Homenaje a la  tinaja" />
+				</listitem>
+			</listbox>
+
+
+		</div>
+<grid>
+		<columns>
+			<column width="10%"/>
+			<column width="15%"/>
+			<column width="10%"/>
+			<column width="15%"/>
+			<column width="10%"/>
+			<column width="25%"/>
+			
+		</columns>
+		<rows>			
+			<row>
+			<label value="Juegos Programados:" width="10%"></label>
+			<textbox width="90%"/>				
+			<label value="Juegos Registrados:" width="10%"></label>
+			<textbox width="90%"/>
+			<label value="Fecha Culminacion:" width="10%" style="align:left;"></label>
+			 <datebox width="80%" constraint="no empty: Debe seleccionar una fecha" ></datebox>
+			
+			
+		</row>
+		</rows>
+	</grid>
+	<div >
+ 	<div align="right">
+			<button image="/Recursos/Imagenes/apertura.png" label="Culminar" ></button>
+			<button image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal" ></button>
+					<button image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal" ></button> 
+		</div>
+    </div>	
+ </window>
+ </div>
+ </zk>

@@ -1,0 +1,291 @@
+<?page title="REGISTRO DE ROSTER" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div id="roster" align="Center">
+		<window title="REGISTRO DE RÓSTER" border="normal"
+			id="FrmRoster" width="60%" closable="true">
+			<div id="Roster" align="left">
+				<panel border="normal"
+					title="Datos de la Competencia">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column width="40px" align="left"></column>
+								<column width="40px"></column>
+								<column width="60px"></column>
+								<column width="60px"></column>
+								<column width="50px"></column>
+								<column width="60px"></column>
+							</columns>
+							<rows>
+								<row>
+									<label value="Competencia"></label>
+									<hbox>
+										<textbox cols="11"></textbox>
+										<button
+											image="../../Recursos/Imagenes/consultar.ico">
+										</button>
+									</hbox>
+									<label value="Fecha Inicio"></label>
+									<textbox cols="10"></textbox>
+									<label value="Fecha Fin"></label>
+									<textbox cols="10"></textbox>
+
+								</row>
+
+								<row></row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+				<panel border="normal" title="Datos del Equipo">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label=""></column>
+								<column label=""></column>
+								<column label=""></column>
+							</columns>
+							<rows>
+								<row>
+									<label value="Categoria"></label>
+									<combobox cols="11"></combobox>
+									<label value="Equipo"></label>
+									<combobox cols="11"></combobox>
+								</row>
+								<row>
+									<label value="Manager"></label>
+									<bandbox cols="12"></bandbox>
+									<label value="Delegado"></label>
+									<bandbox cols="12"></bandbox>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+				<panel border="normal" title="Jugadores">
+					<panelchildren>
+
+						<listbox width="100%">
+							<listhead>
+								<listheader label="#" width="10%"
+									align="center">
+								</listheader>
+								<listheader label="Nombre"
+									width="30%">
+								</listheader>
+								<listheader label="Edad"
+									align="center">
+								</listheader>
+								<listheader label="Alojamiento"
+									align="center" width="80px" sort="">
+								</listheader>
+								<listheader label="Inscrito (4/20)"
+									align="center">
+								</listheader>
+
+							</listhead>
+							<listitem>
+								<listcell>1</listcell>
+								<listcell>Nombre Jugador 1</listcell>
+								<listcell>14</listcell>
+								<listcell>Si</listcell>
+								<listcell>
+									<checkbox checked="true"></checkbox>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>15</listcell>
+								<listcell>Nombre Jugador 2</listcell>
+								<listcell>15</listcell>
+								<listcell>Si</listcell>
+								<listcell>
+									<checkbox checked="true"></checkbox>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>23</listcell>
+								<listcell>Nombre Jugador 3</listcell>
+								<listcell>15</listcell>
+								<listcell>Si</listcell>
+								<listcell>
+									<checkbox checked="true"></checkbox>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>16</listcell>
+								<listcell>Nombre Jugador 4</listcell>
+								<listcell>15</listcell>
+								<listcell>Si</listcell>
+								<listcell>
+									<checkbox checked="true"></checkbox>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>25</listcell>
+								<listcell>Nombre Jugador 5</listcell>
+								<listcell>15</listcell>
+								<listcell>No</listcell>
+								<listcell>
+									<checkbox></checkbox>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>22</listcell>
+								<listcell>Nombre Jugador 6</listcell>
+								<listcell>15</listcell>
+								<listcell>No</listcell>
+								<listcell>
+									<checkbox></checkbox>
+								</listcell>
+
+							</listitem>
+							<listitem>
+								<listcell>11</listcell>
+								<listcell>Nombre Jugador 7</listcell>
+								<listcell>15</listcell>
+								<listcell>No</listcell>
+								<listcell>
+									<checkbox></checkbox>
+								</listcell>
+
+							</listitem>
+
+						</listbox>
+						<div align="right">
+							<button 
+							    id="btnAgregarOtroJugador"
+								label=" Agregar otro jugador "
+								image="/Recursos/Imagenes/agregar.ico" 
+								onClick="btnAgregarOtroJugador()">
+							</button>
+						</div>
+					</panelchildren>
+				</panel>
+				<panel collapsible="true" title="Refuerzos">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label=""></column>
+								<column label="" width="100px"></column>
+								<column label="" width="80px"></column>
+								<column label=""></column>
+							</columns>
+							<rows>
+								<row>
+									<label value="Divisa"></label>
+									<combobox cols="12"></combobox>
+									<label value="Equipo"></label>
+									<combobox cols="12"></combobox>
+								</row>
+								<row>
+									<label value="Cedula"></label>
+									<textbox cols="10"></textbox>
+									<label value="Nombre"></label>
+									<hbox>
+										<textbox cols="20"></textbox>
+										<button
+											image="/Recursos/Imagenes/agregar.ico">
+										</button>
+									</hbox>
+									<!--   <button label="" image="/Recursos/Imagenes/agregar.ico"></button> -->
+								</row>
+							</rows>
+						</grid>
+						<listbox>
+							<listhead>
+								<listheader label="Divisa" sort="auto"
+									width="100px" />
+								<listheader label="Equipo" sort="auto"
+									width="100px" />
+								<listheader label="Numero" sort="auto"
+									width="100px" />
+								<listheader label="Cedula" sort="auto"
+									width="100px" />
+								<listheader label="Nombre" sort="auto" />
+
+							</listhead>
+							<listitem>
+								<listcell label="" />
+								<listcell label="" />
+								<listcell>
+									<combobox width="30%">
+										<comboitem label="" />
+										<comboitem label="" />
+									</combobox>
+								</listcell>
+								<listcell label="" />
+								<listcell label="" />
+							</listitem>
+							<listitem>
+								<listcell label="" />
+								<listcell label="" />
+								<listcell>
+									<combobox width="30%">
+										<comboitem label="" />
+										<comboitem label="" />
+									</combobox>
+								</listcell>
+								<listcell label="" />
+								<listcell label="" />
+							</listitem>
+							<listitem>
+								<listcell label="" />
+								<listcell label="" />
+								<listcell>
+									<combobox width="30%">
+										<comboitem label="" />
+										<comboitem label="" />
+									</combobox>
+								</listcell>
+								<listcell label="" />
+								<listcell label="" />
+							</listitem>
+						</listbox>
+					</panelchildren>
+
+				</panel>
+
+
+				<div align="right">
+					<button image="../../Recursos/Imagenes/guardar.ico"
+						label="Guardar">
+					</button>
+					<button image="../../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar">
+					</button>
+					<button image="../../Recursos/Imagenes/salir.png"
+						label="Salir">
+					</button>
+				</div>
+
+
+
+			</div>
+			<zscript>
+	<![CDATA[
+	void volver() {
+		FrmRoster.getChildren().clear();
+		Component component = Executions.createComponents(
+				"FrmRegistroEquipo.zul", FrmRoster, new HashMap());
+		component.setParent(FrmRoster);
+	}
+	void Refuerzo() {
+		FrmRoster.getChildren().clear();
+		Component component = Executions.createComponents("FrmRefuerzos.zul",
+				FrmRoster, new HashMap());
+		component.setParent(FrmRoster);
+	}
+	void btnAgregarOtroJugador() {
+		Executions.createComponents(
+				"/Competencias/Vistas/FrmCatalogoJugador.zul", null, null);
+	}
+]]>
+</zscript>
+		</window>
+	</div>
+</zk>

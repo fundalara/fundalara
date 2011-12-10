@@ -1,0 +1,52 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winPOP" title="">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void nose() {
+		String var = c.getSelectedItem().getValue().toString();
+
+		if (c.getSelectedItem().getValue().equals("Dona")) {
+			Executions.createComponents("/Administracion/Vistas/FrmDonacion.zul", winPOP, null);
+		} else if (c.getSelectedItem().getValue().equals("Publi")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmIngresoPublicidad.zul", null, null);
+
+		} else if (c.getSelectedItem().getValue().equals("PagoRe")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmPagoRepre.zul", null, null);
+			
+		} else if (c.getSelectedItem().getValue().equals("Pago")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmAportesEspeciales.zul", null, null);
+			
+		} else if (c.getSelectedItem().getValue().equals("Valla")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmIngresoPublicidad.zul", null, null);
+	
+		}
+	}
+]]></zscript>
+
+		<panel title="Tipo de Ingreso" collapsible="true">
+			<panelchildren>
+				<combobox id="c" onSelect="nose()"
+					autocomplete="true">
+					<comboitem label="Donacion" value="Dona" />
+					<comboitem label="Publicidad" value="Publi" />
+					
+					<comboitem label="Pago Representante"
+						value="PagoRe" />
+					<comboitem label="Aporte Especial" value="Pago" />
+					<comboitem label="Servicios de Publicidad" value="Valla" />
+					
+				</combobox>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

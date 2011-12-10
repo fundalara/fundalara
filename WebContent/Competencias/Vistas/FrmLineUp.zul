@@ -1,0 +1,476 @@
+<?page title="Line-up"?>
+<div align="center">
+<zscript>
+			<![CDATA[
+			     void lineUp(){
+			    	 Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul", null, null); 
+			     }
+			 ]]>
+ </zscript>
+<window title="Gestionar Lineup" border="normal" width="auto" height="auto" closable="true" style="">
+
+	
+	<panel border="normal">
+		  <caption label="Datos de la Competencia"></caption>
+		    <panelchildren>
+		      <grid>
+		         <!-- <columns>
+		           <column width="40px" align="left"></column>
+		           <column width="40px"></column>
+		           <column width="60px"></column>
+		           <column width="60px"></column>
+		           <column width="50px"></column>
+		           <column width="60px"></column>
+		         </columns> -->
+		         <rows>
+		            <row>
+		               <label value="Competencia" ></label>
+		               <hbox>
+		               <textbox cols="11"></textbox> 	
+		                <button image="" label="Calendario" onClick="lineUp()" ></button>	                 
+		               </hbox>  
+		               <label value="Fecha Inicio de Competencia"></label>
+		               <textbox cols="10"></textbox> 
+		               <label value="Fecha Fin de Competencia"></label>
+		               <textbox cols="10"></textbox>
+		                
+		            </row>		              
+		            <row >
+		                <label value="Juego"></label>     
+		                <hbox>
+		                <textbox cols="20"></textbox>		                
+		                </hbox>
+		                <label value="Fecha de Juego"></label>
+		                <textbox cols="10"></textbox>
+		                <label value="Hora de Juego"></label>
+		                <textbox cols="10"></textbox>	                 
+		                
+		            </row>
+		            <row>
+		               <label value="Equipo" ></label>
+		               <textbox cols="11"></textbox>   
+                       <label value="Categoria" ></label>
+                       <textbox cols="11"></textbox>                             
+		            </row>
+		            
+		            
+		         </rows>
+		      </grid>
+		    </panelchildren>		    
+		  </panel>
+	
+	<panel height="1%"></panel>
+	
+	<hbox width="100%"><!-- General -->
+		<hbox width="20%"><!-- Roster -->
+
+			<panel title="Roster">
+				<panelchildren>
+
+					<listbox width="300px">
+						<listhead>
+							<listheader label="#" width="5%"></listheader>
+							<listheader label="Nombre" width="35%"></listheader>
+							
+
+						</listhead>
+						<listitem>
+							<listcell>5</listcell>
+							<listcell>Yovanny Manosalva</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>8</listcell>
+							<listcell>Alex Villanueva</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>3</listcell>
+							<listcell>Jhoinnel Liscano</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>9</listcell>
+							<listcell>Jesus Castillo</listcell>
+							
+						</listitem>
+
+						<listitem>
+							<listcell>2</listcell>
+							<listcell>Eduardo Ochoa</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>12</listcell>
+							<listcell>Frank Machado</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>22</listcell>
+							<listcell>Rafael Escobar</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>7</listcell>
+							<listcell>Jesus Rojas</listcell>	
+						</listitem>
+
+						<listitem>
+							<listcell>23</listcell>
+							<listcell>Juan Hernandez</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>15</listcell>
+							<listcell>Orlando Diaz</listcell>
+							
+						</listitem>
+
+						<listitem>
+							<listcell>13</listcell>
+							<listcell>Jose Guillen</listcell>
+						</listitem>
+
+
+					</listbox>
+
+				</panelchildren>
+
+
+			</panel>
+		</hbox><!-- Fin del roster -->
+		
+		<hbox width="10%"><!--Botones -->
+		<div style="margin-top:80px">
+			<panel>
+				<panelchildren>
+					<grid>
+						<columns>
+							<column align="center" width="100%" height="100%"></column>
+						</columns>
+						<rows>
+							<row>
+								<button image="./Recursos/Imagenes/leftarrow_g.png"></button>
+							</row>
+							<row>
+								<button image= "/Recursos/Imagenes/rightarrow_g.png"></button>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>	
+			</panel>
+			
+		</div>
+		</hbox><!--Fin Botones  -->
+
+		<hbox width="40%"><!-- Line-up -->
+			<panel title="Line-Up">
+				<panelchildren>
+					<listbox width="300px">
+						<listhead>
+							<listheader width="1%">OB</listheader>
+							<listheader width="70%">Nombre</listheader>
+							<listheader width="20%">Pos</listheader>
+
+						</listhead>
+						<listitem>
+							<listcell>1</listcell>
+							<listcell>Yovanny Manosalva</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>2</listcell>
+							<listcell>Alix Villanueva</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>3</listcell>
+							<listcell>Jhoinnel Liscano</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>4</listcell>
+							<listcell>Jesus Castillo</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>5</listcell>
+							<listcell>Eduardo Ochoa</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>6</listcell>
+							<listcell>Frank Machado</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>7</listcell>
+							<listcell>Rafael Escobar</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>8</listcell>
+							<listcell>Jesus Rojas</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>	
+						</listitem>
+
+						<listitem>
+							<listcell>9</listcell>
+							<listcell>Juan Hernandez</listcell>
+							<listcell>
+							 <combobox width="40%">
+								<comboitem label="LF"></comboitem>
+								<comboitem label="CF"></comboitem>
+								<comboitem label="RF"></comboitem>
+								<comboitem label="3B"></comboitem>
+								<comboitem label="2B"></comboitem>
+								<comboitem label="1B"></comboitem>
+								<comboitem label="SS"></comboitem>
+								<comboitem label="P"></comboitem>
+								<comboitem label="C"></comboitem>
+							</combobox>
+							</listcell>
+						</listitem>
+
+						
+					</listbox>
+
+				</panelchildren>
+			</panel>
+
+		</hbox ><!-- Orden -->
+		<hbox  width="10%"><!--Botones -->
+		  <div style="margin-top:26px">
+			<panel>
+				<panelchildren>
+					<grid>
+						<columns>
+							<column align="center" width="100%" height="100%"></column>
+						</columns>
+						<rows>
+							<row>
+								<button image="../../Recursos/Imagenes/1uparrow.ico"></button>
+							</row>
+							<row>
+								<button image="../../Recursos/Imagenes/1downarrow.ico"></button>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>	
+			</panel>
+			
+		 </div>
+		</hbox><!--Fin Botones  -->
+
+		
+	</hbox><!-- Fin general -->
+	<panel height="1%">
+
+	</panel>
+    <div align="left" style="margin-top:10px">
+	<panel width="400px" title="Rendimiento Ofensivo">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column width="10%" label="AVG"></column>
+					<column width="10%" label="OBP"></column>
+					<column width="10%" label="SLG"></column>
+					<column width="10%" label="AB"></column>
+					<column width="10%" label="H"></column>
+					<column width="10%" label="2B"></column>
+					<column width="10%" label="3B"></column>
+					<column width="10%" label="HR"></column>
+					<column width="10%" label="R"></column>
+					<column width="10%" label="RBI"></column>
+					
+				</columns>
+
+				<rows>
+					<row>
+						<textbox width="90%" value=".500"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value=".600"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value=".900"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="20"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="10"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="3"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="2"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="1"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="5"
+							readonly="true">
+						</textbox>
+						<textbox width="90%" value="4"
+							readonly="true">
+						</textbox>						
+					</row>
+					
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	
+	
+			
+	<panel width="300px" title="Rendimiento Defensivo">		
+		<panelchildren>		
+			<grid>
+				<columns>
+			
+					<column width="14%" label="W"></column>
+					<column width="14%" label="ERA"></column>
+					<column width="14%" label="IP"></column>
+					<column width="14%" label="L"></column>
+					<column width="14%" label="OC"></column>
+					<column width="14%" label="Lp"></column>
+					<column width="14%" label="Mo"></column>
+			
+				</columns>
+				
+				<rows>
+					<row>
+						<textbox width="90%" value="" readonly="true"></textbox>
+						<textbox width="90%" value="" readonly="true"></textbox>
+						<textbox width="90%" value="" readonly="true"></textbox>
+						<textbox width="90%" value="" readonly="true"></textbox>
+						<textbox width="90%" value="" readonly="true"></textbox>
+						<textbox width="90%" value="" readonly="true"></textbox>
+						<textbox width="90%" value="" readonly="true"></textbox>	
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	</div>
+	<panel height="20px"></panel>
+
+	<panel> <!-- Botones -->
+		<panelchildren>
+		    <div align="right">
+				<button image="../../Recursos/Imagenes/guardar.ico" label="Guardar" ></button>				
+				<button image="../../Recursos/Imagenes/editar.ico"	label="Modificar" ></button>
+				<button image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"></button>
+				<button image="../../Recursos/Imagenes/salir.png" label="Salir" ></button>
+				
+			</div>
+		</panelchildren>
+	</panel>
+</window>
+</div>

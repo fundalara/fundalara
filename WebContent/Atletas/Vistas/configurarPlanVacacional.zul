@@ -1,0 +1,34 @@
+<?page title="Plan Vacacional"?>
+<div align="left">
+	<window title="Plan Vacacional" border="normal" width="500"
+		closable="true">
+		<div width="100%">
+			<grid>
+				<columns>
+					<column width="25%" />
+					<column width="30%" />
+					<column width="15%" />
+					<column width="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Fecha Inicio" />
+						<datebox width="75%" />
+						<label value="Fecha Fin" />
+						<datebox width="75%" />
+					</row>
+					<row>
+						<label value="Cupos Disponibles" />
+						<spinner width="35%"/>
+					</row>
+				</rows>
+			</grid>
+		</div>
+		
+		<div align="right">
+			<button label="Guardar" image="../../Recursos/Imagenes/guardar.ico" orient="horizontal" width="100px"/>
+			<button label="Cancelar" image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal" width="100px"/>
+			<button label="Salir" image="../../Recursos/Imagenes/salir.png" orient="horizontal" width="100px"/>
+		</div>
+	</window>
+</div>

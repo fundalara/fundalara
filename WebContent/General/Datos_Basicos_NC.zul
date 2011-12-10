@@ -1,0 +1,135 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<separator height="15px" />
+	<window closable="true" title="Datos Basicos" border="normal"
+		width="600px" height="" id="wndDatosBasicosNC"
+		apply="vista.general.Datos_Basicos_NC">
+		<grid>
+			<rows>
+				<row>
+					<hbox height="30px" align="center">
+						<label value="Tipo de Dato " width="140px" />
+						<space />
+						<combobox   value="--Seleccione--" width="230px" id="cmbTipoDato" autodrop="true" autocomplete="true" >
+							<comboitem label="Actividad de Mantenimiento" />
+							<comboitem label="Actividad Social" value="ActividadSocial" />
+							<comboitem label="Alergia" value="Alergia" />
+							<comboitem label="Alumno" value="Alumno" />							
+							<comboitem label="Banco" value="Banco" />
+							<comboitem label="Categoria" value="Categoria" />
+							<comboitem label="Código de Área" value="CodigoArea" />
+							<comboitem label="Código de Celular" value="CodigoCelular" />
+							<comboitem label="Comisión" value="Comision" />
+							<comboitem label="Competencia" value="Competencia" />
+							<comboitem label="Concepto Nomina" value="ConceptoNomina" />
+							<comboitem label="Cuenta Bancaria" value="CuentaBancaria" />
+							<comboitem label="Cuenta por Cobrar" value="CuentaCobrar" />
+							<comboitem label="Cuenta por Pagar" value="CuentaPagar" />
+							<comboitem label="Curso" value="Curso" />
+							<comboitem label="Documento Mercantil" value="DocumentoMercantil" />
+							<comboitem label="Estado del Juego" value="EstadoJuego" />
+							<comboitem label="Estado de la Competencia" value="EstadoCompetencia" />
+							<comboitem label="Escala de Medicion" value="EscalaMedicion"/>
+							<comboitem label="Fase de Entrenamiento" value="FaseEntrenamiento" />																																																			
+							<comboitem label="Falta" value="Falta" />
+							<comboitem label="Forma de Pago" value="FormaPago" />
+							<comboitem label="Función" value="Funcion" />
+							<comboitem label="Grupo Sanguíneo" value="GrupoSanguineo" />
+							<comboitem label="Indicador Evaluativo" value="Indicador" />
+							<comboitem label="Inscripción" value="Inscripcion" />
+							<comboitem label="Instalaciones" value="Instalaciones" />
+							<comboitem label="Institución" value="Institucion" />
+							<comboitem label="Lesion" value="Lesion" />
+							<comboitem label="Logro Deportivo" value="Logro" />
+							<comboitem label="Médico" value="Medico" />
+							<comboitem label="Nacionalidad" value="Nacionalidad" />
+							<comboitem label="Parentesco" value="Parentesco" />
+							<comboitem label="Periodicidad de Pago" value="PeriodicidadPago" />
+							<comboitem label="Profesión/Ocupación" value="Profesion" />
+							<comboitem label="Posicion" value="Posicion" />
+							<comboitem label="Proveedor" value="Proveedor" />
+							<comboitem label="Recaudo" value="Recaudo" />
+							<comboitem label="Sanción" value="Sancion" />
+							<comboitem label="Talla" value="Talla" />
+							<comboitem label="Tareas" value="Tareas"/>	
+							<comboitem label="Tarjeta Bancaria" value="TarjetaBancaria" />							
+							<comboitem label="Telefono Celular" value="TelefonoCelular" />
+							<comboitem label="Telefono Habitacion" value="TelefonoHabitacion" />
+							<comboitem label="Unidad de Medida" value="UnidadMedida" />													
+						</combobox>
+					</hbox>
+				</row>
+				<row>
+					<hbox height="30px" align="center">
+						<label value="Nombre" />
+						<space width="40px" />
+						<textbox id="txtNombre" width="130px"
+							height="20px" />
+						<space width="20px" />
+						<label value="Descripcion" />
+						<space />
+						<textbox id="txtDescripcion" width="240px"
+							height="20px" />
+					</hbox>
+				</row>
+				<row>
+					<hbox>
+						<listbox multiple="true" mold="paging"
+							pageSize="10" width="540px" height="350px" id="lbDatos">
+							<listhead>
+								<listheader label="Nombre" width="80px"
+									align="center" />
+								<listheader label="Descripción"
+									width="150px" align="center" />
+							</listhead>
+
+							<listitem>
+								<listcell label="Calentamiento" />
+								<listcell label="Etapa inicial de cada Entrenamiento" />
+							</listitem>
+							<listitem>
+								<listcell label="Tecnica" />
+								<listcell label="Etapa intermedia de cada Entrenamiento donde se ejecutan los aspectos primordiales del beisbol" />
+							</listitem>
+						</listbox>
+
+
+						<vbox height="50px">
+							<button id="btnAgregar"
+								image="../Recursos/Imagenes/agregar.ico" />
+							<separator height="5px" />
+							<button id="btnModificar"
+								image="../Recursos/Imagenes/editar.ico" />
+							<separator height="5px" />
+							<button id="btnQuitar"
+								image="../Recursos/Imagenes/quitar.ico" />
+						</vbox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<separator />
+
+		<grid>
+			<columns>
+
+				<column width="500px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+
+			</columns>
+			<rows>
+
+				<row height="">
+					<label value="" />
+					<button id="btnCancelar"
+						image="../Recursos/Imagenes/cancelar.ico" label="Cancelar"
+						width="100px" />
+					<button id="btnSalir"
+						image="../Recursos/Imagenes/salir.png" label="Salir"
+						width="100px" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>

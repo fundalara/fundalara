@@ -1,0 +1,210 @@
+<?page title="Cálculo de Liquidaciones" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Calcular Liquidación" border="normal" width="650px">
+<zscript><![CDATA[ ]]></zscript>
+<zscript><![CDATA[//@IMPORT 
+
+                  import org.zkoss.Version;
+]]></zscript>
+<zscript><![CDATA[//@DECLARATION 
+        
+]]></zscript>
+
+
+		<groupbox>			
+				<groupbox width="600px">
+				<caption> Datos del Empleado</caption>
+				<grid>
+					<rows>
+
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="130px" />
+									<column label="" width="180px" />
+									<column label="" width="130px" />
+									<column label="" width="180px" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Cédula" />
+										<bandbox width="80%"></bandbox>
+										<label value="Nombre" />
+										<bandbox width="80%"></bandbox>
+									</row>
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			
+			<groupbox width="600px">
+			<caption> Datos Laborales</caption>
+					<grid>
+					<rows>
+
+
+						<row>
+
+							
+									<grid>
+										<columns>
+											<column label=""
+												width="130px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="130px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+										</columns>
+										<rows>
+											<row>
+												Fecha Ingreso
+												<textbox />
+												Tipo Empleado
+												<textbox />
+											</row>
+
+
+											<row>
+												Sueldo Base
+												<textbox />
+												Periodo de Pago
+												<textbox />
+											</row>
+
+											<row>
+												Horario de trabajo
+												<textbox />
+											</row>
+										</rows>
+
+									</grid>
+
+
+
+							
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<panel collapsible="true" title="Datos del Pago"
+					open="false">
+					<panelchildren>
+
+
+						<div>
+							<grid>
+
+								<rows>
+
+									<row>
+										<grid>
+											<columns>
+												<column label=""
+													width="220px">
+												</column>
+												<column label=""
+													width="252px">
+												</column>
+												<column label=""
+													width="180px">
+												</column>
+												<column label=""
+													width="180px">
+												</column>
+
+
+											</columns>
+											<rows>
+												
+												<row id="row1"
+													>
+													<label
+														value="Nro. de Cheque">
+													</label>
+													<textbox
+														width="180px">
+													</textbox>
+
+													<label
+														value="Entidad Bancaria">
+													</label>
+													<combobox
+														width="180px">
+														<comboitem
+															label="Banesco">
+														</comboitem>
+														<comboitem
+															label="Mercantil">
+														</comboitem>
+														<comboitem
+															label="BOD">
+														</comboitem>
+														<comboitem
+															label="Provincial">
+														</comboitem>
+														<comboitem
+															label="Venezuela">
+														</comboitem>
+													</combobox>
+													
+
+												</row>
+												
+												<row id="row2"
+													visible="false">
+													<label
+														value="Tipo de Tarjeta">
+													</label>
+													<combobox
+														width="180px">
+														<comboitem
+															label="Visa">
+														</comboitem>
+														<comboitem
+															label="MarterCard">
+														</comboitem>
+														<comboitem
+															label="American Express">
+														</comboitem>
+													</combobox>
+												</row>
+											</rows>
+										</grid>
+									</row>
+									
+								</rows>
+
+							</grid>
+
+						</div>
+
+
+						<separator></separator>
+					
+						<separator></separator>
+					</panelchildren>
+				</panel>
+					
+			
+			
+		</groupbox>
+
+		<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				tooltiptext="Aceptar" label="Registrar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir" />
+
+		</div>
+	</window>
+</zk>

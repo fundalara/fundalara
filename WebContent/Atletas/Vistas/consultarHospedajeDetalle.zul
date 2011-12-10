@@ -1,0 +1,59 @@
+<?page title="Atletas Hospedados" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Atletas Hospedados por Representante" border="normal"
+		width="520px" closable="true">
+		<panel title="">
+			<panelchildren>
+				<grid style="border:none;" oddRowSclass="none">
+					<columns>
+						<column width="12%" />
+						<column />
+						<column width="20%" />
+						<column />
+						<column />
+					</columns>
+					<rows>
+						<row style="border:none;" >
+							<label value="Competencia" />
+							<textbox value="Nacional Juvenil" maxlength="40" width="90%"
+									readonly="true" />
+							
+							<label value="Representante" />
+							<textbox maxlength="40" width="90%"
+								readonly="true" value="Miguel Luzardo"/>
+						</row>
+					</rows>
+				</grid>
+				<grid  mold="paging" pageSize="3">
+					<columns>
+						<column label="Jugador Foráneo" width="40%" />
+						<column label="Categoría" width="40%" />
+					</columns>
+					<rows>
+						<row>
+							<label value="Alberto Gómez" />
+							<label value="Junior A" />
+						</row>
+						<row>
+							<label value="Juan Luis Camacho" />
+							<label value="Junior B" />
+						</row>
+						<row>
+							<label value="Carlos Perez" />
+							<label value="Juvenil A" />
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+		<div align="right">
+		   <button label="Imprimir"
+					image="/Recursos/Imagenes/imprimir.ico" orient="horizontal"
+					width="100px" />
+				<button label="Salir"
+					image="/Recursos/Imagenes/salir.png" orient="horizontal"
+					width="100px" focus="true"/>
+		</div>
+	</window>
+</zk>

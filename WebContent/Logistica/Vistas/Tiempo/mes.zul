@@ -1,0 +1,31 @@
+<div id="mensual" visible="true" align="left" width="100%">
+	<hbox>
+		<checkbox label="El dia"></checkbox>
+		<intbox></intbox>
+		<label value="de cada"></label>
+		<intbox></intbox>
+		<label value="meses"></label>
+	</hbox>
+	<hbox>
+		<checkbox label="El"></checkbox>
+		<combobox width="60px">
+			<comboitem label="Primer"></comboitem>
+			<comboitem label="Segundo"></comboitem>
+			<comboitem label="Tercer"></comboitem>
+			<comboitem label="Cuarto"></comboitem>
+			<comboitem label="Ultimo"></comboitem>
+		</combobox>
+		<combobox width="60px">
+			<comboitem label="Lunes"></comboitem>
+			<comboitem label="Martes"></comboitem>
+			<comboitem label="Miercoles"></comboitem>
+			<comboitem label="Jueves"></comboitem>
+			<comboitem label="Viernes"></comboitem>
+			<comboitem label="Sabado"></comboitem>
+			<comboitem label="Domingo"></comboitem>
+		</combobox>
+		<label value="de cada"></label>
+		<spinner width="60px"></spinner>
+		<label value="meses"></label>
+	</hbox>
+</div>

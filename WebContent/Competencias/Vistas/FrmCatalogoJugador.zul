@@ -1,0 +1,156 @@
+<?page title="Catalogo Jugador" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="FrmCatalogoJugador" title="Atletas en un categoria"
+		border="normal" width="400px" mode="modal" closable="true">
+
+		<div align="left">
+			<panel width="100%" title="Datos del Equipo">
+				<panelchildren>
+					<grid>
+						<columns>
+							<column width=""></column>
+							<column width=""></column>
+							<column width=""></column>
+							<column width=""></column>
+						</columns>
+
+						<rows>
+							<row style="border:none;">
+
+								<label value="Categoría"></label>
+								<textbox cols="12"></textbox>
+								<label value="Equipo"></label>
+								<combobox width="65%"></combobox>
+
+							</row>
+						</rows>
+
+					</grid>
+				</panelchildren>
+			</panel>
+		</div>
+
+		<div align="left">
+			<panel border="normal" title="Jugadores">
+				<panelchildren>
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox></textbox>
+						<button label="Buscar"></button>
+					</div>
+					<listbox mold="paging" pageSize="10"
+						style="margin-top:5px">
+
+						<listhead>
+							<listheader label="Nombre" width="45%"
+								align="center">
+							</listheader>
+
+							<listheader label="Edad" align="center">
+							</listheader>
+
+							<listheader label="Alojamiento"
+								align="center">
+							</listheader>
+
+						</listhead>
+
+						<listitem>
+							<listcell>Nombre Jugador 1</listcell>
+							<listcell>14</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
+
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 2</listcell>
+							<listcell>15</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
+
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 3</listcell>
+							<listcell>15</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
+
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 4</listcell>
+							<listcell>15</listcell>
+							<listcell>Si</listcell>
+							<listcell></listcell>
+
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 5</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 6</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+
+						</listitem>
+						<listitem>
+							<listcell>Nombre Jugador 7</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 8</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 9</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 10</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+						<listitem>
+							<listcell>Nombre Jugador 11</listcell>
+							<listcell>15</listcell>
+							<listcell>No</listcell>
+							<listcell></listcell>
+						</listitem>
+
+					</listbox>
+					<div align="right">
+						<button image="/Recursos/Imagenes/aceptar.ico"
+							label="Aceptar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							onClick="Salir()" />
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+
+		<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoJugador.onClose();
+	}
+]]></zscript>
+	</window>
+</zk>

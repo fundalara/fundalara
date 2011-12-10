@@ -1,0 +1,90 @@
+<?page title="Auto Generated index.zul"?>
+<window id="winA" title="Actualizar Concepto de Nómina" border="normal"
+	width="650px">
+
+	<zscript>
+<![CDATA[
+	import org.zkoss.Version;
+	void setOn(){
+		
+		if(on.isChecked()){
+				Sec.setChecked(true);
+				Tec.setChecked(true);
+				Obr.setChecked(true);
+		}else{
+				Sec.setChecked(false);
+				Tec.setChecked(false);
+				Obr.setChecked(false);
+		}
+		}
+	
+	/* public void AsPersonal() {
+		Executions.createComponents("/Administracion/FrmAsociarPersonal.zul", winA, null);
+		//winB.doModal();
+	}*/
+	
+]]>
+</zscript>
+	<groupbox>
+		<grid fixedLayout="true">
+			<columns>
+				<column width="130px" />
+				
+			</columns>
+			<rows>
+				<row>
+					<label value="Concepto"></label>
+					<combobox id="cmb" value="Seleccione" width="90px">
+						<comboitem value="Asignacion"
+							label="Asignación" />
+						<comboitem value="Deduccion" label="Deducción" />
+					</combobox>
+
+				</row>
+				<row align="left">
+					<label value="Código"  />
+					<bandbox width="90px"/>
+	
+				</row>
+				<row align="left">
+					<label value="Descripción" />
+					<bandbox width="200px"/>
+				</row>
+				<row align="left">
+					<label value="Tipo" />
+					<combobox  value="Seleccione" width="90px"
+						>
+						<comboitem value="Fijo"
+							label="Fijo" />
+						<comboitem value="Variable" label="Variable" />
+					</combobox>
+				</row>
+				
+				<row align="left">
+				
+					<label value="Monto/Porcentaje" />
+				
+				<doublebox width="105px" ></doublebox>
+				</row>
+				<row align="left">
+					<label value="Fecha" />
+					<datebox width="90px" ></datebox>
+					
+				</row>
+				
+			</rows>
+		</grid>
+	</groupbox>
+	
+	
+	
+		<div align="right">
+		<button image="/Recursos/Imagenes/guardar.ico"
+			label="Registrar" />
+		<button image="/Recursos/Imagenes/editar.ico" label="Modificar" />
+		
+
+		<button image="/Recursos/Imagenes/atras.ico" label="Salir" />
+	</div>
+</window>
+

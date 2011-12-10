@@ -1,0 +1,73 @@
+<div align="center">
+	<separator height="15px" />
+	<window id = "win" title="Test Evaluativo" border="normal" width="600px"
+		height="" closable="true" apply="vista.entrenamiento.rep_test_ent" >
+		<grid>
+			<columns>
+				<column width="110px" align="left" />
+				<column width="125px" align="center" />
+				<column width="115px" align="left" />
+				<column width="140px" align="center" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label value="Fecha Inicio:" width="120px" />
+					<datebox id="dtbox1" width="125px" />
+					<label value="Fecha Final:" width="120px" />
+					<datebox id="dtbox2" width="125px" />
+				</row>
+				<row height="30px">
+					<label value="Categoria:" width="120px" />
+					<combobox id= "cmbcategoria" value="--TODOS--" width="125px" disabled="true" >
+						<comboitem label="PREPA NIVEL I" />
+						<comboitem label="PREPA NIVEL II" />
+						<comboitem label="PREINFANTIL" />
+						<comboitem label="INFANTIL" />
+						<comboitem label="PREJUNIOR" />
+						<comboitem label="JUNIOR" />
+						<comboitem label="JUVENIL" />
+					</combobox>
+
+					<label value="Equipo:" width="120px" />
+					<combobox id="cmbequipo" value="--TODOS--" width="120px" disabled="true" >
+						<comboitem label="A" />
+						<comboitem label="B" />
+						<comboitem label="C" />
+						<comboitem label="D" />
+						<comboitem label="E" />
+						<comboitem label="F" />
+					</combobox>
+
+
+				</row>
+
+				<row height="30px">
+					<label value="Atleta:" width="120px"/>
+					<combobox id= "cmbatleta" value="--TODOS--" width="120px" disabled="true">
+						<comboitem label="Pedro Perez" />
+						<comboitem label="Mario Fernández" />
+						<comboitem label="Carlos Chirinos" />
+					</combobox>
+					<button id="catalogo" label="Catálogo" onClick="" disabled="true" />
+				</row>
+				<row height="30px">
+					
+				</row>
+			</rows>
+		</grid>
+		<separator />
+
+		<grid height="50px">
+
+			<rows>
+				<row align="right" height="">
+
+
+					<button id= "btnimprimir" image="../Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="95px" disabled="true" />
+
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>

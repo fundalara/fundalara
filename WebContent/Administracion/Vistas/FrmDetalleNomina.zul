@@ -1,0 +1,123 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="detnom" title="Pago de Nómina" border="normal"
+		visible="true" width=" 650px">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+	import org.zkoss.lang.Strings;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void salir() {
+		detnom.onClose();
+	}
+	]]></zscript>
+<groupbox id="K1">
+			<caption>Datos del Empleado</caption>
+			<grid>
+				<columns>
+					<column label="" width="110px" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Cédula" />
+						<textbox width="193px" value="V-14392830" />
+					</row>
+					<row>
+						<label value="Nombres" />
+						<textbox width="193px" value="Diego Alberto" />
+					</row>
+					<row>
+						<label value="Apellidos" />
+						<textbox width="193px" value="Alves Guaita" />
+					</row>
+					<row>
+						<label value="Cargo" />
+						<textbox width="193px" value="Técnico" />
+					</row>
+					<row>
+						<label value="Sueldo Base" />
+						<textbox width="193px" value="1500 Bs." />
+					</row>
+				</rows>
+			</grid>
+			<separator></separator>
+			<grid>
+				<rows>
+					<row>
+						<listbox>
+							<listhead>
+								<listheader
+									width="10px" />
+								<listheader label="Concepto"
+									width="75px" align="center"/>
+								<listheader label="Tipo" width="75px" align="center"/>
+								<listheader label="Valor" width="75px"
+									align="center" />
+								<listheader label="Días" width="75px"
+									align="center" />
+								<listheader label="% Sueldo Base"
+									width="95px" align="center" />
+								<listheader label="Monto" width="75px"
+									align="center" />
+							</listhead>
+							<listitem>
+							    <listcell><checkbox></checkbox></listcell>
+								<listcell label="Cesta Ticket" />
+								<listcell label="Asignación" />
+								<listcell label="27 Bs." />
+								<listcell label="10" />
+								<listcell label="-" />
+								<listcell label="270 Bs." />
+							</listitem>
+							<listitem>
+							    <listcell><checkbox></checkbox></listcell>
+								<listcell label="Seguro Social" />
+								<listcell label="Deducción" />
+								<listcell label="-" />
+								<listcell label="-" />
+								<listcell label="1%" />
+								<listcell label="15 Bs." />
+							</listitem>
+							<listitem>
+							    <listcell><checkbox></checkbox></listcell>
+								<listcell label="Horas Extras" />
+								<listcell label="Bonificación" />
+								<listcell label="30 Bs." />
+								<listcell label="0" />
+								<listcell label="-" />
+								<listcell label="0 Bs." />
+							</listitem>
+							<listitem>
+							    <listcell><checkbox></checkbox></listcell>
+								<listcell label="Inasistencias" />
+								<listcell label="Penalización" />
+								<listcell label="30 Bs." />
+								<listcell label="2" />
+								<listcell label="-" />
+								<listcell label="60 Bs." />
+							</listitem>
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+			<div align="right">
+				<label value="Monto Total" />
+				<textbox value="195 Bs." />
+			</div>
+		</groupbox>
+		<separator></separator>
+		<panel id="L2">
+			<panelchildren>
+				<div align="right">
+					<button image="/Recursos/Imagenes/atras.ico"
+						label="Salir" onClick="salir()">
+
+					</button>
+				</div>
+			</panelchildren>
+		</panel>
+</window>
+</zk>

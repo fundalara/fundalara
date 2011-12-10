@@ -1,0 +1,305 @@
+<?page title="Proveedores" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="frmProveedores" title="Proveedores" border="normal"
+		width="690px">
+		<zscript>
+		<![CDATA[
+	public void MostrarCatalogoProveedores() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/Vistas/FrmCatalogoProveedor.zul", null, null);
+	}
+]]>
+	</zscript>
+		<panel title="Datos del Proveedor" collapsible="true"
+			open="true">
+			<panelchildren>
+				<groupbox style="border:none;">
+					<grid width="100%" oddRowSclass="none"
+						style="border:none;">
+						<columns>
+							<column width="110px" />
+							<column width="225px" />
+							<column width="110px" />
+							<column width="225px" />
+						</columns>
+						<rows>
+							<row align="left" style="border:none;">
+								<label value="R.I.F" />
+								<hbox align="center">
+									<textbox width="150px" />
+									<label value="(*)"
+										style="color:red" />
+									<button
+										image="/Recursos/Imagenes/consultar.ico"
+										onClick="MostrarCatalogoProveedores()"
+										tooltiptext="Listado de Proveedores" />
+								</hbox>
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Razón Social" />
+								<hbox align="center">
+									<textbox width="350px" />
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Datos de Contacto"></caption>
+					<grid oddRowSclass="none" style="border:none;">
+						<columns>
+							<column width="110px" />
+							<column width="225px" />
+							<column width="110px" />
+							<column width="225px" />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Teléfono" />
+								<hbox>
+									<combobox width="40px"
+										readonly="true">
+										<comboitem label="0251"></comboitem>
+										<comboitem label="0252"></comboitem>
+										<comboitem label="0253"></comboitem>
+									</combobox>
+									<textbox width="120px"></textbox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+								<label value="Numero de Fax" />
+								<hbox>
+									<combobox width="40px"
+										readonly="true">
+										<comboitem label="0251"></comboitem>
+										<comboitem label="0252"></comboitem>
+										<comboitem label="0253"></comboitem>
+									</combobox>
+									<textbox width="120px"></textbox>
+								</hbox>
+							</row>
+							<row style="border:none;">
+								<label value="Correo Electrónico" />
+								<textbox width="210px" />
+								<label value="Twitter" />
+								<textbox width="185px" />
+							</row>
+							<row style="border:none;" spans="1,3">
+								<label value="Pagina Web" />
+								<textbox width="320px" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Datos de Residencia" />
+					<grid style="border:none;" oddRowSclass="none"
+						width="100%">
+						<columns>
+							<column width="110px" />
+							<column width="225px" />
+							<column width="110px" />
+							<column width="225px" />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Estado" />
+								<hbox>
+									<combobox readonly="true"
+										value="--Seleccione--" width="160px">
+										<comboitem label="Lara" />
+										<comboitem label="Portuguesa" />
+										<comboitem label="Yaracuy" />
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+								<label value="Municipio" />
+								<hbox>
+									<combobox readonly="true"
+										value="--Seleccione--" width="160px">
+										<comboitem
+											label="Andrés Eloy Blanco" />
+										<comboitem label="Crespo" />
+										<comboitem label="Iribarren" />
+										<comboitem label="Jiménez" />
+										<comboitem label="Morán" />
+										<comboitem label="Palavecino" />
+										<comboitem label="Simón Planas" />
+										<comboitem label="Torres" />
+										<comboitem label="Urdaneta" />
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Parroquia" />
+								<hbox>
+									<combobox readonly="true"
+										value="--Seleccione--" width="160px">
+										<comboitem label="Barquisimeto" />
+										<comboitem label="Cabudare" />
+										<comboitem label="Carora" />
+										<comboitem label="Duaca" />
+										<comboitem label="El Cují" />
+										<comboitem label="El Tocuyo" />
+										<comboitem label="Quibor" />
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Dirección" />
+								<hbox align="center">
+									<textbox maxlength="200"
+										height="40px" width="505px" multiline="true" />
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<separator></separator>
+			</panelchildren>
+		</panel>
+		<panel title="Datos Bancarios" collapsible="true"
+			open="false">
+			<panelchildren>
+				<groupbox style="border:none;">
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<!-- 							<column width="90px" />
+								<column width="235px" />
+								<column width="90px" />
+								<column width="225px" /> -->
+
+							<column width="110px" />
+							<column width="235px" />
+							<column width="110px" />
+							<column width="235px" />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Banco" />
+								<combobox width="120px"
+									readonly="true">
+									<comboitem label="Provincial"></comboitem>
+									<comboitem label="Mercantil"></comboitem>
+									<comboitem label="Bicentenario"></comboitem>
+								</combobox>
+							</row>
+							<row style="border:none;">
+								<label value="Tipo Cuenta" />
+								<combobox width="120px"
+									readonly="true">
+									<comboitem label="Ahorro"></comboitem>
+									<comboitem label="Corriente"></comboitem>
+								</combobox>
+							</row>
+							<row style="border:none;">
+								<label value="Nro Cuenta" />
+								<textbox width="96%" />
+							</row>
+							<row style="border:none;">
+								<label value="Titular" />
+								<textbox width="96%" />
+							</row>
+							<row style="border:none;">
+								<separator></separator>
+							</row>
+							<row spans="4" style="border:none;">
+								<hbox>
+									<grid mold="paging" pageSize="3"
+										oddRowSclass="none">
+										<columns>
+											<column label="Banco"
+												width="100px" align="center" />
+											<column label="Tipo Cuenta"
+												width="100px" align="center" />
+											<column label="Nro Cuenta"
+												width="210px" align="center" />
+											<column
+												label="Titular Cuenta" width="150px" align="center" />
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Mercantil" />
+												<label
+													value="Corriente" />
+												<label
+													value="0134-0326-14-3263-04-0653" />
+												<label
+													value="Pedro Pérez" />
+											</row>
+											<row height="20px">
+												<label />
+												<label />
+												<label />
+												<label />
+											</row>
+											<row height="20px">
+												<label />
+												<label />
+												<label />
+												<label />
+											</row>
+											<row height="20px">
+												<label />
+												<label />
+												<label />
+												<label />
+											</row>
+											<row height="20px">
+												<label />
+												<label />
+												<label />
+												<label />
+											</row>
+										</rows>
+									</grid>
+									<separator></separator>
+									<vbox>
+										<button
+											image="/Recursos/Imagenes/agregar.ico" onClick=""
+											tooltiptext="Agregar" label="" />
+										<button
+											image="/Recursos/Imagenes/editar.ico" onClick=""
+											tooltiptext="Editar" label="" />
+										<button
+											image="/Recursos/Imagenes/quitar.ico" onClick=""
+											tooltiptext="Eliminar" label="" />
+									</vbox>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+
+		<label value="(*) Campo Obligatorio" style="color:red" />
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Registrar" label="Registrar" width="100px" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				tooltiptext="Modificar" label="Modificar" width="100px" />
+			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
+				tooltiptext="Eliminar" label="Eliminar" width="100px" />
+			<button image="/Recursos/Imagenes/salir.png" onClick=""
+				tooltiptext="Salir" label="Salir" width="100px">
+				<attribute name="onClick">
+	frmProveedores.onClose();
+</attribute>
+			</button>
+		</div>
+
+	</window>
+</zk>

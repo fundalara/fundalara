@@ -1,0 +1,125 @@
+<?page title="Auto Generated index.zul"?>
+<zk>
+	<window id="win" title="Asignar Instalacion - PREINFANTIL"
+		border="normal" width="550px" height="" closable="true"
+		apply="controlador.entrenamiento.Asignar_Instalacion">
+		<grid>
+			<columns>
+				<column width="110px" align="left" />
+				<column width="125px" align="center" />
+				<column width="115px" align="left" />
+				<column width="140px" align="center" />
+				<column width="80px" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label value="Instalacion" width="120px" />
+					<combobox id="cmbinstalacion" value="--Seleccione--"
+						width="120px">
+						<comboitem label="Jaula de Bateo" />
+						<comboitem label="LeftField" />
+						<comboitem label="InField" />
+						<comboitem label="CenterField" />
+						<comboitem label="RightField" />
+					</combobox>
+				</row>
+				<row height="30px">
+					<label value="Equipo" width="100px" height="25" />
+					<combobox id="cmbequipo" value="--Seleccione--"
+						width="120px" disabled="true">
+						<comboitem label="A" />
+						<comboitem label="B" />
+						<comboitem label="C" />
+						<comboitem label="D" />
+						<comboitem label="E" />
+						<comboitem label="F" />
+					</combobox>
+					<label value="Manager" width="100px" />
+					<textbox id="txtmanager" value="" width="120px"
+						disabled="true" />
+				</row>
+			</rows>
+		</grid>
+		<separator />
+		<hbox>
+			<grid height="110px">
+				<columns sizable="true">
+					<column label="Instalacion" width="200px"
+						align="center" />
+					<column label="Equipo" width="100px" align="center" />
+					<column label="Manager" width="200px"
+						align="center" />
+				</columns>
+				<rows>
+					<row height="25px" id="row" focus="true">
+						<label value="Jaula de Bateo" />
+						<label value="A" />
+						<label value="Pedro Jose Grifol" />
+					</row>
+					<row height="25px">
+						<label value="Infield" />
+						<label value="B" />
+						<label value="Jose Antonio Lopez" />
+					</row>
+					<row height="25px">
+						<label value="LeftField" />
+						<label value="C" />
+						<label value="Aaron Chacon" />
+					</row>
+					<row height="25px">
+						<label value="" />
+						<label value="" />
+						<label />
+					</row>
+					<row height="25px">
+						<label />
+						<label />
+						<label />
+					</row>
+					<row height="15px">
+						<label />
+						<label />
+						<label />
+					</row>
+				</rows>
+			</grid>
+			<vbox>
+				<button id="btnagregar"
+					image="Recursos/Imagenes/agregar.ico" disabled="true" />
+				<separator height="5px" />
+				<button id="btneditar"
+					image="Recursos/Imagenes/editar.ico" disabled="true" />
+				<separator height="5px" />
+				<button id="btnquitar"
+					image="Recursos/Imagenes/quitar.ico" disabled="true" />
+			</vbox>
+		</hbox>
+		<separator />
+		<separator />
+		<grid height="50px">
+			<columns>
+				<column width="150px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+			</columns>
+			<rows>
+				<row height="">
+					<label value="" />
+					<button id="btnguardar"
+						image="Recursos/Imagenes/guardar.ico" disabled="true"
+						label="Guardar" width="95px" />
+					<button id="btnimprimir"
+						image="Recursos/Imagenes/imprimir.ico " disabled="true"
+						label="Imprimir" width="95px" />
+					<button id="btncancelar"
+						image="Recursos/Imagenes/cancelar.ico" label="Cancelar"
+						width="100px" />
+					<button id="btnsalir"
+						image="Recursos/Imagenes/salir.png" label="Salir" width="95px" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

@@ -1,0 +1,58 @@
+
+<zk>
+	<window id="winTE" title="" border="normal">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void nose() {
+		String var = c.getSelectedItem().getValue().toString();
+
+		if (c.getSelectedItem().getValue().equals("Nomi")) {
+			Executions.createComponents("/Administracion/Vistas/FrmNomina.zul",
+					winTE, null);
+		} else if (c.getSelectedItem().getValue().equals("PagoF")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmPagoCompra.zul", null, null);
+			//PCompra.doModal();
+
+		} else if (c.getSelectedItem().getValue().equals("Serv")) {
+			Window window = (Window) Executions.createComponents(
+					"", null, null);
+			
+		} else if (c.getSelectedItem().getValue().equals("Via")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmPagoBonosyViaticos.zul", null, null);
+			
+		} else if (c.getSelectedItem().getValue().equals("Pago")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmPagoLiga.zul", null, null);
+			
+		} else if (c.getSelectedItem().getValue().equals("otis")) {
+			Window window = (Window) Executions.createComponents(
+					"/Administracion/Vistas/FrmOtrosEgresos.zul", null, null);
+			
+
+		}
+
+	}
+]]></zscript>
+
+		<panel title="Tipo de Egreso" collapsible="true">
+			<panelchildren>
+				<combobox id="c" onSelect="nose()"
+					autocomplete="true">
+					<comboitem label="Nomina" value="Nomi" />
+					<comboitem label="Pago de Factura" value="PagoF" />
+					<comboitem label="Servicios" value="Serv" />
+					<comboitem label="Viaticos" value="Via" />
+					<comboitem label="Pago de Liga" value="Pago" />
+					<comboitem label="Otros" value="otis" />
+				</combobox>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

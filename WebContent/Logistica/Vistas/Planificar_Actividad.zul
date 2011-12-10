@@ -1,0 +1,514 @@
+<window title="Planificar Actividad" border="normal" mode="embedded"
+	width="100%" id="crearActividad" closable="false">
+
+	<grid height="30%" style="boder:none">
+		<columns>
+			<column width="17%"></column>
+			<column width="30%"></column>
+			<column width="17%"></column>
+			<column width="36%"></column>
+		</columns>
+		<rows style="border:none">
+			<row style="border:none">
+				<label style="font-weight: bold;" value="Descripción"></label>
+				<textbox disabled="true" width="95%"></textbox>
+				<label style="font-weight: bold;" value="Código" visible="false"></label>
+				<textbox disabled="true" width="90%" visible="false"></textbox>
+				
+			</row>
+
+			<row style="border:none">
+				<label style="font-weight: bold;"
+					value="Fecha de inicio">
+				</label>
+				<datebox id="ppbegin" width="80%" />
+				<label style="font-weight: bold;"
+					value="Hora de Inicio">
+				</label>
+				<hbox>
+					<timebox />
+					<button label="Periodicidad"
+						onClick="verPeriodicidad()"
+						image="/Recursos/Imagenes/calendario.ico">
+					</button>
+				</hbox>
+			</row>
+
+			<row style="border:none">
+				<label style="font-weight: bold;"
+					value="Fecha de Culminación">
+				</label>
+				<datebox id="ppend" width="80%" />
+				<label style="font-weight: bold;"
+					value="Hora de Culminación">
+				</label>
+				<timebox width="50%" />
+				<label style="font-weight: bold;" value="Responsable" visible="true"></label>
+				<hbox>
+					<textbox ></textbox>
+					<button image="/Recursos/Imagenes/consultar.ico" visible="true"></button>
+				</hbox>
+			</row>
+
+			<row style="border:none">
+				<label value="Estado" style="font-weight: bold;"></label>
+				<progressmeter width="50%" value="27"></progressmeter>
+				<label value="Tipo" style="font-weight: bold;"></label>
+				<combobox width="40%">
+					<comboitem label="Preventivo" />
+					<comboitem label="Correctivo" />
+				</combobox>
+				<label value="Prediseñada" style="font-weight: bold;"></label>
+				<hbox>
+					<textbox></textbox>
+					<button image="/Recursos/Imagenes/consultar.ico"></button>
+				</hbox>
+			</row>
+			
+			
+
+			<row style="border:none">
+			</row>
+			
+			
+		</rows>
+	</grid>
+
+	<panel collapsible="true" title="Planificación Específica"
+		open="false" width="100%" id="panelS">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column width="40%"></column>
+					<column width="5%"></column>
+					<column width="40%"></column>
+				</columns>
+				<rows>
+					<row id="fila2" visible="true">
+						<window title="Lista de Tareas" height="150px"
+							width="100%">
+							<listbox width="100%" height="100%"
+								vflex="true">
+								<listhead>
+									<listheader label="Tarea"
+										width="30%">
+									</listheader>
+									<listheader label="Descripción"></listheader>
+								</listhead>
+								<listitem>
+									<listcell label="Tarea 1"></listcell>
+									<listcell
+										label="Descripción de la tarea">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Tarea 2"></listcell>
+									<listcell
+										label="Descripción de la tarea">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Tarea 3"></listcell>
+									<listcell
+										label="Descripción de la tarea">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Tarea 4"></listcell>
+									<listcell
+										label="Descripción de la tarea">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Tarea 5"></listcell>
+									<listcell
+										label="Descripción de la tarea">
+									</listcell>
+								</listitem>
+							</listbox>
+						</window>
+						<div align="center">
+							<hbox>
+								<button
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+							</hbox>
+							<hbox>
+								<button
+									image="/Recursos/Imagenes/quitar.ico">
+								</button>
+							</hbox>
+						</div>
+						<window title="Lista de Tareas Agregadas"
+							height="150px" width="100%">
+							<listbox width="100%">
+								<listhead>
+									<listheader label="Tarea"
+										width="30%">
+									</listheader>
+									<listheader label="Responsable"></listheader>
+								</listhead>
+								<listitem>
+									<listcell label="Tarea 1"></listcell>
+									<listcell label="Aníbal Moreno"></listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Tarea 2"></listcell>
+									<listcell
+										label="Eduardo Quintero">
+									</listcell>
+								</listitem>
+							</listbox>
+						</window>
+					</row>
+				</rows>
+			</grid>
+
+
+			<grid>
+				<columns>
+					<column width="40%"></column>
+					<column width="5%"></column>
+					<column width="40%"></column>
+				</columns>
+				<rows>
+					<row id="fila6" visible="true">
+						<window title="Lista de Comisiones"
+							height="150px" width="100%">
+							<listbox width="100%" height="100%"
+								vflex="true">
+								<listhead>
+									<listheader label="Comision"
+										width="30%">
+									</listheader>
+									<listheader label="Nombre"
+										width="60%">
+									</listheader>
+								</listhead>
+								<listitem>
+									<listcell label="Comisión 1"></listcell>
+									<listcell
+										label="Comisión de Padres y Representantes">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Comisión 2"></listcell>
+									<listcell
+										label="Comisión de Transporte">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Comisión 3"></listcell>
+									<listcell
+										label="Comisión de Hospedaje">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Comisión 4"></listcell>
+									<listcell
+										label="Comisión de Refrigerios">
+									</listcell>
+								</listitem>
+							</listbox>
+						</window>
+						<div align="center">
+							<hbox>
+								<button id="agregarC"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+							</hbox>
+							<hbox>
+								<button
+									image="/Recursos/Imagenes/quitar.ico">
+								</button>
+							</hbox>
+						</div>
+						<window title="Lista de Comisiones Asociadas"
+							height="150px" width="100%">
+							<listbox width="100%">
+								<listhead>
+									<listheader label="Comisión"
+										width="30%">
+									</listheader>
+									<listheader label="Nombre"
+										width="60%">
+									</listheader>
+								</listhead>
+								<listitem>
+									<listcell label="Comisión 2"></listcell>
+									<listcell
+										label="Comisión de Transporte">
+									</listcell>
+								</listitem>
+								<listitem>
+									<listcell label="Comisión 1"></listcell>
+									<listcell
+										label="Comisión de Padres y Representantes">
+									</listcell>
+								</listitem>
+							</listbox>
+						</window>
+					</row>
+				</rows>
+			</grid>
+			<window title="Materiales Requeridos">
+				<grid>
+
+					<columns>
+						<column></column>
+						<column></column>
+					</columns>
+
+					<rows>
+						<row>
+							<window title="Lista de Materiales"
+								height="150px" width="100%">
+								<listbox width="100%" height="100%"
+									vflex="true">
+									<listhead>
+										<listheader label="Material"
+											width="30%">
+										</listheader>
+										<listheader label="Descripción"
+											width="55%">
+										</listheader>
+										<listheader label="Cantidad"
+											width="15%">
+										</listheader>
+
+									</listhead>
+									<listitem>
+										<listcell label="Cal"></listcell>
+										<listcell label="Saco de 1kg"></listcell>
+										<listcell>
+											<doublebox width="80%"
+												value="1">
+											</doublebox>
+										</listcell>
+
+									</listitem>
+									<listitem>
+										<listcell
+											label="Arcilla calcinada">
+										</listcell>
+										<listcell label="Saco de 1kg"></listcell>
+										<listcell>
+											<doublebox width="80%"
+												value="1">
+											</doublebox>
+										</listcell>
+									</listitem>
+
+								</listbox>
+							</window>
+							<div align="center">
+								<vbox>
+									<button
+										image="/Recursos/Imagenes/agregar.ico"
+										onClick="solicitudMaterial()">
+									</button>
+									<button
+										image="/Recursos/Imagenes/quitar.ico">
+									</button>
+								</vbox>
+							</div>
+						</row>
+					</rows>
+				</grid>
+
+			</window>
+			<separator height="2px"></separator>
+
+
+			<div align="center">
+				<hbox>
+					<label>Desea Seleccionar un Mantenimiento</label>
+					<checkbox onCheck="mostrarPanelMantenimiento()"
+						id="check">
+					</checkbox>
+
+				</hbox>
+			</div>
+
+			<panel visible="false" collapsible="true" open="true">
+				<panelchildren>
+					<window title="Materiales Requeridos">
+						<grid>
+
+							<columns>
+								<column></column>
+								<column></column>
+							</columns>
+
+							<rows>
+								<row>
+									<window title="Lista de Materiales"
+										height="150px" width="100%">
+										<listbox width="100%"
+											height="100%" vflex="true">
+											<listhead>
+												<listheader
+													label="Material" width="30%">
+												</listheader>
+												<listheader
+													label="Descripción" width="55%">
+												</listheader>
+												<listheader
+													label="Cantidad" width="15%">
+												</listheader>
+
+											</listhead>
+											<listitem>
+												<listcell label="Cal"></listcell>
+												<listcell
+													label="Saco de 1kg">
+												</listcell>
+												<listcell>
+													<doublebox
+														width="80%" value="1">
+													</doublebox>
+												</listcell>
+
+											</listitem>
+											<listitem>
+												<listcell
+													label="Arcilla calcinada">
+												</listcell>
+												<listcell
+													label="Saco de 1kg">
+												</listcell>
+												<listcell>
+													<doublebox
+														width="80%" value="1">
+													</doublebox>
+												</listcell>
+											</listitem>
+
+										</listbox>
+									</window>
+									<div align="center">
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico"
+												onClick="solicitudMaterial()">
+											</button>
+											<button
+												image="/Recursos/Imagenes/quitar.ico">
+											</button>
+										</vbox>
+									</div>
+								</row>
+							</rows>
+						</grid>
+
+					</window>
+				</panelchildren>
+			</panel>
+
+
+			<panel visible="false" collapsible="true" open="true"
+				id="panelMantenimiento">
+				<panelchildren>
+					<grid height="30%" style="boder:none">
+						<columns>
+							<column width="17%"></column>
+							<column width="30%"></column>
+							<column width="17%"></column>
+							<column width="36%"></column>
+						</columns>
+						<rows style="border:none">
+							<row>
+								<label style="font-weight: bold;"
+									value="Fecha">
+								</label>
+								<hbox>
+									<datebox></datebox>
+								</hbox>
+								<label style="font-weight: bold;"
+									value="Hora">
+								</label>
+								<hbox>
+									<timebox></timebox>
+									<button label="Periodicidad"
+										onClick="verPeriodicidad()"
+										image="/Recursos/Imagenes/calendario.ico">
+									</button>
+								</hbox>
+							</row>
+							<row>
+								<label style="font-weight: bold;"
+									value="Ubicación">
+								</label>
+								<hbox>
+									<textbox></textbox>
+									<button
+										image="/Recursos/Imagenes/consultar.ico">
+									</button>
+								</hbox>
+							</row>
+
+						</rows>
+					</grid>
+				</panelchildren>
+
+			</panel>
+		</panelchildren>
+	</panel>
+
+
+	<grid>
+		<columns>
+			<column width="100%"></column>
+		</columns>
+		<rows>
+			<row width="100%">
+				<div align="right">
+					<button id="guardar" label="Guardar"
+						image="/Recursos/Imagenes/guardar.ico">
+					</button>
+					<button id="modificar" label="Modificar"
+						image="/Recursos/Imagenes/editar.ico">
+					</button>
+					<button id="imprimir" label="Imprimir"
+						image="/Recursos/Imagenes/imprimir.ico">
+					</button>
+					<button id="cancelar" label="Cancelar"
+						image="/Recursos/Imagenes/cancelar.ico">
+					</button>
+					<button id="salir" label="Salir"
+						image="/Recursos/Imagenes/salir.png">
+					</button>
+				</div>
+
+			</row>
+		</rows>
+	</grid>
+
+
+
+	<zscript>
+		<![CDATA[
+	public void verPeriodicidad() {
+		this.panelS.setOpen(true);
+		Executions.createComponents("/Logistica/Periodicidad.zul",
+				crearActividad, null);
+	}
+	public void asigPersoanlxTarea() {
+		Executions.createComponents("/Logistica/Tareas_Personal.zul",
+				crearActividad, null);
+	}
+	public void solicitudMaterial() {
+		Executions.createComponents("/Logistica/Solicitud_Materiales.zul",
+				crearActividad, null);
+	}
+	public void mostrarPanelMantenimiento() {
+		if (check.isChecked() == true)
+			panelMantenimiento.setVisible(true);
+		else
+			panelMantenimiento.setVisible(false);
+
+	}
+]]>
+	</zscript>
+
+</window>

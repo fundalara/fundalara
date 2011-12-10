@@ -1,0 +1,38 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window  title="Tipo de Aportes Especiales" border="normal" width="650px">
+
+		<div>
+			<panel collapsible="true">
+				<panelchildren>
+					<groupbox>
+		
+						<grid>
+							<rows>
+								<row>
+								<label>Código del Aporte</label>
+								<textbox></textbox>
+								</row>		
+								<row>
+								<label>Descripción</label>
+								<textbox></textbox>
+								</row>							
+							</rows>
+						</grid>
+					</groupbox>
+
+				</panelchildren>
+			</panel>
+			<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico"
+				onClick="" label="Guardar" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				label="Editar" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				onClick="" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				label="Salir" />
+		</div>
+		</div>					
+	</window>
+</zk>

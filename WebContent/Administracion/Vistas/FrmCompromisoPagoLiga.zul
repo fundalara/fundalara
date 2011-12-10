@@ -1,0 +1,212 @@
+<?page title="Registrar Compromisos De Pagos A Ligas" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="CPagoLiga" title="Registrar Compromisos De Pagos De Ligas" border="normal" width="650px">
+
+
+			<groupbox width="600px">
+				<caption width="640px">Datos Personales</caption>
+				<grid>
+					<rows>
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="60px"  align="left" />
+									<column label="" width="200px" />
+								</columns>
+
+								<rows>
+									<row>
+									<label value="Cédula" />
+										<hbox>
+										 <bandbox width="120px"></bandbox>
+											<label value="(*)" style="color:red"></label>								
+										</hbox>						
+									</row>
+									<row>
+									<label value="Nombre" />
+										<hbox>
+										<bandbox width="250px"></bandbox>
+											<label value="(*)" style="color:red"></label>										
+										</hbox>								
+									</row>
+									<row>
+										<label value="Fecha" />
+										<hbox>
+											<datebox format="dd/MM/yyyy" width="120px"></datebox>
+											<label value="(*)" style="color:red"></label>
+										</hbox>
+									</row>
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+
+
+
+			<!-- REGISTRO DE COMPROMISOS -->
+			<panel title="Registro De Compromisos" collapsible="true"
+				open="false" width="640px">
+				<panelchildren>
+
+					<zscript>
+<![CDATA[
+	import org.zkoss.Version;
+	void setOn() {
+		uno.setChecked(true);
+		dos.setChecked(true);
+	}
+]]>
+</zscript>
+
+					<groupbox width="622px">
+						<grid width="622px">
+							<rows>
+								<row>
+									<grid >
+										<columns>
+											<column label="" width="60px" align="left" />
+											<column label="" width="200px" align="left" />
+									
+										</columns>
+										<rows>
+											<row>
+												<label>Compromiso</label>
+												<hbox>
+													<combobox width="180px" value="Seleccione ">
+														<comboitem label="Pago de Equipos"></comboitem>
+														<comboitem label="Pago Directiva Nacional"></comboitem>
+														<comboitem label="Pago Directiva Regional"></comboitem>
+													</combobox>
+													<label value="(*)" style="color:red"></label>
+												</hbox>
+
+												<hbox>
+													<label>Período desde</label>
+													<datebox width="80px"></datebox>
+													<label>Hasta</label>
+													<datebox width="80px"></datebox>
+													<label value="(*)" style="color:red"></label>
+												</hbox>
+
+											</row>
+											<row></row>
+											<row>
+												<label
+													value="Descripción" />
+												<textbox width="200px" />
+											</row>
+											<row>
+											
+												<label value="Cantidad" />
+												<intbox width="80px"></intbox>
+											<hbox>
+												<label value="Cuota Bs.F" />
+												<doublebox width="80px"></doublebox>
+									        </hbox>	
+											</row>
+										</rows>
+									</grid>
+								</row>
+							</rows>
+						</grid>
+
+						<div align="right">
+							<button
+								image="/Recursos/Imagenes/agregar.ico" label=""
+								onClick="" tooltiptext="Agregar" />
+							<button
+								image="/Recursos/Imagenes/quitar.ico" onClick=""
+								tooltiptext="Quitar" />
+						</div>
+					</groupbox>
+
+
+					<groupbox width="600">
+						<caption width="635px">Compromisos Agregados</caption>
+						<grid width="600px">
+
+							<columns>
+							<column width="25px">
+							   <checkbox id="on" onClick="setOn()" ></checkbox>
+							</column>
+		        				<column label="Item" width="50px" align="left" />		
+								<column label="Fecha de Registro" width="115px" align="left" />
+								<column label="Nombre" width="90px" align="left" />
+								<column label="Cédula" width="90px" align="left" />
+								<column label="Compromiso" width="90px" align="left" />
+								<column label="Descripción" width="90px" align="left" />
+								<column label="Cantidad" width="60px" align="left" />
+								<column label="Cuota Bs.F" width="80px" align="left" />
+								<column label="Período" width="120px" align="left" />
+							</columns>
+							<rows>
+								<row >
+									<checkbox id="uno"></checkbox>
+									<label value="1" />
+									<label value="20/02/2011" />
+									<label value="Andrés Palinsky" />
+									<label value="4.202.002" />
+									<label value="Pago de Equipos" />
+									<label value="Pago Cuota de Equipos" />
+									<label value="10"/>
+									<label value="40"/>
+									<label value="Del 21/02/2011 al 21/03/2011"/>
+								</row>
+								<row>
+									<checkbox id="dos"></checkbox>
+									<label value="2" />
+									<label value="20/02/2011" />
+									<label value="Andrés Palinsky" />
+									<label value="4.202.002"/>
+									<label value="Pago Directiva Regional"/>
+									<label value="Pago Cuota a Directiva Regional"/>
+									<label value="150" />
+									<label value="50" />
+									<label value="Del 21/02/2011 al 21/03/2011"/>
+
+								</row>
+							</rows>
+
+						</grid>
+					</groupbox>
+
+
+				</panelchildren>
+			</panel>
+
+
+			<div align="right">
+			<button image="/Recursos/Imagenes/agregar.ico" onClick=""
+				tooltiptext="Registrar" label="Guardar" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				tooltiptext="Modificar" label="Editar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir">
+				
+				<attribute name="onClick">
+	CPagoLiga.onClose();
+</attribute>
+				
+</button>				
+		</div>
+	
+	<div align="left"> 
+		
+		<hbox>
+			<label
+			value="Todos los campos marcados con ">
+			</label>
+			<label
+			value="(*)" style="color:red">
+			</label>
+			<label
+			value=" son obligatorios ">
+			</label>
+			</hbox>
+	</div>
+	</window>
+</zk>

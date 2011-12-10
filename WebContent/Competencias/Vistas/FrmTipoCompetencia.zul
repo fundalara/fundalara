@@ -1,0 +1,83 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<div align="center">
+	<window title="DEFINICION DEL TIPO DE COMPETENCIA" 	border="normal" width="40%" closable="true" >
+		<panel>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="" width="48%"/>
+						<column label="" width="50%"/>
+					</columns>
+					<rows>
+						<row align="left">
+							<label value="Competencia"></label>
+							<combobox id="cmbCompetencia" width="80%"
+								 value="Seleccione">
+								<comboitem label="Oficial" />
+								<comboitem label="Especial" />
+								<comboitem label="Interna" />
+							</combobox>
+						</row>
+						<row align="left">
+							<label value="Nombre de la Competencia:"></label>
+							<textbox width="88%" />
+						</row>
+						<row align="left">
+							<label value="Descripción:"></label>
+							<textbox width="88%" />
+						</row>
+						<row align="left">
+							<label value="Tipo de Organización"></label>
+							<combobox id="cmbTipoCompetencia"
+								width="80%" onChange="" value="Seleccione">
+								<comboitem label="Categoria" />
+								<comboitem label="Liga" />
+							</combobox>
+						</row>
+					</rows>
+				</grid>
+				<listbox>
+					<listhead>
+						<listheader label="Categoria" sort="auto" />
+						
+					</listhead>
+					<listitem>
+						<listcell label="" />
+						
+					</listitem>
+					<listitem>
+						<listcell label="" />
+						
+					</listitem>
+					<listitem>
+						<listcell label="" />
+						
+					</listitem>
+				</listbox>
+				</panelchildren>
+		</panel>
+		<panel width="100%" height="20%">
+			<panelchildren>
+	<div >
+ 		<div align="right"  height="30px">    	
+					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+							orient="horizontal"  ></button>
+					<button image="/Recursos/Imagenes/quitar.ico" label="Eliminar"
+							orient="horizontal"  >
+							
+							</button>
+					<button image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal" >
+							</button>
+					<button image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal" >
+							</button>											
+		
+ 		</div>
+    </div>	
+			</panelchildren>
+		</panel>
+	</window>
+	</div>
+</zk>

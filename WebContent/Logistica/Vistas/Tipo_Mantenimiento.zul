@@ -1,0 +1,83 @@
+<?page title="Tipo de Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<window title="Tipo de Mantenimiento" border="normal" width="550px" apply="controlador.logistica.TipoMantenimientoControlador"
+	sizable="true" mode="modal" id="TipoMantenimiento">
+	<panel title="Mantenimiento" collapsible="false">
+		<panelchildren>
+			<hbox width="100%">
+				<div>
+					<grid>
+						<columns>
+							<column width="30%" />
+						</columns>
+						<rows>
+
+							
+							<row>
+								<label value="Nombre" />
+								<textbox width="90%" disabled="false"
+									multiline="true" height="40px" value="" id="txtDescripcion" />
+							</row>
+							
+						</rows>
+					</grid>
+				</div>
+
+
+			</hbox>
+			<space height="4px"></space>
+			<panel title="Lista de Actividades Disponibles" open="true"
+				width="100%" collapsible="true">
+				<panelchildren>
+					<grid width="100%">
+						<columns>
+
+							<column label="Descripción" width="60%"  />
+
+						</columns>
+						<rows>
+							<row>
+
+
+								<label>Preventivo</label>
+
+
+							</row>
+							<row>
+
+
+								<label>Correctivo</label>
+
+
+							</row>
+							<row>
+
+
+								<label>de Rutina</label>
+
+							</row>
+
+						</rows>
+
+					</grid>
+
+				</panelchildren>
+
+			</panel>
+			<space height="1%"></space>
+
+			<space height="1%"></space>
+		</panelchildren>
+	</panel>
+	<div align="right">
+		<button label="Guardar" image="./Recursos/Imagenes/guardar.ico"
+			orient="horizontal" width="100px" id="btnGuardar" />
+		<space />
+		<button label="Cancelar"
+			image="./Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<space />
+		<button label="Salir" image="./Recursos/Imagenes/atras.ico"
+			orient="horizontal" width="100px" />
+		<space />
+	</div>
+</window>

@@ -1,0 +1,73 @@
+<?page title="Registro Material" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Registro  de Material" border="normal" width="690px" maximizable="true" minimizable="true">
+	<panel width="100%" height="100%">
+		<panelchildren>
+			<grid height="100%" width="100%">
+					<columns>
+						<column>
+						<label>Registrar Nuevo</label>
+						</column>
+					</columns>
+					<rows>
+						<row>
+							<div>
+								<label value="Código: "></label>
+								<textbox width="7%"></textbox>
+								<space width="3%"></space>
+								<label value="Categoría: "></label>
+								<combobox width="15%"></combobox>
+								<space width="3%"></space>
+								<label value="Tipo de Material: "></label>
+								<combobox width="15%"></combobox>
+							</div>
+						</row>
+						<row height="100px">
+							<div>
+								<label value="Descripción: "></label>
+								<textbox multiline="true" height="120px" width="100%"></textbox>
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Cantidad: " width="10%"></label>
+								<space  width="3%"></space>
+								<textbox width="" ></textbox>
+								<space width="1%"></space>
+								<label value="Presentación: " width="15%"></label>
+								<combobox value="--Seleccione--" width="30%" id="combo">
+									<comboitem label="Kilogramos" />
+									<comboitem label="Gramos " id="C"/>
+									<comboitem label="Litros" id="Com" />									
+									<comboitem label="Mililitros" />								
+								</combobox>
+							</div>
+						</row>	
+						<row>
+							<div>
+								<label value="Stock Mínimo:"></label>
+								<textbox></textbox>
+								<space width="1%"></space>
+								<label value="Stock Máximo:"></label>
+								<textbox></textbox>
+								<space  width="2%"></space>
+								<label value="Reutilizable"></label>
+									<checkbox></checkbox>
+								<separator height="10px"></separator>
+							</div>
+						</row>
+						<row>
+							<div align="right" width="100%">
+								<button label="Guardar" image="../Recursos/Imagenes/guardar.ico"></button>
+								<space width="1.5%"></space>
+								<button label="Cancelar" image="../Recursos/Imagenes/cancelar.ico"></button>
+								<space width="1.5%"></space>
+								<button label="Salir" image="../Recursos/Imagenes/atras.ico"></button>
+							</div>
+						</row>
+					</rows>
+				</grid>
+		</panelchildren>
+	</panel>
+</window>
+</zk>

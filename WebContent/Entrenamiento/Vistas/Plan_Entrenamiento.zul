@@ -1,0 +1,50 @@
+<?page title="Auto Generated index.zul"?>
+<?component name="Calen" macro-uri="index.zul" inline="true"?>
+	<window title="Plan de Entrenamiento"
+		border="normal" width="180px" height="" closable="true">
+		<grid>
+			<rows>
+				<row>
+					<grid>
+						<columns>						
+							<column width="165px" align="center" />							
+						</columns>
+						<rows>							
+							<row height="30px">
+								<label value="Fecha Inicio"
+									width="160px" />						
+							</row>
+							<row height="30px">
+								<datebox width="125px"/>
+							</row>
+							<row height="30px">							
+								<label value="Fecha Final" width="160px" />
+							</row>
+							<row height="30px">
+								<datebox width="125px"/>
+							</row>
+						</rows>
+					</grid>
+				</row>				
+			</rows>
+		</grid>
+		<separator />
+		<grid>
+			<columns>
+				<column width="50px" align="center" />
+				<column width="50px" align="center" />
+				<column width="50px" align="center" />
+			</columns>
+			<rows>
+				<row>
+					<button image="Recursos/Imagenes/aceptar.ico"
+						width="45px" />
+					<button image="Recursos/Imagenes/cancelar.ico"
+						width="45px" />
+					<button image="Recursos/Imagenes/salir.png"
+						width="45px" />
+				</row>
+			</rows>
+		</grid>
+		<include id="ventana"/>
+	</window>

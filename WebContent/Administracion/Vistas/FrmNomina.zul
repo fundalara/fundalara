@@ -1,0 +1,227 @@
+<?page title="Pago Nómina" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winNO" title="Pago Nómina" border="normal"
+		visible="true" width=" 650px">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+	import org.zkoss.lang.Strings;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void doLogin() {
+		winNO.setVisible(false);
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/Vistas/FrmDetalleNomina.zul", null, null);
+
+	}
+	public void RegPago() {
+		winNO.setVisible(false);
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/Vistas/FrmRegistrarNomina.zul", null, null);
+	}
+	public void mostrar1() {
+		String var = A.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			M1.setVisible(true);
+			M2.setVisible(false);
+			M3.setVisible(true);
+		} else if (var.equals("2")) {
+			M1.setVisible(false);
+			M2.setVisible(true);
+			M3.setVisible(true);
+		}
+	}
+	public void mostrar2() {
+		String var = B.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			G1.setVisible(false);
+			G2.setVisible(false);
+			G3.setVisible(true);
+			G4.setVisible(false);
+		} else if (var.equals("2")) {
+			G1.setVisible(true);
+			G2.setVisible(true);
+			G3.setVisible(false);
+			G4.setVisible(true);
+		} else if (var.equals("3")) {
+			G1.setVisible(true);
+			G2.setVisible(true);
+			G3.setVisible(true);
+			G4.setVisible(true);
+		}
+	}
+]]></zscript>
+		<groupbox id="P1">
+			<separator></separator>
+			<space></space>
+			<label value="Seleccionar Nómina"></label>
+			<combobox id="A" onSelect="mostrar1()" width="230px"
+				value="--Seleccione--">
+				<comboitem label="Quincenal 16-11-2011/30-11-2011"
+					value="1">
+				</comboitem>
+				<comboitem label="Semanal 28-11-2011/04-12-2011"
+					value="2">
+				</comboitem>
+			</combobox>
+			<separator></separator>
+			<separator></separator>
+		</groupbox>
+		<groupbox id="M1" visible="false" width="600px">
+			<caption>Lista Empleados</caption>
+			<separator></separator>
+			<space></space>
+			<label>Clasificar Tipo Empleado</label>
+			<combobox value="--Seleccione--" id="B"
+				onSelect="mostrar2()">
+				<comboitem label="Todos" value="3"></comboitem>
+				<comboitem label="Administrativo" value="1"></comboitem>
+				<comboitem label="Técnico" value="2"></comboitem>
+			</combobox>
+			<separator></separator>
+			<grid width="600px">
+				<columns>
+					<column align="center" width="180px">Nombre</column>
+					<column align="center" width="70px">Cargo</column>
+					<column align="center" width="90px">
+						Sueldo Base
+					</column>
+					<column align="center" width="90px">
+						Asignaciones
+					</column>
+					<column align="center" width="90px">
+						Deducciones
+					</column>
+					<column align="center" width="100px">
+						Bonificaciones
+					</column>
+					<column align="center" width="110px">
+						Penalizaciones
+					</column>
+					<column align="center" width="70px">Total</column>
+				</columns>
+				<rows>
+					<row id="G1" visible="true">
+						<label value="Diego Alves"></label>
+						<label value="Técnico"></label>
+						<label value="1500 Bs."></label>
+						<label value="270 Bs."></label>
+						<label value="15 Bs."></label>
+						<label value="0 Bs."></label>
+						<label value="75 Bs."></label>
+						<toolbarbutton label="1680 Bs."
+							onClick="doLogin()" />
+					</row>
+					<row id="G2" visible="true">
+						<label value="Antonio Barragán"></label>
+						<label value="Técnico"></label>
+						<label value="1200 Bs."></label>
+						<label value="270 Bs."></label>
+						<label value="12 Bs."></label>
+						<label value="60 Bs."></label>
+						<label value="0 Bs."></label>
+						<toolbarbutton label="1518 Bs." onClick="" />
+					</row>
+					<row id="G3" visible="true">
+						<label value="Ricardo Costa"></label>
+						<label value="Administrativo"></label>
+						<label value="1200 Bs."></label>
+						<label value="270 Bs."></label>
+						<label value="12 Bs."></label>
+						<label value="60 Bs."></label>
+						<label value="0 Bs."></label>
+						<toolbarbutton label="1518 Bs." onClick="" />
+					</row>
+					<row id="G4" visible="true">
+						<label value="Federico Domínguez"></label>
+						<label value="Técnico"></label>
+						<label value="1500 Bs."></label>
+						<label value="270 Bs."></label>
+						<label value="15 Bs."></label>
+						<label value="0 Bs."></label>
+						<label value="75 Bs."></label>
+						<toolbarbutton label="1680 Bs." onClick="" />
+					</row>
+				</rows>
+			</grid>
+			<separator></separator>
+			<separator></separator>
+		</groupbox>
+		<groupbox id="M2" visible="false">
+			<caption>Lista Empleados</caption>
+			<separator></separator>
+			<space></space>
+			<label>Clasificar Tipo Empleado</label>
+			<combobox value="--Seleccione--">
+
+				<comboitem label="Obrero"></comboitem>
+
+			</combobox>
+			<separator></separator>
+			<grid width="600px">
+				<columns>
+					<column align="center" width="130px">Nombre</column>
+					<column align="center" width="70px">Cargo</column>
+					<column align="center" width="90px">
+						Sueldo Base
+					</column>
+					<column align="center" width="90px">
+						Asignaciones
+					</column>
+					<column align="center" width="90px">
+						Deducciones
+					</column>
+					<column align="center" width="100px">
+						Bonificaciones
+					</column>
+					<column align="center" width="110px">
+						Penalizaciones
+					</column>
+					<column align="center" width="70px">Total</column>
+				</columns>
+				<rows>
+					<row>
+						<label value="David Silva"></label>
+						<label value="Obrero"></label>
+						<label value="700 Bs."></label>
+						<label value="90 Bs."></label>
+						<label value="7 Bs."></label>
+						<label value="0 Bs."></label>
+						<label value="0 Bs."></label>
+						<toolbarbutton label="783 Bs." />
+					</row>
+					<row>
+						<label value="David Jiménez"></label>
+						<label value="Obrero"></label>
+						<label value="600 Bs."></label>
+						<label value="90 Bs."></label>
+						<label value="6 Bs."></label>
+						<label value="0 Bs."></label>
+						<label value="0 Bs."></label>
+						<toolbarbutton label="684 Bs." onClick="" />
+					</row>
+				</rows>
+			</grid>
+			<separator></separator>
+			<separator></separator>
+		</groupbox>
+		<panel id="P2" visible="true">
+			<panelchildren>
+				<div align="right">
+					<button id="M3" visible="false"
+						image="/Recursos/Imagenes/reporte.ico" label="Registrar Pago"
+						onClick="RegPago()" />
+					<button image="/Recursos/Imagenes/atras.ico"
+						label="Salir" onClick="" />
+				</div>
+			</panelchildren>
+		</panel>
+
+
+
+	</window>
+</zk>

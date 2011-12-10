@@ -1,0 +1,649 @@
+<?page title="Pago De Liga" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="left">
+     <separator height="15px" />
+     <window closable="true"   id="PagoLiga" title="Pago de Ligas" border="normal" width="690px" height="">  
+       
+       
+       <zscript><![CDATA[
+	public void mostrar() {
+		String var = CB.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+
+		}
+
+	}
+]]></zscript>
+
+<zscript>
+<![CDATA[
+	import org.zkoss.Version;
+	void setOn() {
+		uno.setChecked(true);
+		dos.setChecked(true);
+		tres.setChecked(true);
+		cuatro.setChecked(true);
+	}
+]]>
+</zscript>
+ 
+
+				
+				<grid>
+					<rows>
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="150px"  align="left" />
+									<column label="" width="150px" align="left" />
+									<column label="" width="150px"  align="left" />
+								</columns>
+
+								<rows>									
+					<row align="left" style="border:none">
+					<hbox height="30px" align="left">
+						<label value="Estado" width="90px"/>						
+						<space />
+							<combobox width="90px" value="--Seleccione--"> 
+							<comboitem label="Todos Los Estados"></comboitem>
+	 						<comboitem label="Sin Pagar"></comboitem>
+	 						<comboitem label="Pagada"></comboitem>
+						</combobox>
+					<label style="color:red" Value="(*)"></label>
+					</hbox>				
+					
+					<hbox height="30px" align="left">
+				<label value="Fecha Inicio" width="80px"/>						
+				<space/>
+				<datebox format="dd/MM/yyyy" width="80px" />				
+				</hbox>
+				
+				<hbox height="30px" align="left">
+				<label value="Fecha Fin" width="80px"/>						
+				<space/>
+				<space/>
+				<datebox format="dd/MM/yyyy" width="80px" />				
+				
+				</hbox>
+					
+					</row>
+									
+									
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+		
+		
+		
+		
+		
+		
+		
+		
+		<grid>
+			<!--  
+			<columns>
+			<column label="" width="200px" align = "left"/>
+			<column label="" width="200px" align = "left"/>
+			<column label="" width="200px" align = "left"/>
+			</columns>
+			-->
+			 
+			<rows>
+				
+				
+				<row>
+					<hbox>
+
+						<grid mold="paging" pageSize="10"
+							width="625px">
+							<auxhead>
+								<auxheader align="center"
+									label="" width="2px" />
+								<auxheader align="center"
+									label="Código" width="50px" />
+								<auxheader align="center"
+									label="Nombre" width="115px" />
+									<auxheader align="center"
+									label="Compromiso" width="118px" />
+								<auxheader align="center"
+									label="Descripción" width="118px" />
+								<auxheader align="center"
+									label="Cantidad" width="60px"
+									tooltiptext="Cantidad De Participantes" />
+									<auxheader align="center"
+									label="Cuota Bs.F" width="75px" />
+									<auxheader align="center"
+									label="Estado" width="70px" />
+								<!-- 
+								<auxheader align="center" label="Fecha Inicio" width="100px" />
+								<auxheader align="center" label="Fecha Fin" width="100px" />								
+							 -->
+							</auxhead>
+							
+							<columns>
+								<column width="2px" align="left">
+								<checkbox id="on" onClick="setOn()"></checkbox>
+								</column>
+								
+								<column width="100px" align="center">
+									<hbox align="center">
+										<image
+											src="/Recursos/Imagenes/filtro.png" />
+										<textbox width="50px"
+											height="20px" />
+									</hbox>
+								</column>
+								<column width="120px" align="center">
+									<hbox align="center">
+										<image
+											src="/Recursos/Imagenes/filtro.png" />
+										<textbox width="115px"
+											height="20px" />
+									</hbox>
+								</column>
+								<column width="115px" align="center">
+								</column>
+								
+								<column width="118px" align="center">
+								</column>
+								
+								<column width="60px" align="center">
+								</column>
+								<column width="75px" align="center">
+								</column>
+								
+								<column width="70px" align="center">
+								</column>
+								
+								<!--  
+								<column width="100px" align="center">
+									<datebox format="dd/MM/yyyy" width="80px" height="20px" />
+								</column>
+								
+								<column width="100px" align="center">
+									<datebox format="dd/MM/yyyy" width="80px" height="20px" />
+								</column>
+								-->
+								
+								
+								
+							</columns>
+							
+							<rows>
+								<row height="25px">
+									<checkbox id="uno"></checkbox>
+									<label value="001" />
+									<label value="Andrés Palinsky" />
+									<label value="Pago De Equipos" />
+									<label value="Pago Cuota de Equipos" />
+									<label value="10" />
+							        <label value="40" />
+							        <label value="Sin Pagar" />
+									<!-- 
+									<label value="21/02/2011" />
+									<label value="21/03/2011" />
+									<label />
+									 -->
+								</row>
+								<row height="25px">
+									<checkbox id="dos"></checkbox>
+									<label value="001" />
+									<label value = "Andrés Palinsky" />
+									<label value ="Pago Directiva Regional"/>
+									<label value ="Pago Cuota A Directiva Regional"/>
+									<label value="150" />
+									<label value="50" />
+									<label value="Sin Pagar" />
+									
+									<label />
+								</row>
+								<row height="25px">
+									
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label/>
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								
+								<row height="25px">
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+									<label />
+								</row>
+								
+							</rows>
+						</grid>
+
+						
+						
+						<vbox height="50px">							
+							<button
+								image="/Recursos/Imagenes/agregar.ico"
+								tooltiptext="Agregar" />
+							<separator height="5px" />
+							<!-- 
+							<button
+								image="/Recursos/Imagenes/editar.ico" 
+								tooltiptext="Editar"/>
+							<separator height="5px" />
+							 -->
+							<button
+								image="/Recursos/Imagenes/quitar.ico" 
+								tooltiptext="Eliminar"/>
+								
+								<separator height="5px" />
+						
+						<button
+								image="/Recursos/Imagenes/consultar.ico" 
+								tooltiptext="Vista Previa">
+								<attribute name="onClick" >
+								
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmVistaPrevPagoLiga.zul", null,
+			null);
+]]>
+								</attribute>
+								
+								
+								</button>
+								
+								<separator height="5px" />
+						</vbox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		
+<groupbox width="600px">
+		<div align="right">
+
+
+			<groupbox>
+				<label value="Total Bs.F a Pagar"  />				
+				<doublebox value="7900" > </doublebox>			
+			</groupbox>
+		</div>
+	
+	
+	
+	</groupbox>		
+		
+		
+		
+<groupbox width="670px">
+
+
+			
+			<!-- Datos de pago -->
+
+		<panel title="Datos de Pago" collapsible="true" open="false" width="665px">
+			<panelchildren>
+			
+				
+			
+			<groupbox>
+			
+			
+			<caption>Método De Pago</caption>
+			
+			
+			<div>
+						<grid>
+
+							<rows>
+
+								<row>
+									<grid>
+										<columns>
+											<column label=""
+												width="220px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="130px">
+											</column>
+											<column label=""
+												width="130px">
+											</column>
+
+
+										</columns>
+										
+										
+										<rows>
+											<row align="left">
+											<label value="Fecha Pago"/>
+											<hbox><datebox format="dd/MM/yyyy" width="130px"></datebox><label style="color:red" Value="(*)"></label> </hbox> 
+										
+											</row>
+											
+											<row align="left">
+												<label
+													value="Formas Pago">
+												</label>
+												<hbox>
+												<combobox id="CB"
+													onSelect="mostrar()" width="130px">
+													<comboitem value="1"
+														label="Efectivo">
+													</comboitem>
+													<comboitem value="2"
+														label="Débito">
+													</comboitem>
+													<comboitem value="3"
+														label="Crédito">
+													</comboitem>
+													<comboitem value="4"
+														label="Transferencia">
+													</comboitem>
+													<comboitem value="5"
+														label="Cheque">
+													</comboitem>
+												</combobox>
+												<label style="color:red" Value="(*)"></label>
+												</hbox>
+												
+												<label
+													value="Monto Cancelado Bs.F">
+												</label>
+												<hbox><doublebox width="150px"> </doublebox><label style="color:red" Value="(*)"></label> </hbox>
+
+											</row>
+											
+											
+											
+											<row id="row1"
+												visible="false" align="left">
+												
+												<label
+													value="Nro. Documento">
+												</label>
+												<hbox><textbox width="145px"> </textbox> <label style="color:red" Value="(*)"></label> </hbox>
+												
+												<label
+													value="Banco">
+												</label>
+												<hbox>
+												<combobox
+													width="137px">
+													<comboitem
+														label="Banesco">
+													</comboitem>
+													<comboitem
+														label="Bicentenario">
+													</comboitem>
+													<comboitem
+														label="BOD">
+													</comboitem>
+													<comboitem
+														label="Mercantil">
+													</comboitem>
+													<comboitem
+														label="Provincial">
+													</comboitem>
+													<comboitem
+														label="Venezuela">
+													</comboitem>
+												</combobox>
+                                               <label style="color:red" Value="(*)"></label>
+                                               </hbox>
+											</row>
+											<row id="row2"
+												visible="false" align="left">
+												
+												<label
+													value="Tipo Tarjeta">
+												</label>
+												<hbox>
+												<combobox
+													width="130px">
+													<comboitem
+														label="American Express">
+													</comboitem>
+													<comboitem
+														label="MarterCard">
+													</comboitem>
+													<comboitem
+														label="Visa">
+													</comboitem>
+													
+												</combobox>
+												<label style="color:red" Value="(*)"> </label>
+											</hbox>
+											</row>
+										</rows>
+									</grid>
+								</row>
+								
+								<row>
+								<div align="right">
+										<hbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												label="" tooltiptext="Agregar a la Lista" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick=""
+												label="" tooltiptext="Quitar de la Lista" />
+										</hbox>
+									</div>
+								</row>
+						</rows>
+						</grid>
+
+					</div>
+
+
+					<separator></separator>
+					
+			
+			
+			
+			</groupbox>
+			
+			
+			
+		<groupbox>
+		
+		<caption>Diferentes Métodos de Pago</caption>
+		
+		<div align="center">
+							<grid width="600px">
+								<columns>
+									
+									<column label="Forma De Pago"
+										width="50px" align = "center"/>
+									<column label="Nro. Documento"
+										width="80px" align = "center"/>
+									<column label="Banco"
+										width="100px" align = "center"/>
+									<column label="Monto Cancelado Bs.F" width="95px" align = "center" />
+
+								</columns>
+								<rows>
+									<row>
+										<!-- <label value="1" />  -->
+										<label value="Efectivo" />
+										<label value="--------"/>
+										<label value="--------"/>
+										<label value="400"/>
+
+									</row>
+									<row>
+										<!-- <label value="2" />  -->
+										<label value="Cheque" />
+										<label value="010-56-6"/>
+										<label value="Mercantil" />
+										<label value="7500" />
+									</row>
+								</rows>
+
+							</grid>
+						</div>
+			
+		</groupbox>	
+			
+			
+			
+	
+			</panelchildren>
+	</panel>
+	
+
+</groupbox>
+
+<div align="right" width="680px" height="">
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Registrar" label="Guardar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico"
+				onClick="" tooltiptext="Salir" label="Salir" >
+				<attribute name="onClick">
+				PagoLiga.onClose();
+				</attribute>
+				
+				</button>
+		</div>
+
+		<div align="left" width="680px" height=""> 
+		
+		<hbox>
+			<label
+			value="(*) Campo Obligatorio" style="color:red">
+			</label>
+			</hbox>
+		
+	</div>
+
+
+
+</window>
+
+
+
+</div> <!-- DIV PRINCIPAL TERMINA AQUI -->
+
+
+
+</zk>    

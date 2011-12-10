@@ -1,0 +1,68 @@
+<window title="Instalación" border="normal" width="690px">
+	<grid>
+		<columns>
+			<column></column>
+			<column></column>
+			<column></column>
+			<column></column>
+		</columns>
+
+		<rows>
+
+			<row>
+				<label value="Nombre"></label>
+				<textbox value="Cubiculo A3"></textbox>
+			</row>
+			<row>
+				<label value="Descripción"></label>
+				<textbox multiline="true" height="40px" width="300px"
+					value="Oficina del presidente de EBMF">
+				</textbox>
+			</row>
+			<row>
+				<label value="Tipo de Instalación"></label>
+				<combobox value="--Seleccione--">
+					<comboitem label="Deportiva"></comboitem>
+					<comboitem label="Oficina"></comboitem>
+				</combobox>
+			</row>
+
+
+		</rows>
+
+	</grid>
+
+
+	<panel title="Instalaciones Registradas" collapsible="true">
+		<panelchildren>
+			<grid>
+				<columns>
+
+					<column label="Nombre" />
+
+				</columns>
+				<rows>
+					<row>
+
+						<label value="Cubiculo B3"></label>
+					</row>
+					<row>
+
+						<label value="Campo zona este"></label>
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<div align="right">
+		<button label="Guardar"
+			image="/Recursos/Imagenes/guardar.ico">
+		</button>
+		<button label="Cancelar"
+			image="/Recursos/Imagenes/cancelar.ico">
+		</button>
+		<button label="Salir" image="/Recursos/Imagenes/atras.ico">
+		</button>
+	</div>
+
+</window>

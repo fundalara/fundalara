@@ -1,0 +1,218 @@
+<?page title="Regla" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+	<window title="Reglas" border="normal" width="68%" height="auto" closable="true">
+		<panel>
+			<caption label="Creación de Reglas"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="" width="15%" style="border-style:none" />
+						<column label="" width="35%" style="border-style:none" align="left" />
+						<column label="" width="15%" style="border-style:none"
+							align="left" />
+						<column label="" width="35%" style="border-style:none" align="left" />
+					</columns>
+					<rows>
+						<row style="border-style:none" align="left">
+							<label value="Regla:"></label>
+							<textbox width="97%"></textbox>
+							<label value="Variable de Medición:">
+							</label>
+							<combobox width="97%">
+								<comboitem label="%" />
+								<comboitem label="Unidades" />
+							</combobox>
+						</row>
+						<row style="border-style:none" align="left">
+							<label value="Descripción:"></label>
+							<textbox multiline="true" height="50px" width="97%"
+								cols="40">
+							</textbox>
+							<label value="Variable de Comparación:">
+							</label>
+							<hbox>
+							<textbox width="100px"></textbox>
+							<button
+								image="../../Recursos/Imagenes/consultar.ico">
+							</button>
+							</hbox>
+						</row>
+						<row style="border-style:none" align="left">
+							<label value="Criterio:"></label>
+							<combobox width="97%">
+								<comboitem label=" Mayor " />
+								<comboitem label=" Menor " />
+								<comboitem label=" Mayor Igual " />
+								<comboitem label=" Menor Igual " />
+							</combobox>
+						</row>
+
+					</rows>
+
+				</grid>
+
+
+			</panelchildren>
+		</panel>
+
+		<panel>
+			<caption label="Selección de Categorías"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="45%"></column>
+						<column width="12%" align="Center"></column>
+						<column width="45%"></column>
+					</columns>
+					<rows>
+						<row>
+							<listbox>
+								<listhead>
+									<listheader label="" sort="auto"
+										width="20%">
+										<checkbox></checkbox>
+									</listheader>
+									<listheader label="Categorías"
+										sort="auto" />
+								</listhead>
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Preparatorio Nivel 1" />
+								</listitem>
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell
+										label="Preparatrio Nivel 2" />
+								</listitem>
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell label="Pre-Infantil" />
+								</listitem>
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell label="Infantil" />
+								</listitem>
+
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell label="Pre-Junior" />
+								</listitem>
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell label="Junior" />
+								</listitem>
+								<listitem>
+									<listcell>
+										<checkbox />
+									</listcell>
+									<listcell label="Juvenil" />
+								</listitem>
+
+							</listbox>
+                            
+						
+
+							
+						</row>
+
+					</rows>
+				</grid>
+
+			</panelchildren>
+		</panel>
+
+
+
+		<panel collapsible="true">
+			<caption label="Valores por categoría"></caption>
+			<panelchildren>
+			
+		
+		
+				<listbox style="align:left">
+					<listhead>
+						
+						<listheader width="" label="Pre I N"
+							align="center" />
+						<listheader width="" label="Pre II N"
+							align="center" />
+						<listheader width="" label="Preinfantil"
+							align="center" />
+						<listheader width="" label="Infantil"
+							align="center" />
+						<listheader width="" label="Prejunior"
+							align="center" />
+						<listheader width="" label="Junior"
+							align="center" />
+						<listheader width="" label="Juvenil"
+							align="center" />
+					</listhead>
+					<listitem>
+						
+						<listcell>
+							<textbox width="50%" value="N/A" />
+						</listcell>
+						<listcell>
+							<textbox width="50%" value="45%" />
+						</listcell>
+						<listcell>
+							<textbox width="50%" value="45%" />
+						</listcell>
+						<listcell>
+							<textbox width="50%" value="45%" />
+						</listcell>
+						<listcell>
+							<textbox width="50%" value="40%" />
+						</listcell>
+						<listcell>
+							<textbox width="50%" value="35%" />
+						</listcell>
+						<listcell>
+							<textbox width="50%" value="30%" />
+						</listcell>
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+
+
+		<div>
+			<!-- BOTONES -->
+			<panel>
+				<panelchildren style="margin-top:20px ">
+					<div align="right">
+						<button
+							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/editar.ico" label="Modificar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+
+
+	</window>
+	</div>
+</zk>

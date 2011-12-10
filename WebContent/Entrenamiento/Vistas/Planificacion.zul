@@ -1,0 +1,66 @@
+<?page title="Auto Generated index.zul"?>
+<?component name="Calen" macro-uri="index.zul" inline="true"?>
+
+	<window id="wndPlanificacion" apply="controlador.general.planificacion" title="Planificacion" border="normal" width="180px"
+		height="" closable="true" >
+		<grid>
+			<rows>
+				<row>
+					<grid>
+						<columns>
+
+							<column width="165px" align="center" />
+
+						</columns>
+						<rows>
+							<row height="30px">
+								<label value="Categoria" width="160px" />
+							</row>
+							<row height="30px">
+								<combobox value="--Seleccione--"
+									width="125px">
+									<comboitem label="PREPA NIVEL I" />
+									<comboitem label="PREPA NIVEL II" />
+									<comboitem label="PREINFANTIL" />
+									<comboitem label="INFANTIL" />
+									<comboitem label="PREJUNIOR" />
+									<comboitem label="JUNIOR" />
+									<comboitem label="JUVENIL" />
+								</combobox>
+							</row>
+							
+						</rows>
+					</grid>
+				</row>
+
+			</rows>
+		</grid>
+
+
+		<separator />
+
+
+		<grid>
+			<columns>
+
+				<column width="50px" align="center" />
+				<column width="50px" align="center" />
+				<column width="50px" align="center" />
+
+
+			</columns>
+			<rows>
+
+				<row>
+					<button id="btnAceptar" image="Recursos/Imagenes/aceptar.ico"
+						width="45px" />
+					<button image="Recursos/Imagenes/cancelar.ico"
+						width="45px" />
+					<button image="Recursos/Imagenes/salir.png"
+						width="45px" />
+
+				</row>
+			</rows>
+		</grid>
+		<include id="ventana" />
+	</window>

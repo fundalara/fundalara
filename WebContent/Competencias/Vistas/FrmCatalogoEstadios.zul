@@ -1,0 +1,115 @@
+<?page title="Catalogo Estadios" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<window id="FrmCatalogoEstadios" title="Estadios existentes" border="normal" mode="modal" closable="true"
+			width="400px">
+			<panel title="Datos del Estadio" width="100%">
+				<panelchildren>
+				
+					<div style="margin-top:5px">
+					<label value="Filtro"></label>
+					<textbox></textbox>
+					<button label="Buscar"></button>
+					</div>
+					<listbox mold="paging" pageSize="10" style="margin-top:5px">
+						<listhead>
+							<listheader label="Nombre" width="25%" align="center"/>
+							<listheader label="Estado" width="25%" align="center"/>
+							<listheader label="Municipio" width="25%" align="center"/>
+							<listheader label="Ciudad" width="25%" align="center"/>
+						</listhead>
+						
+						<listitem>
+							<listcell label="Fundalara" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="Ucla" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="Delfines" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+						<listitem>
+							<listcell label="xxx" />
+							<listcell label="Lara" />
+							<listcell label="Iribarren" />
+							<listcell label="Barquisimeto" />
+						</listitem>
+					</listbox>
+
+					<div align="right">
+						<button image="/Recursos/Imagenes/aceptar.ico"
+							label="Aceptar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							onClick="Salir()" />
+					</div>
+				</panelchildren>
+
+			</panel>
+<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoEstadios.onClose();
+	}
+]]></zscript>
+
+		</window>
+	</div>
+</zk>

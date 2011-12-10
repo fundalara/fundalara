@@ -1,0 +1,18 @@
+<div id="semanal" visible="true" width="100%" align="left">
+	<hbox>
+		<label value="Repetir cada"></label>
+		<spinner></spinner>
+		<label value="semanas el:"></label>
+	</hbox>
+	<hbox>
+		<checkbox label="Lunes"></checkbox>
+		<checkbox label="Martes"></checkbox>
+		<checkbox label="Miercoles"></checkbox>
+		<checkbox label="Jueves"></checkbox>
+	</hbox>
+	<hbox>
+		<checkbox label="Viernes"></checkbox>
+		<checkbox label="Sabado"></checkbox>
+		<checkbox label="Domingo"></checkbox>
+	</hbox>
+</div>

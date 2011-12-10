@@ -1,0 +1,78 @@
+<?page title="Detalle de Apelación" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="win" title="Detalle de Apelación del Jugador"
+		border="normal" width="720px" closable="true">
+
+		<groupbox style="border-color:orange">
+			<caption label="Datos de Sanción" />
+			<grid style="border:none;" oddRowSclass="none">
+				<rows>
+					<row style="border:none">
+						<label value="Actividad" />
+						<textbox value="Competencia" readonly="true"
+							maxlength="50" width="90%" />
+						<label value="Observación " />
+						<textbox value="Mala Conducta" readonly="true"
+							maxlength="50" width="90%" />
+					</row>
+
+				</rows>
+			</grid>
+		</groupbox>
+
+		<space/>
+		<panel title="Apelaciones">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="30%"
+							label="Representante Disciplinario" />
+						<column width="20%" label="Fecha Apelación" />
+						<column width="29%" label="Observaciones" />
+						<column width="21%"
+							label="Informe de Apelación" />
+
+					</columns>
+					<rows>
+						<row>
+							<label value="Marcos Saavedra" />
+							<label value="26/11/2011" />
+							<label value="Apelación negada."/>
+							<div align="center">
+								<button
+									image="Recursos/Imagenes/reporte.ico">
+									<attribute name="onClick">
+						</attribute>
+								</button>
+							</div>
+						</row>
+						<row>
+							<label value="Marcos Pérez" />
+							<label value="29/11/2011" />
+							<label
+								value="Reconsideración de la falta. Se eliminó un juego de la penalización." />
+							<div align="center">
+								<button
+									image="Recursos/Imagenes/reporte.ico">
+									<attribute name="onClick">
+						</attribute>
+								</button>
+							</div>
+						</row>
+
+					</rows>
+				</grid>
+
+			</panelchildren>
+		</panel>
+
+		<div align="right">
+			<button label="Salir" image="Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px">
+				<attribute name="onClick"><![CDATA[
+					win.detach();
+				]]></attribute>
+			</button>
+		</div>
+	</window>
+</zk>

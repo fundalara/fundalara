@@ -1,0 +1,112 @@
+<?page title="Auto Generated index.zul"?>
+<div align="center" >
+<window title="SOLICITUD DE RECURSOS" border="normal" width="65%" height="100%" closable="true">
+
+		<panel border="normal">
+		  <caption label="Datos de la Competencia"></caption>
+		    <panelchildren>
+		      <grid>
+		         <columns>
+		           <column width="40px" align="left"></column>
+		           <column width="40px"></column>
+		           <column width="60px"></column>
+		           <column width="60px"></column>
+		           <column width="50px"></column>
+		           <column width="60px"></column>
+		         </columns>
+		         <rows>
+		            <row>
+		               <label value="Competencia" ></label>
+		               <hbox>
+		               <textbox cols="11"></textbox>      
+		               <button image="../../Recursos/Imagenes/consultar.ico"></button>  
+		               </hbox>  
+		               <label value="Fecha Inicio"></label>
+		               <textbox cols="10"></textbox> 
+		               <label value="Fecha Fin"></label>
+		               <textbox cols="10"></textbox>
+		                
+		            </row>		              
+		            <row >
+		                <label value="Juego"></label>     
+		                <hbox>
+		                <textbox cols="20"></textbox> 
+		                <button image="../../Recursos/Imagenes/consultar.ico"></button>
+		                </hbox>
+		                <label value="Fecha"></label>
+		                <textbox cols="10"></textbox>  
+		                
+		            </row>
+		            <row>                          
+		            </row>
+		         </rows>
+		      </grid>
+		    </panelchildren>
+		  </panel>
+  
+
+       <panel border="normal" >
+       <caption label="Solicitud"></caption>
+       <panelchildren>
+		<grid>
+			<columns>
+				<column label="  " />
+				<column label="Recurso" width="40%" />
+				<column label="Disponibilidad" width="25%" />
+				<column label="Requeridos" width="25%" />
+			</columns>
+			<rows>
+				<row>
+					<checkbox />
+					<label value="Pelota"></label>
+					<label value="35"></label>
+					<spinner value="7"/>
+				</row>
+				<row>
+					<checkbox />
+					<label value="Guante"></label>
+					<label value="15"></label>
+					<spinner value="4"/>
+				</row>
+				<row>
+					<checkbox />
+					<label value="Bate"></label>
+					<label value="20"></label>
+					<spinner value="6"/>
+				</row>
+				<row>
+					<checkbox />
+					<label value="Casco"></label>
+					<label value="50"></label>
+					<spinner value="4"/>
+				</row>
+				<row>
+					<checkbox />
+					<label value="Termo"></label>
+					<label value="2"></label>
+					<spinner value="1" />
+				</row>
+				<row>
+					<checkbox />
+					<label value="Peto"></label>
+					<label value="5"></label>
+					<spinner value="2"/>
+				</row>
+			</rows>
+		</grid>
+		</panelchildren>
+	 </panel>
+
+
+
+	<div style="" align="right" >
+		<hbox>
+			<button label="Guardar" onClick="" image="../../Recursos/Imagenes/guardar.ico" />
+			<button label="Cancelar" onClick="" image="../../Recursos/Imagenes/cancelar.ico" />
+			<button label="Salir" onClick=""  image="../../Recursos/Imagenes/salir.png"/>
+			
+		</hbox>
+	</div>
+
+</window>
+</div>

@@ -1,0 +1,113 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<window title="APERTURAR COMPETENCIA" width="690px" height=""
+			border="normal" closable="true">
+
+			<grid style="margin-top:10px">
+				<columns>
+					<column label="" align="left" width="35%" />
+					<column label="" width="35%" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row style="border-style:none">
+						<hbox>
+							<label value="Filtro"></label>
+							<space></space>
+							<textbox></textbox>
+						</hbox>
+					</row>
+
+				</rows>
+			</grid>
+
+			<div style="margin-top: 10px">
+				<panel>
+					<caption
+						label=" Seleccione Competencia a Aperturar" >
+					</caption>
+					<panelchildren>
+						<listbox >
+							<listhead>
+								<listheader align="left" label="Nombre Competencia"
+									width="50%" />
+
+								<listheader label="Tipo Competencia"
+									width="50%"  align="left"/>
+
+
+							</listhead>
+							<listitem >
+								<listcell label="Copa Carnaval" />
+								<listcell label="Interna" />
+
+							</listitem>
+							<listitem>
+								<listcell label="Copa Semana Santa" />
+								<listcell label="Interna" />
+
+							</listitem>
+							<listitem>
+								<listcell label="Campeonato 2012" />
+								<listcell label="Oficial" />
+
+							</listitem>
+						</listbox>
+					</panelchildren>
+				</panel>
+
+			</div>
+
+			<div style="margin-top:15px">
+			<panel>
+			<caption label="Datos Competencia">
+			</caption>
+			<panelchildren>
+			<grid>
+					<columns>
+						<column label="Equipos" width="25%" />
+						<column label="Rosters" width="25%" />
+						<column label="Indicadores" width="25%" />
+						<column label="Calendario" width="25%" />
+					</columns>
+					<rows>
+						<row style="border-style:none">
+
+							<label value="0/4 ">
+
+							</label>
+
+							<label value="25/25" />
+							<label value="10" />
+							<button label="Ver Calendario" onClick="" />
+						</row>
+						<row style="border-style:none">
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<button label="Ver Calendario" onClick=""
+								disabled="true" />
+						</row>
+						<row style="border-style:none"></row>
+					</rows>
+				</grid>
+			</panelchildren>
+			</panel>
+				
+
+			</div>
+			<div align="right">
+				<button image="/Recursos/Imagenes/apertura.png"
+					label="Aperturar">
+				</button>
+				<button image="/Recursos/Imagenes/cancelar.ico"
+					label="Cancelar" orient="horizontal">
+				</button>
+				<button image="/Recursos/Imagenes/salir.png"
+					label="Salir" orient="horizontal">
+				</button>
+			</div>
+		</window>
+	</div>
+</zk>

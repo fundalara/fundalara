@@ -1,0 +1,239 @@
+<?page title="Registro Resultados" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Registro Resultados" border="normal" width="690px" id="formResultados" mode="embedded"
+	 apply="">
+<tabbox height="100%" width="100%">
+		<tabs>
+			<tab label="Mantenimiento"></tab>
+			<tab label="Act. Complementarias"></tab>
+		</tabs>
+		<tabpanels height="100%" width="100%">
+			<tabpanel height="100%">				
+			<menubar>
+				<menuitem label="Filtrar Por:" style="font-weight:bold" disabled="true"/>
+				<menuitem label="Fecha" style="font-weight:bold"/>
+				<menuitem label="Lugar" style="font-weight:bold"/>
+				<menuitem label="Tipo" style="font-weight:bold"/>	
+			</menubar>
+			<panel collapsible="false" width="100%" title="Listado de Actividades en Ejecución">
+				<panelchildren>
+				<grid width="100%" height="120px">
+					<columns>
+						<column label="Código" width="10%" visible="false"/>
+						<column label="Descripción" width="30%"/>
+						<column label="Tipo" width="20%"/>
+						<column label="Periódico" width="20%"/>
+						<column label="Fecha" width="20%"/>
+					</columns>
+					<rows>
+						<row onClick="Alerta()">
+							<label>001</label>
+							<label>Mantenimiento del campo</label>
+							<label>Preventivo</label>
+							<label>Si</label>
+							<label>17/11/11</label>
+						</row>
+						<row onClick="Alerta()">
+							<label>002</label>
+							<label>Mantenimiento de Oficina</label>
+							<label>Preventivo</label>
+							<label>Si</label>
+							<label>17/11/11</label>
+						</row>
+						<row onClick="Alerta()">
+							<label>003</label>
+							<label>Mantenimiento de Gradas</label>
+							<label>Especial</label>
+							<label>No</label>
+							<label>21/11/11</label>
+						</row>
+						<row onClick="Alerta()">
+							<label>004</label>
+							<label>Mantenimiento de Cercas</label>
+							<label>Especial</label>
+							<label>No</label>
+							<label>22/11/11</label>
+						</row>
+					</rows>
+				</grid>
+				</panelchildren>
+			</panel>
+		
+			<panel collapsible="True" width="100%" height="100%" title="Detalle de Mantenimiento" 
+			id="PanelDetalle2" movable="true">
+				<panelchildren>
+						<div width="100%" height="100%">
+							<label style="font-weight:bold" visible="false">Código:</label>
+							<label visible="false">001</label>
+							<label style="font-weight:bold">Descripción:</label>
+							<label>Mantenimiento del Campo</label>
+							<panel collapsible="false" title="Lista de Tareas" width="100%" height="100%">
+								<panelchildren>
+												<grid width="100%" height="150px">
+													<columns>
+														<column label="Tarea" width="85%"/>
+														<column label="Ejecutada" width="15%"/>
+													</columns>
+													<rows droppable="true" >
+														<row>
+															<label>Quitar Hierba</label>
+															<div>
+																<button image="../Recursos/Imagenes/aceptar.ico"/>
+																<button image="../Recursos/Imagenes/cancelar.ico"/>
+															</div>
+														</row>
+														<row>
+															<label>Rastrillar el campo</label>
+															<div>
+																<button image="../Recursos/Imagenes/aceptar.ico"/>
+																<button image="../Recursos/Imagenes/cancelar.ico"/>
+															</div>
+														</row>
+														<row>
+															<label>Regar el campo</label>
+															<div>
+																<button image="../Recursos/Imagenes/aceptar.ico"/>
+																<button image="../Recursos/Imagenes/cancelar.ico"/>
+															</div>
+														</row>
+														<row>
+															<label>Cortar grama</label>
+															<div>
+																<button image="../Recursos/Imagenes/aceptar.ico"/>
+																<button image="../Recursos/Imagenes/cancelar.ico"/>
+															</div>
+														</row>
+													</rows>
+												</grid>
+		
+													<div>
+													<space width="55%"/>											
+													<button label="Guardar" image="../Recursos/Imagenes/guardar.ico"/>
+													<button label="Cancelar" image="../Recursos/Imagenes/cancelar.ico" />
+													<button label="Salir" image="../Recursos/Imagenes/atras.ico" />
+													</div>
+								</panelchildren>
+							</panel>
+							</div>
+							
+		
+		
+				</panelchildren>
+			</panel>
+	</tabpanel>
+	<tabpanel>
+		<menubar>
+			<menuitem label="Filtrar Por:" style="font-weight:bold" disabled="true"/>
+			<menuitem label="Fecha" style="font-weight:bold"/>
+			<menuitem label="Lugar" style="font-weight:bold"/>
+			<menuitem label="Tipo" style="font-weight:bold"/>	
+		</menubar>
+		<panel collapsible="false" width="100%"  title="Listado de Actividades en Ejecución">
+			<panelchildren>
+			<grid width="100%" height="120px">
+				<columns>
+					<column label="Código" width="20%"/>
+					<column label="Descripción" width="30%"/>
+					<column label="Tipo" width="30%"/>
+					<column label="Fecha" width="20%"/>
+				</columns>
+				<rows>
+					<row onClick="Alerta()">
+						<label>001</label>
+						<label>Vendimia de Fin de Curso</label>
+						<label>Recaudar Fondos</label>
+						<label>19/11/11</label>
+					</row>
+					<row onClick="Alerta()">
+						<label>002</label>
+						<label>Concierto de Violin</label>
+						<label>Social</label>
+						<label>20/11/11</label>
+					</row>
+					<row onClick="Alerta()">
+						<label>003</label>
+						<label>Concierto de Chelo</label>
+						<label>Social</label>
+						<label>21/11/11</label>
+					</row>
+					<row onClick="Alerta()">
+						<label>005</label>
+						<label>Vendimia Navidad</label>
+						<label>Recaudar Fondos</label>
+						<label>01/12/11</label>
+					</row>
+				</rows>
+			</grid>
+			</panelchildren>
+		</panel>
+	
+		<panel collapsible="True" width="100%" title="Detalle de Act. Complementaria" 
+		id="PanelDetalle" movable="true">
+			<panelchildren>
+					<div width="100%" height="100%">
+						<label style="font-weight:bold">Código:</label>
+						<label>001</label>
+						<space width="15%"/>
+						<label style="font-weight:bold">Descripción:</label>
+						<label>Vendimia de Fin de Curso</label>
+						<panel collapsible="false" title="Lista de Tareas" width="100%" height="100%">
+							<panelchildren>
+											<grid width="100%" height="150px">
+												<columns>
+													<column label="Tarea" width="85%"/>
+													<column label="Ejecutada" width="15%"/>
+												</columns>
+												<rows droppable="true" >
+													<row>
+														<label>Comprar Vasos</label>
+														<div>
+															<button image="../Recursos/Imagenes/aceptar.ico"/>
+															<button image="../Recursos/Imagenes/cancelar.ico"/>
+														</div>
+													</row>
+													<row>
+														<label>Comprar Platos</label>
+														<div>
+															<button image="../Recursos/Imagenes/aceptar.ico"/>
+															<button image="../Recursos/Imagenes/cancelar.ico"/>
+														</div>
+													</row>
+													<row>
+														<label>Realizar Tickets</label>
+														<div>
+															<button image="../Recursos/Imagenes/aceptar.ico"/>
+															<button image="../Recursos/Imagenes/cancelar.ico"/>
+														</div>
+													</row>
+													<row>
+														<label>Dividir Areas de la Vendimia</label>
+														<div>
+															<button image="../Recursos/Imagenes/aceptar.ico"/>
+															<button image="../Recursos/Imagenes/cancelar.ico"/>
+														</div>
+													</row>
+												</rows>
+											</grid>
+	
+												<div>
+												<space width="55%"/>											
+												<button label="Guardar" image="../Recursos/Imagenes/guardar.ico"/>
+												<button label="Cancelar" image="../Recursos/Imagenes/cancelar.ico" />
+												<button label="Salir" image="../Recursos/Imagenes/atras.ico" />
+												</div>
+							</panelchildren>
+						</panel>
+						</div>
+			</panelchildren>
+		</panel>
+	</tabpanel>
+</tabpanels>
+</tabbox>
+   	<zscript>
+	public void Alerta() {
+		PanelDetalle.setOpen(true);
+	}
+   </zscript>
+	
+</window>
+</zk>

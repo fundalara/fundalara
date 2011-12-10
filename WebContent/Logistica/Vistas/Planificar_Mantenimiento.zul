@@ -1,0 +1,326 @@
+
+<window title="Planificación de Mantenimientos" border="normal"
+	mode="embedded" width="100%" id="crearMantenimiento"
+	closable="false">
+ 
+ 
+	<grid height="30%" style="boder:none">
+		<columns>
+			<column width="17%"></column>
+			<column width="40%"></column>
+			<column width="17%"></column>
+			<column width="36%"></column>
+		</columns>
+		<rows style="border:none">
+			<row style="border:none">
+				<label style="font-weight: bold;" value="Descripción"></label>
+			<hbox>
+				<combobox >
+					<comboitem label="Mantenimiento de Campo" />
+					<comboitem label="Mantenimiento de Oficinas" />
+				</combobox>
+
+					<button label="Periodicidad"
+						onClick="verPeriodicidad()"
+						image="/Recursos/Imagenes/calendario.ico">
+					</button>
+				
+				</hbox>
+				<label value="Tipo" style="font-weight: bold;"></label>
+				<combobox width="80%">
+					<comboitem label="Preventivo" />
+					<comboitem label="Correctivo" />
+				</combobox>
+				
+			</row>
+
+			<row style="border:none">
+				<label value="Prediseñada" style="font-weight: bold;"></label>
+				<hbox>
+					<textbox></textbox>
+					<button image="/Recursos/Imagenes/consultar.ico"></button>
+				</hbox>
+				<label style="font-weight: bold;" value="Instalación"></label>
+				<hbox>
+					<textbox></textbox>
+					<button image="/Recursos/Imagenes/consultar.ico"></button>
+				</hbox>
+			</row>
+			<row> 
+			<!-- Estos campos de codigo no son visibles porque es para el control de la base de datos -->
+				<label value="Codigo" style="font-weight: bold"  visible="false"> </label>
+				<textbox value=" " visible="false">  </textbox>
+			
+			</row>
+		</rows>
+	</grid>
+
+	<panel collapsible="true" title="Planificación Específica"
+		open="false" width="100%" id="panelS">
+		<panelchildren>
+			<window title="Tareas Requeridas">
+				<grid>
+					<columns>
+						<column width="40%"></column>
+						<column width="5%"></column>
+						<column width="40%"></column>
+					</columns>
+					<rows>
+						<row id="fila2" visible="true">
+							<window title="Lista de Tareas"
+								height="150px" width="100%">
+								<listbox width="100%" height="100%">
+									<listhead>
+										<listheader label="Tarea"
+											width="30%">
+										</listheader>
+										<listheader
+											label="Descripción">
+										</listheader>
+										
+									</listhead>
+									<listitem>
+										<listcell
+											label="Cortar Cesped">
+										</listcell>
+										<listcell
+											label="Mantener la altura del cesped">
+										</listcell>
+									
+									</listitem>
+									<listitem>
+										<listcell
+											label="Fertilizar Campo">
+										</listcell>
+										<listcell
+											label="Agregar nutrientes al campo">
+										</listcell>
+										
+									</listitem>
+									<listitem>
+										<listcell
+											label="Irrigar Campo">
+										</listcell>
+										<listcell
+											label="Regar el campo">
+										</listcell>
+										
+									</listitem>
+									<listitem>
+										<listcell
+											label="Explanar Campo">
+										</listcell>
+										<listcell
+											label="Alisar áreas sin cesped">
+										</listcell>
+										
+									</listitem>
+
+								</listbox>
+							</window>
+							<div align="center">
+								<hbox>
+									<button
+										image="/Recursos/Imagenes/agregar.ico">
+									</button>
+								</hbox>
+								<hbox>
+									<button
+										image="/Recursos/Imagenes/quitar.ico">
+									</button>
+								</hbox>
+							</div>
+							<window title="Lista de Tareas Agregadas"
+								height="150px" width="100%">
+									<listbox width="100%" height="100%">
+									<listhead>
+										<listheader label="Tarea"
+											width="30%">
+										</listheader>
+										<listheader
+											label="Descripción">
+										</listheader>
+										<listheader
+											label="Personal">
+										</listheader>
+									</listhead>
+									<listitem>
+										<listcell
+											label="Cortar Cesped">
+										</listcell>
+										<listcell
+											label="Mantener la altura del cesped">
+										</listcell>
+											<listcell>
+											<hbox>
+											   <textbox value="Juan González"> </textbox>
+											   <button image="/Recursos/Imagenes/consultar.ico"></button>
+											</hbox>
+										</listcell>
+									</listitem>
+									<listitem>
+										<listcell
+											label="Fertilizar Campo">
+										</listcell>
+										<listcell
+											label="Agregar nutrientes al campo">
+										</listcell>
+											<listcell>
+											<hbox>
+											   <textbox value="Pedro Pérez"> </textbox>
+											   <button image="/Recursos/Imagenes/consultar.ico"></button>
+											</hbox>
+										</listcell>
+									</listitem>
+									<listitem>
+
+									
+									</listitem>
+									<listitem>
+					
+									</listitem>
+
+								</listbox>
+							</window>
+						</row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column width="100%"></column>
+					</columns>
+					<rows>
+					</rows>
+				</grid>
+			</window>
+
+
+			<window title="Materiales Requeridos">
+				<grid>
+	
+			<columns>
+			    <column width="40%"></column>
+			  	<column width="5%"></column>
+			  	<column width="40%"></column>
+			</columns>
+			
+			<rows>
+			   <row id="fila5" visible="true">
+					<window title="Lista de Materiales" height="150px" width="100%">
+						<listbox width="100%" height="100%">
+							<listhead>
+								<listheader label="Material" width="30%"></listheader>
+								<listheader label="Descripción"></listheader>
+							</listhead>
+							<listitem>
+								<listcell label="Cal"></listcell>
+							    <listcell label="Saco de 1kg"></listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Arcilla calcinada"></listcell>
+								<listcell label="Saco de 1kg"></listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Rastillo"></listcell>
+							    <listcell label="Para Jardín"></listcell>
+							</listitem>
+							<listitem>
+							    <listcell label="Apisonador"></listcell>
+								<listcell label="Modelo MT74-F"></listcell>
+							</listitem>
+							<listitem>
+								<listcell label="Pulverizador"></listcell>
+								<listcell label="Pequeño estilo mochila"></listcell>
+							</listitem>
+					   </listbox>
+				    </window>
+					  <div align="center">
+						   <button id="agregarM" image="/Recursos/Imagenes/agregar.ico">
+						   </button>
+						   <button image="/Recursos/Imagenes/quitar.ico">
+						   </button>
+					  </div>
+					  <window title="Lista de Materiales Solicitados"
+							height="150px" width="100%">
+							<listbox width="100%">
+								<listhead>
+									<listheader label="Material" width="20%"></listheader>
+									<listheader label="Descripción" width="45%"></listheader>
+									<listheader label="Cant. Solicitada"></listheader>
+								</listhead>
+								<listitem>
+								    <listcell label="Cal"></listcell>
+							        <listcell label="Saco de 1kg"></listcell>
+									<listcell >
+									<doublebox width="80%" value="1">  </doublebox>
+									</listcell>
+								</listitem>
+								<listitem>
+								    <listcell label="Arcilla calcinada"></listcell>
+								    <listcell label="Saco de 1kg"></listcell>
+									<listcell >
+									<doublebox width="80%" value="1">  </doublebox>
+									</listcell>
+								</listitem>
+							</listbox>
+						</window>
+			      </row>
+					
+		  </rows>
+	</grid>	
+
+			</window>
+
+		</panelchildren>
+	</panel>
+
+
+	<grid>
+		<columns>
+			<column width="100%"></column>
+		</columns>
+		<rows>
+			<row width="100%">
+				<div align="right">
+					<button id="guardar" label="Guardar"
+						image="/Recursos/Imagenes/guardar.ico">
+					</button>
+					<button id="modificar" label="Modificar"
+						image="/Recursos/Imagenes/editar.ico">
+					</button>
+					<button id="imprimir" label="Imprimir"
+						image="/Recursos/Imagenes/imprimir.ico">
+					</button>
+					<button id="cancelar" label="Cancelar"
+						image="/Recursos/Imagenes/cancelar.ico">
+					</button>
+					<button id="salir" label="Salir"
+						image="/Recursos/Imagenes/salir.png">
+					</button>
+				</div>
+
+			</row>
+		</rows>
+	</grid>
+
+
+
+	<zscript>
+		<![CDATA[
+	public void verPeriodicidad() {
+		this.panelS.setOpen(true);
+		Executions.createComponents("/Logistica/Periodicidad.zul",
+				crearMantenimiento, null);
+	}
+	public void asigPersoanlxTarea() {
+		Executions.createComponents("/Logistica/Tareas_Personal.zul",
+				crearMantenimiento, null);
+	}
+	public void solicitudMaterial() {
+		Executions.createComponents("/Logistica/Solicitud_Materiales.zul",
+				crearMantenimiento, null);
+	}
+]]>
+	</zscript>
+
+</window>

@@ -1,0 +1,100 @@
+<?page title="Compromiso Publicidad" contentType="text/html;charset=UTF-8"?>
+<zk>
+	
+	<window id="CP" title="Alquiler de Vallas"  border="normal" width="690px" mode="popup" left="460px" top="200px" closable="true">
+
+		<panel title="Datos del Compromiso" collapsible="true"
+			open="true"  >
+			<panelchildren>
+								<grid>
+									<columns>
+										<column width="100px" />
+										<column width="200px" />
+										<column width="100px" />
+										<column width="200px" />
+									</columns>
+									<rows>
+										<row style=" border:none">
+											<label value="R.I.F"></label>
+												<hbox><textbox width="90%"/><button image="/Recursos/Imagenes/consultar.ico" onClick=""
+				tooltiptext="Consultar"></button><label style="color:red" Value="(*)"></label> </hbox>
+											<label value="Nombre"></label>
+											<hbox><textbox width="90%"/><button image="/Recursos/Imagenes/consultar.ico" onClick=""
+				tooltiptext="Consultar"></button><label style="color:red" Value="(*)"></label> </hbox>
+										</row>
+										
+										
+										<row style=" border:none">
+
+											<label
+												value="Tipo de Compromiso" />
+											<hbox>
+												<combobox width="80%">
+													<comboitem
+														label="Alquiler de Pared Publicitaria" />
+													<comboitem
+														label="Publicidad en Uniformes" />
+												</combobox>
+												<label style="color:red"
+													Value="(*)">
+												</label>
+											</hbox>
+											<label value="Fecha" />
+											<hbox>
+												<datebox width="80%" />
+												<label style="color:red"
+													Value="(*)">
+												</label>
+											</hbox>
+										</row>
+										<row style=" border:none">
+											<label
+												value="Periodo de Alquiler" />
+											<hbox>
+												<spinner></spinner>
+												<label style="color:red"
+													Value="(*)">
+												</label>
+											</hbox>
+										</row>
+										<row style=" border:none">
+											<label
+												value="Cuota Mensual" />
+											<hbox>
+												<doublebox width="96%"></doublebox>
+												<label style="color:red"
+													Value="(*)">
+												</label>
+											</hbox>
+											<label value="Monto Total" />
+											<hbox>
+												<doublebox width="96%"></doublebox>
+												<label style="color:red"
+													Value="(*)">
+												</label>
+											</hbox>
+										</row>
+									</rows>
+								</grid>
+			</panelchildren>
+		</panel>
+
+		<label style="color:red" value=" (*) Información Obligatoria" />
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Guardar" label="Guardar" />
+			<button image="/Recursos/Imagenes/editar.ico" onClick=""
+				tooltiptext="Modificar" label="Modificar" />
+			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
+				tooltiptext="Eliminar" label="Eliminar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir">
+				<attribute name="onClick">
+					CP.onClose();
+				</attribute>
+			</button>
+		</div>
+
+	</window>
+	
+</zk>

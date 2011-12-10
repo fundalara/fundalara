@@ -1,0 +1,419 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="PagoBV" title="Pagar Bonos y Viaticos" border="normal"
+		width="690px">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void mostrar() {
+		String var = CB1.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+	
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			
+		} else {
+			row1.setVisible(true);
+		
+
+		}
+
+	}
+]]></zscript>
+		<panel title="Datos Básicos">
+			<panelchildren>
+				<grid>
+					<rows>
+
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="180px">
+									</column>
+									<column label="" width="200px">
+									</column>
+									<column label="" width="180px">
+									</column>
+									<column label="" width="200px">
+									</column>
+								</columns>
+								<rows>
+									<row>
+
+										<label value="Cédula" />
+										<bandbox width="180px"></bandbox>
+
+										<label value="Nombres" />
+										<bandbox width="180px"></bandbox>
+									</row>
+									<row>
+										<label>Filtrar Desde</label>
+
+										<datebox width="180px" />
+
+										<label>Hasta</label>
+
+										<datebox width="180px" />
+									</row>
+								</rows>
+							</grid>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+
+		</panel>
+
+		<panel title="Datos del Personal Técnico" collapsible="true"
+			open="false">
+			<panelchildren>
+				<groupbox>
+					<caption>Lista de Bonos y Viáticos</caption>
+					<grid>
+						<columns>
+							<column>
+								<checkbox></checkbox>
+							</column>
+							<column label="Item" align="center" width="40px"></column>
+							<!--  <column label="Nombre" align="center"></column>
+								<column label="Cédula" align="center"></column>
+								<column label="Cargo" align="center"></column>-->
+							<column label="Ubicación" align="center"></column>
+							<column label="Monto" align="center"></column>
+							<column label="Tipo Bonificación"
+								align="center">
+							</column>
+							<column label="Fecha" align="center"></column>
+						</columns>
+						<rows>
+							<row>
+								<checkbox></checkbox>
+								<label>1</label>
+								<!--<label>
+									Juan Andrés Rincón Hernández
+									</label>
+									<label>7543869</label>
+									<label>Técnico</label>-->
+								<label>Ayacucho</label>
+								<label>30Bs</label>
+								<!--<label>30Bs</label>  -->
+								<label>Viatico</label>
+								<label>07/10/2011</label>
+							</row>
+							<row>
+								<checkbox></checkbox>
+								<label>2</label>
+								<!-- <label>
+									Juan Andrés Rincón Hernández
+									</label>
+									<label>7543869</label>
+									<label>Técnico</label> -->
+								<label>Patarata</label>
+								<label>15Bs</label>
+								<!--  <label>45Bs</label>-->
+								<label>Bono por Juego</label>
+								<label>08/10/2011</label>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			
+				<div align="right">
+					<groupbox>
+
+						<label value="Total Bsf a Pagar" />
+						<textbox />
+
+					</groupbox>
+				</div>
+
+
+			</panelchildren>
+		</panel>
+		<panel title="Datos del Pago de Bonos y Viaticos"
+			collapsible="true" open="false">
+			<panelchildren>
+		
+
+
+
+				
+
+
+
+
+					<div>
+						<grid>
+
+							<rows>
+
+								<row>
+									<grid>
+										<columns>
+											<column label=""
+												width="220px">
+											</column>
+											<column label=""
+												width="252px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+											<column label=""
+												width="180px">
+											</column>
+
+
+										</columns>
+										<rows>
+											<row>
+												<label
+													value="Forma de Pago">
+												</label>
+												<combobox id="CB1"
+													onSelect="mostrar()" width="180px">
+													<comboitem value="1"
+														label="Efectivo">
+													</comboitem>
+													<!--  <comboitem
+														value="2" label="Débito">
+														</comboitem>
+														<comboitem
+														value="3" label="Crédito">
+														</comboitem>
+														<comboitem
+														value="4" label="Transferencia">
+														</comboitem>-->
+													<comboitem value="5"
+														label="Cheque">
+													</comboitem>
+												</combobox>
+												<label
+													value="Monto Cancelado">
+												</label>
+												<textbox
+													width="180px">
+												</textbox>
+
+
+											</row>
+											<row id="row1"
+												visible="false">
+												<label
+													value="Nro. de Documento">
+												</label>
+												<textbox
+													width="100px">
+												</textbox>
+
+												<label
+													value="Entidad Bancaria">
+												</label>
+												<combobox
+													width="100px">
+													<comboitem
+														label="Banesco">
+													</comboitem>
+													<comboitem
+														label="Mercantil">
+													</comboitem>
+													<comboitem
+														label="BOD">
+													</comboitem>
+													<comboitem
+														label="Provincial">
+													</comboitem>
+													<comboitem
+														label="Venezuela">
+													</comboitem>
+												</combobox>
+
+											</row>
+											
+										</rows>
+									</grid>
+								</row>
+								<row>
+									<div align="right">
+										<hbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick="" label=""
+												tooltiptext="Agregar a la Lista" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+												tooltiptext="Quitar de la Lista" />
+										</hbox>
+									</div>
+								</row>
+							</rows>
+
+						</grid>
+
+					</div>
+
+
+					<separator></separator>
+					<div align="center">
+						<groupbox width="660px">
+							<caption>
+								Diferentes Métodos de Pago
+							</caption>
+
+							<div>
+								<grid>
+
+									<rows>
+
+										<row>
+											<grid width="650px">
+												<columns>
+													<column label=""
+														width="20px">
+														<checkbox
+															onCheck="setOn1()">
+														</checkbox>
+													</column>
+													<column label="Item"
+														width="40px">
+													</column>
+													<column
+														label="Forma de Pago" width="100px">
+													</column>
+													<column
+														label="Tarjeta" width="80px">
+													</column>
+													<column
+														label="Monto Cancelado" width="120px">
+													</column>
+													<column
+														label="Banco" width="100px">
+													</column>
+													<column
+														label="Nro. de Documento" width="140px">
+													</column>
+
+
+												</columns>
+												<rows>
+													<row>
+														<checkbox
+															id="c4">
+														</checkbox>
+														<label
+															value="1">
+														</label>
+														<label
+															value="Efectivo">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="2,5Bs">
+														</label>
+														<label
+															value="N/A">
+														</label>
+														<label
+															value="N/A">
+														</label>
+
+													</row>
+													<!--  <row>
+														<checkbox
+														id="c5">
+														</checkbox>
+														<label
+														value="2">
+														</label>
+														<label
+														value="Cheque">
+														</label>
+														<label
+														value="N/A">
+														</label>
+														<label
+														value="20Bs">
+														</label>
+														<label
+														value="Mercantil">
+														</label>
+														<label
+														value="001299300019920">
+														</label>
+														
+														</row>-->
+												</rows>
+											</grid>
+
+										</row>
+									</rows>
+								</grid>
+								<separator></separator>
+								<div align="right">
+									<grid width="300px">
+										<rows>
+											<row>
+												<label
+													value="Sub-Total">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+											<row>
+
+												<label
+													value="Monto Total">
+												</label>
+												<textbox width="90px"></textbox>
+
+											</row>
+
+											<row>
+												<label
+													value="Monto Restante a Pagar">
+												</label>
+												<textbox width="90px"></textbox>
+											</row>
+
+										</rows>
+									</grid>
+								</div>
+
+							</div>
+						</groupbox>
+					</div>
+					<separator></separator>
+			
+
+
+			</panelchildren>
+
+		</panel>
+		<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				tooltiptext="Aceptar" label="Pagar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				tooltiptext="Salir" label="Salir">
+				<attribute name="onClick">
+	PagoBV.onClose();
+</attribute>
+
+			</button>
+		</div>
+	</window>
+</zk>

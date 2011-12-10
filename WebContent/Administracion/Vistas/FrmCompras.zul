@@ -1,0 +1,379 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="Compras" title="Registrar Facturas" style=""
+		border="normal" width="690px">
+
+
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void mostrar() {
+		String var = CB1.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+
+		}
+
+	}
+	void setOn() {
+		c1.setChecked(true);
+		c2.setChecked(true);
+
+	}
+]]></zscript>
+
+		<panel collapsible="false" title="Datos Básicos" open="true">
+			<panelchildren>
+
+				<grid>
+					<rows>
+
+						<row>
+							<grid>
+								<columns>
+									<column label="" width="180px">
+									</column>
+									<column label="" width="200px">
+									</column>
+									<column label="" width="180px">
+									</column>
+									<column label="" width="200px">
+									</column>
+								</columns>
+								<rows>
+									<row>
+										<label value="Nro. Factura">
+										</label>
+										<textbox width="180px">
+										</textbox>
+										<label value="Fecha"></label>
+										<datebox width="180px">
+										</datebox>
+									</row>
+
+
+
+								</rows>
+							</grid>
+						</row>
+
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel collapsible="true" title="Datos Materiales"
+			open="false">
+			<panelchildren>
+				<separator></separator>
+				<grid>
+					<columns>
+						<column label="" width="180px"></column>
+						<column label="" width="200px"></column>
+						<column label="" width="180px"></column>
+						<column label="" width="200px"></column>
+					</columns>
+					<rows>
+						<row>
+							<label value="Código Proveedor"></label>
+							<hbox>
+								<bandbox id="bd" autodrop="true"
+									width="180px">
+									<bandpopup>
+										<vbox>
+
+											<listbox width="370px"
+												onSelect="bd.value=self.selectedItem.label;bd.close();">
+
+												<listhead>
+													<listheader
+														label="Código" width="80px" />
+													<listheader
+														label="Nombre" width="80px" />
+													<listheader
+														label="Descripción" width="130px" />
+													<listheader
+														label="RIF" width="80px" />
+												</listhead>
+												<listitem>
+													<listcell label="1" />
+													<listcell label="X" />
+													<listcell
+														label="Distribuidor Cal" />
+													<listcell label="1" />
+												</listitem>
+												<listitem>
+													<listcell label="2" />
+													<listcell label="Y" />
+													<listcell
+														label="Distribuidor Uniformes" />
+													<listcell label="2" />
+												</listitem>
+												<listitem>
+													<listcell label="3" />
+													<listcell label="Z" />
+													<listcell
+														label="Distribuidor Arcilla" />
+													<listcell label="3" />
+												</listitem>
+											</listbox>
+										</vbox>
+									</bandpopup>
+								</bandbox>
+								<button
+									image="/Recursos/Imagenes/proveedor.png"
+									tooltiptext="Nuevo Proveedor">
+
+									<attribute name="onClick" >
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmProveedores.zul", null,
+			null);
+]]>
+								</attribute>
+								</button>
+							</hbox>
+							<label value="Orden de Compra"></label>
+							<bandbox id="bdorcomp" autodrop="true"
+								width="180px">
+								<bandpopup>
+									<vbox>
+
+										<listbox width="370px"
+											onSelect="bdorcomp.value=self.selectedItem.label;bd.close();">
+
+											<listhead>
+												<listheader
+													label="Nro. Orden de Compra" width="80px" />
+												<listheader
+													label="Descripción" width="130px" />
+												<listheader
+													label="Proveedor" width="80px" />
+
+												<listheader
+													label="Fecha" width="80px" />
+											</listhead>
+											<listitem>
+												<listcell label="0003" />
+												<listcell
+													label="Uniformes" />
+												<listcell label="Y" />
+
+												<listcell
+													label="12/02/2011" />
+											</listitem>
+											<listitem>
+												<listcell label="0004" />
+												<listcell
+													label="Gorras" />
+												<listcell label="Y" />
+
+												<listcell
+													label="29/10/2011" />
+											</listitem>
+
+										</listbox>
+									</vbox>
+								</bandpopup>
+							</bandbox>
+
+						</row>
+
+					</rows>
+				</grid>
+
+				<div align="right">
+					<hbox>
+						<button image="/Recursos/Imagenes/agregar.ico"
+							onClick="" label="" tooltiptext="Agregar a la Lista" />
+						<button image="/Recursos/Imagenes/quitar.ico"
+							onClick="" label="" tooltiptext="Quitar de la Lista" />
+					</hbox>
+				</div>
+
+				<separator></separator>
+				<div align="center">
+					<groupbox width="510px">
+						<caption>Lista de Materiales</caption>
+
+						<div>
+							<grid>
+
+								<rows>
+
+									<row>
+										<grid width="500px">
+											<columns>
+												<column label=""
+													width="20px">
+													<checkbox id="on"
+														onCheck="setOn()">
+													</checkbox>
+												</column>
+												<column label="Item"
+													width="40px">
+
+												</column>
+												<column
+													label="Orden de Compra" width="120px">
+
+												</column>
+												<column
+													label="Descripción" width="200px">
+												</column>
+
+												<column label="Total"
+													width="70px">
+												</column>
+												<column width="30px">
+
+												</column>
+
+											</columns>
+											<rows>
+												<row>
+													<checkbox id="c1">
+													</checkbox>
+													<label value="1">
+													</label>
+													<label
+														value="0003">
+													</label>
+													<label
+														value="Uniformes">
+													</label>
+
+													<label
+														value="2000Bs">
+													</label>
+													<button
+														image="/Recursos/Imagenes/consultar.ico"
+														tooltiptext="Consultar Orden de Compra">
+														<attribute name="onClick" >
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmConsultaOrdenC.zul", null,
+			null);
+]]>
+								</attribute>
+
+
+													</button>
+												</row>
+												<row>
+													<checkbox id="c2">
+													</checkbox>
+													<label value="2">
+													</label>
+													<label
+														value="0004">
+													</label>
+													<label
+														value="Gorras">
+													</label>
+
+
+													<label
+														value="7500Bs">
+													</label>
+													<button
+														image="/Recursos/Imagenes/consultar.ico"
+														tooltiptext="Consultar Orden de Compra">
+													</button>
+
+												</row>
+
+											</rows>
+										</grid>
+
+									</row>
+								</rows>
+							</grid>
+							<separator></separator>
+							<div align="right">
+								<grid width="220px">
+									<rows>
+										<row>
+											<label value="Sub-Total">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+											<label value="Valor IVA">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+											<label value="Monto IVA">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+										<row>
+
+											<label
+												value="Monto Total">
+											</label>
+											<textbox width="90px"></textbox>
+
+										</row>
+
+
+
+									</rows>
+								</grid>
+							</div>
+
+
+						</div>
+					</groupbox>
+				</div>
+				<separator></separator>
+
+			</panelchildren>
+		</panel>
+
+
+		<div align="right">
+			<button image="/Recursos/Imagenes/money.png" label="Pagar">
+				<attribute name="onClick" >
+								<![CDATA[
+	Executions.createComponents("/Administracion/FrmPagoCompra2.zul", null, null);
+]]>
+								</attribute>
+
+
+			</button>
+
+			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
+				label="Guardar" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				label="Cancelar" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				label="Salir">
+				<attribute name="onClick">
+	Compras.onClose();
+</attribute>
+			</button>
+
+		</div>
+	</window>
+
+</zk>

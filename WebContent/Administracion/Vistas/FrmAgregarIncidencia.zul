@@ -1,0 +1,73 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winA" title="Agregar Incidencia" border="normal" mode="popup" top="200px" left="450px" width="450px">
+		<attribute name="onClick">
+	<![CDATA[
+	
+]]>
+								</attribute>
+
+		<panel>
+			<panelchildren>
+				<grid>
+					<rows>
+						<row>
+							<grid>
+								<columns>
+									<column width="30%"></column>
+									<column width="70%"></column>
+								</columns>
+								<rows>
+									<row>
+										<label>Incidencia</label>
+										<hbox><combobox width="170px">
+										<comboitem label="Inasistencia Justificada"></comboitem>
+										<comboitem label="Inasistencia no Justificada"></comboitem>
+										<comboitem label="Trabajo Extra"></comboitem>
+										</combobox><label style="color:red" Value="(*)"></label>
+										</hbox>
+									</row>
+									<row>
+										<label>Fecha</label>
+										<hbox><datebox width="100px"/><label style="color:red" Value="(*)"></label> </hbox>
+									</row>
+									<row>
+										<label>Horas Laborales</label>
+										<hbox><textbox width="115px"/><label style="color:red" Value="(*)"></label> </hbox>
+									</row>
+									<row>
+										<label>Pago</label>
+										<radiogroup>
+											<radio label="Sí  "></radio>
+											<radio label="No"></radio>
+										</radiogroup>
+									</row>
+									<row>
+										<label>Observación</label>
+										<textbox width="95%" height="40px"></textbox>
+									</row>
+								</rows>
+							</grid>
+
+						</row>
+						<row>
+							<div align="right">
+								<button
+									image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
+								</button>
+								<button
+									image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+									<attribute name="onClick">
+									<![CDATA[
+									         winA.detach();
+									]]>
+									</attribute>
+								</button>
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

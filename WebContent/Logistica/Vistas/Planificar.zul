@@ -1,0 +1,32 @@
+<?page title="Planificar" contentType="text/html;charset=UTF-8"?>
+<?component name="Mantenimiento" macro-uri="Planificar_Mantenimiento.zul" inline="true" ?>
+<?component name="Actividad" macro-uri="Planificar_Actividad.zul" inline="true" ?>
+<?component name="Solicitud" macro-uri="Solicitud_mantenimiento.zul" inline="true" ?>
+
+
+<zk>
+	<window title="Planificar" border="normal">
+		<tabbox>
+			<tabs>
+				<tab label="Mantenimiento" />
+				<tab label="Actividades Complementarias" />
+				<tab label="Solicitudes de Mantenimiento" />
+			</tabs>
+
+			<tabpanels>
+				<tabpanel>
+					<Mantenimiento />
+				</tabpanel>
+
+				<tabpanel>
+					<Actividad/>
+				</tabpanel>
+				
+				<tabpanel>
+					<Solicitud />
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+
+	</window>
+</zk>

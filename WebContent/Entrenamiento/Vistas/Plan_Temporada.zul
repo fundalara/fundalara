@@ -1,0 +1,192 @@
+<?page title="Auto Generated index.zul"?>
+<zk>
+	<window id="pTemporada" apply="controlador.entrenamiento.PlanTemporada"
+		title="Planificacion de Temporada - PREINFATIL" border="normal"
+		width="550px" closable="true">
+		<grid>
+			<rows>
+				<row>
+					<grid>
+						<columns>
+							<column width="110px" />
+							<column width="160px" align="center" />
+							<column width="110px" />
+							<column width="160px" align="center" />
+						</columns>
+						<rows>
+							<row height="30px">
+								<label value="Temporada" width="100px" />
+								<combobox value="--Seleccione--"
+									width="130px" id="cmbTemporada">
+									<comboitem label="2011-2012" />
+									<comboitem label="2012-2013" />
+									<comboitem label="2013-2014" />
+								</combobox>
+							</row>
+						</rows>
+					</grid>
+				</row>
+				<row>
+					<panel title="Asignacion de Horario"
+						collapsible="true">
+						<panelchildren>
+							<hbox>
+								<listbox id="listHorario">
+									<listhead>
+										<listheader label="Dia"
+											width="140px" align="Center" sort="auto" />
+										<listheader label="Bloque"
+											width="140px" align="Center" sort="auto" />
+									</listhead>
+									<listitem>
+										<listcell
+											label="Lunes y Miercoles" />
+										<listcell
+											label="2:00 a 4:00 pm" />
+									</listitem>
+									<listitem>
+										<listcell
+											label="Martes y Jueves " />
+										<listcell label="3:00 a 5:00pm" />
+									</listitem>
+								</listbox>
+								<vbox>
+									<button
+										image="Recursos/Imagenes/agregar.ico" id="btnAgregarHorario" />
+									<separator height="5px" />
+									<button
+										image="Recursos/Imagenes/editar.ico" id="btnEditarHorario" />
+									<separator height="5px" />
+									<button
+										image="Recursos/Imagenes/quitar.ico" id="btnQuitarHorario" />
+								</vbox>
+							</hbox>
+						</panelchildren>
+					</panel>
+				</row>
+				<row>
+					<panel title="Asignacion de Personal Tecnico"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<rows>
+									<row>
+										<grid>
+											<columns>
+												<column width="120px"
+													align="left" />
+												<column width="150px"
+													align="center" />
+												<column width="120px"
+													align="left" />
+												<column width="150px"
+													align="center" />
+												<column align="center" />
+											</columns>
+											<rows>
+												<row height="35px">
+													<label
+														value="Equipo" width="100px" height="25" />
+													<combobox
+														value="--Seleccione--" width="110px" id="cmbEquipo">
+														<comboitem
+															label="A" />
+														<comboitem
+															label="B" />
+														<comboitem
+															label="C" />
+														<comboitem
+															label="D" />
+														<comboitem
+															label="E" />
+														<comboitem
+															label="F" />
+													</combobox>
+													<label
+														value="Tipo de Personal" width="100px" />
+													<combobox
+														value="--Seleccione--" width="110px"
+														id="cmbTipoPersonal">
+														<comboitem
+															label="Manager" />
+														<comboitem
+															label="Monitor" />
+													</combobox>
+												</row>
+												<row>
+													<label
+														value="Nombre" width="100px" />
+													<combobox
+														value="--Seleccione--" width="110px" id="cmbNombre">
+														<comboitem
+															label="Emmanuel Ortega" />
+														<comboitem
+															label="Jose Gutierrez" />
+														<comboitem
+															label="Yovanny Mendoza" />
+													</combobox>
+												</row>
+											</rows>
+										</grid>
+									</row>
+									<row>
+										<hbox>
+											<listbox id="list">
+												<listhead>
+													<listheader
+														label="Equipo" width="140px" align="Center" sort="auto" />
+													<listheader
+														label="Tipo Personal" width="140px" align="Center"
+														sort="auto" />
+													<listheader
+														label="Tecnico" width="140px" align="Center" sort="auto" />
+												</listhead>
+											</listbox>
+											<vbox
+												id="btnModificarPersTecnico">
+
+												<button
+													image="Recursos/Imagenes/agregar.ico"
+													id="btnAgregarPersTecnico" />
+												<separator height="5px" />
+												<button
+													image="Recursos/Imagenes/editar.ico"
+													id="btnEditarPersTecnico" />
+												<separator height="5px" />
+												<button
+													image="Recursos/Imagenes/quitar.ico"
+													id="btnQuitarPersTecnico" />
+											</vbox>
+										</hbox>
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>
+			</rows>
+		</grid>
+		<grid height="50px">
+			<columns>
+				<column width="220px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+			</columns>
+			<rows>
+				<row height="">
+					<label value="" />
+					<button image="Recursos/Imagenes/guardar.ico"
+						label="Guardar" width="95px" id="btnGuardar" />
+					<button image="Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="95px" id="btnImprimir" />
+					<button image="Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" id="btnCancelar" />
+					<button image="Recursos/Imagenes/salir.png"
+						label="Salir" width="95px" id="btnSalir" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>
