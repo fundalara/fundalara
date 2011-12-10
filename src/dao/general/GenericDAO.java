@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -17,8 +19,11 @@ public class GenericDAO extends  BaseHibernateDAO{
 
 
 	public void guardar(Object c) {
+
+		
 		getSession().saveOrUpdate(c);
 		getSession().flush();
+		
 	}
 
 	public void actualizar(Object c) {

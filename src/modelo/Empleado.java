@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 10/12/2011 11:05:49 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/12/2011 12:12:20 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;

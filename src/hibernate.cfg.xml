@@ -10,7 +10,15 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.default_schema">public</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        
+        <property name="connection.pool_size">1</property>
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<!-- Echo all executed SQL to stdout -->
+<!-- 		<property name="show_sql">true</property> -->
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hbm2ddl.auto">none</property>
         <mapping class="modelo.ActividadEntrenamiento"/>
 		<mapping class="modelo.AfeccionJugador"/>
 		<mapping class="modelo.AfeccionJugadorId"/>
