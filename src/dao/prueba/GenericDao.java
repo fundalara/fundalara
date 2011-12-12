@@ -19,20 +19,30 @@ public class GenericDao {
 	}
 
 	public void actualizar(Object c) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.getCurrentSession();
+		Transaction tx =  session.beginTransaction();
+		session.saveOrUpdate(c);
+		tx.commit();
+		session.close();		
 		
 	}
 	
 	public void eliminar(Object c) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.getCurrentSession();
+		Transaction tx =  session.beginTransaction();
+		session.delete(c);
+		tx.commit();
+		session.close();	
 		
 	}
 	
 	public List listar(Object o) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		
+		SessionFactory sf = HibernateUtil.getSessionFactory();	
 		Session session = sf.getCurrentSession();
 		Transaction tx =  session.beginTransaction();
 		List lista = session.createCriteria(o.getClass()).list();
-		session.close();
 		return lista;
 	}
 }

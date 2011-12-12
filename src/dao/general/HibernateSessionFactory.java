@@ -2,72 +2,68 @@ package dao.general;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
+
 
 /**
  * Configures and provides access to Hibernate sessions, tied to the
  * current thread of execution.  Follows the Thread Local Session
- * pattern, see {@link http://hibernate.org/42.html }.
+ * pattern, see {@link http://hibernate.org/42.html}.
  */
 public class HibernateSessionFactory {
 
     /** 
      * Location of hibernate.cfg.xml file.
-     * Location should be on the classpath as Hibernate uses  
-     * #resourceAsStream style lookup for its configuration file. 
-     * The default classpath location of the hibernate config file is 
-     * in the default package. Use #setConfigFile() to update 
-     * the location of the configuration file for the current session.   
+     * NOTICE: Location should be on the classpath as Hibernate uses
+     * #resourceAsStream style lookup for its configuration file. That
+     * is place the config file in a Java package - the default location
+     * is the default Java package.<br><br>
+     * Examples: <br>
+     * <code>CONFIG_FILE_LOCATION = "/hibernate.conf.xml". 
+     * CONFIG_FILE_LOCATION = "/com/foo/bar/myhiberstuff.conf.xml".</code> 
      */
     private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
-	private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
-    private  static Configuration configuration = new AnnotationConfiguration();
-    private static org.hibernate.SessionFactory sessionFactory;
-    private static String configFile = CONFIG_FILE_LOCATION;
 
-    private HibernateSessionFactory() {
-    }
-	
-	/**
+    /** Holds a single instance of Session */
+    private static final ThreadLocal threadLocal = new ThreadLocal();
+
+    /** The single instance of hibernate configuration */
+    private static final AnnotationConfiguration cfg = new AnnotationConfiguration();
+
+    /** The single instance of hibernate SessionFactory */
+    private static SessionFactory sessionFactory;
+
+    /**
      * Returns the ThreadLocal Session instance.  Lazy initialize
      * the <code>SessionFactory</code> if needed.
      *
      *  @return Session
      *  @throws HibernateException
      */
-    public static Session getSession() throws HibernateException {
+    public static Session currentSession() throws HibernateException {
         Session session = (Session) threadLocal.get();
 
-		if (session == null || !session.isOpen()) {
-			if (sessionFactory == null) {
-				rebuildSessionFactory();
-			}
-			session = (sessionFactory != null) ? sessionFactory.openSession()
-					: null;
-			threadLocal.set(session);
-		}
+        if (session == null) {
+            if (sessionFactory == null) {
+                try {
+                    cfg.configure(CONFIG_FILE_LOCATION);
+                    sessionFactory = cfg.buildSessionFactory();
+                }
+                catch (Exception e) {
+                    System.err.println("%%%% Error Creating SessionFactory %%%%");
+                    e.printStackTrace();
+                }
+            }
+            session = sessionFactory.openSession();
+            threadLocal.set(session);
+        }
 
         return session;
     }
 
-	/**
-     *  Rebuild hibernate session factory
-     *
-     */
-	public static void rebuildSessionFactory() {
-		try {
-			configuration.configure(configFile);
-			
-			sessionFactory = configuration.buildSessionFactory();
-		} catch (Exception e) {
-			System.err
-					.println("%%%% Error Creating SessionFactory %%%%");
-			e.printStackTrace();
-		}
-	}
-
-	/**
+    /**
      *  Close the single hibernate session instance.
      *
      *  @throws HibernateException
@@ -81,30 +77,10 @@ public class HibernateSessionFactory {
         }
     }
 
-	/**
-     *  return session factory
-     *
+    /**
+     * Default constructor.
      */
-	public static org.hibernate.SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	/**
-     *  return session factory
-     *
-     *	session factory will be rebuilded in the next call
-     */
-	public static void setConfigFile(String configFile) {
-		HibernateSessionFactory.configFile = configFile;
-		sessionFactory = null;
-	}
-
-	/**
-     *  return hibernate configuration
-     *
-     */
-	public static Configuration getConfiguration() {
-		return configuration;
-	}
+    private HibernateSessionFactory() {
+    }
 
 }

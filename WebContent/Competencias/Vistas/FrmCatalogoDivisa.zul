@@ -1,16 +1,19 @@
-<?page title="Catalogo Divisa" contentType="text/html;charset=UTF-8"?>
+<?page title="REGISTRO DE DIVISAS" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoD"?>
 <zk>
+
 	<div align="center">
-		<window id="FrmCatalogoDivisa" title="Divisas Existentes"
-			border="normal" mode="modal" closable="true" width="420px">
-			<panel width="100%" border="normal">
+		<window id="frmCatalogoD" title="Divisas Existentes" apply="controlador.competencia.CntrlFrmCatalogoDivisa"
+			border="normal" mode="modal" closable="true" width="420px" height="350px">
+			<panel width="100%" border="normal" >
 				<panelchildren>
 					<div style="margin-top:5px">
 					<label value="Filtro"></label>
 					<textbox></textbox>
 					<button label="Buscar"></button>
 					</div>
-					<listbox mold="paging" pageSize="10" style="margin-top:5px">
+					<listbox id="lsbxDivisas" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.divisas}" height="240px">
 						<listhead>
 							<listheader label="Nombre" align="center"
 								width="25%">
@@ -18,96 +21,26 @@
 							<listheader label="Estado" align="center"
 								width="25%">
 							</listheader>
-							<listheader label="Ciudad" align="center"
-								width="25%">
-							</listheader>
 							<listheader label="Teléfono" align="center"
 								width="25%">
 							</listheader>
 						</listhead>
 						
-						<listitem>
-							<listcell>Fundalara</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2331897</listcell>
+						<listitem self="@{each=divisa}">
+							<listcell label="@{divisa.nombre}"></listcell>
+							<listcell label="@{divisa.estadoVenezuela.nombre}"></listcell>
+							<listcell label="@{divisa.Telefono}"></listcell>
 						</listitem>
-						<listitem>
-							<listcell>Ucla</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>Lara</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						
+									
 						
 					</listbox>
 					<div align="right">
-						<button
+						<button id="btnAceptar"
 							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
 						</button>
-						<button
+						<button id="btnSalir"
 							image="../../Recursos/Imagenes/salir.png" label="Salir"
-							onClick="Salir()">
+							onClick="">
 						</button>
 					</div>
 				</panelchildren>

@@ -40,7 +40,7 @@ public class ServicioEstadoVenezuela implements IServicioEstadoVenezuela {
 
 	@Override
 	public EstadoVenezuela buscarPorCodigo(EstadoVenezuela e) {
-		return (EstadoVenezuela) daoEstadoVenezuela.getSession().createCriteria(EstadoVenezuela.class).add(Restrictions.eq("codigo_estado",e.getCodigoEstado()));
+		return null;
 	}
 
 	@Override

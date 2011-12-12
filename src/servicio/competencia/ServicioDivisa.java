@@ -25,34 +25,34 @@ public class ServicioDivisa implements IServicioDivisa {
 	@Override
 	public void eliminar(Divisa d) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void agregar(Divisa d) {
-		// TODO Auto-generated method stub
-
+		daoDivisa.guardar(d);
+		
 	}
 
 	@Override
 	public void actualizar(Divisa d) {
-		// TODO Auto-generated method stub
-
+		daoDivisa.actualizar(d);
+		
 	}
 
 	@Override
 	public Divisa buscarPorCodigo(Divisa d) {
 		// TODO Auto-generated method stub
-		
-		return (Divisa) daoDivisa.getSession().createCriteria(Divisa.class).add(Restrictions.eq("codigoDivisa",d.getCodigoDivisa())).list().get(0);
-		//Criteria c = daoDivisa.getSession().createCriteria("modelo.Divisa");
-		//c.add(a)
-		//System.out.println(d);
-		//System.out.println(daoDivisa.getSession().load(Divisa.class, d.getCodigoDivisa()));
-		//List lista = daoDivisa.getSession().createCriteria(Divisa.class).add(Restrictions.eq("codigoDivisa",d.getCodigoDivisa())).list();
-		
-		//return (Divisa) lista.get(0);
-		//c.add(Restrictions.eq("nombre del campo en la bd", valor del objeto que se pasa por parámetro))
+		return null;
 	}
+
+	@Override
+	public List<Divisa> listar() {
+		return daoDivisa.listar(new Divisa());
+	}
+
+	
+	
+	
 
 }

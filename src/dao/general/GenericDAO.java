@@ -10,34 +10,51 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.transaction.annotation.Transactional;
 
+import dao.prueba.HibernateUtil;
 
 
-public class GenericDAO extends  BaseHibernateDAO{
+
+public class GenericDAO {
 
 
 
 	public void guardar(Object c) {
 
 		
-		getSession().saveOrUpdate(c);
-		getSession().flush();
+
+		
+		Session session = HibernateSessionFactory.currentSession();
+		Transaction tx =  session.beginTransaction();
+		session.saveOrUpdate(c);
+		tx.commit();
+		//session.close();
 		
 	}
 
 	public void actualizar(Object c) {
-		getSession().saveOrUpdate(c);
-		getSession().flush();
+		Session session = HibernateSessionFactory.currentSession();
+		Transaction tx =  session.beginTransaction();
+		session.saveOrUpdate(c);
+		tx.commit();
+		//session.close();
 	}
 	
 	public void eliminar(Object c) {
-		getSession().delete(c);
-		getSession().flush();
+		//getSession().delete(c);
+		//getSession().flush();
+		//getSession().close();
 
 	}
 	
 	public List listar(Object o) {
-		return getSession().createCriteria(o.getClass()).list();
+		Session session = HibernateSessionFactory.currentSession();
+		Transaction tx =  session.beginTransaction();
+		List lista = session.createCriteria(o.getClass()).list();
+		tx.commit();
+		//HibernateSessionFactory.closeSession();
+		return lista;
 	}
 }
