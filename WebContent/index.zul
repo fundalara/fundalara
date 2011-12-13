@@ -8,12 +8,11 @@
 	<style>
 		.z-tab-accordion, .z-tab-accordion-seld{ width:260px; }
 	</style>
-
 	<div style="display:inline">
-		<div style="float:left">
+		<div style="float:left">						
 			<tabbox mold="accordion">
 				<tabs>
-					<tab label="Registros" tooltip="nombre" />
+					<tab label="Registros" />
 					<tab label="Funcionalidades Deportivas" />
 					<tab label="Funcionalidades Operativas" />
 					<tab label="Agenda"
@@ -717,9 +716,7 @@
 											</treechildren>
 										</treeitem>
 									</treechildren>
-
 								</treeitem>
-
 							</treechildren>
 						</tree>
 					</tabpanel>
@@ -962,8 +959,6 @@
 							</treechildren>
 						</tree>
 					</tabpanel>
-
-
 				</tabpanels>
 			</tabbox>
 		</div>
