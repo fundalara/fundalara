@@ -36,8 +36,7 @@ public class ServicioActividadEntrenamiento implements
 	}
 
 	public List<ActividadEntrenamiento> listar() {
-		List<ActividadEntrenamiento> a = daoActividadEntrenamiento
-				.listar(new ActividadEntrenamiento());
+		List<ActividadEntrenamiento> a = daoActividadEntrenamiento.listar(ActividadEntrenamiento.class);
 		return a;
 	}
 

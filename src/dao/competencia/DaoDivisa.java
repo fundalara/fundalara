@@ -7,10 +7,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import dao.general.GenericDAO;
-import dao.prueba.GenericDao;
-import dao.prueba.SessionManager;
+import dao.general.GenericDAO;
+import dao.general.SessionManager;
 
-public class DaoDivisa extends GenericDao {
+public class DaoDivisa extends GenericDAO {
 	
 	public List listarActivos(Class o){
 		Session session = getSession();

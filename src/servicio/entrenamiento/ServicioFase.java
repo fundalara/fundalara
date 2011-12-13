@@ -36,7 +36,7 @@ public class ServicioFase implements IServicioFase {
 
 	@Override
 	public List<Fase> listar() {
-		List<Fase> f = daoFase.listar(new Fase());
+		List<Fase> f = daoFase.listar(Fase.class);
 		return f;
 	}
 

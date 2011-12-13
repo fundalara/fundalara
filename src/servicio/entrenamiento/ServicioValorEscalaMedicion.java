@@ -39,8 +39,7 @@ public class ServicioValorEscalaMedicion implements
 
 	@Override
 	public List<ValorEscalaMedicion> listar() {
-		List<ValorEscalaMedicion> vem = daoValorEscalaMedicion
-				.listar(new ValorEscalaMedicion());
+		List<ValorEscalaMedicion> vem = daoValorEscalaMedicion.listar(ValorEscalaMedicion.class);
 		return vem;
 	}
 

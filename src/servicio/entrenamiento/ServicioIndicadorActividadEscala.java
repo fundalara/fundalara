@@ -40,8 +40,7 @@ public class ServicioIndicadorActividadEscala implements
 
 	@Override
 	public List<IndicadorActividadEscala> listar() {
-		List<IndicadorActividadEscala> iae = daoIndicadorActividadEscala
-				.listar(new IndicadorActividadEscala());
+		List<IndicadorActividadEscala> iae = daoIndicadorActividadEscala.listar(IndicadorActividadEscala.class);
 		return iae;
 	}
 

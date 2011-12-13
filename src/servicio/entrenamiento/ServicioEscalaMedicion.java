@@ -38,7 +38,7 @@ public class ServicioEscalaMedicion implements IServicioEscalaMedicion {
 
 	@Override
 	public List<EscalaMedicion> listar() {
-		List<EscalaMedicion> e = daoEscalaMedicion.listar(new EscalaMedicion());
+		List<EscalaMedicion> e = daoEscalaMedicion.listar(EscalaMedicion.class);
 		return e;
 	}
 

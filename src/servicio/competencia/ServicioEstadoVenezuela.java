@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
 import dao.competencia.DaoEstadoVenezuela;
-import dao.prueba.GenericDao;
+import dao.general.GenericDAO;
 
 import modelo.EstadoVenezuela;
 

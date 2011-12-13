@@ -1,56 +1,50 @@
 package dao.general;
 
-
 import java.util.List;
 
-
-
 import org.hibernate.Session;
-
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-
-import dao.prueba.SessionManager;
-
-
-
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.YesNoType;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+@Service
 public class GenericDAO {
+	
 
-
-
-	public void guardar(Object c) {
-
-		
-
-		
+	public void guardar(Object o) {		
 		Session session = SessionManager.getSession();
 		Transaction tx =  session.beginTransaction();
-		session.saveOrUpdate(c);
-		tx.commit();
-
-		
+		session.saveOrUpdate(o);
+		tx.commit();		
 	}
 
-	public void actualizar(Object c) {
+	public void actualizar(Object o) {
 		Session session = SessionManager.getSession();
 		Transaction tx =  session.beginTransaction();
-		session.saveOrUpdate(c);
+		session.saveOrUpdate(o);
 		tx.commit();
-
 	}
 	
-	public void eliminar(Object c) {
-		//getSession().delete(c);
-		//getSession().flush();
-		//getSession().close();
-
-	}
-	
-	public List listar(Class c) {
+	public void eliminar(Object o) {
 		Session session = SessionManager.getSession();
 		Transaction tx =  session.beginTransaction();
-		List lista = session.createCriteria(c).list();
-		//HibernateSessionFactory.closeSession();
+		session.saveOrUpdate(o);
+	    tx.commit();
+	}
+	
+	public List listar(Class o) {
+		Session session = SessionManager.getSession();
+		Transaction tx =  session.beginTransaction();
+		List lista = session.createCriteria(o).list();
 		return lista;
+	}
+	
+	public Session getSession(){
+		return SessionManager.getSession();
 	}
 }

@@ -17,7 +17,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Window;
 
-import vista.comun.Util;
+import comun.Util;
 
 public class Datos_Basicos_NC extends GenericForwardComposer {
 	Button btnAgregar, btnCancelar, btnSalir, btnModificar, btnQuitar;

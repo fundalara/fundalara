@@ -38,7 +38,7 @@ public class ServicioTipoIndicador implements IServicioTipoIndicador {
 
 	@Override
 	public List<TipoIndicador> listar() {
-		List<TipoIndicador> ti = daoTipoIndicador.listar(new TipoIndicador());
+		List<TipoIndicador> ti = daoTipoIndicador.listar(TipoIndicador.class);
 		return ti;
 	}
 

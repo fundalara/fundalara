@@ -35,7 +35,7 @@ public class ServicioIndicador implements IServicioIndicador {
 
 	@Override
 	public List<Indicador> listar() {
-		List<Indicador> i = daoIndicador.listar(new Indicador());
+		List<Indicador> i = daoIndicador.listar(Indicador.class);
 		return i;
 	}
 

@@ -1,8 +1,8 @@
 package dao.competencia;
 
 import dao.general.GenericDAO;
-import dao.prueba.GenericDao;
+import dao.general.GenericDAO;
 
-public class DaoEstadoCompetencia extends GenericDao {
+public class DaoEstadoCompetencia extends GenericDAO {
 
 }
