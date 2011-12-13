@@ -3,20 +3,23 @@
 
 <beans>
 
-   
-   <bean id="genericDao" class="dao.general.GenericDAO">
-   </bean>
-   <bean id="servicioTipoActividadSocial" class="servicio.atleta.ServicioTipoActividadSocial">
-   <property name="daoP" ref="genericDao"></property>	   
-   </bean>
-	<bean id="daoDivisa" class="dao.competencia.DaoDivisa"></bean>
-   <bean id="servicioDivisa" class="servicio.competencia.ServicioDivisa">
-      <property name="daoDivisa" ref="daoDivisa"></property>
-   </bean>
-   
-   <bean id="daoEstadoVenezuela" class="dao.competencia.DaoEstadoVenezuela"></bean>
-   <bean id="servicioEstadoVenezuela" class="servicio.competencia.ServicioEstadoVenezuela">
-      <property name="daoEstadoVenezuela" ref="daoEstadoVenezuela"></property>
-   </bean>
+
 	
+
+	<bean id="daoEstadoVenezuela" class="dao.competencia.DaoEstadoVenezuela"
+		>
+	</bean>
+
+	<bean id="servicioEstadoVenezuela" class="servicio.competencia.ServicioEstadoVenezuela">
+		<property name="daoEstadoVenezuela" ref="daoEstadoVenezuela"></property>
+	</bean>
+
+	<bean id="daoDivisa" class="dao.competencia.DaoDivisa">
+	</bean>
+
+	<bean id="servicioDivisa" class="servicio.competencia.ServicioDivisa">
+		<property name="daoDivisa" ref="daoDivisa"></property>
+	</bean>
+
+
 </beans>

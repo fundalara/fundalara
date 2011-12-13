@@ -5,13 +5,16 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
 import dao.competencia.DaoEstadoVenezuela;
+import dao.prueba.GenericDao;
 
 import modelo.EstadoVenezuela;
 
 public class ServicioEstadoVenezuela implements IServicioEstadoVenezuela {
 
-	DaoEstadoVenezuela daoEstadoVenezuela;
-	
+    DaoEstadoVenezuela daoEstadoVenezuela;
+    
+    
+
 	public DaoEstadoVenezuela getDaoEstadoVenezuela() {
 		return daoEstadoVenezuela;
 	}
@@ -45,7 +48,7 @@ public class ServicioEstadoVenezuela implements IServicioEstadoVenezuela {
 
 	@Override
 	public List<EstadoVenezuela> listar() {		
-		return daoEstadoVenezuela.listar(new EstadoVenezuela());
+		return daoEstadoVenezuela.listar(EstadoVenezuela.class);
 	}
 
 }

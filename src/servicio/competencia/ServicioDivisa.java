@@ -24,7 +24,7 @@ public class ServicioDivisa implements IServicioDivisa {
 
 	@Override
 	public void eliminar(Divisa d) {
-		// TODO Auto-generated method stub
+		daoDivisa.eliminar(d);
 		
 	}
 
@@ -48,7 +48,12 @@ public class ServicioDivisa implements IServicioDivisa {
 
 	@Override
 	public List<Divisa> listar() {
-		return daoDivisa.listar(new Divisa());
+		return daoDivisa.listar(Divisa.class);
+	}
+
+	@Override
+	public List<Divisa> listarActivos() {
+		return daoDivisa.listarActivos(Divisa.class);
 	}
 
 	

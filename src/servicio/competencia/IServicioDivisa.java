@@ -14,7 +14,10 @@ public interface IServicioDivisa {
 	
 	public abstract  Divisa buscarPorCodigo (Divisa d);
 	
+
+	
 	public abstract  List<Divisa> listar ();
 	
+	public abstract List<Divisa> listarActivos();
 	
 }

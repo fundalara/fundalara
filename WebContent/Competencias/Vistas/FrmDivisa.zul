@@ -22,7 +22,7 @@
 							<row style="border-style:none">
 								<label value="Nombre"></label>
 								<hbox>
-									<textbox value="@{cntrl.divisa.codigoDivisa}" id="txtNombre" cols="20"></textbox>
+									<textbox value="@{cntrl.divisa.nombre}" id="txtNombre" cols="20"></textbox>
 									<space></space>
 									<button id="btnBuscar"
 										image="../../Recursos/Imagenes/consultar.ico" >								
@@ -42,7 +42,7 @@
 								<label value="Dirección"></label>
 								<textbox value="@{cntrl.divisa.direccion}" id="txtDireccion" cols="20"></textbox>
 								<label value="Estado"></label>
-								<combobox model="@{cntrl.estados}" value="@{cntrl.divisa.estadoVenezuela.nombre}">
+								<combobox model="@{cntrl.estados}" selectedItem="@{cntrl.estado}">
 								  <comboitem self="@{each=estado}" value="@{estado.codigoEstado}" label="@{estado.nombre}" ></comboitem>
 								</combobox>
 
@@ -89,14 +89,6 @@
 				</panel>
 				<include id="nuevaPantalla"></include>
 			</div>
-			<zscript><![CDATA[
-	void Cambiar() {
-		Executions.createComponents(
-				"/Competencias/Vistas/FrmcatalogoDivisa.zul", null, null);
-		Divisa.setVisible(false);
-	}
-]]></zscript>
-
 		</window>
 	</div>
 </zk>

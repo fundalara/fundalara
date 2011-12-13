@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 11/12/2011 04:17:03 PM by Hibernate Tools 3.4.0.CR1
+// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,7 @@ public class Divisa implements java.io.Serializable {
 	private String nombre;
 	private String personaContacto;
 	private String telefono;
+	private String estatus;
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
 
 	public Divisa() {
@@ -47,7 +48,7 @@ public class Divisa implements java.io.Serializable {
 	public Divisa(String codigoDivisa, EstadoVenezuela estadoVenezuela,
 			String correoElectronico, String direccion, byte[] logo,
 			String nombre, String personaContacto, String telefono,
-			Set<Equipo> equipos) {
+			String estatus, Set<Equipo> equipos) {
 		this.codigoDivisa = codigoDivisa;
 		this.estadoVenezuela = estadoVenezuela;
 		this.correoElectronico = correoElectronico;
@@ -56,6 +57,7 @@ public class Divisa implements java.io.Serializable {
 		this.nombre = nombre;
 		this.personaContacto = personaContacto;
 		this.telefono = telefono;
+		this.estatus = estatus;
 		this.equipos = equipos;
 	}
 
@@ -131,6 +133,15 @@ public class Divisa implements java.io.Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	@Column(name = "estatus", length = 1)
+	public String getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "divisa")

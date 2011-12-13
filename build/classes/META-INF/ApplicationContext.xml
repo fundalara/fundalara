@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+
+	<!-- La siguiente configuracion es para manejar las sessiones de hibernate 
+		desde spring -->
+	<!-- Datasource le especifica a SessionFactory como se va a realizar la 
+		conexion con la base de datos -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/postgres" />
+		<property name="username" value="postgres" />
+		<property name="password" value="123456" />
+	</bean>
+
+	<!-- mySessionFactory constituye la unica instancia de sessionFactory que 
+		se manejara -->
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<property name="configurationClass">
+			<value>org.hibernate.cfg.AnnotationConfiguration</value>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Spring inyecta el objeto mySessionFactory a la clase genericDao -->
+	<bean id="genericDao" class="dao.prueba.GenericDao">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<!-- fin de la configuracion -->
+
+	<!-- Objetos del Negocio -->
+
+	<bean id="daoEstadoVenezuela" class="dao.competencia.DaoEstadoVenezuela"
+		parent="genericDao">
+	</bean>
+
+	<bean id="servicioEstadoVenezuela" class="servicio.competencia.ServicioEstadoVenezuela">
+		<property name="daoEstadoVenezuela" ref="daoEstadoVenezuela"></property>
+	</bean>
+
+	<bean id="daoDivisa" class="dao.competencia.DaoDivisa" parent="genericDao">
+	</bean>
+
+	<bean id="servicioDivisa" class="servicio.competencia.ServicioDivisa">
+		<property name="daoDivisa" ref="daoDivisa"></property>
+	</bean>
+
+
+</beans>
