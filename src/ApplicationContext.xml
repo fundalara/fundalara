@@ -21,14 +21,26 @@
 		<property name="daoDivisa" ref="daoDivisa"></property>
 	</bean>
 
-
-   <!-- lisbeth -->
-      <bean id="daoRegla" class="dao.competencia.DaoRegla">
+<bean id="daoCompetencia" class="dao.competencia.DaoCompetencia">
 	</bean>
 
-	 <bean id="servicioRegla" class="servicio.competencia.ServicioRegla">
-		<property name="daoRegla" ref="daoRegla"></property>
-	 </bean>
+	<bean id="servicioCompetencia" class="servicio.competencia.ServicioCompetencia">
+		<property name="daoCompetencia" ref="daoCompetencia"></property>
+	</bean>
+	
+	<bean id="daoIndicador" class="dao.competencia.DaoIndicador">
+	</bean>
 
+	<bean id="servicioIndicador" class="servicio.competencia.ServicioIndicador">
+		<property name="daoIndicador" ref="daoIndicador"></property>
+	</bean>
+	
+			
+	<bean id="daoCategoriaCompetencia" class="dao.competencia.DaoCategoriaCompetencia">
+	</bean>
+
+	<bean id="servicioCategoriaCompetencia" class="servicio.competencia.ServicioCategoriaCompetencia">
+		<property name="daoCategoriaCompetencia" ref="daoCategoriaCompetencia"></property>
+	</bean>
 
 </beans>
