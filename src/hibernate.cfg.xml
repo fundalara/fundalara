@@ -16,7 +16,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.show_sql">true</property>
-       <property name="hibernate.hbm2ddl.auto">create</property>
+<!--         <property name="hibernate.hbm2ddl.auto">create</property> -->       
         <mapping class="modelo.ClasificacionEquipo" />
         <mapping class="modelo.AnnoEscolar" />
         <mapping class="modelo.Jugador" />
