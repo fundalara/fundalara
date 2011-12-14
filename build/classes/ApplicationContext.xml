@@ -22,4 +22,13 @@
 	</bean>
 
 
+   <!-- lisbeth -->
+      <bean id="daoRegla" class="dao.competencia.DaoRegla">
+	</bean>
+
+	 <bean id="servicioRegla" class="servicio.competencia.ServicioRegla">
+		<property name="daoRegla" ref="daoRegla"></property>
+	 </bean>
+
+
 </beans>

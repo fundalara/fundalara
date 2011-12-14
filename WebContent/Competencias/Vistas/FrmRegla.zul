@@ -1,7 +1,10 @@
-<?page title="Regla" contentType="text/html;charset=UTF-8"?>
+<?page title="REGISTRO DE REGLAS" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRegla" ?>
+
 <zk>
 	<div align="center">
-	<window title="Reglas" border="normal" width="68%" height="auto" closable="true">
+	<window  apply="controlador.competencia.CntrlFrmRegla"  id="frmRegla"   title="Reglas" border="normal" width="68%" height="auto" closable="true">
 		<panel>
 			<caption label="Creación de Reglas"></caption>
 			<panelchildren>
@@ -16,20 +19,20 @@
 					<rows>
 						<row style="border-style:none" align="left">
 							<label value="Regla:"></label>
-							<textbox width="97%"></textbox>
-							<label value="Variable de Medición:">
+							<textbox value="@{cntrl.regla.nombre}" width="97%"></textbox>
+							<label value="Unidad de Medición:">
 							</label>
-							<combobox width="97%">
+							<combobox width="97%" value="@{cntrl.regla.unidadmedida}">
 								<comboitem label="%" />
 								<comboitem label="Unidades" />
 							</combobox>
 						</row>
 						<row style="border-style:none" align="left">
 							<label value="Descripción:"></label>
-							<textbox multiline="true" height="50px" width="97%"
+							<textbox value="@{cntrl.regla.descripcion}" multiline="true" height="50px" width="97%"
 								cols="40">
 							</textbox>
-							<label value="Variable de Comparación:">
+							<label value="Indicador:">
 							</label>
 							<hbox>
 							<textbox width="100px"></textbox>
@@ -40,7 +43,7 @@
 						</row>
 						<row style="border-style:none" align="left">
 							<label value="Criterio:"></label>
-							<combobox width="97%">
+							<combobox width="90%" value="@{cntrl.regla.criterio}">
 								<comboitem label=" Mayor " />
 								<comboitem label=" Menor " />
 								<comboitem label=" Mayor Igual " />
@@ -81,7 +84,7 @@
 										<checkbox />
 									</listcell>
 									<listcell
-										label="Preparatorio Nivel 1" />
+										label="Preparatorio Nivel 1"/>
 								</listitem>
 								<listitem>
 									<listcell>
@@ -195,16 +198,16 @@
 			<panel>
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
-						<button
+						<button id="btnGuardar"
 							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
-						<button
+						<button id="btnModificar"
 							image="../../Recursos/Imagenes/editar.ico" label="Modificar">
 						</button>
-						<button
+						<button id="btnCancelar"
 							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
-						<button
+						<button  id="btnSalir"
 							image="../../Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>
