@@ -14,4 +14,6 @@ public interface IServicioMaterial {
 	
 	public List<Material> listarMateriales();
 	
+	public String generarCodigo();
+	
 }
