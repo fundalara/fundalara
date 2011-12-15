@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 05-dic-2011 7:29:13 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -56,7 +56,7 @@ public class TipoMaterial implements java.io.Serializable {
 		this.codigoTipoMaterial = codigoTipoMaterial;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "codigo_clase_material", nullable = false)
 	public ClaseMaterial getClaseMaterial() {
 		return this.claseMaterial;

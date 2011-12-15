@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 05-dic-2011 7:29:13 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,71 +23,67 @@ public class Material implements java.io.Serializable {
 	private String codigoMaterial;
 	private UnidadMedida unidadMedida;
 	private TipoMaterial tipoMaterial;
-	private int cantidadDisponible;
+	private String descripcion;
 	private int cantidadExistencia;
 	private int cantidadPresentacion;
-	private String descripcion;
-	private char estadoMaterial;
-	private char estatus;
+	private int cantidadDisponible;
 	private boolean reutilizable;
-	private int stockMaximo;
 	private int stockMinimo;
-	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados = new HashSet<MaterialMantenimientoPlanificado>(
-			0);
+	private int stockMaximo;
+	private char estatus;
 	private Set<MaterialMantenimiento> materialMantenimientos = new HashSet<MaterialMantenimiento>(
+			0);
+	private Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados = new HashSet<MaterialMantenimientoPlanificado>(
 			0);
 
 	public Material() {
 	}
 
 	public Material(String codigoMaterial, UnidadMedida unidadMedida,
-			TipoMaterial tipoMaterial, int cantidadDisponible,
+			TipoMaterial tipoMaterial, String descripcion, 
 			int cantidadExistencia, int cantidadPresentacion,
-			String descripcion, char estadoMaterial, char estatus,
-			boolean reutilizable, int stockMaximo, int stockMinimo) {
+			int cantidadDisponible, boolean reutilizable, int stockMinimo,
+			int stockMaximo, char estatus) {
 		this.codigoMaterial = codigoMaterial;
 		this.unidadMedida = unidadMedida;
 		this.tipoMaterial = tipoMaterial;
-		this.cantidadDisponible = cantidadDisponible;
+		this.descripcion = descripcion;
 		this.cantidadExistencia = cantidadExistencia;
 		this.cantidadPresentacion = cantidadPresentacion;
-		this.descripcion = descripcion;
-		this.estadoMaterial = estadoMaterial;
-		this.estatus = estatus;
+		this.cantidadDisponible = cantidadDisponible;
 		this.reutilizable = reutilizable;
-		this.stockMaximo = stockMaximo;
 		this.stockMinimo = stockMinimo;
+		this.stockMaximo = stockMaximo;
+		this.estatus = estatus;
 	}
 
 	public Material(
 			String codigoMaterial,
 			UnidadMedida unidadMedida,
 			TipoMaterial tipoMaterial,
-			int cantidadDisponible,
+			String descripcion,
 			int cantidadExistencia,
 			int cantidadPresentacion,
-			String descripcion,
-			char estadoMaterial,
-			char estatus,
+			int cantidadDisponible,
 			boolean reutilizable,
-			int stockMaximo,
 			int stockMinimo,
-			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados,
-			Set<MaterialMantenimiento> materialMantenimientos) {
+			int stockMaximo,
+			char estatus,
+			Set<MaterialMantenimiento> materialMantenimientos,
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados) {
 		this.codigoMaterial = codigoMaterial;
 		this.unidadMedida = unidadMedida;
 		this.tipoMaterial = tipoMaterial;
-		this.cantidadDisponible = cantidadDisponible;
+		this.descripcion = descripcion;
 		this.cantidadExistencia = cantidadExistencia;
 		this.cantidadPresentacion = cantidadPresentacion;
-		this.descripcion = descripcion;
-		this.estadoMaterial = estadoMaterial;
-		this.estatus = estatus;
+		this.cantidadDisponible = cantidadDisponible;
 		this.reutilizable = reutilizable;
-		this.stockMaximo = stockMaximo;
 		this.stockMinimo = stockMinimo;
-		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
+		this.stockMaximo = stockMaximo;
+		this.estatus = estatus;
 		this.materialMantenimientos = materialMantenimientos;
+		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
 	}
 
 	@Id
@@ -100,8 +96,8 @@ public class Material implements java.io.Serializable {
 		this.codigoMaterial = codigoMaterial;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_unidad_medida", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "codigo_unidad_medida")
 	public UnidadMedida getUnidadMedida() {
 		return this.unidadMedida;
 	}
@@ -110,7 +106,7 @@ public class Material implements java.io.Serializable {
 		this.unidadMedida = unidadMedida;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "codigo_tipo_material", nullable = false)
 	public TipoMaterial getTipoMaterial() {
 		return this.tipoMaterial;
@@ -118,33 +114,6 @@ public class Material implements java.io.Serializable {
 
 	public void setTipoMaterial(TipoMaterial tipoMaterial) {
 		this.tipoMaterial = tipoMaterial;
-	}
-
-	@Column(name = "cantidad_disponible", nullable = false)
-	public int getCantidadDisponible() {
-		return this.cantidadDisponible;
-	}
-
-	public void setCantidadDisponible(int cantidadDisponible) {
-		this.cantidadDisponible = cantidadDisponible;
-	}
-
-	@Column(name = "cantidad_existencia", nullable = false)
-	public int getCantidadExistencia() {
-		return this.cantidadExistencia;
-	}
-
-	public void setCantidadExistencia(int cantidadExistencia) {
-		this.cantidadExistencia = cantidadExistencia;
-	}
-
-	@Column(name = "cantidad_presentacion", nullable = false)
-	public int getCantidadPresentacion() {
-		return this.cantidadPresentacion;
-	}
-
-	public void setCantidadPresentacion(int cantidadPresentacion) {
-		this.cantidadPresentacion = cantidadPresentacion;
 	}
 
 	@Column(name = "descripcion", nullable = false)
@@ -156,22 +125,32 @@ public class Material implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "estado_material", nullable = false, length = 1)
-	public char getEstadoMaterial() {
-		return this.estadoMaterial;
+
+	@Column(name = "cantidad_existencia", nullable = false)
+	public int getCantidadExistencia() {
+		return this.cantidadExistencia;
 	}
 
-	public void setEstadoMaterial(char estadoMaterial) {
-		this.estadoMaterial = estadoMaterial;
+	public void setCantidadExistencia(int cantidadExistencia) {
+		this.cantidadExistencia = cantidadExistencia;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
+	@Column(name = "cantidad_presentacion")
+	public int getCantidadPresentacion() {
+		return this.cantidadPresentacion;
 	}
 
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
+	public void setCantidadPresentacion(int cantidadPresentacion) {
+		this.cantidadPresentacion = cantidadPresentacion;
+	}
+
+	@Column(name = "cantidad_disponible", nullable = false)
+	public int getCantidadDisponible() {
+		return this.cantidadDisponible;
+	}
+
+	public void setCantidadDisponible(int cantidadDisponible) {
+		this.cantidadDisponible = cantidadDisponible;
 	}
 
 	@Column(name = "reutilizable", nullable = false)
@@ -183,16 +162,7 @@ public class Material implements java.io.Serializable {
 		this.reutilizable = reutilizable;
 	}
 
-	@Column(name = "stock_maximo", nullable = false)
-	public int getStockMaximo() {
-		return this.stockMaximo;
-	}
-
-	public void setStockMaximo(int stockMaximo) {
-		this.stockMaximo = stockMaximo;
-	}
-
-	@Column(name = "stock_minimo", nullable = false)
+	@Column(name = "stock_minimo")
 	public int getStockMinimo() {
 		return this.stockMinimo;
 	}
@@ -201,14 +171,22 @@ public class Material implements java.io.Serializable {
 		this.stockMinimo = stockMinimo;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<MaterialMantenimientoPlanificado> getMaterialMantenimientoPlanificados() {
-		return this.materialMantenimientoPlanificados;
+	@Column(name = "stock_maximo")
+	public int getStockMaximo() {
+		return this.stockMaximo;
 	}
 
-	public void setMaterialMantenimientoPlanificados(
-			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados) {
-		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
+	public void setStockMaximo(int stockMaximo) {
+		this.stockMaximo = stockMaximo;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
@@ -219,6 +197,16 @@ public class Material implements java.io.Serializable {
 	public void setMaterialMantenimientos(
 			Set<MaterialMantenimiento> materialMantenimientos) {
 		this.materialMantenimientos = materialMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
+	public Set<MaterialMantenimientoPlanificado> getMaterialMantenimientoPlanificados() {
+		return this.materialMantenimientoPlanificados;
+	}
+
+	public void setMaterialMantenimientoPlanificados(
+			Set<MaterialMantenimientoPlanificado> materialMantenimientoPlanificados) {
+		this.materialMantenimientoPlanificados = materialMantenimientoPlanificados;
 	}
 
 }

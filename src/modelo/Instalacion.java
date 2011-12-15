@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 12/12/2011 05:59:13 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,28 +24,43 @@ public class Instalacion implements java.io.Serializable {
 	private TipoInstalacion tipoInstalacion;
 	private String descripcion;
 	private char estatus;
+	private int capacidad;
+	private double tamano;
+	private String area;
 	private Set<PlanificacionMantenimiento> planificacionMantenimientos = new HashSet<PlanificacionMantenimiento>(
+			0);
+	private Set<PlanificacionMantenimiento> planificacionMantenimientos_1 = new HashSet<PlanificacionMantenimiento>(
 			0);
 
 	public Instalacion() {
 	}
 
 	public Instalacion(String codigoInstalacion,
-			TipoInstalacion tipoInstalacion, String descripcion, char estatus) {
+			TipoInstalacion tipoInstalacion, String descripcion, char estatus,
+			int capacidad, double tamano) {
 		this.codigoInstalacion = codigoInstalacion;
 		this.tipoInstalacion = tipoInstalacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.capacidad = capacidad;
+		this.tamano = tamano;
+		
 	}
 
 	public Instalacion(String codigoInstalacion,
 			TipoInstalacion tipoInstalacion, String descripcion, char estatus,
-			Set<PlanificacionMantenimiento> planificacionMantenimientos) {
+			int capacidad, double tamano, String area,
+			Set<PlanificacionMantenimiento> planificacionMantenimientos,
+			Set<PlanificacionMantenimiento> planificacionMantenimientos_1) {
 		this.codigoInstalacion = codigoInstalacion;
 		this.tipoInstalacion = tipoInstalacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.capacidad = capacidad;
+		this.tamano = tamano;
+		this.area = area;
 		this.planificacionMantenimientos = planificacionMantenimientos;
+		this.planificacionMantenimientos_1 = planificacionMantenimientos_1;
 	}
 
 	@Id
@@ -86,6 +101,33 @@ public class Instalacion implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
+	@Column(name = "capacidad", nullable = false)
+	public int getCapacidad() {
+		return this.capacidad;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+
+	@Column(name = "tamano", nullable = false, precision = 17, scale = 17)
+	public double getTamano() {
+		return this.tamano;
+	}
+
+	public void setTamano(double tamano) {
+		this.tamano = tamano;
+	}
+
+	@Column(name = "area")
+	public String getArea() {
+		return this.area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
 	public Set<PlanificacionMantenimiento> getPlanificacionMantenimientos() {
 		return this.planificacionMantenimientos;
@@ -94,6 +136,16 @@ public class Instalacion implements java.io.Serializable {
 	public void setPlanificacionMantenimientos(
 			Set<PlanificacionMantenimiento> planificacionMantenimientos) {
 		this.planificacionMantenimientos = planificacionMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
+	public Set<PlanificacionMantenimiento> getPlanificacionMantenimientos_1() {
+		return this.planificacionMantenimientos_1;
+	}
+
+	public void setPlanificacionMantenimientos_1(
+			Set<PlanificacionMantenimiento> planificacionMantenimientos_1) {
+		this.planificacionMantenimientos_1 = planificacionMantenimientos_1;
 	}
 
 }
