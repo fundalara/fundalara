@@ -11,6 +11,7 @@ public class TipoMaterialDAO extends GenericDAO {
 		// TODO Auto-generated method stub
 		List<TipoMaterial> l = getSession().createCriteria(TipoMaterial.class).list();
 		getSession().flush();
+		getSession().close();
 		return l;
 	}
 	
@@ -18,6 +19,7 @@ public class TipoMaterialDAO extends GenericDAO {
 		// TODO Auto-generated method stub
 		List<TipoMaterial> l = getSession().createQuery("FROM " + modelo +" WHERE "+atributo+" = "+"'"+valor+"'").list();
 		getSession().flush();
+		getSession().close();
 		return l;
 	}
 }
