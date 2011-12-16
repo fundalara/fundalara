@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,34 +22,34 @@ public class Periodicidad implements java.io.Serializable {
 
 	private String codigoPeriodicidad;
 	private PlanificacionMantenimiento planificacionMantenimiento;
-	private int diaRepeticion;
-	private String estatus;
-	private Date fechaFinalizacionPeriodicidad;
 	private String frecuenciaPeriodicidad;
 	private int lapsoRepeticion;
+	private String periodicidadSemanal;
+	private int diaRepeticion;
 	private int mesRepeticion;
 	private int numeroRepeticionesPeriodicidad;
-	private String periodicidadSemanal;
+	private Date fechaFinalizacionPeriodicidad;
+	private String estatus;
 
 	public Periodicidad() {
 	}
 
 	public Periodicidad(String codigoPeriodicidad,
 			PlanificacionMantenimiento planificacionMantenimiento,
-			int diaRepeticion, String estatus,
-			Date fechaFinalizacionPeriodicidad, String frecuenciaPeriodicidad,
-			int lapsoRepeticion, int mesRepeticion,
-			int numeroRepeticionesPeriodicidad, String periodicidadSemanal) {
+			String frecuenciaPeriodicidad, int lapsoRepeticion,
+			String periodicidadSemanal, int diaRepeticion, int mesRepeticion,
+			int numeroRepeticionesPeriodicidad,
+			Date fechaFinalizacionPeriodicidad, String estatus) {
 		this.codigoPeriodicidad = codigoPeriodicidad;
 		this.planificacionMantenimiento = planificacionMantenimiento;
-		this.diaRepeticion = diaRepeticion;
-		this.estatus = estatus;
-		this.fechaFinalizacionPeriodicidad = fechaFinalizacionPeriodicidad;
 		this.frecuenciaPeriodicidad = frecuenciaPeriodicidad;
 		this.lapsoRepeticion = lapsoRepeticion;
+		this.periodicidadSemanal = periodicidadSemanal;
+		this.diaRepeticion = diaRepeticion;
 		this.mesRepeticion = mesRepeticion;
 		this.numeroRepeticionesPeriodicidad = numeroRepeticionesPeriodicidad;
-		this.periodicidadSemanal = periodicidadSemanal;
+		this.fechaFinalizacionPeriodicidad = fechaFinalizacionPeriodicidad;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -73,35 +73,6 @@ public class Periodicidad implements java.io.Serializable {
 		this.planificacionMantenimiento = planificacionMantenimiento;
 	}
 
-	@Column(name = "dia_repeticion", nullable = false)
-	public int getDiaRepeticion() {
-		return this.diaRepeticion;
-	}
-
-	public void setDiaRepeticion(int diaRepeticion) {
-		this.diaRepeticion = diaRepeticion;
-	}
-
-	@Column(name = "estatus", nullable = false)
-	public String getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(String estatus) {
-		this.estatus = estatus;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_finalizacion_periodicidad", nullable = false, length = 13)
-	public Date getFechaFinalizacionPeriodicidad() {
-		return this.fechaFinalizacionPeriodicidad;
-	}
-
-	public void setFechaFinalizacionPeriodicidad(
-			Date fechaFinalizacionPeriodicidad) {
-		this.fechaFinalizacionPeriodicidad = fechaFinalizacionPeriodicidad;
-	}
-
 	@Column(name = "frecuencia_periodicidad", nullable = false)
 	public String getFrecuenciaPeriodicidad() {
 		return this.frecuenciaPeriodicidad;
@@ -118,6 +89,24 @@ public class Periodicidad implements java.io.Serializable {
 
 	public void setLapsoRepeticion(int lapsoRepeticion) {
 		this.lapsoRepeticion = lapsoRepeticion;
+	}
+
+	@Column(name = "periodicidad_semanal", nullable = false)
+	public String getPeriodicidadSemanal() {
+		return this.periodicidadSemanal;
+	}
+
+	public void setPeriodicidadSemanal(String periodicidadSemanal) {
+		this.periodicidadSemanal = periodicidadSemanal;
+	}
+
+	@Column(name = "dia_repeticion", nullable = false)
+	public int getDiaRepeticion() {
+		return this.diaRepeticion;
+	}
+
+	public void setDiaRepeticion(int diaRepeticion) {
+		this.diaRepeticion = diaRepeticion;
 	}
 
 	@Column(name = "mes_repeticion", nullable = false)
@@ -139,13 +128,24 @@ public class Periodicidad implements java.io.Serializable {
 		this.numeroRepeticionesPeriodicidad = numeroRepeticionesPeriodicidad;
 	}
 
-	@Column(name = "periodicidad_semanal", nullable = false)
-	public String getPeriodicidadSemanal() {
-		return this.periodicidadSemanal;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_finalizacion_periodicidad", nullable = false, length = 13)
+	public Date getFechaFinalizacionPeriodicidad() {
+		return this.fechaFinalizacionPeriodicidad;
 	}
 
-	public void setPeriodicidadSemanal(String periodicidadSemanal) {
-		this.periodicidadSemanal = periodicidadSemanal;
+	public void setFechaFinalizacionPeriodicidad(
+			Date fechaFinalizacionPeriodicidad) {
+		this.fechaFinalizacionPeriodicidad = fechaFinalizacionPeriodicidad;
+	}
+
+	@Column(name = "estatus", nullable = false)
+	public String getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
 
 }

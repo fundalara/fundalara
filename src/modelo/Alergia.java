@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,8 @@ public class Alergia implements java.io.Serializable {
 	private char estatus;
 	private Set<EmpleadoAlergia> empleadoAlergias = new HashSet<EmpleadoAlergia>(
 			0);
+	private Set<EmpleadoAlergia> empleadoAlergias_1 = new HashSet<EmpleadoAlergia>(
+			0);
 
 	public Alergia() {
 	}
@@ -34,11 +36,13 @@ public class Alergia implements java.io.Serializable {
 	}
 
 	public Alergia(String codigoAlergia, String descripcion, char estatus,
-			Set<EmpleadoAlergia> empleadoAlergias) {
+			Set<EmpleadoAlergia> empleadoAlergias,
+			Set<EmpleadoAlergia> empleadoAlergias_1) {
 		this.codigoAlergia = codigoAlergia;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.empleadoAlergias = empleadoAlergias;
+		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
 
 	@Id
@@ -76,6 +80,15 @@ public class Alergia implements java.io.Serializable {
 
 	public void setEmpleadoAlergias(Set<EmpleadoAlergia> empleadoAlergias) {
 		this.empleadoAlergias = empleadoAlergias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alergia")
+	public Set<EmpleadoAlergia> getEmpleadoAlergias_1() {
+		return this.empleadoAlergias_1;
+	}
+
+	public void setEmpleadoAlergias_1(Set<EmpleadoAlergia> empleadoAlergias_1) {
+		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,25 +19,27 @@ import javax.persistence.Table;
 public class Profesion implements java.io.Serializable {
 
 	private String codigoProfesion;
-	private char estatus;
 	private String nombre;
+	private char estatus;
 	private Set<Familiar> familiars = new HashSet<Familiar>(0);
+	private Set<Familiar> familiars_1 = new HashSet<Familiar>(0);
 
 	public Profesion() {
 	}
 
-	public Profesion(String codigoProfesion, char estatus, String nombre) {
+	public Profesion(String codigoProfesion, String nombre, char estatus) {
 		this.codigoProfesion = codigoProfesion;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
-	public Profesion(String codigoProfesion, char estatus, String nombre,
-			Set<Familiar> familiars) {
+	public Profesion(String codigoProfesion, String nombre, char estatus,
+			Set<Familiar> familiars, Set<Familiar> familiars_1) {
 		this.codigoProfesion = codigoProfesion;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.familiars = familiars;
+		this.familiars_1 = familiars_1;
 	}
 
 	@Id
@@ -50,15 +52,6 @@ public class Profesion implements java.io.Serializable {
 		this.codigoProfesion = codigoProfesion;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -68,6 +61,15 @@ public class Profesion implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesion")
 	public Set<Familiar> getFamiliars() {
 		return this.familiars;
@@ -75,6 +77,15 @@ public class Profesion implements java.io.Serializable {
 
 	public void setFamiliars(Set<Familiar> familiars) {
 		this.familiars = familiars;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesion")
+	public Set<Familiar> getFamiliars_1() {
+		return this.familiars_1;
+	}
+
+	public void setFamiliars_1(Set<Familiar> familiars_1) {
+		this.familiars_1 = familiars_1;
 	}
 
 }

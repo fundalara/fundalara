@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,25 +19,28 @@ import javax.persistence.Table;
 public class TipoLogro implements java.io.Serializable {
 
 	private String codigoLogro;
-	private char estatus;
 	private String nombre;
+	private char estatus;
 	private Set<DatoDeportivo> datoDeportivos = new HashSet<DatoDeportivo>(0);
+	private Set<DatoDeportivo> datoDeportivos_1 = new HashSet<DatoDeportivo>(0);
 
 	public TipoLogro() {
 	}
 
-	public TipoLogro(String codigoLogro, char estatus, String nombre) {
+	public TipoLogro(String codigoLogro, String nombre, char estatus) {
 		this.codigoLogro = codigoLogro;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
-	public TipoLogro(String codigoLogro, char estatus, String nombre,
-			Set<DatoDeportivo> datoDeportivos) {
+	public TipoLogro(String codigoLogro, String nombre, char estatus,
+			Set<DatoDeportivo> datoDeportivos,
+			Set<DatoDeportivo> datoDeportivos_1) {
 		this.codigoLogro = codigoLogro;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.datoDeportivos = datoDeportivos;
+		this.datoDeportivos_1 = datoDeportivos_1;
 	}
 
 	@Id
@@ -50,15 +53,6 @@ public class TipoLogro implements java.io.Serializable {
 		this.codigoLogro = codigoLogro;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -68,6 +62,15 @@ public class TipoLogro implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoLogro")
 	public Set<DatoDeportivo> getDatoDeportivos() {
 		return this.datoDeportivos;
@@ -75,6 +78,15 @@ public class TipoLogro implements java.io.Serializable {
 
 	public void setDatoDeportivos(Set<DatoDeportivo> datoDeportivos) {
 		this.datoDeportivos = datoDeportivos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoLogro")
+	public Set<DatoDeportivo> getDatoDeportivos_1() {
+		return this.datoDeportivos_1;
+	}
+
+	public void setDatoDeportivos_1(Set<DatoDeportivo> datoDeportivos_1) {
+		this.datoDeportivos_1 = datoDeportivos_1;
 	}
 
 }

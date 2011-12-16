@@ -1,0 +1,59 @@
+<?page title="INDICADORES POR COMPETENCIA" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoC"?>
+<zk>
+
+	<div align="center">
+		<window id="frmCatalogoC" title="Competencias Existentes" apply="controlador.competencia.CntrlFrmCatalogoCompetencia"
+			border="normal" mode="modal" closable="true" width="420px" height="350px">
+			<panel width="100%" border="normal" >
+				<panelchildren>
+					<div style="margin-top:5px">
+					<label value="Filtro"></label>
+					<textbox></textbox>
+					<button label="Buscar"></button>
+					</div>
+					<listbox id="lsbxCompetencias" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.competencias}" height="240px">
+						<listhead>
+							<listheader label="Nombre" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Fecha de Inicio" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Fecha de Finalización" align="center"
+								width="25%">
+							</listheader>
+						</listhead>
+						
+						<listitem self="@{each=competencia}">
+							<listcell label="@{competencia.nombre}"></listcell>
+							<listcell label="@{competencia.fechaInicio}"></listcell>
+							<listcell label="@{competencia.fechaFin}"></listcell>
+						</listitem>
+									
+						
+					</listbox>
+					<div align="right">
+						<button id="btnAceptar"
+							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
+						</button>
+						<button id="btnSalir"
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							onClick="">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+
+
+			<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoCompetencia.onClose();
+	}
+]]></zscript>
+
+
+		</window>
+	</div>
+</zk>

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +26,9 @@ public class EmpleadoMantenimiento implements java.io.Serializable {
 	private Mantenimiento mantenimiento;
 	private Empleado empleado;
 	private char estatus;
-	private Set<TareaMantenimiento> tareaMantenimientos = new HashSet<TareaMantenimiento>(
+	private Set<TareaMantenimiento> tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk = new HashSet<TareaMantenimiento>(
+			0);
+	private Set<TareaMantenimiento> tareaMantenimientosForFk2be9c788a2d2a5db = new HashSet<TareaMantenimiento>(
 			0);
 
 	public EmpleadoMantenimiento() {
@@ -40,20 +42,25 @@ public class EmpleadoMantenimiento implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public EmpleadoMantenimiento(EmpleadoMantenimientoId id,
-			Mantenimiento mantenimiento, Empleado empleado, char estatus,
-			Set<TareaMantenimiento> tareaMantenimientos) {
+	public EmpleadoMantenimiento(
+			EmpleadoMantenimientoId id,
+			Mantenimiento mantenimiento,
+			Empleado empleado,
+			char estatus,
+			Set<TareaMantenimiento> tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk,
+			Set<TareaMantenimiento> tareaMantenimientosForFk2be9c788a2d2a5db) {
 		this.id = id;
 		this.mantenimiento = mantenimiento;
 		this.empleado = empleado;
 		this.estatus = estatus;
-		this.tareaMantenimientos = tareaMantenimientos;
+		this.tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk = tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk;
+		this.tareaMantenimientosForFk2be9c788a2d2a5db = tareaMantenimientosForFk2be9c788a2d2a5db;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)),
-			@AttributeOverride(name = "codigoMantenimiento", column = @Column(name = "codigo_mantenimiento", nullable = false)) })
+			@AttributeOverride(name = "codigoMantenimiento", column = @Column(name = "codigo_mantenimiento", nullable = false)),
+			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)) })
 	public EmpleadoMantenimientoId getId() {
 		return this.id;
 	}
@@ -91,14 +98,24 @@ public class EmpleadoMantenimiento implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleadoMantenimiento")
-	public Set<TareaMantenimiento> getTareaMantenimientos() {
-		return this.tareaMantenimientos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleadoMantenimientoByFk2be9c788a2d2a5db")
+	public Set<TareaMantenimiento> getTareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk() {
+		return this.tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk;
 	}
 
-	public void setTareaMantenimientos(
-			Set<TareaMantenimiento> tareaMantenimientos) {
-		this.tareaMantenimientos = tareaMantenimientos;
+	public void setTareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk(
+			Set<TareaMantenimiento> tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk) {
+		this.tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk = tareaMantenimientosForEmpleadoMantenimientoTareaMantenimientoFk;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleadoMantenimientoByFk2be9c788a2d2a5db")
+	public Set<TareaMantenimiento> getTareaMantenimientosForFk2be9c788a2d2a5db() {
+		return this.tareaMantenimientosForFk2be9c788a2d2a5db;
+	}
+
+	public void setTareaMantenimientosForFk2be9c788a2d2a5db(
+			Set<TareaMantenimiento> tareaMantenimientosForFk2be9c788a2d2a5db) {
+		this.tareaMantenimientosForFk2be9c788a2d2a5db = tareaMantenimientosForFk2be9c788a2d2a5db;
 	}
 
 }

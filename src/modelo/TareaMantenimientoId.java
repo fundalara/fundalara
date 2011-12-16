@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,23 +11,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TareaMantenimientoId implements java.io.Serializable {
 
-	private String codigoMantenimiento;
 	private String codigoTarea;
+	private String codigoMantenimiento;
 
 	public TareaMantenimientoId() {
 	}
 
-	public TareaMantenimientoId(String codigoMantenimiento, String codigoTarea) {
-		this.codigoMantenimiento = codigoMantenimiento;
+	public TareaMantenimientoId(String codigoTarea, String codigoMantenimiento) {
 		this.codigoTarea = codigoTarea;
-	}
-
-	@Column(name = "codigo_mantenimiento", nullable = false)
-	public String getCodigoMantenimiento() {
-		return this.codigoMantenimiento;
-	}
-
-	public void setCodigoMantenimiento(String codigoMantenimiento) {
 		this.codigoMantenimiento = codigoMantenimiento;
 	}
 
@@ -40,6 +31,15 @@ public class TareaMantenimientoId implements java.io.Serializable {
 		this.codigoTarea = codigoTarea;
 	}
 
+	@Column(name = "codigo_mantenimiento", nullable = false)
+	public String getCodigoMantenimiento() {
+		return this.codigoMantenimiento;
+	}
+
+	public void setCodigoMantenimiento(String codigoMantenimiento) {
+		this.codigoMantenimiento = codigoMantenimiento;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -49,15 +49,15 @@ public class TareaMantenimientoId implements java.io.Serializable {
 			return false;
 		TareaMantenimientoId castOther = (TareaMantenimientoId) other;
 
-		return ((this.getCodigoMantenimiento() == castOther
-				.getCodigoMantenimiento()) || (this.getCodigoMantenimiento() != null
-				&& castOther.getCodigoMantenimiento() != null && this
-				.getCodigoMantenimiento().equals(
-						castOther.getCodigoMantenimiento())))
-				&& ((this.getCodigoTarea() == castOther.getCodigoTarea()) || (this
-						.getCodigoTarea() != null
-						&& castOther.getCodigoTarea() != null && this
-						.getCodigoTarea().equals(castOther.getCodigoTarea())));
+		return ((this.getCodigoTarea() == castOther.getCodigoTarea()) || (this
+				.getCodigoTarea() != null && castOther.getCodigoTarea() != null && this
+				.getCodigoTarea().equals(castOther.getCodigoTarea())))
+				&& ((this.getCodigoMantenimiento() == castOther
+						.getCodigoMantenimiento()) || (this
+						.getCodigoMantenimiento() != null
+						&& castOther.getCodigoMantenimiento() != null && this
+						.getCodigoMantenimiento().equals(
+								castOther.getCodigoMantenimiento())));
 	}
 
 	public int hashCode() {
@@ -65,12 +65,12 @@ public class TareaMantenimientoId implements java.io.Serializable {
 
 		result = 37
 				* result
-				+ (getCodigoMantenimiento() == null ? 0 : this
-						.getCodigoMantenimiento().hashCode());
-		result = 37
-				* result
 				+ (getCodigoTarea() == null ? 0 : this.getCodigoTarea()
 						.hashCode());
+		result = 37
+				* result
+				+ (getCodigoMantenimiento() == null ? 0 : this
+						.getCodigoMantenimiento().hashCode());
 		return result;
 	}
 

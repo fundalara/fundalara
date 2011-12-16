@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,18 +19,18 @@ public class ValorEscalaMedicion implements java.io.Serializable {
 
 	private String codValor;
 	private EscalaMedicion escalaMedicion;
-	private String descripcion;
 	private String valor;
+	private String descripcion;
 
 	public ValorEscalaMedicion() {
 	}
 
 	public ValorEscalaMedicion(String codValor, EscalaMedicion escalaMedicion,
-			String descripcion, String valor) {
+			String valor, String descripcion) {
 		this.codValor = codValor;
 		this.escalaMedicion = escalaMedicion;
-		this.descripcion = descripcion;
 		this.valor = valor;
+		this.descripcion = descripcion;
 	}
 
 	@Id
@@ -53,15 +53,6 @@ public class ValorEscalaMedicion implements java.io.Serializable {
 		this.escalaMedicion = escalaMedicion;
 	}
 
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	@Column(name = "valor", nullable = false)
 	public String getValor() {
 		return this.valor;
@@ -69,6 +60,15 @@ public class ValorEscalaMedicion implements java.io.Serializable {
 
 	public void setValor(String valor) {
 		this.valor = valor;
+	}
+
+	@Column(name = "descripcion", nullable = false)
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 }

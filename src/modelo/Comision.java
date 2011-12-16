@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,28 +20,32 @@ public class Comision implements java.io.Serializable {
 
 	private String codigoComision;
 	private String descripcion;
-	private String estatus;
 	private String objetivo;
+	private String estatus;
 	private Set<ComisionEquipo> comisionEquipos = new HashSet<ComisionEquipo>(0);
+	private Set<ComisionEquipo> comisionEquipos_1 = new HashSet<ComisionEquipo>(
+			0);
 
 	public Comision() {
 	}
 
-	public Comision(String codigoComision, String descripcion, String estatus,
-			String objetivo) {
+	public Comision(String codigoComision, String descripcion, String objetivo,
+			String estatus) {
 		this.codigoComision = codigoComision;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.objetivo = objetivo;
+		this.estatus = estatus;
 	}
 
-	public Comision(String codigoComision, String descripcion, String estatus,
-			String objetivo, Set<ComisionEquipo> comisionEquipos) {
+	public Comision(String codigoComision, String descripcion, String objetivo,
+			String estatus, Set<ComisionEquipo> comisionEquipos,
+			Set<ComisionEquipo> comisionEquipos_1) {
 		this.codigoComision = codigoComision;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.objetivo = objetivo;
+		this.estatus = estatus;
 		this.comisionEquipos = comisionEquipos;
+		this.comisionEquipos_1 = comisionEquipos_1;
 	}
 
 	@Id
@@ -63,15 +67,6 @@ public class Comision implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "estatus", nullable = false)
-	public String getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(String estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "objetivo", nullable = false)
 	public String getObjetivo() {
 		return this.objetivo;
@@ -81,6 +76,15 @@ public class Comision implements java.io.Serializable {
 		this.objetivo = objetivo;
 	}
 
+	@Column(name = "estatus", nullable = false)
+	public String getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comision")
 	public Set<ComisionEquipo> getComisionEquipos() {
 		return this.comisionEquipos;
@@ -88,6 +92,15 @@ public class Comision implements java.io.Serializable {
 
 	public void setComisionEquipos(Set<ComisionEquipo> comisionEquipos) {
 		this.comisionEquipos = comisionEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comision")
+	public Set<ComisionEquipo> getComisionEquipos_1() {
+		return this.comisionEquipos_1;
+	}
+
+	public void setComisionEquipos_1(Set<ComisionEquipo> comisionEquipos_1) {
+		this.comisionEquipos_1 = comisionEquipos_1;
 	}
 
 }

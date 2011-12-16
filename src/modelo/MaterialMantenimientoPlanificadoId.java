@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class MaterialMantenimientoPlanificadoId implements java.io.Serializable {
 
-	private String codigoMaterial;
 	private String codigoPlanificacionMantenimiento;
+	private String codigoMaterial;
 
 	public MaterialMantenimientoPlanificadoId() {
 	}
 
-	public MaterialMantenimientoPlanificadoId(String codigoMaterial,
-			String codigoPlanificacionMantenimiento) {
-		this.codigoMaterial = codigoMaterial;
+	public MaterialMantenimientoPlanificadoId(
+			String codigoPlanificacionMantenimiento, String codigoMaterial) {
 		this.codigoPlanificacionMantenimiento = codigoPlanificacionMantenimiento;
-	}
-
-	@Column(name = "codigo_material", nullable = false)
-	public String getCodigoMaterial() {
-		return this.codigoMaterial;
-	}
-
-	public void setCodigoMaterial(String codigoMaterial) {
 		this.codigoMaterial = codigoMaterial;
 	}
 
@@ -42,6 +33,15 @@ public class MaterialMantenimientoPlanificadoId implements java.io.Serializable 
 		this.codigoPlanificacionMantenimiento = codigoPlanificacionMantenimiento;
 	}
 
+	@Column(name = "codigo_material", nullable = false)
+	public String getCodigoMaterial() {
+		return this.codigoMaterial;
+	}
+
+	public void setCodigoMaterial(String codigoMaterial) {
+		this.codigoMaterial = codigoMaterial;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -51,16 +51,17 @@ public class MaterialMantenimientoPlanificadoId implements java.io.Serializable 
 			return false;
 		MaterialMantenimientoPlanificadoId castOther = (MaterialMantenimientoPlanificadoId) other;
 
-		return ((this.getCodigoMaterial() == castOther.getCodigoMaterial()) || (this
-				.getCodigoMaterial() != null
-				&& castOther.getCodigoMaterial() != null && this
-				.getCodigoMaterial().equals(castOther.getCodigoMaterial())))
-				&& ((this.getCodigoPlanificacionMantenimiento() == castOther
-						.getCodigoPlanificacionMantenimiento()) || (this
-						.getCodigoPlanificacionMantenimiento() != null
-						&& castOther.getCodigoPlanificacionMantenimiento() != null && this
-						.getCodigoPlanificacionMantenimiento()
-						.equals(castOther.getCodigoPlanificacionMantenimiento())));
+		return ((this.getCodigoPlanificacionMantenimiento() == castOther
+				.getCodigoPlanificacionMantenimiento()) || (this
+				.getCodigoPlanificacionMantenimiento() != null
+				&& castOther.getCodigoPlanificacionMantenimiento() != null && this
+				.getCodigoPlanificacionMantenimiento().equals(
+						castOther.getCodigoPlanificacionMantenimiento())))
+				&& ((this.getCodigoMaterial() == castOther.getCodigoMaterial()) || (this
+						.getCodigoMaterial() != null
+						&& castOther.getCodigoMaterial() != null && this
+						.getCodigoMaterial().equals(
+								castOther.getCodigoMaterial())));
 	}
 
 	public int hashCode() {
@@ -68,12 +69,12 @@ public class MaterialMantenimientoPlanificadoId implements java.io.Serializable 
 
 		result = 37
 				* result
-				+ (getCodigoMaterial() == null ? 0 : this.getCodigoMaterial()
-						.hashCode());
-		result = 37
-				* result
 				+ (getCodigoPlanificacionMantenimiento() == null ? 0 : this
 						.getCodigoPlanificacionMantenimiento().hashCode());
+		result = 37
+				* result
+				+ (getCodigoMaterial() == null ? 0 : this.getCodigoMaterial()
+						.hashCode());
 		return result;
 	}
 

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -25,23 +25,23 @@ public class MaterialMantenimiento implements java.io.Serializable {
 	private MaterialMantenimientoId id;
 	private Material material;
 	private Mantenimiento mantenimiento;
-	private int cantidadDevuelta;
-	private int cantidadEntregada;
 	private char estatus;
+	private int cantidadEntregada;
+	private int cantidadDevuelta;
 	private Date fechaDevolucion;
 
 	public MaterialMantenimiento() {
 	}
 
 	public MaterialMantenimiento(MaterialMantenimientoId id, Material material,
-			Mantenimiento mantenimiento, int cantidadDevuelta,
-			int cantidadEntregada, char estatus, Date fechaDevolucion) {
+			Mantenimiento mantenimiento, char estatus, int cantidadEntregada,
+			int cantidadDevuelta, Date fechaDevolucion) {
 		this.id = id;
 		this.material = material;
 		this.mantenimiento = mantenimiento;
-		this.cantidadDevuelta = cantidadDevuelta;
-		this.cantidadEntregada = cantidadEntregada;
 		this.estatus = estatus;
+		this.cantidadEntregada = cantidadEntregada;
+		this.cantidadDevuelta = cantidadDevuelta;
 		this.fechaDevolucion = fechaDevolucion;
 	}
 
@@ -77,13 +77,13 @@ public class MaterialMantenimiento implements java.io.Serializable {
 		this.mantenimiento = mantenimiento;
 	}
 
-	@Column(name = "cantidad_devuelta", nullable = false)
-	public int getCantidadDevuelta() {
-		return this.cantidadDevuelta;
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
 	}
 
-	public void setCantidadDevuelta(int cantidadDevuelta) {
-		this.cantidadDevuelta = cantidadDevuelta;
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@Column(name = "cantidad_entregada", nullable = false)
@@ -95,13 +95,13 @@ public class MaterialMantenimiento implements java.io.Serializable {
 		this.cantidadEntregada = cantidadEntregada;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
+	@Column(name = "cantidad_devuelta", nullable = false)
+	public int getCantidadDevuelta() {
+		return this.cantidadDevuelta;
 	}
 
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
+	public void setCantidadDevuelta(int cantidadDevuelta) {
+		this.cantidadDevuelta = cantidadDevuelta;
 	}
 
 	@Temporal(TemporalType.DATE)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,38 +23,43 @@ public class Institucion implements java.io.Serializable {
 	private String codigoInstitucion;
 	private TipoInstitucion tipoInstitucion;
 	private Parroquia parroquia;
+	private String nombre;
 	private String direccion;
 	private char estatus;
-	private String nombre;
-	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
 	private Set<DatoAcademico> datoAcademicos = new HashSet<DatoAcademico>(0);
+	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
+	private Set<DatoSocial> datoSocials_1 = new HashSet<DatoSocial>(0);
+	private Set<DatoAcademico> datoAcademicos_1 = new HashSet<DatoAcademico>(0);
 
 	public Institucion() {
 	}
 
 	public Institucion(String codigoInstitucion,
 			TipoInstitucion tipoInstitucion, Parroquia parroquia,
-			String direccion, char estatus, String nombre) {
+			String nombre, String direccion, char estatus) {
 		this.codigoInstitucion = codigoInstitucion;
 		this.tipoInstitucion = tipoInstitucion;
 		this.parroquia = parroquia;
+		this.nombre = nombre;
 		this.direccion = direccion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 	}
 
 	public Institucion(String codigoInstitucion,
 			TipoInstitucion tipoInstitucion, Parroquia parroquia,
-			String direccion, char estatus, String nombre,
-			Set<DatoSocial> datoSocials, Set<DatoAcademico> datoAcademicos) {
+			String nombre, String direccion, char estatus,
+			Set<DatoAcademico> datoAcademicos, Set<DatoSocial> datoSocials,
+			Set<DatoSocial> datoSocials_1, Set<DatoAcademico> datoAcademicos_1) {
 		this.codigoInstitucion = codigoInstitucion;
 		this.tipoInstitucion = tipoInstitucion;
 		this.parroquia = parroquia;
+		this.nombre = nombre;
 		this.direccion = direccion;
 		this.estatus = estatus;
-		this.nombre = nombre;
-		this.datoSocials = datoSocials;
 		this.datoAcademicos = datoAcademicos;
+		this.datoSocials = datoSocials;
+		this.datoSocials_1 = datoSocials_1;
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 	@Id
@@ -87,6 +92,15 @@ public class Institucion implements java.io.Serializable {
 		this.parroquia = parroquia;
 	}
 
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	@Column(name = "direccion", nullable = false)
 	public String getDireccion() {
 		return this.direccion;
@@ -105,13 +119,13 @@ public class Institucion implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion")
+	public Set<DatoAcademico> getDatoAcademicos() {
+		return this.datoAcademicos;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDatoAcademicos(Set<DatoAcademico> datoAcademicos) {
+		this.datoAcademicos = datoAcademicos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion")
@@ -124,12 +138,21 @@ public class Institucion implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion")
-	public Set<DatoAcademico> getDatoAcademicos() {
-		return this.datoAcademicos;
+	public Set<DatoSocial> getDatoSocials_1() {
+		return this.datoSocials_1;
 	}
 
-	public void setDatoAcademicos(Set<DatoAcademico> datoAcademicos) {
-		this.datoAcademicos = datoAcademicos;
+	public void setDatoSocials_1(Set<DatoSocial> datoSocials_1) {
+		this.datoSocials_1 = datoSocials_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "institucion")
+	public Set<DatoAcademico> getDatoAcademicos_1() {
+		return this.datoAcademicos_1;
+	}
+
+	public void setDatoAcademicos_1(Set<DatoAcademico> datoAcademicos_1) {
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 }

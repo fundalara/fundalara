@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,35 +23,39 @@ public class DatoMedico implements java.io.Serializable {
 	private String codigoRegistro;
 	private Medico medico;
 	private Jugador jugador;
-	private char estatus;
 	private String factorSanguineo;
 	private String observacion;
+	private char estatus;
 	private Set<AfeccionJugador> afeccionJugadors = new HashSet<AfeccionJugador>(
+			0);
+	private Set<AfeccionJugador> afeccionJugadors_1 = new HashSet<AfeccionJugador>(
 			0);
 
 	public DatoMedico() {
 	}
 
 	public DatoMedico(String codigoRegistro, Medico medico, Jugador jugador,
-			char estatus, String factorSanguineo, String observacion) {
+			String factorSanguineo, String observacion, char estatus) {
 		this.codigoRegistro = codigoRegistro;
 		this.medico = medico;
 		this.jugador = jugador;
-		this.estatus = estatus;
 		this.factorSanguineo = factorSanguineo;
 		this.observacion = observacion;
+		this.estatus = estatus;
 	}
 
 	public DatoMedico(String codigoRegistro, Medico medico, Jugador jugador,
-			char estatus, String factorSanguineo, String observacion,
-			Set<AfeccionJugador> afeccionJugadors) {
+			String factorSanguineo, String observacion, char estatus,
+			Set<AfeccionJugador> afeccionJugadors,
+			Set<AfeccionJugador> afeccionJugadors_1) {
 		this.codigoRegistro = codigoRegistro;
 		this.medico = medico;
 		this.jugador = jugador;
-		this.estatus = estatus;
 		this.factorSanguineo = factorSanguineo;
 		this.observacion = observacion;
+		this.estatus = estatus;
 		this.afeccionJugadors = afeccionJugadors;
+		this.afeccionJugadors_1 = afeccionJugadors_1;
 	}
 
 	@Id
@@ -84,15 +88,6 @@ public class DatoMedico implements java.io.Serializable {
 		this.jugador = jugador;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "factor_sanguineo", nullable = false)
 	public String getFactorSanguineo() {
 		return this.factorSanguineo;
@@ -111,6 +106,15 @@ public class DatoMedico implements java.io.Serializable {
 		this.observacion = observacion;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoMedico")
 	public Set<AfeccionJugador> getAfeccionJugadors() {
 		return this.afeccionJugadors;
@@ -118,6 +122,15 @@ public class DatoMedico implements java.io.Serializable {
 
 	public void setAfeccionJugadors(Set<AfeccionJugador> afeccionJugadors) {
 		this.afeccionJugadors = afeccionJugadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoMedico")
+	public Set<AfeccionJugador> getAfeccionJugadors_1() {
+		return this.afeccionJugadors_1;
+	}
+
+	public void setAfeccionJugadors_1(Set<AfeccionJugador> afeccionJugadors_1) {
+		this.afeccionJugadors_1 = afeccionJugadors_1;
 	}
 
 }

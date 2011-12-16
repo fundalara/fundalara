@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,47 +22,47 @@ public class Cliente implements java.io.Serializable {
 
 	private String rif;
 	private Parroquia parroquia;
-	private String correoElectronico;
-	private String cuentaFacebook;
-	private String cuentaTwitter;
-	private String direccion;
-	private char estatus;
-	private String fax;
-	private Date fechaIngreso;
-	private String nombre;
-	private String telefono1;
 	private String telefono2;
+	private String fax;
+	private String direccion;
+	private String cuentaFacebook;
+	private Date fechaIngreso;
+	private String correoElectronico;
+	private String telefono1;
+	private String cuentaTwitter;
+	private char estatus;
+	private String nombre;
 
 	public Cliente() {
 	}
 
 	public Cliente(String rif, Parroquia parroquia, String direccion,
-			char estatus, Date fechaIngreso, String nombre, String telefono1) {
+			Date fechaIngreso, String telefono1, char estatus, String nombre) {
 		this.rif = rif;
 		this.parroquia = parroquia;
 		this.direccion = direccion;
-		this.estatus = estatus;
 		this.fechaIngreso = fechaIngreso;
-		this.nombre = nombre;
 		this.telefono1 = telefono1;
+		this.estatus = estatus;
+		this.nombre = nombre;
 	}
 
-	public Cliente(String rif, Parroquia parroquia, String correoElectronico,
-			String cuentaFacebook, String cuentaTwitter, String direccion,
-			char estatus, String fax, Date fechaIngreso, String nombre,
-			String telefono1, String telefono2) {
+	public Cliente(String rif, Parroquia parroquia, String telefono2,
+			String fax, String direccion, String cuentaFacebook,
+			Date fechaIngreso, String correoElectronico, String telefono1,
+			String cuentaTwitter, char estatus, String nombre) {
 		this.rif = rif;
 		this.parroquia = parroquia;
-		this.correoElectronico = correoElectronico;
-		this.cuentaFacebook = cuentaFacebook;
-		this.cuentaTwitter = cuentaTwitter;
-		this.direccion = direccion;
-		this.estatus = estatus;
-		this.fax = fax;
-		this.fechaIngreso = fechaIngreso;
-		this.nombre = nombre;
-		this.telefono1 = telefono1;
 		this.telefono2 = telefono2;
+		this.fax = fax;
+		this.direccion = direccion;
+		this.cuentaFacebook = cuentaFacebook;
+		this.fechaIngreso = fechaIngreso;
+		this.correoElectronico = correoElectronico;
+		this.telefono1 = telefono1;
+		this.cuentaTwitter = cuentaTwitter;
+		this.estatus = estatus;
+		this.nombre = nombre;
 	}
 
 	@Id
@@ -85,31 +85,22 @@ public class Cliente implements java.io.Serializable {
 		this.parroquia = parroquia;
 	}
 
-	@Column(name = "correo_electronico")
-	public String getCorreoElectronico() {
-		return this.correoElectronico;
+	@Column(name = "telefono2")
+	public String getTelefono2() {
+		return this.telefono2;
 	}
 
-	public void setCorreoElectronico(String correoElectronico) {
-		this.correoElectronico = correoElectronico;
+	public void setTelefono2(String telefono2) {
+		this.telefono2 = telefono2;
 	}
 
-	@Column(name = "cuenta_facebook")
-	public String getCuentaFacebook() {
-		return this.cuentaFacebook;
+	@Column(name = "fax")
+	public String getFax() {
+		return this.fax;
 	}
 
-	public void setCuentaFacebook(String cuentaFacebook) {
-		this.cuentaFacebook = cuentaFacebook;
-	}
-
-	@Column(name = "cuenta_twitter")
-	public String getCuentaTwitter() {
-		return this.cuentaTwitter;
-	}
-
-	public void setCuentaTwitter(String cuentaTwitter) {
-		this.cuentaTwitter = cuentaTwitter;
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 
 	@Column(name = "direccion", nullable = false)
@@ -121,22 +112,13 @@ public class Cliente implements java.io.Serializable {
 		this.direccion = direccion;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
+	@Column(name = "cuenta_facebook")
+	public String getCuentaFacebook() {
+		return this.cuentaFacebook;
 	}
 
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
-	@Column(name = "fax")
-	public String getFax() {
-		return this.fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
+	public void setCuentaFacebook(String cuentaFacebook) {
+		this.cuentaFacebook = cuentaFacebook;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -149,13 +131,13 @@ public class Cliente implements java.io.Serializable {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
+	@Column(name = "correo_electronico")
+	public String getCorreoElectronico() {
+		return this.correoElectronico;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
 	}
 
 	@Column(name = "telefono1", nullable = false)
@@ -167,13 +149,31 @@ public class Cliente implements java.io.Serializable {
 		this.telefono1 = telefono1;
 	}
 
-	@Column(name = "telefono2")
-	public String getTelefono2() {
-		return this.telefono2;
+	@Column(name = "cuenta_twitter")
+	public String getCuentaTwitter() {
+		return this.cuentaTwitter;
 	}
 
-	public void setTelefono2(String telefono2) {
-		this.telefono2 = telefono2;
+	public void setCuentaTwitter(String cuentaTwitter) {
+		this.cuentaTwitter = cuentaTwitter;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }

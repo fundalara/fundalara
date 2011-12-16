@@ -15,10 +15,10 @@
 		           <column width="60px"></column>
 		         </columns>
 		         <rows>
-		            <row>
+		            <row style="border-style:none">
 		               <label value="Competencia" ></label>
 		               <hbox>
-		               <textbox cols="11"></textbox>      
+		               <textbox cols="20"></textbox>      
 		               <button image="../../Recursos/Imagenes/consultar.ico"></button>  
 		               </hbox>  
 		               <label value="Fecha Inicio"></label>
@@ -27,7 +27,7 @@
 		               <textbox cols="10"></textbox>
 		                
 		            </row>		              
-		            <row >
+		            <row style="border-style:none">
 		                <label value="Juego"></label>     
 		                <hbox>
 		                <textbox cols="20"></textbox> 
@@ -56,41 +56,41 @@
 				<column label="Requeridos" width="25%" />
 			</columns>
 			<rows>
-				<row>
+				<row style="border-style:none">
 					<checkbox />
 					<label value="Pelota"></label>
 					<label value="35"></label>
-					<spinner value="7"/>
+					<spinner value="7" cols="2"/>
 				</row>
-				<row>
+				<row style="border-style:none">
 					<checkbox />
 					<label value="Guante"></label>
 					<label value="15"></label>
-					<spinner value="4"/>
+					<spinner value="4" cols="2"/>
 				</row>
-				<row>
+				<row style="border-style:none">
 					<checkbox />
 					<label value="Bate"></label>
 					<label value="20"></label>
-					<spinner value="6"/>
+					<spinner value="6" cols="2"/>
 				</row>
-				<row>
+				<row style="border-style:none">
 					<checkbox />
 					<label value="Casco"></label>
 					<label value="50"></label>
-					<spinner value="4"/>
+					<spinner value="4" cols="2"/>
 				</row>
-				<row>
+				<row style="border-style:none">
 					<checkbox />
 					<label value="Termo"></label>
 					<label value="2"></label>
-					<spinner value="1" />
+					<spinner value="1" cols="2"/>
 				</row>
-				<row>
+				<row style="border-style:none">
 					<checkbox />
 					<label value="Peto"></label>
 					<label value="5"></label>
-					<spinner value="2"/>
+					<spinner value="2" cols="2"/>
 				</row>
 			</rows>
 		</grid>

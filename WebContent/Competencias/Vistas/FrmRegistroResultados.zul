@@ -1,104 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?page title="Registro de Resultados"?>
 <zk>
-         <zscript>
+	<zscript>
 			<![CDATA[
-			     void resultados(){
-			    	 Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul", null, null); 
-			     }
-			 ]]>
+	void resultados() {
+		Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",
+				null, null);
+	}
+]]>
          </zscript>
-		
-<div id="Dregresult" align="Center">
+
+	<div id="Dregresult" align="center">
 		<window title="REGISTRO DE RESULTADOS" border="normal"
-		 id="FrmRresultados" width="7
-		 0%" height="auto" closable="true">
-		
-		
-	<!--  		<panel border="normal">
+			id="FrmRresultados" closable="true" width="690px">
+
+
+			<panel border="normal">
 				<caption label="Datos de la Competencia" />
 				<panelchildren>
-					<grid>
+					<grid width="690px" style="border-style:none">
 						<columns>
-							<column width="40px" align="left" />
-							<column width="40px" />
-							<column width="60px" />
-							<column width="60px" />
+							<column width="30px" />
+							<column width="80px" />
 							<column width="50px" />
-							<column width="60px" />
+							<column width="50px" />
+							<column width="50px" />
+
+
 						</columns>
 						<rows>
-							<row>
-								<label value="Competencia" />
+							<row style="border-style:none">
+								<hbox>
+									<label value="Nombre"
+										style="margin-top:5px" />
 
-								<textbox cols="20" />
-								<button
-									image="../../Recursos/Imagenes/consultar.ico" />
+									<textbox cols="20" disabled="true"
+										style="margin-left:30px;margin-top:5px" />
+									<button
+										image="../../Recursos/Imagenes/consultar.ico"
+										style="margin-left:5px" />
+								</hbox>
+								<hbox>
+									<label value="Tipo"></label>
+									<textbox cols="15" disabled="true"
+										style="margin-left:37px">
+									</textbox>
+								</hbox>
+								<label value="Modalidad" style="margin-left:5px"></label>
+								<textbox cols="18" disabled="true"></textbox>
 
+							</row>
+							<row style="border-style:none">
 
-								<label value="Fecha Inicio" />
-								<textbox cols="10" />
-								<label value="Fecha Fin" />
-								<textbox cols="10" />
+								<hbox>
+									<label value="Fecha Inicio" />
+									<datebox cols="10" style="margin-left:3px"
+										disabled="true">
+									</datebox>
+								</hbox>
+								<hbox>
+									<label value="Fecha Fin" />
+									<datebox cols="10" disabled="true"
+										style="margin-left:3px">
+									</datebox>
+								</hbox>
+
 							</row>
 
 						</rows>
 					</grid>
 				</panelchildren>
-			</panel> -->
-			<panel> 
+			</panel>
+			<panel>
 				<caption label="Datos Basicos del Juego" />
+
 				<panelchildren>
+
 					<grid>
 						<columns>
-							<column label="" />
-							<column label="" width="200px" />
-							<column label="" />
-							<column label="" width="150px"/>
-							<column label="" />
-							<column label="" />
+							<column label="" width="60px" />
+							<column label="" width="60px" />
+							<column label="" width="60px" />
+							<column label="" width="60px" />
+							<column label="" width="60px" />
+							<column label="" width="60px" />
+
 						</columns>
 						<rows>
-							<row>
+							<row style="border-style:none">
 								<label value="Juego" />
-								<label value="Fuandalara A Vs Titanes" />
-								<!--  <hbox>
-									<textbox cols="20" />
-									<button
+
+								<hbox>
+									<textbox disabled="true" cols="25"
+										style="margin-top:5px" />
+									<button style="margin-left:5px"
 										image="../../Recursos/Imagenes/consultar.ico" />
 
-								</hbox> -->
+								</hbox>
 								<label value="Fecha" />
-								<label value="22-10-2011"/>
-								<!--  <textbox cols="11" />-->
+
+								<datebox disabled="true" cols="16"></datebox>
 								<label value="Hora" />
-								<label value="10:00 AM"></label>
-								<!--  <textbox cols="11" /> -->
+
+								<textbox disabled="true" cols="10"></textbox>
 							</row>
-							<row>
+							<row style="border-style:none">
 								<label value="Campo" />
-								<label value="Fundalara" />
-								<!--  <textbox cols="20" /> -->
+
+								<textbox disabled="true" cols="30" />
 								<label value="Innings" />
-								<label value="7" />
-								<!--  <spinner cols="9" /> -->
+
+								<spinner cols="3" value="0" />
 								<label value="Tiempo" />
-								<label value="2 Horas"></label>
-								<!--  <textbox cols="11" /> -->
+
+								<textbox cols="11" />
 							</row>
-							<row>
-								<label value="Umpire"></label>
-								<label value="Rafael Pernía"></label>
-								<!--  <hbox>
-									<textbox cols="20" />
-									<button
-										image="../../Recursos/Imagenes/consultar.ico" />
-								</hbox> -->
+							<row style="border-style:none">
+
+
 								<label value="Anotador"></label>
-								<label value="Eduardo Quintero"></label>
-								<!--  <textbox cols="11" />
+
+								<textbox cols="30" />
+
+
+
+
 								<label value="Anotador Oficial"></label>
-								<textbox cols="11" /> -->
+								<textbox cols="20" />
 							</row>
 						</rows>
 					</grid>
@@ -107,8 +135,78 @@
 				</panelchildren>
 			</panel>
 			<panel>
+				<caption label="Umpires"></caption>
+				<panelchildren style="margin-top:10px">
+					<div align="left">
+
+
+						<label value="Umpire"></label>
+						<combobox cols="20">
+							<comboitem>Gabrielena Ponce</comboitem>
+							<comboitem>Eduardo Quintero</comboitem>
+							<comboitem>Anibal Moreno</comboitem>
+							<comboitem>Lilianny Rodriguez</comboitem>
+						</combobox>
+						<label value="Posicion"></label>
+						<combobox cols="20">
+
+							<comboitem>home</comboitem>
+							<comboitem>1B</comboitem>
+							<comboitem>2B</comboitem>
+							<comboitem>3B</comboitem>
+						</combobox>
+
+
+
+					</div>
+					<hbox>
+						<listbox style="margin-top:10px">
+
+							<listhead>
+								<listheader label="Posicion"
+									align="center">
+								</listheader>
+								<listheader label="Nombre Umpires"
+									align="center">
+								</listheader>
+								
+							</listhead>
+                                                   
+							<listitem>
+									<listcell><label value="Home"></label></listcell>
+									<listcell><label value="Gabrielena Ponce"></label></listcell>
+					        </listitem>
+						    <listitem>
+									<listcell><label value="1B"></label></listcell>
+									<listcell><label value="Eduardo Quintero"></label></listcell>
+                            </listitem>
+								
+							<listitem>
+									<listcell><label value="2B"></label></listcell>
+									<listcell><label value="Anibal Moreno"></label></listcell>
+							</listitem>
+							<listitem>
+								   <listcell><label value="3B"></label></listcell>
+								   <listcell><label value="Lilianny Rodriguez"></label></listcell>
+						    </listitem>
+						</listbox>
+						<div>
+							<button style="margin-top:10px"
+								image="/Recursos/Imagenes/agregar.ico" label="">
+							</button>
+							<button style=""
+								image="/Recursos/Imagenes/quitar.ico" label="">
+							</button>
+						</div>
+					</hbox>
+				</panelchildren>
+
+
+
+			</panel>
+			<panel>
 				<caption label="Resultados" />
-				<panelchildren>
+				<panelchildren style="margin-top:15px">
 					<grid>
 						<columns>
 							<column align="center" label="Equipos" />
@@ -129,43 +227,45 @@
 						</columns>
 						<rows>
 							<row>
-								<label style="color:blue;text-decoration:underline" onClick="resultados()" value="Equipo A"></label>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-							    <spinner cols="1"> </spinner>
-							    <spinner cols="1"> </spinner>
-							    <spinner cols="1"> </spinner>
-								
-								
+								<label
+									style="color:blue;text-decoration:underline"
+									onClick="resultados()" value="Equipo A">
+								</label>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+
 							</row>
 							<row>
 								<label value="Equipo B"></label>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-								<spinner cols="1"> </spinner>
-							    <spinner cols="1"> </spinner>
-							    <spinner cols="1"> </spinner>
-							    <spinner cols="1"> </spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
+								<spinner cols="1" value="0"></spinner>
 							</row>
 
 						</rows>
 
 					</grid>
-					<grid>
-					<columns>
+					<grid style="margin-top:15px;border-style:none">
+						<columns>
 							<column label="" />
 							<column label="" />
 							<column label="" />
@@ -174,34 +274,54 @@
 							<column label="" />
 						</columns>
 						<rows>
-						 <row>
-						 <label value="Pitcher Ganador:" style="text-decoration:underline"></label>
-						 <label value="Frank Machado"></label>
-						 <label value="Pitcher Perdedor:" style="text-decoration:underline"></label>
-						 <label value="Domingo Calvicio"></label>
-						 </row>
-						 <row>
-						 <label value="Juego Salvado:" style="text-decoration:underline"></label>
-						 <label value="Anibal Moreno"></label>
-						 <label value="Mejor Jugador:" style="text-decoration:underline"></label>
-						 <label value="Alberto Perozo"></label>
-						 </row>
+							<row style="border-style:none">
+								<label value="Pitcher Ganador"
+									style="text-decoration:bold">
+								</label>
+								<textbox cols="30"></textbox>
+
+								<label value="Pitcher Perdedor"
+									style="text-decoration:bold">
+								</label>
+								<textbox cols="30"></textbox>
+
+							</row>
+							<row style="border-style:none">
+								<label value="Juego Salvado"
+									style="text-decoration:bold">
+								</label>
+								<textbox cols="30"></textbox>
+
+								<label value="Mejor Jugador"
+									style="text-decoration:bold">
+								</label>
+								<textbox cols="30"></textbox>
+
+							</row>
 						</rows>
-					
+
 					</grid>
-														
+
 				</panelchildren>
 			</panel>
 			<panel>
-			  <panelchildren>
-				  <div align="right">
-				    
-				    <button image="../../Recursos/Imagenes/guardar.ico" label="Guardar" ></button>
-					<button image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar" ></button>
-					<button image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"></button>
-					<button image="../../Recursos/Imagenes/salir.png" label="Salir" ></button>
-				  </div>
-			  </panelchildren>
+				<panelchildren>
+					<div align="right">
+
+						<button
+							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+						<button
+							image="../../Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
 			</panel>
 
 		</window>

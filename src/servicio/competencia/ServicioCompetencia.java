@@ -5,20 +5,11 @@ import java.util.List;
 import dao.competencia.DaoCompetencia;
 
 import modelo.Competencia;
+import modelo.Divisa;
 
 public class ServicioCompetencia implements IServicioCompetencia {
 
 	DaoCompetencia daoCompetencia;
-	
-	
-	public DaoCompetencia getDaoCompetencia() {
-		return daoCompetencia;
-	}
-
-	public void setDaoCompetencia(DaoCompetencia daoCompetencia) {
-		this.daoCompetencia = daoCompetencia;
-	}
-
 	@Override
 	public void eliminar(Competencia c) {
 		// TODO Auto-generated method stub
@@ -38,9 +29,27 @@ public class ServicioCompetencia implements IServicioCompetencia {
 	}
 
 	@Override
-	public List<Competencia> buscarPorCodigo(Competencia c) {
+	public Competencia buscarPorCodigo(Competencia c) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Competencia> listar() {
+		return daoCompetencia.listar(Competencia.class);
+	}
+
+	@Override
+	public List<Competencia> listarActivos() {
+		return daoCompetencia.listarActivos(Competencia.class);
+	}
+
+	public DaoCompetencia getDaoCompetencia() {
+		return daoCompetencia;
+	}
+
+	public void setDaoCompetencia(DaoCompetencia daoCompetencia) {
+		this.daoCompetencia = daoCompetencia;
 	}
 
 }

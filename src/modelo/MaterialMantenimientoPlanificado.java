@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,8 +22,8 @@ public class MaterialMantenimientoPlanificado implements java.io.Serializable {
 	private MaterialMantenimientoPlanificadoId id;
 	private Material material;
 	private PlanificacionMantenimiento planificacionMantenimiento;
-	private int cantidadRequerida;
 	private char estatus;
+	private int cantidadRequerida;
 
 	public MaterialMantenimientoPlanificado() {
 	}
@@ -31,18 +31,18 @@ public class MaterialMantenimientoPlanificado implements java.io.Serializable {
 	public MaterialMantenimientoPlanificado(
 			MaterialMantenimientoPlanificadoId id, Material material,
 			PlanificacionMantenimiento planificacionMantenimiento,
-			int cantidadRequerida, char estatus) {
+			char estatus, int cantidadRequerida) {
 		this.id = id;
 		this.material = material;
 		this.planificacionMantenimiento = planificacionMantenimiento;
-		this.cantidadRequerida = cantidadRequerida;
 		this.estatus = estatus;
+		this.cantidadRequerida = cantidadRequerida;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)),
-			@AttributeOverride(name = "codigoPlanificacionMantenimiento", column = @Column(name = "codigo_planificacion_mantenimiento", nullable = false)) })
+			@AttributeOverride(name = "codigoPlanificacionMantenimiento", column = @Column(name = "codigo_planificacion_mantenimiento", nullable = false)),
+			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)) })
 	public MaterialMantenimientoPlanificadoId getId() {
 		return this.id;
 	}
@@ -72,15 +72,6 @@ public class MaterialMantenimientoPlanificado implements java.io.Serializable {
 		this.planificacionMantenimiento = planificacionMantenimiento;
 	}
 
-	@Column(name = "cantidad_requerida", nullable = false)
-	public int getCantidadRequerida() {
-		return this.cantidadRequerida;
-	}
-
-	public void setCantidadRequerida(int cantidadRequerida) {
-		this.cantidadRequerida = cantidadRequerida;
-	}
-
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -88,6 +79,15 @@ public class MaterialMantenimientoPlanificado implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "cantidad_requerida", nullable = false)
+	public int getCantidadRequerida() {
+		return this.cantidadRequerida;
+	}
+
+	public void setCantidadRequerida(int cantidadRequerida) {
+		this.cantidadRequerida = cantidadRequerida;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,28 +23,32 @@ public class Cargo implements java.io.Serializable {
 
 	private String codigoCargo;
 	private String descripcion;
-	private char estatus;
 	private Date fechaActualizacion;
+	private char estatus;
 	private Set<EmpleadoCargo> empleadoCargos = new HashSet<EmpleadoCargo>(0);
+	private Set<EmpleadoCargo> empleadoCargos_1 = new HashSet<EmpleadoCargo>(0);
 
 	public Cargo() {
 	}
 
-	public Cargo(String codigoCargo, String descripcion, char estatus,
-			Date fechaActualizacion) {
+	public Cargo(String codigoCargo, String descripcion,
+			Date fechaActualizacion, char estatus) {
 		this.codigoCargo = codigoCargo;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.fechaActualizacion = fechaActualizacion;
+		this.estatus = estatus;
 	}
 
-	public Cargo(String codigoCargo, String descripcion, char estatus,
-			Date fechaActualizacion, Set<EmpleadoCargo> empleadoCargos) {
+	public Cargo(String codigoCargo, String descripcion,
+			Date fechaActualizacion, char estatus,
+			Set<EmpleadoCargo> empleadoCargos,
+			Set<EmpleadoCargo> empleadoCargos_1) {
 		this.codigoCargo = codigoCargo;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.fechaActualizacion = fechaActualizacion;
+		this.estatus = estatus;
 		this.empleadoCargos = empleadoCargos;
+		this.empleadoCargos_1 = empleadoCargos_1;
 	}
 
 	@Id
@@ -66,15 +70,6 @@ public class Cargo implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_actualizacion", nullable = false, length = 13)
 	public Date getFechaActualizacion() {
@@ -85,6 +80,15 @@ public class Cargo implements java.io.Serializable {
 		this.fechaActualizacion = fechaActualizacion;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo")
 	public Set<EmpleadoCargo> getEmpleadoCargos() {
 		return this.empleadoCargos;
@@ -92,6 +96,15 @@ public class Cargo implements java.io.Serializable {
 
 	public void setEmpleadoCargos(Set<EmpleadoCargo> empleadoCargos) {
 		this.empleadoCargos = empleadoCargos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo")
+	public Set<EmpleadoCargo> getEmpleadoCargos_1() {
+		return this.empleadoCargos_1;
+	}
+
+	public void setEmpleadoCargos_1(Set<EmpleadoCargo> empleadoCargos_1) {
+		this.empleadoCargos_1 = empleadoCargos_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,37 +25,40 @@ public class ComisionEquipo implements java.io.Serializable {
 	private ComisionEquipoId id;
 	private Comision comision;
 	private Equipo equipo;
+	private int maximoComision;
 	private int cantidadComision;
 	private char estatus;
-	private int maximoComision;
 	private Set<FamiliarComisionEquipo> familiarComisionEquipos = new HashSet<FamiliarComisionEquipo>(
+			0);
+	private Set<FamiliarComisionEquipo> familiarComisionEquipos_1 = new HashSet<FamiliarComisionEquipo>(
 			0);
 
 	public ComisionEquipo() {
 	}
 
 	public ComisionEquipo(ComisionEquipoId id, Comision comision,
-			Equipo equipo, int cantidadComision, char estatus,
-			int maximoComision) {
+			Equipo equipo, int maximoComision, int cantidadComision,
+			char estatus) {
 		this.id = id;
 		this.comision = comision;
 		this.equipo = equipo;
+		this.maximoComision = maximoComision;
 		this.cantidadComision = cantidadComision;
 		this.estatus = estatus;
-		this.maximoComision = maximoComision;
 	}
 
 	public ComisionEquipo(ComisionEquipoId id, Comision comision,
-			Equipo equipo, int cantidadComision, char estatus,
-			int maximoComision,
-			Set<FamiliarComisionEquipo> familiarComisionEquipos) {
+			Equipo equipo, int maximoComision, int cantidadComision,
+			char estatus, Set<FamiliarComisionEquipo> familiarComisionEquipos,
+			Set<FamiliarComisionEquipo> familiarComisionEquipos_1) {
 		this.id = id;
 		this.comision = comision;
 		this.equipo = equipo;
+		this.maximoComision = maximoComision;
 		this.cantidadComision = cantidadComision;
 		this.estatus = estatus;
-		this.maximoComision = maximoComision;
 		this.familiarComisionEquipos = familiarComisionEquipos;
+		this.familiarComisionEquipos_1 = familiarComisionEquipos_1;
 	}
 
 	@EmbeddedId
@@ -90,6 +93,15 @@ public class ComisionEquipo implements java.io.Serializable {
 		this.equipo = equipo;
 	}
 
+	@Column(name = "maximo_comision", nullable = false)
+	public int getMaximoComision() {
+		return this.maximoComision;
+	}
+
+	public void setMaximoComision(int maximoComision) {
+		this.maximoComision = maximoComision;
+	}
+
 	@Column(name = "cantidad_comision", nullable = false)
 	public int getCantidadComision() {
 		return this.cantidadComision;
@@ -108,15 +120,6 @@ public class ComisionEquipo implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "maximo_comision", nullable = false)
-	public int getMaximoComision() {
-		return this.maximoComision;
-	}
-
-	public void setMaximoComision(int maximoComision) {
-		this.maximoComision = maximoComision;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionEquipo")
 	public Set<FamiliarComisionEquipo> getFamiliarComisionEquipos() {
 		return this.familiarComisionEquipos;
@@ -125,6 +128,16 @@ public class ComisionEquipo implements java.io.Serializable {
 	public void setFamiliarComisionEquipos(
 			Set<FamiliarComisionEquipo> familiarComisionEquipos) {
 		this.familiarComisionEquipos = familiarComisionEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionEquipo")
+	public Set<FamiliarComisionEquipo> getFamiliarComisionEquipos_1() {
+		return this.familiarComisionEquipos_1;
+	}
+
+	public void setFamiliarComisionEquipos_1(
+			Set<FamiliarComisionEquipo> familiarComisionEquipos_1) {
+		this.familiarComisionEquipos_1 = familiarComisionEquipos_1;
 	}
 
 }

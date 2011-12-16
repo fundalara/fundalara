@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,15 +26,23 @@ public class Mantenimiento implements java.io.Serializable {
 	private String codigoMantenimiento;
 	private PlanificacionMantenimiento planificacionMantenimiento;
 	private char estatus;
-	private Date fechaCulminacion;
 	private Date fechaInicio;
+	private Date fechaCulminacion;
 	private Set<MaterialMantenimiento> materialMantenimientos = new HashSet<MaterialMantenimiento>(
 			0);
-	private Set<EmpleadoMantenimiento> empleadoMantenimientos = new HashSet<EmpleadoMantenimiento>(
+	private Set<MaterialMantenimiento> materialMantenimientos_1 = new HashSet<MaterialMantenimiento>(
 			0);
 	private Set<TareaMantenimiento> tareaMantenimientos = new HashSet<TareaMantenimiento>(
 			0);
+	private Set<EmpleadoMantenimiento> empleadoMantenimientos = new HashSet<EmpleadoMantenimiento>(
+			0);
+	private Set<EmpleadoMantenimiento> empleadoMantenimientos_1 = new HashSet<EmpleadoMantenimiento>(
+			0);
+	private Set<TareaMantenimiento> tareaMantenimientos_1 = new HashSet<TareaMantenimiento>(
+			0);
 	private Set<EstadoMantenimiento> estadoMantenimientos = new HashSet<EstadoMantenimiento>(
+			0);
+	private Set<EstadoMantenimiento> estadoMantenimientos_1 = new HashSet<EstadoMantenimiento>(
 			0);
 
 	public Mantenimiento() {
@@ -42,30 +50,38 @@ public class Mantenimiento implements java.io.Serializable {
 
 	public Mantenimiento(String codigoMantenimiento,
 			PlanificacionMantenimiento planificacionMantenimiento,
-			char estatus, Date fechaCulminacion, Date fechaInicio) {
+			char estatus, Date fechaInicio, Date fechaCulminacion) {
 		this.codigoMantenimiento = codigoMantenimiento;
 		this.planificacionMantenimiento = planificacionMantenimiento;
 		this.estatus = estatus;
-		this.fechaCulminacion = fechaCulminacion;
 		this.fechaInicio = fechaInicio;
+		this.fechaCulminacion = fechaCulminacion;
 	}
 
 	public Mantenimiento(String codigoMantenimiento,
 			PlanificacionMantenimiento planificacionMantenimiento,
-			char estatus, Date fechaCulminacion, Date fechaInicio,
+			char estatus, Date fechaInicio, Date fechaCulminacion,
 			Set<MaterialMantenimiento> materialMantenimientos,
-			Set<EmpleadoMantenimiento> empleadoMantenimientos,
+			Set<MaterialMantenimiento> materialMantenimientos_1,
 			Set<TareaMantenimiento> tareaMantenimientos,
-			Set<EstadoMantenimiento> estadoMantenimientos) {
+			Set<EmpleadoMantenimiento> empleadoMantenimientos,
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1,
+			Set<TareaMantenimiento> tareaMantenimientos_1,
+			Set<EstadoMantenimiento> estadoMantenimientos,
+			Set<EstadoMantenimiento> estadoMantenimientos_1) {
 		this.codigoMantenimiento = codigoMantenimiento;
 		this.planificacionMantenimiento = planificacionMantenimiento;
 		this.estatus = estatus;
-		this.fechaCulminacion = fechaCulminacion;
 		this.fechaInicio = fechaInicio;
+		this.fechaCulminacion = fechaCulminacion;
 		this.materialMantenimientos = materialMantenimientos;
-		this.empleadoMantenimientos = empleadoMantenimientos;
+		this.materialMantenimientos_1 = materialMantenimientos_1;
 		this.tareaMantenimientos = tareaMantenimientos;
+		this.empleadoMantenimientos = empleadoMantenimientos;
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+		this.tareaMantenimientos_1 = tareaMantenimientos_1;
 		this.estadoMantenimientos = estadoMantenimientos;
+		this.estadoMantenimientos_1 = estadoMantenimientos_1;
 	}
 
 	@Id
@@ -99,16 +115,6 @@ public class Mantenimiento implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_culminacion", nullable = false, length = 13)
-	public Date getFechaCulminacion() {
-		return this.fechaCulminacion;
-	}
-
-	public void setFechaCulminacion(Date fechaCulminacion) {
-		this.fechaCulminacion = fechaCulminacion;
-	}
-
-	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_inicio", nullable = false, length = 13)
 	public Date getFechaInicio() {
 		return this.fechaInicio;
@@ -116,6 +122,16 @@ public class Mantenimiento implements java.io.Serializable {
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_culminacion", nullable = false, length = 13)
+	public Date getFechaCulminacion() {
+		return this.fechaCulminacion;
+	}
+
+	public void setFechaCulminacion(Date fechaCulminacion) {
+		this.fechaCulminacion = fechaCulminacion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
@@ -129,13 +145,13 @@ public class Mantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
-	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos() {
-		return this.empleadoMantenimientos;
+	public Set<MaterialMantenimiento> getMaterialMantenimientos_1() {
+		return this.materialMantenimientos_1;
 	}
 
-	public void setEmpleadoMantenimientos(
-			Set<EmpleadoMantenimiento> empleadoMantenimientos) {
-		this.empleadoMantenimientos = empleadoMantenimientos;
+	public void setMaterialMantenimientos_1(
+			Set<MaterialMantenimiento> materialMantenimientos_1) {
+		this.materialMantenimientos_1 = materialMantenimientos_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
@@ -149,6 +165,36 @@ public class Mantenimiento implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos() {
+		return this.empleadoMantenimientos;
+	}
+
+	public void setEmpleadoMantenimientos(
+			Set<EmpleadoMantenimiento> empleadoMantenimientos) {
+		this.empleadoMantenimientos = empleadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos_1() {
+		return this.empleadoMantenimientos_1;
+	}
+
+	public void setEmpleadoMantenimientos_1(
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1) {
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<TareaMantenimiento> getTareaMantenimientos_1() {
+		return this.tareaMantenimientos_1;
+	}
+
+	public void setTareaMantenimientos_1(
+			Set<TareaMantenimiento> tareaMantenimientos_1) {
+		this.tareaMantenimientos_1 = tareaMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
 	public Set<EstadoMantenimiento> getEstadoMantenimientos() {
 		return this.estadoMantenimientos;
 	}
@@ -156,6 +202,16 @@ public class Mantenimiento implements java.io.Serializable {
 	public void setEstadoMantenimientos(
 			Set<EstadoMantenimiento> estadoMantenimientos) {
 		this.estadoMantenimientos = estadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mantenimiento")
+	public Set<EstadoMantenimiento> getEstadoMantenimientos_1() {
+		return this.estadoMantenimientos_1;
+	}
+
+	public void setEstadoMantenimientos_1(
+			Set<EstadoMantenimiento> estadoMantenimientos_1) {
+		this.estadoMantenimientos_1 = estadoMantenimientos_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,8 @@ public class Instalacion implements java.io.Serializable {
 	private char estatus;
 	private Set<PlanificacionMantenimiento> planificacionMantenimientos = new HashSet<PlanificacionMantenimiento>(
 			0);
+	private Set<PlanificacionMantenimiento> planificacionMantenimientos_1 = new HashSet<PlanificacionMantenimiento>(
+			0);
 
 	public Instalacion() {
 	}
@@ -40,12 +42,14 @@ public class Instalacion implements java.io.Serializable {
 
 	public Instalacion(String codigoInstalacion,
 			TipoInstalacion tipoInstalacion, String descripcion, char estatus,
-			Set<PlanificacionMantenimiento> planificacionMantenimientos) {
+			Set<PlanificacionMantenimiento> planificacionMantenimientos,
+			Set<PlanificacionMantenimiento> planificacionMantenimientos_1) {
 		this.codigoInstalacion = codigoInstalacion;
 		this.tipoInstalacion = tipoInstalacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.planificacionMantenimientos = planificacionMantenimientos;
+		this.planificacionMantenimientos_1 = planificacionMantenimientos_1;
 	}
 
 	@Id
@@ -94,6 +98,16 @@ public class Instalacion implements java.io.Serializable {
 	public void setPlanificacionMantenimientos(
 			Set<PlanificacionMantenimiento> planificacionMantenimientos) {
 		this.planificacionMantenimientos = planificacionMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
+	public Set<PlanificacionMantenimiento> getPlanificacionMantenimientos_1() {
+		return this.planificacionMantenimientos_1;
+	}
+
+	public void setPlanificacionMantenimientos_1(
+			Set<PlanificacionMantenimiento> planificacionMantenimientos_1) {
+		this.planificacionMantenimientos_1 = planificacionMantenimientos_1;
 	}
 
 }

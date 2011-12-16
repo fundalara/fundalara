@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -26,30 +26,30 @@ public class AfeccionJugador implements java.io.Serializable {
 	private DatoMedico datoMedico;
 	private TipoAfeccion tipoAfeccion;
 	private String detalleAfeccion;
+	private int duracion;
+	private Date fechaRevision;
+	private Date fechaReincorporacion;
 	private byte[] documento1;
 	private byte[] documento2;
-	private int duracion;
 	private char estatus;
-	private Date fechaReincorporacion;
-	private Date fechaRevision;
 
 	public AfeccionJugador() {
 	}
 
 	public AfeccionJugador(AfeccionJugadorId id, DatoMedico datoMedico,
-			TipoAfeccion tipoAfeccion, String detalleAfeccion,
-			byte[] documento1, byte[] documento2, int duracion, char estatus,
-			Date fechaReincorporacion, Date fechaRevision) {
+			TipoAfeccion tipoAfeccion, String detalleAfeccion, int duracion,
+			Date fechaRevision, Date fechaReincorporacion, byte[] documento1,
+			byte[] documento2, char estatus) {
 		this.id = id;
 		this.datoMedico = datoMedico;
 		this.tipoAfeccion = tipoAfeccion;
 		this.detalleAfeccion = detalleAfeccion;
+		this.duracion = duracion;
+		this.fechaRevision = fechaRevision;
+		this.fechaReincorporacion = fechaReincorporacion;
 		this.documento1 = documento1;
 		this.documento2 = documento2;
-		this.duracion = duracion;
 		this.estatus = estatus;
-		this.fechaReincorporacion = fechaReincorporacion;
-		this.fechaRevision = fechaRevision;
 	}
 
 	@EmbeddedId
@@ -93,6 +93,35 @@ public class AfeccionJugador implements java.io.Serializable {
 		this.detalleAfeccion = detalleAfeccion;
 	}
 
+	@Column(name = "duracion", nullable = false)
+	public int getDuracion() {
+		return this.duracion;
+	}
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_revision", nullable = false, length = 13)
+	public Date getFechaRevision() {
+		return this.fechaRevision;
+	}
+
+	public void setFechaRevision(Date fechaRevision) {
+		this.fechaRevision = fechaRevision;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_reincorporacion", nullable = false, length = 13)
+	public Date getFechaReincorporacion() {
+		return this.fechaReincorporacion;
+	}
+
+	public void setFechaReincorporacion(Date fechaReincorporacion) {
+		this.fechaReincorporacion = fechaReincorporacion;
+	}
+
 	@Column(name = "documento1", nullable = false)
 	public byte[] getDocumento1() {
 		return this.documento1;
@@ -111,15 +140,6 @@ public class AfeccionJugador implements java.io.Serializable {
 		this.documento2 = documento2;
 	}
 
-	@Column(name = "duracion", nullable = false)
-	public int getDuracion() {
-		return this.duracion;
-	}
-
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
-	}
-
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -127,26 +147,6 @@ public class AfeccionJugador implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_reincorporacion", nullable = false, length = 13)
-	public Date getFechaReincorporacion() {
-		return this.fechaReincorporacion;
-	}
-
-	public void setFechaReincorporacion(Date fechaReincorporacion) {
-		this.fechaReincorporacion = fechaReincorporacion;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_revision", nullable = false, length = 13)
-	public Date getFechaRevision() {
-		return this.fechaRevision;
-	}
-
-	public void setFechaRevision(Date fechaRevision) {
-		this.fechaRevision = fechaRevision;
 	}
 
 }

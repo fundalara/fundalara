@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,37 +23,41 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 	private String codActividadEntrenamiento;
 	private Categoria categoria;
 	private Fase fase;
+	private String nombre;
 	private String descripcion;
 	private char estatus;
-	private String nombre;
 	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
+			0);
+	private Set<IndicadorActividadEscala> indicadorActividadEscalas_1 = new HashSet<IndicadorActividadEscala>(
 			0);
 
 	public ActividadEntrenamiento() {
 	}
 
 	public ActividadEntrenamiento(String codActividadEntrenamiento,
-			Categoria categoria, Fase fase, String descripcion, char estatus,
-			String nombre) {
+			Categoria categoria, Fase fase, String nombre, String descripcion,
+			char estatus) {
 		this.codActividadEntrenamiento = codActividadEntrenamiento;
 		this.categoria = categoria;
 		this.fase = fase;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 	}
 
 	public ActividadEntrenamiento(String codActividadEntrenamiento,
-			Categoria categoria, Fase fase, String descripcion, char estatus,
-			String nombre,
-			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
+			Categoria categoria, Fase fase, String nombre, String descripcion,
+			char estatus,
+			Set<IndicadorActividadEscala> indicadorActividadEscalas,
+			Set<IndicadorActividadEscala> indicadorActividadEscalas_1) {
 		this.codActividadEntrenamiento = codActividadEntrenamiento;
 		this.categoria = categoria;
 		this.fase = fase;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
+		this.indicadorActividadEscalas_1 = indicadorActividadEscalas_1;
 	}
 
 	@Id
@@ -86,6 +90,15 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 		this.fase = fase;
 	}
 
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	@Column(name = "descripcion", nullable = false)
 	public String getDescripcion() {
 		return this.descripcion;
@@ -104,15 +117,6 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividadEntrenamiento")
 	public Set<IndicadorActividadEscala> getIndicadorActividadEscalas() {
 		return this.indicadorActividadEscalas;
@@ -121,6 +125,16 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 	public void setIndicadorActividadEscalas(
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividadEntrenamiento")
+	public Set<IndicadorActividadEscala> getIndicadorActividadEscalas_1() {
+		return this.indicadorActividadEscalas_1;
+	}
+
+	public void setIndicadorActividadEscalas_1(
+			Set<IndicadorActividadEscala> indicadorActividadEscalas_1) {
+		this.indicadorActividadEscalas_1 = indicadorActividadEscalas_1;
 	}
 
 }

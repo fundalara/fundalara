@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -28,42 +28,42 @@ public class DatoAcademico implements java.io.Serializable {
 	private Curso curso;
 	private AnnoEscolar annoEscolar;
 	private byte[] documento;
-	private char estatus;
 	private Date fechaIngreso;
+	private char estatus;
 
 	public DatoAcademico() {
 	}
 
 	public DatoAcademico(DatoAcademicoId id, Institucion institucion,
 			Jugador jugador, Curso curso, AnnoEscolar annoEscolar,
-			char estatus, Date fechaIngreso) {
+			Date fechaIngreso, char estatus) {
 		this.id = id;
 		this.institucion = institucion;
 		this.jugador = jugador;
 		this.curso = curso;
 		this.annoEscolar = annoEscolar;
-		this.estatus = estatus;
 		this.fechaIngreso = fechaIngreso;
+		this.estatus = estatus;
 	}
 
 	public DatoAcademico(DatoAcademicoId id, Institucion institucion,
 			Jugador jugador, Curso curso, AnnoEscolar annoEscolar,
-			byte[] documento, char estatus, Date fechaIngreso) {
+			byte[] documento, Date fechaIngreso, char estatus) {
 		this.id = id;
 		this.institucion = institucion;
 		this.jugador = jugador;
 		this.curso = curso;
 		this.annoEscolar = annoEscolar;
 		this.documento = documento;
-		this.estatus = estatus;
 		this.fechaIngreso = fechaIngreso;
+		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "cedulaJugador", column = @Column(name = "cedula_jugador", nullable = false)),
-			@AttributeOverride(name = "codigoAnnoEscolar", column = @Column(name = "codigo_anno_escolar", nullable = false)),
-			@AttributeOverride(name = "codigoInstitucion", column = @Column(name = "codigo_institucion", nullable = false)) })
+			@AttributeOverride(name = "codigoInstitucion", column = @Column(name = "codigo_institucion", nullable = false)),
+			@AttributeOverride(name = "codigoAnnoEscolar", column = @Column(name = "codigo_anno_escolar", nullable = false)) })
 	public DatoAcademicoId getId() {
 		return this.id;
 	}
@@ -121,15 +121,6 @@ public class DatoAcademico implements java.io.Serializable {
 		this.documento = documento;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_ingreso", nullable = false, length = 13)
 	public Date getFechaIngreso() {
@@ -138,6 +129,15 @@ public class DatoAcademico implements java.io.Serializable {
 
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

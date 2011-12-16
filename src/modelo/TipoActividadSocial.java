@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,26 +19,29 @@ import javax.persistence.Table;
 public class TipoActividadSocial implements java.io.Serializable {
 
 	private String codigoActividadSocial;
-	private char estatus;
 	private String nombre;
+	private char estatus;
 	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
+	private Set<DatoSocial> datoSocials_1 = new HashSet<DatoSocial>(0);
 
 	public TipoActividadSocial() {
 	}
 
-	public TipoActividadSocial(String codigoActividadSocial, char estatus,
-			String nombre) {
+	public TipoActividadSocial(String codigoActividadSocial, String nombre,
+			char estatus) {
 		this.codigoActividadSocial = codigoActividadSocial;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
-	public TipoActividadSocial(String codigoActividadSocial, char estatus,
-			String nombre, Set<DatoSocial> datoSocials) {
+	public TipoActividadSocial(String codigoActividadSocial, String nombre,
+			char estatus, Set<DatoSocial> datoSocials,
+			Set<DatoSocial> datoSocials_1) {
 		this.codigoActividadSocial = codigoActividadSocial;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.datoSocials = datoSocials;
+		this.datoSocials_1 = datoSocials_1;
 	}
 
 	@Id
@@ -51,15 +54,6 @@ public class TipoActividadSocial implements java.io.Serializable {
 		this.codigoActividadSocial = codigoActividadSocial;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -69,6 +63,15 @@ public class TipoActividadSocial implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoActividadSocial")
 	public Set<DatoSocial> getDatoSocials() {
 		return this.datoSocials;
@@ -76,6 +79,15 @@ public class TipoActividadSocial implements java.io.Serializable {
 
 	public void setDatoSocials(Set<DatoSocial> datoSocials) {
 		this.datoSocials = datoSocials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoActividadSocial")
+	public Set<DatoSocial> getDatoSocials_1() {
+		return this.datoSocials_1;
+	}
+
+	public void setDatoSocials_1(Set<DatoSocial> datoSocials_1) {
+		this.datoSocials_1 = datoSocials_1;
 	}
 
 }

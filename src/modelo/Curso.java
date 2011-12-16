@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,25 +19,28 @@ import javax.persistence.Table;
 public class Curso implements java.io.Serializable {
 
 	private String codigoCurso;
-	private char estatus;
 	private String nombre;
+	private char estatus;
 	private Set<DatoAcademico> datoAcademicos = new HashSet<DatoAcademico>(0);
+	private Set<DatoAcademico> datoAcademicos_1 = new HashSet<DatoAcademico>(0);
 
 	public Curso() {
 	}
 
-	public Curso(String codigoCurso, char estatus, String nombre) {
+	public Curso(String codigoCurso, String nombre, char estatus) {
 		this.codigoCurso = codigoCurso;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
-	public Curso(String codigoCurso, char estatus, String nombre,
-			Set<DatoAcademico> datoAcademicos) {
+	public Curso(String codigoCurso, String nombre, char estatus,
+			Set<DatoAcademico> datoAcademicos,
+			Set<DatoAcademico> datoAcademicos_1) {
 		this.codigoCurso = codigoCurso;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.datoAcademicos = datoAcademicos;
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 	@Id
@@ -50,15 +53,6 @@ public class Curso implements java.io.Serializable {
 		this.codigoCurso = codigoCurso;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -68,6 +62,15 @@ public class Curso implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
 	public Set<DatoAcademico> getDatoAcademicos() {
 		return this.datoAcademicos;
@@ -75,6 +78,15 @@ public class Curso implements java.io.Serializable {
 
 	public void setDatoAcademicos(Set<DatoAcademico> datoAcademicos) {
 		this.datoAcademicos = datoAcademicos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
+	public Set<DatoAcademico> getDatoAcademicos_1() {
+		return this.datoAcademicos_1;
+	}
+
+	public void setDatoAcademicos_1(Set<DatoAcademico> datoAcademicos_1) {
+		this.datoAcademicos_1 = datoAcademicos_1;
 	}
 
 }

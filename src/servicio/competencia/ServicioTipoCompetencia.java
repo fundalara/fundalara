@@ -2,9 +2,13 @@ package servicio.competencia;
 
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+
 import dao.competencia.DaoTipoCompetencia;
 
+import modelo.Divisa;
 import modelo.TipoCompetencia;
+import modelo.TipoModalidadCompetencia;
 
 public class ServicioTipoCompetencia implements IServicioTipoCompetencia {
     
@@ -38,9 +42,14 @@ public class ServicioTipoCompetencia implements IServicioTipoCompetencia {
 	}
 
 	@Override
-	public List<TipoCompetencia> buscarPorCodigo(TipoCompetencia tc) {
-		// TODO Auto-generated method stub
-		return null;
+	public TipoCompetencia buscarPorCodigo(String codigo) {
+		return (TipoCompetencia) daoTipoCompetencia.getSession().createCriteria(TipoCompetencia.class).add(Restrictions.eq("codigoTipoCompetencia",codigo)).list().get(0);
+		
+	}
+
+	@Override
+	public List<TipoCompetencia> listar() {
+		return daoTipoCompetencia.listar(TipoCompetencia.class);
 	}
 
 }

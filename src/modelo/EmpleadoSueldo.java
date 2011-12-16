@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,24 +21,24 @@ public class EmpleadoSueldo implements java.io.Serializable {
 
 	private EmpleadoSueldoId id;
 	private Empleado empleado;
-	private char estatus;
 	private double monto;
+	private char estatus;
 
 	public EmpleadoSueldo() {
 	}
 
-	public EmpleadoSueldo(EmpleadoSueldoId id, Empleado empleado, char estatus,
-			double monto) {
+	public EmpleadoSueldo(EmpleadoSueldoId id, Empleado empleado, double monto,
+			char estatus) {
 		this.id = id;
 		this.empleado = empleado;
-		this.estatus = estatus;
 		this.monto = monto;
+		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)),
-			@AttributeOverride(name = "fecha", column = @Column(name = "fecha", nullable = false, length = 29)) })
+			@AttributeOverride(name = "fecha", column = @Column(name = "fecha", nullable = false, length = 13)) })
 	public EmpleadoSueldoId getId() {
 		return this.id;
 	}
@@ -57,15 +57,6 @@ public class EmpleadoSueldo implements java.io.Serializable {
 		this.empleado = empleado;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "monto", nullable = false, precision = 17, scale = 17)
 	public double getMonto() {
 		return this.monto;
@@ -73,6 +64,15 @@ public class EmpleadoSueldo implements java.io.Serializable {
 
 	public void setMonto(double monto) {
 		this.monto = monto;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,44 +23,44 @@ public class Benefactor implements java.io.Serializable {
 	private String rif;
 	private Parroquia parroquia;
 	private String codMunicipio;
+	private String fax;
+	private String direccion;
+	private Date fechaIngreso;
+	private String telefono1;
+	private char estatus;
 	private String correoElectronico;
 	private String cuentaTwitter;
-	private String direccion;
-	private char estatus;
-	private String fax;
-	private Date fechaIngreso;
 	private String nombre;
-	private String telefono1;
 
 	public Benefactor() {
 	}
 
 	public Benefactor(String rif, Parroquia parroquia, String codMunicipio,
-			String direccion, char estatus, Date fechaIngreso, String nombre) {
+			String direccion, Date fechaIngreso, char estatus, String nombre) {
 		this.rif = rif;
 		this.parroquia = parroquia;
 		this.codMunicipio = codMunicipio;
 		this.direccion = direccion;
-		this.estatus = estatus;
 		this.fechaIngreso = fechaIngreso;
+		this.estatus = estatus;
 		this.nombre = nombre;
 	}
 
 	public Benefactor(String rif, Parroquia parroquia, String codMunicipio,
-			String correoElectronico, String cuentaTwitter, String direccion,
-			char estatus, String fax, Date fechaIngreso, String nombre,
-			String telefono1) {
+			String fax, String direccion, Date fechaIngreso, String telefono1,
+			char estatus, String correoElectronico, String cuentaTwitter,
+			String nombre) {
 		this.rif = rif;
 		this.parroquia = parroquia;
 		this.codMunicipio = codMunicipio;
+		this.fax = fax;
+		this.direccion = direccion;
+		this.fechaIngreso = fechaIngreso;
+		this.telefono1 = telefono1;
+		this.estatus = estatus;
 		this.correoElectronico = correoElectronico;
 		this.cuentaTwitter = cuentaTwitter;
-		this.direccion = direccion;
-		this.estatus = estatus;
-		this.fax = fax;
-		this.fechaIngreso = fechaIngreso;
 		this.nombre = nombre;
-		this.telefono1 = telefono1;
 	}
 
 	@Id
@@ -92,6 +92,52 @@ public class Benefactor implements java.io.Serializable {
 		this.codMunicipio = codMunicipio;
 	}
 
+	@Column(name = "fax")
+	public String getFax() {
+		return this.fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	@Column(name = "direccion", nullable = false)
+	public String getDireccion() {
+		return this.direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_ingreso", nullable = false, length = 13)
+	public Date getFechaIngreso() {
+		return this.fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	@Column(name = "telefono1")
+	public String getTelefono1() {
+		return this.telefono1;
+	}
+
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@Column(name = "correo_electronico")
 	public String getCorreoElectronico() {
 		return this.correoElectronico;
@@ -110,43 +156,6 @@ public class Benefactor implements java.io.Serializable {
 		this.cuentaTwitter = cuentaTwitter;
 	}
 
-	@Column(name = "direccion", nullable = false)
-	public String getDireccion() {
-		return this.direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
-	@Column(name = "fax")
-	public String getFax() {
-		return this.fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_ingreso", nullable = false, length = 13)
-	public Date getFechaIngreso() {
-		return this.fechaIngreso;
-	}
-
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -154,15 +163,6 @@ public class Benefactor implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	@Column(name = "telefono1")
-	public String getTelefono1() {
-		return this.telefono1;
-	}
-
-	public void setTelefono1(String telefono1) {
-		this.telefono1 = telefono1;
 	}
 
 }

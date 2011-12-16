@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,23 +11,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EmpleadoCargoId implements java.io.Serializable {
 
-	private String cedula;
 	private String codigoCargo;
+	private String cedula;
 
 	public EmpleadoCargoId() {
 	}
 
-	public EmpleadoCargoId(String cedula, String codigoCargo) {
-		this.cedula = cedula;
+	public EmpleadoCargoId(String codigoCargo, String cedula) {
 		this.codigoCargo = codigoCargo;
-	}
-
-	@Column(name = "cedula", nullable = false)
-	public String getCedula() {
-		return this.cedula;
-	}
-
-	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
 
@@ -40,6 +31,15 @@ public class EmpleadoCargoId implements java.io.Serializable {
 		this.codigoCargo = codigoCargo;
 	}
 
+	@Column(name = "cedula", nullable = false)
+	public String getCedula() {
+		return this.cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -49,24 +49,23 @@ public class EmpleadoCargoId implements java.io.Serializable {
 			return false;
 		EmpleadoCargoId castOther = (EmpleadoCargoId) other;
 
-		return ((this.getCedula() == castOther.getCedula()) || (this
-				.getCedula() != null && castOther.getCedula() != null && this
-				.getCedula().equals(castOther.getCedula())))
-				&& ((this.getCodigoCargo() == castOther.getCodigoCargo()) || (this
-						.getCodigoCargo() != null
-						&& castOther.getCodigoCargo() != null && this
-						.getCodigoCargo().equals(castOther.getCodigoCargo())));
+		return ((this.getCodigoCargo() == castOther.getCodigoCargo()) || (this
+				.getCodigoCargo() != null && castOther.getCodigoCargo() != null && this
+				.getCodigoCargo().equals(castOther.getCodigoCargo())))
+				&& ((this.getCedula() == castOther.getCedula()) || (this
+						.getCedula() != null && castOther.getCedula() != null && this
+						.getCedula().equals(castOther.getCedula())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result
-				+ (getCedula() == null ? 0 : this.getCedula().hashCode());
 		result = 37
 				* result
 				+ (getCodigoCargo() == null ? 0 : this.getCodigoCargo()
 						.hashCode());
+		result = 37 * result
+				+ (getCedula() == null ? 0 : this.getCedula().hashCode());
 		return result;
 	}
 

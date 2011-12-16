@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,24 +25,26 @@ public class Empleado implements java.io.Serializable {
 
 	private String cedula;
 	private Parroquia parroquia;
-	private int cantidadHijos;
-	private String correoElectronico;
-	private String cuentaFacebook;
-	private String cuentaTwitter;
-	private String direccion;
-	private String estadoCivil;
-	private char estatus;
-	private Date fechaEgreso;
-	private byte[] foto;
 	private String primerApellido;
-	private String primerNombre;
+	private byte[] foto;
 	private String segundoApellido;
 	private String segundoNombre;
-	private String telefono1;
+	private String direccion;
+	private String cuentaFacebook;
+	private String primerNombre;
+	private String cuentaTwitter;
+	private String correoElectronico;
+	private int cantidadHijos;
 	private String telefono2;
+	private String estadoCivil;
+	private Date fechaEgreso;
 	private String tipoSangre;
+	private char estatus;
+	private String telefono1;
 	private Set<EmpleadoSueldo> empleadoSueldos = new HashSet<EmpleadoSueldo>(0);
 	private Set<EmpleadoTipoNomina> empleadoTipoNominas = new HashSet<EmpleadoTipoNomina>(
+			0);
+	private Set<EmpleadoMantenimiento> empleadoMantenimientos = new HashSet<EmpleadoMantenimiento>(
 			0);
 	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas = new HashSet<EmpleadoConceptoNomina>(
 			0);
@@ -50,84 +52,113 @@ public class Empleado implements java.io.Serializable {
 			0);
 	private Set<DatoAcademicoEmpleado> datoAcademicoEmpleados = new HashSet<DatoAcademicoEmpleado>(
 			0);
-	private Set<EmpleadoCargo> empleadoCargos = new HashSet<EmpleadoCargo>(0);
-	private Set<EmpleadoMantenimiento> empleadoMantenimientos = new HashSet<EmpleadoMantenimiento>(
+	private Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1 = new HashSet<EmpleadoMantenimientoPlanificado>(
 			0);
+	private Set<EmpleadoTipoNomina> empleadoTipoNominas_1 = new HashSet<EmpleadoTipoNomina>(
+			0);
+	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1 = new HashSet<EmpleadoConceptoNomina>(
+			0);
+	private Set<EmpleadoCargo> empleadoCargos = new HashSet<EmpleadoCargo>(0);
 	private Set<EmpleadoAlergia> empleadoAlergias = new HashSet<EmpleadoAlergia>(
+			0);
+	private Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1 = new HashSet<DatoAcademicoEmpleado>(
+			0);
+	private Set<EmpleadoCargo> empleadoCargos_1 = new HashSet<EmpleadoCargo>(0);
+	private Set<EmpleadoSueldo> empleadoSueldos_1 = new HashSet<EmpleadoSueldo>(
+			0);
+	private Set<EmpleadoMantenimiento> empleadoMantenimientos_1 = new HashSet<EmpleadoMantenimiento>(
+			0);
+	private Set<EmpleadoAlergia> empleadoAlergias_1 = new HashSet<EmpleadoAlergia>(
 			0);
 
 	public Empleado() {
 	}
 
-	public Empleado(String cedula, Parroquia parroquia, int cantidadHijos,
-			String direccion, String estadoCivil, char estatus,
-			Date fechaEgreso, String primerApellido, String primerNombre,
-			String tipoSangre) {
+	public Empleado(String cedula, Parroquia parroquia, String primerApellido,
+			String direccion, String primerNombre, int cantidadHijos,
+			String estadoCivil, Date fechaEgreso, String tipoSangre,
+			char estatus) {
 		this.cedula = cedula;
 		this.parroquia = parroquia;
-		this.cantidadHijos = cantidadHijos;
-		this.direccion = direccion;
-		this.estadoCivil = estadoCivil;
-		this.estatus = estatus;
-		this.fechaEgreso = fechaEgreso;
 		this.primerApellido = primerApellido;
+		this.direccion = direccion;
 		this.primerNombre = primerNombre;
+		this.cantidadHijos = cantidadHijos;
+		this.estadoCivil = estadoCivil;
+		this.fechaEgreso = fechaEgreso;
 		this.tipoSangre = tipoSangre;
+		this.estatus = estatus;
 	}
 
 	public Empleado(
 			String cedula,
 			Parroquia parroquia,
-			int cantidadHijos,
-			String correoElectronico,
-			String cuentaFacebook,
-			String cuentaTwitter,
-			String direccion,
-			String estadoCivil,
-			char estatus,
-			Date fechaEgreso,
-			byte[] foto,
 			String primerApellido,
-			String primerNombre,
+			byte[] foto,
 			String segundoApellido,
 			String segundoNombre,
-			String telefono1,
+			String direccion,
+			String cuentaFacebook,
+			String primerNombre,
+			String cuentaTwitter,
+			String correoElectronico,
+			int cantidadHijos,
 			String telefono2,
+			String estadoCivil,
+			Date fechaEgreso,
 			String tipoSangre,
+			char estatus,
+			String telefono1,
 			Set<EmpleadoSueldo> empleadoSueldos,
 			Set<EmpleadoTipoNomina> empleadoTipoNominas,
+			Set<EmpleadoMantenimiento> empleadoMantenimientos,
 			Set<EmpleadoConceptoNomina> empleadoConceptoNominas,
 			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados,
 			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados,
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1,
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1,
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1,
 			Set<EmpleadoCargo> empleadoCargos,
-			Set<EmpleadoMantenimiento> empleadoMantenimientos,
-			Set<EmpleadoAlergia> empleadoAlergias) {
+			Set<EmpleadoAlergia> empleadoAlergias,
+			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1,
+			Set<EmpleadoCargo> empleadoCargos_1,
+			Set<EmpleadoSueldo> empleadoSueldos_1,
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1,
+			Set<EmpleadoAlergia> empleadoAlergias_1) {
 		this.cedula = cedula;
 		this.parroquia = parroquia;
-		this.cantidadHijos = cantidadHijos;
-		this.correoElectronico = correoElectronico;
-		this.cuentaFacebook = cuentaFacebook;
-		this.cuentaTwitter = cuentaTwitter;
-		this.direccion = direccion;
-		this.estadoCivil = estadoCivil;
-		this.estatus = estatus;
-		this.fechaEgreso = fechaEgreso;
-		this.foto = foto;
 		this.primerApellido = primerApellido;
-		this.primerNombre = primerNombre;
+		this.foto = foto;
 		this.segundoApellido = segundoApellido;
 		this.segundoNombre = segundoNombre;
-		this.telefono1 = telefono1;
+		this.direccion = direccion;
+		this.cuentaFacebook = cuentaFacebook;
+		this.primerNombre = primerNombre;
+		this.cuentaTwitter = cuentaTwitter;
+		this.correoElectronico = correoElectronico;
+		this.cantidadHijos = cantidadHijos;
 		this.telefono2 = telefono2;
+		this.estadoCivil = estadoCivil;
+		this.fechaEgreso = fechaEgreso;
 		this.tipoSangre = tipoSangre;
+		this.estatus = estatus;
+		this.telefono1 = telefono1;
 		this.empleadoSueldos = empleadoSueldos;
 		this.empleadoTipoNominas = empleadoTipoNominas;
+		this.empleadoMantenimientos = empleadoMantenimientos;
 		this.empleadoConceptoNominas = empleadoConceptoNominas;
 		this.empleadoMantenimientoPlanificados = empleadoMantenimientoPlanificados;
 		this.datoAcademicoEmpleados = datoAcademicoEmpleados;
+		this.empleadoMantenimientoPlanificados_1 = empleadoMantenimientoPlanificados_1;
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 		this.empleadoCargos = empleadoCargos;
-		this.empleadoMantenimientos = empleadoMantenimientos;
 		this.empleadoAlergias = empleadoAlergias;
+		this.datoAcademicoEmpleados_1 = datoAcademicoEmpleados_1;
+		this.empleadoCargos_1 = empleadoCargos_1;
+		this.empleadoSueldos_1 = empleadoSueldos_1;
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
 
 	@Id
@@ -150,88 +181,6 @@ public class Empleado implements java.io.Serializable {
 		this.parroquia = parroquia;
 	}
 
-	@Column(name = "cantidad_hijos", nullable = false)
-	public int getCantidadHijos() {
-		return this.cantidadHijos;
-	}
-
-	public void setCantidadHijos(int cantidadHijos) {
-		this.cantidadHijos = cantidadHijos;
-	}
-
-	@Column(name = "correo_electronico")
-	public String getCorreoElectronico() {
-		return this.correoElectronico;
-	}
-
-	public void setCorreoElectronico(String correoElectronico) {
-		this.correoElectronico = correoElectronico;
-	}
-
-	@Column(name = "cuenta_facebook")
-	public String getCuentaFacebook() {
-		return this.cuentaFacebook;
-	}
-
-	public void setCuentaFacebook(String cuentaFacebook) {
-		this.cuentaFacebook = cuentaFacebook;
-	}
-
-	@Column(name = "cuenta_twitter")
-	public String getCuentaTwitter() {
-		return this.cuentaTwitter;
-	}
-
-	public void setCuentaTwitter(String cuentaTwitter) {
-		this.cuentaTwitter = cuentaTwitter;
-	}
-
-	@Column(name = "direccion", nullable = false)
-	public String getDireccion() {
-		return this.direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	@Column(name = "estado_civil", nullable = false)
-	public String getEstadoCivil() {
-		return this.estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
-
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_egreso", nullable = false, length = 13)
-	public Date getFechaEgreso() {
-		return this.fechaEgreso;
-	}
-
-	public void setFechaEgreso(Date fechaEgreso) {
-		this.fechaEgreso = fechaEgreso;
-	}
-
-	@Column(name = "foto")
-	public byte[] getFoto() {
-		return this.foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
 	@Column(name = "primer_apellido", nullable = false)
 	public String getPrimerApellido() {
 		return this.primerApellido;
@@ -241,13 +190,13 @@ public class Empleado implements java.io.Serializable {
 		this.primerApellido = primerApellido;
 	}
 
-	@Column(name = "primer_nombre", nullable = false)
-	public String getPrimerNombre() {
-		return this.primerNombre;
+	@Column(name = "foto")
+	public byte[] getFoto() {
+		return this.foto;
 	}
 
-	public void setPrimerNombre(String primerNombre) {
-		this.primerNombre = primerNombre;
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 	@Column(name = "segundo_apellido")
@@ -268,13 +217,58 @@ public class Empleado implements java.io.Serializable {
 		this.segundoNombre = segundoNombre;
 	}
 
-	@Column(name = "telefono1")
-	public String getTelefono1() {
-		return this.telefono1;
+	@Column(name = "direccion", nullable = false)
+	public String getDireccion() {
+		return this.direccion;
 	}
 
-	public void setTelefono1(String telefono1) {
-		this.telefono1 = telefono1;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	@Column(name = "cuenta_facebook")
+	public String getCuentaFacebook() {
+		return this.cuentaFacebook;
+	}
+
+	public void setCuentaFacebook(String cuentaFacebook) {
+		this.cuentaFacebook = cuentaFacebook;
+	}
+
+	@Column(name = "primer_nombre", nullable = false)
+	public String getPrimerNombre() {
+		return this.primerNombre;
+	}
+
+	public void setPrimerNombre(String primerNombre) {
+		this.primerNombre = primerNombre;
+	}
+
+	@Column(name = "cuenta_twitter")
+	public String getCuentaTwitter() {
+		return this.cuentaTwitter;
+	}
+
+	public void setCuentaTwitter(String cuentaTwitter) {
+		this.cuentaTwitter = cuentaTwitter;
+	}
+
+	@Column(name = "correo_electronico")
+	public String getCorreoElectronico() {
+		return this.correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
+	@Column(name = "cantidad_hijos", nullable = false)
+	public int getCantidadHijos() {
+		return this.cantidadHijos;
+	}
+
+	public void setCantidadHijos(int cantidadHijos) {
+		this.cantidadHijos = cantidadHijos;
 	}
 
 	@Column(name = "telefono2")
@@ -286,6 +280,25 @@ public class Empleado implements java.io.Serializable {
 		this.telefono2 = telefono2;
 	}
 
+	@Column(name = "estado_civil", nullable = false)
+	public String getEstadoCivil() {
+		return this.estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_egreso", nullable = false, length = 13)
+	public Date getFechaEgreso() {
+		return this.fechaEgreso;
+	}
+
+	public void setFechaEgreso(Date fechaEgreso) {
+		this.fechaEgreso = fechaEgreso;
+	}
+
 	@Column(name = "tipo_sangre", nullable = false)
 	public String getTipoSangre() {
 		return this.tipoSangre;
@@ -293,6 +306,24 @@ public class Empleado implements java.io.Serializable {
 
 	public void setTipoSangre(String tipoSangre) {
 		this.tipoSangre = tipoSangre;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
+	@Column(name = "telefono1")
+	public String getTelefono1() {
+		return this.telefono1;
+	}
+
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
@@ -312,6 +343,16 @@ public class Empleado implements java.io.Serializable {
 	public void setEmpleadoTipoNominas(
 			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
 		this.empleadoTipoNominas = empleadoTipoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos() {
+		return this.empleadoMantenimientos;
+	}
+
+	public void setEmpleadoMantenimientos(
+			Set<EmpleadoMantenimiento> empleadoMantenimientos) {
+		this.empleadoMantenimientos = empleadoMantenimientos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
@@ -345,6 +386,36 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoMantenimientoPlanificado> getEmpleadoMantenimientoPlanificados_1() {
+		return this.empleadoMantenimientoPlanificados_1;
+	}
+
+	public void setEmpleadoMantenimientoPlanificados_1(
+			Set<EmpleadoMantenimientoPlanificado> empleadoMantenimientoPlanificados_1) {
+		this.empleadoMantenimientoPlanificados_1 = empleadoMantenimientoPlanificados_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas_1() {
+		return this.empleadoTipoNominas_1;
+	}
+
+	public void setEmpleadoTipoNominas_1(
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1) {
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas_1() {
+		return this.empleadoConceptoNominas_1;
+	}
+
+	public void setEmpleadoConceptoNominas_1(
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1) {
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
 	public Set<EmpleadoCargo> getEmpleadoCargos() {
 		return this.empleadoCargos;
 	}
@@ -354,22 +425,59 @@ public class Empleado implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
-	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos() {
-		return this.empleadoMantenimientos;
-	}
-
-	public void setEmpleadoMantenimientos(
-			Set<EmpleadoMantenimiento> empleadoMantenimientos) {
-		this.empleadoMantenimientos = empleadoMantenimientos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
 	public Set<EmpleadoAlergia> getEmpleadoAlergias() {
 		return this.empleadoAlergias;
 	}
 
 	public void setEmpleadoAlergias(Set<EmpleadoAlergia> empleadoAlergias) {
 		this.empleadoAlergias = empleadoAlergias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<DatoAcademicoEmpleado> getDatoAcademicoEmpleados_1() {
+		return this.datoAcademicoEmpleados_1;
+	}
+
+	public void setDatoAcademicoEmpleados_1(
+			Set<DatoAcademicoEmpleado> datoAcademicoEmpleados_1) {
+		this.datoAcademicoEmpleados_1 = datoAcademicoEmpleados_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoCargo> getEmpleadoCargos_1() {
+		return this.empleadoCargos_1;
+	}
+
+	public void setEmpleadoCargos_1(Set<EmpleadoCargo> empleadoCargos_1) {
+		this.empleadoCargos_1 = empleadoCargos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoSueldo> getEmpleadoSueldos_1() {
+		return this.empleadoSueldos_1;
+	}
+
+	public void setEmpleadoSueldos_1(Set<EmpleadoSueldo> empleadoSueldos_1) {
+		this.empleadoSueldos_1 = empleadoSueldos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoMantenimiento> getEmpleadoMantenimientos_1() {
+		return this.empleadoMantenimientos_1;
+	}
+
+	public void setEmpleadoMantenimientos_1(
+			Set<EmpleadoMantenimiento> empleadoMantenimientos_1) {
+		this.empleadoMantenimientos_1 = empleadoMantenimientos_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empleado")
+	public Set<EmpleadoAlergia> getEmpleadoAlergias_1() {
+		return this.empleadoAlergias_1;
+	}
+
+	public void setEmpleadoAlergias_1(Set<EmpleadoAlergia> empleadoAlergias_1) {
+		this.empleadoAlergias_1 = empleadoAlergias_1;
 	}
 
 }

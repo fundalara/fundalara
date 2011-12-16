@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,42 +25,46 @@ public class ConceptoNomina implements java.io.Serializable {
 
 	private String codigoConceptoNomina;
 	private TipoConceptoNomina tipoConceptoNomina;
-	private boolean aplicableSueldo;
-	private char estatus;
-	private Date fechaActivacion;
 	private boolean tipoAplicacion;
 	private double valor;
+	private boolean aplicableSueldo;
+	private Date fechaActivacion;
+	private char estatus;
 	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas = new HashSet<EmpleadoConceptoNomina>(
+			0);
+	private Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1 = new HashSet<EmpleadoConceptoNomina>(
 			0);
 
 	public ConceptoNomina() {
 	}
 
 	public ConceptoNomina(String codigoConceptoNomina,
-			TipoConceptoNomina tipoConceptoNomina, boolean aplicableSueldo,
-			char estatus, Date fechaActivacion, boolean tipoAplicacion,
-			double valor) {
+			TipoConceptoNomina tipoConceptoNomina, boolean tipoAplicacion,
+			double valor, boolean aplicableSueldo, Date fechaActivacion,
+			char estatus) {
 		this.codigoConceptoNomina = codigoConceptoNomina;
 		this.tipoConceptoNomina = tipoConceptoNomina;
-		this.aplicableSueldo = aplicableSueldo;
-		this.estatus = estatus;
-		this.fechaActivacion = fechaActivacion;
 		this.tipoAplicacion = tipoAplicacion;
 		this.valor = valor;
+		this.aplicableSueldo = aplicableSueldo;
+		this.fechaActivacion = fechaActivacion;
+		this.estatus = estatus;
 	}
 
 	public ConceptoNomina(String codigoConceptoNomina,
-			TipoConceptoNomina tipoConceptoNomina, boolean aplicableSueldo,
-			char estatus, Date fechaActivacion, boolean tipoAplicacion,
-			double valor, Set<EmpleadoConceptoNomina> empleadoConceptoNominas) {
+			TipoConceptoNomina tipoConceptoNomina, boolean tipoAplicacion,
+			double valor, boolean aplicableSueldo, Date fechaActivacion,
+			char estatus, Set<EmpleadoConceptoNomina> empleadoConceptoNominas,
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1) {
 		this.codigoConceptoNomina = codigoConceptoNomina;
 		this.tipoConceptoNomina = tipoConceptoNomina;
-		this.aplicableSueldo = aplicableSueldo;
-		this.estatus = estatus;
-		this.fechaActivacion = fechaActivacion;
 		this.tipoAplicacion = tipoAplicacion;
 		this.valor = valor;
+		this.aplicableSueldo = aplicableSueldo;
+		this.fechaActivacion = fechaActivacion;
+		this.estatus = estatus;
 		this.empleadoConceptoNominas = empleadoConceptoNominas;
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 	}
 
 	@Id
@@ -83,34 +87,6 @@ public class ConceptoNomina implements java.io.Serializable {
 		this.tipoConceptoNomina = tipoConceptoNomina;
 	}
 
-	@Column(name = "aplicable_sueldo", nullable = false)
-	public boolean isAplicableSueldo() {
-		return this.aplicableSueldo;
-	}
-
-	public void setAplicableSueldo(boolean aplicableSueldo) {
-		this.aplicableSueldo = aplicableSueldo;
-	}
-
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_activacion", nullable = false, length = 13)
-	public Date getFechaActivacion() {
-		return this.fechaActivacion;
-	}
-
-	public void setFechaActivacion(Date fechaActivacion) {
-		this.fechaActivacion = fechaActivacion;
-	}
-
 	@Column(name = "tipo_aplicacion", nullable = false)
 	public boolean isTipoAplicacion() {
 		return this.tipoAplicacion;
@@ -129,6 +105,34 @@ public class ConceptoNomina implements java.io.Serializable {
 		this.valor = valor;
 	}
 
+	@Column(name = "aplicable_sueldo", nullable = false)
+	public boolean isAplicableSueldo() {
+		return this.aplicableSueldo;
+	}
+
+	public void setAplicableSueldo(boolean aplicableSueldo) {
+		this.aplicableSueldo = aplicableSueldo;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_activacion", nullable = false, length = 13)
+	public Date getFechaActivacion() {
+		return this.fechaActivacion;
+	}
+
+	public void setFechaActivacion(Date fechaActivacion) {
+		this.fechaActivacion = fechaActivacion;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "conceptoNomina")
 	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas() {
 		return this.empleadoConceptoNominas;
@@ -137,6 +141,16 @@ public class ConceptoNomina implements java.io.Serializable {
 	public void setEmpleadoConceptoNominas(
 			Set<EmpleadoConceptoNomina> empleadoConceptoNominas) {
 		this.empleadoConceptoNominas = empleadoConceptoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "conceptoNomina")
+	public Set<EmpleadoConceptoNomina> getEmpleadoConceptoNominas_1() {
+		return this.empleadoConceptoNominas_1;
+	}
+
+	public void setEmpleadoConceptoNominas_1(
+			Set<EmpleadoConceptoNomina> empleadoConceptoNominas_1) {
+		this.empleadoConceptoNominas_1 = empleadoConceptoNominas_1;
 	}
 
 }

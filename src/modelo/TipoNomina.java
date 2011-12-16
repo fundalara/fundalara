@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,9 +26,11 @@ public class TipoNomina implements java.io.Serializable {
 	private String codigoTipoNomina;
 	private PeriodicidadPago periodicidadPago;
 	private String descripcion;
-	private char estatus;
 	private Date fechaActualizacion;
+	private char estatus;
 	private Set<EmpleadoTipoNomina> empleadoTipoNominas = new HashSet<EmpleadoTipoNomina>(
+			0);
+	private Set<EmpleadoTipoNomina> empleadoTipoNominas_1 = new HashSet<EmpleadoTipoNomina>(
 			0);
 
 	public TipoNomina() {
@@ -36,24 +38,26 @@ public class TipoNomina implements java.io.Serializable {
 
 	public TipoNomina(String codigoTipoNomina,
 			PeriodicidadPago periodicidadPago, String descripcion,
-			char estatus, Date fechaActualizacion) {
+			Date fechaActualizacion, char estatus) {
 		this.codigoTipoNomina = codigoTipoNomina;
 		this.periodicidadPago = periodicidadPago;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.fechaActualizacion = fechaActualizacion;
+		this.estatus = estatus;
 	}
 
 	public TipoNomina(String codigoTipoNomina,
 			PeriodicidadPago periodicidadPago, String descripcion,
-			char estatus, Date fechaActualizacion,
-			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
+			Date fechaActualizacion, char estatus,
+			Set<EmpleadoTipoNomina> empleadoTipoNominas,
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1) {
 		this.codigoTipoNomina = codigoTipoNomina;
 		this.periodicidadPago = periodicidadPago;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.fechaActualizacion = fechaActualizacion;
+		this.estatus = estatus;
 		this.empleadoTipoNominas = empleadoTipoNominas;
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
 	}
 
 	@Id
@@ -85,15 +89,6 @@ public class TipoNomina implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_actualizacion", nullable = false, length = 13)
 	public Date getFechaActualizacion() {
@@ -104,6 +99,15 @@ public class TipoNomina implements java.io.Serializable {
 		this.fechaActualizacion = fechaActualizacion;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoNomina")
 	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas() {
 		return this.empleadoTipoNominas;
@@ -112,6 +116,16 @@ public class TipoNomina implements java.io.Serializable {
 	public void setEmpleadoTipoNominas(
 			Set<EmpleadoTipoNomina> empleadoTipoNominas) {
 		this.empleadoTipoNominas = empleadoTipoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoNomina")
+	public Set<EmpleadoTipoNomina> getEmpleadoTipoNominas_1() {
+		return this.empleadoTipoNominas_1;
+	}
+
+	public void setEmpleadoTipoNominas_1(
+			Set<EmpleadoTipoNomina> empleadoTipoNominas_1) {
+		this.empleadoTipoNominas_1 = empleadoTipoNominas_1;
 	}
 
 }

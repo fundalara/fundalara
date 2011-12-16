@@ -4,7 +4,7 @@
 
 <zk>
 	<div align="center">
-		<window apply="controlador.competencia.CntrlFrmDivisa"
+		<window apply=""
 			id="frmDivisa" title="Registro de Divisas" width="630px" border="normal"
 			closable="true" height="">
 			<panel border="normal">
@@ -28,6 +28,27 @@
 										image="../../Recursos/Imagenes/consultar.ico" >								
 									</button>
 								</hbox>
+								<label value="Correo"></label>
+								<textbox value="@{cntrl.divisa.correoElectronico}" id="txtCorreo" cols="20"></textbox>
+								
+							</row>
+							<row style="border-style:none">
+								<label value="Dirección"></label>
+								<textbox value="@{cntrl.divisa.direccion}" id="txtDireccion" cols="20"></textbox>
+ 								<label value="Parroquia"></label> 
+								<combobox value="-- Seleccione --" cols="17">
+ 								  <comboitem ></comboitem> 
+ 								</combobox> 
+
+							</row>
+							<row style="border-style:none">
+								<label value="Teléfono"></label>
+								<textbox value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20"></textbox>
+								<label value="Contacto"></label>
+								<textbox value="@{cntrl.divisa.personaContacto}" id="txtContacto" cols="20"></textbox>
+								
+							</row>
+							<row style="border-style:none">
 								<label value="Logo"></label>
 								<hbox>
 									<textbox value="@{cntrl.divisa.logo}" id="txtLogo" cols="20"></textbox>
@@ -37,27 +58,6 @@
 									</button>
 								
 								</hbox>
-							</row>
-							<row style="border-style:none">
-								<label value="Dirección"></label>
-								<textbox value="@{cntrl.divisa.direccion}" id="txtDireccion" cols="20"></textbox>
-								<label value="Estado"></label>
-								<combobox model="@{cntrl.estados}" selectedItem="@{cntrl.estado}">
-								  <comboitem self="@{each=estado}" value="@{estado.codigoEstado}" label="@{estado.nombre}" ></comboitem>
-								</combobox>
-
-							</row>
-							<row style="border-style:none">
-								<label value="Teléfono"></label>
-								<textbox value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20"></textbox>
-								<label value="Contacto"></label>
-								<textbox value="@{cntrl.divisa.personaContacto}" id="txtContacto" cols="20"></textbox>
-							</row>
-							<row style="border-style:none">
-								<label value="Correo"></label>
-								<textbox value="@{cntrl.divisa.correoElectronico}" id="txtCorreo" cols="20"></textbox>
-								<label value=""></label>
-								<label value=""></label>
 							</row>
 						</rows>
 					</grid>
@@ -76,7 +76,7 @@
 								image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 							</button>
 							<button id="btnEliminar"
-								image="../../Recursos/Imagenes/editar.ico" label="Eliminar">
+								image="/Recursos/Imagenes/eliminar.ico" label="Eliminar">
 							</button>
 							<button id="btnCancelar"
 								image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,11 +23,15 @@ public class EscalaMedicion implements java.io.Serializable {
 	private String codEscalaMedicion;
 	private TipoEscalaMedicion tipoEscalaMedicion;
 	private String descripcion;
-	private char estatus;
 	private String nombre;
+	private char estatus;
+	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
+			0);
 	private Set<ValorEscalaMedicion> valorEscalaMedicions = new HashSet<ValorEscalaMedicion>(
 			0);
-	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
+	private Set<ValorEscalaMedicion> valorEscalaMedicions_1 = new HashSet<ValorEscalaMedicion>(
+			0);
+	private Set<IndicadorActividadEscala> indicadorActividadEscalas_1 = new HashSet<IndicadorActividadEscala>(
 			0);
 
 	public EscalaMedicion() {
@@ -35,26 +39,30 @@ public class EscalaMedicion implements java.io.Serializable {
 
 	public EscalaMedicion(String codEscalaMedicion,
 			TipoEscalaMedicion tipoEscalaMedicion, String descripcion,
-			char estatus, String nombre) {
+			String nombre, char estatus) {
 		this.codEscalaMedicion = codEscalaMedicion;
 		this.tipoEscalaMedicion = tipoEscalaMedicion;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
 	public EscalaMedicion(String codEscalaMedicion,
 			TipoEscalaMedicion tipoEscalaMedicion, String descripcion,
-			char estatus, String nombre,
+			String nombre, char estatus,
+			Set<IndicadorActividadEscala> indicadorActividadEscalas,
 			Set<ValorEscalaMedicion> valorEscalaMedicions,
-			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
+			Set<ValorEscalaMedicion> valorEscalaMedicions_1,
+			Set<IndicadorActividadEscala> indicadorActividadEscalas_1) {
 		this.codEscalaMedicion = codEscalaMedicion;
 		this.tipoEscalaMedicion = tipoEscalaMedicion;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.nombre = nombre;
-		this.valorEscalaMedicions = valorEscalaMedicions;
+		this.estatus = estatus;
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
+		this.valorEscalaMedicions = valorEscalaMedicions;
+		this.valorEscalaMedicions_1 = valorEscalaMedicions_1;
+		this.indicadorActividadEscalas_1 = indicadorActividadEscalas_1;
 	}
 
 	@Id
@@ -86,6 +94,15 @@ public class EscalaMedicion implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -95,13 +112,14 @@ public class EscalaMedicion implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "escalaMedicion")
+	public Set<IndicadorActividadEscala> getIndicadorActividadEscalas() {
+		return this.indicadorActividadEscalas;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setIndicadorActividadEscalas(
+			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
+		this.indicadorActividadEscalas = indicadorActividadEscalas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "escalaMedicion")
@@ -115,13 +133,23 @@ public class EscalaMedicion implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "escalaMedicion")
-	public Set<IndicadorActividadEscala> getIndicadorActividadEscalas() {
-		return this.indicadorActividadEscalas;
+	public Set<ValorEscalaMedicion> getValorEscalaMedicions_1() {
+		return this.valorEscalaMedicions_1;
 	}
 
-	public void setIndicadorActividadEscalas(
-			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
-		this.indicadorActividadEscalas = indicadorActividadEscalas;
+	public void setValorEscalaMedicions_1(
+			Set<ValorEscalaMedicion> valorEscalaMedicions_1) {
+		this.valorEscalaMedicions_1 = valorEscalaMedicions_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "escalaMedicion")
+	public Set<IndicadorActividadEscala> getIndicadorActividadEscalas_1() {
+		return this.indicadorActividadEscalas_1;
+	}
+
+	public void setIndicadorActividadEscalas_1(
+			Set<IndicadorActividadEscala> indicadorActividadEscalas_1) {
+		this.indicadorActividadEscalas_1 = indicadorActividadEscalas_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -38,8 +38,8 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codActividadEntrenamiento", column = @Column(name = "cod_actividad_entrenamiento", nullable = false)),
-			@AttributeOverride(name = "codIndicador", column = @Column(name = "cod_indicador", nullable = false)) })
+			@AttributeOverride(name = "codIndicador", column = @Column(name = "cod_indicador", nullable = false)),
+			@AttributeOverride(name = "codActividadEntrenamiento", column = @Column(name = "cod_actividad_entrenamiento", nullable = false)) })
 	public IndicadorActividadEscalaId getId() {
 		return this.id;
 	}

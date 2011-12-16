@@ -105,7 +105,7 @@
 				<button image="/Recursos/Imagenes/guardar.ico"
 					label="Guardar" orient="horizontal">
 				</button>
-				<button image="/Recursos/Imagenes/quitar.ico"
+				<button image="/Recursos/Imagenes/eliminar.ico"
 					label="Eliminar" orient="horizontal">
 
 				</button>

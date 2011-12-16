@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,8 @@ public class ClaseMantenimiento implements java.io.Serializable {
 	private char estatus;
 	private Set<TipoMantenimiento> tipoMantenimientos = new HashSet<TipoMantenimiento>(
 			0);
+	private Set<TipoMantenimiento> tipoMantenimientos_1 = new HashSet<TipoMantenimiento>(
+			0);
 
 	public ClaseMantenimiento() {
 	}
@@ -36,11 +38,13 @@ public class ClaseMantenimiento implements java.io.Serializable {
 
 	public ClaseMantenimiento(String codigoClaseMantenimiento,
 			String descripcion, char estatus,
-			Set<TipoMantenimiento> tipoMantenimientos) {
+			Set<TipoMantenimiento> tipoMantenimientos,
+			Set<TipoMantenimiento> tipoMantenimientos_1) {
 		this.codigoClaseMantenimiento = codigoClaseMantenimiento;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tipoMantenimientos = tipoMantenimientos;
+		this.tipoMantenimientos_1 = tipoMantenimientos_1;
 	}
 
 	@Id
@@ -78,6 +82,16 @@ public class ClaseMantenimiento implements java.io.Serializable {
 
 	public void setTipoMantenimientos(Set<TipoMantenimiento> tipoMantenimientos) {
 		this.tipoMantenimientos = tipoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "claseMantenimiento")
+	public Set<TipoMantenimiento> getTipoMantenimientos_1() {
+		return this.tipoMantenimientos_1;
+	}
+
+	public void setTipoMantenimientos_1(
+			Set<TipoMantenimiento> tipoMantenimientos_1) {
+		this.tipoMantenimientos_1 = tipoMantenimientos_1;
 	}
 
 }

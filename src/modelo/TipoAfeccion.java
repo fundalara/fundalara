@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,30 +19,35 @@ import javax.persistence.Table;
 public class TipoAfeccion implements java.io.Serializable {
 
 	private String codigoAfeccion;
+	private String nombre;
 	private String descripcion;
 	private char estatus;
-	private String nombre;
 	private Set<AfeccionJugador> afeccionJugadors = new HashSet<AfeccionJugador>(
+			0);
+	private Set<AfeccionJugador> afeccionJugadors_1 = new HashSet<AfeccionJugador>(
 			0);
 
 	public TipoAfeccion() {
 	}
 
-	public TipoAfeccion(String codigoAfeccion, String descripcion,
-			char estatus, String nombre) {
+	public TipoAfeccion(String codigoAfeccion, String nombre,
+			String descripcion, char estatus) {
 		this.codigoAfeccion = codigoAfeccion;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 	}
 
-	public TipoAfeccion(String codigoAfeccion, String descripcion,
-			char estatus, String nombre, Set<AfeccionJugador> afeccionJugadors) {
+	public TipoAfeccion(String codigoAfeccion, String nombre,
+			String descripcion, char estatus,
+			Set<AfeccionJugador> afeccionJugadors,
+			Set<AfeccionJugador> afeccionJugadors_1) {
 		this.codigoAfeccion = codigoAfeccion;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 		this.afeccionJugadors = afeccionJugadors;
+		this.afeccionJugadors_1 = afeccionJugadors_1;
 	}
 
 	@Id
@@ -53,6 +58,15 @@ public class TipoAfeccion implements java.io.Serializable {
 
 	public void setCodigoAfeccion(String codigoAfeccion) {
 		this.codigoAfeccion = codigoAfeccion;
+	}
+
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Column(name = "descripcion", nullable = false)
@@ -73,15 +87,6 @@ public class TipoAfeccion implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoAfeccion")
 	public Set<AfeccionJugador> getAfeccionJugadors() {
 		return this.afeccionJugadors;
@@ -89,6 +94,15 @@ public class TipoAfeccion implements java.io.Serializable {
 
 	public void setAfeccionJugadors(Set<AfeccionJugador> afeccionJugadors) {
 		this.afeccionJugadors = afeccionJugadors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoAfeccion")
+	public Set<AfeccionJugador> getAfeccionJugadors_1() {
+		return this.afeccionJugadors_1;
+	}
+
+	public void setAfeccionJugadors_1(Set<AfeccionJugador> afeccionJugadors_1) {
+		this.afeccionJugadors_1 = afeccionJugadors_1;
 	}
 
 }

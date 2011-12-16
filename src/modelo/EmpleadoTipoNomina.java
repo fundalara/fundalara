@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -25,30 +25,30 @@ public class EmpleadoTipoNomina implements java.io.Serializable {
 	private EmpleadoTipoNominaId id;
 	private TipoNomina tipoNomina;
 	private Empleado empleado;
-	private char estado;
-	private char estatus;
 	private Date fechaFin;
+	private char estado;
 	private Date fechaInicio;
+	private char estatus;
 
 	public EmpleadoTipoNomina() {
 	}
 
 	public EmpleadoTipoNomina(EmpleadoTipoNominaId id, TipoNomina tipoNomina,
-			Empleado empleado, char estado, char estatus, Date fechaFin,
-			Date fechaInicio) {
+			Empleado empleado, Date fechaFin, char estado, Date fechaInicio,
+			char estatus) {
 		this.id = id;
 		this.tipoNomina = tipoNomina;
 		this.empleado = empleado;
-		this.estado = estado;
-		this.estatus = estatus;
 		this.fechaFin = fechaFin;
+		this.estado = estado;
 		this.fechaInicio = fechaInicio;
+		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)),
-			@AttributeOverride(name = "codigoTipoNomina", column = @Column(name = "codigo_tipo_nomina", nullable = false)) })
+			@AttributeOverride(name = "codigoTipoNomina", column = @Column(name = "codigo_tipo_nomina", nullable = false)),
+			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)) })
 	public EmpleadoTipoNominaId getId() {
 		return this.id;
 	}
@@ -77,24 +77,6 @@ public class EmpleadoTipoNomina implements java.io.Serializable {
 		this.empleado = empleado;
 	}
 
-	@Column(name = "estado", nullable = false, length = 1)
-	public char getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(char estado) {
-		this.estado = estado;
-	}
-
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_fin", nullable = false, length = 13)
 	public Date getFechaFin() {
@@ -105,6 +87,15 @@ public class EmpleadoTipoNomina implements java.io.Serializable {
 		this.fechaFin = fechaFin;
 	}
 
+	@Column(name = "estado", nullable = false, length = 1)
+	public char getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(char estado) {
+		this.estado = estado;
+	}
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_inicio", nullable = false, length = 13)
 	public Date getFechaInicio() {
@@ -113,6 +104,15 @@ public class EmpleadoTipoNomina implements java.io.Serializable {
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

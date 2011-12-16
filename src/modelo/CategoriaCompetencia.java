@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 15/12/2011 03:23:59 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -42,8 +42,8 @@ public class CategoriaCompetencia implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoCategoria", column = @Column(name = "codigo_categoria", nullable = false)),
-			@AttributeOverride(name = "codigoCompetencia", column = @Column(name = "codigo_competencia", nullable = false)) })
+			@AttributeOverride(name = "codigoCompetencia", column = @Column(name = "codigo_competencia", nullable = false)),
+			@AttributeOverride(name = "codigoCategoria", column = @Column(name = "codigo_categoria", nullable = false)) })
 	public CategoriaCompetenciaId getId() {
 		return this.id;
 	}

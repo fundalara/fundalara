@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,29 +21,34 @@ import javax.persistence.Table;
 public class TareaMantenimientoPlanificado implements java.io.Serializable {
 
 	private TareaMantenimientoPlanificadoId id;
-	private EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificado;
+	private EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8;
 	private PlanificacionMantenimiento planificacionMantenimiento;
 	private Tarea tarea;
+	private EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
 	private char estatus;
 
 	public TareaMantenimientoPlanificado() {
 	}
 
-	public TareaMantenimientoPlanificado(TareaMantenimientoPlanificadoId id,
-			EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificado,
-			PlanificacionMantenimiento planificacionMantenimiento, Tarea tarea,
+	public TareaMantenimientoPlanificado(
+			TareaMantenimientoPlanificadoId id,
+			EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8,
+			PlanificacionMantenimiento planificacionMantenimiento,
+			Tarea tarea,
+			EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573,
 			char estatus) {
 		this.id = id;
-		this.empleadoMantenimientoPlanificado = empleadoMantenimientoPlanificado;
+		this.empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8 = empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8;
 		this.planificacionMantenimiento = planificacionMantenimiento;
 		this.tarea = tarea;
+		this.empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573 = empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
 		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoPlanificacionMantenimiento", column = @Column(name = "codigo_planificacion_mantenimiento", nullable = false)),
-			@AttributeOverride(name = "codigoTarea", column = @Column(name = "codigo_tarea", nullable = false)) })
+			@AttributeOverride(name = "codigoTarea", column = @Column(name = "codigo_tarea", nullable = false)),
+			@AttributeOverride(name = "codigoPlanificacionMantenimiento", column = @Column(name = "codigo_planificacion_mantenimiento", nullable = false)) })
 	public TareaMantenimientoPlanificadoId getId() {
 		return this.id;
 	}
@@ -54,15 +59,15 @@ public class TareaMantenimientoPlanificado implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
-			@JoinColumn(name = "codigo_planificacion_mantenimiento", referencedColumnName = "cedula", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "cedula", referencedColumnName = "codigo_planificacion_mantenimiento", nullable = false, insertable = false, updatable = false) })
-	public EmpleadoMantenimientoPlanificado getEmpleadoMantenimientoPlanificado() {
-		return this.empleadoMantenimientoPlanificado;
+			@JoinColumn(name = "cedula", referencedColumnName = "codigo_planificacion_mantenimiento", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "codigo_planificacion_mantenimiento", referencedColumnName = "cedula", nullable = false, insertable = false, updatable = false) })
+	public EmpleadoMantenimientoPlanificado getEmpleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8() {
+		return this.empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8;
 	}
 
-	public void setEmpleadoMantenimientoPlanificado(
-			EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificado) {
-		this.empleadoMantenimientoPlanificado = empleadoMantenimientoPlanificado;
+	public void setEmpleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8(
+			EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8) {
+		this.empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8 = empleadoMantenimientoPlanificadoByFk6b2b18d580e2ecc8;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -84,6 +89,19 @@ public class TareaMantenimientoPlanificado implements java.io.Serializable {
 
 	public void setTarea(Tarea tarea) {
 		this.tarea = tarea;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+			@JoinColumn(name = "codigo_planificacion_mantenimiento", referencedColumnName = "codigo_planificacion_mantenimiento", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "cedula", referencedColumnName = "cedula", nullable = false, insertable = false, updatable = false) })
+	public EmpleadoMantenimientoPlanificado getEmpleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573() {
+		return this.empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
+	}
+
+	public void setEmpleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573(
+			EmpleadoMantenimientoPlanificado empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573) {
+		this.empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573 = empleadoMantenimientoPlanificadoByEmpleadoMantenimientoPlanificadoTareaMantenimientoPlani573;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

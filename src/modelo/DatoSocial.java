@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -23,23 +23,23 @@ public class DatoSocial implements java.io.Serializable {
 	private Institucion institucion;
 	private Jugador jugador;
 	private TipoActividadSocial tipoActividadSocial;
-	private char estatus;
-	private String fechaInicio;
 	private int horasDedicadas;
+	private String fechaInicio;
+	private char estatus;
 
 	public DatoSocial() {
 	}
 
 	public DatoSocial(DatoSocialId id, Institucion institucion,
 			Jugador jugador, TipoActividadSocial tipoActividadSocial,
-			char estatus, String fechaInicio, int horasDedicadas) {
+			int horasDedicadas, String fechaInicio, char estatus) {
 		this.id = id;
 		this.institucion = institucion;
 		this.jugador = jugador;
 		this.tipoActividadSocial = tipoActividadSocial;
-		this.estatus = estatus;
-		this.fechaInicio = fechaInicio;
 		this.horasDedicadas = horasDedicadas;
+		this.fechaInicio = fechaInicio;
+		this.estatus = estatus;
 	}
 
 	@EmbeddedId
@@ -84,13 +84,13 @@ public class DatoSocial implements java.io.Serializable {
 		this.tipoActividadSocial = tipoActividadSocial;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
+	@Column(name = "horas_dedicadas", nullable = false)
+	public int getHorasDedicadas() {
+		return this.horasDedicadas;
 	}
 
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
+	public void setHorasDedicadas(int horasDedicadas) {
+		this.horasDedicadas = horasDedicadas;
 	}
 
 	@Column(name = "fecha_inicio", nullable = false)
@@ -102,13 +102,13 @@ public class DatoSocial implements java.io.Serializable {
 		this.fechaInicio = fechaInicio;
 	}
 
-	@Column(name = "horas_dedicadas", nullable = false)
-	public int getHorasDedicadas() {
-		return this.horasDedicadas;
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
 	}
 
-	public void setHorasDedicadas(int horasDedicadas) {
-		this.horasDedicadas = horasDedicadas;
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

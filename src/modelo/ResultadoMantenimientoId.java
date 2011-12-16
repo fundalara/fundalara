@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ResultadoMantenimientoId implements java.io.Serializable {
 
-	private String codigoEstadoMantenimiento;
 	private String codigoResultado;
+	private String codigoEstadoMantenimiento;
 
 	public ResultadoMantenimientoId() {
 	}
 
-	public ResultadoMantenimientoId(String codigoEstadoMantenimiento,
-			String codigoResultado) {
-		this.codigoEstadoMantenimiento = codigoEstadoMantenimiento;
+	public ResultadoMantenimientoId(String codigoResultado,
+			String codigoEstadoMantenimiento) {
 		this.codigoResultado = codigoResultado;
-	}
-
-	@Column(name = "codigo_estado_mantenimiento", nullable = false)
-	public String getCodigoEstadoMantenimiento() {
-		return this.codigoEstadoMantenimiento;
-	}
-
-	public void setCodigoEstadoMantenimiento(String codigoEstadoMantenimiento) {
 		this.codigoEstadoMantenimiento = codigoEstadoMantenimiento;
 	}
 
@@ -41,6 +32,15 @@ public class ResultadoMantenimientoId implements java.io.Serializable {
 		this.codigoResultado = codigoResultado;
 	}
 
+	@Column(name = "codigo_estado_mantenimiento", nullable = false)
+	public String getCodigoEstadoMantenimiento() {
+		return this.codigoEstadoMantenimiento;
+	}
+
+	public void setCodigoEstadoMantenimiento(String codigoEstadoMantenimiento) {
+		this.codigoEstadoMantenimiento = codigoEstadoMantenimiento;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -50,17 +50,16 @@ public class ResultadoMantenimientoId implements java.io.Serializable {
 			return false;
 		ResultadoMantenimientoId castOther = (ResultadoMantenimientoId) other;
 
-		return ((this.getCodigoEstadoMantenimiento() == castOther
-				.getCodigoEstadoMantenimiento()) || (this
-				.getCodigoEstadoMantenimiento() != null
-				&& castOther.getCodigoEstadoMantenimiento() != null && this
-				.getCodigoEstadoMantenimiento().equals(
-						castOther.getCodigoEstadoMantenimiento())))
-				&& ((this.getCodigoResultado() == castOther
-						.getCodigoResultado()) || (this.getCodigoResultado() != null
-						&& castOther.getCodigoResultado() != null && this
-						.getCodigoResultado().equals(
-								castOther.getCodigoResultado())));
+		return ((this.getCodigoResultado() == castOther.getCodigoResultado()) || (this
+				.getCodigoResultado() != null
+				&& castOther.getCodigoResultado() != null && this
+				.getCodigoResultado().equals(castOther.getCodigoResultado())))
+				&& ((this.getCodigoEstadoMantenimiento() == castOther
+						.getCodigoEstadoMantenimiento()) || (this
+						.getCodigoEstadoMantenimiento() != null
+						&& castOther.getCodigoEstadoMantenimiento() != null && this
+						.getCodigoEstadoMantenimiento().equals(
+								castOther.getCodigoEstadoMantenimiento())));
 	}
 
 	public int hashCode() {
@@ -68,12 +67,12 @@ public class ResultadoMantenimientoId implements java.io.Serializable {
 
 		result = 37
 				* result
-				+ (getCodigoEstadoMantenimiento() == null ? 0 : this
-						.getCodigoEstadoMantenimiento().hashCode());
-		result = 37
-				* result
 				+ (getCodigoResultado() == null ? 0 : this.getCodigoResultado()
 						.hashCode());
+		result = 37
+				* result
+				+ (getCodigoEstadoMantenimiento() == null ? 0 : this
+						.getCodigoEstadoMantenimiento().hashCode());
 		return result;
 	}
 

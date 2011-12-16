@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,26 +19,30 @@ import javax.persistence.Table;
 public class TipoCuentaBanco implements java.io.Serializable {
 
 	private String codigoCuentaBanco;
-	private String descripcion;
 	private char estatus;
+	private String descripcion;
 	private Set<ProveedorBanco> proveedorBancos = new HashSet<ProveedorBanco>(0);
+	private Set<ProveedorBanco> proveedorBancos_1 = new HashSet<ProveedorBanco>(
+			0);
 
 	public TipoCuentaBanco() {
 	}
 
-	public TipoCuentaBanco(String codigoCuentaBanco, String descripcion,
-			char estatus) {
+	public TipoCuentaBanco(String codigoCuentaBanco, char estatus,
+			String descripcion) {
 		this.codigoCuentaBanco = codigoCuentaBanco;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 	}
 
-	public TipoCuentaBanco(String codigoCuentaBanco, String descripcion,
-			char estatus, Set<ProveedorBanco> proveedorBancos) {
+	public TipoCuentaBanco(String codigoCuentaBanco, char estatus,
+			String descripcion, Set<ProveedorBanco> proveedorBancos,
+			Set<ProveedorBanco> proveedorBancos_1) {
 		this.codigoCuentaBanco = codigoCuentaBanco;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 		this.proveedorBancos = proveedorBancos;
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 	@Id
@@ -51,15 +55,6 @@ public class TipoCuentaBanco implements java.io.Serializable {
 		this.codigoCuentaBanco = codigoCuentaBanco;
 	}
 
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -69,6 +64,15 @@ public class TipoCuentaBanco implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
+	@Column(name = "descripcion", nullable = false)
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoCuentaBanco")
 	public Set<ProveedorBanco> getProveedorBancos() {
 		return this.proveedorBancos;
@@ -76,6 +80,15 @@ public class TipoCuentaBanco implements java.io.Serializable {
 
 	public void setProveedorBancos(Set<ProveedorBanco> proveedorBancos) {
 		this.proveedorBancos = proveedorBancos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoCuentaBanco")
+	public Set<ProveedorBanco> getProveedorBancos_1() {
+		return this.proveedorBancos_1;
+	}
+
+	public void setProveedorBancos_1(Set<ProveedorBanco> proveedorBancos_1) {
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 }

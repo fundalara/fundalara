@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,17 +12,17 @@ import javax.persistence.Embeddable;
 public class DatoAcademicoId implements java.io.Serializable {
 
 	private String cedulaJugador;
-	private String codigoAnnoEscolar;
 	private String codigoInstitucion;
+	private String codigoAnnoEscolar;
 
 	public DatoAcademicoId() {
 	}
 
-	public DatoAcademicoId(String cedulaJugador, String codigoAnnoEscolar,
-			String codigoInstitucion) {
+	public DatoAcademicoId(String cedulaJugador, String codigoInstitucion,
+			String codigoAnnoEscolar) {
 		this.cedulaJugador = cedulaJugador;
-		this.codigoAnnoEscolar = codigoAnnoEscolar;
 		this.codigoInstitucion = codigoInstitucion;
+		this.codigoAnnoEscolar = codigoAnnoEscolar;
 	}
 
 	@Column(name = "cedula_jugador", nullable = false)
@@ -34,15 +34,6 @@ public class DatoAcademicoId implements java.io.Serializable {
 		this.cedulaJugador = cedulaJugador;
 	}
 
-	@Column(name = "codigo_anno_escolar", nullable = false)
-	public String getCodigoAnnoEscolar() {
-		return this.codigoAnnoEscolar;
-	}
-
-	public void setCodigoAnnoEscolar(String codigoAnnoEscolar) {
-		this.codigoAnnoEscolar = codigoAnnoEscolar;
-	}
-
 	@Column(name = "codigo_institucion", nullable = false)
 	public String getCodigoInstitucion() {
 		return this.codigoInstitucion;
@@ -50,6 +41,15 @@ public class DatoAcademicoId implements java.io.Serializable {
 
 	public void setCodigoInstitucion(String codigoInstitucion) {
 		this.codigoInstitucion = codigoInstitucion;
+	}
+
+	@Column(name = "codigo_anno_escolar", nullable = false)
+	public String getCodigoAnnoEscolar() {
+		return this.codigoAnnoEscolar;
+	}
+
+	public void setCodigoAnnoEscolar(String codigoAnnoEscolar) {
+		this.codigoAnnoEscolar = codigoAnnoEscolar;
 	}
 
 	public boolean equals(Object other) {
@@ -65,18 +65,18 @@ public class DatoAcademicoId implements java.io.Serializable {
 				.getCedulaJugador() != null
 				&& castOther.getCedulaJugador() != null && this
 				.getCedulaJugador().equals(castOther.getCedulaJugador())))
-				&& ((this.getCodigoAnnoEscolar() == castOther
-						.getCodigoAnnoEscolar()) || (this
-						.getCodigoAnnoEscolar() != null
-						&& castOther.getCodigoAnnoEscolar() != null && this
-						.getCodigoAnnoEscolar().equals(
-								castOther.getCodigoAnnoEscolar())))
 				&& ((this.getCodigoInstitucion() == castOther
 						.getCodigoInstitucion()) || (this
 						.getCodigoInstitucion() != null
 						&& castOther.getCodigoInstitucion() != null && this
 						.getCodigoInstitucion().equals(
-								castOther.getCodigoInstitucion())));
+								castOther.getCodigoInstitucion())))
+				&& ((this.getCodigoAnnoEscolar() == castOther
+						.getCodigoAnnoEscolar()) || (this
+						.getCodigoAnnoEscolar() != null
+						&& castOther.getCodigoAnnoEscolar() != null && this
+						.getCodigoAnnoEscolar().equals(
+								castOther.getCodigoAnnoEscolar())));
 	}
 
 	public int hashCode() {
@@ -88,12 +88,12 @@ public class DatoAcademicoId implements java.io.Serializable {
 						.hashCode());
 		result = 37
 				* result
-				+ (getCodigoAnnoEscolar() == null ? 0 : this
-						.getCodigoAnnoEscolar().hashCode());
-		result = 37
-				* result
 				+ (getCodigoInstitucion() == null ? 0 : this
 						.getCodigoInstitucion().hashCode());
+		result = 37
+				* result
+				+ (getCodigoAnnoEscolar() == null ? 0 : this
+						.getCodigoAnnoEscolar().hashCode());
 		return result;
 	}
 

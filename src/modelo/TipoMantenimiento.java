@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,32 +22,36 @@ public class TipoMantenimiento implements java.io.Serializable {
 
 	private String codigoTipoMantenimiento;
 	private ClaseMantenimiento claseMantenimiento;
-	private String descripcion;
 	private char estatus;
+	private String descripcion;
 	private Set<PlanificacionMantenimiento> planificacionMantenimientos = new HashSet<PlanificacionMantenimiento>(
+			0);
+	private Set<PlanificacionMantenimiento> planificacionMantenimientos_1 = new HashSet<PlanificacionMantenimiento>(
 			0);
 
 	public TipoMantenimiento() {
 	}
 
 	public TipoMantenimiento(String codigoTipoMantenimiento,
-			ClaseMantenimiento claseMantenimiento, String descripcion,
-			char estatus) {
+			ClaseMantenimiento claseMantenimiento, char estatus,
+			String descripcion) {
 		this.codigoTipoMantenimiento = codigoTipoMantenimiento;
 		this.claseMantenimiento = claseMantenimiento;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 	}
 
 	public TipoMantenimiento(String codigoTipoMantenimiento,
-			ClaseMantenimiento claseMantenimiento, String descripcion,
-			char estatus,
-			Set<PlanificacionMantenimiento> planificacionMantenimientos) {
+			ClaseMantenimiento claseMantenimiento, char estatus,
+			String descripcion,
+			Set<PlanificacionMantenimiento> planificacionMantenimientos,
+			Set<PlanificacionMantenimiento> planificacionMantenimientos_1) {
 		this.codigoTipoMantenimiento = codigoTipoMantenimiento;
 		this.claseMantenimiento = claseMantenimiento;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 		this.planificacionMantenimientos = planificacionMantenimientos;
+		this.planificacionMantenimientos_1 = planificacionMantenimientos_1;
 	}
 
 	@Id
@@ -70,15 +74,6 @@ public class TipoMantenimiento implements java.io.Serializable {
 		this.claseMantenimiento = claseMantenimiento;
 	}
 
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -86,6 +81,15 @@ public class TipoMantenimiento implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "descripcion", nullable = false)
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoMantenimiento")
@@ -96,6 +100,16 @@ public class TipoMantenimiento implements java.io.Serializable {
 	public void setPlanificacionMantenimientos(
 			Set<PlanificacionMantenimiento> planificacionMantenimientos) {
 		this.planificacionMantenimientos = planificacionMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoMantenimiento")
+	public Set<PlanificacionMantenimiento> getPlanificacionMantenimientos_1() {
+		return this.planificacionMantenimientos_1;
+	}
+
+	public void setPlanificacionMantenimientos_1(
+			Set<PlanificacionMantenimiento> planificacionMantenimientos_1) {
+		this.planificacionMantenimientos_1 = planificacionMantenimientos_1;
 	}
 
 }

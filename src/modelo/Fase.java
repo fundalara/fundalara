@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,30 +19,34 @@ import javax.persistence.Table;
 public class Fase implements java.io.Serializable {
 
 	private String codFaseEntrenamiento;
+	private String nombre;
 	private String descripcion;
 	private char estatus;
-	private String nombre;
 	private Set<ActividadEntrenamiento> actividadEntrenamientos = new HashSet<ActividadEntrenamiento>(
+			0);
+	private Set<ActividadEntrenamiento> actividadEntrenamientos_1 = new HashSet<ActividadEntrenamiento>(
 			0);
 
 	public Fase() {
 	}
 
-	public Fase(String codFaseEntrenamiento, String descripcion, char estatus,
-			String nombre) {
+	public Fase(String codFaseEntrenamiento, String nombre, String descripcion,
+			char estatus) {
 		this.codFaseEntrenamiento = codFaseEntrenamiento;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 	}
 
-	public Fase(String codFaseEntrenamiento, String descripcion, char estatus,
-			String nombre, Set<ActividadEntrenamiento> actividadEntrenamientos) {
+	public Fase(String codFaseEntrenamiento, String nombre, String descripcion,
+			char estatus, Set<ActividadEntrenamiento> actividadEntrenamientos,
+			Set<ActividadEntrenamiento> actividadEntrenamientos_1) {
 		this.codFaseEntrenamiento = codFaseEntrenamiento;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 		this.actividadEntrenamientos = actividadEntrenamientos;
+		this.actividadEntrenamientos_1 = actividadEntrenamientos_1;
 	}
 
 	@Id
@@ -53,6 +57,15 @@ public class Fase implements java.io.Serializable {
 
 	public void setCodFaseEntrenamiento(String codFaseEntrenamiento) {
 		this.codFaseEntrenamiento = codFaseEntrenamiento;
+	}
+
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Column(name = "descripcion", nullable = false)
@@ -73,15 +86,6 @@ public class Fase implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fase")
 	public Set<ActividadEntrenamiento> getActividadEntrenamientos() {
 		return this.actividadEntrenamientos;
@@ -90,6 +94,16 @@ public class Fase implements java.io.Serializable {
 	public void setActividadEntrenamientos(
 			Set<ActividadEntrenamiento> actividadEntrenamientos) {
 		this.actividadEntrenamientos = actividadEntrenamientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fase")
+	public Set<ActividadEntrenamiento> getActividadEntrenamientos_1() {
+		return this.actividadEntrenamientos_1;
+	}
+
+	public void setActividadEntrenamientos_1(
+			Set<ActividadEntrenamiento> actividadEntrenamientos_1) {
+		this.actividadEntrenamientos_1 = actividadEntrenamientos_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,26 +19,28 @@ import javax.persistence.Table;
 public class TipoIndumentaria implements java.io.Serializable {
 
 	private String codigoIndumentaria;
-	private char estatus;
 	private String nombre;
+	private char estatus;
 	private Set<Talla> tallas = new HashSet<Talla>(0);
+	private Set<Talla> tallas_1 = new HashSet<Talla>(0);
 
 	public TipoIndumentaria() {
 	}
 
-	public TipoIndumentaria(String codigoIndumentaria, char estatus,
-			String nombre) {
+	public TipoIndumentaria(String codigoIndumentaria, String nombre,
+			char estatus) {
 		this.codigoIndumentaria = codigoIndumentaria;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
-	public TipoIndumentaria(String codigoIndumentaria, char estatus,
-			String nombre, Set<Talla> tallas) {
+	public TipoIndumentaria(String codigoIndumentaria, String nombre,
+			char estatus, Set<Talla> tallas, Set<Talla> tallas_1) {
 		this.codigoIndumentaria = codigoIndumentaria;
-		this.estatus = estatus;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.tallas = tallas;
+		this.tallas_1 = tallas_1;
 	}
 
 	@Id
@@ -51,15 +53,6 @@ public class TipoIndumentaria implements java.io.Serializable {
 		this.codigoIndumentaria = codigoIndumentaria;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -69,6 +62,15 @@ public class TipoIndumentaria implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIndumentaria")
 	public Set<Talla> getTallas() {
 		return this.tallas;
@@ -76,6 +78,15 @@ public class TipoIndumentaria implements java.io.Serializable {
 
 	public void setTallas(Set<Talla> tallas) {
 		this.tallas = tallas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIndumentaria")
+	public Set<Talla> getTallas_1() {
+		return this.tallas_1;
+	}
+
+	public void setTallas_1(Set<Talla> tallas_1) {
+		this.tallas_1 = tallas_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,29 +11,29 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class FamiliarComisionEquipoId implements java.io.Serializable {
 
-	private String cedulaFamiliar;
-	private String cedulaJugador;
 	private String codigoComision;
+	private String cedulaJugador;
+	private String cedulaFamiliar;
 	private String codigoEquipo;
 
 	public FamiliarComisionEquipoId() {
 	}
 
-	public FamiliarComisionEquipoId(String cedulaFamiliar,
-			String cedulaJugador, String codigoComision, String codigoEquipo) {
-		this.cedulaFamiliar = cedulaFamiliar;
-		this.cedulaJugador = cedulaJugador;
+	public FamiliarComisionEquipoId(String codigoComision,
+			String cedulaJugador, String cedulaFamiliar, String codigoEquipo) {
 		this.codigoComision = codigoComision;
+		this.cedulaJugador = cedulaJugador;
+		this.cedulaFamiliar = cedulaFamiliar;
 		this.codigoEquipo = codigoEquipo;
 	}
 
-	@Column(name = "cedula_familiar", nullable = false)
-	public String getCedulaFamiliar() {
-		return this.cedulaFamiliar;
+	@Column(name = "codigo_comision", nullable = false)
+	public String getCodigoComision() {
+		return this.codigoComision;
 	}
 
-	public void setCedulaFamiliar(String cedulaFamiliar) {
-		this.cedulaFamiliar = cedulaFamiliar;
+	public void setCodigoComision(String codigoComision) {
+		this.codigoComision = codigoComision;
 	}
 
 	@Column(name = "cedula_jugador", nullable = false)
@@ -45,13 +45,13 @@ public class FamiliarComisionEquipoId implements java.io.Serializable {
 		this.cedulaJugador = cedulaJugador;
 	}
 
-	@Column(name = "codigo_comision", nullable = false)
-	public String getCodigoComision() {
-		return this.codigoComision;
+	@Column(name = "cedula_familiar", nullable = false)
+	public String getCedulaFamiliar() {
+		return this.cedulaFamiliar;
 	}
 
-	public void setCodigoComision(String codigoComision) {
-		this.codigoComision = codigoComision;
+	public void setCedulaFamiliar(String cedulaFamiliar) {
+		this.cedulaFamiliar = cedulaFamiliar;
 	}
 
 	@Column(name = "codigo_equipo", nullable = false)
@@ -72,20 +72,20 @@ public class FamiliarComisionEquipoId implements java.io.Serializable {
 			return false;
 		FamiliarComisionEquipoId castOther = (FamiliarComisionEquipoId) other;
 
-		return ((this.getCedulaFamiliar() == castOther.getCedulaFamiliar()) || (this
-				.getCedulaFamiliar() != null
-				&& castOther.getCedulaFamiliar() != null && this
-				.getCedulaFamiliar().equals(castOther.getCedulaFamiliar())))
+		return ((this.getCodigoComision() == castOther.getCodigoComision()) || (this
+				.getCodigoComision() != null
+				&& castOther.getCodigoComision() != null && this
+				.getCodigoComision().equals(castOther.getCodigoComision())))
 				&& ((this.getCedulaJugador() == castOther.getCedulaJugador()) || (this
 						.getCedulaJugador() != null
 						&& castOther.getCedulaJugador() != null && this
 						.getCedulaJugador()
 						.equals(castOther.getCedulaJugador())))
-				&& ((this.getCodigoComision() == castOther.getCodigoComision()) || (this
-						.getCodigoComision() != null
-						&& castOther.getCodigoComision() != null && this
-						.getCodigoComision().equals(
-								castOther.getCodigoComision())))
+				&& ((this.getCedulaFamiliar() == castOther.getCedulaFamiliar()) || (this
+						.getCedulaFamiliar() != null
+						&& castOther.getCedulaFamiliar() != null && this
+						.getCedulaFamiliar().equals(
+								castOther.getCedulaFamiliar())))
 				&& ((this.getCodigoEquipo() == castOther.getCodigoEquipo()) || (this
 						.getCodigoEquipo() != null
 						&& castOther.getCodigoEquipo() != null && this
@@ -97,7 +97,7 @@ public class FamiliarComisionEquipoId implements java.io.Serializable {
 
 		result = 37
 				* result
-				+ (getCedulaFamiliar() == null ? 0 : this.getCedulaFamiliar()
+				+ (getCodigoComision() == null ? 0 : this.getCodigoComision()
 						.hashCode());
 		result = 37
 				* result
@@ -105,7 +105,7 @@ public class FamiliarComisionEquipoId implements java.io.Serializable {
 						.hashCode());
 		result = 37
 				* result
-				+ (getCodigoComision() == null ? 0 : this.getCodigoComision()
+				+ (getCedulaFamiliar() == null ? 0 : this.getCedulaFamiliar()
 						.hashCode());
 		result = 37
 				* result

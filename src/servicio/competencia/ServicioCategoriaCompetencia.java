@@ -4,18 +4,51 @@ import java.util.List;
 
 import dao.competencia.DaoCategoriaCompetencia;
 
+import modelo.Categoria;
 import modelo.CategoriaCompetencia;
+import modelo.Divisa;
 
 public class ServicioCategoriaCompetencia implements
 		IServicioCategoriaCompetencia {
-    
-	
-	
-		
+
 	DaoCategoriaCompetencia daoCategoriaCompetencia;
+	@Override
+	public void eliminar(Categoria cc) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void agregar(Categoria cc) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actualizar(Categoria cc) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Categoria buscarPorCodigo(Categoria cc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Categoria> listar() {
+		return daoCategoriaCompetencia.listar(Categoria.class);
+	}
+
+	@Override
+	public List<Categoria> listarActivos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
-	
+
 	public DaoCategoriaCompetencia getDaoCategoriaCompetencia() {
 		return daoCategoriaCompetencia;
 	}
@@ -26,27 +59,9 @@ public class ServicioCategoriaCompetencia implements
 	}
 
 	@Override
-	public void eliminar(CategoriaCompetencia cc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void agregar(CategoriaCompetencia cc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actualizar(CategoriaCompetencia cc) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<CategoriaCompetencia> buscarPorCodigo(CategoriaCompetencia cc) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CategoriaCompetencia> listarCategoriaPorCompetencia(String codigo) {
+		
+		return daoCategoriaCompetencia.listarCategoriaPorCompetencia(CategoriaCompetencia.class,codigo);
 	}
 
 }

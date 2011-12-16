@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class IndicadorActividadEscalaId implements java.io.Serializable {
 
-	private String codActividadEntrenamiento;
 	private String codIndicador;
+	private String codActividadEntrenamiento;
 
 	public IndicadorActividadEscalaId() {
 	}
 
-	public IndicadorActividadEscalaId(String codActividadEntrenamiento,
-			String codIndicador) {
-		this.codActividadEntrenamiento = codActividadEntrenamiento;
+	public IndicadorActividadEscalaId(String codIndicador,
+			String codActividadEntrenamiento) {
 		this.codIndicador = codIndicador;
-	}
-
-	@Column(name = "cod_actividad_entrenamiento", nullable = false)
-	public String getCodActividadEntrenamiento() {
-		return this.codActividadEntrenamiento;
-	}
-
-	public void setCodActividadEntrenamiento(String codActividadEntrenamiento) {
 		this.codActividadEntrenamiento = codActividadEntrenamiento;
 	}
 
@@ -41,6 +32,15 @@ public class IndicadorActividadEscalaId implements java.io.Serializable {
 		this.codIndicador = codIndicador;
 	}
 
+	@Column(name = "cod_actividad_entrenamiento", nullable = false)
+	public String getCodActividadEntrenamiento() {
+		return this.codActividadEntrenamiento;
+	}
+
+	public void setCodActividadEntrenamiento(String codActividadEntrenamiento) {
+		this.codActividadEntrenamiento = codActividadEntrenamiento;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -50,16 +50,16 @@ public class IndicadorActividadEscalaId implements java.io.Serializable {
 			return false;
 		IndicadorActividadEscalaId castOther = (IndicadorActividadEscalaId) other;
 
-		return ((this.getCodActividadEntrenamiento() == castOther
-				.getCodActividadEntrenamiento()) || (this
-				.getCodActividadEntrenamiento() != null
-				&& castOther.getCodActividadEntrenamiento() != null && this
-				.getCodActividadEntrenamiento().equals(
-						castOther.getCodActividadEntrenamiento())))
-				&& ((this.getCodIndicador() == castOther.getCodIndicador()) || (this
-						.getCodIndicador() != null
-						&& castOther.getCodIndicador() != null && this
-						.getCodIndicador().equals(castOther.getCodIndicador())));
+		return ((this.getCodIndicador() == castOther.getCodIndicador()) || (this
+				.getCodIndicador() != null
+				&& castOther.getCodIndicador() != null && this
+				.getCodIndicador().equals(castOther.getCodIndicador())))
+				&& ((this.getCodActividadEntrenamiento() == castOther
+						.getCodActividadEntrenamiento()) || (this
+						.getCodActividadEntrenamiento() != null
+						&& castOther.getCodActividadEntrenamiento() != null && this
+						.getCodActividadEntrenamiento().equals(
+								castOther.getCodActividadEntrenamiento())));
 	}
 
 	public int hashCode() {
@@ -67,12 +67,12 @@ public class IndicadorActividadEscalaId implements java.io.Serializable {
 
 		result = 37
 				* result
-				+ (getCodActividadEntrenamiento() == null ? 0 : this
-						.getCodActividadEntrenamiento().hashCode());
-		result = 37
-				* result
 				+ (getCodIndicador() == null ? 0 : this.getCodIndicador()
 						.hashCode());
+		result = 37
+				* result
+				+ (getCodActividadEntrenamiento() == null ? 0 : this
+						.getCodActividadEntrenamiento().hashCode());
 		return result;
 	}
 

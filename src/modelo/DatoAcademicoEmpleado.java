@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,22 +22,22 @@ public class DatoAcademicoEmpleado implements java.io.Serializable {
 
 	private String codigoDatoAcademico;
 	private Empleado empleado;
-	private char estatus;
-	private Date fechaEgreso;
-	private String instituto;
 	private String titulo;
+	private String instituto;
+	private Date fechaEgreso;
+	private char estatus;
 
 	public DatoAcademicoEmpleado() {
 	}
 
 	public DatoAcademicoEmpleado(String codigoDatoAcademico, Empleado empleado,
-			char estatus, Date fechaEgreso, String instituto, String titulo) {
+			String titulo, String instituto, Date fechaEgreso, char estatus) {
 		this.codigoDatoAcademico = codigoDatoAcademico;
 		this.empleado = empleado;
-		this.estatus = estatus;
-		this.fechaEgreso = fechaEgreso;
-		this.instituto = instituto;
 		this.titulo = titulo;
+		this.instituto = instituto;
+		this.fechaEgreso = fechaEgreso;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -60,13 +60,22 @@ public class DatoAcademicoEmpleado implements java.io.Serializable {
 		this.empleado = empleado;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
+	@Column(name = "titulo", nullable = false)
+	public String getTitulo() {
+		return this.titulo;
 	}
 
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	@Column(name = "instituto", nullable = false)
+	public String getInstituto() {
+		return this.instituto;
+	}
+
+	public void setInstituto(String instituto) {
+		this.instituto = instituto;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -79,22 +88,13 @@ public class DatoAcademicoEmpleado implements java.io.Serializable {
 		this.fechaEgreso = fechaEgreso;
 	}
 
-	@Column(name = "instituto", nullable = false)
-	public String getInstituto() {
-		return this.instituto;
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
 	}
 
-	public void setInstituto(String instituto) {
-		this.instituto = instituto;
-	}
-
-	@Column(name = "titulo", nullable = false)
-	public String getTitulo() {
-		return this.titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

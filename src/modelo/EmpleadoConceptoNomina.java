@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -25,24 +25,24 @@ public class EmpleadoConceptoNomina implements java.io.Serializable {
 	private EmpleadoConceptoNominaId id;
 	private ConceptoNomina conceptoNomina;
 	private Empleado empleado;
-	private char estatus;
-	private Date fechaFin;
-	private Date fechaInicio;
 	private double monto;
+	private char estatus;
+	private Date fechaInicio;
+	private Date fechaFin;
 
 	public EmpleadoConceptoNomina() {
 	}
 
 	public EmpleadoConceptoNomina(EmpleadoConceptoNominaId id,
-			ConceptoNomina conceptoNomina, Empleado empleado, char estatus,
-			Date fechaFin, Date fechaInicio, double monto) {
+			ConceptoNomina conceptoNomina, Empleado empleado, double monto,
+			char estatus, Date fechaInicio, Date fechaFin) {
 		this.id = id;
 		this.conceptoNomina = conceptoNomina;
 		this.empleado = empleado;
-		this.estatus = estatus;
-		this.fechaFin = fechaFin;
-		this.fechaInicio = fechaInicio;
 		this.monto = monto;
+		this.estatus = estatus;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 	}
 
 	@EmbeddedId
@@ -77,6 +77,15 @@ public class EmpleadoConceptoNomina implements java.io.Serializable {
 		this.empleado = empleado;
 	}
 
+	@Column(name = "monto", nullable = false, precision = 17, scale = 17)
+	public double getMonto() {
+		return this.monto;
+	}
+
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -84,16 +93,6 @@ public class EmpleadoConceptoNomina implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_fin", nullable = false, length = 13)
-	public Date getFechaFin() {
-		return this.fechaFin;
-	}
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -106,13 +105,14 @@ public class EmpleadoConceptoNomina implements java.io.Serializable {
 		this.fechaInicio = fechaInicio;
 	}
 
-	@Column(name = "monto", nullable = false, precision = 17, scale = 17)
-	public double getMonto() {
-		return this.monto;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_fin", nullable = false, length = 13)
+	public Date getFechaFin() {
+		return this.fechaFin;
 	}
 
-	public void setMonto(double monto) {
-		this.monto = monto;
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 }

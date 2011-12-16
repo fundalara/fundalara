@@ -1,0 +1,131 @@
+<?page title="TABLA DE POSICIONES" contentType="text/html;charset=UTF-8"?>
+<zk>
+ <div align="center">
+<window title="TABLA DE POSICIONES" border="normal" width="690px"
+		height="auto" closable="true">
+<!-- DATOS COMPETENCIA -->
+		<panel border="normal">
+			<caption label="Datos de la Competencia"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="15px" align="left"></column>
+						<column width="20px"></column>
+						<column width="40px"></column>
+						<column width="40px"></column>
+					</columns>
+					<rows>
+						<row style="border-style:none">
+							<label value=" Nombre Competencia"></label>
+							<hbox>
+								<textbox cols="20"></textbox>
+								<button
+									image="../../Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+							<label value="Categoria"></label>
+							<combobox></combobox>
+						</row>
+						<row style="border-style:none">
+							<label value="Fecha Inicio"></label>
+							<textbox cols="15"></textbox>
+							<label value="Fecha Fin"></label>
+							<textbox cols="15"></textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+		<separator height="15px"></separator>
+		
+<hbox width="100%"><!-- General -->		
+
+       <panel>
+	     <panelchildren>
+
+	      <listbox >
+	 
+	      <listhead >
+		    <listheader label="Seleccione"  width="11%"/>
+		     <listheader label="Posicion"  width="10%"/>
+		      <listheader label="Equipo"  width="20%"/>
+		      <listheader label="JJ"  width="5%"/>
+		      <listheader label="JG"  width="5%"/>
+		      <listheader label="JE"  width="5%"/>
+		      <listheader label="JP"  width="5%"/>
+		     <listheader label="Puntos"  width="15%"/>
+		     <listheader label="Promedio"  width="15%"/>
+	     </listhead>
+	  <listitem>
+		<listcell><div align="center"><checkbox /></div></listcell>
+		<listcell label="1" />
+		<listcell label="Fundalara A" />
+		<listcell label="5" />
+		<listcell label="4" />
+		<listcell label="1" />
+		<listcell label="0" />
+		<listcell label="4.500" />
+		<listcell label="900" />
+
+	 </listitem>
+	 <listitem>
+		<listcell><div align="center"><checkbox /></div></listcell>
+		<listcell label="2" />
+		<listcell label="Ucla" />
+		<listcell label="5" />
+		<listcell label="4" />
+		<listcell label="0" />
+		<listcell label="1" />
+		<listcell label="4.000" />
+		<listcell label="800" />
+	 </listitem>
+	 
+	 <listitem>
+		<listcell><div align="center"><checkbox /></div></listcell>
+		<listcell label="3" />
+		<listcell label="Delfines" />
+		<listcell label="3" />
+		<listcell label="1" />
+		<listcell label="2" />
+		<listcell label="0" />
+		<listcell label="2.000" />
+		<listcell label="666.7" />
+	 </listitem>
+	 
+	
+	  <listitem>
+		<listcell><div align="center"><checkbox /></div></listcell>
+		<listcell label="4" />
+		<listcell label="Criollitos" />
+		<listcell label="3" />
+		<listcell label="0" />
+		<listcell label="2" />
+		<listcell label="1" />
+		<listcell label="1.000" />
+		<listcell label="333.3" />
+	 </listitem>
+   </listbox>
+  	
+	</panelchildren>
+	
+</panel>
+
+</hbox><!-- Findel general -->		
+
+<separator height="15px"></separator>
+	<panel> <!-- Botones -->
+		<panelchildren>
+		    <div align="right">
+				<button image="../../Recursos/Imagenes/agregar.ico" label="Siguiente Ronda" ></button>				
+				<button image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"></button>
+				<button image="../../Recursos/Imagenes/salir.png" label="Salir" ></button>
+				
+			</div>
+		</panelchildren>
+	</panel>
+
+
+</window>
+</div>
+</zk>

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -38,8 +38,8 @@ public class ResultadoMantenimiento implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoEstadoMantenimiento", column = @Column(name = "codigo_estado_mantenimiento", nullable = false)),
-			@AttributeOverride(name = "codigoResultado", column = @Column(name = "codigo_resultado", nullable = false)) })
+			@AttributeOverride(name = "codigoResultado", column = @Column(name = "codigo_resultado", nullable = false)),
+			@AttributeOverride(name = "codigoEstadoMantenimiento", column = @Column(name = "codigo_estado_mantenimiento", nullable = false)) })
 	public ResultadoMantenimientoId getId() {
 		return this.id;
 	}

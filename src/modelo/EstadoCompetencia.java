@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,26 +19,29 @@ import javax.persistence.Table;
 public class EstadoCompetencia implements java.io.Serializable {
 
 	private String codigoEstadoCompetencia;
-	private String descripcion;
 	private String nombre;
+	private String descripcion;
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
+	private Set<Competencia> competencias_1 = new HashSet<Competencia>(0);
 
 	public EstadoCompetencia() {
 	}
 
-	public EstadoCompetencia(String codigoEstadoCompetencia,
-			String descripcion, String nombre) {
+	public EstadoCompetencia(String codigoEstadoCompetencia, String nombre,
+			String descripcion) {
 		this.codigoEstadoCompetencia = codigoEstadoCompetencia;
-		this.descripcion = descripcion;
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 
-	public EstadoCompetencia(String codigoEstadoCompetencia,
-			String descripcion, String nombre, Set<Competencia> competencias) {
+	public EstadoCompetencia(String codigoEstadoCompetencia, String nombre,
+			String descripcion, Set<Competencia> competencias,
+			Set<Competencia> competencias_1) {
 		this.codigoEstadoCompetencia = codigoEstadoCompetencia;
-		this.descripcion = descripcion;
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 		this.competencias = competencias;
+		this.competencias_1 = competencias_1;
 	}
 
 	@Id
@@ -51,15 +54,6 @@ public class EstadoCompetencia implements java.io.Serializable {
 		this.codigoEstadoCompetencia = codigoEstadoCompetencia;
 	}
 
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -69,6 +63,15 @@ public class EstadoCompetencia implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "descripcion", nullable = false)
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoCompetencia")
 	public Set<Competencia> getCompetencias() {
 		return this.competencias;
@@ -76,6 +79,15 @@ public class EstadoCompetencia implements java.io.Serializable {
 
 	public void setCompetencias(Set<Competencia> competencias) {
 		this.competencias = competencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoCompetencia")
+	public Set<Competencia> getCompetencias_1() {
+		return this.competencias_1;
+	}
+
+	public void setCompetencias_1(Set<Competencia> competencias_1) {
+		this.competencias_1 = competencias_1;
 	}
 
 }

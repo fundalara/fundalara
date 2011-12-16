@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 15/12/2011 03:23:59 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,18 +21,18 @@ public class FaseCompetencia implements java.io.Serializable {
 
 	private FaseCompetenciaId id;
 	private Competencia competencia;
-	private int equipoClasifican;
 	private int equipoIngresan;
+	private int equipoClasifican;
 
 	public FaseCompetencia() {
 	}
 
 	public FaseCompetencia(FaseCompetenciaId id, Competencia competencia,
-			int equipoClasifican, int equipoIngresan) {
+			int equipoIngresan, int equipoClasifican) {
 		this.id = id;
 		this.competencia = competencia;
-		this.equipoClasifican = equipoClasifican;
 		this.equipoIngresan = equipoIngresan;
+		this.equipoClasifican = equipoClasifican;
 	}
 
 	@EmbeddedId
@@ -57,15 +57,6 @@ public class FaseCompetencia implements java.io.Serializable {
 		this.competencia = competencia;
 	}
 
-	@Column(name = "equipo_clasifican", nullable = false)
-	public int getEquipoClasifican() {
-		return this.equipoClasifican;
-	}
-
-	public void setEquipoClasifican(int equipoClasifican) {
-		this.equipoClasifican = equipoClasifican;
-	}
-
 	@Column(name = "equipo_ingresan", nullable = false)
 	public int getEquipoIngresan() {
 		return this.equipoIngresan;
@@ -73,6 +64,15 @@ public class FaseCompetencia implements java.io.Serializable {
 
 	public void setEquipoIngresan(int equipoIngresan) {
 		this.equipoIngresan = equipoIngresan;
+	}
+
+	@Column(name = "equipo_clasifican", nullable = false)
+	public int getEquipoClasifican() {
+		return this.equipoClasifican;
+	}
+
+	public void setEquipoClasifican(int equipoClasifican) {
+		this.equipoClasifican = equipoClasifican;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 15/12/2011 03:23:59 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,54 +20,55 @@ import javax.persistence.Table;
 public class Categoria implements java.io.Serializable {
 
 	private String codigoCategoria;
-	private int cantidadEquipo;
+	private String nombre;
 	private int edadInferior;
 	private int edadSuperior;
-	private char estatus;
-	private int maximoJugador;
+	private int cantidadEquipo;
 	private int minimoJugador;
-	private String nombre;
+	private int maximoJugador;
+	private char estatus;
+	private Set<Liga> ligas = new HashSet<Liga>(0);
+	private Set<ReglaCategoria> reglaCategorias = new HashSet<ReglaCategoria>(0);
 	private Set<CategoriaCompetencia> categoriaCompetencias = new HashSet<CategoriaCompetencia>(
 			0);
-	private Set<Liga> ligas = new HashSet<Liga>(0);
+	private Set<Temporada> temporadas = new HashSet<Temporada>(0);
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
-	private Set<ActividadEntrenamiento> actividadEntrenamientos = new HashSet<ActividadEntrenamiento>(
-			0);
 
 	public Categoria() {
 	}
 
-	public Categoria(String codigoCategoria, int cantidadEquipo,
-			int edadInferior, int edadSuperior, char estatus,
-			int maximoJugador, int minimoJugador, String nombre) {
+	public Categoria(String codigoCategoria, String nombre, int edadInferior,
+			int edadSuperior, int cantidadEquipo, int minimoJugador,
+			int maximoJugador, char estatus) {
 		this.codigoCategoria = codigoCategoria;
-		this.cantidadEquipo = cantidadEquipo;
+		this.nombre = nombre;
 		this.edadInferior = edadInferior;
 		this.edadSuperior = edadSuperior;
-		this.estatus = estatus;
-		this.maximoJugador = maximoJugador;
+		this.cantidadEquipo = cantidadEquipo;
 		this.minimoJugador = minimoJugador;
-		this.nombre = nombre;
+		this.maximoJugador = maximoJugador;
+		this.estatus = estatus;
 	}
 
-	public Categoria(String codigoCategoria, int cantidadEquipo,
-			int edadInferior, int edadSuperior, char estatus,
-			int maximoJugador, int minimoJugador, String nombre,
-			Set<CategoriaCompetencia> categoriaCompetencias, Set<Liga> ligas,
-			Set<Equipo> equipos,
-			Set<ActividadEntrenamiento> actividadEntrenamientos) {
+	public Categoria(String codigoCategoria, String nombre, int edadInferior,
+			int edadSuperior, int cantidadEquipo, int minimoJugador,
+			int maximoJugador, char estatus, Set<Liga> ligas,
+			Set<ReglaCategoria> reglaCategorias,
+			Set<CategoriaCompetencia> categoriaCompetencias,
+			Set<Temporada> temporadas, Set<Equipo> equipos) {
 		this.codigoCategoria = codigoCategoria;
-		this.cantidadEquipo = cantidadEquipo;
+		this.nombre = nombre;
 		this.edadInferior = edadInferior;
 		this.edadSuperior = edadSuperior;
-		this.estatus = estatus;
-		this.maximoJugador = maximoJugador;
+		this.cantidadEquipo = cantidadEquipo;
 		this.minimoJugador = minimoJugador;
-		this.nombre = nombre;
-		this.categoriaCompetencias = categoriaCompetencias;
+		this.maximoJugador = maximoJugador;
+		this.estatus = estatus;
 		this.ligas = ligas;
+		this.reglaCategorias = reglaCategorias;
+		this.categoriaCompetencias = categoriaCompetencias;
+		this.temporadas = temporadas;
 		this.equipos = equipos;
-		this.actividadEntrenamientos = actividadEntrenamientos;
 	}
 
 	@Id
@@ -80,13 +81,13 @@ public class Categoria implements java.io.Serializable {
 		this.codigoCategoria = codigoCategoria;
 	}
 
-	@Column(name = "cantidad_equipo", nullable = false)
-	public int getCantidadEquipo() {
-		return this.cantidadEquipo;
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
 	}
 
-	public void setCantidadEquipo(int cantidadEquipo) {
-		this.cantidadEquipo = cantidadEquipo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Column(name = "edad_inferior", nullable = false)
@@ -107,22 +108,13 @@ public class Categoria implements java.io.Serializable {
 		this.edadSuperior = edadSuperior;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
+	@Column(name = "cantidad_equipo", nullable = false)
+	public int getCantidadEquipo() {
+		return this.cantidadEquipo;
 	}
 
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
-	@Column(name = "maximo_jugador", nullable = false)
-	public int getMaximoJugador() {
-		return this.maximoJugador;
-	}
-
-	public void setMaximoJugador(int maximoJugador) {
-		this.maximoJugador = maximoJugador;
+	public void setCantidadEquipo(int cantidadEquipo) {
+		this.cantidadEquipo = cantidadEquipo;
 	}
 
 	@Column(name = "minimo_jugador", nullable = false)
@@ -134,23 +126,22 @@ public class Categoria implements java.io.Serializable {
 		this.minimoJugador = minimoJugador;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
+	@Column(name = "maximo_jugador", nullable = false)
+	public int getMaximoJugador() {
+		return this.maximoJugador;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setMaximoJugador(int maximoJugador) {
+		this.maximoJugador = maximoJugador;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-	public Set<CategoriaCompetencia> getCategoriaCompetencias() {
-		return this.categoriaCompetencias;
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
 	}
 
-	public void setCategoriaCompetencias(
-			Set<CategoriaCompetencia> categoriaCompetencias) {
-		this.categoriaCompetencias = categoriaCompetencias;
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categorias")
@@ -163,22 +154,40 @@ public class Categoria implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<ReglaCategoria> getReglaCategorias() {
+		return this.reglaCategorias;
+	}
+
+	public void setReglaCategorias(Set<ReglaCategoria> reglaCategorias) {
+		this.reglaCategorias = reglaCategorias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<CategoriaCompetencia> getCategoriaCompetencias() {
+		return this.categoriaCompetencias;
+	}
+
+	public void setCategoriaCompetencias(
+			Set<CategoriaCompetencia> categoriaCompetencias) {
+		this.categoriaCompetencias = categoriaCompetencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<Temporada> getTemporadas() {
+		return this.temporadas;
+	}
+
+	public void setTemporadas(Set<Temporada> temporadas) {
+		this.temporadas = temporadas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
 	public Set<Equipo> getEquipos() {
 		return this.equipos;
 	}
 
 	public void setEquipos(Set<Equipo> equipos) {
 		this.equipos = equipos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-	public Set<ActividadEntrenamiento> getActividadEntrenamientos() {
-		return this.actividadEntrenamientos;
-	}
-
-	public void setActividadEntrenamientos(
-			Set<ActividadEntrenamiento> actividadEntrenamientos) {
-		this.actividadEntrenamientos = actividadEntrenamientos;
 	}
 
 }

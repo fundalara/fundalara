@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,9 @@ public class EstadoVenezuela implements java.io.Serializable {
 	private String codigoEstado;
 	private String nombre;
 	private Set<Divisa> divisas = new HashSet<Divisa>(0);
+	private Set<Divisa> divisas_1 = new HashSet<Divisa>(0);
 	private Set<Municipio> municipios = new HashSet<Municipio>(0);
+	private Set<Municipio> municipios_1 = new HashSet<Municipio>(0);
 
 	public EstadoVenezuela() {
 	}
@@ -32,11 +34,14 @@ public class EstadoVenezuela implements java.io.Serializable {
 	}
 
 	public EstadoVenezuela(String codigoEstado, String nombre,
-			Set<Divisa> divisas, Set<Municipio> municipios) {
+			Set<Divisa> divisas, Set<Divisa> divisas_1,
+			Set<Municipio> municipios, Set<Municipio> municipios_1) {
 		this.codigoEstado = codigoEstado;
 		this.nombre = nombre;
 		this.divisas = divisas;
+		this.divisas_1 = divisas_1;
 		this.municipios = municipios;
+		this.municipios_1 = municipios_1;
 	}
 
 	@Id
@@ -68,12 +73,30 @@ public class EstadoVenezuela implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoVenezuela")
+	public Set<Divisa> getDivisas_1() {
+		return this.divisas_1;
+	}
+
+	public void setDivisas_1(Set<Divisa> divisas_1) {
+		this.divisas_1 = divisas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoVenezuela")
 	public Set<Municipio> getMunicipios() {
 		return this.municipios;
 	}
 
 	public void setMunicipios(Set<Municipio> municipios) {
 		this.municipios = municipios;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "estadoVenezuela")
+	public Set<Municipio> getMunicipios_1() {
+		return this.municipios_1;
+	}
+
+	public void setMunicipios_1(Set<Municipio> municipios_1) {
+		this.municipios_1 = municipios_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,22 +22,22 @@ public class ProveedorBanco implements java.io.Serializable {
 	private TipoCuentaBanco tipoCuentaBanco;
 	private Banco banco;
 	private String descripcion;
-	private char estatus;
 	private String titular;
+	private char estatus;
 
 	public ProveedorBanco() {
 	}
 
 	public ProveedorBanco(String numeroCuenta, Proveedor proveedor,
 			TipoCuentaBanco tipoCuentaBanco, Banco banco, String descripcion,
-			char estatus, String titular) {
+			String titular, char estatus) {
 		this.numeroCuenta = numeroCuenta;
 		this.proveedor = proveedor;
 		this.tipoCuentaBanco = tipoCuentaBanco;
 		this.banco = banco;
 		this.descripcion = descripcion;
-		this.estatus = estatus;
 		this.titular = titular;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -89,15 +89,6 @@ public class ProveedorBanco implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Column(name = "titular", nullable = false)
 	public String getTitular() {
 		return this.titular;
@@ -105,6 +96,15 @@ public class ProveedorBanco implements java.io.Serializable {
 
 	public void setTitular(String titular) {
 		this.titular = titular;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

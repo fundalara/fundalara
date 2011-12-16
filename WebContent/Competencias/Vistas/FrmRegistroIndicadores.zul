@@ -1,8 +1,12 @@
-<?page title="Auto Generated index.zul"?>
+<?page title="REGISTRO DE INDICADORES" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<!-- <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="rmRegistroIndicadores" ?> -->
+
 <zk>
 	<div align="center">
-	<window title="Registro de Indicadores " border="normal" width="500px" height="auto" closable="true">
-	<zscript><![CDATA[
+		<window title="Registro de Indicadores " border="normal"
+			width="500px" height="auto" closable="true">
+			<zscript><![CDATA[
 	//@DECLARATION
 	public void Seleccion() {
 		//		formula.setText(formula.getText() +  );
@@ -11,23 +15,13 @@
 	public void Operador() {
 		formula.setText(formula.getText() + cmbOperador.getText());
 	}
-	
-		public void Tipo() {
-			if (cmbTipo.getText().equals("Sencillos")) {
-				Sencillos.setVisible(true);
-				Compuestos.setVisible(false);
-			} else {
-				Sencillos.setVisible(false);
-				Compuestos.setVisible(true);
-		}
-		}
-	public void Cambio() {
-		if (cmbValidador.getText().equals("Cualitativo ")) {
-			Cualitativo.setVisible(true);
-			Cuantitativo.setVisible(false);
+	public void Tipo() {
+		if (cmbTipo.getText().equals("Sencillo")) {
+			pnlSencillo.setVisible(true);
+			pnlCompuesto.setVisible(false);
 		} else {
-			Cualitativo.setVisible(false);
-			Cuantitativo.setVisible(true);
+			pnlSencillo.setVisible(false);
+			pnlCompuesto.setVisible(true);
 		}
 	}
 	public void Agregar() {
@@ -39,236 +33,228 @@
 	}
 ]]>
 	</zscript>
-	<div align="left">
-		<grid>
-			<columns>
-				<column width="20%"/>
-				<column width="80%"/>
-			</columns>
-			<rows>
-			<row style="border:none">
-			<label value="Tipo Indicador"/>
-			<combobox id="cmbTipo" cols="15" onChange="Tipo()">
-			<comboitem label="Sencillos"/>
-			<comboitem label="Compuestos"/>
-			</combobox>
-			</row>
-			</rows>
-		</grid>
-		<panel id="Sencillos" title="Indicadores Sencillos" border="normal" visible="false">
-			<panelchildren>
-			
-				<grid width="100%">
-					<columns>
-						<column width="25%"/>
-						<column width="25%"/>
-						<column width="25%"/>
-						<column width="25%"/>
-					</columns>
-				<rows>
-				<row align="left" style="border:none">
-					<label value="Aplica a "></label>
-					<combobox id="cmbAplica" cols="12">
-						<comboitem label="Seleccione" />
-						<comboitem label="Jugador" />
-						<comboitem label="Equipo" />
-					</combobox>
-					<label value="Tipo de Actuación"/>
-					<combobox id="cmbDetalle" cols="12">
-						<comboitem label="Ofensivo" />
-						<comboitem label="Defensivo" />
-					</combobox>
-				</row>
-				<row align="left" style="border:none">
-					<label value="Variable del Indicador"></label>
-					<textbox width="95%"/>
-					<label value="Nombre del Indicador"></label>
-					<textbox width="95%"/>
-				</row>
-				<row style="border:none">
-					<label value="Forma de Medir el indicador"></label>
-						<combobox id="cmbValidador" cols="12" onChange="Cambio()">
-							<comboitem label="Cualitativo " />
-							<comboitem label="Cuantitativo" />
-						</combobox>
-				</row>
-			</rows>
-			</grid>
-			<div align="center">
-			<space></space>
-				<panel id="Cuantitativo" border="normal" title="Cuantitativo" visible="false">
-					<panelchildren>
-						<grid>
-							<columns>
-								<column label="" width="25%"></column>
-								<column label=""></column>
-							</columns>
-							<rows>
-								<row align="left">
-									<label value="Valor Menor"></label>
-									<textbox id="txtValormenor"></textbox>
-								</row>
-								<row align="left">
-									<label value="Valor Mayor"></label>
-									<textbox id="txtValormayor"></textbox>
-								</row>
-							</rows>
-						</grid>
-					</panelchildren>
-				</panel>
-				<panel id="Cualitativo" border="normal" title="Cualitativo " visible="False">
-					<panelchildren>
-						<div>
-							<grid mold="paging" pageSize="8">
-								<columns>
-									<column label="Valor" width="25%" align="center" />
-									<column label="Descripcion" width="55%" align="center" />
-									<column width="20%" align="center"/>
-								</columns>
-								<rows>
-									<row>
-										<label value="ejemplo"/>
-										<label value="ejemplo"/>
-										<label value=" "/>
-									</row>
-									<row>
-										<textbox width="95%"/>
-										<textbox width="95%"/>
-										<hbox>
-											<button image="/Recursos/Imagenes/agregar.ico" onClick="Agregar()" width="40px" />
-											<button image="/Recursos/Imagenes/quitar.ico" onClick="Quitar()" width="40px" />
-										</hbox>
-									</row>
-								</rows>
-							</grid>
-						</div>
-					</panelchildren>
-				</panel>
-				</div>
-			</panelchildren>
-		</panel>
-		<panel id="Compuestos" title="Indicadores Compuestos" border="normal" visible="false">
-			<panelchildren>
+			<div align="left">
 				<grid>
+					<columns>
+						<column width="25%" />
+						<column width="75%" />
+					</columns>
 					<rows>
-						<row align="left" style="border:none">
-							<label value="Aplica a "></label>
-							<combobox id="cmbTipoS" value="Jugador" width="90%">
-								<comboitem label="Seleccione" />
-								<comboitem label="Jugador" />
-								<comboitem label="Equipo" />
+						<row style="border:none">
+						   
+							<label value="Tipo Indicador" />
+							 <div>
+							<combobox id="cmbTipo" style="margin-top:5px" cols="13"
+								onChange="Tipo()">
+								<comboitem label="Sencillo" />
+								<comboitem label="Compuesto" />
 							</combobox>
-							<label value="Tipo Actuación"/>
-							<combobox id="cmbDetalleS" value="Ofensivo" width="90%">
-								<comboitem label="Ofensivo" />
-								<comboitem label="Defensivo" />
-							</combobox>
-						</row>
-						<row align="left" style="border:none">
-							<label value="Variable Indicador"/>
-							<textbox width="90%" value="slg" />
-							<label value="Nombre Indicador"/>
-							<textbox width="90%" value="Slugging" />
+							<button id="btnBuscarInidicador"
+										image="../../Recursos/Imagenes/consultar.ico" >								
+							</button>
+							</div>
 						</row>
 					</rows>
 				</grid>
-					<div>
-					<panel>
+				<panel id="pnlSencillo" title="Indicadores Sencillos"
+					border="normal" visible="false">
 					<panelchildren>
-						<grid>
-								<columns>
-									<column width="50%" />
-									<column width="50%" />
-								</columns>
-								<rows>
-									<row>
-										<listbox id="lista" onSelect="Seleccion()" width="99%" style="align:left">
-											<listitem>
-												<listcell>
-													<checkbox checked="true" />
-												</listcell>
-												<listcell label="Sencillos" />
-											</listitem>
-											<listitem>
-												<listcell >
-													<checkbox checked="true" />
-												</listcell>
-												<listcell label="Dobles" />
-												</listitem>
-											<listitem>
-												<listcell>
-													<checkbox checked="true" />
-												</listcell>
-												<listcell label="Triples" />
-											</listitem>
-											<listitem>
-												<listcell>
-													<checkbox checked="true" />
-												</listcell>
-												<listcell label="Veces al Bate" />
-											</listitem>
-											<listitem>
-												<listcell>
-													<checkbox checked="true" />
-												</listcell>
-												<listcell label="Home Run" />
-											</listitem>
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-													<listcell label="Ponches" />
-											</listitem>
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Carreras Impulsadas" />
-											</listitem>
-											<listitem>
-												<listcell>
-													<checkbox />
-												</listcell>
-												<listcell label="Carreras Anotadas" />
-											</listitem>
-										</listbox>
-									<grid width="99%">
-										<rows>
-											<row align="left" style="border-style:none">
-												<label value="Tipo de Operador "/>
-												<combobox id="cmbOperador" onChange="Operador()" width="80%">
-													<comboitem label="=" />
-													<comboitem label="/" />
-													<comboitem label="*" />
-													<comboitem label="+" />
-													<comboitem label="-" />
-													<comboitem label="(" />
-													<comboitem label=")" />
-												</combobox>
-											</row>
-											<row align="left" style="border-style:none">
-												<label value="Formula del Indicador "/>
-												<textbox id="formula" width="90%" height="100px" multiline="true" value="=(H+(2B*2)+(3B*3)+(HR*4))/VB" />
-											</row>
-										</rows>
-									</grid>
+						<grid width="100%">
+							<columns>
+								<column width="25%" />
+								<column width="25%" />
+								<column width="15%" />
+		
+							</columns>
+							<rows>
+								<row align="left" style="border:none">
+									<label value="Modalidad" />
+									<combobox id="cmbModalidadSencillo"
+										cols="13" value="--Seleccione--">
+										<comboitem label="Ofensivo"></comboitem>
+										<comboitem label="Defensivo"></comboitem>
+										<comboitem label="Pitcheo"></comboitem>
+									</combobox>
+								</row>
+								<row align="left" style="border:none">
+									<label value="Abreviatura"></label>
+									<textbox cols="16" />
+								
+									<label value="Nombre"></label>
+									<textbox cols="20" />
+								
 								</row>
 							</rows>
 						</grid>
 					</panelchildren>
 				</panel>
-				</div>
-				</panelchildren>
+
+				<panel id="pnlCompuesto" title="Indicadores Compuestos"
+					border="normal" visible="false">
+					<panelchildren>
+						<grid width="100%">
+							<columns>
+								<column width="25%" />
+								<column width="20%" />
+								<column width="10%" />
+								<column width="30%" />
+							</columns>
+							<rows>
+								<row align="left" style="border:none">
+									<label value="Modalidad" />
+									<combobox id="cmbModalidadCompuesto"
+										cols="13" value="--Seleccione--">
+										<comboitem label="Ofensivo"></comboitem>
+										<comboitem label="Defensivo"></comboitem>
+										<comboitem label="Pitcheo"></comboitem>
+									</combobox>
+									<label value="Medición "></label>
+									<combobox id="cmbMedicion"
+										value="--Seleccione--" cols="21">
+										<comboitem label="Individual" />
+										<comboitem label="Colectivo" />
+									</combobox>
+								</row>
+								<row align="left" style="border:none">
+									<label value="Abreviatura"></label>
+									<textbox cols="16" />
+									<label value="Nombre"></label>
+									<textbox cols="24" />
+								</row>
+								<row align="left" style="border:none">
+									<label value="Seleccionar Indicador"></label>
+									<button id="btnBuscar" image="../../Recursos/Imagenes/consultar.ico" ></button>
+								</row>
+							</rows>
+						</grid>
+						<div>
+							<panel>
+								<panelchildren>
+									<grid>
+										<columns>
+											<column width="50%" />
+											<column width="50%" />
+										</columns>
+										<rows>
+											<row>
+												<listbox id="lista"
+													onSelect="Seleccion()" width="99%" style="align:left">
+													<listitem>
+														<listcell>
+															<checkbox
+																checked="true" />
+														</listcell>
+														<listcell
+															label="Sencillos" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox
+																checked="true" />
+														</listcell>
+														<listcell
+															label="Dobles" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox
+																checked="true" />
+														</listcell>
+														<listcell
+															label="Triples" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox
+																checked="true" />
+														</listcell>
+														<listcell
+															label="Veces al Bate" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox
+																checked="true" />
+														</listcell>
+														<listcell
+															label="Home Run" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox />
+														</listcell>
+														<listcell
+															label="Ponches" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox />
+														</listcell>
+														<listcell
+															label="Carreras Impulsadas" />
+													</listitem>
+													<listitem>
+														<listcell>
+															<checkbox />
+														</listcell>
+														<listcell
+															label="Carreras Anotadas" />
+													</listitem>
+												</listbox>
+												
+												<div align="left">
+												<grid >
+										
+												
+													<!-- <columns>
+													<column width="20%"></column>
+													<column width="20%"></column>
+													<column width="20%"></column>
+													<column width="20%"></column>												
+													<column width="20%"></column>													
+													</columns>-->
+													
+													<rows>
+														<row>
+															<button id="btnSumar" label="+"></button>
+															<button id="btnRestar" label="-"></button>
+															<button id="btnMultiplicar" label="*"></button>
+															<button id="btnDividir" label="/"></button>
+															<button id="btnParentesisAbre" label="(" ></button>
+															<!-- <button id="btnParentesisCierra" label=")" width="16,6%"></button>-->
+														</row>
+																											
+														<row
+															align="left" style="border-style:none">
+															<label
+																value="Fórmula " />
+														</row>
+														
+													<!--  <row>
+															<textbox
+																id="txtFormula"  multiline="true"
+																value="=(H+(2B*2)+(3B*3)+(HR*4))/VB" />
+														</row>-->
+													</rows>
+												</grid>
+											</div>
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+						</div>
+					</panelchildren>
 				</panel>
-				 <div>
-			  	<panel>
+				<div>
+					<panel>
 						<panelchildren style="margin-top:5px ">
 							<div align="right">
 								<button
 									image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 								</button>
 								<button
-									image="../../Recursos/Imagenes/editar.ico" label="Eliminar">
+									image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
 								</button>
 								<button
 									image="../../Recursos/Imagenes/cancelar.ico"
@@ -280,7 +266,7 @@
 							</div>
 						</panelchildren>
 					</panel>
-				 </div>
+				</div>
 			</div>
 		</window>
 	</div>

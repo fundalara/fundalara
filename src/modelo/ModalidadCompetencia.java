@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,10 @@ public class ModalidadCompetencia implements java.io.Serializable {
 
 	private String codigoModalidadCompetencia;
 	private String nombre;
+	private String codigoTipoCompetencia;
 	private Set<TipoModalidadCompetencia> tipoModalidadCompetencias = new HashSet<TipoModalidadCompetencia>(
+			0);
+	private Set<TipoModalidadCompetencia> tipoModalidadCompetencias_1 = new HashSet<TipoModalidadCompetencia>(
 			0);
 
 	public ModalidadCompetencia() {
@@ -32,11 +35,14 @@ public class ModalidadCompetencia implements java.io.Serializable {
 	}
 
 	public ModalidadCompetencia(String codigoModalidadCompetencia,
-			String nombre,
-			Set<TipoModalidadCompetencia> tipoModalidadCompetencias) {
+			String nombre, String codigoTipoCompetencia,
+			Set<TipoModalidadCompetencia> tipoModalidadCompetencias,
+			Set<TipoModalidadCompetencia> tipoModalidadCompetencias_1) {
 		this.codigoModalidadCompetencia = codigoModalidadCompetencia;
 		this.nombre = nombre;
+		this.codigoTipoCompetencia = codigoTipoCompetencia;
 		this.tipoModalidadCompetencias = tipoModalidadCompetencias;
+		this.tipoModalidadCompetencias_1 = tipoModalidadCompetencias_1;
 	}
 
 	@Id
@@ -58,6 +64,15 @@ public class ModalidadCompetencia implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "codigo_tipo_competencia")
+	public String getCodigoTipoCompetencia() {
+		return this.codigoTipoCompetencia;
+	}
+
+	public void setCodigoTipoCompetencia(String codigoTipoCompetencia) {
+		this.codigoTipoCompetencia = codigoTipoCompetencia;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modalidadCompetencia")
 	public Set<TipoModalidadCompetencia> getTipoModalidadCompetencias() {
 		return this.tipoModalidadCompetencias;
@@ -66,6 +81,16 @@ public class ModalidadCompetencia implements java.io.Serializable {
 	public void setTipoModalidadCompetencias(
 			Set<TipoModalidadCompetencia> tipoModalidadCompetencias) {
 		this.tipoModalidadCompetencias = tipoModalidadCompetencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modalidadCompetencia")
+	public Set<TipoModalidadCompetencia> getTipoModalidadCompetencias_1() {
+		return this.tipoModalidadCompetencias_1;
+	}
+
+	public void setTipoModalidadCompetencias_1(
+			Set<TipoModalidadCompetencia> tipoModalidadCompetencias_1) {
+		this.tipoModalidadCompetencias_1 = tipoModalidadCompetencias_1;
 	}
 
 }

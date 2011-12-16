@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,49 +23,53 @@ public class Proveedor implements java.io.Serializable {
 	private String rifNic;
 	private Parroquia parroquia;
 	private String codMunicipio;
-	private String correoElectronico;
 	private String cuentaFacebook;
 	private String cuentaTwitter;
+	private String correoElectronico;
 	private String direccion;
-	private char estatus;
-	private String fax;
 	private String nombre;
 	private String telefono1;
 	private String telefono2;
+	private char estatus;
+	private String fax;
 	private Set<ProveedorBanco> proveedorBancos = new HashSet<ProveedorBanco>(0);
+	private Set<ProveedorBanco> proveedorBancos_1 = new HashSet<ProveedorBanco>(
+			0);
 
 	public Proveedor() {
 	}
 
 	public Proveedor(String rifNic, Parroquia parroquia, String codMunicipio,
-			String direccion, char estatus, String nombre, String telefono1) {
+			String direccion, String nombre, String telefono1, char estatus) {
 		this.rifNic = rifNic;
 		this.parroquia = parroquia;
 		this.codMunicipio = codMunicipio;
 		this.direccion = direccion;
-		this.estatus = estatus;
 		this.nombre = nombre;
 		this.telefono1 = telefono1;
+		this.estatus = estatus;
 	}
 
 	public Proveedor(String rifNic, Parroquia parroquia, String codMunicipio,
-			String correoElectronico, String cuentaFacebook,
-			String cuentaTwitter, String direccion, char estatus, String fax,
-			String nombre, String telefono1, String telefono2,
-			Set<ProveedorBanco> proveedorBancos) {
+			String cuentaFacebook, String cuentaTwitter,
+			String correoElectronico, String direccion, String nombre,
+			String telefono1, String telefono2, char estatus, String fax,
+			Set<ProveedorBanco> proveedorBancos,
+			Set<ProveedorBanco> proveedorBancos_1) {
 		this.rifNic = rifNic;
 		this.parroquia = parroquia;
 		this.codMunicipio = codMunicipio;
-		this.correoElectronico = correoElectronico;
 		this.cuentaFacebook = cuentaFacebook;
 		this.cuentaTwitter = cuentaTwitter;
+		this.correoElectronico = correoElectronico;
 		this.direccion = direccion;
-		this.estatus = estatus;
-		this.fax = fax;
 		this.nombre = nombre;
 		this.telefono1 = telefono1;
 		this.telefono2 = telefono2;
+		this.estatus = estatus;
+		this.fax = fax;
 		this.proveedorBancos = proveedorBancos;
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 	@Id
@@ -97,15 +101,6 @@ public class Proveedor implements java.io.Serializable {
 		this.codMunicipio = codMunicipio;
 	}
 
-	@Column(name = "correo_electronico")
-	public String getCorreoElectronico() {
-		return this.correoElectronico;
-	}
-
-	public void setCorreoElectronico(String correoElectronico) {
-		this.correoElectronico = correoElectronico;
-	}
-
 	@Column(name = "cuenta_facebook")
 	public String getCuentaFacebook() {
 		return this.cuentaFacebook;
@@ -124,6 +119,15 @@ public class Proveedor implements java.io.Serializable {
 		this.cuentaTwitter = cuentaTwitter;
 	}
 
+	@Column(name = "correo_electronico")
+	public String getCorreoElectronico() {
+		return this.correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
 	@Column(name = "direccion", nullable = false)
 	public String getDireccion() {
 		return this.direccion;
@@ -131,24 +135,6 @@ public class Proveedor implements java.io.Serializable {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
-	@Column(name = "fax")
-	public String getFax() {
-		return this.fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -178,6 +164,24 @@ public class Proveedor implements java.io.Serializable {
 		this.telefono2 = telefono2;
 	}
 
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
+	@Column(name = "fax")
+	public String getFax() {
+		return this.fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proveedor")
 	public Set<ProveedorBanco> getProveedorBancos() {
 		return this.proveedorBancos;
@@ -185,6 +189,15 @@ public class Proveedor implements java.io.Serializable {
 
 	public void setProveedorBancos(Set<ProveedorBanco> proveedorBancos) {
 		this.proveedorBancos = proveedorBancos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proveedor")
+	public Set<ProveedorBanco> getProveedorBancos_1() {
+		return this.proveedorBancos_1;
+	}
+
+	public void setProveedorBancos_1(Set<ProveedorBanco> proveedorBancos_1) {
+		this.proveedorBancos_1 = proveedorBancos_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,29 +19,32 @@ import javax.persistence.Table;
 public class ClasificacionEquipo implements java.io.Serializable {
 
 	private String codigoClasificacion;
+	private String nombre;
 	private String descripcion;
 	private char estatus;
-	private String nombre;
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
+	private Set<Equipo> equipos_1 = new HashSet<Equipo>(0);
 
 	public ClasificacionEquipo() {
 	}
 
-	public ClasificacionEquipo(String codigoClasificacion, String descripcion,
-			char estatus, String nombre) {
+	public ClasificacionEquipo(String codigoClasificacion, String nombre,
+			String descripcion, char estatus) {
 		this.codigoClasificacion = codigoClasificacion;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 	}
 
-	public ClasificacionEquipo(String codigoClasificacion, String descripcion,
-			char estatus, String nombre, Set<Equipo> equipos) {
+	public ClasificacionEquipo(String codigoClasificacion, String nombre,
+			String descripcion, char estatus, Set<Equipo> equipos,
+			Set<Equipo> equipos_1) {
 		this.codigoClasificacion = codigoClasificacion;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.nombre = nombre;
 		this.equipos = equipos;
+		this.equipos_1 = equipos_1;
 	}
 
 	@Id
@@ -52,6 +55,15 @@ public class ClasificacionEquipo implements java.io.Serializable {
 
 	public void setCodigoClasificacion(String codigoClasificacion) {
 		this.codigoClasificacion = codigoClasificacion;
+	}
+
+	@Column(name = "nombre", nullable = false)
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	@Column(name = "descripcion", nullable = false)
@@ -72,15 +84,6 @@ public class ClasificacionEquipo implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "nombre", nullable = false)
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "clasificacionEquipo")
 	public Set<Equipo> getEquipos() {
 		return this.equipos;
@@ -88,6 +91,15 @@ public class ClasificacionEquipo implements java.io.Serializable {
 
 	public void setEquipos(Set<Equipo> equipos) {
 		this.equipos = equipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "clasificacionEquipo")
+	public Set<Equipo> getEquipos_1() {
+		return this.equipos_1;
+	}
+
+	public void setEquipos_1(Set<Equipo> equipos_1) {
+		this.equipos_1 = equipos_1;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 15/12/2011 03:23:59 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class CategoriaCompetenciaId implements java.io.Serializable {
 
-	private String codigoCategoria;
 	private String codigoCompetencia;
+	private String codigoCategoria;
 
 	public CategoriaCompetenciaId() {
 	}
 
-	public CategoriaCompetenciaId(String codigoCategoria,
-			String codigoCompetencia) {
-		this.codigoCategoria = codigoCategoria;
+	public CategoriaCompetenciaId(String codigoCompetencia,
+			String codigoCategoria) {
 		this.codigoCompetencia = codigoCompetencia;
-	}
-
-	@Column(name = "codigo_categoria", nullable = false)
-	public String getCodigoCategoria() {
-		return this.codigoCategoria;
-	}
-
-	public void setCodigoCategoria(String codigoCategoria) {
 		this.codigoCategoria = codigoCategoria;
 	}
 
@@ -41,6 +32,15 @@ public class CategoriaCompetenciaId implements java.io.Serializable {
 		this.codigoCompetencia = codigoCompetencia;
 	}
 
+	@Column(name = "codigo_categoria", nullable = false)
+	public String getCodigoCategoria() {
+		return this.codigoCategoria;
+	}
+
+	public void setCodigoCategoria(String codigoCategoria) {
+		this.codigoCategoria = codigoCategoria;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -50,16 +50,16 @@ public class CategoriaCompetenciaId implements java.io.Serializable {
 			return false;
 		CategoriaCompetenciaId castOther = (CategoriaCompetenciaId) other;
 
-		return ((this.getCodigoCategoria() == castOther.getCodigoCategoria()) || (this
-				.getCodigoCategoria() != null
-				&& castOther.getCodigoCategoria() != null && this
-				.getCodigoCategoria().equals(castOther.getCodigoCategoria())))
-				&& ((this.getCodigoCompetencia() == castOther
-						.getCodigoCompetencia()) || (this
-						.getCodigoCompetencia() != null
-						&& castOther.getCodigoCompetencia() != null && this
-						.getCodigoCompetencia().equals(
-								castOther.getCodigoCompetencia())));
+		return ((this.getCodigoCompetencia() == castOther
+				.getCodigoCompetencia()) || (this.getCodigoCompetencia() != null
+				&& castOther.getCodigoCompetencia() != null && this
+				.getCodigoCompetencia()
+				.equals(castOther.getCodigoCompetencia())))
+				&& ((this.getCodigoCategoria() == castOther
+						.getCodigoCategoria()) || (this.getCodigoCategoria() != null
+						&& castOther.getCodigoCategoria() != null && this
+						.getCodigoCategoria().equals(
+								castOther.getCodigoCategoria())));
 	}
 
 	public int hashCode() {
@@ -67,12 +67,12 @@ public class CategoriaCompetenciaId implements java.io.Serializable {
 
 		result = 37
 				* result
-				+ (getCodigoCategoria() == null ? 0 : this.getCodigoCategoria()
-						.hashCode());
-		result = 37
-				* result
 				+ (getCodigoCompetencia() == null ? 0 : this
 						.getCodigoCompetencia().hashCode());
+		result = 37
+				* result
+				+ (getCodigoCategoria() == null ? 0 : this.getCodigoCategoria()
+						.hashCode());
 		return result;
 	}
 

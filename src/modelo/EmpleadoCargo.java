@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -26,28 +26,28 @@ public class EmpleadoCargo implements java.io.Serializable {
 	private Cargo cargo;
 	private Empleado empleado;
 	private char estado;
-	private char estatus;
 	private Date fechaFin;
 	private Date fechaInicio;
+	private char estatus;
 
 	public EmpleadoCargo() {
 	}
 
 	public EmpleadoCargo(EmpleadoCargoId id, Cargo cargo, Empleado empleado,
-			char estado, char estatus, Date fechaFin, Date fechaInicio) {
+			char estado, Date fechaFin, Date fechaInicio, char estatus) {
 		this.id = id;
 		this.cargo = cargo;
 		this.empleado = empleado;
 		this.estado = estado;
-		this.estatus = estatus;
 		this.fechaFin = fechaFin;
 		this.fechaInicio = fechaInicio;
+		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)),
-			@AttributeOverride(name = "codigoCargo", column = @Column(name = "codigo_cargo", nullable = false)) })
+			@AttributeOverride(name = "codigoCargo", column = @Column(name = "codigo_cargo", nullable = false)),
+			@AttributeOverride(name = "cedula", column = @Column(name = "cedula", nullable = false)) })
 	public EmpleadoCargoId getId() {
 		return this.id;
 	}
@@ -85,15 +85,6 @@ public class EmpleadoCargo implements java.io.Serializable {
 		this.estado = estado;
 	}
 
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_fin", nullable = false, length = 13)
 	public Date getFechaFin() {
@@ -112,6 +103,15 @@ public class EmpleadoCargo implements java.io.Serializable {
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 14/12/2011 05:11:39 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,26 +19,30 @@ import javax.persistence.Table;
 public class Resultado implements java.io.Serializable {
 
 	private String codigoResultado;
-	private String descripcion;
 	private char estatus;
+	private String descripcion;
 	private Set<ResultadoMantenimiento> resultadoMantenimientos = new HashSet<ResultadoMantenimiento>(
+			0);
+	private Set<ResultadoMantenimiento> resultadoMantenimientos_1 = new HashSet<ResultadoMantenimiento>(
 			0);
 
 	public Resultado() {
 	}
 
-	public Resultado(String codigoResultado, String descripcion, char estatus) {
+	public Resultado(String codigoResultado, char estatus, String descripcion) {
 		this.codigoResultado = codigoResultado;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 	}
 
-	public Resultado(String codigoResultado, String descripcion, char estatus,
-			Set<ResultadoMantenimiento> resultadoMantenimientos) {
+	public Resultado(String codigoResultado, char estatus, String descripcion,
+			Set<ResultadoMantenimiento> resultadoMantenimientos,
+			Set<ResultadoMantenimiento> resultadoMantenimientos_1) {
 		this.codigoResultado = codigoResultado;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.descripcion = descripcion;
 		this.resultadoMantenimientos = resultadoMantenimientos;
+		this.resultadoMantenimientos_1 = resultadoMantenimientos_1;
 	}
 
 	@Id
@@ -51,15 +55,6 @@ public class Resultado implements java.io.Serializable {
 		this.codigoResultado = codigoResultado;
 	}
 
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -67,6 +62,15 @@ public class Resultado implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "descripcion", nullable = false)
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resultado")
@@ -77,6 +81,16 @@ public class Resultado implements java.io.Serializable {
 	public void setResultadoMantenimientos(
 			Set<ResultadoMantenimiento> resultadoMantenimientos) {
 		this.resultadoMantenimientos = resultadoMantenimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resultado")
+	public Set<ResultadoMantenimiento> getResultadoMantenimientos_1() {
+		return this.resultadoMantenimientos_1;
+	}
+
+	public void setResultadoMantenimientos_1(
+			Set<ResultadoMantenimiento> resultadoMantenimientos_1) {
+		this.resultadoMantenimientos_1 = resultadoMantenimientos_1;
 	}
 
 }
