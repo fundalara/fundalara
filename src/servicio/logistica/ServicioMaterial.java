@@ -39,5 +39,10 @@ public class ServicioMaterial implements IServicioMaterial {
 		// TODO Auto-generated method stub		
 		return materialDAO.listarMateriales();
 	}
+	
+	public String generarCodigo(){
+		Integer nuevoCodigo = materialDAO.contarCodigos(new Material()) + 1;
+		return nuevoCodigo.toString();
+	}
 
 }

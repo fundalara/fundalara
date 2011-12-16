@@ -39,7 +39,6 @@
 								<combobox value="-- Seleccione --" cols="17">
  								  <comboitem ></comboitem> 
  								</combobox> 
-
 							</row>
 							<row style="border-style:none">
 								<label value="Teléfono"></label>

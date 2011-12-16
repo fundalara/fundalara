@@ -18,8 +18,6 @@ import org.zkoss.zul.Messagebox;
 
 import servicio.competencia.ServicioModalidadCompetencia;
 import servicio.competencia.ServicioTipoCompetencia;
-import servicio.competencia.ServicioTipoModalidadCompetencia;
-
 import servicio.competencia.*;
 
 
@@ -27,7 +25,6 @@ public class CntrlFrmNuevaCompetencia extends GenericForwardComposer {
 	AnnotateDataBinder binder;
 	ServicioCompetencia serviciocompetencia;
 	ServicioTipoCompetencia servicioTipoCompetencia;
-	ServicioModalidadCompetencia servicioModalidadCompetencia;
 	List<TipoCompetencia> tipoCompetencias; 
 	TipoCompetencia tipoCompetencia;
 	Combobox cmbTipoCompetencia;

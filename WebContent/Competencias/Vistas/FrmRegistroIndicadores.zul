@@ -40,8 +40,7 @@
 						<column width="75%" />
 					</columns>
 					<rows>
-						<row style="border:none">
-						   
+						<row style="border:none">						   
 							<label value="Tipo Indicador" />
 							 <div>
 							<combobox id="cmbTipo" style="margin-top:5px" cols="13"
@@ -64,7 +63,8 @@
 								<column width="25%" />
 								<column width="25%" />
 								<column width="15%" />
-		
+								<column width="25%" />
+								<column width="25%" />
 							</columns>
 							<rows>
 								<row align="left" style="border:none">
@@ -78,11 +78,9 @@
 								</row>
 								<row align="left" style="border:none">
 									<label value="Abreviatura"></label>
-									<textbox cols="16" />
-								
+									<textbox cols="16" />								
 									<label value="Nombre"></label>
 									<textbox cols="20" />
-								
 								</row>
 							</rows>
 						</grid>
@@ -98,6 +96,9 @@
 								<column width="20%" />
 								<column width="10%" />
 								<column width="30%" />
+								<column width="25%" />
+								<column width="25%" />
+								<column width="25%" />
 							</columns>
 							<rows>
 								<row align="left" style="border:none">
@@ -120,6 +121,10 @@
 									<textbox cols="16" />
 									<label value="Nombre"></label>
 									<textbox cols="24" />
+									<label value="Nombre"></label>
+									<textbox cols="16" />
+									<label value="Descripción"></label>
+									<textbox cols="16" />
 								</row>
 								<row align="left" style="border:none">
 									<label value="Seleccionar Indicador"></label>

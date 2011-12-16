@@ -9,9 +9,8 @@
 						<columns>
 							<column label="" width="" />
 						</columns>
-						
-						<rows>
-							<row align="left" style="border:none">
+						<rows> 
+						    <row>
 								<label value="Tipo Competencia"></label>
 								<combobox id="cmbTipoCompetencia"
 									width="80%" value="--Seleccione--">
@@ -29,6 +28,7 @@
 									<comboitem label="Nacional" />
 								</combobox>
 							</row>
+
 							<row align="left" style="border:none">
 								<label value="Nombre"></label>
 								<textbox width="88%" id="txtNombre"></textbox>
@@ -38,7 +38,7 @@
 								<textbox width="88%" multiline="true" height="50px" id="txtDescripcion"></textbox>    
 
 							</row>
-							
+
 						</rows>
 					</grid>
 
@@ -61,6 +61,7 @@
 								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
 								orient="horizontal">
 							</button>
+
 							<button image="/Recursos/Imagenes/salir.png"
 								label="Salir" orient="horizontal">
 							</button>

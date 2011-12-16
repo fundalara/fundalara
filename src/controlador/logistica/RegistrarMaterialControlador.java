@@ -8,72 +8,66 @@ import modelo.TipoMaterial;
 import modelo.UnidadMedida;
 
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
-import org.zkoss.zul.Intbox;
-import org.zkoss.zul.ListModel;
-import org.zkoss.zul.Listbox;
-import org.zkoss.zul.SimpleListModel;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import servicio.logistica.IServicioClaseMaterial;
 import servicio.logistica.IServicioMaterial;
 import servicio.logistica.IServicioTipoMaterial;
 import servicio.logistica.IServicioUnidadMedida;
-import servicio.logistica.ServicioClaseMaterial;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class RegistrarMaterialControlador extends GenericForwardComposer {
 
-	Window frmRM;
+	Material material = new Material();
+	ClaseMaterial claseMaterial = new ClaseMaterial();
+	
+	BeanFactory beanFactory;
+	IServicioClaseMaterial scm;
+	IServicioUnidadMedida sum;
+	IServicioTipoMaterial stm;
+	IServicioMaterial sm;
+	
 	List<ClaseMaterial> clasesMateriales;
 	List<TipoMaterial> tiposMateriales;
 	List<UnidadMedida> unidadesMedida;
-	ServicioClaseMaterial servicioClaseMaterial;
-	BeanFactory beanFactory;
-	Combobox cmbCM, cmbTM, cmbUM;
-	Textbox txtDescripcion;
-	Intbox txtCantidad, txtPresentacion, txtStockMinimo, txtStockMaximo;
-	Checkbox checkReutilizable;	
-	Comboitem cmbTipo, cmbUnidad;
-	Listbox lista;
+	List<Material> materiales;	
+	
+	Combobox cmbTM;
+	Combobox cmbCM;
+	Window frmRM;
 	
 	public void doAfterCompose(Component comp)throws Exception{
 		super.doAfterCompose(comp);
 		
 		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		
-		IServicioClaseMaterial scm = (IServicioClaseMaterial) beanFactory.getBean("servicioClaseMaterial");
+		scm = (IServicioClaseMaterial) beanFactory.getBean("servicioClaseMaterial");
 		clasesMateriales = scm.listarClasesMateriales();
 		
-		IServicioUnidadMedida sum = (IServicioUnidadMedida) beanFactory.getBean("servicioUnidadMedida");
-		unidadesMedida = sum.listarUnidadesMedida();
+		stm = (IServicioTipoMaterial) beanFactory.getBean("servicioTipoMaterial");
+		tiposMateriales = stm.listarTiposMateriales();
 		
-		IServicioTipoMaterial stm = (IServicioTipoMaterial) beanFactory.getBean("servicioTipoMaterial");
+		sum = (IServicioUnidadMedida) beanFactory.getBean("servicioUnidadMedida");
+		unidadesMedida = sum.listarUnidadesMedida();
 
-		setTiposMateriales(stm.listarTiposMateriales());
+		sm = (IServicioMaterial) beanFactory.getBean("servicioMaterial");
+		
+	}
+	
+	public Material getMaterial() {
+		return material;
+	}
 
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
-	
-	public void filtrarTipos(String codClase){
-		IServicioTipoMaterial stm = (IServicioTipoMaterial) beanFactory.getBean("servicioTipoMaterial");
-		tiposMateriales = stm.filtrarTiposPorClases("TipoMaterial", "claseMaterial", codClase);							
-		cmbTM.setModel(new SimpleListModel(tiposMateriales));		
-	}
-	
-	public void onSelect$cmbCM(){
-		String codClase = clasesMateriales.get(cmbCM.getSelectedIndex()).getCodigoClaseMaterial();
-		this.filtrarTipos(codClase);
-	}
-	
-	
-	public List<ClaseMaterial> getClasesMateriales() {
+
+	public List<ClaseMaterial> getClasesMateriales() {		
 		return clasesMateriales;
 	}
 
@@ -81,15 +75,15 @@ public class RegistrarMaterialControlador extends GenericForwardComposer {
 		this.clasesMateriales = clasesMateriales;
 	}
 
-	public List<TipoMaterial> getTiposMateriales() {
+	public List<TipoMaterial> getTiposMateriales() {		
 		return tiposMateriales;
 	}
 
 	public void setTiposMateriales(List<TipoMaterial> tiposMateriales) {
 		this.tiposMateriales = tiposMateriales;
-	}				
-	
-	public List<UnidadMedida> getUnidadesMedida() {
+	}
+
+	public List<UnidadMedida> getUnidadesMedida() {		
 		return unidadesMedida;
 	}
 
@@ -97,65 +91,65 @@ public class RegistrarMaterialControlador extends GenericForwardComposer {
 		this.unidadesMedida = unidadesMedida;
 	}
 
-	public void onClick$btnSalir() {
-		frmRM.detach();
+	public List<Material> getMateriales() {		
+		materiales = sm.listarMateriales();
+		return materiales;
+	}
+
+	public void setMateriales(List<Material> materiales) {
+		this.materiales = materiales;
 	}
 	
-	public void onClick$btnGuardar(){
-		Material m = new Material();
-		m.setCodigoMaterial("2");
-		m.setDescripcion(txtDescripcion.getValue());
-		m.setCantidadExistencia(txtCantidad.getValue());		
-		m.setReutilizable(checkReutilizable.isChecked());
-		m.setStockMinimo(txtStockMinimo.getValue());
-		m.setStockMaximo(txtStockMaximo.getValue());
-		m.setCantidadDisponible(m.getCantidadExistencia());
-		m.setCantidadPresentacion(txtPresentacion.getValue());
-		m.setEstatus('A');				
+	public ClaseMaterial getClaseMaterial() {
+		return claseMaterial;
+	}
+
+	public void setClaseMaterial(ClaseMaterial claseMaterial) {
+		this.claseMaterial = claseMaterial;
+	}
+
+	public void filtrarTipos(String codClase){
+		tiposMateriales = stm.filtrarTiposPorClases("TipoMaterial", "claseMaterial", codClase);									
+	}
+	
+	public void onSelect$cmbCM(){
+		this.filtrarTipos(claseMaterial.getCodigoClaseMaterial());
+	}
+	
+	public void onClick$btnRegistrar(){
 		
-		m.setTipoMaterial(tiposMateriales.get(cmbTM.getSelectedIndex()));
+		String codigo = sm.generarCodigo();		
 		
-		m.setUnidadMedida(unidadesMedida.get(cmbUM.getSelectedIndex()));
+		material.setCodigoMaterial(codigo);	
+		material.setCantidadDisponible(material.getCantidadExistencia());
+		material.setEstatus('A');
 		
-		IServicioMaterial sm = (IServicioMaterial) beanFactory.getBean("servicioMaterial");
-		sm.agregar(m);
+		sm.agregar(material);
 		
+		this.onClick$btnCancelar();
+		
+	}
+	
+	public void onClick$btnCancelar(){
+		material = new Material();
+		claseMaterial = new ClaseMaterial();
+
 	}
 	
 	public void onSelect$lista() {
-		
-		System.out.println("entro1");
-		
-		if (lista.getSelectedItem() == null) {
-			return;
-		}		
-		
-		Material m = (Material) lista.getSelectedItem().getValue();
-		
-		
-		for (int i=0;i<cmbTM.getModel().getSize();i++) {
-			System.out.println(((TipoMaterial) cmbTM.getModel().getElementAt(i)).getDescripcion());
-			if (((TipoMaterial) cmbTM.getModel().getElementAt(i)).getDescripcion().equals(m.getTipoMaterial().getDescripcion())){
-				System.out.println("entro");
-				cmbTM.setSelectedIndex(i);
-			}
-			
-			
-			
-		}
+		claseMaterial = material.getTipoMaterial().getClaseMaterial();
 	}
 	
-	public List<Material> getMateriales() {
-
-		List<Material> materiales;
-		
-
-		BeanFactory bf = (BeanFactory) new ClassPathXmlApplicationContext(
-				"ApplicationContext.xml");
-		IServicioMaterial servicioMaterial = (IServicioMaterial) bf
-				.getBean("servicioMaterial");
-
-		materiales = (List<Material>) servicioMaterial.listarMateriales();
-		return materiales;
+	
+	public void onClick$btnModificar(){		
+		sm.actualizar(material);
+		this.onClick$btnCancelar();
 	}
+	
+	public void onClick$btnEliminar(){
+		material.setEstatus('E');
+		sm.actualizar(material);
+		this.onClick$btnCancelar();
+	}
+	
 }
