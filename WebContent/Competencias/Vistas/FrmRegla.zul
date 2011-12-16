@@ -1,10 +1,7 @@
-<?page title="REGISTRO DE REGLAS" contentType="text/html;charset=UTF-8"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRegla" ?>
-
+<?page title="Regla" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<div align="center">
-	<window  apply="controlador.competencia.CntrlFrmRegla"  id="frmRegla"   title="Reglas" border="normal" width="68%" height="auto" closable="true">
+	<window title="Reglas" border="normal" width="75%" height="auto" closable="true">
 		<panel>
 			<caption label="Creación de Reglas"></caption>
 			<panelchildren>
@@ -18,21 +15,19 @@
 					</columns>
 					<rows>
 						<row style="border-style:none" align="left">
-							<label value="Regla:"></label>
-							<textbox value="@{cntrl.regla.nombre}" width="97%"></textbox>
-							<label value="Unidad de Medición:">
+							<label value="Nombre"></label>
+							<textbox width="97%"></textbox>
+							<label value="Variable de Medición">
 							</label>
-							<combobox width="97%" value="@{cntrl.regla.unidadmedida}">
-								<comboitem label="%" />
-								<comboitem label="Unidades" />
-							</combobox>
+							<combobox width="97%"></combobox>
 						</row>
 						<row style="border-style:none" align="left">
 							<label value="Descripción:"></label>
-							<textbox value="@{cntrl.regla.descripcion}" multiline="true" height="50px" width="97%"
+							<textbox multiline="true" height="50px" width="97%"
 								cols="40">
 							</textbox>
-							<label value="Indicador:">
+							<div>
+							<label value="Variable de Comparación">
 							</label>
 							<hbox>
 							<textbox width="100px"></textbox>
@@ -40,16 +35,21 @@
 								image="../../Recursos/Imagenes/consultar.ico">
 							</button>
 							</hbox>
-						</row>
-						<row style="border-style:none" align="left">
-							<label value="Criterio:"></label>
-							<combobox width="90%" value="@{cntrl.regla.criterio}">
+							
+							</div>
+							<div>
+							<label value="Criterio"></label>
+											
+							<combobox width="97%">
 								<comboitem label=" Mayor " />
 								<comboitem label=" Menor " />
 								<comboitem label=" Mayor Igual " />
 								<comboitem label=" Menor Igual " />
 							</combobox>
+							
+							</div>
 						</row>
+						
 
 					</rows>
 
@@ -64,9 +64,8 @@
 			<panelchildren>
 				<grid>
 					<columns>
-						<column width="45%"></column>
-						<column width="12%" align="Center"></column>
-						<column width="45%"></column>
+						
+						
 					</columns>
 					<rows>
 						<row>
@@ -84,7 +83,7 @@
 										<checkbox />
 									</listcell>
 									<listcell
-										label="Preparatorio Nivel 1"/>
+										label="Preparatorio Nivel 1" />
 								</listitem>
 								<listitem>
 									<listcell>
@@ -170,22 +169,22 @@
 							<textbox width="50%" value="N/A" />
 						</listcell>
 						<listcell>
-							<textbox width="50%" value="45%" />
+							<textbox width="50%" value="45" />
 						</listcell>
 						<listcell>
-							<textbox width="50%" value="45%" />
+							<textbox width="50%" value="45" />
 						</listcell>
 						<listcell>
-							<textbox width="50%" value="45%" />
+							<textbox width="50%" value="45" />
 						</listcell>
 						<listcell>
-							<textbox width="50%" value="40%" />
+							<textbox width="50%" value="40" />
 						</listcell>
 						<listcell>
-							<textbox width="50%" value="35%" />
+							<textbox width="50%" value="35" />
 						</listcell>
 						<listcell>
-							<textbox width="50%" value="30%" />
+							<textbox width="50%" value="30" />
 						</listcell>
 					</listitem>
 				</listbox>
@@ -198,16 +197,16 @@
 			<panel>
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
-						<button id="btnGuardar"
+						<button
 							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
-						<button id="btnModificar"
-							image="../../Recursos/Imagenes/editar.ico" label="Modificar">
+						<button
+							image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
 						</button>
-						<button id="btnCancelar"
+						<button
 							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
-						<button  id="btnSalir"
+						<button
 							image="../../Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>

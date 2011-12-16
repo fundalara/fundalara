@@ -12,5 +12,7 @@ public interface IServicioTipoCompetencia {
 		
 	public abstract void actualizar(TipoCompetencia tc);
 	
-	public abstract  List<TipoCompetencia> buscarPorCodigo (TipoCompetencia tc);
+	public abstract  TipoCompetencia buscarPorCodigo (String codigo);
+	
+	public abstract List<TipoCompetencia> listar();
 }

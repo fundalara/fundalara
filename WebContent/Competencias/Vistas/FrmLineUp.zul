@@ -150,10 +150,10 @@
 						</columns>
 						<rows>
 							<row>
-								<button image="./Recursos/Imagenes/leftarrow_g.png"></button>
+								<button image="/Recursos/Imagenes/rightarrow_g.png"></button>
 							</row>
 							<row>
-								<button image= "/Recursos/Imagenes/rightarrow_g.png"></button>
+								<button image= "/Recursos/Imagenes/leftarrow_g.png"></button>
 							</row>
 						</rows>
 					</grid>

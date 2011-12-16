@@ -1,4 +1,3 @@
-
 package dao.competencia;
 
 import java.util.List;

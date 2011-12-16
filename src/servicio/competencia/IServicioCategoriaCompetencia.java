@@ -2,16 +2,23 @@ package servicio.competencia;
 
 import java.util.List;
 
+import modelo.Categoria;
 import modelo.CategoriaCompetencia;
 
-public interface IServicioCategoriaCompetencia {
-	
-	public abstract void eliminar(CategoriaCompetencia cc);
-	
-	public abstract void agregar(CategoriaCompetencia cc);
-		
-	public abstract void actualizar(CategoriaCompetencia cc);
-	
-	public abstract  List<CategoriaCompetencia> buscarPorCodigo (CategoriaCompetencia cc);
 
+public interface IServicioCategoriaCompetencia {
+
+	public abstract void eliminar(Categoria cc);
+
+	public abstract void agregar(Categoria cc);
+
+	public abstract void actualizar(Categoria cc);
+
+	public abstract Categoria buscarPorCodigo(Categoria cc);
+
+	public abstract List<Categoria> listar();
+
+	public abstract List<Categoria> listarActivos();
+	
+	public abstract List <CategoriaCompetencia> listarCategoriaPorCompetencia(String codigo);
 }

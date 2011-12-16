@@ -6,13 +6,7 @@
 
 	
 
-	<bean id="daoEstadoVenezuela" class="dao.competencia.DaoEstadoVenezuela"
-		>
-	</bean>
 
-	<bean id="servicioEstadoVenezuela" class="servicio.competencia.ServicioEstadoVenezuela">
-		<property name="daoEstadoVenezuela" ref="daoEstadoVenezuela"></property>
-	</bean>
 
 	<bean id="daoDivisa" class="dao.competencia.DaoDivisa">
 	</bean>

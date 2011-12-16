@@ -41,10 +41,10 @@
 							<row style="border-style:none">
 								<label value="Dirección"></label>
 								<textbox value="@{cntrl.divisa.direccion}" id="txtDireccion" cols="20"></textbox>
-								<label value="Estado"></label>
-								<combobox model="@{cntrl.estados}" selectedItem="@{cntrl.estado}">
-								  <comboitem self="@{each=estado}" value="@{estado.codigoEstado}" label="@{estado.nombre}" ></comboitem>
-								</combobox>
+<!-- 								<label value="Estado"></label> -->
+<!-- 								<combobox model="@{cntrl.estados}" selectedItem="@{cntrl.estado}"> -->
+<!-- 								  <comboitem self="@{each=estado}" value="@{estado.codigoEstado}" label="@{estado.nombre}" ></comboitem> -->
+<!-- 								</combobox> -->
 
 							</row>
 							<row style="border-style:none">

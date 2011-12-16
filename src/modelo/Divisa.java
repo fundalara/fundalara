@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 16/12/2011 10:21:41 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,42 +21,43 @@ import javax.persistence.Table;
 public class Divisa implements java.io.Serializable {
 
 	private String codigoDivisa;
-	private EstadoVenezuela estadoVenezuela;
-	private String correoElectronico;
-	private String direccion;
-	private byte[] logo;
+	private DatoBasico datoBasico;
 	private String nombre;
-	private String personaContacto;
+	private String direccion;
 	private String telefono;
-	private String estatus;
+	private String correoElectronico;
+	private String personaContacto;
+	private byte[] logo;
+	private char estatus;
 	private Set<Equipo> equipos = new HashSet<Equipo>(0);
 
 	public Divisa() {
 	}
 
-	public Divisa(String codigoDivisa, String correoElectronico,
-			String direccion, String nombre, String personaContacto,
-			String telefono) {
+	public Divisa(String codigoDivisa, String nombre, String direccion,
+			String telefono, String correoElectronico, String personaContacto,
+			char estatus) {
 		this.codigoDivisa = codigoDivisa;
-		this.correoElectronico = correoElectronico;
-		this.direccion = direccion;
 		this.nombre = nombre;
-		this.personaContacto = personaContacto;
+		this.direccion = direccion;
 		this.telefono = telefono;
+		this.correoElectronico = correoElectronico;
+		this.personaContacto = personaContacto;
+		this.estatus = estatus;
 	}
 
-	public Divisa(String codigoDivisa, EstadoVenezuela estadoVenezuela,
-			String correoElectronico, String direccion, byte[] logo,
-			String nombre, String personaContacto, String telefono,
-			String estatus, Set<Equipo> equipos) {
+	public Divisa(String codigoDivisa, DatoBasico datoBasico, String nombre,
+			String direccion, String telefono, String correoElectronico,
+			String personaContacto, byte[] logo, char estatus,
+			Set<Equipo> equipos) {
 		this.codigoDivisa = codigoDivisa;
-		this.estadoVenezuela = estadoVenezuela;
-		this.correoElectronico = correoElectronico;
-		this.direccion = direccion;
-		this.logo = logo;
+		this.datoBasico = datoBasico;
 		this.nombre = nombre;
-		this.personaContacto = personaContacto;
+		this.direccion = direccion;
 		this.telefono = telefono;
+		this.correoElectronico = correoElectronico;
+		this.personaContacto = personaContacto;
+		this.logo = logo;
 		this.estatus = estatus;
 		this.equipos = equipos;
 	}
@@ -72,40 +73,13 @@ public class Divisa implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_estado")
-	public EstadoVenezuela getEstadoVenezuela() {
-		return this.estadoVenezuela;
+	@JoinColumn(name = "codigo_parroquia")
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
 	}
 
-	public void setEstadoVenezuela(EstadoVenezuela estadoVenezuela) {
-		this.estadoVenezuela = estadoVenezuela;
-	}
-
-	@Column(name = "correo_electronico", nullable = false)
-	public String getCorreoElectronico() {
-		return this.correoElectronico;
-	}
-
-	public void setCorreoElectronico(String correoElectronico) {
-		this.correoElectronico = correoElectronico;
-	}
-
-	@Column(name = "direccion", nullable = false)
-	public String getDireccion() {
-		return this.direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	@Column(name = "logo")
-	public byte[] getLogo() {
-		return this.logo;
-	}
-
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -117,13 +91,13 @@ public class Divisa implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "persona_contacto", nullable = false)
-	public String getPersonaContacto() {
-		return this.personaContacto;
+	@Column(name = "direccion", nullable = false)
+	public String getDireccion() {
+		return this.direccion;
 	}
 
-	public void setPersonaContacto(String personaContacto) {
-		this.personaContacto = personaContacto;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	@Column(name = "telefono", nullable = false)
@@ -135,12 +109,39 @@ public class Divisa implements java.io.Serializable {
 		this.telefono = telefono;
 	}
 
-	@Column(name = "estatus", length = 1)
-	public String getEstatus() {
+	@Column(name = "correo_electronico", nullable = false)
+	public String getCorreoElectronico() {
+		return this.correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
+	@Column(name = "persona_contacto", nullable = false)
+	public String getPersonaContacto() {
+		return this.personaContacto;
+	}
+
+	public void setPersonaContacto(String personaContacto) {
+		this.personaContacto = personaContacto;
+	}
+
+	@Column(name = "logo")
+	public byte[] getLogo() {
+		return this.logo;
+	}
+
+	public void setLogo(byte[] logo) {
+		this.logo = logo;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
 		return this.estatus;
 	}
 
-	public void setEstatus(String estatus) {
+	public void setEstatus(char estatus) {
 		this.estatus = estatus;
 	}
 

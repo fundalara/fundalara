@@ -6,7 +6,7 @@
 <![CDATA[
 	void individuales() {
 		win.setVisible(false);
-		Executions.createComponents("/Competencias/Vistas/FrmResultados.zul",
+		Executions.createComponents("/Competencias/Vistas/FrmResultadosAcumulados.zul",
 				null, null);
 	}
 	void salir() {

@@ -1,0 +1,163 @@
+<?page title="CONTROL INVENTARIO" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoD"?>
+<zk>
+
+
+<div align="center">
+	<window id= "frmControlInventario" title="Control de Inventario" border="normal" width="650px" apply="controlador.competencia.CntrlFrmControlInventario"
+		height="" closable="true">
+		<panel border="normal">
+			<caption label="Datos de la Competencia"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40px" align="left"></column>
+						<column width="40px"></column>
+						<column width="100px"></column>
+						<column width="60px"></column>
+						<column width="70px"></column>
+						<column width="60px"></column>
+					</columns>
+					<rows>
+					
+					     <row style="border:none;">
+							<label value="Juego"></label>
+							<hbox>
+								<textbox cols="15"></textbox>
+								<button
+									image="../../Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+                                <label value="Fecha del Juego"></label>
+							<datebox cols="10"></datebox>
+                            
+						</row>
+					     
+						<row style="border:none;">
+							<label value="Competencia"></label>
+			                 <textbox cols="15"></textbox>
+			                 
+							
+                             <label value="Fecha Inicio"></label>
+							<datebox cols="10"></datebox>
+							<label value="Fecha Fin"></label>
+							<datebox cols="10"></datebox>
+						</row>
+						
+						<row></row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+		<div width="" style="" align="center">
+
+         <listbox id="lsbxCI" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.ci}" height="240px">
+						<listhead>
+							<listheader label="Recursos" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Pedidos" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Asignados" align="center"
+								width="25%">
+							</listheader>
+							<listheader label="Entregados" align="center"
+								width="25%">
+							</listheader>
+						</listhead>
+						
+						<listitem self="@{each= CI}">
+							<listcell label="@{CI.descripcion}"></listcell>
+							<!--  <listcell label=""></listcell> 
+							<listcell label=""></listcell> -->
+						</listitem>
+									
+						
+					</listbox>
+
+
+
+
+
+
+
+			<!-- <grid>
+				<columns>
+					<column label="Recursos" width="25%" align="center" />
+					<column label="Pedidos" width="25%" align="center" />
+					<column label="Asignados" width="25%"
+						align="center" />
+					<column label="Entregados" width="25%"
+						align="center" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Pelotas"></label>
+						<label value="35"></label>
+						<label value="30"></label>
+						<spinner cols="2" value="7" />
+					</row>
+					<row style="border:none;">
+						<label value="Guantes"></label>
+						<label value="15"></label>
+						<label value="12"></label>
+						<spinner cols="2" value="4" />
+					</row>
+					<row style="border:none;">
+						<label value="Bates"></label>
+						<label value="20"></label>
+						<label value="15"></label>
+						<spinner cols="2" value="6" />
+					</row>
+					<row style="border:none;">
+						<label value="Cascos"></label>
+						<label value="50"></label>
+						<label value="35"></label>
+						<spinner cols="2" value="4" />
+					</row>
+					<row style="border:none;">
+						<label value="Termos"></label>
+						<label value="2"></label>
+						<label value="1"></label>
+						<spinner cols="2" value="1" />
+					</row>
+					<row style="border:none;">
+						<label value="Petos"></label>
+						<label value="5"></label>
+						<label value="3"></label>
+						<spinner cols="2" value="2" />
+					</row>
+				</rows>
+			</grid> -->
+
+
+		</div>
+		<div>
+			<div align="right" height="30px">
+				<button id= "btnGuardar" image="/Recursos/Imagenes/guardar.ico"
+					label="Guardar" orient="horizontal">
+				</button>
+				<button id= "btnEliminar" image="/Recursos/Imagenes/quitar.ico"
+					label="Eliminar" orient="horizontal">
+
+				</button>
+				<button id = "btnCancelar" image="/Recursos/Imagenes/cancelar.ico"
+					label="Cancelar" orient="horizontal">
+				</button>
+				<button id= "btnSalir" image="/Recursos/Imagenes/salir.png"
+					label="Salir" orient="horizontal">
+				</button>
+
+			</div>
+		</div>
+  <zscript><![CDATA[
+	public void Salir() {
+		FrmControlInventario.onClose();
+	}
+]]></zscript>
+
+	</window>
+</div>

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 12/12/2011 09:17:13 PM by Hibernate Tools 3.4.0.CR1
+// Generated 16/12/2011 10:21:41 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,24 +22,28 @@ import javax.persistence.Table;
 public class Liga implements java.io.Serializable {
 
 	private String codigoLiga;
-	private byte[] logo;
+	private DatoBasico datoBasico;
 	private String nombre;
+	private char estatus;
 	private Set<Categoria> categorias = new HashSet<Categoria>(0);
 
 	public Liga() {
 	}
 
-	public Liga(String codigoLiga, byte[] logo, String nombre) {
+	public Liga(String codigoLiga, DatoBasico datoBasico, String nombre,
+			char estatus) {
 		this.codigoLiga = codigoLiga;
-		this.logo = logo;
+		this.datoBasico = datoBasico;
 		this.nombre = nombre;
+		this.estatus = estatus;
 	}
 
-	public Liga(String codigoLiga, byte[] logo, String nombre,
-			Set<Categoria> categorias) {
+	public Liga(String codigoLiga, DatoBasico datoBasico, String nombre,
+			char estatus, Set<Categoria> categorias) {
 		this.codigoLiga = codigoLiga;
-		this.logo = logo;
+		this.datoBasico = datoBasico;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.categorias = categorias;
 	}
 
@@ -52,13 +57,14 @@ public class Liga implements java.io.Serializable {
 		this.codigoLiga = codigoLiga;
 	}
 
-	@Column(name = "logo", nullable = false)
-	public byte[] getLogo() {
-		return this.logo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_parroquia", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
 	}
 
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -68,6 +74,15 @@ public class Liga implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
