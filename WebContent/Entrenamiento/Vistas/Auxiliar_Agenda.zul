@@ -1,0 +1,12 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>	
+	<window title="new page title" id="wind" apply="controlador.entrenamiento.Auxiliar_Agenda" closable="true">
+		<combobox id="actividad">
+			<comboitem label="Desempeño atletas"/>
+			<comboitem label="Cumplimiento actividades"/>
+		</combobox>
+		<div>
+			<include id="include"/>
+		</div>
+	</window>
+</zk>

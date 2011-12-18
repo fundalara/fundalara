@@ -2498,6 +2498,11 @@ font-size: 20px;
 .float-left {
 	float: left;
 }
+
+.labels{
+	font-weight: 700;
+	text-align: right;
+}
 .float-right {
 	float: right;
 	margin-top: 5px;

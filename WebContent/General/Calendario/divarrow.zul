@@ -1,4 +1,4 @@
-<div class="tabs arrows">
+<div class="tabs arrows" forward="onCambiarMesSemana(${arg.type})">
 	<div class="t1" />
 	<div class="t2">
 		<div class="t3" />
