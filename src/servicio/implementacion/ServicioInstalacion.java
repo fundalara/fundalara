@@ -2,48 +2,45 @@ package servicio.implementacion;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import servicio.interfaz.IServicioInstalacion;
-
 import dao.general.DaoInstalacion;
-import modelo.Almacen;
 import modelo.Instalacion;
 
 public class ServicioInstalacion implements IServicioInstalacion {
 
-	DaoInstalacion instalacionDAO;
+	DaoInstalacion daoInstalacion;	
 
-	public DaoInstalacion getInstalacionDAO() {
-		return instalacionDAO;
+	public DaoInstalacion getDaoInstalacion() {
+		return daoInstalacion;
 	}
 
-	public void setInstalacionDAO(DaoInstalacion instalacionDAO) {
-		this.instalacionDAO = instalacionDAO;
+	public void setDaoInstalacion(DaoInstalacion daoInstalacion) {
+		this.daoInstalacion = daoInstalacion;
 	}
 
 	@Override
 	public void eliminar(Instalacion instalacion) {
-		instalacionDAO.eliminar(instalacion);
+		daoInstalacion.eliminar(instalacion);
 	}
 
 	@Override
 	public void guardar(Instalacion instalacion) {
-		instalacionDAO.guardar(instalacion);
+		daoInstalacion.guardar(instalacion);
 
 	}
 
 	@Override
 	public void actualizar(Instalacion instalacion) {
-		instalacionDAO.actualizar(instalacion);
+		daoInstalacion.actualizar(instalacion);
 	}
 
 	public Instalacion buscar(String c) {
-		return (Instalacion) instalacionDAO.buscar(Instalacion.class, c);
+		return (Instalacion) daoInstalacion.buscar(Instalacion.class, c);
 
 	}
 
 	public List<Instalacion> listarInstalacion() {
-		List<Instalacion> a = instalacionDAO.listar(Instalacion.class);
+		List<Instalacion> a = daoInstalacion.listar(Instalacion.class);
 		List<Instalacion> b = new ArrayList<Instalacion>();
 		int longitud = a.size();
 		for (int i = 0; i < longitud; i++) {
@@ -57,7 +54,7 @@ public class ServicioInstalacion implements IServicioInstalacion {
 	}
 
 	public String generarCodigo() {
-		Integer nuevoCodigo = instalacionDAO.contarCodigos("Instalacion") + 1;
+		Integer nuevoCodigo = daoInstalacion.contarCodigos("Instalacion") + 1;
 		return nuevoCodigo.toString();
 	}
 
