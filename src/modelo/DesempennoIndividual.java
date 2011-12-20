@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class DesempennoIndividual implements java.io.Serializable {
 
 	private DesempennoIndividualId id;
-	private IndicadorCompetencia indicadorCompetencia;
+	private IndicadorCategoriaCompetencia indicadorCategoriaCompetencia;
 	private LineUp lineUp;
 	private float valor;
 
@@ -28,10 +28,10 @@ public class DesempennoIndividual implements java.io.Serializable {
 	}
 
 	public DesempennoIndividual(DesempennoIndividualId id,
-			IndicadorCompetencia indicadorCompetencia, LineUp lineUp,
-			float valor) {
+			IndicadorCategoriaCompetencia indicadorCategoriaCompetencia,
+			LineUp lineUp, float valor) {
 		this.id = id;
-		this.indicadorCompetencia = indicadorCompetencia;
+		this.indicadorCategoriaCompetencia = indicadorCategoriaCompetencia;
 		this.lineUp = lineUp;
 		this.valor = valor;
 	}
@@ -50,13 +50,13 @@ public class DesempennoIndividual implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_indicador_competencia", nullable = false, insertable = false, updatable = false)
-	public IndicadorCompetencia getIndicadorCompetencia() {
-		return this.indicadorCompetencia;
+	public IndicadorCategoriaCompetencia getIndicadorCategoriaCompetencia() {
+		return this.indicadorCategoriaCompetencia;
 	}
 
-	public void setIndicadorCompetencia(
-			IndicadorCompetencia indicadorCompetencia) {
-		this.indicadorCompetencia = indicadorCompetencia;
+	public void setIndicadorCategoriaCompetencia(
+			IndicadorCategoriaCompetencia indicadorCategoriaCompetencia) {
+		this.indicadorCategoriaCompetencia = indicadorCategoriaCompetencia;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

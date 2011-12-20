@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,53 +21,47 @@ import javax.persistence.Table;
 @Table(name = "tipo_competencia")
 public class TipoCompetencia implements java.io.Serializable {
 
-	private String codigoTipocompetencia;
-	private DatoBasico datoBasico;
+	private int codigoTipoCompetencia;
 	private String nombre;
 	private String descripcion;
+	private int estatus;
 	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
+	private Set<ModalidadCompetencia> modalidadCompetencias = new HashSet<ModalidadCompetencia>(
+			0);
 
 	public TipoCompetencia() {
 	}
 
-	public TipoCompetencia(String codigoTipocompetencia, DatoBasico datoBasico,
-			String nombre, String descripcion) {
-		this.codigoTipocompetencia = codigoTipocompetencia;
-		this.datoBasico = datoBasico;
+	public TipoCompetencia(int codigoTipoCompetencia, String nombre,
+			String descripcion, int estatus) {
+		this.codigoTipoCompetencia = codigoTipoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.estatus = estatus;
 	}
 
-	public TipoCompetencia(String codigoTipocompetencia, DatoBasico datoBasico,
-			String nombre, String descripcion, Set<DatoBasico> datoBasicos,
-			Set<Competencia> competencias) {
-		this.codigoTipocompetencia = codigoTipocompetencia;
-		this.datoBasico = datoBasico;
+	public TipoCompetencia(int codigoTipoCompetencia, String nombre,
+			String descripcion, int estatus, Set<DatoBasico> datoBasicos,
+			Set<Competencia> competencias,
+			Set<ModalidadCompetencia> modalidadCompetencias) {
+		this.codigoTipoCompetencia = codigoTipoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.estatus = estatus;
 		this.datoBasicos = datoBasicos;
 		this.competencias = competencias;
+		this.modalidadCompetencias = modalidadCompetencias;
 	}
 
 	@Id
-	@Column(name = "codigo_tipocompetencia", unique = true, nullable = false)
-	public String getCodigoTipocompetencia() {
-		return this.codigoTipocompetencia;
+	@Column(name = "codigo_tipo_competencia", unique = true, nullable = false)
+	public int getCodigoTipoCompetencia() {
+		return this.codigoTipoCompetencia;
 	}
 
-	public void setCodigoTipocompetencia(String codigoTipocompetencia) {
-		this.codigoTipocompetencia = codigoTipocompetencia;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_modalidad_competencia", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCodigoTipoCompetencia(int codigoTipoCompetencia) {
+		this.codigoTipoCompetencia = codigoTipoCompetencia;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -89,8 +82,17 @@ public class TipoCompetencia implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
+	@Column(name = "estatus", nullable = false)
+	public int getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(int estatus) {
+		this.estatus = estatus;
+	}
+
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "condicion_competencia", joinColumns = { @JoinColumn(name = "codigo_tipo_competencia_condicion", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_condicion", nullable = false, updatable = false) })
+	@JoinTable(name = "condicion_competencia", joinColumns = { @JoinColumn(name = "codigo_tipo_competencia", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_condicion", nullable = false, updatable = false) })
 	public Set<DatoBasico> getDatoBasicos() {
 		return this.datoBasicos;
 	}
@@ -106,6 +108,16 @@ public class TipoCompetencia implements java.io.Serializable {
 
 	public void setCompetencias(Set<Competencia> competencias) {
 		this.competencias = competencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoCompetencia")
+	public Set<ModalidadCompetencia> getModalidadCompetencias() {
+		return this.modalidadCompetencias;
+	}
+
+	public void setModalidadCompetencias(
+			Set<ModalidadCompetencia> modalidadCompetencias) {
+		this.modalidadCompetencias = modalidadCompetencias;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,18 +20,17 @@ import javax.persistence.Table;
 @Table(name = "roster_competencia")
 public class RosterCompetencia implements java.io.Serializable {
 
-	private String codigoRosterCompetencia;
+	private int codigoRosterCompetencia;
 	private Roster roster;
 	private DatoBasico datoBasicoByCodigoJugadorClave;
 	private Competencia competencia;
 	private DatoBasico datoBasicoByCodigoTipoJugador;
 	private Set<LineUp> lineUps = new HashSet<LineUp>(0);
-	private Set<JugadorClave> jugadorClaves = new HashSet<JugadorClave>(0);
 
 	public RosterCompetencia() {
 	}
 
-	public RosterCompetencia(String codigoRosterCompetencia, Roster roster,
+	public RosterCompetencia(int codigoRosterCompetencia, Roster roster,
 			DatoBasico datoBasicoByCodigoJugadorClave, Competencia competencia,
 			DatoBasico datoBasicoByCodigoTipoJugador) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
@@ -41,26 +40,24 @@ public class RosterCompetencia implements java.io.Serializable {
 		this.datoBasicoByCodigoTipoJugador = datoBasicoByCodigoTipoJugador;
 	}
 
-	public RosterCompetencia(String codigoRosterCompetencia, Roster roster,
+	public RosterCompetencia(int codigoRosterCompetencia, Roster roster,
 			DatoBasico datoBasicoByCodigoJugadorClave, Competencia competencia,
-			DatoBasico datoBasicoByCodigoTipoJugador, Set<LineUp> lineUps,
-			Set<JugadorClave> jugadorClaves) {
+			DatoBasico datoBasicoByCodigoTipoJugador, Set<LineUp> lineUps) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
 		this.roster = roster;
 		this.datoBasicoByCodigoJugadorClave = datoBasicoByCodigoJugadorClave;
 		this.competencia = competencia;
 		this.datoBasicoByCodigoTipoJugador = datoBasicoByCodigoTipoJugador;
 		this.lineUps = lineUps;
-		this.jugadorClaves = jugadorClaves;
 	}
 
 	@Id
 	@Column(name = "codigo_roster_competencia", unique = true, nullable = false)
-	public String getCodigoRosterCompetencia() {
+	public int getCodigoRosterCompetencia() {
 		return this.codigoRosterCompetencia;
 	}
 
-	public void setCodigoRosterCompetencia(String codigoRosterCompetencia) {
+	public void setCodigoRosterCompetencia(int codigoRosterCompetencia) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
 	}
 
@@ -113,15 +110,6 @@ public class RosterCompetencia implements java.io.Serializable {
 
 	public void setLineUps(Set<LineUp> lineUps) {
 		this.lineUps = lineUps;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "rosterCompetencia")
-	public Set<JugadorClave> getJugadorClaves() {
-		return this.jugadorClaves;
-	}
-
-	public void setJugadorClaves(Set<JugadorClave> jugadorClaves) {
-		this.jugadorClaves = jugadorClaves;
 	}
 
 }

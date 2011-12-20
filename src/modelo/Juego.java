@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,67 +23,85 @@ import javax.persistence.TemporalType;
 @Table(name = "juego")
 public class Juego implements java.io.Serializable {
 
-	private String codigoJuego;
+	private int codigoJuego1;
 	private Estadio estadio;
 	private Competencia competencia;
 	private DatoBasico datoBasico;
 	private Date horaInicio;
 	private Date fecha;
+	private String observaciones;
 	private int cantidadInning;
 	private Date duracion;
 	private Set<PersonalJuego> personalJuegos = new HashSet<PersonalJuego>(0);
+	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
+			0);
+	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
+			0);
+	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
 	private Set<EquipoJuego> equipoJuegos = new HashSet<EquipoJuego>(0);
-	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
+	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
+			0);
 	private Set<LineUp> lineUps = new HashSet<LineUp>(0);
-	private Set<UmpireJuego> umpireJuegos = new HashSet<UmpireJuego>(0);
+	private Set<PersonalForaneoJuego> personalForaneoJuegos = new HashSet<PersonalForaneoJuego>(
+			0);
 	private Set<JugadorForaneo> jugadorForaneos = new HashSet<JugadorForaneo>(0);
 
 	public Juego() {
 	}
 
-	public Juego(String codigoJuego, Estadio estadio, Competencia competencia,
+	public Juego(int codigoJuego1, Estadio estadio, Competencia competencia,
 			DatoBasico datoBasico, Date horaInicio, Date fecha,
-			int cantidadInning, Date duracion) {
-		this.codigoJuego = codigoJuego;
+			String observaciones, int cantidadInning, Date duracion) {
+		this.codigoJuego1 = codigoJuego1;
 		this.estadio = estadio;
 		this.competencia = competencia;
 		this.datoBasico = datoBasico;
 		this.horaInicio = horaInicio;
 		this.fecha = fecha;
+		this.observaciones = observaciones;
 		this.cantidadInning = cantidadInning;
 		this.duracion = duracion;
 	}
 
-	public Juego(String codigoJuego, Estadio estadio, Competencia competencia,
+	public Juego(int codigoJuego1, Estadio estadio, Competencia competencia,
 			DatoBasico datoBasico, Date horaInicio, Date fecha,
-			int cantidadInning, Date duracion,
-			Set<PersonalJuego> personalJuegos, Set<EquipoJuego> equipoJuegos,
-			Set<DatoBasico> datoBasicos, Set<LineUp> lineUps,
-			Set<UmpireJuego> umpireJuegos, Set<JugadorForaneo> jugadorForaneos) {
-		this.codigoJuego = codigoJuego;
+			String observaciones, int cantidadInning, Date duracion,
+			Set<PersonalJuego> personalJuegos,
+			Set<ActividadCalendario> actividadCalendarios,
+			Set<MaterialActividad> materialActividads,
+			Set<PersonalEquipo> personalEquipos, Set<EquipoJuego> equipoJuegos,
+			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
+			Set<LineUp> lineUps,
+			Set<PersonalForaneoJuego> personalForaneoJuegos,
+			Set<JugadorForaneo> jugadorForaneos) {
+		this.codigoJuego1 = codigoJuego1;
 		this.estadio = estadio;
 		this.competencia = competencia;
 		this.datoBasico = datoBasico;
 		this.horaInicio = horaInicio;
 		this.fecha = fecha;
+		this.observaciones = observaciones;
 		this.cantidadInning = cantidadInning;
 		this.duracion = duracion;
 		this.personalJuegos = personalJuegos;
+		this.actividadCalendarios = actividadCalendarios;
+		this.materialActividads = materialActividads;
+		this.personalEquipos = personalEquipos;
 		this.equipoJuegos = equipoJuegos;
-		this.datoBasicos = datoBasicos;
+		this.materialActividadPlanificadas = materialActividadPlanificadas;
 		this.lineUps = lineUps;
-		this.umpireJuegos = umpireJuegos;
+		this.personalForaneoJuegos = personalForaneoJuegos;
 		this.jugadorForaneos = jugadorForaneos;
 	}
 
 	@Id
-	@Column(name = "codigo_juego", unique = true, nullable = false)
-	public String getCodigoJuego() {
-		return this.codigoJuego;
+	@Column(name = "codigo_juego1", unique = true, nullable = false)
+	public int getCodigoJuego1() {
+		return this.codigoJuego1;
 	}
 
-	public void setCodigoJuego(String codigoJuego) {
-		this.codigoJuego = codigoJuego;
+	public void setCodigoJuego1(int codigoJuego1) {
+		this.codigoJuego1 = codigoJuego1;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -138,6 +154,15 @@ public class Juego implements java.io.Serializable {
 		this.fecha = fecha;
 	}
 
+	@Column(name = "observaciones", nullable = false)
+	public String getObservaciones() {
+		return this.observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
 	@Column(name = "cantidad_inning", nullable = false)
 	public int getCantidadInning() {
 		return this.cantidadInning;
@@ -167,6 +192,34 @@ public class Juego implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
+	public Set<ActividadCalendario> getActividadCalendarios() {
+		return this.actividadCalendarios;
+	}
+
+	public void setActividadCalendarios(
+			Set<ActividadCalendario> actividadCalendarios) {
+		this.actividadCalendarios = actividadCalendarios;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
+	public Set<MaterialActividad> getMaterialActividads() {
+		return this.materialActividads;
+	}
+
+	public void setMaterialActividads(Set<MaterialActividad> materialActividads) {
+		this.materialActividads = materialActividads;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
+	public Set<PersonalEquipo> getPersonalEquipos() {
+		return this.personalEquipos;
+	}
+
+	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
+		this.personalEquipos = personalEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
 	public Set<EquipoJuego> getEquipoJuegos() {
 		return this.equipoJuegos;
 	}
@@ -175,14 +228,14 @@ public class Juego implements java.io.Serializable {
 		this.equipoJuegos = equipoJuegos;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "anotador_juego", joinColumns = { @JoinColumn(name = "codigo_juego_competencia", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_anotador", nullable = false, updatable = false) })
-	public Set<DatoBasico> getDatoBasicos() {
-		return this.datoBasicos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
+	public Set<MaterialActividadPlanificada> getMaterialActividadPlanificadas() {
+		return this.materialActividadPlanificadas;
 	}
 
-	public void setDatoBasicos(Set<DatoBasico> datoBasicos) {
-		this.datoBasicos = datoBasicos;
+	public void setMaterialActividadPlanificadas(
+			Set<MaterialActividadPlanificada> materialActividadPlanificadas) {
+		this.materialActividadPlanificadas = materialActividadPlanificadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
@@ -195,12 +248,13 @@ public class Juego implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
-	public Set<UmpireJuego> getUmpireJuegos() {
-		return this.umpireJuegos;
+	public Set<PersonalForaneoJuego> getPersonalForaneoJuegos() {
+		return this.personalForaneoJuegos;
 	}
 
-	public void setUmpireJuegos(Set<UmpireJuego> umpireJuegos) {
-		this.umpireJuegos = umpireJuegos;
+	public void setPersonalForaneoJuegos(
+			Set<PersonalForaneoJuego> personalForaneoJuegos) {
+		this.personalForaneoJuegos = personalForaneoJuegos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")

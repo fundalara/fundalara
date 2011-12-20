@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "estadio")
 public class Estadio implements java.io.Serializable {
 
-	private String codigoEstadio;
+	private int codigoEstadio;
 	private DatoBasico datoBasico;
 	private String nombre;
 	private String direccion;
@@ -30,7 +30,7 @@ public class Estadio implements java.io.Serializable {
 	public Estadio() {
 	}
 
-	public Estadio(String codigoEstadio, DatoBasico datoBasico, String nombre,
+	public Estadio(int codigoEstadio, DatoBasico datoBasico, String nombre,
 			String direccion, char estatus) {
 		this.codigoEstadio = codigoEstadio;
 		this.datoBasico = datoBasico;
@@ -39,7 +39,7 @@ public class Estadio implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public Estadio(String codigoEstadio, DatoBasico datoBasico, String nombre,
+	public Estadio(int codigoEstadio, DatoBasico datoBasico, String nombre,
 			String direccion, char estatus, Set<Juego> juegos) {
 		this.codigoEstadio = codigoEstadio;
 		this.datoBasico = datoBasico;
@@ -51,11 +51,11 @@ public class Estadio implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_estadio", unique = true, nullable = false)
-	public String getCodigoEstadio() {
+	public int getCodigoEstadio() {
 		return this.codigoEstadio;
 	}
 
-	public void setCodigoEstadio(String codigoEstadio) {
+	public void setCodigoEstadio(int codigoEstadio) {
 		this.codigoEstadio = codigoEstadio;
 	}
 

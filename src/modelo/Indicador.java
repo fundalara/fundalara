@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,55 +20,51 @@ import javax.persistence.Table;
 @Table(name = "indicador")
 public class Indicador implements java.io.Serializable {
 
-	private String codigoIndicador;
+	private int codigoIndicador;
 	private DatoBasico datoBasicoByCodigoModalidad;
 	private DatoBasico datoBasicoByCodigoTipo;
 	private String nombre;
-	private String descripcion;
-	private String formula;
+	private String abreviatura;
 	private char estatus;
-	private Set<IndicadorCompetencia> indicadorCompetencias = new HashSet<IndicadorCompetencia>(
+	private Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias = new HashSet<IndicadorCategoriaCompetencia>(
 			0);
-	private Set<Regla> reglas = new HashSet<Regla>(0);
 
 	public Indicador() {
 	}
 
-	public Indicador(String codigoIndicador,
+	public Indicador(int codigoIndicador,
 			DatoBasico datoBasicoByCodigoModalidad,
 			DatoBasico datoBasicoByCodigoTipo, String nombre,
-			String descripcion, char estatus) {
+			String abreviatura, char estatus) {
 		this.codigoIndicador = codigoIndicador;
 		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
 		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
+		this.abreviatura = abreviatura;
 		this.estatus = estatus;
 	}
 
-	public Indicador(String codigoIndicador,
+	public Indicador(int codigoIndicador,
 			DatoBasico datoBasicoByCodigoModalidad,
 			DatoBasico datoBasicoByCodigoTipo, String nombre,
-			String descripcion, String formula, char estatus,
-			Set<IndicadorCompetencia> indicadorCompetencias, Set<Regla> reglas) {
+			String abreviatura, char estatus,
+			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias) {
 		this.codigoIndicador = codigoIndicador;
 		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
 		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.formula = formula;
+		this.abreviatura = abreviatura;
 		this.estatus = estatus;
-		this.indicadorCompetencias = indicadorCompetencias;
-		this.reglas = reglas;
+		this.indicadorCategoriaCompetencias = indicadorCategoriaCompetencias;
 	}
 
 	@Id
 	@Column(name = "codigo_indicador", unique = true, nullable = false)
-	public String getCodigoIndicador() {
+	public int getCodigoIndicador() {
 		return this.codigoIndicador;
 	}
 
-	public void setCodigoIndicador(String codigoIndicador) {
+	public void setCodigoIndicador(int codigoIndicador) {
 		this.codigoIndicador = codigoIndicador;
 	}
 
@@ -102,22 +98,13 @@ public class Indicador implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
+	@Column(name = "abreviatura", nullable = false)
+	public String getAbreviatura() {
+		return this.abreviatura;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	@Column(name = "formula")
-	public String getFormula() {
-		return this.formula;
-	}
-
-	public void setFormula(String formula) {
-		this.formula = formula;
+	public void setAbreviatura(String abreviatura) {
+		this.abreviatura = abreviatura;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
@@ -130,22 +117,13 @@ public class Indicador implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "indicador")
-	public Set<IndicadorCompetencia> getIndicadorCompetencias() {
-		return this.indicadorCompetencias;
+	public Set<IndicadorCategoriaCompetencia> getIndicadorCategoriaCompetencias() {
+		return this.indicadorCategoriaCompetencias;
 	}
 
-	public void setIndicadorCompetencias(
-			Set<IndicadorCompetencia> indicadorCompetencias) {
-		this.indicadorCompetencias = indicadorCompetencias;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "indicador")
-	public Set<Regla> getReglas() {
-		return this.reglas;
-	}
-
-	public void setReglas(Set<Regla> reglas) {
-		this.reglas = reglas;
+	public void setIndicadorCategoriaCompetencias(
+			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias) {
+		this.indicadorCategoriaCompetencias = indicadorCategoriaCompetencias;
 	}
 
 }

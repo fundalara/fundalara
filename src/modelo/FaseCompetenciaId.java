@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,23 +11,23 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class FaseCompetenciaId implements java.io.Serializable {
 
-	private String codigoCompetencia;
+	private int codigoCompetencia;
 	private int numeroFase;
 
 	public FaseCompetenciaId() {
 	}
 
-	public FaseCompetenciaId(String codigoCompetencia, int numeroFase) {
+	public FaseCompetenciaId(int codigoCompetencia, int numeroFase) {
 		this.codigoCompetencia = codigoCompetencia;
 		this.numeroFase = numeroFase;
 	}
 
 	@Column(name = "codigo_competencia", nullable = false)
-	public String getCodigoCompetencia() {
+	public int getCodigoCompetencia() {
 		return this.codigoCompetencia;
 	}
 
-	public void setCodigoCompetencia(String codigoCompetencia) {
+	public void setCodigoCompetencia(int codigoCompetencia) {
 		this.codigoCompetencia = codigoCompetencia;
 	}
 
@@ -49,21 +49,14 @@ public class FaseCompetenciaId implements java.io.Serializable {
 			return false;
 		FaseCompetenciaId castOther = (FaseCompetenciaId) other;
 
-		return ((this.getCodigoCompetencia() == castOther
-				.getCodigoCompetencia()) || (this.getCodigoCompetencia() != null
-				&& castOther.getCodigoCompetencia() != null && this
-				.getCodigoCompetencia()
-				.equals(castOther.getCodigoCompetencia())))
+		return (this.getCodigoCompetencia() == castOther.getCodigoCompetencia())
 				&& (this.getNumeroFase() == castOther.getNumeroFase());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37
-				* result
-				+ (getCodigoCompetencia() == null ? 0 : this
-						.getCodigoCompetencia().hashCode());
+		result = 37 * result + this.getCodigoCompetencia();
 		result = 37 * result + this.getNumeroFase();
 		return result;
 	}

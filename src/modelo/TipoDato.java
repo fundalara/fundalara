@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,50 +20,55 @@ import javax.persistence.Table;
 @Table(name = "tipo_dato")
 public class TipoDato implements java.io.Serializable {
 
-	private String codigoTipoDato;
+	private int codigoTipoDato;
 	private TipoDato tipoDato;
 	private String nombre;
 	private String descripcion;
 	private char estatus;
+	private boolean tipo;
+	private Set<SeguridadFuncional> seguridadFuncionals = new HashSet<SeguridadFuncional>(
+			0);
 	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
 	private Set<TipoDato> tipoDatos = new HashSet<TipoDato>(0);
 
 	public TipoDato() {
 	}
 
-	public TipoDato(String codigoTipoDato, TipoDato tipoDato, String nombre,
-			String descripcion, char estatus) {
+	public TipoDato(int codigoTipoDato, String nombre, char estatus,
+			boolean tipo) {
 		this.codigoTipoDato = codigoTipoDato;
-		this.tipoDato = tipoDato;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.tipo = tipo;
 	}
 
-	public TipoDato(String codigoTipoDato, TipoDato tipoDato, String nombre,
-			String descripcion, char estatus, Set<DatoBasico> datoBasicos,
-			Set<TipoDato> tipoDatos) {
+	public TipoDato(int codigoTipoDato, TipoDato tipoDato, String nombre,
+			String descripcion, char estatus, boolean tipo,
+			Set<SeguridadFuncional> seguridadFuncionals,
+			Set<DatoBasico> datoBasicos, Set<TipoDato> tipoDatos) {
 		this.codigoTipoDato = codigoTipoDato;
 		this.tipoDato = tipoDato;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
+		this.tipo = tipo;
+		this.seguridadFuncionals = seguridadFuncionals;
 		this.datoBasicos = datoBasicos;
 		this.tipoDatos = tipoDatos;
 	}
 
 	@Id
 	@Column(name = "codigo_tipo_dato", unique = true, nullable = false)
-	public String getCodigoTipoDato() {
+	public int getCodigoTipoDato() {
 		return this.codigoTipoDato;
 	}
 
-	public void setCodigoTipoDato(String codigoTipoDato) {
+	public void setCodigoTipoDato(int codigoTipoDato) {
 		this.codigoTipoDato = codigoTipoDato;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_codigo_tipo_dato", nullable = false)
+	@JoinColumn(name = "parent_codigo_tipo_dato")
 	public TipoDato getTipoDato() {
 		return this.tipoDato;
 	}
@@ -81,7 +86,7 @@ public class TipoDato implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "descripcion", nullable = false)
+	@Column(name = "descripcion")
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -97,6 +102,25 @@ public class TipoDato implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "tipo", nullable = false)
+	public boolean isTipo() {
+		return this.tipo;
+	}
+
+	public void setTipo(boolean tipo) {
+		this.tipo = tipo;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")
+	public Set<SeguridadFuncional> getSeguridadFuncionals() {
+		return this.seguridadFuncionals;
+	}
+
+	public void setSeguridadFuncionals(
+			Set<SeguridadFuncional> seguridadFuncionals) {
+		this.seguridadFuncionals = seguridadFuncionals;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")

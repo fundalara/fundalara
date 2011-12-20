@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,21 +20,26 @@ import javax.persistence.Table;
 @Table(name = "equipo")
 public class Equipo implements java.io.Serializable {
 
-	private String codigoEquipo;
+	private int codigoEquipo;
 	private Categoria categoria;
 	private Divisa divisa;
 	private DatoBasico datoBasico;
 	private String nombre;
 	private char estatus;
-	private PersonalEquipo personalEquipo;
+	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
 	private Set<Roster> rosters = new HashSet<Roster>(0);
 	private Set<EquipoCompetencia> equipoCompetencias = new HashSet<EquipoCompetencia>(
 			0);
+	private Set<TestEvaluativo> testEvaluativos = new HashSet<TestEvaluativo>(0);
+	private Set<SesionEjecutada> sesionEjecutadas = new HashSet<SesionEjecutada>(
+			0);
+	private Set<Sesion> sesions = new HashSet<Sesion>(0);
+	private Set<ComisionEquipo> comisionEquipos = new HashSet<ComisionEquipo>(0);
 
 	public Equipo() {
 	}
 
-	public Equipo(String codigoEquipo, Categoria categoria, Divisa divisa,
+	public Equipo(int codigoEquipo, Categoria categoria, Divisa divisa,
 			DatoBasico datoBasico, String nombre, char estatus) {
 		this.codigoEquipo = codigoEquipo;
 		this.categoria = categoria;
@@ -45,28 +49,35 @@ public class Equipo implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public Equipo(String codigoEquipo, Categoria categoria, Divisa divisa,
+	public Equipo(int codigoEquipo, Categoria categoria, Divisa divisa,
 			DatoBasico datoBasico, String nombre, char estatus,
-			PersonalEquipo personalEquipo, Set<Roster> rosters,
-			Set<EquipoCompetencia> equipoCompetencias) {
+			Set<PersonalEquipo> personalEquipos, Set<Roster> rosters,
+			Set<EquipoCompetencia> equipoCompetencias,
+			Set<TestEvaluativo> testEvaluativos,
+			Set<SesionEjecutada> sesionEjecutadas, Set<Sesion> sesions,
+			Set<ComisionEquipo> comisionEquipos) {
 		this.codigoEquipo = codigoEquipo;
 		this.categoria = categoria;
 		this.divisa = divisa;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
 		this.estatus = estatus;
-		this.personalEquipo = personalEquipo;
+		this.personalEquipos = personalEquipos;
 		this.rosters = rosters;
 		this.equipoCompetencias = equipoCompetencias;
+		this.testEvaluativos = testEvaluativos;
+		this.sesionEjecutadas = sesionEjecutadas;
+		this.sesions = sesions;
+		this.comisionEquipos = comisionEquipos;
 	}
 
 	@Id
 	@Column(name = "codigo_equipo", unique = true, nullable = false)
-	public String getCodigoEquipo() {
+	public int getCodigoEquipo() {
 		return this.codigoEquipo;
 	}
 
-	public void setCodigoEquipo(String codigoEquipo) {
+	public void setCodigoEquipo(int codigoEquipo) {
 		this.codigoEquipo = codigoEquipo;
 	}
 
@@ -118,13 +129,13 @@ public class Equipo implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public PersonalEquipo getPersonalEquipo() {
-		return this.personalEquipo;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<PersonalEquipo> getPersonalEquipos() {
+		return this.personalEquipos;
 	}
 
-	public void setPersonalEquipo(PersonalEquipo personalEquipo) {
-		this.personalEquipo = personalEquipo;
+	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
+		this.personalEquipos = personalEquipos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
@@ -143,6 +154,42 @@ public class Equipo implements java.io.Serializable {
 
 	public void setEquipoCompetencias(Set<EquipoCompetencia> equipoCompetencias) {
 		this.equipoCompetencias = equipoCompetencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<TestEvaluativo> getTestEvaluativos() {
+		return this.testEvaluativos;
+	}
+
+	public void setTestEvaluativos(Set<TestEvaluativo> testEvaluativos) {
+		this.testEvaluativos = testEvaluativos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<SesionEjecutada> getSesionEjecutadas() {
+		return this.sesionEjecutadas;
+	}
+
+	public void setSesionEjecutadas(Set<SesionEjecutada> sesionEjecutadas) {
+		this.sesionEjecutadas = sesionEjecutadas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<Sesion> getSesions() {
+		return this.sesions;
+	}
+
+	public void setSesions(Set<Sesion> sesions) {
+		this.sesions = sesions;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
+	public Set<ComisionEquipo> getComisionEquipos() {
+		return this.comisionEquipos;
+	}
+
+	public void setComisionEquipos(Set<ComisionEquipo> comisionEquipos) {
+		this.comisionEquipos = comisionEquipos;
 	}
 
 }

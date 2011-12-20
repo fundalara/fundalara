@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,48 +26,73 @@ import org.hibernate.annotations.Parameter;
 public class Jugador implements java.io.Serializable {
 
 	private String cedulaRif;
-	private DatoBasico datoBasico;
+	private DatoBasico datoBasicoByCodigoPais;
+	private DatoBasico datoBasicoByCodigoParroquiaNacimiento;
 	private Persona persona;
+	private String lugarNacimiento;
 	private int numero;
 	private String tipoDeSangre;
-	private double peso;
-	private double altura;
+	private Double peso;
+	private Double altura;
 	private String brazoLanzar;
 	private String posicionBateo;
+	private RetiroTraslado retiroTraslado;
+	private Set<TallaPorJugador> tallaPorJugadors = new HashSet<TallaPorJugador>(
+			0);
 	private Set<FamiliarJugador> familiarJugadors = new HashSet<FamiliarJugador>(
 			0);
+	private Set<DatoMedico> datoMedicos = new HashSet<DatoMedico>(0);
+	private Set<DatoConducta> datoConductas = new HashSet<DatoConducta>(0);
+	private Set<DatoAcademico> datoAcademicos = new HashSet<DatoAcademico>(0);
+	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
 	private Set<Roster> rosters = new HashSet<Roster>(0);
+	private Set<DatoDeportivo> datoDeportivos = new HashSet<DatoDeportivo>(0);
 
 	public Jugador() {
 	}
 
-	public Jugador(DatoBasico datoBasico, Persona persona, int numero,
-			String tipoDeSangre, double peso, double altura,
-			String brazoLanzar, String posicionBateo) {
-		this.datoBasico = datoBasico;
+	public Jugador(DatoBasico datoBasicoByCodigoPais,
+			DatoBasico datoBasicoByCodigoParroquiaNacimiento, Persona persona,
+			int numero, String tipoDeSangre, String brazoLanzar,
+			String posicionBateo) {
+		this.datoBasicoByCodigoPais = datoBasicoByCodigoPais;
+		this.datoBasicoByCodigoParroquiaNacimiento = datoBasicoByCodigoParroquiaNacimiento;
 		this.persona = persona;
 		this.numero = numero;
 		this.tipoDeSangre = tipoDeSangre;
-		this.peso = peso;
-		this.altura = altura;
 		this.brazoLanzar = brazoLanzar;
 		this.posicionBateo = posicionBateo;
 	}
 
-	public Jugador(DatoBasico datoBasico, Persona persona, int numero,
-			String tipoDeSangre, double peso, double altura,
-			String brazoLanzar, String posicionBateo,
-			Set<FamiliarJugador> familiarJugadors, Set<Roster> rosters) {
-		this.datoBasico = datoBasico;
+	public Jugador(DatoBasico datoBasicoByCodigoPais,
+			DatoBasico datoBasicoByCodigoParroquiaNacimiento, Persona persona,
+			String lugarNacimiento, int numero, String tipoDeSangre,
+			Double peso, Double altura, String brazoLanzar,
+			String posicionBateo, RetiroTraslado retiroTraslado,
+			Set<TallaPorJugador> tallaPorJugadors,
+			Set<FamiliarJugador> familiarJugadors, Set<DatoMedico> datoMedicos,
+			Set<DatoConducta> datoConductas, Set<DatoAcademico> datoAcademicos,
+			Set<DatoSocial> datoSocials, Set<Roster> rosters,
+			Set<DatoDeportivo> datoDeportivos) {
+		this.datoBasicoByCodigoPais = datoBasicoByCodigoPais;
+		this.datoBasicoByCodigoParroquiaNacimiento = datoBasicoByCodigoParroquiaNacimiento;
 		this.persona = persona;
+		this.lugarNacimiento = lugarNacimiento;
 		this.numero = numero;
 		this.tipoDeSangre = tipoDeSangre;
 		this.peso = peso;
 		this.altura = altura;
 		this.brazoLanzar = brazoLanzar;
 		this.posicionBateo = posicionBateo;
+		this.retiroTraslado = retiroTraslado;
+		this.tallaPorJugadors = tallaPorJugadors;
 		this.familiarJugadors = familiarJugadors;
+		this.datoMedicos = datoMedicos;
+		this.datoConductas = datoConductas;
+		this.datoAcademicos = datoAcademicos;
+		this.datoSocials = datoSocials;
 		this.rosters = rosters;
+		this.datoDeportivos = datoDeportivos;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "persona"))
@@ -83,13 +108,24 @@ public class Jugador implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_parroquia", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@JoinColumn(name = "codigo_pais", nullable = false)
+	public DatoBasico getDatoBasicoByCodigoPais() {
+		return this.datoBasicoByCodigoPais;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setDatoBasicoByCodigoPais(DatoBasico datoBasicoByCodigoPais) {
+		this.datoBasicoByCodigoPais = datoBasicoByCodigoPais;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_parroquia_nacimiento", nullable = false)
+	public DatoBasico getDatoBasicoByCodigoParroquiaNacimiento() {
+		return this.datoBasicoByCodigoParroquiaNacimiento;
+	}
+
+	public void setDatoBasicoByCodigoParroquiaNacimiento(
+			DatoBasico datoBasicoByCodigoParroquiaNacimiento) {
+		this.datoBasicoByCodigoParroquiaNacimiento = datoBasicoByCodigoParroquiaNacimiento;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -100,6 +136,15 @@ public class Jugador implements java.io.Serializable {
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	@Column(name = "lugar_nacimiento")
+	public String getLugarNacimiento() {
+		return this.lugarNacimiento;
+	}
+
+	public void setLugarNacimiento(String lugarNacimiento) {
+		this.lugarNacimiento = lugarNacimiento;
 	}
 
 	@Column(name = "numero", nullable = false)
@@ -120,21 +165,21 @@ public class Jugador implements java.io.Serializable {
 		this.tipoDeSangre = tipoDeSangre;
 	}
 
-	@Column(name = "peso", nullable = false, precision = 17, scale = 17)
-	public double getPeso() {
+	@Column(name = "peso", precision = 17, scale = 17)
+	public Double getPeso() {
 		return this.peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
-	@Column(name = "altura", nullable = false, precision = 17, scale = 17)
-	public double getAltura() {
+	@Column(name = "altura", precision = 17, scale = 17)
+	public Double getAltura() {
 		return this.altura;
 	}
 
-	public void setAltura(double altura) {
+	public void setAltura(Double altura) {
 		this.altura = altura;
 	}
 
@@ -156,6 +201,24 @@ public class Jugador implements java.io.Serializable {
 		this.posicionBateo = posicionBateo;
 	}
 
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public RetiroTraslado getRetiroTraslado() {
+		return this.retiroTraslado;
+	}
+
+	public void setRetiroTraslado(RetiroTraslado retiroTraslado) {
+		this.retiroTraslado = retiroTraslado;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<TallaPorJugador> getTallaPorJugadors() {
+		return this.tallaPorJugadors;
+	}
+
+	public void setTallaPorJugadors(Set<TallaPorJugador> tallaPorJugadors) {
+		this.tallaPorJugadors = tallaPorJugadors;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
 	public Set<FamiliarJugador> getFamiliarJugadors() {
 		return this.familiarJugadors;
@@ -166,12 +229,57 @@ public class Jugador implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoMedico> getDatoMedicos() {
+		return this.datoMedicos;
+	}
+
+	public void setDatoMedicos(Set<DatoMedico> datoMedicos) {
+		this.datoMedicos = datoMedicos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoConducta> getDatoConductas() {
+		return this.datoConductas;
+	}
+
+	public void setDatoConductas(Set<DatoConducta> datoConductas) {
+		this.datoConductas = datoConductas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoAcademico> getDatoAcademicos() {
+		return this.datoAcademicos;
+	}
+
+	public void setDatoAcademicos(Set<DatoAcademico> datoAcademicos) {
+		this.datoAcademicos = datoAcademicos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoSocial> getDatoSocials() {
+		return this.datoSocials;
+	}
+
+	public void setDatoSocials(Set<DatoSocial> datoSocials) {
+		this.datoSocials = datoSocials;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
 	public Set<Roster> getRosters() {
 		return this.rosters;
 	}
 
 	public void setRosters(Set<Roster> rosters) {
 		this.rosters = rosters;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
+	public Set<DatoDeportivo> getDatoDeportivos() {
+		return this.datoDeportivos;
+	}
+
+	public void setDatoDeportivos(Set<DatoDeportivo> datoDeportivos) {
+		this.datoDeportivos = datoDeportivos;
 	}
 
 }

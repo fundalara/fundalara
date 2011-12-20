@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,39 +17,37 @@ import javax.persistence.Table;
 @Table(name = "jugador_foraneo")
 public class JugadorForaneo implements java.io.Serializable {
 
-	private String cedula;
+	private int cedula;
 	private Juego juego;
 	private EquipoCompetencia equipoCompetencia;
 	private DatoBasico datoBasico;
 	private String nombre;
-	private char estatus;
 
 	public JugadorForaneo() {
 	}
 
-	public JugadorForaneo(String cedula, Juego juego,
+	public JugadorForaneo(int cedula, Juego juego,
 			EquipoCompetencia equipoCompetencia, DatoBasico datoBasico,
-			String nombre, char estatus) {
+			String nombre) {
 		this.cedula = cedula;
 		this.juego = juego;
 		this.equipoCompetencia = equipoCompetencia;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
-		this.estatus = estatus;
 	}
 
 	@Id
 	@Column(name = "cedula", unique = true, nullable = false)
-	public String getCedula() {
+	public int getCedula() {
 		return this.cedula;
 	}
 
-	public void setCedula(String cedula) {
+	public void setCedula(int cedula) {
 		this.cedula = cedula;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego", nullable = false)
+	@JoinColumn(name = "codigo_juego1", nullable = false)
 	public Juego getJuego() {
 		return this.juego;
 	}
@@ -85,15 +83,6 @@ public class JugadorForaneo implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	@Column(name = "estatus", nullable = false, length = 1)
-	public char getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(char estatus) {
-		this.estatus = estatus;
 	}
 
 }

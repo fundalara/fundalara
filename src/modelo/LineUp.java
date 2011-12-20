@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "line_up")
 public class LineUp implements java.io.Serializable {
 
-	private String codigoLineUp;
+	private int codigoLineUp;
 	private RosterCompetencia rosterCompetencia;
 	private Juego juego;
 	private DatoBasico datoBasicoByCodigoPosicion;
@@ -31,7 +31,7 @@ public class LineUp implements java.io.Serializable {
 	public LineUp() {
 	}
 
-	public LineUp(String codigoLineUp, RosterCompetencia rosterCompetencia,
+	public LineUp(int codigoLineUp, RosterCompetencia rosterCompetencia,
 			Juego juego, DatoBasico datoBasicoByCodigoPosicion,
 			DatoBasico datoBasicoByCodigoTipoMencion) {
 		this.codigoLineUp = codigoLineUp;
@@ -41,7 +41,7 @@ public class LineUp implements java.io.Serializable {
 		this.datoBasicoByCodigoTipoMencion = datoBasicoByCodigoTipoMencion;
 	}
 
-	public LineUp(String codigoLineUp, RosterCompetencia rosterCompetencia,
+	public LineUp(int codigoLineUp, RosterCompetencia rosterCompetencia,
 			Juego juego, DatoBasico datoBasicoByCodigoPosicion,
 			DatoBasico datoBasicoByCodigoTipoMencion,
 			Set<DesempennoIndividual> desempennoIndividuals) {
@@ -55,11 +55,11 @@ public class LineUp implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_line_up", unique = true, nullable = false)
-	public String getCodigoLineUp() {
+	public int getCodigoLineUp() {
 		return this.codigoLineUp;
 	}
 
-	public void setCodigoLineUp(String codigoLineUp) {
+	public void setCodigoLineUp(int codigoLineUp) {
 		this.codigoLineUp = codigoLineUp;
 	}
 
@@ -74,7 +74,7 @@ public class LineUp implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego", nullable = false)
+	@JoinColumn(name = "codigo_juego1", nullable = false)
 	public Juego getJuego() {
 		return this.juego;
 	}

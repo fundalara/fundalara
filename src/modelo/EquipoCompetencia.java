@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,8 @@ import javax.persistence.Table;
 @Table(name = "equipo_competencia")
 public class EquipoCompetencia implements java.io.Serializable {
 
-	private String codigoEquipoCompetencia;
+	private int codigoEquipoCompetencia;
+	private Persona persona;
 	private Competencia competencia;
 	private Equipo equipo;
 	private Set<JugadorForaneo> jugadorForaneos = new HashSet<JugadorForaneo>(0);
@@ -29,17 +30,19 @@ public class EquipoCompetencia implements java.io.Serializable {
 	public EquipoCompetencia() {
 	}
 
-	public EquipoCompetencia(String codigoEquipoCompetencia,
+	public EquipoCompetencia(int codigoEquipoCompetencia, Persona persona,
 			Competencia competencia, Equipo equipo) {
 		this.codigoEquipoCompetencia = codigoEquipoCompetencia;
+		this.persona = persona;
 		this.competencia = competencia;
 		this.equipo = equipo;
 	}
 
-	public EquipoCompetencia(String codigoEquipoCompetencia,
+	public EquipoCompetencia(int codigoEquipoCompetencia, Persona persona,
 			Competencia competencia, Equipo equipo,
 			Set<JugadorForaneo> jugadorForaneos, Set<EquipoJuego> equipoJuegos) {
 		this.codigoEquipoCompetencia = codigoEquipoCompetencia;
+		this.persona = persona;
 		this.competencia = competencia;
 		this.equipo = equipo;
 		this.jugadorForaneos = jugadorForaneos;
@@ -48,12 +51,22 @@ public class EquipoCompetencia implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_equipo_competencia", unique = true, nullable = false)
-	public String getCodigoEquipoCompetencia() {
+	public int getCodigoEquipoCompetencia() {
 		return this.codigoEquipoCompetencia;
 	}
 
-	public void setCodigoEquipoCompetencia(String codigoEquipoCompetencia) {
+	public void setCodigoEquipoCompetencia(int codigoEquipoCompetencia) {
 		this.codigoEquipoCompetencia = codigoEquipoCompetencia;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "delegado", nullable = false)
+	public Persona getPersona() {
+		return this.persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

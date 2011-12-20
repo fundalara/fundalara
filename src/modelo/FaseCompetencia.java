@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -23,16 +23,18 @@ public class FaseCompetencia implements java.io.Serializable {
 	private Competencia competencia;
 	private int equipoIngresan;
 	private int equipoClasifican;
+	private char estatus;
 
 	public FaseCompetencia() {
 	}
 
 	public FaseCompetencia(FaseCompetenciaId id, Competencia competencia,
-			int equipoIngresan, int equipoClasifican) {
+			int equipoIngresan, int equipoClasifican, char estatus) {
 		this.id = id;
 		this.competencia = competencia;
 		this.equipoIngresan = equipoIngresan;
 		this.equipoClasifican = equipoClasifican;
+		this.estatus = estatus;
 	}
 
 	@EmbeddedId
@@ -73,6 +75,15 @@ public class FaseCompetencia implements java.io.Serializable {
 
 	public void setEquipoClasifican(int equipoClasifican) {
 		this.equipoClasifican = equipoClasifican;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

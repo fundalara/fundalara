@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,50 +20,41 @@ import javax.persistence.Table;
 @Table(name = "liga")
 public class Liga implements java.io.Serializable {
 
-	private String codigoLiga;
-	private DatoBasico datoBasico;
+	private int codigoLiga;
 	private String nombre;
+	private String localidad;
 	private char estatus;
+	private Set<Competencia> competencias = new HashSet<Competencia>(0);
 	private Set<Categoria> categorias = new HashSet<Categoria>(0);
 
 	public Liga() {
 	}
 
-	public Liga(String codigoLiga, DatoBasico datoBasico, String nombre,
-			char estatus) {
+	public Liga(int codigoLiga, String nombre, String localidad, char estatus) {
 		this.codigoLiga = codigoLiga;
-		this.datoBasico = datoBasico;
 		this.nombre = nombre;
+		this.localidad = localidad;
 		this.estatus = estatus;
 	}
 
-	public Liga(String codigoLiga, DatoBasico datoBasico, String nombre,
-			char estatus, Set<Categoria> categorias) {
+	public Liga(int codigoLiga, String nombre, String localidad, char estatus,
+			Set<Competencia> competencias, Set<Categoria> categorias) {
 		this.codigoLiga = codigoLiga;
-		this.datoBasico = datoBasico;
 		this.nombre = nombre;
+		this.localidad = localidad;
 		this.estatus = estatus;
+		this.competencias = competencias;
 		this.categorias = categorias;
 	}
 
 	@Id
 	@Column(name = "codigo_liga", unique = true, nullable = false)
-	public String getCodigoLiga() {
+	public int getCodigoLiga() {
 		return this.codigoLiga;
 	}
 
-	public void setCodigoLiga(String codigoLiga) {
+	public void setCodigoLiga(int codigoLiga) {
 		this.codigoLiga = codigoLiga;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_parroquia", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -76,6 +66,15 @@ public class Liga implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
+	@Column(name = "localidad", nullable = false)
+	public String getLocalidad() {
+		return this.localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -83,6 +82,16 @@ public class Liga implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "liga_competencia", joinColumns = { @JoinColumn(name = "codigo_liga", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_competencia", nullable = false, updatable = false) })
+	public Set<Competencia> getCompetencias() {
+		return this.competencias;
+	}
+
+	public void setCompetencias(Set<Competencia> competencias) {
+		this.competencias = competencias;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)

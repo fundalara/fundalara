@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 16/12/2011 03:51:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 19-dic-2011 14:08:48 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,33 +11,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PersonalJuegoId implements java.io.Serializable {
 
-	private String cedulaPersonal;
-	private String codigoJuegoPersonal;
+	private int codigoJuego1;
+	private String cedulaRif;
 
 	public PersonalJuegoId() {
 	}
 
-	public PersonalJuegoId(String cedulaPersonal, String codigoJuegoPersonal) {
-		this.cedulaPersonal = cedulaPersonal;
-		this.codigoJuegoPersonal = codigoJuegoPersonal;
+	public PersonalJuegoId(int codigoJuego1, String cedulaRif) {
+		this.codigoJuego1 = codigoJuego1;
+		this.cedulaRif = cedulaRif;
 	}
 
-	@Column(name = "cedula_personal", nullable = false)
-	public String getCedulaPersonal() {
-		return this.cedulaPersonal;
+	@Column(name = "codigo_juego1", nullable = false)
+	public int getCodigoJuego1() {
+		return this.codigoJuego1;
 	}
 
-	public void setCedulaPersonal(String cedulaPersonal) {
-		this.cedulaPersonal = cedulaPersonal;
+	public void setCodigoJuego1(int codigoJuego1) {
+		this.codigoJuego1 = codigoJuego1;
 	}
 
-	@Column(name = "codigo_juego_personal", nullable = false)
-	public String getCodigoJuegoPersonal() {
-		return this.codigoJuegoPersonal;
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setCodigoJuegoPersonal(String codigoJuegoPersonal) {
-		this.codigoJuegoPersonal = codigoJuegoPersonal;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
 	}
 
 	public boolean equals(Object other) {
@@ -49,29 +49,19 @@ public class PersonalJuegoId implements java.io.Serializable {
 			return false;
 		PersonalJuegoId castOther = (PersonalJuegoId) other;
 
-		return ((this.getCedulaPersonal() == castOther.getCedulaPersonal()) || (this
-				.getCedulaPersonal() != null
-				&& castOther.getCedulaPersonal() != null && this
-				.getCedulaPersonal().equals(castOther.getCedulaPersonal())))
-				&& ((this.getCodigoJuegoPersonal() == castOther
-						.getCodigoJuegoPersonal()) || (this
-						.getCodigoJuegoPersonal() != null
-						&& castOther.getCodigoJuegoPersonal() != null && this
-						.getCodigoJuegoPersonal().equals(
-								castOther.getCodigoJuegoPersonal())));
+		return (this.getCodigoJuego1() == castOther.getCodigoJuego1())
+				&& ((this.getCedulaRif() == castOther.getCedulaRif()) || (this
+						.getCedulaRif() != null
+						&& castOther.getCedulaRif() != null && this
+						.getCedulaRif().equals(castOther.getCedulaRif())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37
-				* result
-				+ (getCedulaPersonal() == null ? 0 : this.getCedulaPersonal()
-						.hashCode());
-		result = 37
-				* result
-				+ (getCodigoJuegoPersonal() == null ? 0 : this
-						.getCodigoJuegoPersonal().hashCode());
+		result = 37 * result + this.getCodigoJuego1();
+		result = 37 * result
+				+ (getCedulaRif() == null ? 0 : this.getCedulaRif().hashCode());
 		return result;
 	}
 
