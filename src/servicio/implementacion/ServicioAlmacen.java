@@ -2,45 +2,48 @@ package servicio.implementacion;
 
 import java.util.ArrayList;
 import java.util.List;
-import servicio.interfaz.IServicioAlmacen;
-import dao.general.DaoAlmacen;
-import modelo.Almacen;
 
+import servicio.interfaz.IServicioAlmacen;
+
+import dao.general.DaoAlmacen;
+
+import modelo.Almacen;
+import modelo.Material;
 
 public class ServicioAlmacen implements IServicioAlmacen {
 
-	DaoAlmacen daoAlmacen;		
+	DaoAlmacen nuevoAlmacenDAO;
 	
-	public DaoAlmacen getDaoAlmacen() {
-		return daoAlmacen;
+	public DaoAlmacen getNuevoAlmacenDAO() {
+		return nuevoAlmacenDAO;
 	}
 
-	public void setDaoAlmacen(DaoAlmacen daoAlmacen) {
-		this.daoAlmacen = daoAlmacen;
+	public void setNuevoAlmacenDAO(DaoAlmacen nuevoAlmacenDAO) {
+		this.nuevoAlmacenDAO = nuevoAlmacenDAO;
 	}
 
 	@Override
 	public void eliminar(Almacen a) {
-		daoAlmacen.eliminar(a);
+		nuevoAlmacenDAO.eliminar(a);
 
 	}
 
 	@Override
 	public void agregar(Almacen a) {
-		daoAlmacen.guardar(a);
+		nuevoAlmacenDAO.guardar(a);
 
 	}
 
 	@Override
 	public void actualizar(Almacen a) {
-		daoAlmacen.actualizar(a);
+		nuevoAlmacenDAO.actualizar(a);
 
 	}
 
 	@Override
 	public List<Almacen> listarAlmacen() {
 		
-		List<Almacen> a = daoAlmacen.listarAlmacen();
+		List<Almacen> a = nuevoAlmacenDAO.listarAlmacen();
 		int longitud = a.size();
 		List<Almacen> b = new ArrayList<Almacen>();
 		for(int i = 0; i < longitud; i++){
@@ -54,7 +57,7 @@ public class ServicioAlmacen implements IServicioAlmacen {
 
 	@Override
 	public String generarCodigo(){
-		Integer nuevoCodigo = daoAlmacen.contarCodigos("Almacen") + 1;
+		Integer nuevoCodigo = nuevoAlmacenDAO.contarCodigos("Almacen") + 1;
 		return nuevoCodigo.toString();
 	}
 }
