@@ -4,7 +4,7 @@ import java.util.List;
 
 import servicio.interfaz.IServicioLiga;
 
-importdao.general.DaoLiga;
+import dao.general.DaoLiga;
 
 import modelo.Divisa;
 import modelo.Liga;

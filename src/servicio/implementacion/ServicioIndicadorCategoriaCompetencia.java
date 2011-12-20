@@ -10,6 +10,15 @@ import servicio.interfaz.IServicioIndicadorCategoriaCompetencia;
 public class ServicioIndicadorCategoriaCompetencia implements
 		IServicioIndicadorCategoriaCompetencia {
 	
+	public DaoIndicadorCategoriaCompetencia getDaoIndicadorCategoriaCompetencia() {
+		return daoIndicadorCategoriaCompetencia;
+	}
+
+	public void setDaoIndicadorCategoriaCompetencia(
+			DaoIndicadorCategoriaCompetencia daoIndicadorCategoriaCompetencia) {
+		this.daoIndicadorCategoriaCompetencia = daoIndicadorCategoriaCompetencia;
+	}
+
 	DaoIndicadorCategoriaCompetencia daoIndicadorCategoriaCompetencia;
 
 	@Override

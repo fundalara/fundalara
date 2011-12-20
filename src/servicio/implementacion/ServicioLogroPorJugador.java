@@ -4,7 +4,7 @@ import java.util.List;
 
 import servicio.interfaz.IServicioLogroPorJugador;
 
-import dao.general.jugador.DaoLogroPorJugador;
+import dao.general.DaoLogroPorJugador;
 
 import modelo.LogroPorJugador;
 

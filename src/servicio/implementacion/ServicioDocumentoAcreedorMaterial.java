@@ -7,7 +7,7 @@ import dao.general.DaoDocumentoAcreedorMaterial;
 import modelo.DocumentoAcreedorMaterial;
 import servicio.interfaz.IServicioDocumentoAcreedorMaterial;
 
-public class ServicioDocuemntoAcreedorMaterial implements
+public class ServicioDocumentoAcreedorMaterial implements
 		IServicioDocumentoAcreedorMaterial {
 
 	DaoDocumentoAcreedorMaterial daoDocumentoAcreedorMaterial;

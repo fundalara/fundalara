@@ -9,37 +9,39 @@ import modelo.FamiliarJugador;
 
 public class ServicioFamiliarJugador implements IServicioFamiliarJugador {
 
-	DaoFamiliarJugador daofamiliarJugador;
-	
-	public DaoFamiliarJugador getDaofamiliarJugador() {
-		return daofamiliarJugador;
+	public DaoFamiliarJugador getDaoFamiliarJugador() {
+		return daoFamiliarJugador;
 	}
 
-	public void setDaofamiliarJugador(DaoFamiliarJugador daofamiliarJugador) {
-		this.daofamiliarJugador = daofamiliarJugador;
+	public void setDaoFamiliarJugador(DaoFamiliarJugador daoFamiliarJugador) {
+		this.daoFamiliarJugador = daoFamiliarJugador;
 	}
+
+	DaoFamiliarJugador daoFamiliarJugador;
+	
+	
 
 	@Override
 	public void eliminar(FamiliarJugador c) {
-		daofamiliarJugador.eliminar(c);
+		daoFamiliarJugador.eliminar(c);
 
 	}
 
 	@Override
 	public void agregar(FamiliarJugador c) {
-		daofamiliarJugador.guardar(c);
+		daoFamiliarJugador.guardar(c);
 
 	}
 
 	@Override
 	public void actualizar(FamiliarJugador c) {
-		daofamiliarJugador.actualizar(c);
+		daoFamiliarJugador.actualizar(c);
 
 	}
 
 	@Override
 	public List<FamiliarJugador> listar() {
-		return daofamiliarJugador.listar(new FamiliarJugador());
+		return daoFamiliarJugador.listar(new FamiliarJugador());
 	}
 
 }

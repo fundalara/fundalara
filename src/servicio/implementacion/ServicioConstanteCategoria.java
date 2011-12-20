@@ -2,7 +2,7 @@ package servicio.implementacion;
 
 import java.util.List;
 
-import dao.DaoConstanteCategoria;
+import dao.general.DaoConstanteCategoria;
 
 import modelo.Constante;
 import servicio.interfaz.IServicioConstante;

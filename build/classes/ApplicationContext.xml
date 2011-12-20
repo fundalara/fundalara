@@ -235,139 +235,139 @@
 		<property name="daoConstanteCategoria" ref="daoConstanteCategoria"></property>
 	</bean>
 	
-	<bean id="daoCategoriaCompetencia" class="dao.general.CategoriaCompetencia">
+	<bean id="daoCategoriaCompetencia" class="dao.general.DaoCategoriaCompetencia">
 	</bean>
 	
 	<bean id="servicioCategoriaCompetencia" class="servicio.implementacion.ServicioCategoriaCompetencia">
 		<property name="daoCategoriaCompetencia" ref="daoCategoriaCompetencia"></property>
 	</bean>
 	
-	<bean id="daoLiga" class="dao.general.Liga">
+	<bean id="daoLiga" class="dao.general.DaoLiga">
 	</bean>
 	
 	<bean id="servicioLiga" class="servicio.implementacion.ServicioLiga">
 		<property name="daoLiga" ref="daoLiga"></property>
 	</bean>
 	
-	<bean id="daoCompetencia" class="dao.general.Competencia">
+	<bean id="daoCompetencia" class="dao.general.DaoCompetencia">
 	</bean>
 	
 	<bean id="servicioCompetencia" class="servicio.implementacion.ServicioCompetencia">
 		<property name="daoCompetencia" ref="daoCompetencia"></property>
 	</bean>
 	
-	<bean id="daoIndicador" class="dao.general.Indicador">
+	<bean id="daoIndicador" class="dao.general.DaoIndicador">
 	</bean>
 	<bean id="servicioIndicador" class="servicio.implementacion.ServicioIndicador">
 		<property name="daoIndicador" ref="daoIndicador"></property>
 	</bean>
 	
-	<bean id="daoRosterCompetencia" class="dao.general.RosterCompetencia">
+	<bean id="daoRosterCompetencia" class="dao.general.DaoRosterCompetencia">
 	</bean>
 	
 	<bean id="servicioRosterCompetencia" class="servicio.implementacion.ServicioRosterCompetencia">
 		<property name="daoRosterCompetencia" ref="daoRosterCompetencia"></property>
 	</bean>
 	
-	<bean id="daoIndicadorCategoriaCompetencia" class="dao.general.IndicadorCategoriaCompetencia">
+	<bean id="daoIndicadorCategoriaCompetencia" class="dao.general.DaoIndicadorCategoriaCompetencia">
 	</bean>
 	
 	<bean id="servicioIndicadorCategoriaCompetencia" class="servicio.implementacion.ServicioIndicadorCategoriaCompetencia">
 		<property name="daoIndicadorCategoriaCompetencia" ref="daoIndicadorCategoriaCompetencia"></property>
 	</bean>
 	
-	<bean id="daoDesempennoIndividual" class="dao.general.DesempennoIndividual">
+	<bean id="daoDesempennoIndividual" class="dao.general.DaoDesempennoIndividual">
 	</bean>
 	
 	<bean id="servicioDesempennoIndividual" class="servicio.implementacion.ServicioDesempennoIndividual">
 		<property name="daoDesempennoIndividual" ref="daoDesempennoIndividual"></property>
 	</bean>
 	
-	<bean id="daoLineUp" class="dao.general.LineUp">
+	<bean id="daoLineUp" class="dao.general.DaoLineUp">
 	</bean>
 	
 	<bean id="servicioLineUp" class="servicio.implementacion.ServicioLineUp">
 		<property name="daoLineUp" ref="daoLineUp"></property>
 	</bean>
 	
-	<bean id="daoDesempennoColectivo" class="dao.general.DesempennoColectivo">
+	<bean id="daoDesempennoColectivo" class="dao.general.DaoDesempennoColectivo">
 	</bean>
 	
 	<bean id="servicioDesempennoColectivo" class="servicio.implementacion.ServicioDesempennoColectivo">
 		<property name="daoDesempennoColectivo" ref="daoDesempennoColectivo"></property>
 	</bean>
 	
-	<bean id="daoEquipoCompetencia" class="dao.general.EquipoCompetencia">
+	<bean id="daoEquipoCompetencia" class="dao.general.DaoEquipoCompetencia">
 	</bean>
 	
 	<bean id="servicioEquipoCompetencia" class="servicio.implementacion.ServicioEquipoCompetencia">
 		<property name="daoEquipoCompetencia" ref="daoEquipoCompetencia"></property>
 	</bean>
 	
-	<bean id="daoJugadorForaneo" class="dao.general.JugadorForaneo">
+	<bean id="daoJugadorForaneo" class="dao.general.DaoJugadorForaneo">
 	</bean>
 	
 	<bean id="servicioJugadorForaneo" class="servicio.implementacion.ServicioJugadorForaneo">
 		<property name="daoJugadorForaneo" ref="daoJugadorForaneo"></property>
 	</bean>
 	
-	<bean id="daoEquipoJuego" class="dao.general.EquipoJuego">
+	<bean id="daoEquipoJuego" class="dao.general.DaoEquipoJuego">
 	</bean>
 	
 	<bean id="servicioEquipoJuego" class="servicio.implementacion.ServicioEquipoJuego">
 		<property name="daoEquipoJuego" ref="daoEquipoJuego"></property>
 	</bean>
 	
-	<bean id="daoJuego" class="dao.general.Juego">
+	<bean id="daoJuego" class="dao.general.DaoJuego">
 	</bean>
 	
 	<bean id="servicioJuego" class="servicio.implementacion.ServicioJuego">
 		<property name="daoJuego" ref="daoJuego"></property>
 	</bean>
 	
-	<bean id="daoEstadio" class="dao.general.Estadio">
+	<bean id="daoEstadio" class="dao.general.DaoEstadio">
 	</bean>
 	
 	<bean id="servicioEstadio" class="servicio.implementacion.ServicioEstadio">
 		<property name="daoEstadio" ref="daoEstadio"></property>
 	</bean>
 	
-	<bean id="daoPersonalForaneoJuego" class="dao.general.PersonalForaneoJuego">
+	<bean id="daoPersonalForaneoJuego" class="dao.general.DaoPersonalForaneoJuego">
 	</bean>
 	
 	<bean id="servicioPersonalForaneoJuego" class="servicio.implementacion.ServicioPersonalForaneoJuego">
 		<property name="daoPersonalForaneoJuego" ref="daoPersonalForaneoJuego"></property>
 	</bean>
 	
-	<bean id="daoPersonalJuego" class="dao.general.PersonalJuego">
+	<bean id="daoPersonalJuego" class="dao.general.DaoPersonalJuego">
 	</bean>
 	
 	<bean id="servicioPersonalJuego" class="servicio.implementacion.ServicioPersonalJuego">
 		<property name="daoPersonalJuego" ref="daoPersonalJuego"></property>
 	</bean>
 	
-	<bean id="daoPersonalForaneo" class="dao.general.PersonalForaneo">
+	<bean id="daoPersonalForaneo" class="dao.general.DaoPersonalForaneo">
 	</bean>
 	
 	<bean id="servicioPersonalForaneo" class="servicio.implementacion.ServicioPersonalForaneo">
 		<property name="daoPersonalForaneo" ref="daoPersonalForaneo"></property>
 	</bean>
 	
-	<bean id="daoFaseCompetencia" class="dao.general.FaseCompetencia">
+	<bean id="daoFaseCompetencia" class="dao.general.DaoFaseCompetencia">
 	</bean>
 	
 	<bean id="servicioFaseCompetencia" class="servicio.implementacion.ServicioFaseCompetencia">
 		<property name="daoFaseCompetencia" ref="daoFaseCompetencia"></property>
 	</bean>
 	
-	<bean id="daoTipoCompetencia" class="dao.general.TipoCompetencia">
+	<bean id="daoTipoCompetencia" class="dao.general.DaoTipoCompetencia">
 	</bean>
 	
 	<bean id="servicioTipoCompetencia" class="servicio.implementacion.ServicioTipoCompetencia">
 		<property name="daoTipoCompetencia" ref="daoTipoCompetencia"></property>
 	</bean>
 	
-	<bean id="daoModalidadCompetencia" class="dao.general.ModalidadCompetencia">
+	<bean id="daoModalidadCompetencia" class="dao.general.DaoModalidadCompetencia">
 	</bean>
 	
 	<bean id="servicioModalidadCompetencia" class="servicio.implementacion.ServicioModalidadCompetencia">
@@ -395,10 +395,10 @@
 		<property name="daoCategoria" ref="daoCategoria"></property>
 	</bean>
 
-	<bean id="daoComisionEquipo" class="dao.logistica.DaoComisionEquipo">
+	<bean id="daoComisionEquipo" class="dao.general.DaoComisionEquipo">
 	</bean>
 	
-	<bean id="servicioComisionEquipo" class="servicio.logistica.ServicioComisionEquipo">
+	<bean id="servicioComisionEquipo" class="servicio.implementacion.ServicioComisionEquipo">
 		<property name="daoComisionEquipo" ref="daoComisionEquipo"></property>
 	</bean>
 
@@ -588,13 +588,13 @@
 		<property name="daoActividadesEjecutadas" ref="daoActividadesEjecutadas"></property>
 	</bean>
 
-	<bean id="daoActividadPlanificada" class="dao.general.ActividadPlanificada"></bean>
-	<bean id="servicioActividadPlanificada" class="servicio.implementacion.ActividadPlanificada">
+	<bean id="daoActividadPlanificada" class="dao.general.DaoActividadPlanificada"></bean>
+	<bean id="servicioActividadPlanificada" class="servicio.implementacion.ServicioActividadPlanificada">
 		<property name="daoActividadPlanificada" ref="daoActividadPlanificada"></property>
 	</bean>
 
-	<bean id="daoEscalaMedicion" class="dao.general.EscalaMedicion"></bean>
-	<bean id="servicioEscalaMedicion" class="servicio.implementacion.EscalaMedicion">
+	<bean id="daoEscalaMedicion" class="dao.general.DaoEscalaMedicion"></bean>
+	<bean id="servicioEscalaMedicion" class="servicio.implementacion.ServicioEscalaMedicion">
 		<property name="daoEscalaMedicion" ref="daoEscalaMedicion"></property>
 	</bean>
 
@@ -618,18 +618,18 @@
 		<property name="daoPlanRotacion" ref="daoPlanRotacion"></property>
 	</bean>
 
-	<bean id="daoIndicadorTest" class="dao.general.IndicadorTest"></bean>
-	<bean id="servicioIndicadorTest" class="servicio.implementacion.IndicadorTest">
+	<bean id="daoIndicadorTest" class="dao.general.DaoIndicadorTest"></bean>
+	<bean id="servicioIndicadorTest" class="servicio.implementacion.ServicioIndicadorTest">
 		<property name="daoIndicadorTest" ref="daoIndicadorTest"></property>
 	</bean>
 
-	<bean id="daoPlanEntrenamiento" class="dao.general.PlanEntrenamiento"></bean>
-	<bean id="servicioPlanEntrenamiento" class="servicio.implementacion.PlanEntrenamiento">
+	<bean id="daoPlanEntrenamiento" class="dao.general.DaoPlanEntrenamiento"></bean>
+	<bean id="servicioPlanEntrenamiento" class="servicio.implementacion.ServicioPlanEntrenamiento">
 		<property name="daoPlanEntrenamiento" ref="daoPlanEntrenamiento"></property>
 	</bean>
 
-	<bean id="daoTestJugador" class="dao.general.TestJugador"></bean>
-	<bean id="servicioTestJugador" class="servicio.implementacion.TestJugador">
+	<bean id="daoTestJugador" class="dao.general.DaoTestJugador"></bean>
+	<bean id="servicioTestJugador" class="servicio.implementacion.ServicioTestJugador">
 		<property name="daoTestJugador" ref="daoTestJugador"></property>
 	</bean>
 

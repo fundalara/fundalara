@@ -8,7 +8,7 @@ import dao.general.DaoTallaPorIndumentaria;
 
 import modelo.TallaPorIndumentaria;
 
-public class ServicioTallaPorIndumenrtaria implements
+public class ServicioTallaPorIndumentaria implements
 		IServicioTallaPorIndumentaria {
 
 	DaoTallaPorIndumentaria daoTallaPorIndumentaria;
