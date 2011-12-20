@@ -38,7 +38,7 @@ public class ServicioInstitucion implements IServicioInstitucion {
 
 	@Override
 	public List<Institucion> listar() {
-		return  daoInstitucion.listar(new Institucion());
+		return  daoInstitucion.listar( Institucion.class);
 	}
 	@Override
     public Institucion buscar (String id){

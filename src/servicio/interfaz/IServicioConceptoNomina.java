@@ -1,6 +1,8 @@
 package servicio.interfaz;
 
 import java.util.List;
+
+import modelo.AfeccionPersonal;
 import modelo.ConceptoNomina;
 
 public interface IServicioConceptoNomina {
@@ -10,7 +12,11 @@ public interface IServicioConceptoNomina {
 			
 		public abstract void actualizar(ConceptoNomina c);	
 		
-		public abstract List listar();
+		public abstract  List<ConceptoNomina> listar ();
+		
+		public abstract List<ConceptoNomina> listarActivos();
+		
+		public abstract  ConceptoNomina buscarPorCodigo (ConceptoNomina d);
 
 
 }

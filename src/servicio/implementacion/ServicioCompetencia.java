@@ -43,7 +43,8 @@ public class ServicioCompetencia implements IServicioCompetencia {
 
 	@Override
 	public List<Competencia> listarActivos() {
-		return daoCompetencia.listarActivos(Competencia.class);
+		//return daoCompetencia.listarActivos(Competencia.class);
+		return null;
 	}
 
 	public DaoCompetencia getDaoCompetencia() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonalTipoNomina;
 
+import modelo.PersonalContrato;
 import modelo.PersonalTipoNomina;
 import servicio.interfaz.IServicioPersonalTipoNomina;
 
@@ -36,9 +37,19 @@ public class ServicioPersonalTipoNomina implements IServicioPersonalTipoNomina {
 	}
 
 	@Override
-	public List listar() {
+	public List<PersonalTipoNomina> listar() {
+		return daoPersonalTipoNomina.listar(PersonalTipoNomina.class);
+	}
+
+	@Override
+	public List<PersonalTipoNomina> listarActivos() {
+		return daoPersonalTipoNomina.listarActivos(PersonalTipoNomina.class);
+	}
+
+	@Override
+	public PersonalTipoNomina buscarPorCodigo (PersonalTipoNomina d) {
 		// TODO Auto-generated method stub
-		return daoPersonalTipoNomina.listar(new PersonalTipoNomina());
+		return null;
 	}
 
 }

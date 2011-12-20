@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoDocumentoAcreedorMaterial;
 
+import modelo.DocumentoAcreedor;
 import modelo.DocumentoAcreedorMaterial;
 import servicio.interfaz.IServicioDocumentoAcreedorMaterial;
 
@@ -39,9 +40,19 @@ public class ServicioDocumentoAcreedorMaterial implements
 	}
 
 	@Override
-	public List listar() {
+	public List<DocumentoAcreedorMaterial> listar() {
+		return daoDocumentoAcreedorMaterial.listar(DocumentoAcreedorMaterial.class);
+	}
+
+	@Override
+	public List<DocumentoAcreedorMaterial> listarActivos() {
+		return daoDocumentoAcreedorMaterial.listarActivos(DocumentoAcreedorMaterial.class);
+	}
+
+	@Override
+	public DocumentoAcreedorMaterial buscarPorCodigo(DocumentoAcreedorMaterial d) {
 		// TODO Auto-generated method stub
-		return daoDocumentoAcreedorMaterial.listar(new DaoDocumentoAcreedorMaterial());
+		return null;
 	}
 
 }

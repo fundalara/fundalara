@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.general.DaoCuentaPagarMaterial;
 
+import modelo.CuentaPagar;
 import modelo.CuentaPagarMaterial;
 import servicio.interfaz.IServicioCuentaPagarMaterial;
 
@@ -39,9 +40,19 @@ public class ServicioCuentaPagarMaterial implements
 	}
 
 	@Override
-	public List listar() {
-		
-		return daoCuentaPagarMaterial.listar(new CuentaPagarMaterial());
+	public List<CuentaPagarMaterial> listar() {
+		return daoCuentaPagarMaterial.listar(CuentaPagarMaterial.class);
+	}
+
+	@Override
+	public List<CuentaPagarMaterial> listarActivos() {
+		return daoCuentaPagarMaterial.listarActivos(CuentaPagarMaterial.class);
+	}
+
+	@Override
+	public CuentaPagarMaterial buscarPorCodigo(CuentaPagarMaterial d) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

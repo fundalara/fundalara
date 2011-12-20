@@ -39,7 +39,7 @@ public class ServicioRoster implements IServicioRoster {
 
 	@Override
 	public List<Roster> listar() {
-		return daoRoster.listar(new Roster());
+		return daoRoster.listar( Roster.class);
 	}
 
 }

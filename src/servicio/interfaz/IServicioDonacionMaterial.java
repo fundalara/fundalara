@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.DocumentoIndumentaria;
 import modelo.DonacionMaterial ;
 
 public interface IServicioDonacionMaterial {
@@ -12,7 +13,12 @@ public interface IServicioDonacionMaterial {
 		
 	public abstract void actualizar(DonacionMaterial c);	
 	
-	public abstract List listar();
+	public abstract  List<DonacionMaterial> listar ();
+	
+	public abstract List<DonacionMaterial> listarActivos();
+	
+	public abstract  DonacionMaterial buscarPorCodigo (DonacionMaterial  d);
+
 
 
 }

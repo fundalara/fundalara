@@ -39,7 +39,7 @@ public class ServicioDatoSocial implements IServicioDatoSocial {
 
 	@Override
 	public List<DatoSocial> listar() {
-    	return daoDatoSocial.listar(new DatoSocial());
+    	return daoDatoSocial.listar( DatoSocial.class);
 	}
 
 }

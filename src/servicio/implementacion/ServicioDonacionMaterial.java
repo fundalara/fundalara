@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoDonacionMaterial;
 
+import modelo.DocumentoAcreedorMaterial;
 import modelo.DonacionMaterial;
 import servicio.interfaz.IServicioDonacionMaterial;
 
@@ -36,9 +37,19 @@ public class ServicioDonacionMaterial implements IServicioDonacionMaterial {
 	}
 
 	@Override
-	public List listar() {
+	public List<DonacionMaterial> listar() {
+		return daoDonacionMaterial.listar(DonacionMaterial.class);
+	}
+
+	@Override
+	public List<DonacionMaterial> listarActivos() {
+		return daoDonacionMaterial.listarActivos(DonacionMaterial.class);
+	}
+
+	@Override
+	public DonacionMaterial buscarPorCodigo(DonacionMaterial d) {
 		// TODO Auto-generated method stub
-		return daoDonacionMaterial.listar(new DonacionMaterial());
+		return null;
 	}
 
 }

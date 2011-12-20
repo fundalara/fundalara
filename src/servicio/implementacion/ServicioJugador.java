@@ -39,7 +39,7 @@ public class ServicioJugador implements IServicioJugador {
 
 	@Override
 	public List<Jugador> listar() {
-		return daoJugador.listar(new Jugador());
+		return daoJugador.listar( Jugador.class);
 	}
 
 }

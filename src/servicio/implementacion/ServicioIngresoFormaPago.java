@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoIngresoFormaPago;
 
+import modelo.Egreso;
 import modelo.IngresoFormaPago;
 import servicio.interfaz.IServicioIngresoFormaPago;
 
@@ -37,9 +38,19 @@ public class ServicioIngresoFormaPago implements IServicioIngresoFormaPago {
 	}
 
 	@Override
-	public List listar() {
+	public List<IngresoFormaPago> listar() {
+		return daoIngresoFormaPago.listar(IngresoFormaPago.class);
+	}
+
+	@Override
+	public List<IngresoFormaPago> listarActivos() {
+		return daoIngresoFormaPago.listarActivos(IngresoFormaPago.class);
+	}
+
+	@Override
+	public IngresoFormaPago buscarPorCodigo (IngresoFormaPago d) {
 		// TODO Auto-generated method stub
-		return daoIngresoFormaPago.listar(new IngresoFormaPago());
+		return null;
 	}
 
 }

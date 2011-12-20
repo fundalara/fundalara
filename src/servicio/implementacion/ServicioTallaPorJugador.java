@@ -40,7 +40,7 @@ public class ServicioTallaPorJugador implements IServicioTallaPorJugador {
 
 	@Override
 	public List<TallaPorJugador> listar() {
-		return daoTallaPorJugador.listar(new TallaPorJugador());
+		return daoTallaPorJugador.listar( TallaPorJugador.class);
 	}
 
 }

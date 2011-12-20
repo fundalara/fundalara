@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoEgreso;
 
+import modelo.DocumentoIndumentaria;
 import modelo.Egreso;
 import servicio.interfaz.IServicioEgreso;
 
@@ -37,9 +38,19 @@ public class ServicioEgreso implements IServicioEgreso {
 	}
 
 	@Override
-	public List listar() {
+	public List<Egreso> listar() {
+		return daoEgreso.listar(Egreso.class);
+	}
+
+	@Override
+	public List<Egreso> listarActivos() {
+		return daoEgreso.listarActivos(Egreso.class);
+	}
+
+	@Override
+	public Egreso buscarPorCodigo (Egreso d) {
 		// TODO Auto-generated method stub
-		return daoEgreso.listar(new Egreso());
+		return null;
 	}
 
 }

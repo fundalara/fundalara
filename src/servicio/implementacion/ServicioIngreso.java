@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoIngreso;
 
+import modelo.EgresoFormaPago;
 import modelo.Ingreso;
 import servicio.interfaz.IServicioIngreso;
 
@@ -37,9 +38,19 @@ public class ServicioIngreso implements IServicioIngreso {
 	}
 
 	@Override
-	public List listar() {
+	public List<Ingreso> listar() {
+		return daoIngreso.listar(Ingreso.class);
+	}
+
+	@Override
+	public List<Ingreso> listarActivos() {
+		return daoIngreso.listarActivos(Ingreso.class);
+	}
+
+	@Override
+	public Ingreso buscarPorCodigo (Ingreso d) {
 		// TODO Auto-generated method stub
-		return daoIngreso.listar(new Ingreso());
+		return null;
 	}
 
 }

@@ -40,7 +40,7 @@ public class ServicioLogroPorJugador implements IServicioLogroPorJugador {
 
 	@Override
 	public List<LogroPorJugador> listar() {
-		return daoLogroPorJugador.listar(new LogroPorJugador());
+		return daoLogroPorJugador.listar( LogroPorJugador.class);
 	}
 
 }

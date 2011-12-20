@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoIngresoDocumentoAcreedor;
 
+import modelo.Egreso;
 import modelo.IngresoDocumentoAcreedor;
 import servicio.interfaz.IServicioIngresoDocumentoAcreedor;
 
@@ -40,9 +41,18 @@ public class ServicioIngresoDocumentoAcreedor implements
 	}
 
 	@Override
-	public List listar() {
-		// TODO Auto-generated method stub
-		return daoIngresoDocumentoAcreedor.listar(new IngresoDocumentoAcreedor());
+	public List<IngresoDocumentoAcreedor> listar() {
+		return daoIngresoDocumentoAcreedor.listar(IngresoDocumentoAcreedor.class);
 	}
 
+	@Override
+	public List<IngresoDocumentoAcreedor> listarActivos() {
+		return daoIngresoDocumentoAcreedor.listarActivos(IngresoDocumentoAcreedor.class);
+	}
+
+	@Override
+	public IngresoDocumentoAcreedor buscarPorCodigo (IngresoDocumentoAcreedor d) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,16 +1,31 @@
 package servicio.implementacion;
 
 import java.util.List;
+import javax.management.Query;
 
-import dao.general.DaoActividadEntrenamiento;
-
-import modelo.ActividadEntrenamiento;
 import servicio.interfaz.IServicioActividadEntrenamiento;
+import dao.general.DaoActividadEntrenamiento;
+import modelo.ActividadEntrenamiento;
+import modelo.Categoria;
+import modelo.DatoBasico;
 
 public class ServicioActividadEntrenamiento implements
 		IServicioActividadEntrenamiento {
 
 	DaoActividadEntrenamiento daoActividadEntrenamiento;
+
+	public void eliminar(ActividadEntrenamiento a) {
+		daoActividadEntrenamiento.eliminar(a);
+	}
+
+	public void agregar(ActividadEntrenamiento a) {
+		daoActividadEntrenamiento.guardar(a);
+
+	}
+
+	public void actualizar(ActividadEntrenamiento a) {
+		daoActividadEntrenamiento.actualizar(a);
+	}
 
 	public DaoActividadEntrenamiento getDaoActividadEntrenamiento() {
 		return daoActividadEntrenamiento;
@@ -21,24 +36,29 @@ public class ServicioActividadEntrenamiento implements
 		this.daoActividadEntrenamiento = daoActividadEntrenamiento;
 	}
 
-	@Override
-	public void guardar(ActividadEntrenamiento ae) {
-		daoActividadEntrenamiento.guardar(ae);
-	}
-
-	@Override
-	public void actualizar(ActividadEntrenamiento ae) {
-		daoActividadEntrenamiento.actualizar(ae);
-	}
-
-	@Override
-	public void eliminar(ActividadEntrenamiento ae) {
-		daoActividadEntrenamiento.eliminar(ae);
-	}
-
-	@Override
 	public List<ActividadEntrenamiento> listar() {
-		return daoActividadEntrenamiento.listar(ActividadEntrenamiento.class);
+		List<ActividadEntrenamiento> a = daoActividadEntrenamiento
+				.listar(ActividadEntrenamiento.class);
+		return a;
+	}
+
+	@Override
+	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,
+			String idActividad) {
+		// TODO Auto-generated method stub
+		return daoActividadEntrenamiento.buscarClaveForegn(c, f, idActividad);
+	}
+
+	@Override
+	public List<ActividadEntrenamiento> buscarTodo(Categoria c, DatoBasico f) {
+		// TODO Auto-generated method stub
+		return daoActividadEntrenamiento.buscarTodo(c, f);
+	}
+
+	@Override
+	public List<ActividadEntrenamiento> buscarPorCategoria(Categoria c) {
+		// TODO Auto-generated method stub
+		return daoActividadEntrenamiento.buscarPorCategoria(c);
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import dao.general.DaoDocumentoIndumentaria;
 
 import modelo.DocumentoIndumentaria;
+import modelo.DonacionMaterial;
 import servicio.interfaz.IServicioDocumentoIndumentaria;
 
 public class ServicioDocumentoIndumentaria implements
@@ -40,9 +41,19 @@ public class ServicioDocumentoIndumentaria implements
 	}
 
 	@Override
-	public List listar() {
+	public List<DocumentoIndumentaria> listar() {
+		return daoDocumentoIndumentaria.listar(DocumentoIndumentaria.class);
+	}
+
+	@Override
+	public List<DocumentoIndumentaria> listarActivos() {
+		return daoDocumentoIndumentaria.listarActivos(DocumentoIndumentaria.class);
+	}
+
+	@Override
+	public DocumentoIndumentaria buscarPorCodigo (DocumentoIndumentaria d) {
 		// TODO Auto-generated method stub
-		return daoDocumentoIndumentaria.listar(new DocumentoIndumentaria());
+		return null;
 	}
 
 }

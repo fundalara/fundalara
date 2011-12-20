@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoTipoPagoRepresentante;
 
+import modelo.ProveedorBanco;
 import modelo.TipoPagoRepresentante;
 import servicio.interfaz.IServicioTipoPagoRepresentante;
 
@@ -14,8 +15,6 @@ public class ServicioTipoPagoRepresentante implements
 	@Override
 	
 	
-	
-
 	public void eliminar(TipoPagoRepresentante c) {
 		daoTipoPagoRepresentante.eliminar(c);
 
@@ -43,9 +42,19 @@ public class ServicioTipoPagoRepresentante implements
 	}
 
 	@Override
-	public List listar() {
+	public List<TipoPagoRepresentante> listar() {
+		return daoTipoPagoRepresentante.listar(TipoPagoRepresentante.class);
+	}
+
+	@Override
+	public List<TipoPagoRepresentante> listarActivos() {
+		return daoTipoPagoRepresentante.listarActivos(TipoPagoRepresentante.class);
+	}
+
+	@Override
+	public TipoPagoRepresentante buscarPorCodigo (TipoPagoRepresentante d) {
 		// TODO Auto-generated method stub
-		return daoTipoPagoRepresentante.listar(new TipoPagoRepresentante());
+		return null;
 	}
 
 }

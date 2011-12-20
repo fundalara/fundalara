@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoDatoAcademicoPersonal;
 
+import modelo.CuentaPagarMaterial;
 import modelo.DatoAcademicoPersonal;
 import servicio.interfaz.IServicioDatoAcademicoPersonal;
 
@@ -29,9 +30,19 @@ public class ServicioDatoAcademicoPersonal implements
 	}
 
 	@Override
-	public List listar() {
+	public List<DatoAcademicoPersonal> listar() {
+		return daoDatoAcademicoPersonal.listar(DatoAcademicoPersonal.class);
+	}
+
+	@Override
+	public List<DatoAcademicoPersonal> listarActivos() {
+		return daoDatoAcademicoPersonal.listarActivos(DatoAcademicoPersonal.class);
+	}
+
+	@Override
+	public DatoAcademicoPersonal buscarPorCodigo(DatoAcademicoPersonal d) {
 		// TODO Auto-generated method stub
-		return daoDatoAcademicoPersonal.listar(new DatoAcademicoPersonal());
+		return null;
 	}
 
 	public DaoDatoAcademicoPersonal getDaoDatoAcademicoPersonal() {

@@ -39,7 +39,7 @@ public class ServicioHospedaje implements IServicioHospedaje {
 
 	@Override
 	public List<Hospedaje> listar() {
-		return daoHospedaje.listar(new Hospedaje());
+		return daoHospedaje.listar( Hospedaje.class);
 	}
 
 }

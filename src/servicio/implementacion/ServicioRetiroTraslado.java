@@ -39,7 +39,7 @@ public class ServicioRetiroTraslado implements IServicioRetiroTraslado {
 
 	@Override
 	public List<RetiroTraslado> listar() {
-		return daoRetiroTraslado.listar(new RetiroTraslado());
+		return daoRetiroTraslado.listar( RetiroTraslado.class);
 	}
 
 }

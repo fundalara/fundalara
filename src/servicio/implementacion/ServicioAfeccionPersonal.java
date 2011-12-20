@@ -3,9 +3,10 @@ package servicio.implementacion;
 import java.util.List;
 import servicio.interfaz.IServicioAfeccionPersonal;
 import modelo.AfeccionPersonal;
+import modelo.Personal;
 import dao.general.DaoAfeccionPersonal;
 
-public class SevicioAfeccionPersonal implements IServicioAfeccionPersonal {
+public class ServicioAfeccionPersonal implements IServicioAfeccionPersonal {
 
 	DaoAfeccionPersonal daoAfeccionPersonal;
 	
@@ -35,11 +36,20 @@ public class SevicioAfeccionPersonal implements IServicioAfeccionPersonal {
 	}
 
 	@Override
-	public List listar() {
-		// TODO Auto-generated method stub
-		return daoAfeccionPersonal.listar(new AfeccionPersonal());
+	public List<AfeccionPersonal> listar() {
+		return daoAfeccionPersonal.listar(AfeccionPersonal.class);
 	}
 
+	@Override
+	public List<AfeccionPersonal> listarActivos() {
+		return daoAfeccionPersonal.listarActivos(AfeccionPersonal.class);
+	}
+
+	@Override
+	public AfeccionPersonal buscarPorCodigo (AfeccionPersonal d) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

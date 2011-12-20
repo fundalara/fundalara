@@ -40,7 +40,7 @@ daoUsuario.eliminar(u);
 	@Override
 	public List<Usuario> listar() {
 		// TODO Auto-generated method stub
-		return daoUsuario.listar(new DaoUsuario());
+		return daoUsuario.listar( DaoUsuario.class);
 	}
 
 }

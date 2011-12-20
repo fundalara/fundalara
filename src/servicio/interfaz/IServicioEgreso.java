@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.ConceptoNomina;
 import modelo.Egreso ;
 
 public interface IServicioEgreso {
@@ -12,6 +13,11 @@ public interface IServicioEgreso {
 		
 	public abstract void actualizar(Egreso  c);	
 	
-	public abstract List listar();
+	public abstract  List<Egreso> listar ();
+	
+	public abstract List<Egreso> listarActivos();
+	
+	public abstract  Egreso buscarPorCodigo (Egreso d);
+
 
 }

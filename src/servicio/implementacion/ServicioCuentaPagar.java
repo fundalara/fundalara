@@ -7,6 +7,7 @@ import servicio.interfaz.IServicioCuentaPagar;
 import dao.general.DaoCuentaPagar;
 
 import modelo.CuentaPagar;
+import modelo.Divisa;
 
 
 public class ServicioCuentaPagar implements IServicioCuentaPagar {
@@ -38,10 +39,23 @@ public class ServicioCuentaPagar implements IServicioCuentaPagar {
 
 	}
 
+
+	
 	@Override
-	public List listar() {
-		// TODO Auto-generated method stub
-		return daoCuentaPagar.listar(new CuentaPagar());
+	public List<CuentaPagar> listar() {
+		return daoCuentaPagar.listar(CuentaPagar.class);
 	}
+
+	@Override
+	public List<CuentaPagar> listarActivos() {
+		return daoCuentaPagar.listarActivos(CuentaPagar.class);
+	}
+
+	@Override
+	public CuentaPagar buscarPorCodigo(CuentaPagar d) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

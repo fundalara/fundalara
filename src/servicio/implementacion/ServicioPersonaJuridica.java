@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonaJuridica;
 
+import modelo.Nomina;
 import modelo.PersonaJuridica;
 import servicio.interfaz.IServicioPersonaJuridica;
 
@@ -33,14 +34,22 @@ public class ServicioPersonaJuridica implements IServicioPersonaJuridica {
 	public void actualizar(PersonaJuridica c) {
 		daoPersonaJuridica.actualizar(c);
 		
-		
-
 	}
 
 	@Override
-	public List listar() {
+	public List<PersonaJuridica> listar() {
+		return daoPersonaJuridica.listar(PersonaJuridica.class);
+	}
+
+	@Override
+	public List<PersonaJuridica> listarActivos() {
+		return daoPersonaJuridica.listarActivos(PersonaJuridica.class);
+	}
+
+	@Override
+	public PersonaJuridica buscarPorCodigo (PersonaJuridica d) {
 		// TODO Auto-generated method stub
-		return daoPersonaJuridica.listar(new PersonaJuridica());
+		return null;
 	}
 
 }

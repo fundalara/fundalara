@@ -1,18 +1,16 @@
 package servicio.interfaz;
 
 import java.util.List;
+import modelo.TipoDato;
 
-import servicio.implementacion.ServicioTipoDato;
-
-
-
-public interface IServicioTipoDato  {
-public abstract void guardar(ServicioTipoDato s);
+public interface IServicioTipoDato {
+	public abstract void eliminar(TipoDato td);
 	
-	public abstract void actualizar(ServicioTipoDato s);
+	public abstract void agregar(TipoDato td);
+		
+	public abstract void actualizar(TipoDato td);	
 	
-	public abstract void eliminar(ServicioTipoDato s);
+	public abstract List<TipoDato> listar();
 	
-	public abstract List<ServicioTipoDato> listar(); 
-
+	public abstract TipoDato buscarTipo(String td);
 }

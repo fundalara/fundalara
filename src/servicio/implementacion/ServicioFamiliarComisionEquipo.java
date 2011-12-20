@@ -41,7 +41,7 @@ public class ServicioFamiliarComisionEquipo implements
 
 	@Override
 	public List<FamiliarComisionEquipo> listar() {
-		return daoFamiliarComisionEquipo.listar(new FamiliarComisionEquipo());
+		return daoFamiliarComisionEquipo.listar( FamiliarComisionEquipo.class);
 		
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoMovimiento;
 
+import modelo.IngresoFormaPago;
 import modelo.Movimiento;
 import servicio.interfaz.IServicioMovimiento;
 
@@ -37,9 +38,19 @@ public class ServicioMovimiento implements IServicioMovimiento {
 	}
 
 	@Override
-	public List listar() {
+	public List<Movimiento> listar() {
+		return daoMovimiento.listar(Movimiento.class);
+	}
+
+	@Override
+	public List<Movimiento> listarActivos() {
+		return daoMovimiento.listarActivos(Movimiento.class);
+	}
+
+	@Override
+	public Movimiento buscarPorCodigo (Movimiento d) {
 		// TODO Auto-generated method stub
-		return  daoMovimiento.listar(new Movimiento());
+		return null;
 	}
 
 }

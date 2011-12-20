@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoEgresoCuentaPagar;
 
+import modelo.Egreso;
 import modelo.EgresoCuentaPagar;
 import servicio.interfaz.IServicioEgresoCuentaPagar;
 
@@ -37,9 +38,19 @@ public class ServicioEgresoCuentaPagar implements IServicioEgresoCuentaPagar {
 	}
 
 	@Override
-	public List listar() {
+	public List<EgresoCuentaPagar> listar() {
+		return daoEgresoCuentaPagar.listar(EgresoCuentaPagar.class);
+	}
+
+	@Override
+	public List<EgresoCuentaPagar> listarActivos() {
+		return daoEgresoCuentaPagar.listarActivos(EgresoCuentaPagar.class);
+	}
+
+	@Override
+	public EgresoCuentaPagar buscarPorCodigo (EgresoCuentaPagar d) {
 		// TODO Auto-generated method stub
-		return daoEgresoCuentaPagar.listar(new EgresoCuentaPagar());
+		return null;
 	}
 
 }

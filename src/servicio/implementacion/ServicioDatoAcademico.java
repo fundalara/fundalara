@@ -40,7 +40,7 @@ public class ServicioDatoAcademico implements IServicioDatoAcademico {
 
 	@Override
 	public List<DatoAcademico> listar() {
-		return daoDatoAcademico.listar(new DatoAcademico());
+		return daoDatoAcademico.listar( DatoAcademico.class);
 	}
 
 }

@@ -41,7 +41,7 @@ public class ServicioAscenso implements IServicioAscenso {
 
 	@Override
 	public List<Ascenso> listar() {
-		return daoAscenso.listar(new Ascenso());
+		return daoAscenso.listar(Ascenso.class);
 	}
 
 }

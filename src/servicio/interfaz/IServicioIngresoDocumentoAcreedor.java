@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.Ingreso;
 import modelo.IngresoDocumentoAcreedor ;
 
 public interface IServicioIngresoDocumentoAcreedor {
@@ -12,7 +13,11 @@ public interface IServicioIngresoDocumentoAcreedor {
 		
 	public abstract void actualizar(IngresoDocumentoAcreedor  c);	
 	
-	public abstract List listar();
+	public abstract  List<IngresoDocumentoAcreedor> listar ();
+	
+	public abstract List<IngresoDocumentoAcreedor> listarActivos();
+	
+	public abstract  IngresoDocumentoAcreedor buscarPorCodigo (IngresoDocumentoAcreedor d);
 
 
 }

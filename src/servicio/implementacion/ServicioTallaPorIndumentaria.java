@@ -41,7 +41,7 @@ public class ServicioTallaPorIndumentaria implements
 
 	@Override
 	public List<TallaPorIndumentaria> listar() {
-		return daoTallaPorIndumentaria.listar(new TallaPorIndumentaria());
+		return daoTallaPorIndumentaria.listar( TallaPorIndumentaria.class);
 	}
 
 }

@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.PersonaJuridica;
 import modelo.Personal;
 
 public interface IServicioPersonal {
@@ -12,6 +13,10 @@ public interface IServicioPersonal {
 		
 	public abstract void actualizar(Personal  c);	
 	
-	public abstract List listar();
+	public abstract  List<Personal> listar ();
+	
+	public abstract List<Personal> listarActivos();
+	
+	public abstract Personal buscarPorCodigo (Personal d);
 
 }

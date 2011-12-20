@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.Persona;
 import modelo.TipoPagoRepresentante;
 
 public interface IServicioTipoPagoRepresentante {
@@ -12,6 +13,11 @@ public interface IServicioTipoPagoRepresentante {
 		
 	public abstract void actualizar(TipoPagoRepresentante c);	
 	
-	public abstract List listar();
+	public abstract  List<TipoPagoRepresentante> listar ();
+	
+	public abstract List<TipoPagoRepresentante> listarActivos();
+	
+	public abstract TipoPagoRepresentante buscarPorCodigo (TipoPagoRepresentante d);
+
 
 }

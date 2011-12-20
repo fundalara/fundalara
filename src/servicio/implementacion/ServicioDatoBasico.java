@@ -2,15 +2,45 @@ package servicio.implementacion;
 
 import java.util.List;
 
-import modelo.DatoBasico;
-import dao.general.DaoDatoBasico;
 import servicio.interfaz.IServicioDatoBasico;
 
+import dao.general.DaoDatoBasico;
+
+import modelo.DatoBasico;
+import modelo.TipoDato;
+
 public class ServicioDatoBasico implements IServicioDatoBasico {
-    
-	
 	DaoDatoBasico daoDatoBasico;
 	
+	@Override
+	public void eliminar(DatoBasico d) {
+		
+	}
+
+	@Override
+	public void agregar(DatoBasico d) {
+		daoDatoBasico.guardar(d);
+
+	}
+
+	@Override
+	public void actualizar(DatoBasico d) {
+		daoDatoBasico.actualizar(d);
+	}
+
+	@Override
+	public List<DatoBasico> listar() {
+		return daoDatoBasico.listar(DatoBasico.class);
+	}
+
+	@Override
+	public List<DatoBasico> buscarPorTipoDato(TipoDato td) {
+		// TODO Auto-generated method stub
+		return daoDatoBasico.buscarPorTipoDato(td);
+	}
+	
+
+
 	public DaoDatoBasico getDaoDatoBasico() {
 		return daoDatoBasico;
 	}
@@ -20,26 +50,9 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	}
 
 	@Override
-	public void guardar(Object o) {
+	public DatoBasico buscarPorCodigo(String td) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actualizar(Object o) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void eliminar(Object o) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<DatoBasico> listarParroquias() {
-		return daoDatoBasico.listarParroquias();		
-	}
+		return daoDatoBasico.buscarPorCodigo(td);
+	}	
 
 }

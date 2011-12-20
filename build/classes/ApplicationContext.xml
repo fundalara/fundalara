@@ -634,17 +634,17 @@
 	</bean>
 
 	<bean id="daoDesempennoJugador" class="dao.general.DaoDesempennoJugador"></bean>
-	<bean id="ServicioDesempennoJugador" class="servicio.implementacion.ServicioDesempennoJugador">
+	<bean id="servicioDesempennoJugador" class="servicio.implementacion.ServicioDesempennoJugador">
 		<property name="daoDesempennoJugador" ref="daoDesempennoJugador"></property>
 	</bean>
 
 	<bean id="daoLapsoDeportivo" class="dao.general.DaoLapsoDeportivo"></bean>
-	<bean id="ServicioLapsoDeportivo" class="servicio.implementacion.ServicioLapsoDeportivo">
+	<bean id="servicioLapsoDeportivo" class="servicio.implementacion.ServicioLapsoDeportivo">
 		<property name="daoLapsoDeportivo" ref="daoLapsoDeportivo"></property>
 	</bean>
 
 	<bean id="daoTestEvaluativo" class="dao.general.DaoTestEvaluativo"></bean>
-	<bean id="ServicioTestEvaluativo" class="servicio.implementacion.ServicioTestEvaluativo">
+	<bean id="servicioTestEvaluativo" class="servicio.implementacion.ServicioTestEvaluativo">
 		<property name="daoTestEvaluativo" ref="daoTestEvaluativo"></property>
 	</bean>
 	<bean id="daoAsistenciaPersonalEntrenamiento" class="dao.general.DaoAsistenciaPersonalEntrenamiento"></bean>

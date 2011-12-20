@@ -41,7 +41,7 @@ public class ServicioFamiliarJugador implements IServicioFamiliarJugador {
 
 	@Override
 	public List<FamiliarJugador> listar() {
-		return daoFamiliarJugador.listar(new FamiliarJugador());
+		return daoFamiliarJugador.listar( FamiliarJugador.class);
 	}
 
 }

@@ -40,7 +40,7 @@ public class ServicioRecaudoPorProceso implements IServicioRecaudoPorProceso {
 
 	@Override
 	public List<RecaudoPorProceso> listar() {
-		return daoRecaudoPorProceso.listar(new RecaudoPorProceso());
+		return daoRecaudoPorProceso.listar( RecaudoPorProceso.class);
 	}
 
 }

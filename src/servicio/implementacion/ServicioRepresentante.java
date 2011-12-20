@@ -25,7 +25,7 @@ public class ServicioRepresentante implements IServicioRepresentante {
 
 	@Override
 	public List<modelo.Representante> listar() {
-		return daoRepresentante.listar(new ServicioRepresentante());
+		return daoRepresentante.listar( ServicioRepresentante.class);
 	}
 
 }

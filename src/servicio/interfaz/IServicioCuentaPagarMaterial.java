@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.CuentaPagar;
 import modelo.CuentaPagarMaterial;
 
 public interface IServicioCuentaPagarMaterial {
@@ -12,6 +13,10 @@ public interface IServicioCuentaPagarMaterial {
 		
 	public abstract void actualizar(CuentaPagarMaterial c);	
 	
-	public abstract List listar();
+	public abstract  List<CuentaPagarMaterial> listar ();
+	
+	public abstract List<CuentaPagarMaterial> listarActivos();
+	
+	public abstract  CuentaPagarMaterial buscarPorCodigo (CuentaPagarMaterial d);
 
 }

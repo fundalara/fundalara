@@ -4,18 +4,18 @@
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.password">123456</property>
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        <property name="hibernate.default_schema">public</property>
+        <property name="connection.autocommit">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hibernate.search.autoregister_listeners">false</property>
-        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.transaction.flush_before_completion">true</property>
+        <property name="format_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="modelo.IndicadorTest" />
         <mapping class="modelo.Personal" />
         <mapping class="modelo.TipoPagoRepresentante" />

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoProveedorBanco;
 
+import modelo.PersonalTipoNomina;
 import modelo.ProveedorBanco;
 import servicio.interfaz.IServicioProveedorBanco;
 
@@ -37,9 +38,19 @@ public class ServicioProveedorBanco implements IServicioProveedorBanco {
 	}
 
 	@Override
-	public List listar() {
+	public List<ProveedorBanco> listar() {
+		return daoProveedorBanco.listar(ProveedorBanco.class);
+	}
+
+	@Override
+	public List<ProveedorBanco> listarActivos() {
+		return daoProveedorBanco.listarActivos(ProveedorBanco.class);
+	}
+
+	@Override
+	public ProveedorBanco buscarPorCodigo (ProveedorBanco d) {
 		// TODO Auto-generated method stub
-		return daoProveedorBanco.listar(new ProveedorBanco());
+		return null;
 	}
 
 }

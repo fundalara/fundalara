@@ -39,7 +39,7 @@ public class ServicioDocumentoConducta implements IServicioDocumentoConducta {
 
 	@Override
 	public List<DocumentoConducta> listar() {
-		return daoDocumentoConducta.listar(new DocumentoConducta());
+		return daoDocumentoConducta.listar( DocumentoConducta.class);
 	}
 
 }

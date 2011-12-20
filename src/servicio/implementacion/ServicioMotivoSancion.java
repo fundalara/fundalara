@@ -40,7 +40,7 @@ public class ServicioMotivoSancion implements IServicioMotivoSancion {
 
 	@Override
 	public List<MotivoSancion> listar() {
-		return daoMotivoSancion.listar(new MotivoSancion());
+		return daoMotivoSancion.listar( MotivoSancion.class);
 	}
 
 }

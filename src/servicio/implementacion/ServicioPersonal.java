@@ -5,6 +5,7 @@ import java.util.List;
 import dao.general.DaoPersonal;
 
 import modelo.Personal;
+import modelo.Personal;
 import servicio.interfaz.IServicioPersonal;
 
 public class ServicioPersonal implements IServicioPersonal {
@@ -37,9 +38,19 @@ public class ServicioPersonal implements IServicioPersonal {
 	}
 
 	@Override
-	public List listar() {
+	public List<Personal> listar() {
+		return daoPersonal.listar(Personal.class);
+	}
+
+	@Override
+	public List<Personal> listarActivos() {
+		return daoPersonal.listarActivos(Personal.class);
+	}
+
+	@Override
+	public Personal buscarPorCodigo (Personal d) {
 		// TODO Auto-generated method stub
-		return daoPersonal.listar(new Personal());
+		return null;
 	}
 
 }

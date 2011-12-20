@@ -40,7 +40,7 @@ public class ServicioDocumentoMedico implements IServicioDocumentoMedico {
 
 	@Override
 	public List<DocumentoMedico> listar() {
-		return daoDocumentoMedico.listar(new DocumentoMedico());
+		return daoDocumentoMedico.listar( DocumentoMedico.class);
 	}
 
 }
