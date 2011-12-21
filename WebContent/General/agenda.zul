@@ -39,7 +39,7 @@
 					</div>
 					<div class="float-right">
 						<hbox>							
-							<divtab forEach="Semana, Mes"
+							<divtab forEach="Semana, Mes, Dia"
 								text="${each}" />
 						</hbox>
 					</div>

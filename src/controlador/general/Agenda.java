@@ -82,8 +82,13 @@ public class Agenda extends GenericForwardComposer {
 	public void cambiarFormatoCalendario(String vista){
 		if (vista.compareTo("Semana") == 0) {
 			calendars.setMold("default");
-		} else
+		} else if (vista.compareTo("Dia") == 0){
+			calendars.setMold("default");
+			calendars.setDays(1);
+		} else{
 			calendars.setMold("month");
+		}
+		/*Esto todavia no se que es. Sino sirve, quitarse*/
 		FDOW.setVisible("month".equals(calendars.getMold())
 				|| calendars.getDays() == 7);
 	}
