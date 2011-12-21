@@ -12,38 +12,38 @@ import modelo.Material;
 
 public class ServicioAlmacen implements IServicioAlmacen {
 
-	DaoAlmacen nuevoAlmacenDAO;
-	
-	public DaoAlmacen getNuevoAlmacenDAO() {
-		return nuevoAlmacenDAO;
+	DaoAlmacen daoAlmacen;
+
+	public DaoAlmacen getDaoAlmacen() {
+		return daoAlmacen;
 	}
 
-	public void setNuevoAlmacenDAO(DaoAlmacen nuevoAlmacenDAO) {
-		this.nuevoAlmacenDAO = nuevoAlmacenDAO;
+	public void setDaoAlmacen(DaoAlmacen daoAlmacen) {
+		this.daoAlmacen = daoAlmacen;
 	}
 
 	@Override
 	public void eliminar(Almacen a) {
-		nuevoAlmacenDAO.eliminar(a);
+		daoAlmacen.eliminar(a);
 
 	}
 
 	@Override
 	public void agregar(Almacen a) {
-		nuevoAlmacenDAO.guardar(a);
+		daoAlmacen.guardar(a);
 
 	}
 
 	@Override
 	public void actualizar(Almacen a) {
-		nuevoAlmacenDAO.actualizar(a);
+		daoAlmacen.actualizar(a);
 
 	}
 
 	@Override
 	public List<Almacen> listarAlmacen() {
 		
-		List<Almacen> a = nuevoAlmacenDAO.listarAlmacen();
+		List<Almacen> a = daoAlmacen.listarAlmacen();
 		int longitud = a.size();
 		List<Almacen> b = new ArrayList<Almacen>();
 		for(int i = 0; i < longitud; i++){
@@ -57,7 +57,7 @@ public class ServicioAlmacen implements IServicioAlmacen {
 
 	@Override
 	public String generarCodigo(){
-		Integer nuevoCodigo = nuevoAlmacenDAO.contarCodigos("Almacen") + 1;
+		Integer nuevoCodigo = daoAlmacen.contarCodigos("Almacen") + 1;
 		return nuevoCodigo.toString();
 	}
 }
