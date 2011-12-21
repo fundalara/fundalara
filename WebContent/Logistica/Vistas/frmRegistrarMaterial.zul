@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRegistrarMaterial"?>
+<?page title="Registro Material" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="frmRegistrarMaterial" title="Registro de Material" border="normal"
+		width="690px" maximizable="true" minimizable="true"
+		apply="controlador.logistica.CntrlRegistrarMaterial">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid height="100%" width="100%">
+					<rows>
+						<row>
+							<div>
+								<label value="Tipo de Material " />
+								<combobox id="cmbTipos" width="15%" constraint="no empty"
+									selectedItem="@{frmRegistrarMaterial$composer.tipoMaterial}"
+									model="@{frmRegistrarMaterial$composer.tiposMateriales, load-after='lista.onSelect, btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}">
+									<comboitem id="cmbTipo" self="@{each=tm}" label="@{tm.nombre }" />
+								</combobox>
+								<label value="(*)" style="color:red" />
+								<space width="3%" />
+								<label value="Clasificación: " />
+
+								<combobox id="cmbClasificaciones" width="15%" constraint="no empty" 
+									selectedItem="@{frmRegistrarMaterial$composer.material.datoBasicoByCodigoTipoMaterial, load-after='lista.onSelect' }"
+									model="@{frmRegistrarMaterial$composer.clasificacionesMateriales, load-after='cmbTipos.onSelect, btnRegistrar.onClick, btnCancelar.onClick, lista.onSelect' }">
+									<comboitem id="cmbClasificacion" self="@{each=cm }" label="@{cm.nombre }" />
+								</combobox>
+								
+<!-- 								<combobox id="cmbTM" width="15%" -->
+<!-- 									selectedItem="@{frmRegistrarMaterial$composer.material.tipoMaterial}" -->
+<!-- 									model="@{frmRegistrarMaterial$composer.tiposMateriales, load-after='cmbCM.onSelect, lista.onSelect, btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" -->
+<!-- 									constraint="no empty"> -->
+<!-- 									<comboitem id="cmbTipo" self="@{each=tm}" label="@{tm.descripcion }" /> -->
+<!-- 								</combobox> -->
+								
+								
+								<label value="(*)" style="color:red" />
+							</div>
+						</row>
+						<row height="100px">
+							<div>
+								<label value="Descripción: " />
+								<label value="(*)" style="color:red" />
+								<textbox id="txtDescripcion" multiline="true" height="120px"
+									width="100%" constraint="no empty"
+									value="@{frmRegistrarMaterial$composer.material.descripcion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Cantidad en Existencia: " width="10%" />
+								<label value="(*)" style="color:red" />
+								<space width="1%" />
+								<spinner id="txtCantidad"
+									value="@{frmRegistrarMaterial$composer.material.cantidadExistencia, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no empty, no negative" />
+								<space width="1%" />
+								<label value="Presentación: " width="15%" />
+								<spinner id="txtPresentacion" width=""
+									value="@{frmRegistrarMaterial$composer.material.cantidadPresentacion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no empty, no negative" />
+								<combobox id="cmbUnidades" width="15%" constraint="no empty"
+									selectedItem="@{frmRegistrarMaterial$composer.material.datoBasicoByCodigoUnidadMedida}"
+									model="@{frmRegistrarMaterial$composer.unidadesMedida, load-after='btnRegistrar.onClick, btnCancelar.onClick, lista.onSelect, btnModificar.onClick, btnEliminar.onClick'}">
+									<comboitem id="cmbUnidad" self="@{each=um}" label="@{um.nombre }" />
+								</combobox>
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Stock Mínimo:" />
+								<spinner id="txtStockMinimo"
+									value="@{frmRegistrarMaterial$composer.material.stockMinimo, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no negative" />
+								<space width="1%" />
+								<label value="Stock Máximo:" />
+								<spinner id="txtStockMaximo"
+									value="@{frmRegistrarMaterial$composer.material.stockMaximo, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no negative" />
+								<space width="2%" />
+								<label value="Reutilizable" />
+								<checkbox id="checkReutilizable"
+									checked="@{frmRegistrarMaterial$composer.material.reutilizable, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
+								<separator height="10px" />
+							</div>
+						</row>
+						<row>
+							<panel title="Materiales Registrados" collapsible="true">
+								<panelchildren>
+									<listbox id="lista" mold="paging" pageSize="5"
+										model="@{frmRegistrarMaterial$composer.materiales, load-after='btnRegistrar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+										selectedItem="@{frmRegistrarMaterial$composer.material}">
+										<listhead>
+											<listheader> Nombre</listheader>
+											<listheader width="20%"> Existencia</listheader>
+											<listheader width="20%"> Disponibilidad</listheader>
+										</listhead>
+										<listitem self="@{each='m'}" value="@{m}">
+											<listcell label="@{m.descripcion}" />
+											<listcell label="@{m.cantidadExistencia}" />
+											<listcell label="@{m.cantidadDisponible}" />
+										</listitem>
+									</listbox>
+								</panelchildren>
+							</panel>
+						</row>
+						<row>
+							<div align="right" width="100%">
+								<button id="btnRegistrar" label="Registrar" width="100px"
+									height="30px" image="../../Recursos/Imagenes/guardar.ico">
+									<attribute name="onClick"> 
+									{ binder.loadAll(); 
+									alert("Material	registrado con éxito"); }
+									</attribute>
+								</button>
+								<button id="btnModificar" label="Modificar" width="100px"
+									height="30px" image="../../Recursos/Imagenes/editar.ico" />
+								<button id="btnCancelar" label="Cancelar" width="100px"
+									height="30px" image="../../Recursos/Imagenes/cancelar.ico" />
+								<button id="btnEliminar" label="Eliminar" width="100px"
+									height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
+								<button id="btnSalir" label="Salir" width="100px" height="30px"
+									image="../../Recursos/Imagenes/salir.png" onClick="frmRegistrarMaterial.detach()" />
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+	<zscript><![CDATA[
+	          public void cargar(){
+					binder.loadAll();
+	          }
+	]]></zscript>
+	</window>
+</zk>
