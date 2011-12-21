@@ -16,6 +16,8 @@
         <property name="format_sql">true</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <!--  asdasdasd-->
+        
         <mapping class="modelo.IndicadorTest" />
         <mapping class="modelo.Personal" />
         <mapping class="modelo.TipoPagoRepresentante" />
