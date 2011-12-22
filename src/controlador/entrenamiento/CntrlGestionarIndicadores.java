@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.ActividadEntrenamiento;
 import modelo.Categoria;
+import modelo.DatoBasico;
 import modelo.EscalaMedicion;
 import modelo.IndicadorActividadEscala;
 import modelo.ValorEscala;
@@ -26,7 +27,6 @@ import servicio.implementacion.ServicioEscalaMedicion;
 import servicio.implementacion.ServicioIndicadorActividadEscala;
 import servicio.implementacion.ServicioTipoDato;
 
-
 public class CntrlGestionarIndicadores extends GenericForwardComposer {
 	Combobox cmbEscala, cmbCategoria, cmbActividad, cmbIndicador;
 	Window wndIndicadorEvaluacion;
@@ -42,15 +42,40 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 	boolean editar;
 	List<Categoria> listCategoria;
 	List<EscalaMedicion> listEscala;
+	List<ActividadEntrenamiento> listActividad;
+	List<DatoBasico> listIndicador;
+
 	AnnotateDataBinder binder;
+
+	public List<DatoBasico> getListIndicador() {
+		return listIndicador;
+	}
+
+	public void setListIndicador(List<DatoBasico> listIndicador) {
+		this.listIndicador = listIndicador;
+	}
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
 		listCategoria = servicioCategoria.listar();
 		listEscala = servicioEscalaMedicion.listar();
+		listActividad = servicioActividadEntrenamiento.listar();
+		System.out.println(servicioTipoDato.buscarTipo(
+				"INDICADOR ENTRENAMIENTO").getDescripcion());
+		listIndicador = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato
+				.buscarTipo("INDICADOR ENTRENAMIENTO"));
+		System.out.println(listIndicador.size());
 		editar = false;
 		indicador = new IndicadorActividadEscala();
+	}
+
+	public List<ActividadEntrenamiento> getListActividad() {
+		return listActividad;
+	}
+
+	public void setListActividad(List<ActividadEntrenamiento> listActividad) {
+		this.listActividad = listActividad;
 	}
 
 	public IndicadorActividadEscala getIndicador() {
@@ -81,31 +106,26 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 		Categoria c;
 		for (Object o : servicioCategoria.listar()) {
 			c = (Categoria) o;
-			if (c.getCodigoCategoria()==Integer.parseInt(cmbCategoria.getSelectedItem().getContext()));
-				return c;
+			if (c.getCodigoCategoria() == Integer.parseInt(""
+					+ cmbCategoria.getSelectedItem().getValue()))
+				;
+			return c;
 		}
 		return null;
 	}
 
 	public ActividadEntrenamiento buscarActividad() {
 		ActividadEntrenamiento ae;
-		for (Object o : servicioActividadEntrenamiento.listar()) {
-			ae = (ActividadEntrenamiento) o;
-			if (ae.getCodActividadEntrenamiento()==(cmbActividad.getSelectedItem().getValue()))
-				return ae;
-		}
-		return null;
+		ae = servicioActividadEntrenamiento.buscarPorCodigo(Integer.parseInt(""
+				+ cmbActividad.getSelectedItem().getValue()));
+		return ae;
 	}
 
 	public EscalaMedicion buscarEscala() {
 		EscalaMedicion c;
-		for (Object o : servicioEscalaMedicion.listar()) {
-			c = (EscalaMedicion) o;
-			if (c.getCodigoEscala().equals(
-					cmbEscala.getSelectedItem().getValue()))
-				return c;
-		}
-		return null;
+		c = servicioEscalaMedicion.buscar(Integer.parseInt(""
+				+ (cmbEscala.getSelectedItem().getValue())));
+		return c;
 	}
 
 	public void onSelect$cmbCategoria() {
@@ -147,7 +167,7 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 			} else {
 				if (cmbActividad.getSelectedItem() != null
 						&& cmbActividad.getValue().equals("-Seleccione-")) {
-					alert("Seleccine la Actividad a la que desea asociar el indicador");
+					alert("Seleccione la Actividad a la que desea asociar el indicador");
 					cmbActividad.focus();
 				} else {
 					if (cmbIndicador.getSelectedItem().getLabel() == "-Seleccione-") {
@@ -166,8 +186,8 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 								Listitem item = lbIndicador.getItemAtIndex(i);
 								Listcell lc = (Listcell) item.getChildren()
 										.get(0);
-								if (cmbIndicador.getSelectedItem().getLabel().equals(
-										lc.getLabel())) {
+								if (cmbIndicador.getSelectedItem().getLabel()
+										.equals(lc.getLabel())) {
 									alert("El Indicador ya se encuentra registrado");
 									repetido = false;
 								}
@@ -176,10 +196,16 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 							if (repetido) {
 								indicador
 										.setActividadEntrenamiento(buscarActividad());
+								Integer codigo;
+								if (servicioIndicador.listar().equals(null)){
+									codigo = 1;
+								}else{
+									codigo = servicioIndicador
+											.listar().size()+1;
+									System.out.println(codigo);
+								}
 								indicador
-										.setCodigoIndicador(""
-												+ (servicioIndicador.listar()
-														.size() + 1));
+										.setCodigoIndicadorActividadEscala(codigo);
 								indicador.setEscalaMedicion(buscarEscala());
 								indicador.setEstatus('A');
 
@@ -189,17 +215,15 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 										.getSelectedItem().getLabel()));
 								String s = "[";
 								for (ValorEscala ve : indicador
-										.getEscalaMedicion().getValoresEscala()) {
-									s += "" + ve.getNombre() + ",";
+										.getEscalaMedicion().getValorEscalas()) {
+									s += "" + ve.getDescripcion() + ",";
 								}
 								s = s.substring(0, s.length() - 1);
 								s += "]";
 								nvoItem.appendChild(new Listcell(cmbEscala
 										.getSelectedItem().getLabel() + " " + s));
 								lbIndicador.appendChild(nvoItem);
-								servicioIndicador.agregar(indicador);
-								indicador.setCodigoIndicador("");
-								indicador.setNombre("");
+								servicioIndicador.guardar(indicador);
 
 								binder.loadAll();
 								inicializar();
@@ -230,8 +254,8 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 						.getLabel()));
 				String s = "[";
 				for (ValorEscala ve : indicador.getEscalaMedicion()
-						.getValoresEscala()) {
-					s += "" + ve.getNombre() + ",";
+						.getValorEscalas()) {
+					s += "" + ve.getDescripcion() + ",";
 				}
 				s = s.substring(0, s.length() - 1);
 				s += "]";
@@ -239,7 +263,6 @@ public class CntrlGestionarIndicadores extends GenericForwardComposer {
 						.getLabel() + " " + s));
 				lbIndicador.appendChild(nvoItem);
 				servicioIndicador.actualizar(indicador);
-				indicador.setNombre("");
 				binder.loadAll();
 				inicializar();
 			}

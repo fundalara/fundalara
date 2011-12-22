@@ -24,20 +24,28 @@
 											readonly="true">
 											<comboitem
 												self="@{each=categoria}" label="@{categoria.nombre}"
-												value="@{categoria}" context="@{categoria.codigoCategoria}"/>
+												value="@{categoria.codigoCategoria}" />
 										</combobox>
 										<space width="4px" />
 										<label value="Actividad" />
 										<space width="60px" />
 										<combobox id="cmbActividad"
-											width="130px" readonly="true" autocomplete="true">
+											model="@{ctrl.listActividad}" width="130px" readonly="true"
+											autocomplete="true">
+											<comboitem
+												self="@{each=actividad}" label="@{actividad.nombre}"
+												value="@{actividad.codActividadEntrenamiento}" />
 										</combobox>
 									</hbox>
 									<hbox align="center">
 										<label value="Indicador" />
 										<space width="4px" />
 										<combobox id="cmbIndicador"
-											width="130px" readonly="true" autocomplete="true">
+											width="130px" readonly="true" autocomplete="true"
+											model="@{ctrl.listIndicador}">
+											<comboitem
+												self="@{each=datoBasico}" label="@{datoBasico.nombre}"
+												value="@{datoBasico.codigoDatoBasico}" />
 										</combobox>
 										<space width="1px" />
 										<label

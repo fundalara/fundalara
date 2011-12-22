@@ -13,5 +13,5 @@ public interface IServicioEscalaMedicion {
 	
 	public abstract List<EscalaMedicion> listar();
 
-	public abstract EscalaMedicion  buscar(String codigo);
+	public abstract EscalaMedicion  buscar(Integer codigo);
 }

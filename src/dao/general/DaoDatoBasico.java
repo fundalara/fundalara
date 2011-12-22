@@ -3,6 +3,8 @@ package dao.general;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import modelo.DatoBasico;
@@ -13,6 +15,8 @@ public class DaoDatoBasico extends GenericDao {
 
 	public List<DatoBasico> buscarPorTipoDato(TipoDato td) {
 		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
 		Criteria c = getSession().createCriteria(DatoBasico.class);
 		c.add(Restrictions.eq("tipoDato", td));
 		c.add(Restrictions.eq("estatus", "A"));
@@ -21,6 +25,8 @@ public class DaoDatoBasico extends GenericDao {
 	
 	public DatoBasico buscarPorCodigo(String td) {
 		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
 		Criteria c = getSession().createCriteria(DatoBasico.class);
 		c.add(Restrictions.eq("codigoDatoBasico", td));
 		return (DatoBasico) c.list().get(0);

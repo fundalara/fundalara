@@ -15,9 +15,11 @@ public interface IServicioActividadEntrenamiento {
 	
 	public abstract List<ActividadEntrenamiento> listar();
 	
-	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,String idActividad);
+	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,Integer idActividad);
 	
 	public List<ActividadEntrenamiento> buscarTodo(Categoria c, DatoBasico f);
 	
 	public List<ActividadEntrenamiento> buscarPorCategoria(Categoria c);
+	
+	public ActividadEntrenamiento buscarPorCodigo(Integer i);
 }
