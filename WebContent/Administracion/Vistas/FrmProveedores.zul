@@ -2,7 +2,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
-	<window apply="controlador.CntrlProveedores"
+	<window apply="controlador.administracion.CntrlProveedores"
 		id="frmProveedores" title="Proveedores" border="normal"
 		width="690px">
 		<zscript>

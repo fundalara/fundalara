@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -24,10 +26,10 @@ import org.hibernate.annotations.Parameter;
 public class Personal implements java.io.Serializable {
 
 	private String cedulaRif;
+	private DatoBasico datoBasico;
 	private PersonaNatural personaNatural;
 	private int cantidadHijos;
 	private char estatus;
-	private String estadoCivil;
 	private String tipoSangre;
 	private Set<Requisicion> requisicions = new HashSet<Requisicion>(0);
 	private Set<PersonalTipoNomina> personalTipoNominas = new HashSet<PersonalTipoNomina>(
@@ -53,16 +55,16 @@ public class Personal implements java.io.Serializable {
 	public Personal() {
 	}
 
-	public Personal(PersonaNatural personaNatural, int cantidadHijos,
-			char estatus, String estadoCivil) {
+	public Personal(DatoBasico datoBasico, PersonaNatural personaNatural,
+			int cantidadHijos, char estatus) {
+		this.datoBasico = datoBasico;
 		this.personaNatural = personaNatural;
 		this.cantidadHijos = cantidadHijos;
 		this.estatus = estatus;
-		this.estadoCivil = estadoCivil;
 	}
 
-	public Personal(PersonaNatural personaNatural, int cantidadHijos,
-			char estatus, String estadoCivil, String tipoSangre,
+	public Personal(DatoBasico datoBasico, PersonaNatural personaNatural,
+			int cantidadHijos, char estatus, String tipoSangre,
 			Set<Requisicion> requisicions,
 			Set<PersonalTipoNomina> personalTipoNominas,
 			Set<PersonalContrato> personalContratos,
@@ -75,10 +77,10 @@ public class Personal implements java.io.Serializable {
 			Set<AfeccionPersonal> afeccionPersonals,
 			Set<PersonalActividad> personalActividads,
 			Set<PersonalCargo> personalCargos) {
+		this.datoBasico = datoBasico;
 		this.personaNatural = personaNatural;
 		this.cantidadHijos = cantidadHijos;
 		this.estatus = estatus;
-		this.estadoCivil = estadoCivil;
 		this.tipoSangre = tipoSangre;
 		this.requisicions = requisicions;
 		this.personalTipoNominas = personalTipoNominas;
@@ -107,6 +109,16 @@ public class Personal implements java.io.Serializable {
 		this.cedulaRif = cedulaRif;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_estado_civil", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
+	}
+
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
+	}
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	public PersonaNatural getPersonaNatural() {
@@ -133,15 +145,6 @@ public class Personal implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Column(name = "estado_civil", nullable = false)
-	public String getEstadoCivil() {
-		return this.estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
 	}
 
 	@Column(name = "tipo_sangre")

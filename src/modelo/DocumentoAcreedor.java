@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,11 +35,9 @@ public class DocumentoAcreedor implements java.io.Serializable {
 	private char estatus;
 	private Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors = new HashSet<IngresoDocumentoAcreedor>(
 			0);
-	private Set<DonacionMaterial> donacionMaterials = new HashSet<DonacionMaterial>(
+	private Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials = new HashSet<DocumentoAcreedorMaterial>(
 			0);
 	private Set<DocumentoIndumentaria> documentoIndumentarias = new HashSet<DocumentoIndumentaria>(
-			0);
-	private Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials = new HashSet<DocumentoAcreedorMaterial>(
 			0);
 	private Set<NotaEntrega> notaEntregas = new HashSet<NotaEntrega>(0);
 
@@ -67,9 +65,8 @@ public class DocumentoAcreedor implements java.io.Serializable {
 			Date fechaVencimiento, double monto, String concepto, char estado,
 			char estatus,
 			Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors,
-			Set<DonacionMaterial> donacionMaterials,
-			Set<DocumentoIndumentaria> documentoIndumentarias,
 			Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials,
+			Set<DocumentoIndumentaria> documentoIndumentarias,
 			Set<NotaEntrega> notaEntregas) {
 		this.codigoDocumentoAcreedor = codigoDocumentoAcreedor;
 		this.datoBasico = datoBasico;
@@ -82,9 +79,8 @@ public class DocumentoAcreedor implements java.io.Serializable {
 		this.estado = estado;
 		this.estatus = estatus;
 		this.ingresoDocumentoAcreedors = ingresoDocumentoAcreedors;
-		this.donacionMaterials = donacionMaterials;
-		this.documentoIndumentarias = documentoIndumentarias;
 		this.documentoAcreedorMaterials = documentoAcreedorMaterials;
+		this.documentoIndumentarias = documentoIndumentarias;
 		this.notaEntregas = notaEntregas;
 	}
 
@@ -195,12 +191,13 @@ public class DocumentoAcreedor implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "documentoAcreedor")
-	public Set<DonacionMaterial> getDonacionMaterials() {
-		return this.donacionMaterials;
+	public Set<DocumentoAcreedorMaterial> getDocumentoAcreedorMaterials() {
+		return this.documentoAcreedorMaterials;
 	}
 
-	public void setDonacionMaterials(Set<DonacionMaterial> donacionMaterials) {
-		this.donacionMaterials = donacionMaterials;
+	public void setDocumentoAcreedorMaterials(
+			Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials) {
+		this.documentoAcreedorMaterials = documentoAcreedorMaterials;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "documentoAcreedor")
@@ -211,16 +208,6 @@ public class DocumentoAcreedor implements java.io.Serializable {
 	public void setDocumentoIndumentarias(
 			Set<DocumentoIndumentaria> documentoIndumentarias) {
 		this.documentoIndumentarias = documentoIndumentarias;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "documentoAcreedor")
-	public Set<DocumentoAcreedorMaterial> getDocumentoAcreedorMaterials() {
-		return this.documentoAcreedorMaterials;
-	}
-
-	public void setDocumentoAcreedorMaterials(
-			Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials) {
-		this.documentoAcreedorMaterials = documentoAcreedorMaterials;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "documentoAcreedor")

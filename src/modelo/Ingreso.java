@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,10 +35,8 @@ public class Ingreso implements java.io.Serializable {
 	public Ingreso() {
 	}
 
-	public Ingreso(String numeroDocumento, DatoBasico datoBasico,
-			Date fechaPago, char estatus) {
+	public Ingreso(String numeroDocumento, Date fechaPago, char estatus) {
 		this.numeroDocumento = numeroDocumento;
-		this.datoBasico = datoBasico;
 		this.fechaPago = fechaPago;
 		this.estatus = estatus;
 	}
@@ -66,7 +64,7 @@ public class Ingreso implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_documento", nullable = false)
+	@JoinColumn(name = "codigo_tipo_documento")
 	public DatoBasico getDatoBasico() {
 		return this.datoBasico;
 	}

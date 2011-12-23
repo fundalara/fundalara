@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -33,22 +33,24 @@ public class PersonaNatural implements java.io.Serializable {
 	private byte[] foto;
 	private Character sexo;
 	private Date fechaNacimiento;
+	private char estatus;
 	private Personal personal;
 
 	public PersonaNatural() {
 	}
 
 	public PersonaNatural(Persona persona, String primerNombre,
-			String primerApellido) {
+			String primerApellido, char estatus) {
 		this.persona = persona;
 		this.primerNombre = primerNombre;
 		this.primerApellido = primerApellido;
+		this.estatus = estatus;
 	}
 
 	public PersonaNatural(Persona persona, String celular, String primerNombre,
 			String segundoNombre, String primerApellido,
 			String segundoApellido, byte[] foto, Character sexo,
-			Date fechaNacimiento, Personal personal) {
+			Date fechaNacimiento, char estatus, Personal personal) {
 		this.persona = persona;
 		this.celular = celular;
 		this.primerNombre = primerNombre;
@@ -58,6 +60,7 @@ public class PersonaNatural implements java.io.Serializable {
 		this.foto = foto;
 		this.sexo = sexo;
 		this.fechaNacimiento = fechaNacimiento;
+		this.estatus = estatus;
 		this.personal = personal;
 	}
 
@@ -154,6 +157,15 @@ public class PersonaNatural implements java.io.Serializable {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personaNatural")

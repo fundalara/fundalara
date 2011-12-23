@@ -133,7 +133,6 @@
         <mapping class="modelo.DatoAcademicoPersonal" />
         <mapping class="modelo.IndicadorActividadEscala" />
         <mapping class="modelo.PersonalForaneo" />
-        <mapping class="modelo.DonacionMaterial" />
         <mapping class="modelo.DesempennoIndividual" />
         <mapping class="modelo.DocumentoMedico" />
         <mapping class="modelo.Sesion" />

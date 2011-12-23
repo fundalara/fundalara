@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "ingreso_forma_pago", schema = "public")
 public class IngresoFormaPago implements java.io.Serializable {
 
-	private IngresoFormaPagoId id;
+	private int codigoIngresoFormaPago;
 	private Ingreso ingreso;
 	private DatoBasico datoBasicoByCodigoFormaPago;
 	private DatoBasico datoBasicoByCodigoTarjeta;
@@ -31,21 +29,19 @@ public class IngresoFormaPago implements java.io.Serializable {
 	public IngresoFormaPago() {
 	}
 
-	public IngresoFormaPago(IngresoFormaPagoId id, Ingreso ingreso,
-			DatoBasico datoBasicoByCodigoFormaPago, double monto, char estatus) {
-		this.id = id;
-		this.ingreso = ingreso;
-		this.datoBasicoByCodigoFormaPago = datoBasicoByCodigoFormaPago;
+	public IngresoFormaPago(int codigoIngresoFormaPago, double monto,
+			char estatus) {
+		this.codigoIngresoFormaPago = codigoIngresoFormaPago;
 		this.monto = monto;
 		this.estatus = estatus;
 	}
 
-	public IngresoFormaPago(IngresoFormaPagoId id, Ingreso ingreso,
+	public IngresoFormaPago(int codigoIngresoFormaPago, Ingreso ingreso,
 			DatoBasico datoBasicoByCodigoFormaPago,
 			DatoBasico datoBasicoByCodigoTarjeta,
 			DatoBasico datoBasicoByCodigoBanco, double monto, char estatus,
 			String numeroDocumentoPago) {
-		this.id = id;
+		this.codigoIngresoFormaPago = codigoIngresoFormaPago;
 		this.ingreso = ingreso;
 		this.datoBasicoByCodigoFormaPago = datoBasicoByCodigoFormaPago;
 		this.datoBasicoByCodigoTarjeta = datoBasicoByCodigoTarjeta;
@@ -55,20 +51,18 @@ public class IngresoFormaPago implements java.io.Serializable {
 		this.numeroDocumentoPago = numeroDocumentoPago;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "numeroDocumento", column = @Column(name = "numero_documento", nullable = false)),
-			@AttributeOverride(name = "codigoFormaPago", column = @Column(name = "codigo_forma_pago", nullable = false)) })
-	public IngresoFormaPagoId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_ingreso_forma_pago", unique = true, nullable = false)
+	public int getCodigoIngresoFormaPago() {
+		return this.codigoIngresoFormaPago;
 	}
 
-	public void setId(IngresoFormaPagoId id) {
-		this.id = id;
+	public void setCodigoIngresoFormaPago(int codigoIngresoFormaPago) {
+		this.codigoIngresoFormaPago = codigoIngresoFormaPago;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "numero_documento", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "numero_documento")
 	public Ingreso getIngreso() {
 		return this.ingreso;
 	}
@@ -78,7 +72,7 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_forma_pago", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_forma_pago")
 	public DatoBasico getDatoBasicoByCodigoFormaPago() {
 		return this.datoBasicoByCodigoFormaPago;
 	}

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,6 +34,7 @@ public class Persona implements java.io.Serializable {
 	private String twitter;
 	private String direccion;
 	private Date fechaEgreso;
+	private char estatus;
 	private PersonaJuridica personaJuridica;
 	private Jugador jugador;
 	private Set<EquipoCompetencia> equipoCompetencias = new HashSet<EquipoCompetencia>(
@@ -51,19 +52,20 @@ public class Persona implements java.io.Serializable {
 
 	public Persona(String cedulaRif, DatoBasico datoBasicoByCodigoParroquia,
 			DatoBasico datoBasicoByCodigoTipoPersona, Date fechaIngreso,
-			String direccion) {
+			String direccion, char estatus) {
 		this.cedulaRif = cedulaRif;
 		this.datoBasicoByCodigoParroquia = datoBasicoByCodigoParroquia;
 		this.datoBasicoByCodigoTipoPersona = datoBasicoByCodigoTipoPersona;
 		this.fechaIngreso = fechaIngreso;
 		this.direccion = direccion;
+		this.estatus = estatus;
 	}
 
 	public Persona(String cedulaRif, DatoBasico datoBasicoByCodigoParroquia,
 			DatoBasico datoBasicoByCodigoTipoPersona,
 			String telefonoHabitacion, Date fechaIngreso,
 			String correoElectronico, String facebook, String twitter,
-			String direccion, Date fechaEgreso,
+			String direccion, Date fechaEgreso, char estatus,
 			PersonaJuridica personaJuridica, Jugador jugador,
 			Set<EquipoCompetencia> equipoCompetencias,
 			Set<DocumentoAcreedor> documentoAcreedorsForCedulaAtleta,
@@ -80,6 +82,7 @@ public class Persona implements java.io.Serializable {
 		this.twitter = twitter;
 		this.direccion = direccion;
 		this.fechaEgreso = fechaEgreso;
+		this.estatus = estatus;
 		this.personaJuridica = personaJuridica;
 		this.jugador = jugador;
 		this.equipoCompetencias = equipoCompetencias;
@@ -185,6 +188,15 @@ public class Persona implements java.io.Serializable {
 
 	public void setFechaEgreso(Date fechaEgreso) {
 		this.fechaEgreso = fechaEgreso;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "persona")

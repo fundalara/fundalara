@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,25 +28,29 @@ public class PersonaJuridica implements java.io.Serializable {
 	private String nit;
 	private String fax;
 	private String razonSocial;
+	private char estatus;
 	private Set<ProveedorBanco> proveedorBancos = new HashSet<ProveedorBanco>(0);
 
 	public PersonaJuridica() {
 	}
 
 	public PersonaJuridica(Persona persona, String nit, String fax,
-			String razonSocial) {
+			String razonSocial, char estatus) {
 		this.persona = persona;
 		this.nit = nit;
 		this.fax = fax;
 		this.razonSocial = razonSocial;
+		this.estatus = estatus;
 	}
 
 	public PersonaJuridica(Persona persona, String nit, String fax,
-			String razonSocial, Set<ProveedorBanco> proveedorBancos) {
+			String razonSocial, char estatus,
+			Set<ProveedorBanco> proveedorBancos) {
 		this.persona = persona;
 		this.nit = nit;
 		this.fax = fax;
 		this.razonSocial = razonSocial;
+		this.estatus = estatus;
 		this.proveedorBancos = proveedorBancos;
 	}
 
@@ -97,6 +101,15 @@ public class PersonaJuridica implements java.io.Serializable {
 
 	public void setRazonSocial(String razonSocial) {
 		this.razonSocial = razonSocial;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personaJuridica")

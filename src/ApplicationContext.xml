@@ -54,12 +54,7 @@
 		<property name="daoDocumentoAcreedorMaterial" ref="daoDocumentoAcreedorMaterial"></property>
 	</bean>
 	
-	<bean id="daoDonacionMaterial" class="dao.general.DaoDonacionMaterial">
-	</bean>
 	
-	<bean id="servicioDonacionMaterial" class="servicio.implementacion.ServicioDonacionMaterial">
-		<property name="daoDonacionMaterial" ref="daoDonacionMaterial"></property>
-	</bean>
 	
 	<bean id="daoEgreso" class="dao.general.DaoEgreso">
 	</bean>

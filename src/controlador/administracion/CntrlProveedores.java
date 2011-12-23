@@ -122,17 +122,19 @@ public class CntrlProveedores extends GenericForwardComposer {
 		persona.setDatoBasicoByCodigoParroquia(servicioDatoBasico
 				.buscarPorCodigo(Integer.parseInt(cmbParroquia.getContext())));
 		persona.setFechaIngreso(new Date());
+		persona.setEstatus('A');
 		personaJuridica.setFax(fax);
 		personaJuridica.setNit("dasd");
 
 		persona.setPersonaJuridica(personaJuridica);
+		personaJuridica.setEstatus('A');
 		personaJuridica.setPersona(persona);
 		servicioPersona.agregar(persona);
 		servicioPersonaJuridica.agregar(personaJuridica);
 
 		List<ProveedorBanco> auxCuentasBancarias = servicioProveedorBanco.listarPorProveedor(txtRif.getValue());
 		for (int i = 0; i < auxCuentasBancarias.size(); i++) {
-			// cuentasBancarias.get(i).setEstatus("E");
+		    cuentasBancarias.get(i).setEstatus('A');
 			servicioProveedorBanco.agregar(auxCuentasBancarias.get(i));
 		}
 
@@ -170,14 +172,14 @@ public class CntrlProveedores extends GenericForwardComposer {
 	}
 
 	public void onClick$btnEliminar() {
-		// persona.setEstatus("E");
-		// personaJuridica.setEstatus("E");
+		persona.setEstatus('E');
+		personaJuridica.setEstatus('E');
 		servicioPersona.actualizar(persona);
 		servicioPersonaJuridica.actualizar(personaJuridica);
 		cuentasBancarias = servicioProveedorBanco.listarPorProveedor(persona
 				.getCedulaRif());
 		for (int i = 0; i < cuentasBancarias.size(); i++) {
-			// cuentasBancarias.get(i).setEstatus("E");
+			cuentasBancarias.get(i).setEstatus('E');
 			servicioProveedorBanco.agregar(cuentasBancarias.get(i));
 		}
 		alert("Registro Eliminado");

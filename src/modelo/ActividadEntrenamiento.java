@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,6 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 	private Categoria categoria;
 	private DatoBasico datoBasico;
 	private String nombre;
-	private String descripcion;
 	private char estatus;
 	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
 			0);
@@ -34,24 +33,22 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 
 	public ActividadEntrenamiento(int codActividadEntrenamiento,
 			Categoria categoria, DatoBasico datoBasico, String nombre,
-			String descripcion, char estatus) {
+			char estatus) {
 		this.codActividadEntrenamiento = codActividadEntrenamiento;
 		this.categoria = categoria;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
 	}
 
 	public ActividadEntrenamiento(int codActividadEntrenamiento,
 			Categoria categoria, DatoBasico datoBasico, String nombre,
-			String descripcion, char estatus,
+			char estatus,
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.codActividadEntrenamiento = codActividadEntrenamiento;
 		this.categoria = categoria;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
 	}
@@ -93,15 +90,6 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	@Column(name = "descripcion", nullable = false)
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

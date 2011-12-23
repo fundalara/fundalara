@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -26,6 +26,7 @@ public class PersonalContrato implements java.io.Serializable {
 	private Personal personal;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private char estatus;
 
 	public PersonalContrato() {
 	}
@@ -33,24 +34,26 @@ public class PersonalContrato implements java.io.Serializable {
 	public PersonalContrato(int codigoPersonalContrato,
 			DatoBasico datoBasicoByCodigoModalidad,
 			DatoBasico datoBasicoByCodigoHorario, Personal personal,
-			Date fechaInicio) {
+			Date fechaInicio, char estatus) {
 		this.codigoPersonalContrato = codigoPersonalContrato;
 		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
 		this.datoBasicoByCodigoHorario = datoBasicoByCodigoHorario;
 		this.personal = personal;
 		this.fechaInicio = fechaInicio;
+		this.estatus = estatus;
 	}
 
 	public PersonalContrato(int codigoPersonalContrato,
 			DatoBasico datoBasicoByCodigoModalidad,
 			DatoBasico datoBasicoByCodigoHorario, Personal personal,
-			Date fechaInicio, Date fechaFin) {
+			Date fechaInicio, Date fechaFin, char estatus) {
 		this.codigoPersonalContrato = codigoPersonalContrato;
 		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
 		this.datoBasicoByCodigoHorario = datoBasicoByCodigoHorario;
 		this.personal = personal;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -113,6 +116,15 @@ public class PersonalContrato implements java.io.Serializable {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

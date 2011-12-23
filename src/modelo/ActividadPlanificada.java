@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated Dec 23, 2011 1:26:53 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -28,28 +28,19 @@ public class ActividadPlanificada implements java.io.Serializable {
 	private IndicadorActividadEscala indicadorActividadEscala;
 	private Date tiempo;
 	private char estatus;
-	private Date fechaCreacion;
-	private Date horaCreacion;
-	private Date fechaModificacion;
-	private Date horaModificacion;
 
 	public ActividadPlanificada() {
 	}
 
 	public ActividadPlanificada(ActividadPlanificadaId id, Usuario usuario,
 			Sesion sesion, IndicadorActividadEscala indicadorActividadEscala,
-			Date tiempo, char estatus, Date fechaCreacion, Date horaCreacion,
-			Date fechaModificacion, Date horaModificacion) {
+			Date tiempo, char estatus) {
 		this.id = id;
 		this.usuario = usuario;
 		this.sesion = sesion;
 		this.indicadorActividadEscala = indicadorActividadEscala;
 		this.tiempo = tiempo;
 		this.estatus = estatus;
-		this.fechaCreacion = fechaCreacion;
-		this.horaCreacion = horaCreacion;
-		this.fechaModificacion = fechaModificacion;
-		this.horaModificacion = horaModificacion;
 	}
 
 	@EmbeddedId
@@ -112,46 +103,6 @@ public class ActividadPlanificada implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_creacion", nullable = false, length = 13)
-	public Date getFechaCreacion() {
-		return this.fechaCreacion;
-	}
-
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_creacion", nullable = false, length = 15)
-	public Date getHoraCreacion() {
-		return this.horaCreacion;
-	}
-
-	public void setHoraCreacion(Date horaCreacion) {
-		this.horaCreacion = horaCreacion;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_modificacion", nullable = false, length = 13)
-	public Date getFechaModificacion() {
-		return this.fechaModificacion;
-	}
-
-	public void setFechaModificacion(Date fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
-
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_modificacion", nullable = false, length = 15)
-	public Date getHoraModificacion() {
-		return this.horaModificacion;
-	}
-
-	public void setHoraModificacion(Date horaModificacion) {
-		this.horaModificacion = horaModificacion;
 	}
 
 }
