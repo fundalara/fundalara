@@ -51,5 +51,9 @@ public class ServicioPersona implements IServicioPersona {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Persona buscarPorCedulaRif(String s) {
+		return daoPersona.buscarByCedulaRif(s);
+	}
 
 }

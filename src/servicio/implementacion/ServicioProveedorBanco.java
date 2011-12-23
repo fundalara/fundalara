@@ -52,5 +52,9 @@ public class ServicioProveedorBanco implements IServicioProveedorBanco {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<ProveedorBanco> listarPorProveedor(String s){
+		return  daoProveedorBanco.listarPorProveedor(s);
+	}
 
 }
