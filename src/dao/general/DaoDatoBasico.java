@@ -16,6 +16,8 @@ public class DaoDatoBasico extends GenericDao {
 
 	public List<DatoBasico> buscarPorTipoDato(TipoDato td) {
 		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
 		Criteria c = getSession().createCriteria(DatoBasico.class);
 		c.add(Restrictions.eq("tipoDato", td));
 		c.add(Restrictions.eq("estatus", "A"));

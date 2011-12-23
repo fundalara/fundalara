@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.password">123456</property>
+        <property name="hibernate.connection.password">832145</property>
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>
@@ -16,7 +16,6 @@
         <property name="format_sql">true</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <!--  asdasdasd-->
         
         <mapping class="modelo.IndicadorTest" />
         <mapping class="modelo.Personal" />
