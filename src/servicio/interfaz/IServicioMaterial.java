@@ -12,10 +12,12 @@ public interface IServicioMaterial {
 		
 	public abstract void actualizar(Material m);
 	
-	public List<Material> listarMateriales();
+	public abstract List<Material> listar();
+	
+	public abstract List<Material> listarActivos();
 	
 //	public Material buscarPorCodigo(int cod);
 	
-//	public String generarCodigo();
+	public int generarCodigo();
 	
 }

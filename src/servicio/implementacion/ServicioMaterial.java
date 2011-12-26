@@ -34,22 +34,25 @@ public class ServicioMaterial implements IServicioMaterial {
 		daoMaterial.actualizar(m);
 	}
 	
-	
 	@Override
-	public List<Material> listarMateriales() {
-		return daoMaterial.listarMateriales();
+	public List<Material> listar() {
+		return daoMaterial.listar(Material.class);
 	}
+
+	@Override
+	public List<Material> listarActivos() {		
+		return daoMaterial.listarActivos(Material.class);
+	}
+
 
 //	@Override
 //	public Material buscarPorCodigo(int cod) {
 //		return daoMaterial.buscarPorCodigo(cod);
-//	}
+//	}	
 	
 	
-	
-//	public String generarCodigo(){
-//		Integer nuevoCodigo = daoMaterial.contarCodigos(new Material()) + 1;
-//		return nuevoCodigo.toString();
-//	}
+	public int generarCodigo(){		
+		return daoMaterial.generarCodigo(Material.class);
+	}
 
 }
