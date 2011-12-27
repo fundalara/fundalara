@@ -22,46 +22,55 @@
 							<row style="border-style:none">
 								<label value="Nombre"></label>
 								<hbox>
-									<textbox id="txtNombre" 
-										value="@{cntrl.divisa.nombre}" cols="20">
+									<textbox id="txtNombre"
+										value="@{cntrl.divisa.nombre}"
+										constraint="no empty:El campo 'nombre' es obligatorio"
+										cols="20">
 									</textbox>
 									<button id="btnBuscar"
 										image="../../Recursos/Imagenes/consultar.ico">
 									</button>
 								</hbox>
+								<label value="Parroquia"></label>
 
-								<label value="Correo"></label>
-								<textbox
-									value="@{cntrl.divisa.correoElectronico}" id="txtCorreo"
-									cols="20">
-								</textbox>
+								<combobox id="cmbParroquia" 
+									model="@{cntrl.parroquias}" readonly="true" cols="18">
+									<comboitem self="@{each=parroquia}"
+										value="@{parroquia}" label="@{parroquia.nombre}">
+									</comboitem>
+								</combobox>
 
 							</row>
 							<row style="border-style:none">
 								<label value="Dirección"></label>
 								<textbox
 									value="@{cntrl.divisa.direccion}" id="txtDireccion"
+									constraint="no empty:El campo 'direccion' es obligatorio"
 									cols="20">
 								</textbox>
-								<label value="Parroquia"></label>
+								<label value="Contacto"></label>
+								<textbox
+								    constraint="no empty:El campo 'contacto' es obligatorio"
+									value="@{cntrl.divisa.personaContacto}" id="txtContacto"
+									cols="20">
+								</textbox>
 
-								<combobox id="cmbParroquia"
-									model="@{cntrl.parroquias}" readonly="true" cols="17">
-									<comboitem self="@{each=parroquia}"
-										value="@{parroquia}" label="@{parroquia.nombre}">
-									</comboitem>
-								</combobox>
 							</row>
 							<row style="border-style:none">
 								<label value="Teléfono"></label>
 								<textbox
-									value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20">
+									value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20"
+									maxlength="12"
+									constraint="/[0-9]{4}-[0-9]{7}/: Inserte un numero de telefono valido, Ej: 0251-2527319">
 								</textbox>
-								<label value="Contacto"></label>
+
+								<label value="Correo"></label>
 								<textbox
-									value="@{cntrl.divisa.personaContacto}" id="txtContacto"
-									cols="20">
+									value="@{cntrl.divisa.correoElectronico}" id="txtCorreo"
+									cols="20"
+									constraint="/.+@.+\.[a-z]+/: Inserte una dirección de correo válida, Ej: example@email.com ">
 								</textbox>
+
 
 							</row>
 							<row style="border-style:none">

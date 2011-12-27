@@ -34,6 +34,7 @@ public class ServicioDivisa implements IServicioDivisa {
 		   d.setCodigoDivisa(cod);
 		   d.setEstatus('A');
 		}
+		System.out.println(d.getDireccion());
 		daoDivisa.guardar(d);
 		
 	}
@@ -61,7 +62,7 @@ public class ServicioDivisa implements IServicioDivisa {
 	}
 
 	@Override
-	public List<Divisa> filtar(String cad) {
+	public List<Divisa> filtrar (String cad) {
 		System.out.println(cad);
 		return daoDivisa.filtar(cad);
 	}
