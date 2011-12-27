@@ -1,61 +1,56 @@
-<?page title="Maestro Instalación" contentType="text/html;charset=UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><?page title="Maestro Instalación" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
-	<window title="Maestro Instalación" border="normal" width="696px">
-		<panel title="Registrar Instalación" collapsible="true"
-			open="true" width="100%">
+	<window id="winRegistrarInstalacion" title="Registro de Instalación"
+		border="normal" width="696px"
+		apply="controlador.logistica.CntrlRegistrarInstalacion">
+		<panel height="100%" width="100%">
 			<panelchildren>
-				<grid height="80%" width="100%">
+				<grid width="100%">
 					<columns>
-						<column width="15%"></column>
-						<column width="35%"></column>
-						<column width="15%"></column>
-						<column width="35%"></column>
+						<column width="15%" />
+						<column width="35%" />
+						<column width="15%" />
+						<column width="35%" />
 					</columns>
 					<rows>
 						<row>
-							<label value="Descripción"></label>
-							<textbox width="90%" multiline="true"
-								height="50px" constraint="no empty"
-								value="@{instalacion.descripcion}">
-							</textbox>
-							<label value="Tipo de instalación"></label>
-							<combobox model="@{listaTipoInstalacion}"
-								width="90%" id="comboTipoInstalacion">
+							<label value="Descripción" />
+							<textbox id="txtDescripcion" width="90%"
+								multiline="true" height="50px" constraint="no empty"
+								value="@{cntrl.instalacion.descripcion}" />
+<!-- 							<label value="(*)" style="color:red" /> -->
+							<label value="Tipo de instalación" />
+							<combobox id="cmbTipoInstalacion" constraint="no empty"
+								selectedItem="@{cntrl.instalacion.datoBasico}"
+								model="@{cntrl.tiposInstalaciones}" width="90%">
 								<comboitem self="@{each=Instalacion}"
-									label="@{Instalacion.descripcion}"
-									value="@{Instalacion.codigoTipoInstalacion}">
-								</comboitem>
+									label="@{Instalacion.descripcion}" />
 							</combobox>
+<!-- 							<label value="(*)" style="color:red" /> -->
 						</row>
 						<row>
-							<label value="Capacidad"></label>
-							<spinner width="90%
-								"
-								constraint="no empty" value="@{instalacion.capacidad}">
-							</spinner>
-
-							<label value="Tamaño"></label>
+							<label value="Capacidad" />
+							<spinner id="spCapacidad" width="90%"
+								constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.capacidad}" />
+<!-- 							<label value="(*)" style="color:red" /> -->
+							<label value="Tamaño" />
 							<div>
-								<doublebox width="90%"
-									constraint="no empty" value="@{instalacion.tamano}">
-								</doublebox>
-								<label value="m²"></label>
+								<doublebox id="dboxTamano" width="90%"
+									constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.tamano}" />
+								<label value="m²" />
 							</div>
 						</row>
 						<row>
-
-							<label value="Área"></label>
-							<combobox model="@{listaArea}" width="90%"
-								id="comboArea">
-								<comboitem self="@{each=area}"
-									label="@{area.codigoInstalacion}"
-									value="@{area.codigoInstalacion}">
-								</comboitem>
+							<label value="Ubicada en: " />
+							<combobox id="cmbUbicacion" width="90%" 
+								selectedItem="@{cntrl.instalacion.ubicacion }"
+								model="@{cntrl.instalaciones }">								
+								<comboitem self="@{each=ubicacion}"
+									label="@{ubicacion.descripcion}" />
 							</combobox>
 						</row>
-
 					</rows>
 				</grid>
 			</panelchildren>
@@ -63,41 +58,28 @@
 		<panel title="Instalaciones Registradas" collapsible="true">
 			<panelchildren>
 				<grid>
-					<columns></columns>
+					<columns />
 					<rows>
 						<row>
-							<listbox model="@{listaInstalacion}"
-								id="tabla">
-
+							<listbox id="lboxInstalaciones" mold="paging" pageSize="5" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
+								model="@{cntrl.instalaciones, load-after='btnRegistrar.onClick, btnModificar.onClick, btnEliminar.onClick, btnCancelar.onClick'}"
+								selectedItem="@{cntrl.instalacion }">
 								<listhead>
-
 									<listheader label="Código"
-										width="10%">
-									</listheader>
+										width="10%" />
 									<listheader label="Descripción"
-										width="50%">
-									</listheader>
+										width="50%" />
 									<listheader label="Capacidad"
-										width="20%">
-									</listheader>
-									<listheader label="Área"
-										width="20%">
-									</listheader>
+										width="20%" />
+									<listheader label="Ubicación"
+										width="20%" />
 								</listhead>
 								<listitem self="@{each=i}">
 									<listcell
-										label="@{i.CodigoInstalacion}" id="celdaCodigo" 
-										onClick="cargar_datos()">
-									</listcell>
-									<listcell
-										label="@{i.descripcion}">
-									</listcell>
-									<listcell
-										label="@{i.capacidad}">
-									</listcell>
-
-									<listcell label="@{i.area}">
-									</listcell>
+										label="@{i.CodigoInstalacion}" id="celdaCodigo" />
+									<listcell label="@{i.descripcion}" />
+									<listcell label="@{i.capacidad}" />
+									<listcell label="@{i.ubicacion.descripcion}" />
 								</listitem>
 							</listbox>
 						</row>
@@ -106,86 +88,24 @@
 			</panelchildren>
 		</panel>
 		<div align="right" width="100%">
-			<button label="Guardar"
-				image="../../Recursos/Imagenes/guardar.ico" onClick="guardar()">
+			<button id="btnRegistrar" label="Registrar" width="100px"
+				onClick="btnModificar.disabled=btnEliminar.disabled=true"
+				height="30px" image="../../Recursos/Imagenes/guardar.ico">
 			</button>
-			<space width="1.5%"></space>
-			<button label="Eliminar"
-				image="../../Recursos/Imagenes/eliminar.ico" onClick="eliminar()">
-			</button>
-			<space width="1.5%"></space>
-			<button label="Cancelar"
-				image="../../Recursos/Imagenes/cancelar.ico" onClick="cancelar()">
-			</button>
-			<space width="1.5%"></space>
-			<button label="Salir"
-				image="../../Recursos/Imagenes/atras.ico">
-			</button>
+			<button id="btnModificar" label="Modificar" width="100px"
+				disabled="true"
+				onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+				height="30px" image="../../Recursos/Imagenes/editar.ico" />
+			<button id="btnCancelar" label="Cancelar" width="100px"
+				onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+				height="30px" image="../../Recursos/Imagenes/cancelar.ico" />
+			<button id="btnEliminar" label="Eliminar" width="100px"
+				disabled="true"
+				onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+				height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
+			<button id="btnSalir" label="Salir" width="100px"
+				height="30px" image="../../Recursos/Imagenes/salir.png"
+				onClick="winRegistrarInstalacion.detach()" />
 		</div>
-
-		<zscript>
-	<![CDATA[
-	//<!-- 	         seccion de instancias de modelos -->
-	modelo.Instalacion instalacion = new modelo.Instalacion();
-	modelo.TipoInstalacion tInstalacion = new modelo.TipoInstalacion();
-	List listaTipoInstalacion = servicioTipoInstalacion.listar();
-	List listaArea = servicioInstalacion.listarInstalacion();
-	List listaInstalacion = servicioInstalacion.listarInstalacion();
-	//<!-- seccion de llamada de metodos y funciones -->
-	public void guardar() {
-		instalacion.setCodigoInstalacion(servicioInstalacion.generarCodigo());
-		instalacion.setEstatus('A');
-		tInstalacion = servicioTipoInstalacion.buscar(comboTipoInstalacion
-				.getSelectedItem().getValue());
-		instalacion.setTipoInstalacion(tInstalacion);
-		try {
-			instalacion.setArea(comboArea.getSelectedItem().getValue()
-					.toString());
-		} catch (Exception e) {
-		}
-		servicioInstalacion.guardar(instalacion);
-		this.cargarCombo();
-		comboArea.setValue("");
-		comboTipoInstalacion.setValue("");
-		instalacion = new modelo.Instalacion();
-		tInstalacion = new modelo.TipoInstalacion();
-		alert("Se guardo exitosamente");
-		binder.loadAll();
-	}
-	public void eliminar() {
-		instalacion.setEstatus('E');
-		servicioInstalacion.guardar(instalacion);
-		instalacion = new modelo.Instalacion();
-		comboTipoInstalacion.setValue("");
-		cargarCombo();
-		binder.loadAll();
-
-		alert("Se elimino exitosamente");
-	}
-	public void cancelar() {
-		this.cargarCombo();
-		comboArea.setValue("");
-		comboTipoInstalacion.setValue("");
-		instalacion = new modelo.Instalacion();
-		tInstalacion = new modelo.TipoInstalacion();
-		binder.loadAll();
-	}
-	public void cargarCombo() {
-		listaTipoInstalacion = servicioTipoInstalacion.listar();
-		listaArea = servicioInstalacion.listarInstalacion();
-		listaInstalacion = servicioInstalacion.listarInstalacion();
-	}
-	public void cargar_datos() {
-		String codigo = tabla.getSelectedItem().getLabel();
-		instalacion = servicioInstalacion.buscar(codigo);
-		String codigoTI = instalacion.getTipoInstalacion()
-				.getCodigoTipoInstalacion();
-		tInstalacion = servicioTipoInstalacion.buscar(codigoTI);
-		comboTipoInstalacion.setValue(tInstalacion.getDescripcion());
-		comboArea.setValue(instalacion.getArea());
-		binder.loadAll();
-	}
-]]>
-	</zscript>
 	</window>
 </zk>
