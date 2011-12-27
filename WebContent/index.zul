@@ -49,14 +49,14 @@
 													<treerow>
 														<treecell
 															label="Categorías"
-															onClick='enlace("Atletas/Vistas/tipoCategoria.zul")' />
+															onClick='enlace("Jugador/Vistas/tipoCategoria.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Equipos"
-															onClick='enlace("Atletas/Vistas/configurarEquipo.zul")' />
+															onClick='enlace("Jugador/Vistas/configurarEquipo.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -183,7 +183,7 @@
 													<treerow>
 														<treecell
 															label="Recaudos"
-															onClick='enlace("Atletas/Vistas/configurarRecaudo.zul")' />
+															onClick='enlace("Jugador/Vistas/configurarRecaudo.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -210,14 +210,14 @@
 													<treerow>
 														<treecell
 															label="Instituciones"
-															onClick='enlace("Atletas/Vistas/configurarInstitucion.zul")' />
+															onClick='enlace("Jugador/Vistas/configurarInstitucion.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Médicos"
-															onClick='enlace("Atletas/Vistas/configurarInstitucion.zul")' />
+															onClick='enlace("Jugador/Vistas/configurarInstitucion.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -241,49 +241,49 @@
 											<treerow>
 												<treecell
 													label="Inscribir"
-													onClick='enlace("Atletas/Vistas/inscribirJugador.zul")' />
+													onClick='enlace("Jugador/Vistas/inscribirJugador.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="true">
 											<treerow>
 												<treecell
 													label="Actualizar"
-													onClick='enlace("Atletas/Vistas/actualizarJugador.zul")' />
+													onClick='enlace("Jugador/Vistas/actualizarJugador.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Ascender de Categoría"
-													onClick='enlace("Atletas/Vistas/ascensoCategoria.zul")' />
+													onClick='enlace("Jugador/Vistas/ascensoCategoria.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Cambiar de Equipo"
-													onClick='enlace("Atletas/Vistas/cambiarEquipo.zul")' />
+													onClick='enlace("Jugador/Vistas/cambiarEquipo.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem>
 											<treerow>
 												<treecell
 													label="Retirar"
-													onClick='enlace("Atletas/Vistas/retirarJugador.zul")' />
+													onClick='enlace("Jugador/Vistas/retirarJugador.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem>
 											<treerow>
 												<treecell
 													label="Trasladar (Pase)"
-													onClick='enlace("Atletas/Vistas/registrarPase.zul")' />
+													onClick='enlace("Jugador/Vistas/registrarPase.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Actualizar Familiar"
-													onClick='enlace("Atletas/Vistas/actualizarFamiliar.zul")' />
+													onClick='enlace("Jugador/Vistas/actualizarFamiliar.zul")' />
 											</treerow>
 										</treeitem>
 									</treechildren>
@@ -361,7 +361,7 @@
 											<treerow>
 												<treecell
 													label="Hospedaje de Jugadores"
-													onClick='enlace("Atletas/Vistas/registrarHospedaje.zul")' />
+													onClick='enlace("Jugador/Vistas/registrarHospedaje.zul")' />
 											</treerow>
 										</treeitem>										
 										<treeitem open="false">
