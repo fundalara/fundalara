@@ -1,4 +1,4 @@
-package controlador.atleta;
+package controlador.jugador;
 
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Image;

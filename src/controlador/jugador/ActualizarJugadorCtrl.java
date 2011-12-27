@@ -1,4 +1,4 @@
-package controlador.atleta;
+package controlador.jugador;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

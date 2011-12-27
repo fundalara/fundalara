@@ -1,4 +1,4 @@
-package controlador.atleta;
+package controlador.jugador;
 
 import java.util.Date;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
