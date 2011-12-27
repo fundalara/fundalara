@@ -1,0 +1,31 @@
+<?page title="Inscribir" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window id="winInscribirJugador" title="Inscribir" border="normal"
+		width="677px" closable="true"
+		apply="controlador.jugador.CntrlInscribirJugador">
+
+		<grid style="border:none;" oddRowSclass="none">
+			<columns>
+				<column width="30%" />
+				<column />
+			</columns>
+			<rows>
+				<row style="border:none;">
+					<label value="Tipo Inscripción" />
+					<combobox value="--Seleccione--" id="cmbTipoInscrip"
+						readonly="true" focus="true"
+						selectedItem="@{controller.tipoIncripcion}"
+						model="@{winInscribirJugador$composer.inscripciones}">
+						<comboitem self="@{each='inscrip'}"
+							label="@{inscrip.nombre}" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<div style="display:inline">
+			<include id="incCuerpo" tipo="${controller.tipoIncripcion}" />
+		</div>
+	</window>
+</zk>

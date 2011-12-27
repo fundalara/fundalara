@@ -1,0 +1,130 @@
+<?page title="Registro de Pases"?>
+<div align="left">
+	<window id="windregistrarPase" title="Registro de Pases" border="normal" width="670px"
+		closable="true" apply="controlador.jugador.RegistrarPaseCtrl">		
+		<div>
+			<grid oddRowSclass="none">
+				<columns>
+					<column width="18%" />
+					<column width="32%" />
+					<column width="18%" />
+					<column width="32%" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Número Pase"/>
+						<textbox width="87%" readonly="true"/>
+					</row>						
+				</rows>
+			</grid>
+		</div>
+		
+		<div>		
+			<grid oddRowSclass="none">
+				<rows>
+				<row style="border:none;">					
+					<groupbox style="border-color:orange"  closable="false">
+						<caption label="Datos del Jugador" />
+						<grid style="border:none;" oddRowSclass="none">
+							<columns>
+								<column	width="18%" />
+								<column	width="32%" />
+								<column	width="18%" />
+								<column	width="32%" />
+							</columns>
+							<rows>
+								<row style="border:none;">
+									<label value="Cédula" />
+									<div>
+										<combobox id="cmbNacionalidad" value="-" width="10%"
+											readonly="true">
+											<comboitem label="V" />
+											<comboitem label="E" />
+											<comboitem label="R" />
+										</combobox>
+										<intbox	constraint="no negative"
+											width="45%" readonly="true" />
+										<button id="btnCatalogoJugador" image="../../Recursos/Imagenes/consultar.ico" orient="horizontal" />												
+									</div>
+									<label value="Fecha Nacimiento" />
+									<datebox width="78%" readonly="true" />								
+								</row>																
+								<row style="border:none;">
+									<label value="Nombre" />
+									<textbox width="87%" />
+									<label value="Apellido" />
+									<textbox width="87%" />										
+								</row>
+								<row style="border:none;">
+									<label value="Categoría" />
+									<combobox value="-Seleccione-" width="78%" readonly="true" >
+										<comboitem label="Preparatorio Nivel 1" />
+										<comboitem label="Preparatorio Nivel 2" />
+										<comboitem label="Pre-Infantil" />
+										<comboitem label="Infantil" />
+										<comboitem label="Pre-Junior" />
+										<comboitem label="Junior" />
+										<comboitem label="Juvenil" />
+									</combobox>
+									<label value="Equipo" />
+									<textbox id="txtEquipo" width="87%" readonly="true" />
+								</row>																								
+							</rows>
+						</grid>
+					</groupbox>										
+				</row>				
+
+				<row style="border:none;">					
+					<groupbox style="border-color:orange"  closable="false">
+						<caption label="Datos de Donde desea jugar" />
+						<grid style="border:none;" oddRowSclass="none">
+							<columns>
+								<column	width="18%" />
+								<column	width="32%" />
+								<column	width="18%" />
+								<column	width="32%" />
+							</columns>
+							<rows>
+								<row style="border:none;">									
+									<label value="Divisa" />
+									<textbox width="87%" />																			
+								</row>
+								<row style="border:none;">									
+									<label value="Liga" />
+									<textbox width="87%" />
+									<label value="Estado" />
+									<combobox value="-Seleccione-" width="78%" readonly="true">
+										<comboitem label="Lara" />
+										<comboitem label="Portuguesa" />
+										<comboitem label="Yaracuy" />
+									</combobox>								
+								</row>																
+							<row spans="1,3" style="border:none;">
+								<label value="Motivo Cambio" />
+								<textbox id="txtMotivoCambio" maxlength="200" width="95%" multiline="true" height="40px" />
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Observaciones" />
+								<textbox id="txtObservaciones" maxlength="200" width="95%" multiline="true" height="40px" />
+							</row>																																																																		
+							</rows>
+						</grid>
+					</groupbox>										
+				</row>					
+				</rows>
+			</grid>
+		</div>
+		
+		
+		<label value="(*) Campos obligatorios" style="color:red" />
+		<div align="right">
+			<button id="btnExportar" label="Exportar" image="../../Recursos/Imagenes/guardar.ico"
+				orient="horizontal" width="100px" />
+			<button id="btnCancelar" label="Cancelar" image="../../Recursos/Imagenes/cancelar.ico"
+				orient="horizontal" width="100px" />				
+			<button id="btnSalir" label="Salir" image="../../Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px" />											
+		</div>
+		
+	</window>
+</div>

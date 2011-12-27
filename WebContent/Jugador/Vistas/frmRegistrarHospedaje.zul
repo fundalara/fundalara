@@ -1,0 +1,111 @@
+<?page title="Registro Hospedaje"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<window id="winRegistrarHospedaje" title="Registro de Hospedaje"
+	apply="controlador.jugador.CntrlRegistrarHospedaje" border="normal"
+	width="620px" closable="true">
+	<panel title="Competencia" collapsible="" open="true">
+		<panelchildren>
+			<grid oddRowSclass="none">
+				<columns>
+					<column width="15%" />
+					<column width="35%" />
+					<column width="15%" />
+					<column width="35%" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Nombre" />
+						<div>
+						<combobox id="cmbCompetencia"
+							value="--Seleccione--" width="65%" readonly="true"
+							model="@{winRegistrarHospedaje$composer.categorias}">
+							<comboitem self="@{each='categoria'}"
+								label="@{categoria.nombre}"
+								value="@{categoria.codigoCategoria}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+						</div>
+					</row>
+					<row style="border:none;">
+						<label value="Fecha Inicio" />
+						<datebox id="dtboxFechaIni" 
+							constraint="no future" format="dd/MM/yyyy" disabled="true"
+							style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+						<label value="Fecha Fin" />
+						<datebox id="dtboxFechaFin" 
+							constraint="no future" format="dd/MM/yyyy" disabled="true"
+							style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Lugar" />
+						<textbox id="txtLugar" maxlength="200" rows="1"  
+							width="95%" multiline="true" disabled="true" />
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+
+	<panel title="Representante" collapsible="" open="true">
+		<panelchildren>
+			<grid oddRowSclass="none">
+				<columns>
+					<column width="15%" />
+					<column width="35%" />
+					<column width="15%" />
+					<column width="35%" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Cédula" />
+						<div>
+							<combobox id="cmbCedulaRep" value="V"
+								width="10%" readonly="true">
+								<comboitem label="V" />
+								<comboitem label="E" />
+							</combobox>
+							<intbox id="txtCedulaRep"
+									
+								constraint="no negative" maxlength="8" width="30%" />
+							<label value="(*)" style="color:red" />
+							<button id="btnCatalogoRepresentante"
+								image="../../Recursos/Imagenes/consultar.ico"
+								orient="horizontal">
+							</button>
+						</div>
+					</row>
+					<row style="border:none;">
+						<label value="Nombre" />
+						<textbox id="txtNombreRep" 
+								width="86%"	disabled="true" />
+						<label value="Apellido" />
+						<textbox id="txtApellidoRep" width="86%"
+							disabled="true" />
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Dirección" />
+						<textbox id="txtDireccionRep" maxlength="200" 
+							width="95%" multiline="true" disabled="true" height="40px" />
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<label value="(*) Campo Obligatorio" style="color:red" />
+	<div align="right">
+		<button id="btnGuardar" label="Guardar"
+			image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+			width="100px" />
+
+		<button id="btnCancelar" label="Cancelar"
+			image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+
+		<button id="btnSalir" label="Salir"
+			image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+			width="100px">
+		</button>
+
+	</div>
+</window>

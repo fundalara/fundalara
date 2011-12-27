@@ -1,0 +1,89 @@
+<?page title="Equipo" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+
+<zk>
+	<window id="winConfigurarEquipo" title="Buscar Jugador" border="normal" width="500px"
+		closable="true" apply="controlador.jugador.BuscarJugadorCtrl">
+
+
+
+		<grid style="border:none">
+			<rows>
+				<row style="border:none">
+					<label value="Categoría" />
+					<combobox id="cmbCategoria" value="--Seleccione--" selectedItem="@{controller.categoria}"
+						width="90%" model="@{winConfigurarEquipo$composer.categorias}">
+						<comboitem self="@{each='categoria'}"
+								label="@{categoria.nombre}" value="@{categoria.codigoCategoria}" />
+					</combobox>
+					<label value="Equipo" />
+					<hbox>
+						<combobox value="--Seleccione--" width="90%" id="cmbEquipo" selectedItem="@{controller.equipo}"
+						 model="@{winConfigurarEquipo$composer.equipos}">
+							<comboitem self="@{each='equipo'}" label="@{equipo.clasificacionEquipo}" value="@{equipo.codigoEquipo}"/>
+						</combobox>
+						<space></space>
+						<button id="btnBuscar"
+							image="Recursos/Imagenes/consultar.ico">
+						</button>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<separator></separator>
+		<listbox mold="paging" pageSize="10">
+			<attribute name="onSelect"><![CDATA[
+				winConfigurarEquipo.detach();
+			]]></attribute>
+			<auxhead sclass="category-center">
+				<auxheader label="Listado Equipo" colspan="4"
+					align="center">
+				</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader width="20%" label="Cédula" />
+				<listheader width="32%" label="Nombre" />
+				<listheader width="32%" label="Apellido" />
+				<listheader width="16%" label="Número" align="center" />
+			</listhead>
+			<auxhead width="100%">
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter2" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter3" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter4" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter1" width="50%" />
+				</auxheader>
+			</auxhead>
+
+			<listitem self="@{each='equipo'}" value="@{equipo}">
+				<listcell>V-22145214</listcell>
+				<listcell>Pérez</listcell>
+				<listcell>José</listcell>
+				<listcell>12</listcell>
+			</listitem>
+		</listbox>
+		<separator></separator>
+		<div align="right">
+			<button label="Salir" image="Recursos/Imagenes/salir.png">
+				<attribute name="onClick"><![CDATA[
+					winConfigurarEquipo.detach();
+				]]></attribute>
+			</button>
+		</div>
+
+	</window>
+</zk>

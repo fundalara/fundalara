@@ -1,0 +1,672 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+
+<window title="Actualizar Familiar" id="win" border="normal"
+	apply="controlador.jugador.ActualizarFamiliarCtrl"
+	closable="true">
+	<groupbox style="border-color:orange">
+		<caption style="font-weight: bold" label="Jugador" />
+		<grid style="border:none;" oddRowSclass="none">
+			<columns>
+				<column width="90%" />
+				<column width="10%" />
+			</columns>
+			<rows>
+				<row style="border:none">
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="21%" />
+							<column width="32%" />
+							<column />
+							<column width="32%" />
+						</columns>
+						<rows>
+							<row spans="1,3" style="border:none">
+								<label value="Cédula" />
+								<div>
+									<combobox value="-" width="4%"
+										readonly="true" focus="true">
+										<comboitem label="V" />
+										<comboitem label="E" />
+									</combobox>
+
+									<intbox constraint="no negative"
+										width="19%" disabled="false" />
+									<button id="Jugador"
+										tooltiptext="Consultar Jugador"
+										image="../../Recursos/Imagenes/consultar.ico">
+										<attribute name="onClick"><![CDATA[
+	Window nuevaVentana = (Window) Executions.createComponents(
+			"Jugador/Vistas/buscarJugador.zul", null, null);
+	try {
+		nuevaVentana.doModal();
+	} catch (Exception e) {
+	}
+]]></attribute>
+									</button>
+								</div>
+							</row>
+							<row style="border:none">
+								<label value="Nombres" />
+
+								<textbox maxlength="50" width="95%"
+									constraint="no empty" disabled="true" />
+
+
+								<label value="Apellidos" />
+								<textbox maxlength="40" width="95%"
+									disabled="true" />
+							</row>
+
+							<row style="border:none">
+								<label value="Fecha Nacimiento"
+									width="95%" />
+								<datebox id="dtboxFechaNac"
+									constraint="no future" format="dd/MM/yyyy"
+									style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
+									disabled="true" width="85%" />
+
+
+								<label value="Categoría" width="95%" />
+								<textbox maxlength="40" width="95%"
+									disabled="true" />
+							</row>
+							<row style="border:none">
+								<label value="Equipo" width="95%" />
+
+								<textbox maxlength="40" width="95%"
+									disabled="true" />
+
+								<label value="Número" width="95%" />
+								<textbox maxlength="2" width="15%"
+									disabled="true" />
+							</row>
+
+						</rows>
+					</grid>
+					<grid style="border:none" oddRowSclass="none">
+						<rows>
+							<row style="border:none" height="80%"
+								align="center" valign="middle">
+								<groupbox mold="3d">
+									<image
+										src="../../Recursos/Imagenes/jug.png" height="100px"
+										width="80px" />
+								</groupbox>
+							</row>
+
+						</rows>
+					</grid>
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+	<space height="10px" />
+
+	<grid style="border:none" mold="paging" pageSize="4">
+		<columns>
+			<column width="90%" />
+			<column width="10%" />
+		</columns>
+		<rows>
+			<row spans="2" style="border:none;">
+				<grid id="gridFamiliares">
+					<columns>
+						<column label="Cédula" width="15%" />
+						<column label="Nombres" width="25%" />
+						<column label="Apellidos" width="25%" />
+						<column label="Parentesco" width="17%" />
+						<column label="Representante" width="18%" />
+					</columns>
+					<rows>
+						<row>
+							<label value="V-3444555" />
+							<label value="Juan" />
+							<label value="Meléndez" />
+							<label value="Padre" />
+							<checkbox checked="true" />
+						</row>
+						<row>
+							<label value="V-8776778" />
+							<label value="Elisa" />
+							<label value="Vargas" />
+							<label value="Madre" />
+							<checkbox />
+						</row>
+						<row>
+							<label value="V-14335567" />
+							<label value="Mario" />
+							<label value="Vargas" />
+							<label value="Tío" />
+							<checkbox />
+						</row>
+					</rows>
+				</grid>
+				<div>
+					<button id="btnAgregar"
+						image="../../Recursos/Imagenes/agregar.ico" />
+					<separator height="5px" />
+					<button id="btnEditar"
+						image="../../Recursos/Imagenes/editar.ico" />
+					<separator height="5px" />
+					<button id="btnQuitar"
+						image="../../Recursos/Imagenes/quitar.ico" />
+				</div>
+			</row>
+		</rows>
+	</grid>
+
+	<panel title="Familiar">
+		<panelchildren>
+			<tabbox orient="vertical" height="350px">
+				<tabs width="90px">
+					<tab label="Básicos" />
+					<tab label="Ubicación" />
+					<tab label="Comisiones" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<groupbox style="border-color:orange"
+							closable="false">
+							<caption label="Datos Básicos" />
+							<grid style="border:none;">
+								<columns>
+									<column width="85%" />
+									<column width="15%" />
+								</columns>
+								<rows>
+									<row style="border:none;">
+										<grid style="border:none;"
+											oddRowSclass="none">
+											<columns>
+												<column width="22%" />
+												<column width="30%" />
+												<column width="26%" />
+												<column  />
+											</columns>
+											<rows>
+												<row
+													style="border:none;">
+													<label
+														value="Cédula" />
+													<div>
+														<combobox
+															id="cmbNacionalidadFamiliar" readonly="true" value="-"
+															width="10%">
+															<comboitem
+																label="V" />
+															<comboitem
+																label="E" />
+														</combobox>
+														<intbox
+															constraint="no negative" width="51%" />
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<!--label value="RIF" />
+													<div>
+														<combobox
+															value="-" width="10%" readonly="true">
+															<comboitem
+																label="J" />
+															<comboitem
+																label="G" />
+														</combobox>
+														<textbox
+															width="52%">
+														</textbox>
+													</div-->
+												</row>
+												<row
+													style="border:none;">
+													<label
+														value="Primer Nombre" />
+													<div>
+														<textbox
+															width="80%">
+														</textbox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Segundo Nombre" />
+													<textbox
+														width="95%">
+													</textbox>
+
+												</row>
+												<row
+													style="border:none;">
+													<label
+														value="Primer Apellido" />
+													<div>
+														<textbox
+															width="80%">
+														</textbox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Segundo Apellido" />
+													<textbox
+														width="95%">
+													</textbox>
+												</row>
+
+
+												<row
+													style="border:none;">
+													<label
+														value="Parentesco" />
+													<div>
+														<combobox
+															readonly="true" value="--Seleccione--" width="67%">
+															<comboitem
+																label="Abuelo(a)" />
+															<comboitem
+																label="Hermano(a)" />
+															<comboitem
+																label="Madre" />
+															<comboitem
+																label="Padre" />
+															<comboitem
+																label="Primo(a)" />
+															<comboitem
+																label="Tio(a)" />
+															<comboitem
+																label="Otro" />
+														</combobox>
+														<label
+															value="(*)" style="color:red" />
+													</div>
+													<label
+														value="Profesión/ Ocupación" />
+													<div>
+														<combobox
+															readonly="true" value="--Seleccione--" width="80%">
+															<comboitem
+																label="Abogado" />
+															<comboitem
+																label="Administrador" />
+															<comboitem
+																label="Agricultor" />
+															<comboitem
+																label="Albañil" />
+															<comboitem
+																label="Analista" />
+															<comboitem
+																label="Arquitecto" />
+															<comboitem
+																label="Artesano" />
+															<comboitem
+																label="Asistente" />
+															<comboitem
+																label="Atleta" />
+															<comboitem
+																label="Auxiliar" />
+															<comboitem
+																label="Bachiller" />
+															<comboitem
+																label="Bailarin" />
+															<comboitem
+																label="Biólogo" />
+															<comboitem
+																label="Bionalista" />
+															<comboitem
+																label="Bombero" />
+															<comboitem
+																label="Botánico" />
+															<comboitem
+																label="Cajero" />
+															<comboitem
+																label="Cantante" />
+															<comboitem
+																label="Carnicero" />
+															<comboitem
+																label="Carpintero" />
+															<comboitem
+																label="Chef" />
+															<comboitem
+																label="Comerciante" />
+															<comboitem
+																label="Cosmetología" />
+															<comboitem
+																label="Computación" />
+															<comboitem
+																label="Comunicador Social" />
+															<comboitem
+																label="Conductor" />
+															<comboitem
+																label="Del Hogar" />
+															<comboitem
+																label="Docente" />
+															<comboitem
+																label="Dibujante" />
+															<comboitem
+																label="Economista" />
+															<comboitem
+																label="Electricista" />
+															<comboitem
+																label="Enfermera" />
+															<comboitem
+																label="Estudiante" />
+															<comboitem
+																label="Farmaceutico" />
+															<comboitem
+																label="Gerente" />
+															<comboitem
+																label="Ingeniero" />
+															<comboitem
+																label="Licenciado" />
+															<comboitem
+																label="Médico" />
+														</combobox>		
+													</div>											
+												</row>
+												<row
+													style="border:none;">
+													<label
+														value="Función" />
+													<combobox
+														readonly="true" value="--Seleccione--" width="70%"
+														tooltiptext="Función del familiar en la Escuela">
+														<comboitem
+															label="Directivo" />
+														<comboitem
+															label="Técnico" />
+														<comboitem
+															label="Ninguno" />
+													</combobox>							
+												</row>
+											</rows>
+										</grid>
+										<grid style="border:none;"
+											oddRowSclass="none">
+											<rows>
+												<row
+													style="border:none;" height="80%" align="center"
+													valign="middle">
+													<groupbox
+														style="border-color:orange" mold="3d">
+														<image
+															id="imgFamiliar"
+															src="../../Recursos/Imagenes/imgPadre.jpg" height="80px"
+															width="80px" />
+													</groupbox>
+												</row>
+												<row
+													style="border:none;" height="20%" align="center">
+													<button	id="btnFotoFamiliar" tooltiptext="Cargar Foto"
+														image="../../Recursos/Imagenes/foto.png">
+													</button>
+												</row>
+											</rows>
+										</grid>
+
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+					</tabpanel>
+					<tabpanel>
+						<groupbox style="border-color:orange"
+							closable="false">
+							<caption label="Datos de Residencia" />
+							<grid style="border:none;"
+								oddRowSclass="none">
+								<columns>
+									<column width="25%" />
+									<column width="25%" />
+									<column width="20%" />
+									<column width="30%" />
+								</columns>
+								<rows>
+									<row style="border:none;">
+										<label value="Estado" />
+										<div>
+											<combobox
+												value="-Seleccione-" width="65%" readonly="true">
+												<comboitem label="Lara" />
+												<comboitem
+													label="Portuguesa" />
+												<comboitem
+													label="Yaracuy" />
+											</combobox>
+											<label value="(*)"
+												style="color:red" />
+										</div>
+										<label value="Municipio" />
+										<div>
+											<combobox
+												value="-Seleccione-" width="65%" readonly="true">
+												<comboitem
+													label="Andrés Eloy Blanco" />
+												<comboitem
+													label="Crespo" />
+												<comboitem
+													label="Iribarren" />
+												<comboitem
+													label="Jiménez" />
+												<comboitem
+													label="Morán" />
+												<comboitem
+													label="Palavecino" />
+												<comboitem
+													label="Simón Planas" />
+												<comboitem
+													label="Torres" />
+												<comboitem
+													label="Urdaneta" />
+											</combobox>
+											<label value="(*)"
+												style="color:red" />
+										</div>
+
+									</row>
+									<row style="border:none;">
+										<label value="Ciudad" />
+										<div>
+											<combobox
+												value="-Seleccione-" width="65%" readonly="true">
+												<comboitem
+													label="Barquisimeto" />
+												<comboitem
+													label="Cabudare" />
+												<comboitem
+													label="Carora" />
+												<comboitem
+													label="Duaca" />
+												<comboitem
+													label="El Cují" />
+												<comboitem
+													label="El Tocuyo" />
+												<comboitem
+													label="Quibor" />
+											</combobox>
+											<label value="(*)"
+												style="color:red" />
+										</div>
+									</row>
+
+									<row style="border:none;"
+										spans="1,3">
+
+										<label
+											value="Dirección Habitación" />
+
+										<div>
+											<textbox maxlength="180"
+												height="40px" width="90%" multiline="true" />
+											<label value="(*)"
+												style="color:red" />
+										</div>
+
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+						<groupbox style="border-color:orange"
+							closable="false">
+							<caption label="Datos de Contacto" />
+							<grid style="border:none;"
+								oddRowSclass="none">
+								<columns>
+									<column width="24%" />
+									<column width="27%" />
+									<column width="20%" />
+									<column width="30%" />
+								</columns>
+								<rows>
+									<row style="border:none;">
+										<label
+											value="Teléfono Habitación" />
+										<div>
+											<combobox width="25%"
+												value="0251" readonly="true">
+												<comboitem label="0252" />
+												<comboitem label="0253" />
+												<comboitem label="0254" />
+												<comboitem label="0255" />
+											</combobox>
+
+											<textbox width="40%" />
+											<label value="(*)"
+												style="color:red" />
+										</div>
+										<label value="Teléfono Celular" />
+
+										<div>
+											<combobox width="25%"
+												value="0412" readonly="true">
+												<comboitem label="0414" />
+												<comboitem label="0416" />
+												<comboitem label="0424" />
+												<comboitem label="0426" />
+											</combobox>
+
+											<textbox width="40%" />
+											<label value="(*)"
+												style="color:red" />
+										</div>
+
+									</row>
+									<row style="border:none;">
+										<label
+											value="Correo Electrónico" />
+										<textbox value="" width="88%" />
+										<label value="Twitter" />
+										<hbox>
+											<label value="@" />
+											<textbox value=""
+												width="80%" />
+										</hbox>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+					</tabpanel>
+					<tabpanel>
+						<groupbox style="border-color:orange"
+							closable="false">
+							<caption label="Comisión (es)" />
+							<grid style="border:none;"
+								oddRowSclass="none">
+								<columns>
+									<column width="25%" />
+									<column width="75%" />
+								</columns>
+								<rows>
+									<row style="border:none;">
+										<label value="Comisión" />
+										<combobox value="-Seleccione-"
+											readonly="true">
+											<comboitem label="Campo" />
+											<comboitem
+												label="Disciplina" />
+											<comboitem
+												label="Eventos Especiales" />
+											<comboitem
+												label="Información y Medios" />
+										</combobox>
+									</row>
+								</rows>
+							</grid>
+							<space height="10px" />
+							<grid style="border:none;">
+								<columns>
+									<column width="90%" />
+									<column width="10%" />
+								</columns>
+								<rows>
+									<row style="border:none;">
+										<grid id="gridComisiones">
+											<columns>
+												<column
+													label="Comisiones" width="30%" />
+												<column
+													label="Descripción" width="70%" />
+											</columns>
+											<rows>
+												<row>
+													<label
+														value="Disciplina" />
+													<label
+														value="Evaluar comportamiento de los jugadores" />
+												</row>
+												<row>
+													<label
+														value="Eventos Especiales" />
+													<label
+														value="Organizar actividades extra-deportivas" />
+												</row>
+												<row>
+													<label
+														value="Información y Medios" />
+													<label
+														value="Difundir información de eventos" />
+												</row>
+											</rows>
+										</grid>
+										<div>
+											<button id="btnAgregarC"
+												image="../../Recursos/Imagenes/agregar.ico" />
+											<separator height="5px" />
+											<button id="btnEditarC"
+												image="../../Recursos/Imagenes/editar.ico" />
+											<separator height="5px" />
+											<button id="btnQuitarC"
+												image="../../Recursos/Imagenes/quitar.ico" />
+
+										</div>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+		</panelchildren>
+	</panel>
+
+
+	<div align="right">
+		<button id="btnGuardar" label="Guardar"
+			image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+			width="100px" visible="true">
+			<attribute name="onClick">
+	{
+		Messagebox.show("¿Desea Guardar los cambios?", "Question",
+				Messagebox.YES | Messagebox.NO, Messagebox.QUESTION);
+	}
+</attribute>
+		</button>
+		<button label="Cancelar"
+			image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+			width="100px" />
+		<button label="Salir" image="../../Recursos/Imagenes/salir.png"
+			orient="horizontal" width="100px">
+			<attribute name="onClick"><![CDATA[
+	win.detach();
+]]></attribute>
+		</button>
+	</div>
+</window>

@@ -1,0 +1,26 @@
+<?page title="Trasladar" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Trasladar" border="normal" width="677px"
+		closable="true" apply="controlador.jugador.TrasladarJugadorCtrl">
+
+		<grid style="border:none;" oddRowSclass="none">
+			<columns>
+				<column width="30%" />
+				<column />
+			</columns>
+			<rows>
+				<row style="border:none;">
+					<label value="Tipo de Traslado" />
+					<combobox value="--Seleccione--" id="cmbTipoTraslado"
+						readonly="true" focus="true">
+						<comboitem label="Retiro" value="1" />
+						<comboitem label="Pase" value="2" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<div style="display:inline">
+			<include id="incCuerpo" />
+		</div>
+	</window>
+</zk>
