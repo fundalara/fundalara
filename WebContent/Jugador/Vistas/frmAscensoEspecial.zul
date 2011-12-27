@@ -1,0 +1,629 @@
+<?page title="Ascenso Especial" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window id="winAscensoEspecial" title="Ascenso Especial"
+		border="normal" width="600px" closable="true"
+		apply="controlador.jugador.CntrlAscensoEspecial">
+		<groupbox style="border-color:orange" closable="false">
+			<caption style="font-weight: bold" label="Jugador" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="90%" />
+					<column width="10%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="21%" />
+								<column width="32%" />
+								<column />
+								<column width="32%" />
+							</columns>
+							<rows>
+								<row spans="1,3" style="border:none">
+									<label value="Cédula" />
+									<div>
+										<combobox id="cmbNacionalidad"
+											value="--" width="4%" readonly="true">
+											<comboitem label="V" />
+											<comboitem label="E" />
+											<comboitem label="R" />
+										</combobox>
+										<textbox id="txtCedula"
+											constraint="no negative" width="19%" disabled="false"
+											focus="true" />
+										<button id="btnBuscar"
+											tooltiptext="Consultar Jugador"
+											image="../../Recursos/Imagenes/consultar.ico" />
+
+									</div>
+								</row>
+								<row style="border:none">
+									<label value="Nombres" />
+									<textbox id="txtNombre"
+										maxlength="50" width="95%" disabled="true" />
+									<label value="Apellidos" />
+									<textbox id="txtApellido"
+										maxlength="40" width="95%" disabled="true" />
+								</row>
+								<row style="border:none">
+									<label value="Fecha Nacimiento"
+										width="95%" />
+									<datebox id="dtboxFechaNac"
+										constraint="no future" format="dd/MM/yyyy"
+										style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
+										disabled="true" width="85%" />
+									<label value="Categoría"
+										width="95%" />
+									<textbox id="txtCategoria"
+										maxlength="40" width="95%" disabled="true" />
+								</row>
+								<row style="border:none">
+									<label value="Equipo" width="95%" />
+									<textbox id="txtEquipo"
+										maxlength="40" width="95%" disabled="true" />
+									<label value="Número" width="95%" />
+									<textbox id="txtNumero"
+										maxlength="2" width="15%" disabled="true" />
+								</row>
+							</rows>
+						</grid>
+
+						<grid style="border:none" oddRowSclass="none">
+							<rows>
+								<row style="border:none" height="80%"
+									align="center" valign="middle">
+									<groupbox mold="3d"
+										closable="false">
+										<image
+											src="../../Recursos/Imagenes/jug.png" height="80px"
+											width="80px" tooltiptext="Seleccionar Foto" />
+									</groupbox>
+								</row>
+							</rows>
+						</grid>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<space height="10px" />
+
+		<panel title="Datos Cambio">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="15%" />
+						<column width="30%" />
+						<column width="12%" />
+						<column />
+						<column width="12%" />
+						<column width="10%" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<div>
+								<space />
+								<label value="Categoría" />
+							</div>
+							<combobox id="cmbCategoria"
+								value="--Seleccione--" disabled="true"
+								selectedItem="@{controller.categoria}" width="80%"
+								model="@{winAscensoEspecial$composer.Categorias}">
+								<comboitem self="@{each='categoria'}"
+									label="@{categoria.nombre}" />
+							</combobox>
+							<div>
+								<space />
+								<label value="Equipo" />
+							</div>
+							<combobox id="cmbEquipo"
+								value="--Seleccione--" width="65%">
+								<comboitem label="Equipo A" />
+								<comboitem label="Equipo B" />
+								<comboitem label="Equipo C" />
+								<comboitem label="Equipo D" />
+								<comboitem label="Equipo E" />
+							</combobox>
+							<div>
+								<space />
+								<label value="Número" />
+							</div>
+							<bandbox id="bboxNumero" maxlength="2"
+								width="40%" readonly="true" constraint="no empty"
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;">
+								<bandpopup>
+									<panel title="00-19"
+										collapsible="true" open="false" width="180px" id="pnl1"
+										onClick="pnl2.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
+										<panelchildren>
+											<listbox width="180px"
+												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
+												<listitem>
+													<listcell label="00"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="01"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="02"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="03"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="04"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="05"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="06"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="07"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="08"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="09"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="10"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="11"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="12"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="13"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="14"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="15"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="16"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="17"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="18"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="19"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+											</listbox>
+										</panelchildren>
+									</panel>
+
+									<panel title="20-39"
+										collapsible="true" open="false" width="180px" id="pnl2"
+										onClick="pnl1.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
+										<panelchildren>
+											<listbox width="180px"
+												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
+												<listitem>
+													<listcell label="20"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="21"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="22"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="23"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="24"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="25"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="26"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="27"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="28"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="29"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="30"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="31"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="32"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="33"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="34"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="35"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="36"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="37"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="38"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="39"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+											</listbox>
+										</panelchildren>
+									</panel>
+
+									<panel title="40-59"
+										collapsible="true" open="false" width="180px" id="pnl3"
+										onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
+										<panelchildren>
+											<listbox width="180px"
+												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
+												<listitem>
+													<listcell label="40"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="41"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="42"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="43"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="44"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="45"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="46"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="47"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="48"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="49"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="50"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="51"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="52"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="53"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="54"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="55"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="56"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="57"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="58"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="59"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+											</listbox>
+										</panelchildren>
+									</panel>
+
+									<panel title="60-79"
+										collapsible="true" open="false" width="180px" id="pnl4"
+										onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl3.setOpen(false);pnl5.setOpen(false);">
+										<panelchildren>
+											<listbox width="180px"
+												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
+												<listitem>
+													<listcell label="60"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="61"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="62"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="63"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="64"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="65"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="66"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="67"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="68"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="69"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="70"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="71"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="72"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="73"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="74"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="75"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="76"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="77"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="78"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="79"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+											</listbox>
+										</panelchildren>
+									</panel>
+
+									<panel title="80-99"
+										collapsible="true" open="false" width="180px" id="pnl5"
+										onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);">
+										<panelchildren>
+											<listbox width="180px"
+												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
+												<listitem>
+													<listcell label="80"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="81"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="82"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="83"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="84"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="85"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="86"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="87"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="88"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="89"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="90"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="91"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="92"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="93"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="94"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+												<listitem>
+													<listcell label="95"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="96"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="97"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="98"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+													<listcell label="99"
+														onClick="bboxNumero.setValue(self.getLabel());" />
+												</listitem>
+											</listbox>
+										</panelchildren>
+									</panel>
+								</bandpopup>
+							</bandbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<space height="10px" />
+
+		<panel title="Documentos">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40" label="Responsable" />
+						<column width="20%" label="Fecha Emisión" />
+						<column width="13%" label="Entregado"
+							align="center" />
+						<column width="18" label="Documento"
+							align="center" />
+					</columns>
+					<rows>
+						<row>
+							<label value="Médico" />
+							<datebox id="dtboxFecha"
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<checkbox />
+							<button id="btnSubir" label="Subir">
+								<attribute name="onClick"><![CDATA[
+									Object media = Fileupload.get();
+								]]></attribute>
+							</button>
+						</row>
+						<row>
+							<label value="Representante" />
+							<datebox
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<checkbox />
+							<button label="Subir">
+								<attribute name="onClick"><![CDATA[
+									Object media = Fileupload.get();
+								]]></attribute>
+							</button>
+						</row>
+						<row>
+							<label value="Manager" />
+							<datebox
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<checkbox />
+							<button label="Subir">
+								<attribute name="onClick"><![CDATA[
+									Object media = Fileupload.get();
+								]]></attribute>
+							</button>
+						</row>
+						<row>
+							<label value="Delegado" />
+							<datebox
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<checkbox />
+							<button label="Subir">
+								<attribute name="onClick"><![CDATA[
+									Object media = Fileupload.get();
+								]]></attribute>
+							</button>
+						</row>
+						<row>
+							<label
+								value="Presidente del Directorio de Liga" />
+							<datebox
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<checkbox />
+							<button label="Subir">
+								<attribute name="onClick"><![CDATA[
+									Object media = Fileupload.get();
+								]]></attribute>
+							</button>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<space height="10px" />
+
+		<panel title="Especificaciones Técnicas">
+			<panelchildren>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Ofensiva" />
+					<grid>
+						<columns>
+							<column label="Al día de hoy" width="40%"
+								align="center" />
+							<column label="VB" width="10%"
+								align="center" tooltip="VB" />
+							<column label="HC" width="10%"
+								align="center" tooltip="HC" />
+							<column label="2B" width="10%"
+								align="center" tooltip="doB" />
+							<column label="3B" width="10%"
+								align="center" tooltip="triB" />
+							<column label="HR" width="10%"
+								align="center" tooltip="HR" />
+							<column label="AVG" width="10%"
+								align="center" tooltip="AVG" />
+						</columns>
+						<rows>
+							<row>
+								<label value="25/11/2011" />
+								<label value="75" />
+								<label value="20" />
+								<label value="10" />
+								<label value="7" />
+								<label value="13" />
+								<label value=".240" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Defensiva" />
+					<grid>
+						<columns>
+							<column label="Al día de hoy" width="40%"
+								align="center" />
+							<column label="LE" width="12%"
+								align="center" tooltip="LE" />
+							<column label="E" width="12%" align="center"
+								tooltip="E" />
+							<column label="ASIS" width="12%"
+								align="center" tooltip="ASIS" />
+							<column label="DP" width="12%"
+								align="center" tooltip="DP" />
+							<column label="PFIL" width="12%"
+								align="center" tooltip="PFIL" />
+						</columns>
+						<rows>
+							<row>
+								<label value="25/11/2011" />
+								<label value="25" />
+								<label value="16" />
+								<label value="27" />
+								<label value="17" />
+								<label value="66%" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Pitcheo" />
+					<grid>
+						<columns>
+							<column label="Al día de hoy" width="40%"
+								align="center" />
+							<column label="JG" width="8%" align="center"
+								tooltip="JG" />
+							<column label="JP" width="8%" align="center"
+								tooltip="JP" />
+							<column label="JS" width="8%" align="center"
+								tooltip="JS" />
+							<column label="K" width="8%" align="center"
+								tooltip="KK" />
+							<column label="BB" width="8%" align="center"
+								tooltip="BxB" />
+							<column label="EFE" width="8%"
+								align="center" tooltip="EFE" />
+							<column label="WHIP" width="12%"
+								align="center" tooltip="WHIP" />
+						</columns>
+						<rows>
+							<row>
+								<label value="25/11/2011" />
+								<label value="15" />
+								<label value="13" />
+								<label value="7" />
+								<label value="24" />
+								<label value="12" />
+								<label value=".280 " />
+								<label value="5" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<space height="10px" />
+
+		<div align="right">
+			<button id="btnGuardar" label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnCancelar" label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+		</div>
+	</window>
+</zk>
