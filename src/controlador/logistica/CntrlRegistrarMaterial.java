@@ -5,7 +5,6 @@ import java.util.List;
 import modelo.DatoBasico;
 import modelo.Material;
 
-import org.jfree.chart.needle.PinNeedle;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
@@ -20,6 +19,13 @@ import servicio.interfaz.IServicioMaterial;
 
 import comun.TipoDatoBasico;
 
+/**
+ * Clase controladora de los eventos de la vista de igual nombre y manejo de los
+ * servicios de datos para el registro de nuevos materiales
+ * 
+ * @author Reinaldo L.
+ * 
+ * */
 public class CntrlRegistrarMaterial extends GenericForwardComposer {
 
 	private Material material = new Material();	
@@ -107,10 +113,7 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 	public void onClick$btnRegistrar() throws InterruptedException{
 		
 		validar();
-		
-		//int codigo = servicioMaterial.generarCodigo();	
-		
-		//material.setCodigoMaterial(codigo);	
+			
 		material.setCantidadDisponible(material.getCantidadExistencia());
 		material.setEstatus('A');
 		
@@ -171,7 +174,7 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 	}
 	
 	public void onClick$btnEliminar() throws InterruptedException{
-		if(Messagebox.show("¿Realmente desea eliminar este material","Mensaje",Messagebox.YES+Messagebox.NO,Messagebox.QUESTION) == Messagebox.YES){
+		if(Messagebox.show("¿Realmente desea eliminar este material?","Mensaje",Messagebox.YES+Messagebox.NO,Messagebox.QUESTION) == Messagebox.YES){
 			material.setEstatus('E');
 			servicioMaterial.actualizar(material);
 			this.onClick$btnCancelar();
@@ -186,7 +189,6 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 		cmbClasificaciones.getValue();
 		txtDescripcion.getValue();
 		spExistencia.getValue();
-		//binder.saveAll();
 	}
 	
 	

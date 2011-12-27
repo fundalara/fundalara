@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRegistrarMaterial"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winRegistrarMaterial"?>
 <?page title="Registro Material" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="frmRegistrarMaterial" title="Registro de Material" border="normal"
+	<window id="winRegistrarMaterial" title="Registro de Material" border="normal"
 		width="690px" maximizable="false" minimizable="false"
 		apply="controlador.logistica.CntrlRegistrarMaterial">
 		<panel width="100%" height="100%">
@@ -105,7 +105,7 @@
 								<button id="btnEliminar" label="Eliminar" width="100px" disabled="true" onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
 									height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
 								<button id="btnSalir" label="Salir" width="100px" height="30px"
-									image="../../Recursos/Imagenes/salir.png" onClick="frmRegistrarMaterial.detach()" />
+									image="../../Recursos/Imagenes/salir.png" onClick="winRegistrarMaterial.detach()" />
 							</div>
 						</row>
 					</rows>
