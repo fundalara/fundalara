@@ -26,9 +26,9 @@
 								<button mold="os" label="Hoy" id="hoy"/>
 								<span id="FDOW">
 									<label value="Filtrar por:" />
-									<listbox mold="select"
-										id="filtro">
-										<listitem id="item" label="--Seleccione--"/>
+									<listbox mold="select" 
+										id="lsbxFiltro">
+										<listitem  id="item" label="--Seleccione--"/>
 										<listitem label="${each}"
 											forEach="Entrenamiento,Competencia,Mantenimiento,Actividad Complementaria" />
 									</listbox>
