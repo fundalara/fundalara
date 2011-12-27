@@ -4,9 +4,9 @@
 
 <zk>
 	<div align="center">
-		<window apply=""
-			id="frmDivisa" title="Registro de Divisas" width="630px" border="normal"
-			closable="true" height="">
+		<window apply="controlador.competencia.CntrlFrmDivisa"
+			id="frmDivisa" title="Registro de Divisas" width="630px"
+			border="normal" closable="true" height="">
 			<panel border="normal">
 				<caption label="Datos de la Divisa"></caption>
 				<panelchildren>
@@ -22,41 +22,60 @@
 							<row style="border-style:none">
 								<label value="Nombre"></label>
 								<hbox>
-									<textbox value="@{cntrl.divisa.nombre}" id="txtNombre" cols="20"></textbox>
-									<space></space>
+									<textbox id="txtNombre" 
+										value="@{cntrl.divisa.nombre}" cols="20">
+									</textbox>
 									<button id="btnBuscar"
-										image="../../Recursos/Imagenes/consultar.ico" >								
+										image="../../Recursos/Imagenes/consultar.ico">
 									</button>
 								</hbox>
+
 								<label value="Correo"></label>
-								<textbox value="@{cntrl.divisa.correoElectronico}" id="txtCorreo" cols="20"></textbox>
-								
+								<textbox
+									value="@{cntrl.divisa.correoElectronico}" id="txtCorreo"
+									cols="20">
+								</textbox>
+
 							</row>
 							<row style="border-style:none">
 								<label value="Dirección"></label>
-								<textbox value="@{cntrl.divisa.direccion}" id="txtDireccion" cols="20"></textbox>
- 								<label value="Parroquia"></label> 
-								<combobox value="-- Seleccione --" cols="17">
- 								  <comboitem ></comboitem> 
- 								</combobox> 
+								<textbox
+									value="@{cntrl.divisa.direccion}" id="txtDireccion"
+									cols="20">
+								</textbox>
+								<label value="Parroquia"></label>
+
+								<combobox id="cmbParroquia"
+									model="@{cntrl.parroquias}" readonly="true" cols="17">
+									<comboitem self="@{each=parroquia}"
+										value="@{parroquia}" label="@{parroquia.nombre}">
+									</comboitem>
+								</combobox>
 							</row>
 							<row style="border-style:none">
 								<label value="Teléfono"></label>
-								<textbox value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20"></textbox>
+								<textbox
+									value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20">
+								</textbox>
 								<label value="Contacto"></label>
-								<textbox value="@{cntrl.divisa.personaContacto}" id="txtContacto" cols="20"></textbox>
-								
+								<textbox
+									value="@{cntrl.divisa.personaContacto}" id="txtContacto"
+									cols="20">
+								</textbox>
+
 							</row>
 							<row style="border-style:none">
 								<label value="Logo"></label>
 								<hbox>
-									<textbox value="@{cntrl.divisa.logo}" id="txtLogo" cols="20"></textbox>
-									<space></space>
+									<textbox
+										value="@{cntrl.divisa.logo}" id="txtLogo" cols="20">
+									</textbox>
+
 									<button id="btnExaminar"
 										label="Examinar">
 									</button>
-								
 								</hbox>
+
 							</row>
 						</rows>
 					</grid>
@@ -86,7 +105,6 @@
 						</div>
 					</panelchildren>
 				</panel>
-				<include id="nuevaPantalla"></include>
 			</div>
 		</window>
 	</div>

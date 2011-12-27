@@ -54,5 +54,10 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		// TODO Auto-generated method stub
 		return daoDatoBasico.buscarPorCodigo(td);
 	}	
+	
+	@Override
+	public List<DatoBasico> listarParroquias() {
+		return daoDatoBasico.listarParroquias();		
+	}
 
 }

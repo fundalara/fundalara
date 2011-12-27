@@ -679,4 +679,105 @@
 	<bean id="servicioValorEscala" class="servicio.implementacion.ServicioValorEscala">
 		<property name="daoValorEscala" ref="daoValorEscala"></property>
 	</bean>
+	
+	<bean id="daoActividad" class="dao.general.DaoActividad" />	
+	<bean id="servicioActividad" class="servicio.implementacion.ServicioActividad">
+		<property name="daoActividad" ref="daoActividad" />
+	</bean>
+	
+	<bean id="daoActividadCalendario" class="dao.general.DaoActividadCalendario" />	
+	<bean id="servicioActividadCalendario" class="servicio.implementacion.ServicioActividadCalendario">
+		<property name="daoActividadCalendario" ref="daoActividadCalendario" />
+	</bean>
+	
+	<bean id="daoAlmacen" class="dao.general.DaoAlmacen" />	
+	<bean id="servicioAlmacen" class="servicio.implementacion.ServicioAlmacen">
+		<property name="daoAlmacen" ref="daoAlmacen" />
+	</bean>
+	
+	<bean id="daoDetalleRequisicion" class="dao.general.DaoDetalleRequisicion" />	
+	<bean id="servicioDetalleRequisicion" class="servicio.implementacion.ServicioDetalleRequisicion">
+		<property name="daoDetalleRequisicion" ref="daoDetalleRequisicion" />
+	</bean>
+	
+	<bean id="daoEstadoActividad" class="dao.general.DaoEstadoActividad" />	
+	<bean id="servicioEstadoActividad" class="servicio.implementacion.ServicioEstadoActividad">
+		<property name="daoEstadoActividad" ref="daoEstadoActividad" />
+	</bean>
+	
+	<bean id="daoInstalacion" class="dao.general.DaoInstalacion" />	
+	<bean id="servicioInstalacion" class="servicio.implementacion.ServicioInstalacion">
+		<property name="daoInstalacion" ref="daoInstalacion" />
+	</bean>
+	
+	<bean id="daoMaterial" class="dao.general.DaoMaterial" />	
+	<bean id="servicioMaterial" class="servicio.implementacion.ServicioMaterial">
+		<property name="daoMaterial" ref="daoMaterial" />
+	</bean>
+	
+	<bean id="daoMaterialActividad" class="dao.general.DaoMaterialActividad" />	
+	<bean id="servicioMaterialActividad" class="servicio.implementacion.ServicioMaterialActividad">
+		<property name="daoMaterialActividad" ref="daoMaterialActividad" />
+	</bean>
+	
+	<bean id="daoMaterialActividadPlanificada" class="dao.general.DaoMaterialActividadPlanificada" />	
+	<bean id="servicioMaterialActividadPlanificada" class="servicio.implementacion.ServicioMaterialActividadPlanificada">
+		<property name="daoMaterialActividadPlanificada" ref="daoMaterialActividadPlanificada" />
+	</bean>
+	
+	<bean id="daoNotaEntrega" class="dao.general.DaoNotaEntrega" />	
+	<bean id="servicioNotaEntrega" class="servicio.implementacion.ServicioNotaEntrega">
+		<property name="daoNotaEntrega" ref="daoNotaEntrega" />
+	</bean>
+	
+	<bean id="daoPeriodicidad" class="dao.general.DaoPeriodicidad" />	
+	<bean id="servicioPeriodicidad" class="servicio.implementacion.ServicioPeriodicidad">
+		<property name="daoPeriodicidad" ref="daoPeriodicidad" />
+	</bean>
+	
+	<bean id="daoPersonalActividad" class="dao.general.DaoPersonalActividad" />	
+	<bean id="servicioPersonalActividad" class="servicio.implementacion.ServicioPersonalActividad">
+		<property name="daoPersonalActividad" ref="daoPersonalActividad" />
+	</bean>
+	
+	<bean id="daoPersonalActividadPlanificada" class="dao.general.DaoPersonalActividadPlanificada" />	
+	<bean id="servicioPersonalActividadPlanificada" class="servicio.implementacion.ServicioPersonalActividadPlanificada">
+		<property name="daoPersonalActividadPlanificada" ref="daoPersonalActividadPlanificada" />
+	</bean>
+	
+	<bean id="daoPlanificacionActividad" class="dao.general.DaoPlanificacionActividad" />	
+	<bean id="servicioPlanificacionActividad" class="servicio.implementacion.ServicioPlanificacionActividad">
+		<property name="daoPlanificacionActividad" ref="daoPlanificacionActividad" />
+	</bean>
+	
+	<bean id="daoRecepcionMaterial" class="dao.general.DaoRecepcionMaterial" />	
+	<bean id="servicioRecepcionMaterial" class="servicio.implementacion.ServicioRecepcionMaterial">
+		<property name="daoRecepcionMaterial" ref="daoRecepcionMaterial" />
+	</bean>
+	
+	<bean id="daoRequisiscion" class="dao.general.DaoRequisicion" />	
+	<bean id="servicioRequisicion" class="servicio.implementacion.ServicioRequisicion">
+		<property name="daoRequisicion" ref="daoRequisiscion" />
+	</bean>
+	
+	<bean id="daoResultadoActividad" class="dao.general.DaoResultadoActividad" />	
+	<bean id="servicioResultadoActividad" class="servicio.implementacion.ServicioResultadoActividad">
+		<property name="daoResultadoActividad" ref="daoResultadoActividad" />
+	</bean>
+	
+	<bean id="daoSolicitudMantenimiento" class="dao.general.DaoSolicitudMantenimiento" />	
+	<bean id="servicioSolicitudMantenimiento" class="servicio.implementacion.ServicioSolicitudMantenimiento">
+		<property name="daoSolicitudMantenimiento" ref="daoSolicitudMantenimiento" />
+	</bean>
+	
+	<bean id="daoTareaActividad" class="dao.general.DaoTareaActividad" />	
+	<bean id="servicioTareaActividad" class="servicio.implementacion.ServicioTareaActividad">
+		<property name="daoTareaActividad" ref="daoTareaActividad" />
+	</bean>
+	
+	<bean id="daoTareaActividadPlanificada" class="dao.general.DaoTareaActividadPlanificada" />	
+	<bean id="servicioTareaActividadPlanificada" class="servicio.implementacion.ServicioTareaActividadPlanificada">
+		<property name="daoTareaActividadPlanificada" ref="daoTareaActividadPlanificada" />
+	</bean>
+	
 </beans>

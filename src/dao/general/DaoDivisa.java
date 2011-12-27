@@ -15,13 +15,23 @@ import dao.generico.GenericDao;
 public class DaoDivisa extends GenericDao {
 	
 	//Metodos personalizados
-	/*public List<Divisa> listarActivos(){
+	public List<Divisa> listarActivos(){
 		//Permite buscar todas las divisas con estatus = 'A'
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Criteria c = getSession().createCriteria(Divisa.class);
 		List lista = c.add(Restrictions.eq("estatus",'A')).list();
 		return lista;
-	}*/
+	}
+	
+	public List<Divisa> filtar(String cad){
+		
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Divisa.class);
+		c.add(Restrictions.like("nombre", cad));
+		return c.list();
+		
+	}
 
 }

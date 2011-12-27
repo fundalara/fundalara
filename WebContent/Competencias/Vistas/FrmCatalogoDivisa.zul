@@ -4,44 +4,43 @@
 <zk>
 
 	<div align="center">
-		<window id="frmCatalogoD" title="Divisas Existentes" apply="controlador.competencia.CntrlFrmCatalogoDivisa"
-			border="normal" mode="modal" closable="true" width="420px" height="350px">
-			<panel width="100%" border="normal" >
+		<window id="frmCatalogoD" title="Divisas Existentes"
+			apply="controlador.competencia.CntrlFrmCatalogoDivisa"
+			border="normal" mode="modal" closable="true" width="690px"
+			height="350px">
+			<panel width="100%" border="normal">
 				<panelchildren>
 					<div style="margin-top:5px">
-					<label value="Filtro"></label>
-					<textbox></textbox>
-					<button label="Buscar"></button>
+						<label value="Filtro"></label>
+						<textbox id="txtFiltro" ></textbox>
+						<button label="Buscar"></button>
 					</div>
-					<listbox id="lsbxDivisas" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.divisas}" height="240px">
+					<listbox id="lsbxDivisas" mold="paging" width="100%"
+						pageSize="10" style="margin-top:5px" model="@{cntrl.divisas}"
+						height="240px" >
 						<listhead>
-							<listheader label="Nombre" align="center"
-								width="25%">
-							</listheader>
-							<listheader label="Estado" align="center"
-								width="25%">
-							</listheader>
-							<listheader label="Teléfono" align="center"
-								width="25%">
-							</listheader>
+							<listheader label="Nombre" align="center" width="10%"></listheader>
+							<listheader label="Dirección" align="center" width="auto"></listheader>
+							<listheader label="Parroquia" align="center"  width="auto"></listheader>
+							<listheader label="Telefono" align="center"  width="auto"></listheader>
+							<listheader label="Correo" align="center"  width="auto"></listheader>
+							<listheader label="Contacto" align="center"  width="10%"></listheader>
 						</listhead>
-						
+
 						<listitem self="@{each=divisa}">
 							<listcell label="@{divisa.nombre}"></listcell>
-							<listcell label="@{divisa.estadoVenezuela.nombre}"></listcell>
-							<listcell label="@{divisa.Telefono}"></listcell>
+							<listcell label="@{divisa.direccion}"></listcell>
+							<listcell label="@{divisa.datoBasico.nombre}"></listcell>
+							<listcell label="@{divisa.telefono}"></listcell>
+							<listcell label="@{divisa.correoElectronico}"></listcell>
+							<listcell label="@{divisa.personaContacto}"></listcell>
 						</listitem>
-									
-						
+
+
 					</listbox>
 					<div align="right">
-						<button id="btnAceptar"
-							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
-						</button>
-						<button id="btnSalir"
-							image="../../Recursos/Imagenes/salir.png" label="Salir"
-							onClick="">
-						</button>
+						<button id="btnAceptar" image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar" />
+						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
 					</div>
 				</panelchildren>
 			</panel>
