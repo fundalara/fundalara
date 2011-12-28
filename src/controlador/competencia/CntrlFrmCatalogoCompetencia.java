@@ -13,8 +13,10 @@ import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 
-import servicio.competencia.ServicioCategoriaCompetencia;
-import servicio.competencia.ServicioCompetencia;
+import servicio.implementacion.ServicioCategoriaCompetencia;
+import servicio.implementacion.ServicioCompetencia;
+
+
 
 
 public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
@@ -23,47 +25,43 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
 	ServicioCompetencia servicioCompetencia;
 	List<Competencia> competencias;
 	Listbox lsbxCompetencias;
-	Component comp;
+	Component catalogo;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	List<CategoriaCompetencia> categoria;
 
-	public void doAfterCompose(Component cn) throws Exception {
-//		super.doAfterCompose(cn);
-//		cn.setVariable("cntrl", this, true);
-//		comp = cn;
-//		competencias = servicioCompetencia.listarActivos();
-//		if (lsbxCompetencias.getItems().size() != 0){
-//			lsbxCompetencias.setSelectedIndex(0);
+	public void doAfterCompose(Component c) throws Exception {
+		super.doAfterCompose(c);
+		c.setVariable("cntrl", this, true);
+		catalogo = c;
+		
+	}
+
+	public void onClick$btnAceptar() {
+//		if (lsbxCompetencias.getSelectedIndex() != -1) {
+//			
+//			Competencia c = competencias.get(lsbxCompetencias.getSelectedIndex());
+//			
+//			categoria = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(c.getCodigoCompetencia());
+//			CntrlFrmIndicador cn = (CntrlFrmIndicador) comp.getVariable("ref", false);
+//			cn.setCompetencia(c);
+//			cn.setCategorias(categoria);
+//			comp.detach();
+//
+//		} else {
+//			try {
+//				Messagebox.show("Seleccione una Competencia", "Mensaje",
+//						Messagebox.YES, Messagebox.INFORMATION);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
 //		}
 
 	}
 
-	public void onClick$btnAceptar() {
-		if (lsbxCompetencias.getSelectedIndex() != -1) {
-			
-			Competencia c = competencias.get(lsbxCompetencias.getSelectedIndex());
-			
-			categoria = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(c.getCodigoCompetencia());
-			CntrlFrmIndicador cn = (CntrlFrmIndicador) comp.getVariable("ref", false);
-			cn.setCompetencia(c);
-			cn.setCategorias(categoria);
-			comp.detach();
-
-		} else {
-			try {
-				Messagebox.show("Seleccione una Competencia", "Mensaje",
-						Messagebox.YES, Messagebox.INFORMATION);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-	}
-
 	public void onClick$btnSalir() {
-		comp.detach();
+		catalogo.detach();
 	}
 
 	public List<Competencia> getCompetencias() {

@@ -69,7 +69,7 @@ public class CntrlFrmCatalogoDivisa extends GenericForwardComposer {
 	public void onChanging$txtFiltro(){
 		
 		
-		divisas = servicioDivisa.filtar(txtFiltro.getText()+"%");
+		//divisas = servicioDivisa.filtar(txtFiltro.getText()+"%");
 		binder.loadAll();
 	}
 	

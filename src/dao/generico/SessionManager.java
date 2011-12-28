@@ -10,8 +10,11 @@ import org.hibernate.SessionFactory;
 
 
 /**
- *
+ * Implementacion del patron OpenSessionInView
  * @author JavAdicto
+ * @author Eduardo Ochoa
+ * @version 1.2 
+ * @email elos3000@gmail.com
  */
 public class SessionManager implements Filter
 {

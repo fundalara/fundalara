@@ -11,11 +11,9 @@ public interface IServicioCompetencia {
 
 	public abstract void agregar(Competencia c);
 
-	//public abstract void actualizar(Competencia c);
-
-	//public abstract Competencia buscarPorCodigo(Competencia c);
-
 	public abstract List<Competencia> listar();
 
 	public abstract List<Competencia> listarActivos();
+	
+	public abstract List<Competencia> listarPorEstatus(int estatus);
 }

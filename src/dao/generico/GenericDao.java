@@ -16,7 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+/**
+ * Clase para manejar las operaciones basicas mediante session factory
+ * @author Eduardo Ochoa
+ * @version 1.0 
+ * @email elos3000@gmail.com
+ */
 public class GenericDao {
 	
 	Session session;
