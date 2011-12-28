@@ -3,6 +3,8 @@ package dao.general;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import modelo.ActividadEntrenamiento;
@@ -11,8 +13,10 @@ import modelo.DatoBasico;
 import dao.generico.GenericDao;
 
 public class DaoActividadEntrenamiento extends GenericDao {
-	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,String idActividad){		
-		Criteria where =  getSession().createCriteria(ActividadEntrenamiento.class);
+	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,int idActividad){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria where =  session.createCriteria(ActividadEntrenamiento.class);
 		where.add(Restrictions.eq("categoria", c));
 		where.add(Restrictions.eq("datoBasico", f));
 		where.add(Restrictions.eq("codActividadEntrenamiento", idActividad));
@@ -21,7 +25,9 @@ public class DaoActividadEntrenamiento extends GenericDao {
 	}
 	
 	public List<ActividadEntrenamiento> buscarTodo(Categoria c, DatoBasico f){		
-		Criteria where =  getSession().createCriteria(ActividadEntrenamiento.class);
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria where =  session.createCriteria(ActividadEntrenamiento.class);
 		where.add(Restrictions.eq("categoria", c));
 		where.add(Restrictions.eq("datoBasico", f));		
 		where.add(Restrictions.eq("estatus", "A"));

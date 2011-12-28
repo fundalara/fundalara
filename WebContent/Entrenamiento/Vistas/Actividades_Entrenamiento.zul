@@ -1,375 +1,85 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk xmlns:h="xhtml" xmlns:zk="zk">
 	<div align="center">
 		<separator height="15px" />
 		<?page title="Auto Generated index.zul"?>
 		<window title="Actividades de Entrenamiento" border="normal"
-			width="500px" height="" closable="true"
+			width="465px" closable="true"
 			apply="controlador.entrenamiento.Actividad_Entrenamiento"
 			id="winActividadEntrenamiento">
+			<grid>
+				<columns>
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Categoria" />
+						<combobox id="cmbCategoria"
+							model="@{ctrl.listCategoria}" readonly="true" width="110px">
+							<comboitem self="@{each=categoria}"
+								label="@{categoria.nombre}"
+								value="@{categoria.codigoCategoria}" />
+						</combobox>
+						<!--	<combobox id="cmbCategoria" readonly="true"
+							width="155px">
+							<comboitem label="PREPARATORIO NIVEL I" />
+							<comboitem label="PREPARATORIO NIVEL II" />
+							<comboitem label="PRE-INFANTIL" />
+							<comboitem label="INFANTIL" />
+							<comboitem label="JUNIOR" />
+							<comboitem label="JUVENIL" />
+							</combobox>-->
+						<label value="Fase" />
+						<!--<combobox id="cmbFase" readonly="true"
+							width="110px">
+							<comboitem label="CALENTAMIENTO" />
+							<comboitem label="TECNICA" />
+							<comboitem label="ENFRIAMIENTO" />
+							</combobox>-->
+						<combobox id="cmbFase" model="@{ctrl.listFase}"
+							readonly="true" width="110px">
+							<comboitem self="@{each=fase}"
+								label="@{fase.nombre}" value="@{fase.codFaseEntrenamiento}" />
+						</combobox>
+					</row>
+					<row>
+						<label value="Actividad " />
+						<textbox width="160px" id="txtActividades"
+							disabled="true" value="@{ctrl.actividadEntrenamiento.nombre}" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<hbox width="450px">
+				<listbox id="lboxActividades" mold="paging"
+					pageSize="10" height="300px" width="360px">
+					<listhead>
+						<listheader label="Actividades" sort="none"
+							height="" />
+						<listheader label="Id" visible="false" />
+					</listhead>
+				</listbox>
+				<vbox>
+					<button image="../../Recursos/Imagenes/agregar.ico"
+						id="btnAgregar" />
+					<separator height="5px" />
+					<button image="../../Recursos/Imagenes/quitar.ico"
+						id="btnQuitar" />
+				</vbox>
+			</hbox>
 			<separator />
 			<grid>
 				<columns>
-					<column align="center" />
-				</columns>
-				<rows>
-					<row width="480px">
-						<hbox focus="false">
-							<vbox>
-								<tree width="200px" height="330px"
-									id="trActividades">
-									<treechildren>
-										<treeitem>
-											<treerow height="30px">
-												<treecell
-													label="Categoría" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="Preparatorio Nivel I" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" id="treecell" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="Preparatorio Nivel II" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="PreInfantil" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="Infantil" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="PreJunior" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="Junior" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow
-														height="30px">
-														<treecell
-															label="Juvenil" />
-													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Fase" />
-															</treerow>
-															<treechildren>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Calentamiento" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Técnico" />
-																	</treerow>
-																</treeitem>
-																<treeitem
-																	open="false">
-																	<treerow>
-																		<treecell
-																			label="Enfriamiento" />
-																	</treerow>
-																</treeitem>
-															</treechildren>
-														</treeitem>
-
-													</treechildren>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-									</treechildren>
-								</tree>
-								<combobox id="cmbCategoria" value="- Categoria -" readonly="true">
-									<comboitem label="Preparatorio I"/>
-									<comboitem label="Juvenil"/>
-								</combobox>
-								<combobox id="cmbFase" value="- Fase -" readonly="true" disabled="true">
-									<comboitem label="Calentamiento"/>
-									<comboitem label="Tecnica"/>
-								</combobox>
-							</vbox>
-							<space width="5px" />
-							<vbox>
-								<hbox align="center">
-									<label value="Actividad"/>
-									<textbox width="160px"
-										height="20px" id="txtActividades" disabled="true"/>
-								</hbox>
-								<listbox id="lbxActividades"
-									mold="paging" pageSize="10" height="330px">
-									<listhead>
-										<listheader label="Actividades"
-											sort="none" />
-									</listhead>									
-								</listbox>
-							</vbox>
-							<vbox>
-								<separator height="20px" />
-								<button
-									image="../../Recursos/Imagenes/agregar.ico" id="btnAgregar" />
-								<separator height="5px" />
-								<button
-									image="../../Recursos/Imagenes/editar.ico" id="btnEditar" />
-								<separator height="5px" />
-								<button
-									image="../../Recursos/Imagenes/quitar.ico" id="btnQuitar" />
-							</vbox>
-
-						</hbox>
-					</row>
-
-				</rows>
-			</grid>
-
-
-
-			<grid>
-				<columns>
-
 					<column width="200px" align="center" />
 					<column width="110px" align="center" />
 					<column width="110px" align="center" />
-
 				</columns>
 				<rows>
-
-					<row height="">
+					<row>
 						<label value="" />
 						<button
 							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"
@@ -380,7 +90,6 @@
 					</row>
 				</rows>
 			</grid>
-
 		</window>
 	</div>
 </zk>
