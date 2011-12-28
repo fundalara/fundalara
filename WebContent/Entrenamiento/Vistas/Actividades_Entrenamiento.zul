@@ -24,22 +24,7 @@
 								label="@{categoria.nombre}"
 								value="@{categoria.codigoCategoria}" />
 						</combobox>
-						<!--	<combobox id="cmbCategoria" readonly="true"
-							width="155px">
-							<comboitem label="PREPARATORIO NIVEL I" />
-							<comboitem label="PREPARATORIO NIVEL II" />
-							<comboitem label="PRE-INFANTIL" />
-							<comboitem label="INFANTIL" />
-							<comboitem label="JUNIOR" />
-							<comboitem label="JUVENIL" />
-							</combobox>-->
 						<label value="Fase" />
-						<!--<combobox id="cmbFase" readonly="true"
-							width="110px">
-							<comboitem label="CALENTAMIENTO" />
-							<comboitem label="TECNICA" />
-							<comboitem label="ENFRIAMIENTO" />
-							</combobox>-->
 						<combobox id="cmbFase" model="@{ctrl.listFase}"
 							readonly="true" width="110px">
 							<comboitem self="@{each=fase}"
