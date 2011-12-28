@@ -5,7 +5,7 @@
 
 	<div align="center">
 		<window id="FrmCatalogoC" title="Competencias Existentes" apply="controlador.competencia.CntrlFrmCatalogoCompetencia"
-			border="normal" mode="modal" closable="true" width="420px" height="350px">
+			border="normal" mode="modal" closable="true" width="690px" height="350px">
 			<panel width="100%" border="normal" >
 				<panelchildren>
 					<div style="margin-top:5px">
@@ -15,21 +15,26 @@
 					</div>
 					<listbox id="lsbxCompetencias" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.competencias}" height="240px">
 						<listhead>
-							<listheader label="Nombre" align="center"
-								width="25%">
-							</listheader>
-							<listheader label="Fecha de Inicio" align="center"
-								width="25%">
-							</listheader>
-							<listheader label="Fecha de Finalización" align="center"
-								width="25%">
-							</listheader>
+						    <listheader label="Tipo" align="center" width="auto"/>		
+						    <listheader label="Modalidad" align="center" width="10%"/>			
+							<listheader label="Nombre" align="center" width="auto"/>
+							<listheader label="Fecha de Inicio" align="center" width="auto"/>
+							<listheader label="Fecha de Fin" align="center" width="auto"/>		
+							<listheader label="Cant.Equipos" align="center" width="13%"/>	
+							<listheader label="Cant.Fases" align="center" width="12%"/>
+							<listheader label="Monto Inscripcion" align="center" width="17%"/>
+												
 						</listhead>
 						
 						<listitem self="@{each=competencia}">
+						    <listcell label="@{competencia.modalidadCompetencia.tipoCompetencia.nombre}"></listcell>
+						    <listcell label="@{competencia.modalidadCompetencia.nombre}"></listcell>
 							<listcell label="@{competencia.nombre}"></listcell>
 							<listcell label="@{competencia.fechaInicio}"></listcell>
 							<listcell label="@{competencia.fechaFin}"></listcell>
+							<listcell label="@{competencia.cantidadEquipo}"></listcell>
+							<listcell label="@{competencia.cantidadFase}"></listcell>
+							<listcell label="@{competencia.montoInscripcion}"></listcell>
 						</listitem>
 									
 						

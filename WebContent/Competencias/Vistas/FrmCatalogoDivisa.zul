@@ -33,7 +33,7 @@
 							<listcell label="@{divisa.datoBasico.nombre}"></listcell>
 							<listcell label="@{divisa.telefono}"></listcell>
 							<listcell label="@{divisa.correoElectronico}"></listcell>
-							<listcell label="@{divisa.personaContacto}"></listcell>
+							<listcell label="@{divisa.montoInscripcion;"></listcell>
 						</listitem>
 
 
