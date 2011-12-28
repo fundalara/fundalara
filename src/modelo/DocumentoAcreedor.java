@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -48,11 +48,13 @@ public class DocumentoAcreedor implements java.io.Serializable {
 
 	public DocumentoAcreedor(int codigoDocumentoAcreedor,
 			DatoBasico datoBasico, Persona personaByCedulaRif,
-			Date fechaEmision, Date fechaVencimiento, double monto,
-			String concepto, char estado, char estatus) {
+			Persona personaByCedulaAtleta, Date fechaEmision,
+			Date fechaVencimiento, double monto, String concepto, char estado,
+			char estatus) {
 		this.codigoDocumentoAcreedor = codigoDocumentoAcreedor;
 		this.datoBasico = datoBasico;
 		this.personaByCedulaRif = personaByCedulaRif;
+		this.personaByCedulaAtleta = personaByCedulaAtleta;
 		this.fechaEmision = fechaEmision;
 		this.fechaVencimiento = fechaVencimiento;
 		this.monto = monto;
@@ -119,7 +121,7 @@ public class DocumentoAcreedor implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_atleta")
+	@JoinColumn(name = "cedula_atleta", nullable = false)
 	public Persona getPersonaByCedulaAtleta() {
 		return this.personaByCedulaAtleta;
 	}

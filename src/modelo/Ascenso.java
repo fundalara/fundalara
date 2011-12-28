@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +25,7 @@ public class Ascenso implements java.io.Serializable {
 
 	private int codigoAscenso;
 	private Roster roster;
-	private String tipoAscenso;
+	private DatoBasico datoBasico;
 	private Date fechaAscenso;
 	private char estatus;
 	private Set<DocumentoAscenso> documentoAscensos = new HashSet<DocumentoAscenso>(
@@ -34,21 +34,21 @@ public class Ascenso implements java.io.Serializable {
 	public Ascenso() {
 	}
 
-	public Ascenso(int codigoAscenso, Roster roster, String tipoAscenso,
+	public Ascenso(int codigoAscenso, Roster roster, DatoBasico datoBasico,
 			Date fechaAscenso, char estatus) {
 		this.codigoAscenso = codigoAscenso;
 		this.roster = roster;
-		this.tipoAscenso = tipoAscenso;
+		this.datoBasico = datoBasico;
 		this.fechaAscenso = fechaAscenso;
 		this.estatus = estatus;
 	}
 
-	public Ascenso(int codigoAscenso, Roster roster, String tipoAscenso,
+	public Ascenso(int codigoAscenso, Roster roster, DatoBasico datoBasico,
 			Date fechaAscenso, char estatus,
 			Set<DocumentoAscenso> documentoAscensos) {
 		this.codigoAscenso = codigoAscenso;
 		this.roster = roster;
-		this.tipoAscenso = tipoAscenso;
+		this.datoBasico = datoBasico;
 		this.fechaAscenso = fechaAscenso;
 		this.estatus = estatus;
 		this.documentoAscensos = documentoAscensos;
@@ -74,13 +74,14 @@ public class Ascenso implements java.io.Serializable {
 		this.roster = roster;
 	}
 
-	@Column(name = "tipo_ascenso", nullable = false)
-	public String getTipoAscenso() {
-		return this.tipoAscenso;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_tipo_ascenso", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
 	}
 
-	public void setTipoAscenso(String tipoAscenso) {
-		this.tipoAscenso = tipoAscenso;
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
 	}
 
 	@Temporal(TemporalType.DATE)

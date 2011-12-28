@@ -45,8 +45,7 @@ public class ServicioCompetencia implements IServicioCompetencia {
 
 	@Override
 	public List<Competencia> listarPorEstatus(int estatus) {
-		// TODO Auto-generated method stub
-		return null;
+		return daoCompetencia.listarPorEstatus(estatus);
 	}
 
 }

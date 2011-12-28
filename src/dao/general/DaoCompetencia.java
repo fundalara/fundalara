@@ -42,11 +42,13 @@ public class DaoCompetencia extends GenericDao {
 		 */
 		Session session = getSession();                         
 		Transaction tx = session.beginTransaction();   
-				
+		
 		Criteria c = session.createCriteria(DatoBasico.class);	
 		c.add(Restrictions.eq("codigoDatoBasico",estatus)); 
 		DatoBasico db = (DatoBasico) c.list().get(0);                               
-			
+		
+		
+		System.out.println(db.getCompetenciasForCodigoEstado().size());
 		c = session.createCriteria(Competencia.class);
 		c.add(Restrictions.eq("datoBasicoByCodigoEstadoCompetencia",db));
 		return c.list();

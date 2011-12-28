@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,9 +23,8 @@ public class ActividadCalendario implements java.io.Serializable {
 	private int codigoActividadCalendario;
 	private DatoBasico datoBasico;
 	private Competencia competencia;
-	private Actividad actividad;
 	private Juego juego;
-	private Sesion sesion;
+	private Actividad actividad;
 	private Date fechaInicio;
 	private Date fechaCulminacion;
 	private String descripcion;
@@ -38,10 +37,14 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	public ActividadCalendario(int codigoActividadCalendario,
-			DatoBasico datoBasico, Date fechaInicio, Date fechaCulminacion,
+			DatoBasico datoBasico, Competencia competencia, Juego juego,
+			Actividad actividad, Date fechaInicio, Date fechaCulminacion,
 			String descripcion, char estatus, Date horaInicio, Date horaFin) {
 		this.codigoActividadCalendario = codigoActividadCalendario;
 		this.datoBasico = datoBasico;
+		this.competencia = competencia;
+		this.juego = juego;
+		this.actividad = actividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.descripcion = descripcion;
@@ -51,16 +54,15 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	public ActividadCalendario(int codigoActividadCalendario,
-			DatoBasico datoBasico, Competencia competencia,
-			Actividad actividad, Juego juego, Sesion sesion, Date fechaInicio,
-			Date fechaCulminacion, String descripcion, char estatus,
-			String color, Date horaInicio, Date horaFin) {
+			DatoBasico datoBasico, Competencia competencia, Juego juego,
+			Actividad actividad, Date fechaInicio, Date fechaCulminacion,
+			String descripcion, char estatus, String color, Date horaInicio,
+			Date horaFin) {
 		this.codigoActividadCalendario = codigoActividadCalendario;
 		this.datoBasico = datoBasico;
 		this.competencia = competencia;
-		this.actividad = actividad;
 		this.juego = juego;
-		this.sesion = sesion;
+		this.actividad = actividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.descripcion = descripcion;
@@ -91,7 +93,7 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_competencia")
+	@JoinColumn(name = "codigo_competencia", nullable = false)
 	public Competencia getCompetencia() {
 		return this.competencia;
 	}
@@ -101,17 +103,7 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_actividad")
-	public Actividad getActividad() {
-		return this.actividad;
-	}
-
-	public void setActividad(Actividad actividad) {
-		this.actividad = actividad;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego1")
+	@JoinColumn(name = "codigo_juego", nullable = false)
 	public Juego getJuego() {
 		return this.juego;
 	}
@@ -121,13 +113,13 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_sesion")
-	public Sesion getSesion() {
-		return this.sesion;
+	@JoinColumn(name = "codigo_actividad", nullable = false)
+	public Actividad getActividad() {
+		return this.actividad;
 	}
 
-	public void setSesion(Sesion sesion) {
-		this.sesion = sesion;
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
 	}
 
 	@Temporal(TemporalType.DATE)

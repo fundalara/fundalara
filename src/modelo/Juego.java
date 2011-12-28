@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 @Table(name = "juego", schema = "public")
 public class Juego implements java.io.Serializable {
 
-	private int codigoJuego1;
+	private int codigoJuego;
 	private Estadio estadio;
 	private Competencia competencia;
 	private DatoBasico datoBasico;
@@ -35,12 +35,8 @@ public class Juego implements java.io.Serializable {
 	private Set<PersonalJuego> personalJuegos = new HashSet<PersonalJuego>(0);
 	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
 			0);
-	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
-			0);
 	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
 	private Set<EquipoJuego> equipoJuegos = new HashSet<EquipoJuego>(0);
-	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
-			0);
 	private Set<LineUp> lineUps = new HashSet<LineUp>(0);
 	private Set<PersonalForaneoJuego> personalForaneoJuegos = new HashSet<PersonalForaneoJuego>(
 			0);
@@ -49,10 +45,10 @@ public class Juego implements java.io.Serializable {
 	public Juego() {
 	}
 
-	public Juego(int codigoJuego1, Estadio estadio, Competencia competencia,
+	public Juego(int codigoJuego, Estadio estadio, Competencia competencia,
 			DatoBasico datoBasico, Date horaInicio, Date fecha,
 			String observaciones, int cantidadInning, Date duracion) {
-		this.codigoJuego1 = codigoJuego1;
+		this.codigoJuego = codigoJuego;
 		this.estadio = estadio;
 		this.competencia = competencia;
 		this.datoBasico = datoBasico;
@@ -63,18 +59,16 @@ public class Juego implements java.io.Serializable {
 		this.duracion = duracion;
 	}
 
-	public Juego(int codigoJuego1, Estadio estadio, Competencia competencia,
+	public Juego(int codigoJuego, Estadio estadio, Competencia competencia,
 			DatoBasico datoBasico, Date horaInicio, Date fecha,
 			String observaciones, int cantidadInning, Date duracion,
 			Set<PersonalJuego> personalJuegos,
 			Set<ActividadCalendario> actividadCalendarios,
-			Set<MaterialActividad> materialActividads,
 			Set<PersonalEquipo> personalEquipos, Set<EquipoJuego> equipoJuegos,
-			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
 			Set<LineUp> lineUps,
 			Set<PersonalForaneoJuego> personalForaneoJuegos,
 			Set<JugadorForaneo> jugadorForaneos) {
-		this.codigoJuego1 = codigoJuego1;
+		this.codigoJuego = codigoJuego;
 		this.estadio = estadio;
 		this.competencia = competencia;
 		this.datoBasico = datoBasico;
@@ -85,23 +79,21 @@ public class Juego implements java.io.Serializable {
 		this.duracion = duracion;
 		this.personalJuegos = personalJuegos;
 		this.actividadCalendarios = actividadCalendarios;
-		this.materialActividads = materialActividads;
 		this.personalEquipos = personalEquipos;
 		this.equipoJuegos = equipoJuegos;
-		this.materialActividadPlanificadas = materialActividadPlanificadas;
 		this.lineUps = lineUps;
 		this.personalForaneoJuegos = personalForaneoJuegos;
 		this.jugadorForaneos = jugadorForaneos;
 	}
 
 	@Id
-	@Column(name = "codigo_juego1", unique = true, nullable = false)
-	public int getCodigoJuego1() {
-		return this.codigoJuego1;
+	@Column(name = "codigo_juego", unique = true, nullable = false)
+	public int getCodigoJuego() {
+		return this.codigoJuego;
 	}
 
-	public void setCodigoJuego1(int codigoJuego1) {
-		this.codigoJuego1 = codigoJuego1;
+	public void setCodigoJuego(int codigoJuego) {
+		this.codigoJuego = codigoJuego;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -202,15 +194,6 @@ public class Juego implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
-	public Set<MaterialActividad> getMaterialActividads() {
-		return this.materialActividads;
-	}
-
-	public void setMaterialActividads(Set<MaterialActividad> materialActividads) {
-		this.materialActividads = materialActividads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
 	public Set<PersonalEquipo> getPersonalEquipos() {
 		return this.personalEquipos;
 	}
@@ -226,16 +209,6 @@ public class Juego implements java.io.Serializable {
 
 	public void setEquipoJuegos(Set<EquipoJuego> equipoJuegos) {
 		this.equipoJuegos = equipoJuegos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
-	public Set<MaterialActividadPlanificada> getMaterialActividadPlanificadas() {
-		return this.materialActividadPlanificadas;
-	}
-
-	public void setMaterialActividadPlanificadas(
-			Set<MaterialActividadPlanificada> materialActividadPlanificadas) {
-		this.materialActividadPlanificadas = materialActividadPlanificadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")

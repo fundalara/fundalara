@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,10 +32,14 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	public IngresoFormaPago(IngresoFormaPagoId id, Ingreso ingreso,
-			DatoBasico datoBasicoByCodigoFormaPago, double monto, char estatus) {
+			DatoBasico datoBasicoByCodigoFormaPago,
+			DatoBasico datoBasicoByCodigoTarjeta,
+			DatoBasico datoBasicoByCodigoBanco, double monto, char estatus) {
 		this.id = id;
 		this.ingreso = ingreso;
 		this.datoBasicoByCodigoFormaPago = datoBasicoByCodigoFormaPago;
+		this.datoBasicoByCodigoTarjeta = datoBasicoByCodigoTarjeta;
+		this.datoBasicoByCodigoBanco = datoBasicoByCodigoBanco;
 		this.monto = monto;
 		this.estatus = estatus;
 	}
@@ -89,7 +93,7 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tarjeta")
+	@JoinColumn(name = "codigo_tarjeta", nullable = false)
 	public DatoBasico getDatoBasicoByCodigoTarjeta() {
 		return this.datoBasicoByCodigoTarjeta;
 	}
@@ -100,7 +104,7 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_banco")
+	@JoinColumn(name = "codigo_banco", nullable = false)
 	public DatoBasico getDatoBasicoByCodigoBanco() {
 		return this.datoBasicoByCodigoBanco;
 	}

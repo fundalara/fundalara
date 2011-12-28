@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,6 +28,7 @@ public class FamiliarJugador implements java.io.Serializable {
 	private DatoBasico datoBasico;
 	private Jugador jugador;
 	private Familiar familiar;
+	private String cedulaFamiliar;
 	private boolean representanteActual;
 	private Date fechaIngreso;
 	private char estatus;
@@ -40,26 +41,28 @@ public class FamiliarJugador implements java.io.Serializable {
 	}
 
 	public FamiliarJugador(int codigoFamiliarJugador, DatoBasico datoBasico,
-			Jugador jugador, Familiar familiar, boolean representanteActual,
-			Date fechaIngreso, char estatus) {
+			Jugador jugador, Familiar familiar, String cedulaFamiliar,
+			boolean representanteActual, Date fechaIngreso, char estatus) {
 		this.codigoFamiliarJugador = codigoFamiliarJugador;
 		this.datoBasico = datoBasico;
 		this.jugador = jugador;
 		this.familiar = familiar;
+		this.cedulaFamiliar = cedulaFamiliar;
 		this.representanteActual = representanteActual;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 	}
 
 	public FamiliarJugador(int codigoFamiliarJugador, DatoBasico datoBasico,
-			Jugador jugador, Familiar familiar, boolean representanteActual,
-			Date fechaIngreso, char estatus,
+			Jugador jugador, Familiar familiar, String cedulaFamiliar,
+			boolean representanteActual, Date fechaIngreso, char estatus,
 			Set<FamiliarComisionEquipo> familiarComisionEquipos,
 			Representante representante, Set<Hospedaje> hospedajes) {
 		this.codigoFamiliarJugador = codigoFamiliarJugador;
 		this.datoBasico = datoBasico;
 		this.jugador = jugador;
 		this.familiar = familiar;
+		this.cedulaFamiliar = cedulaFamiliar;
 		this.representanteActual = representanteActual;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
@@ -99,13 +102,22 @@ public class FamiliarJugador implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_familiar", nullable = false)
+	@JoinColumn(name = "cedula_rif", nullable = false, insertable = false, updatable = false)
 	public Familiar getFamiliar() {
 		return this.familiar;
 	}
 
 	public void setFamiliar(Familiar familiar) {
 		this.familiar = familiar;
+	}
+
+	@Column(name = "cedula_familiar", nullable = false)
+	public String getCedulaFamiliar() {
+		return this.cedulaFamiliar;
+	}
+
+	public void setCedulaFamiliar(String cedulaFamiliar) {
+		this.cedulaFamiliar = cedulaFamiliar;
 	}
 
 	@Column(name = "representante_actual", nullable = false)

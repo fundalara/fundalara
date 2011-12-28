@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,8 +21,6 @@ import javax.persistence.TemporalType;
 public class MaterialActividad implements java.io.Serializable {
 
 	private int codigoMaterialActividad;
-	private Juego juego;
-	private SesionEjecutada sesionEjecutada;
 	private Material material;
 	private Actividad actividad;
 	private char estatus;
@@ -35,24 +33,9 @@ public class MaterialActividad implements java.io.Serializable {
 	}
 
 	public MaterialActividad(int codigoMaterialActividad, Material material,
-			char estatus, int cantidadEntregada, int cantidadDevuelta,
-			Date fechaDevolucion, String observacion) {
-		this.codigoMaterialActividad = codigoMaterialActividad;
-		this.material = material;
-		this.estatus = estatus;
-		this.cantidadEntregada = cantidadEntregada;
-		this.cantidadDevuelta = cantidadDevuelta;
-		this.fechaDevolucion = fechaDevolucion;
-		this.observacion = observacion;
-	}
-
-	public MaterialActividad(int codigoMaterialActividad, Juego juego,
-			SesionEjecutada sesionEjecutada, Material material,
 			Actividad actividad, char estatus, int cantidadEntregada,
 			int cantidadDevuelta, Date fechaDevolucion, String observacion) {
 		this.codigoMaterialActividad = codigoMaterialActividad;
-		this.juego = juego;
-		this.sesionEjecutada = sesionEjecutada;
 		this.material = material;
 		this.actividad = actividad;
 		this.estatus = estatus;
@@ -73,26 +56,6 @@ public class MaterialActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego_material")
-	public Juego getJuego() {
-		return this.juego;
-	}
-
-	public void setJuego(Juego juego) {
-		this.juego = juego;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_sesion_ejecutada")
-	public SesionEjecutada getSesionEjecutada() {
-		return this.sesionEjecutada;
-	}
-
-	public void setSesionEjecutada(SesionEjecutada sesionEjecutada) {
-		this.sesionEjecutada = sesionEjecutada;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_material", nullable = false)
 	public Material getMaterial() {
 		return this.material;
@@ -103,7 +66,7 @@ public class MaterialActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_actividad")
+	@JoinColumn(name = "codigo_actividad", nullable = false)
 	public Actividad getActividad() {
 		return this.actividad;
 	}

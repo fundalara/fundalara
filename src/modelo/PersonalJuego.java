@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -37,7 +37,7 @@ public class PersonalJuego implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoJuego1", column = @Column(name = "codigo_juego1", nullable = false)),
+			@AttributeOverride(name = "codigoJuego", column = @Column(name = "codigo_juego", nullable = false)),
 			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)) })
 	public PersonalJuegoId getId() {
 		return this.id;
@@ -48,7 +48,7 @@ public class PersonalJuego implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego1", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_juego", nullable = false, insertable = false, updatable = false)
 	public Juego getJuego() {
 		return this.juego;
 	}

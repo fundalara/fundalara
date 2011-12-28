@@ -18,9 +18,15 @@ import servicio.implementacion.ServicioCompetencia;
 
 
 
-
+/**
+ * Controlador para el archivo 'FrmCatalogoCompetencia.zul'
+ * 
+ * @author Eduardo Ochoa
+ * @version 1.0
+ */
 public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
-
+    
+	
 	AnnotateDataBinder binder;
 	ServicioCompetencia servicioCompetencia;
 	List<Competencia> competencias;
@@ -29,11 +35,17 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	List<CategoriaCompetencia> categoria;
 
+	public void onCreate$FrmCatalogoC(){
+	    int estatus = (Integer) catalogo.getVariable("estatus",false);	
+	    competencias = servicioCompetencia.listarPorEstatus(estatus);
+	    binder.loadAll();
+	}
+	
+	
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
 		catalogo = c;
-		
 	}
 
 	public void onClick$btnAceptar() {

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -39,8 +39,6 @@ public class SesionEjecutada implements java.io.Serializable {
 			0);
 	private Set<ActividadesEjecutadas> actividadesEjecutadases = new HashSet<ActividadesEjecutadas>(
 			0);
-	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
-			0);
 
 	public SesionEjecutada() {
 	}
@@ -74,8 +72,7 @@ public class SesionEjecutada implements java.io.Serializable {
 			char estatus,
 			Set<AsistenciaJugador> asistenciaJugadors,
 			Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos,
-			Set<ActividadesEjecutadas> actividadesEjecutadases,
-			Set<MaterialActividad> materialActividads) {
+			Set<ActividadesEjecutadas> actividadesEjecutadases) {
 		this.codigoSesionEjecutada = codigoSesionEjecutada;
 		this.datoBasico = datoBasico;
 		this.planRotacion = planRotacion;
@@ -89,7 +86,6 @@ public class SesionEjecutada implements java.io.Serializable {
 		this.asistenciaJugadors = asistenciaJugadors;
 		this.asistenciaPersonalEntrenamientos = asistenciaPersonalEntrenamientos;
 		this.actividadesEjecutadases = actividadesEjecutadases;
-		this.materialActividads = materialActividads;
 	}
 
 	@Id
@@ -218,15 +214,6 @@ public class SesionEjecutada implements java.io.Serializable {
 	public void setActividadesEjecutadases(
 			Set<ActividadesEjecutadas> actividadesEjecutadases) {
 		this.actividadesEjecutadases = actividadesEjecutadases;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesionEjecutada")
-	public Set<MaterialActividad> getMaterialActividads() {
-		return this.materialActividads;
-	}
-
-	public void setMaterialActividads(Set<MaterialActividad> materialActividads) {
-		this.materialActividads = materialActividads;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,10 +34,11 @@ public class TipoDato implements java.io.Serializable {
 	public TipoDato() {
 	}
 
-	public TipoDato(int codigoTipoDato, String nombre, char estatus,
-			boolean tipo) {
+	public TipoDato(int codigoTipoDato, String nombre, String descripcion,
+			char estatus, boolean tipo) {
 		this.codigoTipoDato = codigoTipoDato;
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tipo = tipo;
 	}
@@ -86,7 +87,7 @@ public class TipoDato implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "descripcion")
+	@Column(name = "descripcion", nullable = false)
 	public String getDescripcion() {
 		return this.descripcion;
 	}

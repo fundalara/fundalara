@@ -1,9 +1,11 @@
 <?page title="CALENDARIO" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmCalendario" ?>
 <zk>
 
 	<div align="center">
-		<window title="CALENDARIO" border="normal" width="690px"
-			height="70%" closable="true">
+		<window title="CALENDARIO" id="FrmCalendario" border="normal" width="690px"
+			height="70%" closable="true" apply="controlador.competencia.CntrlFrmCalendario">
 
 			<!-- DATOS COMPETENCIA -->
 			<panel border="normal">
@@ -25,7 +27,7 @@
 								</label>
 
 								<textbox cols="15" width="95%"></textbox>
-								<button
+								<button id="btnBuscarCompetencia"
 									image="../../Recursos/Imagenes/consultar.ico" width="100%">
 								</button>
 

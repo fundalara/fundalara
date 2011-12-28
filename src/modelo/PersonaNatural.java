@@ -1,8 +1,7 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -31,24 +28,22 @@ public class PersonaNatural implements java.io.Serializable {
 	private String primerApellido;
 	private String segundoApellido;
 	private byte[] foto;
-	private Character sexo;
-	private Date fechaNacimiento;
 	private Personal personal;
 
 	public PersonaNatural() {
 	}
 
-	public PersonaNatural(Persona persona, String primerNombre,
+	public PersonaNatural(Persona persona, String celular, String primerNombre,
 			String primerApellido) {
 		this.persona = persona;
+		this.celular = celular;
 		this.primerNombre = primerNombre;
 		this.primerApellido = primerApellido;
 	}
 
 	public PersonaNatural(Persona persona, String celular, String primerNombre,
 			String segundoNombre, String primerApellido,
-			String segundoApellido, byte[] foto, Character sexo,
-			Date fechaNacimiento, Personal personal) {
+			String segundoApellido, byte[] foto, Personal personal) {
 		this.persona = persona;
 		this.celular = celular;
 		this.primerNombre = primerNombre;
@@ -56,8 +51,6 @@ public class PersonaNatural implements java.io.Serializable {
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
 		this.foto = foto;
-		this.sexo = sexo;
-		this.fechaNacimiento = fechaNacimiento;
 		this.personal = personal;
 	}
 
@@ -83,7 +76,7 @@ public class PersonaNatural implements java.io.Serializable {
 		this.persona = persona;
 	}
 
-	@Column(name = "celular")
+	@Column(name = "celular", nullable = false)
 	public String getCelular() {
 		return this.celular;
 	}
@@ -135,25 +128,6 @@ public class PersonaNatural implements java.io.Serializable {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
-	}
-
-	@Column(name = "sexo", length = 1)
-	public Character getSexo() {
-		return this.sexo;
-	}
-
-	public void setSexo(Character sexo) {
-		this.sexo = sexo;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_nacimiento", length = 13)
-	public Date getFechaNacimiento() {
-		return this.fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personaNatural")

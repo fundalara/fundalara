@@ -1,11 +1,13 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,50 +19,39 @@ import javax.persistence.Table;
 @Table(name = "material_actividad_planificada", schema = "public")
 public class MaterialActividadPlanificada implements java.io.Serializable {
 
-	private int codigoMaterialActividadPlanificada;
+	private MaterialActividadPlanificadaId id;
 	private PlanificacionActividad planificacionActividad;
 	private Material material;
-	private Juego juego;
-	private Sesion sesion;
 	private char estatus;
 	private int cantidadRequerida;
 
 	public MaterialActividadPlanificada() {
 	}
 
-	public MaterialActividadPlanificada(int codigoMaterialActividadPlanificada,
-			Material material, char estatus, int cantidadRequerida) {
-		this.codigoMaterialActividadPlanificada = codigoMaterialActividadPlanificada;
-		this.material = material;
-		this.estatus = estatus;
-		this.cantidadRequerida = cantidadRequerida;
-	}
-
-	public MaterialActividadPlanificada(int codigoMaterialActividadPlanificada,
+	public MaterialActividadPlanificada(MaterialActividadPlanificadaId id,
 			PlanificacionActividad planificacionActividad, Material material,
-			Juego juego, Sesion sesion, char estatus, int cantidadRequerida) {
-		this.codigoMaterialActividadPlanificada = codigoMaterialActividadPlanificada;
+			char estatus, int cantidadRequerida) {
+		this.id = id;
 		this.planificacionActividad = planificacionActividad;
 		this.material = material;
-		this.juego = juego;
-		this.sesion = sesion;
 		this.estatus = estatus;
 		this.cantidadRequerida = cantidadRequerida;
 	}
 
-	@Id
-	@Column(name = "codigo_material_actividad_planificada", unique = true, nullable = false)
-	public int getCodigoMaterialActividadPlanificada() {
-		return this.codigoMaterialActividadPlanificada;
+	@EmbeddedId
+	@AttributeOverrides({
+			@AttributeOverride(name = "codigoPlanificacionActividad", column = @Column(name = "codigo_planificacion_actividad", nullable = false)),
+			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)) })
+	public MaterialActividadPlanificadaId getId() {
+		return this.id;
 	}
 
-	public void setCodigoMaterialActividadPlanificada(
-			int codigoMaterialActividadPlanificada) {
-		this.codigoMaterialActividadPlanificada = codigoMaterialActividadPlanificada;
+	public void setId(MaterialActividadPlanificadaId id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_planificacion_actividad")
+	@JoinColumn(name = "codigo_planificacion_actividad", nullable = false, insertable = false, updatable = false)
 	public PlanificacionActividad getPlanificacionActividad() {
 		return this.planificacionActividad;
 	}
@@ -71,33 +62,13 @@ public class MaterialActividadPlanificada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_material", nullable = false)
+	@JoinColumn(name = "codigo_material", nullable = false, insertable = false, updatable = false)
 	public Material getMaterial() {
 		return this.material;
 	}
 
 	public void setMaterial(Material material) {
 		this.material = material;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego1")
-	public Juego getJuego() {
-		return this.juego;
-	}
-
-	public void setJuego(Juego juego) {
-		this.juego = juego;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_sesion")
-	public Sesion getSesion() {
-		return this.sesion;
-	}
-
-	public void setSesion(Sesion sesion) {
-		this.sesion = sesion;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

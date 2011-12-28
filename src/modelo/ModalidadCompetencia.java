@@ -1,13 +1,16 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +24,7 @@ public class ModalidadCompetencia implements java.io.Serializable {
 	private TipoCompetencia tipoCompetencia;
 	private String nombre;
 	private String descripcion;
+	private Set<Competencia> competencias = new HashSet<Competencia>(0);
 
 	public ModalidadCompetencia() {
 	}
@@ -31,6 +35,16 @@ public class ModalidadCompetencia implements java.io.Serializable {
 		this.tipoCompetencia = tipoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+	}
+
+	public ModalidadCompetencia(int codigoModalidadCompetencia,
+			TipoCompetencia tipoCompetencia, String nombre, String descripcion,
+			Set<Competencia> competencias) {
+		this.codigoModalidadCompetencia = codigoModalidadCompetencia;
+		this.tipoCompetencia = tipoCompetencia;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.competencias = competencias;
 	}
 
 	@Id
@@ -69,6 +83,15 @@ public class ModalidadCompetencia implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modalidadCompetencia")
+	public Set<Competencia> getCompetencias() {
+		return this.competencias;
+	}
+
+	public void setCompetencias(Set<Competencia> competencias) {
+		this.competencias = competencias;
 	}
 
 }

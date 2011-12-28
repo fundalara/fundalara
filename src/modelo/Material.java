@@ -1,13 +1,12 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +25,7 @@ public class Material implements java.io.Serializable {
 	private Almacen almacen;
 	private DatoBasico datoBasicoByCodigoUnidadMedida;
 	private String descripcion;
-	private Integer cantidadExistencia;
+	private int cantidadExistencia;
 	private Integer cantidadPresentacion;
 	private int cantidadDisponible;
 	private boolean reutilizable;
@@ -55,11 +54,13 @@ public class Material implements java.io.Serializable {
 
 	public Material(int codigoMaterial,
 			DatoBasico datoBasicoByCodigoTipoMaterial, Almacen almacen,
-			String descripcion, int cantidadExistencia, int cantidadDisponible,
+			DatoBasico datoBasicoByCodigoUnidadMedida, String descripcion,
+			int cantidadExistencia, int cantidadDisponible,
 			boolean reutilizable, char estatus) {
 		this.codigoMaterial = codigoMaterial;
 		this.datoBasicoByCodigoTipoMaterial = datoBasicoByCodigoTipoMaterial;
 		this.almacen = almacen;
+		this.datoBasicoByCodigoUnidadMedida = datoBasicoByCodigoUnidadMedida;
 		this.descripcion = descripcion;
 		this.cantidadExistencia = cantidadExistencia;
 		this.cantidadDisponible = cantidadDisponible;
@@ -104,7 +105,6 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue
 	@Column(name = "codigo_material", unique = true, nullable = false)
 	public int getCodigoMaterial() {
 		return this.codigoMaterial;
@@ -126,7 +126,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_almacen")
+	@JoinColumn(name = "codigo_almacen", nullable = false)
 	public Almacen getAlmacen() {
 		return this.almacen;
 	}
@@ -136,7 +136,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_unidad_medida")
+	@JoinColumn(name = "codigo_unidad_medida", nullable = false)
 	public DatoBasico getDatoBasicoByCodigoUnidadMedida() {
 		return this.datoBasicoByCodigoUnidadMedida;
 	}
@@ -156,11 +156,11 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Column(name = "cantidad_existencia", nullable = false)
-	public Integer getCantidadExistencia() {
+	public int getCantidadExistencia() {
 		return this.cantidadExistencia;
 	}
 
-	public void setCantidadExistencia(Integer cantidadExistencia) {
+	public void setCantidadExistencia(int cantidadExistencia) {
 		this.cantidadExistencia = cantidadExistencia;
 	}
 
@@ -294,4 +294,5 @@ public class Material implements java.io.Serializable {
 			Set<CuentaPagarMaterial> cuentaPagarMaterials_1) {
 		this.cuentaPagarMaterials_1 = cuentaPagarMaterials_1;
 	}
+
 }

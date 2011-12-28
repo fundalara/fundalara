@@ -1,19 +1,18 @@
 package comun;
+
+
 /**
- * Enumerado para tipificar los estados de las competencias
+ * Clase estatica para manejar los estatus de las competencias
+ * 
  * @author Eduardo Ochoa
- * @version 1.0 
- * @email elos3000@gmail.com
+ * @version 1.0
  */
 
-public enum EstadoCompetencia {
-	REGISTRADA(6),
-	APERTURADA(7),
-	ELIMINADA(8),
-	CLAUSURADA(9);
-	int val;
+public class EstadoCompetencia {
 	
-	private EstadoCompetencia(int val) {
-		this.val = val;
-	}
+	public static int REGISTRADA = 6;
+	public static int APERTURADA = 7;
+	public static int ELIMINADA  = 8;
+	public static int CLAUSURADA = 9;
+
 }

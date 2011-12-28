@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,9 +24,8 @@ public class TipoCompetencia implements java.io.Serializable {
 	private int codigoTipoCompetencia;
 	private String nombre;
 	private String descripcion;
-	private int estatus;
+	private char estatus;
 	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
-	private Set<Competencia> competencias = new HashSet<Competencia>(0);
 	private Set<ModalidadCompetencia> modalidadCompetencias = new HashSet<ModalidadCompetencia>(
 			0);
 
@@ -34,7 +33,7 @@ public class TipoCompetencia implements java.io.Serializable {
 	}
 
 	public TipoCompetencia(int codigoTipoCompetencia, String nombre,
-			String descripcion, int estatus) {
+			String descripcion, char estatus) {
 		this.codigoTipoCompetencia = codigoTipoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -42,15 +41,13 @@ public class TipoCompetencia implements java.io.Serializable {
 	}
 
 	public TipoCompetencia(int codigoTipoCompetencia, String nombre,
-			String descripcion, int estatus, Set<DatoBasico> datoBasicos,
-			Set<Competencia> competencias,
+			String descripcion, char estatus, Set<DatoBasico> datoBasicos,
 			Set<ModalidadCompetencia> modalidadCompetencias) {
 		this.codigoTipoCompetencia = codigoTipoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.datoBasicos = datoBasicos;
-		this.competencias = competencias;
 		this.modalidadCompetencias = modalidadCompetencias;
 	}
 
@@ -82,12 +79,12 @@ public class TipoCompetencia implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "estatus", nullable = false)
-	public int getEstatus() {
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
 		return this.estatus;
 	}
 
-	public void setEstatus(int estatus) {
+	public void setEstatus(char estatus) {
 		this.estatus = estatus;
 	}
 
@@ -99,15 +96,6 @@ public class TipoCompetencia implements java.io.Serializable {
 
 	public void setDatoBasicos(Set<DatoBasico> datoBasicos) {
 		this.datoBasicos = datoBasicos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoCompetencia")
-	public Set<Competencia> getCompetencias() {
-		return this.competencias;
-	}
-
-	public void setCompetencias(Set<Competencia> competencias) {
-		this.competencias = competencias;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoCompetencia")

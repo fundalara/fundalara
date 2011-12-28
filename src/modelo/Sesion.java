@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,11 +27,7 @@ public class Sesion implements java.io.Serializable {
 	private char estatus;
 	private Set<ActividadPlanificada> actividadPlanificadas = new HashSet<ActividadPlanificada>(
 			0);
-	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
-			0);
 	private Set<PlanRotacion> planRotacions = new HashSet<PlanRotacion>(0);
-	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
-			0);
 
 	public Sesion() {
 	}
@@ -48,18 +44,14 @@ public class Sesion implements java.io.Serializable {
 	public Sesion(int codigoSesion, PlanEntrenamiento planEntrenamiento,
 			DatoBasico datoBasico, Equipo equipo, char estatus,
 			Set<ActividadPlanificada> actividadPlanificadas,
-			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
-			Set<PlanRotacion> planRotacions,
-			Set<ActividadCalendario> actividadCalendarios) {
+			Set<PlanRotacion> planRotacions) {
 		this.codigoSesion = codigoSesion;
 		this.planEntrenamiento = planEntrenamiento;
 		this.datoBasico = datoBasico;
 		this.equipo = equipo;
 		this.estatus = estatus;
 		this.actividadPlanificadas = actividadPlanificadas;
-		this.materialActividadPlanificadas = materialActividadPlanificadas;
 		this.planRotacions = planRotacions;
-		this.actividadCalendarios = actividadCalendarios;
 	}
 
 	@Id
@@ -122,32 +114,12 @@ public class Sesion implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")
-	public Set<MaterialActividadPlanificada> getMaterialActividadPlanificadas() {
-		return this.materialActividadPlanificadas;
-	}
-
-	public void setMaterialActividadPlanificadas(
-			Set<MaterialActividadPlanificada> materialActividadPlanificadas) {
-		this.materialActividadPlanificadas = materialActividadPlanificadas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")
 	public Set<PlanRotacion> getPlanRotacions() {
 		return this.planRotacions;
 	}
 
 	public void setPlanRotacions(Set<PlanRotacion> planRotacions) {
 		this.planRotacions = planRotacions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")
-	public Set<ActividadCalendario> getActividadCalendarios() {
-		return this.actividadCalendarios;
-	}
-
-	public void setActividadCalendarios(
-			Set<ActividadCalendario> actividadCalendarios) {
-		this.actividadCalendarios = actividadCalendarios;
 	}
 
 }

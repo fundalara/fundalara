@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,27 +22,27 @@ public class Liga implements java.io.Serializable {
 
 	private int codigoLiga;
 	private String nombre;
-	private String localidad;
 	private char estatus;
+	private String localidad;
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
 	private Set<Categoria> categorias = new HashSet<Categoria>(0);
 
 	public Liga() {
 	}
 
-	public Liga(int codigoLiga, String nombre, String localidad, char estatus) {
+	public Liga(int codigoLiga, String nombre, char estatus, String localidad) {
 		this.codigoLiga = codigoLiga;
 		this.nombre = nombre;
-		this.localidad = localidad;
 		this.estatus = estatus;
+		this.localidad = localidad;
 	}
 
-	public Liga(int codigoLiga, String nombre, String localidad, char estatus,
+	public Liga(int codigoLiga, String nombre, char estatus, String localidad,
 			Set<Competencia> competencias, Set<Categoria> categorias) {
 		this.codigoLiga = codigoLiga;
 		this.nombre = nombre;
-		this.localidad = localidad;
 		this.estatus = estatus;
+		this.localidad = localidad;
 		this.competencias = competencias;
 		this.categorias = categorias;
 	}
@@ -66,15 +66,6 @@ public class Liga implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "localidad", nullable = false)
-	public String getLocalidad() {
-		return this.localidad;
-	}
-
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
-
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -82,6 +73,15 @@ public class Liga implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "localidad", nullable = false)
+	public String getLocalidad() {
+		return this.localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)

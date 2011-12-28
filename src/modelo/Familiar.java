@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,47 +25,37 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "familiar", schema = "public")
 public class Familiar implements java.io.Serializable {
 
-	private String cedulaFamiliar;
-	private Persona persona;
+	private String cedulaRif;
 	private DatoBasico datoBasico;
+	private Persona persona;
 	private Set<FamiliarJugador> familiarJugadors = new HashSet<FamiliarJugador>(
 			0);
 
 	public Familiar() {
 	}
 
-	public Familiar(Persona persona, DatoBasico datoBasico) {
-		this.persona = persona;
+	public Familiar(DatoBasico datoBasico, Persona persona) {
 		this.datoBasico = datoBasico;
+		this.persona = persona;
 	}
 
-	public Familiar(Persona persona, DatoBasico datoBasico,
+	public Familiar(DatoBasico datoBasico, Persona persona,
 			Set<FamiliarJugador> familiarJugadors) {
-		this.persona = persona;
 		this.datoBasico = datoBasico;
+		this.persona = persona;
 		this.familiarJugadors = familiarJugadors;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "persona"))
 	@Id
 	@GeneratedValue(generator = "generator")
-	@Column(name = "cedula_familiar", unique = true, nullable = false)
-	public String getCedulaFamiliar() {
-		return this.cedulaFamiliar;
+	@Column(name = "cedula_rif", unique = true, nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setCedulaFamiliar(String cedulaFamiliar) {
-		this.cedulaFamiliar = cedulaFamiliar;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public Persona getPersona() {
-		return this.persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -78,7 +68,17 @@ public class Familiar implements java.io.Serializable {
 		this.datoBasico = datoBasico;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "familiar")
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	public Persona getPersona() {
+		return this.persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
 	public Set<FamiliarJugador> getFamiliarJugadors() {
 		return this.familiarJugadors;
 	}

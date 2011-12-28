@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,24 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PersonalJuegoId implements java.io.Serializable {
 
-	private int codigoJuego1;
+	private int codigoJuego;
 	private String cedulaRif;
 
 	public PersonalJuegoId() {
 	}
 
-	public PersonalJuegoId(int codigoJuego1, String cedulaRif) {
-		this.codigoJuego1 = codigoJuego1;
+	public PersonalJuegoId(int codigoJuego, String cedulaRif) {
+		this.codigoJuego = codigoJuego;
 		this.cedulaRif = cedulaRif;
 	}
 
-	@Column(name = "codigo_juego1", nullable = false)
-	public int getCodigoJuego1() {
-		return this.codigoJuego1;
+	@Column(name = "codigo_juego", nullable = false)
+	public int getCodigoJuego() {
+		return this.codigoJuego;
 	}
 
-	public void setCodigoJuego1(int codigoJuego1) {
-		this.codigoJuego1 = codigoJuego1;
+	public void setCodigoJuego(int codigoJuego) {
+		this.codigoJuego = codigoJuego;
 	}
 
 	@Column(name = "cedula_rif", nullable = false)
@@ -49,7 +49,7 @@ public class PersonalJuegoId implements java.io.Serializable {
 			return false;
 		PersonalJuegoId castOther = (PersonalJuegoId) other;
 
-		return (this.getCodigoJuego1() == castOther.getCodigoJuego1())
+		return (this.getCodigoJuego() == castOther.getCodigoJuego())
 				&& ((this.getCedulaRif() == castOther.getCedulaRif()) || (this
 						.getCedulaRif() != null
 						&& castOther.getCedulaRif() != null && this
@@ -59,7 +59,7 @@ public class PersonalJuegoId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoJuego1();
+		result = 37 * result + this.getCodigoJuego();
 		result = 37 * result
 				+ (getCedulaRif() == null ? 0 : this.getCedulaRif().hashCode());
 		return result;

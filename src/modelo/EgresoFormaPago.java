@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +33,11 @@ public class EgresoFormaPago implements java.io.Serializable {
 	public EgresoFormaPago() {
 	}
 
-	public EgresoFormaPago(Egreso egreso, double monto, char estatus) {
+	public EgresoFormaPago(Egreso egreso, DatoBasico datoBasicoByCodigoBanco,
+			DatoBasico datoBasicoByCodigoTarjeta, double monto, char estatus) {
 		this.egreso = egreso;
+		this.datoBasicoByCodigoBanco = datoBasicoByCodigoBanco;
+		this.datoBasicoByCodigoTarjeta = datoBasicoByCodigoTarjeta;
 		this.monto = monto;
 		this.estatus = estatus;
 	}
@@ -73,7 +76,7 @@ public class EgresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_banco")
+	@JoinColumn(name = "codigo_banco", nullable = false)
 	public DatoBasico getDatoBasicoByCodigoBanco() {
 		return this.datoBasicoByCodigoBanco;
 	}
@@ -83,7 +86,7 @@ public class EgresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tarjeta")
+	@JoinColumn(name = "codigo_tarjeta", nullable = false)
 	public DatoBasico getDatoBasicoByCodigoTarjeta() {
 		return this.datoBasicoByCodigoTarjeta;
 	}

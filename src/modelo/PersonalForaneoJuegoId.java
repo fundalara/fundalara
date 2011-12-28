@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
+// Generated 28/12/2011 03:24:38 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,24 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PersonalForaneoJuegoId implements java.io.Serializable {
 
-	private int codigoJuego1;
+	private int codigoJuego;
 	private int codigoPersonalForaneo;
 
 	public PersonalForaneoJuegoId() {
 	}
 
-	public PersonalForaneoJuegoId(int codigoJuego1, int codigoPersonalForaneo) {
-		this.codigoJuego1 = codigoJuego1;
+	public PersonalForaneoJuegoId(int codigoJuego, int codigoPersonalForaneo) {
+		this.codigoJuego = codigoJuego;
 		this.codigoPersonalForaneo = codigoPersonalForaneo;
 	}
 
-	@Column(name = "codigo_juego1", nullable = false)
-	public int getCodigoJuego1() {
-		return this.codigoJuego1;
+	@Column(name = "codigo_juego", nullable = false)
+	public int getCodigoJuego() {
+		return this.codigoJuego;
 	}
 
-	public void setCodigoJuego1(int codigoJuego1) {
-		this.codigoJuego1 = codigoJuego1;
+	public void setCodigoJuego(int codigoJuego) {
+		this.codigoJuego = codigoJuego;
 	}
 
 	@Column(name = "codigo_personal_foraneo", nullable = false)
@@ -49,7 +49,7 @@ public class PersonalForaneoJuegoId implements java.io.Serializable {
 			return false;
 		PersonalForaneoJuegoId castOther = (PersonalForaneoJuegoId) other;
 
-		return (this.getCodigoJuego1() == castOther.getCodigoJuego1())
+		return (this.getCodigoJuego() == castOther.getCodigoJuego())
 				&& (this.getCodigoPersonalForaneo() == castOther
 						.getCodigoPersonalForaneo());
 	}
@@ -57,7 +57,7 @@ public class PersonalForaneoJuegoId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoJuego1();
+		result = 37 * result + this.getCodigoJuego();
 		result = 37 * result + this.getCodigoPersonalForaneo();
 		return result;
 	}
