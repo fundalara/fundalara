@@ -104,6 +104,7 @@ public class Agenda extends GenericForwardComposer {
 	public void cambiarFormatoCalendario(String vista){
 		if (vista.compareTo("Semana") == 0) {
 			calendars.setMold("default");
+			calendars.setDays(7);
 		} else if (vista.compareTo("Dia") == 0){
 			calendars.setMold("default");
 			calendars.setDays(1);
