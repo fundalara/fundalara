@@ -1,5 +1,6 @@
 package dao.general;
 
+import modelo.ActividadEntrenamiento;
 import modelo.TipoDato;
 
 import org.hibernate.Criteria;
