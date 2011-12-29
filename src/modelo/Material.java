@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "material", schema = "public")
+@SequenceGenerator(name="material_seq", sequenceName="material_codigo_material_seq")
 public class Material implements java.io.Serializable {
 
 	private int codigoMaterial;
@@ -104,7 +106,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator="material_seq")
 	@Column(name = "codigo_material", unique = true, nullable = false)
 	public int getCodigoMaterial() {
 		return this.codigoMaterial;

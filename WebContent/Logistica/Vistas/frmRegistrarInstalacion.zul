@@ -36,7 +36,7 @@
 							<div>								
 								<label value="Tamaño en m²" />	
 								<space width="7%"/>									
-								<spinner id="spTamano" width="39%"
+								<doublebox id="dboxTamano" width="39%"
 									constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.tamano}" />
 								<label value="(*)" style="color:red" />
 							</div>							

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "instalacion", schema = "public")
+@SequenceGenerator(name="instalacion_seq", sequenceName="instalacion_codigo_instalacion_seq")
 public class Instalacion implements java.io.Serializable {
 
 	private int codigoInstalacion;
@@ -69,7 +71,7 @@ public class Instalacion implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator="instalacion_seq")
 	@Column(name = "codigo_instalacion", unique = true, nullable = false)
 	public int getCodigoInstalacion() {
 		return this.codigoInstalacion;

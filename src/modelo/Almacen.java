@@ -8,10 +8,12 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "almacen", schema = "public")
+@SequenceGenerator(name="almacen_seq", sequenceName="almacen_codigo_almacen_seq_1")
 public class Almacen implements java.io.Serializable {
 
 	private int codigoAlmacen;
@@ -55,6 +58,7 @@ public class Almacen implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(generator="almacen_seq")
 	@Column(name = "codigo_almacen", unique = true, nullable = false)
 	public int getCodigoAlmacen() {
 		return this.codigoAlmacen;

@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
@@ -38,7 +39,7 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 	private Textbox txtDescripcion;
 	private Combobox cmbTipoInstalacion;
 	private Spinner spCapacidad;
-	private Spinner spTamano;
+	private Doublebox dboxTamano;
 	
 	private AnnotateDataBinder binder;
 	
@@ -121,7 +122,7 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 		txtDescripcion.getValue();
 		cmbTipoInstalacion.getValue();
 		spCapacidad.getValue();
-		spTamano.getValue();
+		dboxTamano.getValue();
 	}
 
 }
