@@ -25,7 +25,6 @@ public class PersonaJuridica implements java.io.Serializable {
 
 	private String cedulaRif;
 	private Persona persona;
-	private String nit;
 	private String fax;
 	private String razonSocial;
 	private char estatus;
@@ -37,7 +36,6 @@ public class PersonaJuridica implements java.io.Serializable {
 	public PersonaJuridica(Persona persona, String nit, String fax,
 			String razonSocial, char estatus) {
 		this.persona = persona;
-		this.nit = nit;
 		this.fax = fax;
 		this.razonSocial = razonSocial;
 		this.estatus = estatus;
@@ -47,7 +45,6 @@ public class PersonaJuridica implements java.io.Serializable {
 			String razonSocial, char estatus,
 			Set<ProveedorBanco> proveedorBancos) {
 		this.persona = persona;
-		this.nit = nit;
 		this.fax = fax;
 		this.razonSocial = razonSocial;
 		this.estatus = estatus;
@@ -76,14 +73,7 @@ public class PersonaJuridica implements java.io.Serializable {
 		this.persona = persona;
 	}
 
-	@Column(name = "nit", nullable = false)
-	public String getNit() {
-		return this.nit;
-	}
-
-	public void setNit(String nit) {
-		this.nit = nit;
-	}
+	
 
 	@Column(name = "fax", nullable = false)
 	public String getFax() {

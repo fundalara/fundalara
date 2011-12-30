@@ -53,7 +53,11 @@ public class ServicioPersona implements IServicioPersona {
 	}
 	
 	public Persona buscarPorCedulaRif(String s) {
-		return daoPersona.buscarByCedulaRif(s);
+		return daoPersona.buscarPorCedulaRif(s);
+	}
+	
+	public Persona buscarPorTipoPersona(String s, Integer i) {
+		return daoPersona.buscarPorTipoPersona(s, i);
 	}
 
 }

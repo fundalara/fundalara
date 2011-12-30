@@ -27,7 +27,7 @@ public class ServicioInstalacion implements IServicioInstalacion {
 	}
 
 	@Override
-	public void guardar(Instalacion instalacion) {
+	public void agregar(Instalacion instalacion) {
 		daoInstalacion.guardar(instalacion);
 
 	}
@@ -56,9 +56,10 @@ public class ServicioInstalacion implements IServicioInstalacion {
 		return b;
 	}
 
-	public String generarCodigo() {
-		Integer nuevoCodigo = daoInstalacion.contarCodigos("Instalacion") + 1;
-		return nuevoCodigo.toString();
+
+	@Override
+	public List<Instalacion> listarActivos() {
+		return daoInstalacion.listarActivos(Instalacion.class);
 	}
 
 }

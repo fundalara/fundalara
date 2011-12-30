@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winRegistrarMaterial"?>
+<?page title="Registro Material" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winRegistrarMaterial" title="Registro de Material" border="normal"
+		width="690px" maximizable="false" minimizable="false"
+		apply="controlador.logistica.CntrlRegistrarMaterial">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid height="100%" width="100%">
+					<rows>
+						<row>
+							<div>
+								<label value="Tipo de Material " />
+								<combobox id="cmbTipos" width="15%" constraint="no empty"
+									selectedItem="@{cntrl.tipoMaterial}"
+									model="@{cntrl.tiposMateriales, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}">
+									<comboitem id="cmbTipo" self="@{each=tm}" label="@{tm.nombre }" />
+								</combobox>
+								<label value="(*)" style="color:red" />
+								<space width="3%" />
+								<label value="Clasificación: " />
+								<combobox id="cmbClasificaciones" width="15%" constraint="no empty" 
+									selectedItem="@{cntrl.material.datoBasicoByCodigoTipoMaterial}"
+									model="@{cntrl.clasificacionesMateriales, load-after='cmbTipos.onSelect, btnRegistrar.onClick, btnCancelar.onClick' }">
+									<comboitem id="cmbClasificacion" self="@{each=cm }" label="@{cm.nombre }" />
+								</combobox>																
+								<label value="(*)" style="color:red" />
+							</div>
+						</row>
+						<row height="100px">
+							<div>
+								<label value="Descripción: " />
+								<label value="(*)" style="color:red" />
+								<textbox id="txtDescripcion" multiline="true" height="120px"
+									width="100%" constraint="no empty"
+									value="@{cntrl.material.descripcion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Cantidad en Existencia: " width="10%" />
+								<spinner id="spExistencia"
+									value="@{cntrl.material.cantidadExistencia, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no empty, no negative" />																
+								<label value="(*)" style="color:red" />								
+								<space width="2%" />
+								<label value="Presentación: " width="15%" />
+								<spinner id="spPresentacion"
+									value="@{cntrl.material.cantidadPresentacion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
+								<combobox id="cmbUnidades" width="15%"
+									selectedItem="@{cntrl.material.datoBasicoByCodigoUnidadMedida}"
+									model="@{cntrl.unidadesMedida, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}">
+									<comboitem id="cmbUnidad" self="@{each=um}" label="@{um.nombre }" />
+								</combobox>
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Stock Mínimo:" />
+								<spinner id="spStockMinimo"
+									value="@{cntrl.material.stockMinimo, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no negative" />
+								<space width="1%" />
+								<label value="Stock Máximo:" />
+								<spinner id="spStockMaximo"
+									value="@{cntrl.material.stockMaximo, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
+									constraint="no negative" />
+								<space width="2%" />
+								<label value="Reutilizable" />
+								<checkbox id="chboxReutilizable"
+									checked="@{cntrl.material.reutilizable, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
+								<separator height="10px" />
+							</div>
+						</row>
+						<row>
+							<panel title="Materiales Registrados" collapsible="true">
+								<panelchildren>
+									<listbox id="lboxMateriales" mold="paging" pageSize="5" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
+										model="@{cntrl.materiales, load-after='btnRegistrar.onClick, btnModificar.onClick, btnEliminar.onClick, btnCancelar.onClick'}"
+										selectedItem="@{cntrl.material}">
+										<listhead>
+											<listheader> Nombre</listheader>
+											<listheader width="20%"> Existencia</listheader>
+											<listheader width="20%"> Disponibilidad</listheader>
+										</listhead>
+										<listitem self="@{each='m'}" value="@{m}">
+											<listcell label="@{m.descripcion}" />
+											<listcell label="@{m.cantidadExistencia}" />
+											<listcell label="@{m.cantidadDisponible}" />
+										</listitem>
+									</listbox>
+								</panelchildren>
+							</panel>
+						</row>
+						<row>
+							<div align="right" width="100%">
+								<button id="btnRegistrar" label="Registrar" width="100px" onClick="btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/guardar.ico">
+								</button>
+								<button id="btnModificar" label="Modificar" width="100px" disabled="true" onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/editar.ico" />
+								<button id="btnCancelar" label="Cancelar" width="100px" onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/cancelar.ico" />
+								<button id="btnEliminar" label="Eliminar" width="100px" disabled="true" onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
+								<button id="btnSalir" label="Salir" width="100px" height="30px"
+									image="../../Recursos/Imagenes/salir.png" onClick="winRegistrarMaterial.detach()" />
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

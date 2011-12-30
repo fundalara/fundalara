@@ -1,0 +1,132 @@
+<?page title="Actualizar Almacén" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Actualizar Almacén" border="normal" width="60%">
+		<zscript><![CDATA[
+	public void enlace(String cad) {
+		cuerpo.setSrc(cad);
+	}
+	public void mostrarPanelObservacion() {
+		if (check.isChecked() == true)
+			panelobservacion.setVisible(true);
+		else
+			panelobservacion.setVisible(false);
+
+	}
+]]></zscript>
+
+
+		<menubar>
+			<menuitem label="Filtrar Por:" style="font-weight:bold"
+				disabled="true" />
+			<menuitem label="Todas" style="font-weight:bold" />
+			<menuitem label="Compras" style="font-weight:bold" />
+			<menuitem label="Donaciones" style="font-weight:bold" />
+		</menubar>
+		<panel title="Compras y Donaciones Procesadas">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="código"></column>
+						<column label="Nombre"></column>
+						<column label="Concepto"></column>
+						<column label="Fecha de Fact/Donación"></column>
+					</columns>
+					<rows>
+						<row>
+							<label>002</label>
+							<label>Isabel Rojas</label>
+							<label>compra</label>
+							<label>14/12/11</label>
+						</row>
+						<row>
+							<label>003</label>
+							<label>Manuel Torres</label>
+							<label>donacion</label>
+							<label>15/12/12</label>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+		<separator></separator>
+		
+		<panel title="Actualizar Almacén">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="Item" width="1%"></column>
+						<column label="Código fact/Donac" width="18%">
+						</column>
+						<column label="Descripción" width="18%">
+						</column>
+						<column label="Cant.Fact/Donac" width="18%">
+						</column>
+						<column label="Cant recibida" width="14%">
+						</column>
+						<column label="Fecha Ingreso almacen"
+							width="20%">
+						</column>
+					</columns>
+					<rows>
+						<row>
+							<checkbox
+								onCheck="mostrarPanelObservacion()" id="check">
+							</checkbox>
+
+							<label>003</label>
+							<label>bates</label>
+							<label>24</label>
+							<label>23"</label>
+							<label>14/12/11</label>
+						</row>
+						<row>
+							<checkbox></checkbox>
+							<label>003</label>
+							<label>careta</label>
+							<label>20</label>
+							<label>20"</label>
+							<label>14/12/11</label>
+
+						</row>
+					</rows>
+
+				</grid>
+			</panelchildren>
+		</panel>
+
+		<panel visible="false" id="panelobservacion" height="100%">
+			<panelchildren>
+				<grid>
+					<rows>
+						<row>
+							<label value="Observación" />
+							<textbox multiline="true" width="50%"
+								height="100%" />
+
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<separator></separator>
+
+		<div align="right" width="100%" height="100%">
+			<button label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico">
+			</button>
+			<space width="1%"></space>
+			<button label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico">
+			</button>
+			<space width="1%"></space>
+			<button label="Salir"
+				image="/Recursos/Imagenes/atras.ico">
+			</button>
+		</div>
+
+
+
+
+	</window>
+</zk>

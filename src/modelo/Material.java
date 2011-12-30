@@ -7,10 +7,12 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "material", schema = "public")
+@SequenceGenerator(name="material_seq", sequenceName="material_codigo_material_seq")
 public class Material implements java.io.Serializable {
 
 	private int codigoMaterial;
@@ -25,7 +28,7 @@ public class Material implements java.io.Serializable {
 	private Almacen almacen;
 	private DatoBasico datoBasicoByCodigoUnidadMedida;
 	private String descripcion;
-	private int cantidadExistencia;
+	private Integer cantidadExistencia;
 	private Integer cantidadPresentacion;
 	private int cantidadDisponible;
 	private boolean reutilizable;
@@ -99,6 +102,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(generator="material_seq")
 	@Column(name = "codigo_material", unique = true, nullable = false)
 	public int getCodigoMaterial() {
 		return this.codigoMaterial;
@@ -120,7 +124,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_almacen", nullable = false)
+	@JoinColumn(name = "codigo_almacen")
 	public Almacen getAlmacen() {
 		return this.almacen;
 	}
@@ -150,11 +154,11 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Column(name = "cantidad_existencia", nullable = false)
-	public int getCantidadExistencia() {
+	public Integer getCantidadExistencia() {
 		return this.cantidadExistencia;
 	}
 
-	public void setCantidadExistencia(int cantidadExistencia) {
+	public void setCantidadExistencia(Integer cantidadExistencia) {
 		this.cantidadExistencia = cantidadExistencia;
 	}
 
@@ -279,5 +283,4 @@ public class Material implements java.io.Serializable {
 			Set<CuentaPagarMaterial> cuentaPagarMaterials_1) {
 		this.cuentaPagarMaterials_1 = cuentaPagarMaterials_1;
 	}
-
 }

@@ -17,7 +17,6 @@ import servicio.implementacion.ServicioPersona;
 import servicio.implementacion.ServicioPersonaJuridica;
 import servicio.implementacion.ServicioProveedorBanco;
 import servicio.implementacion.ServicioTipoDato;
-
 public class CntrlProveedores extends GenericForwardComposer {
 
 	Persona persona;
@@ -33,7 +32,7 @@ public class CntrlProveedores extends GenericForwardComposer {
 			codigosDeArea = new ArrayList<DatoBasico>();
 	DatoBasico estado, municipio, parroquia, codigoDeArea, banco, tipoDeCuenta;
 	AnnotateDataBinder binder;
-
+	
 	Textbox txtTelefono, txtFax, txtTitularCuenta, txtCuenta, txtDireccion,
 			txtRazonSocial, txtCorreoElectronico, txtTwitter, txtRif;
 	Combobox cmbEstado, cmbParroquia, cmbMunicipio, cmbFax, cmbTelefono,
@@ -45,12 +44,16 @@ public class CntrlProveedores extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
+		
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
+	
 		bancos = servicioDatoBasico.listarPorTipoDato("ENTIDAD BANCARIA");
 		estados = servicioDatoBasico.listarPorTipoDato("ESTADO_VENEZUELA");
 		tiposDeCuentas = servicioDatoBasico
 				.listarPorTipoDato("CUENTA BANCARIA");
+		codigosDeArea = servicioDatoBasico.listarPorTipoDato("CODIGO_AREA");
+		
 	}
 
 	public void onSelect$cmbEstado() {
@@ -65,6 +68,7 @@ public class CntrlProveedores extends GenericForwardComposer {
 	}
 
 	public void onSelect$cmbMunicipio() {
+		
 		cmbParroquia.setDisabled(false);
 		cmbParroquia.setValue("-Seleccione-");
 		parroquias = new ArrayList<DatoBasico>();
@@ -76,12 +80,38 @@ public class CntrlProveedores extends GenericForwardComposer {
 	public void onSelect$cmbParroquia() {
 		cmbParroquia.setContext(cmbParroquia.getSelectedItem().getContext());
 	}
+	
+	public void actualizarPersona(){
+		String telefono = cmbTelefono.getValue().toString()
+				+ txtTelefono.getValue().toString();
+		String fax = cmbFax.getValue().toString()
+				+ txtFax.getValue().toString();
+		String rif = "J-"+txtRif.getValue();
+		persona.setCedulaRif(rif);
+		persona.setDatoBasicoByCodigoTipoPersona(servicioDatoBasico
+				.buscarPorCodigo(175));
+		persona.setTelefonoHabitacion(telefono);
+		persona.setDatoBasicoByCodigoParroquia(servicioDatoBasico
+				.buscarPorCodigo(Integer.parseInt(cmbParroquia.getContext())));
+		persona.setFechaIngreso(new Date());
+		persona.setEstatus('A');
+		personaJuridica.setFax(fax);
+		persona.setPersonaJuridica(personaJuridica);
+		personaJuridica.setEstatus('A');
+		personaJuridica.setPersona(persona);
+		servicioPersona.agregar(persona);
+		servicioPersonaJuridica.agregar(personaJuridica);
+	}
 
 	public void onClick$btnBuscar() {
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
-		persona = servicioPersona.buscarPorCedulaRif(txtRif.getValue());
-		personaJuridica = servicioPersonaJuridica.buscarPorCedulaRif(txtRif
+		persona = servicioPersona.buscarPorTipoPersona("J-"+txtRif.getValue(),175);
+		if (persona==null){
+			alert("Registro no encontrado");
+			return;
+		}
+		personaJuridica = servicioPersonaJuridica.buscarPorCedulaRif("J-"+txtRif
 				.getValue());
 		parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
 				.getDatoBasicoByCodigoParroquia().getDatoBasico()
@@ -103,50 +133,48 @@ public class CntrlProveedores extends GenericForwardComposer {
 		cmbTelefono.setValue(persona.getTelefonoHabitacion().substring(0, 4));
 		txtFax.setValue(personaJuridica.getFax().substring(4));
 		txtTelefono.setValue(persona.getTelefonoHabitacion().substring(4));
-		cuentasBancarias = servicioProveedorBanco.listarPorProveedor(txtRif
+		cuentasBancarias = servicioProveedorBanco.listarPorProveedor("J-"+txtRif
 				.getValue());
+		btnRegistrar.setDisabled(true);
 		btnEliminar.setDisabled(false);
 		btnModificar.setDisabled(false);
 		binder.loadAll();
 	}
 
 	public void onClick$btnRegistrar() {
-		String telefono = cmbTelefono.getValue().toString()
-				+ txtTelefono.getValue().toString();
-		String fax = cmbFax.getValue().toString()
-				+ txtFax.getValue().toString();
-		persona.setCedulaRif(txtRif.getValue());
-		persona.setDatoBasicoByCodigoTipoPersona(servicioDatoBasico
-				.buscarPorCodigo(175));
-		persona.setTelefonoHabitacion(telefono);
-		persona.setDatoBasicoByCodigoParroquia(servicioDatoBasico
-				.buscarPorCodigo(Integer.parseInt(cmbParroquia.getContext())));
-		persona.setFechaIngreso(new Date());
-		persona.setEstatus('A');
-		personaJuridica.setFax(fax);
-		personaJuridica.setNit("dasd");
-
-		persona.setPersonaJuridica(personaJuridica);
-		personaJuridica.setEstatus('A');
-		personaJuridica.setPersona(persona);
-		servicioPersona.agregar(persona);
-		servicioPersonaJuridica.agregar(personaJuridica);
-
-		List<ProveedorBanco> auxCuentasBancarias = servicioProveedorBanco.listarPorProveedor(txtRif.getValue());
-		for (int i = 0; i < auxCuentasBancarias.size(); i++) {
-		    cuentasBancarias.get(i).setEstatus('A');
-			servicioProveedorBanco.agregar(auxCuentasBancarias.get(i));
+		Persona auxPersona = servicioPersona.buscarPorCedulaRif("J-"+txtRif.getValue());
+		if (auxPersona!=null){
+		alert("Registro ya existente");
+			return;
 		}
-
+		
+		actualizarPersona();
 		for (int i = 0; i < cuentasBancarias.size(); i++) {
+			cuentasBancarias.get(i).setEstatus('A');
 			cuentasBancarias.get(i).setPersonaJuridica(personaJuridica);
 			servicioProveedorBanco.agregar(cuentasBancarias.get(i));
 		}
 		clear();
 		alert("Guardado");
-
 	}
 
+	public void onClick$btnModificar(){
+		actualizarPersona();
+		List<ProveedorBanco> auxCuentasBancarias = servicioProveedorBanco.listarPorProveedor("J-"+txtRif.getValue());
+		for (int i = 0; i < auxCuentasBancarias.size(); i++) {
+		    auxCuentasBancarias.get(i).setEstatus('E');
+			servicioProveedorBanco.actualizar(auxCuentasBancarias.get(i));
+		}
+
+		for (int i = 0; i < cuentasBancarias.size(); i++) {
+			cuentasBancarias.get(i).setEstatus('A');
+			cuentasBancarias.get(i).setPersonaJuridica(personaJuridica);
+			servicioProveedorBanco.actualizar(cuentasBancarias.get(i));
+		}
+		clear();
+		alert("Modificado");
+	}
+	
 	public void clear() {
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
@@ -170,6 +198,25 @@ public class CntrlProveedores extends GenericForwardComposer {
 		btnRegistrar.setDisabled(false);
 		binder.loadAll();
 	}
+	
+	public void onSelect$lbxCuentas(){
+		ProveedorBanco auxCuentaBancaria = (ProveedorBanco) lbxCuentas.getSelectedItem().getValue();
+		txtTitularCuenta.setValue(auxCuentaBancaria.getTitular());
+		txtCuenta.setValue(auxCuentaBancaria.getCodigoCuentaBanco());
+		for (int i = 0; i < bancos.size(); i++) {
+			if (bancos.get(i).getCodigoDatoBasico()==auxCuentaBancaria.getDatoBasicoByCodigoBanco().getCodigoDatoBasico()){
+				cmbBanco.setSelectedIndex(i);
+			}
+		}
+		for (int i = 0; i < tiposDeCuentas.size(); i++) {
+			if (tiposDeCuentas.get(i).getCodigoDatoBasico()==auxCuentaBancaria.getDatoBasicoByCodigoTipoCuenta().getCodigoDatoBasico()){
+				cmbTipoCuenta.setSelectedIndex(i);
+			}
+		}
+		btnEditar.setDisabled(false);
+		btnQuitar.setDisabled(false);
+		btnAgregar.setDisabled(true);
+	}
 
 	public void onClick$btnEliminar() {
 		persona.setEstatus('E');
@@ -180,21 +227,42 @@ public class CntrlProveedores extends GenericForwardComposer {
 				.getCedulaRif());
 		for (int i = 0; i < cuentasBancarias.size(); i++) {
 			cuentasBancarias.get(i).setEstatus('E');
-			servicioProveedorBanco.agregar(cuentasBancarias.get(i));
+			servicioProveedorBanco.actualizar(cuentasBancarias.get(i));
 		}
-		alert("Registro Eliminado");
+		alert("Eliminado");
 		clear();
 	}
 
 	public void onClick$btnCancelar() {
 		clear();
 	}
+	
+	public void onClick$btnEditar(){
+		ProveedorBanco auxCuentaBancaria =cuentasBancarias.get(lbxCuentas.getSelectedIndex());
+		auxCuentaBancaria.setTitular(txtTitularCuenta.getValue());
+		auxCuentaBancaria.setDatoBasicoByCodigoBanco((DatoBasico) cmbBanco.getSelectedItem().getValue());
+		auxCuentaBancaria.setDatoBasicoByCodigoTipoCuenta((DatoBasico) cmbTipoCuenta.getSelectedItem().getValue());
+		cuentasBancarias.set(lbxCuentas.getSelectedIndex(), auxCuentaBancaria);
+		btnAgregar.setDisabled(false);
+		btnEditar.setDisabled(true);
+		btnQuitar.setDisabled(true);
+		cmbBanco.setValue("-Seleccione-");
+		cmbTipoCuenta.setValue("-Seleccione-");
+		txtTitularCuenta.setValue(null);
+		txtCuenta.setValue(null);
+		binder.loadComponent(lbxCuentas);
+	}
 
 	public void onClick$btnAgregar() {
+		for (int i = 0; i < cuentasBancarias.size(); i++) {
+			if(cuentasBancarias.get(i).getCodigoCuentaBanco().equals(txtCuenta.getValue())){
+				alert("Numero de cuenta ya existente");
+				return;
+			}			
+		}
 		ProveedorBanco cuentaBancaria = new ProveedorBanco();
 		cuentaBancaria.setDatoBasicoByCodigoBanco((DatoBasico) cmbBanco
 				.getSelectedItem().getValue());
-		// cuentaBancaria.setEstatus('A');
 		cuentaBancaria.setCodigoCuentaBanco(txtCuenta.getValue().toString());
 		cuentaBancaria.setTitular(txtTitularCuenta.getValue());
 		cuentaBancaria
@@ -210,6 +278,13 @@ public class CntrlProveedores extends GenericForwardComposer {
 
 	public void onClick$btnQuitar() {
 		cuentasBancarias.remove(lbxCuentas.getSelectedIndex());
+		btnAgregar.setDisabled(false);
+		btnEditar.setDisabled(true);
+		btnQuitar.setDisabled(true);
+		cmbBanco.setValue("-Seleccione-");
+		cmbTipoCuenta.setValue("-Seleccione-");
+		txtTitularCuenta.setValue(null);
+		txtCuenta.setValue(null);
 		binder.loadComponent(lbxCuentas);
 	}
 
@@ -354,5 +429,7 @@ public class CntrlProveedores extends GenericForwardComposer {
 	public void setTipoDeCuenta(DatoBasico tipoDeCuenta) {
 		this.tipoDeCuenta = tipoDeCuenta;
 	}
+
+	
 
 }

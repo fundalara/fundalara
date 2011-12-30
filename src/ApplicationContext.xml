@@ -573,10 +573,10 @@
 		<property name="daoTallaPorJugador" ref="daoTallaPorJugador"></property>
 	</bean>
 	
-	<bean id="daoActividadEntrenamiento" class="dao.general.DaoActividadEntrenamiento"></bean>
-	<bean id="servicioActividadEntrenamiento" class="servicio.implementacion.ServicioActividadEntrenamiento">
-		<property name="daoActividadEntrenamiento" ref="daoActividadEntrenamiento"></property>
-	</bean>
+<!-- 	<bean id="daoActividadEntrenamiento" class="dao.general.DaoActividadEntrenamiento"></bean> -->
+<!-- 	<bean id="servicioActividadEntrenamiento" class="servicio.implementacion.ServicioActividadEntrenamiento"> -->
+<!-- 		<property name="daoActividadEntrenamiento" ref="daoActividadEntrenamiento"></property> -->
+<!-- 	</bean> -->
 
 	<bean id="daoActividadesEjecutadas" class="dao.general.DaoActividadesEjecutadas"></bean>
 	<bean id="servicioActividadesEjecutadas" class="servicio.implementacion.ServicioActividadesEjecutadas">

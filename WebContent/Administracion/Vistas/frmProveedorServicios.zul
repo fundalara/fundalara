@@ -1,9 +1,9 @@
-<?page title="Clientes" contentType="text/html;charset=UTF-8"?>
+<?page title="Proveedor de Servicios" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
 	<window apply="controlador.administracion.CntrlPersonaJuridica"
-		id="frmClientes" title="Clientes" border="normal"
+		id="frmProveedorServicios" title="Proveedores de Servicios" border="normal"
 		width="690px">
 		<zscript>
 		<![CDATA[
@@ -13,7 +13,7 @@
 	}
 ]]>
 	</zscript>
-		<panel title="Datos del Cliente" collapsible="true"
+		<panel title="Datos del Proveedor de Servicios" collapsible="true"
 			open="true">
 			<panelchildren>
 				<groupbox style="border:none;">
@@ -36,7 +36,7 @@
 										style="color:red" />
 									<button id="btnBuscar"
 										image="/Recursos/Imagenes/consultar.ico"
-										tooltiptext="Listado de Clientes" />
+										tooltiptext="Listado de Proveedores de Servicios" />
 								</hbox>
 							</row>
 
@@ -199,7 +199,7 @@
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
 				tooltiptext="Salir" label="Salir" width="100px">
 				<attribute name="onClick">
-	frmClientes .onClose();
+	frmProveedorServicios .onClose();
 </attribute>
 			</button>
 		</div>
