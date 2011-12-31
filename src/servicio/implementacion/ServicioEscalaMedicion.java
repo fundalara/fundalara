@@ -45,7 +45,7 @@ public class ServicioEscalaMedicion implements IServicioEscalaMedicion {
 	}
 
 	@Override
-	public EscalaMedicion buscar(String codigo) {
+	public EscalaMedicion buscar(Integer codigo) {
 		return daoEscalaMedicion.buscarCodigo(codigo);
 		
 	}

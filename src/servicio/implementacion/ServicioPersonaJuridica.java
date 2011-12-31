@@ -52,4 +52,7 @@ public class ServicioPersonaJuridica implements IServicioPersonaJuridica {
 		return null;
 	}
 
+	public PersonaJuridica buscarPorCedulaRif(String s){
+		return (PersonaJuridica) daoPersonaJuridica.buscarPorCedulaRif(s);
+	}
 }

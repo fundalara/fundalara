@@ -71,5 +71,11 @@ public class GenericDao {
 		List lista = c.add(Restrictions.eq("estatus",'A')).list();
 		return lista;
 	}
+	
+	public int generarCodigo(Class o) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		return session.createCriteria(o).list().size()+1;
+	}
 }
 

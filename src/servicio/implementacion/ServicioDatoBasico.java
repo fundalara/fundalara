@@ -2,6 +2,8 @@ package servicio.implementacion;
 
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+
 import servicio.interfaz.IServicioDatoBasico;
 
 import dao.general.DaoDatoBasico;
@@ -50,14 +52,30 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	}
 
 	@Override
+	public DatoBasico buscarPorCodigo(Integer i) {
+		// TODO Auto-generated method stub
+		return daoDatoBasico.buscarPorCodigo(i);
+	}	
+
+
+	public List<DatoBasico> listarPorTipoDato(String s){
+		return daoDatoBasico.listarPorTipoDeDato(s);	
+	}
+	
+	public List<DatoBasico> listarPorPadre(String s,Integer i){
+		return daoDatoBasico.listarPorPadre(s,i);
+		}
+
+	@Override
 	public DatoBasico buscarPorCodigo(String td) {
 		// TODO Auto-generated method stub
-		return daoDatoBasico.buscarPorCodigo(td);
-	}	
-	
+		return null;
+	}
+
 	@Override
 	public List<DatoBasico> listarParroquias() {
-		return daoDatoBasico.listarParroquias();		
+		return daoDatoBasico.listarParroquias();
 	}
+
 
 }

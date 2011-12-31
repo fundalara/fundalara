@@ -8,41 +8,40 @@
 		<panel height="100%" width="100%">
 			<panelchildren>
 				<grid width="100%">
-					<columns>
-						<column width="15%" />
-						<column width="35%" />
-						<column width="15%" />
-						<column width="35%" />
-					</columns>
 					<rows>
-						<row>
+						<row style="border:none">
 							<label value="Descripción" />
-							<textbox id="txtDescripcion" width="90%"
+							<textbox id="txtDescripcion" width="95%"
 								multiline="true" height="50px" constraint="no empty"
 								value="@{cntrl.instalacion.descripcion}" />
-<!-- 							<label value="(*)" style="color:red" /> -->
-							<label value="Tipo de instalación" />
-							<combobox id="cmbTipoInstalacion" constraint="no empty"
-								selectedItem="@{cntrl.instalacion.datoBasico}"
-								model="@{cntrl.tiposInstalaciones}" width="90%">
-								<comboitem self="@{each=Instalacion}"
-									label="@{Instalacion.descripcion}" />
-							</combobox>
-<!-- 							<label value="(*)" style="color:red" /> -->
+							<label value="(*)" style="color:red" />
+							<space width="15%"/>			
+							<div>
+								<label value="Tipo de instalación"/>
+								<combobox id="cmbTipoInstalacion" constraint="no empty"
+									selectedItem="@{cntrl.instalacion.datoBasico}"
+									model="@{cntrl.tiposInstalaciones}" >
+									<comboitem self="@{each=Instalacion}"
+										label="@{Instalacion.descripcion}" />
+								</combobox>							
+								<label value="(*)" style="color:red" />
+							</div>
 						</row>
-						<row>
+						<row style="border:none">
 							<label value="Capacidad" />
 							<spinner id="spCapacidad" width="90%"
 								constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.capacidad}" />
-<!-- 							<label value="(*)" style="color:red" /> -->
-							<label value="Tamaño" />
-							<div>
-								<doublebox id="dboxTamano" width="90%"
+							<label value="(*)" style="color:red" />
+							<space width="15%"/>
+							<div>								
+								<label value="Tamaño en m²" />	
+								<space width="7%"/>									
+								<doublebox id="dboxTamano" width="39%"
 									constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.tamano}" />
-								<label value="m²" />
-							</div>
+								<label value="(*)" style="color:red" />
+							</div>							
 						</row>
-						<row>
+						<row style="border:none">
 							<label value="Ubicada en: " />
 							<combobox id="cmbUbicacion" width="90%" 
 								selectedItem="@{cntrl.instalacion.ubicacion }"

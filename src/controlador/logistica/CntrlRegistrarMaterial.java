@@ -45,7 +45,7 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 	private Textbox txtDescripcion;
 	private Spinner spExistencia;
 	
-	AnnotateDataBinder binder;
+	private AnnotateDataBinder binder;
 	
 	public void doAfterCompose(Component comp)throws Exception{
 		super.doAfterCompose(comp);		

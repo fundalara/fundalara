@@ -2,10 +2,11 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmCalendario" ?>
 <zk>
-
+                                                                                                          
 	<div align="center">
-		<window title="CALENDARIO" id="FrmCalendario" border="normal" width="690px"
-			height="70%" closable="true" apply="controlador.competencia.CntrlFrmCalendario">
+		<window title="CALENDARIO" id="FrmCalendario" border="normal"
+			width="690px" height="70%" closable="true    "
+			apply="controlador.competencia.CntrlFrmCalendario">
 
 			<!-- DATOS COMPETENCIA -->
 			<panel border="normal">
@@ -13,34 +14,42 @@
 				<panelchildren>
 					<grid>
 						<columns>
-							<column width="20%" align="left"></column>
-							<column width="35%" align="left"></column>
-							<column width="5%"></column>
-							<column width="15%"></column>
-							<column width="10%"></column>
-							<column width="15%"></column>
+							<column width="10px" align="left"></column>
+							<column width="140px" align="left"></column>
+							<column width="10px"></column>
+							<column width=""></column>
+							<column width="20px" align="center"></column>
+							<column width="80px"></column>
 						</columns>
 						<rows>
 							<row style="border-style:none">
 
-								<label value="Nombre Competencia">
-								</label>
+								<label  value="Nombre"></label>
 
-								<textbox cols="15" width="95%"></textbox>
+								<textbox style="margin-left:5px" cols="18"></textbox>
 								<button id="btnBuscarCompetencia"
 									image="../../Recursos/Imagenes/consultar.ico" width="100%">
 								</button>
+                                  
+										
+								<label value="Tipo"></label>
+								<textbox cols="13" ></textbox>
+								
+
+								<label value="Modalidad"></label>
+
+								<textbox cols="11" ></textbox>
 
 
-								<label value="Fecha Inicio "></label>
-								<datebox />
-
-								<label value="Fecha Fin"></label>
-								<datebox />
 							</row>
 							<row style="border-style:none">
+								<label value="Fecha Inicio "></label>
+								<datebox />
+                               <label></label>
+								<label value="Fecha Fin"></label>
+								<datebox />
 								<label value="Categoría"></label>
-								<combobox value="--Seleccione--">
+								<combobox cols="10" value="--Seleccione--">
 									<comboitem label="Infantil" />
 									<comboitem label="Pre-Junior" />
 									<comboitem label="Juvenil" />
