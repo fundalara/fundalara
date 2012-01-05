@@ -3,6 +3,7 @@ package servicio.interfaz;
 import java.util.List;
 
 import modelo.Almacen;
+import modelo.Instalacion;
 
 
 
@@ -14,7 +15,11 @@ public interface IServicioAlmacen {
 		
 	public abstract void actualizar(Almacen a);
 	
-	public List<Almacen> listarAlmacen();
+//	public List<Almacen> listarAlmacen();
+//	
+//	public String generarCodigo();
 	
-	public String generarCodigo();
+	public Instalacion buscarInstalacion(Almacen a);
+	
+	public List<Almacen> listarActivos();
 }

@@ -1,63 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?><?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 <?page title="Registro Almacen" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Registrar Nuevo Almacén" border="normal"
-		width="690px" maximizable="true" minimizable="true" id="NuevoAlmacen"
-		apply="controlador.logistica.NuevoAlmacenControlador">
+		width="690px" maximizable="true" minimizable="true"
+		id="winRegistrarAlmacen"
+		apply="controlador.logistica.CntrlRegistrarAlmacen">
 		<panel width="100%" height="100%">
 			<panelchildren>
 				<grid height="100%" width="100%">
 					<columns>
 						<column></column>
-
 					</columns>
 					<rows>
 						<row>
 							<div>
-
 								<label value="Nombre: "></label>
-								<textbox width="15%" id="txtNombre"
-									value="@{NuevoAlmacen$composer.almacen.nombreAlmacen, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnEliminar.onClick, btnModificar.onClick'}">
+								<textbox width="15%" id="txtNombre" constraint="no empty"
+									value="@{cntrl.almacen.nombre}">
 								</textbox>
 								<label value="(*)" style="color:red" />
 								<space width="3%"></space>
-
 								<label value="Instalación: "></label>
-								<combobox 
-									width="15%" id="cmbInstalacion"
-									selectedItem="@{NuevoAlmacen$composer.instalacion}"
-									model="@{NuevoAlmacen$composer.instalaciones, load-after='btnRegistrar.onClick, btnEliminar.onClick, lista.onSelect, btnModificar.onClick'}">
+								<combobox width="15%" constraint="no empty" readonly="true"
+									id="cmbInstalacion" selectedItem="@{cntrl.almacen.instalacion}"
+									model="@{cntrl.instalaciones}">
 									<comboitem id="cmbInta"
 										self="@{each=insta}" label="@{insta.descripcion}"
-										value="@{insta.codigoInstalacion, load-after='lista.onSelect'}"/>
+										value="@{insta.codigoInstalacion}" />
 								</combobox>
 								<label value="(*)" style="color:red" />
 								<space width="3%"></space>
 							</div>
-
 						</row>
-
 						<row>
 							<div>
 								<label value="Descripción: "></label>
-
-								<textbox multiline="true" height="40px"
+								<textbox multiline="true" height="40px" constraint="no empty"
 									width="300px" id="txtDescripcion"
-									value="@{NuevoAlmacen$composer.almacen.descripcion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnEliminar.onClick, btnModificar.onClick'}">
+									value="@{cntrl.almacen.descripcion}">
 								</textbox>
 								<label value="(*)" style="color:red" />
 							</div>
 						</row>
-
 						<row>
 							<div>
 								<label
-									value="Capacidad del Almacén: ">
+									value="Capacidad del almacén: ">
 								</label>
-								<doublebox constraint="no negative"
-									id="spnCapacidad"
-									value="@{NuevoAlmacen$composer.almacen.capacidadAlmacen, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnEliminar.onClick, btnModificar.onClick'}" />
+								<doublebox constraint="no empty, no negative, no zero"
+									id="dboxCapacidad"
+									value="@{cntrl.almacen.capacidad}" />
 								<label value="m²"></label>
 								<label value="(*)" style="color:red" />
 								<space width="3%"></space>
@@ -67,27 +61,26 @@
 							<panel title="Almacenes Registrados"
 								collapsible="true" height="200px">
 								<panelchildren>
-									<listbox id="lista"
-										model="@{NuevoAlmacen$composer.almacenes, load-after='btnRegistrar.onClick, btnEliminar.onClick, btnModificar.onClick'}"
-										selectedItem="@{NuevoAlmacen$composer.almacen}" mold="paging"
-										pageSize="10">
+									<listbox id="lboxAlmacenes" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
+										model="@{cntrl.almacenes, load-after='btnRegistrar.onClick, btnEliminar.onClick, btnModificar.onClick'}"
+										selectedItem="@{cntrl.almacen}" mold="paging" pageSize="8">
 										<listhead>
 											<listheader
-												label="Nombre ALmacén">
+												label="Nombre Almacén">
 											</listheader>
 											<listheader
 												label="Capacidad en m²">
 											</listheader>
 											<listheader
-												label="Descripcion Almacén">
+												label="Descripción Almacén">
 											</listheader>
 										</listhead>
 										<listitem self="@{each='a'}"
 											value="@{a}">
 											<listcell
-												label="@{a.nombreAlmacen}" />
+												label="@{a.nombre}" />
 											<listcell
-												label="@{a.capacidadAlmacen}" />
+												label="@{a.capacidad}" />
 											<listcell
 												label="@{a.descripcion}" />
 										</listitem>
@@ -97,48 +90,27 @@
 						</row>
 						<row>
 							<div align="right" width="100%">
-								<button label="Guardar"
-									image="/Recursos/Imagenes/guardar.ico" id="btnRegistrar">
-									<attribute name="onClick">
-								    {
-										binder.loadAll();
-									}
-									</attribute>
+								<button id="btnRegistrar"
+									label="Registrar" width="100px"
+									onClick="btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/guardar.ico">
 								</button>
-								
-								<space width="1.5%"></space>
-								
-								<button label="Modificar"
-									image="/Recursos/Imagenes/editar.ico" id="btnModificar">
-									<attribute name="onClick">
-								    {
-										binder.loadAll();
-									}
-									</attribute>
-								</button>
-								
-								<space width="1.5%"></space>
-								<button label="Eliminar"
-									image="/Recursos/Imagenes/eliminar.ico" id="btnEliminar">
-									<attribute name="onClick">
-								    {
-										binder.loadAll();
-									}
-									</attribute>
-								</button>
-								<space width="1.5%"></space>
-								<button label="Cancelar"
-									image="/Recursos/Imagenes/cancelar.ico" id="btnCancelar">
-									<attribute name="onClick">
-								    {
-										binder.loadAll();
-									}
-									</attribute>
-								</button>
-								<space width="1.5%"></space>
-								<button label="Salir"
-									image="/Recursos/Imagenes/atras.ico">
-								</button>
+								<button id="btnModificar"
+									label="Modificar" width="100px" disabled="true"
+									onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/editar.ico" />
+								<button id="btnCancelar"
+									label="Cancelar" width="100px"
+									onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/cancelar.ico" />
+								<button id="btnEliminar"
+									label="Eliminar" width="100px" disabled="true"
+									onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
+									height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
+								<button id="btnSalir" label="Salir"
+									width="100px" height="30px"
+									image="../../Recursos/Imagenes/salir.png"
+									onClick="winRegistrarAlmacen.detach()" />
 							</div>
 						</row>
 					</rows>

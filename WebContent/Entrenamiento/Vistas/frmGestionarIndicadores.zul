@@ -1,0 +1,98 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk xmlns:h="xhtml" xmlns:zk="zk">
+	<div align="center">
+		<separator height="15px" />
+		<?page title="Gestionar Indicadores"?>
+		<div align="center">
+			<separator height="15px" />
+			<window id="wndIndicadorEvaluacion"
+				title="Indicadores de Evaluación" border="normal" width="600px"
+				height="" closable="true"
+				apply="controlador.entrenamiento.CntrlGestionarIndicadores">
+				<grid>
+					<rows>
+						<row width="450px">
+							<hbox>
+								<space width="5px" />
+								<vbox>
+									<hbox align="center">
+										<label value="Categoria" />
+										<space width="4px" />
+										<combobox id="cmbCategoria"
+											width="130px" model="@{ctrl.listCategoria}"
+											readonly="true">
+											<comboitem
+												self="@{each=categoria}" label="@{categoria.nombre}"
+												value="@{categoria.codigoCategoria}" />
+										</combobox>
+										<space width="4px" />
+										<label value="Actividad" />
+										<space width="60px" />
+										<combobox id="cmbActividad"
+											model="@{ctrl.listActividad}" width="130px" readonly="true"
+											autocomplete="true">
+											<comboitem
+												self="@{each=actividad}" label="@{actividad.nombre}"
+												value="@{actividad.codActividadEntrenamiento}" />
+										</combobox>
+									</hbox>
+									<hbox align="center">
+										<label value="Indicador" />
+										<space width="4px" />
+										<combobox id="cmbIndicador"
+											width="130px" readonly="true" autocomplete="true"
+											model="@{ctrl.listIndicador}">
+											<comboitem
+												self="@{each=datoBasico}" label="@{datoBasico.nombre}"
+												value="@{datoBasico.codigoDatoBasico}" />
+										</combobox>
+										<space width="1px" />
+										<label
+											value="Escala de Medicion" />
+
+										<combobox id="cmbEscala"
+											width="130px" model="@{ctrl.listEscala}" readonly="true">
+											<comboitem
+												self="@{each=escala}" label="@{escala.nombre}"
+												value="@{escala.codigoEscala}" />
+										</combobox>
+									</hbox>
+									<hbox>
+										<listbox width="500px"
+											id="lbIndicador" height="330px">
+											<listhead>
+												<listheader
+													label="Indicador" width="150px" align="center" />
+												<listheader
+													label="Escala" width="150px" align="center" />
+											</listhead>
+										</listbox>
+
+									</hbox>
+								</vbox>
+							</hbox>
+							<vbox>
+								<separator height="23px" />
+								<button
+									image="../../Recursos/Imagenes/agregar.ico" id="btnAgregar" />
+								<separator height="5px" />
+								<button
+									image="../../Recursos/Imagenes/editar.ico" id="btnModificar" />
+								<separator height="5px" />
+								<button
+									image="../../Recursos/Imagenes/quitar.ico" id="btnQuitar" />
+							</vbox>
+						</row>
+					</rows>
+				</grid>
+				<div align="right">
+					<button image="../../Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" id="btnCancelar" onClick="" />
+					<button image="../../Recursos/Imagenes/salir.png"
+						label="Salir" width="100px" id="btnSalir" />
+				</div>
+			</window>
+		</div>
+	</div>
+</zk>

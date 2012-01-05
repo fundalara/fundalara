@@ -1,16 +1,22 @@
 <?page title="Clientes" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
-	<!-- <div align="center"> -->
-	<window id="frmCliente" title="Clientes" border="normal" width="690px">
-<zscript>
+	<window apply="controlador.administracion.CntrlPersonaJuridica"
+		id="frmClientes" title="Clientes" border="normal"
+		width="690px">
+		<zscript>
 		<![CDATA[
-			public void MostrarCatalogoCliente() {
-				Window window = (Window) Executions.createComponents(
-						"/Administracion/Vistas/FrmCatalogoCliente.zul", null, null);
-				}
-		]]>
+	public void MostrarCatalogoProveedores() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/FrmCatalogoProveedor.zul", null, null);
+	}
+]]>
 	</zscript>
-		<groupbox style="border:none;" closable="false">
+		<panel title="Datos del Cliente" collapsible="true"
+			open="true">
+			<panelchildren>
+				<groupbox style="border:none;">
 					<grid width="100%" oddRowSclass="none"
 						style="border:none;">
 						<columns>
@@ -23,19 +29,23 @@
 							<row align="left" style="border:none;">
 								<label value="R.I.F" />
 								<hbox align="center">
-									<textbox width="150px" />
+									<label value="J-" />
+									<textbox id="txtRif"></textbox>
+
 									<label value="(*)"
 										style="color:red" />
-									<button
-										image="/Recursos/Imagenes/consultar.ico" 
-										onClick="MostrarCatalogoCliente()"
+									<button id="btnBuscar"
+										image="/Recursos/Imagenes/consultar.ico"
 										tooltiptext="Listado de Clientes" />
 								</hbox>
 							</row>
+
 							<row spans="1,3" style="border:none;">
 								<label value="Razón Social" />
 								<hbox align="center">
-									<textbox width="350px" />
+									<textbox width="350px"
+										id="txtRazonSocial" constraint="no empty"
+										value="@{cntrl.personaJuridica.razonSocial}" />
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
@@ -43,7 +53,8 @@
 						</rows>
 					</grid>
 				</groupbox>
-				<groupbox style="border-color:orange" closable="false">
+				<groupbox style="border-color:orange"
+					closable="false">
 					<caption label="Datos de Contacto"></caption>
 					<grid oddRowSclass="none" style="border:none;">
 						<columns>
@@ -56,35 +67,46 @@
 							<row style="border:none;">
 								<label value="Teléfono" />
 								<hbox>
-									<combobox width="40px" readonly="true">
-										<comboitem label="0251"></comboitem>
-										<comboitem label="0252"></comboitem>
-										<comboitem label="0253"></comboitem>
+									<combobox width="40px"
+										model="@{cntrl.codigosDeArea}" readonly="true"
+										id="cmbTelefono">
+										<comboitem
+											self="@{each='codigoDeArea'}" label="@{codigoDeArea.nombre}"
+											value="@{codigoDeArea}">
+										</comboitem>
 									</combobox>
-									<textbox width="120px"></textbox>
+
+									<textbox width="120px"
+										id="txtTelefono">
+									</textbox>
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
 								<label value="Numero de Fax" />
 								<hbox>
-									<combobox width="40px" readonly="true">
-										<comboitem label="0251"></comboitem>
-										<comboitem label="0252"></comboitem>
-										<comboitem label="0253"></comboitem>
+									<combobox width="40px"
+										model="@{cntrl.codigosDeArea}" readonly="true" id="cmbFax">
+
+										<comboitem
+											self="@{each='codigoDeArea'}" label="@{codigoDeArea.nombre}"
+											value="@{codigoDeArea}">
+										</comboitem>
 									</combobox>
-									<textbox width="120px"></textbox>
+									<textbox id="txtFax"
+										width="120px">
+									</textbox>
 								</hbox>
 							</row>
 							<row style="border:none;">
 								<label value="Correo Electrónico" />
-								<textbox width="210px" />
-								<label value="Twitter" />
-								<textbox width="185px" />
+								<textbox width="210px"
+									id="txtCorreoElectronico"
+									value="@{cntrl.persona.correoElectronico}" />
+								<label value="Twitter" id="txtTwitter" />
+								<textbox width="185px"
+									value="@{cntrl.persona.twitter}" />
 							</row>
-							<row style="border:none;" spans="1,3">
-								<label value="Pagina Web" />
-								<textbox width="320px" />
-							</row>
+
 						</rows>
 					</grid>
 				</groupbox>
@@ -104,10 +126,12 @@
 								<label value="Estado" />
 								<hbox>
 									<combobox readonly="true"
-										value="--Seleccione--" width="160px">
-										<comboitem label="Lara" />
-										<comboitem label="Portuguesa" />
-										<comboitem label="Yaracuy" />
+										width="160px" id="cmbEstado" model="@{cntrl.estados}"
+										value="-Seleccione-">
+										<comboitem
+											self="@{each='estado'}" label="@{estado.nombre}"
+											context="@{estado.codigoDatoBasico}" value="@{estado}">
+										</comboitem>
 									</combobox>
 									<label value="(*)"
 										style="color:red" />
@@ -115,17 +139,13 @@
 								<label value="Municipio" />
 								<hbox>
 									<combobox readonly="true"
-										value="--Seleccione--" width="160px">
+										disabled="true" width="160px" id="cmbMunicipio"
+										model="@{cntrl.municipios}" value="-Seleccione-">
 										<comboitem
-											label="Andrés Eloy Blanco" />
-										<comboitem label="Crespo" />
-										<comboitem label="Iribarren" />
-										<comboitem label="Jiménez" />
-										<comboitem label="Morán" />
-										<comboitem label="Palavecino" />
-										<comboitem label="Simón Planas" />
-										<comboitem label="Torres" />
-										<comboitem label="Urdaneta" />
+											self="@{each='municipio'}" label="@{municipio.nombre}"
+											context="@{municipio.codigoDatoBasico}"
+											value="@{municipio}">
+										</comboitem>
 									</combobox>
 									<label value="(*)"
 										style="color:red" />
@@ -135,23 +155,23 @@
 								<label value="Parroquia" />
 								<hbox>
 									<combobox readonly="true"
-										value="--Seleccione--" width="160px">
-										<comboitem label="Barquisimeto" />
-										<comboitem label="Cabudare" />
-										<comboitem label="Carora" />
-										<comboitem label="Duaca" />
-										<comboitem label="El Cují" />
-										<comboitem label="El Tocuyo" />
-										<comboitem label="Quibor" />
+										disabled="true" width="160px" id="cmbParroquia"
+										model="@{cntrl.parroquias}" value="-Seleccione-">
+										<comboitem
+											self="@{each='parroquia'}" label="@{parroquia.nombre}"
+											value="@{parroquia}"
+											context="@{parroquia.codigoDatoBasico}">
+										</comboitem>
 									</combobox>
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
-								<label value="Dirección Habitación" />
+								<label value="Dirección" />
 								<hbox align="center">
-									<textbox maxlength="200"
+									<textbox id="txtDireccion"
+										value="@{cntrl.persona.direccion}" maxlength="200"
 										height="40px" width="505px" multiline="true" />
 									<label value="(*)"
 										style="color:red" />
@@ -160,21 +180,29 @@
 						</rows>
 					</grid>
 				</groupbox>
-
-		<label value=" (*) Campo Obligatorio" style="color:red" />
+				<separator></separator>
+			</panelchildren>
+		</panel>
 		<div align="right">
-			<button image="/Recursos/Imagenes/guardar.ico" onClick=""
-				tooltiptext="Guardar Nuevo Cliente" label="Guardar" width="100px" />
-			<button image="/Recursos/Imagenes/editar.ico" onClick=""
-				tooltiptext="Modificar Datos del Cliente" label="Modificar" width="100px" />
-			<button image="/Recursos/Imagenes/quitar.ico" onClick=""
-				tooltiptext="Eliminar Cliente" label="Eliminar" width="100px" />
-			<button image="/Recursos/Imagenes/salir.png" onClick=""
-				tooltiptext="Salir de la Ventana" label="Salir" width="100px">
-			<attribute name="onClick">
-				frmCliente.onClose();
-			</attribute>	
+			<button image="/Recursos/Imagenes/guardar.ico"
+				id="btnRegistrar" tooltiptext="Registrar" label="Registrar"
+				width="100px" />
+			<button image="/Recursos/Imagenes/editar.ico"
+				disabled="true" id="btnModificar" tooltiptext="Modificar"
+				label="Modificar" width="100px" />
+			<button image="/Recursos/Imagenes/quitar.ico"
+				disabled="true" id="btnEliminar" tooltiptext="Eliminar"
+				label="Eliminar" width="100px" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
+				width="100px" />
+			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+				tooltiptext="Salir" label="Salir" width="100px">
+				<attribute name="onClick">
+	frmClientes .onClose();
+</attribute>
 			</button>
 		</div>
+
 	</window>
 </zk>

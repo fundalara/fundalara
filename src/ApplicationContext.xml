@@ -54,12 +54,7 @@
 		<property name="daoDocumentoAcreedorMaterial" ref="daoDocumentoAcreedorMaterial"></property>
 	</bean>
 	
-	<bean id="daoDonacionMaterial" class="dao.general.DaoDonacionMaterial">
-	</bean>
 	
-	<bean id="servicioDonacionMaterial" class="servicio.implementacion.ServicioDonacionMaterial">
-		<property name="daoDonacionMaterial" ref="daoDonacionMaterial"></property>
-	</bean>
 	
 	<bean id="daoEgreso" class="dao.general.DaoEgreso">
 	</bean>
@@ -578,10 +573,10 @@
 		<property name="daoTallaPorJugador" ref="daoTallaPorJugador"></property>
 	</bean>
 	
-	<bean id="daoActividadEntrenamiento" class="dao.general.DaoActividadEntrenamiento"></bean>
-	<bean id="servicioActividadEntrenamiento" class="servicio.implementacion.ServicioActividadEntrenamiento">
-		<property name="daoActividadEntrenamiento" ref="daoActividadEntrenamiento"></property>
-	</bean>
+<!-- 	<bean id="daoActividadEntrenamiento" class="dao.general.DaoActividadEntrenamiento"></bean> -->
+<!-- 	<bean id="servicioActividadEntrenamiento" class="servicio.implementacion.ServicioActividadEntrenamiento"> -->
+<!-- 		<property name="daoActividadEntrenamiento" ref="daoActividadEntrenamiento"></property> -->
+<!-- 	</bean> -->
 
 	<bean id="daoActividadesEjecutadas" class="dao.general.DaoActividadesEjecutadas"></bean>
 	<bean id="servicioActividadesEjecutadas" class="servicio.implementacion.ServicioActividadesEjecutadas">

@@ -112,7 +112,6 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 		Messagebox.show("Datos cargados exitosamente","Mensaje",Messagebox.OK,Messagebox.EXCLAMATION);
 		for(int i=0; i<tiposInstalaciones.size(); i++){
 			if(tiposInstalaciones.get(i).getNombre().equals(instalacion.getDatoBasico().getNombre())){
-				System.out.println("yyyyyyyyyyyyyyyyy");
 				cmbTipoInstalacion.setSelectedIndex(i);
 				break;
 			}
@@ -125,77 +124,5 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 		spCapacidad.getValue();
 		dboxTamano.getValue();
 	}
-
-
-
-
-
-
-
-
-
-
-
-	//------------
-	//<!-- 	         seccion de instancias de modelos -->
-	//modelo.Instalacion instalacion = new modelo.Instalacion();
-//	modelo.TipoInstalacion tInstalacion = new modelo.TipoInstalacion();
-//	List listaTipoInstalacion = servicioTipoInstalacion.listar();
-//	List listaArea = servicioInstalacion.listarInstalacion();
-//	List listaInstalacion = servicioInstalacion.listarInstalacion();
-//	//<!-- seccion de llamada de metodos y funciones -->
-//	public void guardar() {
-//		instalacion.setCodigoInstalacion(servicioInstalacion.generarCodigo());
-//		instalacion.setEstatus('A');
-//		tInstalacion = servicioTipoInstalacion.buscar(comboTipoInstalacion
-//				.getSelectedItem().getValue());
-//		instalacion.setTipoInstalacion(tInstalacion);
-//		try {
-//			instalacion.setArea(comboArea.getSelectedItem().getValue()
-//					.toString());
-//		} catch (Exception e) {
-//		}
-//		servicioInstalacion.guardar(instalacion);
-//		this.cargarCombo();
-//		comboArea.setValue("");
-//		comboTipoInstalacion.setValue("");
-//		instalacion = new modelo.Instalacion();
-//		tInstalacion = new modelo.TipoInstalacion();
-//		alert("Se guardo exitosamente");
-//		binder.loadAll();
-//	}
-//	public void eliminar() {
-//		instalacion.setEstatus('E');
-//		servicioInstalacion.guardar(instalacion);
-//		instalacion = new modelo.Instalacion();
-//		comboTipoInstalacion.setValue("");
-//		cargarCombo();
-//		binder.loadAll();
-//
-//		alert("Se elimino exitosamente");
-//	}
-//	public void cancelar() {
-//		this.cargarCombo();
-//		comboArea.setValue("");
-//		comboTipoInstalacion.setValue("");
-//		instalacion = new modelo.Instalacion();
-//		tInstalacion = new modelo.TipoInstalacion();
-//		binder.loadAll();
-//	}
-//	public void cargarCombo() {
-//		listaTipoInstalacion = servicioTipoInstalacion.listar();
-//		listaArea = servicioInstalacion.listarInstalacion();
-//		listaInstalacion = servicioInstalacion.listarInstalacion();
-//	}
-//	public void cargar_datos() {
-//		String codigo = tabla.getSelectedItem().getLabel();
-//		instalacion = servicioInstalacion.buscar(codigo);
-//		String codigoTI = instalacion.getTipoInstalacion()
-//				.getCodigoTipoInstalacion();
-//		tInstalacion = servicioTipoInstalacion.buscar(codigoTI);
-//		comboTipoInstalacion.setValue(tInstalacion.getDescripcion());
-//		comboArea.setValue(instalacion.getArea());
-//		binder.loadAll();
-//	}
 
 }

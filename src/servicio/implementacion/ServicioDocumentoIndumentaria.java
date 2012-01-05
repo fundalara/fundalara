@@ -7,7 +7,6 @@ import java.util.List;
 import dao.general.DaoDocumentoIndumentaria;
 
 import modelo.DocumentoIndumentaria;
-import modelo.DonacionMaterial;
 import servicio.interfaz.IServicioDocumentoIndumentaria;
 
 public class ServicioDocumentoIndumentaria implements

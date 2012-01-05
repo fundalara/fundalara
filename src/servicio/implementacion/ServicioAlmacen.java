@@ -8,6 +8,7 @@ import servicio.interfaz.IServicioAlmacen;
 import dao.general.DaoAlmacen;
 
 import modelo.Almacen;
+import modelo.Instalacion;
 import modelo.Material;
 
 public class ServicioAlmacen implements IServicioAlmacen {
@@ -41,23 +42,33 @@ public class ServicioAlmacen implements IServicioAlmacen {
 	}
 
 	@Override
-	public List<Almacen> listarAlmacen() {
-		
-		List<Almacen> a = daoAlmacen.listarAlmacen();
-		int longitud = a.size();
-		List<Almacen> b = new ArrayList<Almacen>();
-		for(int i = 0; i < longitud; i++){
-			char v = a.get(i).getEstatus();
-			if(v == 'A'){
-				b.add(a.get(i));	
-			}
-		}
-		return b;
+	public List<Almacen> listarActivos() {
+		return daoAlmacen.listarActivos(Almacen.class);
 	}
 
 	@Override
-	public String generarCodigo(){
-		Integer nuevoCodigo = daoAlmacen.contarCodigos("Almacen") + 1;
-		return nuevoCodigo.toString();
+	public Instalacion buscarInstalacion(Almacen a) {
+		return daoAlmacen.buscarInstalacion(a);		
 	}
+
+//	@Override
+//	public List<Almacen> listarAlmacen() {
+//		
+//		List<Almacen> a = daoAlmacen.listarAlmacen();
+//		int longitud = a.size();
+//		List<Almacen> b = new ArrayList<Almacen>();
+//		for(int i = 0; i < longitud; i++){
+//			char v = a.get(i).getEstatus();
+//			if(v == 'A'){
+//				b.add(a.get(i));	
+//			}
+//		}
+//		return b;
+//	}
+//
+//	@Override
+//	public String generarCodigo(){
+//		Integer nuevoCodigo = daoAlmacen.contarCodigos("Almacen") + 1;
+//		return nuevoCodigo.toString();
+//	}
 }

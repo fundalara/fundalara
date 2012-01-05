@@ -1,0 +1,304 @@
+<?page title="Proveedores" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window apply="controlador.administracion.CntrlProveedores"
+		id="frmProveedores" title="Proveedores" border="normal"
+		width="690px">
+		<zscript>
+		<![CDATA[
+	public void MostrarCatalogoProveedores() {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/FrmCatalogoProveedor.zul", null, null);
+	}
+]]>
+	</zscript>
+		<panel title="Datos del Proveedor" collapsible="true"
+			open="true">
+			<panelchildren>
+				<groupbox style="border:none;">
+					<grid width="100%" oddRowSclass="none"
+						style="border:none;">
+						<columns>
+							<column width="110px" />
+							<column width="225px" />
+							<column width="110px" />
+							<column width="225px" />
+						</columns>
+						<rows>
+							<row align="left" style="border:none;">
+								<label value="R.I.F" />
+								<hbox align="center">
+								    <label value="J-"/>
+									<textbox id="txtRif"></textbox>
+
+									<label value="(*)"
+										style="color:red" />
+									<button id="btnBuscar"
+										image="/Recursos/Imagenes/consultar.ico"
+										tooltiptext="Listado de Proveedores" />
+								</hbox>
+							</row>
+							
+							<row spans="1,3" style="border:none;">
+								<label value="Razón Social" />
+								<hbox align="center">
+									<textbox width="350px"
+										id="txtRazonSocial" constraint="no empty"
+										value="@{cntrl.personaJuridica.razonSocial}" />
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Datos de Contacto"></caption>
+					<grid oddRowSclass="none" style="border:none;">
+						<columns>
+							<column width="110px" />
+							<column width="225px" />
+							<column width="110px" />
+							<column width="225px" />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Teléfono" />
+								<hbox>
+									<combobox width="40px"
+										model="@{cntrl.codigosDeArea}" readonly="true"
+										id="cmbTelefono">
+										<comboitem
+											self="@{each='codigoDeArea'}" label="@{codigoDeArea.nombre}"
+											value="@{codigoDeArea}">
+										</comboitem>
+									</combobox>
+
+									<textbox width="120px"
+										id="txtTelefono">
+									</textbox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+								<label value="Numero de Fax" />
+								<hbox>
+									<combobox width="40px"
+										model="@{cntrl.codigosDeArea}" readonly="true" id="cmbFax">
+
+										<comboitem
+											self="@{each='codigoDeArea'}" label="@{codigoDeArea.nombre}"
+											value="@{codigoDeArea}">
+										</comboitem>
+									</combobox>
+									<textbox id="txtFax"
+										width="120px">
+									</textbox>
+								</hbox>
+							</row>
+							<row style="border:none;">
+								<label value="Correo Electrónico" />
+								<textbox width="210px"
+									id="txtCorreoElectronico"
+									value="@{cntrl.persona.correoElectronico}" />
+								<label value="Twitter" id="txtTwitter" />
+								<textbox width="185px"
+									value="@{cntrl.persona.twitter}" />
+							</row>
+
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Datos de Residencia" />
+					<grid style="border:none;" oddRowSclass="none"
+						width="100%">
+						<columns>
+							<column width="110px" />
+							<column width="225px" />
+							<column width="110px" />
+							<column width="225px" />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Estado" />
+								<hbox>
+									<combobox readonly="true"
+										width="160px" id="cmbEstado" model="@{cntrl.estados}"
+										value="-Seleccione-">
+										<comboitem
+											self="@{each='estado'}" label="@{estado.nombre}"
+											context="@{estado.codigoDatoBasico}" value="@{estado}">
+										</comboitem>
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+								<label value="Municipio" />
+								<hbox>
+									<combobox readonly="true"
+										disabled="true" width="160px" id="cmbMunicipio"
+										model="@{cntrl.municipios}" value="-Seleccione-">
+										<comboitem
+											self="@{each='municipio'}" label="@{municipio.nombre}"
+											context="@{municipio.codigoDatoBasico}"
+											value="@{municipio}">
+										</comboitem>
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Parroquia" />
+								<hbox>
+									<combobox readonly="true"
+										disabled="true" width="160px" id="cmbParroquia"
+										model="@{cntrl.parroquias}" value="-Seleccione-">
+										<comboitem
+											self="@{each='parroquia'}" label="@{parroquia.nombre}"
+											value="@{parroquia}"
+											context="@{parroquia.codigoDatoBasico}">
+										</comboitem>
+									</combobox>
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Dirección" />
+								<hbox align="center">
+									<textbox id="txtDireccion"
+										value="@{cntrl.persona.direccion}" maxlength="200"
+										height="40px" width="505px" multiline="true" />
+									<label value="(*)"
+										style="color:red" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<separator></separator>
+			</panelchildren>
+		</panel>
+		<panel title="Datos Bancarios" collapsible="true"
+			open="false">
+			<panelchildren>
+				<groupbox style="border:none;">
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="110px" />
+							<column width="235px" />
+							<column width="110px" />
+							<column width="235px" />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Banco" />
+								<combobox width="120px" readonly="true"
+									id="cmbBanco" value="-Seleccione-" model="@{cntrl.bancos}">
+									<comboitem self="@{each='banco'}"
+										label="@{banco.nombre}" value="@{banco}" />
+								</combobox>
+
+
+							</row>
+							<row style="border:none;">
+								<label value="Tipo Cuenta" />
+								<combobox width="120px" readonly="true"
+									value="-Seleccione-" id="cmbTipoCuenta"
+									model="@{cntrl.tiposDeCuentas}">
+									<comboitem
+										self="@{each='tipoDeCuenta'}" label="@{tipoDeCuenta.nombre}"
+										value="@{tipoDeCuenta}">
+									</comboitem>
+								</combobox>
+							</row>
+							<row style="border:none;">
+								<label value="Nro Cuenta" />
+								<textbox width="96%" id="txtCuenta" />
+							</row>
+							<row style="border:none;">
+								<label value="Titular" />
+								<textbox width="96%"
+									id="txtTitularCuenta" />
+							</row>
+							<row style="border:none;">
+								<separator></separator>
+							</row>
+							<row spans="4" style="border:none;">
+								<hbox>
+									<listbox id="lbxCuentas"
+										model="@{cntrl.cuentasBancarias}">
+										<listhead>
+											<listheader label="Banco"></listheader>
+											<listheader
+												label="Tipo Cuenta">
+											</listheader>
+											<listheader
+												label="Nro. de Cuenta">
+											</listheader>
+											<listheader
+												label="Titular de la Cuenta">
+											</listheader>
+										</listhead>
+										<listitem
+											self="@{each='cuentaBancaria'}" value="@{cuentaBancaria}">
+											<listcell
+												label="@{cuentaBancaria.datoBasicoByCodigoBanco.nombre}" />
+											<listcell
+												label="@{cuentaBancaria.datoBasicoByCodigoTipoCuenta.nombre}" />
+											<listcell
+												label="@{cuentaBancaria.codigoCuentaBanco}" />
+											<listcell
+												label="@{cuentaBancaria.titular}" />
+										</listitem>
+
+									</listbox>
+									<separator></separator>
+									<vbox>
+										<button
+											image="/Recursos/Imagenes/agregar.ico"
+											tooltiptext="Agregar" id="btnAgregar"  />
+										<button
+											image="/Recursos/Imagenes/editar.ico"
+											tooltiptext="Editar" id="btnEditar" disabled="true"/>
+										<button
+											image="/Recursos/Imagenes/quitar.ico" disabled="true"
+											tooltiptext="Eliminar" id="btnQuitar" />
+									</vbox>
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+			
+		</panel>
+
+		<label value="(*) Campo Obligatorio" style="color:red" />
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico"
+				id="btnRegistrar" tooltiptext="Registrar" label="Registrar"
+				width="100px" />
+			<button image="/Recursos/Imagenes/editar.ico"
+				disabled="true" id="btnModificar" tooltiptext="Modificar"
+				label="Modificar" width="100px" />
+			<button image="/Recursos/Imagenes/quitar.ico"
+				disabled="true" id="btnEliminar" tooltiptext="Eliminar"
+				label="Eliminar" width="100px" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
+				width="100px" />
+			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+				tooltiptext="Salir" label="Salir" width="100px">
+				<attribute name="onClick">
+	frmProveedores.onClose();
+</attribute>
+			</button>
+		</div>
+
+	</window>
+</zk>

@@ -5,6 +5,6 @@ import servicio.interfaz.IServicioAgenda;
 
 public class ServicioAgenda implements IServicioAgenda {
 	
-	DaoAgenda
+
 
 }
