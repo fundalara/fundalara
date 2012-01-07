@@ -70,6 +70,7 @@ public class Agenda extends GenericForwardComposer {
 		formulario = component;
 		actualizarRangoCalendario();
 		lsbxFiltro.setSelectedIndex(0);
+	
 	}
 
 	public void onSelect$lsbxFiltro(){
@@ -83,6 +84,7 @@ public class Agenda extends GenericForwardComposer {
 			break;
 		}
 		case 2:{ //Competencia
+			calendars.setReadonly(false);
 			btnVer.setVisible(true);
 			break;
 		}	
@@ -116,16 +118,13 @@ public class Agenda extends GenericForwardComposer {
 		EventosCalendario eventosCalendario = new EventosCalendario();
 		
 		for (Iterator i = juegos.iterator(); i.hasNext();){
-			Juego j = (Juego) i.next();
-			
+			Juego j = (Juego) i.next();			
 			Calendar cal1 = Calendar.getInstance();
 			Calendar cal2 = Calendar.getInstance();
-			Date f = j.getFecha();
-			Date h = j.getHoraInicio();
-			cal1.set(f.getYear(),f.getMonth(),f.getDate(),h.getHours(),h.getMinutes(),0);
-			System.out.println(cal1.getTime().toString());
-			//SimpleCalendarEvent e = crearEvento(cal.getTime(),cal.getTime(),"un juego","un juego",color[0],color[0]);
-			//eventosCalendario.cargarEvento(e);
+			Date di = new Date(111, 11, 21, 11, 0);
+			Date df = new Date(111, 11, 21, 13, 0);
+			SimpleCalendarEvent e = crearEvento(di,df,"Fundalara A vs Delfines B","Fundalara A vs Delfines B",color[0],color[0]);
+			eventosCalendario.cargarEvento(e);
 		}
 		calendars.setModel(eventosCalendario.getModel());
 	}
@@ -144,25 +143,25 @@ public class Agenda extends GenericForwardComposer {
 	 
 	/*Ejemplo como crear un evento*/
 	public void onCreate$wndCalendario() {
-		SimpleCalendarEvent ce = new SimpleCalendarEvent();
-		Date di = new Date(111, 11, 21, 11, 0);
-		Date df = new Date(111, 11, 24, 13, 0);
-		ce.setBeginDate(di);
-		ce.setEndDate(df);
-		ce.setContent("Leyner");
-		ce.setTitle("Titulo");
-		ce.setContentColor(color[0]);
-		ce.setHeaderColor(color[0]);
-		
-		EventosCalendario calendarEvents = new EventosCalendario();
-		calendarEvents.cargarEvento(ce);
-		calendars.setModel(calendarEvents.getModel());
+//		SimpleCalendarEvent ce = new SimpleCalendarEvent();
+//		Date di = new Date(111, 11, 21, 11, 0);
+//		Date df = new Date(111, 11, 24, 13, 0);
+//		ce.setBeginDate(di);
+//		ce.setEndDate(df);
+//		ce.setContent("Leyner");
+//		ce.setTitle("Titulo");
+//		ce.setContentColor(color[0]);
+//		ce.setHeaderColor(color[0]);
+//		
+//		EventosCalendario calendarEvents = new EventosCalendario();
+//		calendarEvents.cargarEvento(ce);
+//		calendars.setModel(calendarEvents.getModel());
 	}
 
 	public void onEventEdit$calendars(){
-		Window win = (Window) execution.createComponents(
-				form, null, null);
-		win.doHighlighted();
+//		Window win = (Window) execution.createComponents(
+//				form, null, null);
+//		win.doHighlighted();
 	}
 	
 	/* 

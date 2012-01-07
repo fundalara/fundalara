@@ -32,7 +32,7 @@
 										<listitem label="${each}"
 											forEach="Entrenamiento,Competencia,Mantenimiento,Actividad Complementaria" />
 									</listbox>
-									<button  id="btnVer" label="ver" visible="false" />
+									<button  id="btnVer" mold="os" label="ver" visible="false" />
 								</span>
 								<separator orient="vertical" />
 							</div>
