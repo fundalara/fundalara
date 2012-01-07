@@ -13,6 +13,7 @@ import modelo.Competencia;
 import modelo.Juego;
 
 import org.zkoss.calendar.Calendars;
+import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.util.Locales;
@@ -24,6 +25,7 @@ import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -56,6 +58,7 @@ public class Agenda extends GenericForwardComposer {
 	Competencia competencia;
 	Button btnVer;
 	ServicioCompetencia servicioCompetencia;
+
 	
 	
 	/*
@@ -84,6 +87,11 @@ public class Agenda extends GenericForwardComposer {
 			break;
 		}
 		case 2:{ //Competencia
+            //Div divMenu = (Div) formulario.getPage().getDesktop().getPage("frmMenu").getFellow("divMenu");
+            //divMenu.setVisible(false);
+            //Window w = (Window) formulario;
+            //w.setWidth("980px");
+			calendars.setMold("month");
 			calendars.setReadonly(false);
 			btnVer.setVisible(true);
 			break;
@@ -119,11 +127,17 @@ public class Agenda extends GenericForwardComposer {
 		
 		for (Iterator i = juegos.iterator(); i.hasNext();){
 			Juego j = (Juego) i.next();			
+	        
 			Calendar cal1 = Calendar.getInstance();
 			Calendar cal2 = Calendar.getInstance();
-			Date di = new Date(111, 11, 21, 11, 0);
-			Date df = new Date(111, 11, 21, 13, 0);
-			SimpleCalendarEvent e = crearEvento(di,df,"Fundalara A vs Delfines B","Fundalara A vs Delfines B",color[0],color[0]);
+			cal1.setTime(j.getFecha());
+			cal2.setTime(j.getFecha());
+			cal1.set(Calendar.HOUR, 1);
+			cal2.set(Calendar.HOUR, 3);
+			System.out.println(cal1.getTime());
+			System.out.println(cal2.getTime());
+			
+			SimpleCalendarEvent e = crearEvento(cal1.getTime(),cal2.getTime(),"f","Fundalara A vs Delfines",color[0],color[0]);
 			eventosCalendario.cargarEvento(e);
 		}
 		calendars.setModel(eventosCalendario.getModel());
@@ -143,21 +157,27 @@ public class Agenda extends GenericForwardComposer {
 	 
 	/*Ejemplo como crear un evento*/
 	public void onCreate$wndCalendario() {
+	
 //		SimpleCalendarEvent ce = new SimpleCalendarEvent();
-//		Date di = new Date(111, 11, 21, 11, 0);
-//		Date df = new Date(111, 11, 24, 13, 0);
+//		Date di = new Date(12, 01, 01, 10, 0);
+//		Date df = new Date(12, 01, 01, 13, 0);
 //		ce.setBeginDate(di);
 //		ce.setEndDate(df);
 //		ce.setContent("Leyner");
-//		ce.setTitle("Titulo");
+//		ce.setTitle("dasdsa dsadsad adsdasd asdsada saddasdas");
 //		ce.setContentColor(color[0]);
 //		ce.setHeaderColor(color[0]);
+//	
 //		
 //		EventosCalendario calendarEvents = new EventosCalendario();
 //		calendarEvents.cargarEvento(ce);
 //		calendars.setModel(calendarEvents.getModel());
 	}
 
+	public void onEventCreate$calendars(CalendarsEvent event){
+		
+	}
+	
 	public void onEventEdit$calendars(){
 //		Window win = (Window) execution.createComponents(
 //				form, null, null);
@@ -203,6 +223,8 @@ public class Agenda extends GenericForwardComposer {
 				calendars.getDefaultTimeZone()).getTime());
 		actualizarRangoCalendario();
 	}
+	
+	
 	
 	public void onCambiarMesSemana(ForwardEvent event){
 		if (event.getData().equals("arrow-left"))

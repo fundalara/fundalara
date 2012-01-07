@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page  language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -75,8 +75,8 @@
                 	</ul>
                 	</div>
                 </div>
-                <div class="art-content-layout">
-                    <div class="art-content-layout-row">
+                <div id="divMenu" class="art-content-layout" >
+                    <div class="art-content-layout-row"  >
                         <jsp:include page="index.zul"/>
                         <div class="art-layout-cell art-sidebar2">
                         <div class="art-layout-bg"></div>

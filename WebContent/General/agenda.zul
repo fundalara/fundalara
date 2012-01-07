@@ -9,8 +9,8 @@
 <?component name="divarrow" macro-uri="Calendario/divarrow.zul" inline="true"?>
 <?page title="Calendario" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window border="none" mode="embedded"
-		closable="true" width="695px" height="600px"
+	<window border="none" mode="embedded" 
+		closable="true" width="980px" height="600px"
 		apply="controlador.general.Agenda" id="wndCalendario">
 		<caption id="titulo" label="Calendario" >
 			<label sclass="labels" id="rangoCalendario"></label>

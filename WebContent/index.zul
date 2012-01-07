@@ -1,8 +1,13 @@
-<?page title="Auto Generated index.zul"?>
+<?page id="frmMenu" title="menu.zul"?>
 <zk>
 	<zscript><![CDATA[
 	public void enlace(String cad) {
 		cuerpo.setSrc(cad);
+	}
+	
+	public void agenda(){
+		divMenu.setVisible(false);
+		enlace("/General/agenda.zul");
 	}
 ]]></zscript>
 	<style>
@@ -10,14 +15,14 @@
 	</style>
 
 	<div style="display:inline">
-		<div style="float:left">
+		<div id="divMenu" style="float:left">
 			<tabbox mold="accordion">
 				<tabs>
 					<tab label="Registros" tooltip="nombre" />
 					<tab label="Funcionalidades Deportivas" />
 					<tab label="Funcionalidades Operativas" />
 					<tab label="Agenda"
-						onClick='enlace("/General/agenda.zul")' />
+						onClick='agenda()' />
 					<tab label="Reportes" />
 					<tab label="Configuraciones" />
 
