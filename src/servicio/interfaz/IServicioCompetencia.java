@@ -3,6 +3,7 @@ package servicio.interfaz;
 import java.util.List;
 
 import modelo.Competencia;
+import modelo.Juego;
 
 
 public interface IServicioCompetencia {
@@ -16,4 +17,6 @@ public interface IServicioCompetencia {
 	public abstract List<Competencia> listarActivos();
 	
 	public abstract List<Competencia> listarPorEstatus(int estatus);
+	
+
 }

@@ -12,6 +12,7 @@
     <filter-mapping>
         <filter-name>sessionmanager</filter-name>
         <servlet-name>SessionManager</servlet-name>
+   
     </filter-mapping>
      	
 	<listener>

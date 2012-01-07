@@ -1,118 +1,42 @@
 <?page title="Catalogo Ligas" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoLigas"?>
+
 <zk>
 
 	<div align="center">
-		<window id="FrmCatalogoLigas" title="Ligas Existentes" border="normal" width="400px" mode="modal" closable="true">
+		<window id="frmCatalogoLigas" apply="controlador.competencia.CntrlFrmCatalogoLigas" title="Ligas Existentes"
+			border="normal" width="400px" mode="modal" closable="true" height="350px">
 			<panel width="100%">
 				<panelchildren>
 					<div style="margin-top:5px">
-					<label value="Filtro"></label>
-					<textbox></textbox>
-					<button label="Buscar"></button>
+						<label value="Filtro"></label>
+						<textbox></textbox>
+						<button label="Buscar"></button>
 					</div>
-					<listbox mold="paging" pageSize="10" style="margin-top:5px">
+					<listbox id="lsbxLigas" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.ligas}"
+						height="240px" >
 						<listhead>
-							<listheader label="Nombre" align="center"
-								width="30%">
+							<listheader label="Nombre" align="center" width="55px">
 							</listheader>
-							<listheader label="Categoria" align="center"
-								width="22%">
+							<listheader label="Localidad" align="center" width="65px">
 							</listheader>
-							<listheader label="Localidad" align="center"
-								width="23%">
-							</listheader>
-							<listheader label="Teléfono" align="center"
-								width="25%">
-							</listheader>
-						</listhead>
-						
-						
-						
-						<listitem>
-							<listcell>Manuel Monsalve</listcell>
-							<listcell>Preparatoria</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2331897</listcell>
+						</listhead>  
+
+						<listitem self="@{each=liga}">
+							<listcell label="@{liga.nombre}"></listcell>
+                            <listcell label="@{liga.localidad}"></listcell>
+                           
 						</listitem>
-						<listitem>
-							<listcell>Monseñor Omar Cordero</listcell>
-							<listcell>Preinfantil</listcell>
-							<listcell>Barquisimeto Este</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>Monseñor Omar Cordero</listcell>
-							<listcell>Infantil</listcell>
-							<listcell>Barquisimeto Este</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558877</listcell>
-						</listitem>
-						<listitem>
-							<listcell>xxxxx</listcell>
-							<listcell>xxx</listcell>
-							<listcell>Barquisimeto</listcell>
-							<listcell>0251-2558879</listcell>
-						</listitem>
+
 					</listbox>
 					<div align="right">
-						<button
+						<button id="btnAceptar"
 							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
 						</button>
-						<button
-							image="../../Recursos/Imagenes/salir.png" label="Salir" onClick="Salir()">
+						<button id="btnSalir"
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							>
 						</button>
 					</div>
 
@@ -126,9 +50,7 @@
 		FrmCatalogoLigas.onClose();
 	}
 ]]></zscript>
-			
+
 		</window>
 	</div>
 </zk>
-
-

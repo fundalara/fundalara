@@ -4,6 +4,7 @@ import java.util.List;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.Estadio;
+import modelo.Juego;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -56,4 +57,6 @@ public class DaoCompetencia extends GenericDao {
 		return c.list();
 			
 	}
+	
+
 }

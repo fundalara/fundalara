@@ -40,7 +40,7 @@ public class SessionManager implements Filter
    //inicializar valores o solicitar recursos, pero eso ya lo hice arriba.
     public void init(FilterConfig filterConfig) throws ServletException
     {        
-        System.out.println("algo");
+  
     }
 
     //Este metodo se debe declarar por que viene especificado en la interfaz y es donde se deberia asignar una session
@@ -91,7 +91,7 @@ public class SessionManager implements Filter
     	 try
 	        {      	
 			   sessionFactory.close();
-			   System.out.println("session cerrada");
+
 	        }
 	        catch (HibernateException ex)
 	        {

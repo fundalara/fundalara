@@ -3,12 +3,23 @@ package controlador.general;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+
+
+import modelo.Competencia;
+import modelo.Juego;
 
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.util.Locales;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
@@ -21,17 +32,32 @@ import org.zkoss.zul.Span;
 import org.zkoss.zul.Timer;
 import org.zkoss.zul.Window;
 
+import servicio.implementacion.ServicioCompetencia;
+
+import comun.EstadoCompetencia;
+
 public class Agenda extends GenericForwardComposer {
+	
+	
 	Popup updateMsg;
 	Label popupLabel, rangoCalendario;
 	Caption titulo;
 	Timer timer;
 	Button hoy;
+	
 	Calendars calendars;
 	Span FDOW;
 	String form;
 	Listbox lsbxFiltro;
 	Listitem item;
+	
+	//Competencias
+	Component formulario;
+	Competencia competencia;
+	Button btnVer;
+	ServicioCompetencia servicioCompetencia;
+	
+	
 	/*
 	 * 0->Evento no registrado, 1->Evento pendiente, 2->Evento cancelado,
 	 * 3->Evento Finalizado
@@ -41,16 +67,13 @@ public class Agenda extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(Component component) throws Exception {
 		super.doAfterCompose(component);
+		formulario = component;
 		actualizarRangoCalendario();
 		lsbxFiltro.setSelectedIndex(0);
 	}
 
 	public void onSelect$lsbxFiltro(){
-		//filtro.removeItemAt(item.getIndex());
-//		if (filtro.getSelectedItem().getLabel().compareTo("Entrenamiento") == 0) {
-//			calendars.setReadonly(false);
-//			form = "Entrenamiento/Vistas/Auxiliar_Agenda.zul";
-//		}
+
 
 		switch (lsbxFiltro.getSelectedIndex()){
 		
@@ -60,7 +83,7 @@ public class Agenda extends GenericForwardComposer {
 			break;
 		}
 		case 2:{ //Competencia
-			alert("Competencia");
+			btnVer.setVisible(true);
 			break;
 		}	
 		case 3:{//mantenimiento
@@ -73,7 +96,49 @@ public class Agenda extends GenericForwardComposer {
 		}
 		}
 	}
+	
+	public void onClick$btnVer(){
+		
+		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmSelectorCompetencia.zul",null,null);        
+        catalogo.setVariable("formulario",formulario,false);
+		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				  competencia = (Competencia) formulario.getVariable("competencia",false);		
+				  cargarJuegos();
+			}
+		});
+	}
+	
+	
+	public void cargarJuegos(){
+		Set<Juego> juegos = competencia.getJuegos();
+		EventosCalendario eventosCalendario = new EventosCalendario();
+		
+		for (Iterator i = juegos.iterator(); i.hasNext();){
+			Juego j = (Juego) i.next();
+			
+			
+			Date fecha1 = j.getFecha();
+			Date fecha2 = new Date(fecha1.getYear(),fecha1.getMonth(),fecha1.getDate(),24,0);
+			SimpleCalendarEvent e = crearEvento(fecha1,fecha2,"un juego","un juego",color[0],color[0]);
+			eventosCalendario.cargarEvento(e);
+		}
+		calendars.setModel(eventosCalendario.getModel());
+	}
 
+	
+	public SimpleCalendarEvent crearEvento(Date fi,Date ff,String titulo,String contenido,String colorFondo,String colorEncabezado){
+		SimpleCalendarEvent ce = new SimpleCalendarEvent();
+		ce.setBeginDate(fi);
+		ce.setEndDate(ff);
+		ce.setTitle(titulo);
+		ce.setContent(contenido);
+		ce.setContentColor(colorFondo);
+		ce.setHeaderColor(colorEncabezado);
+		return ce;
+	}
+	 
 	/*Ejemplo como crear un evento*/
 	public void onCreate$wndCalendario() {
 		SimpleCalendarEvent ce = new SimpleCalendarEvent();
@@ -87,7 +152,7 @@ public class Agenda extends GenericForwardComposer {
 		ce.setHeaderColor(color[0]);
 		
 		EventosCalendario calendarEvents = new EventosCalendario();
-		calendarEvents.cargarEventos(ce);
+		calendarEvents.cargarEvento(ce);
 		calendars.setModel(calendarEvents.getModel());
 	}
 

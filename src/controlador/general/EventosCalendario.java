@@ -7,7 +7,7 @@ import org.zkoss.calendar.impl.SimpleCalendarModel;
 public class EventosCalendario {	
 	public SimpleCalendarModel model = new SimpleCalendarModel();
 	
-	public void cargarEventos(SimpleCalendarEvent ce){
+	public void cargarEvento(SimpleCalendarEvent ce){
 		model.add(ce);
 	}
 	

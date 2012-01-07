@@ -8,6 +8,7 @@ import dao.general.DaoCompetencia;
 
 import modelo.Competencia;
 import modelo.Divisa;
+import modelo.Juego;
 
 public class ServicioCompetencia implements IServicioCompetencia {
 
@@ -48,4 +49,5 @@ public class ServicioCompetencia implements IServicioCompetencia {
 		return daoCompetencia.listarPorEstatus(estatus);
 	}
 
+	
 }
