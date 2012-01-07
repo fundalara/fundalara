@@ -118,11 +118,14 @@ public class Agenda extends GenericForwardComposer {
 		for (Iterator i = juegos.iterator(); i.hasNext();){
 			Juego j = (Juego) i.next();
 			
-			
-			Date fecha1 = j.getFecha();
-			Date fecha2 = new Date(fecha1.getYear(),fecha1.getMonth(),fecha1.getDate(),24,0);
-			SimpleCalendarEvent e = crearEvento(fecha1,fecha2,"un juego","un juego",color[0],color[0]);
-			eventosCalendario.cargarEvento(e);
+			Calendar cal1 = Calendar.getInstance();
+			Calendar cal2 = Calendar.getInstance();
+			Date f = j.getFecha();
+			Date h = j.getHoraInicio();
+			cal1.set(f.getYear(),f.getMonth(),f.getDate(),h.getHours(),h.getMinutes(),0);
+			System.out.println(cal1.getTime().toString());
+			//SimpleCalendarEvent e = crearEvento(cal.getTime(),cal.getTime(),"un juego","un juego",color[0],color[0]);
+			//eventosCalendario.cargarEvento(e);
 		}
 		calendars.setModel(eventosCalendario.getModel());
 	}
