@@ -17,13 +17,13 @@ public class DaoDatoBasico extends GenericDao {
 	public List<DatoBasico> buscarPorTipoDato(TipoDato td) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
-		Transaction tx =  session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		Criteria c = getSession().createCriteria(DatoBasico.class);
 		c.add(Restrictions.eq("tipoDato", td));
 		c.add(Restrictions.eq("estatus", "A"));
 		return c.list();
 	}
-	
+
 	public List<DatoBasico> listarPorTipoDeDato(String s) {
 		// TODO Auto-generated method stub
 		List<DatoBasico> lista = new ArrayList<DatoBasico>();
@@ -54,17 +54,16 @@ public class DaoDatoBasico extends GenericDao {
 		c.add(Restrictions.eq("codigoDatoBasico", i));
 		return (DatoBasico) c.list().get(0);
 	}
-	
 
-	public List<DatoBasico> listarParroquias(){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria c = session.createCriteria(TipoDato.class);
-		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "parroquia")).list().get(0);
-          c = session.createCriteria(DatoBasico.class);
-          List list = c.add(Restrictions.eq("tipoDato",td)).list();
-          return list;
-		  
-	  }
+	public List<DatoBasico> listarParroquias() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c.add(Restrictions.eq("nombre", "parroquia"))
+				.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+	}
 }
