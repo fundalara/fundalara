@@ -1,11 +1,11 @@
 <?page title="REGISTRO DE INDICADORES" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<!-- <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="rmRegistroIndicadores" ?> -->
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 
 <zk>
 	<div align="center">
-		<window title="Registro de Indicadores " border="normal"
-			width="500px" height="auto" closable="true">
+		<window title="Registro de Indicadores" border="normal"
+			width="500px" height="auto" closable="true" apply="controlador.competencia.CntrlFrmRegistroIndicadores">
 			<zscript><![CDATA[
 	//@DECLARATION
 	public void Seleccion() {
@@ -15,7 +15,7 @@
 	public void Operador() {
 		formula.setText(formula.getText() + cmbOperador.getText());
 	}
-	public void Tipo() {
+	/*public void Tipo() {
 		if (cmbTipo.getText().equals("Sencillo")) {
 			pnlSencillo.setVisible(true);
 			pnlCompuesto.setVisible(false);
@@ -23,7 +23,7 @@
 			pnlSencillo.setVisible(false);
 			pnlCompuesto.setVisible(true);
 		}
-	}
+	}*/
 	public void Agregar() {
 		//		if (id1.toString().isEmpty()){
 
@@ -40,17 +40,21 @@
 						<column width="75%" />
 					</columns>
 					<rows>
-						<row style="border:none">						   
+						<row style="border:none">
 							<label value="Tipo Indicador" />
-							 <div>
-							<combobox id="cmbTipo" style="margin-top:5px" cols="13"
-								onChange="Tipo()">
-								<comboitem label="Sencillo" />
-								<comboitem label="Compuesto" />
-							</combobox>
-							<button id="btnBuscarInidicador"
-										image="../../Recursos/Imagenes/consultar.ico" >								
-							</button>
+							<div>
+								<combobox id="cmbTipo"
+									style="margin-top:5px" cols="13" 
+									model="@{cntrl.listTipoIndicador}">
+									<comboitem self="@{each=tipoIndicador}"
+										label="@{tipoIndicador.nombre}"
+										value="@{tipoIndicador}" />
+									<!-- 									<comboitem label="Sencillo" /> -->
+									<!-- 									<comboitem label="Compuesto" /> -->
+								</combobox>
+								<button id="btnBuscarInidicador"
+									image="../../Recursos/Imagenes/consultar.ico">
+								</button>
 							</div>
 						</row>
 					</rows>
@@ -78,7 +82,7 @@
 								</row>
 								<row align="left" style="border:none">
 									<label value="Abreviatura"></label>
-									<textbox cols="16" />								
+									<textbox cols="16" />
 									<label value="Nombre"></label>
 									<textbox cols="20" />
 								</row>
@@ -127,8 +131,12 @@
 									<textbox cols="16" />
 								</row>
 								<row align="left" style="border:none">
-									<label value="Seleccionar Indicador"></label>
-									<button id="btnBuscar" image="../../Recursos/Imagenes/consultar.ico" ></button>
+									<label
+										value="Seleccionar Indicador">
+									</label>
+									<button id="btnBuscar"
+										image="../../Recursos/Imagenes/consultar.ico">
+									</button>
 								</row>
 							</rows>
 						</grid>
@@ -206,43 +214,53 @@
 															label="Carreras Anotadas" />
 													</listitem>
 												</listbox>
-												
+
 												<div align="left">
-												<grid >
-										
-												
-													<!-- <columns>
-													<column width="20%"></column>
-													<column width="20%"></column>
-													<column width="20%"></column>
-													<column width="20%"></column>												
-													<column width="20%"></column>													
-													</columns>-->
-													
-													<rows>
-														<row>
-															<button id="btnSumar" label="+"></button>
-															<button id="btnRestar" label="-"></button>
-															<button id="btnMultiplicar" label="*"></button>
-															<button id="btnDividir" label="/"></button>
-															<button id="btnParentesisAbre" label="(" ></button>
-															<!-- <button id="btnParentesisCierra" label=")" width="16,6%"></button>-->
-														</row>
-																											
-														<row
-															align="left" style="border-style:none">
-															<label
-																value="Fórmula " />
-														</row>
-														
-													<!--  <row>
-															<textbox
+													<grid>
+
+
+														<!-- <columns>
+															<column width="20%"></column>
+															<column width="20%"></column>
+															<column width="20%"></column>
+															<column width="20%"></column>												
+															<column width="20%"></column>													
+															</columns>-->
+
+														<rows>
+															<row>
+																<button
+																	id="btnSumar" label="+">
+																</button>
+																<button
+																	id="btnRestar" label="-">
+																</button>
+																<button
+																	id="btnMultiplicar" label="*">
+																</button>
+																<button
+																	id="btnDividir" label="/">
+																</button>
+																<button
+																	id="btnParentesisAbre" label="(">
+																</button>
+																<!-- <button id="btnParentesisCierra" label=")" width="16,6%"></button>-->
+															</row>
+
+															<row
+																align="left" style="border-style:none">
+																<label
+																	value="Fórmula " />
+															</row>
+
+															<!--  <row>
+																<textbox
 																id="txtFormula"  multiline="true"
 																value="=(H+(2B*2)+(3B*3)+(HR*4))/VB" />
-														</row>-->
-													</rows>
-												</grid>
-											</div>
+																</row>-->
+														</rows>
+													</grid>
+												</div>
 											</row>
 										</rows>
 									</grid>
@@ -259,7 +277,8 @@
 									image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 								</button>
 								<button
-									image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
+									image="../../Recursos/Imagenes/eliminar.ico"
+									label="Eliminar">
 								</button>
 								<button
 									image="../../Recursos/Imagenes/cancelar.ico"
