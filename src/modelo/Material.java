@@ -1,16 +1,18 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "material", schema = "public")
+@SequenceGenerator(name="material_seq", sequenceName="material_codigo_material_seq")
 public class Material implements java.io.Serializable {
 
 	private int codigoMaterial;
@@ -25,7 +28,7 @@ public class Material implements java.io.Serializable {
 	private Almacen almacen;
 	private DatoBasico datoBasicoByCodigoUnidadMedida;
 	private String descripcion;
-	private int cantidadExistencia;
+	private Integer cantidadExistencia;
 	private Integer cantidadPresentacion;
 	private int cantidadDisponible;
 	private boolean reutilizable;
@@ -54,13 +57,11 @@ public class Material implements java.io.Serializable {
 
 	public Material(int codigoMaterial,
 			DatoBasico datoBasicoByCodigoTipoMaterial, Almacen almacen,
-			DatoBasico datoBasicoByCodigoUnidadMedida, String descripcion,
-			int cantidadExistencia, int cantidadDisponible,
+			String descripcion, int cantidadExistencia, int cantidadDisponible,
 			boolean reutilizable, char estatus) {
 		this.codigoMaterial = codigoMaterial;
 		this.datoBasicoByCodigoTipoMaterial = datoBasicoByCodigoTipoMaterial;
 		this.almacen = almacen;
-		this.datoBasicoByCodigoUnidadMedida = datoBasicoByCodigoUnidadMedida;
 		this.descripcion = descripcion;
 		this.cantidadExistencia = cantidadExistencia;
 		this.cantidadDisponible = cantidadDisponible;
@@ -105,6 +106,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(generator="material_seq")
 	@Column(name = "codigo_material", unique = true, nullable = false)
 	public int getCodigoMaterial() {
 		return this.codigoMaterial;
@@ -126,7 +128,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_almacen", nullable = false)
+	@JoinColumn(name = "codigo_almacen")
 	public Almacen getAlmacen() {
 		return this.almacen;
 	}
@@ -136,7 +138,7 @@ public class Material implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_unidad_medida", nullable = false)
+	@JoinColumn(name = "codigo_unidad_medida")
 	public DatoBasico getDatoBasicoByCodigoUnidadMedida() {
 		return this.datoBasicoByCodigoUnidadMedida;
 	}
@@ -156,11 +158,11 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Column(name = "cantidad_existencia", nullable = false)
-	public int getCantidadExistencia() {
+	public Integer getCantidadExistencia() {
 		return this.cantidadExistencia;
 	}
 
-	public void setCantidadExistencia(int cantidadExistencia) {
+	public void setCantidadExistencia(Integer cantidadExistencia) {
 		this.cantidadExistencia = cantidadExistencia;
 	}
 
@@ -294,5 +296,4 @@ public class Material implements java.io.Serializable {
 			Set<CuentaPagarMaterial> cuentaPagarMaterials_1) {
 		this.cuentaPagarMaterials_1 = cuentaPagarMaterials_1;
 	}
-
 }

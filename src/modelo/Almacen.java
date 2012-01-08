@@ -1,16 +1,19 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 20-dic-2011 13:32:22 by Hibernate Tools 3.4.0.CR1
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -18,13 +21,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "almacen", schema = "public")
+@SequenceGenerator(name="almacen_seq", sequenceName="almacen_codigo_almacen_seq_1")
 public class Almacen implements java.io.Serializable {
 
 	private int codigoAlmacen;
 	private Instalacion instalacion;
 	private String nombre;
 	private String descripcion;
-	private String capacidad;
+	private BigDecimal capacidad;
 	private char estatus;
 	private Set<Material> materials = new HashSet<Material>(0);
 
@@ -32,16 +36,17 @@ public class Almacen implements java.io.Serializable {
 	}
 
 	public Almacen(int codigoAlmacen, Instalacion instalacion, String nombre,
-			String descripcion, char estatus) {
+			String descripcion, BigDecimal capacidad, char estatus) {
 		this.codigoAlmacen = codigoAlmacen;
 		this.instalacion = instalacion;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.capacidad = capacidad;
 		this.estatus = estatus;
 	}
 
 	public Almacen(int codigoAlmacen, Instalacion instalacion, String nombre,
-			String descripcion, String capacidad, char estatus,
+			String descripcion, BigDecimal capacidad, char estatus,
 			Set<Material> materials) {
 		this.codigoAlmacen = codigoAlmacen;
 		this.instalacion = instalacion;
@@ -53,6 +58,7 @@ public class Almacen implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(generator="almacen_seq")
 	@Column(name = "codigo_almacen", unique = true, nullable = false)
 	public int getCodigoAlmacen() {
 		return this.codigoAlmacen;
@@ -90,12 +96,12 @@ public class Almacen implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Column(name = "capacidad")
-	public String getCapacidad() {
+	@Column(name = "capacidad", nullable = false, precision = 131089, scale = 0)
+	public BigDecimal getCapacidad() {
 		return this.capacidad;
 	}
 
-	public void setCapacidad(String capacidad) {
+	public void setCapacidad(BigDecimal capacidad) {
 		this.capacidad = capacidad;
 	}
 
