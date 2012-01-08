@@ -1,5 +1,5 @@
-<window title="Planificar Actividad" border="normal" mode="embedded"
-	width="100%" id="crearActividad" closable="false">
+<window title="Planificar Actividad" border="normal" mode="modal"
+	width="100%" id="crearActividad" closable="true">
 
 	<grid height="30%" style="boder:none">
 		<columns>

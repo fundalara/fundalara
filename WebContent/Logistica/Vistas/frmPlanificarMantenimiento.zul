@@ -1,7 +1,7 @@
 
 <window title="Planificación de Mantenimientos" border="normal"
-	mode="embedded" width="100%" id="crearMantenimiento"
-	closable="false">
+	mode="modal" width="100%" id="crearMantenimiento"
+	closable="true">
  
  
 	<grid height="30%" style="boder:none">
