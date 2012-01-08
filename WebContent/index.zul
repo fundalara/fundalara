@@ -190,8 +190,7 @@
 															label="Recaudos"
 															onClick='enlace("Jugador/Vistas/configurarRecaudo.zul")' />
 													</treerow>
-												</treeitem>
-												<treeitem>
+												</treeitem>												
 												<treeitem>
 													<treerow>
 														<treecell
