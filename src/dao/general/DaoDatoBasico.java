@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import comun.TipoDatoBasico;
+
 import modelo.DatoBasico;
 import modelo.TipoDato;
 import dao.generico.GenericDao;
@@ -65,5 +67,36 @@ public class DaoDatoBasico extends GenericDao {
 		c = session.createCriteria(DatoBasico.class);
 		List list = c.add(Restrictions.eq("tipoDato", td)).list();
 		return list;
+	}
+	
+	/**
+	 * Busca los registros de un tipo de dato en particular
+	 * @param tipoDato tipo de dato a buscar
+	 * @return lista de los datos asociados al tipo de dato suministrado
+	 * 
+	 */
+	public List<DatoBasico> buscar(TipoDatoBasico tipoDato){		
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("tipoDato.codigoTipoDato", tipoDato.getCodigo()));
+		c.add(Restrictions.eq("estatus", "A"));
+		List<DatoBasico> lista = c.list();
+		return lista;
+	}
+	
+	/**
+	 * Busca los datos que tiene como padre el datoBasico suministrado
+	 * @param datoBasico dato del cual se desea buscar sus hijos (relacion de dependencia hacia el)
+	 * @return lista de datos hijos
+	 */
+	public List<DatoBasico> buscarPorRelacion(DatoBasico datoBasico){		
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("datoBasico.codigoDatoBasico",datoBasico.getCodigoDatoBasico()));
+		c.add(Restrictions.eq("estatus", "A"));
+		List<DatoBasico> lista = c.list();
+		return lista;
 	}
 }

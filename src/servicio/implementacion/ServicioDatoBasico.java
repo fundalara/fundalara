@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
 
+import comun.TipoDatoBasico;
+
 import servicio.interfaz.IServicioDatoBasico;
 
 import dao.general.DaoDatoBasico;
@@ -77,5 +79,14 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		return daoDatoBasico.listarParroquias();
 	}
 
+	@Override
+	public List<DatoBasico> buscar(TipoDatoBasico tipoDato) {
+		return daoDatoBasico.buscar(tipoDato);
+	}
+
+	@Override
+	public List<DatoBasico> buscarDatosPorRelacion(DatoBasico datoBasico) {
+		return daoDatoBasico.buscarPorRelacion(datoBasico);
+	}
 
 }
