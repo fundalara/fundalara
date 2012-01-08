@@ -192,15 +192,32 @@
 													</treerow>
 												</treeitem>
 												<treeitem>
+												<treeitem>
 													<treerow>
 														<treecell
-															label="Materiales" />
+															label="Materiales" 
+															onClick='enlace("Logistica/Vistas/frmRegistrarMaterial.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Instalaciones" />
+															label="Instalaciones"
+															onClick='enlace("Logistica/Vistas/frmRegistrarInstalacion.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Almacenes"
+															onClick='enlace("Logistica/Vistas/frmRegistrarAlmacen.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Plantilla Mantenimiento"
+															onClick='enlace("Logistica/Vistas/frmPlantillaMantenimiento.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -399,7 +416,8 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Generar Requisiciones" />
+													label="Generar Requisiciones"
+													onClick='enlace("Logistica/Vistas/frmGenerarRequisicion.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem>
@@ -445,19 +463,22 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Solicitudes de Mantenimiento" />
+													label="Solicitudes de Mantenimiento" 
+													onClick='enlace("Logistica/Vistas/frmSolicitudMantenimiento.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Actualización de Almacen" />
+													label="Recepción de Materiales"
+													onClick='enlace("Logistica/Vistas/frmRecepcionMaterial.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Distribución de Materiales" />
+													label="Préstamo/Devolución de Materiales"
+													onClick='enlace("Logistica/Vistas/frmPrestamoDevolucion.zul")' />
 											</treerow>
 										</treeitem>
 									</treechildren>
