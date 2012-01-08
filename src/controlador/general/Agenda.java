@@ -97,11 +97,15 @@ public class Agenda extends GenericForwardComposer {
 			break;
 		}	
 		case 3:{//mantenimiento
-			alert("Mantenimiento");
+			calendars.setReadonly(false);
+			btnVer.setVisible(false);
+			calendars.setMold("default");
 			break;
 		}
 		case 4:{//Actividad Complementaria
-			alert("Actividad Complementaria");
+			calendars.setReadonly(false);
+			btnVer.setVisible(false);
+			calendars.setMold("default");
 			break;
 		}
 		}
@@ -176,6 +180,28 @@ public class Agenda extends GenericForwardComposer {
 
 	public void onEventCreate$calendars(CalendarsEvent event){
 		
+	}
+	
+	//Se invoca cuando se da click en el calendario para crear un evento nuevo
+	public void onEventCreate$calendars(ForwardEvent event) {
+		
+		switch (lsbxFiltro.getSelectedIndex()){
+		
+		case 1:{ //Entrenamiento	
+			break;
+		}
+		case 2:{ //Competencia	
+			break;
+		}	
+		case 3:{//Mantenimiento			
+			Component c = Executions.createComponents("Logistica/Vistas/frmPlanificarMantenimiento.zul", null, null);
+			break;
+		}
+		case 4:{//Actividad Complementaria
+			Component c = Executions.createComponents("Logistica/Vistas/frmPlanificarActividad.zul", null, null);
+			break;
+		}
+		}
 	}
 	
 	public void onEventEdit$calendars(){
