@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,51 +25,43 @@ public class ActividadCalendario implements java.io.Serializable {
 	private Competencia competencia;
 	private Juego juego;
 	private Actividad actividad;
+	private Sesion sesion;
 	private Date fechaInicio;
 	private Date fechaCulminacion;
 	private String descripcion;
 	private char estatus;
 	private String color;
-	private Date horaInicio;
-	private Date horaFin;
 
 	public ActividadCalendario() {
 	}
 
 	public ActividadCalendario(int codigoActividadCalendario,
-			DatoBasico datoBasico, Competencia competencia, Juego juego,
-			Actividad actividad, Date fechaInicio, Date fechaCulminacion,
-			String descripcion, char estatus, Date horaInicio, Date horaFin) {
+			DatoBasico datoBasico, Date fechaInicio, Date fechaCulminacion,
+			String descripcion, char estatus) {
 		this.codigoActividadCalendario = codigoActividadCalendario;
 		this.datoBasico = datoBasico;
-		this.competencia = competencia;
-		this.juego = juego;
-		this.actividad = actividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
 	}
 
 	public ActividadCalendario(int codigoActividadCalendario,
 			DatoBasico datoBasico, Competencia competencia, Juego juego,
-			Actividad actividad, Date fechaInicio, Date fechaCulminacion,
-			String descripcion, char estatus, String color, Date horaInicio,
-			Date horaFin) {
+			Actividad actividad, Sesion sesion, Date fechaInicio,
+			Date fechaCulminacion, String descripcion, char estatus,
+			String color) {
 		this.codigoActividadCalendario = codigoActividadCalendario;
 		this.datoBasico = datoBasico;
 		this.competencia = competencia;
 		this.juego = juego;
 		this.actividad = actividad;
+		this.sesion = sesion;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.color = color;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
 	}
 
 	@Id
@@ -93,7 +85,7 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_competencia", nullable = false)
+	@JoinColumn(name = "codigo_competencia")
 	public Competencia getCompetencia() {
 		return this.competencia;
 	}
@@ -103,7 +95,7 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego", nullable = false)
+	@JoinColumn(name = "codigo_juego")
 	public Juego getJuego() {
 		return this.juego;
 	}
@@ -113,13 +105,23 @@ public class ActividadCalendario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_actividad", nullable = false)
+	@JoinColumn(name = "codigo_actividad")
 	public Actividad getActividad() {
 		return this.actividad;
 	}
 
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_sesion")
+	public Sesion getSesion() {
+		return this.sesion;
+	}
+
+	public void setSesion(Sesion sesion) {
+		this.sesion = sesion;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -167,26 +169,6 @@ public class ActividadCalendario implements java.io.Serializable {
 
 	public void setColor(String color) {
 		this.color = color;
-	}
-
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_inicio", nullable = false, length = 15)
-	public Date getHoraInicio() {
-		return this.horaInicio;
-	}
-
-	public void setHoraInicio(Date horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_fin", nullable = false, length = 15)
-	public Date getHoraFin() {
-		return this.horaFin;
-	}
-
-	public void setHoraFin(Date horaFin) {
-		this.horaFin = horaFin;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,22 +21,21 @@ import javax.persistence.TemporalType;
 public class Horario implements java.io.Serializable {
 
 	private int codigoHorario;
-	private DatoBasico datoBasico;
 	private PlanTemporada planTemporada;
-	private Date horInicio;
+	private DatoBasico datoBasico;
+	private Date horaInicio;
 	private Date horaFin;
 	private char estatus;
 
 	public Horario() {
 	}
 
-	public Horario(int codigoHorario, DatoBasico datoBasico,
-			PlanTemporada planTemporada, Date horInicio, Date horaFin,
-			char estatus) {
+	public Horario(int codigoHorario, PlanTemporada planTemporada,
+			DatoBasico datoBasico, Date horaInicio, Date horaFin, char estatus) {
 		this.codigoHorario = codigoHorario;
-		this.datoBasico = datoBasico;
 		this.planTemporada = planTemporada;
-		this.horInicio = horInicio;
+		this.datoBasico = datoBasico;
+		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
 		this.estatus = estatus;
 	}
@@ -52,16 +51,6 @@ public class Horario implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_dato_basico", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_plan_temporada", nullable = false)
 	public PlanTemporada getPlanTemporada() {
 		return this.planTemporada;
@@ -71,18 +60,28 @@ public class Horario implements java.io.Serializable {
 		this.planTemporada = planTemporada;
 	}
 
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hor_inicio", nullable = false, length = 15)
-	public Date getHorInicio() {
-		return this.horInicio;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dia", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
 	}
 
-	public void setHorInicio(Date horInicio) {
-		this.horInicio = horInicio;
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
 	}
 
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_fin", nullable = false, length = 15)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "hora_inicio", nullable = false, length = 13)
+	public Date getHoraInicio() {
+		return this.horaInicio;
+	}
+
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "hora_fin", nullable = false, length = 13)
 	public Date getHoraFin() {
 		return this.horaFin;
 	}

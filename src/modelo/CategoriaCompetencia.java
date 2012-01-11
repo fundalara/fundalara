@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -26,13 +26,20 @@ public class CategoriaCompetencia implements java.io.Serializable {
 	private Categoria categoria;
 	private Competencia competencia;
 	private Date duracionHora;
-	private int duracionInning;
+	private Integer duracionInning;
 
 	public CategoriaCompetencia() {
 	}
 
 	public CategoriaCompetencia(CategoriaCompetenciaId id, Categoria categoria,
-			Competencia competencia, Date duracionHora, int duracionInning) {
+			Competencia competencia) {
+		this.id = id;
+		this.categoria = categoria;
+		this.competencia = competencia;
+	}
+
+	public CategoriaCompetencia(CategoriaCompetenciaId id, Categoria categoria,
+			Competencia competencia, Date duracionHora, Integer duracionInning) {
 		this.id = id;
 		this.categoria = categoria;
 		this.competencia = competencia;
@@ -73,7 +80,7 @@ public class CategoriaCompetencia implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "duracion_hora", nullable = false, length = 15)
+	@Column(name = "duracion_hora", length = 15)
 	public Date getDuracionHora() {
 		return this.duracionHora;
 	}
@@ -82,12 +89,12 @@ public class CategoriaCompetencia implements java.io.Serializable {
 		this.duracionHora = duracionHora;
 	}
 
-	@Column(name = "duracion_inning", nullable = false)
-	public int getDuracionInning() {
+	@Column(name = "duracion_inning")
+	public Integer getDuracionInning() {
 		return this.duracionInning;
 	}
 
-	public void setDuracionInning(int duracionInning) {
+	public void setDuracionInning(Integer duracionInning) {
 		this.duracionInning = duracionInning;
 	}
 

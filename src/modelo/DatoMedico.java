@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -39,11 +39,10 @@ public class DatoMedico implements java.io.Serializable {
 	}
 
 	public DatoMedico(int codigoDatoMedico, Medico medico, Jugador jugador,
-			Date fechaReincorporacion, char estatus) {
+			char estatus) {
 		this.codigoDatoMedico = codigoDatoMedico;
 		this.medico = medico;
 		this.jugador = jugador;
-		this.fechaReincorporacion = fechaReincorporacion;
 		this.estatus = estatus;
 	}
 
@@ -103,7 +102,7 @@ public class DatoMedico implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_reincorporacion", nullable = false, length = 13)
+	@Column(name = "fecha_reincorporacion", length = 13)
 	public Date getFechaReincorporacion() {
 		return this.fechaReincorporacion;
 	}

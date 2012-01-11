@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +25,7 @@ public class Ascenso implements java.io.Serializable {
 
 	private int codigoAscenso;
 	private Roster roster;
-	private DatoBasico datoBasico;
+	private String tipoAscenso;
 	private Date fechaAscenso;
 	private char estatus;
 	private Set<DocumentoAscenso> documentoAscensos = new HashSet<DocumentoAscenso>(
@@ -34,21 +34,21 @@ public class Ascenso implements java.io.Serializable {
 	public Ascenso() {
 	}
 
-	public Ascenso(int codigoAscenso, Roster roster, DatoBasico datoBasico,
+	public Ascenso(int codigoAscenso, Roster roster, String tipoAscenso,
 			Date fechaAscenso, char estatus) {
 		this.codigoAscenso = codigoAscenso;
 		this.roster = roster;
-		this.datoBasico = datoBasico;
+		this.tipoAscenso = tipoAscenso;
 		this.fechaAscenso = fechaAscenso;
 		this.estatus = estatus;
 	}
 
-	public Ascenso(int codigoAscenso, Roster roster, DatoBasico datoBasico,
+	public Ascenso(int codigoAscenso, Roster roster, String tipoAscenso,
 			Date fechaAscenso, char estatus,
 			Set<DocumentoAscenso> documentoAscensos) {
 		this.codigoAscenso = codigoAscenso;
 		this.roster = roster;
-		this.datoBasico = datoBasico;
+		this.tipoAscenso = tipoAscenso;
 		this.fechaAscenso = fechaAscenso;
 		this.estatus = estatus;
 		this.documentoAscensos = documentoAscensos;
@@ -74,14 +74,13 @@ public class Ascenso implements java.io.Serializable {
 		this.roster = roster;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_ascenso", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "tipo_ascenso", nullable = false)
+	public String getTipoAscenso() {
+		return this.tipoAscenso;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setTipoAscenso(String tipoAscenso) {
+		this.tipoAscenso = tipoAscenso;
 	}
 
 	@Temporal(TemporalType.DATE)

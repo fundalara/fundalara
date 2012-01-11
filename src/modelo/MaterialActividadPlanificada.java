@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,39 +17,50 @@ import javax.persistence.Table;
 @Table(name = "material_actividad_planificada", schema = "public")
 public class MaterialActividadPlanificada implements java.io.Serializable {
 
-	private MaterialActividadPlanificadaId id;
+	private int codigoMaterialActividadPlanificada;
 	private PlanificacionActividad planificacionActividad;
 	private Material material;
+	private Juego juego;
+	private Sesion sesion;
 	private char estatus;
 	private int cantidadRequerida;
 
 	public MaterialActividadPlanificada() {
 	}
 
-	public MaterialActividadPlanificada(MaterialActividadPlanificadaId id,
-			PlanificacionActividad planificacionActividad, Material material,
-			char estatus, int cantidadRequerida) {
-		this.id = id;
-		this.planificacionActividad = planificacionActividad;
+	public MaterialActividadPlanificada(int codigoMaterialActividadPlanificada,
+			Material material, char estatus, int cantidadRequerida) {
+		this.codigoMaterialActividadPlanificada = codigoMaterialActividadPlanificada;
 		this.material = material;
 		this.estatus = estatus;
 		this.cantidadRequerida = cantidadRequerida;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoPlanificacionActividad", column = @Column(name = "codigo_planificacion_actividad", nullable = false)),
-			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)) })
-	public MaterialActividadPlanificadaId getId() {
-		return this.id;
+	public MaterialActividadPlanificada(int codigoMaterialActividadPlanificada,
+			PlanificacionActividad planificacionActividad, Material material,
+			Juego juego, Sesion sesion, char estatus, int cantidadRequerida) {
+		this.codigoMaterialActividadPlanificada = codigoMaterialActividadPlanificada;
+		this.planificacionActividad = planificacionActividad;
+		this.material = material;
+		this.juego = juego;
+		this.sesion = sesion;
+		this.estatus = estatus;
+		this.cantidadRequerida = cantidadRequerida;
 	}
 
-	public void setId(MaterialActividadPlanificadaId id) {
-		this.id = id;
+	@Id
+	@Column(name = "codigo_material_actividad_planificada", unique = true, nullable = false)
+	public int getCodigoMaterialActividadPlanificada() {
+		return this.codigoMaterialActividadPlanificada;
+	}
+
+	public void setCodigoMaterialActividadPlanificada(
+			int codigoMaterialActividadPlanificada) {
+		this.codigoMaterialActividadPlanificada = codigoMaterialActividadPlanificada;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_planificacion_actividad", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_planificacion_actividad")
 	public PlanificacionActividad getPlanificacionActividad() {
 		return this.planificacionActividad;
 	}
@@ -62,13 +71,33 @@ public class MaterialActividadPlanificada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_material", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_material", nullable = false)
 	public Material getMaterial() {
 		return this.material;
 	}
 
 	public void setMaterial(Material material) {
 		this.material = material;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_juego")
+	public Juego getJuego() {
+		return this.juego;
+	}
+
+	public void setJuego(Juego juego) {
+		this.juego = juego;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_sesion")
+	public Sesion getSesion() {
+		return this.sesion;
+	}
+
+	public void setSesion(Sesion sesion) {
+		this.sesion = sesion;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

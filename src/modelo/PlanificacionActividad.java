@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 	private char estatus;
 	private boolean actividadPeriodico;
 	private boolean actividadPlantilla;
+	private String descripcion;
 	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
 			0);
 	private Set<Actividad> actividads = new HashSet<Actividad>(0);
@@ -40,18 +41,21 @@ public class PlanificacionActividad implements java.io.Serializable {
 
 	public PlanificacionActividad(int codigoPlanificacionActividad,
 			DatoBasico datoBasico, Instalacion instalacion, char estatus,
-			boolean actividadPeriodico, boolean actividadPlantilla) {
+			boolean actividadPeriodico, boolean actividadPlantilla,
+			String descripcion) {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
 		this.instalacion = instalacion;
 		this.estatus = estatus;
 		this.actividadPeriodico = actividadPeriodico;
 		this.actividadPlantilla = actividadPlantilla;
+		this.descripcion = descripcion;
 	}
 
 	public PlanificacionActividad(int codigoPlanificacionActividad,
 			DatoBasico datoBasico, Instalacion instalacion, char estatus,
 			boolean actividadPeriodico, boolean actividadPlantilla,
+			String descripcion,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
 			Set<Actividad> actividads,
 			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
@@ -63,6 +67,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 		this.estatus = estatus;
 		this.actividadPeriodico = actividadPeriodico;
 		this.actividadPlantilla = actividadPlantilla;
+		this.descripcion = descripcion;
 		this.materialActividadPlanificadas = materialActividadPlanificadas;
 		this.actividads = actividads;
 		this.personalActividadPlanificadas = personalActividadPlanificadas;
@@ -125,6 +130,15 @@ public class PlanificacionActividad implements java.io.Serializable {
 
 	public void setActividadPlantilla(boolean actividadPlantilla) {
 		this.actividadPlantilla = actividadPlantilla;
+	}
+
+	@Column(name = "descripcion", nullable = false)
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")

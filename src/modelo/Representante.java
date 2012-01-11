@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,17 +25,15 @@ public class Representante implements java.io.Serializable {
 
 	private int codigoFamiliarJugador;
 	private FamiliarJugador familiarJugador;
-	private String cedulaFamiliar;
 	private Date fechaAsignacion;
 	private Date fechaRetiro;
 
 	public Representante() {
 	}
 
-	public Representante(FamiliarJugador familiarJugador,
-			String cedulaFamiliar, Date fechaAsignacion, Date fechaRetiro) {
+	public Representante(FamiliarJugador familiarJugador, Date fechaAsignacion,
+			Date fechaRetiro) {
 		this.familiarJugador = familiarJugador;
-		this.cedulaFamiliar = cedulaFamiliar;
 		this.fechaAsignacion = fechaAsignacion;
 		this.fechaRetiro = fechaRetiro;
 	}
@@ -60,15 +58,6 @@ public class Representante implements java.io.Serializable {
 
 	public void setFamiliarJugador(FamiliarJugador familiarJugador) {
 		this.familiarJugador = familiarJugador;
-	}
-
-	@Column(name = "cedula_familiar", nullable = false)
-	public String getCedulaFamiliar() {
-		return this.cedulaFamiliar;
-	}
-
-	public void setCedulaFamiliar(String cedulaFamiliar) {
-		this.cedulaFamiliar = cedulaFamiliar;
 	}
 
 	@Temporal(TemporalType.DATE)

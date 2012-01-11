@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,34 +21,46 @@ import javax.persistence.TemporalType;
 @Table(name = "egreso", schema = "public")
 public class Egreso implements java.io.Serializable {
 
+	private int codigoEgreso;
 	private String numeroDocumento;
 	private Date fechaPago;
 	private char estatus;
 	private Set<EgresoCuentaPagar> egresoCuentaPagars = new HashSet<EgresoCuentaPagar>(
 			0);
-	private EgresoFormaPago egresoFormaPago;
+	private Set<EgresoFormaPago> egresoFormaPagos = new HashSet<EgresoFormaPago>(
+			0);
 
 	public Egreso() {
 	}
 
-	public Egreso(String numeroDocumento, Date fechaPago, char estatus) {
-		this.numeroDocumento = numeroDocumento;
+	public Egreso(int codigoEgreso, Date fechaPago, char estatus) {
+		this.codigoEgreso = codigoEgreso;
 		this.fechaPago = fechaPago;
 		this.estatus = estatus;
 	}
 
-	public Egreso(String numeroDocumento, Date fechaPago, char estatus,
-			Set<EgresoCuentaPagar> egresoCuentaPagars,
-			EgresoFormaPago egresoFormaPago) {
+	public Egreso(int codigoEgreso, String numeroDocumento, Date fechaPago,
+			char estatus, Set<EgresoCuentaPagar> egresoCuentaPagars,
+			Set<EgresoFormaPago> egresoFormaPagos) {
+		this.codigoEgreso = codigoEgreso;
 		this.numeroDocumento = numeroDocumento;
 		this.fechaPago = fechaPago;
 		this.estatus = estatus;
 		this.egresoCuentaPagars = egresoCuentaPagars;
-		this.egresoFormaPago = egresoFormaPago;
+		this.egresoFormaPagos = egresoFormaPagos;
 	}
 
 	@Id
-	@Column(name = "numero_documento", unique = true, nullable = false)
+	@Column(name = "codigo_egreso", unique = true, nullable = false)
+	public int getCodigoEgreso() {
+		return this.codigoEgreso;
+	}
+
+	public void setCodigoEgreso(int codigoEgreso) {
+		this.codigoEgreso = codigoEgreso;
+	}
+
+	@Column(name = "numero_documento")
 	public String getNumeroDocumento() {
 		return this.numeroDocumento;
 	}
@@ -86,13 +97,13 @@ public class Egreso implements java.io.Serializable {
 		this.egresoCuentaPagars = egresoCuentaPagars;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "egreso")
-	public EgresoFormaPago getEgresoFormaPago() {
-		return this.egresoFormaPago;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "egreso")
+	public Set<EgresoFormaPago> getEgresoFormaPagos() {
+		return this.egresoFormaPagos;
 	}
 
-	public void setEgresoFormaPago(EgresoFormaPago egresoFormaPago) {
-		this.egresoFormaPago = egresoFormaPago;
+	public void setEgresoFormaPagos(Set<EgresoFormaPago> egresoFormaPagos) {
+		this.egresoFormaPagos = egresoFormaPagos;
 	}
 
 }

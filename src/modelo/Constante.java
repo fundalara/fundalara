@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,11 +28,9 @@ public class Constante implements java.io.Serializable {
 	public Constante() {
 	}
 
-	public Constante(int codigoConstante, String abreviatura, String nombre,
-			char estatus) {
+	public Constante(int codigoConstante, String abreviatura, char estatus) {
 		this.codigoConstante = codigoConstante;
 		this.abreviatura = abreviatura;
-		this.nombre = nombre;
 		this.estatus = estatus;
 	}
 
@@ -64,7 +62,7 @@ public class Constante implements java.io.Serializable {
 		this.abreviatura = abreviatura;
 	}
 
-	@Column(name = "nombre", nullable = false)
+	@Column(name = "nombre")
 	public String getNombre() {
 		return this.nombre;
 	}

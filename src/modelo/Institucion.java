@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,8 @@ import javax.persistence.Table;
 public class Institucion implements java.io.Serializable {
 
 	private int codigoInstitucion;
-	private DatoBasico datoBasico;
+	private DatoBasico datoBasicoByCodigoTipoInstitucion;
+	private DatoBasico datoBasicoByCodigoParroquia;
 	private String nombre;
 	private String direccion;
 	private char estatus;
@@ -31,20 +32,23 @@ public class Institucion implements java.io.Serializable {
 	public Institucion() {
 	}
 
-	public Institucion(int codigoInstitucion, DatoBasico datoBasico,
-			String nombre, String direccion, char estatus) {
+	public Institucion(int codigoInstitucion,
+			DatoBasico datoBasicoByCodigoTipoInstitucion, String nombre,
+			char estatus) {
 		this.codigoInstitucion = codigoInstitucion;
-		this.datoBasico = datoBasico;
+		this.datoBasicoByCodigoTipoInstitucion = datoBasicoByCodigoTipoInstitucion;
 		this.nombre = nombre;
-		this.direccion = direccion;
 		this.estatus = estatus;
 	}
 
-	public Institucion(int codigoInstitucion, DatoBasico datoBasico,
-			String nombre, String direccion, char estatus,
-			Set<DatoAcademico> datoAcademicos, Set<DatoSocial> datoSocials) {
+	public Institucion(int codigoInstitucion,
+			DatoBasico datoBasicoByCodigoTipoInstitucion,
+			DatoBasico datoBasicoByCodigoParroquia, String nombre,
+			String direccion, char estatus, Set<DatoAcademico> datoAcademicos,
+			Set<DatoSocial> datoSocials) {
 		this.codigoInstitucion = codigoInstitucion;
-		this.datoBasico = datoBasico;
+		this.datoBasicoByCodigoTipoInstitucion = datoBasicoByCodigoTipoInstitucion;
+		this.datoBasicoByCodigoParroquia = datoBasicoByCodigoParroquia;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.estatus = estatus;
@@ -64,12 +68,24 @@ public class Institucion implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_tipo_institucion", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	public DatoBasico getDatoBasicoByCodigoTipoInstitucion() {
+		return this.datoBasicoByCodigoTipoInstitucion;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setDatoBasicoByCodigoTipoInstitucion(
+			DatoBasico datoBasicoByCodigoTipoInstitucion) {
+		this.datoBasicoByCodigoTipoInstitucion = datoBasicoByCodigoTipoInstitucion;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_parroquia")
+	public DatoBasico getDatoBasicoByCodigoParroquia() {
+		return this.datoBasicoByCodigoParroquia;
+	}
+
+	public void setDatoBasicoByCodigoParroquia(
+			DatoBasico datoBasicoByCodigoParroquia) {
+		this.datoBasicoByCodigoParroquia = datoBasicoByCodigoParroquia;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -81,7 +97,7 @@ public class Institucion implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "direccion", nullable = false)
+	@Column(name = "direccion")
 	public String getDireccion() {
 		return this.direccion;
 	}

@@ -1,17 +1,14 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,37 +21,23 @@ import javax.persistence.TemporalType;
 public class PlanRotacion implements java.io.Serializable {
 
 	private int codigoPlanRotacion;
-	private DatoBasico datoBasico;
 	private Instalacion instalacion;
 	private Sesion sesion;
-	private Date fechaUso;
+	private Date fechaInicio;
+	private Date fechaFin;
 	private char estatus;
-	private Set<SesionEjecutada> sesionEjecutadas = new HashSet<SesionEjecutada>(
-			0);
 
 	public PlanRotacion() {
 	}
 
-	public PlanRotacion(int codigoPlanRotacion, DatoBasico datoBasico,
-			Instalacion instalacion, Sesion sesion, Date fechaUso, char estatus) {
+	public PlanRotacion(int codigoPlanRotacion, Instalacion instalacion,
+			Sesion sesion, Date fechaInicio, Date fechaFin, char estatus) {
 		this.codigoPlanRotacion = codigoPlanRotacion;
-		this.datoBasico = datoBasico;
 		this.instalacion = instalacion;
 		this.sesion = sesion;
-		this.fechaUso = fechaUso;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 		this.estatus = estatus;
-	}
-
-	public PlanRotacion(int codigoPlanRotacion, DatoBasico datoBasico,
-			Instalacion instalacion, Sesion sesion, Date fechaUso,
-			char estatus, Set<SesionEjecutada> sesionEjecutadas) {
-		this.codigoPlanRotacion = codigoPlanRotacion;
-		this.datoBasico = datoBasico;
-		this.instalacion = instalacion;
-		this.sesion = sesion;
-		this.fechaUso = fechaUso;
-		this.estatus = estatus;
-		this.sesionEjecutadas = sesionEjecutadas;
 	}
 
 	@Id
@@ -65,16 +48,6 @@ public class PlanRotacion implements java.io.Serializable {
 
 	public void setCodigoPlanRotacion(int codigoPlanRotacion) {
 		this.codigoPlanRotacion = codigoPlanRotacion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "eventualidad", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -98,13 +71,23 @@ public class PlanRotacion implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_uso", nullable = false, length = 13)
-	public Date getFechaUso() {
-		return this.fechaUso;
+	@Column(name = "fecha_inicio", nullable = false, length = 13)
+	public Date getFechaInicio() {
+		return this.fechaInicio;
 	}
 
-	public void setFechaUso(Date fechaUso) {
-		this.fechaUso = fechaUso;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_fin", nullable = false, length = 13)
+	public Date getFechaFin() {
+		return this.fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
@@ -114,15 +97,6 @@ public class PlanRotacion implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planRotacion")
-	public Set<SesionEjecutada> getSesionEjecutadas() {
-		return this.sesionEjecutadas;
-	}
-
-	public void setSesionEjecutadas(Set<SesionEjecutada> sesionEjecutadas) {
-		this.sesionEjecutadas = sesionEjecutadas;
 	}
 
 }

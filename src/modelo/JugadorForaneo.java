@@ -1,12 +1,16 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,43 +21,42 @@ import javax.persistence.Table;
 @Table(name = "jugador_foraneo", schema = "public")
 public class JugadorForaneo implements java.io.Serializable {
 
-	private int cedula;
-	private Juego juego;
+	private String cedula;
 	private EquipoCompetencia equipoCompetencia;
-	private DatoBasico datoBasico;
 	private String nombre;
+	private char estatus;
+	private Set<RosterCompetencia> rosterCompetencias = new HashSet<RosterCompetencia>(
+			0);
 
 	public JugadorForaneo() {
 	}
 
-	public JugadorForaneo(int cedula, Juego juego,
-			EquipoCompetencia equipoCompetencia, DatoBasico datoBasico,
-			String nombre) {
+	public JugadorForaneo(String cedula, EquipoCompetencia equipoCompetencia,
+			String nombre, char estatus) {
 		this.cedula = cedula;
-		this.juego = juego;
 		this.equipoCompetencia = equipoCompetencia;
-		this.datoBasico = datoBasico;
 		this.nombre = nombre;
+		this.estatus = estatus;
+	}
+
+	public JugadorForaneo(String cedula, EquipoCompetencia equipoCompetencia,
+			String nombre, char estatus,
+			Set<RosterCompetencia> rosterCompetencias) {
+		this.cedula = cedula;
+		this.equipoCompetencia = equipoCompetencia;
+		this.nombre = nombre;
+		this.estatus = estatus;
+		this.rosterCompetencias = rosterCompetencias;
 	}
 
 	@Id
 	@Column(name = "cedula", unique = true, nullable = false)
-	public int getCedula() {
+	public String getCedula() {
 		return this.cedula;
 	}
 
-	public void setCedula(int cedula) {
+	public void setCedula(String cedula) {
 		this.cedula = cedula;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego", nullable = false)
-	public Juego getJuego() {
-		return this.juego;
-	}
-
-	public void setJuego(Juego juego) {
-		this.juego = juego;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,16 +69,6 @@ public class JugadorForaneo implements java.io.Serializable {
 		this.equipoCompetencia = equipoCompetencia;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_mencion", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
 	@Column(name = "nombre", nullable = false)
 	public String getNombre() {
 		return this.nombre;
@@ -83,6 +76,25 @@ public class JugadorForaneo implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "jugador_foraneo_roster_competencia", schema = "public", joinColumns = { @JoinColumn(name = "cedula", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_roster_competencia", nullable = false, updatable = false) })
+	public Set<RosterCompetencia> getRosterCompetencias() {
+		return this.rosterCompetencias;
+	}
+
+	public void setRosterCompetencias(Set<RosterCompetencia> rosterCompetencias) {
+		this.rosterCompetencias = rosterCompetencias;
 	}
 
 }

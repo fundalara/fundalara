@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,15 +35,11 @@ public class Divisa implements java.io.Serializable {
 	}
 
 	public Divisa(int codigoDivisa, DatoBasico datoBasico, String nombre,
-			String direccion, String telefono, String correoElectronico,
-			String personaContacto, char estatus) {
+			String direccion, char estatus) {
 		this.codigoDivisa = codigoDivisa;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
 		this.direccion = direccion;
-		this.telefono = telefono;
-		this.correoElectronico = correoElectronico;
-		this.personaContacto = personaContacto;
 		this.estatus = estatus;
 	}
 
@@ -101,7 +97,7 @@ public class Divisa implements java.io.Serializable {
 		this.direccion = direccion;
 	}
 
-	@Column(name = "telefono", nullable = false)
+	@Column(name = "telefono")
 	public String getTelefono() {
 		return this.telefono;
 	}
@@ -110,7 +106,7 @@ public class Divisa implements java.io.Serializable {
 		this.telefono = telefono;
 	}
 
-	@Column(name = "correo_electronico", nullable = false)
+	@Column(name = "correo_electronico")
 	public String getCorreoElectronico() {
 		return this.correoElectronico;
 	}
@@ -119,7 +115,7 @@ public class Divisa implements java.io.Serializable {
 		this.correoElectronico = correoElectronico;
 	}
 
-	@Column(name = "persona_contacto", nullable = false)
+	@Column(name = "persona_contacto")
 	public String getPersonaContacto() {
 		return this.personaContacto;
 	}

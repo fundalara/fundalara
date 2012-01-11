@@ -1,14 +1,17 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,26 +24,41 @@ import javax.persistence.TemporalType;
 public class SeguridadFuncional implements java.io.Serializable {
 
 	private int codigoSeguridad;
-	private DatoBasico datoBasico;
 	private TipoDato tipoDato;
 	private Usuario usuario;
 	private Date fechaRegistro;
-	private Date horaRegistro;
 	private int codigoRegistro;
+	private Boolean agregar;
+	private Boolean modificar;
+	private Boolean eliminar;
+	private Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals = new HashSet<DetalleSeguridadFuncional>(
+			0);
 
 	public SeguridadFuncional() {
 	}
 
-	public SeguridadFuncional(int codigoSeguridad, DatoBasico datoBasico,
-			TipoDato tipoDato, Usuario usuario, Date fechaRegistro,
-			Date horaRegistro, int codigoRegistro) {
+	public SeguridadFuncional(int codigoSeguridad, TipoDato tipoDato,
+			Usuario usuario, Date fechaRegistro, int codigoRegistro) {
 		this.codigoSeguridad = codigoSeguridad;
-		this.datoBasico = datoBasico;
 		this.tipoDato = tipoDato;
 		this.usuario = usuario;
 		this.fechaRegistro = fechaRegistro;
-		this.horaRegistro = horaRegistro;
 		this.codigoRegistro = codigoRegistro;
+	}
+
+	public SeguridadFuncional(int codigoSeguridad, TipoDato tipoDato,
+			Usuario usuario, Date fechaRegistro, int codigoRegistro,
+			Boolean agregar, Boolean modificar, Boolean eliminar,
+			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
+		this.codigoSeguridad = codigoSeguridad;
+		this.tipoDato = tipoDato;
+		this.usuario = usuario;
+		this.fechaRegistro = fechaRegistro;
+		this.codigoRegistro = codigoRegistro;
+		this.agregar = agregar;
+		this.modificar = modificar;
+		this.eliminar = eliminar;
+		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 	}
 
 	@Id
@@ -51,16 +69,6 @@ public class SeguridadFuncional implements java.io.Serializable {
 
 	public void setCodigoSeguridad(int codigoSeguridad) {
 		this.codigoSeguridad = codigoSeguridad;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_dato_basico", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -93,16 +101,6 @@ public class SeguridadFuncional implements java.io.Serializable {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "hora_registro", nullable = false, length = 13)
-	public Date getHoraRegistro() {
-		return this.horaRegistro;
-	}
-
-	public void setHoraRegistro(Date horaRegistro) {
-		this.horaRegistro = horaRegistro;
-	}
-
 	@Column(name = "codigo_registro", nullable = false)
 	public int getCodigoRegistro() {
 		return this.codigoRegistro;
@@ -110,6 +108,43 @@ public class SeguridadFuncional implements java.io.Serializable {
 
 	public void setCodigoRegistro(int codigoRegistro) {
 		this.codigoRegistro = codigoRegistro;
+	}
+
+	@Column(name = "agregar")
+	public Boolean getAgregar() {
+		return this.agregar;
+	}
+
+	public void setAgregar(Boolean agregar) {
+		this.agregar = agregar;
+	}
+
+	@Column(name = "modificar")
+	public Boolean getModificar() {
+		return this.modificar;
+	}
+
+	public void setModificar(Boolean modificar) {
+		this.modificar = modificar;
+	}
+
+	@Column(name = "eliminar")
+	public Boolean getEliminar() {
+		return this.eliminar;
+	}
+
+	public void setEliminar(Boolean eliminar) {
+		this.eliminar = eliminar;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seguridadFuncional")
+	public Set<DetalleSeguridadFuncional> getDetalleSeguridadFuncionals() {
+		return this.detalleSeguridadFuncionals;
+	}
+
+	public void setDetalleSeguridadFuncionals(
+			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
+		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 	}
 
 }

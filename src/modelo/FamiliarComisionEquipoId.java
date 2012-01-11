@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,15 +11,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class FamiliarComisionEquipoId implements java.io.Serializable {
 
+	private int codigoComisionEquipo;
 	private int codigoFamiliarJugador;
-	private int estatus;
 
 	public FamiliarComisionEquipoId() {
 	}
 
-	public FamiliarComisionEquipoId(int codigoFamiliarJugador, int estatus) {
+	public FamiliarComisionEquipoId(int codigoComisionEquipo,
+			int codigoFamiliarJugador) {
+		this.codigoComisionEquipo = codigoComisionEquipo;
 		this.codigoFamiliarJugador = codigoFamiliarJugador;
-		this.estatus = estatus;
+	}
+
+	@Column(name = "codigo_comision_equipo", nullable = false)
+	public int getCodigoComisionEquipo() {
+		return this.codigoComisionEquipo;
+	}
+
+	public void setCodigoComisionEquipo(int codigoComisionEquipo) {
+		this.codigoComisionEquipo = codigoComisionEquipo;
 	}
 
 	@Column(name = "codigo_familiar_jugador", nullable = false)
@@ -31,15 +41,6 @@ public class FamiliarComisionEquipoId implements java.io.Serializable {
 		this.codigoFamiliarJugador = codigoFamiliarJugador;
 	}
 
-	@Column(name = "estatus", nullable = false)
-	public int getEstatus() {
-		return this.estatus;
-	}
-
-	public void setEstatus(int estatus) {
-		this.estatus = estatus;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -49,16 +50,17 @@ public class FamiliarComisionEquipoId implements java.io.Serializable {
 			return false;
 		FamiliarComisionEquipoId castOther = (FamiliarComisionEquipoId) other;
 
-		return (this.getCodigoFamiliarJugador() == castOther
-				.getCodigoFamiliarJugador())
-				&& (this.getEstatus() == castOther.getEstatus());
+		return (this.getCodigoComisionEquipo() == castOther
+				.getCodigoComisionEquipo())
+				&& (this.getCodigoFamiliarJugador() == castOther
+						.getCodigoFamiliarJugador());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
+		result = 37 * result + this.getCodigoComisionEquipo();
 		result = 37 * result + this.getCodigoFamiliarJugador();
-		result = 37 * result + this.getEstatus();
 		return result;
 	}
 

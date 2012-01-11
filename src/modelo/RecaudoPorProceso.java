@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class RecaudoPorProceso implements java.io.Serializable {
 	private DatoBasico datoBasicoByCodigoDocumento;
 	private DatoBasico datoBasicoByCodigoImportancia;
 	private DatoBasico datoBasicoByCodigoProceso;
-	private int cantidad;
+	private Integer cantidad;
 	private char estatus;
 	private Set<DocumentoEntregado> documentoEntregados = new HashSet<DocumentoEntregado>(
 			0);
@@ -35,20 +35,19 @@ public class RecaudoPorProceso implements java.io.Serializable {
 	public RecaudoPorProceso(int codigoRecaudoPorProceso,
 			DatoBasico datoBasicoByCodigoDocumento,
 			DatoBasico datoBasicoByCodigoImportancia,
-			DatoBasico datoBasicoByCodigoProceso, int cantidad, char estatus) {
+			DatoBasico datoBasicoByCodigoProceso, char estatus) {
 		this.codigoRecaudoPorProceso = codigoRecaudoPorProceso;
 		this.datoBasicoByCodigoDocumento = datoBasicoByCodigoDocumento;
 		this.datoBasicoByCodigoImportancia = datoBasicoByCodigoImportancia;
 		this.datoBasicoByCodigoProceso = datoBasicoByCodigoProceso;
-		this.cantidad = cantidad;
 		this.estatus = estatus;
 	}
 
 	public RecaudoPorProceso(int codigoRecaudoPorProceso,
 			DatoBasico datoBasicoByCodigoDocumento,
 			DatoBasico datoBasicoByCodigoImportancia,
-			DatoBasico datoBasicoByCodigoProceso, int cantidad, char estatus,
-			Set<DocumentoEntregado> documentoEntregados) {
+			DatoBasico datoBasicoByCodigoProceso, Integer cantidad,
+			char estatus, Set<DocumentoEntregado> documentoEntregados) {
 		this.codigoRecaudoPorProceso = codigoRecaudoPorProceso;
 		this.datoBasicoByCodigoDocumento = datoBasicoByCodigoDocumento;
 		this.datoBasicoByCodigoImportancia = datoBasicoByCodigoImportancia;
@@ -101,12 +100,12 @@ public class RecaudoPorProceso implements java.io.Serializable {
 		this.datoBasicoByCodigoProceso = datoBasicoByCodigoProceso;
 	}
 
-	@Column(name = "cantidad", nullable = false)
-	public int getCantidad() {
+	@Column(name = "cantidad")
+	public Integer getCantidad() {
 		return this.cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 

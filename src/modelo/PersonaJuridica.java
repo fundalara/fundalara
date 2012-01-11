@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,28 +25,26 @@ public class PersonaJuridica implements java.io.Serializable {
 
 	private String cedulaRif;
 	private Persona persona;
-	private String nit;
 	private String fax;
 	private String razonSocial;
+	private char estatus;
 	private Set<ProveedorBanco> proveedorBancos = new HashSet<ProveedorBanco>(0);
 
 	public PersonaJuridica() {
 	}
 
-	public PersonaJuridica(Persona persona, String nit, String fax,
-			String razonSocial) {
+	public PersonaJuridica(Persona persona, String razonSocial, char estatus) {
 		this.persona = persona;
-		this.nit = nit;
-		this.fax = fax;
 		this.razonSocial = razonSocial;
+		this.estatus = estatus;
 	}
 
-	public PersonaJuridica(Persona persona, String nit, String fax,
-			String razonSocial, Set<ProveedorBanco> proveedorBancos) {
+	public PersonaJuridica(Persona persona, String fax, String razonSocial,
+			char estatus, Set<ProveedorBanco> proveedorBancos) {
 		this.persona = persona;
-		this.nit = nit;
 		this.fax = fax;
 		this.razonSocial = razonSocial;
+		this.estatus = estatus;
 		this.proveedorBancos = proveedorBancos;
 	}
 
@@ -72,16 +70,7 @@ public class PersonaJuridica implements java.io.Serializable {
 		this.persona = persona;
 	}
 
-	@Column(name = "nit", nullable = false)
-	public String getNit() {
-		return this.nit;
-	}
-
-	public void setNit(String nit) {
-		this.nit = nit;
-	}
-
-	@Column(name = "fax", nullable = false)
+	@Column(name = "fax")
 	public String getFax() {
 		return this.fax;
 	}
@@ -97,6 +86,15 @@ public class PersonaJuridica implements java.io.Serializable {
 
 	public void setRazonSocial(String razonSocial) {
 		this.razonSocial = razonSocial;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personaJuridica")

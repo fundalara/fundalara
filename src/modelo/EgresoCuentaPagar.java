@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,19 +20,19 @@ import javax.persistence.Table;
 public class EgresoCuentaPagar implements java.io.Serializable {
 
 	private EgresoCuentaPagarId id;
-	private CuentaPagar cuentaPagar;
 	private Egreso egreso;
+	private CuentaPagar cuentaPagar;
 	private double montoAbonado;
 	private char estatus;
 
 	public EgresoCuentaPagar() {
 	}
 
-	public EgresoCuentaPagar(EgresoCuentaPagarId id, CuentaPagar cuentaPagar,
-			Egreso egreso, double montoAbonado, char estatus) {
+	public EgresoCuentaPagar(EgresoCuentaPagarId id, Egreso egreso,
+			CuentaPagar cuentaPagar, double montoAbonado, char estatus) {
 		this.id = id;
-		this.cuentaPagar = cuentaPagar;
 		this.egreso = egreso;
+		this.cuentaPagar = cuentaPagar;
 		this.montoAbonado = montoAbonado;
 		this.estatus = estatus;
 	}
@@ -40,13 +40,23 @@ public class EgresoCuentaPagar implements java.io.Serializable {
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "origen", column = @Column(name = "origen", nullable = false)),
-			@AttributeOverride(name = "numeroDocumento", column = @Column(name = "numero_documento", nullable = false)) })
+			@AttributeOverride(name = "codigoEgreso", column = @Column(name = "codigo_egreso", nullable = false)) })
 	public EgresoCuentaPagarId getId() {
 		return this.id;
 	}
 
 	public void setId(EgresoCuentaPagarId id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_egreso", nullable = false, insertable = false, updatable = false)
+	public Egreso getEgreso() {
+		return this.egreso;
+	}
+
+	public void setEgreso(Egreso egreso) {
+		this.egreso = egreso;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -57,16 +67,6 @@ public class EgresoCuentaPagar implements java.io.Serializable {
 
 	public void setCuentaPagar(CuentaPagar cuentaPagar) {
 		this.cuentaPagar = cuentaPagar;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "numero_documento", nullable = false, insertable = false, updatable = false)
-	public Egreso getEgreso() {
-		return this.egreso;
-	}
-
-	public void setEgreso(Egreso egreso) {
-		this.egreso = egreso;
 	}
 
 	@Column(name = "monto_abonado", nullable = false, precision = 17, scale = 17)

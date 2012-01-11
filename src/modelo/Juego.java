@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -31,43 +31,42 @@ public class Juego implements java.io.Serializable {
 	private Date fecha;
 	private String observaciones;
 	private int cantidadInning;
-	private Date duracion;
-	private Set<PersonalJuego> personalJuegos = new HashSet<PersonalJuego>(0);
+	private Date horaFin;
 	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
 			0);
-	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
+	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
+			0);
 	private Set<EquipoJuego> equipoJuegos = new HashSet<EquipoJuego>(0);
+	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
+			0);
 	private Set<LineUp> lineUps = new HashSet<LineUp>(0);
 	private Set<PersonalForaneoJuego> personalForaneoJuegos = new HashSet<PersonalForaneoJuego>(
 			0);
-	private Set<JugadorForaneo> jugadorForaneos = new HashSet<JugadorForaneo>(0);
 
 	public Juego() {
 	}
 
 	public Juego(int codigoJuego, Estadio estadio, Competencia competencia,
 			DatoBasico datoBasico, Date horaInicio, Date fecha,
-			String observaciones, int cantidadInning, Date duracion) {
+			int cantidadInning, Date horaFin) {
 		this.codigoJuego = codigoJuego;
 		this.estadio = estadio;
 		this.competencia = competencia;
 		this.datoBasico = datoBasico;
 		this.horaInicio = horaInicio;
 		this.fecha = fecha;
-		this.observaciones = observaciones;
 		this.cantidadInning = cantidadInning;
-		this.duracion = duracion;
+		this.horaFin = horaFin;
 	}
 
 	public Juego(int codigoJuego, Estadio estadio, Competencia competencia,
 			DatoBasico datoBasico, Date horaInicio, Date fecha,
-			String observaciones, int cantidadInning, Date duracion,
-			Set<PersonalJuego> personalJuegos,
+			String observaciones, int cantidadInning, Date horaFin,
 			Set<ActividadCalendario> actividadCalendarios,
-			Set<PersonalEquipo> personalEquipos, Set<EquipoJuego> equipoJuegos,
-			Set<LineUp> lineUps,
-			Set<PersonalForaneoJuego> personalForaneoJuegos,
-			Set<JugadorForaneo> jugadorForaneos) {
+			Set<MaterialActividad> materialActividads,
+			Set<EquipoJuego> equipoJuegos,
+			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
+			Set<LineUp> lineUps, Set<PersonalForaneoJuego> personalForaneoJuegos) {
 		this.codigoJuego = codigoJuego;
 		this.estadio = estadio;
 		this.competencia = competencia;
@@ -76,14 +75,13 @@ public class Juego implements java.io.Serializable {
 		this.fecha = fecha;
 		this.observaciones = observaciones;
 		this.cantidadInning = cantidadInning;
-		this.duracion = duracion;
-		this.personalJuegos = personalJuegos;
+		this.horaFin = horaFin;
 		this.actividadCalendarios = actividadCalendarios;
-		this.personalEquipos = personalEquipos;
+		this.materialActividads = materialActividads;
 		this.equipoJuegos = equipoJuegos;
+		this.materialActividadPlanificadas = materialActividadPlanificadas;
 		this.lineUps = lineUps;
 		this.personalForaneoJuegos = personalForaneoJuegos;
-		this.jugadorForaneos = jugadorForaneos;
 	}
 
 	@Id
@@ -146,7 +144,7 @@ public class Juego implements java.io.Serializable {
 		this.fecha = fecha;
 	}
 
-	@Column(name = "observaciones", nullable = false)
+	@Column(name = "observaciones")
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -165,22 +163,13 @@ public class Juego implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "duracion", nullable = false, length = 15)
-	public Date getDuracion() {
-		return this.duracion;
+	@Column(name = "hora_fin", nullable = false, length = 15)
+	public Date getHoraFin() {
+		return this.horaFin;
 	}
 
-	public void setDuracion(Date duracion) {
-		this.duracion = duracion;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
-	public Set<PersonalJuego> getPersonalJuegos() {
-		return this.personalJuegos;
-	}
-
-	public void setPersonalJuegos(Set<PersonalJuego> personalJuegos) {
-		this.personalJuegos = personalJuegos;
+	public void setHoraFin(Date horaFin) {
+		this.horaFin = horaFin;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
@@ -194,12 +183,12 @@ public class Juego implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
-	public Set<PersonalEquipo> getPersonalEquipos() {
-		return this.personalEquipos;
+	public Set<MaterialActividad> getMaterialActividads() {
+		return this.materialActividads;
 	}
 
-	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
-		this.personalEquipos = personalEquipos;
+	public void setMaterialActividads(Set<MaterialActividad> materialActividads) {
+		this.materialActividads = materialActividads;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
@@ -209,6 +198,16 @@ public class Juego implements java.io.Serializable {
 
 	public void setEquipoJuegos(Set<EquipoJuego> equipoJuegos) {
 		this.equipoJuegos = equipoJuegos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
+	public Set<MaterialActividadPlanificada> getMaterialActividadPlanificadas() {
+		return this.materialActividadPlanificadas;
+	}
+
+	public void setMaterialActividadPlanificadas(
+			Set<MaterialActividadPlanificada> materialActividadPlanificadas) {
+		this.materialActividadPlanificadas = materialActividadPlanificadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
@@ -228,15 +227,6 @@ public class Juego implements java.io.Serializable {
 	public void setPersonalForaneoJuegos(
 			Set<PersonalForaneoJuego> personalForaneoJuegos) {
 		this.personalForaneoJuegos = personalForaneoJuegos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")
-	public Set<JugadorForaneo> getJugadorForaneos() {
-		return this.jugadorForaneos;
-	}
-
-	public void setJugadorForaneos(Set<JugadorForaneo> jugadorForaneos) {
-		this.jugadorForaneos = jugadorForaneos;
 	}
 
 }

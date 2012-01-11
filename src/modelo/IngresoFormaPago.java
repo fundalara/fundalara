@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "ingreso_forma_pago", schema = "public")
 public class IngresoFormaPago implements java.io.Serializable {
 
-	private IngresoFormaPagoId id;
+	private int codigoIngresoFormaPago;
 	private Ingreso ingreso;
 	private DatoBasico datoBasicoByCodigoFormaPago;
 	private DatoBasico datoBasicoByCodigoTarjeta;
@@ -31,25 +29,19 @@ public class IngresoFormaPago implements java.io.Serializable {
 	public IngresoFormaPago() {
 	}
 
-	public IngresoFormaPago(IngresoFormaPagoId id, Ingreso ingreso,
-			DatoBasico datoBasicoByCodigoFormaPago,
-			DatoBasico datoBasicoByCodigoTarjeta,
-			DatoBasico datoBasicoByCodigoBanco, double monto, char estatus) {
-		this.id = id;
-		this.ingreso = ingreso;
-		this.datoBasicoByCodigoFormaPago = datoBasicoByCodigoFormaPago;
-		this.datoBasicoByCodigoTarjeta = datoBasicoByCodigoTarjeta;
-		this.datoBasicoByCodigoBanco = datoBasicoByCodigoBanco;
+	public IngresoFormaPago(int codigoIngresoFormaPago, double monto,
+			char estatus) {
+		this.codigoIngresoFormaPago = codigoIngresoFormaPago;
 		this.monto = monto;
 		this.estatus = estatus;
 	}
 
-	public IngresoFormaPago(IngresoFormaPagoId id, Ingreso ingreso,
+	public IngresoFormaPago(int codigoIngresoFormaPago, Ingreso ingreso,
 			DatoBasico datoBasicoByCodigoFormaPago,
 			DatoBasico datoBasicoByCodigoTarjeta,
 			DatoBasico datoBasicoByCodigoBanco, double monto, char estatus,
 			String numeroDocumentoPago) {
-		this.id = id;
+		this.codigoIngresoFormaPago = codigoIngresoFormaPago;
 		this.ingreso = ingreso;
 		this.datoBasicoByCodigoFormaPago = datoBasicoByCodigoFormaPago;
 		this.datoBasicoByCodigoTarjeta = datoBasicoByCodigoTarjeta;
@@ -59,20 +51,18 @@ public class IngresoFormaPago implements java.io.Serializable {
 		this.numeroDocumentoPago = numeroDocumentoPago;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "numeroDocumento", column = @Column(name = "numero_documento", nullable = false)),
-			@AttributeOverride(name = "codigoFormaPago", column = @Column(name = "codigo_forma_pago", nullable = false)) })
-	public IngresoFormaPagoId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_ingreso_forma_pago", unique = true, nullable = false)
+	public int getCodigoIngresoFormaPago() {
+		return this.codigoIngresoFormaPago;
 	}
 
-	public void setId(IngresoFormaPagoId id) {
-		this.id = id;
+	public void setCodigoIngresoFormaPago(int codigoIngresoFormaPago) {
+		this.codigoIngresoFormaPago = codigoIngresoFormaPago;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "numero_documento", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "numero_documento")
 	public Ingreso getIngreso() {
 		return this.ingreso;
 	}
@@ -82,7 +72,7 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_forma_pago", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_forma_pago")
 	public DatoBasico getDatoBasicoByCodigoFormaPago() {
 		return this.datoBasicoByCodigoFormaPago;
 	}
@@ -93,7 +83,7 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tarjeta", nullable = false)
+	@JoinColumn(name = "codigo_tarjeta")
 	public DatoBasico getDatoBasicoByCodigoTarjeta() {
 		return this.datoBasicoByCodigoTarjeta;
 	}
@@ -104,7 +94,7 @@ public class IngresoFormaPago implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_banco", nullable = false)
+	@JoinColumn(name = "codigo_banco")
 	public DatoBasico getDatoBasicoByCodigoBanco() {
 		return this.datoBasicoByCodigoBanco;
 	}

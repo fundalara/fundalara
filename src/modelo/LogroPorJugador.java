@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -9,7 +9,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,6 +29,14 @@ public class LogroPorJugador implements java.io.Serializable {
 	}
 
 	public LogroPorJugador(LogroPorJugadorId id, DatoDeportivo datoDeportivo,
+			DatoBasico datoBasico, char estatus) {
+		this.id = id;
+		this.datoDeportivo = datoDeportivo;
+		this.datoBasico = datoBasico;
+		this.estatus = estatus;
+	}
+
+	public LogroPorJugador(LogroPorJugadorId id, DatoDeportivo datoDeportivo,
 			DatoBasico datoBasico, String observacion, char estatus) {
 		this.id = id;
 		this.datoDeportivo = datoDeportivo;
@@ -40,9 +47,8 @@ public class LogroPorJugador implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoCompetencia", column = @Column(name = "codigo_competencia", nullable = false)),
-			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)),
-			@AttributeOverride(name = "codigoLogro", column = @Column(name = "codigo_logro", nullable = false)) })
+			@AttributeOverride(name = "codigoLogro", column = @Column(name = "codigo_logro", nullable = false)),
+			@AttributeOverride(name = "codigoDatoDeportivo", column = @Column(name = "codigo_dato_deportivo", nullable = false)) })
 	public LogroPorJugadorId getId() {
 		return this.id;
 	}
@@ -52,9 +58,7 @@ public class LogroPorJugador implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "codigo_competencia", referencedColumnName = "codigo_competencia", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "cedula_rif", referencedColumnName = "cedula_rif", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "codigo_dato_deportivo", nullable = false, insertable = false, updatable = false)
 	public DatoDeportivo getDatoDeportivo() {
 		return this.datoDeportivo;
 	}
@@ -73,7 +77,7 @@ public class LogroPorJugador implements java.io.Serializable {
 		this.datoBasico = datoBasico;
 	}
 
-	@Column(name = "observacion", nullable = false)
+	@Column(name = "observacion")
 	public String getObservacion() {
 		return this.observacion;
 	}

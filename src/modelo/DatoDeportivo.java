@@ -1,15 +1,13 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "dato_deportivo", schema = "public")
 public class DatoDeportivo implements java.io.Serializable {
 
-	private DatoDeportivoId id;
+	private int codigoDatoDeportivo;
 	private Competencia competencia;
 	private Jugador jugador;
 	private char estatus;
@@ -32,37 +30,35 @@ public class DatoDeportivo implements java.io.Serializable {
 	public DatoDeportivo() {
 	}
 
-	public DatoDeportivo(DatoDeportivoId id, Competencia competencia,
+	public DatoDeportivo(int codigoDatoDeportivo, Competencia competencia,
 			Jugador jugador, char estatus) {
-		this.id = id;
+		this.codigoDatoDeportivo = codigoDatoDeportivo;
 		this.competencia = competencia;
 		this.jugador = jugador;
 		this.estatus = estatus;
 	}
 
-	public DatoDeportivo(DatoDeportivoId id, Competencia competencia,
+	public DatoDeportivo(int codigoDatoDeportivo, Competencia competencia,
 			Jugador jugador, char estatus, Set<LogroPorJugador> logroPorJugadors) {
-		this.id = id;
+		this.codigoDatoDeportivo = codigoDatoDeportivo;
 		this.competencia = competencia;
 		this.jugador = jugador;
 		this.estatus = estatus;
 		this.logroPorJugadors = logroPorJugadors;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoCompetencia", column = @Column(name = "codigo_competencia", nullable = false)),
-			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)) })
-	public DatoDeportivoId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_dato_deportivo", unique = true, nullable = false)
+	public int getCodigoDatoDeportivo() {
+		return this.codigoDatoDeportivo;
 	}
 
-	public void setId(DatoDeportivoId id) {
-		this.id = id;
+	public void setCodigoDatoDeportivo(int codigoDatoDeportivo) {
+		this.codigoDatoDeportivo = codigoDatoDeportivo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_competencia", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_competencia", nullable = false)
 	public Competencia getCompetencia() {
 		return this.competencia;
 	}
@@ -72,7 +68,7 @@ public class DatoDeportivo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Jugador getJugador() {
 		return this.jugador;
 	}

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,13 +28,10 @@ public class Usuario implements java.io.Serializable {
 	private String nick;
 	private String password;
 	private char estatus;
-	private Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos = new HashSet<AsistenciaPersonalEntrenamiento>(
-			0);
-	private Set<ActividadPlanificada> actividadPlanificadas = new HashSet<ActividadPlanificada>(
+	private Set<Perfil> perfils = new HashSet<Perfil>(0);
+	private Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals = new HashSet<DetalleSeguridadFuncional>(
 			0);
 	private Set<SeguridadFuncional> seguridadFuncionals = new HashSet<SeguridadFuncional>(
-			0);
-	private Set<DesempeoJugador> desempeoJugadors = new HashSet<DesempeoJugador>(
 			0);
 
 	public Usuario() {
@@ -47,23 +44,17 @@ public class Usuario implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public Usuario(
-			Personal personal,
-			String nick,
-			String password,
-			char estatus,
-			Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos,
-			Set<ActividadPlanificada> actividadPlanificadas,
-			Set<SeguridadFuncional> seguridadFuncionals,
-			Set<DesempeoJugador> desempeoJugadors) {
+	public Usuario(Personal personal, String nick, String password,
+			char estatus, Set<Perfil> perfils,
+			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals,
+			Set<SeguridadFuncional> seguridadFuncionals) {
 		this.personal = personal;
 		this.nick = nick;
 		this.password = password;
 		this.estatus = estatus;
-		this.asistenciaPersonalEntrenamientos = asistenciaPersonalEntrenamientos;
-		this.actividadPlanificadas = actividadPlanificadas;
+		this.perfils = perfils;
+		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 		this.seguridadFuncionals = seguridadFuncionals;
-		this.desempeoJugadors = desempeoJugadors;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "personal"))
@@ -116,23 +107,22 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	public Set<AsistenciaPersonalEntrenamiento> getAsistenciaPersonalEntrenamientos() {
-		return this.asistenciaPersonalEntrenamientos;
+	public Set<Perfil> getPerfils() {
+		return this.perfils;
 	}
 
-	public void setAsistenciaPersonalEntrenamientos(
-			Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos) {
-		this.asistenciaPersonalEntrenamientos = asistenciaPersonalEntrenamientos;
+	public void setPerfils(Set<Perfil> perfils) {
+		this.perfils = perfils;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	public Set<ActividadPlanificada> getActividadPlanificadas() {
-		return this.actividadPlanificadas;
+	public Set<DetalleSeguridadFuncional> getDetalleSeguridadFuncionals() {
+		return this.detalleSeguridadFuncionals;
 	}
 
-	public void setActividadPlanificadas(
-			Set<ActividadPlanificada> actividadPlanificadas) {
-		this.actividadPlanificadas = actividadPlanificadas;
+	public void setDetalleSeguridadFuncionals(
+			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
+		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
@@ -143,15 +133,6 @@ public class Usuario implements java.io.Serializable {
 	public void setSeguridadFuncionals(
 			Set<SeguridadFuncional> seguridadFuncionals) {
 		this.seguridadFuncionals = seguridadFuncionals;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	public Set<DesempeoJugador> getDesempeoJugadors() {
-		return this.desempeoJugadors;
-	}
-
-	public void setDesempeoJugadors(Set<DesempeoJugador> desempeoJugadors) {
-		this.desempeoJugadors = desempeoJugadors;
 	}
 
 }

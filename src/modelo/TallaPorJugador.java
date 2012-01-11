@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -38,8 +38,8 @@ public class TallaPorJugador implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)),
-			@AttributeOverride(name = "codigoTallaIndumentaria", column = @Column(name = "codigo_talla_indumentaria", nullable = false)) })
+			@AttributeOverride(name = "codigoTallaIndumentaria", column = @Column(name = "codigo_talla_indumentaria", nullable = false)),
+			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)) })
 	public TallaPorJugadorId getId() {
 		return this.id;
 	}

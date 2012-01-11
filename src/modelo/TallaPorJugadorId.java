@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,23 +11,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TallaPorJugadorId implements java.io.Serializable {
 
-	private String cedulaRif;
 	private int codigoTallaIndumentaria;
+	private String cedulaRif;
 
 	public TallaPorJugadorId() {
 	}
 
-	public TallaPorJugadorId(String cedulaRif, int codigoTallaIndumentaria) {
-		this.cedulaRif = cedulaRif;
+	public TallaPorJugadorId(int codigoTallaIndumentaria, String cedulaRif) {
 		this.codigoTallaIndumentaria = codigoTallaIndumentaria;
-	}
-
-	@Column(name = "cedula_rif", nullable = false)
-	public String getCedulaRif() {
-		return this.cedulaRif;
-	}
-
-	public void setCedulaRif(String cedulaRif) {
 		this.cedulaRif = cedulaRif;
 	}
 
@@ -40,6 +31,15 @@ public class TallaPorJugadorId implements java.io.Serializable {
 		this.codigoTallaIndumentaria = codigoTallaIndumentaria;
 	}
 
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
+	}
+
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -49,19 +49,20 @@ public class TallaPorJugadorId implements java.io.Serializable {
 			return false;
 		TallaPorJugadorId castOther = (TallaPorJugadorId) other;
 
-		return ((this.getCedulaRif() == castOther.getCedulaRif()) || (this
-				.getCedulaRif() != null && castOther.getCedulaRif() != null && this
-				.getCedulaRif().equals(castOther.getCedulaRif())))
-				&& (this.getCodigoTallaIndumentaria() == castOther
-						.getCodigoTallaIndumentaria());
+		return (this.getCodigoTallaIndumentaria() == castOther
+				.getCodigoTallaIndumentaria())
+				&& ((this.getCedulaRif() == castOther.getCedulaRif()) || (this
+						.getCedulaRif() != null
+						&& castOther.getCedulaRif() != null && this
+						.getCedulaRif().equals(castOther.getCedulaRif())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
+		result = 37 * result + this.getCodigoTallaIndumentaria();
 		result = 37 * result
 				+ (getCedulaRif() == null ? 0 : this.getCedulaRif().hashCode());
-		result = 37 * result + this.getCodigoTallaIndumentaria();
 		return result;
 	}
 

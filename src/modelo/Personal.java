@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -24,75 +26,71 @@ import org.hibernate.annotations.Parameter;
 public class Personal implements java.io.Serializable {
 
 	private String cedulaRif;
+	private DatoBasico datoBasico;
 	private PersonaNatural personaNatural;
 	private int cantidadHijos;
 	private char estatus;
-	private String estadoCivil;
 	private String tipoSangre;
 	private Set<Requisicion> requisicions = new HashSet<Requisicion>(0);
+	private Set<Movimiento> movimientos = new HashSet<Movimiento>(0);
 	private Set<PersonalTipoNomina> personalTipoNominas = new HashSet<PersonalTipoNomina>(
 			0);
-	private Set<PersonalContrato> personalContratos = new HashSet<PersonalContrato>(
-			0);
-	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
-	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
-			0);
-	private Usuario usuario;
-	private Set<Movimiento> movimientos = new HashSet<Movimiento>(0);
-	private Set<PersonalJuego> personalJuegos = new HashSet<PersonalJuego>(0);
 	private Set<PersonalConceptoNomina> personalConceptoNominas = new HashSet<PersonalConceptoNomina>(
+			0);
+	private Set<PersonalContrato> personalContratos = new HashSet<PersonalContrato>(
 			0);
 	private Set<DatoAcademicoPersonal> datoAcademicoPersonals = new HashSet<DatoAcademicoPersonal>(
 			0);
 	private Set<AfeccionPersonal> afeccionPersonals = new HashSet<AfeccionPersonal>(
 			0);
+	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
 	private Set<PersonalActividad> personalActividads = new HashSet<PersonalActividad>(
 			0);
+	private Usuario usuario;
 	private Set<PersonalCargo> personalCargos = new HashSet<PersonalCargo>(0);
+	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
+			0);
 
 	public Personal() {
 	}
 
-	public Personal(PersonaNatural personaNatural, int cantidadHijos,
-			char estatus, String estadoCivil) {
+	public Personal(DatoBasico datoBasico, PersonaNatural personaNatural,
+			int cantidadHijos, char estatus) {
+		this.datoBasico = datoBasico;
 		this.personaNatural = personaNatural;
 		this.cantidadHijos = cantidadHijos;
 		this.estatus = estatus;
-		this.estadoCivil = estadoCivil;
 	}
 
-	public Personal(PersonaNatural personaNatural, int cantidadHijos,
-			char estatus, String estadoCivil, String tipoSangre,
-			Set<Requisicion> requisicions,
+	public Personal(DatoBasico datoBasico, PersonaNatural personaNatural,
+			int cantidadHijos, char estatus, String tipoSangre,
+			Set<Requisicion> requisicions, Set<Movimiento> movimientos,
 			Set<PersonalTipoNomina> personalTipoNominas,
-			Set<PersonalContrato> personalContratos,
-			Set<PersonalEquipo> personalEquipos,
-			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
-			Usuario usuario, Set<Movimiento> movimientos,
-			Set<PersonalJuego> personalJuegos,
 			Set<PersonalConceptoNomina> personalConceptoNominas,
+			Set<PersonalContrato> personalContratos,
 			Set<DatoAcademicoPersonal> datoAcademicoPersonals,
 			Set<AfeccionPersonal> afeccionPersonals,
-			Set<PersonalActividad> personalActividads,
-			Set<PersonalCargo> personalCargos) {
+			Set<PersonalEquipo> personalEquipos,
+			Set<PersonalActividad> personalActividads, Usuario usuario,
+			Set<PersonalCargo> personalCargos,
+			Set<PersonalActividadPlanificada> personalActividadPlanificadas) {
+		this.datoBasico = datoBasico;
 		this.personaNatural = personaNatural;
 		this.cantidadHijos = cantidadHijos;
 		this.estatus = estatus;
-		this.estadoCivil = estadoCivil;
 		this.tipoSangre = tipoSangre;
 		this.requisicions = requisicions;
-		this.personalTipoNominas = personalTipoNominas;
-		this.personalContratos = personalContratos;
-		this.personalEquipos = personalEquipos;
-		this.personalActividadPlanificadas = personalActividadPlanificadas;
-		this.usuario = usuario;
 		this.movimientos = movimientos;
-		this.personalJuegos = personalJuegos;
+		this.personalTipoNominas = personalTipoNominas;
 		this.personalConceptoNominas = personalConceptoNominas;
+		this.personalContratos = personalContratos;
 		this.datoAcademicoPersonals = datoAcademicoPersonals;
 		this.afeccionPersonals = afeccionPersonals;
+		this.personalEquipos = personalEquipos;
 		this.personalActividads = personalActividads;
+		this.usuario = usuario;
 		this.personalCargos = personalCargos;
+		this.personalActividadPlanificadas = personalActividadPlanificadas;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "personaNatural"))
@@ -105,6 +103,16 @@ public class Personal implements java.io.Serializable {
 
 	public void setCedulaRif(String cedulaRif) {
 		this.cedulaRif = cedulaRif;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_estado_civil", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
+	}
+
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -135,15 +143,6 @@ public class Personal implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "estado_civil", nullable = false)
-	public String getEstadoCivil() {
-		return this.estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
-
 	@Column(name = "tipo_sangre")
 	public String getTipoSangre() {
 		return this.tipoSangre;
@@ -163,6 +162,15 @@ public class Personal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Set<Movimiento> getMovimientos() {
+		return this.movimientos;
+	}
+
+	public void setMovimientos(Set<Movimiento> movimientos) {
+		this.movimientos = movimientos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
 	public Set<PersonalTipoNomina> getPersonalTipoNominas() {
 		return this.personalTipoNominas;
 	}
@@ -173,61 +181,6 @@ public class Personal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Set<PersonalContrato> getPersonalContratos() {
-		return this.personalContratos;
-	}
-
-	public void setPersonalContratos(Set<PersonalContrato> personalContratos) {
-		this.personalContratos = personalContratos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Set<PersonalEquipo> getPersonalEquipos() {
-		return this.personalEquipos;
-	}
-
-	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
-		this.personalEquipos = personalEquipos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Set<PersonalActividadPlanificada> getPersonalActividadPlanificadas() {
-		return this.personalActividadPlanificadas;
-	}
-
-	public void setPersonalActividadPlanificadas(
-			Set<PersonalActividadPlanificada> personalActividadPlanificadas) {
-		this.personalActividadPlanificadas = personalActividadPlanificadas;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Usuario getUsuario() {
-		return this.usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Set<Movimiento> getMovimientos() {
-		return this.movimientos;
-	}
-
-	public void setMovimientos(Set<Movimiento> movimientos) {
-		this.movimientos = movimientos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Set<PersonalJuego> getPersonalJuegos() {
-		return this.personalJuegos;
-	}
-
-	public void setPersonalJuegos(Set<PersonalJuego> personalJuegos) {
-		this.personalJuegos = personalJuegos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
 	public Set<PersonalConceptoNomina> getPersonalConceptoNominas() {
 		return this.personalConceptoNominas;
 	}
@@ -235,6 +188,15 @@ public class Personal implements java.io.Serializable {
 	public void setPersonalConceptoNominas(
 			Set<PersonalConceptoNomina> personalConceptoNominas) {
 		this.personalConceptoNominas = personalConceptoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Set<PersonalContrato> getPersonalContratos() {
+		return this.personalContratos;
+	}
+
+	public void setPersonalContratos(Set<PersonalContrato> personalContratos) {
+		this.personalContratos = personalContratos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
@@ -257,12 +219,30 @@ public class Personal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Set<PersonalEquipo> getPersonalEquipos() {
+		return this.personalEquipos;
+	}
+
+	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
+		this.personalEquipos = personalEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
 	public Set<PersonalActividad> getPersonalActividads() {
 		return this.personalActividads;
 	}
 
 	public void setPersonalActividads(Set<PersonalActividad> personalActividads) {
 		this.personalActividads = personalActividads;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
@@ -272,6 +252,16 @@ public class Personal implements java.io.Serializable {
 
 	public void setPersonalCargos(Set<PersonalCargo> personalCargos) {
 		this.personalCargos = personalCargos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Set<PersonalActividadPlanificada> getPersonalActividadPlanificadas() {
+		return this.personalActividadPlanificadas;
+	}
+
+	public void setPersonalActividadPlanificadas(
+			Set<PersonalActividadPlanificada> personalActividadPlanificadas) {
+		this.personalActividadPlanificadas = personalActividadPlanificadas;
 	}
 
 }

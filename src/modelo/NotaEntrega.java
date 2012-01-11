@@ -1,14 +1,16 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,7 +25,7 @@ import javax.persistence.TemporalType;
 @Table(name = "nota_entrega", schema = "public")
 public class NotaEntrega implements java.io.Serializable {
 
-	private int codigoNotaEntrega;
+	private NotaEntregaId id;
 	private DocumentoAcreedor documentoAcreedor;
 	private CuentaPagar cuentaPagar;
 	private Date fechaRecepcion;
@@ -33,33 +35,34 @@ public class NotaEntrega implements java.io.Serializable {
 	public NotaEntrega() {
 	}
 
-	public NotaEntrega(int codigoNotaEntrega,
-			DocumentoAcreedor documentoAcreedor, CuentaPagar cuentaPagar,
-			Date fechaRecepcion) {
-		this.codigoNotaEntrega = codigoNotaEntrega;
+	public NotaEntrega(NotaEntregaId id, DocumentoAcreedor documentoAcreedor,
+			CuentaPagar cuentaPagar, Date fechaRecepcion) {
+		this.id = id;
 		this.documentoAcreedor = documentoAcreedor;
 		this.cuentaPagar = cuentaPagar;
 		this.fechaRecepcion = fechaRecepcion;
 	}
 
-	public NotaEntrega(int codigoNotaEntrega,
-			DocumentoAcreedor documentoAcreedor, CuentaPagar cuentaPagar,
-			Date fechaRecepcion, Set<RecepcionMaterial> recepcionMaterials) {
-		this.codigoNotaEntrega = codigoNotaEntrega;
+	public NotaEntrega(NotaEntregaId id, DocumentoAcreedor documentoAcreedor,
+			CuentaPagar cuentaPagar, Date fechaRecepcion,
+			Set<RecepcionMaterial> recepcionMaterials) {
+		this.id = id;
 		this.documentoAcreedor = documentoAcreedor;
 		this.cuentaPagar = cuentaPagar;
 		this.fechaRecepcion = fechaRecepcion;
 		this.recepcionMaterials = recepcionMaterials;
 	}
 
-	@Id
-	@Column(name = "codigo_nota_entrega", unique = true, nullable = false)
-	public int getCodigoNotaEntrega() {
-		return this.codigoNotaEntrega;
+	@EmbeddedId
+	@AttributeOverrides({
+			@AttributeOverride(name = "codigoNotaEntrega", column = @Column(name = "codigo_nota_entrega", nullable = false)),
+			@AttributeOverride(name = "origen", column = @Column(name = "origen", nullable = false)) })
+	public NotaEntregaId getId() {
+		return this.id;
 	}
 
-	public void setCodigoNotaEntrega(int codigoNotaEntrega) {
-		this.codigoNotaEntrega = codigoNotaEntrega;
+	public void setId(NotaEntregaId id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,7 +76,7 @@ public class NotaEntrega implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "origen", nullable = false)
+	@JoinColumn(name = "origen", nullable = false, insertable = false, updatable = false)
 	public CuentaPagar getCuentaPagar() {
 		return this.cuentaPagar;
 	}

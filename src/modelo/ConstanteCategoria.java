@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "constante_categoria", schema = "public")
 public class ConstanteCategoria implements java.io.Serializable {
 
-	private ConstanteCategoriaId id;
+	private int codigoConstanteCategoria;
 	private Constante constante;
 	private Categoria categoria;
 	private int valor;
@@ -27,28 +25,26 @@ public class ConstanteCategoria implements java.io.Serializable {
 	public ConstanteCategoria() {
 	}
 
-	public ConstanteCategoria(ConstanteCategoriaId id, Constante constante,
-			Categoria categoria, int valor) {
-		this.id = id;
+	public ConstanteCategoria(int codigoConstanteCategoria,
+			Constante constante, Categoria categoria, int valor) {
+		this.codigoConstanteCategoria = codigoConstanteCategoria;
 		this.constante = constante;
 		this.categoria = categoria;
 		this.valor = valor;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoConstanteCategoria", column = @Column(name = "codigo_constante_categoria", nullable = false)),
-			@AttributeOverride(name = "codigoConstante", column = @Column(name = "codigo_constante", nullable = false)) })
-	public ConstanteCategoriaId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_constante_categoria", unique = true, nullable = false)
+	public int getCodigoConstanteCategoria() {
+		return this.codigoConstanteCategoria;
 	}
 
-	public void setId(ConstanteCategoriaId id) {
-		this.id = id;
+	public void setCodigoConstanteCategoria(int codigoConstanteCategoria) {
+		this.codigoConstanteCategoria = codigoConstanteCategoria;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_constante", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_constante", nullable = false)
 	public Constante getConstante() {
 		return this.constante;
 	}

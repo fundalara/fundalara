@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,14 +11,26 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class RecepcionMaterialId implements java.io.Serializable {
 
-	private int codigoNotaEntrega;
 	private int codigoMaterial;
+	private int codigoNotaEntrega;
+	private String origen;
 
 	public RecepcionMaterialId() {
 	}
 
-	public RecepcionMaterialId(int codigoNotaEntrega, int codigoMaterial) {
+	public RecepcionMaterialId(int codigoMaterial, int codigoNotaEntrega,
+			String origen) {
+		this.codigoMaterial = codigoMaterial;
 		this.codigoNotaEntrega = codigoNotaEntrega;
+		this.origen = origen;
+	}
+
+	@Column(name = "codigo_material", nullable = false)
+	public int getCodigoMaterial() {
+		return this.codigoMaterial;
+	}
+
+	public void setCodigoMaterial(int codigoMaterial) {
 		this.codigoMaterial = codigoMaterial;
 	}
 
@@ -31,13 +43,13 @@ public class RecepcionMaterialId implements java.io.Serializable {
 		this.codigoNotaEntrega = codigoNotaEntrega;
 	}
 
-	@Column(name = "codigo_material", nullable = false)
-	public int getCodigoMaterial() {
-		return this.codigoMaterial;
+	@Column(name = "origen", nullable = false)
+	public String getOrigen() {
+		return this.origen;
 	}
 
-	public void setCodigoMaterial(int codigoMaterial) {
-		this.codigoMaterial = codigoMaterial;
+	public void setOrigen(String origen) {
+		this.origen = origen;
 	}
 
 	public boolean equals(Object other) {
@@ -49,15 +61,21 @@ public class RecepcionMaterialId implements java.io.Serializable {
 			return false;
 		RecepcionMaterialId castOther = (RecepcionMaterialId) other;
 
-		return (this.getCodigoNotaEntrega() == castOther.getCodigoNotaEntrega())
-				&& (this.getCodigoMaterial() == castOther.getCodigoMaterial());
+		return (this.getCodigoMaterial() == castOther.getCodigoMaterial())
+				&& (this.getCodigoNotaEntrega() == castOther
+						.getCodigoNotaEntrega())
+				&& ((this.getOrigen() == castOther.getOrigen()) || (this
+						.getOrigen() != null && castOther.getOrigen() != null && this
+						.getOrigen().equals(castOther.getOrigen())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoNotaEntrega();
 		result = 37 * result + this.getCodigoMaterial();
+		result = 37 * result + this.getCodigoNotaEntrega();
+		result = 37 * result
+				+ (getOrigen() == null ? 0 : this.getOrigen().hashCode());
 		return result;
 	}
 

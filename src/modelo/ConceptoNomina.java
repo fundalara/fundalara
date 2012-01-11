@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,6 +30,7 @@ public class ConceptoNomina implements java.io.Serializable {
 	private Date fechaCreacion;
 	private char estatus;
 	private String descripcion;
+	private boolean fijo;
 	private Set<PersonalConceptoNomina> personalConceptoNominas = new HashSet<PersonalConceptoNomina>(
 			0);
 	private Set<Movimiento> movimientos = new HashSet<Movimiento>(0);
@@ -39,18 +40,19 @@ public class ConceptoNomina implements java.io.Serializable {
 
 	public ConceptoNomina(int codigoConceptoNomina, DatoBasico datoBasico,
 			boolean aplicableSueldo, Date fechaCreacion, char estatus,
-			String descripcion) {
+			String descripcion, boolean fijo) {
 		this.codigoConceptoNomina = codigoConceptoNomina;
 		this.datoBasico = datoBasico;
 		this.aplicableSueldo = aplicableSueldo;
 		this.fechaCreacion = fechaCreacion;
 		this.estatus = estatus;
 		this.descripcion = descripcion;
+		this.fijo = fijo;
 	}
 
 	public ConceptoNomina(int codigoConceptoNomina, DatoBasico datoBasico,
 			Double valor, boolean aplicableSueldo, Date fechaCreacion,
-			char estatus, String descripcion,
+			char estatus, String descripcion, boolean fijo,
 			Set<PersonalConceptoNomina> personalConceptoNominas,
 			Set<Movimiento> movimientos) {
 		this.codigoConceptoNomina = codigoConceptoNomina;
@@ -60,6 +62,7 @@ public class ConceptoNomina implements java.io.Serializable {
 		this.fechaCreacion = fechaCreacion;
 		this.estatus = estatus;
 		this.descripcion = descripcion;
+		this.fijo = fijo;
 		this.personalConceptoNominas = personalConceptoNominas;
 		this.movimientos = movimientos;
 	}
@@ -128,6 +131,15 @@ public class ConceptoNomina implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	@Column(name = "fijo", nullable = false)
+	public boolean isFijo() {
+		return this.fijo;
+	}
+
+	public void setFijo(boolean fijo) {
+		this.fijo = fijo;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "conceptoNomina")

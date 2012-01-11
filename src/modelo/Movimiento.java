@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,6 +28,8 @@ public class Movimiento implements java.io.Serializable {
 	private Date fecha;
 	private byte[] justificacionInasistencia;
 	private char estatus;
+	private Integer cantidadHoraDia;
+	private String observacion;
 
 	public Movimiento() {
 	}
@@ -46,7 +48,8 @@ public class Movimiento implements java.io.Serializable {
 
 	public Movimiento(int codigoMovimiento, ConceptoNomina conceptoNomina,
 			Personal personal, Nomina nomina, double monto, Date fecha,
-			byte[] justificacionInasistencia, char estatus) {
+			byte[] justificacionInasistencia, char estatus,
+			Integer cantidadHoraDia, String observacion) {
 		this.codigoMovimiento = codigoMovimiento;
 		this.conceptoNomina = conceptoNomina;
 		this.personal = personal;
@@ -55,6 +58,8 @@ public class Movimiento implements java.io.Serializable {
 		this.fecha = fecha;
 		this.justificacionInasistencia = justificacionInasistencia;
 		this.estatus = estatus;
+		this.cantidadHoraDia = cantidadHoraDia;
+		this.observacion = observacion;
 	}
 
 	@Id
@@ -132,6 +137,24 @@ public class Movimiento implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "cantidad_hora_dia")
+	public Integer getCantidadHoraDia() {
+		return this.cantidadHoraDia;
+	}
+
+	public void setCantidadHoraDia(Integer cantidadHoraDia) {
+		this.cantidadHoraDia = cantidadHoraDia;
+	}
+
+	@Column(name = "observacion")
+	public String getObservacion() {
+		return this.observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
 }

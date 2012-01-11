@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,12 +26,12 @@ public class PersonalEquipo implements java.io.Serializable {
 
 	private int codigoPersonalEquipo;
 	private PlanTemporada planTemporada;
-	private Juego juego;
 	private Personal personal;
 	private Equipo equipo;
 	private Date fechaInicio;
 	private Date fechaFinalizacion;
 	private String eventualidad;
+	private char estatus;
 	private Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos = new HashSet<AsistenciaPersonalEntrenamiento>(
 			0);
 	private Set<EquipoJuego> equipoJuegos = new HashSet<EquipoJuego>(0);
@@ -40,38 +40,38 @@ public class PersonalEquipo implements java.io.Serializable {
 	}
 
 	public PersonalEquipo(int codigoPersonalEquipo,
-			PlanTemporada planTemporada, Juego juego, Personal personal,
-			Equipo equipo, Date fechaInicio, Date fechaFinalizacion,
-			String eventualidad) {
+			PlanTemporada planTemporada, Personal personal, Equipo equipo,
+			Date fechaInicio, Date fechaFinalizacion, String eventualidad,
+			char estatus) {
 		this.codigoPersonalEquipo = codigoPersonalEquipo;
 		this.planTemporada = planTemporada;
-		this.juego = juego;
 		this.personal = personal;
 		this.equipo = equipo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinalizacion = fechaFinalizacion;
 		this.eventualidad = eventualidad;
+		this.estatus = estatus;
 	}
 
 	public PersonalEquipo(
 			int codigoPersonalEquipo,
 			PlanTemporada planTemporada,
-			Juego juego,
 			Personal personal,
 			Equipo equipo,
 			Date fechaInicio,
 			Date fechaFinalizacion,
 			String eventualidad,
+			char estatus,
 			Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos,
 			Set<EquipoJuego> equipoJuegos) {
 		this.codigoPersonalEquipo = codigoPersonalEquipo;
 		this.planTemporada = planTemporada;
-		this.juego = juego;
 		this.personal = personal;
 		this.equipo = equipo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinalizacion = fechaFinalizacion;
 		this.eventualidad = eventualidad;
+		this.estatus = estatus;
 		this.asistenciaPersonalEntrenamientos = asistenciaPersonalEntrenamientos;
 		this.equipoJuegos = equipoJuegos;
 	}
@@ -94,16 +94,6 @@ public class PersonalEquipo implements java.io.Serializable {
 
 	public void setPlanTemporada(PlanTemporada planTemporada) {
 		this.planTemporada = planTemporada;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_juego", nullable = false)
-	public Juego getJuego() {
-		return this.juego;
-	}
-
-	public void setJuego(Juego juego) {
-		this.juego = juego;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -153,6 +143,15 @@ public class PersonalEquipo implements java.io.Serializable {
 
 	public void setEventualidad(String eventualidad) {
 		this.eventualidad = eventualidad;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personalEquipo")

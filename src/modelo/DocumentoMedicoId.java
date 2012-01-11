@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,23 +11,14 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class DocumentoMedicoId implements java.io.Serializable {
 
-	private int codigoDatoMedico;
 	private int codigoDocumentoEntregado;
+	private int codigoDatoMedico;
 
 	public DocumentoMedicoId() {
 	}
 
-	public DocumentoMedicoId(int codigoDatoMedico, int codigoDocumentoEntregado) {
-		this.codigoDatoMedico = codigoDatoMedico;
+	public DocumentoMedicoId(int codigoDocumentoEntregado, int codigoDatoMedico) {
 		this.codigoDocumentoEntregado = codigoDocumentoEntregado;
-	}
-
-	@Column(name = "codigo_dato_medico", nullable = false)
-	public int getCodigoDatoMedico() {
-		return this.codigoDatoMedico;
-	}
-
-	public void setCodigoDatoMedico(int codigoDatoMedico) {
 		this.codigoDatoMedico = codigoDatoMedico;
 	}
 
@@ -40,6 +31,15 @@ public class DocumentoMedicoId implements java.io.Serializable {
 		this.codigoDocumentoEntregado = codigoDocumentoEntregado;
 	}
 
+	@Column(name = "codigo_dato_medico", nullable = false)
+	public int getCodigoDatoMedico() {
+		return this.codigoDatoMedico;
+	}
+
+	public void setCodigoDatoMedico(int codigoDatoMedico) {
+		this.codigoDatoMedico = codigoDatoMedico;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -49,16 +49,17 @@ public class DocumentoMedicoId implements java.io.Serializable {
 			return false;
 		DocumentoMedicoId castOther = (DocumentoMedicoId) other;
 
-		return (this.getCodigoDatoMedico() == castOther.getCodigoDatoMedico())
-				&& (this.getCodigoDocumentoEntregado() == castOther
-						.getCodigoDocumentoEntregado());
+		return (this.getCodigoDocumentoEntregado() == castOther
+				.getCodigoDocumentoEntregado())
+				&& (this.getCodigoDatoMedico() == castOther
+						.getCodigoDatoMedico());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoDatoMedico();
 		result = 37 * result + this.getCodigoDocumentoEntregado();
+		result = 37 * result + this.getCodigoDatoMedico();
 		return result;
 	}
 

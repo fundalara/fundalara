@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,27 +18,36 @@ import javax.persistence.Table;
 public class ProveedorBanco implements java.io.Serializable {
 
 	private String codigoCuentaBanco;
+	private DatoBasico datoBasicoByCodigoTipoCuenta;
 	private PersonaJuridica personaJuridica;
-	private DatoBasico datoBasico;
+	private DatoBasico datoBasicoByCodigoBanco;
 	private String titular;
+	private char estatus;
 
 	public ProveedorBanco() {
 	}
 
 	public ProveedorBanco(String codigoCuentaBanco,
-			PersonaJuridica personaJuridica, DatoBasico datoBasico) {
+			DatoBasico datoBasicoByCodigoTipoCuenta,
+			PersonaJuridica personaJuridica,
+			DatoBasico datoBasicoByCodigoBanco, char estatus) {
 		this.codigoCuentaBanco = codigoCuentaBanco;
+		this.datoBasicoByCodigoTipoCuenta = datoBasicoByCodigoTipoCuenta;
 		this.personaJuridica = personaJuridica;
-		this.datoBasico = datoBasico;
+		this.datoBasicoByCodigoBanco = datoBasicoByCodigoBanco;
+		this.estatus = estatus;
 	}
 
 	public ProveedorBanco(String codigoCuentaBanco,
-			PersonaJuridica personaJuridica, DatoBasico datoBasico,
-			String titular) {
+			DatoBasico datoBasicoByCodigoTipoCuenta,
+			PersonaJuridica personaJuridica,
+			DatoBasico datoBasicoByCodigoBanco, String titular, char estatus) {
 		this.codigoCuentaBanco = codigoCuentaBanco;
+		this.datoBasicoByCodigoTipoCuenta = datoBasicoByCodigoTipoCuenta;
 		this.personaJuridica = personaJuridica;
-		this.datoBasico = datoBasico;
+		this.datoBasicoByCodigoBanco = datoBasicoByCodigoBanco;
 		this.titular = titular;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -49,6 +58,17 @@ public class ProveedorBanco implements java.io.Serializable {
 
 	public void setCodigoCuentaBanco(String codigoCuentaBanco) {
 		this.codigoCuentaBanco = codigoCuentaBanco;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_tipo_cuenta", nullable = false)
+	public DatoBasico getDatoBasicoByCodigoTipoCuenta() {
+		return this.datoBasicoByCodigoTipoCuenta;
+	}
+
+	public void setDatoBasicoByCodigoTipoCuenta(
+			DatoBasico datoBasicoByCodigoTipoCuenta) {
+		this.datoBasicoByCodigoTipoCuenta = datoBasicoByCodigoTipoCuenta;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -63,12 +83,12 @@ public class ProveedorBanco implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_banco", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	public DatoBasico getDatoBasicoByCodigoBanco() {
+		return this.datoBasicoByCodigoBanco;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setDatoBasicoByCodigoBanco(DatoBasico datoBasicoByCodigoBanco) {
+		this.datoBasicoByCodigoBanco = datoBasicoByCodigoBanco;
 	}
 
 	@Column(name = "titular")
@@ -78,6 +98,15 @@ public class ProveedorBanco implements java.io.Serializable {
 
 	public void setTitular(String titular) {
 		this.titular = titular;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,8 @@ public class TipoDato implements java.io.Serializable {
 	private String descripcion;
 	private char estatus;
 	private boolean tipo;
+	private Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals = new HashSet<DetalleSeguridadFuncional>(
+			0);
 	private Set<SeguridadFuncional> seguridadFuncionals = new HashSet<SeguridadFuncional>(
 			0);
 	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
@@ -34,17 +36,17 @@ public class TipoDato implements java.io.Serializable {
 	public TipoDato() {
 	}
 
-	public TipoDato(int codigoTipoDato, String nombre, String descripcion,
-			char estatus, boolean tipo) {
+	public TipoDato(int codigoTipoDato, String nombre, char estatus,
+			boolean tipo) {
 		this.codigoTipoDato = codigoTipoDato;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tipo = tipo;
 	}
 
 	public TipoDato(int codigoTipoDato, TipoDato tipoDato, String nombre,
 			String descripcion, char estatus, boolean tipo,
+			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals,
 			Set<SeguridadFuncional> seguridadFuncionals,
 			Set<DatoBasico> datoBasicos, Set<TipoDato> tipoDatos) {
 		this.codigoTipoDato = codigoTipoDato;
@@ -53,6 +55,7 @@ public class TipoDato implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tipo = tipo;
+		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 		this.seguridadFuncionals = seguridadFuncionals;
 		this.datoBasicos = datoBasicos;
 		this.tipoDatos = tipoDatos;
@@ -87,7 +90,7 @@ public class TipoDato implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "descripcion", nullable = false)
+	@Column(name = "descripcion")
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -112,6 +115,16 @@ public class TipoDato implements java.io.Serializable {
 
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")
+	public Set<DetalleSeguridadFuncional> getDetalleSeguridadFuncionals() {
+		return this.detalleSeguridadFuncionals;
+	}
+
+	public void setDetalleSeguridadFuncionals(
+			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
+		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")

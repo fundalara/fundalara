@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,8 +17,9 @@ import javax.persistence.Table;
 @Table(name = "test_jugador", schema = "public")
 public class TestJugador implements java.io.Serializable {
 
-	private TestJugadorId id;
+	private int codigoTestJugador;
 	private Roster roster;
+	private RosterPlan rosterPlan;
 	private IndicadorTest indicadorTest;
 	private String puntuacion;
 	private char estatus;
@@ -28,29 +27,37 @@ public class TestJugador implements java.io.Serializable {
 	public TestJugador() {
 	}
 
-	public TestJugador(TestJugadorId id, Roster roster,
-			IndicadorTest indicadorTest, String puntuacion, char estatus) {
-		this.id = id;
-		this.roster = roster;
+	public TestJugador(int codigoTestJugador, IndicadorTest indicadorTest,
+			String puntuacion, char estatus) {
+		this.codigoTestJugador = codigoTestJugador;
 		this.indicadorTest = indicadorTest;
 		this.puntuacion = puntuacion;
 		this.estatus = estatus;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoIndicadorTest", column = @Column(name = "codigo_indicador_test", nullable = false)),
-			@AttributeOverride(name = "codigoRoster", column = @Column(name = "codigo_roster", nullable = false)) })
-	public TestJugadorId getId() {
-		return this.id;
+	public TestJugador(int codigoTestJugador, Roster roster,
+			RosterPlan rosterPlan, IndicadorTest indicadorTest,
+			String puntuacion, char estatus) {
+		this.codigoTestJugador = codigoTestJugador;
+		this.roster = roster;
+		this.rosterPlan = rosterPlan;
+		this.indicadorTest = indicadorTest;
+		this.puntuacion = puntuacion;
+		this.estatus = estatus;
 	}
 
-	public void setId(TestJugadorId id) {
-		this.id = id;
+	@Id
+	@Column(name = "codigo_test_jugador", unique = true, nullable = false)
+	public int getCodigoTestJugador() {
+		return this.codigoTestJugador;
+	}
+
+	public void setCodigoTestJugador(int codigoTestJugador) {
+		this.codigoTestJugador = codigoTestJugador;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_roster", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_roster")
 	public Roster getRoster() {
 		return this.roster;
 	}
@@ -60,7 +67,17 @@ public class TestJugador implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_indicador_test", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_roster_plan")
+	public RosterPlan getRosterPlan() {
+		return this.rosterPlan;
+	}
+
+	public void setRosterPlan(RosterPlan rosterPlan) {
+		this.rosterPlan = rosterPlan;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_indicador_test", nullable = false)
 	public IndicadorTest getIndicadorTest() {
 		return this.indicadorTest;
 	}

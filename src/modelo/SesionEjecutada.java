@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,14 +24,13 @@ import javax.persistence.TemporalType;
 public class SesionEjecutada implements java.io.Serializable {
 
 	private int codigoSesionEjecutada;
-	private DatoBasico datoBasico;
-	private PlanRotacion planRotacion;
+	private DatoBasico datoBasicoByEventualidadInstalacion;
+	private DatoBasico datoBasicoByEventualidadSesion;
 	private Instalacion instalacion;
-	private PlanEntrenamiento planEntrenamiento;
+	private Sesion sesion;
 	private Equipo equipo;
-	private Date fecha;
-	private Date horaInicio;
-	private Date horaFin;
+	private Date fechaInicio;
+	private Date fechaFin;
 	private char estatus;
 	private Set<AsistenciaJugador> asistenciaJugadors = new HashSet<AsistenciaJugador>(
 			0);
@@ -39,53 +38,55 @@ public class SesionEjecutada implements java.io.Serializable {
 			0);
 	private Set<ActividadesEjecutadas> actividadesEjecutadases = new HashSet<ActividadesEjecutadas>(
 			0);
+	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
+			0);
 
 	public SesionEjecutada() {
 	}
 
-	public SesionEjecutada(int codigoSesionEjecutada, DatoBasico datoBasico,
-			PlanRotacion planRotacion, Instalacion instalacion,
-			PlanEntrenamiento planEntrenamiento, Equipo equipo, Date fecha,
-			Date horaInicio, Date horaFin, char estatus) {
+	public SesionEjecutada(int codigoSesionEjecutada,
+			DatoBasico datoBasicoByEventualidadInstalacion,
+			DatoBasico datoBasicoByEventualidadSesion, Instalacion instalacion,
+			Sesion sesion, Equipo equipo, Date fechaInicio, Date fechaFin,
+			char estatus) {
 		this.codigoSesionEjecutada = codigoSesionEjecutada;
-		this.datoBasico = datoBasico;
-		this.planRotacion = planRotacion;
+		this.datoBasicoByEventualidadInstalacion = datoBasicoByEventualidadInstalacion;
+		this.datoBasicoByEventualidadSesion = datoBasicoByEventualidadSesion;
 		this.instalacion = instalacion;
-		this.planEntrenamiento = planEntrenamiento;
+		this.sesion = sesion;
 		this.equipo = equipo;
-		this.fecha = fecha;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 		this.estatus = estatus;
 	}
 
 	public SesionEjecutada(
 			int codigoSesionEjecutada,
-			DatoBasico datoBasico,
-			PlanRotacion planRotacion,
+			DatoBasico datoBasicoByEventualidadInstalacion,
+			DatoBasico datoBasicoByEventualidadSesion,
 			Instalacion instalacion,
-			PlanEntrenamiento planEntrenamiento,
+			Sesion sesion,
 			Equipo equipo,
-			Date fecha,
-			Date horaInicio,
-			Date horaFin,
+			Date fechaInicio,
+			Date fechaFin,
 			char estatus,
 			Set<AsistenciaJugador> asistenciaJugadors,
 			Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos,
-			Set<ActividadesEjecutadas> actividadesEjecutadases) {
+			Set<ActividadesEjecutadas> actividadesEjecutadases,
+			Set<MaterialActividad> materialActividads) {
 		this.codigoSesionEjecutada = codigoSesionEjecutada;
-		this.datoBasico = datoBasico;
-		this.planRotacion = planRotacion;
+		this.datoBasicoByEventualidadInstalacion = datoBasicoByEventualidadInstalacion;
+		this.datoBasicoByEventualidadSesion = datoBasicoByEventualidadSesion;
 		this.instalacion = instalacion;
-		this.planEntrenamiento = planEntrenamiento;
+		this.sesion = sesion;
 		this.equipo = equipo;
-		this.fecha = fecha;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 		this.estatus = estatus;
 		this.asistenciaJugadors = asistenciaJugadors;
 		this.asistenciaPersonalEntrenamientos = asistenciaPersonalEntrenamientos;
 		this.actividadesEjecutadases = actividadesEjecutadases;
+		this.materialActividads = materialActividads;
 	}
 
 	@Id
@@ -99,23 +100,25 @@ public class SesionEjecutada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "eventualidad", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@JoinColumn(name = "eventualidad_instalacion", nullable = false)
+	public DatoBasico getDatoBasicoByEventualidadInstalacion() {
+		return this.datoBasicoByEventualidadInstalacion;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setDatoBasicoByEventualidadInstalacion(
+			DatoBasico datoBasicoByEventualidadInstalacion) {
+		this.datoBasicoByEventualidadInstalacion = datoBasicoByEventualidadInstalacion;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_plan_rotacion", nullable = false)
-	public PlanRotacion getPlanRotacion() {
-		return this.planRotacion;
+	@JoinColumn(name = "eventualidad_sesion", nullable = false)
+	public DatoBasico getDatoBasicoByEventualidadSesion() {
+		return this.datoBasicoByEventualidadSesion;
 	}
 
-	public void setPlanRotacion(PlanRotacion planRotacion) {
-		this.planRotacion = planRotacion;
+	public void setDatoBasicoByEventualidadSesion(
+			DatoBasico datoBasicoByEventualidadSesion) {
+		this.datoBasicoByEventualidadSesion = datoBasicoByEventualidadSesion;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -129,13 +132,13 @@ public class SesionEjecutada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_plan_entrenamiento", nullable = false)
-	public PlanEntrenamiento getPlanEntrenamiento() {
-		return this.planEntrenamiento;
+	@JoinColumn(name = "codigo_sesion", nullable = false)
+	public Sesion getSesion() {
+		return this.sesion;
 	}
 
-	public void setPlanEntrenamiento(PlanEntrenamiento planEntrenamiento) {
-		this.planEntrenamiento = planEntrenamiento;
+	public void setSesion(Sesion sesion) {
+		this.sesion = sesion;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -149,33 +152,23 @@ public class SesionEjecutada implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha", nullable = false, length = 13)
-	public Date getFecha() {
-		return this.fecha;
+	@Column(name = "fecha_inicio", nullable = false, length = 13)
+	public Date getFechaInicio() {
+		return this.fechaInicio;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_inicio", nullable = false, length = 15)
-	public Date getHoraInicio() {
-		return this.horaInicio;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_fin", nullable = false, length = 13)
+	public Date getFechaFin() {
+		return this.fechaFin;
 	}
 
-	public void setHoraInicio(Date horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_fin", nullable = false, length = 15)
-	public Date getHoraFin() {
-		return this.horaFin;
-	}
-
-	public void setHoraFin(Date horaFin) {
-		this.horaFin = horaFin;
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
@@ -214,6 +207,15 @@ public class SesionEjecutada implements java.io.Serializable {
 	public void setActividadesEjecutadases(
 			Set<ActividadesEjecutadas> actividadesEjecutadases) {
 		this.actividadesEjecutadases = actividadesEjecutadases;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesionEjecutada")
+	public Set<MaterialActividad> getMaterialActividads() {
+		return this.materialActividads;
+	}
+
+	public void setMaterialActividads(Set<MaterialActividad> materialActividads) {
+		this.materialActividads = materialActividads;
 	}
 
 }

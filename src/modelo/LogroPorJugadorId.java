@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,36 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class LogroPorJugadorId implements java.io.Serializable {
 
-	private int codigoCompetencia;
-	private String cedulaRif;
 	private int codigoLogro;
+	private int codigoDatoDeportivo;
 
 	public LogroPorJugadorId() {
 	}
 
-	public LogroPorJugadorId(int codigoCompetencia, String cedulaRif,
-			int codigoLogro) {
-		this.codigoCompetencia = codigoCompetencia;
-		this.cedulaRif = cedulaRif;
+	public LogroPorJugadorId(int codigoLogro, int codigoDatoDeportivo) {
 		this.codigoLogro = codigoLogro;
-	}
-
-	@Column(name = "codigo_competencia", nullable = false)
-	public int getCodigoCompetencia() {
-		return this.codigoCompetencia;
-	}
-
-	public void setCodigoCompetencia(int codigoCompetencia) {
-		this.codigoCompetencia = codigoCompetencia;
-	}
-
-	@Column(name = "cedula_rif", nullable = false)
-	public String getCedulaRif() {
-		return this.cedulaRif;
-	}
-
-	public void setCedulaRif(String cedulaRif) {
-		this.cedulaRif = cedulaRif;
+		this.codigoDatoDeportivo = codigoDatoDeportivo;
 	}
 
 	@Column(name = "codigo_logro", nullable = false)
@@ -52,6 +31,15 @@ public class LogroPorJugadorId implements java.io.Serializable {
 		this.codigoLogro = codigoLogro;
 	}
 
+	@Column(name = "codigo_dato_deportivo", nullable = false)
+	public int getCodigoDatoDeportivo() {
+		return this.codigoDatoDeportivo;
+	}
+
+	public void setCodigoDatoDeportivo(int codigoDatoDeportivo) {
+		this.codigoDatoDeportivo = codigoDatoDeportivo;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -61,21 +49,16 @@ public class LogroPorJugadorId implements java.io.Serializable {
 			return false;
 		LogroPorJugadorId castOther = (LogroPorJugadorId) other;
 
-		return (this.getCodigoCompetencia() == castOther.getCodigoCompetencia())
-				&& ((this.getCedulaRif() == castOther.getCedulaRif()) || (this
-						.getCedulaRif() != null
-						&& castOther.getCedulaRif() != null && this
-						.getCedulaRif().equals(castOther.getCedulaRif())))
-				&& (this.getCodigoLogro() == castOther.getCodigoLogro());
+		return (this.getCodigoLogro() == castOther.getCodigoLogro())
+				&& (this.getCodigoDatoDeportivo() == castOther
+						.getCodigoDatoDeportivo());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoCompetencia();
-		result = 37 * result
-				+ (getCedulaRif() == null ? 0 : this.getCedulaRif().hashCode());
 		result = 37 * result + this.getCodigoLogro();
+		result = 37 * result + this.getCodigoDatoDeportivo();
 		return result;
 	}
 

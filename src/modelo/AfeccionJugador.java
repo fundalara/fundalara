@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 31/12/2011 11:02:01 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -37,8 +37,8 @@ public class AfeccionJugador implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoDatoMedico", column = @Column(name = "codigo_dato_medico", nullable = false)),
-			@AttributeOverride(name = "codigoAfeccion", column = @Column(name = "codigo_afeccion", nullable = false)) })
+			@AttributeOverride(name = "codigoAfeccion", column = @Column(name = "codigo_afeccion", nullable = false)),
+			@AttributeOverride(name = "codigoDatoMedico", column = @Column(name = "codigo_dato_medico", nullable = false)) })
 	public AfeccionJugadorId getId() {
 		return this.id;
 	}
