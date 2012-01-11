@@ -127,7 +127,7 @@ public class Indicador implements java.io.Serializable {
 		this.abreviatura = abreviatura;
 	}
 
-	@Column(name = "formula", nullable = false)
+	@Column(name = "formula", nullable = true)
 	public String getFormula() {
 		return this.formula;
 	}
