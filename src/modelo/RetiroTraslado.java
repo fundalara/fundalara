@@ -1,14 +1,16 @@
 package modelo;
 
-// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
+// Generated 11-ene-2012 21:47:34 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,6 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "retiro_traslado", schema = "public")
+@SequenceGenerator(name = "retiroTraslado_seq", sequenceName = "retiro_traslado_codigo_retiro_traslado_seq_1")
 public class RetiroTraslado implements java.io.Serializable {
 
 	private int codigoRetiroTraslado;
@@ -44,6 +47,7 @@ public class RetiroTraslado implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_retiro_traslado", unique = true, nullable = false)
+	@GeneratedValue(generator = "retiroTraslado_seq")
 	public int getCodigoRetiroTraslado() {
 		return this.codigoRetiroTraslado;
 	}
