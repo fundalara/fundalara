@@ -1,19 +1,19 @@
 package controlador.jugador.bean;
 
-
 import modelo.DatoBasico;
 
 /**
  * Clase bean para representar al Jugador
+ * 
  * @author Robert A
  * @author German L
  * @version 0.1 22/12/2011
- *
+ * 
  */
+
 public class Jugador extends Persona {
 
 	private String secuencia;
-	
 	private int numero;
 	private TipoSangre tipoSangre;
 	private double peso;
@@ -25,8 +25,7 @@ public class Jugador extends Persona {
 	private DatoBasico tallaCamisa;
 	private DatoBasico paisNac;
 	private DatoBasico parroquiaNac;
-	
-	
+
 	public Jugador() {
 		super();
 		tipoSangre = new TipoSangre();
@@ -41,8 +40,6 @@ public class Jugador extends Persona {
 	public void setSecuencia(String secuencia) {
 		this.secuencia = secuencia;
 	}
-
-	
 
 	public int getNumero() {
 		return numero;
@@ -107,8 +104,6 @@ public class Jugador extends Persona {
 	public void setParroquiaNac(DatoBasico parroquiaNac) {
 		this.parroquiaNac = parroquiaNac;
 	}
-
-
 
 	public DatoBasico getTallaCalzado() {
 		return tallaCalzado;

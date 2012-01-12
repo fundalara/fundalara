@@ -2,6 +2,14 @@ package controlador.jugador.bean;
 
 import modelo.DatoBasico;
 
+/**
+ * Clase bean para representar el tipo de sangre
+ * 
+ * @author Robert A
+ * @author German L
+ * @version 0.1 22/12/2011
+ * 
+ */
 public class TipoSangre {
 	private DatoBasico grupoSanguineo;
 	private DatoBasico factorRH;
@@ -28,7 +36,11 @@ public class TipoSangre {
 	}
 
 	public String getTipoSangre() {
-		return grupoSanguineo.getNombre() + "-" + factorRH.getNombre();
+		if (grupoSanguineo.getNombre() == null || factorRH.getNombre() == null) {
+			return null;
+		} else {
+			return grupoSanguineo.getNombre() + "-" + factorRH.getNombre();
+		}
 	}
 
 }

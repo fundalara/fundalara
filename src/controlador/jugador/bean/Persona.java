@@ -34,7 +34,6 @@ public class Persona {
 	public Persona() {
 		telefonoHabitacion = new Telefono();
 		telefonoCelular = new Telefono();
-		parroquiaResi = new DatoBasico();
 		genero = new DatoBasico();
 	}
 
