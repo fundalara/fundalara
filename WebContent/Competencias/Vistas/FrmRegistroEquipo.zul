@@ -33,11 +33,11 @@
 								</hbox>
 								<label value="Tipo"></label>
 								<textbox id="txtTipoCompetencia"
-									disabled="true">
+									disabled="true" value="@{cntrl.competencia.modalidadCompetencia.tipoCompetencia.nombre }">
 								</textbox>
 								<label value="Modalidad"></label>
 								<textbox id="txtModalidadCompetencia"
-									disabled="true">
+									disabled="true" value="@{cntrl.competencia.modalidadCompetencia.nombre }">
 								</textbox>
 							</row>
 							<row style="border:none">
@@ -293,7 +293,7 @@
 				<panel>
 					<panelchildren style="margin-top:5px ">
 						<div align="right">
-							<button
+							<button id="btnGuardar"
 								image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 							</button>
 							<button
