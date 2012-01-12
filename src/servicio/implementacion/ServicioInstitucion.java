@@ -5,6 +5,7 @@ import java.util.List;
 import servicio.interfaz.IServicioInstitucion;
 
 import dao.general.DaoInstitucion;
+import modelo.DatoBasico;
 import modelo.Institucion;
 
 public class ServicioInstitucion implements IServicioInstitucion {
@@ -27,22 +28,26 @@ public class ServicioInstitucion implements IServicioInstitucion {
 	@Override
 	public void agregar(Institucion c) {
 		 daoInstitucion.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(Institucion c) {
 		 daoInstitucion.actualizar(c);
-
 	}
 
 	@Override
 	public List<Institucion> listar() {
 		return  daoInstitucion.listar( Institucion.class);
 	}
+	
 	@Override
     public Institucion buscar (String id){
     	return daoInstitucion.buscar(id);
     }
+	
+	@Override
+	public List<Institucion> buscarInstitucionTipo(DatoBasico datoBasico) {
+		return daoInstitucion.buscarInstitucionTipo(datoBasico);
+	}
 	
 }

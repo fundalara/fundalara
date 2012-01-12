@@ -51,9 +51,9 @@ public class ServicioMedico implements IServicioMedico {
 		return daoMedico.buscar(id);
 	}
 
-	/*@Override
-	public Medico buscar(Medico c) {
-		return (Medico) daoMedico.getSession().createCriteria(Medico.class).add(Restrictions.eq("numeroColegio",c.getNumeroColegio())).list().get(0);
-	}*/
+	@Override
+	public boolean buscarelimi(Medico medico){
+		return daoMedico.verificareli(medico);
+	}
 
 }

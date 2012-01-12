@@ -54,14 +54,14 @@
 													<treerow>
 														<treecell
 															label="Categorías"
-															onClick='enlace("Jugador/Vistas/tipoCategoria.zul")' />
+																onClick='enlace("Jugador/Vistas/frmConfigurarCategoria.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Equipos"
-															onClick='enlace("Jugador/Vistas/configurarEquipo.zul")' />
+																onClick='enlace("Jugador/Vistas/frmConfigurarEquipo.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -231,14 +231,14 @@
 													<treerow>
 														<treecell
 															label="Instituciones"
-															onClick='enlace("Jugador/Vistas/configurarInstitucion.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarInstitucion.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Médicos"
-															onClick='enlace("Jugador/Vistas/configurarInstitucion.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarMedico.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -262,7 +262,7 @@
 											<treerow>
 												<treecell
 													label="Inscribir"
-													onClick='enlace("Jugador/Vistas/inscribirJugador.zul")' />
+													onClick='enlace("Jugador/Vistas/frmInscribirJugador.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="true">
@@ -276,35 +276,21 @@
 											<treerow>
 												<treecell
 													label="Ascender de Categoría"
-													onClick='enlace("Jugador/Vistas/ascensoCategoria.zul")' />
-											</treerow>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Cambiar de Equipo"
-													onClick='enlace("Jugador/Vistas/cambiarEquipo.zul")' />
+													onClick='enlace("Jugador/Vistas/frmAscenderJugador.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem>
 											<treerow>
 												<treecell
-													label="Retirar"
-													onClick='enlace("Jugador/Vistas/retirarJugador.zul")' />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Trasladar (Pase)"
-													onClick='enlace("Jugador/Vistas/registrarPase.zul")' />
+													label="Retirar/Trasladar(Pase)"
+													onClick='enlace("Jugador/Vistas/trasladarJugador.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Actualizar Familiar"
-													onClick='enlace("Jugador/Vistas/actualizarFamiliar.zul")' />
+													onClick='enlace("Jugador/Vistas/frmActualizarFamiliar.zul")' />
 											</treerow>
 										</treeitem>
 									</treechildren>
@@ -382,7 +368,7 @@
 											<treerow>
 												<treecell
 													label="Hospedaje de Jugadores"
-													onClick='enlace("Jugador/Vistas/registrarHospedaje.zul")' />
+													onClick='enlace("Jugador/Vistas/frmRegistrarHospedaje.zul")' />
 											</treerow>
 										</treeitem>										
 										<treeitem open="false">

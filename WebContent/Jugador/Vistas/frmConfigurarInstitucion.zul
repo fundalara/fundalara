@@ -1,0 +1,88 @@
+<?page title="Institución" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<zk>
+	<zscript>
+<![CDATA[ 
+]]>
+</zscript>
+	<window id="winconfigurarInstitucion" title="Institución"
+		border="normal" width="420px" closable="true"
+		apply="controlador.jugador.CntrlConfigurarInstitucion">
+		<grid oddRowSclass="none">
+			<columns>
+				<column width="25%" />
+				<column width="75%" />
+			</columns>
+			<rows>
+				<row style="border:none;">
+					<label value="Nombre" />
+					<textbox id="txtNombre" width="95%" maxlength="80"
+						constraint="no empty" value="@{cntrl.institucion.nombre}" />
+					<button id="btnBuscar"
+						image="/Recursos/Imagenes/consultar.ico" />
+				</row>
+				<row style="border:none;">
+					<label value="Tipo Institución" />
+					<combobox id="cmbTipo" value="--Seleccione--"
+						width="46%"
+						model="@{winconfigurarInstitucion$composer.tipoInstituciones}"
+						selectedItem="@{cntrl.tipoinstitucion}">
+						<comboitem self="@{each='institucion'}"
+							label="@{institucion.nombre}" />
+					</combobox>
+				</row>
+				<row style="border:none;">
+					<label value="Estado" />
+					<combobox readonly="true" id="cmbEstadoResi"
+						value="--Seleccione--" width="70%" selectedItem="@{cntrl.estado}"
+						model="@{winconfigurarInstitucion$composer.estadosVenezuela}">
+						<comboitem self="@{each='estado'}"
+							label="@{estado.nombre}" />
+					</combobox>
+				</row>
+				<row style="border:none;">
+					<label value="Municipio" />
+					<combobox id="cmbMunicipioResi" readonly="true"
+						selectedItem="@{cntrl.municipio}" value="--Seleccione--"
+						width="70%"
+						model="@{winconfigurarInstitucion$composer.municipiosEstadosResi, load-after='cmbEstadoResi.onChange'}">
+						<comboitem self="@{each='municipio'}"
+							label="@{municipio.nombre}" />
+					</combobox>
+				</row>
+				<row style="border:none;">
+					<label value="Parroquia" />
+					<combobox id="cmbParroquiaResi" readonly="true"
+						value="--Seleccione--" width="27%"
+						selectedItem="@{cntrl.parroquia}"
+						model="@{winconfigurarInstitucion$composer.parroquiasMunicipioResi, load-after='cmbMunicipioResi.onChange'}">
+						<comboitem self="@{each='parroquia'}"
+							label="@{parroquia.nombre}" />
+					</combobox>
+				</row>
+				<row style="border:none;">
+					<label value="Dirección" />
+					<textbox id="txtDireccion" width="95%" height="40px"
+						maxlength="200" multiline="true" constraint="no empty"
+						value="@{cntrl.institucion.direccion}" />
+				</row>
+			</rows>
+		</grid>
+		<div align="right">
+			<button id="btnGuardar" label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnCancelar" label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px">
+				<attribute name="onClick"><![CDATA[
+	winconfigurarInstitucion.detach();
+]]></attribute>
+			</button>
+		</div>
+	</window>
+</zk>

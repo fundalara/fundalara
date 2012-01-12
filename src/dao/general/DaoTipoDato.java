@@ -5,9 +5,12 @@ import java.util.List;
 import modelo.TipoDato;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+import comun.TipoDatoBasico;
 
 
 
@@ -30,5 +33,29 @@ public class DaoTipoDato extends GenericDao {
 		Criteria c = getSession().createCriteria(TipoDato.class);
 		c.add(Restrictions.eq("tipo", bool));
 		return  c.list();
+	}
+	
+	
+
+	/**
+	 * Busca el tipo de dato completo segun su tipo(código)
+	 * @param tipoDato tipo de dato básico
+	 * @return Objeto de TipoDato, en caso de no encontrar retorna null
+	 */
+	public TipoDato buscarPorCodigo(TipoDatoBasico tipoDato) {
+		TipoDato tipo;
+		Session session = SessionManager.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"SELECT * FROM tipo_dato WHERE codigo_tipo_dato='"
+						+ tipoDato.getCodigo() + "'").addEntity(TipoDato.class);
+		List<Object> lista = query.list();
+		if (!lista.isEmpty()) {
+			tipo = (TipoDato) lista.get(0);
+		} else {
+			tipo = null;
+		}
+		tx.commit();
+		return tipo;
 	}
 }

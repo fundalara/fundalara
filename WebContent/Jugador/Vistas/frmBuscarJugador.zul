@@ -1,40 +1,34 @@
 <?page title="Equipo" contentType="text/html;charset=UTF-8"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winBuscarjugador"?>
 
 <zk>
-	<window id="winConfigurarEquipo" title="Buscar Jugador" border="normal" width="500px"
-		closable="true" apply="controlador.jugador.BuscarJugadorCtrl">
-
-
+	<window id="winBuscarjugador" title="Buscar Jugador" border="normal" width="500px" mode="modal"
+		closable="true" apply="controlador.jugador.CntrlBuscarJugador">
 
 		<grid style="border:none">
 			<rows>
 				<row style="border:none">
 					<label value="Categoría" />
 					<combobox id="cmbCategoria" value="--Seleccione--" selectedItem="@{controller.categoria}"
-						width="90%" model="@{winConfigurarEquipo$composer.categorias}">
+						width="90%" model="@{winBuscarjugador$composer.categorias}">
 						<comboitem self="@{each='categoria'}"
 								label="@{categoria.nombre}" value="@{categoria.codigoCategoria}" />
 					</combobox>
 					<label value="Equipo" />
 					<hbox>
 						<combobox value="--Seleccione--" width="90%" id="cmbEquipo" selectedItem="@{controller.equipo}"
-						 model="@{winConfigurarEquipo$composer.equipos}">
-							<comboitem self="@{each='equipo'}" label="@{equipo.clasificacionEquipo}" value="@{equipo.codigoEquipo}"/>
+						 model="@{winBuscarjugador$composer.equipos, load-after='cmbCategoria.onChange'}">
+							<comboitem self="@{each='equipo'}" label="@{equipo.datoBasico.nombre}" value="@{equipo.codigoEquipo}"/>
 						</combobox>
-						<space></space>
-						<button id="btnBuscar"
-							image="Recursos/Imagenes/consultar.ico">
-						</button>
+						
 					</hbox>
 				</row>
 			</rows>
 		</grid>
 		<separator></separator>
-		<listbox mold="paging" pageSize="10">
-			<attribute name="onSelect"><![CDATA[
-				winConfigurarEquipo.detach();
-			]]></attribute>
+		<listbox id="listEquipo"  mold="paging" pageSize="5"  model="@{controller.jugadores, load-after='cmbEquipo.onChange'}" 
+					    selectedItem="@{winBuscarjugador$composer.Jugador}">
 			<auxhead sclass="category-center">
 				<auxheader label="Listado Equipo" colspan="4"
 					align="center">
@@ -69,18 +63,21 @@
 				</auxheader>
 			</auxhead>
 
-			<listitem self="@{each='equipo'}" value="@{equipo}">
-				<listcell>V-22145214</listcell>
-				<listcell>Pérez</listcell>
-				<listcell>José</listcell>
-				<listcell>12</listcell>
+			<listitem self="@{each='jugador'}" value="@{jugador}">
+				 <listcell label="@{jugador.cedulaRif}" />
+				<listcell label="@{jugador.personaNatural.primerNombre}" />
+				<listcell label="@{jugador.personaNatural.primerApellido}"/>
+				<listcell label="@{jugador.numero}" /> 
 			</listitem>
 		</listbox>
 		<separator></separator>
 		<div align="right">
+		<button id="btnSeleccionar" label="Seleccionar"
+					image="/Recursos/Imagenes/glowing_cursor.png">
+				</button>
 			<button label="Salir" image="Recursos/Imagenes/salir.png">
 				<attribute name="onClick"><![CDATA[
-					winConfigurarEquipo.detach();
+					winBuscarjugador.detach();
 				]]></attribute>
 			</button>
 		</div>

@@ -1,6 +1,8 @@
 <?page title="Trasladar" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
-	<window title="Trasladar" border="normal" width="677px"
+	<window id="winTrasladarJugador" title="Trasladar" border="normal" width="677px"
 		closable="true" apply="controlador.jugador.TrasladarJugadorCtrl">
 
 		<grid style="border:none;" oddRowSclass="none">
@@ -12,15 +14,17 @@
 				<row style="border:none;">
 					<label value="Tipo de Traslado" />
 					<combobox value="--Seleccione--" id="cmbTipoTraslado"
-						readonly="true" focus="true">
-						<comboitem label="Retiro" value="1" />
-						<comboitem label="Pase" value="2" />
+						readonly="true" focus="true"
+						selectedItem="@{controller.tipoOperacion}"
+						model="@{winTrasladarJugador$composer.operaciones}">
+						<comboitem self="@{each='operac'}"
+							label="@{operac.nombre}" />
 					</combobox>
 				</row>
 			</rows>
 		</grid>
 		<div style="display:inline">
-			<include id="incCuerpo" />
+			<include id="incCuerpo" tipo="${controller.tipoOperacion}" />
 		</div>
 	</window>
 </zk>

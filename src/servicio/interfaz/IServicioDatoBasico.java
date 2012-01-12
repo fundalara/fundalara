@@ -8,6 +8,7 @@ import modelo.DatoBasico;
 import modelo.TipoDato;
 
 public interface IServicioDatoBasico {
+	
 	public abstract void eliminar(DatoBasico d);
 	
 	public abstract void agregar(DatoBasico d);
@@ -28,5 +29,6 @@ public interface IServicioDatoBasico {
 	
 	public List<DatoBasico> buscarDatosPorRelacion(DatoBasico datoBasico);
 
-
+	public abstract DatoBasico buscarTipo(TipoDatoBasico tipoDato, String nombre);
+	
 }
