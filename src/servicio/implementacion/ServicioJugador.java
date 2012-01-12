@@ -43,6 +43,11 @@ public class ServicioJugador implements IServicioJugador {
 	public void actualizar(Jugador c) {
 		daoJugador.actualizar(c);
 	}
+	
+	public void actualizar(Jugador c, PersonaNatural pn) {
+		daoJugador.actualizar(c,pn);
+
+	}
 
 	@Override
 	public List<Jugador> listar() {

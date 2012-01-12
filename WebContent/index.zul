@@ -231,7 +231,7 @@
 													<treerow>
 														<treecell
 															label="Instituciones"
-															onClick='enlace("Jugador/Vistas/configurarInstitucion.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarInstitucion.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
