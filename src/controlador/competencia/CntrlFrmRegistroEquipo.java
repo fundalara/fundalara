@@ -7,7 +7,9 @@ import modelo.CategoriaCompetencia;
 import modelo.Competencia;
 import modelo.Divisa;
 import modelo.Equipo;
+import modelo.EquipoCompetencia;
 import modelo.Indicador;
+import modelo.PersonaNatural;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,6 +36,7 @@ import comun.EstadoCompetencia;
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDivisa;
 import servicio.implementacion.ServicioEquipo;
+import servicio.implementacion.ServicioEquipoCompetencia;
 import servicio.implementacion.ServicioIndicador;
 import servicio.implementacion.ServicioRegistroEquipo;
 
@@ -45,6 +48,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	ServicioEquipo servicioEquipo;
 	ServicioRegistroEquipo servicioRegistroEquipo;
+	ServicioEquipoCompetencia servicioEquipoCompetencia;
+	EquipoCompetencia equipoComptencia;
 	ServicioDivisa servicioDivisa;
 	Competencia competencia;
 	AnnotateDataBinder binder;
@@ -162,7 +167,35 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		binder.loadAll();
 		Selectes = new ArrayList<Equipo>();
 	}
+	
+	//// llamando el evento guardar
+	public void onClick$btnGuardar() {
+		Cargar(lsbxEquiposSeleccionadosLocales, Selectes);
+		binder.loadAll();
+	}
+	
+	//// llenar el objeto para grabar
+	public void Cargar( Listbox destino, List lista){
+		PersonaNatural p;
+		p = new PersonaNatural();
+//		Set seleccionados = destino.getItems();
+//		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
+//			boolean sw = false;
+//			Listitem li = (Listitem) i.next();
+//			Equipo c1 = (Equipo) li.getValue();				
+//				c1.getNombre();
+//				equipoComptencia.setCompetencia(competencia);				
+//				equipoComptencia.setPersonaNatural(competencia.get)
+//				equipoComptencia.setEquipo(c1);
+//				equipoComptencia.setPersonaNatural(p);
+//				equipoComptencia.setEstatus('A');
+//				alert("paso por aqui y entro al ciclo");
+//			}
 
+		alert("paso por aqui");
+			
+		
+	}
 	// ///////////////////////////// Getter and Setter
 	// ///////////////////////////
 	public Listbox getLsbxEquiposLocales() {
