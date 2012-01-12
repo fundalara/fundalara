@@ -4,6 +4,7 @@ import java.util.List;
 import modelo.TipoDato;
 
 public interface IServicioTipoDato {
+	
 	public abstract void eliminar(TipoDato td);
 	
 	public abstract void agregar(TipoDato td);

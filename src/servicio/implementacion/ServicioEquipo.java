@@ -5,7 +5,16 @@ import java.util.List;
 import servicio.interfaz.IServicioEquipo;
 
 import dao.general.DaoEquipo;
+import modelo.Categoria;
 import modelo.Equipo;
+
+/**
+ * Clase para brindar los servicios para manejar los datos relacionados con los equipos
+ * @author Robert A
+ * @author German L
+ * @version 0.1 29/12/2011
+ *
+ */
 
 public class ServicioEquipo implements IServicioEquipo {
 
@@ -48,5 +57,14 @@ public class ServicioEquipo implements IServicioEquipo {
 
 	public List<Equipo> listarEquipoForaneos(){
 		return daoEquipo.listarEquipoForaneos();
+	}
+	
+	
+	public List<Equipo> buscarPorCategoria(Categoria categoria){
+		return daoEquipo.buscarEquiposPorCategoria(categoria);
+	}
+	
+	public boolean buscarPorCodigo (Equipo equipo) {
+		return daoEquipo.buscarPorCodigo(equipo);
 	}
 }

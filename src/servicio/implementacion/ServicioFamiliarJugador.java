@@ -6,9 +6,12 @@ import servicio.interfaz.IServicioFamiliarJugador;
 
 import dao.general.DaoFamiliarJugador;
 import modelo.FamiliarJugador;
+import modelo.Jugador;
 
 public class ServicioFamiliarJugador implements IServicioFamiliarJugador {
 
+	DaoFamiliarJugador daoFamiliarJugador;
+	
 	public DaoFamiliarJugador getDaoFamiliarJugador() {
 		return daoFamiliarJugador;
 	}
@@ -16,10 +19,6 @@ public class ServicioFamiliarJugador implements IServicioFamiliarJugador {
 	public void setDaoFamiliarJugador(DaoFamiliarJugador daoFamiliarJugador) {
 		this.daoFamiliarJugador = daoFamiliarJugador;
 	}
-
-	DaoFamiliarJugador daoFamiliarJugador;
-	
-	
 
 	@Override
 	public void eliminar(FamiliarJugador c) {
@@ -42,6 +41,11 @@ public class ServicioFamiliarJugador implements IServicioFamiliarJugador {
 	@Override
 	public List<FamiliarJugador> listar() {
 		return daoFamiliarJugador.listar( FamiliarJugador.class);
+	}
+	
+	@Override
+	public List<FamiliarJugador> buscarFamiliarJugador(Jugador jugador) {
+		return daoFamiliarJugador.buscarFamiliarJugador(jugador);
 	}
 
 }

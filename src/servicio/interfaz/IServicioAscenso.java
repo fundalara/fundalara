@@ -3,6 +3,7 @@ package servicio.interfaz;
 import java.util.List;
 
 import modelo.Ascenso;
+import modelo.Roster;
 
 public interface IServicioAscenso {
 	
@@ -13,4 +14,7 @@ public interface IServicioAscenso {
 	public abstract void actualizar(Ascenso c);
 
 	public abstract List<Ascenso> listar();
+	
+	public abstract void actualizarAscenso(Roster r);
+	
 }

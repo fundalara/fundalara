@@ -96,5 +96,11 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		return daoDatoBasico.buscarPorString(s);
 	}
 
+	
+	@Override
+	public DatoBasico buscarTipo(TipoDatoBasico tipoDato, String nombre) {
+		return daoDatoBasico.buscarTipo(tipoDato, nombre);
+	}
+	
 
 }

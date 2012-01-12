@@ -7,6 +7,14 @@ import servicio.interfaz.IServicioHospedaje;
 import dao.general.DaoHospedaje;
 
 import modelo.Hospedaje;
+import modelo.Representante;//NUEVO
+
+/**
+ * Clase para brindar los servicios para manejar los datos relacionados al hospedje
+ * @author Erika O
+ * @version 0.1 29/12/2011
+ *
+ */
 
 public class ServicioHospedaje implements IServicioHospedaje {
 
@@ -39,7 +47,12 @@ public class ServicioHospedaje implements IServicioHospedaje {
 
 	@Override
 	public List<Hospedaje> listar() {
-		return daoHospedaje.listar( Hospedaje.class);
+		return daoHospedaje.listar(Hospedaje.class);
+	}
+	
+	@Override
+	public Representante buscar (String id) {
+		return daoHospedaje.buscar(id);
 	}
 
 }

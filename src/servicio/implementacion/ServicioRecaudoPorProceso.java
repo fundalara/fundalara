@@ -2,12 +2,24 @@ package servicio.implementacion;
 
 import java.util.List;
 
+import comun.TipoDatoBasico;
+
 import servicio.interfaz.IServicioRecaudoPorProceso;
 
 import dao.general.DaoRecaudoPorProceso;
 
+import modelo.DatoBasico;
 import modelo.RecaudoPorProceso;
 
+/**
+ * Clase para brindar los servicios para manejar los datos relacionados con los
+ * recaudos solicitados en los diversos procesos a los jugadores
+ * 
+ * @author Robert A
+ * @author German L
+ * @version 0.1 29/12/2011
+ * 
+ */
 public class ServicioRecaudoPorProceso implements IServicioRecaudoPorProceso {
 
 	DaoRecaudoPorProceso daoRecaudoPorProceso;
@@ -41,6 +53,13 @@ public class ServicioRecaudoPorProceso implements IServicioRecaudoPorProceso {
 	@Override
 	public List<RecaudoPorProceso> listar() {
 		return daoRecaudoPorProceso.listar( RecaudoPorProceso.class);
+	}
+
+	@Override
+	public List<RecaudoPorProceso> buscarPorProceso(DatoBasico proceso,
+			TipoDatoBasico tipoDocumento, String nombre) {
+		return daoRecaudoPorProceso.buscarPorProceso(proceso, tipoDocumento,
+				nombre);
 	}
 
 }

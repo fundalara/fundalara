@@ -7,6 +7,14 @@ import servicio.interfaz.IServicioCategoria;
 import dao.general.DaoCategoria;
 import modelo.Categoria;
 
+
+/**
+ * Clase para brindar los servicios para manejar los datos relacionados con las categorias de los jugadores
+ * @author Robert A
+ * @author German L
+ * @version 0.1 29/12/2011
+ *
+ */
 public class ServicioCategoria implements IServicioCategoria {
 
 	DaoCategoria daoCategoria;
@@ -48,5 +56,22 @@ public class ServicioCategoria implements IServicioCategoria {
 		return daoCategoria.listarActivos();
 	}
 
+	@Override
+	public Categoria buscarPorEdad(int edad) {
+		return daoCategoria.buscarPorEdad(edad);
+	}
+	
+	@Override
+	public List<Categoria> buscarCategorias(int edad){
+		return daoCategoria.buscarCategorias(edad);
+	}
 
+	@Override
+	public boolean buscarPorCodigo(Categoria categoria) {
+		return daoCategoria.buscarPorCodigo(categoria);
+	}
+	
+
+	
+	
 }

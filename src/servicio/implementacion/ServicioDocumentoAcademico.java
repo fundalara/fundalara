@@ -6,8 +6,17 @@ import servicio.interfaz.IServicioDocumentoAcademico;
 
 import dao.general.DaoDocumentoAcademico;
 
+import modelo.DatoAcademico;
 import modelo.DocumentoAcademico;
+import modelo.DocumentoEntregado;
 
+/**
+ * Clase para brindar los servicios para manejar los datos relacionados con los documentos academicos de los jugadores
+ * @author Robert A
+ * @author German L
+ * @version 0.1 02/01/2012
+ *
+ */
 public class ServicioDocumentoAcademico implements IServicioDocumentoAcademico {
  
 	DaoDocumentoAcademico daoDocumentoAcademico;
@@ -42,5 +51,11 @@ public class ServicioDocumentoAcademico implements IServicioDocumentoAcademico {
 	public List<DocumentoAcademico> listar() {
 		return daoDocumentoAcademico.listar( DocumentoAcademico.class);
 	}
-
+	
+	@Override
+	public void guardar(List<DocumentoEntregado> documentos,
+		DatoAcademico datoAcademico) {
+		daoDocumentoAcademico.guardar(documentos, datoAcademico);
+	
+	}
 }

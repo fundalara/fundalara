@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.DatoSocial;
 
 public interface IServicioDatoSocial {
+	
 	public abstract void eliminar(DatoSocial c);
 	
 	public abstract void agregar(DatoSocial c);
