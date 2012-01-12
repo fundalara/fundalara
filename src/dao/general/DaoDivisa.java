@@ -33,5 +33,14 @@ public class DaoDivisa extends GenericDao {
 		return c.list();
 		
 	}
+	
+	public List listarDivisaForanea(){
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(Divisa.class);
+		c.add(Restrictions.not(Restrictions.eq("codigoDivisa",1)));
+		List <Divisa> lista = c.list();		
+		return lista;
+	}
 
 }

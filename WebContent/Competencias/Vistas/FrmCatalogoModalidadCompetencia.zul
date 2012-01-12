@@ -1,0 +1,41 @@
+<?page title="FrmCatalogoNuevaModalidad" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoModalidadCompetencia"?>
+<zk>
+
+	<div align="center">
+		<window id="frmCatalogoModalidadCompetencia" title="Modalidades Existentes"
+			apply="controlador.competencia.CntrlFrmCatalogoNuevaModalidad"
+			border="normal" mode="modal" closable="true" width="690px"
+			height="350px">
+			<panel width="100%" border="normal">
+				<panelchildren>
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox id="txtFiltro" ></textbox>
+						<button label="Buscar"></button>
+					</div>
+					<listbox id="lsbxModalidad" mold="paging" width="100%"
+						pageSize="10" style="margin-top:5px" model="@{cntrl.modalidades}"
+						height="240px" >
+						<listhead>
+							<listheader label="Nombre" align="center" width="10%"></listheader>
+							<listheader label="Descripción" align="center" width="auto"></listheader>
+						</listhead>
+
+						<listitem self="@{each=modalidadCompetencia}">
+							<listcell label="@{modalidadCompetencia.nombre}"></listcell>
+							<listcell label="@{modalidadCompetencia.descripcion}"></listcell>
+						</listitem>
+
+
+					</listbox>
+					<div align="right">
+						<button id="btnAceptar" image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar" />
+						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
+					</div>
+				</panelchildren>
+			</panel>
+		</window>
+	</div>
+</zk>

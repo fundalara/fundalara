@@ -10,7 +10,7 @@ public interface IServicioIndicador {
 
 	public abstract void agregar(Indicador i);
 
-	//public abstract void actualizar(Indicador i);
+	public abstract void actualizar(Indicador i);
 
 	//public abstract Indicador buscarPorCodigo(Indicador i);
 

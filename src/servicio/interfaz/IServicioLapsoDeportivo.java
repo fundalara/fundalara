@@ -13,4 +13,6 @@ public interface IServicioLapsoDeportivo {
 	public abstract void eliminar(LapsoDeportivo ae);
 	
 	public abstract List<LapsoDeportivo> listar(); 
+	
+	public abstract List<LapsoDeportivo> listarActivos();
 }

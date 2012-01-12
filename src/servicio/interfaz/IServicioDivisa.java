@@ -19,4 +19,6 @@ public interface IServicioDivisa {
 	public abstract  Divisa buscarPorCodigo (Divisa d);
 	
 	public List<Divisa> filtrar (String cad);
+	
+	public abstract List<Divisa> listarDivisaForanea();
 }

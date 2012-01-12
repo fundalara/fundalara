@@ -4,7 +4,11 @@ import java.util.List;
 
 import dao.general.DaoIndicadorCategoriaCompetencia;
 
+import modelo.Categoria;
+import modelo.Competencia;
+import modelo.Indicador;
 import modelo.IndicadorCategoriaCompetencia;
+import modelo.Liga;
 import servicio.interfaz.IServicioIndicadorCategoriaCompetencia;
 
 public class ServicioIndicadorCategoriaCompetencia implements
@@ -45,4 +49,14 @@ public class ServicioIndicadorCategoriaCompetencia implements
 		return null;
 	}
 
+	@Override
+	public List<Indicador> listarIndicadoresPorCategoria(Categoria c, Competencia comp) {
+		return daoIndicadorCategoriaCompetencia.listarIndicadoresPorCategoria(c, comp);
+		
+	}
+	 
+	
+	
+	
+	
 }

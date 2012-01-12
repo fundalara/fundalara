@@ -1,11 +1,17 @@
 <?page title="REGISTRO DE ROSTER" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRoster"?>
+
+
+
+
 <zk>
-	<div id="roster" align="Center">
-		<window title="REGISTRO DE RÓSTER" border="normal"
-			id="FrmRoster" width="60%" closable="true">
+	<div align="center">
+	 <window id="frmRoster" apply="controlador.competencia.CntrlFrmRoster"
+		 title="REGISTRO DE RÓSTER" border="normal" closable="true" width="60%">
 			<div id="Roster" align="left">
-				<panel border="normal"
-					title="Datos de la Competencia">
+				
+				<panel border="normal" title="Datos de la Competencia">
 					<panelchildren>
 						<grid>
 							<columns>
@@ -20,15 +26,15 @@
 								<row>
 									<label value="Competencia"></label>
 									<hbox>
-										<textbox cols="11"></textbox>
-										<button
+										<textbox cols="11" id="txtIdCompetencia" value="@{cntrl.competencia.nombre}"></textbox>
+										<button id="btnBuscar"
 											image="../../Recursos/Imagenes/consultar.ico">
 										</button>
 									</hbox>
 									<label value="Fecha Inicio"></label>
-									<textbox cols="10"></textbox>
+									<textbox cols="10" id="txtfinicio" value="@{cntrl.competencia.fechaInicio}"></textbox>
 									<label value="Fecha Fin"></label>
-									<textbox cols="10"></textbox>
+									<textbox cols="10" id="txtffin" value="@{cntrl.competencia.fechaFin}"></textbox>
 
 								</row>
 
@@ -37,6 +43,7 @@
 						</grid>
 					</panelchildren>
 				</panel>
+				</div>
 				<panel border="normal" title="Datos del Equipo">
 					<panelchildren>
 						<grid>
@@ -48,9 +55,23 @@
 							<rows>
 								<row>
 									<label value="Categoria"></label>
-									<combobox cols="11"></combobox>
+									
+									<combobox id="cmbCategoria" 
+									model="@{cntrl.categorias}" readonly="true" cols="18">
+									<comboitem self="@{each=categoria}"
+										value="@{categoria}" label="@{categoria.nombre}">
+									</comboitem>
+								</combobox>
 									<label value="Equipo"></label>
-									<combobox cols="11"></combobox>
+								
+								<combobox id="cmbEquipo" 
+									model="@{cntrl.equipos}" readonly="true" cols="18">
+									<comboitem self="@{each=equipo}"
+										value="@{equipo}" label="@{equipo.nombre}">
+									</comboitem>
+								</combobox>
+								
+								
 								</row>
 								<row>
 									<label value="Manager"></label>
@@ -62,6 +83,7 @@
 						</grid>
 					</panelchildren>
 				</panel>
+				
 				<panel border="normal" title="Jugadores">
 					<panelchildren>
 
@@ -89,70 +111,8 @@
 								<listcell>Nombre Jugador 1</listcell>
 								<listcell>14</listcell>
 								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
-
-							</listitem>
-							<listitem>
-								<listcell>15</listcell>
-								<listcell>Nombre Jugador 2</listcell>
-								<listcell>15</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
-
-							</listitem>
-							<listitem>
-								<listcell>23</listcell>
-								<listcell>Nombre Jugador 3</listcell>
-								<listcell>15</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
-
-							</listitem>
-							<listitem>
-								<listcell>16</listcell>
-								<listcell>Nombre Jugador 4</listcell>
-								<listcell>15</listcell>
-								<listcell>Si</listcell>
-								<listcell>
-									<checkbox checked="true"></checkbox>
-								</listcell>
-
-							</listitem>
-							<listitem>
-								<listcell>25</listcell>
-								<listcell>Nombre Jugador 5</listcell>
-								<listcell>15</listcell>
-								<listcell>No</listcell>
-								<listcell>
-									<checkbox></checkbox>
-								</listcell>
-
-							</listitem>
-							<listitem>
-								<listcell>22</listcell>
-								<listcell>Nombre Jugador 6</listcell>
-								<listcell>15</listcell>
-								<listcell>No</listcell>
-								<listcell>
-									<checkbox></checkbox>
-								</listcell>
-
-							</listitem>
-							<listitem>
-								<listcell>11</listcell>
-								<listcell>Nombre Jugador 7</listcell>
-								<listcell>15</listcell>
-								<listcell>No</listcell>
-								<listcell>
-									<checkbox></checkbox>
-								</listcell>
-
+								<listcell> <checkbox></checkbox> </listcell>
+								
 							</listitem>
 
 						</listbox>
@@ -166,6 +126,7 @@
 						</div>
 					</panelchildren>
 				</panel>
+				
 				<panel collapsible="true" title="Refuerzos">
 					<panelchildren>
 						<grid>
@@ -249,6 +210,7 @@
 					</panelchildren>
 
 				</panel>
+				
 
 
 				<div align="right">
@@ -262,30 +224,12 @@
 						label="Salir">
 					</button>
 				</div>
+				
 
 
 
-			</div>
-			<zscript>
-	<![CDATA[
-	void volver() {
-		FrmRoster.getChildren().clear();
-		Component component = Executions.createComponents(
-				"FrmRegistroEquipo.zul", FrmRoster, new HashMap());
-		component.setParent(FrmRoster);
-	}
-	void Refuerzo() {
-		FrmRoster.getChildren().clear();
-		Component component = Executions.createComponents("FrmRefuerzos.zul",
-				FrmRoster, new HashMap());
-		component.setParent(FrmRoster);
-	}
-	void btnAgregarOtroJugador() {
-		Executions.createComponents(
-				"/Competencias/Vistas/FrmCatalogoJugador.zul", null, null);
-	}
-]]>
-</zscript>
-		</window>
-	</div>
+			
+</window>
+		</div>
+	
 </zk>

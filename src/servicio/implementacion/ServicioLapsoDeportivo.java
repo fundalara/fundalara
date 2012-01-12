@@ -35,6 +35,11 @@ public class ServicioLapsoDeportivo implements IServicioLapsoDeportivo {
 		return daoLapsoDeportivo.listar(LapsoDeportivo.class);
 	}
 
+	@Override
+	public List<LapsoDeportivo> listarActivos() {
+		return daoLapsoDeportivo.listarActivos();
+	}	
+	 
 	public DaoLapsoDeportivo getDaoLapsoDeportivo() {
 		return daoLapsoDeportivo;
 	}

@@ -1,0 +1,380 @@
+<?page title="Auto Generated index.zul"?>
+<window title="Resultados Individuales" border="normal" height="100%"
+	width="100%">
+
+	<panel border="normal">
+		<caption label="RESULTADOS INDIVIDUALES"></caption>
+		<panelchildren>
+			<tabbox>
+				<tabs>
+					<tab label="Bateo" />
+					<tab label="Fildeo" />
+					<tab label="Picheo" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<div>
+							<div width="40%">
+								<hbox>
+
+									<label value="INNING"></label>
+
+									<grid>
+										<rows>
+											<row>
+											<hbox>
+											<spinner value="1"></spinner>
+											<button label="Cargar Inning"></button>
+											</hbox>
+												
+
+											</row>
+										</rows>
+									</grid>
+								</hbox>
+
+							</div>
+							<div align="right" width="25%"
+								style="margin-top:30px;float:left">
+								
+								<panel border="normal">
+									<caption label="LINE-UP"></caption>
+									<panelchildren>
+										<grid>
+											<columns>
+												<column label="N°"
+													width="30px">
+												</column>
+												<column
+													label="Nombre" align="left">
+												</column>
+												
+												<column label="Pos"
+													width="30px">
+												</column>
+											</columns>
+											<rows>
+												<row>
+													<label value="1"></label>
+													<label
+														value="Rafael Escobar" >
+													</label>
+													
+													<label value="SS"></label>
+												</row>
+												<row>
+													<label value="2"></label>
+													<label
+														value="Eduardo Ochoa">
+													</label>
+													
+													<label value="RF"></label>
+												</row>
+												<row>
+													<label value="3"></label>
+													<label
+														value="Francisco Machado">
+													</label>
+													
+													<label value="CF"></label>
+												</row>
+												<row>
+													<label value="4"></label>
+													<label
+														value="Yovanny Mansalva">
+													</label>
+													
+													<label value="LF"></label>
+												</row>
+												<row>
+													<label value="5"></label>
+													<label
+														value="Jesus Rojas">
+													</label>
+													
+													<label value="3B"></label>
+												</row>
+												<row>
+													<label value="6"></label>
+													<label
+														value="Jesus Castillo">
+													</label>
+													
+													<label value="2B"></label>
+												</row>
+												<row>
+													<label value="7"></label>
+													<label
+														value="Jhoinnel Liscano">
+													</label>
+													
+													<label value="1B"></label>
+												</row>
+												<row>
+													<label value="8"></label>
+													<label
+														value="Juan Hernandez">
+													</label>
+													
+													<label value="P"></label>
+												</row>
+												<row>
+													<label value="9"></label>
+													<label
+														value="Ana Vargas">
+													</label>
+													
+													<label value="C"></label>
+												</row>
+											</rows>
+										</grid>
+									</panelchildren>
+								</panel>
+								<panel collapsible="True"
+									border="normal">
+									<caption label="RESERVA"></caption>
+									<panelchildren>
+										<grid>
+											<columns>
+												<column label="N°"
+													width="30px">
+												</column>
+												<column
+													label="Nombre" align="left">
+												</column>
+												
+												<column label="Pos"
+													width="30px">
+												</column>
+											</columns>
+											<rows>
+												<row>
+													<label value="1"></label>
+													<label value="Rafael Escobar">
+													</label>
+													
+													<label value=""></label>
+												</row>
+												<row>
+													<label value="2"></label>
+													<label
+														value="Eduardo Ochoa">
+													</label>
+													
+													<label value=""></label>
+												</row>
+											</rows>
+										</grid>
+									</panelchildren>
+								</panel>
+
+							</div>
+							<div style="float:left;margin-top:31px"
+								width="75%">
+								<panel border="normal">
+									<caption label="INDICADORES"></caption>
+									<panelchildren>
+										<grid>
+											<columns>
+												<column label="H"
+													align="center" />
+												<column label="O"
+													align="center" />
+												<column label="CI"
+													align="center" />
+												<column label="CA"
+													align="center" />
+												<column label="2B"
+													align="center" />
+												<column label="3B"
+													align="center" />
+												<column label="AL"
+													align="center" />
+												<column label="VB"
+													align="center" />
+												<column label="K"
+													align="center" />
+											</columns>
+											<rows>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+											</rows>
+										</grid>
+									</panelchildren>
+								</panel>
+							</div>
+							<div align="right" width="75%" style="float:left;margin-top:25px">
+								<panel>
+									<panelchildren>
+										<grid>
+											<columns>
+												<column label="H"
+													align="center" />
+												<column label="O"
+													align="center" />
+												<column label="CI"
+													align="center" />
+												<column label="CA"
+													align="center" />
+												<column label="2B"
+													align="center" />
+												<column label="3B"
+													align="center" />
+												<column label="AL"
+													align="center" />
+												<column label="VB"
+													align="center" />
+												<column label="K"
+													align="center" />
+											</columns>
+											<rows>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												<row>
+													<label value="0"></label>
+													<label value="1"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+													<label value="3"></label>
+													<label value="2"></label>
+													<label value="0"></label>
+												</row>
+												
+											</rows>
+										</grid>
+
+
+
+
+
+
+									</panelchildren>
+								</panel>
+							</div>
+							<div align="right" style="">
+								<button label="Borrar"></button>
+							</div>
+						</div>
+					</tabpanel>
+					<tabpanel></tabpanel>
+					<tabpanel></tabpanel>
+				</tabpanels>
+			</tabbox>
+		</panelchildren>
+	</panel>
+	<div align="right">
+		<hbox>
+			<button label="Guardar"></button>
+			<button label="Salir"></button>
+		</hbox>
+	</div>
+
+</window>

@@ -46,6 +46,13 @@ public class GenericDao {
 	    tx.commit();
 	}
 	
+	public void eliminarFisico(Object o) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		session.delete(o);
+	    tx.commit();
+	}
+	
 	public List listar(Class o) {
 		Session session = getSession();
 		Transaction tx =  session.beginTransaction();
@@ -76,6 +83,44 @@ public class GenericDao {
 		Session session = getSession();
 		Transaction tx =  session.beginTransaction();
 		return session.createCriteria(o).list().size()+1;
+	}
+	
+	public Object buscarUnCampo(Class o, String c, Object v) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c, v));
+		Object resultado = cri.list().get(0);
+		System.out.println(resultado);
+	    return resultado;
+	}
+	
+	public Object buscarDosCampos(Class o, String c1, Object v1, String c2, Object v2) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c1, v1));
+		cri.add(Restrictions.eq(c2, v2));
+		Object resultado = cri.list().get(0);
+	    return resultado;
+	}
+	public List listarUnCampo(Class o,String c, Object v) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c, v));
+		List lista = cri.list();
+		return lista;
+	}
+	
+	public List listarDosCampos(Class o,String c1, Object v1, String c2, Object v2) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c1, v1));
+		cri.add(Restrictions.eq(c2, v2));
+		List lista = cri.list();
+		return lista;
 	}
 }
 

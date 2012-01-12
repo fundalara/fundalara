@@ -12,4 +12,8 @@ public interface IServicioEquipo {
 	public abstract void actualizar(Equipo c);	
 	
 	public abstract List<Equipo> listar();
+	
+	public abstract List<Equipo> listarEquipoPorCategoria(int codigo)
+	
+	public abstract List<Equipo> listarEquipoForaneos();
 }

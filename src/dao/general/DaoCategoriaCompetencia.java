@@ -11,7 +11,7 @@ import dao.generico.GenericDao;
 public class DaoCategoriaCompetencia extends GenericDao {
 	
 	
-	public List listarCategoriaPorCompetencia(Class o, String codigo){
+	public List listarCategoriaPorCompetencia(Class o, int codigo){
 		Session session = getSession();
 		Transaction tx =  session.beginTransaction();
 		List lista = session.createCriteria(o).add(Restrictions.eq("competencia.codigoCompetencia", codigo)).list();

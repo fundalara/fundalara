@@ -10,9 +10,9 @@ package comun;
 
 public class EstadoCompetencia {
 	
-	public static int REGISTRADA = 6;
-	public static int APERTURADA = 7;
-	public static int ELIMINADA  = 8;
-	public static int CLAUSURADA = 9;
+	public static int REGISTRADA = 287;
+	public static int APERTURADA = 288;
+	public static int ELIMINADA  = 289;
+	public static int CLAUSURADA = 290;
 
 }

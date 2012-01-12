@@ -41,5 +41,12 @@ public class ServicioCategoria implements IServicioCategoria {
 	public List<Categoria> listar() {
 		return daoCategoria.listar( Categoria.class);
 	}
+	
+	@Override
+	public List<Categoria> listarActivos() {
+		// TODO Auto-generated method stub
+		return daoCategoria.listarActivos();
+	}
+
 
 }

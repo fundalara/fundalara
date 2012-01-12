@@ -1,155 +1,294 @@
 <?page title="Registro de Equipo" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRegistroEquipo"?>
+
 <zk>
+
 	<div align="center">
-		<window title="Equipos" border="normal" width="690px"
-			height="auto" onClose="VerRoster()" closable="true">
-
-
-			<!-- DATOS COMPETENCIA -->
-			<panel border="normal" width="690px">
+		<window title="Equipos" id="frmRegistroEquipo" border="normal"
+			width="690px" height="auto" onClose="VerRoster()" closable="true"
+			apply="controlador.competencia.CntrlFrmRegistroEquipo">
+			<panel border="normal">
 				<caption label="Datos de la Competencia"></caption>
 				<panelchildren>
 					<grid>
 						<columns>
-							<column width="5%"></column>
-							<column width="5%"></column>
-							<column width="5%"></column>
-							<column width="25%"></column>
-							<column width="5%"></column>
-							<column width="25%"></column>
+							<column width="40px" align="left"></column>
+							<column width="40px"></column>
+							<column width="60px"></column>
+							<column width="60px"></column>
+							<column width="50px"></column>
+							<column width="60px"></column>
 						</columns>
 						<rows>
-							<row style="border-style:none">
+							<row style="border:none">
 								<label value="Nombre"></label>
 								<hbox>
-									<textbox cols="20" disabled="true"
-										style="margin-left:15px">
+									<textbox id="txtNombreCompetencia"
+										value="@{cntrl.competencia.nombre }">
 									</textbox>
-									<button
+									<button id="btnBuscar"
 										image="../../Recursos/Imagenes/consultar.ico">
 									</button>
 								</hbox>
 								<label value="Tipo"></label>
-								<textbox cols="14" disabled="true"
-									style="margin-left:15px">
+								<textbox id="txtTipoCompetencia"
+									disabled="true">
 								</textbox>
 								<label value="Modalidad"></label>
-								<textbox cols="14" disabled="true"></textbox>
+								<textbox id="txtModalidadCompetencia"
+									disabled="true">
+								</textbox>
 							</row>
-							<row style="border-style:none">
+							<row style="border:none">
 								<label value="Fecha Inicio"></label>
-								<datebox cols="10" disabled="true"
-									style="margin-left:15px">
-								</datebox>
+								<datebox id="txtFechaInicioCompetencia"
+									value="@{cntrl.competencia.fechaInicio }" disabled="true" />
 								<label value="Fecha Fin"></label>
-								<datebox cols="10" disabled="true"
-									style="margin-left:15px">
-								</datebox>
-
+								<datebox id="txtFechaFin"
+									value="@{cntrl.competencia.fechaFin }" disabled="true" />
 							</row>
 						</rows>
 					</grid>
 				</panelchildren>
 			</panel>
 
-			<div>
-				<!-- TABLA REGISTRO DE EQUIPOS -->
-				<div id="PrincipalEquipos" align="left">
-					<panel title="Equipos Internos"
-						collapsible="true">
-						<panelchildren>
-							<grid width="auto" height="auto">
-								<columns>
-									<column width="25%"></column>
-									<column></column>
-								</columns>
-								<rows>
-									<row style="border-style:none">
-										<label
-											value="Buscar por Categoría">
-										</label>
-										<combobox width="120px">
-											<comboitem label="Infantil" />
-											<comboitem
-												label="Pre-Junior" />
-											<comboitem label="Juvenil" />
-										</combobox>
-									</row>
-								</rows>
-							</grid>
 
-							<div>
-								<listbox height="auto" id="ListaEquipos"
-									mold="paging" pageSize="4">
-									<listhead>
+			<tabbox>
+				<tabs>
+					<tab label="Locales" />
+					<tab label="Foráneos" />
+				</tabs>
 
-										<listheader label="Equipo"
-											width="25%" align="center" id="Equipo" />
-										<listheader label="Delegado"
-											width="25%" align="center" id="Delegado" />
-										<listheader label="Entrenador"
-											width="25%" align="center" id="Entrenador" />
-									</listhead>
-									<listitem>
+				<tabpanels>
+					<tabpanel>
+						<div>
+							<!-- TABLA REGISTRO DE EQUIPOS -->
+							<div id="PrincipalEquipos" align="left">
+								<panel collapsible="true">
+									<panelchildren>
+										<grid width="auto"
+											height="auto">
+											<columns>
+												<column width="25%"></column>
+												<column></column>
+											</columns>
+											<rows>
+												<row
+													style="border-style:none">
+													<label
+														value="Buscar por Categoría">
+													</label>
+													<combobox
+														id="cmbCategorias" model="@{cntrl.categorias}"
+														value="--Seleccione--">
+														<comboitem
+															self="@{each=categoriaCompetencia}"
+															value="@{categoriaCompetencia}"
+															label="@{categoriaCompetencia.categoria.nombre }">
+														</comboitem>
+													</combobox>
+												</row>
+											</rows>
+										</grid>
+										<div>
+											<panel>
+												<panelchildren>
+													<grid>
+														<columns>
+															<column
+																width="45%">
+															</column>
+															<column
+																width="12%" align="Center">
+															</column>
+															<column
+																width="45%">
+															</column>
+														</columns>
+														<rows>
+															<row
+																style="border:none">
+																<listbox
+																	id="lsbxEquiposLocales" model="@{cntrl.equipos}"
+																	style="margin-top:5px" height="200px" multiple="true"
+																	mold="paging" checkmark="true">
 
-										<listcell>
-											Nombre Equipo 1
-										</listcell>
-										<listcell>Delegado 1</listcell>
-										<listcell>
-											Entrenador 1
-										</listcell>
-									</listitem>
-									<listitem>
+																	<listhead>
+																		<listheader
+																			label="Equipos" sort="auto" />
+																	</listhead>
+																	<listitem
+																		self="@{each=equipo}" value="@{equipo}">
+																		<listcell
+																			label="@{equipo.nombre}" />
+																	</listitem>
+																</listbox>
+																<grid>
+																	<rows>
+																		<row
+																			style="border:none" align="center">
+																			<button
+																				id="btnAgregar"
+																				image="/Recursos/Imagenes/rightarrow_g.png"
+																				style="center" />
+																		</row>
+																		<row
+																			style="border:none" align="center">
+																			<button
+																				onClick=""
+																				image="/Recursos/Imagenes/leftarrow_g.png"
+																				style="center" />
+																		</row>
+																	</rows>
+																</grid>
+																<div>
+																	<listbox
+																		id="lsbxEquiposSeleccionadosLocales"
+																		style="margin-top:5px" height="200px"
+																		model="@{cntrl.Selectes}" multiple="true"
+																		checkmark="true" mold="paging">
+																		<listhead>
+																			<listheader
+																				label="Equipos" sort="auto" />
+																		</listhead>
+																		<listitem
+																			self="@{each=Select}" value="@{Select}">
+																			<listcell
+																				label="@{Select.nombre}" />
+																		</listitem>
+																	</listbox>
+																</div>
 
-										<listcell>
-											Nombre Equipo 2
-										</listcell>
-										<listcell>Delegado 2</listcell>
-										<listcell>
-											Entrenador 2
-										</listcell>
-									</listitem>
-									<listitem>
-
-										<listcell>
-											Nombre Equipo 3
-										</listcell>
-										<listcell>Delegado 3</listcell>
-										<listcell>
-											Entrenador 3
-										</listcell>
-									</listitem>
-									<listitem>
-
-										<listcell>
-											Nombre Equipo 4
-										</listcell>
-										<listcell>Delegado 4</listcell>
-										<listcell>
-											Entrenador 4
-										</listcell>
-									</listitem>
-									<listitem>
-
-										<listcell>
-											Nombre Equipo 5
-										</listcell>
-										<listcell>Delegado 5</listcell>
-										<listcell>
-											Entrenador 5
-										</listcell>
-									</listitem>
-								</listbox>
+															</row>
+														</rows>
+													</grid>
+												</panelchildren>
+											</panel>
+										</div>
+									</panelchildren>
+								</panel>
 							</div>
+						</div>
+					</tabpanel>
+					<tabpanel>
+						<!-- AGREGAR NUEVO EQUIPO FORÁNEO -->						
+						<panel border="normal" width="690px">
 
-						</panelchildren>
-					</panel>
-				</div>
+							<panelchildren>
+								<grid>
+									<columns>
+										<column width="5%"></column>
+										<column width="5%"></column>
+										<column width="5%"></column>
+										<column width="25%"></column>
+										<column width="5%"></column>
+										<column width="25%"></column>
+									</columns>
+									<rows>
+										<row
+											style="border-style:none">
+											<label value="Nombre"></label>
+											<hbox>
+												<textbox cols="15"  
+													disabled="false" style="margin-left:15px">
+												</textbox>
 
-				
-			</div>
+											</hbox>
+											<label value="Categoria"></label>
+											<combobox
+												id="cmbCategoriasForaneas" width="80%" model="@{cntrl.categorias}"
+												value="--Seleccione--">
+												<comboitem
+													self="@{each=categoriaCompetencia}"
+													value="@{categoriaCompetencia}"
+													label="@{categoriaCompetencia.categoria.nombre }">
+												</comboitem>
+											</combobox>
+											<label value="Divisa"></label>
+											<combobox id="cmbDivisa" width="80%"
+												model="@{cntrl.divisas}" value="--Seleccione--">
+												<comboitem 
+													self="@{each=divis}" value="@{divis}"
+													label="@{divis.nombre }">
+												</comboitem>
+											</combobox>
+											<button id="btnAgregarEquipoForaneo"
+												image="../../Recursos/Imagenes/agregar.ico">
+											</button>
+										</row>
 
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+						<panel>
+							<panelchildren>
+								<grid>
+									<columns>
+										<column width="45%"></column>
+										<column width="12%"
+											align="Center">
+										</column>
+										<column width="45%"></column>
+									</columns>
+									<rows>
+										<row style="border:none">
+											<listbox
+												id="lsbxEquiposForaneos" style="margin-top:5px"
+												height="200px" model="@{cntrl.equiposforaneos}" multiple="true"
+												checkmark="true" mold="paging">
+												<listhead>
+													<listheader
+														label="Equipos Foraneos" sort="auto" />
+												</listhead>
+												<listitem
+													self="@{each=equiposforaneo}" value="@{equiposforaneo}">
+													<listcell
+														label="@{equiposforaneo.nombre}" />
+												</listitem>
+											</listbox>
+											<grid>
+												<rows>
+													<row
+														style="border:none" align="center">
+														<button
+															onClick="" image="/Recursos/Imagenes/rightarrow_g.png"
+															style="center" />
+													</row>
+													<row
+														style="border:none" align="center">
+														<button
+															onClick="" image="/Recursos/Imagenes/leftarrow_g.png"
+															style="center" />
+													</row>
+
+												</rows>
+											</grid>
+											<listbox
+												id="lsbxEquiposForaneosSeleccionados" style="margin-top:5px"
+												height="200px" model="@{cntrl.equiposforaneos}" multiple="true"
+												checkmark="true" mold="paging">
+												<listhead>
+													<listheader
+														label="Equipos Foraneos" sort="auto" />
+												</listhead>
+												<listitem
+													self="@{each=equiposforaneo}" value="@{equiposforaneo}">
+													<listcell
+														label="@{equiposforaneo.nombre}" />
+												</listitem>
+											</listbox>
+
+																					</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</tabpanel>
+
+				</tabpanels>
+			</tabbox>
 			<div>
 				<panel>
 					<panelchildren style="margin-top:5px ">

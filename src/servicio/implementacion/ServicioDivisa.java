@@ -67,6 +67,8 @@ public class ServicioDivisa implements IServicioDivisa {
 		return daoDivisa.filtar(cad);
 	}
 	
-	
-
+	public List<Divisa> listarDivisaForanea(){
+		return daoDivisa.listarDivisaForanea();
+		
+	}
 }

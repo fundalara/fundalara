@@ -9,7 +9,9 @@ public interface IServicioCategoria {
 	
 	public abstract void agregar(Categoria c);
 		
-	public abstract void actualizar(Categoria c);	
+	public abstract void actualizar(Categoria c);
+	
+	public List<Categoria> listarActivos();
 	
 	public abstract List<Categoria> listar();
 }

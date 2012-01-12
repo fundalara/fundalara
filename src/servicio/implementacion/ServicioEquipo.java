@@ -41,5 +41,12 @@ public class ServicioEquipo implements IServicioEquipo {
 	public List<Equipo> listar() {
 		return daoEquipo.listar( Equipo.class);
 	}
+	
+	public List<Equipo> listarEquipoPorCategoria(int codigo) {
+		return daoEquipo.listarEquipoPorCategoria(Equipo.class, codigo);
+	}
 
+	public List<Equipo> listarEquipoForaneos(){
+		return daoEquipo.listarEquipoForaneos();
+	}
 }

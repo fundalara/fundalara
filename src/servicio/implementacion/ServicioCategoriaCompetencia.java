@@ -60,7 +60,7 @@ public class ServicioCategoriaCompetencia implements
 	}
 
 	@Override
-	public List<CategoriaCompetencia> listarCategoriaPorCompetencia(String codigo) {
+	public List<CategoriaCompetencia> listarCategoriaPorCompetencia(int codigo) {
 		
 		return daoCategoriaCompetencia.listarCategoriaPorCompetencia(CategoriaCompetencia.class,codigo);
 	}

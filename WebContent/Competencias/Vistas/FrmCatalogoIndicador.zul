@@ -1,0 +1,64 @@
+<?page title="Catalogo Indicadores" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoIndicador"?>
+<zk>
+	<div align="center">
+		<window id="frmCatalogoIndicador" title="Catálogo Indicadores"
+			apply="controlador.competencia.CntrlFrmCatalogoIndicador"
+			border="normal" mode="modal" closable="true" width="600px">
+			<panel title="Datos de los Indicadores" width="100%">
+				<panelchildren>
+
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox id="txtFiltro"></textbox>
+						<button id="btnBuscar" label="Buscar"></button>
+					</div>
+					<listbox id="lsbxIndicadores" mold="paging"
+						pageSize="10" style="margin-top:5px" width="100%" model="@{cntrl.listIndicador}" >
+												
+						<listhead>
+							<listheader label="Nombre" width="16%"
+								align="center" />
+							<listheader label="Abreviatura" width="14%"
+								align="center" />
+							<listheader label="Fórmula" width="22%"
+								align="center" />
+							<listheader label="Tipo" width="16%"
+								align="center" />
+							<listheader label="Modalidad" width="16%"
+								align="center" />
+							<listheader label="Medición" width="16%"
+								align="center" />
+						</listhead>
+
+						<listitem self="@{each=indicador}">
+							<listcell label="@{indicador.nombre}" />
+							<listcell label="@{indicador.abreviatura}" />
+							<listcell label="@{indicador.formula}" />
+							<listcell label="@{indicador.datoBasicoByCodigoTipoIndicador.nombre}"/>
+							<listcell label="@{indicador.datoBasicoByCodigoModalidad.nombre}"/>							
+							<listcell label="@{indicador.datoBasicoByCodigoMedicion.nombre}"/>
+						</listitem>
+
+					</listbox>
+
+					<div align="right">
+						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
+							label="Aceptar">
+						</button>
+						<button id="btnSalir"
+							image="../../Recursos/Imagenes/salir.png" label="Salir"	/>
+					</div>
+				</panelchildren>
+
+			</panel>
+			<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoEstadios.onClose();
+	}
+]]></zscript>
+
+		</window>
+	</div>
+</zk>
