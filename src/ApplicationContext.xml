@@ -775,4 +775,32 @@
 		<property name="daoTareaActividadPlanificada" ref="daoTareaActividadPlanificada" />
 	</bean>
 	
+	
+	<bean id="daoDocumentoPersonal" class="dao.general.DaoDocumentoPersonal"></bean>
+	<bean id="servicioDocumentoPersonal" class="servicio.implementacion.ServicioDocumentoPersonal">
+		<property name="daoDocumentoPersonal" ref="daoDocumentoPersonal"></property>
+	</bean>
+	
+		<bean id="daoJugadorPlan" class="dao.general.DaoJugadorPlan"></bean>
+	<bean id="servicioJugadorPlan" class="servicio.implementacion.ServicioJugadorPlan">
+		<property name="daoJugadorPlan" ref="daoJugadorPlan"></property>
+	</bean>
+	
+		<bean id="daoRepresentanteJugadorPlan" class="dao.general.DaoRepresentanteJugadorPlan"></bean>
+	<bean id="servicioRepresentanteJugadorPlan" class="servicio.implementacion.ServicioRepresentanteJugadorPlan">
+		<property name="daoRepresentanteJugadorPlan" ref="daoRepresentanteJugadorPlan"></property>
+	</bean>
+	
+	
+		<bean id="daoRepresentantePlan" class="dao.general.DaoRepresentantePlan"></bean>
+	<bean id="servicioRepresentantePlan" class="servicio.implementacion.ServicioRepresentantePlan">
+		<property name="daoRepresentantePlan" ref="daoRepresentantePlan"></property>
+	</bean>
+	
+		<bean id="daoRosterPlan" class="dao.general.DaoRosterPlan"></bean>
+	<bean id="servicioRosterPlan" class="servicio.implementacion.ServicioRosterPlan">
+		<property name="daoRosterPlan" ref="daoRosterPlan"></property>
+	</bean>
+	
+	
 </beans>
