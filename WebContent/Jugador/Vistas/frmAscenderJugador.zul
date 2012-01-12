@@ -1,0 +1,30 @@
+<?page title="Ascender de Categoría" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window id="winAscenderCategoria" title="Ascender de Categoría"
+		border="normal" width="677px" closable="true"
+		apply="controlador.jugador.CntrlAscenderJugador">
+		<grid style="border:none;" oddRowSclass="none">
+			<columns>
+				<column width="30%" />
+				<column />
+			</columns>
+			<rows>
+				<row style="border:none;">
+					<label value="Tipo Ascenso" />
+					<combobox value="--Seleccione--" id="cmbTipoAscenso"
+						readonly="true" focus="true"
+						selectedItem="@{controller.tipoAscenso}"
+						model="@{winAscenderCategoria$composer.ascensos}">
+						<comboitem self="@{each='ascenso'}"
+							label="@{ascenso.nombre}" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<div style="display:inline">
+			<include id="incCuerpo" tipo="${controller.tipoAscenso}" />
+		</div>
+	</window>
+</zk>

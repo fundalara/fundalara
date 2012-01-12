@@ -1,0 +1,112 @@
+<?page title="Ascenso por Edad"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<zk>
+	<window id="winAscensoEdad" border="none" width="670px"
+		closable="true" apply="controlador.jugador.CntrlAscensoEdad">
+		<groupbox style="border-color:orange" closable="false">
+			<caption label="Actual" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="20%" />
+					<column width="30%" />
+					<column width="20%" />
+					<column width="30%" />
+					<column />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<div>
+							<space />
+							<label value="Categoría" />
+						</div>
+						<combobox id="cmbCategoria" readonly="true"
+							focus="true" width="65%" selectedItem="@{controller.categoria}"
+							model="@{winAscensoEdad$composer.categorias}">
+							<comboitem self="@{each='categoria'}"
+								label="@{categoria.nombre}"
+								value="@{categoria.codigoCategoria}" />
+						</combobox>
+						<div>
+							<space />
+							<label value="Equipo" />
+						</div>
+						<combobox id="cmbEquipo" width="65%"
+							readonly="true" disabled="true"
+							selectedItem="@{controller.equipo}"
+							model="@{winAscensoEdad$composer.equipos, load-after='cmbCategoria.onChange'}">
+							<comboitem self="@{each='equipo'}"
+								label="@{equipo.nombre}" />
+						</combobox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<space height="10px" />
+		<groupbox style="border-color:orange" closable="false">
+			<caption label="Ascenso" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="20%" />
+					<column width="30%" />
+					<column width="20%" />
+					<column width="30%" />
+					<column />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<div>
+							<space />
+							<label value="Categoría" />
+						</div>
+						<combobox id="cmbCategoriaAsc" disabled="true" 
+							width="65%" >
+							<comboitem />
+							</combobox>
+						<div>
+							<space />
+							<label value="Equipo" />
+						</div>
+						<combobox id="cmbEquipoAsc" disabled="true">
+							<comboitem />
+						</combobox>
+
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<space height="10px" />
+		<listbox id="listJugadores" fixedLayout="true" multiple="true"
+			checkmark="true" mold="paging" pageSize="5"
+			model="@{winAscensoEdad$composer.jugadores, load-after='cmbEquipo.onChange'}"
+			selectedItem="@{winAscensoEdad$composer.jugador}">
+			<listhead>
+				<listheader width="20%" label="Cédula" />
+				<listheader width="25%" label="Nombre" />
+				<listheader width="25%" label="Apellido" />
+			    <listheader width="12%" align="center" label="Número" />
+			</listhead>
+			<listitem self="@{each='jugador'}" value="@{jugador}">
+				<listcell label="@{jugador.cedulaRif}" />
+				<listcell
+					label="@{jugador.personaNatural.primerNombre}" />
+				<listcell
+					label="@{jugador.personaNatural.primerApellido}" />
+			    <listcell label="@{jugador.numero}" />
+			</listitem>
+		</listbox>
+
+
+		<div align="right">
+			<button id="btnGuardar" label="Guardar"
+				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnCancelar" label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnSalir" label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+		</div>
+	</window>
+</zk>

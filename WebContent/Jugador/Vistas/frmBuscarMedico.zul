@@ -1,0 +1,58 @@
+<?page title="Buscador de Medicos"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win" ?> 
+<zk>
+	<window id="win" title="Buscar Médico" border="normal" width="620px" mode="modal"
+		closable="true" apply="controlador.jugador.CntrlBuscarMedico">
+	<listbox id="listmedico"  mold="paging" pageSize="10"  model="@{controller.medicos}" 
+					    selectedItem="@{winBuscarjugador$composer.medico}" width="590px" >
+			<auxhead sclass="category-center">
+			 <auxheader label="Listado Médicos" colspan="5" align="center"/>
+			</auxhead>
+			<listhead>
+			    <listheader width="15%" align="center">Matrícula</listheader>
+				<listheader width="18%" align="center">Número Colegio</listheader>
+				<listheader width="29%" >Nombre</listheader>
+				<listheader width="29%" >Apellido</listheader>
+				<listheader width="15%" tooltiptext="A=Habilitado E=Deshabilitado" >Estado</listheader>
+			</listhead>
+			<auxhead>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter1" width="75%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter2" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter3" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter4" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+				</auxheader>
+			</auxhead>
+			<listitem self="@{each='medico'}" value="@{medico}">
+				 <listcell label="@{medico.matricula}" />
+				<listcell label="@{medico.numeroColegio}" />
+				<listcell label="@{medico.nombre}"/>
+				<listcell label="@{medico.apellido}" /> 
+				<listcell label="@{medico.estatus}" tooltiptext="A=Habilitado E=Deshabilitado" />
+			</listitem>
+		</listbox>
+
+			<div align="right">
+			    <button id="btnSeleccionar" label="Seleccionar"
+					image="/Recursos/Imagenes/glowing_cursor.png">
+				</button>
+				<button id="btnSalir" label="Salir"
+					image="/Recursos/Imagenes/salir.png">
+				</button>
+			</div>
+	
+	</window>
+</zk>

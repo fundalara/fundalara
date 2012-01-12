@@ -19,28 +19,30 @@
 						<div>
 						<combobox id="cmbCompetencia"
 							value="--Seleccione--" width="65%" readonly="true"
-							model="@{winRegistrarHospedaje$composer.categorias}">
-							<comboitem self="@{each='categoria'}"
-								label="@{categoria.nombre}"
-								value="@{categoria.codigoCategoria}" />
+							model="@{winRegistrarHospedaje$composer.competencias}"
+							>
+							<comboitem self="@{each='comp'}"
+								label="@{comp.nombre}"
+								value="@{comp}" />
 						</combobox>
 						<label value="(*)" style="color:red" />
 						</div>
 					</row>
 					<row style="border:none;">
 						<label value="Fecha Inicio" />
-						<datebox id="dtboxFechaIni" 
-							constraint="no future" format="dd/MM/yyyy" disabled="true"
+						<datebox id="dtboxFechaIni" value="@{controller.competencia.fechaInicio}"
+							constraint="no future" format="dd/MM/yyyy" readonly="true"
 							style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
 						<label value="Fecha Fin" />
-						<datebox id="dtboxFechaFin" 
-							constraint="no future" format="dd/MM/yyyy" disabled="true"
-							style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+						<datebox id="dtboxFechaFin" value="@{controller.competencia.fechaFin}"
+							constraint="no future" format="dd/MM/yyyy" readonly="true"
+							style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"/> 
 					</row>
 					<row spans="1,3" style="border:none;">
-						<label value="Lugar" />
-						<textbox id="txtLugar" maxlength="200" rows="1"  
-							width="95%" multiline="true" disabled="true" />
+						<label value="Estado" />
+						<textbox id="txtLugar" value="@{controller.competencia.datoBasicoByCodigoEstado.nombre}"
+							maxlength="200" rows="1" 
+							width="95%" multiline="true" readonly="true" />
 					</row>
 				</rows>
 			</grid>

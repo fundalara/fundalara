@@ -3,10 +3,9 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 
 <zk>
-
-
-	<window id="winConfigurarEquipo" title="Equipo" border="normal" width="52%"
-		closable="true" apply="controlador.jugador.ConfigurarEquipoCtrl">
+	<window id="winConfigurarEquipo" title="Equipo" border="normal"
+		width="52%" closable="true"
+		apply="controlador.jugador.CntrlConfigurarEquipo">
 		<grid style="border:none;" oddRowSclass="none">
 			<columns>
 				<column width="16%" />
@@ -15,81 +14,65 @@
 				<column />
 			</columns>
 			<rows>
-			    <row style="border:none;">
-			    <label value="Divisa" />
-					<combobox id="cmbDivisa" value="--Seleccione--" selectedItem="@{controller.divisa}"
-						width="80%" focus="true" model="@{winConfigurarEquipo$composer.divisas}">
+				<row style="border:none;">
+					<label value="Divisa" />
+					<combobox id="cmbDivisa" value="--Seleccione--"
+						selectedItem="@{controller.divisa}" width="80%" focus="true"
+						model="@{winConfigurarEquipo$composer.divisas}">
 						<comboitem self="@{each='divisa'}"
-								label="@{divisa.nombre}" />
+							label="@{divisa.nombre}" />
 					</combobox>
-			  
-			  </row>
+				</row>
 				<row style="border:none;">
 					<label value="Categoría" />
-					<combobox id="cmbCategoria" value="--Seleccione--" selectedItem="@{controller.categoria}"
-						width="80%" focus="true" model="@{winConfigurarEquipo$composer.categorias}">
+					<combobox id="cmbCategoria" value="--Seleccione--"
+						selectedItem="@{controller.categoria}" width="80%" focus="true"
+						model="@{winConfigurarEquipo$composer.categorias}">
 						<comboitem self="@{each='categoria'}"
-								label="@{categoria.nombre}"/>
+							label="@{categoria.nombre}" />
 					</combobox>
 					<label value="Tipo" />
-					<combobox id="cmbTipo" value="--" width="20%"  selectedItem="@{controller.clasificacion}"
-						 model="@{winConfigurarEquipo$composer.tipos}">
-					<comboitem self="@{each='tiposv'}"
-								label="@{tiposv.nombre}" />
+					<combobox id="cmbTipo" value="--" width="20%"
+						selectedItem="@{controller.clasificacion}"
+						model="@{winConfigurarEquipo$composer.tipos, load-after='cmbCategoria.onChange'}">
+						<comboitem self="@{each='tiposv'}"
+							label="@{tiposv.nombre}" />
 					</combobox>
 				</row>
 				<row spans="1,3" style="border:none;">
 					<label value="Nombre" />
-					 <textbox id="txtNombre" width="72%" />
+					<textbox id="txtNombre" width="72%" />
 					<!--  <textbox id="txtNombre" width="72%"  value="@{controller.equipo.nombre}"/> -->
 				</row>
 			</rows>
 		</grid>
-
 		<grid style="border:none;">
 			<columns>
 				<column width="90%" />
 				<column width="10%" />
-
 			</columns>
 			<rows>
 				<row style="border:none;">
-				
-				<listbox id="listEquipo"  mold="paging" pageSize="5"  model="@{controller.equipos}" 
-					    selectedItem="@{winConfigurarEquipo$composer.equipo}">
+					<listbox id="listEquipo" mold="paging" pageSize="5"
+						model="@{controller.equipos}"
+						selectedItem="@{winConfigurarEquipo$composer.equipo}">
 						<listhead>
 							<listheader label="Nombre" />
 							<listheader label="Categoría" />
 							<listheader label="Tipo" width="15%" />
 							<listheader label="Divisa" width="15%" />
 						</listhead>
-						<listitem self="@{each='equipo'}" value="@{equipo}">
+						<listitem self="@{each='equipo'}"
+							value="@{equipo}">
 							<listcell label="@{equipo.nombre}" />
-							<listcell label="@{equipo.categoria.nombre}" />
-							<listcell label="@{equipo.datoBasico.nombre}"/>
+							<listcell
+								label="@{equipo.categoria.nombre}" />
+							<listcell
+								label="@{equipo.datoBasico.nombre}" />
 							<listcell label="@{equipo.divisa.nombre}" />
 						</listitem>
-					
+
 					</listbox>
-				
-				
-				
-				
-				<!-- <listbox mold="paging"
-							id="lbDatos" >
-							<listhead>
-							    <listheader label="codigo" width="1%"
-									align="center" />
-								<listheader label="Nombre" width="30%"
-									align="center" />
-								<listheader label="Categoría" width="40%"
-									align="center" />
-								<listheader label="Tipo" width="10%" align="center"/>
-							</listhead>
-							
-							
-							</listbox> -->
-					
 					<div>
 						<button id="btnAgregar"
 							image="../../Recursos/Imagenes/agregar.ico" />
@@ -99,7 +82,6 @@
 						<separator height="5px" />
 						<button id="btnQuitar"
 							image="../../Recursos/Imagenes/quitar.ico" />
-
 					</div>
 				</row>
 
@@ -107,7 +89,7 @@
 		</grid>
 
 		<div align="right">
-			
+
 			<button id="btnCancelar" label="Cancelar"
 				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
 				width="100px" />
@@ -115,7 +97,7 @@
 				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
 				width="100px">
 				<attribute name="onClick"><![CDATA[
-	win.detach();
+	winConfigurarEquipo.detach();
 ]]></attribute>
 			</button>
 		</div>

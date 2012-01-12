@@ -1,9 +1,18 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"   root="winRegistrarPase" ?>
 <?page title="Registro de Pases"?>
+<zk>
+
+<zscript><![CDATA[
+	//@IMPORT
+	import controlador.jugador.converter.*;
+]]></zscript>
 <div align="left">
-	<window id="windregistrarPase" title="Registro de Pases" border="normal" width="670px"
-		closable="true" apply="controlador.jugador.RegistrarPaseCtrl">		
+	<window id="winRegistrarPase" title="" border="normal" width="670px"
+		closable="true" apply="controlador.jugador.CntrlRegistrarPase">	
+		<space />	
 		<div>
-			<grid oddRowSclass="none">
+			<grid oddRowSclass="none" style="border:none;" >
 				<columns>
 					<column width="18%" />
 					<column width="32%" />
@@ -13,14 +22,14 @@
 				<rows>
 					<row style="border:none;">
 						<label value="Número Pase"/>
-						<textbox width="87%" readonly="true"/>
+						<textbox width="50%" readonly="true"/>
 					</row>						
 				</rows>
 			</grid>
 		</div>
 		
 		<div>		
-			<grid oddRowSclass="none">
+			<grid oddRowSclass="none" style="border:none;">
 				<rows>
 				<row style="border:none;">					
 					<groupbox style="border-color:orange"  closable="false">
@@ -36,38 +45,30 @@
 								<row style="border:none;">
 									<label value="Cédula" />
 									<div>
-										<combobox id="cmbNacionalidad" value="-" width="10%"
-											readonly="true">
-											<comboitem label="V" />
-											<comboitem label="E" />
-											<comboitem label="R" />
-										</combobox>
-										<intbox	constraint="no negative"
-											width="45%" readonly="true" />
-										<button id="btnCatalogoJugador" image="../../Recursos/Imagenes/consultar.ico" orient="horizontal" />												
+										<textbox id="txtNacionalidad"
+											readonly="true" width="15%" maxlength="8"/>
+										<textbox id="txtCedula"
+											readonly="true" width="45%" maxlength="8"/>
+										<button id="btnCatalogoJugador"
+											focus="true" tooltiptext="Consultar Jugador"
+											image="../../Recursos/Imagenes/consultar.ico" />
 									</div>
-									<label value="Fecha Nacimiento" />
-									<datebox width="78%" readonly="true" />								
-								</row>																
-								<row style="border:none;">
+									</row>																
+							     	<row style="border:none;">
 									<label value="Nombre" />
-									<textbox width="87%" />
+									<textbox id="txtPrimerNombre" readonly="true" width="87%"/>
 									<label value="Apellido" />
-									<textbox width="87%" />										
+									<textbox id="txtPrimerApellido" readonly="true" width="87%" />										
 								</row>
 								<row style="border:none;">
 									<label value="Categoría" />
-									<combobox value="-Seleccione-" width="78%" readonly="true" >
-										<comboitem label="Preparatorio Nivel 1" />
-										<comboitem label="Preparatorio Nivel 2" />
-										<comboitem label="Pre-Infantil" />
-										<comboitem label="Infantil" />
-										<comboitem label="Pre-Junior" />
-										<comboitem label="Junior" />
-										<comboitem label="Juvenil" />
-									</combobox>
+									<textbox id="txtCategoria" readonly="true"
+										maxlength="25" width="87%" 
+										value="@{controller.roster.equipo.categoria.nombre}" />
+									 
 									<label value="Equipo" />
-									<textbox id="txtEquipo" width="87%" readonly="true" />
+									<textbox id="txtEquipo" width="87%" readonly="true"
+									value="@{controller.roster.equipo.nombre}"/>
 								</row>																								
 							</rows>
 						</grid>
@@ -87,26 +88,33 @@
 							<rows>
 								<row style="border:none;">									
 									<label value="Divisa" />
-									<textbox width="87%" />																			
+									<div>
+									<textbox width="87%" id="txtDivisaNueva"/>
+									<label value="(*)" style="color:red" />
+									</div>																			
 								</row>
 								<row style="border:none;">									
 									<label value="Liga" />
-									<textbox width="87%" />
-									<label value="Estado" />
-									<combobox value="-Seleccione-" width="78%" readonly="true">
-										<comboitem label="Lara" />
-										<comboitem label="Portuguesa" />
-										<comboitem label="Yaracuy" />
-									</combobox>								
+									<div>
+									<textbox width="87%" id="txtLigaNueva"/>
+									<label value="(*)" style="color:red" />
+									</div>
 								</row>																
 							<row spans="1,3" style="border:none;">
 								<label value="Motivo Cambio" />
-								<textbox id="txtMotivoCambio" maxlength="200" width="95%" multiline="true" height="40px" />
+								<div>
+										<combobox id="cmbMotivo"
+											readonly="true" value="--Seleccione--" width="65%"
+											model="@{winRegistrarPase$composer.pases}"
+											selectedItem="@{controller.retiroJugador.datoBasicoByCodigoMotivoRetiro}">
+											<comboitem
+												self="@{each='ret'}" label="@{ret.nombre}" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+
+									</div>
 							</row>
-							<row spans="1,3" style="border:none;">
-								<label value="Observaciones" />
-								<textbox id="txtObservaciones" maxlength="200" width="95%" multiline="true" height="40px" />
-							</row>																																																																		
 							</rows>
 						</grid>
 					</groupbox>										
@@ -116,7 +124,7 @@
 		</div>
 		
 		
-		<label value="(*) Campos obligatorios" style="color:red" />
+		<label value="(*) Campo obligatorio" style="color:red" />
 		<div align="right">
 			<button id="btnExportar" label="Exportar" image="../../Recursos/Imagenes/guardar.ico"
 				orient="horizontal" width="100px" />
@@ -128,3 +136,5 @@
 		
 	</window>
 </div>
+	</zk>
+

@@ -1,0 +1,52 @@
+<?page title="Buscador Familiar"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winBuscarfamiliar"?>
+<zk>
+	<window id="winBuscarfamiliar" title="Buscar Familiar" border="normal" width="500px" closable="true" mode="modal" apply="controlador.jugador.CntrlBuscarFamiliar">
+		
+	
+		
+	<listbox id="listFamiliar"  mold="paging" pageSize="5"  model="@{controller.familiares}" 
+					selectedItem="@{winBuscarfamiliar$composer.familiar}"   >
+			<auxhead sclass="category-center">
+				<auxheader label="Listado Familiares" colspan="4" align="center"/>
+			</auxhead>
+			<listhead>
+				<listheader sort="auto" align="center" label="Cédula" width="24%"/>
+				<listheader sort="auto" label="Nombre" width="38%"/>
+				<listheader sort="auto" label="Apellido" width="38%"/>
+			</listhead>
+			<auxhead>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter1" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter2" width="80%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter3" width="80%" />
+				</auxheader>
+			</auxhead>
+			<listitem self="@{each='familiar'}" value="@{familiar}">
+				 <listcell label="@{familiar.cedulaRif}" />
+				<listcell label="@{familiar.personaNatural.primerNombre}" />
+				<listcell label="@{familiar.personaNatural.primerApellido}"/>
+			</listitem>
+		</listbox>
+
+		<div align="right">
+		<button id="btnSeleccionar" label="Seleccionar"
+					image="/Recursos/Imagenes/glowing_cursor.png">
+				</button>
+			<button label="Salir"
+				image="/Recursos/Imagenes/salir.png">
+				<attribute name="onClick"><![CDATA[
+								win.detach();
+							]]></attribute>
+			</button>
+		</div>
+	</window>
+</zk>

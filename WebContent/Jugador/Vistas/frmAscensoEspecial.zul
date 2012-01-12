@@ -1,10 +1,10 @@
-<?page title="Ascenso Especial" contentType="text/html;charset=UTF-8"?>
+<?page title="Ascenso Especial"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" 
+root="winAscensoEspecial"?>
 <zk>
-	<window id="winAscensoEspecial" title="Ascenso Especial"
-		border="normal" width="600px" closable="true"
-		apply="controlador.jugador.CntrlAscensoEspecial">
+	<window id="winAscensoEspecial" border="none" width="670px"
+		closable="true" apply="controlador.jugador.CntrlAscensoEspecial">
 		<groupbox style="border-color:orange" closable="false">
 			<caption style="font-weight: bold" label="Jugador" />
 			<grid style="border:none;" oddRowSclass="none">
@@ -27,27 +27,35 @@
 									<label value="Cédula" />
 									<div>
 										<combobox id="cmbNacionalidad"
-											value="--" width="4%" readonly="true">
-											<comboitem label="V" />
-											<comboitem label="E" />
-											<comboitem label="R" />
+											width="4%" readonly="true" disabled="true">
+											<comboitem label="V"
+												value="V" />
+											<comboitem label="E"
+												value="E" />
+											<comboitem label="R"
+												value="R" />
 										</combobox>
 										<textbox id="txtCedula"
-											constraint="no negative" width="19%" disabled="false"
-											focus="true" />
-										<button id="btnBuscar"
+											constraint="no negative" width="25%" maxlength="8"
+											readonly="true" />
+										<label value="-"
+											id="lblSeparador" visible="false" />
+										<intbox id="txtCedulaSecuencia" width="5%" readonly="true"
+											visible="false" maxlength="2"/>
+										<button id="btnCatalogoJugador" focus="true"
 											tooltiptext="Consultar Jugador"
 											image="../../Recursos/Imagenes/consultar.ico" />
-
 									</div>
 								</row>
 								<row style="border:none">
 									<label value="Nombres" />
 									<textbox id="txtNombre"
-										maxlength="50" width="95%" disabled="true" />
+										maxlength="40" width="95%" readonly="true"
+										value="@{controller.nombres}" />
 									<label value="Apellidos" />
 									<textbox id="txtApellido"
-										maxlength="40" width="95%" disabled="true" />
+										maxlength="40" width="95%" readonly="true"
+										value="@{controller.apellidos}" />
 								</row>
 								<row style="border:none">
 									<label value="Fecha Nacimiento"
@@ -55,19 +63,21 @@
 									<datebox id="dtboxFechaNac"
 										constraint="no future" format="dd/MM/yyyy"
 										style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
-										disabled="true" width="85%" />
+										readonly="true" width="85%" value="@{jugador.personaNatural.fechaNacimiento}" />
 									<label value="Categoría"
 										width="95%" />
 									<textbox id="txtCategoria"
-										maxlength="40" width="95%" disabled="true" />
+										maxlength="25" width="95%" readonly="true"
+										value="@{controller.roster.equipo.categoria.nombre}"/>
 								</row>
 								<row style="border:none">
 									<label value="Equipo" width="95%" />
 									<textbox id="txtEquipo"
-										maxlength="40" width="95%" disabled="true" />
+										maxlength="30" width="95%" readonly="true"
+										value="@{controller.roster.equipo.nombre}"/>
 									<label value="Número" width="95%" />
-									<textbox id="txtNumero"
-										maxlength="2" width="15%" disabled="true" />
+									<intbox id="txtNumero" width="15%"
+										readonly="true" maxlength="2" value="@{jugador.numero}" />
 								</row>
 							</rows>
 						</grid>
@@ -79,8 +89,8 @@
 									<groupbox mold="3d"
 										closable="false">
 										<image
-											src="../../Recursos/Imagenes/jug.png" height="80px"
-											width="80px" tooltiptext="Seleccionar Foto" />
+										  	src="../../Recursos/Imagenes/jug.png" height="80px"
+											width="80px" />
 									</groupbox>
 								</row>
 							</rows>
@@ -109,23 +119,23 @@
 								<label value="Categoría" />
 							</div>
 							<combobox id="cmbCategoria"
-								value="--Seleccione--" disabled="true"
-								selectedItem="@{controller.categoria}" width="80%"
-								model="@{winAscensoEspecial$composer.Categorias}">
+								value="--Seleccione--" width="65%" readonly="true"
+								disabled="true" selectedItem="@{controller.categoria}"
+								model="@{winAscensoEspecial$composer.Categorias, load-after='btnCatalogoJugador.onClick'}">
 								<comboitem self="@{each='categoria'}"
-									label="@{categoria.nombre}" />
+									label="@{categoria.nombre}"
+									value="@{categoria.codigoCategoria}" />
 							</combobox>
 							<div>
 								<space />
 								<label value="Equipo" />
 							</div>
-							<combobox id="cmbEquipo"
-								value="--Seleccione--" width="65%">
-								<comboitem label="Equipo A" />
-								<comboitem label="Equipo B" />
-								<comboitem label="Equipo C" />
-								<comboitem label="Equipo D" />
-								<comboitem label="Equipo E" />
+							<combobox id="cmbEquipo" readonly="true"
+								value="--Seleccione--" width="65%" disabled="true"
+								selectedItem="@{controller.equipo}"
+								model="@{winAscensoEspecial$composer.equipos, load-after='cmbCategoria.onChange'}">
+								<comboitem self="@{each='equipo'}"
+									label="@{equipo.nombre}" />
 							</combobox>
 							<div>
 								<space />
@@ -133,7 +143,8 @@
 							</div>
 							<bandbox id="bboxNumero" maxlength="2"
 								width="40%" readonly="true" constraint="no empty"
-								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;">
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
+								value="@{controller.jugador.numero}">
 								<bandpopup>
 									<panel title="00-19"
 										collapsible="true" open="false" width="180px" id="pnl1"
@@ -432,184 +443,155 @@
 			</panelchildren>
 		</panel>
 		<space height="10px" />
-
 		<panel title="Documentos">
 			<panelchildren>
-				<grid>
-					<columns>
-						<column width="40" label="Responsable" />
-						<column width="20%" label="Fecha Emisión" />
-						<column width="13%" label="Entregado"
-							align="center" />
-						<column width="18" label="Documento"
-							align="center" />
-					</columns>
-					<rows>
-						<row>
-							<label value="Médico" />
-							<datebox id="dtboxFecha"
-								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
-							<checkbox />
-							<button id="btnSubir" label="Subir">
-								<attribute name="onClick"><![CDATA[
-									Object media = Fileupload.get();
-								]]></attribute>
-							</button>
-						</row>
-						<row>
-							<label value="Representante" />
-							<datebox
-								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
-							<checkbox />
-							<button label="Subir">
-								<attribute name="onClick"><![CDATA[
-									Object media = Fileupload.get();
-								]]></attribute>
-							</button>
-						</row>
-						<row>
-							<label value="Manager" />
-							<datebox
-								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
-							<checkbox />
-							<button label="Subir">
-								<attribute name="onClick"><![CDATA[
-									Object media = Fileupload.get();
-								]]></attribute>
-							</button>
-						</row>
-						<row>
-							<label value="Delegado" />
-							<datebox
-								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
-							<checkbox />
-							<button label="Subir">
-								<attribute name="onClick"><![CDATA[
-									Object media = Fileupload.get();
-								]]></attribute>
-							</button>
-						</row>
-						<row>
-							<label
-								value="Presidente del Directorio de Liga" />
-							<datebox
-								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
-							<checkbox />
-							<button label="Subir">
-								<attribute name="onClick"><![CDATA[
-									Object media = Fileupload.get();
-								]]></attribute>
-							</button>
-						</row>
-					</rows>
-				</grid>
+				<listbox id="listDoc" mold="paging" pageSize="3"
+					model="@{winAscensoEspecial$composer.recaudosAscenso}"
+					selectedItem="@{controller.docEntAscenso}">
+					<listhead>
+						<listheader width="37%" label="Nombre" />
+						<listheader width="15%" label="Solicitado" />
+						<listheader width="13%" label="Entregado" />
+						<listheader width="11%" label="Documento" />
+					</listhead>
+					<listitem self="@{each='docAsc'}" value="docAsc">
+						<listcell visible="false"
+							label="@{docAsc.recaudoPorProceso.codigoRecaudoPorProceso}" />
+						<listcell
+							label="@{docAsc.recaudoPorProceso.datoBasicoByCodigoDocumento.nombre}" />
+						<listcell 
+							label="@{docAsc.recaudoPorProceso.cantidad}" />
+						<listcell>
+							<spinner id="spCantidad" width="45%"
+								value="@{docAsc.cantidad}" />
+						</listcell>
+						<listcell label="Subir"
+							onClick="winAscensoEspecial$composer.subirDocumento(self,self.getParent().getParent())">
+						</listcell>
+					</listitem>
+				</listbox>
 			</panelchildren>
 		</panel>
 		<space height="10px" />
 
 		<panel title="Especificaciones Técnicas">
 			<panelchildren>
-				<groupbox style="border-color:orange"
-					closable="false">
-					<caption label="Ofensiva" />
-					<grid>
-						<columns>
-							<column label="Al día de hoy" width="40%"
-								align="center" />
-							<column label="VB" width="10%"
-								align="center" tooltip="VB" />
-							<column label="HC" width="10%"
-								align="center" tooltip="HC" />
-							<column label="2B" width="10%"
-								align="center" tooltip="doB" />
-							<column label="3B" width="10%"
-								align="center" tooltip="triB" />
-							<column label="HR" width="10%"
-								align="center" tooltip="HR" />
-							<column label="AVG" width="10%"
-								align="center" tooltip="AVG" />
-						</columns>
-						<rows>
-							<row>
-								<label value="25/11/2011" />
-								<label value="75" />
-								<label value="20" />
-								<label value="10" />
-								<label value="7" />
-								<label value="13" />
-								<label value=".240" />
-							</row>
-						</rows>
-					</grid>
-				</groupbox>
+				<listbox id="listResultado">
+					<listhead>
+						<listheader label="" sort="auto" />
+						<listheader label="" sort="auto" />
+					</listhead>
+					<listitem>
+						<listcell label="" />
+						<listcell label="" />
+					</listitem>
+					<listitem>
+						<listcell label="" />
+						<listcell label="" />
+					</listitem>
+				</listbox>
 
-				<groupbox style="border-color:orange"
-					closable="false">
-					<caption label="Defensiva" />
-					<grid>
-						<columns>
-							<column label="Al día de hoy" width="40%"
-								align="center" />
-							<column label="LE" width="12%"
-								align="center" tooltip="LE" />
-							<column label="E" width="12%" align="center"
-								tooltip="E" />
-							<column label="ASIS" width="12%"
-								align="center" tooltip="ASIS" />
-							<column label="DP" width="12%"
-								align="center" tooltip="DP" />
-							<column label="PFIL" width="12%"
-								align="center" tooltip="PFIL" />
-						</columns>
-						<rows>
-							<row>
-								<label value="25/11/2011" />
-								<label value="25" />
-								<label value="16" />
-								<label value="27" />
-								<label value="17" />
-								<label value="66%" />
-							</row>
-						</rows>
-					</grid>
-				</groupbox>
+				<!-- 				<groupbox style="border-color:orange" -->
+				<!-- 					closable="false"> -->
+				<!-- 					<caption label="Ofensiva" /> -->
+				<!-- 					<grid> -->
+				<!-- 						<columns> -->
+				<!-- 							<column label="Al día de hoy" width="40%" -->
+				<!-- 								align="center" /> -->
+				<!-- 							<column label="VB" width="10%" -->
+				<!-- 								align="center" tooltip="VB" /> -->
+				<!-- 							<column label="HC" width="10%" -->
+				<!-- 								align="center" tooltip="HC" /> -->
+				<!-- 							<column label="2B" width="10%" -->
+				<!-- 								align="center" tooltip="doB" /> -->
+				<!-- 							<column label="3B" width="10%" -->
+				<!-- 								align="center" tooltip="triB" /> -->
+				<!-- 							<column label="HR" width="10%" -->
+				<!-- 								align="center" tooltip="HR" /> -->
+				<!-- 							<column label="AVG" width="10%" -->
+				<!-- 								align="center" tooltip="AVG" /> -->
+				<!-- 						</columns> -->
+				<!-- 						<rows> -->
+				<!-- 							<row> -->
+				<!-- 								<label value="25/11/2011" /> -->
+				<!-- 								<label value="75" /> -->
+				<!-- 								<label value="20" /> -->
+				<!-- 								<label value="10" /> -->
+				<!-- 								<label value="7" /> -->
+				<!-- 								<label value="13" /> -->
+				<!-- 								<label value=".240" /> -->
+				<!-- 							</row> -->
+				<!-- 						</rows> -->
+				<!-- 					</grid> -->
+				<!-- 				</groupbox> -->
 
-				<groupbox style="border-color:orange"
-					closable="false">
-					<caption label="Pitcheo" />
-					<grid>
-						<columns>
-							<column label="Al día de hoy" width="40%"
-								align="center" />
-							<column label="JG" width="8%" align="center"
-								tooltip="JG" />
-							<column label="JP" width="8%" align="center"
-								tooltip="JP" />
-							<column label="JS" width="8%" align="center"
-								tooltip="JS" />
-							<column label="K" width="8%" align="center"
-								tooltip="KK" />
-							<column label="BB" width="8%" align="center"
-								tooltip="BxB" />
-							<column label="EFE" width="8%"
-								align="center" tooltip="EFE" />
-							<column label="WHIP" width="12%"
-								align="center" tooltip="WHIP" />
-						</columns>
-						<rows>
-							<row>
-								<label value="25/11/2011" />
-								<label value="15" />
-								<label value="13" />
-								<label value="7" />
-								<label value="24" />
-								<label value="12" />
-								<label value=".280 " />
-								<label value="5" />
-							</row>
-						</rows>
-					</grid>
-				</groupbox>
+				<!-- 				<groupbox style="border-color:orange" -->
+				<!-- 					closable="false"> -->
+				<!-- 					<caption label="Defensiva" /> -->
+				<!-- 					<grid> -->
+				<!-- 						<columns> -->
+				<!-- 							<column label="Al día de hoy" width="40%" -->
+				<!-- 								align="center" /> -->
+				<!-- 							<column label="LE" width="12%" -->
+				<!-- 								align="center" tooltip="LE" /> -->
+				<!-- 							<column label="E" width="12%" align="center" -->
+				<!-- 								tooltip="E" /> -->
+				<!-- 							<column label="ASIS" width="12%" -->
+				<!-- 								align="center" tooltip="ASIS" /> -->
+				<!-- 							<column label="DP" width="12%" -->
+				<!-- 								align="center" tooltip="DP" /> -->
+				<!-- 							<column label="PFIL" width="12%" -->
+				<!-- 								align="center" tooltip="PFIL" /> -->
+				<!-- 						</columns> -->
+				<!-- 						<rows> -->
+				<!-- 							<row> -->
+				<!-- 								<label value="25/11/2011" /> -->
+				<!-- 								<label value="25" /> -->
+				<!-- 								<label value="16" /> -->
+				<!-- 								<label value="27" /> -->
+				<!-- 								<label value="17" /> -->
+				<!-- 								<label value="66%" /> -->
+				<!-- 							</row> -->
+				<!-- 						</rows> -->
+				<!-- 					</grid> -->
+				<!-- 				</groupbox> -->
+
+				<!-- 				<groupbox style="border-color:orange" -->
+				<!-- 					closable="false"> -->
+				<!-- 					<caption label="Pitcheo" /> -->
+				<!-- 					<grid> -->
+				<!-- 						<columns> -->
+				<!-- 							<column label="Al día de hoy" width="40%" -->
+				<!-- 								align="center" /> -->
+				<!-- 							<column label="JG" width="8%" align="center" -->
+				<!-- 								tooltip="JG" /> -->
+				<!-- 							<column label="JP" width="8%" align="center" -->
+				<!-- 								tooltip="JP" /> -->
+				<!-- 							<column label="JS" width="8%" align="center" -->
+				<!-- 								tooltip="JS" /> -->
+				<!-- 							<column label="K" width="8%" align="center" -->
+				<!-- 								tooltip="KK" /> -->
+				<!-- 							<column label="BB" width="8%" align="center" -->
+				<!-- 								tooltip="BxB" /> -->
+				<!-- 							<column label="EFE" width="8%" -->
+				<!-- 								align="center" tooltip="EFE" /> -->
+				<!-- 							<column label="WHIP" width="12%" -->
+				<!-- 								align="center" tooltip="WHIP" /> -->
+				<!-- 						</columns> -->
+				<!-- 						<rows> -->
+				<!-- 							<row> -->
+				<!-- 								<label value="25/11/2011" /> -->
+				<!-- 								<label value="15" /> -->
+				<!-- 								<label value="13" /> -->
+				<!-- 								<label value="7" /> -->
+				<!-- 								<label value="24" /> -->
+				<!-- 								<label value="12" /> -->
+				<!-- 								<label value=".280 " /> -->
+				<!-- 								<label value="5" /> -->
+				<!-- 							</row> -->
+				<!-- 						</rows> -->
+				<!-- 					</grid> -->
+				<!-- 				</groupbox> -->
 			</panelchildren>
 		</panel>
 		<space height="10px" />

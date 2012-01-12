@@ -1,0 +1,51 @@
+<?page title="Buscador de Institución"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win" ?> 
+<zk>
+	<window id="win" title="Buscador de Institución" border="normal" mode="modal"
+		closable="true" width="290px" height="" apply="controlador.jugador.CntrlBuscarInstitucion">
+
+		<grid  style="border:none">
+			<columns>
+				<column width="110px" align="left" />
+				<column width="160px" align="center" />
+			</columns>
+			<rows>
+				<row height="30px" style="border:none">
+					<label value="Tipo Institución" width="140px" />
+					<combobox id="cmbTipo" value="--Seleccione--" width="140px" selectedItem="@{controller.tipo}"
+						model="@{win$composer.tipos}">
+						<comboitem self="@{each='tipo'}"
+								label="@{tipo.nombre}" value="@{tipo.codigoDatoBasico}" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<space height="10px" />
+		
+		<listbox id="listinstitucion"  mold="paging" pageSize="10"  model="@{controller.instituciones, load-after='cmbTipo.onChange'}" 
+					    selectedItem="@{win$composer.institucion}">
+			<listhead>
+				<listheader width="23%" label="Nombre Institución" align="center"/>
+			</listhead>
+			<auxhead>
+				<auxheader colspan="1">
+					<image src="/Recursos/Imagenes/filtro.png" width="15px" />
+					<textbox id="filter1" width="85%" />
+				</auxheader>
+			</auxhead>
+			<listitem self="@{each='instituto'}" value="@{instituto}">
+				 <listcell label="@{instituto.nombre}" />
+			</listitem>
+		</listbox>
+
+		<div align="right">
+			    <button id="btnSeleccionar" label="Seleccionar"
+					image="/Recursos/Imagenes/glowing_cursor.png">
+				</button>
+				<button id="btnSalir" label="Salir"
+					image="/Recursos/Imagenes/salir.png">
+				</button>
+			</div>
+	</window>
+</zk>
