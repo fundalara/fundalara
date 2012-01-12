@@ -43,6 +43,8 @@ import servicio.implementacion.ServicioRegistroEquipo;
 public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Equipo equipo;
 	Divisa divisa;
+	EquipoCompetencia equipoCompetencia;
+	PersonaNatural personaNatural;
 	List<CategoriaCompetencia> categorias;
 	Component comp;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
@@ -54,7 +56,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Competencia competencia;
 	AnnotateDataBinder binder;
 	List<Equipo> equipos, equiposforaneos;
-	List<Equipo> Selectes;
+	List<EquipoCompetencia> Selectes;
 	
 	List<Divisa> divisas;
 	Component formulario;
@@ -88,16 +90,18 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
+	
 	// ////////////// agrega de una lista origen a destino validando que no
 	// exista en la de destino ///////////////
-	public void Agregar(Listbox origen, Listbox destino, List lista) {
+	public void Agregar(Listbox origen, Listbox destino, List lista) {		
 		Set seleccionados = origen.getSelectedItems();
 		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
 			boolean sw = false;
 			Listitem li = (Listitem) i.next();
-			Equipo c1 = (Equipo) li.getValue();
+			Equipo c1   = (Equipo) li.getValue();
 			List seleccionDestino = destino.getItems();
 			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {
+				alert(c1.getNombre());
 				Listitem li2 = (Listitem) j.next();
 				Equipo c2 = (Equipo) li2.getValue();
 				if (c1.getNombre().equals(c2.getNombre())) {
@@ -106,6 +110,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				}
 			}
 			if (!sw) {
+				alert(c1.getNombre());				
 				lista.add(c1);
 			}
 		}
@@ -128,15 +133,34 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				competencia = (Competencia) formulario.getVariable(
 						"competencia", false);
 				categorias = servicioCategoriaCompetencia
-						.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
-				
+						.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());				
 				divisas = servicioDivisa.listarDivisaForanea();
 				equiposforaneos = servicioEquipo.listarEquipoForaneos();
 				binder.loadAll();
 			}
 		});
-
 	}
+	
+	// //////////// Llama al catalogo de Persona Natural
+	// ///////////////////////////////
+	public void BuscarPersonaNatural() {
+		// se crea el catalogo y se llama
+		Component catalogo = Executions.createComponents(
+				"/Competencias/Vistas/FrmCatalogoPersonaNatural.zul", null, null);
+		// asigna una referencia del formulario al catalogo.
+		catalogo.setVariable("formulario", formulario, false);		
+		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
+			@Override
+			// Este metodo se llama cuando se envia la señal desde el catalogo
+			public void onEvent(Event arg0) throws Exception {
+				// se obtiene la competencia
+				personaNatural = (PersonaNatural) formulario.getVariable(
+						"personaNatural", false);	
+				binder.loadAll();				
+			}			
+		});		
+	}
+
 	
 	public void onClick$btnAgregarEquipoForaneo(){
 		alert(String.valueOf(servicioEquipo.listar().size()+1));
@@ -165,39 +189,26 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		equipos = servicioEquipo.listarEquipoPorCategoria(c1.getCategoria()
 				.getCodigoCategoria());
 		binder.loadAll();
-		Selectes = new ArrayList<Equipo>();
+		Selectes = new ArrayList<EquipoCompetencia>();
 	}
 	
 	//// llamando el evento guardar
-	public void onClick$btnGuardar() {
-		Cargar(lsbxEquiposSeleccionadosLocales, Selectes);
+	public void onClick$btnGuardar() {	
 		binder.loadAll();
 	}
 	
 	//// llenar el objeto para grabar
-	public void Cargar( Listbox destino, List lista){
-		PersonaNatural p;
-		p = new PersonaNatural();
-//		Set seleccionados = destino.getItems();
-//		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
-//			boolean sw = false;
-//			Listitem li = (Listitem) i.next();
-//			Equipo c1 = (Equipo) li.getValue();				
-//				c1.getNombre();
-//				equipoComptencia.setCompetencia(competencia);				
-//				equipoComptencia.setPersonaNatural(competencia.get)
-//				equipoComptencia.setEquipo(c1);
-//				equipoComptencia.setPersonaNatural(p);
-//				equipoComptencia.setEstatus('A');
-//				alert("paso por aqui y entro al ciclo");
-//			}
-
-		alert("paso por aqui");
-			
-		
-	}
-	// ///////////////////////////// Getter and Setter
+		// ///////////////////////////// Getter and Setter
 	// ///////////////////////////
+	
+	public PersonaNatural getPersonaNatural() {
+		return personaNatural;
+	}
+
+	public void setPersonaNatural(PersonaNatural personaNatural) {
+		this.personaNatural = personaNatural;
+	}
+
 	public Listbox getLsbxEquiposLocales() {
 		return lsbxEquiposLocales;
 	}
@@ -215,7 +226,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		this.lsbxEquiposSeleccionadosLocales = lsbxEquiposSeleccionadosLocales;
 	}
 
-	public List<Equipo> getSelectes() {
+	public List<EquipoCompetencia> getSelectes() {
 		return Selectes;
 	}
 
@@ -227,7 +238,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		this.divisas = divisas;
 	}
 
-	public void setSelectes(List<Equipo> selectes) {
+	public void setSelectes(List<EquipoCompetencia> selectes) {
 		Selectes = selectes;
 	}
 

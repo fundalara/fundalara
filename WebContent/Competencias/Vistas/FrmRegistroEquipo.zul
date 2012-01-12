@@ -33,11 +33,13 @@
 								</hbox>
 								<label value="Tipo"></label>
 								<textbox id="txtTipoCompetencia"
-									disabled="true" value="@{cntrl.competencia.modalidadCompetencia.tipoCompetencia.nombre }">
+									disabled="true"
+									value="@{cntrl.competencia.modalidadCompetencia.tipoCompetencia.nombre }">
 								</textbox>
 								<label value="Modalidad"></label>
 								<textbox id="txtModalidadCompetencia"
-									disabled="true" value="@{cntrl.competencia.modalidadCompetencia.nombre }">
+									disabled="true"
+									value="@{cntrl.competencia.modalidadCompetencia.nombre }">
 								</textbox>
 							</row>
 							<row style="border:none">
@@ -151,18 +153,38 @@
 																		<listhead>
 																			<listheader
 																				label="Equipos" sort="auto" />
+																			<listheader
+																				label="Delegados" sort="auto" />
 																		</listhead>
 																		<listitem
 																			self="@{each=Select}" value="@{Select}">
 																			<listcell
-																				label="@{Select.nombre}" />
+																				label="@{Select.equipo.nombre}" />
+																			<listcell
+																				label="@{Select.personaNatural.primerNombre}" />
 																		</listitem>
 																	</listbox>
 																</div>
-
 															</row>
 														</rows>
 													</grid>
+													<div>
+														<grid>
+															<rows>
+																<row>
+																	<hbox>
+																		<textbox id ="ceduladelegado"></textbox>
+																		<button
+																			id="btnBuscarDelegado"
+																			image="../../Recursos/Imagenes/consultar.ico">
+																		</button>
+																		<textbox id ="nombreDelegado"></textbox>
+																		<textbox id ="apellidoDelegado"></textbox>
+																	</hbox>
+																</row>
+															</rows>
+														</grid>
+													</div>
 												</panelchildren>
 											</panel>
 										</div>
@@ -172,7 +194,7 @@
 						</div>
 					</tabpanel>
 					<tabpanel>
-						<!-- AGREGAR NUEVO EQUIPO FORÁNEO -->						
+						<!-- AGREGAR NUEVO EQUIPO FORÁNEO -->
 						<panel border="normal" width="690px">
 
 							<panelchildren>
@@ -190,15 +212,15 @@
 											style="border-style:none">
 											<label value="Nombre"></label>
 											<hbox>
-												<textbox cols="15"  
+												<textbox cols="15"
 													disabled="false" style="margin-left:15px">
 												</textbox>
 
 											</hbox>
 											<label value="Categoria"></label>
 											<combobox
-												id="cmbCategoriasForaneas" width="80%" model="@{cntrl.categorias}"
-												value="--Seleccione--">
+												id="cmbCategoriasForaneas" width="80%"
+												model="@{cntrl.categorias}" value="--Seleccione--">
 												<comboitem
 													self="@{each=categoriaCompetencia}"
 													value="@{categoriaCompetencia}"
@@ -206,14 +228,16 @@
 												</comboitem>
 											</combobox>
 											<label value="Divisa"></label>
-											<combobox id="cmbDivisa" width="80%"
-												model="@{cntrl.divisas}" value="--Seleccione--">
-												<comboitem 
+											<combobox id="cmbDivisa"
+												width="80%" model="@{cntrl.divisas}"
+												value="--Seleccione--">
+												<comboitem
 													self="@{each=divis}" value="@{divis}"
 													label="@{divis.nombre }">
 												</comboitem>
 											</combobox>
-											<button id="btnAgregarEquipoForaneo"
+											<button
+												id="btnAgregarEquipoForaneo"
 												image="../../Recursos/Imagenes/agregar.ico">
 											</button>
 										</row>
@@ -236,8 +260,8 @@
 										<row style="border:none">
 											<listbox
 												id="lsbxEquiposForaneos" style="margin-top:5px"
-												height="200px" model="@{cntrl.equiposforaneos}" multiple="true"
-												checkmark="true" mold="paging">
+												height="200px" model="@{cntrl.equiposforaneos}"
+												multiple="true" checkmark="true" mold="paging">
 												<listhead>
 													<listheader
 														label="Equipos Foraneos" sort="auto" />
@@ -267,8 +291,8 @@
 											</grid>
 											<listbox
 												id="lsbxEquiposForaneosSeleccionados" style="margin-top:5px"
-												height="200px" model="@{cntrl.equiposforaneos}" multiple="true"
-												checkmark="true" mold="paging">
+												height="200px" model="@{cntrl.equiposforaneos}"
+												multiple="true" checkmark="true" mold="paging">
 												<listhead>
 													<listheader
 														label="Equipos Foraneos" sort="auto" />
@@ -280,7 +304,7 @@
 												</listitem>
 											</listbox>
 
-																					</row>
+										</row>
 									</rows>
 								</grid>
 							</panelchildren>
