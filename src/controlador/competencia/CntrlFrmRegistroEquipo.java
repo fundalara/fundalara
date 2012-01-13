@@ -1,5 +1,6 @@
 package controlador.competencia;
 
+import org.zkoss.zul.Button;
 import java.util.List;
 
 import modelo.Categoria;
@@ -29,7 +30,9 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 import org.zkoss.zul.api.Comboitem;
+
 
 import comun.EstadoCompetencia;
 
@@ -43,6 +46,8 @@ import servicio.implementacion.ServicioRegistroEquipo;
 public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Equipo equipo;
 	Divisa divisa;
+	EquipoCompetencia equipoCompetencia;
+	PersonaNatural personaNatural;
 	List<CategoriaCompetencia> categorias;
 	Component comp;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
@@ -54,12 +59,20 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Competencia competencia;
 	AnnotateDataBinder binder;
 	List<Equipo> equipos, equiposforaneos;
-	List<Equipo> Selectes;
-	
+	List<EquipoCompetencia> equipocompetencia;
+	public List<EquipoCompetencia> getEquipocompetencia() {
+		return equipocompetencia;
+	}
+
+	public void setEquipocompetencia(List<EquipoCompetencia> equipocompetencia) {
+		this.equipocompetencia = equipocompetencia;
+	}
+
+	Button btnBuscarDelegado;
 	List<Divisa> divisas;
-	Component formulario;
+	Component formulario,formularios;
 	Combobox cmbCategorias;
-	Combobox cmbDivisa;
+	Combobox cmbDivisa,cmbCategoriasForaneas;
 	Listbox lsbxDivisa;
 	Listbox lsbxEquiposLocales;
 	Listbox lsbxEquiposSeleccionadosLocales;
@@ -74,39 +87,43 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		// se guarda la referencia al formulario actual ej (frmDivisa)
 		formulario = c;
 		restaurar();
+		 equipoCompetencia = new EquipoCompetencia();
 	}
 
 	public void restaurar() {
 		competencia = new Competencia();
-		// Selectes = new HashSet<Equipo>();
+
 
 	}
 
 	// Llama al evento select de la lista de equipos locales
 	public void onClick$btnAgregar() {
-		Agregar(lsbxEquiposLocales, lsbxEquiposSeleccionadosLocales, Selectes);
+		Agregar(lsbxEquiposLocales, lsbxEquiposSeleccionadosLocales, equipocompetencia);
 		binder.loadAll();
 	}
 
+	
 	// ////////////// agrega de una lista origen a destino validando que no
 	// exista en la de destino ///////////////
-	public void Agregar(Listbox origen, Listbox destino, List lista) {
+	public void Agregar(Listbox origen, Listbox destino, List lista) {		
 		Set seleccionados = origen.getSelectedItems();
 		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
 			boolean sw = false;
 			Listitem li = (Listitem) i.next();
-			Equipo c1 = (Equipo) li.getValue();
+			Equipo c1   = (Equipo) li.getValue();
 			List seleccionDestino = destino.getItems();
-			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {
+			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {				
 				Listitem li2 = (Listitem) j.next();
-				Equipo c2 = (Equipo) li2.getValue();
-				if (c1.getNombre().equals(c2.getNombre())) {
+				EquipoCompetencia c2 = (EquipoCompetencia) li2.getValue();				
+				alert(c2.getEquipo().getNombre());
+				if (c1.getNombre().equals(c2.getEquipo().getNombre())) {
 					sw = true;
 					break;
 				}
 			}
 			if (!sw) {
-				lista.add(c1);
+				equipoCompetencia.setEquipo(c1);				
+				lista.add(equipoCompetencia);
 			}
 		}
 	}
@@ -128,28 +145,88 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				competencia = (Competencia) formulario.getVariable(
 						"competencia", false);
 				categorias = servicioCategoriaCompetencia
-						.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
-				
+						.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());				
 				divisas = servicioDivisa.listarDivisaForanea();
 				equiposforaneos = servicioEquipo.listarEquipoForaneos();
 				binder.loadAll();
 			}
 		});
-
 	}
 	
-	public void onClick$btnAgregarEquipoForaneo(){
-		alert(String.valueOf(servicioEquipo.listar().size()+1));
-		equipo.setCodigoEquipo(servicioEquipo.listar().size()+1);
-		CategoriaCompetencia c1 = (CategoriaCompetencia) cmbCategorias.getSelectedItem().getValue();		
-		equipo.setCategoria(c1.getCategoria());
-		Divisa c2 = (Divisa) cmbDivisa.getSelectedItem().getValue();
-		equipo.setDivisa(c2);
-		equipo.setEstatus('A');
-		equipo.setNombre(Nombre.getValue());
-//		equipo.setDatoBasico("2");
-		equiposforaneos.add(equipo);
-		binder.loadAll();
+	//// activa el boton de catalogo de persona natural ////
+	public void onSelect$lsbxEquiposSeleccionadosLocales() {
+		btnBuscarDelegado.setDisabled(false);		
+	}
+	
+	
+	
+	/////////////////////////////////////////////////////////
+	
+	// //////////// Llama al catalogo de Persona Natural
+	// ///////////////////////////////
+	public void onClick$btnBuscarDelegado() {
+		// se crea el catalogo y se llama
+		Component catalogos = Executions.createComponents(
+				"/Competencias/Vistas/FrmCatalogoPersonaNatural.zul", null, null);
+		// asigna una referencia del formulario al catalogo.
+		catalogos.setVariable("formulario", formulario, false);		
+		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
+			@Override
+			// Este metodo se llama cuando se envia la señal desde el catalogo
+			public void onEvent(Event arg0) throws Exception {
+				// se obtiene la competencia
+				personaNatural = (PersonaNatural) formulario.getVariable(
+						"personaNatural", false);	
+				binder.loadAll();
+			}			
+		});		
+	}
+
+	
+	public Button getBtnBuscarDelegado() {
+		return btnBuscarDelegado;
+	}
+
+	public void setBtnBuscarDelegado(Button btnBuscarDelegado) {
+		this.btnBuscarDelegado = btnBuscarDelegado;
+	}
+
+	public Component getFormularios() {
+		return formularios;
+	}
+
+	public void setFormularios(Component formularios) {
+		this.formularios = formularios;
+	}
+
+	public void onClick$btnAgregarEquipoForaneo() throws InterruptedException{		
+		if (cmbCategoriasForaneas.getText()!="--Seleccione--"){			
+		}else{
+			// se crea el catalogo y se llama
+			Component catalogos = Executions.createComponents(
+					"/Jugador/Vistas/frmConfigurarEquipo.zul", null, null);
+			// asigna una referencia del formulario al catalogo.
+		    Window w = (Window) catalogos;
+			w.setMode("popup");
+			w.setPosition("center");
+			catalogos.setVariable("formulario", formulario, false);		
+			formulario.addEventListener("onCatalogoCerrado", new EventListener() {
+				@Override
+				// Este metodo se llama cuando se envia la señal desde el catalogo
+				public void onEvent(Event arg0) throws Exception {
+					// se obtiene la competencia
+					Comboitem li = cmbCategorias.getSelectedItem();
+					CategoriaCompetencia c1 = (CategoriaCompetencia) li.getValue();	
+					equiposforaneos = servicioEquipo.listarEquipoPorCategoria(c1.getCategoria()
+							.getCodigoCategoria());
+					
+					binder.loadAll();
+					
+				}			
+			});					
+		}
+
+		
 	}
 	
 	
@@ -165,39 +242,26 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		equipos = servicioEquipo.listarEquipoPorCategoria(c1.getCategoria()
 				.getCodigoCategoria());
 		binder.loadAll();
-		Selectes = new ArrayList<Equipo>();
+		equipocompetencia = new ArrayList<EquipoCompetencia>();
 	}
 	
 	//// llamando el evento guardar
-	public void onClick$btnGuardar() {
-		Cargar(lsbxEquiposSeleccionadosLocales, Selectes);
+	public void onClick$btnGuardar() {	
 		binder.loadAll();
 	}
 	
 	//// llenar el objeto para grabar
-	public void Cargar( Listbox destino, List lista){
-		PersonaNatural p;
-		p = new PersonaNatural();
-//		Set seleccionados = destino.getItems();
-//		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
-//			boolean sw = false;
-//			Listitem li = (Listitem) i.next();
-//			Equipo c1 = (Equipo) li.getValue();				
-//				c1.getNombre();
-//				equipoComptencia.setCompetencia(competencia);				
-//				equipoComptencia.setPersonaNatural(competencia.get)
-//				equipoComptencia.setEquipo(c1);
-//				equipoComptencia.setPersonaNatural(p);
-//				equipoComptencia.setEstatus('A');
-//				alert("paso por aqui y entro al ciclo");
-//			}
-
-		alert("paso por aqui");
-			
-		
-	}
-	// ///////////////////////////// Getter and Setter
+		// ///////////////////////////// Getter and Setter
 	// ///////////////////////////
+	
+	public PersonaNatural getPersonaNatural() {
+		return personaNatural;
+	}
+
+	public void setPersonaNatural(PersonaNatural personaNatural) {
+		this.personaNatural = personaNatural;
+	}
+
 	public Listbox getLsbxEquiposLocales() {
 		return lsbxEquiposLocales;
 	}
@@ -215,8 +279,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		this.lsbxEquiposSeleccionadosLocales = lsbxEquiposSeleccionadosLocales;
 	}
 
-	public List<Equipo> getSelectes() {
-		return Selectes;
+	public List<EquipoCompetencia> getequipocompetencia() {
+		return equipocompetencia;
 	}
 
 	public List<Divisa> getDivisas() {
@@ -227,8 +291,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		this.divisas = divisas;
 	}
 
-	public void setSelectes(List<Equipo> selectes) {
-		Selectes = selectes;
+	public void setequipocompetencia(List<EquipoCompetencia> equipocompetencia) {
+		equipocompetencia = equipocompetencia;
 	}
 
 	public Divisa getDivisa() {

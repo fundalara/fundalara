@@ -1,5 +1,6 @@
 package controlador.competencia;
 
+import java.awt.Button;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,6 +24,9 @@ import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import comun.EstadoCompetencia;
 
@@ -43,26 +47,125 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	AnnotateDataBinder binder;
 	List<Indicador> indicadores;
 	List<IndicadorCategoriaCompetencia> indicadoresAux = new ArrayList<IndicadorCategoriaCompetencia>();
-	Listbox lsbxIndicadores, lsbxIndicadoresSeleccionados;
+	Listbox lsbxIndicadores, lsbxIndicadoresSeleccionados, lsbxIndicadoresColectivos, lsbxIndicadoresSeleccionadosColectivos;
 	Component formulario;
-	Combobox cmbSeleccionarCategoria, cmbSeleccionarModalidad;
+	Combobox cmbSeleccionarCategoria, cmbSeleccionarCategoriaColectivo, cmbSeleccionarModalidad, cmbSeleccionarModalidadColectivo;
 	List<DatoBasico> lsbxModalidadIndicador;
 	ServicioTipoDato servicioTipoDato;
 	ServicioDatoBasico servicioDatoBasico;
+	org.zkoss.zul.Button btnGuardar, btnEliminar, btnCancelar, btnMoverDerecha, btnMoverIzquierda, btnMoverDerechaColectivo, btnMoverIzquierdaColectivo;
+	Textbox txtNombreCompetencia, txtTipoCompetencia, txtModalidadCompetencia, txtFechaInicioCompetencia, txtFechaFin;
+	Window frmIndicador;
+	
+	
+	
+	public List<DatoBasico> getLsbxModalidadIndicador() {
+		return lsbxModalidadIndicador;
+	}
+
+	public void setLsbxModalidadIndicador(List<DatoBasico> lsbxModalidadIndicador) {
+		this.lsbxModalidadIndicador = lsbxModalidadIndicador;
+	}
+
+	
 
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
 
-		indicador = new Indicador();
+		
+		inicializar();
+		TipoDato modalidadIndicador = servicioTipoDato
+				.buscarPorTipo("MODALIDAD INDICADOR");
+		lsbxModalidadIndicador = servicioDatoBasico
+				.buscarPorTipoDato(modalidadIndicador);
+		
 		formulario = c;
+			}
+
+	public void inicializar() {
 		
-		/*TipoDato modalidadIndicador = servicioTipoDato.buscarPorTipo("MODALIDAD INDICADOR");
-		lsbxModalidadIndicador = servicioDatoBasico.buscarPorTipoDato(modalidadIndicador);*/
+		btnGuardar.setDisabled(true);
+		btnEliminar.setDisabled(true);
+		btnCancelar.setDisabled(true);
+		btnMoverDerecha.setDisabled(true);
+		btnMoverIzquierda.setDisabled(true);
+		btnMoverDerechaColectivo.setDisabled(true);
+		btnMoverIzquierdaColectivo.setDisabled(true);
+		cmbSeleccionarCategoria.setDisabled(true);
+		cmbSeleccionarModalidad.setDisabled(true);
+		cmbSeleccionarCategoriaColectivo.setDisabled(true);
+		cmbSeleccionarModalidadColectivo.setDisabled(true);
+		txtNombreCompetencia.setDisabled(true);
+		txtTipoCompetencia.setDisabled(true);
+		txtModalidadCompetencia.setDisabled(true);
+		lsbxIndicadores.setDisabled(true);
+		lsbxIndicadoresSeleccionados.setDisabled(true);
+		lsbxIndicadoresColectivos.setDisabled(true);
+		lsbxIndicadoresSeleccionadosColectivos.setDisabled(true);
+		indicador = new Indicador(); 
 		
+	}
+	
+	public void camposHabilitados (){
+		cmbSeleccionarCategoria.setDisabled(false);
+		cmbSeleccionarModalidad.setDisabled(false);
+		cmbSeleccionarCategoriaColectivo.setDisabled(false);
+		cmbSeleccionarModalidadColectivo.setDisabled(false);
+		btnGuardar.setDisabled(false);
+		btnEliminar.setDisabled(false);
+		btnCancelar.setDisabled(false);
+		lsbxIndicadores.setDisabled(false);
+		lsbxIndicadoresSeleccionados.setDisabled(false);
+		btnMoverDerecha.setDisabled(false);
+		btnMoverIzquierda.setDisabled(false);
+		
+		
+		
+	}
+	
+	public void limpiar() {
+		cmbSeleccionarCategoria.setValue("--Seleccione--");
+		cmbSeleccionarModalidad.setValue("--Seleccione--");
+		txtNombreCompetencia.setValue("");
+		txtTipoCompetencia.setValue("");
+		txtModalidadCompetencia.setValue("");
+		/*txtFechaInicioCompetencia.setValue("00/00/00");
+		txtFechaFin.setValue("");*/
+		
+		
+	}
+	
+	
+	public void onClick$btnSalir() throws InterruptedException {
+		if (indicador != null) {
+			int result = Messagebox
+					.show("Existen elementos en el formulario ¿Realmente desea salir?",
+							"Question", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION);
+			switch (result) {
+			case Messagebox.OK:
+				onClick$btnCancelar();
+				binder.loadAll();
+				frmIndicador.detach();
+				break;
+			case Messagebox.CANCEL:
+				break;
+			default:
+				break;
+			}
+		} else {
+			onClick$btnCancelar();
+			binder.loadAll();
+			frmIndicador.detach();
+		}
 
 	}
 
+	public void onClick$btnCancelar() {
+		limpiar();
+	}
+	
 	public void onClick$btnBuscarCompetencia() {
 
 		Component catalogo = Executions.createComponents(
@@ -78,11 +181,20 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 						"competencia", false);
 				categorias = ConvertirConjuntoALista(competencia
 						.getCategoriaCompetencias());
+				camposHabilitados();
 				binder.loadAll();
 			}
 		});
 
 	}
+	
+	public void onClick$btnGuardar() throws InterruptedException {
+		/*servicioIndicadorCategoriaCompetencia.agregar(indicador);
+		Messagebox.show("Datos agregados exitosamente", "Mensaje",
+				Messagebox.OK, Messagebox.EXCLAMATION);
+		binder.loadAll();*/
+	}
+	
 
 	public void onChange$cmbSeleccionarCategoria() {
 		Categoria cat =  (Categoria) cmbSeleccionarCategoria.getSelectedItem().getValue();
@@ -92,9 +204,10 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 
 	}
 	
+	
+
 	public void onChange$cmbSeleccionarModalidad(){
-		/*cmbSeleccionarModalidad.getSelectedItem().getValue();
-		*/
+	
 		
 	}
 
@@ -120,6 +233,7 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		}
 
 	}
+	
 
 	public void onClick$btnMoverDerecha() {
 		seleccionarIndicadores();
