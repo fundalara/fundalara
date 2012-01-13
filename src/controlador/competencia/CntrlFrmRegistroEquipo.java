@@ -57,7 +57,15 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Competencia competencia;
 	AnnotateDataBinder binder;
 	List<Equipo> equipos, equiposforaneos;
-	List<EquipoCompetencia> Selectes;
+	List<EquipoCompetencia> equipocompetencia;
+	public List<EquipoCompetencia> getEquipocompetencia() {
+		return equipocompetencia;
+	}
+
+	public void setEquipocompetencia(List<EquipoCompetencia> equipocompetencia) {
+		this.equipocompetencia = equipocompetencia;
+	}
+
 	Button btnBuscarDelegado;
 	List<Divisa> divisas;
 	Component formulario,formularios;
@@ -77,17 +85,18 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		// se guarda la referencia al formulario actual ej (frmDivisa)
 		formulario = c;
 		restaurar();
+		 equipoCompetencia = new EquipoCompetencia();
 	}
 
 	public void restaurar() {
 		competencia = new Competencia();
-		// Selectes = new HashSet<Equipo>();
+
 
 	}
 
 	// Llama al evento select de la lista de equipos locales
 	public void onClick$btnAgregar() {
-		Agregar(lsbxEquiposLocales, lsbxEquiposSeleccionadosLocales, Selectes);
+		Agregar(lsbxEquiposLocales, lsbxEquiposSeleccionadosLocales, equipocompetencia);
 		binder.loadAll();
 	}
 
@@ -101,18 +110,18 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 			Listitem li = (Listitem) i.next();
 			Equipo c1   = (Equipo) li.getValue();
 			List seleccionDestino = destino.getItems();
-			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {
-				alert(c1.getNombre());
+			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {				
 				Listitem li2 = (Listitem) j.next();
-				Equipo c2 = (Equipo) li2.getValue();
-				if (c1.getNombre().equals(c2.getNombre())) {
+				EquipoCompetencia c2 = (EquipoCompetencia) li2.getValue();				
+				alert(c2.getEquipo().getNombre());
+				if (c1.getNombre().equals(c2.getEquipo().getNombre())) {
 					sw = true;
 					break;
 				}
 			}
 			if (!sw) {
 				equipoCompetencia.setEquipo(c1);				
-				lista.add(c1);
+				lista.add(equipoCompetencia);
 			}
 		}
 	}
@@ -215,7 +224,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		equipos = servicioEquipo.listarEquipoPorCategoria(c1.getCategoria()
 				.getCodigoCategoria());
 		binder.loadAll();
-		Selectes = new ArrayList<EquipoCompetencia>();
+		equipocompetencia = new ArrayList<EquipoCompetencia>();
 	}
 	
 	//// llamando el evento guardar
@@ -252,8 +261,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		this.lsbxEquiposSeleccionadosLocales = lsbxEquiposSeleccionadosLocales;
 	}
 
-	public List<EquipoCompetencia> getSelectes() {
-		return Selectes;
+	public List<EquipoCompetencia> getequipocompetencia() {
+		return equipocompetencia;
 	}
 
 	public List<Divisa> getDivisas() {
@@ -264,8 +273,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		this.divisas = divisas;
 	}
 
-	public void setSelectes(List<EquipoCompetencia> selectes) {
-		Selectes = selectes;
+	public void setequipocompetencia(List<EquipoCompetencia> equipocompetencia) {
+		equipocompetencia = equipocompetencia;
 	}
 
 	public Divisa getDivisa() {

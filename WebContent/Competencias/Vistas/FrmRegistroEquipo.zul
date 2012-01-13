@@ -148,7 +148,7 @@
 																	<listbox
 																		id="lsbxEquiposSeleccionadosLocales"
 																		style="margin-top:5px" height="200px"
-																		model="@{cntrl.Selectes}" multiple="true"
+																		model="@{cntrl.equipocompetencia}" multiple="true"
 																		checkmark="true" mold="paging" >
 																		<listhead>
 																			<listheader
@@ -157,11 +157,11 @@
 																				label="Delegados" sort="auto" />
 																		</listhead>
 																		<listitem
-																			self="@{each=Select}" value="@{Select}">
+																			self="@{each=equipocompetenci}" value="@{equipocompetenci}">
 																			<listcell
-																				label="@{Select.equipo.nombre}" />
+																				label="@{equipocompetenci.equipo.nombre}" />
 																			<listcell
-																				label="@{Select.personaNatural.primerNombre}" />
+																				label="@{equipocompetenci.personaNatural.primerNombre}" />
 																		</listitem>
 																	</listbox>
 																</div>
@@ -209,33 +209,17 @@
 									</columns>
 									<rows>
 										<row
-											style="border-style:none">
-											<label value="Nombre"></label>
-											<hbox>
-												<textbox cols="15"
-													disabled="false" style="margin-left:15px">
-												</textbox>
-
-											</hbox>
+											style="border-style:none">											
 											<label value="Categoria"></label>
 											<combobox
-												id="cmbCategoriasForaneas" width="80%"
+												id="cmbCategoriasForaneas" width="250%"
 												model="@{cntrl.categorias}" value="--Seleccione--">
 												<comboitem
 													self="@{each=categoriaCompetencia}"
 													value="@{categoriaCompetencia}"
 													label="@{categoriaCompetencia.categoria.nombre }">
 												</comboitem>
-											</combobox>
-											<label value="Divisa"></label>
-											<combobox id="cmbDivisa"
-												width="80%" model="@{cntrl.divisas}"
-												value="--Seleccione--">
-												<comboitem
-													self="@{each=divis}" value="@{divis}"
-													label="@{divis.nombre }">
-												</comboitem>
-											</combobox>
+											</combobox>											
 											<button
 												id="btnAgregarEquipoForaneo"
 												image="../../Recursos/Imagenes/agregar.ico">
