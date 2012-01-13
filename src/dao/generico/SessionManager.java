@@ -94,7 +94,8 @@ public class SessionManager implements Filter
 	        {      	
     		   sessionFactory.getCurrentSession().disconnect();
 			   sessionFactory.close();
-
+			   sessionFactory.getCurrentSession().disconnect();
+               System.out.println("session cerrada 2");
 	        }
 	        catch (HibernateException ex)
 	        {
