@@ -149,7 +149,7 @@
 																		id="lsbxEquiposSeleccionadosLocales"
 																		style="margin-top:5px" height="200px"
 																		model="@{cntrl.Selectes}" multiple="true"
-																		checkmark="true" mold="paging">
+																		checkmark="true" mold="paging" >
 																		<listhead>
 																			<listheader
 																				label="Equipos" sort="auto" />
@@ -173,13 +173,13 @@
 															<rows>
 																<row>
 																	<hbox>
-																		<textbox id ="ceduladelegado"></textbox>
+																		<textbox id ="txtceduladelegado" readonly="true" value="@{cntrl.personaNatural.cedulaRif}"> </textbox>
 																		<button
 																			id="btnBuscarDelegado"
-																			image="../../Recursos/Imagenes/consultar.ico">
+																			image="../../Recursos/Imagenes/consultar.ico" disabled="true">
 																		</button>
-																		<textbox id ="nombreDelegado"></textbox>
-																		<textbox id ="apellidoDelegado"></textbox>
+																		<textbox id ="txtnombreDelegado" value="@{cntrl.personaNatural.primerNombre}" readonly="true"></textbox>
+																		<textbox id ="txtapellidoDelegado" value="@{cntrl.personaNatural.primerApellido}" readonly="true"></textbox>
 																	</hbox>
 																</row>
 															</rows>

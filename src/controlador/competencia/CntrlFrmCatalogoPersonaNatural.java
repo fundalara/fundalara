@@ -51,7 +51,7 @@ public class CntrlFrmCatalogoPersonaNatural extends GenericForwardComposer {
 			//se obtiene la referencia del formulario
 			Component formulario = (Component) catalogo.getVariable("formulario",false);
             //se le asigna el objeto Persona Natural al formulario
-			formulario.setVariable("", d,false);
+			formulario.setVariable("personaNatural", d,false);
 			//se le envia una señal al formulario indicado que el formulario se cerro y que los datos se han enviado
 			Events.sendEvent(new Event("onCatalogoCerrado",formulario));          
 			//se cierra el catalogo

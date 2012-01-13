@@ -1,5 +1,6 @@
 package controlador.competencia;
 
+import org.zkoss.zul.Button;
 import java.util.List;
 
 import modelo.Categoria;
@@ -57,9 +58,9 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	AnnotateDataBinder binder;
 	List<Equipo> equipos, equiposforaneos;
 	List<EquipoCompetencia> Selectes;
-	
+	Button btnBuscarDelegado;
 	List<Divisa> divisas;
-	Component formulario;
+	Component formulario,formularios;
 	Combobox cmbCategorias;
 	Combobox cmbDivisa;
 	Listbox lsbxDivisa;
@@ -110,7 +111,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				}
 			}
 			if (!sw) {
-				alert(c1.getNombre());				
+				equipoCompetencia.setEquipo(c1);				
 				lista.add(c1);
 			}
 		}
@@ -141,14 +142,23 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		});
 	}
 	
+	//// activa el boton de catalogo de persona natural ////
+	public void onSelect$lsbxEquiposSeleccionadosLocales() {
+		btnBuscarDelegado.setDisabled(false);		
+	}
+	
+	
+	
+	/////////////////////////////////////////////////////////
+	
 	// //////////// Llama al catalogo de Persona Natural
 	// ///////////////////////////////
-	public void BuscarPersonaNatural() {
+	public void onClick$btnBuscarDelegado() {
 		// se crea el catalogo y se llama
-		Component catalogo = Executions.createComponents(
+		Component catalogos = Executions.createComponents(
 				"/Competencias/Vistas/FrmCatalogoPersonaNatural.zul", null, null);
 		// asigna una referencia del formulario al catalogo.
-		catalogo.setVariable("formulario", formulario, false);		
+		catalogos.setVariable("formulario", formulario, false);		
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			// Este metodo se llama cuando se envia la señal desde el catalogo
@@ -156,12 +166,28 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				// se obtiene la competencia
 				personaNatural = (PersonaNatural) formulario.getVariable(
 						"personaNatural", false);	
-				binder.loadAll();				
+				binder.loadAll();
 			}			
 		});		
 	}
 
 	
+	public Button getBtnBuscarDelegado() {
+		return btnBuscarDelegado;
+	}
+
+	public void setBtnBuscarDelegado(Button btnBuscarDelegado) {
+		this.btnBuscarDelegado = btnBuscarDelegado;
+	}
+
+	public Component getFormularios() {
+		return formularios;
+	}
+
+	public void setFormularios(Component formularios) {
+		this.formularios = formularios;
+	}
+
 	public void onClick$btnAgregarEquipoForaneo(){
 		alert(String.valueOf(servicioEquipo.listar().size()+1));
 		equipo.setCodigoEquipo(servicioEquipo.listar().size()+1);
