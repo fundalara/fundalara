@@ -1,114 +1,53 @@
 <?page title="Catalogo Estadios" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoE"?>
 <zk>
 	<div align="center">
-		<window id="FrmCatalogoEstadios" title="Estadios existentes" border="normal" mode="modal" closable="true"
-			width="400px">
+		<window
+			apply="controlador.competencia.CntrlFrmCatalogoEstadios" 
+			id="frmCatalogoE" title="Estadios existentes"
+		    border="normal" mode="modal" closable="true"
+			width="690px" height="360px">
+		
 			<panel title="Datos del Estadio" width="100%">
 				<panelchildren>
 				
 					<div style="margin-top:5px">
 					<label value="Filtro"></label>
-					<textbox></textbox>
-					<button label="Buscar"></button>
+					<textbox id="txtFiltro"></textbox>
+					<button id="btnBuscar" label="Buscar"></button>
 					</div>
-					<listbox mold="paging" pageSize="10" style="margin-top:5px">
+					<listbox id="lsbxEstadios" mold="paging" width="100%" 
+							pageSize="10" style="margin-top:5px" model="@{cntrl.estadios}"
+							height="240px">
 						<listhead>
-							<listheader label="Nombre" width="25%" align="center"/>
-							<listheader label="Estado" width="25%" align="center"/>
-							<listheader label="Municipio" width="25%" align="center"/>
-							<listheader label="Ciudad" width="25%" align="center"/>
+							<listheader label="Nombre" width="20%" align="center"/>
+							<listheader label="Estado" width="auto" align="center"/>
+							<listheader label="Municipio" width="auto" align="center"/>
+							<listheader label="Parroquia" width="auto" align="center"/>
+							<listheader label="Dirección" width="auto" align="center"/>
 						</listhead>
 						
-						<listitem>
-							<listcell label="Fundalara" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="Ucla" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="Delfines" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
-						</listitem>
-						<listitem>
-							<listcell label="xxx" />
-							<listcell label="Lara" />
-							<listcell label="Iribarren" />
-							<listcell label="Barquisimeto" />
+						<listitem self="@{each=estadio}">
+							<listcell label="@{estadio.nombre}"></listcell>
+							<listcell label="@{estadio.datoBasico.datoBasico.datoBasico.nombre}"></listcell>
+							<listcell label="@{estadio.datoBasico.datoBasico.nombre}"></listcell>
+							<listcell label="@{estadio.datoBasico.nombre}"></listcell>
+							<listcell label="@{estadio.direccion}"></listcell>
 						</listitem>
 					</listbox>
 
+					<!--BOTONES -->
 					<div align="right">
-						<button image="/Recursos/Imagenes/aceptar.ico"
+						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
 							label="Aceptar">
 						</button>
-						<button
-							image="../../Recursos/Imagenes/salir.png" label="Salir"
-							onClick="Salir()" />
+						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png"
+							label="Salir" />
 					</div>
 				</panelchildren>
 
 			</panel>
-<zscript><![CDATA[
-	public void Salir() {
-		FrmCatalogoEstadios.onClose();
-	}
-]]></zscript>
 
 		</window>
 	</div>

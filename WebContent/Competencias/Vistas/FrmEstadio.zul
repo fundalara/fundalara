@@ -1,47 +1,60 @@
 <?page title="Estadio" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmEstadio" ?>
 <zk>
 	<div align="center">
-		<window title="Estadio" border="normal" width="370px">
+		<window apply="controlador.competencia.CntrlFrmEstadio" 
+				id="frmEstadio" title="Registro de Estadios" border="normal" width="370px">
 			<panel>
 				<panelchildren>
 					<grid>
-						<columns>
-							<column label="" width="" />
-						</columns>
+				
 						<rows>
-							<row align="left" style="border:none">
+							<row align="left"  style="border:none">
 								<label value="Nombre"></label>
-								<textbox width="88%" id="txtNombre"/>
+								
+								<textbox value="@{cntrl.estadio.nombre}" id="txtNombre" 
+								constraint="/.[a-z]+/:El campo 'nombre' es obligatorio"  width="88%"/>
+								<button id="btnBuscar"
+										image="../../Recursos/Imagenes/consultar.ico" >								
+								</button>
+						
 							</row>
-							<row align="left" style="border:none">
-								<label value="Dirección"></label>
-								<textbox width="88%" multiline="true" height="50px" id="txtDireccion"/>
-
-							</row>
-							<row align="left" style="border:none">
+								<row align="left" style="border:none">
 								<label value="Estado"></label>
-								<combobox id="cmbEstado" width="80%"
-									value="--Seleccione--">
-									<comboitem label="Lara" />
-									<comboitem label="Portuguesa" />
+								<combobox id="cmbEstados"  width="82%"
+									model="@{cntrl.estados}" readonly="true">
+									<comboitem self="@{each=estado}"
+										 value="@{estado}" label="@{estado.nombre}">
+									</comboitem>
 								</combobox>
 							</row>
 							<row align="left" style="border:none">
 								<label value="Municipio"></label>
-								<combobox id="cmbMunicipio" width="80%"
-									value="--Seleccione--">
-									<comboitem label="Iribarren" />
-									<comboitem label="Palavecino" />
+								<combobox id="cmbMunicipios" width="82%" 
+									model="@{cntrl.municipios}" readonly="true">
+									<comboitem self="@{each=municipio}" 
+										 value="@{municipio}" label="@{municipio.nombre}" />
 								</combobox>
 							</row>
 							<row align="left" style="border:none">
 								<label value="Parroquia"></label>
-								<combobox id="cmbParroquia" width="80%"
-									value="--Seleccione--">
-									<comboitem label="Union" />
-									<comboitem label="Juan de Villegas" />
+								<combobox   id="cmbParroquias" width="82%" 
+									model="@{cntrl.parroquias}" readonly="true">
+									<comboitem self="@{each=parroquia}" 
+										value="@{parroquia}" label="@{parroquia.nombre}"
+										 />
+										
 								</combobox>
 							</row>
+							<row align="left" style="border:none">
+								<label value="Dirección"></label>
+								<textbox id="txtDireccion" value="@{cntrl.estadio.direccion}" 
+								constraint="no empty:El campo 'dirección' es obligatorio"
+								width="88%" multiline="true" height="50px"/>
+
+							</row>
+						
 						</rows>
 					</grid>
 
@@ -52,19 +65,24 @@
 					<div>
 						<div align="right" height="30px">
 							<button
+								id="btnGuardar"
 								image="/Recursos/Imagenes/guardar.ico" label="Guardar"
 								orient="horizontal">
 							</button>
 							<button
+								id="btnEliminar"
 								image="/Recursos/Imagenes/eliminar.ico" label="Eliminar"
 								orient="horizontal">
 
 							</button>
 							<button
+								id="btnCancelar"
 								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
 								orient="horizontal">
 							</button>
-							<button image="/Recursos/Imagenes/salir.png"
+							<button 
+								id="btnSalir"
+								image="/Recursos/Imagenes/salir.png"
 								label="Salir" orient="horizontal">
 							</button>
 
