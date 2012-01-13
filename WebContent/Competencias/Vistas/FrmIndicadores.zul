@@ -77,11 +77,13 @@
 												<label
 													value="Categoría" />
 												<space width="5%"></space>
-												<combobox 
-													model="@{cntrl.categorias}" value="--Seleccione--" id="cmbSeleccionarCategoria">
+												<combobox
+													model="@{cntrl.categorias}" value="--Seleccione--"
+													id="cmbSeleccionarCategoria">
 													<comboitem
 														self="@{each=categoriaCompetencia }"
-														label="@{categoriaCompetencia.categoria.nombre }" value="@{categoriaCompetencia.categoria}">
+														label="@{categoriaCompetencia.categoria.nombre }"
+														value="@{categoriaCompetencia.categoria}">
 													</comboitem>
 												</combobox>
 											</hbox>
@@ -92,10 +94,13 @@
 												<label
 													value="Modalidad" />
 												<space width="5%"></space>
-												<combobox id="cmbSeleccionarModalidad" 
-													value="--Seleccione--">
-													<comboitem />
-												
+												<combobox
+													id="cmbSeleccionarModalidad" value="--Seleccione--"
+													model="@{cntrl.lsbxModalidadIndicador}">
+													<comboitem
+														self="@{each=modalidadIndicador}"
+														label="@{modalidadIndicador.nombre}"
+														value="@{modalidadIndicador}" />
 												</combobox>
 											</hbox>
 										</row>
@@ -105,8 +110,7 @@
 								<grid>
 									<columns>
 										<column width="45%"></column>
-										<column width="12%">
-										</column>
+										<column width="12%"></column>
 										<column width="45%"></column>
 									</columns>
 									<rows>
@@ -134,7 +138,7 @@
 													<row
 														style="border:none" align="center">
 														<button
-															id="btnMoverDerecha" onClick="" 
+															id="btnMoverDerecha" onClick=""
 															image="/Recursos/Imagenes/rightarrow_g.png"
 															style="center" />
 													</row>
@@ -150,9 +154,9 @@
 											</grid>
 
 											<listbox
-												id="lsbxIndicadoresSeleccionados" mold="paging" style="margin-top:5px"
-												model="@{cntrl.indicadoresAux}" height="200px" multiple="true"
-												checkmark="true">
+												id="lsbxIndicadoresSeleccionados" mold="paging"
+												style="margin-top:5px" model="@{cntrl.indicadoresAux}"
+												height="200px" multiple="true" checkmark="true">
 												<listhead>
 
 													<listheader
@@ -195,7 +199,7 @@
 												<label
 													value="Categoría" />
 												<space width="5%"></space>
-												<combobox
+												<combobox id="cmbSeleccionarCategoriaColectivo"
 													model="@{cntrl.categorias}" value="--Seleccione--">
 													<comboitem
 														self="@{each=categoriaCompetencia }"
@@ -210,12 +214,13 @@
 												<label
 													value="Modalidad" />
 												<space width="5%"></space>
-												<combobox
-													value="--Seleccione--">
+												<combobox id="cmbSeleccionarModalidadColectivo"
+													 value="--Seleccione--"
+													model="@{cntrl.lsbxModalidadIndicador}">
 													<comboitem
-														label="Ofensivo" />
-													<comboitem
-														label="Defensivo" />
+														self="@{each=modalidadIndicador}"
+														label="@{modalidadIndicador.nombre}"
+														value="@{modalidadIndicador}" />
 												</combobox>
 											</hbox>
 										</row>
@@ -232,25 +237,20 @@
 									</columns>
 									<rows>
 										<row style="border:none">
-											<listbox
-												id="lsbxIndicadoresColectivos" mold="paging"
-												style="margin-top:5px" model="@{cntrl.indicadores}"
-												height="200px">
+											<listbox id="lsbxIndicadoresColectivos"
+												 mold="paging"
+												style="margin-top:5px" model="@{cntrl.indicadoresAux}"
+												height="200px" multiple="true" checkmark="true">
 												<listhead>
-													<listheader label=""
-														sort="auto" width="20%">
-														<checkbox></checkbox>
-													</listheader>
+
 													<listheader
-														label="Indicadores" sort="auto" />
+														label="Indicadores Seleccionados" sort="auto" />
 												</listhead>
 												<listitem
-													self="@{each=indicador}">
-													<listcell>
-														<checkbox />
-													</listcell>
+													self="@{each=indicador}" value="@{indicador}">
+
 													<listcell
-														label="@{indicador.nombre}">
+														label="@{indicador.indicador.nombre}">
 													</listcell>
 												</listitem>
 											</listbox>
@@ -259,13 +259,13 @@
 												<rows>
 													<row
 														style="border:none" align="center">
-														<button
+														<button id="btnMoverDerechaColectivo"
 															onClick="" image="/Recursos/Imagenes/rightarrow_g.png"
 															style="center" />
 													</row>
 													<row
 														style="border:none" align="center">
-														<button
+														<button id="btnMoverIzquierdaColectivo"
 															onClick="" image="/Recursos/Imagenes/leftarrow_g.png"
 															style="center" />
 													</row>
@@ -299,16 +299,16 @@
 			</tabbox>
 			<div>
 				<div align="right" height="30px">
-					<button image="/Recursos/Imagenes/guardar.ico"
+					<button id="btnGuardar" image="/Recursos/Imagenes/guardar.ico"
 						label="Guardar" orient="horizontal">
 					</button>
-					<button image="/Recursos/Imagenes/eliminar.ico"
+					<button id="btnEliminar" image="/Recursos/Imagenes/eliminar.ico"
 						label="Eliminar" orient="horizontal">
 					</button>
-					<button image="/Recursos/Imagenes/cancelar.ico"
+					<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico"
 						label="Cancelar" orient="horizontal">
 					</button>
-					<button image="/Recursos/Imagenes/salir.png"
+					<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
 						label="Salir" orient="horizontal">
 					</button>
 				</div>

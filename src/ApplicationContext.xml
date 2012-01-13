@@ -135,9 +135,9 @@
 	<bean id="daoPersonal" class="dao.general.DaoPersonal">
 	</bean>
 	
-	<bean id="servicioPersonal" class="servicio.implementacion.ServicioPersonal">
-		<property name="daoPersonal" ref="daoPersonal"></property>
-	</bean>
+<!-- 	<bean id="servicioPersonal" class="servicio.implementacion.ServicioPersonal"> -->
+<!-- 		<property name="daoPersonal" ref="daoPersonal"></property> -->
+<!-- 	</bean> -->
 	
 	<bean id="daoPersonalCargo" class="dao.general.DaoPersonalCargo">
 	</bean>
@@ -221,6 +221,7 @@
 	
 	<bean id="servicioConstante" class="servicio.implementacion.ServicioConstante">
 		<property name="daoConstante" ref="daoConstante"></property>
+		<property name="daoConstanteCategoria" ref="daoConstanteCategoria"></property>
 	</bean>
 	
 	<bean id="daoConstanteCategoria" class="dao.general.DaoConstanteCategoria">
@@ -337,9 +338,9 @@
 	<bean id="daoPersonalJuego" class="dao.general.DaoPersonalJuego">
 	</bean>
 	
-	<bean id="servicioPersonalJuego" class="servicio.implementacion.ServicioPersonalJuego">
-		<property name="daoPersonalJuego" ref="daoPersonalJuego"></property>
-	</bean>
+<!-- 	<bean id="servicioPersonalJuego" class="servicio.implementacion.ServicioPersonalJuego"> -->
+<!-- 		<property name="daoPersonalJuego" ref="daoPersonalJuego"></property> -->
+<!-- 	</bean> -->
 	
 	<bean id="daoPersonalForaneo" class="dao.general.DaoPersonalForaneo">
 	</bean>

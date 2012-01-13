@@ -5,34 +5,8 @@
 <zk>
 	<div align="center">
 		<window title="Registro de Indicadores" border="normal"
-			id="winRegistroIndicador" width="500px" height="auto" closable="true"
+			id="winRegistroIndicador" width="500px" height="auto" closable="true" 
 			apply="controlador.competencia.CntrlFrmRegistroIndicadores">
-			<zscript><![CDATA[
-	//@DECLARATION
-	public void Seleccion() {
-		//		formula.setText(formula.getText() +  );
-	}
-	public void Operador() {
-		formula.setText(formula.getText() + cmbOperador.getText());
-	}
-	/*public void Tipo() {
-	 if (cmbTipo.getText().equals("Sencillo")) {
-	 pnlSencillo.setVisible(true);
-	 pnlCompuesto.setVisible(false);
-	 } else {
-	 pnlSencillo.setVisible(false);
-	 pnlCompuesto.setVisible(true);
-	 }
-	 }*/
-	public void Agregar() {
-		//		if (id1.toString().isEmpty()){
-
-		//		}
-	}
-	public void Quitar() {
-	}
-]]>
-	</zscript>
 			<div align="left">
 				<grid>
 					<columns>
@@ -40,9 +14,24 @@
 						<column width="5%" />
 						<column width="5%" />
 						<column width="65%" />
+						
+<!-- 						<column width="25%" /> -->
+<!-- 								<column width="25%" /> -->
+<!-- 								<column width="5%" /> -->
+<!-- 								<column width="15%" /> -->
+<!-- 								<column width="20%" /> -->
+<!-- 								<column width="5%" /> -->
+						
 					</columns>
 					<rows>
 						<row style="border:none">
+						
+						
+<!-- 						<label value="Nombre"></label> -->
+<!-- 									<textbox id="txtNombreSencillo" -->
+<!-- 										cols="20" value="@{cntrl.indicador.nombre}" /> -->
+										
+						
 							<label value="Tipo Indicador" />
 							<combobox id="cmbTipo"
 								style="margin-top:5px" cols="13"
@@ -51,10 +40,25 @@
 									label="@{tipoIndicador.nombre}" value="@{tipoIndicador}" />
 							</combobox>
 							<label />
+
+
 							<button id="btnBuscarIndicador"
 								image="../../Recursos/Imagenes/consultar.ico">
 							</button>
 						</row>
+						
+<!-- 						<row> -->
+<!-- 						<label value="Tipo Indicador" /> -->
+<!-- 							<combobox id="cmbTipo" -->
+<!-- 								style="margin-top:5px" cols="13" -->
+<!-- 								model="@{cntrl.listTipoIndicador}"> -->
+<!-- 								<comboitem self="@{each=tipoIndicador}" -->
+<!-- 									label="@{tipoIndicador.nombre}" value="@{tipoIndicador}" /> -->
+<!-- 							</combobox> -->
+<!-- 							<label /> -->
+						
+<!-- 						</row> -->
+						
 					</rows>
 				</grid>
 				<panel id="pnlSencillo" title="Indicadores Sencillos"
@@ -68,7 +72,6 @@
 								<column width="15%" />
 								<column width="20%" />
 								<column width="5%" />
-
 							</columns>
 							<rows>
 								<row align="left" style="border:none">
@@ -134,11 +137,10 @@
 								<row align="left" style="border:none">
 									<label value="Abreviatura"></label>
 									<textbox
-										id="txtAbreviaturaCompuesto" cols="16" />
+										id="txtAbreviaturaCompuesto" cols="16" value="@{cntrl.indicador.abreviatura}"/>
 									<label />
 									<label value="Nombre"></label>
-									<textbox id="txtNombreCompuesto"
-										cols="20" />
+									<textbox id="txtNombreCompuesto" cols="20" value="@{cntrl.indicador.nombre}"/>
 								</row>
 								<row />
 							</rows>
@@ -163,22 +165,20 @@
 							<rows>
 								<row align="left" style="border:none">
 									<label value="Indicador "></label>
-									<combobox id="cmbIndicador" disabled="true"
-										cols="13" value="--Seleccione--"
+									<combobox id="cmbIndicador"
+										disabled="true" cols="13" value="--Seleccione--"
 										model="@{cntrl.listIndicador}">
 										<comboitem
-											self="@{each=Indicador}"
-											label="@{Indicador.nombre}"
+											self="@{each=Indicador}" label="@{Indicador.nombre}"
 											value="@{Indicador}" />
 									</combobox>
 									<label />
 									<label value="Constante "></label>
-									<combobox id="cmbConstante" disabled="true"
-										cols="13" value="--Seleccione--"
+									<combobox id="cmbConstante"
+										disabled="true" cols="13" value="--Seleccione--"
 										model="@{cntrl.listConstante}">
 										<comboitem
-											self="@{each=Constante}"
-											label="@{Constante.nombre}"
+											self="@{each=Constante}" label="@{Constante.nombre}"
 											value="@{Constante}" />
 									</combobox>
 								</row>
@@ -215,32 +215,42 @@
 							</rows>
 						</grid>
 
-						<grid width="100%">
-							<columns>
-								<column width="22%" />
-								<column width="70%" />
-								<!-- 								<column width="2%" /> -->
-								<!-- 								<column width="15%" /> -->
-								<!-- 								<column width="20%" /> -->
-								<!-- 								<column width="5%" /> -->
-							</columns>
-							<rows>
+						<!-- 						<grid width="100%"> -->
+						<!-- 							<columns> -->
+						<!-- 								<column width="22%" /> -->
+						<!-- 								<column width="70%" /> -->
+						<!-- 							</columns> -->
+						<!-- 							<rows> -->
+						<!-- 								<row align="left" -->
+						<!-- 									style="border-style:none"> -->
+						<!-- 									<label value="Fórmula " /> -->
+						<!-- 									<textbox id="txtFormula" -->
+						<!-- 										multiline="true" cols="30" value="@{cntrl.indicador.formula}" /> -->
+						<!-- 									<button id="btnBorrar" -->
+						<!-- 										image="../../Recursos/Imagenes/atras.ico"> -->
+						<!-- 									</button> -->
+						<!-- 								</row> -->
+						<!-- 							</rows> -->
+						<!-- 						</grid> -->
 
-								<row align="left"
-									style="border-style:none">
-									<label value="Fórmula " />
-									<textbox id="txtFormula"
-										multiline="true" cols="30" />
-								</row>
+						<div>
+							<panel>
+								<panelchildren>
+									<div align="center">
+										<label value="Fórmula " />
+										<textbox id="txtFormula"
+											multiline="true" cols="30"
+											value="@{cntrl.indicador.formula}" />
+										<button id="btnBorrar" 
+											image="../../Recursos/Imagenes/atras.ico">
+										</button>
+									</div>
+								</panelchildren>
+							</panel>
+						</div>
 
-								<!--  <row>
-									<textbox
-									id="txtFormula"  multiline="true"
-									value="=(H+(2B*2)+(3B*3)+(HR*4))/VB" />
-									</row>-->
 
-							</rows>
-						</grid>
+
 					</panelchildren>
 				</panel>
 				<div>

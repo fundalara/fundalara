@@ -67,6 +67,13 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	public List<DatoBasico> listarPorPadre(String s,Integer i){
 		return daoDatoBasico.listarPorPadre(s,i);
 		}
+<<<<<<< HEAD
+=======
+	
+//	public List<DatoBasico> buscarPadre(DatoBasico db) {
+//		return daoDatoBasico.buscarPadre(db);
+//	}
+>>>>>>> f424a277708ba4680d6592dea5c10a85fb32ed5f
 
 	@Override
 	public DatoBasico buscarPorCodigo(String td) {
@@ -82,6 +89,26 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	@Override
 	public List<DatoBasico> listarParroquias() {
 		return daoDatoBasico.listarParroquias();
+	}
+	
+	@Override
+	public List<DatoBasico> listarEstados() {
+		return daoDatoBasico.listarEstados();		
+	}
+	
+	@Override
+	public List<DatoBasico> listarMunicipios() {
+		return daoDatoBasico.listarMunicipios();		
+	}
+	
+	@Override
+	public List<DatoBasico> listarMunicipiosPorEstados(DatoBasico db) {
+		return daoDatoBasico.listarMunicipiosPorEstados(db);		
+	}
+
+	@Override
+	public List<DatoBasico> listarParroquiasPorMunicipios(DatoBasico db) {
+		return daoDatoBasico.listarParroquiasPorMunicipios(db);		
 	}
 
 	@Override

@@ -1,0 +1,111 @@
+<?page title="Constantes" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmConstante" ?>
+<zk>
+	<div align="center">
+	<window id="frmConstante" apply="controlador.competencia.CntrlFrmConstante" 
+			title="Constantes" border="normal" width="70%" height="auto" closable="true">
+		<panel>
+			<caption label="Registro de Constates"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="" width="10%" style="border-style:none" />
+						<column label="" width="20%" style="border-style:none" align="left" />
+						<column label="" width="5%" style="border-style:none" align="left" />
+					</columns>
+					<rows>
+						<row style="border-style:none" align="left">
+							<label value="Abreviatura"></label>
+							<textbox id="txtAbreviatura"
+									 value="@{cntrl.constante.abreviatura }" width="40%"
+									 constraint="no empty:El campo 'Abreviatura' es obligatorio"></textbox>
+							<label value="Nombre"></label>
+							<textbox id="txtNombre" 
+									 value="@{cntrl.constante.nombre }" width="80%"
+									 constraint="no empty:El campo 'Nombre' es obligatorio"></textbox>
+							<button id="btnBuscar" image="../../Recursos/Imagenes/consultar.ico" ></button>						
+						</row>	
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel>
+			<caption label="Selección de Categorías"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="" width="35%" style="border-style:none" />
+						<column label="" width="10%" style="border-style:none" align="left" />
+						<column label="" width="50%" style="border-style:none" align="left" />
+					</columns>					
+					<rows>
+						<row align="left">
+							<listbox id="lsbxCategorias"
+									 checkmark="true" multiple="true" 
+									 model="@{cntrl.categorias }"
+									 mold="paging" pageSize="10"
+									 style="margin-top:5px" height="200px">
+								<listhead>									
+									<listheader label="Categorías" sort="auto">
+									</listheader>
+								</listhead>
+								<listitem self="@{each=categoria}" value="@{categoria }">
+									<listcell label="@{categoria.nombre }"></listcell> 
+								</listitem>								
+							</listbox>  
+							<grid>
+								<rows>
+									<row style="border:none" align="center">
+										<button id="btnAgregar" image="/Recursos/Imagenes/rightarrow_g.png" style="center" />
+									</row>
+									<row style="border:none" align="center">
+										<button	id="btnQuitar" image="/Recursos/Imagenes/leftarrow_g.png" style="center" />
+									</row>
+								</rows>
+							</grid>
+							<listbox id="lsbxCategoriasSeleccionadas" 
+									checkmark="true" multiple="true" 
+									model="@{cntrl.categoriasSeleccionadas }"
+									mold="paging" pageSize="10"
+									style="margin-top:5px" height="200px">
+								<listhead>
+									<listheader label="Categorías Seleccionadas" sort="auto" width="50%"></listheader>
+									<listheader label="Valores" sort="auto" width="30%"></listheader>
+								</listhead>
+								<listitem self="@{each=categoria }" value="@{categoria}">
+									<listcell label="@{categoria.categoria.nombre }" ></listcell>
+									<listcell>
+										<textbox id="txtValor" width="50%"
+												 constraint="/[0-9]{2}/:Inserte un valor de la constante Ejemplo 01 o 99" value="@{categoria.valor }"></textbox>									
+									</listcell>
+								</listitem>	
+							</listbox>  
+							       
+						</row>												
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<div>
+			<!-- BOTONES -->
+			<panel>
+				<panelchildren style="margin-top:20px ">
+					<div align="right">
+						<button id="btnGuardar"	image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						</button>
+						<button id="btnEliminar" image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
+						</button>
+						<button id="btnCancelar" image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+
+
+	</window>
+	</div>
+</zk>
