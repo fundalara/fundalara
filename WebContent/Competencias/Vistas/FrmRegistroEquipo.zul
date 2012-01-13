@@ -212,7 +212,7 @@
 											style="border-style:none">											
 											<label value="Categoria"></label>
 											<combobox
-												id="cmbCategoriasForaneas" width="250%"
+												id="cmbCategoriasForaneas" 
 												model="@{cntrl.categorias}" value="--Seleccione--">
 												<comboitem
 													self="@{each=categoriaCompetencia}"
