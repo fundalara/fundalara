@@ -38,6 +38,22 @@
 								
 								<rows>								
 								<!-- FILA 1 -->										    
+
+									<row style="border-style:none" spans="1,3">
+
+										<label value="Nombre"></label>
+										<hbox width="100%">		
+											<textbox  id="txtNombre" value="@{cntrl.competencia.nombre}" 
+													  constraint="no empty:El campo 'nombre' es obligatorio" width="98%" ></textbox>	
+													  
+											<button image="../../Recursos/Imagenes/consultar.ico"></button>									        
+										</hbox>
+									</row>
+
+
+											
+								<!-- FILA 2 -->		
+
 									<row style="border-style:none" align="left">
 										<label value="Tipo" />
 										<combobox id="cmbTipoCompetencia" width="80%" value="--Seleccione--" 
@@ -53,47 +69,37 @@
 											<comboitem self="@{each=modalidadCompetencia}" label="@{modalidadCompetencia.nombre}" value="@{modalidadCompetencia }" />													
 										</combobox>	
 									</row>
-											
-								<!-- FILA 2 -->		
-									<row style="border-style:none" spans="1,3">
 
-										<label value="Nombre"></label>
-										<hbox width="100%">		
-											<textbox  id="txtNombre" width="98%" ></textbox>	
-											<button image="../../Recursos/Imagenes/consultar.ico">
-											</button>									        
-										</hbox>
-									</row>
 											
 								<!-- FILA 3 -->			
 									<row style="border-style:none">
 										<label value="Fecha Inicio"></label>
-										<datebox   id="txtfechaInicio"></datebox>											   
+										<datebox   id="txtfechaInicio" value="@{cntrl.competencia.fechaInicio}"></datebox>											   
 
 										<label value="Fecha Fin"></label>
-										<datebox  id="txtfechaFin"></datebox>
+										<datebox  id="txtfechaFin" value="@{cntrl.competencia.fechaFin}"></datebox>
 									</row>
 									
 								<!-- FILA 4 -->			
 									<row style="border-style:none">
 										<label value="Nro de Fases"></label>
-										<spinner id="spnNroFases"  value="1" cols="5"  constraint="no empty,min 1 max 5"></spinner>
+										<spinner id="spnNroFases" value="@{cntrl.competencia.cantidadFase}"  cols="5" constraint="no empty,min 1 max 25" />
 
 										<label value="Jugadores por Roster" />
-										<spinner id="spnNroJugadores" value="9"  cols="5" constraint="no empty,min 9 max 25"/>
+										<spinner id="spnNroJugadores" value="@{cntrl.competencia.cantidadJugador}"  cols="5" constraint="no empty,min 9 max 25"/>
 									</row>
 
 								<!-- FILA 5 -->			
 									<row style="border-style:none">
 										<label value="Tipo de Organización"></label>
-										<combobox id="cmbTipoOrganizacion" width="80%" onChange="" value="--Seleccione--">
-											<comboitem label="Categoria" />
-											<comboitem label="Liga" />
+										<combobox id="cmbTipoOrganizacion" width="80%" onChange="" readonly="true" model="@{cntrl.OrganizacionCompetencias}" value="--Seleccione--">
+											<comboitem self="@{each=organizacionCompetencia}" label="@{organizacionCompetencia.nombre}"  value="@{organizacionCompetencia}"/>
+											
 										</combobox>									
 									
 										<label value="Monto de Inscripción" />
 										<hbox>
-											<textbox  id="txtmontoInscripcion" cols="14"></textbox>
+											<textbox  id="txtmontoInscripcion"  value="@{cntrl.competencia.montoInscripcion}"  cols="14"></textbox>
 													<!--  	width="70%"
 														value="0.00" cols="14" /> -->
 											<label value="Bs.f." />
@@ -114,7 +120,7 @@
 										<combobox id="cmbEstado" width="80%" value="--Seleccione--"
 												  readonly="true" model="@{cntrl.datoBasicos}" > 
 
-											<comboitem self="@{each=datoBasico}" label="@{datoBasico.nombre}"  value="@{datoBasico}" /> 
+											<comboitem self="@{each=estado}" label="@{estado.nombre}"  value="@{estado}" /> 
 										</combobox>											
 									</row>
 								
@@ -140,7 +146,7 @@
 								</listhead>
 								
 								<listitem  id="itemFases"  self="@{each=fase}">   <!-- self="@{each=fase}" self="@{each=faseCompetencia}"-->  
-									<listcell ></listcell>  <!-- label="@{each=fase}" label="@{each=faseCompetencia.id}"-->
+									<listcell label="@{cntrl.fase}"></listcell>  <!-- label="@{each=fase}" label="@{each=faseCompetencia.id}"-->
 									<listcell ><spinner value="2" cols="5" constraint="no empty,min 2 max 25" ></spinner></listcell>
 									<listcell ><spinner value="2" cols="5" constraint="no empty,min 2 max 25"></spinner></listcell>       
 								</listitem>
@@ -279,7 +285,7 @@
 								<!-- FILA 1 -->
 									<row style="border-style:none" >
 										<label>Condiciones Generales</label>
-										<textbox  id="txtcondicionesGenerales"
+										<textbox  id="txtcondicionesGenerales" value="@{cntrl.competencia.condicionesGenerales}"
 												 width="98%" height="100%" multiline="true" rows="3">
 										</textbox>
 									</row>
@@ -287,7 +293,7 @@
 								<!-- FILA 2 -->		
 									<row style="border-style:none" align="left">
 										<label value=" En Base al Desempate de Posiciones"> </label>
-										<textbox   id="txtdesempate" 
+										<textbox   id="txtdesempate"  value="@{cntrl.competencia.desempate}"
 												width="98%" height="100%" multiline="true" rows="3">
 										</textbox>
 									</row>
@@ -295,7 +301,7 @@
 								<!-- FILA 3 -->		
 									<row style="border-style:none" align="left">
 										<label value="En Base a los Extrainning"> </label>
-										<textbox   id="txtextrainning" 
+										<textbox   id="txtextrainning" value="@{cntrl.competencia.extrainning}"
 												  width="98%" height="100%" multiline="true" rows="3">
 										</textbox>
 									</row>

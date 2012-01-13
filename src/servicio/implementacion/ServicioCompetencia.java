@@ -16,12 +16,19 @@ public class ServicioCompetencia implements IServicioCompetencia {
 	@Override
 	public void eliminar(Competencia c) {
 		// TODO Auto-generated method stub
-
+		c.setEstatus('E');
+		daoCompetencia.eliminar(c);
 	}
 
 	@Override
 	public void agregar(Competencia c) {
 		// TODO Auto-generated method stub
+		if (c.getCodigoCompetencia()==0){
+			int cod = daoCompetencia.listar(Competencia.class).size()+1;
+			c.setCodigoCompetencia(cod);
+			c.setEstatus('A');
+		}
+		daoCompetencia.guardar(c);		
 
 	}
 

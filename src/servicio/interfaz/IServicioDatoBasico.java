@@ -21,6 +21,8 @@ public interface IServicioDatoBasico {
 	
 	public abstract DatoBasico buscarPorCodigo(String td);
 	
+	public abstract List<DatoBasico> listarEstados();	
+	
 	public abstract List<DatoBasico> listarParroquias();
 	
 	public abstract DatoBasico buscarPorCodigo(Integer i);
@@ -30,5 +32,7 @@ public interface IServicioDatoBasico {
 	public List<DatoBasico> buscarDatosPorRelacion(DatoBasico datoBasico);
 
 	public abstract DatoBasico buscarTipo(TipoDatoBasico tipoDato, String nombre);
+	
+	public abstract List<DatoBasico> listarOrganizacionCompetencia();	
 	
 }

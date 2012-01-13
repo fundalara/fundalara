@@ -1,16 +1,14 @@
 package modelo;
 
-// Generated 11-ene-2012 21:47:34 by Hibernate Tools 3.4.0.CR1
+// Generated 13/01/2012 03:34:55 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,7 +18,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "dato_social", schema = "public")
-@SequenceGenerator(name = "datoSocial_seq", sequenceName = "dato_social_codigo_dato_social_seq_1")
 public class DatoSocial implements java.io.Serializable {
 
 	private int codigoDatoSocial;
@@ -57,7 +54,6 @@ public class DatoSocial implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_dato_social", unique = true, nullable = false)
-	@GeneratedValue(generator = "datoSocial_seq")
 	public int getCodigoDatoSocial() {
 		return this.codigoDatoSocial;
 	}

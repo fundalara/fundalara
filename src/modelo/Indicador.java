@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
+// Generated 13/01/2012 03:34:55 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,14 +38,13 @@ public class Indicador implements java.io.Serializable {
 			DatoBasico datoBasicoByCodigoModalidad,
 			DatoBasico datoBasicoByCodigoTipoIndicador,
 			DatoBasico datoBasicoByCodigoMedicion, String nombre,
-			String abreviatura, String formula, char estatus) {
+			String abreviatura, char estatus) {
 		this.codigoIndicador = codigoIndicador;
 		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
 		this.datoBasicoByCodigoTipoIndicador = datoBasicoByCodigoTipoIndicador;
 		this.datoBasicoByCodigoMedicion = datoBasicoByCodigoMedicion;
 		this.nombre = nombre;
 		this.abreviatura = abreviatura;
-		this.formula = formula;
 		this.estatus = estatus;
 	}
 
@@ -127,7 +126,7 @@ public class Indicador implements java.io.Serializable {
 		this.abreviatura = abreviatura;
 	}
 
-	@Column(name = "formula", nullable = true)
+	@Column(name = "formula")
 	public String getFormula() {
 		return this.formula;
 	}

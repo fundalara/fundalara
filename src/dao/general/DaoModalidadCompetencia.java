@@ -36,11 +36,11 @@ public class DaoModalidadCompetencia extends GenericDao {
   	  return list;
         
 	  }
+
     public List<ModalidadCompetencia> listarModalidad(TipoCompetencia tc){
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(ModalidadCompetencia.class);
-		c.add(Restrictions.eq("estatus",'A'));
 		c.add(Restrictions.eq("tipoCompetencia",tc));
 		return c.list();
 	
