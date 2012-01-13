@@ -86,17 +86,7 @@ public class DaoDatoBasico extends GenericDao {
 	
 	
 	
-	public List<DatoBasico> listarEstados(){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria c = session.createCriteria(TipoDato.class);
-		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "ESTADO")).list().get(0);
-      c = session.createCriteria(DatoBasico.class);
-      List list = c.add(Restrictions.eq("tipoDato",td)).list();
-      return list;
-		  
-	  }
+
 
 	public List<DatoBasico> listarMunicipios(){
 		  

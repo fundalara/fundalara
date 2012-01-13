@@ -21,7 +21,7 @@ public interface IServicioDatoBasico {
 	
 	public abstract DatoBasico buscarPorCodigo(String td);
 	
-	public abstract List<DatoBasico> listarEstados();	
+
 	
 	public abstract List<DatoBasico> listarParroquias();
 	
