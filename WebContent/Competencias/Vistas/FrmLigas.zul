@@ -1,7 +1,7 @@
 <?page title="Auto Generated index.zul"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmLiga" ?>
-<!-- <div align="center"> -->
+<div align="center">
 	<window id="frmLiga" apply="controlador.competencia.CntrlFrmLiga"
 		title="Registro de Ligas" border="normal" width="550px"
 		closable="true">
@@ -21,24 +21,24 @@
 							<label value="Nombre"></label>
 							<hbox>
 								<textbox id="txtNombre"
-									value="@{cntrl.liga.nombre}" cols="30">
+									value="@{cntrl.liga.nombre}" cols="30"
+									constraint="no empty:El campo 'Nombre' es obligatorio">
 								</textbox>
 								<space></space>
 								<button id="btnBuscar"
 									image="../../Recursos/Imagenes/consultar.ico">
 								</button>
 							</hbox>
-
-
 						</row>
 						<row style="border-style:none">
 							<label value="Localidad"></label>
-							<textbox multiline="true" rows="3" cols="30"
-								value="@{cntrl.liga.localidad}">
+							<textbox id="txtLocalidad" multiline="true"
+								rows="3" cols="30" value="@{cntrl.liga.localidad}"
+								constraint="no empty:El campo 'Localidad' es obligatorio">
 							</textbox>
 						</row>
 						<row style="border-style:none">
-							<label value="Logo:"></label>
+							<label value="Logo"></label>
 							<div>
 								<textbox cols="17"></textbox>
 								<button label="Examinar"></button>
@@ -71,15 +71,13 @@
 								mold="paging" pageSize="10" style="margin-top:5px"
 								height="200px">
 								<listhead>
-
-									<listheader label="Categorias"/>
+									<listheader label="Categorias" />
 								</listhead>
-								<listitem self="@{each=categorias}" value="@{categorias}">
-
+								<listitem self="@{each=categorias}"
+									value="@{categorias}">
 									<listcell
 										label="@{categorias.nombre}">
 									</listcell>
-
 								</listitem>
 							</listbox>
 
@@ -108,9 +106,10 @@
 									<listheader
 										label="Categorias Seleccionadas" />
 								</listhead>
-								<listitem self="@{each=categorias}" value="@{categorias}">
+								<listitem self="@{each=categorias}"
+									value="@{categorias}">
 
-									<listcell 
+									<listcell
 										label="@{categorias.nombre}">
 									</listcell>
 
@@ -134,7 +133,8 @@
 							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
 						<button id="btnEliminar"
-							image="/Recursos/Imagenes/eliminar.ico" label="Eliminar">
+							image="/Recursos/Imagenes/eliminar.ico" label="Eliminar"
+							disabled="true">
 						</button>
 						<button id="btnCancelar"
 							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
@@ -146,6 +146,5 @@
 				</panelchildren>
 			</panel>
 		</div>
-
 	</window>
-<!-- </div> -->
+</div>

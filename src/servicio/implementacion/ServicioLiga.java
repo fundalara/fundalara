@@ -24,15 +24,20 @@ public class ServicioLiga implements IServicioLiga {
 	}
 
 	@Override
-	public void eliminar(Liga c) {
-		// TODO Auto-generated method stub
-
+	public void eliminar(Liga l) {
+		l.setEstatus('E');
+		daoLiga.eliminar(l);
 	}
 
 	@Override
-	public void agregar(Liga c) {
-		// TODO Auto-generated method stub
-
+	public void agregar(Liga l) {
+		
+		if (l.getCodigoLiga() == 0){
+			   int cod = daoLiga.listar(Liga.class).size()+1;
+			   l.setCodigoLiga(cod);
+			   l.setEstatus('A');
+			}
+			daoLiga.guardar(l);
 	}
 
 	/*@Override
