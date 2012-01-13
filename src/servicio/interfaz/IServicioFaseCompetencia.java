@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.Competencia;
 import modelo.FaseCompetencia;
 import modelo.Juego;
 
@@ -16,6 +17,8 @@ public interface IServicioFaseCompetencia {
 	public abstract List<FaseCompetencia> listarActivos();
 	
 	public abstract  List<FaseCompetencia> buscarPorCodigo (FaseCompetencia fc);
+	
+	public abstract FaseCompetencia EquiposRegistrados(Competencia competencia);
 	
 	
 }

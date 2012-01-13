@@ -63,5 +63,11 @@ public class ServicioRoster implements IServicioRoster {
 	public Roster buscarRoster(String ced) {
 		return daoRoster.buscarRoster(ced);
 	}
+	
+	@Override
+	public List<Roster> listar(int codigo) {
+		// TODO Auto-generated method stub
+		return daoRoster.listarCedxEquipo(Roster.class, codigo);
+	}
 
 }

@@ -1,0 +1,54 @@
+<?page title="CatalogoEstatusCompetencia" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoEstatusCompetencia"?>
+<zk>
+	<window id="frmCatalogoEstatusCompetencia" apply="controlador.competencia.CntrlFrmCatalogoEstatusCompetencia"
+		title="Competencia Existentes" border="normal" width="690px"
+		mode="modal" closable="true" height="350px">
+
+
+		<div align="center">
+			<panel width="100%">
+				<panelchildren>
+					<div style="margin-top:5px" align="left">
+						<label value="Filtro"></label>
+						<textbox></textbox>
+						<button label="Buscar"></button>
+					</div>
+					<listbox id="lsbxCompetencias" mold="paging" pageSize="10"
+						style="margin-top:5px" model="@{cntrl.competencias}" height="240px">
+						<listhead>
+							<listheader label="Nombre" align="left"
+								width="40%">
+							</listheader>
+							<listheader label="Tipo Competencia" align="left"
+								width="20%">
+							</listheader>
+							<listheader label="Fecha Inicio" align="left"
+								width="20%">
+							</listheader>
+							<listheader label="Fecha Culminación" align="left"
+								width="20%">
+							</listheader>
+						</listhead>
+						<listitem self="@{each=competencia}">
+							<listcell label="@{competencia.nombre}"></listcell>
+							<listcell label="@{competencia.modalidadCompetencia.tipoCompetencia.nombre}"></listcell>
+							<listcell label="@{competencia.fechaInicio}"></listcell>
+							<listcell label="@{competencia.fechaFin}"></listcell>
+						</listitem>
+					</listbox>
+					<div align="right">
+						<button id="btnAceptar"
+							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
+						</button>
+						<button id="btnSalir"
+							image="../../Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+
+</window>
+</zk>

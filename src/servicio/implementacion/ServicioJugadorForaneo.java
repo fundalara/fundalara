@@ -22,25 +22,29 @@ public class ServicioJugadorForaneo implements IServicioJugadorForaneo {
 	@Override
 	public void eliminar(JugadorForaneo j) {
 		// TODO Auto-generated method stub
-
+		j.setEstatus('E');
+		daoJugadorForaneo.eliminar(j);
 	}
 
 	@Override
 	public void agregar(JugadorForaneo j) {
 		// TODO Auto-generated method stub
-
+		 j.setEstatus('A');
+			
+			
+			daoJugadorForaneo.guardar(j);
 	}
 
 	@Override
 	public List<JugadorForaneo> listar() {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		return daoJugadorForaneo.listar(JugadorForaneo.class);
+		}
 
 	@Override
 	public List<JugadorForaneo> listarActivos() {
 		// TODO Auto-generated method stub
-		return null;
+		return daoJugadorForaneo.listarActivos();
 	}
 
 }

@@ -17,6 +17,7 @@ public interface IServicioCompetencia {
 	public abstract List<Competencia> listarActivos();
 	
 	public abstract List<Competencia> listarPorEstatus(int estatus);
+	public abstract List<Competencia> listarRegistradasAperturadas(); 
 	
 
 }

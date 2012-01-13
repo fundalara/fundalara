@@ -70,7 +70,7 @@ public class DaoRoster extends GenericDao {
 	/**
 	 * Busca el registro del roster al que pertenece un jugador
 	 * 
-	 * @param Nro de Cédula del jugador
+	 * @param Nro de Cï¿½dula del jugador
 	 * @return Un objeto Roster sino null
 	 */
 	public Roster buscarRoster(String ced) {
@@ -81,5 +81,14 @@ public class DaoRoster extends GenericDao {
 				.add(Restrictions.eq("estatus", 'A'));
 		return (Roster) c.uniqueResult();
 	}
+
 	
+	public List<Roster> listarCedxEquipo(Class o, int codigo){
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(Roster.class);
+		c.add(Restrictions.eq("equipo.codigoEquipo",codigo));
+		List <Roster> lista = c.list(); 
+		return lista;
+	}
 }

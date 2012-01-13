@@ -9,7 +9,15 @@
 	<div align="center">
 	 <window id="frmRoster" apply="controlador.competencia.CntrlFrmRoster"
 		 title="REGISTRO DE RÓSTER" border="normal" closable="true" width="60%">
-			<div id="Roster" align="left">
+		 
+		 <tabbox>
+	<tabs>
+		<tab label="Roster" />
+		<tab label="Gestion de Refuerzos " />
+	</tabs>
+	<tabpanels>
+		<tabpanel><!-- Roster Jesus -->
+		<div id="Roster" align="left">
 				
 				<panel border="normal" title="Datos de la Competencia">
 					<panelchildren>
@@ -26,15 +34,15 @@
 								<row>
 									<label value="Competencia"></label>
 									<hbox>
-										<textbox cols="11" id="txtIdCompetencia" value="@{cntrl.competencia.nombre}"></textbox>
+										<textbox readonly="true" cols="11" id="txtIdCompetencia" value="@{cntrl.competencia.nombre}"></textbox>
 										<button id="btnBuscar"
 											image="../../Recursos/Imagenes/consultar.ico">
 										</button>
 									</hbox>
 									<label value="Fecha Inicio"></label>
-									<textbox cols="10" id="txtfinicio" value="@{cntrl.competencia.fechaInicio}"></textbox>
+									<textbox readonly="true" cols="10" id="txtfinicio" value="@{cntrl.competencia.fechaInicio}"></textbox>
 									<label value="Fecha Fin"></label>
-									<textbox cols="10" id="txtffin" value="@{cntrl.competencia.fechaFin}"></textbox>
+									<textbox readonly="true" cols="10" id="txtffin" value="@{cntrl.competencia.fechaFin}"></textbox>
 
 								</row>
 
@@ -56,16 +64,17 @@
 								<row>
 									<label value="Categoria"></label>
 									
-									<combobox id="cmbCategoria" 
-									model="@{cntrl.categorias}" readonly="true" cols="18">
-									<comboitem self="@{each=categoria}"
-										value="@{categoria}" label="@{categoria.nombre}">
+									<combobox 
+									model="@{cntrl.categorias}" value="--Seleccione--" id="cmbCategoria" readonly="true">
+									<comboitem
+									self="@{each=categoriaCompetencia}"
+									label="@{categoriaCompetencia.categoria.nombre }" value="@{categoriaCompetencia.categoria}">
 									</comboitem>
-								</combobox>
+									</combobox>
 									<label value="Equipo"></label>
 								
 								<combobox id="cmbEquipo" 
-									model="@{cntrl.equipos}" readonly="true" cols="18">
+									model="@{cntrl.equipos}" readonly="true" cols="18"  value="--Seleccione--">
 									<comboitem self="@{each=equipo}"
 										value="@{equipo}" label="@{equipo.nombre}">
 									</comboitem>
@@ -87,7 +96,8 @@
 				<panel border="normal" title="Jugadores">
 					<panelchildren>
 
-						<listbox width="100%">
+						<listbox id="lsbxJugadores" mold="paging"
+						pageSize="10" style="margin-top:5px" width="100%" model="@{cntrl.jugadoresxRoster}" >
 							<listhead>
 								<listheader label="#" width="10%"
 									align="center">
@@ -106,13 +116,9 @@
 								</listheader>
 
 							</listhead>
-							<listitem>
-								<listcell>1</listcell>
-								<listcell>Nombre Jugador 1</listcell>
-								<listcell>14</listcell>
-								<listcell>Si</listcell>
-								<listcell> <checkbox></checkbox> </listcell>
-								
+							<listitem self="@{each=roster}">
+								<listcell label="@{roster.jugador.cedulaRif}"></listcell>
+																
 							</listitem>
 
 						</listbox>
@@ -127,90 +133,218 @@
 					</panelchildren>
 				</panel>
 				
-				<panel collapsible="true" title="Refuerzos">
+						
+		
+		
+		
+		
+		</tabpanel>
+		<tabpanel> <!-- Refuerzos Lisbeth -->
+		<panel collapsible="true" title="Datos Básicos"  >
 					<panelchildren>
 						<grid>
 							<columns>
-								<column label=""></column>
-								<column label="" width="100px"></column>
-								<column label="" width="80px"></column>
-								<column label=""></column>
+								<column label=""  width="50px"></column>
+								<column label="" width="50px"></column>
+								<column label="" width="30px"></column>
+								<column label=""  width="30px"></column>
+								<column label=""  width="30px"></column>
+								<column label=""  width="30px"></column>
 							</columns>
 							<rows>
-								<row>
-									<label value="Divisa"></label>
-									<combobox cols="12"></combobox>
-									<label value="Equipo"></label>
-									<combobox cols="12"></combobox>
+							
+							       <row style="border-style:none">
+									
+									<label value="Cedula" ></label>
+								    
+							
+									<textbox id="txtCedula"
+										value="@{cntrl.jugadorForaneo.cedula}"
+										
+										cols="20">
+									</textbox>
+									
+									
+									
+									<label   value="Nombre"></label>
+									<textbox id="txtNombre"
+										value="@{cntrl.jugadorForaneo.nombre}"
+										constraint="no empty:El campo 'nombre' es obligatorio"
+										cols="20" >
+									</textbox>
 								</row>
-								<row>
-									<label value="Cedula"></label>
-									<textbox cols="10"></textbox>
-									<label value="Nombre"></label>
+							
+							
+							      <row style="border-style:none">
+							      
+							       
+								     <label value="Equipo"></label>
+								
 									<hbox>
-										<textbox cols="20"></textbox>
-										<button
-											image="/Recursos/Imagenes/agregar.ico">
-										</button>
-									</hbox>
-									<!--   <button label="" image="/Recursos/Imagenes/agregar.ico"></button> -->
-								</row>
+									<textbox id="txtEquipo"   
+									 readonly="true" cols="18"
+                                       constraint="no empty:El campo 'EQUIPO' es obligatorio"
+									 value= "@{cntrl.equipoCompetencia.equipo.nombre}" >
+									</textbox>
+									<button 
+									  id="btnBuscarEquipo"
+									 image="../../Recursos/Imagenes/consultar.ico"
+								     >
+									</button>
+								  </hbox>
+									<label value="Categoria"></label>
+									<textbox id="txtCategoria"  cols="18"  readonly="true"
+								        constraint="no empty:El campo 'CATEGORIA' es obligatorio"
+									 value="@{cntrl.equipoCompetencia.equipo.categoria.nombre}">
+										
+										</textbox>
+									
+									
+									<label value="Divisa"></label>
+									<textbox id="txtDivisa" cols="18"  readonly="true"
+									   constraint="no empty:El campo 'DIVISA' es obligatorio"
+										 value="@{cntrl.equipoCompetencia.equipo.divisa.nombre}"></textbox>
+									</row>
+							
+							
+							   
+							
+				
+								
 							</rows>
 						</grid>
-						<listbox>
-							<listhead>
-								<listheader label="Divisa" sort="auto"
-									width="100px" />
-								<listheader label="Equipo" sort="auto"
-									width="100px" />
-								<listheader label="Numero" sort="auto"
-									width="100px" />
-								<listheader label="Cedula" sort="auto"
-									width="100px" />
-								<listheader label="Nombre" sort="auto" />
+						
+					<panel >
+							<panelchildren>	
+								<grid>
+									<columns>
+										<column width="45%"></column>
+										<column width="12%"
+											align="Center">
+										</column>
+										<column width="45%"></column>
+									</columns>
+									<rows >
+										<row style="border:none" >
+											<panel title="Jugadores Refuerzos Existentes"><panelchildren>
+										<!-- cambiar variable en controlador -->	<listbox
+									  id="lsbxJugadors" 
+									 checkmark="true" multiple="true" 
+									model="@{cntrl.jugadors}"
+									 mold="paging" pageSize="10"
+									 style="margin-top:5px" height="200px" width="">
+												<listhead>
+											
+													<listheader label="Cedula"
+														sort="auto" width="10%">
+													</listheader>
+													<listheader
+														label="Nombre" sort="auto" width="10%"/>
+														
+													<listheader
+														label="Equipo" sort="auto" width="10%"/>
+														<listheader
+														label="Categoria" sort="auto" width="10%"/>
+														<listheader
+														label="Divisa" sort="auto" width="10%"/>
+												</listhead>
+												<listitem self="@{each=jugador}" value="@{jugador }">
+									                <listcell label="@{jugador.cedula }"></listcell> 
+								               
+								                   
+													
+									                <listcell label="@{jugador.nombre }"></listcell> 
+								                  
+								                       <listcell 
+									             label="@{jugador.equipoCompetencia.equipo.nombre}">
+									             </listcell>
+                                                <listcell 
+									             label="@{jugador.equipoCompetencia.equipo.categoria.nombre}">
+									             </listcell>
+									             <listcell 
+									             label="@{jugador.equipoCompetencia.equipo.divisa.nombre}">
+									             </listcell>
+									             </listitem>
+											</listbox>
+                                            </panelchildren></panel>
+											<grid>
+								<rows>
+									<row style="border:none"
+										align="center">
+										<button id="btnAgregar"
+											image="/Recursos/Imagenes/rightarrow_g.png" style="center" />
+									</row>
+									<row style="border:none"
+										align="center">
+										<button onClick=""
+											id="btnQuitar" image="/Recursos/Imagenes/leftarrow_g.png"
+											style="center" />
+									</row>
+								</rows>
 
-							</listhead>
-							<listitem>
-								<listcell label="" />
-								<listcell label="" />
-								<listcell>
-									<combobox width="30%">
-										<comboitem label="" />
-										<comboitem label="" />
-									</combobox>
-								</listcell>
-								<listcell label="" />
-								<listcell label="" />
-							</listitem>
-							<listitem>
-								<listcell label="" />
-								<listcell label="" />
-								<listcell>
-									<combobox width="30%">
-										<comboitem label="" />
-										<comboitem label="" />
-									</combobox>
-								</listcell>
-								<listcell label="" />
-								<listcell label="" />
-							</listitem>
-							<listitem>
-								<listcell label="" />
-								<listcell label="" />
-								<listcell>
-									<combobox width="30%">
-										<comboitem label="" />
-										<comboitem label="" />
-									</combobox>
-								</listcell>
-								<listcell label="" />
-								<listcell label="" />
-							</listitem>
-						</listbox>
+							</grid>
+                                             <panel title="Jugadores Refuerzos Seleccionados"><panelchildren>
+											<listbox 
+												id="lsbxJugadoresSeleccionados"    
+                                                     model="@{cntrl.jugadoresSeleccionados}" multiple="true"
+								                   checkmark="true" mold="paging" pageSize="10"
+								                   style="margin-top:5px" height="200px">
+												<listhead>
+													<listheader label="Cedula"
+														sort="auto" width="10%">
+														
+													</listheader>
+													<listheader
+														label="Nombre" sort="auto" width="10%"/>
+													<listheader
+														label="Equipo" sort="auto" width="10%"/>
+														<listheader
+														label="Categoria" sort="auto" width="10%"/>
+														<listheader
+														label="Divisa" sort="auto" width="10%"/>	
+												</listhead>
+                                               <listitem self="@{each=jugador}" value="@{jugador}">
+
+									             <listcell 
+									             label="@{jugador.cedula}">
+									             </listcell>
+                                                <listcell 
+									             label="@{jugador.nombre}">
+									             </listcell>
+                                                     <listcell 
+									             label="@{jugador.equipoCompetencia.equipo.nombre}">
+									             </listcell>
+                                                <listcell 
+									             label="@{jugador.equipoCompetencia.equipo.categoria.nombre}">
+									             </listcell>
+									             <listcell 
+									             label="@{jugador.equipoCompetencia.equipo.divisa.nombre}">
+									             </listcell>
+								</listitem>
+											</listbox>
+											</panelchildren></panel>
+										</row>
+									</rows>
+								</grid>
+
+							</panelchildren>
+						</panel>
+						
+						
 					</panelchildren>
 
 				</panel>
-				
+		
+		
+		
+		
+		</tabpanel>
+	</tabpanels>
+</tabbox>
+		 
+		 
+		 
+							
 
 
 				<div align="right">

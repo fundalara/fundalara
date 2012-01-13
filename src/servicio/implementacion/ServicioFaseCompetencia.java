@@ -57,4 +57,8 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 		return null;
 	}
 
+	@Override
+	public FaseCompetencia EquiposRegistrados(Competencia competencia) {
+		return daoFaseCompetencia.EquiposRegistrados(competencia);
+}
 }

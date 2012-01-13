@@ -21,5 +21,7 @@ public interface IServicioRoster {
 	public abstract int obtenerUltimoId();
 	
 	public abstract Roster buscarRoster(String ced);
+	
+	public abstract List<Roster> listar(int codigo);
 
 }

@@ -56,5 +56,9 @@ public class ServicioCompetencia implements IServicioCompetencia {
 		return daoCompetencia.listarPorEstatus(estatus);
 	}
 
-	
+	@Override
+	public List<Competencia> listarRegistradasAperturadas() {
+		return daoCompetencia.listarRegistradasAperturadas();
+	}
+
 }

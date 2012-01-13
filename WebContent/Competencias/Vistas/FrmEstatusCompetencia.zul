@@ -3,156 +3,119 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmEstatusCompetencia"?>
 <zk>
 	<div align="center">
-		<window id="frmEstatusCompetencia" title="Estatus de Competencia"
-			width="690px" height="" border="normal" closable="true">
-
-			<grid style="margin-top:10px">
-				<columns>
-					<column label="" align="left" width="35%" />
-					<column label="" width="35%" />
-					<column label="" width="10%" />
-				</columns>
-				<rows>
-					<row style="border-style:none">
-						<hbox>
-							<label value="Filtrar por:"></label>
-							<space></space>
-							<combobox id="cmbFiltro"
-								value="--Seleccione--">
-								<comboitem label="Nombre Competencia" />
-								<comboitem label="Tipo Competencia" />
-							</combobox>
-						</hbox>
-					</row>
-					<row style="border-style:none">
-						<hbox>
-							<space width="80px"></space>
-							<textbox id="txtFiltro"></textbox>
-							<space></space>
-							<button id="btnBuscar" onClick=""
-								image="../../Recursos/Imagenes/consultar.ico" />
-						</hbox>
-					</row>
-				</rows>
-			</grid>
-
-			<div style="margin-top: 10px">
-				<panel>
-					<caption label=" Seleccione una Competencia">
-					</caption>
-					<panelchildren>
-						<listbox id="lsbxAperCompetencia1" mold="paging"
-							pageSize="2">
-							<listhead>
-								<listheader align="left"
-									label="Nombre Competencia" width="33%" />
-								<listheader label="Tipo Competencia"
-									width="33%" align="left" />
-								<listheader label="Estatus Competencia"
-									width="33%" align="left" />
-							</listhead>
-							<listitem>
-								<listcell label="" />
-								<listcell label="" />
-								<listcell label="" />
-
-							</listitem>
-							<listitem>
-								<listcell label="" />
-								<listcell label="" />
-								<listcell label="" />
-							</listitem>
-							<listitem>
-								<listcell label="" />
-								<listcell label="" />
-								<listcell label="" />
-							</listitem>
-						</listbox>
-					</panelchildren>
-				</panel>
-			</div>
-
-			<div style="margin-top:15px">
-				<panel>
-					<caption label="Datos Competencia"></caption>
+		<window id="frmEstatusCompetencia"
+			apply="controlador.competencia.CntrlFrmEstatusCompetencia"
+			title="Estatus de Competencia" width="690px" height=""
+			border="normal" closable="true">
+			<div align="left">
+				<panel height="90%" title="Datos de la Competencia">
 					<panelchildren>
 						<div>
-							<listbox id="lsbxAperCompetencia2"
-								mold="paging" pageSize="2">
-								<listhead>
-									<listheader label="Equipos"
-										width="14%" align="left" />
-									<listheader label="Rosters"
-										width="14%" align="left" />
-									<listheader label="Indicadores"
-										width="14%" align="left" />
-									<listheader label="JP" width="14%"
-										align="left" />
-									<listheader label="JR" width="14%"
-										align="left" />
-									<listheader label="FI" width="14%"
-										align="left" />
-									<listheader label="FC" width="14%"
-										align="left" />
-								</listhead>
-								<listitem>
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-								</listitem>
-								<listitem>
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-								</listitem>
-								<listitem>
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-									<listcell label="" />
-								</listitem>
-							</listbox>
+							<grid width="100%">
+								<columns>
+									<column width="25%" align="left" />
+									<column width="25%" align="left" />
+									<column width="25%" align="left" />
+									<column width="25%" align="left" />
+								</columns>
+								<rows>
+									<row style="border-style:none">
+										<hbox>
+											<label
+												value="Nombre Competencia">
+											</label>
+											<space width="10px"></space>
+											<textbox id="txtNombre"
+												value="@{cntrl.competencia.nombre}" cols="30">
+											</textbox>
+											<space></space>
+											<button id="btnBuscar"
+												onClick="" image="../../Recursos/Imagenes/consultar.ico" />
+										</hbox>
+										<label value="Tipo Competencia" />
+										<textbox
+											value="@{cntrl.competencia.modalidadCompetencia.tipoCompetencia.nombre}"
+											id="txtTipoCompetencia">
+										</textbox>
+									</row>
+
+									<row style="border-style:none"
+										align="left">
+										<hbox>
+											<label value="Modalidad "
+												width="100%" />
+											<space width="20px"></space>
+											<textbox
+												value="@{cntrl.competencia.modalidadCompetencia.nombre}"
+												id="txtModalidad">
+											</textbox>
+										</hbox>
+										<label value="Estatus"></label>
+										<textbox
+											value="@{cntrl.competencia.datoBasicoByCodigoEstadoCompetencia.nombre}"
+											id="txtEstatus">
+										</textbox>
+									</row>
+
+									<row style="border-style:none">
+										<hbox>
+											<label
+												value="Fecha Inicio">
+											</label>
+											<space width="15px"></space>
+											<textbox
+												value="@{cntrl.competencia.fechaInicio}"
+												id="txtfechaInicio">
+											</textbox>
+										</hbox>
+										<label
+											value="Fecha Estimada Fin">
+										</label>
+										<textbox
+											value="@{cntrl.competencia.fechaFin}" id="txtfechaFin">
+										</textbox>
+									</row>
+
+									<row style="border-style:none">
+										<hbox>
+											<label
+												value="Cantidad Equipos" />
+											<textbox 
+												id="txtCantEquipos">
+											</textbox>
+											<space width="15px"></space>
+										</hbox>
+										<label
+											value="Jugadores por Roster" />
+										<textbox id="txtJugRoster" ></textbox>
+									</row>
+									<row style="border-style:none">
+										<hbox>
+											<label
+												value="Juegos Programados" />
+											<textbox 
+												id="txtJuegosProgramados"> 
+											</textbox>
+											<space width="15px"></space>
+										</hbox>
+										<label
+											value="Juegos Registrados" />
+										<textbox id="txtJuegosRegistrados" value=""></textbox>
+									</row>
+								</rows>
+							</grid>
 						</div>
-						<grid>
-							<rows>
-								<row>
-									<label
-										value="JP: Juegos Programados">
-									</label>
-									<label
-										value="JR: Juegos Registrados">
-									</label>
-									<label
-										value="FI: Fecha de Inicio">
-									</label>
-									<label
-										value="FC: Fecha de Culminación">
-									</label>
-								</row>
-							</rows>
-						</grid>
 					</panelchildren>
 				</panel>
-
-
 			</div>
 			<div align="right">
 				<button id="btnAperturar"
-					image="/Recursos/Imagenes/apertura.png" label="Aperturar">
+					image="/Recursos/Imagenes/apertura.png" label="Aperturar"
+					disabled="true">
 				</button>
 				<button id="btnCulminar"
-					image="/Recursos/Imagenes/apertura.png" label="Culminar">
+					image="/Recursos/Imagenes/apertura.png" label="Culminar"
+					disabled="true">
 				</button>
 				<button id="btnCancelar"
 					image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
