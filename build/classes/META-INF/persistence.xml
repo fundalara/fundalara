@@ -118,6 +118,8 @@
 		<class>modelo.DatoAcademico1</class>
 		<class>modelo.DatoAcademico</class>
 		<class>modelo.Curso</class>
+		<class>modelo.ConstanteCategoria</class>
+		<class>modelo.Constante</class>
 		<class>modelo.ConceptoNomina</class>
 		<class>modelo.Competencia</class>
 		<class>modelo.ComisionEquipoPK</class>

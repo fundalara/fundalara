@@ -53,12 +53,10 @@ public class SessionManager implements Filter
     	        	
 					chain.doFilter(request, response);
 					 try
-				        {  
+				        {      	
 						 sessionFactory.getCurrentSession().disconnect();
-						 sessionFactory.getCurrentSession().close();
-						   
-						   System.out.println("session cerrada 1");
-					       
+						 System.out.println("Sesion cerrada");
+						   sessionFactory.getCurrentSession().close();
 				        }
 				        catch (HibernateException ex)
 				        {
@@ -94,6 +92,7 @@ public class SessionManager implements Filter
     {
     	 try
 	        {      	
+    		   sessionFactory.getCurrentSession().disconnect();
 			   sessionFactory.close();
 			   sessionFactory.getCurrentSession().disconnect();
                System.out.println("session cerrada 2");

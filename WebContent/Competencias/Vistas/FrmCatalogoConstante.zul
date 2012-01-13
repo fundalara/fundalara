@@ -1,0 +1,49 @@
+<?page title="CATALOGO DE CONSTANTES" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoC"?>
+<zk>
+	<div align="center">
+		<window 
+			apply="controlador.competencia.CntrlFrmCatalogoConstante"
+			id="frmCatalogoC" title="Constantes existentes" border="normal" mode="modal" closable="true"
+			width="400px">
+			<panel title="Datos de la constante" width="100%">
+				<panelchildren>
+				
+					<div style="margin-top:5px">
+					<label value="Filtro"></label>
+					<textbox></textbox>
+					<button label="Buscar"></button>
+					</div>
+					<listbox id="lsbxConstantes" mold="paging" width="100%"
+							 model="@{cntrl.constantes }" pageSize="10" 
+							 style="margin-top:5px" height="240px">
+						<listhead>
+							<listheader label="Abreviatura" width="15%" align="center"/>
+							<listheader label="Nombre" width="40%"/>
+						</listhead>
+						
+						<listitem self="@{each=constante}">
+							<listcell label="@{constante.abreviatura}"></listcell>
+							<listcell label="@{constante.nombre}"></listcell>
+						</listitem>
+					</listbox>
+
+					<div align="right">
+						<panel>
+							<panelchildren>
+								<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
+										label="Aceptar">
+								</button>
+								<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir">
+								</button>
+							</panelchildren>
+						</panel>						
+					</div>
+				</panelchildren>
+
+			</panel>
+
+		</window>
+	</div>
+</zk>

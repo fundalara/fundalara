@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 11/01/2012 03:50:04 PM by Hibernate Tools 3.4.0.CR1
+// Generated 13/01/2012 12:53:26 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,10 +32,9 @@ public class PlanTemporada implements java.io.Serializable {
 	public PlanTemporada() {
 	}
 
-	public PlanTemporada(int codigoPlanTemporada, Categoria categoria,
+	public PlanTemporada(int codigoPlanTemporada,
 			LapsoDeportivo lapsoDeportivo, char estatus) {
 		this.codigoPlanTemporada = codigoPlanTemporada;
-		this.categoria = categoria;
 		this.lapsoDeportivo = lapsoDeportivo;
 		this.estatus = estatus;
 	}
@@ -64,7 +63,7 @@ public class PlanTemporada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_categoria", nullable = false)
+	@JoinColumn(name = "codigo_categoria")
 	public Categoria getCategoria() {
 		return this.categoria;
 	}

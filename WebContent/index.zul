@@ -125,8 +125,8 @@
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Reglas"
-															onClick='enlace("/Competencias/Vistas/FrmRegla.zul")' />
+															label="Constantes"
+															onClick='enlace("/Competencias/Vistas/FrmConstante.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
