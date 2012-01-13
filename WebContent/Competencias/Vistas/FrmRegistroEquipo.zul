@@ -4,7 +4,7 @@
 
 <zk>
 
-	<div align="center">
+<!-- 	<div align="center"> -->
 		<window title="Equipos" id="frmRegistroEquipo" border="normal"
 			width="690px" height="auto" onClose="VerRoster()" closable="true"
 			apply="controlador.competencia.CntrlFrmRegistroEquipo">
@@ -328,5 +328,5 @@
 ]]>
 		</zscript>
 		</window>
-	</div>
+<!-- 	</div> -->
 </zk>

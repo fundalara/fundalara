@@ -1,7 +1,7 @@
 <?page title="Auto Generated index.zul"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmLiga" ?>
-<div align="center">
+<!-- <div align="center"> -->
 	<window id="frmLiga" apply="controlador.competencia.CntrlFrmLiga"
 		title="Registro de Ligas" border="normal" width="550px"
 		closable="true">
@@ -148,4 +148,4 @@
 		</div>
 
 	</window>
-</div>
+<!-- </div> -->

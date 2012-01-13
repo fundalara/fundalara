@@ -1,11 +1,8 @@
 <?page id="frmMenu" title="menu.zul"?>
 <zk>
 	<zscript><![CDATA[
-	Window win = new Window();
 	public void enlace(String cad) {
-		win = new Window();
-		win = (Window)execution.createComponents(cad,null,null);
-			cuerpoPrincipal.appendChild(win);
+		cuerpo.setSrc(cad);
 	}
 	
 	public void agenda(){
