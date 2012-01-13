@@ -21,8 +21,6 @@ public interface IServicioDatoBasico {
 	
 	public abstract DatoBasico buscarPorCodigo(String td);
 	
-
-	
 	public abstract List<DatoBasico> listarParroquias();
 	
 	public abstract DatoBasico buscarPorCodigo(Integer i);
@@ -34,6 +32,8 @@ public interface IServicioDatoBasico {
 	public abstract List<DatoBasico> listarMunicipiosPorEstados(DatoBasico db );
 	
 	public abstract List<DatoBasico> listarParroquiasPorMunicipios(DatoBasico db );
+	
+	public abstract List<DatoBasico> listarPosiciones();
 	
 	public abstract List<DatoBasico> buscar(TipoDatoBasico tipoDato);
 	

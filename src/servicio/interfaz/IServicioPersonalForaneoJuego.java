@@ -1,6 +1,8 @@
 package servicio.interfaz;
 
 import java.util.List;
+
+import modelo.PersonalForaneo;
 import modelo.PersonalForaneoJuego;
 
 public interface IServicioPersonalForaneoJuego {
@@ -12,5 +14,7 @@ public interface IServicioPersonalForaneoJuego {
 	public abstract  List<PersonalForaneoJuego> listar ();
 	
 	public abstract List<PersonalForaneoJuego> listarActivos();
+	
+	
 
 }

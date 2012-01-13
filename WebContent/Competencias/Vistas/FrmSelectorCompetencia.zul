@@ -20,7 +20,7 @@
 							<listheader label="Nombre" align="center" width="auto"/>
 							<listheader label="Fecha de Inicio" align="center" width="auto"/>
 							<listheader label="Fecha de Fin" align="center" width="auto"/>		
-							<listheader label="Cant.Equipos" align="center" width="13%"/>	
+							<listheader label="Cant.Jugadores" align="center" width="13%"/>	
 							<listheader label="Cant.Fases" align="center" width="12%"/>
 							<listheader label="Monto Inscripcion" align="center" width="17%"/>
 												
@@ -32,7 +32,7 @@
 							<listcell label="@{competencia.nombre}"></listcell>
 							<listcell label="@{competencia.fechaInicio}"></listcell>
 							<listcell label="@{competencia.fechaFin}"></listcell>
-							<listcell label="@{competencia.cantidadEquipo}"></listcell>
+							<listcell label="@{competencia.cantidadJugador}"></listcell>
 							<listcell label="@{competencia.cantidadFase}"></listcell>
 							<listcell label="@{competencia.montoInscripcion}"></listcell>
 						</listitem>

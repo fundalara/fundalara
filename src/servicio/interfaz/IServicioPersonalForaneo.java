@@ -12,5 +12,7 @@ public interface IServicioPersonalForaneo {
 	public abstract  List<PersonalForaneo> listar ();
 	
 	public abstract List<PersonalForaneo> listarActivos();
+	
+	public abstract List<PersonalForaneo> listarUmpires();
 
 }

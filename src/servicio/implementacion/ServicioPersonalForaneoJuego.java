@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonalForaneoJuego;
 
+import modelo.PersonalForaneo;
 import modelo.PersonalForaneoJuego;
 import servicio.interfaz.IServicioPersonalForaneoJuego;
 
@@ -44,5 +45,7 @@ public class ServicioPersonalForaneoJuego implements
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

@@ -1,15 +1,17 @@
 package controlador.general;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-
-
+import modelo.Categoria;
+import modelo.CategoriaCompetencia;
 import modelo.Competencia;
+import modelo.EquipoJuego;
 import modelo.Juego;
 
 import org.zkoss.calendar.Calendars;
@@ -35,37 +37,36 @@ import org.zkoss.zul.Timer;
 import org.zkoss.zul.Window;
 
 import servicio.implementacion.ServicioCompetencia;
+import servicio.implementacion.ServicioEquipoJuego;
 
 import comun.EstadoCompetencia;
 
 public class Agenda extends GenericForwardComposer {
-	
-	
+
 	Popup updateMsg;
 	Label popupLabel, rangoCalendario;
 	Caption titulo;
 	Timer timer;
 	Button hoy;
-	
+
 	Calendars calendars;
 	Span FDOW;
 	String form;
 	Listbox lsbxFiltro;
 	Listitem item;
-	
-	//Competencias
+
+	// Competencias
 	Component formulario;
 	Competencia competencia;
 	Button btnVer;
 	ServicioCompetencia servicioCompetencia;
+	ServicioEquipoJuego servicioEquipoJuego;
 
-	
-	
 	/*
 	 * 0->Evento no registrado, 1->Evento pendiente, 2->Evento cancelado,
 	 * 3->Evento Finalizado
 	 */
-	String[] color = { "#EE5C42", "#cdbe70", "#FDD017", "#a2cd5a" };
+	String[] color = { "#EE5C42", "#32CD32", "#FDD017", "#FFA500" };
 
 	@Override
 	public void doAfterCompose(Component component) throws Exception {
@@ -74,185 +75,238 @@ public class Agenda extends GenericForwardComposer {
 		actualizarRangoCalendario();
 		lsbxFiltro.setSelectedIndex(0);
 	
+
 	}
 
-	public void onSelect$lsbxFiltro(){
+	public void onSelect$lsbxFiltro() {
 
+		switch (lsbxFiltro.getSelectedIndex()) {
 
-		switch (lsbxFiltro.getSelectedIndex()){
-		
-		case 1:{ //Entrenamiento
+		case 1: { // Entrenamiento
 			calendars.setReadonly(false);
-			form = "Entrenamiento/Vistas/Auxiliar_Agenda.zul";	
+			btnVer.setVisible(false);
+			form = "Entrenamiento/Vistas/Auxiliar_Agenda.zul";
 			break;
 		}
-		case 2:{ //Competencia
-            //Div divMenu = (Div) formulario.getPage().getDesktop().getPage("frmMenu").getFellow("divMenu");
-            //divMenu.setVisible(false);
-            //Window w = (Window) formulario;
-            //w.setWidth("980px");
-			calendars.setMold("month");
+		case 2: { // Competencia
+		    calendars.setMold("default");
+			calendars.setDays(7);
 			calendars.setReadonly(false);
 			btnVer.setVisible(true);
 			break;
-		}	
-		case 3:{//mantenimiento
+		}
+		case 3: {// mantenimiento
 			calendars.setReadonly(false);
 			btnVer.setVisible(false);
 			calendars.setMold("default");
 			break;
 		}
-		case 4:{//Actividad Complementaria
+		case 4: {// Actividad Complementaria
 			calendars.setReadonly(false);
 			btnVer.setVisible(false);
 			calendars.setMold("default");
 			break;
 		}
+		
+		default:
+			btnVer.setVisible(false);
+			break;
 		}
 	}
-	
-	public void onClick$btnVer(){
-		
-		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmSelectorCompetencia.zul",null,null);        
-        catalogo.setVariable("formulario",formulario,false);
+
+	public void onClick$btnVer() {
+
+		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmSelectorCompetencia.zul", null, null);
+		catalogo.setVariable("formulario", formulario, false);
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				  competencia = (Competencia) formulario.getVariable("competencia",false);		
-				  cargarJuegos();
+				competencia = (Competencia) formulario.getVariable("competencia", false);
+				cargarJuegos();
 			}
 		});
 	}
-	
-	
-	public void cargarJuegos(){
+
+	public void cargarJuegos() {
 		Set<Juego> juegos = competencia.getJuegos();
 		EventosCalendario eventosCalendario = new EventosCalendario();
-		
-		for (Iterator i = juegos.iterator(); i.hasNext();){
-			Juego j = (Juego) i.next();			
-	        
-			Calendar cal1 = Calendar.getInstance();
-			Calendar cal2 = Calendar.getInstance();
-			cal1.setTime(j.getFecha());
-			cal2.setTime(j.getFecha());
-			cal1.set(Calendar.HOUR, 1);
-			cal2.set(Calendar.HOUR, 3);
-			System.out.println(cal1.getTime());
-			System.out.println(cal2.getTime());
+		System.out.println(competencia.getCodigoCompetencia());
+		System.out.println(juegos.size());
+		for (Iterator i = juegos.iterator(); i.hasNext();) {
+			Juego j = (Juego) i.next();
+			Date fecha = j.getFecha();
+			Date hora = j.getHoraInicio();
+			List<EquipoJuego> equipos = ConvertirConjuntoALista(j.getEquipoJuegos());
+			System.out.println(equipos.size());
+			//Categoria cat = equipos.get(0).getEquipoCompetencia().getEquipo().getCategoria();
+
+		    //Date duracion = obtenerDuracion(j,cat);	 
+      
+            //System.out.println("Equipo 1: "+equipos.get(0).getEquipoCompetencia().getEquipo().getCodigoEquipo());
+            //System.out.println("Equipo 2: "+equipos.get(1).getEquipoCompetencia().getEquipo().getCodigoEquipo());
+		 	Date fechaI = new Date(fecha.getYear(), fecha.getMonth(),
+					fecha.getDate(), hora.getHours(), hora.getMinutes());
 			
-			SimpleCalendarEvent e = crearEvento(cal1.getTime(),cal2.getTime(),"f","Fundalara A vs Delfines",color[0],color[0]);
+		 	Date fechaF = new Date(fecha.getYear(), fecha.getMonth(),
+					fecha.getDate(), hora.getHours() + 2, hora.getMinutes());
+		 	System.out.println(fechaI);
+		 	System.out.println(fechaF);
+		 	String equipo1 = equipos.get(0).getEquipoCompetencia().getEquipo().getNombre();
+		    String divisa1 = equipos.get(0).getEquipoCompetencia().getEquipo().getDivisa().getNombre();
+		    String equipo2 = equipos.get(1).getEquipoCompetencia().getEquipo().getNombre();
+		    String divisa2 = equipos.get(1).getEquipoCompetencia().getEquipo().getDivisa().getNombre();
+		    String cadena = equipo1 + "(" + divisa1 + ")" + " vs " + equipo2 + "(" + divisa2 + ")";
+		    System.out.println(cadena);
+			SimpleCalendarEvent e = crearEvento(fechaI, fechaF,cadena, obtenerColor(j),obtenerColor(j), j);
 			eventosCalendario.cargarEvento(e);
 		}
 		calendars.setModel(eventosCalendario.getModel());
 	}
-
 	
-	public SimpleCalendarEvent crearEvento(Date fi,Date ff,String titulo,String contenido,String colorFondo,String colorEncabezado){
-		SimpleCalendarEvent ce = new SimpleCalendarEvent();
-		ce.setBeginDate(fi);
-		ce.setEndDate(ff);
-		ce.setTitle(titulo);
-		ce.setContent(contenido);
-		ce.setContentColor(colorFondo);
-		ce.setHeaderColor(colorEncabezado);
-		return ce;
+	public String obtenerColor(Juego j){
+		 if (j.getDatoBasico().getNombre().equals("POR REALIZAR")){
+			 //System.out.println("ejecutada");
+			 return color[1];
+		 }else if(j.getDatoBasico().getNombre().equals("CULMINADO")){
+			 //System.out.println("culminada");
+			 return color[3];
+		 }else{
+			 //System.out.println("suspendido");
+			 return color[0];
+		 }
 	}
-	 
-	/*Ejemplo como crear un evento*/
-	public void onCreate$wndCalendario() {
 	
+	public Date obtenerDuracion(Juego j,Categoria c){
+	
+		List<CategoriaCompetencia> ccs  = ConvertirConjuntoALista(j.getCompetencia().getCategoriaCompetencias());
+		for (Iterator i = ccs.iterator();i.hasNext();){
+			CategoriaCompetencia cc = (CategoriaCompetencia) i.next();
+			if (cc.getCategoria().getNombre().equals(c.getNombre()))
+				return cc.getDuracionHora();
+		}
+		return null;
+	}
+	
+	public List ConvertirConjuntoALista(Set conjunto) {
+		List l = new ArrayList();
+		for (Iterator i = conjunto.iterator(); i.hasNext();) {
+			l.add(i.next());
+		}
+		return l;
+	}
+
+	public SimpleCalendarEvent crearEvento(Date fi, Date ff, 
+			String contenido, String colorFondo, String colorEncabezado,
+			Object valor) {
+		EventoSimpleCalendario esc = new EventoSimpleCalendario();
+		esc.setBeginDate(fi);
+		esc.setEndDate(ff);
+	
+		esc.setContent(contenido);
+		esc.setContentColor(colorFondo);
+		esc.setHeaderColor(colorEncabezado);
+		esc.setValue(valor);
+		return esc;
+	}
+
+	/* Ejemplo como crear un evento */
+	public void onCreate$wndCalendario() {
+
 //		SimpleCalendarEvent ce = new SimpleCalendarEvent();
-//		Date di = new Date(12, 01, 01, 10, 0);
-//		Date df = new Date(12, 01, 01, 13, 0);
+//		Date di = new Date(112, 0, 9, 0, 0);
+//
+//		Date df = new Date(112, 0, 9, 1, 0);
 //		ce.setBeginDate(di);
 //		ce.setEndDate(df);
 //		ce.setContent("Leyner");
 //		ce.setTitle("dasdsa dsadsad adsdasd asdsada saddasdas");
 //		ce.setContentColor(color[0]);
 //		ce.setHeaderColor(color[0]);
-//	
-//		
+//
 //		EventosCalendario calendarEvents = new EventosCalendario();
 //		calendarEvents.cargarEvento(ce);
 //		calendars.setModel(calendarEvents.getModel());
+
 	}
 
-	public void onEventCreate$calendars(CalendarsEvent event){
-		
+	public void onEventCreate$calendars(CalendarsEvent event) {
+
 	}
-	
-	//Se invoca cuando se da click en el calendario para crear un evento nuevo
+
+	// Se invoca cuando se da click en el calendario para crear un evento nuevo
 	public void onEventCreate$calendars(ForwardEvent event) {
-		
-		switch (lsbxFiltro.getSelectedIndex()){
-		
-		case 1:{ //Entrenamiento	
+
+		switch (lsbxFiltro.getSelectedIndex()) {
+
+		case 1: { // Entrenamiento
 			break;
 		}
-		case 2:{ //Competencia	
-			break;
-		}	
-		case 3:{//Mantenimiento			
-			Component c = Executions.createComponents("Logistica/Vistas/frmPlanificarMantenimiento.zul", null, null);
+		case 2: { // Competencia
 			break;
 		}
-		case 4:{//Actividad Complementaria
-			Component c = Executions.createComponents("Logistica/Vistas/frmPlanificarActividad.zul", null, null);
+		case 3: {// Mantenimiento
+			Component c = Executions.createComponents(
+					"Logistica/Vistas/frmPlanificarMantenimiento.zul", null,
+					null);
+			break;
+		}
+		case 4: {// Actividad Complementaria
+			Component c = Executions.createComponents(
+					"Logistica/Vistas/frmPlanificarActividad.zul", null, null);
 			break;
 		}
 		}
 	}
-	
-	public void onEventEdit$calendars(){
-//		Window win = (Window) execution.createComponents(
-//				form, null, null);
-//		win.doHighlighted();
+
+	public void onEventEdit$calendars(CalendarsEvent e) {
+		EventoSimpleCalendario esc = (EventoSimpleCalendario) e.getCalendarEvent();		
+		Window w = (Window) Executions.createComponents("/Competencias/Vistas/FrmAccionJuego.zul", null, null);
+        w.setPosition("center");
+        Juego j = (Juego) esc.getValue();
+        w.setVariable("juego",j,false);
 	}
-	
-	/* 
-	 * Programacion del toolbar del calendario 
-	 * 
+
+	/*
+	 * Programacion del toolbar del calendario
 	 */
-	public void cambiarFormatoCalendario(String vista){
+	public void cambiarFormatoCalendario(String vista) {
 		if (vista.compareTo("Semana") == 0) {
 			calendars.setMold("default");
 			calendars.setDays(7);
-		} else if (vista.compareTo("Dia") == 0){
+		} else if (vista.compareTo("Dia") == 0) {
 			calendars.setMold("default");
 			calendars.setDays(1);
-		} else{
+		} else {
 			calendars.setMold("month");
 		}
-		/*Esto todavia no se que es. Sino sirve, quitarse*/
+		/* Esto todavia no se que es. Sino sirve, quitarse */
 		FDOW.setVisible("month".equals(calendars.getMold())
 				|| calendars.getDays() == 7);
 	}
-	
+
 	public void onClickTabs(ForwardEvent event) {
 		String view = String.valueOf(event.getData());
 		cambiarFormatoCalendario(view);
 		actualizarRangoCalendario();
 	}
-	
-	public void actualizarRangoCalendario(){
+
+	public void actualizarRangoCalendario() {
 		Date fechaIni = calendars.getBeginDate();
-		Date fechaFin = calendars.getEndDate();		
-		SimpleDateFormat formatoFecha = new SimpleDateFormat(
-				"MMMMM/yyyy", Locales.getCurrent());
-		formatoFecha.setTimeZone(calendars.getDefaultTimeZone());		 
-		rangoCalendario.setValue(formatoFecha.format(fechaIni)+" - "+formatoFecha.format(fechaFin));
+		Date fechaFin = calendars.getEndDate();
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("MMMMM/yyyy",
+				Locales.getCurrent());
+		formatoFecha.setTimeZone(calendars.getDefaultTimeZone());
+		rangoCalendario.setValue(formatoFecha.format(fechaIni) + " - "
+				+ formatoFecha.format(fechaFin));
 	}
 
-	public void onClick$hoy(){
+	public void onClick$hoy() {
 		calendars.setCurrentDate(Calendar.getInstance(
 				calendars.getDefaultTimeZone()).getTime());
 		actualizarRangoCalendario();
 	}
-	
-	
-	
-	public void onCambiarMesSemana(ForwardEvent event){
+
+	public void onCambiarMesSemana(ForwardEvent event) {
 		if (event.getData().equals("arrow-left"))
 			calendars.previousPage();
 		else

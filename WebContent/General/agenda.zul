@@ -8,9 +8,10 @@
 <?component name="divtab" macro-uri="Calendario/divtab.zul" inline="true"?>
 <?component name="divarrow" macro-uri="Calendario/divarrow.zul" inline="true"?>
 <?page title="Calendario" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <zk>
 	<window border="none" mode="embedded" 
-		closable="true" width="980px" height="600px"
+		width="980px" height="600px"
 		apply="controlador.general.Agenda" id="wndCalendario">
 		<caption id="titulo" label="Calendario" >
 			<label sclass="labels" id="rangoCalendario"></label>

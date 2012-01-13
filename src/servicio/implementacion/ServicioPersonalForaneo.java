@@ -43,5 +43,10 @@ public class ServicioPersonalForaneo implements IServicioPersonalForaneo {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public List<PersonalForaneo> listarUmpires() {
+		return daoPersonalForaneo.listarUmpires();
+	}
 
 }

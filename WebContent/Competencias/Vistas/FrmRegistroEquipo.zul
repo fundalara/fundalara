@@ -4,9 +4,9 @@
 
 <zk>
 
-	<!-- 	<div align="center"> -->
+		<div align="center">
 	<window title="Equipos" id="frmRegistroEquipo" border="normal"
-		width="690px" height="auto" onClose="VerRoster()" closable="true"
+		width="690px" height="auto" closable="true"
 		apply="controlador.competencia.CntrlFrmRegistroEquipo">
 		<panel border="normal">
 			<caption label="Datos de la Competencia"></caption>
@@ -272,29 +272,29 @@
 													align="center">
 													<button onClick=""
 														image="/Recursos/Imagenes/rightarrow_g.png"
-														style="center" />
+														style="center" id="btnAgregarForaneo"/>
 												</row>
 												<row style="border:none"
 													align="center">
 													<button onClick=""
-														image="/Recursos/Imagenes/leftarrow_g.png" style="center" />
+														image="/Recursos/Imagenes/leftarrow_g.png" style="center" id="btnQuitarForaneo"/>
 												</row>
 
 											</rows>
 										</grid>
 										<listbox
 											id="lsbxEquiposForaneosSeleccionados" style="margin-top:5px"
-											height="200px" model="@{cntrl.equipocompetencia}"
+											height="200px" model="@{cntrl.equipocompetenciaforaneo}"
 											multiple="true" checkmark="true" mold="paging">
 											<listhead>
 												<listheader
 													label="Equipos Foraneos" sort="auto" />
 											</listhead>
 											<listitem
-												self="@{each=equipocompetenci}"
-												value="@{equipocompetenci}">
+												self="@{each=equipocompetenciaforane}"
+												value="@{equipocompetenciaforane}">
 												<listcell
-													label="@{equipocompetenci.equipo.nombre}" />
+													label="@{equipocompetenciaforane.equipo.nombre}" />
 											</listitem>
 										</listbox>
 
@@ -312,31 +312,21 @@
 				<panelchildren style="margin-top:5px ">
 					<div align="right">
 						<button id="btnGuardar"
-							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+							image="../../Recursos/Imagenes/guardar.ico" label="Guardar" >
 						</button>
 						<button
-							image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
+							image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar" id="btnEliminar">
 						</button>
 						<button
-							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar" id="btnCancelar">
 						</button>
 						<button
-							image="../../Recursos/Imagenes/salir.png" label="Salir">
+							image="../../Recursos/Imagenes/salir.png" label="Salir" id="btnSalir">
 						</button>
 					</div>
 				</panelchildren>
 			</panel>
 		</div>
-
-		<include id="Rost"></include>
-		<zscript>
-		<![CDATA[
-	public void Enlace(String cad) {
-		Rost.setSrc(cad);
-		PrincipalEquipos.setVisible(false);
-	}
-]]>
-		</zscript>
 	</window>
-	<!-- 	</div> -->
+		</div>
 </zk>

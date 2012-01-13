@@ -5,9 +5,11 @@ import java.util.List;
 import dao.general.DaoRosterCompetencia;
 
 import modelo.Constante;
+import modelo.RosterCompetencia;
 import servicio.interfaz.IServicioConstante;
+import servicio.interfaz.IServicioRosterCompetencia;
 
-public class ServicioRosterCompetencia implements IServicioConstante {
+public class ServicioRosterCompetencia implements IServicioRosterCompetencia {
 	
 	DaoRosterCompetencia daoRosterCompetencia; 
 
@@ -20,25 +22,25 @@ public class ServicioRosterCompetencia implements IServicioConstante {
 	}
 
 	@Override
-	public void eliminar(Constante c) {
+	public void eliminar(RosterCompetencia c) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void agregar(Constante c) {
+	public void agregar(RosterCompetencia c) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<Constante> listar() {
+	public List<RosterCompetencia> listar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Constante> listarActivos() {
+	public List<RosterCompetencia> listarActivos() {
 		// TODO Auto-generated method stub
 		return null;
 	}

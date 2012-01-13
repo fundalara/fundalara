@@ -29,6 +29,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.api.Comboitem;
@@ -59,7 +60,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Competencia competencia;
 	AnnotateDataBinder binder;
 	List<Equipo> equipos, equiposforaneos;
-	List<EquipoCompetencia> equipocompetencia;
+	List<EquipoCompetencia> equipocompetencia,equipocompetenciaforaneo;
+	Window frmRegistroEquipo;
 
 	public List<EquipoCompetencia> getEquipocompetencia() {
 		return equipocompetencia;
@@ -78,7 +80,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Listbox lsbxEquiposLocales;
 	Listbox lsbxEquiposSeleccionadosLocales;
 	Listbox lsbxEquiposForaneos,lsbxEquiposForaneosSeleccionados;
-	Textbox Nombre;
+	Textbox Nombre,txtNombreCompetencia,txtTipoCompetencia,txtModalidadCompetencia;
 
 	// Este metodo se llama al cargar la ventana
 	public void doAfterCompose(Component c) throws Exception {
@@ -260,7 +262,48 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	public void onClick$btnGuardar() {
 		binder.loadAll();
 	}
-
+	public void limpiar() {
+		cmbCategorias.setValue("--Seleccione--");
+		cmbCategoriasForaneas.setValue("--Seleccione--");
+		txtNombreCompetencia.setValue("");
+		txtTipoCompetencia.setValue("");
+		txtModalidadCompetencia.setValue("");
+		/*txtFechaInicioCompetencia.setValue("00/00/00");
+		txtFechaFin.setValue("");*/
+		
+		
+	}
+	
+	public void onClick$btnCancelar() {
+		limpiar();
+	}
+	
+	public void onClick$btnSalir() throws InterruptedException {
+		if (equipocompetencia!= null) {
+			int result = Messagebox
+					.show("Existen elementos en el formulario ¿Realmente desea salir?",
+							"Question", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION);
+			switch (result) {
+			case Messagebox.OK:
+				onClick$btnCancelar();
+				binder.loadAll();
+				frmRegistroEquipo.detach();
+				break;
+			case Messagebox.CANCEL:
+				break;
+			default:
+				break;
+			}
+		} else {
+			onClick$btnCancelar();
+			binder.loadAll();
+			frmRegistroEquipo.detach();
+		}
+		
+	}
+	
+	
 	// // llenar el objeto para grabar
 	// ///////////////////////////// Getter and Setter
 	// ///////////////////////////

@@ -127,4 +127,9 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		return daoDatoBasico.listarOrganizacionCompetencia();		
 	}
 	
+	@Override
+	public List<DatoBasico> listarPosiciones() {
+		return daoDatoBasico.listarPosiciones();
+	}
+	
 }

@@ -1,0 +1,16 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Tarea a Realizar" border="normal" mode="popup" closable="true" apply="controlador.competencia.CntrlFrmAccionJuego"
+		width="250px" id="FrmAccionJuego"> 
+		<div>
+			<label value="Tarea"></label>
+			<combobox id="cmbTarea" value="-- Seleccione --" readonly="true" >
+			</combobox>
+		</div>
+		<space></space>
+		<div align="right">
+		    <button id="btnAceptar" label="Aceptar"></button>
+			<button id="btnCancelar" label="Cancelar"></button>
+		</div>
+	</window>
+</zk>

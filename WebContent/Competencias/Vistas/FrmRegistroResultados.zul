@@ -1,139 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?page title="Registro de Resultados"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmRegistroResultados" ?>
 <zk>
-	<zscript>
-			<![CDATA[
-	void resultados() {
-		Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",
-				null, null);
-	}
-]]>
-         </zscript>
-
-	<div id="Dregresult" align="center">
-		<window title="REGISTRO DE RESULTADOS" border="normal"
-			id="FrmRresultados" closable="true" width="690px">
+	<window title="REGISTRO DE RESULTADOS" border="normal" mode="popup"
+		id="FrmRegistroResultados" closable="true" width="740px" apply="controlador.competencia.CntrlFrmRegistroResultados">
 
 
-			<panel border="normal">
-				<caption label="Datos de la Competencia" />
-				<panelchildren>
-					<grid width="690px" style="border-style:none">
-						<columns>
-							<column width="30px" />
-							<column width="80px" />
-							<column width="50px" />
-							<column width="50px" />
-							<column width="50px" />
-
-
-						</columns>
-						<rows>
-							<row style="border-style:none">
-								<hbox>
-									<label value="Nombre"
-										style="margin-top:5px" />
-
-									<textbox cols="20" disabled="true"
-										style="margin-left:30px;margin-top:5px" />
-									<button
-										image="../../Recursos/Imagenes/consultar.ico"
-										style="margin-left:5px" />
-								</hbox>
-								<hbox>
-									<label value="Tipo"></label>
-									<textbox cols="15" disabled="true"
-										style="margin-left:37px">
-									</textbox>
-								</hbox>
-								<label value="Modalidad" style="margin-left:5px"></label>
-								<textbox cols="18" disabled="true"></textbox>
-
-							</row>
-							<row style="border-style:none">
-
-								<hbox>
-									<label value="Fecha Inicio" />
-									<datebox cols="10" style="margin-left:3px"
-										disabled="true">
-									</datebox>
-								</hbox>
-								<hbox>
-									<label value="Fecha Fin" />
-									<datebox cols="10" disabled="true"
-										style="margin-left:3px">
-									</datebox>
-								</hbox>
-
-							</row>
-
-						</rows>
-					</grid>
-				</panelchildren>
-			</panel>
-			<panel>
-				<caption label="Datos Basicos del Juego" />
-
-				<panelchildren>
-
-					<grid>
-						<columns>
-							<column label="" width="60px" />
-							<column label="" width="60px" />
-							<column label="" width="60px" />
-							<column label="" width="60px" />
-							<column label="" width="60px" />
-							<column label="" width="60px" />
-
-						</columns>
-						<rows>
-							<row style="border-style:none">
-								<label value="Juego" />
-
-								<hbox>
-									<textbox disabled="true" cols="25"
-										style="margin-top:5px" />
-									<button style="margin-left:5px"
-										image="../../Recursos/Imagenes/consultar.ico" />
-
-								</hbox>
-								<label value="Fecha" />
-
-								<datebox disabled="true" cols="16"></datebox>
-								<label value="Hora" />
-
-								<textbox disabled="true" cols="10"></textbox>
-							</row>
-							<row style="border-style:none">
-								<label value="Campo" />
-
-								<textbox disabled="true" cols="30" />
-								<label value="Innings" />
-
-								<spinner cols="3" value="0" />
-								<label value="Tiempo" />
-
-								<textbox cols="11" />
-							</row>
-							<row style="border-style:none">
-
-
-								<label value="Anotador"></label>
-
-								<textbox cols="30" />
-
-
-
-
-								<label value="Anotador Oficial"></label>
+		<panel border="normal">
+			<caption label="Datos de la Competencia" />
+			<panelchildren>
+				<grid width="690px" style="border-style:none">
+					<columns>
+						<column width="15px"></column>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+					</columns>
+					<rows>
+						<row style="border-style:none">
+							<label value="Nombre" />
+							<textbox cols="20" value="@{cntrl.juego.competencia.nombre}" readonly="true" style="text-color:black" />
+							<label value="Tipo"></label>
+							<textbox cols="13" readonly="true" style="text-color:black" value="@{cntrl.juego.competencia.modalidadCompetencia.tipoCompetencia.nombre}">
+							</textbox>
+							<label value="Modalidad" 
+								style="margin-left:5px">
+							</label>
+							<textbox cols="18" readonly="true" style="text-color:black" value="@{cntrl.juego.competencia.modalidadCompetencia.nombre}"></textbox>
+						</row>
+						<row style="border-style:none">
+							<label value="Fecha Inicio" />
+							<datebox cols="10" readonly="true" style="text-color:black" value="@{cntrl.juego.competencia.fechaInicio}">
+							</datebox>
+							<label value="Fecha Fin" />
+							<datebox cols="10" readonly="true" style="text-color:black" value="@{cntrl.juego.competencia.fechaFin}">
+							</datebox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel>
+			<caption label="Datos Basicos del Juego" />
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="" />
+						<column label="" />
+						<column label="" width="30px" />
+						<column label="" />
+						<column label="" />
+						<column label="" />
+						<column label="" />
+					</columns>
+					<rows>
+						<row style="border-style:none">
+							<label value="Juego" />
+							<textbox id ="txtJuego" cols="30" readonly="true" style="text-color:black" />
+							<label value="Fecha" />
+							<datebox readonly="true" style="text-color:black" value="@{cntrl.juego.fecha}" cols="10"></datebox>
+							<label value="Hora Inicio" />
+							<timebox readonly="true" style="text-color:black" cols="8" value="@{cntrl.juego.horaInicio}"></timebox>
+						</row>
+						<row style="border-style:none">
+							<label value="Campo" />
+							<textbox readonly="true" style="text-color:black" cols="30" value="@{cntrl.juego.estadio.nombre}" />
+							<label value="Innings" />
+							<spinner id="spnrInnigs" readonly="true" style="text-color:black"  cols="3" value="0" />
+							<label value="Hora Fin" />
+							<timebox style="text-color:black" cols="8"></timebox>
+						</row>
+						<row style="border-style:none">
+							<label value="Anotador"></label>
+							<div>
 								<textbox cols="20" />
-							</row>
-						</rows>
-					</grid>
+								<label value="(Oficial)" ></label>
+							</div>
+							<label value="Anotador"></label>
+
+							<textbox cols="20" />
+							<label value="(Divisa)"></label>
 
 
-				</panelchildren>
-			</panel>
+						</row>
+
+
+					</rows>
+				</grid>
+
+
+			</panelchildren>
+		</panel>
 			<panel>
 				<caption label="Umpires"></caption>
 				<panelchildren style="margin-top:10px">
@@ -141,60 +101,40 @@
 
 
 						<label value="Umpire"></label>
-						<combobox cols="20">
-							<comboitem>Gabrielena Ponce</comboitem>
-							<comboitem>Eduardo Quintero</comboitem>
-							<comboitem>Anibal Moreno</comboitem>
-							<comboitem>Lilianny Rodriguez</comboitem>
-						</combobox>
+						<combobox id="cmbUmpires" model="@{cntrl.umpires}" readonly="true" cols="18" value="--Seleccione--">
+							<comboitem self="@{each=umpire}"
+								value="@{umpire}" label="@{umpire.nombre}">
+									</comboitem>
+								</combobox>
 						<label value="Posicion"></label>
-						<combobox cols="20">
-
-							<comboitem>home</comboitem>
-							<comboitem>1B</comboitem>
-							<comboitem>2B</comboitem>
-							<comboitem>3B</comboitem>
+						<combobox id="cmbPosiciones" model="@{cntrl.posiciones}" readonly="true" cols="18" value="--Seleccione--">
+							<comboitem self="@{each=posicion}"
+								value="@{posicion}" label="@{posicion.nombre}">
+							</comboitem>
 						</combobox>
-
-
 
 					</div>
 					<hbox>
-						<listbox style="margin-top:10px">
-
+						<listbox id="lsbxUmpires" model="@{cntrl.umpiresJuego}" mold="paging" pageSize="10" style="margin-top:5px">
 							<listhead>
 								<listheader label="Posicion"
 									align="center">
 								</listheader>
 								<listheader label="Nombre Umpires"
-									align="center">
+									align="center" maxlength="25">
 								</listheader>
-								
-							</listhead>
-                                                   
-							<listitem>
-									<listcell><label value="Home"></label></listcell>
-									<listcell><label value="Gabrielena Ponce"></label></listcell>
+								</listhead>
+                            
+							<listitem self="@{ each=personalForaneoJuego}">
+									<listcell><label value="@{personalForaneoJuego.datoBasico.nombre}"></label></listcell>
+									<listcell><label value="@{personalForaneoJuego.personalForaneo.nombre}"></label></listcell>
 					        </listitem>
-						    <listitem>
-									<listcell><label value="1B"></label></listcell>
-									<listcell><label value="Eduardo Quintero"></label></listcell>
-                            </listitem>
-								
-							<listitem>
-									<listcell><label value="2B"></label></listcell>
-									<listcell><label value="Anibal Moreno"></label></listcell>
-							</listitem>
-							<listitem>
-								   <listcell><label value="3B"></label></listcell>
-								   <listcell><label value="Lilianny Rodriguez"></label></listcell>
-						    </listitem>
 						</listbox>
 						<div>
-							<button style="margin-top:10px"
+							<button id="btnAgregar" style="margin-top:10px"
 								image="/Recursos/Imagenes/agregar.ico" label="">
 							</button>
-							<button style=""
+							<button id="btnQuitar" style="margin-top:10px"
 								image="/Recursos/Imagenes/quitar.ico" label="">
 							</button>
 						</div>
@@ -204,6 +144,7 @@
 
 
 			</panel>
+			<!-- probando con estaticos  -->
 			<panel>
 				<caption label="Resultados" />
 				<panelchildren style="margin-top:15px">
@@ -229,36 +170,36 @@
 							<row>
 								<label
 									style="color:blue;text-decoration:underline"
-									onClick="resultados()" value="Equipo A">
+									onClick="resultados()" id="lblEquipoA">
 								</label>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
 
 							</row>
 							<row>
-								<label value="Equipo B"></label>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
-								<spinner cols="1" value="0"></spinner>
+								<label id="lblEquipoB" ></label>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
+								<spinner cols="3" value="0"></spinner>
 							</row>
 
 						</rows>
@@ -304,27 +245,100 @@
 
 				</panelchildren>
 			</panel>
-			<panel>
-				<panelchildren>
-					<div align="right">
+	 <!-- fin del estatico -->
+	 
+	 
+	 
+<!-- 		<panel> -->
+		   
+<!-- 			<caption label="Resultados" /> -->
+			
+<!-- 			<panelchildren style="margin-top:15px"> -->
+		    
+<!-- 			<listbox id="lsbxEquipos" width="200px" model="@{cntrl.equipos}"> -->
+<!-- 				<listhead> -->
+<!-- 			    	<listheader label="Equipos" /> -->
+<!-- 				</listhead> -->
+<!-- 				<listitem self="@{each=equipoJuego}"> -->
+<!-- 					<listcell label="@{equipoJuego.equipoCompetencia.equipo.nombre}" /> -->
+<!-- 				</listitem> -->
+<!-- 			</listbox> -->
+			
+<!-- 			<listbox id="lsbxInnigs" width="auto" model="@{cntrl.innings}"> -->
+<!-- 			   <listhead id="lhLsbxInnigs"> -->
+<!--  			      <listheader label=" " visible="false"></listheader> -->
+<!-- 			   </listhead> -->
+<!-- 			   <listitem id="liEquipoA"> -->
+<!-- 			        <listcell id="lcEquipoA"></listcell> -->
+<!-- 			    </listitem> -->
+<!-- 			   <listitem id="liEquipoB"> -->
+<!-- 			      <listcell id="lcEquipoB"></listcell> -->
+<!-- 			   </listitem> -->
+<!-- 			</listbox> -->
+	
 
-						<button
-							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
-						</button>
-						<button
-							image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
-						</button>
-						<button
-							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
-						</button>
-						<button
-							image="../../Recursos/Imagenes/salir.png" label="Salir">
-						</button>
-					</div>
-				</panelchildren>
-			</panel>
+          
+<!-- 			<grid style="margin-top:15px;border-style:none"> -->
+<!-- 					<columns> -->
+<!-- 						<column label="" /> -->
+<!-- 						<column label="" /> -->
+<!-- 						<column label="" /> -->
+<!-- 						<column label="" /> -->
+<!-- 						<column label="" /> -->
+<!-- 						<column label="" /> -->
+<!-- 					</columns> -->
+<!-- 					<rows> -->
+<!-- 						<row style="border-style:none"> -->
+<!-- 							<label value="Pitcher Ganador" -->
+<!-- 								style="text-decoration:bold"> -->
+<!-- 							</label> -->
+<!-- 							<textbox cols="30"></textbox> -->
 
-		</window>
+<!-- 							<label value="Pitcher Perdedor" -->
+<!-- 								style="text-decoration:bold"> -->
+<!-- 							</label> -->
+<!-- 							<textbox cols="30"></textbox> -->
 
-	</div>
+<!-- 						</row> -->
+<!-- 						<row style="border-style:none"> -->
+<!-- 							<label value="Juego Salvado" -->
+<!-- 								style="text-decoration:bold"> -->
+<!-- 							</label> -->
+<!-- 							<textbox cols="30"></textbox> -->
+
+<!-- 							<label value="Mejor Jugador" -->
+<!-- 								style="text-decoration:bold"> -->
+<!-- 							</label> -->
+<!-- 							<textbox cols="30"></textbox> -->
+
+<!-- 						</row> -->
+<!-- 					</rows> -->
+
+<!-- 				</grid> -->
+			
+		
+<!--              	</panelchildren> -->
+			
+<!-- 		</panel> -->
+		
+		
+		<panel>
+			<panelchildren>
+				<div align="right">
+
+					<button image="/Recursos/Imagenes/guardar.ico"
+						label="Guardar">
+					</button>
+					<button image="/Recursos/Imagenes/cancelar.ico"
+						label="Cancelar">
+					</button>
+					<button image="/Recursos/Imagenes/salir.png"
+						label="Salir">
+					</button>
+				</div>
+			</panelchildren>
+		</panel>
+
+	</window>
+
 </zk>
