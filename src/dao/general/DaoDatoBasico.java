@@ -21,6 +21,7 @@ import dao.generico.GenericDao;
  * @author Robert A.
  * @author German L.
  * @author Reinaldo L.
+ * @autor Alix V.
  * @version 0.1 12/01/2012
  * 
  */
@@ -82,6 +83,52 @@ public class DaoDatoBasico extends GenericDao {
 		List list = c.add(Restrictions.eq("tipoDato", td)).list();
 		return list;
 	}
+	
+	
+	
+	public List<DatoBasico> listarEstados(){
+		  
+		  Session session = getSession();
+		  Transaction tx = session.beginTransaction();
+		  Criteria c = session.createCriteria(TipoDato.class);
+		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "ESTADO")).list().get(0);
+      c = session.createCriteria(DatoBasico.class);
+      List list = c.add(Restrictions.eq("tipoDato",td)).list();
+      return list;
+		  
+	  }
+
+	public List<DatoBasico> listarMunicipios(){
+		  
+		  Session session = getSession();
+		  Transaction tx = session.beginTransaction();
+		  Criteria c = session.createCriteria(TipoDato.class);
+		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "MUNICIPIO")).list().get(0);
+	 c = session.createCriteria(DatoBasico.class);
+	 List list = c.add(Restrictions.eq("tipoDato",td)).list();
+	 return list;
+		  
+	}
+	
+	
+	public List<DatoBasico> listarMunicipiosPorEstados(DatoBasico db ){
+		  
+		  Session session = getSession();
+		  Transaction tx = session.beginTransaction();
+		  Criteria  c = session.createCriteria(DatoBasico.class);
+		  List list = c.add(Restrictions.eq("datoBasico",db)).list();
+	 	  return list;
+		  
+	}
+	
+	public List<DatoBasico> listarParroquiasPorMunicipios(DatoBasico db ){
+		  
+		  Session session = getSession();
+		  Transaction tx = session.beginTransaction();
+		  Criteria  c = session.createCriteria(DatoBasico.class);
+		  List list = c.add(Restrictions.eq("datoBasico",db)).list();
+		  return list;
+		  }
 
 	/**
 	 * Busca los registros de un tipo de dato en particular
