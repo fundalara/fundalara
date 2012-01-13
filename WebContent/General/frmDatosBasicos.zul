@@ -1,0 +1,77 @@
+<?page title="Datos Basicos"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<div align="center">
+	<separator height="15px" />
+	<window closable="true" title="Datos Basicos Simples"
+		border="normal" width="650px" height="" id="wndDatosBasicosSimples"
+		apply="controlador.general.CntrlDatosBasicos">
+		<grid>
+			<columns>
+				<column width="100px" align="left" />
+				<column width="180px" align="center" />
+				<column width="100px" align="left" />
+				<column width="180px" align="center" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label id="lblTipoDato" value="Tipo de Dato " width="150px" />
+					<combobox value="--SELECCIONE--" width="170px"
+						id="cmbTipoDato" autodrop="true" autocomplete="true">
+
+					</combobox>
+					<label id="lblDatoBasicoA" value="Tipo de Dato " width="140px" />
+					<combobox value="--SELECCIONE--" width="170px"
+						id="cmbDatoBasicoA" autodrop="true" autocomplete="true">						
+					</combobox>
+				</row>				
+				<row height="30px" id="rowB">
+					<label id="lblDatoBasicoB" value="Tipo de Dato " width="150px" />
+					
+					<combobox value="--SELECCIONE--" width="170px"					
+						id="cmbDatoBasicoB" autodrop="true" autocomplete="true">					
+					</combobox>
+					<label id="lblDatoBasicoC" value="Tipo de Dato " width="140px" />
+					<combobox value="--SELECCIONE--" width="170px"
+						id="cmbDatoBasicoC" autodrop="true" autocomplete="true">						
+					</combobox>
+				</row>
+				<row>
+					<label value="Nombre" width="140px" />
+					<textbox id="txtNombre" width="180px" />
+					<label value="Descripción" />
+					<textbox id="txtDescripcion" width="180px"
+						multiline="true" rows="1" />
+				</row>
+				<row spans="5">
+					<hbox>
+						<listbox multiple="true" mold="paging"
+							pageSize="10" width="580px" height="300px" id="lboxDatos">
+							<listhead>
+								<listheader label="Nombre" width="200px"
+									align="center" />
+								<listheader label="Descripción"
+									width="380px" align="center" />
+							</listhead>							
+						</listbox>
+						<vbox height="50px">
+							<button id="btnAgregar"
+								image="../Recursos/Imagenes/aceptar.ico" />
+							<separator height="5px" />
+							<button id="btnQuitar"
+								image="../Recursos/Imagenes/eliminar.ico" />
+						</vbox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<separator />
+		<div align="right">
+			<button id="btnCancelar"
+				image="../Recursos/Imagenes/cancelar.ico" label="Cancelar"
+				width="100px" />
+			<button id="btnSalir" image="../Recursos/Imagenes/salir.png"
+				label="Salir" width="100px" />
+		</div>
+	</window>
+</div>
