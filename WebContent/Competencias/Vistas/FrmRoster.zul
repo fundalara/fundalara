@@ -32,7 +32,7 @@
 							</columns>
 							<rows>
 								<row>
-									<label value="Competencia"></label>
+									<label value="Nombre"></label>
 									<hbox>
 										<textbox readonly="true" cols="11" id="txtIdCompetencia" value="@{cntrl.competencia.nombre}"></textbox>
 										<button id="btnBuscar"

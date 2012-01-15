@@ -6,8 +6,8 @@
 
 		<div align="center">
 	<window title="Equipos" id="frmRegistroEquipo" border="normal"
-		width="690px" height="auto" closable="true"
-		apply="controlador.competencia.CntrlFrmRegistroEquipo">
+		width="690px" height="auto" closable="true" 
+		apply="controlador.competencia.CntrlFrmRegistroEquipo"> 
 		<panel border="normal">
 			<caption label="Datos de la Competencia"></caption>
 			<panelchildren>
@@ -178,7 +178,7 @@
 																	</textbox>
 																	<button
 																		id="btnBuscarDelegado"
-																		image="../../Recursos/Imagenes/consultar.ico"
+																		image="/Recursos/Imagenes/consultar.ico"
 																		disabled="true">
 																	</button>
 																	<textbox
@@ -232,7 +232,7 @@
 										</combobox>
 										<button
 											id="btnAgregarEquipoForaneo"
-											image="../../Recursos/Imagenes/agregar.ico">
+											image="/Recursos/Imagenes/agregar.ico">
 										</button>
 									</row>
 

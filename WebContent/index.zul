@@ -111,7 +111,7 @@
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Indicadores de Desempeño"
+															label="Indicadores"
 															onClick='enlace("/Competencias/Vistas/FrmRegistroIndicadores.zul")' />
 													</treerow>
 												</treeitem>
@@ -339,7 +339,7 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Equipos Participantes"
+													label="Gestionar Equipos"
 													onClick='enlace("/Competencias/Vistas/FrmRegistroEquipo.zul")' />
 											</treerow>
 										</treeitem>
@@ -353,14 +353,14 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Indicadores de Desempeño"
+													label="Seleccionar Indicadores"
 													onClick='enlace("/Competencias/Vistas/FrmIndicadores.zul")' />
 											</treerow>
 										</treeitem>										
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Calendario"
+													label="Programar Juegos"
 													onClick='enlace("/Competencias/Vistas/FrmCalendario.zul")' />
 											</treerow>
 										</treeitem>										
@@ -371,13 +371,7 @@
 													onClick='enlace("Jugador/Vistas/frmRegistrarHospedaje.zul")' />
 											</treerow>
 										</treeitem>										
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Jugadores Claves"
-													onClick='enlace("/Competencias/Vistas/FrmJugadoresClaves.zul")' />
-											</treerow>
-										</treeitem>
+										
 									</treechildren>
 								</treeitem>
 							</treechildren>

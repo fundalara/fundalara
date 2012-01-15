@@ -3,8 +3,16 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmRegistroResultados" ?>
 <zk>
+     <zscript>
+     <![CDATA[
+     void resultados(){
+    	 Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul", null, null); 
+     }
+     ]]>
+     </zscript>
+    
 	<window title="REGISTRO DE RESULTADOS" border="normal" mode="popup"
-		id="FrmRegistroResultados" closable="true" width="740px" apply="controlador.competencia.CntrlFrmRegistroResultados">
+		id="FrmRegistroResultados" closable="true" width="760px" apply="controlador.competencia.CntrlFrmRegistroResultados">
 
 
 		<panel border="normal">

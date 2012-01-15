@@ -46,6 +46,7 @@ import servicio.implementacion.ServicioRegistroEquipo;
 public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	int posicion;
 	Equipo equipo;
+
 	Divisa divisa;
 	EquipoCompetencia equipoCompetencia;
 	PersonaNatural personaNatural;
@@ -63,13 +64,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	List<EquipoCompetencia> equipocompetencia,equipocompetenciaforaneo;
 	Window frmRegistroEquipo;
 
-	public List<EquipoCompetencia> getEquipocompetencia() {
-		return equipocompetencia;
-	}
 
-	public void setEquipocompetencia(List<EquipoCompetencia> equipocompetencia) {
-		this.equipocompetencia = equipocompetencia;
-	}
 
 	Button btnBuscarDelegado;
 	List<Divisa> divisas;
@@ -97,6 +92,22 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	public void restaurar() {
 		competencia = new Competencia();
 
+	}
+
+	public EquipoCompetencia getEquipoCompetencia() {
+		return equipoCompetencia;
+	}
+
+	public void setEquipoCompetencia(EquipoCompetencia equipoCompetencia) {
+		this.equipoCompetencia = equipoCompetencia;
+	}
+
+	public EquipoCompetencia getEquipoComptencia() {
+		return equipoComptencia;
+	}
+
+	public void setEquipoComptencia(EquipoCompetencia equipoComptencia) {
+		this.equipoComptencia = equipoComptencia;
 	}
 
 	// Llama al evento select de la lista de equipos locales
@@ -420,6 +431,22 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	public void setFormularios(Component formularios) {
 		this.formularios = formularios;
+	}
+
+	public List<EquipoCompetencia> getEquipocompetenciaforaneo() {
+		return equipocompetenciaforaneo;
+	}
+
+	public void setEquipocompetenciaforaneo(
+			List<EquipoCompetencia> equipocompetenciaforaneo) {
+		this.equipocompetenciaforaneo = equipocompetenciaforaneo;
+	}
+	public List<EquipoCompetencia> getEquipocompetencia() {
+		return equipocompetencia;
+	}
+
+	public void setEquipocompetencia(List<EquipoCompetencia> equipocompetencia) {
+		this.equipocompetencia = equipocompetencia;
 	}
 
 }
