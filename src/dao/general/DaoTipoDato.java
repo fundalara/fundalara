@@ -2,6 +2,7 @@ package dao.general;
 
 import java.util.List;
 
+import modelo.ActividadEntrenamiento;
 import modelo.TipoDato;
 
 import org.hibernate.Criteria;
@@ -22,9 +23,9 @@ public class DaoTipoDato extends GenericDao {
 		// TODO Auto-generated method stub
 		Session session = getSession();
 		Transaction tx =  session.beginTransaction();
-		Criteria c = getSession().createCriteria(TipoDato.class);
+		Criteria c = session.createCriteria(TipoDato.class);
 		c.add(Restrictions.eq("nombre", tipo));
-		return (TipoDato) c.list().get(0);
+		return (TipoDato) c.uniqueResult();
 	}
 	
 	public List <TipoDato> buscarTrue(Boolean bool) {
@@ -38,8 +39,8 @@ public class DaoTipoDato extends GenericDao {
 	
 
 	/**
-	 * Busca el tipo de dato completo segun su tipo(código)
-	 * @param tipoDato tipo de dato básico
+	 * Busca el tipo de dato completo segun su tipo(cï¿½digo)
+	 * @param tipoDato tipo de dato bï¿½sico
 	 * @return Objeto de TipoDato, en caso de no encontrar retorna null
 	 */
 	public TipoDato buscarPorCodigo(TipoDatoBasico tipoDato) {
