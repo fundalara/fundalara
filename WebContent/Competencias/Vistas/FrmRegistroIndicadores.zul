@@ -98,7 +98,6 @@
 						</grid>
 					</panelchildren>
 				</panel>
-
 				<panel id="pnlCompuesto" title="Indicadores Compuestos"
 					border="normal" visible="false">
 					<panelchildren>

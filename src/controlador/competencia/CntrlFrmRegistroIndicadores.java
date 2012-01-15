@@ -394,14 +394,14 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		// "Debes ingresar una descripcion al valor de la escala");
 	}
 
-	// public void onClick$btnEliminar() throws InterruptedException {
-	// indicador.setEstatus('E');
-	// servicioIndicador.agregar(indicador);
-	// Messagebox.show("Datos eliminados exitosamente", "Mensaje",
-	// Messagebox.OK, Messagebox.EXCLAMATION);
-	// onClick$btnCancelar();
-	// binder.loadAll();
-	// }
+	 public void onClick$btnEliminar() throws InterruptedException {
+	 indicador.setEstatus('E');
+	 servicioIndicador.agregar(indicador);
+	 Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+	 Messagebox.OK, Messagebox.EXCLAMATION);
+	 onClick$btnCancelar();
+	 binder.loadAll();
+	 }
 
 	// Llama al catalogo
 
