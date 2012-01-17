@@ -25,7 +25,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -35,8 +34,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.api.Comboitem;
 
-import com.lowagie.text.ListItem;
-
 import comun.EstadoCompetencia;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
@@ -44,7 +41,6 @@ import servicio.implementacion.ServicioDivisa;
 import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioEquipoCompetencia;
 import servicio.implementacion.ServicioIndicador;
-import servicio.implementacion.ServicioPersonaNatural;
 import servicio.implementacion.ServicioRegistroEquipo;
 
 public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
@@ -52,29 +48,34 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Equipo equipo;
 
 	Divisa divisa;
-	EquipoCompetencia equipoComptencia, equipoCompetencia;
-	Competencia competencia;
+	EquipoCompetencia equipoCompetencia;
 	PersonaNatural personaNatural;
-	Component comp, formulario;
-	AnnotateDataBinder binder;
-	ServicioDivisa servicioDivisa;
+	List<CategoriaCompetencia> categorias;
+	Component comp;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	ServicioEquipo servicioEquipo;
 	ServicioRegistroEquipo servicioRegistroEquipo;
 	ServicioEquipoCompetencia servicioEquipoCompetencia;
-	ServicioPersonaNatural serviciopersonaNatural;
-	List<CategoriaCompetencia> categorias;
-	List<EquipoCompetencia> equipocompetencia, equipocompetenciaforaneo;
+	EquipoCompetencia equipoComptencia;
+	ServicioDivisa servicioDivisa;
+	Competencia competencia;
+	AnnotateDataBinder binder;
 	List<Equipo> equipos, equiposforaneos;
-	List<Divisa> divisas;
-	Combobox cmbCategorias, cmbCategoriasForaneas;
-	Listbox lsbxDivisa, lsbxEquiposLocales, lsbxEquiposSeleccionadosLocales,
-			lsbxEquiposForaneos, lsbxEquiposForaneosSeleccionados;
-	Textbox Nombre, txtNombreCompetencia, txtTipoCompetencia,
-			txtModalidadCompetencia;
+	List<EquipoCompetencia> equipocompetencia,equipocompetenciaforaneo;
 	Window frmRegistroEquipo;
+
+
+
 	Button btnBuscarDelegado;
-	Combobox cmbDivisa;
+	List<Divisa> divisas;
+	Component formulario, formularios;
+	Combobox cmbCategorias;
+	Combobox cmbDivisa, cmbCategoriasForaneas;
+	Listbox lsbxDivisa;
+	Listbox lsbxEquiposLocales;
+	Listbox lsbxEquiposSeleccionadosLocales;
+	Listbox lsbxEquiposForaneos,lsbxEquiposForaneosSeleccionados;
+	Textbox Nombre,txtNombreCompetencia,txtTipoCompetencia,txtModalidadCompetencia;
 
 	// Este metodo se llama al cargar la ventana
 	public void doAfterCompose(Component c) throws Exception {
@@ -90,19 +91,29 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	public void restaurar() {
 		competencia = new Competencia();
+
+	}
+
+	public EquipoCompetencia getEquipoCompetencia() {
+		return equipoCompetencia;
+	}
+
+	public void setEquipoCompetencia(EquipoCompetencia equipoCompetencia) {
+		this.equipoCompetencia = equipoCompetencia;
+	}
+
+	public EquipoCompetencia getEquipoComptencia() {
+		return equipoComptencia;
+	}
+
+	public void setEquipoComptencia(EquipoCompetencia equipoComptencia) {
+		this.equipoComptencia = equipoComptencia;
 	}
 
 	// Llama al evento select de la lista de equipos locales
 	public void onClick$btnAgregar() {
 		Agregar(lsbxEquiposLocales, lsbxEquiposSeleccionadosLocales,
 				equipocompetencia);
-		binder.loadAll();
-	}
-
-	// Llama al evento select de la lista de equipos locales
-	public void onClick$btnAgregarEquiposForaneos() {
-		Agregar(lsbxEquiposForaneos, lsbxEquiposForaneosSeleccionados,
-				equipocompetenciaforaneo);
 		binder.loadAll();
 	}
 
@@ -118,16 +129,14 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {
 				Listitem li2 = (Listitem) j.next();
 				EquipoCompetencia c2 = (EquipoCompetencia) li2.getValue();
+				alert(c2.getEquipo().getNombre());
 				if (c1.getNombre().equals(c2.getEquipo().getNombre())) {
 					sw = true;
 					break;
 				}
 			}
 			if (!sw) {
-				equipoCompetencia = new EquipoCompetencia();
-//				List<PersonaNatural> personaNaturales = serviciopersonaNatural.listarActivos();
-//				equipoCompetencia.setPersonaNatural(personaNaturales.get(0));
-				equipoCompetencia.setCompetencia(competencia);				
+				equipoCompetencia.setCompetencia(competencia);
 				equipoCompetencia.setEstatus('A');
 				equipoCompetencia.setEquipo(c1);
 				lista.add(equipoCompetencia);
@@ -135,34 +144,9 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		}
 	}
 
-	// /////////////// Evento Click del Boton Quitar Equipo Local
-	// ///////////////
-	public void onClick$btnQuitar() {
-		Quitar(lsbxEquiposLocales, equipocompetencia);
-		binder.loadAll();
-	}
-
-	// /////////////// Evento Click del Boton Quitar Equipo Foraneo
-	// ////////////////
-	public void onClick$btnQuitarEquiposForaneos() {
-		Quitar(lsbxEquiposForaneosSeleccionados, equipocompetenciaforaneo);
-		binder.loadAll();
-	}
-
-	// /////////////// Funcion Quitar Equipos ///////////////
-	public void Quitar(Listbox origen, List lista) {
-		Set seleccionados = origen.getSelectedItems();
-		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
-			Listitem li = (Listitem) i.next();
-			Object o = li.getValue();
-			lista.remove(o);
-		}
-	}
-
 	// //////////// Llama al catalogo de Competencias
 	// ///////////////////////////////
 	public void onClick$btnBuscar() {
-		equipocompetencia = new ArrayList<EquipoCompetencia>();
 		// se crea el catalogo y se llama
 		Component catalogo = Executions.createComponents(
 				"/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
@@ -180,27 +164,25 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 						.listarCategoriaPorCompetencia(competencia
 								.getCodigoCompetencia());
 				divisas = servicioDivisa.listarDivisaForanea();
-				if (equipocompetencia.size() == 0) {
-					CargarEquipos();
-				}
-
+//				equiposforaneos = servicioEquipo.listarEquipoForaneos();
 				binder.loadAll();
 			}
 		});
 	}
 
 	// // activa el boton de catalogo de persona natural ////
-	public void onSelect$lsbxEquiposSeleccionadosLocales() {
-		posicion = lsbxEquiposSeleccionadosLocales.getSelectedIndex();
+	public void onSelect$lsbxEquiposSeleccionadosLocales() {		
+		posicion =lsbxEquiposSeleccionadosLocales.getSelectedIndex();
 		personaNatural = equipocompetencia.get(posicion).getPersonaNatural();
 		btnBuscarDelegado.setDisabled(false);
 		binder.loadAll();
-
+		
 	}
 
-	// ////////////////////////////////////////////////////////
-	// //////////// Llama al catalogo de Persona Natural ///
 	// ///////////////////////////////////////////////////////
+
+	// //////////// Llama al catalogo de Persona Natural
+	// ///////////////////////////////
 	public void onClick$btnBuscarDelegado() {
 		// se crea el catalogo y se llama
 		Component catalogos = Executions.createComponents(
@@ -211,22 +193,25 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			// Este metodo se llama cuando se envia la señal desde el catalogo
-			public void onEvent(Event arg0) throws Exception {//
+			public void onEvent(Event arg0) throws Exception {
 				// se obtiene la competencia
-
 				personaNatural = (PersonaNatural) formulario.getVariable(
-						"personaNatural", false);//
-				equipocompetencia.get(posicion).setPersonaNatural(
-						personaNatural);				
+						"personaNatural", false);
+				equipocompetencia.get(posicion).setPersonaNatural(personaNatural);
 				personaNatural = new PersonaNatural();
-				btnBuscarDelegado.setDisabled(true);
 				binder.loadAll();
 			}
 		});
 	}
 
-	// //////////////////////////// Llama a la interfaz de agregar equipos
-	// /////////////////
+	
+	public void onClick$btnAgregarPersonaNatural() {
+//		alert(personaNatural.getCedulaRif());
+//		alert(String.valueOf(lsbxEquiposLocales.getSelectedIndex()));
+		
+	}
+	
+
 	public void onClick$btnAgregarEquipoForaneo() throws InterruptedException {
 		if (cmbCategoriasForaneas.getText() != "--Seleccione--") {
 		} else {
@@ -251,10 +236,13 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 							equiposforaneos = servicioEquipo
 									.listarEquipoPorCategoria(c1.getCategoria()
 											.getCodigoCategoria());
+
 							binder.loadAll();
+
 						}
 					});
 		}
+
 	}
 
 	// ////// Cuando ocurre un cambio en el combo llama a este procedimiento
@@ -266,7 +254,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		equipos = servicioEquipo.listarEquipoPorCategoria(c1.getCategoria()
 				.getCodigoCategoria());
 		binder.loadAll();
-
+		equipocompetencia = new ArrayList<EquipoCompetencia>();
 	}
 
 	// ////// Cuando ocurre un cambio en el combo llama a este procedimiento
@@ -278,81 +266,31 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		equiposforaneos = servicioEquipo.listarEquipoPorCategoria(c1
 				.getCategoria().getCodigoCategoria());
 		binder.loadAll();
-		equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
+		equipocompetencia = new ArrayList<EquipoCompetencia>();
 	}
 
 	// // llamando el evento guardar
-	public void onClick$btnGuardar() throws InterruptedException {
-		int estado;
-		estado = 0;
-		if (txtNombreCompetencia.getText() != null) {
-			if (lsbxEquiposForaneosSeleccionados.getItems().size() > 0) {
-				servicioEquipoCompetencia.agregar(equipocompetenciaforaneo);
-				estado = 1;
-			} else if (lsbxEquiposSeleccionadosLocales.getItems().size() < 1) {
-				Messagebox.show("Seleccione la Equipos Foraneos", "Mensaje",
-						Messagebox.OK, Messagebox.EXCLAMATION);
-			}
-
-			// if (lsbxEquiposSeleccionadosLocales.getItems().size() > 0) {
-			// if(servicioEquipoCompetencia.buscarEquipoporCompetencia(competencia).size()>0){
-			// servicioEquipoCompetencia.agregar(equipocompetencia);
-			// }else{
-			// servicioEquipoCompetencia.actualizar(equipocompetencia);
-			// }
-
-			estado = 1;
-			restaurar();
-			onClick$btnCancelar();
-			binder.loadAll();
-		} else if (lsbxEquiposForaneosSeleccionados.getItems().size() < 1) {
-			Messagebox.show("Seleccione la Equipos", "Mensaje", Messagebox.OK,
-					Messagebox.EXCLAMATION);
-		}
-
-		if (estado > 0) {
-			Messagebox.show("Datos agregados exitosamente", "Mensaje",
-					Messagebox.OK, Messagebox.EXCLAMATION);
-			restaurar();
-			onClick$btnCancelar();
-			binder.loadAll();
-		}
+	public void onClick$btnGuardar() {
+		binder.loadAll();
 	}
-	
-public void onClick$btnEliminar() throws InterruptedException{		
-		if (Messagebox.show("¿Realmente desea eliminar los equipos asociados a la competencia", "Mensaje",
-				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
-			servicioEquipoCompetencia.eliminar(equipocompetencia);
-			servicioEquipoCompetencia.eliminar(equipocompetenciaforaneo);
-            restaurar();
-            binder.loadAll();
-			Messagebox.show("Datos eliminados exitosamente", "Mensaje",	Messagebox.OK, Messagebox.EXCLAMATION);
-		}
-	}
-
 	public void limpiar() {
 		cmbCategorias.setValue("--Seleccione--");
 		cmbCategoriasForaneas.setValue("--Seleccione--");
 		txtNombreCompetencia.setValue("");
 		txtTipoCompetencia.setValue("");
 		txtModalidadCompetencia.setValue("");
-		equipocompetencia = new ArrayList<EquipoCompetencia>();
-		equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
-		equipos = new ArrayList<Equipo>();
-		equiposforaneos = new ArrayList<Equipo>();
-		categorias = new ArrayList<CategoriaCompetencia>();
-		competencia = new Competencia();
-		binder.loadAll();
-
+		/*txtFechaInicioCompetencia.setValue("00/00/00");
+		txtFechaFin.setValue("");*/
+		
+		
 	}
-
+	
 	public void onClick$btnCancelar() {
 		limpiar();
-
 	}
-
+	
 	public void onClick$btnSalir() throws InterruptedException {
-		if (equipocompetencia != null) {
+		if (equipocompetencia!= null) {
 			int result = Messagebox
 					.show("Existen elementos en el formulario ¿Realmente desea salir?",
 							"Question", Messagebox.OK | Messagebox.CANCEL,
@@ -373,27 +311,15 @@ public void onClick$btnEliminar() throws InterruptedException{
 			binder.loadAll();
 			frmRegistroEquipo.detach();
 		}
+		
 	}
+	
+	
+	// // llenar el objeto para grabar
+	// ///////////////////////////// Getter and Setter
+	// ///////////////////////////
+	
 
-	public void CargarEquipos() {
-		equipocompetencia = new ArrayList<EquipoCompetencia>();
-		equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
-		List<EquipoCompetencia> EC = servicioEquipoCompetencia
-				.buscarEquipoporCompetencia(competencia);
-		for (Iterator i = EC.iterator(); i.hasNext();) {
-			EquipoCompetencia c1 = (EquipoCompetencia) i.next();
-			if (c1.getEquipo().getDivisa().getCodigoDivisa() == 1) {
-				equipocompetencia.add(c1);
-			} else {
-				equipocompetenciaforaneo.add(c1);
-			}
-
-		}
-		binder.loadAll();
-
-	}
-
-	// //////////////////// Getter and Setter /////////////////////////////
 	public int getPosicion() {
 		return posicion;
 	}
@@ -401,6 +327,7 @@ public void onClick$btnEliminar() throws InterruptedException{
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
+
 
 	public PersonaNatural getPersonaNatural() {
 		return personaNatural;
@@ -490,13 +417,20 @@ public void onClick$btnEliminar() throws InterruptedException{
 	public void setEquiposforaneos(List<Equipo> equiposforaneos) {
 		this.equiposforaneos = equiposforaneos;
 	}
-
 	public Button getBtnBuscarDelegado() {
 		return btnBuscarDelegado;
 	}
 
 	public void setBtnBuscarDelegado(Button btnBuscarDelegado) {
 		this.btnBuscarDelegado = btnBuscarDelegado;
+	}
+
+	public Component getFormularios() {
+		return formularios;
+	}
+
+	public void setFormularios(Component formularios) {
+		this.formularios = formularios;
 	}
 
 	public List<EquipoCompetencia> getEquipocompetenciaforaneo() {
@@ -507,7 +441,6 @@ public void onClick$btnEliminar() throws InterruptedException{
 			List<EquipoCompetencia> equipocompetenciaforaneo) {
 		this.equipocompetenciaforaneo = equipocompetenciaforaneo;
 	}
-
 	public List<EquipoCompetencia> getEquipocompetencia() {
 		return equipocompetencia;
 	}
@@ -516,19 +449,4 @@ public void onClick$btnEliminar() throws InterruptedException{
 		this.equipocompetencia = equipocompetencia;
 	}
 
-	public EquipoCompetencia getEquipoCompetencia() {
-		return equipoCompetencia;
-	}
-
-	public void setEquipoCompetencia(EquipoCompetencia equipoCompetencia) {
-		this.equipoCompetencia = equipoCompetencia;
-	}
-
-	public EquipoCompetencia getEquipoComptencia() {
-		return equipoComptencia;
-	}
-
-	public void setEquipoComptencia(EquipoCompetencia equipoComptencia) {
-		this.equipoComptencia = equipoComptencia;
-	}
 }

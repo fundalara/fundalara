@@ -23,16 +23,6 @@ public class DaoEquipoCompetencia extends GenericDao {
 		return lista;
 	}
 	
-
-public List<EquipoCompetencia> buscarEquipoporCompetencia(Competencia c) {
-		Session session = this.getSession();
-		org.hibernate.Transaction tx = session.beginTransaction();
-		Criteria cc = session.createCriteria(EquipoCompetencia.class);
-		cc.add(Restrictions.eq("competencia", c));
-		cc.add(Restrictions.eq("estatus", 'A'));
-		List<EquipoCompetencia> lista = cc.list();
-		return lista;
-	}
 	
 	
 	

@@ -137,7 +137,7 @@
 																	<row
 																		style="border:none" align="center">
 																		<button
-																			id="btnQuitar" image="/Recursos/Imagenes/leftarrow_g.png"
+																			onClick="" image="/Recursos/Imagenes/leftarrow_g.png"
 																			style="center" />
 																	</row>
 																</rows>
@@ -160,8 +160,7 @@
 																		<listcell
 																			label="@{equipocompetenci.equipo.nombre}" />
 																		<listcell
-																			label= "@{equipocompetenci.personaNatural.PrimerNombre}"/>
-																			
+																			label="@{equipocompetenci.personaNatural.primerNombre}" />
 																	</listitem>
 																</listbox>
 															</div>
@@ -173,9 +172,8 @@
 														<rows>
 															<row>
 																<hbox>
-																	<label value="Cedula/Rif"></label>
 																	<textbox
-																		id="txtceduladelegado" readonly="true" width="90px"
+																		id="txtceduladelegado" readonly="true"
 																		value="@{cntrl.personaNatural.cedulaRif}">
 																	</textbox>
 																	<button
@@ -183,13 +181,11 @@
 																		image="/Recursos/Imagenes/consultar.ico"
 																		disabled="true">
 																	</button>
-																	<label value="Nombre"></label>
 																	<textbox
 																		id="txtnombreDelegado"
 																		value="@{cntrl.personaNatural.primerNombre}"
 																		readonly="true">
 																	</textbox>
-																	<label value="Apellido"></label>
 																	<textbox
 																		id="txtapellidoDelegado"
 																		value="@{cntrl.personaNatural.primerApellido}"
@@ -274,20 +270,20 @@
 											<rows>
 												<row style="border:none"
 													align="center">
-													<button id="btnAgregarEquiposForaneos"
+													<button onClick=""
 														image="/Recursos/Imagenes/rightarrow_g.png"
-														style="center" />
+														style="center" id="btnAgregarForaneo"/>
 												</row>
 												<row style="border:none"
 													align="center">
-													<button id="btnQuitarEquiposForaneos"
-														image="/Recursos/Imagenes/leftarrow_g.png" style="center" />
+													<button onClick=""
+														image="/Recursos/Imagenes/leftarrow_g.png" style="center" id="btnQuitarForaneo"/>
 												</row>
 
 											</rows>
 										</grid>
 										<listbox
-											id="lsbxEquiposForaneosSeleccionados" style="margin-top:5px"  
+											id="lsbxEquiposForaneosSeleccionados" style="margin-top:5px"
 											height="200px" model="@{cntrl.equipocompetenciaforaneo}"
 											multiple="true" checkmark="true" mold="paging">
 											<listhead>
