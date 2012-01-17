@@ -5,12 +5,12 @@
 
 <!-- 	<bean id="genericDao" class="dao.generico.GenericDao"> -->
 <!-- 	</bean> -->
-	<bean id="daoConceptoNomina" class="dao.general.DaoConceptoNomina">
-	</bean>
+<!-- 	<bean id="daoConceptoNomina" class="dao.general.DaoConceptoNomina"> -->
+<!-- 	</bean> -->
 	
-	<bean id="servicioConceptoNomina" class="servicio.implementacion.ServicioConceptoNomina">
-		<property name="daoConceptoNomina" ref="daoConceptoNomina"></property>
-	</bean>
+<!-- 	<bean id="servicioConceptoNomina" class="servicio.implementacion.ServicioConceptoNomina"> -->
+<!-- 		<property name="daoConceptoNomina" ref="daoConceptoNomina"></property> -->
+<!-- 	</bean> -->
 	
 	<bean id="daoCuentaPagar" class="dao.general.DaoCuentaPagar">
 	</bean>

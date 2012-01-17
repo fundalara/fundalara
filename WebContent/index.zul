@@ -35,7 +35,7 @@
 									<treerow>
 										<treecell
 											label="Simples/Unitarios"
-											onClick='enlace("General/Datos_Basicos_NC.zul")' />
+											onClick='enlace("General/frmDatosBasicos.zul")' />
 									</treerow>
 								</treeitem>
 								<treeitem open="false">

@@ -28,6 +28,7 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
@@ -50,6 +51,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	List<Inning> innings;
 	Listbox lsbxEquipos;
 	Listbox lsbxInnigs;
+	Listbox lsbxUmpires;
 	Listhead lhLsbxInnigs;
 	Listitem liEquipoA;
 	Listitem liEquipoB;
@@ -115,9 +117,8 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 		equipoA = equipos.get(0).getEquipoCompetencia().getEquipo();
 		equipoB = equipos.get(1).getEquipoCompetencia().getEquipo();
 		txtJuego.setText(equipoA.getNombre() + " vs " + equipoB.getNombre());
-		// lblEquipoA.setValue(equipoA.getNombre());
-
-		// lblEquipoB.setValue(equipoB.getNombre());
+		lblEquipoA.setValue(equipoA.getNombre());
+		lblEquipoB.setValue(equipoB.getNombre());
 		innings = new ArrayList<Inning>();
 		innings.add(new Inning(1, 0));
 		innings.add(new Inning(2, 0));
@@ -178,8 +179,26 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 				.getValue());
 		pfj.setDatoBasico((DatoBasico) cmbPosiciones.getSelectedItem()
 				.getValue());
+		umpires.remove(cmbUmpires.getSelectedIndex());
+		cmbUmpires.setText("-- Seleccione --");
+		posiciones.remove(cmbPosiciones.getSelectedIndex());
+		cmbPosiciones.setText("-- Seleccione --");
 		umpiresJuego.add(pfj);
 		binder.loadAll();
+	}
+	
+	public void onClick$btnQuitar() throws InterruptedException{
+		if (lsbxUmpires.getItemCount() > 0) {
+		    if (lsbxUmpires.getSelectedItem() != null){	
+				PersonalForaneoJuego pfj = (PersonalForaneoJuego) lsbxUmpires.getSelectedItem().getValue();
+				umpires.add(pfj.getPersonalForaneo());
+				posiciones.add(pfj.getDatoBasico());
+				umpiresJuego.remove(lsbxUmpires.getSelectedIndex());
+				binder.loadAll();
+		    }else
+		    	Messagebox.show("Debe seleccionar un elemento", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
+			
+		}
 	}
 
 	public Juego getJuego() {

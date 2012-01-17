@@ -3,18 +3,11 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmRegistroResultados" ?>
 <zk>
-	<zscript>
-     <![CDATA[
-	void resultados() {
-		Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",
-				null, null);
-	}
-]]>
-     </zscript>
 
+    
 	<window title="REGISTRO DE RESULTADOS" border="normal" mode="popup"
-		id="FrmRegistroResultados" closable="true" width="760px"
-		apply="controlador.competencia.CntrlFrmRegistroResultados">
+		id="FrmRegistroResultados" closable="true" width="760px" apply="controlador.competencia.CntrlFrmRegistroResultados">
+
 
 
 		<panel border="normal">
@@ -164,16 +157,10 @@
 						</listhead>
 
 						<listitem
-							self="@{ each=personalForaneoJuego}">
-							<listcell>
-								<label
-									value="@{personalForaneoJuego.datoBasico.nombre}">
-								</label>
+							self="@{each=personalForaneoJuego}" value="@{personalForaneoJuego}"> 
+							<listcell label="@{personalForaneoJuego.datoBasico.nombre}">
 							</listcell>
-							<listcell>
-								<label
-									value="@{personalForaneoJuego.personalForaneo.nombre}">
-								</label>
+							<listcell label="@{personalForaneoJuego.personalForaneo.nombre}">
 							</listcell>
 						</listitem>
 					</listbox>
@@ -204,13 +191,13 @@
 					</columns>
 					<rows>
 						<row id="fila1">
-                          <label value="Fundalara A"></label>
+                          <label id="lblEquipoA"></label>
                           <label id="lblCarrerasA" value="0"></label>
                           <label id="lblHitsA" value="0"></label>
                           <label id="lblErroresA" value="0"></label>
 						</row>
 						<row id="fila2">
-						  <label value="Fundalara B"></label>
+						  <label id="lblEquipoB"></label>
                           <label id="lblCarrerasB" value="0"></label>
                           <label id="lblHitsB" value="0"></label>
                           <label id="lblErroresB" value="0"></label>
