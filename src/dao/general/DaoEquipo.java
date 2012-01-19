@@ -64,12 +64,12 @@ public class DaoEquipo extends GenericDao {
 	 * @param categoria Categoria para filtrar los equipos 
 	 * @return List<Equipo> Lista de equipos de una categoria
 	 */
-	public List<Equipo> buscarEquiposForaneosPorCategoria(Categoria categoria){
+	public List<Equipo> buscarEquiposForaneosPorCategoria(int categoria){
 		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Criteria c = session
 				.createCriteria(Equipo.class)
-				.add(Restrictions.eq("categoria", categoria))
+				.add(Restrictions.eq("categoria.codigoCategoria", categoria))
 				.add(Restrictions.eq("estatus", 'A'))
 				.add(Restrictions.not(Restrictions.eq("divisa.codigoDivisa", 1)));
 		List<Equipo> lista =  c.list();

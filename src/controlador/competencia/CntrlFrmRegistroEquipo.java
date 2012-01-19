@@ -38,23 +38,26 @@ import org.zkoss.zul.api.Comboitem;
 import com.lowagie.text.ListItem;
 
 import comun.EstadoCompetencia;
+import controlador.jugador.bean.Persona;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDivisa;
 import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioEquipoCompetencia;
 import servicio.implementacion.ServicioIndicador;
+import servicio.implementacion.ServicioPersona;
 import servicio.implementacion.ServicioPersonaNatural;
+import servicio.implementacion.ServicioPersonal;
 import servicio.implementacion.ServicioRegistroEquipo;
 
 public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
-	int posicion;
+	int posicion,tipoOperacion=0;
 	Equipo equipo;
 
 	Divisa divisa;
 	EquipoCompetencia equipoComptencia, equipoCompetencia;
 	Competencia competencia;
-	PersonaNatural personaNatural;
+	PersonaNatural personaNatural,personaNaturalForaneo;
 	Component comp, formulario;
 	AnnotateDataBinder binder;
 	ServicioDivisa servicioDivisa;
@@ -62,8 +65,11 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	ServicioEquipo servicioEquipo;
 	ServicioRegistroEquipo servicioRegistroEquipo;
 	ServicioEquipoCompetencia servicioEquipoCompetencia;
-	ServicioPersonaNatural serviciopersonaNatural;
+	ServicioPersonaNatural servicioPersonaNatural;
+	ServicioPersona servicioPersona;
+	ServicioPersonaNatural servicioPersonaNaturalForaneo;
 	List<CategoriaCompetencia> categorias;
+	List<Persona> persona;
 	List<EquipoCompetencia> equipocompetencia, equipocompetenciaforaneo;
 	List<Equipo> equipos, equiposforaneos;
 	List<Divisa> divisas;
@@ -75,6 +81,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	Window frmRegistroEquipo;
 	Button btnBuscarDelegado;
 	Combobox cmbDivisa;
+
+	
 
 	// Este metodo se llama al cargar la ventana
 	public void doAfterCompose(Component c) throws Exception {
@@ -90,6 +98,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	public void restaurar() {
 		competencia = new Competencia();
+//		personaNaturalForaneo = servicioPersonaNaturalForaneo.buscarPersonaNatural();
+		
 	}
 
 	// Llama al evento select de la lista de equipos locales
@@ -101,6 +111,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	// Llama al evento select de la lista de equipos locales
 	public void onClick$btnAgregarEquiposForaneos() {
+		tipoOperacion=1;				
 		Agregar(lsbxEquiposForaneos, lsbxEquiposForaneosSeleccionados,
 				equipocompetenciaforaneo);
 		binder.loadAll();
@@ -125,9 +136,10 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 			}
 			if (!sw) {
 				equipoCompetencia = new EquipoCompetencia();
-				// List<PersonaNatural> personaNaturales =
-				// serviciopersonaNatural.listarActivos();
-				// equipoCompetencia.setPersonaNatural(personaNaturales.get(0));
+				if (tipoOperacion==1){
+					
+					equipoCompetencia.setPersonaNatural(personaNaturalForaneo);
+				}
 				equipoCompetencia.setCompetencia(competencia);
 				equipoCompetencia.setEstatus('A');
 				equipoCompetencia.setEquipo(c1);
@@ -180,7 +192,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				categorias = servicioCategoriaCompetencia
 						.listarCategoriaPorCompetencia(competencia
 								.getCodigoCompetencia());
-				divisas = servicioDivisa.listarDivisaForanea();
+				divisas = servicioDivisa.listarDivisaForanea();				
+				personaNaturalForaneo = servicioPersonaNatural.buscarPersonaNatural("V-0000000");				
 				if (equipocompetencia.size() == 0) {
 					CargarEquipos();
 				}
@@ -278,10 +291,10 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		// se crea el catalogo y se llama
 		Comboitem li = cmbCategoriasForaneas.getSelectedItem();
 		CategoriaCompetencia c1 = (CategoriaCompetencia) li.getValue();
-		equiposforaneos = servicioEquipo.listarEquipoPorCategoria(c1
-				.getCategoria().getCodigoCategoria());
+		equiposforaneos = servicioEquipo.buscarEquiposForaneosPorCategoria(c1.getCategoria().getCodigoCategoria()
+				);
 		binder.loadAll();
-		equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
+//		equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
 	}
 
 	// // llamando el evento guardar
@@ -304,24 +317,23 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				} else {
 					servicioEquipoCompetencia.actualizar(equipocompetencia);
 				}
-			
 
-			estado = 1;
-			restaurar();
-			onClick$btnCancelar();
-			binder.loadAll();
-		} else if (lsbxEquiposForaneosSeleccionados.getItems().size() < 1) {
-			Messagebox.show("Seleccione la Equipos", "Mensaje", Messagebox.OK,
-					Messagebox.EXCLAMATION);
-		}
+				estado = 1;
+				restaurar();
+				onClick$btnCancelar();
+				binder.loadAll();
+			} else if (lsbxEquiposForaneosSeleccionados.getItems().size() < 1) {
+				Messagebox.show("Seleccione la Equipos", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+			}
 
-		if (estado > 0) {
-			Messagebox.show("Datos agregados exitosamente", "Mensaje",
-					Messagebox.OK, Messagebox.EXCLAMATION);
-			restaurar();
-			onClick$btnCancelar();
-			binder.loadAll();
-		}
+			if (estado > 0) {
+				Messagebox.show("Datos agregados exitosamente", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+				restaurar();
+				onClick$btnCancelar();
+				binder.loadAll();
+			}
 		}
 	}
 
@@ -391,7 +403,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				.buscarEquipoporCompetencia(competencia);
 		for (Iterator i = EC.iterator(); i.hasNext();) {
 			EquipoCompetencia c1 = (EquipoCompetencia) i.next();
-			if (c1.getEquipo().getDivisa().getCodigoDivisa() == 1) {
+			if (c1.getEquipo().getDivisa().getCodigoDivisa() == 1) {				
 				equipocompetencia.add(c1);
 			} else {
 				equipocompetenciaforaneo.add(c1);
@@ -540,4 +552,5 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	public void setEquipoComptencia(EquipoCompetencia equipoComptencia) {
 		this.equipoComptencia = equipoComptencia;
 	}
+	
 }

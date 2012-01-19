@@ -18,6 +18,8 @@ public interface IServicoPersonaNatural {
 	public abstract List<PersonaNatural> listarActivos();
 	
 	public abstract PersonaNatural buscarPorCodigo (PersonaNatural d);
+	
+	public abstract PersonaNatural  buscarPersonaNatural(String d);
 
 
 }

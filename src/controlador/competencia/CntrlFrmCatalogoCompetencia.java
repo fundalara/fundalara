@@ -6,6 +6,7 @@ import modelo.Categoria;
 import modelo.CategoriaCompetencia;
 import modelo.Competencia;
 import modelo.Divisa;
+import modelo.PersonaNatural;
 
 
 import org.zkoss.zk.ui.Component;
@@ -19,6 +20,7 @@ import org.zkoss.zul.Window;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioCompetencia;
+import servicio.implementacion.ServicioPersonaNatural;
 
 
 
@@ -37,11 +39,14 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
 	Listbox lsbxCompetencias;
 	Component catalogo;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
-	List<CategoriaCompetencia> categoria;
+	List<CategoriaCompetencia> categoria;	
+
 
 	public void onCreate$FrmCatalogoC(){
 	    int estatus = (Integer) catalogo.getVariable("estatus",false);	
 	    competencias = servicioCompetencia.listarPorEstatus(estatus);
+	     
+	    
 	    determinarTitulo(estatus);
 	    binder.loadAll();
 	}

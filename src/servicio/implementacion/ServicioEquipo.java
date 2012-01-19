@@ -63,7 +63,7 @@ public class ServicioEquipo implements IServicioEquipo {
 	public List<Equipo> buscarPorCategoria(Categoria categoria){
 		return daoEquipo.buscarEquiposPorCategoria(categoria);
 	}
-	public List<Equipo> buscarEquiposForaneosPorCategoria(Categoria categoria){
+	public List<Equipo> buscarEquiposForaneosPorCategoria(int categoria){
 		return daoEquipo.buscarEquiposForaneosPorCategoria(categoria);
 	}
 	public boolean buscarPorCodigo (Equipo equipo) {

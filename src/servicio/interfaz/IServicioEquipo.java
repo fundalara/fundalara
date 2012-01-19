@@ -21,7 +21,7 @@ public interface IServicioEquipo {
 	
     public abstract List<Equipo> buscarPorCategoria(Categoria categoria);
     
-    public abstract List<Equipo> buscarEquiposForaneosPorCategoria(Categoria categoria);
+    public abstract List<Equipo> buscarEquiposForaneosPorCategoria(int categoria);
 	
 	public abstract boolean buscarPorCodigo (Equipo equipo);
 	
