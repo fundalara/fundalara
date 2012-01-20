@@ -15,9 +15,12 @@ import modelo.PersonalForaneoJuego;
 import org.python.modules.synchronize;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Combobox;
@@ -35,6 +38,7 @@ import org.zkoss.zul.Textbox;
 
 import comun.Inning;
 
+import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioPersonalForaneo;
 
@@ -44,6 +48,9 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	Juego juego;
 	Component formulario;
 	Textbox txtJuego;
+	Textbox txtInnings;
+	Button btnAgregarI;
+	Button btnQuitarI;
 	Spinner spnrInnigs;
 	Equipo equipoA;
 	Equipo equipoB;
@@ -58,10 +65,13 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	Listcell lcEquipoA;
 	Listcell lcEquipoB;
 	Label lblEquipoA;
+	Label lblCarrerasA;
 	Label lblEquipoB;
+	Label lblCarrerasB;
 	Grid grid;
 	ServicioDatoBasico servicioDatoBasico;
 	ServicioPersonalForaneo servicioPersonalForaneo;
+	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	List<PersonalForaneo> umpires;
 	List<DatoBasico> posiciones;
 	Combobox cmbUmpires;
@@ -119,11 +129,39 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 		txtJuego.setText(equipoA.getNombre() + " vs " + equipoB.getNombre());
 		lblEquipoA.setValue(equipoA.getNombre());
 		lblEquipoB.setValue(equipoB.getNombre());
-		innings = new ArrayList<Inning>();
-		innings.add(new Inning(1, 0));
-		innings.add(new Inning(2, 0));
-		innings.add(new Inning(3, 0));
+		int duracionA = servicioCategoriaCompetencia
+				.getDuraccionCategoria(equipoA.getCategoria());
+		int duracionB = servicioCategoriaCompetencia
+				.getDuraccionCategoria(equipoB.getCategoria());
+
+		if (duracionA > duracionB) {
+			txtInnings.setText(String.valueOf(duracionA));
+			llenar(duracionA);
+		} else {
+			txtInnings.setValue(String.valueOf(duracionB));
+			llenar(duracionB);
+		}
 		binder.loadAll();
+	}
+
+	public void onClick$btnAgregarI() {
+		int val = Integer.valueOf(txtInnings.getText());
+		txtInnings.setText(String.valueOf(val + 1));
+		agregar(txtInnings.getText());
+	}
+
+	public void onClick$btnQuitarI() {
+		int val = Integer.valueOf(txtInnings.getText());
+		if (val > 1) {
+			txtInnings.setText(String.valueOf(val - 1));
+			quitar(String.valueOf(val));
+		}
+	}
+
+	public void llenar(int valor) {
+		for (int i = 0; i < valor; i++) {
+			agregar(String.valueOf(i + 1));
+		}
 	}
 
 	public List ConvertirConjuntoALista(Set conjunto) {
@@ -135,30 +173,74 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 
 	}
 
-	public void onChanging$spnrInnigs(InputEvent e) {
-
+	public void agregar(String valor) {
 		Columns cols = (Columns) formulario.getFellow("titulo");
-		Column col = new Column(e.getValue());
-		if (!buscar(cols, e.getValue())) {
-				col.setWidth("55px");
-				Column columnCarreras = (Column) formulario.getFellow("columnCarreras");
-				cols.insertBefore(col, columnCarreras);
-				Row fila1 = (Row) formulario.getFellow("fila1");
-				Row fila2 = (Row) formulario.getFellow("fila2");
-				Spinner spr1 = new Spinner(0);
-				spr1.setCols(1);
-				spr1.setId("spnrA"+e.getValue());
-				Spinner spr2 = new Spinner(0);
-				spr2.setCols(1);
-				spr2.setId("spnrB"+e.getValue());
-				Label lblCarrerasA = (Label) formulario.getFellow("lblCarrerasA");
-				Label lblCarrerasB = (Label) formulario.getFellow("lblCarrerasB");
-				fila1.insertBefore(spr1, lblCarrerasA);
-				fila2.insertBefore(spr2, lblCarrerasB);
-				resultados.invalidate();
-				e.stopPropagation();
-	     }
+		Column col = new Column(valor);
+		col.setWidth("55px");
+		col.setId("col" + valor);
+		Column columnCarreras = (Column) formulario.getFellow("columnCarreras");
+		cols.insertBefore(col, columnCarreras);
+		Row fila1 = (Row) formulario.getFellow("fila1");
+		Row fila2 = (Row) formulario.getFellow("fila2");
+		Spinner spr1 = new Spinner(0);
+		spr1.setCols(2);
+		spr1.setId("spnrA" + valor);
+		spr1.setConstraint("min 0");
+		spr1.addForward(Events.ON_CHANGING,formulario, "onCambio");
+		Spinner spr2 = new Spinner(0);
+		spr2.setCols(2);
+		spr2.setId("spnrB" + valor);
+		spr2.setConstraint("min 0");
+		spr2.addForward(Events.ON_CHANGING, formulario, "onCambio");
+		Label lblCarrerasA = (Label) formulario.getFellow("lblCarrerasA");
+		Label lblCarrerasB = (Label) formulario.getFellow("lblCarrerasB");
+		fila1.insertBefore(spr1, lblCarrerasA);
+		fila2.insertBefore(spr2, lblCarrerasB);
+		resultados.invalidate();
+
+	}
+
+	
+    
+   public void onCambio(InputEvent e) {
 		
+	    Spinner spnr = (Spinner) formulario.getFellow(e.getTarget().getId());
+	    spnr.setValue(Integer.valueOf(e.getValue()));
+	    spnr.invalidate();
+		acumular();
+		
+	}
+	public void acumular () {
+		Columns cols = (Columns) formulario.getFellow("titulo");
+		int n = cols.getChildren().size() - 4;
+		int acumA = 0;
+		int acumB = 0;
+		for (int i = 1; i <= n; i++) {
+			String idA = "spnrA" + String.valueOf(i);
+			String idB = "spnrB" + String.valueOf(i);			
+			Spinner spnrA = (Spinner) formulario.getFellow(idA);
+			acumA += Integer.valueOf(spnrA.getValue());
+			Spinner spnrB = (Spinner) formulario.getFellow(idB);
+			acumB += Integer.valueOf(spnrB.getValue());
+		}
+		lblCarrerasA.setValue(String.valueOf(acumA));
+		lblCarrerasB.setValue(String.valueOf(acumB));
+
+	}
+
+	public void quitar(String valor) {
+		Columns cols = (Columns) formulario.getFellow("titulo");
+		Column col = (Column) formulario.getFellow("col" + valor);
+		cols.removeChild(col);
+		Row fila1 = (Row) formulario.getFellow("fila1");
+		Row fila2 = (Row) formulario.getFellow("fila2");
+		Spinner spr1 = (Spinner) formulario.getFellow("spnrA" + valor);
+		Spinner spr2 = (Spinner) formulario.getFellow("spnrB" + valor);
+		fila1.removeChild(spr1);
+		fila2.removeChild(spr2);
+		acumular();
+		resultados.invalidate();
+
 	}
 
 	public Boolean buscar(Columns cols, String valor) {
@@ -186,18 +268,20 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 		umpiresJuego.add(pfj);
 		binder.loadAll();
 	}
-	
-	public void onClick$btnQuitar() throws InterruptedException{
+
+	public void onClick$btnQuitar() throws InterruptedException {
 		if (lsbxUmpires.getItemCount() > 0) {
-		    if (lsbxUmpires.getSelectedItem() != null){	
-				PersonalForaneoJuego pfj = (PersonalForaneoJuego) lsbxUmpires.getSelectedItem().getValue();
+			if (lsbxUmpires.getSelectedItem() != null) {
+				PersonalForaneoJuego pfj = (PersonalForaneoJuego) lsbxUmpires
+						.getSelectedItem().getValue();
 				umpires.add(pfj.getPersonalForaneo());
 				posiciones.add(pfj.getDatoBasico());
 				umpiresJuego.remove(lsbxUmpires.getSelectedIndex());
 				binder.loadAll();
-		    }else
-		    	Messagebox.show("Debe seleccionar un elemento", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
-			
+			} else
+				Messagebox.show("Debe seleccionar un elemento", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+
 		}
 	}
 

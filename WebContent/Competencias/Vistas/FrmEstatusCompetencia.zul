@@ -13,42 +13,42 @@
 						<div>
 							<grid width="100%">
 								<columns>
-									<column width="25%" align="left" />
-									<column width="25%" align="left" />
-									<column width="25%" align="left" />
-									<column width="25%" align="left" />
+									<column width="" align="left" />
+									<column width="" align="left" />
+									<column width="" align="left" />
+									<column width="" align="left" />
 								</columns>
 								<rows>
-									<row style="border-style:none">
+									<row spans="4"
+										style="border-style:none">
 										<hbox>
 											<label
-												value="Nombre Competencia">
+												value="Nombre">
 											</label>
-											<space width="10px"></space>
+											<space width="75px"></space>
 											<textbox id="txtNombre"
-												value="@{cntrl.competencia.nombre}" cols="30">
+												value="@{cntrl.competencia.nombre}" cols="25">
 											</textbox>
-											<space></space>
+
 											<button id="btnBuscar"
 												onClick="" image="../../Recursos/Imagenes/consultar.ico" />
 										</hbox>
-										<label value="Tipo Competencia" />
+										<label value="Tipo" />
 										<textbox
 											value="@{cntrl.competencia.modalidadCompetencia.tipoCompetencia.nombre}"
 											id="txtTipoCompetencia">
 										</textbox>
 									</row>
 
-									<row style="border-style:none"
-										align="left">
+									<row spans="4"
+										style="border-style:none" align="left">
 										<hbox>
-											<label value="Modalidad "
-												width="100%" />
-											<space width="20px"></space>
+											<label value="Modalidad " />
+											<space width="60px"></space>
 											<textbox
 												value="@{cntrl.competencia.modalidadCompetencia.nombre}"
-												id="txtModalidad">
-											</textbox>
+												id="txtModalidad" cols="25">
+										</textbox>
 										</hbox>
 										<label value="Estatus"></label>
 										<textbox
@@ -56,16 +56,16 @@
 											id="txtEstatus">
 										</textbox>
 									</row>
-
-									<row style="border-style:none">
+									<row spans="4"
+										style="border-style:none" align="left">
 										<hbox>
 											<label
 												value="Fecha Inicio">
 											</label>
-											<space width="15px"></space>
+											<space width="50px"></space>
 											<textbox
 												value="@{cntrl.competencia.fechaInicio}"
-												id="txtfechaInicio">
+												id="txtfechaInicio" cols="25">
 											</textbox>
 										</hbox>
 										<label
@@ -75,32 +75,33 @@
 											value="@{cntrl.competencia.fechaFin}" id="txtfechaFin">
 										</textbox>
 									</row>
-
-									<row style="border-style:none">
+									<row spans="4"
+										style="border-style:none" align="left">
 										<hbox>
-											<label
-												value="Cantidad Equipos" />
-											<textbox 
-												id="txtCantEquipos">
-											</textbox>
-											<space width="15px"></space>
+										<label value="Cantidad Equipos" />
+										<space width="13px"></space>
+										<textbox id="txtCantEquipos" cols="25">
+										</textbox>
 										</hbox>
 										<label
 											value="Jugadores por Roster" />
-										<textbox id="txtJugRoster" ></textbox>
+										<textbox id="txtJugRoster"></textbox>
 									</row>
-									<row style="border-style:none">
+									<row spans="4"
+										style="border-style:none">
 										<hbox>
 											<label
 												value="Juegos Programados" />
-											<textbox 
-												id="txtJuegosProgramados"> 
+											<textbox
+												id="txtJuegosProgramados" cols="24">
 											</textbox>
-											<space width="15px"></space>
 										</hbox>
 										<label
 											value="Juegos Registrados" />
-										<textbox id="txtJuegosRegistrados" value=""></textbox>
+										<textbox
+											id="txtJuegosRegistrados" value="">
+										</textbox>
+
 									</row>
 								</rows>
 							</grid>

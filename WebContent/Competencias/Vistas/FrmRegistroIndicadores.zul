@@ -5,7 +5,7 @@
 <zk>
 	<div align="center">
 		<window title="Registro de Indicadores" border="normal"
-			id="winRegistroIndicador" width="500px" height="auto" closable="true" 
+			id="winRegistroIndicador" width="500px" height="auto" closable="true"
 			apply="controlador.competencia.CntrlFrmRegistroIndicadores">
 			<div align="left">
 				<grid>
@@ -14,92 +14,27 @@
 						<column width="5%" />
 						<column width="5%" />
 						<column width="65%" />
-						
-<!-- 						<column width="25%" /> -->
-<!-- 								<column width="25%" /> -->
-<!-- 								<column width="5%" /> -->
-<!-- 								<column width="15%" /> -->
-<!-- 								<column width="20%" /> -->
-<!-- 								<column width="5%" /> -->
-						
 					</columns>
 					<rows>
 						<row style="border:none">
-						
-						
-<!-- 						<label value="Nombre"></label> -->
-<!-- 									<textbox id="txtNombreSencillo" -->
-<!-- 										cols="20" value="@{cntrl.indicador.nombre}" /> -->
-										
-						
 							<label value="Tipo Indicador" />
 							<combobox id="cmbTipo"
 								style="margin-top:5px" cols="13"
 								model="@{cntrl.listTipoIndicador}">
 								<comboitem self="@{each=tipoIndicador}"
 									label="@{tipoIndicador.nombre}" value="@{tipoIndicador}" />
-							</combobox>
+							</combobox>							
 							<label />
-
-
 							<button id="btnBuscarIndicador"
-								image="../../Recursos/Imagenes/consultar.ico">
-							</button>
+										image="../../Recursos/Imagenes/consultar.ico">
+									</button>
 						</row>
-						
-<!-- 						<row> -->
-<!-- 						<label value="Tipo Indicador" /> -->
-<!-- 							<combobox id="cmbTipo" -->
-<!-- 								style="margin-top:5px" cols="13" -->
-<!-- 								model="@{cntrl.listTipoIndicador}"> -->
-<!-- 								<comboitem self="@{each=tipoIndicador}" -->
-<!-- 									label="@{tipoIndicador.nombre}" value="@{tipoIndicador}" /> -->
-<!-- 							</combobox> -->
-<!-- 							<label /> -->
-						
-<!-- 						</row> -->
-						
 					</rows>
 				</grid>
-				<panel id="pnlSencillo" title="Indicadores Sencillos"
-					border="normal" visible="false">
-					<panelchildren>
-						<grid width="100%">
-							<columns>
-								<column width="25%" />
-								<column width="25%" />
-								<column width="5%" />
-								<column width="15%" />
-								<column width="20%" />
-								<column width="5%" />
-							</columns>
-							<rows>
-								<row align="left" style="border:none">
-									<label value="Modalidad" />
-									<combobox id="cmbModalidadSencillo"
-										cols="13" value="--Seleccione--"
-										model="@{cntrl.listModalidadIndicador}">
-										<comboitem
-											self="@{each=modalidadIndicador}"
-											label="@{modalidadIndicador.nombre}"
-											value="@{modalidadIndicador}" />
-									</combobox>
-								</row>
-								<row align="left" style="border:none">
-									<label value="Abreviatura"></label>
-									<textbox id="txtAbreviaturaSencillo"
-										cols="16" value="@{cntrl.indicador.abreviatura}" />
-									<label />
-									<label value="Nombre"></label>
-									<textbox id="txtNombreSencillo"
-										cols="20" value="@{cntrl.indicador.nombre}" />
-								</row>
-							</rows>
-						</grid>
-					</panelchildren>
-				</panel>
-				<panel id="pnlCompuesto" title="Indicadores Compuestos"
-					border="normal" visible="false">
+
+
+
+				<panel id="pnlIndicador" border="normal">
 					<panelchildren>
 						<grid width="100%">
 							<columns>
@@ -111,9 +46,10 @@
 								<column width="2%" />
 							</columns>
 							<rows>
+							<row></row>
 								<row align="left" style="border:none">
 									<label value="Modalidad" />
-									<combobox id="cmbModalidadCompuesto"
+									<combobox id="cmbModalidad"
 										cols="13" value="--Seleccione--"
 										model="@{cntrl.listModalidadIndicador}">
 										<comboitem
@@ -122,7 +58,7 @@
 											value="@{modalidadIndicador}" />
 									</combobox>
 									<label />
-									<label value="Medición " />
+									<label id="lblMedicion" value="Medición " />
 									<combobox id="cmbMedicion" cols="13"
 										value="--Seleccione--"
 										model="@{cntrl.listMedicionIndicador}">
@@ -131,28 +67,35 @@
 											label="@{medicionIndicador.nombre}"
 											value="@{medicionIndicador}" />
 									</combobox>
-
+								</row>
+								<row align="left" style="border:none">
+									<label value="Nombre"></label>
+									<textbox id="txtNombre"
+										cols="35" value="@{cntrl.indicador.nombre}"/>
+									<label />
+									<label />
+									<label />
 								</row>
 								<row align="left" style="border:none">
 									<label value="Abreviatura"></label>
 									<textbox
-										id="txtAbreviaturaCompuesto" cols="16" value="@{cntrl.indicador.abreviatura}"/>
+										id="txtAbreviatura" cols="16"
+										value="@{cntrl.indicador.abreviatura}"/>
 									<label />
-									<label value="Nombre"></label>
-									<textbox id="txtNombreCompuesto" cols="20" value="@{cntrl.indicador.nombre}"/>
+									<label />
+									<label />
+
 								</row>
 								<row />
 							</rows>
 						</grid>
+					</panelchildren>
+				</panel>
 
 
-						<grid>
-							<columns>
-								<column align="Center">Fórmula</column>
-							</columns>
-						</grid>
-
-						<grid width="100%">
+				<panel id="pnlFormula" title="Fórmula" border="normal">
+					<panelchildren>
+						<grid width="100%" style="border:none">
 							<columns>
 								<column width="22%" />
 								<column width="25%" />
@@ -184,7 +127,7 @@
 							</rows>
 						</grid>
 
-						<grid width="100%">
+						<grid width="100%" style="border:none">
 							<columns>
 								<column width="15%" />
 								<column width="15%" />
@@ -193,13 +136,10 @@
 								<column width="15%" />
 								<column width="15%" />
 								<column width="15%" />
-
 							</columns>
 							<rows>
-
-
-
-								<row>
+								<row></row>
+								<row style="border:none">
 									<button id="btnSumar" label="+" />
 									<button id="btnRestar" label="-" />
 									<button id="btnMultiplicar"
@@ -207,49 +147,33 @@
 									<button id="btnDividir" label="/" />
 									<button id="btnParentesisAbre"
 										label="(" />
-
 									<button id="btnParentesisCierra"
 										label=")" />
+									<label />
 								</row>
 							</rows>
 						</grid>
-
-						<!-- 						<grid width="100%"> -->
-						<!-- 							<columns> -->
-						<!-- 								<column width="22%" /> -->
-						<!-- 								<column width="70%" /> -->
-						<!-- 							</columns> -->
-						<!-- 							<rows> -->
-						<!-- 								<row align="left" -->
-						<!-- 									style="border-style:none"> -->
-						<!-- 									<label value="Fórmula " /> -->
-						<!-- 									<textbox id="txtFormula" -->
-						<!-- 										multiline="true" cols="30" value="@{cntrl.indicador.formula}" /> -->
-						<!-- 									<button id="btnBorrar" -->
-						<!-- 										image="../../Recursos/Imagenes/atras.ico"> -->
-						<!-- 									</button> -->
-						<!-- 								</row> -->
-						<!-- 							</rows> -->
-						<!-- 						</grid> -->
-
-						<div>
-							<panel>
-								<panelchildren>
-									<div align="center">
-										<label value="Fórmula " />
-										<textbox id="txtFormula"
-											multiline="true" cols="30"
-											value="@{cntrl.indicador.formula}" />
-										<button id="btnBorrar" 
-											image="../../Recursos/Imagenes/atras.ico">
-										</button>
-									</div>
-								</panelchildren>
-							</panel>
-						</div>
-
-
-
+						<grid width="100%" style="border:none">
+							<columns>
+								<column width="25%" />
+								<column width="35%" />
+								<column width="2%" />
+								<column width="15%" />
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Fórmula " />
+									<textbox id="txtFormula"
+										multiline="true" cols="30" value="@{cntrl.indicador.formula}" />
+									<label />
+									<button id="btnBorrar"
+										image="../../Recursos/Imagenes/atras.ico">
+									</button>
+									<label />
+									<label />
+								</row>
+							</rows>
+						</grid>
 					</panelchildren>
 				</panel>
 				<div>

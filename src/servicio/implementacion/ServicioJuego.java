@@ -6,6 +6,7 @@ import dao.general.DaoJuego;
 
 import modelo.Juego;
 import servicio.interfaz.IServicioJuego;
+import modelo.DatoBasico;
 
 public class ServicioJuego implements IServicioJuego {
 	
@@ -42,5 +43,9 @@ public class ServicioJuego implements IServicioJuego {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public int listarJuegosProgramados(DatoBasico datoBasico) {
+		return daoJuego.listarJuegosProgramados(datoBasico );
+}
 
 }

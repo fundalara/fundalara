@@ -1,6 +1,8 @@
 package servicio.interfaz;
 
 import java.util.List;
+
+import modelo.DatoBasico;
 import modelo.PersonalForaneo;
 
 public interface IServicioPersonalForaneo {
@@ -14,5 +16,7 @@ public interface IServicioPersonalForaneo {
 	public abstract List<PersonalForaneo> listarActivos();
 	
 	public abstract List<PersonalForaneo> listarUmpires();
+
+	 public abstract DatoBasico consultarDB();
 
 }

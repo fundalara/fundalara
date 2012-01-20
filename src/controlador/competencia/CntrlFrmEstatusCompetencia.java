@@ -124,8 +124,9 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 						.EquiposRegistrados(competencia).getEquipoIngresan()));
 				txtJugRoster.setValue(String.valueOf(competencia
 						.getCantidadJugador()));
-				txtJuegosProgramados.setValue(String.valueOf(competencia
+				txtJuegosRegistrados.setValue(String.valueOf(competencia
 						.getJuegos().size()));
+				txtJuegosProgramados.setValue(String.valueOf(servicioJuego.listarJuegosProgramados(datoBasico)));
 
 				binder.loadAll();
 			}

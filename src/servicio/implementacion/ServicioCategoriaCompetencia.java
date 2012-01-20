@@ -65,4 +65,10 @@ public class ServicioCategoriaCompetencia implements
 		return daoCategoriaCompetencia.listarCategoriaPorCompetencia(CategoriaCompetencia.class,codigo);
 	}
 
+	@Override
+	public int getDuraccionCategoria(Categoria cat) {
+		return daoCategoriaCompetencia.getDuraccionCategoria(cat);
+		
+	}
+
 }

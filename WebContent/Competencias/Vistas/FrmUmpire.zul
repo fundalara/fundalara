@@ -1,0 +1,68 @@
+<?page title="Umpire" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmUmpire"?>
+
+<zk>
+	<div align="center">
+		<window id="FrmUmpire" title="Umpire" border="normal"
+			width="450px" height="" closable="true"
+			apply="controlador.competencia.CntrlFrmUmpire">
+
+
+			<panel>
+				<caption label="Datos del Umpire"></caption>
+				<panelchildren>
+					<separator height="5px"></separator>
+					<div align="center">
+						<grid width="90%" style="border:none">
+							<columns>
+								<column label="" width="30%"
+									align="left" />
+								<column label="" width="70%"
+									align="left" />
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Nombre:"></label>
+									<hbox>
+										<textbox id="txtNombre"
+											value="@{cntrl.umpire.nombre}" cols="35"
+											constraint="no empty:El campo 'Nombre' es obligatorio">
+										</textbox>
+										<space></space>
+										<button id="btnBuscar"
+											image="../../Recursos/Imagenes/consultar.ico">
+										</button>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</div>
+					<separator height="15px"></separator>
+
+					<div align="right" height="30px">
+						<button id="btnGuardar"
+							image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+							orient="horizontal">
+						</button>
+						<button id="btnEliminar"
+							image="../../Recursos/Imagenes/editar.ico" label="Eliminar"
+							disabled="true" orient="horizontal">
+						</button>
+						<button id="btnCancelar"
+							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+							orient="horizontal">
+						</button>
+						<button id="btnSalir"
+							image="/Recursos/Imagenes/salir.png" label="Salir"
+							orient="horizontal">
+						</button>
+					</div>
+					<separator height="20spx"></separator>
+				</panelchildren>
+			</panel>
+
+
+		</window>
+	</div>
+</zk>

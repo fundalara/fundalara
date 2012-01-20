@@ -1,0 +1,43 @@
+<?page title="Catalogo Umpire" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmCatalogoUmpire"?>
+<zk>
+	<div align="center">
+		<window id="FrmCatalogoUmpire" title="Umpire" border="normal"
+			width="450px" mode="modal" closable="true" height="350px" apply="controlador.competencia.CntrlFrmCatalogoUmpire">
+
+			<panel width="100%">
+				<panelchildren>
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox></textbox>
+						<button label="Buscar"></button>
+					</div>
+					<listbox id="lsbxUmpire" mold="paging" pageSize="10"
+						style="margin-top:5px" model="@{cntrl.umpires}" height="240px"  width="100%">
+						<listhead>
+							<listheader label="Nombre" align="center"
+								width="60%">
+							</listheader>
+							<listheader label="Descripción" align="center"
+								width="40%">
+							</listheader>
+						</listhead>
+						<listitem self="@{each=umpire}">
+							<listcell label="@{umpire.nombre}"></listcell>
+							<listcell label="@{umpire.datoBasico.nombre}"></listcell> 
+						</listitem>
+					</listbox>
+					<div align="right">
+						<button id="btnAceptar"
+							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
+						</button>
+						<button id="btnSalir"
+							image="../../Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+		</window>
+	</div>
+</zk>

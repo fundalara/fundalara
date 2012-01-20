@@ -44,13 +44,6 @@ public class CntrlFrmCatalogoEstatusCompetencia extends GenericForwardComposer {
 		this.competencias = competencias;
 	}
 
-	public Component getCatalogo() {
-		return catalogo;
-	}
-
-	public void setCatalogo(Component catalogo) {
-		this.catalogo = catalogo;
-	}
 
 	public ServicioCompetencia getServicioCompetencia() {
 		return servicioCompetencia;

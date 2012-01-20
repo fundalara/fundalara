@@ -4,9 +4,10 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmRegistroResultados" ?>
 <zk>
 
-    
+
 	<window title="REGISTRO DE RESULTADOS" border="normal" mode="popup"
-		id="FrmRegistroResultados" closable="true" width="760px" apply="controlador.competencia.CntrlFrmRegistroResultados">
+		id="FrmRegistroResultados" closable="true" width="760px"
+		apply="controlador.competencia.CntrlFrmRegistroResultados">
 
 
 
@@ -92,8 +93,11 @@
 								style="text-color:black" cols="30"
 								value="@{cntrl.juego.estadio.nombre}" />
 							<label value="Innings" />
-							<spinner   id="spnrInnigs" readonly="true" constraint="no negative"
-								style="text-color:black" cols="3" value="0" />
+							<div>
+								<textbox cols="2" id="txtInnings" readonly="true"></textbox>
+								<button label="+" id="btnAgregarI"></button>
+								<button label="-" id="btnQuitarI"></button>
+							</div>
 							<label value="Hora Fin" />
 							<timebox style="text-color:black"
 								cols="8">
@@ -102,12 +106,12 @@
 						<row style="border-style:none">
 							<label value="Anotador"></label>
 							<div>
-								<textbox cols="20" />
+								<combobox cols="20" />
 								<label value="(Oficial)"></label>
 							</div>
 							<label value="Anotador"></label>
 
-							<textbox cols="20" />
+							<combobox cols="20" />
 							<label value="(Divisa)"></label>
 
 
@@ -144,7 +148,7 @@
 
 				</div>
 				<hbox>
-					<listbox id="lsbxUmpires" 
+					<listbox id="lsbxUmpires"
 						model="@{cntrl.umpiresJuego}" width="300px" mold="paging"
 						pageSize="10" style="margin-top:5px">
 						<listhead>
@@ -156,11 +160,13 @@
 							</listheader>
 						</listhead>
 
-						<listitem
-							self="@{each=personalForaneoJuego}" value="@{personalForaneoJuego}"> 
-							<listcell label="@{personalForaneoJuego.datoBasico.nombre}">
+						<listitem self="@{each=personalForaneoJuego}"
+							value="@{personalForaneoJuego}">
+							<listcell
+								label="@{personalForaneoJuego.datoBasico.nombre}">
 							</listcell>
-							<listcell label="@{personalForaneoJuego.personalForaneo.nombre}">
+							<listcell
+								label="@{personalForaneoJuego.personalForaneo.nombre}">
 							</listcell>
 						</listitem>
 					</listbox>
@@ -184,26 +190,28 @@
 			<panelchildren style="margin-top:15px">
 				<grid id="resultados" width="740px">
 					<columns id="titulo">
-					  <column width="150px" label="Equipos" ></column>
-					  <column id="columnCarreras" width="30px" label="C"></column>
-					  <column width="30px" label="H"></column>
-					  <column width="30px" label="E"></column>
+						<column width="150px" label="Equipos"></column>
+						<column id="columnCarreras" width="30px"
+							label="C" align="center" >
+						</column>
+						<column width="30px" label="H" align="center"></column>
+						<column width="30px" label="E" align="center"></column>
 					</columns>
 					<rows>
 						<row id="fila1">
-                          <label id="lblEquipoA"></label>
-                          <label id="lblCarrerasA" value="0"></label>
-                          <label id="lblHitsA" value="0"></label>
-                          <label id="lblErroresA" value="0"></label>
+							<label id="lblEquipoA"></label>
+							<label id="lblCarrerasA" value="0"></label>
+							<label id="lblHitsA" value="0"></label>
+							<label id="lblErroresA" value="0"></label>
 						</row>
 						<row id="fila2">
-						  <label id="lblEquipoB"></label>
-                          <label id="lblCarrerasB" value="0"></label>
-                          <label id="lblHitsB" value="0"></label>
-                          <label id="lblErroresB" value="0"></label>
-						 
-				    </row>
-   
+							<label id="lblEquipoB"></label>
+							<label id="lblCarrerasB" value="0"></label>
+							<label id="lblHitsB" value="0"></label>
+							<label id="lblErroresB" value="0"></label>
+
+						</row>
+
 					</rows>
 				</grid>
 

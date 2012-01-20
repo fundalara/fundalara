@@ -21,4 +21,6 @@ public interface IServicioCategoriaCompetencia {
 	public abstract List<Categoria> listarActivos();
 	
 	public abstract List <CategoriaCompetencia> listarCategoriaPorCompetencia(int codigo);
+	
+	public abstract int getDuraccionCategoria (Categoria cat);
 }
