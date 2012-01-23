@@ -11,8 +11,7 @@
 
 
 
-		<panel border="normal">
-			<caption label="Datos de la Competencia" />
+		<panel border="normal" title="Datos de la Competencia">
 			<panelchildren>
 				<grid width="690px" style="border-style:none">
 					<columns>
@@ -58,8 +57,7 @@
 				</grid>
 			</panelchildren>
 		</panel>
-		<panel>
-			<caption label="Datos Basicos del Juego" />
+		<panel title="Datos Basicos del Juego">
 			<panelchildren>
 				<grid>
 					<columns>
@@ -99,7 +97,7 @@
 								<button label="-" id="btnQuitarI"></button>
 							</div>
 							<label value="Hora Fin" />
-							<timebox style="text-color:black"
+							<timebox id="tbxHoraF" style="text-color:black"
 								cols="8">
 							</timebox>
 						</row>
@@ -124,8 +122,7 @@
 
 			</panelchildren>
 		</panel>
-		<panel>
-			<caption label="Umpires"></caption>
+		<panel title="Umpires">
 			<panelchildren style="margin-top:10px">
 				<div align="left">
 
@@ -185,30 +182,30 @@
 
 		</panel>
 		<!-- probando con estaticos  -->
-		<panel>
-			<caption label="Resultados" />
+		<panel title="Resultados">
 			<panelchildren style="margin-top:15px">
 				<grid id="resultados" width="740px">
 					<columns id="titulo">
 						<column width="150px" label="Equipos"></column>
-						<column id="columnCarreras" width="30px"
+						<column id="columnCarreras" width="55px"
 							label="C" align="center" >
 						</column>
-						<column width="30px" label="H" align="center"></column>
-						<column width="30px" label="E" align="center"></column>
+						<column width="55px" label="H" align="center"></column>
+						<column width="55px" label="E" align="center"></column>
 					</columns>
 					<rows>
 						<row id="fila1">
 							<label id="lblEquipoA"></label>
 							<label id="lblCarrerasA" value="0"></label>
-							<label id="lblHitsA" value="0"></label>
-							<label id="lblErroresA" value="0"></label>
+							<spinner id="spnrHitsA" cols="2" constraint="min 0" value="0"></spinner>
+							<spinner id="spnrErroresA" cols="2" constraint="min 0" value="0"></spinner>
+							
 						</row>
 						<row id="fila2">
 							<label id="lblEquipoB"></label>
 							<label id="lblCarrerasB" value="0"></label>
-							<label id="lblHitsB" value="0"></label>
-							<label id="lblErroresB" value="0"></label>
+							<spinner id="spnrHitsB" cols="2" constraint="min 0" value="0"></spinner>
+							<spinner id="spnrErroresB" cols="2" constraint="min 0" value="0"></spinner>
 
 						</row>
 
@@ -223,16 +220,9 @@
 		<panel>
 			<panelchildren>
 				<div align="right">
-
-					<button image="/Recursos/Imagenes/guardar.ico"
-						label="Guardar">
-					</button>
-					<button image="/Recursos/Imagenes/cancelar.ico"
-						label="Cancelar">
-					</button>
-					<button image="/Recursos/Imagenes/salir.png"
-						label="Salir">
-					</button>
+					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar" />
+					<button image="/Recursos/Imagenes/cancelar.ico"	label="Cancelar" />
+					<button image="/Recursos/Imagenes/salir.png" label="Salir" />
 				</div>
 			</panelchildren>
 		</panel>

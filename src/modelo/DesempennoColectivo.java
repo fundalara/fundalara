@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -41,7 +41,7 @@ public class DesempennoColectivo implements java.io.Serializable {
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "codigoEquipoJuego", column = @Column(name = "codigo_equipo_juego", nullable = false)),
-			@AttributeOverride(name = "codigoIndicadorCompetencia", column = @Column(name = "codigo_indicador_competencia", nullable = false)) })
+			@AttributeOverride(name = "codigoIndicadorCategoriaCompetencia", column = @Column(name = "codigo_indicador_categoria_competencia", nullable = false)) })
 	public DesempennoColectivoId getId() {
 		return this.id;
 	}
@@ -51,7 +51,7 @@ public class DesempennoColectivo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_indicador_competencia", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_indicador_categoria_competencia", nullable = false, insertable = false, updatable = false)
 	public IndicadorCategoriaCompetencia getIndicadorCategoriaCompetencia() {
 		return this.indicadorCategoriaCompetencia;
 	}

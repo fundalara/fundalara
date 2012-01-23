@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,6 @@ public class EscalaMedicion implements java.io.Serializable {
 	private Set<ValorEscala> valorEscalas = new HashSet<ValorEscala>(0);
 	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
 			0);
-	private Set<IndicadorTest> indicadorTests = new HashSet<IndicadorTest>(0);
 
 	public EscalaMedicion() {
 	}
@@ -45,8 +44,7 @@ public class EscalaMedicion implements java.io.Serializable {
 	public EscalaMedicion(int codigoEscala, DatoBasico datoBasico,
 			String nombre, char estatus, String descripcion,
 			Set<ValorEscala> valorEscalas,
-			Set<IndicadorActividadEscala> indicadorActividadEscalas,
-			Set<IndicadorTest> indicadorTests) {
+			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.codigoEscala = codigoEscala;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
@@ -54,7 +52,6 @@ public class EscalaMedicion implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.valorEscalas = valorEscalas;
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
-		this.indicadorTests = indicadorTests;
 	}
 
 	@Id
@@ -121,15 +118,6 @@ public class EscalaMedicion implements java.io.Serializable {
 	public void setIndicadorActividadEscalas(
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "escalaMedicion")
-	public Set<IndicadorTest> getIndicadorTests() {
-		return this.indicadorTests;
-	}
-
-	public void setIndicadorTests(Set<IndicadorTest> indicadorTests) {
-		this.indicadorTests = indicadorTests;
 	}
 
 }

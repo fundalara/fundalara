@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,25 +11,26 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class DesempennoIndividualId implements java.io.Serializable {
 
-	private int codigoIndicadorCompetencia;
+	private int codigoIndicadorCategoriaCompetencia;
 	private int codigoLineUp;
 
 	public DesempennoIndividualId() {
 	}
 
-	public DesempennoIndividualId(int codigoIndicadorCompetencia,
+	public DesempennoIndividualId(int codigoIndicadorCategoriaCompetencia,
 			int codigoLineUp) {
-		this.codigoIndicadorCompetencia = codigoIndicadorCompetencia;
+		this.codigoIndicadorCategoriaCompetencia = codigoIndicadorCategoriaCompetencia;
 		this.codigoLineUp = codigoLineUp;
 	}
 
-	@Column(name = "codigo_indicador_competencia", nullable = false)
-	public int getCodigoIndicadorCompetencia() {
-		return this.codigoIndicadorCompetencia;
+	@Column(name = "codigo_indicador_categoria_competencia", nullable = false)
+	public int getCodigoIndicadorCategoriaCompetencia() {
+		return this.codigoIndicadorCategoriaCompetencia;
 	}
 
-	public void setCodigoIndicadorCompetencia(int codigoIndicadorCompetencia) {
-		this.codigoIndicadorCompetencia = codigoIndicadorCompetencia;
+	public void setCodigoIndicadorCategoriaCompetencia(
+			int codigoIndicadorCategoriaCompetencia) {
+		this.codigoIndicadorCategoriaCompetencia = codigoIndicadorCategoriaCompetencia;
 	}
 
 	@Column(name = "codigo_line_up", nullable = false)
@@ -50,15 +51,15 @@ public class DesempennoIndividualId implements java.io.Serializable {
 			return false;
 		DesempennoIndividualId castOther = (DesempennoIndividualId) other;
 
-		return (this.getCodigoIndicadorCompetencia() == castOther
-				.getCodigoIndicadorCompetencia())
+		return (this.getCodigoIndicadorCategoriaCompetencia() == castOther
+				.getCodigoIndicadorCategoriaCompetencia())
 				&& (this.getCodigoLineUp() == castOther.getCodigoLineUp());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoIndicadorCompetencia();
+		result = 37 * result + this.getCodigoIndicadorCategoriaCompetencia();
 		result = 37 * result + this.getCodigoLineUp();
 		return result;
 	}

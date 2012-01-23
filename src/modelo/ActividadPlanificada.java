@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,34 +20,45 @@ import javax.persistence.Table;
 public class ActividadPlanificada implements java.io.Serializable {
 
 	private ActividadPlanificadaId id;
+	private ActividadEntrenamiento actividadEntrenamiento;
 	private Sesion sesion;
-	private IndicadorActividadEscala indicadorActividadEscala;
 	private int tiempo;
 	private char estatus;
 
 	public ActividadPlanificada() {
 	}
 
-	public ActividadPlanificada(ActividadPlanificadaId id, Sesion sesion,
-			IndicadorActividadEscala indicadorActividadEscala, int tiempo,
-			char estatus) {
+	public ActividadPlanificada(ActividadPlanificadaId id,
+			ActividadEntrenamiento actividadEntrenamiento, Sesion sesion,
+			int tiempo, char estatus) {
 		this.id = id;
+		this.actividadEntrenamiento = actividadEntrenamiento;
 		this.sesion = sesion;
-		this.indicadorActividadEscala = indicadorActividadEscala;
 		this.tiempo = tiempo;
 		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "codigoIndicadorActividadEscala", column = @Column(name = "codigo_indicador_actividad_escala", nullable = false)),
-			@AttributeOverride(name = "codigoSesion", column = @Column(name = "codigo_sesion", nullable = false)) })
+			@AttributeOverride(name = "codigoSesion", column = @Column(name = "codigo_sesion", nullable = false)),
+			@AttributeOverride(name = "codActividadEntrenamiento", column = @Column(name = "cod_actividad_entrenamiento", nullable = false)) })
 	public ActividadPlanificadaId getId() {
 		return this.id;
 	}
 
 	public void setId(ActividadPlanificadaId id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cod_actividad_entrenamiento", nullable = false, insertable = false, updatable = false)
+	public ActividadEntrenamiento getActividadEntrenamiento() {
+		return this.actividadEntrenamiento;
+	}
+
+	public void setActividadEntrenamiento(
+			ActividadEntrenamiento actividadEntrenamiento) {
+		this.actividadEntrenamiento = actividadEntrenamiento;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -58,17 +69,6 @@ public class ActividadPlanificada implements java.io.Serializable {
 
 	public void setSesion(Sesion sesion) {
 		this.sesion = sesion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_indicador_actividad_escala", nullable = false, insertable = false, updatable = false)
-	public IndicadorActividadEscala getIndicadorActividadEscala() {
-		return this.indicadorActividadEscala;
-	}
-
-	public void setIndicadorActividadEscala(
-			IndicadorActividadEscala indicadorActividadEscala) {
-		this.indicadorActividadEscala = indicadorActividadEscala;
 	}
 
 	@Column(name = "tiempo", nullable = false)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -29,10 +29,7 @@ public class Instalacion implements java.io.Serializable {
 	private BigDecimal tamano;
 	private String ubicacion;
 	private Set<Almacen> almacens = new HashSet<Almacen>(0);
-	private Set<PlanificacionActividad> planificacionActividads = new HashSet<PlanificacionActividad>(
-			0);
-	private Set<PlanRotacion> planRotacions = new HashSet<PlanRotacion>(0);
-	private Set<SesionEjecutada> sesionEjecutadas = new HashSet<SesionEjecutada>(
+	private Set<InstalacionUtilizada> instalacionUtilizadas = new HashSet<InstalacionUtilizada>(
 			0);
 
 	public Instalacion() {
@@ -49,9 +46,7 @@ public class Instalacion implements java.io.Serializable {
 	public Instalacion(int codigoInstalacion, DatoBasico datoBasico,
 			String descripcion, Integer capacidad, char estatus,
 			BigDecimal tamano, String ubicacion, Set<Almacen> almacens,
-			Set<PlanificacionActividad> planificacionActividads,
-			Set<PlanRotacion> planRotacions,
-			Set<SesionEjecutada> sesionEjecutadas) {
+			Set<InstalacionUtilizada> instalacionUtilizadas) {
 		this.codigoInstalacion = codigoInstalacion;
 		this.datoBasico = datoBasico;
 		this.descripcion = descripcion;
@@ -60,9 +55,7 @@ public class Instalacion implements java.io.Serializable {
 		this.tamano = tamano;
 		this.ubicacion = ubicacion;
 		this.almacens = almacens;
-		this.planificacionActividads = planificacionActividads;
-		this.planRotacions = planRotacions;
-		this.sesionEjecutadas = sesionEjecutadas;
+		this.instalacionUtilizadas = instalacionUtilizadas;
 	}
 
 	@Id
@@ -140,31 +133,13 @@ public class Instalacion implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
-	public Set<PlanificacionActividad> getPlanificacionActividads() {
-		return this.planificacionActividads;
+	public Set<InstalacionUtilizada> getInstalacionUtilizadas() {
+		return this.instalacionUtilizadas;
 	}
 
-	public void setPlanificacionActividads(
-			Set<PlanificacionActividad> planificacionActividads) {
-		this.planificacionActividads = planificacionActividads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
-	public Set<PlanRotacion> getPlanRotacions() {
-		return this.planRotacions;
-	}
-
-	public void setPlanRotacions(Set<PlanRotacion> planRotacions) {
-		this.planRotacions = planRotacions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
-	public Set<SesionEjecutada> getSesionEjecutadas() {
-		return this.sesionEjecutadas;
-	}
-
-	public void setSesionEjecutadas(Set<SesionEjecutada> sesionEjecutadas) {
-		this.sesionEjecutadas = sesionEjecutadas;
+	public void setInstalacionUtilizadas(
+			Set<InstalacionUtilizada> instalacionUtilizadas) {
+		this.instalacionUtilizadas = instalacionUtilizadas;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,6 +29,7 @@ public class LapsoDeportivo implements java.io.Serializable {
 	private Date fechaFin;
 	private String nombre;
 	private char estatus;
+	private Date fechaAscenso;
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
 	private Set<PlanTemporada> planTemporadas = new HashSet<PlanTemporada>(0);
 
@@ -47,13 +48,15 @@ public class LapsoDeportivo implements java.io.Serializable {
 
 	public LapsoDeportivo(int codigoLapsoDeportivo, DatoBasico datoBasico,
 			Date fechaInicio, Date fechaFin, String nombre, char estatus,
-			Set<Competencia> competencias, Set<PlanTemporada> planTemporadas) {
+			Date fechaAscenso, Set<Competencia> competencias,
+			Set<PlanTemporada> planTemporadas) {
 		this.codigoLapsoDeportivo = codigoLapsoDeportivo;
 		this.datoBasico = datoBasico;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.nombre = nombre;
 		this.estatus = estatus;
+		this.fechaAscenso = fechaAscenso;
 		this.competencias = competencias;
 		this.planTemporadas = planTemporadas;
 	}
@@ -114,6 +117,16 @@ public class LapsoDeportivo implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_ascenso", length = 13)
+	public Date getFechaAscenso() {
+		return this.fechaAscenso;
+	}
+
+	public void setFechaAscenso(Date fechaAscenso) {
+		this.fechaAscenso = fechaAscenso;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "lapsoDeportivo")

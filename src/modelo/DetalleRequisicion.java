@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -23,15 +23,24 @@ public class DetalleRequisicion implements java.io.Serializable {
 	private Material material;
 	private Requisicion requisicion;
 	private int cantidadSolicitada;
-	private int cantidadEntregada;
+	private Integer cantidadEntregada;
 	private char estatus;
 
 	public DetalleRequisicion() {
 	}
 
 	public DetalleRequisicion(DetalleRequisicionId id, Material material,
+			Requisicion requisicion, int cantidadSolicitada, char estatus) {
+		this.id = id;
+		this.material = material;
+		this.requisicion = requisicion;
+		this.cantidadSolicitada = cantidadSolicitada;
+		this.estatus = estatus;
+	}
+
+	public DetalleRequisicion(DetalleRequisicionId id, Material material,
 			Requisicion requisicion, int cantidadSolicitada,
-			int cantidadEntregada, char estatus) {
+			Integer cantidadEntregada, char estatus) {
 		this.id = id;
 		this.material = material;
 		this.requisicion = requisicion;
@@ -81,12 +90,12 @@ public class DetalleRequisicion implements java.io.Serializable {
 		this.cantidadSolicitada = cantidadSolicitada;
 	}
 
-	@Column(name = "cantidad_entregada", nullable = false)
-	public int getCantidadEntregada() {
+	@Column(name = "cantidad_entregada")
+	public Integer getCantidadEntregada() {
 		return this.cantidadEntregada;
 	}
 
-	public void setCantidadEntregada(int cantidadEntregada) {
+	public void setCantidadEntregada(Integer cantidadEntregada) {
 		this.cantidadEntregada = cantidadEntregada;
 	}
 

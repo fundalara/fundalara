@@ -71,7 +71,6 @@ public class CntrlFrmSelectorCompetencia extends GenericForwardComposer {
 		    competencia = competencias.get(lsbxCompetencias.getSelectedIndex());
 		    Component formulario = (Component) catalogo.getVariable("formulario",false);
 		    formulario.setVariable("competencia",competencia, false);
-		    System.out.println("aceptar");
 		    Events.postEvent(new Event("onCatalogoCerrado", formulario));
 		    catalogo.detach();
 			

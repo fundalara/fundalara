@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,11 +22,12 @@ public class PlanificacionActividad implements java.io.Serializable {
 
 	private int codigoPlanificacionActividad;
 	private DatoBasico datoBasico;
-	private Instalacion instalacion;
+	private InstalacionUtilizada instalacionUtilizada;
 	private char estatus;
 	private boolean actividadPeriodico;
 	private boolean actividadPlantilla;
 	private String descripcion;
+	private String descripcionInstalacion;
 	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
 			0);
 	private Set<Actividad> actividads = new HashSet<Actividad>(0);
@@ -40,12 +41,10 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	public PlanificacionActividad(int codigoPlanificacionActividad,
-			DatoBasico datoBasico, Instalacion instalacion, char estatus,
-			boolean actividadPeriodico, boolean actividadPlantilla,
-			String descripcion) {
+			DatoBasico datoBasico, char estatus, boolean actividadPeriodico,
+			boolean actividadPlantilla, String descripcion) {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
-		this.instalacion = instalacion;
 		this.estatus = estatus;
 		this.actividadPeriodico = actividadPeriodico;
 		this.actividadPlantilla = actividadPlantilla;
@@ -53,9 +52,10 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	public PlanificacionActividad(int codigoPlanificacionActividad,
-			DatoBasico datoBasico, Instalacion instalacion, char estatus,
-			boolean actividadPeriodico, boolean actividadPlantilla,
-			String descripcion,
+			DatoBasico datoBasico, InstalacionUtilizada instalacionUtilizada,
+			char estatus, boolean actividadPeriodico,
+			boolean actividadPlantilla, String descripcion,
+			String descripcionInstalacion,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
 			Set<Actividad> actividads,
 			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
@@ -63,11 +63,12 @@ public class PlanificacionActividad implements java.io.Serializable {
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
-		this.instalacion = instalacion;
+		this.instalacionUtilizada = instalacionUtilizada;
 		this.estatus = estatus;
 		this.actividadPeriodico = actividadPeriodico;
 		this.actividadPlantilla = actividadPlantilla;
 		this.descripcion = descripcion;
+		this.descripcionInstalacion = descripcionInstalacion;
 		this.materialActividadPlanificadas = materialActividadPlanificadas;
 		this.actividads = actividads;
 		this.personalActividadPlanificadas = personalActividadPlanificadas;
@@ -96,13 +97,14 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_instalacion", nullable = false)
-	public Instalacion getInstalacion() {
-		return this.instalacion;
+	@JoinColumn(name = "codigo_instalacion_utilizada")
+	public InstalacionUtilizada getInstalacionUtilizada() {
+		return this.instalacionUtilizada;
 	}
 
-	public void setInstalacion(Instalacion instalacion) {
-		this.instalacion = instalacion;
+	public void setInstalacionUtilizada(
+			InstalacionUtilizada instalacionUtilizada) {
+		this.instalacionUtilizada = instalacionUtilizada;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
@@ -139,6 +141,15 @@ public class PlanificacionActividad implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	@Column(name = "descripcion_instalacion")
+	public String getDescripcionInstalacion() {
+		return this.descripcionInstalacion;
+	}
+
+	public void setDescripcionInstalacion(String descripcionInstalacion) {
+		this.descripcionInstalacion = descripcionInstalacion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")

@@ -1,5 +1,6 @@
 package servicio.implementacion;
 
+import java.util.Date;
 import java.util.List;
 
 import servicio.interfaz.IServicioCategoriaCompetencia;
@@ -69,6 +70,11 @@ public class ServicioCategoriaCompetencia implements
 	public int getDuraccionCategoria(Categoria cat) {
 		return daoCategoriaCompetencia.getDuraccionCategoria(cat);
 		
+	}
+
+	@Override
+	public Date getDuraccionCategoriaHora(Categoria cat) {
+		return daoCategoriaCompetencia.getDuraccionCategoriaHoras(cat);
 	}
 
 }

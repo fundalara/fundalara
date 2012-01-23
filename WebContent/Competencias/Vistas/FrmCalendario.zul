@@ -28,7 +28,7 @@
 
 								<textbox style="margin-left:5px" cols="18"></textbox>
 								<button id="btnBuscarCompetencia"
-									image="../../Recursos/Imagenes/consultar.ico" width="100%">
+									image="/Recursos/Imagenes/consultar.ico" width="100%">
 								</button>
                                   
 										
@@ -89,7 +89,7 @@
 															<hbox>
 																<textbox></textbox>
 																<button
-																	image="../../Recursos/Imagenes/consultar.ico">
+																	image="/Recursos/Imagenes/consultar.ico">
 																</button>
 															</hbox>
 															<label
@@ -98,7 +98,7 @@
 															<hbox>
 																<textbox></textbox>
 																<button
-																	image="../../Recursos/Imagenes/consultar.ico">
+																	image="/Recursos/Imagenes/consultar.ico">
 																</button>
 
 															</hbox>
@@ -197,14 +197,14 @@
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
 						<button
-							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
 
 						<button
-							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
 						<button
-							image="../../Recursos/Imagenes/salir.png" label="Salir">
+							image="/Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>
 				</panelchildren>

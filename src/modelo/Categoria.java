@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +24,6 @@ public class Categoria implements java.io.Serializable {
 	private int edadInferior;
 	private int edadSuperior;
 	private int cantidadEquipo;
-	private int minimoJugador;
-	private int maximoJugador;
 	private char estatus;
 	private Set<Liga> ligas = new HashSet<Liga>(0);
 	private Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias = new HashSet<IndicadorCategoriaCompetencia>(
@@ -43,21 +41,18 @@ public class Categoria implements java.io.Serializable {
 	}
 
 	public Categoria(int codigoCategoria, String nombre, int edadInferior,
-			int edadSuperior, int cantidadEquipo, int minimoJugador,
-			int maximoJugador, char estatus) {
+			int edadSuperior, int cantidadEquipo, char estatus) {
 		this.codigoCategoria = codigoCategoria;
 		this.nombre = nombre;
 		this.edadInferior = edadInferior;
 		this.edadSuperior = edadSuperior;
 		this.cantidadEquipo = cantidadEquipo;
-		this.minimoJugador = minimoJugador;
-		this.maximoJugador = maximoJugador;
 		this.estatus = estatus;
 	}
 
 	public Categoria(int codigoCategoria, String nombre, int edadInferior,
-			int edadSuperior, int cantidadEquipo, int minimoJugador,
-			int maximoJugador, char estatus, Set<Liga> ligas,
+			int edadSuperior, int cantidadEquipo, char estatus,
+			Set<Liga> ligas,
 			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias,
 			Set<ConstanteCategoria> constanteCategorias,
 			Set<CategoriaCompetencia> categoriaCompetencias,
@@ -69,8 +64,6 @@ public class Categoria implements java.io.Serializable {
 		this.edadInferior = edadInferior;
 		this.edadSuperior = edadSuperior;
 		this.cantidadEquipo = cantidadEquipo;
-		this.minimoJugador = minimoJugador;
-		this.maximoJugador = maximoJugador;
 		this.estatus = estatus;
 		this.ligas = ligas;
 		this.indicadorCategoriaCompetencias = indicadorCategoriaCompetencias;
@@ -125,24 +118,6 @@ public class Categoria implements java.io.Serializable {
 
 	public void setCantidadEquipo(int cantidadEquipo) {
 		this.cantidadEquipo = cantidadEquipo;
-	}
-
-	@Column(name = "minimo_jugador", nullable = false)
-	public int getMinimoJugador() {
-		return this.minimoJugador;
-	}
-
-	public void setMinimoJugador(int minimoJugador) {
-		this.minimoJugador = minimoJugador;
-	}
-
-	@Column(name = "maximo_jugador", nullable = false)
-	public int getMaximoJugador() {
-		return this.maximoJugador;
-	}
-
-	public void setMaximoJugador(int maximoJugador) {
-		this.maximoJugador = maximoJugador;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -27,7 +27,7 @@ public class MaterialActividad implements java.io.Serializable {
 	private Actividad actividad;
 	private char estatus;
 	private int cantidadEntregada;
-	private int cantidadDevuelta;
+	private Integer cantidadDevuelta;
 	private Date fechaDevolucion;
 	private String observacion;
 
@@ -35,20 +35,17 @@ public class MaterialActividad implements java.io.Serializable {
 	}
 
 	public MaterialActividad(int codigoMaterialActividad, Material material,
-			char estatus, int cantidadEntregada, int cantidadDevuelta,
-			Date fechaDevolucion) {
+			char estatus, int cantidadEntregada) {
 		this.codigoMaterialActividad = codigoMaterialActividad;
 		this.material = material;
 		this.estatus = estatus;
 		this.cantidadEntregada = cantidadEntregada;
-		this.cantidadDevuelta = cantidadDevuelta;
-		this.fechaDevolucion = fechaDevolucion;
 	}
 
 	public MaterialActividad(int codigoMaterialActividad,
 			SesionEjecutada sesionEjecutada, Material material, Juego juego,
 			Actividad actividad, char estatus, int cantidadEntregada,
-			int cantidadDevuelta, Date fechaDevolucion, String observacion) {
+			Integer cantidadDevuelta, Date fechaDevolucion, String observacion) {
 		this.codigoMaterialActividad = codigoMaterialActividad;
 		this.sesionEjecutada = sesionEjecutada;
 		this.material = material;
@@ -129,17 +126,17 @@ public class MaterialActividad implements java.io.Serializable {
 		this.cantidadEntregada = cantidadEntregada;
 	}
 
-	@Column(name = "cantidad_devuelta", nullable = false)
-	public int getCantidadDevuelta() {
+	@Column(name = "cantidad_devuelta")
+	public Integer getCantidadDevuelta() {
 		return this.cantidadDevuelta;
 	}
 
-	public void setCantidadDevuelta(int cantidadDevuelta) {
+	public void setCantidadDevuelta(Integer cantidadDevuelta) {
 		this.cantidadDevuelta = cantidadDevuelta;
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_devolucion", nullable = false, length = 13)
+	@Column(name = "fecha_devolucion", length = 13)
 	public Date getFechaDevolucion() {
 		return this.fechaDevolucion;
 	}

@@ -1,5 +1,6 @@
 package dao.general;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.Categoria;
@@ -29,6 +30,15 @@ public class DaoCategoriaCompetencia extends GenericDao {
 		c.add(Restrictions.eq("categoria", cat));
 		CategoriaCompetencia cc = (CategoriaCompetencia) c.list().get(0);
 		return cc.getDuracionInning();
+	}
+	
+	public Date getDuraccionCategoriaHoras(Categoria cat) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(CategoriaCompetencia.class);
+		c.add(Restrictions.eq("categoria", cat));
+		CategoriaCompetencia cc = (CategoriaCompetencia) c.list().get(0);
+		return cc.getDuracionHora();
 	}
 
 }

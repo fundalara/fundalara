@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class JugadorForaneo implements java.io.Serializable {
 
 	private String cedula;
-	private EquipoCompetencia equipoCompetencia;
+	private Equipo equipo;
 	private String nombre;
 	private char estatus;
 	private Set<RosterCompetencia> rosterCompetencias = new HashSet<RosterCompetencia>(
@@ -31,19 +31,18 @@ public class JugadorForaneo implements java.io.Serializable {
 	public JugadorForaneo() {
 	}
 
-	public JugadorForaneo(String cedula, EquipoCompetencia equipoCompetencia,
-			String nombre, char estatus) {
+	public JugadorForaneo(String cedula, Equipo equipo, String nombre,
+			char estatus) {
 		this.cedula = cedula;
-		this.equipoCompetencia = equipoCompetencia;
+		this.equipo = equipo;
 		this.nombre = nombre;
 		this.estatus = estatus;
 	}
 
-	public JugadorForaneo(String cedula, EquipoCompetencia equipoCompetencia,
-			String nombre, char estatus,
-			Set<RosterCompetencia> rosterCompetencias) {
+	public JugadorForaneo(String cedula, Equipo equipo, String nombre,
+			char estatus, Set<RosterCompetencia> rosterCompetencias) {
 		this.cedula = cedula;
-		this.equipoCompetencia = equipoCompetencia;
+		this.equipo = equipo;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.rosterCompetencias = rosterCompetencias;
@@ -60,13 +59,13 @@ public class JugadorForaneo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_equipo_competencia", nullable = false)
-	public EquipoCompetencia getEquipoCompetencia() {
-		return this.equipoCompetencia;
+	@JoinColumn(name = "codigo_equipo", nullable = false)
+	public Equipo getEquipo() {
+		return this.equipo;
 	}
 
-	public void setEquipoCompetencia(EquipoCompetencia equipoCompetencia) {
-		this.equipoCompetencia = equipoCompetencia;
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
 	}
 
 	@Column(name = "nombre", nullable = false)

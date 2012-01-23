@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +22,10 @@ public class ActividadesEjecutadas implements java.io.Serializable {
 
 	private int codigoActividadEjecutada;
 	private SesionEjecutada sesionEjecutada;
-	private IndicadorActividadEscala indicadorActividadEscala;
+	private ActividadEntrenamiento actividadEntrenamiento;
 	private int tiempo;
 	private char estatus;
-	private Set<DesempeoJugador> desempeoJugadors = new HashSet<DesempeoJugador>(
+	private Set<DesempennoJugador> desempennoJugadors = new HashSet<DesempennoJugador>(
 			0);
 
 	public ActividadesEjecutadas() {
@@ -33,25 +33,25 @@ public class ActividadesEjecutadas implements java.io.Serializable {
 
 	public ActividadesEjecutadas(int codigoActividadEjecutada,
 			SesionEjecutada sesionEjecutada,
-			IndicadorActividadEscala indicadorActividadEscala, int tiempo,
+			ActividadEntrenamiento actividadEntrenamiento, int tiempo,
 			char estatus) {
 		this.codigoActividadEjecutada = codigoActividadEjecutada;
 		this.sesionEjecutada = sesionEjecutada;
-		this.indicadorActividadEscala = indicadorActividadEscala;
+		this.actividadEntrenamiento = actividadEntrenamiento;
 		this.tiempo = tiempo;
 		this.estatus = estatus;
 	}
 
 	public ActividadesEjecutadas(int codigoActividadEjecutada,
 			SesionEjecutada sesionEjecutada,
-			IndicadorActividadEscala indicadorActividadEscala, int tiempo,
-			char estatus, Set<DesempeoJugador> desempeoJugadors) {
+			ActividadEntrenamiento actividadEntrenamiento, int tiempo,
+			char estatus, Set<DesempennoJugador> desempennoJugadors) {
 		this.codigoActividadEjecutada = codigoActividadEjecutada;
 		this.sesionEjecutada = sesionEjecutada;
-		this.indicadorActividadEscala = indicadorActividadEscala;
+		this.actividadEntrenamiento = actividadEntrenamiento;
 		this.tiempo = tiempo;
 		this.estatus = estatus;
-		this.desempeoJugadors = desempeoJugadors;
+		this.desempennoJugadors = desempennoJugadors;
 	}
 
 	@Id
@@ -75,14 +75,14 @@ public class ActividadesEjecutadas implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_indicador_actividad_escala", nullable = false)
-	public IndicadorActividadEscala getIndicadorActividadEscala() {
-		return this.indicadorActividadEscala;
+	@JoinColumn(name = "cod_actividad_entrenamiento", nullable = false)
+	public ActividadEntrenamiento getActividadEntrenamiento() {
+		return this.actividadEntrenamiento;
 	}
 
-	public void setIndicadorActividadEscala(
-			IndicadorActividadEscala indicadorActividadEscala) {
-		this.indicadorActividadEscala = indicadorActividadEscala;
+	public void setActividadEntrenamiento(
+			ActividadEntrenamiento actividadEntrenamiento) {
+		this.actividadEntrenamiento = actividadEntrenamiento;
 	}
 
 	@Column(name = "tiempo", nullable = false)
@@ -104,12 +104,12 @@ public class ActividadesEjecutadas implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividadesEjecutadas")
-	public Set<DesempeoJugador> getDesempeoJugadors() {
-		return this.desempeoJugadors;
+	public Set<DesempennoJugador> getDesempennoJugadors() {
+		return this.desempennoJugadors;
 	}
 
-	public void setDesempeoJugadors(Set<DesempeoJugador> desempeoJugadors) {
-		this.desempeoJugadors = desempeoJugadors;
+	public void setDesempennoJugadors(Set<DesempennoJugador> desempennoJugadors) {
+		this.desempennoJugadors = desempennoJugadors;
 	}
 
 }

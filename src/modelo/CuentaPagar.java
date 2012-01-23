@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -44,17 +44,14 @@ public class CuentaPagar implements java.io.Serializable {
 	}
 
 	public CuentaPagar(String origen, DatoBasico datoBasicoByCodigoTipoEgreso,
-			Persona persona, DatoBasico datoBasicoByCodigoTipoDocumento,
-			Date fechaEmision, double montoTotal, Date fechaVencimiento,
-			String concepto, char estado, char estatus) {
+			DatoBasico datoBasicoByCodigoTipoDocumento, Date fechaEmision,
+			double montoTotal, Date fechaVencimiento, char estado, char estatus) {
 		this.origen = origen;
 		this.datoBasicoByCodigoTipoEgreso = datoBasicoByCodigoTipoEgreso;
-		this.persona = persona;
 		this.datoBasicoByCodigoTipoDocumento = datoBasicoByCodigoTipoDocumento;
 		this.fechaEmision = fechaEmision;
 		this.montoTotal = montoTotal;
 		this.fechaVencimiento = fechaVencimiento;
-		this.concepto = concepto;
 		this.estado = estado;
 		this.estatus = estatus;
 	}
@@ -104,7 +101,7 @@ public class CuentaPagar implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false)
+	@JoinColumn(name = "cedula_rif")
 	public Persona getPersona() {
 		return this.persona;
 	}
@@ -153,7 +150,7 @@ public class CuentaPagar implements java.io.Serializable {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 
-	@Column(name = "concepto", nullable = false)
+	@Column(name = "concepto")
 	public String getConcepto() {
 		return this.concepto;
 	}

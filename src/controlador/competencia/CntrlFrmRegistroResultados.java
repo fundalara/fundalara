@@ -1,19 +1,24 @@
 package controlador.competencia;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import modelo.DatoBasico;
 import modelo.Equipo;
 import modelo.EquipoJuego;
 import modelo.Juego;
+import modelo.LineUp;
 import modelo.PersonalForaneo;
 import modelo.PersonalForaneoJuego;
 
 import org.python.modules.synchronize;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.ForwardEvent;
@@ -35,11 +40,14 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Timebox;
+import org.zkoss.zul.Window;
 
 import comun.Inning;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDatoBasico;
+import servicio.implementacion.ServicioLineUp;
 import servicio.implementacion.ServicioPersonalForaneo;
 
 public class CntrlFrmRegistroResultados extends GenericForwardComposer {
@@ -69,9 +77,11 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	Label lblEquipoB;
 	Label lblCarrerasB;
 	Grid grid;
+	Timebox tbxHoraF;
 	ServicioDatoBasico servicioDatoBasico;
 	ServicioPersonalForaneo servicioPersonalForaneo;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
+	ServicioLineUp servicioLineUp;
 	List<PersonalForaneo> umpires;
 	List<DatoBasico> posiciones;
 	Combobox cmbUmpires;
@@ -124,16 +134,15 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 		juego = (Juego) formulario.getVariable("juego", false);
 		System.out.println(juego.getCodigoJuego());
 		equipos = ConvertirConjuntoALista(juego.getEquipoJuegos());
+		
 		equipoA = equipos.get(0).getEquipoCompetencia().getEquipo();
 		equipoB = equipos.get(1).getEquipoCompetencia().getEquipo();
 		txtJuego.setText(equipoA.getNombre() + " vs " + equipoB.getNombre());
-		lblEquipoA.setValue(equipoA.getNombre());
-		lblEquipoB.setValue(equipoB.getNombre());
-		int duracionA = servicioCategoriaCompetencia
-				.getDuraccionCategoria(equipoA.getCategoria());
-		int duracionB = servicioCategoriaCompetencia
-				.getDuraccionCategoria(equipoB.getCategoria());
-
+		
+		
+		//Establece la duraccion por defecto de los innings
+		int duracionA = servicioCategoriaCompetencia.getDuraccionCategoria(equipoA.getCategoria());
+		int duracionB = servicioCategoriaCompetencia.getDuraccionCategoria(equipoB.getCategoria());		
 		if (duracionA > duracionB) {
 			txtInnings.setText(String.valueOf(duracionA));
 			llenar(duracionA);
@@ -141,9 +150,83 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 			txtInnings.setValue(String.valueOf(duracionB));
 			llenar(duracionB);
 		}
+		
+		Date duraccionHA = servicioCategoriaCompetencia.getDuraccionCategoriaHora(equipoA.getCategoria());
+		Date duraccionHB = servicioCategoriaCompetencia.getDuraccionCategoriaHora(equipoB.getCategoria());
+		Date mayor;
+		
+		if (duraccionHA.before(duraccionHB))
+			mayor = duraccionHB;
+		else
+			mayor = duraccionHA;
+		Date hora = new Date(0,0,0,juego.getHoraInicio().getHours()+ mayor.getHours(),juego.getHoraInicio().getMinutes()+mayor.getMinutes());
+		tbxHoraF.setValue(hora);
+		
+		//Determina a que equipos se les procesa resultados individuales
+		
+		if (equipoA.getDivisa().getCodigoDivisa() == 1 ){	
+			lblEquipoA.setStyle("text-decoration:underline;color:blue");
+            lblEquipoA.addForward(Events.ON_CLICK,formulario,"onIndividualesA");
+		}
+		
+		if (equipoB.getDivisa().getCodigoDivisa() == 1 ){			
+			lblEquipoB.setStyle("text-decoration:underline;color:blue");
+			lblEquipoB.addForward(Events.ON_CLICK,formulario,"onIndividualesB");
+			
+		}
+		
+		lblEquipoA.setValue(equipoA.getNombre());
+		lblEquipoB.setValue(equipoB.getNombre());
+		
 		binder.loadAll();
 	}
+	
+	
+	public void onIndividualesA(){
+		
+		List<LineUp> lineups = ConvertirConjuntoALista(juego.getLineUps());
+		int cont=0;
+		for (int i=0;i<lineups.size();i++){
+			int codigo = lineups.get(i).getRosterCompetencia().getRoster().getEquipo().getCodigoEquipo();
+			if (codigo == equipoA.getCodigoEquipo()){
+				cont++;
+			}
+		}
+		Component f;
 
+		if (cont==0){
+			 f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);
+		}else
+			 f = Executions.createComponents("/Competencias/Vistas/FrmResultadosIndividuales.zul",null,null);
+		Window w = (Window)f;
+		w.setPosition("center");   	
+	    w.setVariable("equipo",equipos.get(0).getEquipoCompetencia(),false);
+	    w.doHighlighted();
+	}
+	
+    public void onIndividualesB(){
+    	List<LineUp> lineups = ConvertirConjuntoALista(juego.getLineUps());
+		int cont=0;		
+		for (int i=0;i<lineups.size();i++){
+			int codigo = lineups.get(i).getRosterCompetencia().getRoster().getEquipo().getCodigoEquipo();
+			if (codigo == equipoB.getCodigoEquipo()){
+				cont++;
+			}
+		}
+		Component f;
+	
+		if (cont==0){
+			 f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);
+		}else
+			 f = Executions.createComponents("/Competencias/Vistas/FrmResultadosIndividuales.zul",null,null);
+		Window w = (Window)f;
+		w.setPosition("center");
+		w.setVariable("equipo",equipos.get(1).getEquipoCompetencia(),false);
+		w.doHighlighted();
+	}
+    
+
+   
 	public void onClick$btnAgregarI() {
 		int val = Integer.valueOf(txtInnings.getText());
 		txtInnings.setText(String.valueOf(val + 1));
@@ -177,6 +260,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 		Columns cols = (Columns) formulario.getFellow("titulo");
 		Column col = new Column(valor);
 		col.setWidth("55px");
+		col.setAlign("center");
 		col.setId("col" + valor);
 		Column columnCarreras = (Column) formulario.getFellow("columnCarreras");
 		cols.insertBefore(col, columnCarreras);

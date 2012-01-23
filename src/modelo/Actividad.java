@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 public class Actividad implements java.io.Serializable {
 
 	private int codigoActividad;
+	private InstalacionUtilizada instalacionUtilizada;
 	private PlanificacionActividad planificacionActividad;
 	private Date fechaInicio;
 	private Date fechaCulminacion;
@@ -51,9 +52,11 @@ public class Actividad implements java.io.Serializable {
 	}
 
 	public Actividad(int codigoActividad,
+			InstalacionUtilizada instalacionUtilizada,
 			PlanificacionActividad planificacionActividad, Date fechaInicio,
 			Date fechaCulminacion, char estatus, Date horaInicio, Date horaFin) {
 		this.codigoActividad = codigoActividad;
+		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
@@ -63,6 +66,7 @@ public class Actividad implements java.io.Serializable {
 	}
 
 	public Actividad(int codigoActividad,
+			InstalacionUtilizada instalacionUtilizada,
 			PlanificacionActividad planificacionActividad, Date fechaInicio,
 			Date fechaCulminacion, char estatus, Date horaInicio, Date horaFin,
 			Set<SolicitudMantenimiento> solicitudMantenimientos,
@@ -74,6 +78,7 @@ public class Actividad implements java.io.Serializable {
 			Set<ActividadCalendario> actividadCalendarios,
 			Set<DatoBasico> datoBasicos) {
 		this.codigoActividad = codigoActividad;
+		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
@@ -98,6 +103,17 @@ public class Actividad implements java.io.Serializable {
 
 	public void setCodigoActividad(int codigoActividad) {
 		this.codigoActividad = codigoActividad;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_instalacion_utilizada", nullable = false)
+	public InstalacionUtilizada getInstalacionUtilizada() {
+		return this.instalacionUtilizada;
+	}
+
+	public void setInstalacionUtilizada(
+			InstalacionUtilizada instalacionUtilizada) {
+		this.instalacionUtilizada = instalacionUtilizada;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

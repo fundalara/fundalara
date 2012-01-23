@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -35,6 +35,8 @@ public class PersonalEquipo implements java.io.Serializable {
 	private Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos = new HashSet<AsistenciaPersonalEntrenamiento>(
 			0);
 	private Set<EquipoJuego> equipoJuegos = new HashSet<EquipoJuego>(0);
+	private Set<PersonalEquipoCompetencia> personalEquipoCompetencias = new HashSet<PersonalEquipoCompetencia>(
+			0);
 
 	public PersonalEquipo() {
 	}
@@ -63,7 +65,8 @@ public class PersonalEquipo implements java.io.Serializable {
 			String eventualidad,
 			char estatus,
 			Set<AsistenciaPersonalEntrenamiento> asistenciaPersonalEntrenamientos,
-			Set<EquipoJuego> equipoJuegos) {
+			Set<EquipoJuego> equipoJuegos,
+			Set<PersonalEquipoCompetencia> personalEquipoCompetencias) {
 		this.codigoPersonalEquipo = codigoPersonalEquipo;
 		this.planTemporada = planTemporada;
 		this.personal = personal;
@@ -74,6 +77,7 @@ public class PersonalEquipo implements java.io.Serializable {
 		this.estatus = estatus;
 		this.asistenciaPersonalEntrenamientos = asistenciaPersonalEntrenamientos;
 		this.equipoJuegos = equipoJuegos;
+		this.personalEquipoCompetencias = personalEquipoCompetencias;
 	}
 
 	@Id
@@ -171,6 +175,16 @@ public class PersonalEquipo implements java.io.Serializable {
 
 	public void setEquipoJuegos(Set<EquipoJuego> equipoJuegos) {
 		this.equipoJuegos = equipoJuegos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personalEquipo")
+	public Set<PersonalEquipoCompetencia> getPersonalEquipoCompetencias() {
+		return this.personalEquipoCompetencias;
+	}
+
+	public void setPersonalEquipoCompetencias(
+			Set<PersonalEquipoCompetencia> personalEquipoCompetencias) {
+		this.personalEquipoCompetencias = personalEquipoCompetencias;
 	}
 
 }

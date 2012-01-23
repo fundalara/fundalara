@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,7 +25,6 @@ public class PersonalTipoNomina implements java.io.Serializable {
 	private Personal personal;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private char estado;
 	private char estatus;
 
 	public PersonalTipoNomina() {
@@ -33,24 +32,22 @@ public class PersonalTipoNomina implements java.io.Serializable {
 
 	public PersonalTipoNomina(int codigoPersonalTipoNomina,
 			DatoBasico datoBasico, Personal personal, Date fechaInicio,
-			char estado, char estatus) {
+			char estatus) {
 		this.codigoPersonalTipoNomina = codigoPersonalTipoNomina;
 		this.datoBasico = datoBasico;
 		this.personal = personal;
 		this.fechaInicio = fechaInicio;
-		this.estado = estado;
 		this.estatus = estatus;
 	}
 
 	public PersonalTipoNomina(int codigoPersonalTipoNomina,
 			DatoBasico datoBasico, Personal personal, Date fechaInicio,
-			Date fechaFin, char estado, char estatus) {
+			Date fechaFin, char estatus) {
 		this.codigoPersonalTipoNomina = codigoPersonalTipoNomina;
 		this.datoBasico = datoBasico;
 		this.personal = personal;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.estado = estado;
 		this.estatus = estatus;
 	}
 
@@ -102,15 +99,6 @@ public class PersonalTipoNomina implements java.io.Serializable {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-	@Column(name = "estado", nullable = false, length = 1)
-	public char getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(char estado) {
-		this.estado = estado;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

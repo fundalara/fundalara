@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,10 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 	private DatoBasico datoBasico;
 	private String nombre;
 	private char estatus;
+	private Set<ActividadPlanificada> actividadPlanificadas = new HashSet<ActividadPlanificada>(
+			0);
+	private Set<ActividadesEjecutadas> actividadesEjecutadases = new HashSet<ActividadesEjecutadas>(
+			0);
 	private Set<IndicadorActividadEscala> indicadorActividadEscalas = new HashSet<IndicadorActividadEscala>(
 			0);
 
@@ -43,13 +47,16 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 
 	public ActividadEntrenamiento(int codActividadEntrenamiento,
 			Categoria categoria, DatoBasico datoBasico, String nombre,
-			char estatus,
+			char estatus, Set<ActividadPlanificada> actividadPlanificadas,
+			Set<ActividadesEjecutadas> actividadesEjecutadases,
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.codActividadEntrenamiento = codActividadEntrenamiento;
 		this.categoria = categoria;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
 		this.estatus = estatus;
+		this.actividadPlanificadas = actividadPlanificadas;
+		this.actividadesEjecutadases = actividadesEjecutadases;
 		this.indicadorActividadEscalas = indicadorActividadEscalas;
 	}
 
@@ -99,6 +106,26 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividadEntrenamiento")
+	public Set<ActividadPlanificada> getActividadPlanificadas() {
+		return this.actividadPlanificadas;
+	}
+
+	public void setActividadPlanificadas(
+			Set<ActividadPlanificada> actividadPlanificadas) {
+		this.actividadPlanificadas = actividadPlanificadas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividadEntrenamiento")
+	public Set<ActividadesEjecutadas> getActividadesEjecutadases() {
+		return this.actividadesEjecutadases;
+	}
+
+	public void setActividadesEjecutadases(
+			Set<ActividadesEjecutadas> actividadesEjecutadases) {
+		this.actividadesEjecutadases = actividadesEjecutadases;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividadEntrenamiento")

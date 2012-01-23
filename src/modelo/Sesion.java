@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +31,8 @@ public class Sesion implements java.io.Serializable {
 			0);
 	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
 			0);
-	private Set<PlanRotacion> planRotacions = new HashSet<PlanRotacion>(0);
+	private Set<InstalacionUtilizada> instalacionUtilizadas = new HashSet<InstalacionUtilizada>(
+			0);
 	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
 			0);
 
@@ -52,7 +53,7 @@ public class Sesion implements java.io.Serializable {
 			Set<SesionEjecutada> sesionEjecutadas,
 			Set<ActividadPlanificada> actividadPlanificadas,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
-			Set<PlanRotacion> planRotacions,
+			Set<InstalacionUtilizada> instalacionUtilizadas,
 			Set<ActividadCalendario> actividadCalendarios) {
 		this.codigoSesion = codigoSesion;
 		this.planEntrenamiento = planEntrenamiento;
@@ -62,7 +63,7 @@ public class Sesion implements java.io.Serializable {
 		this.sesionEjecutadas = sesionEjecutadas;
 		this.actividadPlanificadas = actividadPlanificadas;
 		this.materialActividadPlanificadas = materialActividadPlanificadas;
-		this.planRotacions = planRotacions;
+		this.instalacionUtilizadas = instalacionUtilizadas;
 		this.actividadCalendarios = actividadCalendarios;
 	}
 
@@ -145,12 +146,13 @@ public class Sesion implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")
-	public Set<PlanRotacion> getPlanRotacions() {
-		return this.planRotacions;
+	public Set<InstalacionUtilizada> getInstalacionUtilizadas() {
+		return this.instalacionUtilizadas;
 	}
 
-	public void setPlanRotacions(Set<PlanRotacion> planRotacions) {
-		this.planRotacions = planRotacions;
+	public void setInstalacionUtilizadas(
+			Set<InstalacionUtilizada> instalacionUtilizadas) {
+		this.instalacionUtilizadas = instalacionUtilizadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sesion")

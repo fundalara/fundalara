@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,16 +13,13 @@ public class RecepcionMaterialId implements java.io.Serializable {
 
 	private int codigoMaterial;
 	private int codigoNotaEntrega;
-	private String origen;
 
 	public RecepcionMaterialId() {
 	}
 
-	public RecepcionMaterialId(int codigoMaterial, int codigoNotaEntrega,
-			String origen) {
+	public RecepcionMaterialId(int codigoMaterial, int codigoNotaEntrega) {
 		this.codigoMaterial = codigoMaterial;
 		this.codigoNotaEntrega = codigoNotaEntrega;
-		this.origen = origen;
 	}
 
 	@Column(name = "codigo_material", nullable = false)
@@ -43,15 +40,6 @@ public class RecepcionMaterialId implements java.io.Serializable {
 		this.codigoNotaEntrega = codigoNotaEntrega;
 	}
 
-	@Column(name = "origen", nullable = false)
-	public String getOrigen() {
-		return this.origen;
-	}
-
-	public void setOrigen(String origen) {
-		this.origen = origen;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -63,10 +51,7 @@ public class RecepcionMaterialId implements java.io.Serializable {
 
 		return (this.getCodigoMaterial() == castOther.getCodigoMaterial())
 				&& (this.getCodigoNotaEntrega() == castOther
-						.getCodigoNotaEntrega())
-				&& ((this.getOrigen() == castOther.getOrigen()) || (this
-						.getOrigen() != null && castOther.getOrigen() != null && this
-						.getOrigen().equals(castOther.getOrigen())));
+						.getCodigoNotaEntrega());
 	}
 
 	public int hashCode() {
@@ -74,8 +59,6 @@ public class RecepcionMaterialId implements java.io.Serializable {
 
 		result = 37 * result + this.getCodigoMaterial();
 		result = 37 * result + this.getCodigoNotaEntrega();
-		result = 37 * result
-				+ (getOrigen() == null ? 0 : this.getOrigen().hashCode());
 		return result;
 	}
 

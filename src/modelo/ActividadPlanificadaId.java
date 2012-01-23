@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,26 +11,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ActividadPlanificadaId implements java.io.Serializable {
 
-	private int codigoIndicadorActividadEscala;
 	private int codigoSesion;
+	private int codActividadEntrenamiento;
 
 	public ActividadPlanificadaId() {
 	}
 
-	public ActividadPlanificadaId(int codigoIndicadorActividadEscala,
-			int codigoSesion) {
-		this.codigoIndicadorActividadEscala = codigoIndicadorActividadEscala;
+	public ActividadPlanificadaId(int codigoSesion,
+			int codActividadEntrenamiento) {
 		this.codigoSesion = codigoSesion;
-	}
-
-	@Column(name = "codigo_indicador_actividad_escala", nullable = false)
-	public int getCodigoIndicadorActividadEscala() {
-		return this.codigoIndicadorActividadEscala;
-	}
-
-	public void setCodigoIndicadorActividadEscala(
-			int codigoIndicadorActividadEscala) {
-		this.codigoIndicadorActividadEscala = codigoIndicadorActividadEscala;
+		this.codActividadEntrenamiento = codActividadEntrenamiento;
 	}
 
 	@Column(name = "codigo_sesion", nullable = false)
@@ -42,6 +32,15 @@ public class ActividadPlanificadaId implements java.io.Serializable {
 		this.codigoSesion = codigoSesion;
 	}
 
+	@Column(name = "cod_actividad_entrenamiento", nullable = false)
+	public int getCodActividadEntrenamiento() {
+		return this.codActividadEntrenamiento;
+	}
+
+	public void setCodActividadEntrenamiento(int codActividadEntrenamiento) {
+		this.codActividadEntrenamiento = codActividadEntrenamiento;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -51,16 +50,16 @@ public class ActividadPlanificadaId implements java.io.Serializable {
 			return false;
 		ActividadPlanificadaId castOther = (ActividadPlanificadaId) other;
 
-		return (this.getCodigoIndicadorActividadEscala() == castOther
-				.getCodigoIndicadorActividadEscala())
-				&& (this.getCodigoSesion() == castOther.getCodigoSesion());
+		return (this.getCodigoSesion() == castOther.getCodigoSesion())
+				&& (this.getCodActividadEntrenamiento() == castOther
+						.getCodActividadEntrenamiento());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCodigoIndicadorActividadEscala();
 		result = 37 * result + this.getCodigoSesion();
+		result = 37 * result + this.getCodActividadEntrenamiento();
 		return result;
 	}
 

@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,47 +17,33 @@ import javax.persistence.Table;
 @Table(name = "condicion_competencia", schema = "public")
 public class CondicionCompetencia implements java.io.Serializable {
 
-	private CondicionCompetenciaId id;
-	private TipoCompetencia tipoCompetencia;
+	private int codigoCondicionCompetencia;
 	private DatoBasico datoBasico;
-	private boolean aplica;
+	private ClasificacionCompetencia clasificacionCompetencia;
 
 	public CondicionCompetencia() {
 	}
 
-	public CondicionCompetencia(CondicionCompetenciaId id,
-			TipoCompetencia tipoCompetencia, DatoBasico datoBasico,
-			boolean aplica) {
-		this.id = id;
-		this.tipoCompetencia = tipoCompetencia;
+	public CondicionCompetencia(int codigoCondicionCompetencia,
+			DatoBasico datoBasico,
+			ClasificacionCompetencia clasificacionCompetencia) {
+		this.codigoCondicionCompetencia = codigoCondicionCompetencia;
 		this.datoBasico = datoBasico;
-		this.aplica = aplica;
+		this.clasificacionCompetencia = clasificacionCompetencia;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoCondicion", column = @Column(name = "codigo_condicion", nullable = false)),
-			@AttributeOverride(name = "codigoTipoCompetencia", column = @Column(name = "codigo_tipo_competencia", nullable = false)) })
-	public CondicionCompetenciaId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_condicion_competencia", unique = true, nullable = false)
+	public int getCodigoCondicionCompetencia() {
+		return this.codigoCondicionCompetencia;
 	}
 
-	public void setId(CondicionCompetenciaId id) {
-		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_competencia", nullable = false, insertable = false, updatable = false)
-	public TipoCompetencia getTipoCompetencia() {
-		return this.tipoCompetencia;
-	}
-
-	public void setTipoCompetencia(TipoCompetencia tipoCompetencia) {
-		this.tipoCompetencia = tipoCompetencia;
+	public void setCodigoCondicionCompetencia(int codigoCondicionCompetencia) {
+		this.codigoCondicionCompetencia = codigoCondicionCompetencia;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_condicion", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_condicion", nullable = false)
 	public DatoBasico getDatoBasico() {
 		return this.datoBasico;
 	}
@@ -68,13 +52,15 @@ public class CondicionCompetencia implements java.io.Serializable {
 		this.datoBasico = datoBasico;
 	}
 
-	@Column(name = "aplica", nullable = false)
-	public boolean isAplica() {
-		return this.aplica;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_clasificacion_competencia", nullable = false)
+	public ClasificacionCompetencia getClasificacionCompetencia() {
+		return this.clasificacionCompetencia;
 	}
 
-	public void setAplica(boolean aplica) {
-		this.aplica = aplica;
+	public void setClasificacionCompetencia(
+			ClasificacionCompetencia clasificacionCompetencia) {
+		this.clasificacionCompetencia = clasificacionCompetencia;
 	}
 
 }
