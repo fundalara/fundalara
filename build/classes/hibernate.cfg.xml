@@ -17,6 +17,7 @@
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.transaction.flush_before_completion">true</property>
+<!--         <property name="hibernate.hbm2ddl.auto">create</property> -->
         <mapping class="modelo.IndicadorTest" />
         <mapping class="modelo.Personal" />
         <mapping class="modelo.DocumentoAcreedor" />
