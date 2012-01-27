@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +18,8 @@ import javax.persistence.Table;
 public class TareaActividad implements java.io.Serializable {
 
 	private int codigoTareaActividad;
-	private DatoBasico datoBasico;
+	private DatoBasico datoBasicoByCodigoDatoBasico;
+	private DatoBasico datoBasicoByCodigoTarea;
 	private Actividad actividad;
 	private PersonalActividad personalActividad;
 	private char estatus;
@@ -27,11 +28,14 @@ public class TareaActividad implements java.io.Serializable {
 	public TareaActividad() {
 	}
 
-	public TareaActividad(int codigoTareaActividad, DatoBasico datoBasico,
-			Actividad actividad, PersonalActividad personalActividad,
-			char estatus, boolean tareaEjecutada) {
+	public TareaActividad(int codigoTareaActividad,
+			DatoBasico datoBasicoByCodigoDatoBasico,
+			DatoBasico datoBasicoByCodigoTarea, Actividad actividad,
+			PersonalActividad personalActividad, char estatus,
+			boolean tareaEjecutada) {
 		this.codigoTareaActividad = codigoTareaActividad;
-		this.datoBasico = datoBasico;
+		this.datoBasicoByCodigoDatoBasico = datoBasicoByCodigoDatoBasico;
+		this.datoBasicoByCodigoTarea = datoBasicoByCodigoTarea;
 		this.actividad = actividad;
 		this.personalActividad = personalActividad;
 		this.estatus = estatus;
@@ -49,13 +53,24 @@ public class TareaActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tarea", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@JoinColumn(name = "codigo_dato_basico", nullable = false)
+	public DatoBasico getDatoBasicoByCodigoDatoBasico() {
+		return this.datoBasicoByCodigoDatoBasico;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setDatoBasicoByCodigoDatoBasico(
+			DatoBasico datoBasicoByCodigoDatoBasico) {
+		this.datoBasicoByCodigoDatoBasico = datoBasicoByCodigoDatoBasico;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_tarea", nullable = false)
+	public DatoBasico getDatoBasicoByCodigoTarea() {
+		return this.datoBasicoByCodigoTarea;
+	}
+
+	public void setDatoBasicoByCodigoTarea(DatoBasico datoBasicoByCodigoTarea) {
+		this.datoBasicoByCodigoTarea = datoBasicoByCodigoTarea;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -135,7 +135,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 				  categorias = ConvertirConjuntoALista(competencia.getCategoriaCompetencias());
 				  estadios = servicioEstadio.listarActivos();
 				  //estadios = servicioEstadio.listarEstadiosCompetencia(competencia);
-				 //fases = servicioFaseCompetencia.listarFaseCompetencia(competencia);
+			//	 fases = servicioFaseCompetencia.listarFaseCompetencia(competencia);
 				 
 				  binder.loadAll();
 			}

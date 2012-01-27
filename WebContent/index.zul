@@ -513,12 +513,36 @@
 											label="Consultas Dinámicas" />
 									</treerow>
 								</treeitem>
-								<treeitem open="false">
-									<treerow>
-										<treecell
-											label="Especiales" />
-									</treerow>
-								</treeitem>
+<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Especiales" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Competencias" />
+													</treerow>
+													<treechildren>
+														<treeitem
+															open="false">
+															<treerow>
+																<treecell
+																	label="Desempeño Deportivo"
+																	onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
+															</treerow>
+														</treeitem>
+													</treechildren>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+								
+
+
+
+
 								<treeitem open="false">
 									<treerow>
 										<treecell label="Estádisticos" />

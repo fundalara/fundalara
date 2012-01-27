@@ -25,7 +25,6 @@
         <mapping class="modelo.RetiroTraslado" />
         <mapping class="modelo.Competencia" />
         <mapping class="modelo.DocumentoAscenso" />
-        <mapping class="modelo.FamiliarComisionEquipo" />
         <mapping class="modelo.JugadorPlan" />
         <mapping class="modelo.SesionEjecutada" />
         <mapping class="modelo.DocumentoAcreedorMaterial" />
@@ -50,6 +49,7 @@
         <mapping class="modelo.PlanificacionActividad" />
         <mapping class="modelo.PlanTemporada" />
         <mapping class="modelo.TareaActividadPlanificada" />
+        <mapping class="modelo.ComisionFamiliar" />
         <mapping class="modelo.EstadoActividad" />
         <mapping class="modelo.DatoBasico" />
         <mapping class="modelo.CuentaPagar" />
@@ -107,6 +107,7 @@
         <mapping class="modelo.TipoIngreso" />
         <mapping class="modelo.SolicitudMantenimiento" />
         <mapping class="modelo.TestJugador" />
+        <mapping class="modelo.JugadorForaneoRosterCompetencia" />
         <mapping class="modelo.RosterCompetencia" />
         <mapping class="modelo.RepresentantePlan" />
         <mapping class="modelo.EgresoFormaPago" />
@@ -131,8 +132,8 @@
         <mapping class="modelo.LogroPorJugador" />
         <mapping class="modelo.ConstanteCategoria" />
         <mapping class="modelo.ActividadEntrenamiento" />
+        <mapping class="modelo.IngresoInscripcion" />
         <mapping class="modelo.ConceptoNomina" />
-        <mapping class="modelo.ComisionEquipo" />
         <mapping class="modelo.DatoMedico" />
         <mapping class="modelo.MaterialActividad" />
         <mapping class="modelo.SeguridadFuncional" />

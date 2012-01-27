@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,9 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,7 +24,7 @@ public class JugadorForaneo implements java.io.Serializable {
 	private Equipo equipo;
 	private String nombre;
 	private char estatus;
-	private Set<RosterCompetencia> rosterCompetencias = new HashSet<RosterCompetencia>(
+	private Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias = new HashSet<JugadorForaneoRosterCompetencia>(
 			0);
 
 	public JugadorForaneo() {
@@ -39,13 +38,17 @@ public class JugadorForaneo implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public JugadorForaneo(String cedula, Equipo equipo, String nombre,
-			char estatus, Set<RosterCompetencia> rosterCompetencias) {
+	public JugadorForaneo(
+			String cedula,
+			Equipo equipo,
+			String nombre,
+			char estatus,
+			Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias) {
 		this.cedula = cedula;
 		this.equipo = equipo;
 		this.nombre = nombre;
 		this.estatus = estatus;
-		this.rosterCompetencias = rosterCompetencias;
+		this.jugadorForaneoRosterCompetencias = jugadorForaneoRosterCompetencias;
 	}
 
 	@Id
@@ -86,14 +89,14 @@ public class JugadorForaneo implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "jugador_foraneo_roster_competencia", schema = "public", joinColumns = { @JoinColumn(name = "cedula", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_roster_competencia", nullable = false, updatable = false) })
-	public Set<RosterCompetencia> getRosterCompetencias() {
-		return this.rosterCompetencias;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugadorForaneo")
+	public Set<JugadorForaneoRosterCompetencia> getJugadorForaneoRosterCompetencias() {
+		return this.jugadorForaneoRosterCompetencias;
 	}
 
-	public void setRosterCompetencias(Set<RosterCompetencia> rosterCompetencias) {
-		this.rosterCompetencias = rosterCompetencias;
+	public void setJugadorForaneoRosterCompetencias(
+			Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias) {
+		this.jugadorForaneoRosterCompetencias = jugadorForaneoRosterCompetencias;
 	}
 
 }

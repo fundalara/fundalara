@@ -45,6 +45,7 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 	Label lblCompetencia;
 	Label lblFechaI;
 	Label lblFechaF;
+	Label lblEspacio;
 	
 	Competencia competencia;
 	List<Competencia> competencias;
@@ -65,10 +66,13 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 		// Creando componentes necesarios
 		hoy.setVisible(false);
 		cmbCompetencia = new Combobox();
-		cmbCompetencia.setCols(30);
-		cmbCompetencia.setText("                     --Seleccione--");
+		cmbCompetencia.setCols(50);
+		cmbCompetencia.setText("--Seleccione--");
+		cmbCompetencia.setStyle("align:center");
 		cmbCompetencia.setReadonly(true);
+		cmbCompetencia.setStyle("align:center");
 		cmbCompetencia.addForward(Events.ON_SELECT,formulario,"onSelecciono");
+		lblEspacio = new Label("         ");		
 		btnVer = new Button();
 		btnVer.setMold("os");
 		btnVer.setImage("Recursos/Imagenes/consultar.ico");
@@ -76,14 +80,15 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 		lblFechaI = new Label("Fecha Inicio ");
 		lblFechaI.setStyle("margin-left:5px");
 		dbxFechaI = new Datebox();
-		dbxFechaI.setCols(10);
+		dbxFechaI.setCols(12);
 		dbxFechaI.setReadonly(true);
 		lblFechaF = new Label("Fecha Fin ");
 		lblFechaF.setStyle("margin-left:5px");
 		dbxFechaF = new Datebox();
-		dbxFechaF.setCols(10);
+		dbxFechaF.setCols(12);
 		dbxFechaF.setReadonly(true);
 		spnControles.appendChild(cmbCompetencia);
+		spnControles.appendChild(lblEspacio);
 		spnControles.appendChild(btnVer);
 	    spnControles.appendChild(lblFechaI);
 	    spnControles.appendChild(dbxFechaI);

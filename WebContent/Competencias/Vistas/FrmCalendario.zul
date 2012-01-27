@@ -3,30 +3,46 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmCalendario" ?>
 <zk>
 
-
+	<div align="center">
 		<window title="Programar Juegos" id="FrmCalendario"
-			border="normal" width="70%" height="70%" closable="true"
+			border="normal" width="630px" height="100%" closable="true"
 			apply="controlador.competencia.CntrlFrmCalendario">
+
 			<panel title="Datos de la Competencia" border="normal">
 				<panelchildren>
-					<grid>
-						<columns></columns>
+					<grid oddRowSclass="none" style="border:none">
+						<columns>
+							<column width="15%" />
+							<column width="52%" />
+							<column width="5%" />
+							<column width="15%" />
+						</columns>
 						<rows>
 							<row spans="0,4" style="border:none">
-								<label value="Nombre"></label>
-								<hbox>
-									<textbox id="txtNombreCompetencia"
-										cols="40" style="margin-top:5px" readonly="true"
-										value="@{cntrl.competencia.nombre }">
-									</textbox>
-									<button id="btnBuscarCompetencia"
-										image="/Recursos/Imagenes/consultar.ico"
-										style="margin-left:3px">
-									</button>
-								</hbox>
-
-
+								<label value="Nombre" width="15%"></label>
+								<textbox id="txtNombreCompetencia"
+									cols="40" style="margin-top:5px" readonly="true"
+									value="@{cntrl.competencia.nombre }" width="98%">
+								</textbox>
+								<label />
+								<button id="btnBuscarCompetencia"
+									image="/Recursos/Imagenes/consultar.ico"
+									style="margin-left:3px">
+								</button>
 							</row>
+						</rows>
+					</grid>
+
+					<grid oddRowSclass="none" style="border:none">
+						<columns>
+							<column width="11%" />
+							<column width="10%" />
+							<column width="4%" />
+							<column width="6%" />
+							<column width="20%" />
+							<column width="4%" />
+						</columns>
+						<rows>
 							<row style="border:none">
 
 								<label value="Tipo"></label>
@@ -34,6 +50,7 @@
 									readonly="true"
 									value="@{cntrl.competencia.clasificacionCompetencia.datoBasico.nombre}">
 								</textbox>
+								<label />
 
 								<label value="Clasificación"></label>
 								<textbox id="txtModalidadCompetencia"
@@ -45,10 +62,13 @@
 							<row style="border-style:none">
 								<label value="Fecha Inicio"></label>
 								<datebox id="txtFechaInicioCompetencia"
-									value="@{cntrl.competencia.fechaInicio }" readonly="true" />
+									value="@{cntrl.competencia.fechaInicio }" readonly="true"
+									cols="12" />
+								<label />
 								<label value="Fecha Fin"></label>
 								<datebox id="txtFechaFin"
-									value="@{cntrl.competencia.fechaFin }" readonly="true" />
+									value="@{cntrl.competencia.fechaFin }" readonly="true"
+									cols="12" />
 							</row>
 						</rows>
 					</grid>
@@ -62,99 +82,68 @@
 						<hbox width="100%">
 
 							<!-- General -->
-							<hbox height="100px">
-								<grid width="100%">
-									<columns>
-										<!-- 										<column width="50%"></column> -->
-										<!-- 										<column width="50%"></column> -->
-										<!-- 										<column width="25%"></column> -->
-										<!-- 										<column width=></column> -->
-									</columns>
-									<rows>
-										<row
-											style="border-style:none">
+							<grid width="580px" oddRowSclass="none"
+								style="border:none">
+								<columns>
+									<column width="20%"></column>
+									<column width="15%"></column>
+									<column width="2%"></column>
+									<column width="5%"></column>
+									<column width="10%"></column>
+									<column width="20%"></column>
+									<column width="2%"></column>
+									<column width="5%"></column>
+									<column width="10%"></column>
+								</columns>
+								<rows>
+									<row style="border-style:none">
+										<label value="Fase"></label>
+										<combobox id="cmbFases"
+											readonly="true" cols="15" value="--Seleccione--">
+<!-- 											model="@{cntrl.fases }"> -->
+											<comboitem label="1"/>
+<!-- 												self="@{each=fase}" label="@{fase.id.numeroFase}" -->
+<!-- 												value="@{fase}" /> -->
+										</combobox>
+										<label />
+										<label />
+										<label />
+										<label value="Categoria"></label>
+										<combobox id="cmbCategoria"
+											readonly="true" cols="13" value="--Seleccione--"
+											model="@{cntrl.categorias }">
+											<comboitem
+												self="@{each=categoria}"
+												label="@{categoria.categoria.nombre}" value="@{categoria}" />
+										</combobox>
+										<label />
+									</row>
+									<row style="border-style:none">
+										<label value="Home Club" />
+										<textbox id="txtHomeClub"
+											value="@{cntrl.equipoCompetencia1.equipo.nombre}">
+										</textbox>
+										<label />
+										<button id="btnBuscarEquipo"
+											image="/Recursos/Imagenes/consultar.ico">
+										</button>
+										<label />
 
-											<label value="Fase"></label>
-											<combobox id="cmbFases"
-												cols="10" value="--Seleccione--">
-												<!-- 												<comboitem -->
-												<!-- 													self="@{each=fase}" label="@{fase.id.numeroFase}" -->
-												<!-- 													value="@{fase}" /> -->
-												<comboitem label="1">
+										<label value="Visitante" />
+										<textbox id="txtVisitante"
+											value="@{cntrl.equipoCompetencia2.equipo.nombre}">
+										</textbox>
+										<label />
+										<button id="btnBuscarEquipo2"
+											image="/Recursos/Imagenes/consultar.ico">
+										</button>
+										<label />
+										<label />
+									</row>
+								</rows>
+							</grid>
 
-												</comboitem>
-
-											</combobox>
-
-
-											<label value="Estadio">
-											</label>
-											<combobox id="cmbEstadios"
-												model="@{cntrl.estadios}" selectedItem="@{cntrl.juego.estadio}"
-												cols="20">
-												<comboitem
-													self="@{each=estadio}" label="@{estadio.nombre}"
-													value="@{estadio}" />
-											</combobox>
-
-										</row>
-
-										<row
-											style="border-style:none">
-
-
-											<label value="Home Club">
-											</label>
-											<hbox>
-												<textbox
-													id="txtHomeClub"
-													value="@{cntrl.equipoCompetencia1.equipo.nombre}">
-												</textbox>
-												<button
-													id="btnBuscarEquipo"
-													image="/Recursos/Imagenes/consultar.ico">
-												</button>
-											</hbox>
-
-											<label value="Visitante">
-											</label>
-											<hbox>
-
-												<textbox
-													id="txtVisitante"
-													value="@{cntrl.equipoCompetencia2.equipo.nombre}">
-												</textbox>
-												<button
-													id="btnBuscarEquipo2"
-													image="/Recursos/Imagenes/consultar.ico">
-												</button>
-											</hbox>
-
-
-										</row>
-
-										<row
-											style="border-style:none">
-
-
-
-											<label value="Fecha">
-											</label>
-											<datebox id="dtbxFecha"
-												value="@{cntrl.juego.fecha}" cols="8" />
-
-											<label
-												value="Hora Inicio">
-											</label>
-
-											<timebox id="tmbxHoraInicio"
-												value="@{cntrl.juego.horaInicio}" cols="8" />
-										</row>
-									</rows>
-								</grid>
-							</hbox>
-
-							<div align="right" height="100px">
+							<div align="right" height="40px">
 								<vbox>
 									<button id="btnAgregar"
 										image="/Recursos/Imagenes/agregar.ico">
@@ -166,6 +155,49 @@
 								</vbox>
 							</div>
 						</hbox><!-- fin General -->
+						<div align="left">
+							<grid width="580px" oddRowSclass="none"
+								style="border:none">
+								<columns>
+									<column width="71px"></column>
+									<column width="5px"></column>
+									<column width="25px"></column>
+									<column width="10px"></column>
+									<column width="50px"></column>
+									<column width="100px"></column>
+									<column width="20px"></column>
+									<column width="20px"></column>
+									<column width="20px"></column>
+								</columns>
+								<rows>
+									<row style="border-style:none">
+										<label value="Fecha" />
+
+										<!-- 											<hbox> -->
+										<datebox id="dtbxFecha"
+											value="@{cntrl.juego.fecha}" cols="12" />
+										<label />
+										<space width="10px"></space>
+										<label value="Hora" />
+										<timebox id="tmbxHoraInicio"
+											value="@{cntrl.juego.horaInicio}" cols="8" />
+										<!-- 											</hbox> -->
+										<label />
+										<label value="Estadio" />
+										<combobox id="cmbEstadios"
+											readonly="true" value="--Seleccione--"
+											model="@{cntrl.estadios}"
+											selectedItem="@{cntrl.juego.estadio}" cols="15">
+											<comboitem
+												self="@{each=estadio}" label="@{estadio.nombre}"
+												value="@{estadio}" />
+										</combobox>
+										<label />
+									</row>
+									<row></row>
+								</rows>
+							</grid>
+						</div>
 					</panelchildren>
 				</panel>
 			</div>
@@ -177,23 +209,36 @@
 					<panelchildren>
 
 						<listbox id="lsbxEnfrentamientos"
-							model="@{cntrl.juegos }" style="margin-top:5px" height="150px"
-							mold="paging">
+							multiple="true" model="@{cntrl.juegos }" style="margin-top:5px"
+							height="100px" mold="paging">
 							<listhead>
-								<listheader label="Home Club" width="20%" align="center" />
-								<listheader label="Visitante" width="20%" align="center" />
-								<listheader label="Fecha" width="10%" align="center" />
-								<listheader label="Estadio" width="20%" align="center" />
-								<listheader label="Hora Inicio" width="10%" align="center" />
-								
+								<listheader label="Home Club"
+									width="20%" align="left" />
+								<listheader label="Visitante"
+									width="20%" align="left" />
+								<listheader label="Fecha" width="10%"
+									align="left" />
+								<listheader label="Estadio" width="20%"
+									align="left" />
+								<listheader label="Hora Inicio"
+									width="10%" align="left" />
+
 							</listhead>
 							<listitem self="@{each=juego }"
 								value="@{juego }">
-								<listcell label="@{cntrl.equipoCompetencia1.equipo.nombre}"></listcell>
-								<listcell label="@{cntrl.equipoCompetencia2.equipo.nombre}"></listcell>
+								<listcell
+									label="@{cntrl.equipoCompetencia1.equipo.nombre}">
+								</listcell>
+								<listcell
+									label="@{cntrl.equipoCompetencia2.equipo.nombre}">
+								</listcell>
 								<listcell label="@{juego.fecha}"></listcell>
-								<listcell label="@{juego.estadio.nombre}"></listcell>
-								<listcell label="@{juego.horaInicio }"></listcell>								
+								<listcell
+									label="@{juego.estadio.nombre}">
+								</listcell>
+								<listcell
+									label="@{juego.horaInicio }">
+								</listcell>
 							</listitem>
 
 						</listbox>
@@ -212,8 +257,8 @@
 			<panel>
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
-						<button id="btnGuardar"  image="/Recursos/Imagenes/guardar.ico"
-							label="Guardar">
+						<button id="btnGuardar"
+							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
 
 						<button id="btnCancelar"
@@ -226,5 +271,5 @@
 				</panelchildren>
 			</panel>
 		</window>
-
+	</div>
 </zk>

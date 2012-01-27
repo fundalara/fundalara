@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -40,8 +40,8 @@ public class IngresoDocumentoAcreedor implements java.io.Serializable {
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "numeroDocumento", column = @Column(name = "numero_documento", nullable = false)),
-			@AttributeOverride(name = "codigoDocumentoAcreedor", column = @Column(name = "codigo_documento_acreedor", nullable = false)) })
+			@AttributeOverride(name = "codigoDocumentoAcreedor", column = @Column(name = "codigo_documento_acreedor", nullable = false)),
+			@AttributeOverride(name = "codigoIngreso", column = @Column(name = "codigo_ingreso", nullable = false)) })
 	public IngresoDocumentoAcreedorId getId() {
 		return this.id;
 	}
@@ -61,7 +61,7 @@ public class IngresoDocumentoAcreedor implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "numero_documento", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_ingreso", nullable = false, insertable = false, updatable = false)
 	public Ingreso getIngreso() {
 		return this.ingreso;
 	}

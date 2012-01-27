@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "detalle_requisicion", schema = "public")
 public class DetalleRequisicion implements java.io.Serializable {
 
-	private DetalleRequisicionId id;
+	private int codigoDetalleRequisicion;
 	private Material material;
 	private Requisicion requisicion;
 	private int cantidadSolicitada;
@@ -29,19 +27,19 @@ public class DetalleRequisicion implements java.io.Serializable {
 	public DetalleRequisicion() {
 	}
 
-	public DetalleRequisicion(DetalleRequisicionId id, Material material,
+	public DetalleRequisicion(int codigoDetalleRequisicion, Material material,
 			Requisicion requisicion, int cantidadSolicitada, char estatus) {
-		this.id = id;
+		this.codigoDetalleRequisicion = codigoDetalleRequisicion;
 		this.material = material;
 		this.requisicion = requisicion;
 		this.cantidadSolicitada = cantidadSolicitada;
 		this.estatus = estatus;
 	}
 
-	public DetalleRequisicion(DetalleRequisicionId id, Material material,
+	public DetalleRequisicion(int codigoDetalleRequisicion, Material material,
 			Requisicion requisicion, int cantidadSolicitada,
 			Integer cantidadEntregada, char estatus) {
-		this.id = id;
+		this.codigoDetalleRequisicion = codigoDetalleRequisicion;
 		this.material = material;
 		this.requisicion = requisicion;
 		this.cantidadSolicitada = cantidadSolicitada;
@@ -49,20 +47,18 @@ public class DetalleRequisicion implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)),
-			@AttributeOverride(name = "codigoRequisicion", column = @Column(name = "codigo_requisicion", nullable = false)) })
-	public DetalleRequisicionId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_detalle_requisicion", unique = true, nullable = false)
+	public int getCodigoDetalleRequisicion() {
+		return this.codigoDetalleRequisicion;
 	}
 
-	public void setId(DetalleRequisicionId id) {
-		this.id = id;
+	public void setCodigoDetalleRequisicion(int codigoDetalleRequisicion) {
+		this.codigoDetalleRequisicion = codigoDetalleRequisicion;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_material", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_material", nullable = false)
 	public Material getMaterial() {
 		return this.material;
 	}
@@ -72,7 +68,7 @@ public class DetalleRequisicion implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_requisicion", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_requisicion", nullable = false)
 	public Requisicion getRequisicion() {
 		return this.requisicion;
 	}

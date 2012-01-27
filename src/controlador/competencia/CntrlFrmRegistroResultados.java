@@ -187,10 +187,10 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
     	int contD = servicioLineUp.listarDefinitivos(juego, equipoB).size();
 		Component f;
 		
-		if (contD == 9)
+		//if (contD == 9)
 			f = Executions.createComponents("/Competencias/Vistas/FrmResultadosIndividuales.zul",null,null);
-		else 
-			f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);	
+		//else 
+			//f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);	
 		
 		Window w = (Window)f;
 		w.setPosition("center");   	

@@ -9,7 +9,17 @@
 		id="FrmRegistroResultados" closable="true" width="760px"
 		apply="controlador.competencia.CntrlFrmRegistroResultados">
 
-
+<zscript>
+		<![CDATA[ 
+		    public void guardar(){
+		      try{	
+		    	Messagebox.show("Datos almacenados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
+		      }catch (Exception e){
+		    	  
+		      }
+		    
+		    }
+		]]></zscript>
 
 		<panel border="normal" title="Datos de la Competencia">
 			<panelchildren>
@@ -106,13 +116,17 @@
 						<row style="border-style:none">
 							<label value="Anotador"></label>
 							<div>
-								<combobox cols="20" />
-								
+								<combobox cols="20" value="-- Seleccione --">
+								<comboitem label="ANTONIO PÉREZ"></comboitem>
+								<comboitem label="JOSÉ DÍAZ"></comboitem>
+								</combobox>								
 								<label value="(Oficial)"></label>
 							</div>
 							<label value="Anotador"></label>
 
-							<combobox cols="20" />
+							<combobox cols="20" value="-- Seleccione --">
+							<comboitem label="JOSÉ DÍAZ"></comboitem>
+							</combobox>
 							<label value="(Divisa)"></label>
 						</row>
 					</rows>
@@ -219,7 +233,7 @@
 		<panel>
 			<panelchildren>
 				<div align="right">
-					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar" />
+					<button image="/Recursos/Imagenes/guardar.ico" label="Guardar" onClick="guardar()" />
 					<button image="/Recursos/Imagenes/cancelar.ico"	label="Cancelar" />
 					<button image="/Recursos/Imagenes/salir.png" label="Salir" />
 				</div>
