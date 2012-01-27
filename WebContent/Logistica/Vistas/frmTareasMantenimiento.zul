@@ -1,148 +1,92 @@
-<window title="Tareas Mantenimiento" border="normal" mode="modal"
-	width="690px" id="tareasMantenimiento" closable="true" >
-	
-		<grid>
-			
-			<columns>
-	            <column width="20%"></column>
-	            <column width="30%"></column>
-			    <column width="20%"></column>
-				<column width="30%"></column>	          
-			</columns>
-			
-			<rows>
-				<row style="border:none">
-				    <label style="font-weight: bold;" value="Descripción" ></label>
-				    <textbox disabled="true" value="Mantenimiento del Campo" width=" 95%" style="color:black !important;"></textbox>
-		             		
-				</row>
-    
-	  		</rows>
-	
-	    </grid>
+<?page title="Tareas Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init root="tareasMantenimiento" class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  ?>
+<window id="tareasMantenimiento" title="Tareas Mantenimiento"
+	border="normal" mode="modal" width="930px" closable="true"
+	apply="controlador.logistica.CntrlCalogoTareas">
+
 	<grid>
-					<columns>
-						<column width="40%"></column>
-						<column width="5%"></column>
-						<column width="40%"></column>
-					</columns>
-					<rows>
-						<row id="fila2" visible="true">
-							<window title="Lista de Tareas"
-								height="150px" width="100%">
-								<listbox width="100%" height="100%">
-									<listhead>
-										<listheader label="Tarea"
-											width="50%">
-										</listheader>
-										<listheader
-											label="Descripción">
-										</listheader>
-									</listhead>
-									<listitem>
-										<listcell
-											label="Cortar Cesped">
-										</listcell>
-										<listcell
-											label="Mantener la altura del cesped">
-										</listcell>
-									</listitem>
-									<listitem>
-										<listcell
-											label="Fertilizar Campo">
-										</listcell>
-										<listcell
-											label="Agregar nutrientes al campo">
-										</listcell>
-									</listitem>
-									<listitem>
-										<listcell
-											label="Irrigar Campo">
-										</listcell>
-										<listcell
-											label="Regar el campo">
-										</listcell>
-									</listitem>
-									<listitem>
-										<listcell
-											label="Explanar Campo">
-										</listcell>
-										<listcell
-											label="Alisar áreas sin cesped">
-										</listcell>
-									</listitem>
 
-								</listbox>
-							</window>
-							<div align="center">
-								<hbox>
-									<button
-										image="/Recursos/Imagenes/agregar.ico">
-									</button>
-								</hbox>
-								<hbox>
-									<button
-										image="/Recursos/Imagenes/quitar.ico">
-									</button>
-								</hbox>
-							</div>
-							<window title="Lista de Tareas Agregadas"
-								height="150px" width="100%">
-									<listbox width="100%" height="100%">
-									<listhead>
-										<listheader label="Tarea"
-											width="50%">
-										</listheader>
-										<listheader
-											label="Descripción">
-										</listheader>
-									</listhead>
-									<listitem>
-										<listcell
-											label="Cortar Cesped">
-										</listcell>
-										<listcell
-											label="Mantener la altura del cesped">
-										</listcell>
-									</listitem>
-									<listitem>
-										<listcell
-											label="Fertilizar Campo">
-										</listcell>
-										<listcell
-											label="Agregar nutrientes al campo">
-										</listcell>
-									</listitem>
-									<listitem>
+		<columns>
+			<column width="20%"></column>
+			<column width="30%"></column>
+			<column width="20%"></column>
+			<column width="30%"></column>
+		</columns>
 
-									
-									</listitem>
-									<listitem>
-					
-									</listitem>
+		<rows>
+			<row style="border:none">
+				<label style="font-weight: bold;" value="Descripción"></label>
+				<textbox disabled="true" value="Mantenimiento del Campo"
+					width=" 95%" style="color:black !important;">
+				</textbox>
 
-								</listbox>
-							</window>
-						</row>
-					</rows>
-				</grid>
-				<grid>
+			</row>
+		</rows>
+
+	</grid>
+	<grid>
+		<columns>
+			<column width="80%"></column>
+			<column width="5%"></column>
+		</columns>
+		<rows>
+			<row id="fila2" visible="true">
+				<panel title="Lista de Tareas" width="100%">
+					<panelchildren>
+						<listbox id="lboxlistadotareas"
+							model="@{cntrl.listadoTareas}" selectedItem="@{cntrl.datoBasico}"
+							width="100%" mold="paging" pageSize="3">
+							<listhead>
+								<listheader label="Tarea" width="50%">
+								</listheader>
+								<listheader label="Descripción">
+								</listheader>
+							</listhead>
+							<listitem self="@{each='d'}" value="@{d}">
+								<listcell label="@{d.nombre}"></listcell>
+								<listcell label="@{d.descripcion}"></listcell>
+							</listitem>
+						</listbox>
+					</panelchildren>
+				</panel>
+				<div align="center">
+					<hbox>
+						<button id="agregar"
+							image="/Recursos/Imagenes/agregar.ico" disabled="true">
+						</button>
+					</hbox>
+					<hbox>
+						<button id="quitar"
+							image="/Recursos/Imagenes/quitar.ico" disabled="true">
+						</button>
+					</hbox>
+				</div>
+			</row>
+		</rows>
+	</grid>
+	<grid>
 		<columns>
 			<column width="100%"></column>
 		</columns>
 		<rows>
 			<row width="100%">
 				<div align="right">
-					<button id="guardar" label="Guardar"
+					<button id="guardarTareas" label="Guardar"
 						image="/Recursos/Imagenes/guardar.ico">
 					</button>
-					<button id="cancelar" label="Cancelar" image="/Recursos/Imagenes/cancelar.ico">
+					<button id="cancelarTareas" label="Cancelar"
+						image="/Recursos/Imagenes/cancelar.ico">
 					</button>
 				</div>
 
 			</row>
 		</rows>
 	</grid>
-	
-	
+
+	<zscript>
+<![CDATA[
+
+]]>
+</zscript>
 </window>

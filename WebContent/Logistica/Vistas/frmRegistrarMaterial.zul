@@ -33,9 +33,9 @@
 							<div>
 								<label value="Descripción: " />
 								<label value="(*)" style="color:red" />
-								<textbox id="txtDescripcion" multiline="true" height="120px"
-									width="100%" constraint="no empty"
-									value="@{cntrl.material.descripcion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
+								<textbox id="txtDescripcion" multiline="true" height="120px" width="100%" style='text-transform:uppercase;'
+									value="@{cntrl.material.descripcion, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" 
+									onChanging="filtrar(event)" />
 							</div>
 						</row>
 						<row>
@@ -55,29 +55,46 @@
 									<comboitem id="cmbUnidad" self="@{each=um}" label="@{um.nombre }" />
 								</combobox>
 							</div>
-						</row>
+						</row>						
 						<row>
 							<div>
 								<label value="Stock Mínimo:" />
-								<spinner id="spStockMinimo"
+								<spinner id="spStockMinimo" width="6%"
 									value="@{cntrl.material.stockMinimo, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
 									constraint="no negative" />
 								<space width="1%" />
 								<label value="Stock Máximo:" />
-								<spinner id="spStockMaximo"
+								<spinner id="spStockMaximo" width="6%"
 									value="@{cntrl.material.stockMaximo, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}"
 									constraint="no negative" />
 								<space width="2%" />
 								<label value="Reutilizable" />
 								<checkbox id="chboxReutilizable"
 									checked="@{cntrl.material.reutilizable, load-after='btnRegistrar.onClick, btnCancelar.onClick, btnModificar.onClick, btnEliminar.onClick'}" />
-								<separator height="10px" />
+								<space width="1%" />
+								<label value="Almacén: " />
+								<combobox id="cmbAlmacen" selectedItem="@{cntrl.material.almacen }" width="15%"
+									constraint="no empty"
+									model="@{cntrl.almacenes }"> 
+									<comboitem self="@{each=a }" value="@{a }" label="@{a.nombre }"/>
+								</combobox>
+							
+						
 							</div>
 						</row>
+<!-- 						<row> -->
+<!-- 							<div> -->
+<!-- 								<label value="Almacenado en: " /> -->
+<!-- 								<combobox id="cmbAlmacen" selectedItem="@{cntrl.material.almacen }" -->
+<!-- 									model="@{cntrl.almacenes }"> -->
+<!-- 									<comboitem self="@{each=a }" value="@{a }" label="@{a.nombre }"/> -->
+<!-- 								</combobox> -->
+<!-- 							</div> -->
+<!-- 						</row> -->
 						<row>
 							<panel title="Materiales Registrados" collapsible="true">
 								<panelchildren>
-									<listbox id="lboxMateriales" mold="paging" pageSize="5" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
+									<listbox id="lboxMateriales" mold="paging" pageSize="4" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
 										model="@{cntrl.materiales, load-after='btnRegistrar.onClick, btnModificar.onClick, btnEliminar.onClick, btnCancelar.onClick'}"
 										selectedItem="@{cntrl.material}">
 										<listhead>
@@ -96,6 +113,9 @@
 						</row>
 						<row>
 							<div align="right" width="100%">
+								<button id="btnImprimir" label="Imprimir" width="100px"
+									height="30px" image="../../Recursos/Imagenes/imprimir.ico">
+								</button>
 								<button id="btnRegistrar" label="Registrar" width="100px" onClick="btnModificar.disabled=btnEliminar.disabled=true"
 									height="30px" image="../../Recursos/Imagenes/guardar.ico">
 								</button>
@@ -113,5 +133,11 @@
 				</grid>
 			</panelchildren>
 		</panel>
+				<zscript><![CDATA[	
+		
+		public void filtrar(Event event) {	
+			((Textbox) event.getTarget()).setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+		}
+  ]]></zscript>
 	</window>
 </zk>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmAsignarPersonal"?>
+<?page title="Asignar Personal" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Asignar Personal" id="frmAsignarPersonal" 
+	apply="controlador.logistica.CntrlPlanificarActividad"
+	border="normal" mode="modal"  width="50%">
+		<listbox id="lboxPersonal" mold="paging" pageSize="5"
+			selectedItem="@{persona}" checkmark="true" >
+			<listhead>
+				<listheader label="Nombre" sort="auto" />
+				<listheader label="Apellido"/>
+			</listhead>
+			<listitem self="@{each='p'}" value="@{p}">
+				<listcell label="@{p.getPrimerNombre}" />
+				<listcell label="@{p.getPrimerApellido}" />
+			</listitem>
+		</listbox>
+		
+		<div align="right">
+					<button id="btnAgregarPersonal" label="Agregar"
+						image="/Recursos/Imagenes/agregar.ico" />
+						
+					<button id="btnSalir" label="Salir" onClick="frmAsignarPersonal.detach()"
+						image="/Recursos/Imagenes/salir.png" />
+		</div>
+		
+		
+	</window>
+</zk>

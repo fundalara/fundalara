@@ -1,9 +1,19 @@
 package controlador.logistica;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.DatoBasico;
 import modelo.Instalacion;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -123,6 +133,22 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 		cmbTipoInstalacion.getValue();
 		spCapacidad.getValue();
 		dboxTamano.getValue();
+	}
+	
+	public void onClick$btnImprimir() throws JRException{
+		 
+		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(instalaciones);
+				
+		Map parameters = new HashMap();
+		parameters.put("FECHA", new java.util.Date());
+	    JasperReport report = JasperCompileManager.compileReport("C:\\Users\\Reinaldo López\\Documents\\workspace entrega viernes 13\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteListadoInstalaciones.jrxml");
+	    JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
+	    
+	    // Exporta el informe a PDF
+	    JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Reinaldo López\\Documents\\workspace entrega viernes 13\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteListadoInstalaciones.pdf");
+	    
+	    //Para visualizar el pdf directamente desde java
+	    JasperViewer.viewReport(print, false);
 	}
 
 }

@@ -1,0 +1,83 @@
+<?page title="Solicitud Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window title="Solicitud de Mantenimiento" border="normal"
+		width="690px" id="SolicitudMantenimiento"
+		apply="controlador.logistica.CntrlSolicitudMantenimiento">
+
+		<grid height="80%" width="100%">
+			<columns>
+				<column></column>
+				<column></column>
+				<column></column>
+				<column></column>
+			</columns>
+			<rows>
+				<row>
+					<label value="Actividad a Realizar"></label>
+					<combobox id="cmb1"
+						selectedItem="@{cntrl.planificacionActividad}"
+						model="@{cntrl.actividades, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
+						<comboitem id="cmb2" self="@{each=a}"
+							label="@{a.descripcion}" value="@{a.codigoPlanificacionActividad}" />
+					</combobox>
+					<checkbox id="checkperiodico" label=" Periódico"
+						checked="@{cntrl.planificacionActividad.actividadPeriodico, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
+					</checkbox>
+					<checkbox id="checkplantilla" label=" Plantilla"
+						checked="@{cntrl.planificacionActividad.actividadPlantilla, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
+					</checkbox>
+				</row>
+				<row>
+					<label value="Fecha de Inicio:" width="90%"></label>
+					<datebox
+						value="@{cntrl.actividad.fechaInicio, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
+					<label value="Fecha de Culminacion:" width="90%">
+					</label>
+					<datebox
+						value="@{cntrl.actividad.fechaCulminacion, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
+				</row>
+
+				<row>
+					<label value="Hora de Inicio"></label>
+					<timebox
+						value="@{cntrl.actividad.horaInicio, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
+					<label value="Hora de Culminacion"></label>
+					<timebox
+						value="@{cntrl.actividad.horaFin, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
+
+				</row>
+				<row>
+
+					<label value="Instalacion"></label>
+					<combobox id="cmb3"
+						selectedItem="@{cntrl.insta}"
+						model="@{cntrl.instalaciones, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
+						<comboitem id="cm4" self="@{each=insta}"
+							label="@{insta.instalacion.descripcion}" value="@{insta.codigoInstalacionUtilizada}" />
+					</combobox>
+					<label value="Prioridad"></label>
+					<combobox id="cmb5"
+						selectedItem="@{cntrl.datoBasico}"
+						model="@{cntrl.prioridades, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
+						<comboitem id="cmb6" self="@{each=p}"
+							label="@{p.nombre}" value="@{p.codigoDatoBasico}" />
+					</combobox>
+				</row>
+
+			</rows>
+		</grid>
+
+		<div align="right">
+			<button id="btnAceptar" label="Aceptar"
+				image="../../Recursos/Imagenes/aceptar.ico"
+				tooltiptext="Enviar Solicitud" />
+			<button id="btnCancelar" label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" tooltiptext="Cancelar" />
+			<button label="Salir"
+				image="../../Recursos/Imagenes/salir.png" tooltiptext="Salir" />
+		</div>
+
+	</window>
+</zk>

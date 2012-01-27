@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteListadoMateriales1" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="FECHA" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     material.codigo_material AS "codigoMaterial",
+     material.descripcion AS "descripcion",
+     material.cantidad_existencia AS "cantidadExistencia",
+     material.cantidad_presentacion AS "cantidadPresentacion",
+     material.cantidad_disponible AS "cantidadDisponible",
+     material.reutilizable AS "reutilizable",
+     material.stock_minimo AS "stockMinimo",
+     material.stock_maximo AS "stockMaximo",
+     dato_basico.nombre AS "datoBasicoByCodigoTipoMaterial.nombre"
+FROM
+     "public"."dato_basico" dato_basico FULL OUTER JOIN "public"."material" material ON dato_basico."codigo_dato_basico" = material."codigo_tipo_material"
+WHERE
+     dato_basico.estatus = 'A'
+ AND material.estatus = 'A'
+ORDER BY
+     material."codigo_material" ASC]]>
+	</queryString>
+	<field name="codigoMaterial" class="java.lang.Integer"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="cantidadExistencia" class="java.lang.Integer"/>
+	<field name="cantidadPresentacion" class="java.lang.Integer"/>
+	<field name="cantidadDisponible" class="java.lang.Integer"/>
+	<field name="reutilizable" class="java.lang.Boolean"/>
+	<field name="stockMinimo" class="java.lang.Integer"/>
+	<field name="stockMaximo" class="java.lang.Integer"/>
+	<field name="datoBasicoByCodigoTipoMaterial.nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="154" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="752" height="154"/>
+				<imageExpression><![CDATA["C:\\Users\\Reinaldo López\\Documents\\workspace entrega viernes 13\\fundalara\\WebContent\\Recursos\\Imagenes\\Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="603" y="134" width="48" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="652" y="134" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="752" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Agency FB" size="24"/>
+				</textElement>
+				<text><![CDATA[Materiales Registrados]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="42">
+			<staticText>
+				<reportElement x="0" y="0" width="48" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="0" width="100" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="0" width="100" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="0" width="78" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad en Existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="73" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Disponible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="0" width="69" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reutilizable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="570" y="2" width="80" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock Mínimo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="667" y="2" width="85" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock Máximo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="38" width="752" height="3" forecolor="#FF9933"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39">
+			<textField>
+				<reportElement x="0" y="0" width="54" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoMaterial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="0" width="100" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="0" width="100" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datoBasicoByCodigoTipoMaterial.nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="0" width="52" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidadExistencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="0" width="49" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidadDisponible}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="69" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reutilizable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="573" y="0" width="79" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stockMinimo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="675" y="0" width="68" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stockMaximo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="34" width="743" height="4"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36">
+			<textField>
+				<reportElement x="341" y="16" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="406" y="16" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="697" y="7" width="55" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="570" y="7" width="124" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Materiales:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

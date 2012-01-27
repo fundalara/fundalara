@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatActPla"?>
+<?page title="Planificacion de Actividades" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Lista de Actividades" id="frmCatActPla"
+		border="normal" mode="modal" width="50%"
+		apply="controlador.logistica.CntrlFrmCatalogoActividad"
+		closable="true">
+		<div width="100%">
+			<label value="Buscar" width="10%" />
+			<label value="Nombre" width="15%"></label>
+			<textbox width="30%"></textbox>
+		</div>
+		<listbox id="lboxActividad" mold="paging" pageSize="5"
+			model="@{cntrl.listaActividad}" selectedItem="@{cntrl.actividad}"
+			checkmark="true">
+			<listhead>
+				<listheader label="Descripcion" sort="auto" />
+			</listhead>
+			<listitem self="@{each='ap'}" value="@{ap}">
+				<listcell
+					label="@{ap.planificacionActividad.descripcion}" />
+			</listitem>
+		</listbox>
+
+		<div align="right">
+			<button id="btnGuardar" label="Seleccionar"
+				image="/Recursos/Imagenes/guardar.ico" />
+
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" />
+		</div>
+
+
+	</window>
+</zk>

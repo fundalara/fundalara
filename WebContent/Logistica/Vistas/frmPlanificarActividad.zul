@@ -1,5 +1,11 @@
-<window title="Planificar Actividad" border="normal" mode="modal"
-	width="100%" id="crearActividad" closable="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPlanificarActividad"?>
+<?page title="Planificar Actividad" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Planificar Actividad" border="normal" mode="modal" 
+	apply="controlador.logistica.CntrlPlanificarActividad"
+	 id="frmPlanificarActividad" closable="true">
 
 	<grid height="30%" style="boder:none">
 		<columns>
@@ -10,505 +16,247 @@
 		</columns>
 		<rows style="border:none">
 			<row style="border:none">
-				<label style="font-weight: bold;" value="Descripción"></label>
-				<textbox disabled="true" width="95%"></textbox>
-				<label style="font-weight: bold;" value="Código" visible="false"></label>
-				<textbox disabled="true" width="90%" visible="false"></textbox>
+				<label value="Descripción"></label>
+				<textbox disabled="false" width="95%" id="txtDescripcion" style='text-transform:uppercase;'></textbox>
+				<label value="Tipo" />
+				
+				<combobox id="cmbTipo" selectedItem="@{cntrl.tipoActividad}" model="@{cntrl.tiposActividades}" readonly="true" tooltiptext="Seleccione el tipo de actividad">
+					<comboitem  self="@{each=tm}" label="@{tm.nombre}" />
+				</combobox>
 				
 			</row>
-
 			<row style="border:none">
-				<label style="font-weight: bold;"
+				<label
 					value="Fecha de inicio">
 				</label>
-				<datebox id="ppbegin" width="80%" />
-				<label style="font-weight: bold;"
+				<datebox id="fechaInicio" width="50%" />
+				<label
 					value="Hora de Inicio">
 				</label>
 				<hbox>
-					<timebox />
-					<button label="Periodicidad"
-						onClick="verPeriodicidad()"
+					<timebox id="horaInicio"/>
+					<button id="btnPeriodicidad" tooltiptext="Periodicidad"		
 						image="/Recursos/Imagenes/calendario.ico">
 					</button>
 				</hbox>
 			</row>
 
 			<row style="border:none">
-				<label style="font-weight: bold;"
+				<label
 					value="Fecha de Culminación">
 				</label>
-				<datebox id="ppend" width="80%" />
-				<label style="font-weight: bold;"
+				<datebox id="fechaFin" width="50%" />
+				<label
 					value="Hora de Culminación">
 				</label>
-				<timebox width="50%" />
-				<label style="font-weight: bold;" value="Responsable" visible="true"></label>
-				<hbox>
-					<textbox ></textbox>
-					<button image="/Recursos/Imagenes/consultar.ico" visible="true"></button>
-				</hbox>
-			</row>
-
+				<timebox id="horaFin" width="15%" />
+			</row>			
 			<row style="border:none">
-				<label value="Estado" style="font-weight: bold;"></label>
-				<progressmeter width="50%" value="27"></progressmeter>
-				<label value="Tipo" style="font-weight: bold;"></label>
-				<combobox width="40%">
-					<comboitem label="Preventivo" />
-					<comboitem label="Correctivo" />
-				</combobox>
-				<label value="Prediseñada" style="font-weight: bold;"></label>
-				<hbox>
-					<textbox></textbox>
-					<button image="/Recursos/Imagenes/consultar.ico"></button>
-				</hbox>
-			</row>
-			
-			
+			<label value="Instalación" />
+				<hbox width="100%">
+					<combobox id="cmbTipoInstalacion" tooltiptext="Seleccione el tipo de instalación" width="80%" readonly="true"
+						selectedItem="@{cntrl.tipoInstalacion}"
+						model="@{cntrl.tiposInstalaciones}">
+						<comboitem id="cmbTiposInst" self="@{each=ti}" 
+						     label="@{ti.nombre}" />
+					</combobox>
+					
+<!-- 					<combobox id="cmbInstalacion" tooltiptext="Seleccione la instalación" width="80%" readonly="true" -->
+<!-- 						selectedItem="@{cntrl.instalacionUtilizada}"  -->
+<!-- 						model="@{cntrl.listaInstalacionUtilizada, load-after='cmbTipoInstalacion.onSelect'}"> -->
+<!-- 						<comboitem  id="cmbIInstalacion" self="@{each=i}" -->
+<!-- 							label="@{i.getInstalacion.descripcion}" /> -->
+<!-- 					</combobox> -->
 
-			<row style="border:none">
+					<combobox id="cmbInstalacion" tooltiptext="Seleccione la instalación" width="80%" readonly="true"
+						selectedItem="@{cntrl.instalacionUtilizada}">
+						<comboitem  id="cmbIInstalacion" self="@{each=i}"
+							label="@{i.getInstalacion.descripcion}" />
+					</combobox>
+
+
+					<textbox id="txtInstalacion" ></textbox>
+				</hbox>
+			    <label value="Responsable" visible="true"></label>
+				<hbox>
+					<textbox value="@{cntrl.personalActividadPlanificada.personal.personaNatural converter='comun.converter.NameConverter'}"></textbox>
+					<button image="/Recursos/Imagenes/consultar.ico"  id="btnResponsable" visible="true" tooltiptext="Buscar Responsable"></button>
+				</hbox>				
 			</row>
-			
-			
 		</rows>
 	</grid>
 
 	<panel collapsible="true" title="Planificación Específica"
-		open="false" width="100%" id="panelS">
+		open="true" width="100%" id="panelS">
 		<panelchildren>
 			<grid>
 				<columns>
-					<column width="40%"></column>
+					<column width="95%"></column>
 					<column width="5%"></column>
-					<column width="40%"></column>
 				</columns>
 				<rows>
+				
+				<row id="fila6" visible="true">
+				<window title="Lista de Comisiones" id="winComision">
+						<listbox id="lboxComisiones" mold="paging" height="100px" pageSize="5" model="@{cntrl.listaComisiones}" selectedItem="@{cntrl.comision}" checkmark="true">
+					<listhead>
+						<listheader label="Nombre de la Comisión"></listheader>
+						<listheader label="Descripción de la Comisión"></listheader>
+					</listhead>
+					<listitem self="@{each='r'}" value="@{r}">
+						<listcell label="@{r.nombre}"></listcell>
+						<listcell label="@{r.descripcion}"></listcell>
+					</listitem>
+				</listbox>
+						</window>
+							<vbox>
+								<button id="btnAgregarComision" tooltiptext="Agregar Comisión"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>							
+								<button id="btnEliminarComision" tooltiptext="Eliminar Comisión"
+									image="/Recursos/Imagenes/quitar.ico">
+								</button>
+							</vbox>						
+					
+
+					</row>
 					<row id="fila2" visible="true">
-						<window title="Lista de Tareas" height="150px"
-							width="100%">
-							<listbox width="100%" height="100%"
-								vflex="true">
+					   <window title="Lista de Tareas" id="winTarea">
+							<listbox id="lboxTareas" mold="paging" width="100%" pageSize="5" height="120px" model="@{cntrl.tareasActividades}" selectedItem="@{cntrl.tareaActividad}" checkmark="true">
 								<listhead>
-									<listheader label="Tarea"
-										width="30%">
-									</listheader>
-									<listheader label="Descripción"></listheader>
+									<listheader label="Tarea" width="15%"></listheader>
+									<listheader label="Descripción" width="35%"></listheader>
+									<listheader label="Personal" width="25%" />
+									<listheader label="Representante" width="25%" ></listheader>
 								</listhead>
-								<listitem>
-									<listcell label="Tarea 1"></listcell>
-									<listcell
-										label="Descripción de la tarea">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Tarea 2"></listcell>
-									<listcell
-										label="Descripción de la tarea">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Tarea 3"></listcell>
-									<listcell
-										label="Descripción de la tarea">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Tarea 4"></listcell>
-									<listcell
-										label="Descripción de la tarea">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Tarea 5"></listcell>
-									<listcell
-										label="Descripción de la tarea">
-									</listcell>
+								<listitem self="@{each='tarea'}" value="@{tarea }">
+									<listcell label="@{tarea.datoBasico.nombre}" />
+									<listcell label="@{tarea.datoBasico.descripcion}" />
+									<listcell label="@{tarea.getPersonalActividadPlanificada.getPersonal.getPersonaNatural, converter='comun.converter.NameConverter'}"  />
+									<listcell></listcell>
+<!-- 									<listcell label="@{tarea.getFamiliarComisionEquipo.getFamiliarJugador.getFamiliar.getPersonaNatural, converter='comun.converter.NameConverter'}" ></listcell> -->
 								</listitem>
 							</listbox>
-						</window>
+								</window>
 						<div align="center">
-							<hbox>
-								<button
+							<vbox>
+								<button id="btnAsignarRepresentante" tooltiptext="Asignar Representante"
+									image="/Recursos/Imagenes/zs.jpg">
+								</button>
+								<button id="btnAgregarTarea"  tooltiptext="Agregar Tarea"
 									image="/Recursos/Imagenes/agregar.ico">
 								</button>
-							</hbox>
-							<hbox>
-								<button
+								<button id="btnEliminarTarea"  tooltiptext="Eliminar Tarea"
 									image="/Recursos/Imagenes/quitar.ico">
 								</button>
-							</hbox>
-						</div>
-						<window title="Lista de Tareas Agregadas"
-							height="150px" width="100%">
-							<listbox width="100%">
-								<listhead>
-									<listheader label="Tarea"
-										width="30%">
-									</listheader>
-									<listheader label="Responsable"></listheader>
-								</listhead>
-								<listitem>
-									<listcell label="Tarea 1"></listcell>
-									<listcell label="Aníbal Moreno"></listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Tarea 2"></listcell>
-									<listcell
-										label="Eduardo Quintero">
-									</listcell>
-								</listitem>
-							</listbox>
-						</window>
+								
+								<button id="btnAsignarPersonal"  tooltiptext="Asignar Personal"
+									image="/Recursos/Imagenes/personal.png">
+								</button>
+
+							</vbox>
+						</div>					
+		
 					</row>
-				</rows>
-			</grid>
-
-
-			<grid>
-				<columns>
-					<column width="40%"></column>
-					<column width="5%"></column>
-					<column width="40%"></column>
-				</columns>
-				<rows>
-					<row id="fila6" visible="true">
-						<window title="Lista de Comisiones"
-							height="150px" width="100%">
-							<listbox width="100%" height="100%"
-								vflex="true">
+					
+				<row id="filaInvisible" visible="false">
+					<vbox align="start" height="100%" width="100%">
+					<panel title="Lista de Tareas" height="100px">
+				      <panelchildren>
+							<listbox id="lboxTareasAgregadas2" width="100%" height="120px" >
 								<listhead>
-									<listheader label="Comision"
-										width="30%">
-									</listheader>
-									<listheader label="Nombre"
-										width="60%">
-									</listheader>
-								</listhead>
+									<listheader label="Tarea" width="15%"></listheader>
+									<listheader label="Descripción" width="35%"></listheader>
+									<listheader label="Personal" width="25%" />
+									<listheader label="Representante" width="25%" ></listheader>
+								</listhead>								
 								<listitem>
-									<listcell label="Comisión 1"></listcell>
-									<listcell
-										label="Comisión de Padres y Representantes">
-									</listcell>
+									<listcell label="ADORNAR INSTALACIONES" />
+									<listcell label="TAREA REALIZADA PARA AMBIENTAR LAS INSTLACIONES" />
+									<listcell label="GABRIELA PÉREZ"/>
+									<listcell label=""  />									
 								</listitem>
 								<listitem>
-									<listcell label="Comisión 2"></listcell>
-									<listcell
-										label="Comisión de Transporte">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Comisión 3"></listcell>
-									<listcell
-										label="Comisión de Hospedaje">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Comisión 4"></listcell>
-									<listcell
-										label="Comisión de Refrigerios">
-									</listcell>
+									<listcell label="CONTRATAR SONIDO" />
+									<listcell label="TAREA REALIZADA PARA BRINDAR SONIDO A LAS ACTIVIDADES" />
+									<listcell label=""/>
+									<listcell label="ANTONIO RODRÍGUEZ"  />									
 								</listitem>
 							</listbox>
-						</window>
+						</panelchildren>
+					</panel>
+					</vbox>
 						<div align="center">
-							<hbox>
-								<button id="agregarC"
+							<vbox>
+								<button id="btnAsignarRepresentante2"
+									image="/Recursos/Imagenes/zs.jpg">
+								</button>
+								<button id="btnAgregarTarea2"
 									image="/Recursos/Imagenes/agregar.ico">
 								</button>
-							</hbox>
-							<hbox>
-								<button
+								<button id="btnEliminarTarea2"
 									image="/Recursos/Imagenes/quitar.ico">
 								</button>
-							</hbox>
+								
+								<button id="btnAsignarPersonal2"
+									image="/Recursos/Imagenes/personal.png">
+								</button>
+
+							</vbox>
 						</div>
-						<window title="Lista de Comisiones Asociadas"
-							height="150px" width="100%">
-							<listbox width="100%">
-								<listhead>
-									<listheader label="Comisión"
-										width="30%">
-									</listheader>
-									<listheader label="Nombre"
-										width="60%">
-									</listheader>
-								</listhead>
-								<listitem>
-									<listcell label="Comisión 2"></listcell>
-									<listcell
-										label="Comisión de Transporte">
-									</listcell>
-								</listitem>
-								<listitem>
-									<listcell label="Comisión 1"></listcell>
-									<listcell
-										label="Comisión de Padres y Representantes">
-									</listcell>
-								</listitem>
-							</listbox>
-						</window>
+						
+			
 					</row>
-				</rows>
-			</grid>
-			<window title="Materiales Requeridos">
-				<grid>
-
-					<columns>
-						<column></column>
-						<column></column>
-					</columns>
-
-					<rows>
+					
+					
 						<row>
-							<window title="Lista de Materiales"
-								height="150px" width="100%">
-								<listbox width="100%" height="100%"
-									vflex="true">
-									<listhead>
-										<listheader label="Material"
-											width="30%">
-										</listheader>
-										<listheader label="Descripción"
-											width="55%">
-										</listheader>
-										<listheader label="Cantidad"
-											width="15%">
-										</listheader>
+                         				 <window title="Lista de Materiales" id="winMaterial">
+							<listbox width="100%" height="120px"	id="lboxMateriales" mold="paging" pageSize="5"  model="@{cntrl.materialesActividades}" checkmark="true">
+								<listhead>
+									<listheader label="Material"
+										width="20%" />
+									<listheader label="Descripción"
+										width="45%" />
+									<listheader
+										label="Cantidad Solicitada" />
+								</listhead>
+								<listitem self="@{each='m'}"
+									value="@{m}">
+									<listcell
+										label="@{m.material.DatoBasicoByCodigoTipoMaterial.Nombre}" />
+									<listcell
+										label="@{m.material.descripcion}" />
+									<listcell
+										label="@{m.cantidadRequerida}" />
 
-									</listhead>
-									<listitem>
-										<listcell label="Cal"></listcell>
-										<listcell label="Saco de 1kg"></listcell>
-										<listcell>
-											<doublebox width="80%"
-												value="1">
-											</doublebox>
-										</listcell>
-
-									</listitem>
-									<listitem>
-										<listcell
-											label="Arcilla calcinada">
-										</listcell>
-										<listcell label="Saco de 1kg"></listcell>
-										<listcell>
-											<doublebox width="80%"
-												value="1">
-											</doublebox>
-										</listcell>
-									</listitem>
-
-								</listbox>
-							</window>
+								</listitem>
+							</listbox>
+										</window>
 							<div align="center">
 								<vbox>
-									<button
-										image="/Recursos/Imagenes/agregar.ico"
-										onClick="solicitudMaterial()">
-									</button>
-									<button
-										image="/Recursos/Imagenes/quitar.ico">
-									</button>
+									<button id="btnAgregarMateriales" tooltiptext="Agregar un material"	image="/Recursos/Imagenes/agregar.ico" />
+						    	    <button id="btnEliminarMateriales" tooltiptext="Quitar un material" image="/Recursos/Imagenes/quitar.ico" />
 								</vbox>
 							</div>
+
 						</row>
-					</rows>
-				</grid>
-
-			</window>
-			<separator height="2px"></separator>
-
-
-			<div align="center">
-				<hbox>
-					<label>Desea Seleccionar un Mantenimiento</label>
-					<checkbox onCheck="mostrarPanelMantenimiento()"
-						id="check">
-					</checkbox>
-
-				</hbox>
-			</div>
-
-			<panel visible="false" collapsible="true" open="true">
-				<panelchildren>
-					<window title="Materiales Requeridos">
-						<grid>
-
-							<columns>
-								<column></column>
-								<column></column>
-							</columns>
-
-							<rows>
-								<row>
-									<window title="Lista de Materiales"
-										height="150px" width="100%">
-										<listbox width="100%"
-											height="100%" vflex="true">
-											<listhead>
-												<listheader
-													label="Material" width="30%">
-												</listheader>
-												<listheader
-													label="Descripción" width="55%">
-												</listheader>
-												<listheader
-													label="Cantidad" width="15%">
-												</listheader>
-
-											</listhead>
-											<listitem>
-												<listcell label="Cal"></listcell>
-												<listcell
-													label="Saco de 1kg">
-												</listcell>
-												<listcell>
-													<doublebox
-														width="80%" value="1">
-													</doublebox>
-												</listcell>
-
-											</listitem>
-											<listitem>
-												<listcell
-													label="Arcilla calcinada">
-												</listcell>
-												<listcell
-													label="Saco de 1kg">
-												</listcell>
-												<listcell>
-													<doublebox
-														width="80%" value="1">
-													</doublebox>
-												</listcell>
-											</listitem>
-
-										</listbox>
-									</window>
-									<div align="center">
-										<vbox>
-											<button
-												image="/Recursos/Imagenes/agregar.ico"
-												onClick="solicitudMaterial()">
-											</button>
-											<button
-												image="/Recursos/Imagenes/quitar.ico">
-											</button>
-										</vbox>
-									</div>
-								</row>
-							</rows>
-						</grid>
-
-					</window>
-				</panelchildren>
-			</panel>
-
-
-			<panel visible="false" collapsible="true" open="true"
-				id="panelMantenimiento">
-				<panelchildren>
-					<grid height="30%" style="boder:none">
-						<columns>
-							<column width="17%"></column>
-							<column width="30%"></column>
-							<column width="17%"></column>
-							<column width="36%"></column>
-						</columns>
-						<rows style="border:none">
-							<row>
-								<label style="font-weight: bold;"
-									value="Fecha">
-								</label>
-								<hbox>
-									<datebox></datebox>
-								</hbox>
-								<label style="font-weight: bold;"
-									value="Hora">
-								</label>
-								<hbox>
-									<timebox></timebox>
-									<button label="Periodicidad"
-										onClick="verPeriodicidad()"
-										image="/Recursos/Imagenes/calendario.ico">
-									</button>
-								</hbox>
-							</row>
-							<row>
-								<label style="font-weight: bold;"
-									value="Ubicación">
-								</label>
-								<hbox>
-									<textbox></textbox>
-									<button
-										image="/Recursos/Imagenes/consultar.ico">
-									</button>
-								</hbox>
-							</row>
-
-						</rows>
-					</grid>
-				</panelchildren>
-
-			</panel>
-		</panelchildren>
-	</panel>
-
-
-	<grid>
-		<columns>
-			<column width="100%"></column>
-		</columns>
-		<rows>
-			<row width="100%">
+			<row width="100%" spans="4">
 				<div align="right">
-					<button id="guardar" label="Guardar"
+					<button id="btnGuardar" label="Guardar"
 						image="/Recursos/Imagenes/guardar.ico">
 					</button>
-					<button id="modificar" label="Modificar"
-						image="/Recursos/Imagenes/editar.ico">
-					</button>
-					<button id="imprimir" label="Imprimir"
-						image="/Recursos/Imagenes/imprimir.ico">
-					</button>
-					<button id="cancelar" label="Cancelar"
+					<button id="btnCancelar" label="Cancelar"
 						image="/Recursos/Imagenes/cancelar.ico">
 					</button>
-					<button id="salir" label="Salir"
+					<button id="btnSalir" label="Salir"
 						image="/Recursos/Imagenes/salir.png">
 					</button>
 				</div>
-
 			</row>
 		</rows>
 	</grid>
-
-
-
-	<zscript>
-		<![CDATA[
-	public void verPeriodicidad() {
-		this.panelS.setOpen(true);
-		Executions.createComponents("/Logistica/Periodicidad.zul",
-				crearActividad, null);
-	}
-	public void asigPersoanlxTarea() {
-		Executions.createComponents("/Logistica/Tareas_Personal.zul",
-				crearActividad, null);
-	}
-	public void solicitudMaterial() {
-		Executions.createComponents("/Logistica/Solicitud_Materiales.zul",
-				crearActividad, null);
-	}
-	public void mostrarPanelMantenimiento() {
-		if (check.isChecked() == true)
-			panelMantenimiento.setVisible(true);
-		else
-			panelMantenimiento.setVisible(false);
-
-	}
-]]>
-	</zscript>
+	</panelchildren>
+	</panel>
 
 </window>
+</zk>

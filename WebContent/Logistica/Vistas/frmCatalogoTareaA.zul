@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatTareaA" ?>
+<?page title="Catalogo de Tareas" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Lista de Tareas" id="frmCatTareaA" border="normal" mode="modal"  
+	  closable="true" width="50%" apply="controlador.logistica.CntrlFrmCatalogoTareaA">
+			<label value="Nombre"></label>
+		<textbox ></textbox>
+		<listbox id="lboxTarea" mold="paging" pageSize="5"
+			model="@{cntrl.listaTarea}"
+			selectedItem="@{cntrl.tarea}" checkmark="true" >
+			<listhead>
+				<listheader label="Nombre" sort="auto" />
+				<listheader label="Descripcion"/>
+			</listhead>
+			<listitem self="@{each='pm'}" value="@{pm}">
+				<listcell label="@{pm.nombre}" />
+				<listcell label="@{pm.descripcion}" />
+			</listitem>
+		</listbox>
+		
+		<div align="right">
+					<button id="btnGuardar" label="Seleccionar"
+						image="/Recursos/Imagenes/guardar.ico" />
+						
+					<button id="btnSalir" label="Salir"
+						image="/Recursos/Imagenes/salir.png" />
+		</div>
+		
+		
+	</window>
+</zk>

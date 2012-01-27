@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatPlantilla"?>
+<?page title="Plantillas de Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Plantillas de Mantenimiento" border="normal"
+		id="frmCatPlantilla" mode="modal" closable="true"
+		apply="controlador.logistica.CntrlFrmCatalogoPlantilla" width="50%" >
+		<label value="Nombre"></label>
+		<textbox></textbox>
+		<listbox id="lboxPlantilla" mold="paging" pageSize="5"
+			model="@{cntrl.listaPlantilla}"
+			selectedItem="@{cntrl.plantilla}" checkmark="true" >
+			<listhead>
+				<listheader label="Descripcion" sort="auto" />
+			</listhead>
+			<listitem self="@{each='pm'}" value="@{pm}">
+				<listcell label="@{pm.descripcion}" />
+			</listitem>
+		</listbox>
+		<div align="right">
+					<button id="btnGuardar" label="Seleccionar"
+						image="/Recursos/Imagenes/guardar.ico" />
+					<button id="btnSalir" label="Salir"
+						image="/Recursos/Imagenes/salir.png" />
+				</div>
+		
+	</window>
+</zk>

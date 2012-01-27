@@ -1,0 +1,29 @@
+<?page title="Catalogo de Comisiones" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="catalogoComisiones" ?>
+<zk>
+	<window id="catalogoComisiones" title="Catalogo de Comisiones"
+		border="normal" mode="modal"
+		apply="controlador.logistica.CntrlCatalogoComisionesA"
+		width="80%">
+		<panel>
+			<panelchildren>
+				<listbox id="lboxListadoComisiones" mold="paging" pageSize="5" model="@{cntrl.listadoComisiones}" selectedItem="@{cntrl.comision}">
+					<listhead>
+						<listheader label="Nombre de la Comision"></listheader>
+						<listheader label="Descripcion de la Comision"></listheader>
+					</listhead>
+					<listitem self="@{each='r'}" value="@{r}">
+						<listcell label="@{r.listadoComisiones.nombre}"></listcell>
+						<listcell label="@{r.listadoComisiones.descripcion}"></listcell>
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<div width="100%" align="right">
+			<button id="btnAceptar" label="Aceptar" image="/Recursos/Imagenes/aceptar.ico"></button>
+			<button id="btnCancelar" label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"></button>
+		</div>
+		
+	</window>
+</zk>

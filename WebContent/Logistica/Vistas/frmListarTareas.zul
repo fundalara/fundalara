@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winListarTareas"?>
+<?page title="Tareas" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winListarTareas" title="Tareas" border="normal"
+		mode="modal" apply="controlador.logistica.CntrlListarTareas">
+		<listbox id="lboxTarea" width="100%" height="100%" mold="paging" pageSize="10"		
+		 model="@{cntrl.listaTareas}" selectedItem="@{cntrl.tareaSeleccionada }">
+			<listhead>
+				<listheader label="Tarea"></listheader>
+				<listheader label="Descripción"></listheader>
+			</listhead>
+			<listitem self="@{each='tarea'}">
+				<listcell label="@{tarea.nombre}" />
+				<listcell label="@{tarea.descripcion}" />
+			</listitem>
+		</listbox>
+		<div align="right">
+			<button id="btnAgregar" label="Agregar"
+				image="/Recursos/Imagenes/agregar.ico" />
+
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" />
+		</div>
+	</window>
+</zk>

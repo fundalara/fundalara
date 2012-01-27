@@ -1,375 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPrestamoDevolucion"?>
 <?page title="Manejo de Materiales" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="Manejo de Materiales" border="normal" width="690px" id="formDistribucion"
-	height="auto" apply="">
-<tabbox >
-	<tabs>
-		<tab label="Distribución"/>
-		<tab label="Devolución"/>
-</tabs>
-<tabpanels>
-<tabpanel>
+	<window title="Manejo de Materiales" border="normal" width="720px"
+		id="frmPrestamoDevolucion" height="auto"
+		apply="controlador.logistica.CntrlPrestamoDevolucion">
 
-	<menubar>
-	<menuitem label="Filtrar Por:" style="font-weight:bold" disabled="true"/>
-	<menuitem label="Todas" style="font-weight:bold"/>
-	<menuitem label="Competencias" style="font-weight:bold"/>
-	<menuitem label="Entrenamientos" style="font-weight:bold"/>	
-	<menuitem label="Eventos" style="font-weight:bold"/>
-	<menuitem label="Mantenimiento" style="font-weight:bold"/>
-	</menubar>	
-	<panel width="100%"  collapsible="True" title="Listado de Solicitudes" open="true">
-		<panelchildren>
-			<grid width="100%" height="120px">
-				<columns>
-					<column label="Artículo" width="12%"/>
-					<column label="Cantidad Solicitada" width="13%"/>
-					<column label="Disponible" width="11%"/>
-					<column label="Fecha" width="13%"/>
-					<column label="Hora Requerida" width="13%"/>
-					<column label="   " width="12%"/>
-					<column label="Disponer" width="26%"/>
-				</columns>
-				<rows>
-					<row>
-						<label>Protectores</label>
-						<label>1</label>
-						<label>3</label>
-						<label>01/11/2011</label>
-						<label>3:00pm</label>
-						<label>Asignado</label>
-						<div>
-							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="true"/>
-							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical" disabled="true"/>
-						</div>
-					</row>
-					<row>
-						<label>Guantes</label>
-						<label>10</label>
-						<label>8</label>
-						<label>01/11/2011</label>
-						<label>3:00pm</label>
-						<label>Insuficiente Para Asignar</label>
-						<div>
-							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="True"/>
-							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
-						</div>
-					</row>
-					<row>
-						<label>Bates</label>
-						<label>5</label>
-						<label>20</label>
-						<label>01/11/2011</label>
-						<label>3:00pm</label>
-						<label>Por Asignar</label>
-						<div>
-							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
-						</div>
-					</row>
-				</rows>
-			</grid>			
-		</panelchildren>
-	</panel>
-	
-	<panel collapsible="true" title="Detalle del Prestamo" 
-		style="font-weight:bold;" open="false">
-		<panelchildren>
-			
-			<grid>
-				<columns>
-					<column width="10%" align="left"></column>
-					<column width="25%" align="left"></column>
-					<column width="15%" align="left"></column>
-					<column width="25%" align="left"></column>
-				</columns>
-				<rows>
-					<row>
-						<label style="font-weight:bold;">
-							Material
-						</label>
-						<label>Guantes</label>
-						<label style="font-weight:bold;">
-							Cantidad en Inventario:
-						</label>
-						<label>20</label>
-					</row>
-					<row>
-						<label style="font-weight:bold;">
-							Descripción
-						</label>
-						<label>De tamaño regular para diestros</label>
-						<label style="font-weight:bold;">
-							Cantidad En Prestamo:
-						</label>
-						<label>12</label>
-					</row>
-					<row>
-						<label style="font-weight:bold;">
-							Tipo de material
-						</label>
-						<label>Deportivos</label>
-						<label></label>
-						<button id="btnHistorialPrestamo"
-							label="Historial Prestamo" width="90%" height="90%"
-							style="background-color:#fff000;border: 1px solid; font-size: 10px;font-weight:bold" onClick="verHistorialPrestamo()">
-							
-						</button>
-					</row>
-				</rows>
-
-			</grid>
-			
-			
-			
-			
-			
-			<grid>
-				<columns>
-					<column width="10%" align="left"></column>
-					<column width="35%" align="left"></column>
-					<column width="12%" align="left"></column>
-					<column width="40%" align="left"></column>
-
-				</columns>
-				<rows>
-					<row>
-						<label style="font-weight:bold;">
-							Disponibles para Asignar
-						</label>
-						<div>
-							<intbox value="8"></intbox>
-							<space width="5%"></space>
-							<button image="/Recursos/Imagenes/agregar.ico" orient="vertical"></button>
-							<button image="/Recursos/Imagenes/quitar.ico" orient="vertical"></button>
-						</div>
-						<label style="font-weight:bold;">
-							Cantidad Faltante Por Asignar:
-						</label>
-						<div>
-							<intbox value="2"></intbox>
-							<space width="5%"></space>
-							<button label="Generar Requisición" image="/Recursos/Imagenes/agregar.ico"/>
-						</div>
-					</row>
-				</rows>
-			</grid>
-			
-		</panelchildren>
-	</panel>
-	<panel  collapsible="true" title="Requisición" width="100%" 
-		style="font-weight:bold;" open="false">
-		<panelchildren>
-			<grid width="100%" height="90px">
-				<columns>
-					<column width="15%" align="left">
-					<label>Artículo</label>
-					</column>
-					<column width="15%" align="left">
-					<label>Cantidad a Solicitar</label>
-					</column>
-					<column width="35%" align="left">
-					<label>Descripción</label>
-					</column>
-					<column width="35%" align="left"/>
-				</columns>
-				<rows>
-					<row>
-						<label>Bates</label>
-						<label>3</label>
-						<label>Medida Estandar Para PreInfantil</label>
-						<div>
-							<button image="/Recursos/Imagenes/quitar.ico" orient="vertical"/>
-						</div>
-					</row>
-					<row>
-						<label>Guantes</label>
-						<label>2</label>
-						<label>De tamaño regular para diestros</label>
-						<div>
-							<button image="/Recursos/Imagenes/quitar.ico" orient="vertical"/>
-						</div>
-					</row>
-				</rows>
-			</grid>
-			<div width="100%" height="45%">
-				<groupbox>
-					<space width="55%"></space>
-					<button label="Guardar" image="/Recursos/Imagenes/guardar.ico" onClick="verRequisicion()"/>
-					<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"/>
-					<button label="Salir" image="/Recursos/Imagenes/atras.ico"/>
-				</groupbox>
-			</div>
-		</panelchildren>
-	</panel>
-</tabpanel>
-
-<tabpanel>
-	<menubar>
-	<menuitem label="Filtrar Por:" style="font-weight:bold" disabled="true"/>
-	<menuitem label="Todas" style="font-weight:bold"/>
-	<menuitem label="Competencias" style="font-weight:bold"/>
-	<menuitem label="Entrenamientos" style="font-weight:bold"/>	
-	<menuitem label="Eventos" style="font-weight:bold"/>
-	<menuitem label="Mantenimiento" style="font-weight:bold"/>
-	</menubar>	
-	<panel width="100%"  collapsible="True" title="Listado de Prestamos" open="true">
-		<panelchildren>
-			<grid width="100%">
-				<columns>
-					<column label="Artículo" width="20%"/>
-					<column label="Cantidad" width="20%"/>
-					<column label="Actividad" width="20%"/>
-					<column label="Fecha Asignación" width="20%"/>
-					<column label="Operar" width="20%"/>
-				</columns>
-				<rows>
-					<row>
-						<label>Protectores</label>
-						<label>1</label>
-						<label>Entrenamiento</label>
-						<label>01/11/2011</label>
-						<div>
-							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="true"/>
-							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical" disabled="true"/>
-						</div>
-					</row>
-					<row>
-						<label>Cal</label>
-						<label>10</label>
-						<label>Mantenimiento</label>
-						<label>01/11/2011</label>
-						<div>
-							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical" disabled="True"/>
-							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
-						</div>
-					</row>
-					<row>
-						<label>Guantes</label>
-						<label>10</label>
-						<label>Entrenamiento</label>
-						<label>01/11/2011</label>
-						<div>
-							<button image="/Recursos/Imagenes/aceptar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/editar.ico" orient="vertical"/>
-							<button image="/Recursos/Imagenes/cancelar.ico" orient="vertical"/>
-						</div>
-					</row>
-				</rows>
-			</grid>			
-		</panelchildren>
-	</panel>
-	<panel collapsible="true" title="Detalle Devolución" width="100%" height="50%"
-		style="font-weight:bold;" open="true">
-		<panelchildren>
-			
-			<grid>
-				<columns>
-					<column width="10%" align="left"></column>
-					<column width="25%" align="left"></column>
-					<column width="12%" align="left"></column>
-					<column width="25%" align="left"></column>
-				</columns>
-				<rows>
-					<row>
-						<label style="font-weight:bold;">
-							Material
-						</label>
-						<label>Guantes</label>
-						<label style="font-weight:bold;">
-							Cantidad en Inventario:
-						</label>
-						<label>20</label>
-					</row>
-					<row>
-						<label style="font-weight:bold;">
-							Descripción
-						</label>
-						<label>De tamaño regular para diestros</label>
-						<label style="font-weight:bold;">
-							Cantidad En Prestamo:
-						</label>
-						<label>12</label>
-					</row>
-					<row>
-						<label style="font-weight:bold;">
-							Tipo de material
-						</label>
-						<label>Deportivos</label>
-						<label></label>
-						<button id="btnHistorialPrestamo2"
-							label="Historial Prestamo" width="90%" height="90%"
-							style="background-color:#fff000;border: 1px solid; font-size: 10px;font-weight:bold" onClick="verHistorialPrestamo()">
-							
-						</button>
-					</row>
-				</rows>
-			</grid>
-			<grid>
-				<columns>
-					<column width="10%" align="left"></column>
-					<column width="25%" align="left"></column>
-					<column width="22%" align="left"></column>
-					<column width="40%" align="left"></column>
-
-				</columns>
-				<rows>
-					<row>
-						<div>
-							<label style="font-weight:bold;">
-								Cantidad a Devolver:
-							</label>				
-							<intbox value="8"></intbox>
-						</div>
-						<div>
-							<label style="font-weight:bold;">
-								Articulos en mal estado:
-							</label>
-							<intbox value="2"></intbox>
-						</div>
-						<div>							
-							<label style="font-weight:bold;">
-								Observaciones:
-							</label>
-							<textbox value="Escriba aqui sus observaciones" width="200px" height="50px"></textbox>
-						</div>
-						<button label="Procesar Devolución" image="/Recursos/Imagenes/agregar.ico"/>
-					</row>
-				</rows>
-			</grid>
-	
-		</panelchildren>
-	</panel>
-</tabpanel>
-
-</tabpanels>
-</tabbox>
-	
-	
+		<tabbox>
+			<tabs>
+				<tab label="Prestamo" />
+				<tab label="Devolución" />
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+					<menubar>
+						<menuitem label="Filtrar Por:"
+							style="font-weight:bold" disabled="true" />
+						<menuitem label="Todas" style="font-weight:bold"
+							id="menuTodasP" />
+						<menuitem label="Competencias"
+							style="font-weight:bold" id="menuCP" />
+						<menuitem label="Entrenamientos"
+							style="font-weight:bold" id="menuEP" />
+						<menuitem label="Eventos"
+							style="font-weight:bold" id="menuEVP" />
+						<menuitem label="Mantenimiento"
+							style="font-weight:bold" id="menuMP" />
+					</menubar>
+					<div>
+						<label value="Actividades en proceso"></label>
+						<textbox id="txtActividadPlanificada"
+							value="@{cntrl.actividad.planificacionActividad.descripcion}"
+							width="50%" readonly="true" />
+						<button id="btnPlanificacionActividad"
+							image="/Recursos/Imagenes/consultar.ico"
+							tooltiptext="Buscar una actividad en ejecucion" />
+					</div>
+					<panel title="Listado de Solicitudes"
+						collapsible="true">
+						<panelchildren>
+							<listbox id="lboxSolicitudMaterial"
+								mold="paging" pageSize="5" model="@{cntrl.solicitudes}"
+								selectedItem="@{cntrl.solicitud}">
+								<listhead>
+									<listheader>Artículo</listheader>
+									<listheader width="15%">
+										Cantidad Requerida
+									</listheader>
+									<listheader width="15%">
+										Cantidad En inventario
+									</listheader>
+									<listheader width="15%">
+										Tipo Actividad
+									</listheader>
+								</listhead>
+								<listitem self="@{each='s'}"
+									value="@{s}">
+									<listcell
+										label="@{s.material.descripcion}" />
+									<listcell
+										label="@{s.cantidadRequerida}" />
+									<listcell
+										label="@{s.material.cantidadDisponible}" />
+									<listcell
+										label="@{s.planificacionActividad.datoBasico.nombre}" />
+								</listitem>
+							</listbox>
+						</panelchildren>
+					</panel>
 
 
-	<zscript>
-	public void verHistorialPrestamo() {
-		Executions.createComponents("/Logistica/Historial_Pedido.zul",formDistribucion, null);
-	}
-   </zscript>
-   
-   	<zscript>
-	public void procesarPrestamo() {
-		alert("Registro Guardado!");
-	}
-   </zscript>
-	
-	<zscript>
-	public void verRequisicion() {
-		Executions.createComponents("/Logistica/requisicion.zul",formDistribucion, null);
-	}
-   </zscript>
+					<panel collapsible="true"
+						title="Detalle del Prestamo" style="font-weight:bold;" open="true"
+						id="panelDetalle">
+						<panelchildren>
+							<grid>
+								<columns>
+									<column width="10%" align="left"></column>
+									<column width="25%" align="left"></column>
+									<column width="15%" align="left"></column>
+									<column width="25%" align="left"></column>
+								</columns>
+								<rows>
+									<row>
+										<label
+											style="font-weight:bold;">
+											Material
+										</label>
+										<textbox id="txtMaterial"
+											value="@{cntrl.solicitud.material.descripcion}"
+											readonly="true" width="90%" />
+										<label
+											style="font-weight:bold;">
+											Tipo de material
+										</label>
+										<textbox id="txtTipoMaterial"
+											value="@{cntrl.solicitud.material.datoBasicoByCodigoTipoMaterial.nombre}"
+											width="90%" readonly="true" />
 
-</window>
+									</row>
+									<row>
+										<label
+											style="font-weight:bold;">
+
+											Cantidad en Inventario:
+										</label>
+										<textbox
+											id="txtCantidadDisponible"
+											value="@{cntrl.solicitud.material.cantidadDisponible}"
+											readonly="true" width="90%" />
+										<label
+											style="font-weight:bold;">
+
+											Cantidad Necesaria:
+										</label>
+										<textbox
+											id="txtCantidadNecesaria"
+											value="@{cntrl.solicitud.cantidadRequerida}" readonly="true"
+											width="90%" />
+									</row>
+									<row>
+										<label
+											style="font-weight:bold;">
+											Disponibles para Asignar
+										</label>
+										<spinner
+											id="txtDisponibleAsignar" value="@{cntrl.cantidadNecesitada}"
+											width="40%" constraint="no empty, no negative, no zero" />
+										<label style="font-weight:bold;"
+											visible="false" id="labelRequisicion">
+											Cantidad para requisicion:
+										</label>
+										<spinner id="txtFaltante"
+											value="@{cntrl.cantidadFaltante}" width="40%"
+											constraint="no empty, no negative, no zero" visible="false" />
+
+
+									</row>
+									<row>
+										<label></label>
+										<label></label>
+										<label></label>
+										<button id="btnRequisicion"
+											label="Generar Requisición"
+											image="/Recursos/Imagenes/agregar.ico" visible="true" />
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+					<panel collapsible="true" title="Requisición"
+						width="100%" style="font-weight:bold;" open="true" visible="false"
+						id="panelRequisicion">
+
+						<panelchildren>
+
+							<grid width="100%" height="90px">
+								<columns>
+									<column width="10%" align="left">
+									</column>
+									<column width="20%" align="left">
+									</column>
+									<column width="10%" align="left">
+									</column>
+									<column width="10%" align="left" />
+									<column width="15%" align="left" />
+									<column width="15%" align="left" />
+								</columns>
+								<rows>
+									<row>
+										<label value="Artículo"></label>
+										<textbox id="txtArticuloReq"
+											readonly="true" width="90%" />
+										<label
+											value="Cantidad a Solicitar">
+										</label>
+										<spinner id="txtCatidadReq"
+											width="40%" constraint="no empty, no negative, no zero" />
+										<label value="Descripcion">
+										</label>
+										<textbox width="300px"
+											height="50px" multiline="true">
+										</textbox>
+
+									</row>
+								</rows>
+							</grid>
+							<div align="right">
+								<button
+									image="/Recursos/Imagenes/quitar.ico" orient="vertical" />
+								<button
+									image="/Recursos/Imagenes/agregar.ico" orient="vertical" />
+							</div>
+						</panelchildren>
+					</panel>
+					<div width="100%" height="45%">
+						<groupbox>
+							<space width="55%"></space>
+							<button label="Guardar"
+								image="/Recursos/Imagenes/guardar.ico" id="btnGuardarSolicitud" />
+							<button label="Cancelar"
+								image="/Recursos/Imagenes/cancelar.ico"
+								id="btnCancelarSolicitud" />
+							<button label="Salir"
+								image="/Recursos/Imagenes/atras.ico" id="btnSalirSolicitud" />
+						</groupbox>
+					</div>
+				</tabpanel>
+
+				<tabpanel>
+					<menubar>
+						<menuitem label="Filtrar Por:"
+							style="font-weight:bold" disabled="true" />
+						<menuitem label="Todas" style="font-weight:bold"
+							id="menuTodasD" />
+						<menuitem label="Competencias"
+							style="font-weight:bold" id="menuCD" />
+						<menuitem label="Entrenamientos"
+							style="font-weight:bold" id="menuED" />
+						<menuitem label="Eventos"
+							style="font-weight:bold" id="menuEVD" />
+						<menuitem label="Mantenimiento"
+							style="font-weight:bold" id="menuMD" />
+					</menubar>
+					<div>
+						<label value="Actividades en proceso"></label>
+						<textbox id="txtActividadDevolucion" width="50%"
+							readonly="true" />
+						<button id="btnDevolucion"
+							image="/Recursos/Imagenes/consultar.ico"
+							tooltiptext="buscar Actividad donde se asignaron materiales" />
+					</div>
+					<panel title="Listado de Prestamos"
+						collapsible="true">
+						<panelchildren>
+							<listbox id="lboxDevolucionMaterial"
+								mold="paging" pageSize="5"
+								model="@{cntrl.materialesActividadesPorDevolver}"
+								selectedItem="@{cntrl.materialActividadD}">
+								<listhead>
+									<listheader>Artículo</listheader>
+									<listheader width="15%">
+										Cantidad Entregada
+									</listheader>
+									<!-- 									<listheader width="15%"> -->
+									<!-- 										Actividad -->
+									<!-- 									</listheader> -->
+									<!-- 									<listheader width="15%"> -->
+									<!-- 										Fecha Devolucion -->
+									<!-- 									</listheader> -->
+									<!-- 									<listheader width="15%"> -->
+									<!-- 										Estatus -->
+									<!-- 									</listheader> -->
+								</listhead>
+								<listitem self="@{each='d'}"
+									value="@{d}">
+									<listcell
+										label="@{d.material.descripcion}" />
+									<listcell
+										label="@{d.cantidadEntregada}" />
+									<!-- 									<listcell label="" /> -->
+									<!-- 									<listcell -->
+									<!-- 										label="@{d.fechaDevolucion}" /> -->
+									<!-- 									<listcell label="@{d.estatus}" -->
+									<!-- 										tooltiptext="Por Devolver" /> -->
+								</listitem>
+							</listbox>
+						</panelchildren>
+					</panel>
+					<panel collapsible="true" title="Detalle Devolución"
+						width="100%" height="50%" style="font-weight:bold;" open="true">
+						<panelchildren>
+							<grid>
+								<columns>
+									<column width="10%" align="left"></column>
+									<column width="25%" align="left"></column>
+									<column width="15%" align="left"></column>
+									<column width="25%" align="left"></column>
+								</columns>
+								<rows>
+									<row>
+										<label
+											style="font-weight:bold;">
+											Material
+										</label>
+										<textbox id="txtMaterialD"
+											value="@{cntrl.materialActividadD.material.descripcion}"
+											readonly="true" width="90%" />
+										<label
+											style="font-weight:bold;">
+											Tipo de material
+										</label>
+										<textbox id="txtTipoMaterialD"
+											value="@{cntrl.materialActividadD.material.datoBasicoByCodigoTipoMaterial.nombre}"
+											width="90%" readonly="true" />
+									</row>
+									<row>
+										<label
+											style="font-weight:bold;">
+											Cantidad a Devolver:
+										</label>
+										<spinner id="txtDevolver"
+											value="@{cntrl.materialActividadD.cantidadDevuelta}"
+											width="40px" constraint="no empty, no negative, no zero" />
+
+										<label
+											style="font-weight:bold;">
+											Articulos en mal estado:
+										</label>
+										<spinner id="txtMalEstado"
+											width="40px" constraint="no empty, no negative, no zero"
+											value="@{cntrl.cantidadMalEstado}" />
+
+									</row>
+									<row>
+										<label
+											style="font-weight:bold;">
+											Observaciones:
+										</label>
+										<textbox
+											value="@{cntrl.materialActividadD.observacion}" width="300px"
+											height="50px" multiline="true">
+										</textbox>
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+					<div width="100%" height="45%">
+						<groupbox>
+							<space width="55%"></space>
+							<button label="Guardar"
+								image="/Recursos/Imagenes/guardar.ico"
+								id="btnGuardarDevolucion" />
+							<button label="Cancelar"
+								image="/Recursos/Imagenes/cancelar.ico"
+								id="btnCancelarDevolucion" />
+							<button label="Salir"
+								image="/Recursos/Imagenes/atras.ico" id="btnSalirDevolucion" />
+						</groupbox>
+					</div>
+				</tabpanel>
+
+			</tabpanels>
+		</tabbox>
+	</window>
 </zk>

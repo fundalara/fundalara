@@ -1,128 +1,71 @@
-<?page title="Requisición" contentType="text/html;charset=UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="formRequisicion2"?>
+<?page title="Generar Requisicion" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Requisición" border="normal" width="80%" height="80%"
-		id="formRequisicion" mode="modal" closable="true">
-		<panel height="12%">
+	<window title="Requisición" border="normal" width="60%"
+		id="formRequisicion2" mode="modal" closable="true"
+		apply="controlador.logistica.CntrlFrmRequisicion" sizable="true" >
+
+		<panel title="Materiales Requisados" width="100%" >
 			<panelchildren>
-				<label>Id Requisición</label>
-				<intbox value="001" />
-				<space width="10%" />
-				<label>Fecha</label>
-				<datebox />
-				<space width="40%" />
-				<button label="Historial de Requisiciones" />
-			</panelchildren>
-		</panel>
-		<panel title="Artículos Requisados" height="93%">
-			<panelchildren>
-				<grid>
-					<columns>
-						<column width="70%" height="100%"
-							label="Requisición" />
-						<column width="30%" height="100%"
-							label="Agregar Artículo" />
-					</columns>
+				<button label="Historial de Requisiciones"
+					visible="false" />
+				<grid width="100%" height="200px">
 					<rows>
 						<row>
 							<div>
-								<label value="Filtrar Artículo"></label>
-								<textbox />
-								<button image="/Recursos/Imagenes/consultar.ico" />
-								<grid width="98%" height="300px">
-									<columns>
-										<column width="25%"
-											align="left">
-											<label>Artículo</label>
-										</column>
-										<column width="25%"
-											align="left">
-											<label>
-												Cantidad a Solicitar
-											</label>
-										</column>
-										<column width="35%"
-											align="left">
-											<label>Descripción</label>
-										</column>
-										<column width="15%"
-											align="left" />
-									</columns>
-									<rows>
-										<row>
-											<label>Bates</label>
-											<label>3</label>
-											<label>
-												Medida Estandar Para
-												PreInfantil
-											</label>
-											<div align="center">
-												<button
-													image="/Recursos/Imagenes/editar.ico" orient="vertical" />
-												<button
-													image="/Recursos/Imagenes/quitar.ico" orient="vertical" />
-											</div>
-										</row>
-										<row>
-											<label>Guantes</label>
-											<label>2</label>
-											<label>
-												De tamaño regular para
-												diestros
-											</label>
-											<div align="center">
-												<button
-													image="/Recursos/Imagenes/editar.ico" orient="vertical" />
-												<button
-													image="/Recursos/Imagenes/quitar.ico" orient="vertical" />
-											</div>
-										</row>
-									</rows>
-								</grid>
+								<div>
+									<label width="10%"
+										value="Materiales">
+									</label>
+									<textbox width="20%"
+										readonly="true" />
+									<button
+										image="/Recursos/Imagenes/agregar.ico"
+										id="btnAgregarMateriales">
+									</button>
+									<button
+										image="/Recursos/Imagenes/quitar.ico"
+										id="btnQuitarMateriales">
+									</button>
+								</div>
+								<listbox id="lsbxGenerarR" width="100%"
+									vflex="true" mold="paging" pageSize="5"
+									model="@{cntrl.materialesRequisados}"
+									selectedItem="@{cntrl.aux}">
+									<listhead>
+										<listheader width=" 80%"
+											align="center">
+											Descripcion
+										</listheader>
+										<listheader width="20%"
+											align="center">
+											Cantidad
+										</listheader>
+									</listhead>
+									<listitem self="@{each='r'}"
+										value="@{r}">
+										<listcell
+											label="@{r.material.descripcion}">
+										</listcell>
+										<listcell
+											label="@{r.cantidadSolicitada}">
+										</listcell>
+									</listitem>
+								</listbox>
 								<div align="right">
 									<button label="Guardar"
-										image="/Recursos/Imagenes/guardar.ico" />
+										image="/Recursos/Imagenes/guardar.ico" id="btnGuardar" />
 									<button label="Salir"
 										image="/Recursos/Imagenes/salir.png" onClick="salir()" />
 								</div>
 							</div>
-							<div>
-								<label>Artículo</label>
-								<textbox />
-								<button
-									image="/Recursos/Imagenes/consultar.ico" />
-								<grid height="300px" width="98%">
-									<columns>
-										<column label="Codigo" />
-										<column label="Articulo" />
-										<column label="Cant Disp." />
-									</columns>
-								</grid>
-								<div align="right">
-									<button label="Agregar"
-										image="/Recursos/Imagenes/agregar.ico" />
-								</div>
-							</div>
+
 						</row>
 					</rows>
 				</grid>
 			</panelchildren>
 		</panel>
-
-
-		<zscript>
-	public void agregarArticulo() {
-		Executions.createComponents("/Logistica/agregararticulo.zul",
-				formRequisicion, null);
-	}
-</zscript>
-
-		<zscript>
-	<![CDATA[
-	public void salir() {
-		formRequisicion.onClose();
-	}
-]]>
-	
-	</zscript>
 	</window>
 </zk>

@@ -5,25 +5,25 @@
 		<label value="año(s)"></label>
 	</hbox>
 	<hbox>
-		<checkbox label="El:"></checkbox>
+		<label value="El:"></label>
 		<spinner></spinner>
 		<label value="de"></label>
 		<combobox width="80px">
-			<comboitem label="Enero"></comboitem>
-			<comboitem label="Febrero"></comboitem>
-			<comboitem label="Marzo"></comboitem>
-			<comboitem label="Abril"></comboitem>
-			<comboitem label="Mayo"></comboitem>
-			<comboitem label="Junio"></comboitem>
-			<comboitem label="Julio"></comboitem>
-			<comboitem label="Agosto"></comboitem>
-			<comboitem label="Septiembre"></comboitem>
-			<comboitem label="Octubre"></comboitem>
-			<comboitem label="Noviembre"></comboitem>
-			<comboitem label="Diciembre"></comboitem>
+			<comboitem label="ENERO"></comboitem>
+			<comboitem label="FEBRERO"></comboitem>
+			<comboitem label="MARZO"></comboitem>
+			<comboitem label="ABRIL"></comboitem>
+			<comboitem label="MAYO"></comboitem>
+			<comboitem label="JUNIO"></comboitem>
+			<comboitem label="JULIO"></comboitem>
+			<comboitem label="AGOSTO"></comboitem>
+			<comboitem label="SEPTIEMBRE"></comboitem>
+			<comboitem label="OCTUBRE"></comboitem>
+			<comboitem label="NOVIEMBRE"></comboitem>
+			<comboitem label="DICIEMBRE"></comboitem>
 		</combobox>
 	</hbox>
-	<hbox>
+	<hbox visible="false">
 		<label value="En el:"></label>
 		<combobox width="80px">
 			<comboitem label="Primer"></comboitem>

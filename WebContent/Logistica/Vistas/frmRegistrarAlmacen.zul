@@ -90,6 +90,9 @@
 						</row>
 						<row>
 							<div align="right" width="100%">
+								<button id="btnImprimir" label="Imprimir" width="100px"
+									height="30px" image="../../Recursos/Imagenes/imprimir.ico">
+								</button>
 								<button id="btnRegistrar"
 									label="Registrar" width="100px"
 									onClick="btnModificar.disabled=btnEliminar.disabled=true"

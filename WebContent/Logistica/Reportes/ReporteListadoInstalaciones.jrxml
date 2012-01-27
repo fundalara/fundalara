@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteListadoInstalaciones" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="FECHA" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     instalacion."codigo_instalacion" AS "codigoInstalacion",
+     instalacion."descripcion" AS descripcion,
+     instalacion."capacidad" AS capacidad,
+     instalacion."tamano" AS tamano,
+     dato_basico."nombre" AS "datoBasico.nombre",
+     instalacion."ubicacion" AS "ubicacion.descripcion"
+FROM
+     "public"."dato_basico" dato_basico FULL OUTER JOIN "public"."instalacion" instalacion ON dato_basico."codigo_dato_basico" = instalacion."codigo_tipo_instalacion"
+WHERE
+     dato_basico.estatus = 'A'
+ AND instalacion.estatus = 'A'
+ORDER BY
+     instalacion."codigo_instalacion" ASC]]>
+	</queryString>
+	<field name="codigoInstalacion" class="java.lang.Integer"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="capacidad" class="java.lang.Integer"/>
+	<field name="tamano" class="java.math.BigDecimal"/>
+	<field name="datoBasico.nombre" class="java.lang.String"/>
+	<field name="ubicacion.descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="157" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="572" height="156"/>
+				<imageExpression><![CDATA["C:\\Users\\Reinaldo López\\Documents\\workspace entrega viernes 13\\fundalara\\WebContent\\Recursos\\Imagenes\\Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="427" y="136" width="46" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="476" y="137" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47">
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Agency FB" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instalaciones Registradas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38">
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="0" width="100" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="96" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Instalacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="0" width="72" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capacidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="0" width="60" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tamaño]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="0" width="113" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área a la que Pertenece]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-2" y="33" width="570" height="3" forecolor="#FF9933"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39">
+			<textField>
+				<reportElement x="0" y="2" width="56" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoInstalacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="2" width="100" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="0" width="53" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{capacidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="60" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tamano}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="349" y="2" width="111" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ubicacion.descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="2" width="96" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datoBasico.nombre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="36" width="572" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31">
+			<textField>
+				<reportElement x="212" y="5" width="78" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="276" y="5" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="512" y="17" width="57" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="376" y="17" width="140" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Instalaciones:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoMaterial" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="122"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1"/>
+	<subDataset name="materiales">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     codigo_material AS "codigoMaterial",
+     material.descripcion AS "descripcion",
+     cantidad_existencia AS "cantidadExistencia",
+     cantidad_disponible AS "cantidadDisponible",
+     dato_basico.nombre AS "datoBasicoByCodigoTipoMaterial.nombre"
+FROM
+     "public"."dato_basico" dato_basico FULL OUTER JOIN "material" material ON dato_basico."codigo_dato_basico" = material."codigo_tipo_material"
+WHERE
+     material.estatus = 'A']]>
+		</queryString>
+		<field name="codigoMaterial" class="java.lang.Integer"/>
+		<field name="descripcion" class="java.lang.String"/>
+		<field name="cantidadExistencia" class="java.lang.Integer"/>
+		<field name="cantidadDisponible" class="java.lang.Integer"/>
+		<field name="datoBasicoByCodigoTipoMaterial.nombre" class="java.lang.String"/>
+		<group name="codigoMaterial">
+			<groupExpression><![CDATA[$F{codigoMaterial}]]></groupExpression>
+		</group>
+		<group name="descripcion">
+			<groupExpression><![CDATA[$F{descripcion}]]></groupExpression>
+		</group>
+		<group name="cantidadExistencia">
+			<groupExpression><![CDATA[$F{cantidadExistencia}]]></groupExpression>
+		</group>
+		<group name="cantidadDisponible">
+			<groupExpression><![CDATA[$F{cantidadDisponible}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="FECHA" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     codigo_material AS "codigoMaterial",
+     material.descripcion AS "descripcion",
+     cantidad_existencia AS "cantidadExistencia",
+     cantidad_disponible AS "cantidadDisponible",
+     dato_basico.nombre AS "datoBasicoByCodigoTipoMaterial.nombre"
+FROM
+     "public"."dato_basico" dato_basico FULL OUTER JOIN "material" material ON dato_basico."codigo_dato_basico" = material."codigo_tipo_material"
+WHERE
+     material.estatus = 'A']]>
+	</queryString>
+	<field name="codigoMaterial" class="java.lang.Integer"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="cantidadExistencia" class="java.lang.Integer"/>
+	<field name="cantidadDisponible" class="java.lang.Integer"/>
+	<field name="datoBasicoByCodigoTipoMaterial.nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="161" splitType="Stretch">
+			<image>
+				<reportElement x="1" y="0" width="547" height="161"/>
+				<imageExpression><![CDATA["C:\\Users\\LABSI\\workspace fundalara\\fundalara\\WebContent\\Recursos\\Imagenes\\Encabezado.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="2" width="61" height="20"/>
+				<textElement/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[cantidad Existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="2" width="66" height="36"/>
+				<textElement/>
+				<text><![CDATA[cantidad Disponible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tipo de Material]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement x="-18" y="0" width="566" height="1" forecolor="#FF3300"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="17" width="62" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{codigoMaterial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="17" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="17" width="55" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantidadExistencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="323" y="17" width="66" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cantidadDisponible}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="17" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{datoBasicoByCodigoTipoMaterial.nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="244">
+			<stackedBarChart>
+				<chart>
+					<reportElement x="243" y="69" width="200" height="100"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="materiales"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{descripcion}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{cantidadExistencia}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+				</barPlot>
+			</stackedBarChart>
+		</band>
+	</summary>
+</jasperReport>

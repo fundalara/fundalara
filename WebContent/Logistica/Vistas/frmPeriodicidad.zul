@@ -1,7 +1,7 @@
 <zk>
-<window title="Repetir Actividad" border="normal" mode="modal"
+<window title="Repetir Actividad" border="normal" mode="modal" id="winPeriodicidad"
   closable="true" width="42%">
-  <panel title="Hora de la Actividad">
+  <panel title="Hora de la Actividad" visible="false">
  	<panelchildren>
 		<grid>
 			<columns>
@@ -38,12 +38,12 @@
 			<rows>
 				<row style="border:none">
 						<vbox>
-						   <checkbox id="dia" label="Diariamente" onCheck='enlace("/Logistica/Tiempo/dia.zul",1)'></checkbox>
-						   <checkbox id="sema" label="Semanal" onCheck='enlace("/Logistica/Tiempo/sema.zul",2)'></checkbox>
+						   <checkbox id="dia" label="Diariamente" onCheck='enlace("/Logistica/Vistas/Tiempo/dia.zul",1)'></checkbox>
+						   <checkbox id="sema" label="Semanal" onCheck='enlace("/Logistica/Vistas/Tiempo/sema.zul",2)'></checkbox>
 						</vbox>
 						<vbox>
-						   <checkbox id="mes" label="Mensual" onCheck='enlace("/Logistica/Tiempo/mes.zul",3)' ></checkbox>
-						   <checkbox id="anno" label="Anual" onCheck='enlace("/Logistica/Tiempo/anno.zul",4)' ></checkbox>
+						   <checkbox id="mes" label="Mensual" onCheck='enlace("/Logistica/Vistas/Tiempo/mes.zul",3)' ></checkbox>
+						   <checkbox id="anno" label="Anual" onCheck='enlace("/Logistica/Vistas/Tiempo/frmAnno.zul",4)' ></checkbox>
 						</vbox>
 			        		
 
@@ -77,7 +77,7 @@
 				<rows>
 					<row>
 						<div align="right">
-							<button label="Guardar" image="/Recursos/Imagenes/guardar.ico"></button>
+							<button label="Guardar" image="/Recursos/Imagenes/guardar.ico" onClick="winPeriodicidad.detach()"></button>
 							<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"></button>
 						</div>	
 					</row>

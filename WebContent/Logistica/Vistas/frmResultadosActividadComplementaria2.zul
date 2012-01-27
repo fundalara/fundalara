@@ -1,0 +1,212 @@
+<?page title="Control y Resultados de Actividad Complementaria" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="ejecucionActividadComplementaria" ?>
+<zk>
+	<window id="ejecucionActividadComplementaria" 
+		title="Control y Resultados de Actividad Complementaria"
+		border="normal" mode="modal" width="80%"
+		apply="controlador.logistica.CntrlResultadosActividadComplementaria">
+		<panel collapsible="false" width="100%"
+			title="Listado de Actividades en Ejecución">
+			<panelchildren>
+				<div width="100%" height="100%">
+					<space width="15%" />
+					<label style="font-weight:bold">Descripción:</label>
+					<label
+						value="@{cntrl.actividad.planificacionActividad.descripcion}">
+					</label>
+
+					<grid style="boder:none">
+						<columns>
+							<column width="17%"></column>
+							<column width="30%"></column>
+							<column width="17%"></column>
+							<column width="36%"></column>
+						</columns>
+						<rows style="border:none">
+							<row style="border:none">
+								<label style="font-weight: bold;"
+									value="Fecha de inicio">
+								</label>
+								<datebox
+									value="@{cntrl.actividad.fechaInicio}" width=" 50%"
+									style="color:black !important;">
+								</datebox>
+
+								<label style="font-weight: bold;"
+									value="Hora de Inicio">
+								</label>
+								<timebox
+									value="@{cntrl.actividad.horaInicio}" />
+							</row>
+							<row style="border:none">
+								<label style="font-weight: bold;"
+									value="Fecha de Culminación">
+								</label>
+								<datebox id="ppend"
+									value="@{cntrl.actividad.fechaCulminacion}" width="50%" />
+								<label style="font-weight: bold;"
+									value="Hora de Culminación">
+								</label>
+								<timebox
+									value="@{cntrl.actividad.horaFin}" />
+							</row>
+							<row style="border:none">
+								<label value="Estado"
+									style="font-weight: bold;">
+								</label>
+								<progressmeter id="barraProgreso"
+									width="90%">
+								</progressmeter>
+								<label style="font-weight: bold;"
+									value="Instalación">
+								</label>
+								<textbox disabled="true"
+									value="@{cntrl.actividad.instalacionUtilizada.instalacion.descripcion}"
+									width=" 80%" style="color:black !important;">
+								</textbox>
+							</row>
+						</rows>
+					</grid>
+					<panel collapsible="false"
+						title="Lista de Comisiones" width="100%">
+						<panelchildren>
+							<hbox>
+								<listbox id="lboxlistadocomision" 
+									mold="paging" pageSize="5" model="@{cntrl.listadoCAP}"
+									selectedItem="@{cntrl.comisionAP}">
+									<listhead>
+										<listheader
+											label="Nombre de la Comision" width="35%">
+										</listheader>
+										<listheader
+											label="Descripcion de la Comision">
+										</listheader>
+									</listhead>
+									<listitem self="@{each='q'}"
+										value="@{q}">
+										<listcell
+											label="@{q.listadoCAP.datoBasico.nombre}">
+										</listcell>
+										<listcell
+											label="@{q.listadoCAP.datoBasico.descripcion}">
+										</listcell>
+									</listitem>
+								</listbox>
+								<vbox align="center">
+									<button id="btnAgregarComision"
+										image="/Recursos/Imagenes/agregar.ico">
+									</button>
+									<button id="btnQuitarComision"
+										image="/Recursos/Imagenes/quitar.ico" disabled="true">
+									</button>
+								</vbox>
+								
+							</hbox>
+						</panelchildren>
+					</panel>
+					<panel collapsible="false" title="Lista de Tareas"
+						width="100%">
+						<panelchildren>
+							<hbox>
+								<listbox id="lboxtareas"
+									model="@{cntrl.tareasPlanificadas}"
+									selectedItem="@{cntrl.tareaActividadP}" mold="paging"
+									pageSize="6">
+									<listhead>
+										<listheader label="Tarea" width="30%">
+										</listheader>
+										<listheader
+											label="Personal Asignado" width="50%">
+										</listheader>
+										<listheader label="Estado de Ejecucion">
+										</listheader>
+									</listhead>
+									<listitem self="@{each='a'}"
+										value="@{a}">
+										<listcell
+											label="@{a.datoBasico.nombre}" />
+										<listcell>
+											<label value="@{a.tareasPlanificadas.personalActividadPlanificada.personal.personaNatural.primerNombre}"></label>
+											<label value="@{a.tareasPlanificadas.familiarComisionEquipo.familiarJugador.familiar.personaNatural.primerNombre}"></label>
+										</listcell>
+										<listcell>
+											<checkbox checked="@{a.tareaEjecutada}" disabled="true">
+											</checkbox>
+										</listcell>
+									</listitem>
+								</listbox>
+								<vbox align="center">
+									<button id="btnEjecutada"
+										image="/Recursos/Imagenes/aceptar.ico" disabled="true">
+									</button>
+									<button id="btnAgregarResponsable"
+										image="/Recursos/Imagenes/agregR.jpg" disabled="true">
+									</button>
+									<button id="btnAgregarPersonal"
+										image="/Recursos/Imagenes/agreg.jpg" disabled="true">
+									</button>
+								</vbox>
+							</hbox>
+							<div width="100%" align="right">
+									<button id="btnAgregarTarea" image="/Recursos/Imagenes/agregar.ico"></button>
+									<button id="QuitarTarea" image="/Recursos/Imagenes/quitar.ico"></button>
+							</div>
+						</panelchildren>
+					</panel>
+					<panel collapsible="false"
+						title="Lista de Materiales" width="100%">
+						<panelchildren>
+							<hbox>
+								<listbox id="lboxListadoMateriales"
+									mold="paging" pageSize="5"
+									model="@{cntrl.materialesPlanificados}"
+									selectedItem="@{cntrl.materialP}">
+									<listhead>
+										<listheader label="Nombre"
+											width="30%">
+										</listheader>
+										<listheader
+											label="Descripcion">
+										</listheader>
+										<listheader label="Almacen"
+											width="30%">
+										</listheader>
+									</listhead>
+									<listitem self="@{each='w'}"
+										value="@{w}">
+										<listcell
+											label="@{w.material.datoBasicoByCodigoTipoMaterial.nombre}">
+										</listcell>
+										<listcell
+											label="@{w.material.descripcion}">
+										</listcell>
+										<listcell
+											label="@{w.material.almacen.nombre}">
+										</listcell>
+									</listitem>
+								</listbox>
+								<vbox align="center">
+									<button id="btnAgregarMaterial"
+										image="/Recursos/Imagenes/agregar.ico">
+									</button>
+									<button id="btnQuitarMaterial"
+										image="/Recursos/Imagenes/quitar.ico" disabled="true">
+									</button>
+								</vbox>
+							</hbox>
+						</panelchildren>
+					</panel>
+				</div>
+			</panelchildren>
+		</panel>
+		<div width="100%" align="right">
+			<button id="btnGuardar"
+				image="/Recursos/Imagenes/guardar.ico" label="Guardar">
+			</button>
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
+				label="Salir">
+			</button>
+		</div>
+	</window>
+</zk>

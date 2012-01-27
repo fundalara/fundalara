@@ -1,9 +1,20 @@
 package controlador.logistica;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.Almacen;
 import modelo.Instalacion;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -13,6 +24,7 @@ import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import servicio.implementacion.ServicioInstalacion;
 import servicio.interfaz.IServicioAlmacen;
 import servicio.interfaz.IServicioInstalacion;
 
@@ -22,7 +34,7 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 	private Almacen almacen = new Almacen(); 
 	//private Instalacion instalacion = new Instalacion();
 	
-	private IServicioInstalacion servicioInstalacion;
+	private ServicioInstalacion servicioInstalacion;
 	private IServicioAlmacen servicioAlmacen;
 	
 	private List<Almacen> almacenes;
@@ -39,7 +51,9 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 		super.doAfterCompose(comp);		
 		comp.setVariable("cntrl", this, false);
 		almacenes = servicioAlmacen.listarActivos();
-		instalaciones = servicioInstalacion.listarActivos();		
+		instalaciones = servicioInstalacion.listarActivos();	
+		//instalaciones = new ArrayList<Instalacion>();
+		//instalaciones = servicioInstalacion.listarInstalacion();
 	}	
 	
 	public Almacen getAlmacen() {
@@ -152,6 +166,22 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 		cmbInstalacion.getValue();
 		txtDescripcion.getValue();
 		dboxCapacidad.getValue();
+	}
+	
+	public void onClick$btnImprimir() throws JRException{
+		 
+		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(almacenes);
+				
+		Map parameters = new HashMap();
+		parameters.put("FECHA", new java.util.Date());
+	    JasperReport report = JasperCompileManager.compileReport("C:\\Users\\Reinaldo López\\Documents\\workspace entrega viernes 13\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteListadoAlmacenes.jrxml");
+	    JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
+	    
+	    // Exporta el informe a PDF
+	    JasperExportManager.exportReportToPdfFile(print,"C:\\Users\\Reinaldo López\\Documents\\workspace entrega viernes 13\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteListadoAlmacenes.pdf");
+	    
+	    //Para visualizar el pdf directamente desde java
+	    JasperViewer.viewReport(print, false);
 	}
 	
 	

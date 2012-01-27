@@ -1,129 +1,130 @@
-<?page title="Actualizar Almacén" contentType="text/html;charset=UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?page title="Recepcion de Compra/Donación" contentType="text/html;charset=UTF-8"?>
+
 <zk>
-	<window title="Actualizar Almacén" border="normal" width="60%">
-		<zscript><![CDATA[
-	public void enlace(String cad) {
-		cuerpo.setSrc(cad);
-	}
-	public void mostrarPanelObservacion() {
-		if (check.isChecked() == true)
-			panelobservacion.setVisible(true);
-		else
-			panelobservacion.setVisible(false);
-
-	}
-]]></zscript>
+	<window title="Recepcion de Materiales" border="normal" width="65%"
+		apply="controlador.logistica.CntrlRecepcionMaterial" id="wnRecepcion" mode="embedded" >
 
 
-		<menubar>
-			<menuitem label="Filtrar Por:" style="font-weight:bold"
-				disabled="true" />
-			<menuitem label="Todas" style="font-weight:bold" />
-			<menuitem label="Compras" style="font-weight:bold" />
-			<menuitem label="Donaciones" style="font-weight:bold" />
-		</menubar>
-		<panel title="Compras y Donaciones Procesadas">
-			<panelchildren>
-				<grid>
-					<columns>
-						<column label="código"></column>
-						<column label="Nombre"></column>
-						<column label="Concepto"></column>
-						<column label="Fecha de Fact/Donación"></column>
-					</columns>
-					<rows>
-						<row>
-							<label>002</label>
-							<label>Isabel Rojas</label>
-							<label>compra</label>
-							<label>14/12/11</label>
-						</row>
-						<row>
-							<label>003</label>
-							<label>Manuel Torres</label>
-							<label>donacion</label>
-							<label>15/12/12</label>
-						</row>
-					</rows>
-				</grid>
-			</panelchildren>
-		</panel>
-		
-		<separator></separator>
-		
-		<panel title="Actualizar Almacén">
-			<panelchildren>
-				<grid>
-					<columns>
-						<column label="Item" width="1%"></column>
-						<column label="Código fact/Donac" width="18%">
-						</column>
-						<column label="Descripción" width="18%">
-						</column>
-						<column label="Cant.Fact/Donac" width="18%">
-						</column>
-						<column label="Cant recibida" width="14%">
-						</column>
-						<column label="Fecha Ingreso almacen"
-							width="20%">
-						</column>
-					</columns>
-					<rows>
-						<row>
-							<checkbox
-								onCheck="mostrarPanelObservacion()" id="check">
-							</checkbox>
 
-							<label>003</label>
-							<label>bates</label>
-							<label>24</label>
-							<label>23"</label>
-							<label>14/12/11</label>
-						</row>
-						<row>
-							<checkbox></checkbox>
-							<label>003</label>
-							<label>careta</label>
-							<label>20</label>
-							<label>20"</label>
-							<label>14/12/11</label>
 
-						</row>
-					</rows>
+	<panel title="Nota de entrega" width="100%">
+		<panelchildren>
+			<separator />
+			<grid>
+				<columns>
+					<column width="20%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<label value="Fecha de Recepción" />
+						<datebox id="fechaRecepcion" constraint="no empty" />
+						<label value="Origen">  </label>
+						<combobox>
+							<comboitem label="Compra" />
+							<comboitem label="Donacion" />
+						</combobox>
+					</row>
 
-				</grid>
-			</panelchildren>
-		</panel>
+				</rows>
 
-		<panel visible="false" id="panelobservacion" height="100%">
-			<panelchildren>
-				<grid>
-					<rows>
-						<row>
-							<label value="Observación" />
-							<textbox multiline="true" width="50%"
-								height="100%" />
+			</grid>
+		</panelchildren>
+	</panel>
 
-						</row>
-					</rows>
-				</grid>
-			</panelchildren>
-		</panel>
-		<separator></separator>
+	<separator />
 
-		<div align="right" width="100%" height="100%">
-			<button label="Guardar"
-				image="/Recursos/Imagenes/guardar.ico">
-			</button>
-			<space width="1%"></space>
-			<button label="Cancelar"
-				image="/Recursos/Imagenes/cancelar.ico">
-			</button>
-			<space width="1%"></space>
-			<button label="Salir"
-				image="/Recursos/Imagenes/atras.ico">
-			</button>
-		</div>
+	<panel title="Ingreso Almacen" id="IngresoAlmacen">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column />
+					<column />
+					<column />
+					<column />
+					<column />
+					<column />
+				</columns>
+				<rows>
+					<row style="border: none">
+						<label value="Tipo  de Material" />
+						
+						<combobox id="cmbTD" width="80px" constraint="no empty"
+									selectedItem="@{cntrl.tipoDatoBasico}"  model="@{cntrl.tipoMateriales }">
+							<comboitem id="cmbTipoD" self="@{each=td}" label="@{td.nombre}" value="@{td.nombre}"></comboitem> 
+						</combobox>
+						
+						<label value="Clasificación del Material" /> 
+						<combobox id="cmbCM" width="80px" constraint="no empty"
+									selectedItem="@{cntrl.clasificacionMaterial}"  model="@{cntrl.claseMateriales,load-after='cmbTD.onSelect'}">
+						<comboitem id="cmbDatoBasico" self="@{each=cm}" label="@{cm.nombre}" value="@{cm.nombre}"></comboitem>
+						</combobox>
+						<label value="Descripción del Material" />
+						<combobox id="cmbDM" width="80px" constraint="no empty"
+									selectedItem="@{cntrl.tipoMaterial}" model="@{cntrl.Materiales,load-after='cmbCM.onSelect'}">
+						<comboitem id="cmbDatoBasicoDescripcion" self="@{each=dm}" label="@{dm.descripcion}" value="@{dm.descripcion}"></comboitem>
+						</combobox>
+					</row>
+
+
+					<row style="border: none">
+						<label value="Cantidad de Material" />
+						<spinner id="spCantidad" constraint="no negative, no empty" cols="6"/>
+						<label />
+						<label />
+						<label />
+						<label />
+					</row>
+				</rows>
+			</grid>
+
+			<div>
+				<space />
+			</div>
+
+			<toolbar align="end">
+				<toolbarbutton image="/Recursos/Imagenes/agregar.ico" id="btnAgregar"
+					 />
+				
+				<toolbarbutton image="/Recursos/Imagenes/quitar.ico" id="btnQuitar"/>
+			</toolbar>
+
+			<panel title="Materiales Registrados" collapsible="false">
+								<panelchildren>
+									<listbox id="lboxRecepcionMateriales" mold="paging" pageSize="5" model="@{cntrl.materialesPrevios,load-after='btnAgregar.onClick,btnQuitar.onClick'}"
+										>
+										<listhead>
+											<listheader> Descripcion</listheader>
+											<listheader width="20%"> Cantidad</listheader>
+											
+										</listhead>
+										<listitem self="@{each='m'}" value="@{m}">
+											<listcell label="@{m.observaciones}" />
+											<listcell label="@{m.cantidadRecibida}" />
+											
+										</listitem>
+									</listbox>
+								</panelchildren>
+							</panel>
+
+		</panelchildren>
+	</panel>
+
+
+	<separator />
+
+	<div align="right" width="100%" height="100%">
+		<button label="Guardar" image="/Recursos/Imagenes/guardar.ico" id="btnGuardar"  />
+
+		<space width="1%" />
+		<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico" id="btnCancelar" />
+
+		<space width="1%" />
+		<button label="Salir" image="/Recursos/Imagenes/salir.png" />
+
+	</div>
 
 
 

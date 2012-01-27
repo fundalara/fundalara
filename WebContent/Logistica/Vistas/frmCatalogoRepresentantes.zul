@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatRepresentante"?>
+<?page title="Representantes" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Representantes" id="frmCatRepresentante"  border="normal" mode="modal"  width="50%"  closable="true" 
+	apply="controlador.logistica.CntrlCatalogoRepresentante">
+		<div width="100%">
+		<label value="Buscar" width="10%"/>
+		<label value="Nombre" width="15%"></label>
+		<textbox width="30%"></textbox>
+		<label value="Apellido" width="15%"></label>
+		<textbox width="30%"></textbox>
+		</div>
+<!-- 		<listbox id="lboxPersona" mold="paging" pageSize="5" -->
+<!-- 			model="@{cntrl.listaFamiliarComision}" -->
+<!-- 			selectedItem="@{cntrl.familiarComision}" checkmark="true" > -->
+			
+		<listbox id="lboxPersona" mold="paging" pageSize="5" >
+			
+			<listhead>
+				<listheader label="Nombre" sort="auto" />
+				<listheader label="Apellido"/>
+			</listhead>
+<!-- 			<listitem self="@{each='pm'}" value="@{pm}"> -->
+<!-- 				<listcell label="@{pm.getFamiliarJugador().getFamiliar().getPersonaNatural().primerNombre}" /> -->
+<!-- 				<listcell label="@{pm.getFamiliarJugador().getFamiliar().getPersonaNatural().primerApellido}" /> -->
+<!-- 			</listitem> -->
+	
+			<listitem>
+				<listcell>ANTONIO</listcell>
+				<listcell>RODRÍGUEZ</listcell>
+			</listitem>
+			
+			<listitem>
+				<listcell>JOSÉ</listcell>
+				<listcell>PÉREZ</listcell>
+			</listitem>
+			
+			<listitem>
+				<listcell>ANDREA</listcell>
+				<listcell>ALVARADO</listcell>
+			</listitem>
+
+
+		</listbox>
+		
+		<div align="right">
+					<button id="btnGuardar" label="Seleccionar"
+						image="/Recursos/Imagenes/guardar.ico" />
+					<button id="btnSalir" label="Salir"
+						image="/Recursos/Imagenes/salir.png" />
+		</div>
+	</window>
+</zk>
