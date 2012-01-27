@@ -1,15 +1,16 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,37 +20,48 @@ import javax.persistence.Table;
 @Table(name = "familiar_comision_equipo", schema = "public")
 public class FamiliarComisionEquipo implements java.io.Serializable {
 
-	private FamiliarComisionEquipoId id;
+	private int codigoFamiliarComision;
 	private FamiliarJugador familiarJugador;
 	private ComisionEquipo comisionEquipo;
 	private char estatus;
+	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
+			0);
 
 	public FamiliarComisionEquipo() {
 	}
 
-	public FamiliarComisionEquipo(FamiliarComisionEquipoId id,
+	public FamiliarComisionEquipo(int codigoFamiliarComision,
 			FamiliarJugador familiarJugador, ComisionEquipo comisionEquipo,
 			char estatus) {
-		this.id = id;
+		this.codigoFamiliarComision = codigoFamiliarComision;
 		this.familiarJugador = familiarJugador;
 		this.comisionEquipo = comisionEquipo;
 		this.estatus = estatus;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoComisionEquipo", column = @Column(name = "codigo_comision_equipo", nullable = false)),
-			@AttributeOverride(name = "codigoFamiliarJugador", column = @Column(name = "codigo_familiar_jugador", nullable = false)) })
-	public FamiliarComisionEquipoId getId() {
-		return this.id;
+	public FamiliarComisionEquipo(int codigoFamiliarComision,
+			FamiliarJugador familiarJugador, ComisionEquipo comisionEquipo,
+			char estatus,
+			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
+		this.codigoFamiliarComision = codigoFamiliarComision;
+		this.familiarJugador = familiarJugador;
+		this.comisionEquipo = comisionEquipo;
+		this.estatus = estatus;
+		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
 
-	public void setId(FamiliarComisionEquipoId id) {
-		this.id = id;
+	@Id
+	@Column(name = "codigo_familiar_comision", unique = true, nullable = false)
+	public int getCodigoFamiliarComision() {
+		return this.codigoFamiliarComision;
+	}
+
+	public void setCodigoFamiliarComision(int codigoFamiliarComision) {
+		this.codigoFamiliarComision = codigoFamiliarComision;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_familiar_jugador", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_familiar_jugador", nullable = false)
 	public FamiliarJugador getFamiliarJugador() {
 		return this.familiarJugador;
 	}
@@ -59,7 +71,7 @@ public class FamiliarComisionEquipo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_comision_equipo", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_comision_equipo", nullable = false)
 	public ComisionEquipo getComisionEquipo() {
 		return this.comisionEquipo;
 	}
@@ -75,6 +87,16 @@ public class FamiliarComisionEquipo implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "familiarComisionEquipo")
+	public Set<TareaActividadPlanificada> getTareaActividadPlanificadas() {
+		return this.tareaActividadPlanificadas;
+	}
+
+	public void setTareaActividadPlanificadas(
+			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
+		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
 
 }

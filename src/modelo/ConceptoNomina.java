@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +25,6 @@ public class ConceptoNomina implements java.io.Serializable {
 
 	private int codigoConceptoNomina;
 	private DatoBasico datoBasico;
-	private Double valor;
 	private boolean aplicableSueldo;
 	private Date fechaCreacion;
 	private char estatus;
@@ -51,13 +50,12 @@ public class ConceptoNomina implements java.io.Serializable {
 	}
 
 	public ConceptoNomina(int codigoConceptoNomina, DatoBasico datoBasico,
-			Double valor, boolean aplicableSueldo, Date fechaCreacion,
-			char estatus, String descripcion, boolean fijo,
+			boolean aplicableSueldo, Date fechaCreacion, char estatus,
+			String descripcion, boolean fijo,
 			Set<PersonalConceptoNomina> personalConceptoNominas,
 			Set<Movimiento> movimientos) {
 		this.codigoConceptoNomina = codigoConceptoNomina;
 		this.datoBasico = datoBasico;
-		this.valor = valor;
 		this.aplicableSueldo = aplicableSueldo;
 		this.fechaCreacion = fechaCreacion;
 		this.estatus = estatus;
@@ -85,15 +83,6 @@ public class ConceptoNomina implements java.io.Serializable {
 
 	public void setDatoBasico(DatoBasico datoBasico) {
 		this.datoBasico = datoBasico;
-	}
-
-	@Column(name = "valor", precision = 17, scale = 17)
-	public Double getValor() {
-		return this.valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
 	}
 
 	@Column(name = "aplicable_sueldo", nullable = false)

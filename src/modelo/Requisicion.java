@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,10 +24,10 @@ import javax.persistence.TemporalType;
 public class Requisicion implements java.io.Serializable {
 
 	private int codigoRequisicion;
+	private DatoBasico datoBasico;
 	private Personal personal;
 	private Date fechaEmision;
 	private Date fechaEntrega;
-	private String estadoRequisicion;
 	private String motivoRequisicion;
 	private char estatus;
 	private Set<DetalleRequisicion> detalleRequisicions = new HashSet<DetalleRequisicion>(
@@ -36,27 +36,26 @@ public class Requisicion implements java.io.Serializable {
 	public Requisicion() {
 	}
 
-	public Requisicion(int codigoRequisicion, Personal personal,
-			Date fechaEmision, Date fechaEntrega, String estadoRequisicion,
-			String motivoRequisicion, char estatus) {
+	public Requisicion(int codigoRequisicion, DatoBasico datoBasico,
+			Personal personal, Date fechaEmision, Date fechaEntrega,
+			char estatus) {
 		this.codigoRequisicion = codigoRequisicion;
+		this.datoBasico = datoBasico;
 		this.personal = personal;
 		this.fechaEmision = fechaEmision;
 		this.fechaEntrega = fechaEntrega;
-		this.estadoRequisicion = estadoRequisicion;
-		this.motivoRequisicion = motivoRequisicion;
 		this.estatus = estatus;
 	}
 
-	public Requisicion(int codigoRequisicion, Personal personal,
-			Date fechaEmision, Date fechaEntrega, String estadoRequisicion,
+	public Requisicion(int codigoRequisicion, DatoBasico datoBasico,
+			Personal personal, Date fechaEmision, Date fechaEntrega,
 			String motivoRequisicion, char estatus,
 			Set<DetalleRequisicion> detalleRequisicions) {
 		this.codigoRequisicion = codigoRequisicion;
+		this.datoBasico = datoBasico;
 		this.personal = personal;
 		this.fechaEmision = fechaEmision;
 		this.fechaEntrega = fechaEntrega;
-		this.estadoRequisicion = estadoRequisicion;
 		this.motivoRequisicion = motivoRequisicion;
 		this.estatus = estatus;
 		this.detalleRequisicions = detalleRequisicions;
@@ -70,6 +69,16 @@ public class Requisicion implements java.io.Serializable {
 
 	public void setCodigoRequisicion(int codigoRequisicion) {
 		this.codigoRequisicion = codigoRequisicion;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_estado_requisicion", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
+	}
+
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -102,16 +111,7 @@ public class Requisicion implements java.io.Serializable {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-	@Column(name = "estado_requisicion", nullable = false)
-	public String getEstadoRequisicion() {
-		return this.estadoRequisicion;
-	}
-
-	public void setEstadoRequisicion(String estadoRequisicion) {
-		this.estadoRequisicion = estadoRequisicion;
-	}
-
-	@Column(name = "motivo_requisicion", nullable = false)
+	@Column(name = "motivo_requisicion")
 	public String getMotivoRequisicion() {
 		return this.motivoRequisicion;
 	}

@@ -44,8 +44,8 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
 
 	public void onCreate$FrmCatalogoC(){
 	    int estatus = (Integer) catalogo.getVariable("estatus",false);	
-	    competencias = servicioCompetencia.listarPorEstatus(estatus);
-	     
+	    //competencias = servicioCompetencia.listarPorEstatus(estatus);
+	     competencias = servicioCompetencia.listarRegistradasAperturadas();
 	    
 	    determinarTitulo(estatus);
 	    binder.loadAll();

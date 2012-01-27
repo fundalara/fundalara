@@ -1,5 +1,6 @@
 package servicio.interfaz;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.Categoria;
@@ -10,7 +11,7 @@ public interface IServicioCategoriaCompetencia {
 
 	public abstract void eliminar(Categoria cc);
 
-	public abstract void agregar(Categoria cc);
+	public abstract void agregar(List<CategoriaCompetencia> lista,int comp);
 
 	//public abstract void actualizar(Categoria cc);
 
@@ -23,4 +24,6 @@ public interface IServicioCategoriaCompetencia {
 	public abstract List <CategoriaCompetencia> listarCategoriaPorCompetencia(int codigo);
 	
 	public abstract int getDuraccionCategoria (Categoria cat);
+	
+	public abstract Date getDuraccionCategoriaHora(Categoria cat);
 }

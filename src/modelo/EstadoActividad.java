@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "estado_actividad", schema = "public")
 public class EstadoActividad implements java.io.Serializable {
 
-	private EstadoActividadId id;
+	private int codigoEstadoActividad;
 	private DatoBasico datoBasico;
 	private Actividad actividad;
 	private char estatus;
@@ -27,28 +25,26 @@ public class EstadoActividad implements java.io.Serializable {
 	public EstadoActividad() {
 	}
 
-	public EstadoActividad(EstadoActividadId id, DatoBasico datoBasico,
+	public EstadoActividad(int codigoEstadoActividad, DatoBasico datoBasico,
 			Actividad actividad, char estatus) {
-		this.id = id;
+		this.codigoEstadoActividad = codigoEstadoActividad;
 		this.datoBasico = datoBasico;
 		this.actividad = actividad;
 		this.estatus = estatus;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoEstado", column = @Column(name = "codigo_estado", nullable = false)),
-			@AttributeOverride(name = "codigoActividad", column = @Column(name = "codigo_actividad", nullable = false)) })
-	public EstadoActividadId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_estado_actividad", unique = true, nullable = false)
+	public int getCodigoEstadoActividad() {
+		return this.codigoEstadoActividad;
 	}
 
-	public void setId(EstadoActividadId id) {
-		this.id = id;
+	public void setCodigoEstadoActividad(int codigoEstadoActividad) {
+		this.codigoEstadoActividad = codigoEstadoActividad;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_estado", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_estado", nullable = false)
 	public DatoBasico getDatoBasico() {
 		return this.datoBasico;
 	}
@@ -58,7 +54,7 @@ public class EstadoActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_actividad", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_actividad", nullable = false)
 	public Actividad getActividad() {
 		return this.actividad;
 	}

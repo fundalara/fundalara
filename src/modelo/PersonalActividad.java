@@ -1,15 +1,13 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "personal_actividad", schema = "public")
 public class PersonalActividad implements java.io.Serializable {
 
-	private PersonalActividadId id;
+	private int codigoPersonalActividad;
 	private Actividad actividad;
 	private Personal personal;
 	private char estatus;
@@ -31,37 +29,35 @@ public class PersonalActividad implements java.io.Serializable {
 	public PersonalActividad() {
 	}
 
-	public PersonalActividad(PersonalActividadId id, Actividad actividad,
+	public PersonalActividad(int codigoPersonalActividad, Actividad actividad,
 			Personal personal, char estatus) {
-		this.id = id;
+		this.codigoPersonalActividad = codigoPersonalActividad;
 		this.actividad = actividad;
 		this.personal = personal;
 		this.estatus = estatus;
 	}
 
-	public PersonalActividad(PersonalActividadId id, Actividad actividad,
+	public PersonalActividad(int codigoPersonalActividad, Actividad actividad,
 			Personal personal, char estatus, Set<TareaActividad> tareaActividads) {
-		this.id = id;
+		this.codigoPersonalActividad = codigoPersonalActividad;
 		this.actividad = actividad;
 		this.personal = personal;
 		this.estatus = estatus;
 		this.tareaActividads = tareaActividads;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)),
-			@AttributeOverride(name = "codigoActividad", column = @Column(name = "codigo_actividad", nullable = false)) })
-	public PersonalActividadId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_personal_actividad", unique = true, nullable = false)
+	public int getCodigoPersonalActividad() {
+		return this.codigoPersonalActividad;
 	}
 
-	public void setId(PersonalActividadId id) {
-		this.id = id;
+	public void setCodigoPersonalActividad(int codigoPersonalActividad) {
+		this.codigoPersonalActividad = codigoPersonalActividad;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_actividad", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_actividad", nullable = false)
 	public Actividad getActividad() {
 		return this.actividad;
 	}
@@ -71,7 +67,7 @@ public class PersonalActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
 	}

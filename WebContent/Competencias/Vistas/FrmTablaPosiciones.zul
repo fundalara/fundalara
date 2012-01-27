@@ -1,8 +1,8 @@
 <?page title="TABLA DE POSICIONES" contentType="text/html;charset=UTF-8"?>
 <zk>
  <div align="center">
-<window title="TABLA DE POSICIONES" border="normal" width="690px"
-		height="auto" closable="true">
+<window title="TABLA DE POSICIONES" border="normal" width="70%px"
+		height="auto" closable="true" mode="modal">
 <!-- DATOS COMPETENCIA -->
 		<panel border="normal">
 			<caption label="Datos de la Competencia"></caption>
@@ -19,9 +19,6 @@
 							<label value=" Nombre Competencia"></label>
 							<hbox>
 								<textbox cols="20"></textbox>
-								<button
-									image="../../Recursos/Imagenes/consultar.ico">
-								</button>
 							</hbox>
 							<label value="Categoria"></label>
 							<combobox></combobox>

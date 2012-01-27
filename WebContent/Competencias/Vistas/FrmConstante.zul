@@ -24,7 +24,7 @@
 							<textbox id="txtNombre" 
 									 value="@{cntrl.constante.nombre }" width="80%"
 									 constraint="no empty:El campo 'Nombre' es obligatorio"></textbox>
-							<button id="btnBuscar" image="../../Recursos/Imagenes/consultar.ico" ></button>						
+							<button id="btnBuscar" image="/Recursos/Imagenes/consultar.ico" ></button>						
 						</row>	
 					</rows>
 				</grid>
@@ -92,13 +92,13 @@
 			<panel>
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
-						<button id="btnGuardar"	image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+						<button id="btnGuardar"	image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
-						<button id="btnEliminar" image="../../Recursos/Imagenes/eliminar.ico" label="Eliminar">
+						<button id="btnEliminar" image="/Recursos/Imagenes/eliminar.ico" label="Eliminar">
 						</button>
-						<button id="btnCancelar" image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
-						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir">
+						<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>
 				</panelchildren>

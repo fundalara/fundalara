@@ -16,7 +16,7 @@
 					<listbox id="lsbxCompetencias" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.competencias}" height="240px">
 						<listhead>
 						    <listheader label="Tipo" align="center" width="auto"/>		
-						    <listheader label="Modalidad" align="center" width="10%"/>			
+						    <listheader label="Clasificacion" align="center" width="12%"/>			
 							<listheader label="Nombre" align="center" width="auto"/>
 							<listheader label="Fecha de Inicio" align="center" width="auto"/>
 							<listheader label="Fecha de Fin" align="center" width="auto"/>
@@ -26,8 +26,8 @@
 						</listhead>
 						
 						<listitem self="@{each=competencia}">
-						    <listcell label="@{competencia.modalidadCompetencia.tipoCompetencia.nombre}"></listcell>
-						    <listcell label="@{competencia.modalidadCompetencia.nombre}"></listcell>
+						    <listcell label="@{competencia.clasificacionCompetencia.datoBasico.nombre}"></listcell>
+						    <listcell label="@{competencia.clasificacionCompetencia.nombre}"></listcell>
 							<listcell label="@{competencia.nombre}"></listcell>
 							<listcell label="@{competencia.fechaInicio}"></listcell>
 							<listcell label="@{competencia.fechaFin}"></listcell>							
@@ -39,10 +39,10 @@
 					</listbox>
 					<div align="right">
 						<button id="btnAceptar"
-							image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar">
+							image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
 						</button>
 						<button id="btnSalir"
-							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							image="/Recursos/Imagenes/salir.png" label="Salir"
 							onClick="">
 						</button>
 					</div>

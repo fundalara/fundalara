@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 import comun.TipoDatoBasico;
 
+import modelo.CondicionCompetencia;
 import modelo.DatoBasico;
 import modelo.TipoDato;
 import dao.generico.GenericDao;
@@ -22,6 +23,8 @@ import dao.generico.GenericDao;
  * @author German L.
  * @author Reinaldo L.
  * @autor Alix V.
+ * @autor Merielen G
+ * @autor Diana S.
  * @version 0.1 12/01/2012
  * 
  */
@@ -83,42 +86,38 @@ public class DaoDatoBasico extends GenericDao {
 		List list = c.add(Restrictions.eq("tipoDato", td)).list();
 		return list;
 	}
-	
-	
-	
 
+	public List<DatoBasico> listarMunicipios() {
 
-	public List<DatoBasico> listarMunicipios(){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria c = session.createCriteria(TipoDato.class);
-		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "MUNICIPIO")).list().get(0);
-	 c = session.createCriteria(DatoBasico.class);
-	 List list = c.add(Restrictions.eq("tipoDato",td)).list();
-	 return list;
-		  
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c.add(Restrictions.eq("nombre", "MUNICIPIO"))
+				.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+
 	}
-	
-	
-	public List<DatoBasico> listarMunicipiosPorEstados(DatoBasico db ){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria  c = session.createCriteria(DatoBasico.class);
-		  List list = c.add(Restrictions.eq("datoBasico",db)).list();
-	 	  return list;
-		  
+
+	public List<DatoBasico> listarMunicipiosPorEstados(DatoBasico db) {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("datoBasico", db)).list();
+		return list;
+
 	}
-	
-	public List<DatoBasico> listarParroquiasPorMunicipios(DatoBasico db ){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria  c = session.createCriteria(DatoBasico.class);
-		  List list = c.add(Restrictions.eq("datoBasico",db)).list();
-		  return list;
-		  }
+
+	public List<DatoBasico> listarParroquiasPorMunicipios(DatoBasico db) {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("datoBasico", db)).list();
+		return list;
+	}
 
 	/**
 	 * Busca los registros de un tipo de dato en particular
@@ -180,7 +179,7 @@ public class DaoDatoBasico extends GenericDao {
 	 * @return dato basico de un tipo especifico o null en caso de no encontralo
 	 */
 	public DatoBasico buscarTipo(TipoDatoBasico tipoDato, String nombre) {
-		Session session = SessionManager.getSession();
+		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Query query = session.createSQLQuery(
 				"SELECT * FROM dato_basico WHERE codigo_tipo_dato='"
@@ -191,41 +190,95 @@ public class DaoDatoBasico extends GenericDao {
 		tx.commit();
 		return lista;
 	}
-	
-	public List<DatoBasico> listarEstados(){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria c = session.createCriteria(TipoDato.class);
-		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "ESTADO")).list().get(0);
-      c = session.createCriteria(DatoBasico.class);
-      List list = c.add(Restrictions.eq("tipoDato",td)).list();
-      return list;
-		  
-	  }
-	
-	public List<DatoBasico> listarPosiciones(){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria c = session.createCriteria(TipoDato.class);
-		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "TIPO UMPIRE")).list().get(0);
-		  c = session.createCriteria(DatoBasico.class);
-		  List list = c.add(Restrictions.eq("tipoDato",td)).list();
-		  return list;
-	  }
 
-	public List<DatoBasico> listarOrganizacionCompetencia(){
-		  
-		  Session session = getSession();
-		  Transaction tx = session.beginTransaction();
-		  Criteria c = session.createCriteria(TipoDato.class);
-		  TipoDato td =  (TipoDato) c.add(Restrictions.eq("nombre", "ORGANIZACION COMPETENCIA")).list().get(0);
-		  c = session.createCriteria(DatoBasico.class);
-		  List list = c.add(Restrictions.eq("tipoDato",td)).list();
-		  return list;
-		  
+	public List<DatoBasico> listarEstados() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c.add(Restrictions.eq("nombre", "ESTADO"))
+				.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+
 	}
-	
+
+	public List<DatoBasico> listarPosiciones() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c
+				.add(Restrictions.eq("nombre", "TIPO UMPIRE")).list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+	}
+
+	public List<DatoBasico> listarOrganizacionCompetencia() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c
+				.add(Restrictions.eq("nombre", "ORGANIZACION COMPETENCIA"))
+				.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+
+	}
+
+	public List<DatoBasico> listarPosicionesJugadores() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c.add(Restrictions.eq("nombre", "POSICION"))
+				.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+
+	}
+
+	public List<DatoBasico> listarTipoCompetencia() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		c.add(Restrictions.eq("nombre", "TIPO COMPETENCIA"));
+		TipoDato td = (TipoDato) c.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("tipoDato", td));
+		c.add(Restrictions.eq("estatus", 'A'));
+		return c.list();
+
+	}
+
+	public List<DatoBasico> listarCondicion() {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(CondicionCompetencia.class);
+		c.add(Restrictions.eq("estatus", 'A'));
+		// c.add(Restrictions.eq("datoBasico", cc));
+		return c.list();
+	}
+
+	public List<DatoBasico> listarTipoDato(String nombre) {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TipoDato.class);
+		TipoDato td = (TipoDato) c.add(Restrictions.eq("nombre", nombre))
+				.list().get(0);
+		c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("estatus", 'A'));
+
+		List list = c.add(Restrictions.eq("tipoDato", td)).list();
+		return list;
+
+	}
 
 }

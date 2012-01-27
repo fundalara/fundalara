@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class AsistenciaJugador implements java.io.Serializable {
 	private boolean asistencia;
 	private String observacion;
 	private char estatus;
-	private Set<DesempeoJugador> desempeoJugadors = new HashSet<DesempeoJugador>(
+	private Set<DesempennoJugador> desempennoJugadors = new HashSet<DesempennoJugador>(
 			0);
 
 	public AsistenciaJugador() {
@@ -36,19 +36,18 @@ public class AsistenciaJugador implements java.io.Serializable {
 
 	public AsistenciaJugador(int codigoAsistencia,
 			SesionEjecutada sesionEjecutada, DatoBasico datoBasico,
-			boolean asistencia, String observacion, char estatus) {
+			boolean asistencia, char estatus) {
 		this.codigoAsistencia = codigoAsistencia;
 		this.sesionEjecutada = sesionEjecutada;
 		this.datoBasico = datoBasico;
 		this.asistencia = asistencia;
-		this.observacion = observacion;
 		this.estatus = estatus;
 	}
 
 	public AsistenciaJugador(int codigoAsistencia, Roster roster,
 			RosterPlan rosterPlan, SesionEjecutada sesionEjecutada,
 			DatoBasico datoBasico, boolean asistencia, String observacion,
-			char estatus, Set<DesempeoJugador> desempeoJugadors) {
+			char estatus, Set<DesempennoJugador> desempennoJugadors) {
 		this.codigoAsistencia = codigoAsistencia;
 		this.roster = roster;
 		this.rosterPlan = rosterPlan;
@@ -57,7 +56,7 @@ public class AsistenciaJugador implements java.io.Serializable {
 		this.asistencia = asistencia;
 		this.observacion = observacion;
 		this.estatus = estatus;
-		this.desempeoJugadors = desempeoJugadors;
+		this.desempennoJugadors = desempennoJugadors;
 	}
 
 	@Id
@@ -119,7 +118,7 @@ public class AsistenciaJugador implements java.io.Serializable {
 		this.asistencia = asistencia;
 	}
 
-	@Column(name = "observacion", nullable = false)
+	@Column(name = "observacion")
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -138,12 +137,12 @@ public class AsistenciaJugador implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "asistenciaJugador")
-	public Set<DesempeoJugador> getDesempeoJugadors() {
-		return this.desempeoJugadors;
+	public Set<DesempennoJugador> getDesempennoJugadors() {
+		return this.desempennoJugadors;
 	}
 
-	public void setDesempeoJugadors(Set<DesempeoJugador> desempeoJugadors) {
-		this.desempeoJugadors = desempeoJugadors;
+	public void setDesempennoJugadors(Set<DesempennoJugador> desempennoJugadors) {
+		this.desempennoJugadors = desempennoJugadors;
 	}
 
 }

@@ -131,5 +131,26 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	public List<DatoBasico> listarPosiciones() {
 		return daoDatoBasico.listarPosiciones();
 	}
+
+	@Override
+	public List<DatoBasico> listarPosicionesJugadores() {
+		return daoDatoBasico.listarPosicionesJugadores();
+	}
+
+	@Override
+	public List<DatoBasico> listarTipoCompetencia() {
+		return daoDatoBasico.listarTipoCompetencia();
+	}
+
+	@Override
+	public List<DatoBasico> listarCondicion() {
+		return daoDatoBasico.listarCondicion();
+	}
+
+	@Override
+	public List<DatoBasico> listarTipoDato(String nombre) {
+		// TODO Auto-generated method stub
+		return daoDatoBasico.listarTipoDato(nombre);
+	}
 	
 }

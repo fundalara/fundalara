@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import comun.EstadoCompetencia;
 
 import dao.generico.GenericDao;
+import dao.generico.SessionManager;
 
 /** 
  * DAO para la clase Competencia 
@@ -43,7 +44,8 @@ public class DaoCompetencia extends GenericDao {
 		 * Competencia.
 		 * 
 		 */
-		Session session = getSession();                         
+		//Session session = getSession();                         
+		Session session = SessionManager.getSession();
 		Transaction tx = session.beginTransaction();   
 		
 		Criteria c = session.createCriteria(DatoBasico.class);	

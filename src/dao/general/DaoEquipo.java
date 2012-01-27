@@ -95,7 +95,7 @@ public class DaoEquipo extends GenericDao {
 	 */
 	public boolean buscarPorCodigo(Equipo equipo) {
 		boolean sw;
-		Session session = SessionManager.getSession();
+		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Query query = session.createSQLQuery(
 				"select equipo.codigo_equipo,roster.codigo_roster from equipo,roster where roster.estatus='A' and equipo.estatus='A'and equipo.codigo_equipo=roster.codigo_equipo and roster.codigo_equipo='"

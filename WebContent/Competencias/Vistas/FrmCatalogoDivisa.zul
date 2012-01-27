@@ -39,8 +39,8 @@
 
 					</listbox>
 					<div align="right">
-						<button id="btnAceptar" image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar" />
-						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
+						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" />
+						<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
 					</div>
 				</panelchildren>
 			</panel>

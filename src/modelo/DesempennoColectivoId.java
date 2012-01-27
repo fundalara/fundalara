@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,15 +12,15 @@ import javax.persistence.Embeddable;
 public class DesempennoColectivoId implements java.io.Serializable {
 
 	private int codigoEquipoJuego;
-	private int codigoIndicadorCompetencia;
+	private int codigoIndicadorCategoriaCompetencia;
 
 	public DesempennoColectivoId() {
 	}
 
 	public DesempennoColectivoId(int codigoEquipoJuego,
-			int codigoIndicadorCompetencia) {
+			int codigoIndicadorCategoriaCompetencia) {
 		this.codigoEquipoJuego = codigoEquipoJuego;
-		this.codigoIndicadorCompetencia = codigoIndicadorCompetencia;
+		this.codigoIndicadorCategoriaCompetencia = codigoIndicadorCategoriaCompetencia;
 	}
 
 	@Column(name = "codigo_equipo_juego", nullable = false)
@@ -32,13 +32,14 @@ public class DesempennoColectivoId implements java.io.Serializable {
 		this.codigoEquipoJuego = codigoEquipoJuego;
 	}
 
-	@Column(name = "codigo_indicador_competencia", nullable = false)
-	public int getCodigoIndicadorCompetencia() {
-		return this.codigoIndicadorCompetencia;
+	@Column(name = "codigo_indicador_categoria_competencia", nullable = false)
+	public int getCodigoIndicadorCategoriaCompetencia() {
+		return this.codigoIndicadorCategoriaCompetencia;
 	}
 
-	public void setCodigoIndicadorCompetencia(int codigoIndicadorCompetencia) {
-		this.codigoIndicadorCompetencia = codigoIndicadorCompetencia;
+	public void setCodigoIndicadorCategoriaCompetencia(
+			int codigoIndicadorCategoriaCompetencia) {
+		this.codigoIndicadorCategoriaCompetencia = codigoIndicadorCategoriaCompetencia;
 	}
 
 	public boolean equals(Object other) {
@@ -51,15 +52,15 @@ public class DesempennoColectivoId implements java.io.Serializable {
 		DesempennoColectivoId castOther = (DesempennoColectivoId) other;
 
 		return (this.getCodigoEquipoJuego() == castOther.getCodigoEquipoJuego())
-				&& (this.getCodigoIndicadorCompetencia() == castOther
-						.getCodigoIndicadorCompetencia());
+				&& (this.getCodigoIndicadorCategoriaCompetencia() == castOther
+						.getCodigoIndicadorCategoriaCompetencia());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
 		result = 37 * result + this.getCodigoEquipoJuego();
-		result = 37 * result + this.getCodigoIndicadorCompetencia();
+		result = 37 * result + this.getCodigoIndicadorCategoriaCompetencia();
 		return result;
 	}
 

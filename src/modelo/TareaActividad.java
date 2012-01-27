@@ -1,13 +1,12 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,18 +22,20 @@ public class TareaActividad implements java.io.Serializable {
 	private Actividad actividad;
 	private PersonalActividad personalActividad;
 	private char estatus;
+	private boolean tareaEjecutada;
 
 	public TareaActividad() {
 	}
 
 	public TareaActividad(int codigoTareaActividad, DatoBasico datoBasico,
 			Actividad actividad, PersonalActividad personalActividad,
-			char estatus) {
+			char estatus, boolean tareaEjecutada) {
 		this.codigoTareaActividad = codigoTareaActividad;
 		this.datoBasico = datoBasico;
 		this.actividad = actividad;
 		this.personalActividad = personalActividad;
 		this.estatus = estatus;
+		this.tareaEjecutada = tareaEjecutada;
 	}
 
 	@Id
@@ -68,9 +69,7 @@ public class TareaActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "cedula_rif", referencedColumnName = "cedula_rif", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "codigo_actividad", referencedColumnName = "codigo_actividad", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "codigo_personal_actividad", nullable = false)
 	public PersonalActividad getPersonalActividad() {
 		return this.personalActividad;
 	}
@@ -86,6 +85,15 @@ public class TareaActividad implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "tarea_ejecutada", nullable = false)
+	public boolean isTareaEjecutada() {
+		return this.tareaEjecutada;
+	}
+
+	public void setTareaEjecutada(boolean tareaEjecutada) {
+		this.tareaEjecutada = tareaEjecutada;
 	}
 
 }

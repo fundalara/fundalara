@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,9 +26,9 @@ public class Competencia implements java.io.Serializable {
 
 	private int codigoCompetencia;
 	private DatoBasico datoBasicoByCodigoEstadoCompetencia;
-	private ModalidadCompetencia modalidadCompetencia;
 	private DatoBasico datoBasicoByCodigoOrganizacion;
 	private DatoBasico datoBasicoByCodigoEstado;
+	private ClasificacionCompetencia clasificacionCompetencia;
 	private LapsoDeportivo lapsoDeportivo;
 	private String nombre;
 	private Date fechaInicio;
@@ -56,6 +56,8 @@ public class Competencia implements java.io.Serializable {
 			0);
 	private Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias = new HashSet<IndicadorCategoriaCompetencia>(
 			0);
+	private Set<PersonalEquipoCompetencia> personalEquipoCompetencias = new HashSet<PersonalEquipoCompetencia>(
+			0);
 	private Set<Juego> juegos = new HashSet<Juego>(0);
 
 	public Competencia() {
@@ -63,16 +65,17 @@ public class Competencia implements java.io.Serializable {
 
 	public Competencia(int codigoCompetencia,
 			DatoBasico datoBasicoByCodigoEstadoCompetencia,
-			ModalidadCompetencia modalidadCompetencia,
 			DatoBasico datoBasicoByCodigoOrganizacion,
-			DatoBasico datoBasicoByCodigoEstado, LapsoDeportivo lapsoDeportivo,
-			String nombre, Date fechaInicio, Date fechaFin, int cantidadFase,
-			int cantidadJugador, float montoInscripcion, char estatus) {
+			DatoBasico datoBasicoByCodigoEstado,
+			ClasificacionCompetencia clasificacionCompetencia,
+			LapsoDeportivo lapsoDeportivo, String nombre, Date fechaInicio,
+			Date fechaFin, int cantidadFase, int cantidadJugador,
+			float montoInscripcion, char estatus) {
 		this.codigoCompetencia = codigoCompetencia;
 		this.datoBasicoByCodigoEstadoCompetencia = datoBasicoByCodigoEstadoCompetencia;
-		this.modalidadCompetencia = modalidadCompetencia;
 		this.datoBasicoByCodigoOrganizacion = datoBasicoByCodigoOrganizacion;
 		this.datoBasicoByCodigoEstado = datoBasicoByCodigoEstado;
+		this.clasificacionCompetencia = clasificacionCompetencia;
 		this.lapsoDeportivo = lapsoDeportivo;
 		this.nombre = nombre;
 		this.fechaInicio = fechaInicio;
@@ -85,26 +88,27 @@ public class Competencia implements java.io.Serializable {
 
 	public Competencia(int codigoCompetencia,
 			DatoBasico datoBasicoByCodigoEstadoCompetencia,
-			ModalidadCompetencia modalidadCompetencia,
 			DatoBasico datoBasicoByCodigoOrganizacion,
-			DatoBasico datoBasicoByCodigoEstado, LapsoDeportivo lapsoDeportivo,
-			String nombre, Date fechaInicio, Date fechaFin, int cantidadFase,
-			int cantidadJugador, float montoInscripcion,
-			String condicionesGenerales, String desempate, String extrainning,
-			byte[] documento, char estatus,
-			Set<ActividadCalendario> actividadCalendarios,
+			DatoBasico datoBasicoByCodigoEstado,
+			ClasificacionCompetencia clasificacionCompetencia,
+			LapsoDeportivo lapsoDeportivo, String nombre, Date fechaInicio,
+			Date fechaFin, int cantidadFase, int cantidadJugador,
+			float montoInscripcion, String condicionesGenerales,
+			String desempate, String extrainning, byte[] documento,
+			char estatus, Set<ActividadCalendario> actividadCalendarios,
 			Set<FaseCompetencia> faseCompetencias,
 			Set<CategoriaCompetencia> categoriaCompetencias,
 			Set<EquipoCompetencia> equipoCompetencias, Set<Liga> ligas,
 			Set<DatoDeportivo> datoDeportivos, Set<Hospedaje> hospedajes,
 			Set<RosterCompetencia> rosterCompetencias,
 			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias,
+			Set<PersonalEquipoCompetencia> personalEquipoCompetencias,
 			Set<Juego> juegos) {
 		this.codigoCompetencia = codigoCompetencia;
 		this.datoBasicoByCodigoEstadoCompetencia = datoBasicoByCodigoEstadoCompetencia;
-		this.modalidadCompetencia = modalidadCompetencia;
 		this.datoBasicoByCodigoOrganizacion = datoBasicoByCodigoOrganizacion;
 		this.datoBasicoByCodigoEstado = datoBasicoByCodigoEstado;
+		this.clasificacionCompetencia = clasificacionCompetencia;
 		this.lapsoDeportivo = lapsoDeportivo;
 		this.nombre = nombre;
 		this.fechaInicio = fechaInicio;
@@ -126,6 +130,7 @@ public class Competencia implements java.io.Serializable {
 		this.hospedajes = hospedajes;
 		this.rosterCompetencias = rosterCompetencias;
 		this.indicadorCategoriaCompetencias = indicadorCategoriaCompetencias;
+		this.personalEquipoCompetencias = personalEquipoCompetencias;
 		this.juegos = juegos;
 	}
 
@@ -151,17 +156,6 @@ public class Competencia implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_modalidad_competencia", nullable = false)
-	public ModalidadCompetencia getModalidadCompetencia() {
-		return this.modalidadCompetencia;
-	}
-
-	public void setModalidadCompetencia(
-			ModalidadCompetencia modalidadCompetencia) {
-		this.modalidadCompetencia = modalidadCompetencia;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_organizacion", nullable = false)
 	public DatoBasico getDatoBasicoByCodigoOrganizacion() {
 		return this.datoBasicoByCodigoOrganizacion;
@@ -180,6 +174,17 @@ public class Competencia implements java.io.Serializable {
 
 	public void setDatoBasicoByCodigoEstado(DatoBasico datoBasicoByCodigoEstado) {
 		this.datoBasicoByCodigoEstado = datoBasicoByCodigoEstado;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_clasificacion_competencia", nullable = false)
+	public ClasificacionCompetencia getClasificacionCompetencia() {
+		return this.clasificacionCompetencia;
+	}
+
+	public void setClasificacionCompetencia(
+			ClasificacionCompetencia clasificacionCompetencia) {
+		this.clasificacionCompetencia = clasificacionCompetencia;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -375,6 +380,16 @@ public class Competencia implements java.io.Serializable {
 	public void setIndicadorCategoriaCompetencias(
 			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias) {
 		this.indicadorCategoriaCompetencias = indicadorCategoriaCompetencias;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competencia")
+	public Set<PersonalEquipoCompetencia> getPersonalEquipoCompetencias() {
+		return this.personalEquipoCompetencias;
+	}
+
+	public void setPersonalEquipoCompetencias(
+			Set<PersonalEquipoCompetencia> personalEquipoCompetencias) {
+		this.personalEquipoCompetencias = personalEquipoCompetencias;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competencia")
