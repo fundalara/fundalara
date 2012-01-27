@@ -1,18 +1,6 @@
 package modelo;
 
-<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
-=======
-<<<<<<< HEAD
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
-=======
-<<<<<<< HEAD
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
-=======
-// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,17 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -86,22 +63,8 @@ public class DatoBasico implements java.io.Serializable {
 	private Set<EgresoFormaPago> egresoFormaPagosForCodigoFormaPago = new HashSet<EgresoFormaPago>(
 			0);
 	private Set<Estadio> estadios = new HashSet<Estadio>(0);
-<<<<<<< HEAD
 	private Set<ComisionActividad> comisionActividads = new HashSet<ComisionActividad>(
 			0);
-=======
-<<<<<<< HEAD
-	private Set<ComisionActividad> comisionActividads = new HashSet<ComisionActividad>(
-			0);
-=======
-<<<<<<< HEAD
-	private Set<ComisionActividad> comisionActividads = new HashSet<ComisionActividad>(
-			0);
-=======
-	private Set<Actividad> actividads = new HashSet<Actividad>(0);
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private Set<RecaudoPorProceso> recaudoPorProcesosForCodigoImportancia = new HashSet<RecaudoPorProceso>(
 			0);
 	private Set<CuentaPagar> cuentaPagarsForCodigoTipoDocumento = new HashSet<CuentaPagar>(
@@ -129,32 +92,11 @@ public class DatoBasico implements java.io.Serializable {
 	private Set<TipoIngreso> tipoIngresosForCodigoTipo = new HashSet<TipoIngreso>(
 			0);
 	private Set<EscalaMedicion> escalaMedicions = new HashSet<EscalaMedicion>(0);
-<<<<<<< HEAD
 	private Set<JugadorPlan> jugadorPlans = new HashSet<JugadorPlan>(0);
-=======
-<<<<<<< HEAD
-	private Set<JugadorPlan> jugadorPlans = new HashSet<JugadorPlan>(0);
-=======
-<<<<<<< HEAD
-	private Set<JugadorPlan> jugadorPlans = new HashSet<JugadorPlan>(0);
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private Set<DatoAcademico> datoAcademicosForCodigoCurso = new HashSet<DatoAcademico>(
 			0);
 	private Set<AsistenciaJugador> asistenciaJugadors = new HashSet<AsistenciaJugador>(
 			0);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-	private Set<JugadorPlan> jugadorPlans = new HashSet<JugadorPlan>(0);
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private Set<PersonalForaneo> personalForaneos = new HashSet<PersonalForaneo>(
 			0);
 	private Set<DatoAcademico> datoAcademicosForCodigoAnnoEscolar = new HashSet<DatoAcademico>(
@@ -173,21 +115,8 @@ public class DatoBasico implements java.io.Serializable {
 	private Set<Material> materialsForCodigoTipoMaterial = new HashSet<Material>(
 			0);
 	private Set<Medico> medicos = new HashSet<Medico>(0);
-<<<<<<< HEAD
 	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
 			0);
-=======
-<<<<<<< HEAD
-	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
-			0);
-=======
-<<<<<<< HEAD
-	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
-			0);
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private Set<Competencia> competenciasForCodigoEstado = new HashSet<Competencia>(
 			0);
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
@@ -285,19 +214,7 @@ public class DatoBasico implements java.io.Serializable {
 			Set<EstadoActividad> estadoActividads,
 			Set<EgresoFormaPago> egresoFormaPagosForCodigoFormaPago,
 			Set<Estadio> estadios,
-<<<<<<< HEAD
 			Set<ComisionActividad> comisionActividads,
-=======
-<<<<<<< HEAD
-			Set<ComisionActividad> comisionActividads,
-=======
-<<<<<<< HEAD
-			Set<ComisionActividad> comisionActividads,
-=======
-			Set<Actividad> actividads,
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			Set<RecaudoPorProceso> recaudoPorProcesosForCodigoImportancia,
 			Set<CuentaPagar> cuentaPagarsForCodigoTipoDocumento,
 			Set<Competencia> competenciasForCodigoEstadoCompetencia,
@@ -313,27 +230,9 @@ public class DatoBasico implements java.io.Serializable {
 			Set<IngresoFormaPago> ingresoFormaPagosForCodigoFormaPago,
 			Set<TipoIngreso> tipoIngresosForCodigoTipo,
 			Set<EscalaMedicion> escalaMedicions,
-<<<<<<< HEAD
 			Set<JugadorPlan> jugadorPlans,
 			Set<DatoAcademico> datoAcademicosForCodigoCurso,
 			Set<AsistenciaJugador> asistenciaJugadors,
-=======
-<<<<<<< HEAD
-			Set<JugadorPlan> jugadorPlans,
-			Set<DatoAcademico> datoAcademicosForCodigoCurso,
-			Set<AsistenciaJugador> asistenciaJugadors,
-=======
-<<<<<<< HEAD
-			Set<JugadorPlan> jugadorPlans,
-			Set<DatoAcademico> datoAcademicosForCodigoCurso,
-			Set<AsistenciaJugador> asistenciaJugadors,
-=======
-			Set<DatoAcademico> datoAcademicosForCodigoCurso,
-			Set<AsistenciaJugador> asistenciaJugadors,
-			Set<JugadorPlan> jugadorPlans,
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			Set<PersonalForaneo> personalForaneos,
 			Set<DatoAcademico> datoAcademicosForCodigoAnnoEscolar,
 			Set<ComisionEquipo> comisionEquipos,
@@ -346,18 +245,7 @@ public class DatoBasico implements java.io.Serializable {
 			Set<Equipo> equiposForCodigoClasificacion,
 			Set<Material> materialsForCodigoTipoMaterial,
 			Set<Medico> medicos,
-<<<<<<< HEAD
 			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
-=======
-<<<<<<< HEAD
-			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
-=======
-<<<<<<< HEAD
-			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			Set<Competencia> competenciasForCodigoEstado,
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas,
 			Set<Competencia> competenciasForCodigoOrganizacion,
@@ -418,19 +306,7 @@ public class DatoBasico implements java.io.Serializable {
 		this.estadoActividads = estadoActividads;
 		this.egresoFormaPagosForCodigoFormaPago = egresoFormaPagosForCodigoFormaPago;
 		this.estadios = estadios;
-<<<<<<< HEAD
 		this.comisionActividads = comisionActividads;
-=======
-<<<<<<< HEAD
-		this.comisionActividads = comisionActividads;
-=======
-<<<<<<< HEAD
-		this.comisionActividads = comisionActividads;
-=======
-		this.actividads = actividads;
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.recaudoPorProcesosForCodigoImportancia = recaudoPorProcesosForCodigoImportancia;
 		this.cuentaPagarsForCodigoTipoDocumento = cuentaPagarsForCodigoTipoDocumento;
 		this.competenciasForCodigoEstadoCompetencia = competenciasForCodigoEstadoCompetencia;
@@ -446,27 +322,9 @@ public class DatoBasico implements java.io.Serializable {
 		this.ingresoFormaPagosForCodigoFormaPago = ingresoFormaPagosForCodigoFormaPago;
 		this.tipoIngresosForCodigoTipo = tipoIngresosForCodigoTipo;
 		this.escalaMedicions = escalaMedicions;
-<<<<<<< HEAD
 		this.jugadorPlans = jugadorPlans;
 		this.datoAcademicosForCodigoCurso = datoAcademicosForCodigoCurso;
 		this.asistenciaJugadors = asistenciaJugadors;
-=======
-<<<<<<< HEAD
-		this.jugadorPlans = jugadorPlans;
-		this.datoAcademicosForCodigoCurso = datoAcademicosForCodigoCurso;
-		this.asistenciaJugadors = asistenciaJugadors;
-=======
-<<<<<<< HEAD
-		this.jugadorPlans = jugadorPlans;
-		this.datoAcademicosForCodigoCurso = datoAcademicosForCodigoCurso;
-		this.asistenciaJugadors = asistenciaJugadors;
-=======
-		this.datoAcademicosForCodigoCurso = datoAcademicosForCodigoCurso;
-		this.asistenciaJugadors = asistenciaJugadors;
-		this.jugadorPlans = jugadorPlans;
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.personalForaneos = personalForaneos;
 		this.datoAcademicosForCodigoAnnoEscolar = datoAcademicosForCodigoAnnoEscolar;
 		this.comisionEquipos = comisionEquipos;
@@ -479,18 +337,7 @@ public class DatoBasico implements java.io.Serializable {
 		this.equiposForCodigoClasificacion = equiposForCodigoClasificacion;
 		this.materialsForCodigoTipoMaterial = materialsForCodigoTipoMaterial;
 		this.medicos = medicos;
-<<<<<<< HEAD
 		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
-=======
-<<<<<<< HEAD
-		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
-=======
-<<<<<<< HEAD
-		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.competenciasForCodigoEstado = competenciasForCodigoEstado;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 		this.competenciasForCodigoOrganizacion = competenciasForCodigoOrganizacion;
@@ -791,13 +638,6 @@ public class DatoBasico implements java.io.Serializable {
 		this.estadios = estadios;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasico")
 	public Set<ComisionActividad> getComisionActividads() {
 		return this.comisionActividads;
@@ -805,22 +645,6 @@ public class DatoBasico implements java.io.Serializable {
 
 	public void setComisionActividads(Set<ComisionActividad> comisionActividads) {
 		this.comisionActividads = comisionActividads;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "comision_actividad", schema = "public", joinColumns = { @JoinColumn(name = "codigo_comision", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_actividad", nullable = false, updatable = false) })
-	public Set<Actividad> getActividads() {
-		return this.actividads;
-	}
-
-	public void setActividads(Set<Actividad> actividads) {
-		this.actividads = actividads;
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasicoByCodigoImportancia")
@@ -968,13 +792,6 @@ public class DatoBasico implements java.io.Serializable {
 		this.escalaMedicions = escalaMedicions;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasico")
 	public Set<JugadorPlan> getJugadorPlans() {
 		return this.jugadorPlans;
@@ -984,14 +801,6 @@ public class DatoBasico implements java.io.Serializable {
 		this.jugadorPlans = jugadorPlans;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasicoByCodigoCurso")
 	public Set<DatoAcademico> getDatoAcademicosForCodigoCurso() {
 		return this.datoAcademicosForCodigoCurso;
@@ -1012,24 +821,6 @@ public class DatoBasico implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasico")
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-	public Set<JugadorPlan> getJugadorPlans() {
-		return this.jugadorPlans;
-	}
-
-	public void setJugadorPlans(Set<JugadorPlan> jugadorPlans) {
-		this.jugadorPlans = jugadorPlans;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasico")
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	public Set<PersonalForaneo> getPersonalForaneos() {
 		return this.personalForaneos;
 	}
@@ -1143,13 +934,6 @@ public class DatoBasico implements java.io.Serializable {
 		this.medicos = medicos;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasico")
 	public Set<ComisionActividadPlanificada> getComisionActividadPlanificadas() {
 		return this.comisionActividadPlanificadas;
@@ -1160,14 +944,6 @@ public class DatoBasico implements java.io.Serializable {
 		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "datoBasicoByCodigoEstado")
 	public Set<Competencia> getCompetenciasForCodigoEstado() {
 		return this.competenciasForCodigoEstado;

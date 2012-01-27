@@ -1,18 +1,6 @@
 package modelo;
 
-<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
-=======
-<<<<<<< HEAD
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
-=======
-<<<<<<< HEAD
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
-=======
-// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,18 +26,7 @@ public class TipoIngreso implements java.io.Serializable {
 	private String descripcion;
 	private Double monto;
 	private char estatus;
-<<<<<<< HEAD
 	private char aplicacion;
-=======
-<<<<<<< HEAD
-	private char aplicacion;
-=======
-<<<<<<< HEAD
-	private char aplicacion;
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private Set<DocumentoAcreedor> documentoAcreedors = new HashSet<DocumentoAcreedor>(
 			0);
 
@@ -57,56 +34,19 @@ public class TipoIngreso implements java.io.Serializable {
 	}
 
 	public TipoIngreso(int codigoTipoIngreso,
-<<<<<<< HEAD
 			DatoBasico datoBasicoByCodigoTipo, String descripcion,
 			char estatus, char aplicacion) {
-=======
-<<<<<<< HEAD
-			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-			char estatus, char aplicacion) {
-=======
-<<<<<<< HEAD
-			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-			char estatus, char aplicacion) {
-=======
-			DatoBasico datoBasicoByCodigoTipo, String descripcion, char estatus) {
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.codigoTipoIngreso = codigoTipoIngreso;
 		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-<<<<<<< HEAD
 		this.aplicacion = aplicacion;
-=======
-<<<<<<< HEAD
-		this.aplicacion = aplicacion;
-=======
-<<<<<<< HEAD
-		this.aplicacion = aplicacion;
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	}
 
 	public TipoIngreso(int codigoTipoIngreso,
 			DatoBasico datoBasicoByCodigoPeriodicidad,
 			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-<<<<<<< HEAD
 			Double monto, char estatus, char aplicacion,
-=======
-<<<<<<< HEAD
-			Double monto, char estatus, char aplicacion,
-=======
-<<<<<<< HEAD
-			Double monto, char estatus, char aplicacion,
-=======
-			Double monto, char estatus,
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			Set<DocumentoAcreedor> documentoAcreedors) {
 		this.codigoTipoIngreso = codigoTipoIngreso;
 		this.datoBasicoByCodigoPeriodicidad = datoBasicoByCodigoPeriodicidad;
@@ -114,18 +54,7 @@ public class TipoIngreso implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.monto = monto;
 		this.estatus = estatus;
-<<<<<<< HEAD
 		this.aplicacion = aplicacion;
-=======
-<<<<<<< HEAD
-		this.aplicacion = aplicacion;
-=======
-<<<<<<< HEAD
-		this.aplicacion = aplicacion;
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.documentoAcreedors = documentoAcreedors;
 	}
 
@@ -187,13 +116,6 @@ public class TipoIngreso implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@Column(name = "aplicacion", nullable = false, length = 1)
 	public char getAplicacion() {
 		return this.aplicacion;
@@ -203,14 +125,6 @@ public class TipoIngreso implements java.io.Serializable {
 		this.aplicacion = aplicacion;
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIngreso")
 	public Set<DocumentoAcreedor> getDocumentoAcreedors() {
 		return this.documentoAcreedors;

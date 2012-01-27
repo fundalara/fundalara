@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 <?page title="Auto Generated index.zul"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmResultadosIndividuales" ?>
@@ -12,23 +5,8 @@
 	<window id="FrmResultadosIndividuales"
 		title="Resultados Individuales" border="normal" width="780px"
 		mode="modal" closable="true">
-<<<<<<< HEAD
-		<zscript>
-		<![CDATA[ 
-		    public void guardar(){
-		      try{	
-		    	Messagebox.show("Datos almacenados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
-		      }catch (Exception e){
-		    	  
-		      }
-		      FrmResultadosIndividuales.detach();
-		    }
-		]]></zscript>
-		<panel border="normal" title="RESULTADOS  INDIVIDUALES">
-=======
 		<panel border="normal">
 			<caption label="RESULTADOS  INDIVIDUALES"></caption>
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			<panelchildren>
 
 				<tabbox>
@@ -43,90 +21,6 @@
 								<panelchildren>
 									<div width="40%"
 										style="float:left">
-<<<<<<< HEAD
-										<panel title="LINE-UP">
-											<panelchildren>
-												<grid>
-													<columns>
-														<column	label="OB" width="8%" />
-														<column label="N" width="8%"  />
-														<column	label="NOMBRE" width="35%" />
-														<column	label="APELLIDO" width="35%" />
-														<column	label="POS" width="10%" />
-													</columns>
-													<rows>													
-													   <row height="27px">
-													     <label value="1"></label>
-													     <label value="44"></label>
-													     <label value="JOSE"></label>
-													     <label value="RODRIGUEZ"></label>
-													     <label value="3B"></label>
-													   </row> 
-													   <row height="27px">
-													     <label value="2"></label>
-													     <label value="23"></label>
-													     <label value="EDUARDO"></label>
-													     <label value="OCHOA"></label>
-													     <label value="2B"></label>
-													   </row>
-													   
-													    <row height="27px">
-													     <label value="3"></label>
-													     <label value="15"></label>
-													     <label value="YOVANNY"></label>
-													     <label value="MANOSALVA"></label>
-													     <label value="LF"></label>
-													   </row>
-													   
-													    <row height="27px">
-													     <label value="4"></label>
-													     <label value="22"></label>
-													     <label value="RAFAEL"></label>
-													     <label value="ESCOBAR"></label>
-													     <label value="SS"></label>
-													   </row>				   
-													   <row height="27px">
-													     <label value="5"></label>
-													     <label value="26"></label>
-													     <label value="FRANCISCO"></label>
-													     <label value="MACHADO"></label>
-													     <label value="P"></label>
-													   </row>
-													  <row height="27px">
-													     <label value="6"></label>
-													     <label value="11"></label>
-													     <label value="JHOINNEL"></label>
-													     <label value="LISCANO"></label>
-													     <label value="3B"></label>
-													   </row>
-													   <row height="27px">
-													     <label value="7"></label>
-													     <label value="8"></label>
-													     <label value="JESUS"></label>
-													     <label value="ROJAS"></label>
-													     <label value="CF"></label>
-													   </row>
-													   <row height="27px">
-													     <label value="8"></label>
-													     <label value="14"></label>
-													     <label value="JESUS"></label>
-													     <label value="CASTILLO"></label>
-													     <label value="RF"></label>
-													   </row>
-													   <row height="27px">
-													     <label value="9"></label>
-													     <label value="60"></label>
-													     <label value="JUAN"></label>
-													     <label value="HERNADEZ"></label>
-													     <label value="C"></label>
-													   </row>
-													   
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-										<panel title="RESERVA" >
-=======
 										<panel>
 											<caption label="LINE-UP" />
 											<panelchildren>
@@ -144,7 +38,6 @@
 										</panel>
 										<panel border="normal">
 											<caption label="RESERVA" />
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 											<panelchildren>
 												<grid>
 													<columns>
@@ -159,107 +52,6 @@
 											</panelchildren>
 										</panel>
 									</div>
-<<<<<<< HEAD
-									<div style="float:left;margin-left:2px"
-										width="59%">
-										<panel title="INDICADORES" >
-											<panelchildren>
-												<grid>
-													<columns>
-													   <column label="VB" align="center"></column>
-													   <column label="H"  align="center"></column>
-													   <column label="2B" align="center"></column>
-													   <column label="3B" align="center"></column>
-													   <column label="CA" align="center"></column>
-													   <column label="CI" align="center"></column>
-													   <column label="O"  align="center"></column>
-													   
-													</columns>
-													<rows>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>													    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>													    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													
-													</rows>
-=======
 									<div style="float:left;"
 										width="60%">
 										<panel border="normal">
@@ -269,34 +61,16 @@
 												<grid>
 													<columns></columns>
 													<rows></rows>
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 												</grid>
 											</panelchildren>
 										</panel>
 									</div>
-<<<<<<< HEAD
-									<div align="left" width="59%"
-										style="float:left;margin-left:2px">
-										<panel title="INDICADORES">
-											<panelchildren>
-												<grid>
-													<columns>
-													   <column label="VB" align="center"></column>
-													   <column label="H"  align="center"></column>
-													   <column label="2B" align="center"></column>
-													   <column label="3B" align="center"></column>
-													   <column label="CA" align="center"></column>
-													   <column label="CI" align="center"></column>
-													   <column label="O"  align="center"></column>													
-													</columns>
-=======
 									<div align="right" width="60%"
 										style="float:left;margin-top:25px">
 										<panel>
 											<panelchildren>
 												<grid>
 													<columns></columns>
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 													<rows></rows>
 												</grid>
 											</panelchildren>
@@ -310,11 +84,7 @@
 				<div align="right">
 					<hbox>
 						<button image="/Recursos/Imagenes/guardar.ico"
-<<<<<<< HEAD
-							id="btnGuardar" onClick="guardar()" label="Guardar" />
-=======
 							id="btnGuardar" label="Guardar" />
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 						<button image="/Recursos/Imagenes/cancelar.ico"
 							label="Cancelar" />
 						<button image="/Recursos/Imagenes/salir.png"
@@ -327,101 +97,4 @@
 
 
 	</window>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-<?page title="Auto Generated index.zul"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmResultadosIndividuales" ?>
-<zk>
-	<window id="FrmResultadosIndividuales" title="Resultados Individuales" border="normal"
-		width="690px" mode="modal" closable="true">
-		<panel border="normal">
-			<caption label="RESULTADOS  INDIVIDUALES"></caption>
-			<panelchildren>
-
-				<tabbox>
-					<tabs>
-						<tab label="Ofensiva" />
-						<tab label="Defensiva" />
-						<tab label="Picheo" />
-					</tabs>
-					<tabpanels>
-						<tabpanel>
-							<panel> <!-- Indicadores Ofensivos -->
-								<panelchildren>
-									<div width="25%" style="margin-top:30px;float:left">
-										<panel>
-											<caption label="LINE-UP" />
-											<panelchildren>
-												<grid>
-													<columns>
-														<column label="N°" width="30px" />
-														<column label="Nombre" align="left" />
-														<column	label="Num" width="35px" />
-														<column label="Pos" width="30px" />
-													</columns>
-													<rows></rows>
-												</grid>
-											</panelchildren>
-										</panel>
-										<panel border="normal">
-											<caption label="RESERVA" />
-											<panelchildren>
-												<grid>
-													<columns>
-														<column label="N°" width="30px" />
-														<column label="Nombre" align="left" />
-														<column label="Num" width="35px" />
-														<column label="Pos" width="30px" />
-													</columns>
-													<rows></rows>
-												</grid>
-											</panelchildren>
-										</panel>
-									</div>
-									<div style="float:left;margin-top:30px" width="75%">
-										<panel border="normal">
-											<caption label="INDICADORES" />
-											<panelchildren>
-												<grid>
-													<columns></columns>
-													<rows></rows>
-												</grid>
-											</panelchildren>
-										</panel>
-									</div>
-									<div align="right" width="75%" style="float:left;margin-top:25px">
-										<panel>
-											<panelchildren>
-												<grid>
-													<columns></columns>
-													<rows></rows>
-												</grid>
-											</panelchildren>
-										</panel>
-									</div>
-								</panelchildren>
-							</panel>
-						</tabpanel> <!-- Fin indicadores ofensivos -->
-					</tabpanels>
-				</tabbox> 
-				<div align="right">
-					<hbox>
-						<button label="Guardar"></button>
-						<button label="Cancelar"></button>
-						<button label="Salir"></button>
-					</hbox>
-				</div>
-			</panelchildren>
-		</panel>
-
-
-
-	</window>
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 </zk>

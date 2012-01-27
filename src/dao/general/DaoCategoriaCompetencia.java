@@ -33,18 +33,7 @@ public class DaoCategoriaCompetencia extends GenericDao {
 	}
 	
 	public Date getDuraccionCategoriaHoras(Categoria cat) {
-<<<<<<< HEAD
 		//Session session = getSession();
-=======
-<<<<<<< HEAD
-		//Session session = getSession();
-=======
-<<<<<<< HEAD
-		//Session session = getSession();
-=======
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		Session session = getSession();
 		Transaction tx =  session.beginTransaction();
 		Criteria c = session.createCriteria(CategoriaCompetencia.class);

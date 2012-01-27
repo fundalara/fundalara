@@ -25,26 +25,6 @@
 									</button>
 								</hbox>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-								<label  value="Nombre"></label>
-
-								<textbox style="margin-left:5px" cols="18"></textbox>
-								<button id="btnBuscarCompetencia"
-									image="/Recursos/Imagenes/consultar.ico" width="100%">
-								</button>
-                                  
-										
-								<label value="Tipo"></label>
-								<textbox cols="13" ></textbox>
-								
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 							</row>
 							<row style="border:none">
@@ -75,13 +55,6 @@
 				</panelchildren>
 			</panel>
 			<!-- TABLA DE ENFRENTAMIENTOS -->
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			<div width="100%">
 				<panel border="normal" height="70%">
 					<caption label="Agregar Enfrentamientos"></caption>
@@ -141,85 +114,11 @@
 													id="btnBuscarEquipo"
 													image="/Recursos/Imagenes/consultar.ico">
 												</button>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-			<div>
-				<tabbox>
-
-					<tabs>
-						<tab label="Ronda Uno" />
-					</tabs>
-					<!-- RONDA -->
-					<tabpanels height="50%">
-						<tabpanel>
-							<div width="100%">
-								<panel border="normal" height="100px">
-									<caption
-										label="Agregar Enfrentamientos">
-									</caption>
-									<panelchildren>
-										<hbox width="100%"><!-- General -->
-											<hbox height="100px">
-												<grid>
-													<rows>
-														<row
-															style="border-style:none">
-
-															<label
-																value="Home Club">
-															</label>
-															<hbox>
-																<textbox></textbox>
-																<button
-																	image="/Recursos/Imagenes/consultar.ico">
-																</button>
-															</hbox>
-															<label
-																value="Visitante">
-															</label>
-															<hbox>
-																<textbox></textbox>
-																<button
-																	image="/Recursos/Imagenes/consultar.ico">
-																</button>
-
-															</hbox>
-														</row>
-														<row
-															style="border-style:none">
-
-															<label
-																value="Fecha">
-															</label>
-															<datebox />
-
-															<label
-																value="Lugar">
-															</label>
-															<textbox></textbox>
-
-															<label
-																value="Hora">
-															</label>
-															<hbox>
-																<timebox />
-															</hbox>
-
-														</row>
-													</rows>
-												</grid>
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 											</hbox>
 
 											<label value="Visitante">
 											</label>
 											<hbox>
-<<<<<<< HEAD
 
 												<textbox
 													id="txtVisitante"
@@ -234,39 +133,6 @@
 
 										</row>
 
-=======
-<<<<<<< HEAD
-
-												<textbox
-													id="txtVisitante"
-													value="@{cntrl.equipoCompetencia2.equipo.nombre}">
-												</textbox>
-												<button
-													id="btnBuscarEquipo2"
-													image="/Recursos/Imagenes/consultar.ico">
-												</button>
-											</hbox>
-
-
-										</row>
-
-=======
-
-												<textbox
-													id="txtVisitante"
-													value="@{cntrl.equipoCompetencia2.equipo.nombre}">
-												</textbox>
-												<button
-													id="btnBuscarEquipo2"
-													image="/Recursos/Imagenes/consultar.ico">
-												</button>
-											</hbox>
-
-
-										</row>
-
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 										<row
 											style="border-style:none">
 
@@ -306,10 +172,6 @@
 
 			<div width="100%">
 				<panel border="normal">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 					<caption label="Enfrentamientos"></caption>
 					<panelchildren>
@@ -338,39 +200,6 @@
 					</panelchildren>
 				</panel>
 
-<<<<<<< HEAD
-=======
-=======
-
-					<caption label="Enfrentamientos"></caption>
-					<panelchildren>
-
-						<listbox id="lsbxEnfrentamientos"
-							model="@{cntrl.juegos }" style="margin-top:5px" height="150px"
-							mold="paging">
-							<listhead>
-								<listheader label="Home Club" width="20%" align="center" />
-								<listheader label="Visitante" width="20%" align="center" />
-								<listheader label="Fecha" width="10%" align="center" />
-								<listheader label="Estadio" width="20%" align="center" />
-								<listheader label="Hora Inicio" width="10%" align="center" />
-								
-							</listhead>
-							<listitem self="@{each=juego }"
-								value="@{juego }">
-								<listcell label="@{cntrl.equipoCompetencia1.equipo.nombre}"></listcell>
-								<listcell label="@{cntrl.equipoCompetencia2.equipo.nombre}"></listcell>
-								<listcell label="@{juego.fecha}"></listcell>
-								<listcell label="@{juego.estadio.nombre}"></listcell>
-								<listcell label="@{juego.horaInicio }"></listcell>								
-							</listitem>
-
-						</listbox>
-					</panelchildren>
-				</panel>
-
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			</div>
 			<separator height="4px"></separator>
 			<div align="right">
@@ -383,7 +212,6 @@
 			<panel>
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
-<<<<<<< HEAD
 						<button id="btnGuardar"  image="/Recursos/Imagenes/guardar.ico"
 							label="Guardar">
 						</button>
@@ -392,38 +220,6 @@
 							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
 						<button id="btnSalir"
-=======
-<<<<<<< HEAD
-						<button id="btnGuardar"  image="/Recursos/Imagenes/guardar.ico"
-							label="Guardar">
-						</button>
-
-						<button id="btnCancelar"
-							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
-						</button>
-						<button id="btnSalir"
-=======
-<<<<<<< HEAD
-						<button id="btnGuardar"  image="/Recursos/Imagenes/guardar.ico"
-							label="Guardar">
-						</button>
-
-						<button id="btnCancelar"
-							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
-						</button>
-						<button id="btnSalir"
-=======
-						<button
-							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
-						</button>
-
-						<button
-							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
-						</button>
-						<button
->>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
->>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
->>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 							image="/Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>

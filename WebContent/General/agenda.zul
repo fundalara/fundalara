@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/calendar.css"?>
+<?component name="calendario" macro-uri="Calendario/Calendario.zul" inline="true"?>
+<!-- <?component name="leftPanel" macro-uri="Calendario/Left_Panel.zul" inline="true"?> -->
+<?component name="create" macro-uri="Calendario/createEvent.zul" inline="true"?>
+<?component name="edit" macro-uri="Calendario/editEvent.zul" inline="true"?>
+<?component name="toolbar" macro-uri="Calendario/toolbar.zul" inline="true"?>
+<?component name="divtab" macro-uri="Calendario/divtab.zul" inline="true"?>
+<?component name="divarrow" macro-uri="Calendario/divarrow.zul" inline="true"?>
+<?page title="Calendario" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<zk>
+	<window border="none" mode="embedded" 
+		width="980px" height="600px"
+		apply="controlador.general.Agenda" id="wndCalendario">
+		<caption id="titulo" label="Calendario" >
+			<label sclass="labels" id="rangoCalendario"></label>
+		</caption>
+		<borderlayout>
+			<north>
+				<div>
+					<div class="float-left">
+						<hbox>
+							<divarrow type="arrow-left" />
+							<divarrow type="arrow-right" />
+							<div>
+								<button mold="os" label="Hoy" id="hoy"/>
+								<span id="FDOW">
+									<label value="Filtrar por:" />
+									<listbox mold="select" 
+										id="lsbxFiltro">
+										<listitem  id="item" label="--Seleccione--"/>
+										<listitem label="${each}"
+											forEach="Entrenamiento,Competencia,Mantenimiento,Actividad Complementaria" />
+									</listbox>
+									<button  id="btnVer" mold="os" label="ver" visible="false" />
+								</span>
+								<separator orient="vertical" />
+							</div>
+						</hbox>
+					</div>
+					<div class="float-right">
+						<hbox>							
+							<divtab forEach="Semana, Mes, Dia"
+								text="${each}" />
+						</hbox>
+					</div>
+				</div>
+			</north>
+			<west border="none"></west>
+			<center border="none">
+				<calendario/>
+			</center>
+		</borderlayout>
+		<popup id="updateMsg" width="320px">
+			<label id="popupLabel" />
+			<timer id="timer" delay="1000" running="false"
+				onTimer="updateMsg.close()" />
+		</popup>
+	</window>
+</zk>
