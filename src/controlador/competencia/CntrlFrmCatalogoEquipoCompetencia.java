@@ -1,8 +1,12 @@
 package controlador.competencia;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import modelo.Competencia;
 import modelo.Divisa;
 import modelo.Equipo;
 import modelo.EquipoCompetencia;
@@ -32,6 +36,7 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	Component catalogo;
 	Textbox txtFiltro;
 	Equipo equipo;
+	int id=0;
 
 	
 	  //SETTERS Y GETTERS...
@@ -61,6 +66,26 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	}
 
 	
+	public void onCreate$frmCatalogoEC(){
+		Competencia competencia = (Competencia) catalogo.getVariable("competencia", false);
+		equipoCompetencia = ConvertirConjuntoALista(competencia.getEquipoCompetencias());
+		id = (Integer) catalogo.getVariable("id",false);
+		EquipoCompetencia aux = (EquipoCompetencia) catalogo.getVariable("equipoCompetencia",false);
+		if (aux.getCodigoEquipoCompetencia() != 0){
+			sacar(aux);
+		}
+		binder.loadAll();
+	}
+	
+	public void sacar(EquipoCompetencia aux){
+		System.out.println("sacar");
+		for (int i=0;i<equipoCompetencia.size();i++){
+			if (aux.getCodigoEquipoCompetencia() == equipoCompetencia.get(i).getCodigoEquipoCompetencia()){
+				equipoCompetencia.remove(i);
+				System.out.println("consiguio");
+			}
+		}
+	}
 	
 	//METODO PARA TRABAJAR EL CATALOGO EQUIPO
 	
@@ -71,7 +96,8 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 		//se guarda la referencia al catalogo
 		catalogo = c;
 		//Se listan los equipos activos y se cargan mediante databinding (ver zul)
-		equipoCompetencia = servicioEquipoCompetencia.listarActivos();
+		
+		//equipoCompetencia = servicioEquipoCompetencia.listarActivos();
 		
 		
 		//si selecciona por defecto el primero de la lista si hay al menos 1
@@ -91,7 +117,10 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
             //se le asigna el objeto divisa al formulario
 			formulario.setVariable("equipoCompetencia", ec,false);
 			//se le envia una señal al formulario indicado que el formulario se cerro y que los datos se han enviado
-			Events.sendEvent(new Event("onCatalogoCerrado",formulario));          
+			if (id==1)
+				Events.postEvent(new Event("onCatalogoCerrado1",formulario)); 
+			else 
+				Events.postEvent(new Event("onCatalogoCerrado2",formulario)); 
 			//se cierra el catalogo
 			catalogo.detach();
 			
@@ -118,6 +147,13 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 		catalogo.detach();
 	}
 
+	public List ConvertirConjuntoALista(Set conjunto) {
+		List l = new ArrayList();
+		for (Iterator i = conjunto.iterator(); i.hasNext();) {
+			l.add(i.next());
+		}
+		return l;
+	}
 	
 	
 	

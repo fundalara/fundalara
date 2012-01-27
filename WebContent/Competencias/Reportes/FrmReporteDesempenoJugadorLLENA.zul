@@ -1,0 +1,94 @@
+<?page title="frmReporteDesempenoJugador" contentType="text/html;charset=UTF-8"?>
+<zk>
+<div align="center" >
+	<window title="Configuración de Reporte del Desempeño Deportivo"
+		border="normal" width="500px">
+		<grid style="border:none">
+			<columns>
+				<column label="" align="left" width="10%" />
+				<column label="" align="left" width="80%" />
+				<column label="" align="left" width="10%" />
+			</columns>
+			<rows>
+				<row style="border:none">
+					<label value="Competencia" />
+					<hbox>
+						<textbox
+							value="CAMPEONATO NACIONAL CRIOLLITOS DE VENEZUELA" cols="40">
+						</textbox>
+						<button id="btnBuscar"
+							image="/Recursos/Imagenes/consultar.ico">
+						</button>
+					</hbox>
+				</row>
+				<row style="border:none">
+					<label value="Categoría"></label>
+					<hbox>
+						<combobox value="PREJUNIOR" cols="15">
+							<comboitem label="" />
+							<comboitem label="" />
+						</combobox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<grid style="border:none" width="100%">
+			<columns>
+				<column label="" align="left" width="19%" />
+				<column label="" align="left" width="10%" />
+				<column label="" align="left" width="20%" />
+				<column label="" align="left" width="10%" />
+			</columns>
+			<rows>
+				<row style="border:none">
+					<label value="Filtrar por"></label>
+					<combobox value="--Seleccione--" >
+						<comboitem label="Equipo" />
+						<comboitem label="Competencia" />
+					</combobox>
+				</row>
+				<row style="border:none">
+					<label value="Equipo"></label>
+					<hbox>
+						<textbox value="PREJUNIOR A" width="170px"></textbox>
+						<space></space>
+						<button id="btnBuscarEquipo"
+							image="/Recursos/Imagenes/consultar.ico">
+						</button>
+					</hbox>
+					<hbox>
+						<label value="Modalidad"></label>
+						<combobox value="OFENSIVA" width="70px">
+							<comboitem label="" />
+							<comboitem label="" />
+						</combobox>
+					</hbox>
+				</row>
+				<row style="border:none">
+					<label value="Juego"></label>
+					<combobox value="PREJUNIOR A Vs DELFINES A"
+						cols="22">
+						<comboitem label="" />
+						<comboitem label="" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<div align="right" height="30px">
+			<button id="btnGuardar"
+				image="/Recursos/Imagenes/reporte.ico" label="Generar"
+				orient="horizontal">
+			</button>
+
+			<button id="btnCancelar"
+				image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+				orient="horizontal">
+			</button>
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
+				label="Salir" orient="horizontal">
+			</button>
+
+		</div>
+	</window>
+	</div>
+</zk>

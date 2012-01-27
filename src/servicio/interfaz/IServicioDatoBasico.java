@@ -43,4 +43,11 @@ public interface IServicioDatoBasico {
 	
 	public abstract List<DatoBasico> listarOrganizacionCompetencia();	
 	
+	public abstract List<DatoBasico> listarPosicionesJugadores();
+	
+	public List<DatoBasico>listarTipoCompetencia();
+	
+	public List<DatoBasico> listarCondicion ();
+	public abstract List<DatoBasico> listarTipoDato(String nombre);
+	
 }

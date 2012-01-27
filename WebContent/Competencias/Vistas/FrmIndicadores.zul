@@ -25,7 +25,7 @@
 										value="@{cntrl.competencia.nombre }">
 									</textbox>
 									<button id="btnBuscarCompetencia"
-										image="../../Recursos/Imagenes/consultar.ico">
+										image="Recursos/Imagenes/consultar.ico">
 									</button>
 								</hbox>
 								<label value="Tipo"></label>

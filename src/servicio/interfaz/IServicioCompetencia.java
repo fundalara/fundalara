@@ -11,6 +11,8 @@ public interface IServicioCompetencia {
 	public abstract void eliminar(Competencia c);
 
 	public abstract void agregar(Competencia c);
+	
+	public abstract int obtenerCodigoCompetencia();	
 
 	public abstract List<Competencia> listar();
 

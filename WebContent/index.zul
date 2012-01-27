@@ -2,12 +2,28 @@
 <zk>
 	<zscript><![CDATA[
 	public void enlace(String cad) {
-		cuerpo.setSrc(cad);
+		//cuerpo.setSrc(cad);
+		if (divCuerpo.getLastChild() != null)
+			divCuerpo.getLastChild().detach();
+		Component comp = Executions.createComponents(cad, null, null);
+		divCuerpo.appendChild(comp);
+
 	}
-	
-	public void agenda(){
+	public void mostrarAgenda() {
+		Map map = new Hashtable();
+		if (divCuerpo.getLastChild() != null)
+			divCuerpo.getLastChild().detach();
+		if (event.getTarget().getId().equals("mnuAgendaEntrenamiento")) {
+			map.put("disparador", "entrenamiento");
+		} else if (event.getTarget().getId().equals("mnuAgendaCompetencia")) {
+			map.put("disparador", "competencia");
+		} else {
+			map.put("disparador", "logistica");
+		}
+		Component comp = Executions.createComponents("/General/FrmAgenda.zul",
+				null, map);
 		divMenu.setVisible(false);
-		enlace("/General/agenda.zul");
+		divCuerpo.appendChild(comp);
 	}
 ]]></zscript>
 	<style>
@@ -21,8 +37,7 @@
 					<tab label="Registros" tooltip="nombre" />
 					<tab label="Funcionalidades Deportivas" />
 					<tab label="Funcionalidades Operativas" />
-					<tab label="Agenda"
-						onClick='agenda()' />
+					<tab label="Agenda" />
 					<tab label="Reportes" />
 					<tab label="Configuraciones" />
 
@@ -54,14 +69,14 @@
 													<treerow>
 														<treecell
 															label="Categorías"
-																onClick='enlace("Jugador/Vistas/frmConfigurarCategoria.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarCategoria.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Equipos"
-																onClick='enlace("Jugador/Vistas/frmConfigurarEquipo.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarEquipo.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -118,8 +133,8 @@
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Tipos de Competencia"
-															onClick='enlace("/Competencias/Vistas/FrmTipoCompetencia.zul")' />
+															label="Clasificación"
+															onClick='enlace("/Competencias/Vistas/FrmNuevaModalidad.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -190,11 +205,11 @@
 															label="Recaudos"
 															onClick='enlace("Jugador/Vistas/configurarRecaudo.zul")' />
 													</treerow>
-												</treeitem>												
+												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Materiales" 
+															label="Materiales"
 															onClick='enlace("Logistica/Vistas/frmRegistrarMaterial.zul")' />
 													</treerow>
 												</treeitem>
@@ -332,7 +347,7 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Crear Competencia"
+													label="Gestionar Competencia"
 													onClick='enlace("/Competencias/Vistas/FrmCrearCompetencia.zul")' />
 											</treerow>
 										</treeitem>
@@ -356,22 +371,22 @@
 													label="Seleccionar Indicadores"
 													onClick='enlace("/Competencias/Vistas/FrmIndicadores.zul")' />
 											</treerow>
-										</treeitem>										
+										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Programar Juegos"
 													onClick='enlace("/Competencias/Vistas/FrmCalendario.zul")' />
 											</treerow>
-										</treeitem>										
+										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Hospedaje de Jugadores"
 													onClick='enlace("Jugador/Vistas/frmRegistrarHospedaje.zul")' />
 											</treerow>
-										</treeitem>										
-										
+										</treeitem>
+
 									</treechildren>
 								</treeitem>
 							</treechildren>
@@ -442,7 +457,7 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Solicitudes de Mantenimiento" 
+													label="Solicitudes de Mantenimiento"
 													onClick='enlace("Logistica/Vistas/frmSolicitudMantenimiento.zul")' />
 											</treerow>
 										</treeitem>
@@ -470,161 +485,24 @@
 							<treechildren>
 								<treeitem open="false">
 									<treerow>
-										<treecell label="Planificacion" />
+										<treecell
+											id="mnuAgendaEntrenamiento" label="Entrenamientos"
+											onClick="mostrarAgenda()" />
 									</treerow>
-									<treechildren>
-
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Competencia" />
-											</treerow>
-											<treechildren>
-
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Line-Up"
-															onClick='enlace("/Competencias/Vistas/FrmLineUp.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Solicitud de Materiales"
-															onClick='enlace("/Competencias/Vistas/FrmRecursos.zul")' />
-													</treerow>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Logistica" />
-											</treerow>					
-										</treeitem>
-									</treechildren>
 								</treeitem>
 								<treeitem open="false">
 									<treerow>
 										<treecell
-											label="Registro de Resultados" />
+											id="mnuAgendaCompetencia" label="Competencias"
+											onClick="mostrarAgenda()" />
 									</treerow>
-									<treechildren>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Entrenamiento" />
-											</treerow>
-											<treechildren>
-												<treeitem open="false"
-													visible="false">
-													<treerow>
-														<treecell
-															label="Desarrollo de Actividades"
-															onClick='enlace("/Entrenamiento/Vistas/Actividades_Realizadas.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Cumplimiento de Entrenamiento"
-															onClick='enlace("/Entrenamiento/Vistas/Cumplimiento_Entrenamiento.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Desempeño de Jugadores"
-															onClick='enlace("/Entrenamiento/Vistas/Desempeno_Atleta.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Test Aplicados"
-															onClick='enlace("/Entrenamiento/Vistas/Resultados_Evaluativos.zul")' />
-													</treerow>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Competencia" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Registro de Resultados"
-															onClick='enlace("/Competencias/Vistas/FrmRegistroResultados.zul")' />
-													</treerow>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Logistica" />
-											</treerow>											
-										</treeitem>
-									</treechildren>
-
 								</treeitem>
 								<treeitem open="false">
 									<treerow>
-										<treecell
-											label="Seguimiento y Control" />
+										<treecell label="Operaciones"
+											onClick="mostrarAgenda()" />
+										<!--la verdad no que nombre necesita cronos aqui -->
 									</treerow>
-									<treechildren>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Entrenamiento" />
-											</treerow>
-											<treechildren>
-
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Control de Inventario"
-															onClick='enlace("/Entrenamiento/Vistas/Control_Inventario_Entrenamiento.zul")' />
-													</treerow>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Competencia" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Control de Inventario"
-															onClick='enlace("/Competencias/Vistas/FrmControlInventario.zul")' />
-													</treerow>
-												</treeitem>
-
-											</treechildren>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Logistica" />
-											</treerow>											
-										</treeitem>
-									</treechildren>
 								</treeitem>
 							</treechildren>
 						</tree>
@@ -640,175 +518,45 @@
 								</treeitem>
 								<treeitem open="false">
 									<treerow>
-										<treecell
-											label="Especiales" />
+										<treecell label="Especiales" />
 									</treerow>
-								</treeitem>
-								<treeitem open="false">
-									<treerow>
-										<treecell label="Estádisticos" />
-									</treerow>
-								</treeitem>
+									<treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Competencias" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Desempeño de Deportivo"
+															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
+													</treerow>
+												</treeitem>
+<!-- 												<treeitem -->
+<!-- 													open="false"> -->
+<!-- 													<treerow> -->
+<!-- 														<treecell -->
+<!-- 															label="Gestionar Equipos" -->
+<!-- 															onClick='enlace("/Competencias/Vistas/FrmRegistroEquipo.zul")' /> -->
+<!-- 													</treerow> -->
+<!-- 												</treeitem> -->
+												</treechildren>
+										</treeitem>
+									</treechildren>
+							
+							</treeitem>
 
-								<!-- 	<treeitem open="false">
-									<treerow>
-									<treecell label="Deportivos" />
-									</treerow>
-									<treechildren>
-									<treeitem open="true">
-									<treerow>
-									<treecell
-									label="Jugador" />
-									</treerow>
-									<treechildren>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Inscritos"
-									onClick='enlace("Atleta/Vistas/consultarJugador.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Sancionados"
-									onClick='enlace("Atleta/Vistas/consultarSanciones.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Lesionados"
-									onClick='enlace("Atleta/Vistas/consultarLesion.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Expediente"
-									onClick='enlace("Atleta/Vistas/consultarExpedienteJugador.zul")' />
-									</treerow>
-									</treeitem>
-									</treechildren>
-									</treeitem>
-									<treeitem open="false"
-									visible="false">
-									<treerow>
-									<treecell
-									label="Categoria" />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Equipos"
-									onClick='enlace("Atleta/Vistas/consultarEquipos.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Anuario"
-									onClick='enlace("Atleta/Vistas/consultarAnuario.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem open="false">
-									<treerow>
-									<treecell
-									label="Entrenamiento" />
-									</treerow>
-									<treechildren>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Cumplimiento de Actividades"
-									onClick='enlace("/Entrenamiento/Reportes/rep_cum_ent.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Test Evaluativos"
-									onClick='enlace("/Entrenamiento/Reportes/rep_test_ent.zul")' />
-									</treerow>
-									</treeitem>
-									</treechildren>
-									</treeitem>
-									</treechildren>
-									</treeitem>
-									<treeitem open="false">
-									<treerow>
-									<treecell label="Gerenciales" />
-									</treerow>
-									<treechildren>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Representantes Insolventes" />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									<treerow>
-									<treecell
-									label="Catalogo de Inventario" />
-									</treerow>
-									</treeitem>
-									<treeitem open="false">
-									<treerow>
-									<treecell
-									label="Financieros"
-									onClick='enlace("/Administracion/Vistas/Reportes/FrmTipoReporte.zul")' />
-									</treerow>
-									<treechildren>
-									<treeitem>
-									
-									<treerow>
-									<treecell
-									label="Balance General" 
-									onClick='enlace("/Administracion/Vistas/Reportes/FrmBalance.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem>
-									
-									<treerow>
-									<treecell
-									label="Estado de Ganancias y Perdidas" />
-									</treerow>
-									</treeitem>
-									</treechildren>
-									</treeitem> 
-									
-									</treechildren>
-									</treeitem>
-									<treeitem open="false">
-									<treerow>
-									<treecell label="Otros" />
-									</treerow>
-									<treechildren>
-									<treeitem open="false">
-									<treerow>
-									<treecell
-									label="Representantes"
-									onClick='enlace("Atleta/Vistas/consultarRepresentantes.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem open="false">
-									<treerow>
-									<treecell
-									label="Familiares"
-									onClick='enlace("Atleta/Vistas/consultarFamiliar.zul")' />
-									</treerow>
-									</treeitem>
-									<treeitem open="false">
-									<treerow>
-									<treecell
-									label="Hospedaje"
-									onClick='enlace("Atleta/Vistas/consultarHospedaje.zul")' />
-									</treerow>
-									</treeitem>
-									</treechildren>
-									</treeitem>
-								-->
+							<treeitem open="false">
+								<treerow>
+									<treecell label="Estádisticos" />
+
+								</treerow>
+							</treeitem>
+
+
 							</treechildren>
 						</tree>
 					</tabpanel>
@@ -845,7 +593,7 @@
 													onClick='enlace("Administracion/Vistas/FrmActualizarConcepto.zul")' />
 											</treerow>
 										</treeitem>
-										<treeitem >
+										<treeitem>
 											<treerow>
 												<treecell
 													label="Seguridad" />
@@ -877,7 +625,7 @@
 												</treeitem>
 											</treechildren>
 										</treeitem>
-										
+
 									</treechildren>
 								</treeitem>
 								<treeitem open="false">
@@ -931,8 +679,9 @@
 				</tabpanels>
 			</tabbox>
 		</div>
-		<div style="display:inline">
-			<include id="cuerpo" />
+		<div id="divCuerpo" style="display:inline">
+
 		</div>
+
 	</div>
 </zk>

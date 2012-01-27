@@ -1,0 +1,100 @@
+<?page title="Auto Generated index.zul"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmResultadosIndividuales" ?>
+<zk>
+	<window id="FrmResultadosIndividuales"
+		title="Resultados Individuales" border="normal" width="780px"
+		mode="modal" closable="true">
+		<panel border="normal">
+			<caption label="RESULTADOS  INDIVIDUALES"></caption>
+			<panelchildren>
+
+				<tabbox>
+					<tabs>
+						<tab label="Ofensiva" />
+						<tab label="Defensiva" />
+						<tab label="Picheo" />
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+							<panel><!-- Indicadores Ofensivos -->
+								<panelchildren>
+									<div width="40%"
+										style="float:left">
+										<panel>
+											<caption label="LINE-UP" />
+											<panelchildren>
+												<grid>
+													<columns>
+														<column label="N" width="8%" />
+														<column	label="OB" width="8%" />
+														<column	label="NOMBRE" align="35%" />
+														<column	label="APELLIDO" width="35%" />
+														<column	label="POS" width="10%" />
+													</columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+										<panel border="normal">
+											<caption label="RESERVA" />
+											<panelchildren>
+												<grid>
+													<columns>
+														<column label="N" width="8%" />
+														<column	label="OB" width="8%" />
+														<column	label="NOMBRE" align="35%" />
+														<column label="APELLIDO" width="35%" />
+														<column label="POS" width="10%" />
+													</columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div style="float:left;"
+										width="60%">
+										<panel border="normal">
+											<caption
+												label="INDICADORES" />
+											<panelchildren>
+												<grid>
+													<columns></columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div align="right" width="60%"
+										style="float:left;margin-top:25px">
+										<panel>
+											<panelchildren>
+												<grid>
+													<columns></columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+								</panelchildren>
+							</panel>
+						</tabpanel><!-- Fin indicadores ofensivos -->
+					</tabpanels>
+				</tabbox>
+				<div align="right">
+					<hbox>
+						<button image="/Recursos/Imagenes/guardar.ico"
+							id="btnGuardar" label="Guardar" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							label="Cancelar" />
+						<button image="/Recursos/Imagenes/salir.png"
+							label="Salir" />
+					</hbox>
+				</div>
+			</panelchildren>
+		</panel>
+
+
+
+	</window>
+</zk>

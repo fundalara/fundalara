@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,9 +25,8 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	private DatoBasico datoBasico;
 	private ActividadEntrenamiento actividadEntrenamiento;
 	private char estatus;
-	private Set<ActividadesEjecutadas> actividadesEjecutadases = new HashSet<ActividadesEjecutadas>(
-			0);
-	private Set<ActividadPlanificada> actividadPlanificadas = new HashSet<ActividadPlanificada>(
+	private Set<IndicadorTest> indicadorTests = new HashSet<IndicadorTest>(0);
+	private Set<PuntuacionJugador> puntuacionJugadors = new HashSet<PuntuacionJugador>(
 			0);
 
 	public IndicadorActividadEscala() {
@@ -46,15 +45,15 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	public IndicadorActividadEscala(int codigoIndicadorActividadEscala,
 			EscalaMedicion escalaMedicion, DatoBasico datoBasico,
 			ActividadEntrenamiento actividadEntrenamiento, char estatus,
-			Set<ActividadesEjecutadas> actividadesEjecutadases,
-			Set<ActividadPlanificada> actividadPlanificadas) {
+			Set<IndicadorTest> indicadorTests,
+			Set<PuntuacionJugador> puntuacionJugadors) {
 		this.codigoIndicadorActividadEscala = codigoIndicadorActividadEscala;
 		this.escalaMedicion = escalaMedicion;
 		this.datoBasico = datoBasico;
 		this.actividadEntrenamiento = actividadEntrenamiento;
 		this.estatus = estatus;
-		this.actividadesEjecutadases = actividadesEjecutadases;
-		this.actividadPlanificadas = actividadPlanificadas;
+		this.indicadorTests = indicadorTests;
+		this.puntuacionJugadors = puntuacionJugadors;
 	}
 
 	@Id
@@ -89,7 +88,7 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cod_actividad_entrenamiento", nullable = false)
+	@JoinColumn(name = "codigo_actividad_entrenamiento", nullable = false)
 	public ActividadEntrenamiento getActividadEntrenamiento() {
 		return this.actividadEntrenamiento;
 	}
@@ -109,23 +108,21 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "indicadorActividadEscala")
-	public Set<ActividadesEjecutadas> getActividadesEjecutadases() {
-		return this.actividadesEjecutadases;
+	public Set<IndicadorTest> getIndicadorTests() {
+		return this.indicadorTests;
 	}
 
-	public void setActividadesEjecutadases(
-			Set<ActividadesEjecutadas> actividadesEjecutadases) {
-		this.actividadesEjecutadases = actividadesEjecutadases;
+	public void setIndicadorTests(Set<IndicadorTest> indicadorTests) {
+		this.indicadorTests = indicadorTests;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "indicadorActividadEscala")
-	public Set<ActividadPlanificada> getActividadPlanificadas() {
-		return this.actividadPlanificadas;
+	public Set<PuntuacionJugador> getPuntuacionJugadors() {
+		return this.puntuacionJugadors;
 	}
 
-	public void setActividadPlanificadas(
-			Set<ActividadPlanificada> actividadPlanificadas) {
-		this.actividadPlanificadas = actividadPlanificadas;
+	public void setPuntuacionJugadors(Set<PuntuacionJugador> puntuacionJugadors) {
+		this.puntuacionJugadors = puntuacionJugadors;
 	}
 
 }

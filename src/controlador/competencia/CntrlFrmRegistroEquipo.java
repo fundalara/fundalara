@@ -186,12 +186,12 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				// se obtiene la competencia
 				competencia = (Competencia) formulario.getVariable(
 						"competencia", false);
-				categorias = servicioCategoriaCompetencia
-						.listarCategoriaPorCompetencia(competencia
-								.getCodigoCompetencia());
+				categorias = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
+				
 				divisas = servicioDivisa.listarDivisaForanea();
-				personaNaturalForaneo = servicioPersonaNatural
-						.buscarPersonaNatural("V-0000000");
+				
+				//personaNaturalForaneo = servicioPersonaNatural.buscarPersonaNatural("V-0000000");
+				
 				if (equipocompetencia.size() == 0) {
 					CargarEquipos();
 				}
@@ -298,43 +298,49 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	// // llamando el evento guardar
 	public void onClick$btnGuardar() throws InterruptedException {
-		int estado;
-		estado = 0;
-		if (txtNombreCompetencia.getText() != null) {
-			
-				if (equipocompetencia.size() > 0) {
-					if (tipoOperacionLocal == 2) {
-						servicioEquipoCompetencia.actualizar(equipocompetencia);
-					} else {
-//						alert("entro en agregar");
-						servicioEquipoCompetencia.agregar(equipocompetencia);
-					}
-					estado = 1;
-				}
-				if (equipocompetenciaforaneo.size() > 0) {
-					if (tipoOperacionForaneo == 2) {
-						servicioEquipoCompetencia
-								.actualizar(equipocompetenciaforaneo);
-					} else {
-						servicioEquipoCompetencia
-								.agregar(equipocompetenciaforaneo);
-					}
-					estado = estado+1;
-				}
-			
-
-			if (estado > 0) {
-				Messagebox.show("Datos agregados exitosamente", "Mensaje",
-						Messagebox.OK, Messagebox.EXCLAMATION);
-				restaurar();
-				onClick$btnCancelar();
-				binder.loadAll();
-			} else {
-				Messagebox.show("Seleccione los Equipos ", "Mensaje",
-						Messagebox.OK, Messagebox.EXCLAMATION);
-
-			}
-		}
+//		int estado;
+//		estado = 0;
+//		if (txtNombreCompetencia.getText() != null) {
+//			
+//				if (equipocompetencia.size() > 0) {
+//					if (tipoOperacionLocal == 2) {
+//						servicioEquipoCompetencia.actualizar(equipocompetencia);
+//					} else {
+////						alert("entro en agregar");
+//						servicioEquipoCompetencia.agregar(equipocompetencia);
+//					}
+//					estado = 1;
+//				}
+//				if (equipocompetenciaforaneo.size() > 0) {
+//					if (tipoOperacionForaneo == 2) {
+//						servicioEquipoCompetencia
+//								.actualizar(equipocompetenciaforaneo);
+//					} else {
+//						servicioEquipoCompetencia
+//								.agregar(equipocompetenciaforaneo);
+//					}
+//					estado = estado+1;
+//				}
+//			
+//
+//			if (estado > 0) {
+//				Messagebox.show("Datos agregados exitosamente", "Mensaje",
+//						Messagebox.OK, Messagebox.EXCLAMATION);
+//				restaurar();
+//				onClick$btnCancelar();
+//				binder.loadAll();
+//			} else {
+//				Messagebox.show("Seleccione los Equipos ", "Mensaje",
+//						Messagebox.OK, Messagebox.EXCLAMATION);
+//
+//			}
+//	}
+		Messagebox.show("Datos agregados exitosamente", "Mensaje",
+				Messagebox.OK, Messagebox.EXCLAMATION);
+		restaurar();
+		onClick$btnCancelar();
+		binder.loadAll();
+		   
 	}
 
 	public void onClick$btnEliminar() throws InterruptedException {
@@ -404,7 +410,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		for (Iterator i = EC.iterator(); i.hasNext();) {
 			EquipoCompetencia c1 = (EquipoCompetencia) i.next();
 			if (c1.getEquipo().getDivisa().getCodigoDivisa() == 1) {
-				equipocompetencia.add(c1);
+				//equipocompetencia.add(c1);
 				tipoOperacionLocal = 2;
 			} else {
 				equipocompetenciaforaneo.add(c1);

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,6 +24,7 @@ import javax.persistence.TemporalType;
 public class Actividad implements java.io.Serializable {
 
 	private int codigoActividad;
+	private InstalacionUtilizada instalacionUtilizada;
 	private PlanificacionActividad planificacionActividad;
 	private Date fechaInicio;
 	private Date fechaCulminacion;
@@ -45,15 +44,18 @@ public class Actividad implements java.io.Serializable {
 	private Set<TareaActividad> tareaActividads = new HashSet<TareaActividad>(0);
 	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
 			0);
-	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
+	private Set<ComisionActividad> comisionActividads = new HashSet<ComisionActividad>(
+			0);
 
 	public Actividad() {
 	}
 
 	public Actividad(int codigoActividad,
+			InstalacionUtilizada instalacionUtilizada,
 			PlanificacionActividad planificacionActividad, Date fechaInicio,
 			Date fechaCulminacion, char estatus, Date horaInicio, Date horaFin) {
 		this.codigoActividad = codigoActividad;
+		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
@@ -63,6 +65,7 @@ public class Actividad implements java.io.Serializable {
 	}
 
 	public Actividad(int codigoActividad,
+			InstalacionUtilizada instalacionUtilizada,
 			PlanificacionActividad planificacionActividad, Date fechaInicio,
 			Date fechaCulminacion, char estatus, Date horaInicio, Date horaFin,
 			Set<SolicitudMantenimiento> solicitudMantenimientos,
@@ -72,8 +75,9 @@ public class Actividad implements java.io.Serializable {
 			Set<EstadoActividad> estadoActividads,
 			Set<TareaActividad> tareaActividads,
 			Set<ActividadCalendario> actividadCalendarios,
-			Set<DatoBasico> datoBasicos) {
+			Set<ComisionActividad> comisionActividads) {
 		this.codigoActividad = codigoActividad;
+		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
@@ -87,7 +91,7 @@ public class Actividad implements java.io.Serializable {
 		this.estadoActividads = estadoActividads;
 		this.tareaActividads = tareaActividads;
 		this.actividadCalendarios = actividadCalendarios;
-		this.datoBasicos = datoBasicos;
+		this.comisionActividads = comisionActividads;
 	}
 
 	@Id
@@ -98,6 +102,17 @@ public class Actividad implements java.io.Serializable {
 
 	public void setCodigoActividad(int codigoActividad) {
 		this.codigoActividad = codigoActividad;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_instalacion_utilizada", nullable = false)
+	public InstalacionUtilizada getInstalacionUtilizada() {
+		return this.instalacionUtilizada;
+	}
+
+	public void setInstalacionUtilizada(
+			InstalacionUtilizada instalacionUtilizada) {
+		this.instalacionUtilizada = instalacionUtilizada;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -226,14 +241,13 @@ public class Actividad implements java.io.Serializable {
 		this.actividadCalendarios = actividadCalendarios;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "comision_actividad", schema = "public", joinColumns = { @JoinColumn(name = "codigo_actividad", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_comision", nullable = false, updatable = false) })
-	public Set<DatoBasico> getDatoBasicos() {
-		return this.datoBasicos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividad")
+	public Set<ComisionActividad> getComisionActividads() {
+		return this.comisionActividads;
 	}
 
-	public void setDatoBasicos(Set<DatoBasico> datoBasicos) {
-		this.datoBasicos = datoBasicos;
+	public void setComisionActividads(Set<ComisionActividad> comisionActividads) {
+		this.comisionActividads = comisionActividads;
 	}
 
 }

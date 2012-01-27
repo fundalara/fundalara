@@ -32,14 +32,12 @@ public class CntrlFrmAccionJuego extends GenericForwardComposer {
 		Comboitem ci = new Comboitem();
         Comboitem ci2 = new Comboitem();
 		if (estado.equals("POR REALIZAR")){            
+             ci2.setLabel("Gestionar Line-Up");
+             ci2.setValue("2");
+             cmbTarea.appendChild(ci2);   
              ci.setLabel("Registro de Resultados");
              ci.setValue("1");
              cmbTarea.appendChild(ci); 
-             ci2.setLabel("Gestionar Line-Up");
-             ci2.setValue("2");
-             cmbTarea.appendChild(ci2); 
-           
-                        
 		}else if (estado.equals("CULMINADO")){
 			 ci.setLabel("Ver Resultados");
              ci.setValue("1");
@@ -68,6 +66,7 @@ public class CntrlFrmAccionJuego extends GenericForwardComposer {
 		Juego j = (Juego) c.getVariable("juego",false);
 		w.setVariable("juego",j,false);
 		w.setPosition("center");
+		w.doHighlighted();
 		c.detach();
 		
 	}

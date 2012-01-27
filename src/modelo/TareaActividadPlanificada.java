@@ -1,13 +1,12 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,36 +17,41 @@ import javax.persistence.Table;
 @Table(name = "tarea_actividad_planificada", schema = "public")
 public class TareaActividadPlanificada implements java.io.Serializable {
 
-	private int codigoPersonalActividadPlanificada;
+	private int codigoTareaActividadPlanificada;
 	private DatoBasico datoBasico;
 	private PlanificacionActividad planificacionActividad;
 	private PersonalActividadPlanificada personalActividadPlanificada;
+	private FamiliarComisionEquipo familiarComisionEquipo;
 	private char estatus;
+	private boolean tareaEjecutada;
 
 	public TareaActividadPlanificada() {
 	}
 
-	public TareaActividadPlanificada(int codigoPersonalActividadPlanificada,
+	public TareaActividadPlanificada(int codigoTareaActividadPlanificada,
 			DatoBasico datoBasico,
 			PlanificacionActividad planificacionActividad,
 			PersonalActividadPlanificada personalActividadPlanificada,
-			char estatus) {
-		this.codigoPersonalActividadPlanificada = codigoPersonalActividadPlanificada;
+			FamiliarComisionEquipo familiarComisionEquipo, char estatus,
+			boolean tareaEjecutada) {
+		this.codigoTareaActividadPlanificada = codigoTareaActividadPlanificada;
 		this.datoBasico = datoBasico;
 		this.planificacionActividad = planificacionActividad;
 		this.personalActividadPlanificada = personalActividadPlanificada;
+		this.familiarComisionEquipo = familiarComisionEquipo;
 		this.estatus = estatus;
+		this.tareaEjecutada = tareaEjecutada;
 	}
 
 	@Id
-	@Column(name = "codigo_personal_actividad_planificada", unique = true, nullable = false)
-	public int getCodigoPersonalActividadPlanificada() {
-		return this.codigoPersonalActividadPlanificada;
+	@Column(name = "codigo_tarea_actividad_planificada", unique = true, nullable = false)
+	public int getCodigoTareaActividadPlanificada() {
+		return this.codigoTareaActividadPlanificada;
 	}
 
-	public void setCodigoPersonalActividadPlanificada(
-			int codigoPersonalActividadPlanificada) {
-		this.codigoPersonalActividadPlanificada = codigoPersonalActividadPlanificada;
+	public void setCodigoTareaActividadPlanificada(
+			int codigoTareaActividadPlanificada) {
+		this.codigoTareaActividadPlanificada = codigoTareaActividadPlanificada;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -72,9 +76,7 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "cedula_rif", referencedColumnName = "cedula_rif", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "codigo_planificacion_actividad", referencedColumnName = "codigo_planificacion_actividad", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "codigo_personal_actividad_plan", nullable = false)
 	public PersonalActividadPlanificada getPersonalActividadPlanificada() {
 		return this.personalActividadPlanificada;
 	}
@@ -84,6 +86,17 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 		this.personalActividadPlanificada = personalActividadPlanificada;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_familiar_comision", nullable = false)
+	public FamiliarComisionEquipo getFamiliarComisionEquipo() {
+		return this.familiarComisionEquipo;
+	}
+
+	public void setFamiliarComisionEquipo(
+			FamiliarComisionEquipo familiarComisionEquipo) {
+		this.familiarComisionEquipo = familiarComisionEquipo;
+	}
+
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;
@@ -91,6 +104,15 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "tarea_ejecutada", nullable = false)
+	public boolean isTareaEjecutada() {
+		return this.tareaEjecutada;
+	}
+
+	public void setTareaEjecutada(boolean tareaEjecutada) {
+		this.tareaEjecutada = tareaEjecutada;
 	}
 
 }

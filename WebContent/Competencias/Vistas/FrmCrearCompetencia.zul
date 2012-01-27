@@ -1,169 +1,285 @@
-<?page title="Crear Competencia" contentType="text/html;charset=UTF-8"?>
+<?page title="Gestionar Competencia" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCrearCompetencia"?>
 
 <zk>
 
-<div align="center">
-<window id="frmCrearCompetencia" title="Crear Competencia" border="normal" closable="true" height="auto" width="70%" apply="controlador.competencia.CntrlFrmCrearCompetencia">
 
-	<tabbox>
-		<tabs>
-			<tab id="tabRegistrosBasicos" label="Datos Básicos" />
-			<tab id="tabLigaPorCompetencia" label="Ligas Participantes" visible="false" />
-			<tab id="tabCategoriaPorCompetencia" label="Categorias Participantes" visible="false" />			
-			<tab id="tabCondicionesEspeciales" label="Condiciones especiales" />			
-		</tabs>
+		<window id="frmCrearCompetencia" title="Gestionar Competencia"
+			border="normal" closable="true" height="auto" width="70%"
+			apply="controlador.competencia.CntrlFrmCrearCompetencia">
 
-		<tabpanels>
-		
-			<!-- PESTAÑA DATOS BASICOS -->
-			<tabpanel height="90%" width="auto">
-               
+			<tabbox>
+				<tabs>
+					<tab id="tabRegistrosBasicos" label="Datos Básicos" />
+					<tab id="tabLigaPorCompetencia"
+						label="Ligas Participantes" visible="false" />
+					<tab id="tabCategoriaPorCompetencia"
+						label="Categorias Participantes" visible="false" />
+					<tab id="tabCondicionesEspeciales"
+						label="Condiciones especiales" />
+				</tabs>
 
-             	<!-- PANEL GENERAL -->
-             		
-		  		<panel height="auto" width="auto" >
-					<caption label="Datos de la Competencia"></caption>
-					<panelchildren> 
-						<div>
-							<grid  oddRowSclass="none">
-							
-								<columns>
-									<column width="20%" align="left" />
-									<column width="30%" align="left" />
-									<column width="20%" align="left" />
-									<column width="30%" align="left" />
-								</columns>
-								
-								<rows>								
-								<!-- FILA 1 -->										    
+				<tabpanels>
 
-									<row style="border-style:none" spans="1,3">
-
-										<label value="Nombre"></label>
-										<hbox width="100%">		
-											<textbox  id="txtNombre" value="@{cntrl.competencia.nombre}" 
-													  constraint="no empty:El campo 'nombre' es obligatorio" width="98%" ></textbox>	
-													  
-											<button image="../../Recursos/Imagenes/consultar.ico"></button>									        
-										</hbox>
-									</row>
+					<!-- PESTAÑA DATOS BASICOS -->
+					<tabpanel height="90%" width="auto">
 
 
-											
-								<!-- FILA 2 -->		
+						<!-- PANEL GENERAL -->
 
-									<row style="border-style:none" align="left">
-										<label value="Tipo" />
-										<combobox id="cmbTipoCompetencia" width="80%" value="--Seleccione--" 
-												  readonly="true" model="@{cntrl.tipoCompetencias}" >
-												  			  
-											<comboitem self="@{each=tipoCompetencia}" label="@{tipoCompetencia.nombre}" value="@{tipoCompetencia}" />													
-										</combobox>
-												
-										<label	value="Modalidad " width="100%" />
-										<combobox id="cmbModalidadCompetencia" width="80%" value="--Seleccione--"
-												  readonly="true" model="@{cntrl.modalidadCompetencias}" >
-												  
-											<comboitem self="@{each=modalidadCompetencia}" label="@{modalidadCompetencia.nombre}" value="@{modalidadCompetencia }" />													
-										</combobox>	
-									</row>
+						<panel title="Datos de la Competencia">
+							<panelchildren>
+								<div>
+									<grid oddRowSclass="none">
 
-											
-								<!-- FILA 3 -->			
-									<row style="border-style:none">
-										<label value="Fecha Inicio"></label>
-										<datebox   id="txtfechaInicio" value="@{cntrl.competencia.fechaInicio}"></datebox>											   
+										<columns>
+											<column width="20%"
+												align="left" />
+											<column width="30%"
+												align="left" />
+											<column width="20%"
+												align="left" />
+											<column width="30%"
+												align="left" />
+										</columns>
 
-										<label value="Fecha Fin"></label>
-										<datebox  id="txtfechaFin" value="@{cntrl.competencia.fechaFin}"></datebox>
-									</row>
-									
-								<!-- FILA 4 -->			
-									<row style="border-style:none">
-										<label value="Nro de Fases"></label>
-										<spinner id="spnNroFases" value="@{cntrl.competencia.cantidadFase}"  cols="5" constraint="no empty,min 1 max 25" />
+										<rows>
+											<!-- FILA 1 -->
 
-										<label value="Jugadores por Roster" />
-										<spinner id="spnNroJugadores" value="@{cntrl.competencia.cantidadJugador}"  cols="5" constraint="no empty,min 9 max 25"/>
-									</row>
+											<row
+												style="border-style:none" spans="1,3">
 
-								<!-- FILA 5 -->			
-									<row style="border-style:none">
-										<label value="Tipo de Organización"></label>
-										<combobox id="cmbTipoOrganizacion" width="80%" onChange="" readonly="true" model="@{cntrl.OrganizacionCompetencias}" value="--Seleccione--">
-											<comboitem self="@{each=organizacionCompetencia}" label="@{organizacionCompetencia.nombre}"  value="@{organizacionCompetencia}"/>
-											
-										</combobox>									
-									
-										<label value="Monto de Inscripción" />
-										<hbox>
-											<textbox  id="txtmontoInscripcion"  value="@{cntrl.competencia.montoInscripcion}"  cols="14"></textbox>
-													<!--  	width="70%"
-														value="0.00" cols="14" /> -->
-											<label value="Bs.f." />
-										</hbox >
-												
-									</row>
-											
-								<!-- FILA 6 -->			
-									<row style="border-style:none" align="left">												
-										<label	value="Temporada " width="100%" />
-										<combobox id="cmbTemporada" width="80%" value="--Seleccione--"
-												   readonly="true" model="@{cntrl.lapsoDeportivos}">
-												  
-											<comboitem self="@{each=lapsoDeportivo}" label="@{lapsoDeportivo.nombre}" value="@{lapsoDeportivo}" />
-										</combobox>		
-										
-										<label	value="Estado " width="100%" />
-										<combobox id="cmbEstado" width="80%" value="--Seleccione--"
-												  readonly="true" model="@{cntrl.datoBasicos}" > 
+												<label value="Nombre"></label>
+												<hbox width="100%">
+													<textbox
+														id="txtNombre" value="@{cntrl.competencia.nombre}"
+														constraint="no empty:El campo 'nombre' es obligatorio"
+														width="98%">
+													</textbox>
 
-											<comboitem self="@{each=estado}" label="@{estado.nombre}"  value="@{estado}" /> 
-										</combobox>											
-									</row>
-								
-								<!-- FILA 7 -->		
-									<row style="border-style:none">
-										<label	id="labelliga" value="Liga " width="100%" visible="false" />
-										<combobox id="cmbLiga" width="80%" value="--Seleccione--" visible="false"
-												  readonly="true" >
-												  
-											<comboitem label="liga 1"/>
-											<comboitem label="Liga 2"/>
-										</combobox>																				
-									</row>										
-								</rows>
-							</grid>
-							
-							<!-- CONTROL DE FASES -->
-							<listbox id="lsbxFases" model="@{cntrl.fases}" oddRowSclass="none"> <!-- model="@{cntrl.fases}" -->
-								<listhead>
-									<listheader label="N° Fase" width="30%"></listheader>
-									<listheader label="N° Equipos" align="center" width="35%"></listheader>
-									<listheader label="N° Equipos que Clasifican" align="center" width="35%"></listheader>
-								</listhead>
-								
-								<listitem  id="itemFases"  self="@{each=fase}">   <!-- self="@{each=fase}" self="@{each=faseCompetencia}"-->  
-									<listcell label="@{cntrl.fase}"></listcell>  <!-- label="@{each=fase}" label="@{each=faseCompetencia.id}"-->
-									<listcell ><spinner value="2" cols="5" constraint="no empty,min 2 max 25" ></spinner></listcell>
-									<listcell ><spinner value="2" cols="5" constraint="no empty,min 2 max 25"></spinner></listcell>       
-								</listitem>
-							</listbox>
-							
-						</div>
-					</panelchildren>
-				</panel>   
-							
-			</tabpanel>
+													<button
+														id="btnBuscarCompetencia"
+														image="/Recursos/Imagenes/consultar.ico">
+													</button>
+												</hbox>
+											</row>
 
-			<!-- PESTAÑA LIGAS POR COMPETENCIA -->
-			<tabpanel>
-				<panel height="auto" width="100%" >
-					<caption label="Ligas que Participan en la Competencia"></caption>
-					<panelchildren>	
-	
+
+											<!-- FILA 2 -->
+											<row
+												style="border-style:none" align="left">
+												<label value="Tipo" />
+												<combobox 
+													id="cmbTipoCompetencia" width="80%" value="--Seleccione--"
+													readonly="true"
+													model="@{cntrl.tiposCompetencias}">
+
+													<comboitem
+														self="@{each=tipoCompetencia}"
+														label="@{tipoCompetencia.nombre}"
+														value="@{tipoCompetencia}" />
+												</combobox>
+
+												<label
+													value="Clasificacion" />
+												<combobox
+													id="cmbClasificacion" width="80%" value="--Seleccione--"
+													readonly="true"
+													model="@{cntrl.clasificacionCompetencias}">
+													<comboitem
+														self="@{each=clasificacionCompetencia}"
+														label="@{clasificacionCompetencia.nombre}"
+														value="@{clasificacionCompetencia}" />
+												</combobox>
+											</row>
+
+											<!-- FILA 3 -->
+											<row
+												style="border-style:none">
+												<label
+													value="Fecha Inicio">
+												</label>
+												<datebox
+													id="datefechaInicio"
+													value="@{cntrl.competencia.fechaInicio}">
+												</datebox>
+
+												<label
+													value="Fecha Fin">
+												</label>
+												<datebox
+													id="datefechaFin" value="@{cntrl.competencia.fechaFin}">
+												</datebox>
+											</row>
+
+
+											<!-- FILA 4 -->
+											<row
+												style="border-style:none" align="left">
+
+												<label
+													value="Temporada " width="100%" />
+												<combobox
+													id="cmbTemporada" width="80%" value="--Seleccione--"
+													readonly="true" model="@{cntrl.lapsoDeportivos}">
+
+													<comboitem
+														self="@{each=lapsoDeportivo}"
+														label="@{lapsoDeportivo.nombre}"
+														value="@{lapsoDeportivo}" />
+												</combobox>
+
+												<label value="Estado "
+													width="100%" />
+												<combobox id="cmbEstado"
+													width="80%" value="--Seleccione--" readonly="true"
+													model="@{cntrl.estados}">
+
+													<comboitem
+														self="@{each=estado}" label="@{estado.nombre}"
+														value="@{estado}" />
+												</combobox>
+
+											</row>
+
+
+
+											<!-- FILA 5 -->
+											<row
+												style="border-style:none">
+
+
+												<label
+													value="Tipo de Organización">
+												</label>
+												<combobox
+													id="cmbTipoOrganizacion" width="80%" onChange=""
+													readonly="true" model="@{cntrl.OrganizacionCompetencias}"
+													value="--Seleccione--">
+													<comboitem
+														self="@{each=organizacionCompetencia}"
+														label="@{organizacionCompetencia.nombre}"
+														value="@{organizacionCompetencia}" />
+
+												</combobox>
+
+												<label
+													value="Monto de Inscripción" />
+												<hbox>
+													<!--  <decimalbox id="txtmontoInscripcion"  value="@{cntrl.competencia.montoInscripcion}"  cols="15"/> -->
+													<doublebox
+														id="txtmontoInscripcion"
+														value="@{cntrl.competencia.montoInscripcion}" cols="15" />
+													<!-- 	<textbox  id="txtmontoInscripcion"  value="@{cntrl.competencia.montoInscripcion}"  cols="15"></textbox>  -->
+
+													<label
+														value="Bs.f." />
+												</hbox>
+
+											</row>
+
+
+
+											<!-- FILA 6 -->
+											<row
+												style="border-style:none">
+												<label
+													value="Jugadores por Roster" />
+												<spinner
+													id="spnNroJugadores"
+													value="@{cntrl.competencia.cantidadJugador}" cols="5"
+													constraint="no empty,min 9 max 25" />
+
+
+												<label
+													value="Nro de Fases">
+												</label>
+												<spinner
+													id="spnNroFases" value="@{cntrl.competencia.cantidadFase}"
+													cols="5" constraint="no empty,min 1 max 25" />
+
+
+											</row>
+
+
+
+
+
+
+											<!-- FILA 7 -->
+											<row
+												style="border-style:none">
+												<label id="labelliga"
+													value="Liga " width="100%" visible="false" />
+												<combobox id="cmbLiga"
+													width="80%" value="--Seleccione--" visible="false"
+													readonly="true">
+
+													<comboitem
+														label="liga 1" />
+													<comboitem
+														label="Liga 2" />
+												</combobox>
+
+											</row>
+
+										</rows>
+									</grid>
+
+									<!-- CONTROL DE FASES -->
+									<listbox id="lsbxFases"
+										model="@{cntrl.faseCompetencias}" oddRowSclass="none">
+										<listhead>
+											<listheader label="Fase"
+												width="30%" align="center">
+											</listheader>
+											<listheader
+												label="N° Equipos" align="center" width="35%">
+											</listheader>
+											<listheader
+												label="N° Equipos que Clasifican" align="center"
+												width="35%">
+											</listheader>
+										</listhead>
+
+
+										<listitem
+											self="@{each=faseCompetencia}" value="@{faseCompetencia}">
+											<listcell
+												label="@{faseCompetencia.id.numeroFase}">
+											</listcell>
+											<listcell>
+												<spinner id="spnEqIng"
+													value="@{faseCompetencia.equipoIngresan}" cols="5"
+													constraint="no empty,min 2 max 25">
+												</spinner>
+											</listcell>
+											<listcell>
+												<spinner id="spnEqClsf"
+													value="@{faseCompetencia.equipoClasifican}" cols="5"
+													constraint="no empty,min 2 max 25">
+												</spinner>
+											</listcell>
+										</listitem>
+
+
+									</listbox>
+
+								</div>
+							</panelchildren>
+						</panel>
+
+					</tabpanel>
+
+					<!-- PESTAÑA LIGAS POR COMPETENCIA -->
+					<tabpanel>
+						<panel height="auto" width="100%">
+							<caption
+								label="Ligas que Participan en la Competencia">
+							</caption>
+							<panelchildren>
+
 								<grid oddRowSclass="none">
 
 									<columns>
@@ -174,42 +290,64 @@
 										<column width="44%"></column>
 									</columns>
 
-									
+
 									<rows>
 										<row style="border:none">
-											<listbox id="lsbxLigas" mold="paging" style="margin-top:5px" height="130px"
-										 			 checkmark="true" multiple="true" model="@{cntrl.ligas}" oddRowSclass="none">
+											<listbox id="lsbxLigas"
+												mold="paging" style="margin-top:5px" height="130px"
+												checkmark="true" multiple="true" model="@{cntrl.ligas}"
+												oddRowSclass="none">
 												<listhead>
-													<listheader label="Ligas" sort="auto" ></listheader>
+													<listheader
+														label="Ligas" sort="auto">
+													</listheader>
 												</listhead>
-												
-												<listitem self="@{each=liga}" value="@{liga}">
-													<listcell   label="@{liga.nombre}" ></listcell>
+
+												<listitem
+													self="@{each=liga}" value="@{liga}">
+													<listcell
+														label="@{liga.nombre}">
+													</listcell>
 												</listitem>
 
 											</listbox>
 
 											<grid oddRowSclass="none">
 												<rows>
-													<row style="border:none" align="center">
-														<button id="btnMoverD" image="/Recursos/Imagenes/rightarrow_g.png" style="center" />
+													<row
+														style="border:none" align="center">
+														<button
+															id="btnMoverD"
+															image="/Recursos/Imagenes/rightarrow_g.png"
+															style="center" />
 													</row>
-													
-													<row style="border:none" align="center">
-														<button id="btnMoverI" image="/Recursos/Imagenes/leftarrow_g.png" style="center" />
+
+													<row
+														style="border:none" align="center">
+														<button
+															id="btnMoverI" image="/Recursos/Imagenes/leftarrow_g.png"
+															style="center" />
 													</row>
 
 												</rows>
 											</grid>
-											
-											<listbox id="lsbxLigasSeleccionadas" mold="paging" style="margin-top:5px" height="130px"
-													 checkmark="true" multiple="true" model="@{cntrl.ligasAux}" oddRowSclass="none">
+
+											<listbox
+												id="lsbxLigasSeleccionadas" mold="paging"
+												style="margin-top:5px" height="130px" checkmark="true"
+												multiple="true" model="@{cntrl.ligasAux}"
+												oddRowSclass="none">
 												<listhead>
-													<listheader label="Ligas Seleccionadas" sort="auto" ></listheader>
+													<listheader
+														label="Ligas Seleccionadas" sort="auto">
+													</listheader>
 												</listhead>
-												
-												<listitem self="@{each=liga}" value="@{liga}">
-													<listcell   label="@{liga.nombre}" ></listcell>
+
+												<listitem
+													self="@{each=liga}" value="@{liga}">
+													<listcell
+														label="@{liga.nombre}">
+													</listcell>
 												</listitem>
 
 											</listbox>
@@ -219,127 +357,217 @@
 
 
 
-						<listbox id="lsbxligasCategorias" model="@{cntrl.categoriaLigas}" oddRowSclass="none" >
-							<listhead>
-								<listheader label="Categoria" width="40%"></listheader>
-								<listheader label="Horas" align="center" width="30%"></listheader>
-								<listheader label="Inning" align="center" width="30%"></listheader>
-							</listhead>								
-								
-							<listitem  self="@{each=categoria}" >
-								<listcell  label="@{categoria.nombre}" ></listcell>
-								<listcell ><spinner value="2" cols="5" constraint="no empty,min 0 max 25"></spinner></listcell>
-								<listcell ><spinner value="2" cols="5" constraint="no empty,min 1 max 25"></spinner></listcell>       
-							</listitem>
-							
-						</listbox>		
-		
-						
-					</panelchildren>
-				</panel>			
-			</tabpanel>
+								<listbox id="lsbxligasCategorias"
+									model="@{cntrl.categoriaLigas}" oddRowSclass="none">
+									<listhead>
+										<listheader label="Categoria"
+											width="40%">
+										</listheader>
+										<listheader label="Horas"
+											align="center" width="30%">
+										</listheader>
+										<listheader label="Inning"
+											align="center" width="30%">
+										</listheader>
+									</listhead>
 
-			<!-- PESTAÑA CATEGORIAS POR COMPETENCIA -->
-			
-			<tabpanel  height="auto" width="auto">
-			
-				<panel height="auto" width="100%" >
-					<caption label="Categorias que Participan en la Competencia"></caption>
-					<panelchildren>			
+									<listitem
+										self="@{each=ligaCategCompetencia}"
+										value="@{categoriaCompetencia}">
+										<listcell
+											label="@{ligaCategCompetencia.categoria.nombre}">
+										</listcell>
+										<listcell>
+											<timebox id="spnHoralg"
+												value="@{ligaCategCompetencia.duracionHora}" />
+										</listcell>
+										<listcell>
+											<spinner id="spnIninglg"
+												value="@{ligaCategCompetencia.duracionInning}" cols="5"
+												constraint="no empty,min 1 max 25">
+											</spinner>
+										</listcell>
+									</listitem>
 
-						<listbox id="lsbxCategorias" checkmark="true" multiple="true" model="@{cntrl.categorias}" oddRowSclass="none">
-							<listhead>
-								<listheader label="Categoria" width="40%"></listheader>
-								<listheader label="Horas" align="center" width="30%"></listheader>
-							<listheader label="Inning" align="center" width="30%"></listheader>
-								</listhead>								
-								
-							<listitem self="@{each=categoria}">
-								<listcell   label="@{categoria.nombre}"></listcell>
-								<listcell ><spinner value="2" cols="5" constraint="no empty,min 0 max 25"></spinner></listcell>
-								<listcell ><spinner value="2" cols="5" constraint="no empty,min 1 max 25"></spinner></listcell>       
-  							</listitem>
-													
-						</listbox>			
-					</panelchildren>
-				</panel>
-			
-			</tabpanel>
+								</listbox>
 
 
-			<!-- PESTAÑA CONDICIONES ESPECIALES -->
-			<tabpanel width="auto">
-			
-				<hbox width="100%">
-					<panel  width="100%">
-						<caption label="Condiciones Especificas Establecidas en el Congresillo"></caption>
-						<panelchildren>
-						
-							<grid oddRowSclass="none">
-								<columns>
-									<column width="15%"></column>
-									<column width="80%"></column>
-								</columns>
-								
-								<rows>
-								<!-- FILA 1 -->
-									<row style="border-style:none" >
-										<label>Condiciones Generales</label>
-										<textbox  id="txtcondicionesGenerales" value="@{cntrl.competencia.condicionesGenerales}"
-												 width="98%" height="100%" multiline="true" rows="3">
-										</textbox>
-									</row>
-										
-								<!-- FILA 2 -->		
-									<row style="border-style:none" align="left">
-										<label value=" En Base al Desempate de Posiciones"> </label>
-										<textbox   id="txtdesempate"  value="@{cntrl.competencia.desempate}"
-												width="98%" height="100%" multiline="true" rows="3">
-										</textbox>
-									</row>
-										
-								<!-- FILA 3 -->		
-									<row style="border-style:none" align="left">
-										<label value="En Base a los Extrainning"> </label>
-										<textbox   id="txtextrainning" value="@{cntrl.competencia.extrainning}"
-												  width="98%" height="100%" multiline="true" rows="3">
-										</textbox>
-									</row>
-										
-								<!-- FILA 4 -->
-									<row style="border-style:none" align="left">
-										<label value="Adjuntar Documento "> </label>
-										<hbox width="70%">
-											<textbox width="100%" height="100%" ></textbox>
-											<space width="1px"></space>
-											<button id="btnExaminar" label="Examinar">
-											</button>
-										</hbox>											
-									</row>	
-								</rows>
-							</grid>
-							
-						</panelchildren>
-					</panel>
-				</hbox>
-				
-			</tabpanel>
-		</tabpanels>
-	</tabbox>
-	
-	<!-- BOTONES -->
-	<div >
- 		<div align="right"  height="30px">    	
-			<button id="btnGuardar" image="/Recursos/Imagenes/guardar.ico" label="Guardar" orient="horizontal"  width="90px" ></button>
-											
-			<button id="btnEliminar" image="/Recursos/Imagenes/eliminar.ico" label="Eliminar" orient="horizontal"  width="90px"  ></button>
+							</panelchildren>
+						</panel>
+					</tabpanel>
+
+					<!-- PESTAÑA CATEGORIAS POR COMPETENCIA -->
+
+					<tabpanel height="auto" width="auto">
+
+						<panel height="auto" width="100%">
+							<caption
+								label="Categorias que Participan en la Competencia">
+							</caption>
+							<panelchildren>
+
+								<listbox id="lsbxCategorias"
+									checkmark="true" multiple="true"
+									model="@{cntrl.categoriaCompetencias}" oddRowSclass="none">
+									<listhead>
+										<listheader label="Categoria"
+											width="40%">
+										</listheader>
+										<listheader label="Horas"
+											align="center" width="30%">
+										</listheader>
+										<listheader label="Inning"
+											align="center" width="30%">
+										</listheader>
+									</listhead>
+
+									<listitem
+										self="@{each=categoriaCompetencia}"
+										value="@{categoriaCompetencia}">
+										<listcell
+											label="@{categoriaCompetencia.categoria.nombre}">
+										</listcell>
+										<listcell>
+											<timebox id="spnHora"
+												value="@{categoriaCompetencia.duracionHora}" />
+										</listcell>
+										<!-- <spinner id="spnHora" value="@{categoriaCompetencia.duracionHora}" cols="5" constraint="no empty,min 0 max 25"></spinner> -->
+										<listcell>
+											<spinner id="spnIning"
+												value="@{categoriaCompetencia.duracionInning}" cols="5"
+												constraint="no empty,min 1 max 9">
+											</spinner>
+										</listcell>
+									</listitem>
+
+								</listbox>
+							</panelchildren>
+						</panel>
+
+					</tabpanel>
+
+
+					<!-- PESTAÑA CONDICIONES ESPECIALES -->
+					<tabpanel width="auto">
+
+						<hbox width="100%">
+							<panel width="100%">
+								<caption
+									label="Condiciones Especificas Establecidas en el Congresillo">
+								</caption>
+								<panelchildren>
+
+									<grid oddRowSclass="none">
+										<columns>
+											<column width="15%"></column>
+											<column width="80%"></column>
+										</columns>
+
+										<rows>
+											<!-- FILA 1 -->
+											<row
+												style="border-style:none">
+												<label>
+													Condiciones
+													Generales
+												</label>
+												<textbox
+													id="txtcondicionesGenerales"
+													value="@{cntrl.competencia.condicionesGenerales}"
+													width="98%" height="100%" multiline="true" rows="3">
+												</textbox>
+											</row>
+
+											<!-- FILA 2 -->
+											<row
+												style="border-style:none" align="left">
+												<label
+													value=" En Base al Desempate de Posiciones">
+												</label>
+												<textbox
+													id="txtdesempate" value="@{cntrl.competencia.desempate}"
+													width="98%" height="100%" multiline="true" rows="3">
+												</textbox>
+											</row>
+
+											<!-- FILA 3 -->
+											<row
+												style="border-style:none" align="left">
+												<label
+													value="En Base a los Extrainning">
+												</label>
+												<textbox
+													id="txtextrainning"
+													value="@{cntrl.competencia.extrainning}" width="98%"
+													height="100%" multiline="true" rows="3">
+												</textbox>
+											</row>
+
+											<!-- FILA 4 -->
+											<row
+												style="border-style:none" align="left">
+												<label
+													value="Adjuntar Documento ">
+												</label>
+												<hbox width="70%">
+													<textbox
+														width="100%" height="100%">
+													</textbox>
+													<space
+														width="1px">
+													</space>
+													<button
+														id="btnExaminar" label="Examinar">
+													</button>
+												</hbox>
+											</row>
+										</rows>
+									</grid>
+
+								</panelchildren>
+							</panel>
+						</hbox>
+
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+
+			<!-- BOTONES -->
+			<div>
+				<div align="right" height="30px">
+				    
+				    <button id="btnApertura" disabled="false"
+						image="/Recursos/Imagenes/guardar.ico" label="Apertura"
+						orient="horizontal" width="90px">
+					</button>
 					
-			<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico" label="Cancelar" orient="horizontal" width="90px" ></button>	
-							
-			<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir" orient="horizontal" width="90px"  ></button>											
- 		</div>
-    </div>	
-</window>
-</div>
+					 <button id="btnClausura"  disabled="true"
+						image="/Recursos/Imagenes/guardar.ico" label="Clausura"
+						orient="horizontal" width="90px">
+					</button>
+				   
+					<button id="btnGuardar"
+						image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+						orient="horizontal" width="90px">
+					</button>
+
+					<button id="btnEliminar"
+						image="/Recursos/Imagenes/eliminar.ico" label="Eliminar"
+						orient="horizontal" width="90px">
+					</button>
+
+					<button id="btnCancelar"
+						image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+						orient="horizontal" width="90px">
+					</button>
+
+					<button id="btnSalir"
+						image="/Recursos/Imagenes/salir.png" label="Salir"
+						orient="horizontal" width="90px">
+					</button>
+				</div>
+			</div>
+		</window>
+
 
 </zk>

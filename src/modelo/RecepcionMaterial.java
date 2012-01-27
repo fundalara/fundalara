@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -9,7 +9,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -53,8 +52,7 @@ public class RecepcionMaterial implements java.io.Serializable {
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)),
-			@AttributeOverride(name = "codigoNotaEntrega", column = @Column(name = "codigo_nota_entrega", nullable = false)),
-			@AttributeOverride(name = "origen", column = @Column(name = "origen", nullable = false)) })
+			@AttributeOverride(name = "codigoNotaEntrega", column = @Column(name = "codigo_nota_entrega", nullable = false)) })
 	public RecepcionMaterialId getId() {
 		return this.id;
 	}
@@ -74,9 +72,7 @@ public class RecepcionMaterial implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "codigo_nota_entrega", referencedColumnName = "codigo_nota_entrega", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "origen", referencedColumnName = "origen", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "codigo_nota_entrega", nullable = false, insertable = false, updatable = false)
 	public NotaEntrega getNotaEntrega() {
 		return this.notaEntrega;
 	}

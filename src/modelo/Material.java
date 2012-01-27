@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,7 @@ public class Material implements java.io.Serializable {
 	private Almacen almacen;
 	private DatoBasico datoBasicoByCodigoUnidadMedida;
 	private String descripcion;
+	private Integer cantidadDeteriorada;
 	private int cantidadExistencia;
 	private Integer cantidadPresentacion;
 	private int cantidadDisponible;
@@ -67,10 +68,10 @@ public class Material implements java.io.Serializable {
 	public Material(int codigoMaterial,
 			DatoBasico datoBasicoByCodigoTipoMaterial, Almacen almacen,
 			DatoBasico datoBasicoByCodigoUnidadMedida, String descripcion,
-			int cantidadExistencia, Integer cantidadPresentacion,
-			int cantidadDisponible, boolean reutilizable, Integer stockMinimo,
-			Integer stockMaximo, char estatus,
-			Set<MaterialActividad> materialActividads,
+			Integer cantidadDeteriorada, int cantidadExistencia,
+			Integer cantidadPresentacion, int cantidadDisponible,
+			boolean reutilizable, Integer stockMinimo, Integer stockMaximo,
+			char estatus, Set<MaterialActividad> materialActividads,
 			Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials,
 			Set<RecepcionMaterial> recepcionMaterials,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
@@ -82,6 +83,7 @@ public class Material implements java.io.Serializable {
 		this.almacen = almacen;
 		this.datoBasicoByCodigoUnidadMedida = datoBasicoByCodigoUnidadMedida;
 		this.descripcion = descripcion;
+		this.cantidadDeteriorada = cantidadDeteriorada;
 		this.cantidadExistencia = cantidadExistencia;
 		this.cantidadPresentacion = cantidadPresentacion;
 		this.cantidadDisponible = cantidadDisponible;
@@ -147,6 +149,15 @@ public class Material implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	@Column(name = "cantidad_deteriorada")
+	public Integer getCantidadDeteriorada() {
+		return this.cantidadDeteriorada;
+	}
+
+	public void setCantidadDeteriorada(Integer cantidadDeteriorada) {
+		this.cantidadDeteriorada = cantidadDeteriorada;
 	}
 
 	@Column(name = "cantidad_existencia", nullable = false)

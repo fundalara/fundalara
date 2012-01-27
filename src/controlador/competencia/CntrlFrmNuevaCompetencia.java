@@ -6,7 +6,7 @@ import java.util.List;
 import modelo.Divisa;
 import modelo.Competencia;
 
-import modelo.TipoCompetencia;
+//import modelo.TipoCompetencia;
 
 import modelo.CategoriaCompetencia;
 
@@ -17,7 +17,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Messagebox;
 
 import servicio.implementacion.ServicioCompetencia;
-import servicio.implementacion.ServicioTipoCompetencia;
+//import servicio.implementacion.ServicioTipoCompetencia;
 
 
 
@@ -25,9 +25,9 @@ import servicio.implementacion.ServicioTipoCompetencia;
 public class CntrlFrmNuevaCompetencia extends GenericForwardComposer {
 	AnnotateDataBinder binder;
 	ServicioCompetencia serviciocompetencia;
-	ServicioTipoCompetencia servicioTipoCompetencia;
-	List<TipoCompetencia> tipoCompetencias; 
-	TipoCompetencia tipoCompetencia;
+	//ServicioTipoCompetencia servicioTipoCompetencia;
+	//List<TipoCompetencia> tipoCompetencias; 
+	//TipoCompetencia tipoCompetencia;
 	Combobox cmbTipoCompetencia;
 	Competencia competencia;
 	Component comp;
@@ -57,19 +57,19 @@ public class CntrlFrmNuevaCompetencia extends GenericForwardComposer {
 
 
 
-	public List<TipoCompetencia> getTipoCompetencias() {
-		return tipoCompetencias;
-	}
-
-	public void setTipoCompetencias(List<TipoCompetencia> tipoCompetencias) {
-		this.tipoCompetencias = tipoCompetencias;
-	}
+//	public List<TipoCompetencia> getTipoCompetencias() {
+//		return tipoCompetencias;
+//	}
+//
+//	public void setTipoCompetencias(List<TipoCompetencia> tipoCompetencias) {
+//		this.tipoCompetencias = tipoCompetencias;
+//	}
 	
 	public void onClick$btnGuardar() throws InterruptedException{
 		//competencia.setEstatus("A");		
-		serviciocompetencia.agregar(competencia);
-		competencia = new Competencia();
-		binder.loadAll();
+		//serviciocompetencia.agregar(competencia);
+		//competencia = new Competencia();
+		//binder.loadAll();
 		Messagebox.show("Datos agregados exitosamente","Mensaje",Messagebox.OK,Messagebox.EXCLAMATION);
 	}
 	

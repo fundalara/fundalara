@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,9 +21,8 @@ import javax.persistence.Table;
 public class IndicadorTest implements java.io.Serializable {
 
 	private int codigoIndicadorTest;
-	private EscalaMedicion escalaMedicion;
 	private TestEvaluativo testEvaluativo;
-	private DatoBasico datoBasico;
+	private IndicadorActividadEscala indicadorActividadEscala;
 	private char estatus;
 	private Set<TestJugador> testJugadors = new HashSet<TestJugador>(0);
 
@@ -31,22 +30,21 @@ public class IndicadorTest implements java.io.Serializable {
 	}
 
 	public IndicadorTest(int codigoIndicadorTest,
-			EscalaMedicion escalaMedicion, TestEvaluativo testEvaluativo,
-			DatoBasico datoBasico, char estatus) {
+			TestEvaluativo testEvaluativo,
+			IndicadorActividadEscala indicadorActividadEscala, char estatus) {
 		this.codigoIndicadorTest = codigoIndicadorTest;
-		this.escalaMedicion = escalaMedicion;
 		this.testEvaluativo = testEvaluativo;
-		this.datoBasico = datoBasico;
+		this.indicadorActividadEscala = indicadorActividadEscala;
 		this.estatus = estatus;
 	}
 
 	public IndicadorTest(int codigoIndicadorTest,
-			EscalaMedicion escalaMedicion, TestEvaluativo testEvaluativo,
-			DatoBasico datoBasico, char estatus, Set<TestJugador> testJugadors) {
+			TestEvaluativo testEvaluativo,
+			IndicadorActividadEscala indicadorActividadEscala, char estatus,
+			Set<TestJugador> testJugadors) {
 		this.codigoIndicadorTest = codigoIndicadorTest;
-		this.escalaMedicion = escalaMedicion;
 		this.testEvaluativo = testEvaluativo;
-		this.datoBasico = datoBasico;
+		this.indicadorActividadEscala = indicadorActividadEscala;
 		this.estatus = estatus;
 		this.testJugadors = testJugadors;
 	}
@@ -62,16 +60,6 @@ public class IndicadorTest implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_escala", nullable = false)
-	public EscalaMedicion getEscalaMedicion() {
-		return this.escalaMedicion;
-	}
-
-	public void setEscalaMedicion(EscalaMedicion escalaMedicion) {
-		this.escalaMedicion = escalaMedicion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_test", nullable = false)
 	public TestEvaluativo getTestEvaluativo() {
 		return this.testEvaluativo;
@@ -82,13 +70,14 @@ public class IndicadorTest implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "indicador", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@JoinColumn(name = "codigo_indicador_actividad_escala", nullable = false)
+	public IndicadorActividadEscala getIndicadorActividadEscala() {
+		return this.indicadorActividadEscala;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setIndicadorActividadEscala(
+			IndicadorActividadEscala indicadorActividadEscala) {
+		this.indicadorActividadEscala = indicadorActividadEscala;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

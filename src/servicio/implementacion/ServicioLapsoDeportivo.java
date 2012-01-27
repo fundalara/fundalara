@@ -4,7 +4,7 @@ import java.util.List;
 
 import dao.general.DaoLapsoDeportivo;
 
-import modelo.DesempeoJugador;
+import modelo.DesempennoJugador;
 import modelo.LapsoDeportivo;
 import servicio.interfaz.IServicioLapsoDeportivo;
 

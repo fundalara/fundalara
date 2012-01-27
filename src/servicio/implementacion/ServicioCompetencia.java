@@ -33,6 +33,9 @@ public class ServicioCompetencia implements IServicioCompetencia {
 	}
 
 	@Override
+	public int obtenerCodigoCompetencia(){ return daoCompetencia.listar(Competencia.class).size();}	
+	
+	@Override
 	public List<Competencia> listar() {
 		return daoCompetencia.listar(Competencia.class);
 	}

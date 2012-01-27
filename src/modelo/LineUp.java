@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +26,7 @@ public class LineUp implements java.io.Serializable {
 	private DatoBasico datoBasicoByCodigoPosicion;
 	private DatoBasico datoBasicoByCodigoTipoMencion;
 	private DatoBasico datoBasicoByCodigoEstadoLineUp;
-	private int ordenBate;
+	private Integer ordenBate;
 	private Set<DesempennoIndividual> desempennoIndividuals = new HashSet<DesempennoIndividual>(
 			0);
 
@@ -34,20 +34,17 @@ public class LineUp implements java.io.Serializable {
 	}
 
 	public LineUp(int codigoLineUp, RosterCompetencia rosterCompetencia,
-			Juego juego, DatoBasico datoBasicoByCodigoPosicion,
-			DatoBasico datoBasicoByCodigoEstadoLineUp, int ordenBate) {
+			Juego juego, DatoBasico datoBasicoByCodigoEstadoLineUp) {
 		this.codigoLineUp = codigoLineUp;
 		this.rosterCompetencia = rosterCompetencia;
 		this.juego = juego;
-		this.datoBasicoByCodigoPosicion = datoBasicoByCodigoPosicion;
 		this.datoBasicoByCodigoEstadoLineUp = datoBasicoByCodigoEstadoLineUp;
-		this.ordenBate = ordenBate;
 	}
 
 	public LineUp(int codigoLineUp, RosterCompetencia rosterCompetencia,
 			Juego juego, DatoBasico datoBasicoByCodigoPosicion,
 			DatoBasico datoBasicoByCodigoTipoMencion,
-			DatoBasico datoBasicoByCodigoEstadoLineUp, int ordenBate,
+			DatoBasico datoBasicoByCodigoEstadoLineUp, Integer ordenBate,
 			Set<DesempennoIndividual> desempennoIndividuals) {
 		this.codigoLineUp = codigoLineUp;
 		this.rosterCompetencia = rosterCompetencia;
@@ -90,7 +87,7 @@ public class LineUp implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_posicion", nullable = false)
+	@JoinColumn(name = "codigo_posicion")
 	public DatoBasico getDatoBasicoByCodigoPosicion() {
 		return this.datoBasicoByCodigoPosicion;
 	}
@@ -122,12 +119,12 @@ public class LineUp implements java.io.Serializable {
 		this.datoBasicoByCodigoEstadoLineUp = datoBasicoByCodigoEstadoLineUp;
 	}
 
-	@Column(name = "orden_bate", nullable = false)
-	public int getOrdenBate() {
+	@Column(name = "orden_bate")
+	public Integer getOrdenBate() {
 		return this.ordenBate;
 	}
 
-	public void setOrdenBate(int ordenBate) {
+	public void setOrdenBate(Integer ordenBate) {
 		this.ordenBate = ordenBate;
 	}
 

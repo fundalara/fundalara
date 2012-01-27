@@ -16,7 +16,7 @@ public interface IServicioPersonalForaneo {
 	public abstract List<PersonalForaneo> listarActivos();
 	
 	public abstract List<PersonalForaneo> listarUmpires();
-
-	 public abstract DatoBasico consultarDB();
+	
+    public abstract DatoBasico consultarDB();
 
 }
