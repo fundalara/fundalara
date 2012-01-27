@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 #Thu Jan 26 20:17:59 VET 2012
 eclipse.preferences.version=1
 visualeditor.custom_web_content_path=/fundalara 26-01-12/WebContent
 visualeditor.custom_zk_package=zk-bin-3.6.4
+=======
+#Thu Nov 17 17:21:50 VET 2011
+eclipse.preferences.version=1
+visualeditor.custom_web_content_path=/Competencias/WebContent
+visualeditor.custom_zk_package=zk-bin-eval-5.0.7.1
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0

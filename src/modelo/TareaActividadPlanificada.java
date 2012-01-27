@@ -1,12 +1,27 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import javax.persistence.JoinColumns;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,6 +32,10 @@ import javax.persistence.Table;
 @Table(name = "tarea_actividad_planificada", schema = "public")
 public class TareaActividadPlanificada implements java.io.Serializable {
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	private int codigoTareaActividadPlanificada;
 	private DatoBasico datoBasico;
 	private PlanificacionActividad planificacionActividad;
@@ -24,10 +43,25 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 	private FamiliarComisionEquipo familiarComisionEquipo;
 	private char estatus;
 	private boolean tareaEjecutada;
+<<<<<<< HEAD
+=======
+=======
+	private int codigoPersonalActividadPlanificada;
+	private PersonalActividadPlanificada personalActividadPlanificada;
+	private DatoBasico datoBasico;
+	private PlanificacionActividad planificacionActividad;
+	private FamiliarComisionEquipo familiarComisionEquipo;
+	private char estatus;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 
 	public TareaActividadPlanificada() {
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	public TareaActividadPlanificada(int codigoTareaActividadPlanificada,
 			DatoBasico datoBasico,
 			PlanificacionActividad planificacionActividad,
@@ -52,6 +86,53 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 	public void setCodigoTareaActividadPlanificada(
 			int codigoTareaActividadPlanificada) {
 		this.codigoTareaActividadPlanificada = codigoTareaActividadPlanificada;
+<<<<<<< HEAD
+=======
+=======
+	public TareaActividadPlanificada(int codigoPersonalActividadPlanificada,
+			DatoBasico datoBasico,
+			PlanificacionActividad planificacionActividad, char estatus) {
+		this.codigoPersonalActividadPlanificada = codigoPersonalActividadPlanificada;
+		this.datoBasico = datoBasico;
+		this.planificacionActividad = planificacionActividad;
+		this.estatus = estatus;
+	}
+
+	public TareaActividadPlanificada(int codigoPersonalActividadPlanificada,
+			PersonalActividadPlanificada personalActividadPlanificada,
+			DatoBasico datoBasico,
+			PlanificacionActividad planificacionActividad,
+			FamiliarComisionEquipo familiarComisionEquipo, char estatus) {
+		this.codigoPersonalActividadPlanificada = codigoPersonalActividadPlanificada;
+		this.personalActividadPlanificada = personalActividadPlanificada;
+		this.datoBasico = datoBasico;
+		this.planificacionActividad = planificacionActividad;
+		this.familiarComisionEquipo = familiarComisionEquipo;
+		this.estatus = estatus;
+	}
+
+	@Id
+	@Column(name = "codigo_personal_actividad_planificada", unique = true, nullable = false)
+	public int getCodigoPersonalActividadPlanificada() {
+		return this.codigoPersonalActividadPlanificada;
+	}
+
+	public void setCodigoPersonalActividadPlanificada(
+			int codigoPersonalActividadPlanificada) {
+		this.codigoPersonalActividadPlanificada = codigoPersonalActividadPlanificada;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_personal_actividad_planificada_1")
+	public PersonalActividadPlanificada getPersonalActividadPlanificada() {
+		return this.personalActividadPlanificada;
+	}
+
+	public void setPersonalActividadPlanificada(
+			PersonalActividadPlanificada personalActividadPlanificada) {
+		this.personalActividadPlanificada = personalActividadPlanificada;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,6 +157,10 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	@JoinColumn(name = "codigo_personal_actividad_plan", nullable = false)
 	public PersonalActividadPlanificada getPersonalActividadPlanificada() {
 		return this.personalActividadPlanificada;
@@ -88,6 +173,14 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_familiar_comision", nullable = false)
+<<<<<<< HEAD
+=======
+=======
+	@JoinColumns({
+			@JoinColumn(name = "codigo_comision_equipo", referencedColumnName = "codigo_comision_equipo"),
+			@JoinColumn(name = "codigo_familiar_jugador", referencedColumnName = "codigo_familiar_jugador") })
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	public FamiliarComisionEquipo getFamiliarComisionEquipo() {
 		return this.familiarComisionEquipo;
 	}
@@ -106,6 +199,10 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	@Column(name = "tarea_ejecutada", nullable = false)
 	public boolean isTareaEjecutada() {
 		return this.tareaEjecutada;
@@ -115,4 +212,9 @@ public class TareaActividadPlanificada implements java.io.Serializable {
 		this.tareaEjecutada = tareaEjecutada;
 	}
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 }

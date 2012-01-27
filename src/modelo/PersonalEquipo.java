@@ -1,6 +1,14 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -43,13 +51,29 @@ public class PersonalEquipo implements java.io.Serializable {
 
 	public PersonalEquipo(int codigoPersonalEquipo,
 			PlanTemporada planTemporada, Personal personal, Equipo equipo,
+<<<<<<< HEAD
 			Date fechaInicio, Date fechaFinalizacion, char estatus) {
+=======
+<<<<<<< HEAD
+			Date fechaInicio, Date fechaFinalizacion, char estatus) {
+=======
+			Date fechaInicio, Date fechaFinalizacion, String eventualidad,
+			char estatus) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 		this.codigoPersonalEquipo = codigoPersonalEquipo;
 		this.planTemporada = planTemporada;
 		this.personal = personal;
 		this.equipo = equipo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinalizacion = fechaFinalizacion;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		this.eventualidad = eventualidad;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 		this.estatus = estatus;
 	}
 
@@ -138,7 +162,15 @@ public class PersonalEquipo implements java.io.Serializable {
 		this.fechaFinalizacion = fechaFinalizacion;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "eventualidad")
+=======
+<<<<<<< HEAD
+	@Column(name = "eventualidad")
+=======
+	@Column(name = "eventualidad", nullable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	public String getEventualidad() {
 		return this.eventualidad;
 	}

@@ -1,6 +1,14 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,6 +18,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -44,8 +60,17 @@ public class Actividad implements java.io.Serializable {
 	private Set<TareaActividad> tareaActividads = new HashSet<TareaActividad>(0);
 	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
 			0);
+<<<<<<< HEAD
 	private Set<ComisionActividad> comisionActividads = new HashSet<ComisionActividad>(
 			0);
+=======
+<<<<<<< HEAD
+	private Set<ComisionActividad> comisionActividads = new HashSet<ComisionActividad>(
+			0);
+=======
+	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 
 	public Actividad() {
 	}
@@ -75,7 +100,15 @@ public class Actividad implements java.io.Serializable {
 			Set<EstadoActividad> estadoActividads,
 			Set<TareaActividad> tareaActividads,
 			Set<ActividadCalendario> actividadCalendarios,
+<<<<<<< HEAD
 			Set<ComisionActividad> comisionActividads) {
+=======
+<<<<<<< HEAD
+			Set<ComisionActividad> comisionActividads) {
+=======
+			Set<DatoBasico> datoBasicos) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 		this.codigoActividad = codigoActividad;
 		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
@@ -91,7 +124,15 @@ public class Actividad implements java.io.Serializable {
 		this.estadoActividads = estadoActividads;
 		this.tareaActividads = tareaActividads;
 		this.actividadCalendarios = actividadCalendarios;
+<<<<<<< HEAD
 		this.comisionActividads = comisionActividads;
+=======
+<<<<<<< HEAD
+		this.comisionActividads = comisionActividads;
+=======
+		this.datoBasicos = datoBasicos;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	}
 
 	@Id
@@ -241,6 +282,10 @@ public class Actividad implements java.io.Serializable {
 		this.actividadCalendarios = actividadCalendarios;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividad")
 	public Set<ComisionActividad> getComisionActividads() {
 		return this.comisionActividads;
@@ -248,6 +293,19 @@ public class Actividad implements java.io.Serializable {
 
 	public void setComisionActividads(Set<ComisionActividad> comisionActividads) {
 		this.comisionActividads = comisionActividads;
+<<<<<<< HEAD
+=======
+=======
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "comision_actividad", schema = "public", joinColumns = { @JoinColumn(name = "codigo_actividad", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_comision", nullable = false, updatable = false) })
+	public Set<DatoBasico> getDatoBasicos() {
+		return this.datoBasicos;
+	}
+
+	public void setDatoBasicos(Set<DatoBasico> datoBasicos) {
+		this.datoBasicos = datoBasicos;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	}
 
 }

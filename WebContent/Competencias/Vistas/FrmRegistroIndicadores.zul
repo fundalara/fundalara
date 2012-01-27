@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 <?page title="REGISTRO DE INDICADORES" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
@@ -194,4 +198,212 @@
 			</div>
 		</window>
 	</div>
+<<<<<<< HEAD
+=======
+=======
+<?page title="REGISTRO DE INDICADORES" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+
+<zk>
+	<div align="center">
+		<window title="Registro de Indicadores" border="normal"
+			id="winRegistroIndicador" width="500px" height="auto" closable="true"
+			apply="controlador.competencia.CntrlFrmRegistroIndicadores">
+			<div align="left">
+				<grid>
+					<columns>
+						<column width="25%" />
+						<column width="5%" />
+						<column width="5%" />
+						<column width="65%" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="Tipo Indicador" />
+							<combobox id="cmbTipo"
+								style="margin-top:5px" cols="13"
+								model="@{cntrl.listTipoIndicador}">
+								<comboitem self="@{each=tipoIndicador}"
+									label="@{tipoIndicador.nombre}" value="@{tipoIndicador}" />
+							</combobox>							
+							<label />
+							<button id="btnBuscarIndicador"
+										image="/Recursos/Imagenes/consultar.ico">
+									</button>
+						</row>
+					</rows>
+				</grid>
+
+
+
+				<panel id="pnlIndicador" border="normal">
+					<panelchildren>
+						<grid width="100%">
+							<columns>
+								<column width="25%" />
+								<column width="25%" />
+								<column width="5%" />
+								<column width="20%" />
+								<column width="20%" />
+								<column width="2%" />
+							</columns>
+							<rows>
+							<row></row>
+								<row align="left" style="border:none">
+									<label value="Modalidad" />
+									<combobox id="cmbModalidad"
+										cols="13" value="--Seleccione--"
+										model="@{cntrl.listModalidadIndicador}">
+										<comboitem
+											self="@{each=modalidadIndicador}"
+											label="@{modalidadIndicador.nombre}"
+											value="@{modalidadIndicador}" />
+									</combobox>
+									<label />
+									<label id="lblMedicion" value="Medición " />
+									<combobox id="cmbMedicion" cols="13"
+										value="--Seleccione--"
+										model="@{cntrl.listMedicionIndicador}">
+										<comboitem
+											self="@{each=medicionIndicador}"
+											label="@{medicionIndicador.nombre}"
+											value="@{medicionIndicador}" />
+									</combobox>
+								</row>
+								<row align="left" style="border:none">
+									<label value="Nombre"></label>
+									<textbox id="txtNombre"
+										cols="35" value="@{cntrl.indicador.nombre}"/>
+									<label />
+									<label />
+									<label />
+								</row>
+								<row align="left" style="border:none">
+									<label value="Abreviatura"></label>
+									<textbox
+										id="txtAbreviatura" cols="16"
+										value="@{cntrl.indicador.abreviatura}"/>
+									<label />
+									<label />
+									<label />
+
+								</row>
+								<row />
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+
+
+				<panel id="pnlFormula" title="Fórmula" border="normal">
+					<panelchildren>
+						<grid width="100%" style="border:none">
+							<columns>
+								<column width="22%" />
+								<column width="25%" />
+								<column width="2%" />
+								<column width="20%" />
+								<column width="20%" />
+								<column width="2%" />
+							</columns>
+							<rows>
+								<row align="left" style="border:none">
+									<label value="Indicador "></label>
+									<combobox id="cmbIndicador"
+										disabled="true" cols="13" value="--Seleccione--"
+										model="@{cntrl.listIndicador}">
+										<comboitem
+											self="@{each=Indicador}" label="@{Indicador.nombre}"
+											value="@{Indicador}" />
+									</combobox>
+									<label />
+									<label value="Constante "></label>
+									<combobox id="cmbConstante"
+										disabled="true" cols="13" value="--Seleccione--"
+										model="@{cntrl.listConstante}">
+										<comboitem
+											self="@{each=Constante}" label="@{Constante.nombre}"
+											value="@{Constante}" />
+									</combobox>
+								</row>
+							</rows>
+						</grid>
+
+						<grid width="100%" style="border:none">
+							<columns>
+								<column width="15%" />
+								<column width="15%" />
+								<column width="15%" />
+								<column width="15%" />
+								<column width="15%" />
+								<column width="15%" />
+								<column width="15%" />
+							</columns>
+							<rows>
+								<row></row>
+								<row style="border:none">
+									<button id="btnSumar" label="+" />
+									<button id="btnRestar" label="-" />
+									<button id="btnMultiplicar"
+										label="x" />
+									<button id="btnDividir" label="/" />
+									<button id="btnParentesisAbre"
+										label="(" />
+									<button id="btnParentesisCierra"
+										label=")" />
+									<label />
+								</row>
+							</rows>
+						</grid>
+						<grid width="100%" style="border:none">
+							<columns>
+								<column width="25%" />
+								<column width="35%" />
+								<column width="2%" />
+								<column width="15%" />
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Fórmula " />
+									<textbox id="txtFormula"
+										multiline="true" cols="30" value="@{cntrl.indicador.formula}" />
+									<label />
+									<button id="btnBorrar"
+										image="/Recursos/Imagenes/atras.ico">
+									</button>
+									<label />
+									<label />
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+				<div>
+					<panel>
+						<panelchildren style="margin-top:5px ">
+							<div align="right">
+								<button id="btnGuardar"
+									image="/Recursos/Imagenes/guardar.ico" label="Guardar">
+								</button>
+								<button id="btnEliminar"
+									image="/Recursos/Imagenes/eliminar.ico"
+									label="Eliminar">
+								</button>
+								<button id="btnCancelar"
+									image="/Recursos/Imagenes/cancelar.ico"
+									label="Cancelar">
+								</button>
+								<button id="btnSalir"
+									image="/Recursos/Imagenes/salir.png" label="Salir">
+								</button>
+							</div>
+						</panelchildren>
+					</panel>
+				</div>
+			</div>
+		</window>
+	</div>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 </zk>

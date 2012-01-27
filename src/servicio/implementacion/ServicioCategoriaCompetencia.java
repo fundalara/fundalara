@@ -1,7 +1,14 @@
 package servicio.implementacion;
 
 import java.util.Date;
+<<<<<<< HEAD
 import java.util.Iterator;
+=======
+<<<<<<< HEAD
+import java.util.Iterator;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 import java.util.List;
 
 import servicio.interfaz.IServicioCategoriaCompetencia;

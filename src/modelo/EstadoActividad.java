@@ -1,11 +1,28 @@
 package modelo;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+<<<<<<< HEAD
+=======
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,7 +34,15 @@ import javax.persistence.Table;
 @Table(name = "estado_actividad", schema = "public")
 public class EstadoActividad implements java.io.Serializable {
 
+<<<<<<< HEAD
 	private int codigoEstadoActividad;
+=======
+<<<<<<< HEAD
+	private int codigoEstadoActividad;
+=======
+	private EstadoActividadId id;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	private DatoBasico datoBasico;
 	private Actividad actividad;
 	private char estatus;
@@ -25,14 +50,30 @@ public class EstadoActividad implements java.io.Serializable {
 	public EstadoActividad() {
 	}
 
+<<<<<<< HEAD
 	public EstadoActividad(int codigoEstadoActividad, DatoBasico datoBasico,
 			Actividad actividad, char estatus) {
 		this.codigoEstadoActividad = codigoEstadoActividad;
+=======
+<<<<<<< HEAD
+	public EstadoActividad(int codigoEstadoActividad, DatoBasico datoBasico,
+			Actividad actividad, char estatus) {
+		this.codigoEstadoActividad = codigoEstadoActividad;
+=======
+	public EstadoActividad(EstadoActividadId id, DatoBasico datoBasico,
+			Actividad actividad, char estatus) {
+		this.id = id;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 		this.datoBasico = datoBasico;
 		this.actividad = actividad;
 		this.estatus = estatus;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	@Id
 	@Column(name = "codigo_estado_actividad", unique = true, nullable = false)
 	public int getCodigoEstadoActividad() {
@@ -45,6 +86,25 @@ public class EstadoActividad implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_estado", nullable = false)
+<<<<<<< HEAD
+=======
+=======
+	@EmbeddedId
+	@AttributeOverrides({
+			@AttributeOverride(name = "codigoEstado", column = @Column(name = "codigo_estado", nullable = false)),
+			@AttributeOverride(name = "codigoActividad", column = @Column(name = "codigo_actividad", nullable = false)) })
+	public EstadoActividadId getId() {
+		return this.id;
+	}
+
+	public void setId(EstadoActividadId id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_estado", nullable = false, insertable = false, updatable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	public DatoBasico getDatoBasico() {
 		return this.datoBasico;
 	}
@@ -54,7 +114,15 @@ public class EstadoActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+<<<<<<< HEAD
 	@JoinColumn(name = "codigo_actividad", nullable = false)
+=======
+<<<<<<< HEAD
+	@JoinColumn(name = "codigo_actividad", nullable = false)
+=======
+	@JoinColumn(name = "codigo_actividad", nullable = false, insertable = false, updatable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
 	public Actividad getActividad() {
 		return this.actividad;
 	}
