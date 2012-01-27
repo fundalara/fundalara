@@ -48,7 +48,7 @@
 							label="Aceptar">
 						</button>
 						<button id="btnSalir"
-							image="../../Recursos/Imagenes/salir.png" label="Salir"	/>
+							image="/Recursos/Imagenes/salir.png" label="Salir"	/>
 					</div>
 				</panelchildren>
 

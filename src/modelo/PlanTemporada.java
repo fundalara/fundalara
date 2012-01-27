@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +24,9 @@ public class PlanTemporada implements java.io.Serializable {
 	private Categoria categoria;
 	private LapsoDeportivo lapsoDeportivo;
 	private char estatus;
-	private Set<Horario> horarios = new HashSet<Horario>(0);
 	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
+	private Set<HorarioPlanTemporada> horarioPlanTemporadas = new HashSet<HorarioPlanTemporada>(
+			0);
 	private Set<PlanEntrenamiento> planEntrenamientos = new HashSet<PlanEntrenamiento>(
 			0);
 
@@ -40,15 +41,16 @@ public class PlanTemporada implements java.io.Serializable {
 	}
 
 	public PlanTemporada(int codigoPlanTemporada, Categoria categoria,
-			LapsoDeportivo lapsoDeportivo, char estatus, Set<Horario> horarios,
+			LapsoDeportivo lapsoDeportivo, char estatus,
 			Set<PersonalEquipo> personalEquipos,
+			Set<HorarioPlanTemporada> horarioPlanTemporadas,
 			Set<PlanEntrenamiento> planEntrenamientos) {
 		this.codigoPlanTemporada = codigoPlanTemporada;
 		this.categoria = categoria;
 		this.lapsoDeportivo = lapsoDeportivo;
 		this.estatus = estatus;
-		this.horarios = horarios;
 		this.personalEquipos = personalEquipos;
+		this.horarioPlanTemporadas = horarioPlanTemporadas;
 		this.planEntrenamientos = planEntrenamientos;
 	}
 
@@ -92,21 +94,22 @@ public class PlanTemporada implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planTemporada")
-	public Set<Horario> getHorarios() {
-		return this.horarios;
-	}
-
-	public void setHorarios(Set<Horario> horarios) {
-		this.horarios = horarios;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planTemporada")
 	public Set<PersonalEquipo> getPersonalEquipos() {
 		return this.personalEquipos;
 	}
 
 	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
 		this.personalEquipos = personalEquipos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planTemporada")
+	public Set<HorarioPlanTemporada> getHorarioPlanTemporadas() {
+		return this.horarioPlanTemporadas;
+	}
+
+	public void setHorarioPlanTemporadas(
+			Set<HorarioPlanTemporada> horarioPlanTemporadas) {
+		this.horarioPlanTemporadas = horarioPlanTemporadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planTemporada")

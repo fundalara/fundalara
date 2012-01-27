@@ -1,15 +1,13 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "personal_actividad_planificada", schema = "public")
 public class PersonalActividadPlanificada implements java.io.Serializable {
 
-	private PersonalActividadPlanificadaId id;
+	private int codigoPersonalActividadPlan;
 	private PlanificacionActividad planificacionActividad;
 	private Personal personal;
 	private char estatus;
@@ -32,40 +30,38 @@ public class PersonalActividadPlanificada implements java.io.Serializable {
 	public PersonalActividadPlanificada() {
 	}
 
-	public PersonalActividadPlanificada(PersonalActividadPlanificadaId id,
+	public PersonalActividadPlanificada(int codigoPersonalActividadPlan,
 			PlanificacionActividad planificacionActividad, Personal personal,
 			char estatus) {
-		this.id = id;
+		this.codigoPersonalActividadPlan = codigoPersonalActividadPlan;
 		this.planificacionActividad = planificacionActividad;
 		this.personal = personal;
 		this.estatus = estatus;
 	}
 
-	public PersonalActividadPlanificada(PersonalActividadPlanificadaId id,
+	public PersonalActividadPlanificada(int codigoPersonalActividadPlan,
 			PlanificacionActividad planificacionActividad, Personal personal,
 			char estatus,
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
-		this.id = id;
+		this.codigoPersonalActividadPlan = codigoPersonalActividadPlan;
 		this.planificacionActividad = planificacionActividad;
 		this.personal = personal;
 		this.estatus = estatus;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)),
-			@AttributeOverride(name = "codigoPlanificacionActividad", column = @Column(name = "codigo_planificacion_actividad", nullable = false)) })
-	public PersonalActividadPlanificadaId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_personal_actividad_plan", unique = true, nullable = false)
+	public int getCodigoPersonalActividadPlan() {
+		return this.codigoPersonalActividadPlan;
 	}
 
-	public void setId(PersonalActividadPlanificadaId id) {
-		this.id = id;
+	public void setCodigoPersonalActividadPlan(int codigoPersonalActividadPlan) {
+		this.codigoPersonalActividadPlan = codigoPersonalActividadPlan;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_planificacion_actividad", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_planificacion_actividad", nullable = false)
 	public PlanificacionActividad getPlanificacionActividad() {
 		return this.planificacionActividad;
 	}
@@ -76,7 +72,7 @@ public class PersonalActividadPlanificada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
 	}

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,22 +26,26 @@ public class TestEvaluativo implements java.io.Serializable {
 	private int codigoTest;
 	private Equipo equipo;
 	private Date fecha;
+	private char estatus;
 	private Set<IndicadorTest> indicadorTests = new HashSet<IndicadorTest>(0);
 
 	public TestEvaluativo() {
 	}
 
-	public TestEvaluativo(int codigoTest, Equipo equipo, Date fecha) {
+	public TestEvaluativo(int codigoTest, Equipo equipo, Date fecha,
+			char estatus) {
 		this.codigoTest = codigoTest;
 		this.equipo = equipo;
 		this.fecha = fecha;
+		this.estatus = estatus;
 	}
 
 	public TestEvaluativo(int codigoTest, Equipo equipo, Date fecha,
-			Set<IndicadorTest> indicadorTests) {
+			char estatus, Set<IndicadorTest> indicadorTests) {
 		this.codigoTest = codigoTest;
 		this.equipo = equipo;
 		this.fecha = fecha;
+		this.estatus = estatus;
 		this.indicadorTests = indicadorTests;
 	}
 
@@ -73,6 +77,15 @@ public class TestEvaluativo implements java.io.Serializable {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "testEvaluativo")

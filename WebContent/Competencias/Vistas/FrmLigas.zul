@@ -26,7 +26,7 @@
 								</textbox>
 								<space></space>
 								<button id="btnBuscar"
-									image="../../Recursos/Imagenes/consultar.ico">
+									image="/Recursos/Imagenes/consultar.ico">
 								</button>
 							</hbox>
 						</row>
@@ -130,17 +130,17 @@
 				<panelchildren style="margin-top:5px ">
 					<div align="right">
 						<button id="btnGuardar"
-							image="../../Recursos/Imagenes/guardar.ico" label="Guardar">
+							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
 						<button id="btnEliminar"
 							image="/Recursos/Imagenes/eliminar.ico" label="Eliminar"
 							disabled="true">
 						</button>
 						<button id="btnCancelar"
-							image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar">
+							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
 						<button id="btnSalir"
-							image="../../Recursos/Imagenes/salir.png" label="Salir">
+							image="/Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>
 				</panelchildren>

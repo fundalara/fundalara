@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,16 +22,19 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 	private SolicitudMantenimientoId id;
 	private Actividad actividad;
 	private DatoBasico datoBasico;
+	private String descripcionActividad;
 	private char estatus;
 
 	public SolicitudMantenimiento() {
 	}
 
 	public SolicitudMantenimiento(SolicitudMantenimientoId id,
-			Actividad actividad, DatoBasico datoBasico, char estatus) {
+			Actividad actividad, DatoBasico datoBasico,
+			String descripcionActividad, char estatus) {
 		this.id = id;
 		this.actividad = actividad;
 		this.datoBasico = datoBasico;
+		this.descripcionActividad = descripcionActividad;
 		this.estatus = estatus;
 	}
 
@@ -65,6 +68,15 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 
 	public void setDatoBasico(DatoBasico datoBasico) {
 		this.datoBasico = datoBasico;
+	}
+
+	@Column(name = "descripcion_actividad", nullable = false)
+	public String getDescripcionActividad() {
+		return this.descripcionActividad;
+	}
+
+	public void setDescripcionActividad(String descripcionActividad) {
+		this.descripcionActividad = descripcionActividad;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

@@ -10,7 +10,7 @@ public interface IServicioFaseCompetencia {
     
 	public abstract void eliminar(FaseCompetencia fc);
 	
-	public abstract void agregar(FaseCompetencia fc);
+	public abstract void agregar(List<FaseCompetencia> lista,int comp);
 	
 	public abstract  List<FaseCompetencia> listar ();
 	

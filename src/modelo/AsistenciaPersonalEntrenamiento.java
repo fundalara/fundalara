@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,6 +22,7 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 	private AsistenciaPersonalEntrenamientoId id;
 	private SesionEjecutada sesionEjecutada;
 	private PersonalEquipo personalEquipo;
+	private DatoBasico datoBasico;
 	private boolean asistencia;
 	private String observacion;
 	private char estatus;
@@ -32,10 +33,24 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 	public AsistenciaPersonalEntrenamiento(
 			AsistenciaPersonalEntrenamientoId id,
 			SesionEjecutada sesionEjecutada, PersonalEquipo personalEquipo,
-			boolean asistencia, String observacion, char estatus) {
+			DatoBasico datoBasico, boolean asistencia, char estatus) {
 		this.id = id;
 		this.sesionEjecutada = sesionEjecutada;
 		this.personalEquipo = personalEquipo;
+		this.datoBasico = datoBasico;
+		this.asistencia = asistencia;
+		this.estatus = estatus;
+	}
+
+	public AsistenciaPersonalEntrenamiento(
+			AsistenciaPersonalEntrenamientoId id,
+			SesionEjecutada sesionEjecutada, PersonalEquipo personalEquipo,
+			DatoBasico datoBasico, boolean asistencia, String observacion,
+			char estatus) {
+		this.id = id;
+		this.sesionEjecutada = sesionEjecutada;
+		this.personalEquipo = personalEquipo;
+		this.datoBasico = datoBasico;
 		this.asistencia = asistencia;
 		this.observacion = observacion;
 		this.estatus = estatus;
@@ -73,6 +88,16 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 		this.personalEquipo = personalEquipo;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "eventualidad_entrenador", nullable = false)
+	public DatoBasico getDatoBasico() {
+		return this.datoBasico;
+	}
+
+	public void setDatoBasico(DatoBasico datoBasico) {
+		this.datoBasico = datoBasico;
+	}
+
 	@Column(name = "asistencia", nullable = false)
 	public boolean isAsistencia() {
 		return this.asistencia;
@@ -82,7 +107,7 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 		this.asistencia = asistencia;
 	}
 
-	@Column(name = "observacion", nullable = false)
+	@Column(name = "observacion")
 	public String getObservacion() {
 		return this.observacion;
 	}

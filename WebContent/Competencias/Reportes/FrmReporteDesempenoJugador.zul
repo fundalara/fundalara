@@ -1,0 +1,105 @@
+<?page title="frmReporteDesempenoJugador" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Configuración de Reporte del Desempeño del Jugador"
+		border="normal" width="700px">
+		<grid style="border:none">
+			<columns>
+				<column label="" align="left" width="15%" />
+				<column label="" align="left" width="85%" />
+			</columns>
+			<rows>
+				<row style="border:none">
+					<label value="Competencia" />
+					<hbox>
+						<textbox cols="40"></textbox>
+						<space></space>
+						<button id="btnBuscar"
+							image="/Recursos/Imagenes/consultar.ico">
+						</button>
+					</hbox>
+				</row>
+				<row style="border:none">
+					<label value="Categoría"></label>
+					<hbox>
+						<combobox cols="15">
+							<comboitem label="" />
+							<comboitem label="" />
+						</combobox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<separator></separator>
+
+
+		<grid style="border:none" width="100%">
+			<columns>
+				<column label="" align="left" width="13%" />
+				<column label="" align="left" width="25%" />
+				<column label="" align="left" width="20%" />
+				<column label="" align="left" width="25%" />
+			</columns>
+			<rows>
+
+				<row style="border:none">
+					<checkbox label="  Equipo"></checkbox>
+			
+					<hbox>
+	
+					<textbox cols="17"></textbox>
+						<space></space>
+						<button id="btnBuscarEquipo"
+							image="/Recursos/Imagenes/consultar.ico">
+						</button>
+					</hbox>
+					<hbox>
+						
+						<space></space>
+						<checkbox label="Competencia"></checkbox>
+					</hbox>
+
+				</row>
+
+				<row style="border:none">
+					<label value="Modalidad"></label>
+					<combobox cols="15">
+						<comboitem label="" />
+						<comboitem label="" />
+					</combobox>
+					<hbox>
+						<space></space>
+						<space></space>
+						<space></space>
+						<label value="Juego"></label>
+					</hbox>
+
+					<combobox cols="15">
+						<comboitem label="" />
+						<comboitem label="" />
+					</combobox>
+				</row>
+
+
+			</rows>
+		</grid>
+						<div align="right" height="30px">
+							<button
+								id="btnGuardar"
+								image="/Recursos/Imagenes/guardar.ico" label="Generar"
+								orient="horizontal">
+							</button>
+						
+							<button
+								id="btnCancelar"
+								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+								orient="horizontal">
+							</button>
+							<button 
+								id="btnSalir"
+								image="/Recursos/Imagenes/salir.png"
+								label="Salir" orient="horizontal">
+							</button>
+
+						</div>
+	</window>
+</zk>

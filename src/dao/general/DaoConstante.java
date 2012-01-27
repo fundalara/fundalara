@@ -15,7 +15,7 @@ import dao.generico.GenericDao;
 /** 
  * DAO para la clase Constante 
  * 
- * @author Niurka Gómez
+ * @author Niurka Gï¿½mez
  * @version 1.0
  *  
  */
@@ -35,7 +35,7 @@ public class DaoConstante extends dao.generico.GenericDao {
 		 */
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
-		Criteria c = session.createCriteria(Categoria.class);
+		Criteria c = session.createCriteria(Constante.class);
 		c.add(Restrictions.eq("estatus",'A'));
 		return c.list();
 	}

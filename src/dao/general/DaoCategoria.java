@@ -86,7 +86,7 @@ public class DaoCategoria extends GenericDao {
 	public boolean buscarPorCodigo(Categoria categoria) {
 		//Categoria categoria;
 		boolean sw;
-		Session session = SessionManager.getSession();
+		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Query query = session.createSQLQuery(
 				"select * from equipo,categoria where categoria.estatus='A' and equipo.estatus='A'and equipo.codigo_categoria=categoria.codigo_categoria and equipo.codigo_categoria='"

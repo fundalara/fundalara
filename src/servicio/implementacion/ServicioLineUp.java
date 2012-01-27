@@ -4,6 +4,9 @@ import java.util.List;
 
 import dao.general.DaoLineUp;
 
+import modelo.Competencia;
+import modelo.Equipo;
+import modelo.Juego;
 import modelo.LineUp;
 import servicio.interfaz.IServicioLineUp;
 
@@ -27,8 +30,11 @@ public class ServicioLineUp implements IServicioLineUp {
 
 	@Override
 	public void agregar(LineUp l) {
-		// TODO Auto-generated method stub
-
+		if (l.getCodigoLineUp() == 0){
+			int codigo = daoLineUp.listar(LineUp.class).size()+1;
+			l.setCodigoLineUp(codigo);
+		}
+		daoLineUp.guardar(l);
 	}
 
 	@Override
@@ -41,6 +47,18 @@ public class ServicioLineUp implements IServicioLineUp {
 	public List<LineUp> listarActivos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<LineUp> listarPlanificados(Juego j,Equipo e) {
+		
+		return daoLineUp.listarPlanificados(j,e);
+	}
+
+	@Override
+	public List<LineUp> listarDefinitivos(Juego j, Equipo e) {
+		
+		return daoLineUp.listarDefinivos(j, e);
 	}
 
 }

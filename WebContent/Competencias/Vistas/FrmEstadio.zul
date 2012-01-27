@@ -16,7 +16,7 @@
 								<textbox value="@{cntrl.estadio.nombre}" id="txtNombre" 
 								constraint="/.[a-z]+/:El campo 'nombre' es obligatorio"  width="88%"/>
 								<button id="btnBuscar"
-										image="../../Recursos/Imagenes/consultar.ico" >								
+										image="/Recursos/Imagenes/consultar.ico" >								
 								</button>
 						
 							</row>

@@ -42,7 +42,7 @@
 						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
 							label="Aceptar">
 						</button>
-						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png"
+						<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
 							label="Salir" />
 					</div>
 				</panelchildren>

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 13/01/2012 04:28:39 AM by Hibernate Tools 3.4.0.CR1
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class RosterCompetencia implements java.io.Serializable {
 	private int codigoRosterCompetencia;
 	private Roster roster;
 	private Competencia competencia;
+	private Equipo equipo;
 	private char estatus;
 	private Set<LineUp> lineUps = new HashSet<LineUp>(0);
 	private Set<JugadorForaneo> jugadorForaneos = new HashSet<JugadorForaneo>(0);
@@ -32,19 +33,21 @@ public class RosterCompetencia implements java.io.Serializable {
 	}
 
 	public RosterCompetencia(int codigoRosterCompetencia, Roster roster,
-			Competencia competencia, char estatus) {
+			Competencia competencia, Equipo equipo, char estatus) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
 		this.roster = roster;
 		this.competencia = competencia;
+		this.equipo = equipo;
 		this.estatus = estatus;
 	}
 
 	public RosterCompetencia(int codigoRosterCompetencia, Roster roster,
-			Competencia competencia, char estatus, Set<LineUp> lineUps,
-			Set<JugadorForaneo> jugadorForaneos) {
+			Competencia competencia, Equipo equipo, char estatus,
+			Set<LineUp> lineUps, Set<JugadorForaneo> jugadorForaneos) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
 		this.roster = roster;
 		this.competencia = competencia;
+		this.equipo = equipo;
 		this.estatus = estatus;
 		this.lineUps = lineUps;
 		this.jugadorForaneos = jugadorForaneos;
@@ -78,6 +81,16 @@ public class RosterCompetencia implements java.io.Serializable {
 
 	public void setCompetencia(Competencia competencia) {
 		this.competencia = competencia;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_equipo", nullable = false)
+	public Equipo getEquipo() {
+		return this.equipo;
+	}
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
