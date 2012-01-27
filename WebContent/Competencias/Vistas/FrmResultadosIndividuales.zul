@@ -5,18 +5,8 @@
 	<window id="FrmResultadosIndividuales"
 		title="Resultados Individuales" border="normal" width="780px"
 		mode="modal" closable="true">
-		<zscript>
-		<![CDATA[ 
-		    public void guardar(){
-		      try{	
-		    	Messagebox.show("Datos almacenados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
-		      }catch (Exception e){
-		    	  
-		      }
-		      FrmResultadosIndividuales.detach();
-		    }
-		]]></zscript>
-		<panel border="normal" title="RESULTADOS  INDIVIDUALES">
+		<panel border="normal">
+			<caption label="RESULTADOS  INDIVIDUALES"></caption>
 			<panelchildren>
 
 				<tabbox>
@@ -31,88 +21,23 @@
 								<panelchildren>
 									<div width="40%"
 										style="float:left">
-										<panel title="LINE-UP">
+										<panel>
+											<caption label="LINE-UP" />
 											<panelchildren>
 												<grid>
 													<columns>
+														<column label="N" width="8%" />
 														<column	label="OB" width="8%" />
-														<column label="N" width="8%"  />
-														<column	label="NOMBRE" width="35%" />
+														<column	label="NOMBRE" align="35%" />
 														<column	label="APELLIDO" width="35%" />
 														<column	label="POS" width="10%" />
 													</columns>
-													<rows>													
-													   <row height="27px">
-													     <label value="1"></label>
-													     <label value="44"></label>
-													     <label value="JOSE"></label>
-													     <label value="RODRIGUEZ"></label>
-													     <label value="3B"></label>
-													   </row> 
-													   <row height="27px">
-													     <label value="2"></label>
-													     <label value="23"></label>
-													     <label value="EDUARDO"></label>
-													     <label value="OCHOA"></label>
-													     <label value="2B"></label>
-													   </row>
-													   
-													    <row height="27px">
-													     <label value="3"></label>
-													     <label value="15"></label>
-													     <label value="YOVANNY"></label>
-													     <label value="MANOSALVA"></label>
-													     <label value="LF"></label>
-													   </row>
-													   
-													    <row height="27px">
-													     <label value="4"></label>
-													     <label value="22"></label>
-													     <label value="RAFAEL"></label>
-													     <label value="ESCOBAR"></label>
-													     <label value="SS"></label>
-													   </row>				   
-													   <row height="27px">
-													     <label value="5"></label>
-													     <label value="26"></label>
-													     <label value="FRANCISCO"></label>
-													     <label value="MACHADO"></label>
-													     <label value="P"></label>
-													   </row>
-													  <row height="27px">
-													     <label value="6"></label>
-													     <label value="11"></label>
-													     <label value="JHOINNEL"></label>
-													     <label value="LISCANO"></label>
-													     <label value="3B"></label>
-													   </row>
-													   <row height="27px">
-													     <label value="7"></label>
-													     <label value="8"></label>
-													     <label value="JESUS"></label>
-													     <label value="ROJAS"></label>
-													     <label value="CF"></label>
-													   </row>
-													   <row height="27px">
-													     <label value="8"></label>
-													     <label value="14"></label>
-													     <label value="JESUS"></label>
-													     <label value="CASTILLO"></label>
-													     <label value="RF"></label>
-													   </row>
-													   <row height="27px">
-													     <label value="9"></label>
-													     <label value="60"></label>
-													     <label value="JUAN"></label>
-													     <label value="HERNADEZ"></label>
-													     <label value="C"></label>
-													   </row>
-													   
-													</rows>
+													<rows></rows>
 												</grid>
 											</panelchildren>
 										</panel>
-										<panel title="RESERVA" >
+										<panel border="normal">
+											<caption label="RESERVA" />
 											<panelchildren>
 												<grid>
 													<columns>
@@ -127,123 +52,25 @@
 											</panelchildren>
 										</panel>
 									</div>
-									<div style="float:left;margin-left:2px"
-										width="59%">
-										<panel title="INDICADORES" >
+									<div style="float:left;"
+										width="60%">
+										<panel border="normal">
+											<caption
+												label="INDICADORES" />
 											<panelchildren>
 												<grid>
-													<columns>
-													   <column label="VB" align="center"></column>
-													   <column label="H"  align="center"></column>
-													   <column label="2B" align="center"></column>
-													   <column label="3B" align="center"></column>
-													   <column label="CA" align="center"></column>
-													   <column label="CI" align="center"></column>
-													   <column label="O"  align="center"></column>
-													   
-													</columns>
-													<rows>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>													    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>													    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													
-													</rows>
+													<columns></columns>
+													<rows></rows>
 												</grid>
 											</panelchildren>
 										</panel>
 									</div>
-									<div align="left" width="59%"
-										style="float:left;margin-left:2px">
-										<panel title="INDICADORES">
+									<div align="right" width="60%"
+										style="float:left;margin-top:25px">
+										<panel>
 											<panelchildren>
 												<grid>
-													<columns>
-													   <column label="VB" align="center"></column>
-													   <column label="H"  align="center"></column>
-													   <column label="2B" align="center"></column>
-													   <column label="3B" align="center"></column>
-													   <column label="CA" align="center"></column>
-													   <column label="CI" align="center"></column>
-													   <column label="O"  align="center"></column>													
-													</columns>
+													<columns></columns>
 													<rows></rows>
 												</grid>
 											</panelchildren>
@@ -257,7 +84,7 @@
 				<div align="right">
 					<hbox>
 						<button image="/Recursos/Imagenes/guardar.ico"
-							id="btnGuardar" onClick="guardar()" label="Guardar" />
+							id="btnGuardar" label="Guardar" />
 						<button image="/Recursos/Imagenes/cancelar.ico"
 							label="Cancelar" />
 						<button image="/Recursos/Imagenes/salir.png"
