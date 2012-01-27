@@ -25,6 +25,20 @@
 									</button>
 								</hbox>
 
+<<<<<<< HEAD
+=======
+								<label  value="Nombre"></label>
+
+								<textbox style="margin-left:5px" cols="18"></textbox>
+								<button id="btnBuscarCompetencia"
+									image="/Recursos/Imagenes/consultar.ico" width="100%">
+								</button>
+                                  
+										
+								<label value="Tipo"></label>
+								<textbox cols="13" ></textbox>
+								
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 							</row>
 							<row style="border:none">
@@ -55,6 +69,7 @@
 				</panelchildren>
 			</panel>
 			<!-- TABLA DE ENFRENTAMIENTOS -->
+<<<<<<< HEAD
 			<div width="100%">
 				<panel border="normal" height="70%">
 					<caption label="Agregar Enfrentamientos"></caption>
@@ -114,6 +129,73 @@
 													id="btnBuscarEquipo"
 													image="/Recursos/Imagenes/consultar.ico">
 												</button>
+=======
+			<div>
+				<tabbox>
+
+					<tabs>
+						<tab label="Ronda Uno" />
+					</tabs>
+					<!-- RONDA -->
+					<tabpanels height="50%">
+						<tabpanel>
+							<div width="100%">
+								<panel border="normal" height="100px">
+									<caption
+										label="Agregar Enfrentamientos">
+									</caption>
+									<panelchildren>
+										<hbox width="100%"><!-- General -->
+											<hbox height="100px">
+												<grid>
+													<rows>
+														<row
+															style="border-style:none">
+
+															<label
+																value="Home Club">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="/Recursos/Imagenes/consultar.ico">
+																</button>
+															</hbox>
+															<label
+																value="Visitante">
+															</label>
+															<hbox>
+																<textbox></textbox>
+																<button
+																	image="/Recursos/Imagenes/consultar.ico">
+																</button>
+
+															</hbox>
+														</row>
+														<row
+															style="border-style:none">
+
+															<label
+																value="Fecha">
+															</label>
+															<datebox />
+
+															<label
+																value="Lugar">
+															</label>
+															<textbox></textbox>
+
+															<label
+																value="Hora">
+															</label>
+															<hbox>
+																<timebox />
+															</hbox>
+
+														</row>
+													</rows>
+												</grid>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 											</hbox>
 
 											<label value="Visitante">
@@ -212,6 +294,7 @@
 			<panel>
 				<panelchildren style="margin-top:20px ">
 					<div align="right">
+<<<<<<< HEAD
 						<button id="btnGuardar"  image="/Recursos/Imagenes/guardar.ico"
 							label="Guardar">
 						</button>
@@ -220,6 +303,16 @@
 							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
 						</button>
 						<button id="btnSalir"
+=======
+						<button
+							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
+						</button>
+
+						<button
+							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+						<button
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 							image="/Recursos/Imagenes/salir.png" label="Salir">
 						</button>
 					</div>

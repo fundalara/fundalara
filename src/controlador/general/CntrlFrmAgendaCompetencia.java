@@ -64,9 +64,16 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
         
 		// Creando componentes necesarios
 		hoy.setVisible(false);
+<<<<<<< HEAD
 		cmbCompetencia = new Combobox();
 		cmbCompetencia.setCols(30);
 		cmbCompetencia.setText("                     --Seleccione--");
+=======
+		lblCompetencia = new Label("Competencia ");
+		cmbCompetencia = new Combobox();
+		cmbCompetencia.setCols(24);
+		cmbCompetencia.setText("- Seleccione una Competecia -");
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		cmbCompetencia.setReadonly(true);
 		cmbCompetencia.addForward(Events.ON_SELECT,formulario,"onSelecciono");
 		btnVer = new Button();
@@ -83,6 +90,10 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 		dbxFechaF = new Datebox();
 		dbxFechaF.setCols(10);
 		dbxFechaF.setReadonly(true);
+<<<<<<< HEAD
+=======
+		spnControles.appendChild(lblCompetencia);
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		spnControles.appendChild(cmbCompetencia);
 		spnControles.appendChild(btnVer);
 	    spnControles.appendChild(lblFechaI);
@@ -127,7 +138,11 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 	
 	public void onEventEdit$calendars(CalendarsEvent e) {
 		EventoSimpleCalendario esc = (EventoSimpleCalendario) e.getCalendarEvent();		
+<<<<<<< HEAD
 		Window w = (Window) Executions.createComponents("/Competencias/Vistas/FrmRegistroResultados.zul", null, null);
+=======
+		Window w = (Window) Executions.createComponents("/Competencias/Vistas/FrmAccionJuego.zul", null, null);
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
         w.setPosition("center");
         Juego j = (Juego) esc.getValue();
         w.setVariable("juego",j,false);

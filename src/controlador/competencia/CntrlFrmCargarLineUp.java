@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
 import jxl.biff.drawing.ComboBox;
 
 import modelo.Categoria;
@@ -49,10 +50,33 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 	ServicioLineUp servicioLineUp;
 	Juego juego;
 
+=======
+import modelo.Equipo;
+import modelo.EquipoCompetencia;
+import modelo.Roster;
+
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Textbox;
+
+public class CntrlFrmCargarLineUp extends GenericForwardComposer {
+	
+	
+	Component formulario;
+	AnnotateDataBinder binder;
+	EquipoCompetencia equipoCompetencia;
+	Textbox txtDelegado;
+    List<Roster> rosters;
+    Listbox lsbxRoster;
+	
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		// TODO Auto-generated method stub
 		super.doAfterCompose(comp);
+<<<<<<< HEAD
 		comp.setVariable("cntrl", this, true);
 		formulario = comp;
 		lineups = new ArrayList<LineUp>();
@@ -259,6 +283,24 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 		}
 	}
 
+=======
+			comp.setVariable("cntrl", this, true);
+	    formulario = comp;
+	    	    
+	}
+	
+	public void onCreate$FrmCargarLineUp(){
+		equipoCompetencia =  (EquipoCompetencia) formulario.getVariable("equipo",false);
+		rosters = ConvertirConjuntoALista(equipoCompetencia.getEquipo().getRosters());
+		String nombre = equipoCompetencia.getPersonaNatural().getPrimerNombre();
+		String apellido= equipoCompetencia.getPersonaNatural().getPrimerApellido();
+		txtDelegado.setText(nombre+" "+apellido);
+		binder.loadAll();
+		
+      
+	}
+	
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public List ConvertirConjuntoALista(Set conjunto) {
 		List l = new ArrayList();
 		for (Iterator i = conjunto.iterator(); i.hasNext();) {
@@ -275,11 +317,19 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 		this.equipoCompetencia = equipoCompetencia;
 	}
 
+<<<<<<< HEAD
 	public List<RosterCompetencia> getRosters() {
 		return rosters;
 	}
 
 	public void setRosters(List<RosterCompetencia> rosters) {
+=======
+	public List<Roster> getRosters() {
+		return rosters;
+	}
+
+	public void setRosters(List<Roster> rosters) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.rosters = rosters;
 	}
 
@@ -290,6 +340,7 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 	public void setLsbxRoster(Listbox lsbxRoster) {
 		this.lsbxRoster = lsbxRoster;
 	}
+<<<<<<< HEAD
 
 	public List<LineUp> getLineups() {
 		return lineups;
@@ -315,4 +366,12 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 		this.juego = juego;
 	}
 
+=======
+	
+	
+    
+	
+	
+	
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 }

@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -31,6 +35,7 @@ public class PersonalSuplente implements java.io.Serializable {
 
 	public PersonalSuplente(PersonalSuplenteId id,
 			SesionEjecutada sesionEjecutada, DatoBasico datoBasico,
+<<<<<<< HEAD
 			Personal personal, char estatus) {
 		this.id = id;
 		this.sesionEjecutada = sesionEjecutada;
@@ -41,6 +46,8 @@ public class PersonalSuplente implements java.io.Serializable {
 
 	public PersonalSuplente(PersonalSuplenteId id,
 			SesionEjecutada sesionEjecutada, DatoBasico datoBasico,
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 			Personal personal, String observacion, char estatus) {
 		this.id = id;
 		this.sesionEjecutada = sesionEjecutada;
@@ -92,7 +99,11 @@ public class PersonalSuplente implements java.io.Serializable {
 		this.personal = personal;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "observacion")
+=======
+	@Column(name = "observacion", nullable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public String getObservacion() {
 		return this.observacion;
 	}

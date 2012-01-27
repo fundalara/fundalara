@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,11 +40,19 @@ public class AsistenciaJugador implements java.io.Serializable {
 
 	public AsistenciaJugador(int codigoAsistencia,
 			SesionEjecutada sesionEjecutada, DatoBasico datoBasico,
+<<<<<<< HEAD
 			boolean asistencia, char estatus) {
+=======
+			boolean asistencia, String observacion, char estatus) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.codigoAsistencia = codigoAsistencia;
 		this.sesionEjecutada = sesionEjecutada;
 		this.datoBasico = datoBasico;
 		this.asistencia = asistencia;
+<<<<<<< HEAD
+=======
+		this.observacion = observacion;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.estatus = estatus;
 	}
 
@@ -118,7 +130,11 @@ public class AsistenciaJugador implements java.io.Serializable {
 		this.asistencia = asistencia;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "observacion")
+=======
+	@Column(name = "observacion", nullable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public String getObservacion() {
 		return this.observacion;
 	}

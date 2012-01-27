@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?page title="Auto Generated index.zul"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmResultadosIndividuales" ?>
@@ -97,4 +98,95 @@
 
 
 	</window>
+=======
+<?page title="Auto Generated index.zul"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmResultadosIndividuales" ?>
+<zk>
+	<window id="FrmResultadosIndividuales" title="Resultados Individuales" border="normal"
+		width="690px" mode="modal" closable="true">
+		<panel border="normal">
+			<caption label="RESULTADOS  INDIVIDUALES"></caption>
+			<panelchildren>
+
+				<tabbox>
+					<tabs>
+						<tab label="Ofensiva" />
+						<tab label="Defensiva" />
+						<tab label="Picheo" />
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+							<panel> <!-- Indicadores Ofensivos -->
+								<panelchildren>
+									<div width="25%" style="margin-top:30px;float:left">
+										<panel>
+											<caption label="LINE-UP" />
+											<panelchildren>
+												<grid>
+													<columns>
+														<column label="N°" width="30px" />
+														<column label="Nombre" align="left" />
+														<column	label="Num" width="35px" />
+														<column label="Pos" width="30px" />
+													</columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+										<panel border="normal">
+											<caption label="RESERVA" />
+											<panelchildren>
+												<grid>
+													<columns>
+														<column label="N°" width="30px" />
+														<column label="Nombre" align="left" />
+														<column label="Num" width="35px" />
+														<column label="Pos" width="30px" />
+													</columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div style="float:left;margin-top:30px" width="75%">
+										<panel border="normal">
+											<caption label="INDICADORES" />
+											<panelchildren>
+												<grid>
+													<columns></columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div align="right" width="75%" style="float:left;margin-top:25px">
+										<panel>
+											<panelchildren>
+												<grid>
+													<columns></columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+								</panelchildren>
+							</panel>
+						</tabpanel> <!-- Fin indicadores ofensivos -->
+					</tabpanels>
+				</tabbox> 
+				<div align="right">
+					<hbox>
+						<button label="Guardar"></button>
+						<button label="Cancelar"></button>
+						<button label="Salir"></button>
+					</hbox>
+				</div>
+			</panelchildren>
+		</panel>
+
+
+
+	</window>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 </zk>

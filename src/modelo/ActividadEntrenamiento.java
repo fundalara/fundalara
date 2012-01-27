@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +24,11 @@ import javax.persistence.Table;
 @Table(name = "actividad_entrenamiento", schema = "public")
 public class ActividadEntrenamiento implements java.io.Serializable {
 
+<<<<<<< HEAD
 	private int codigoActividadEntrenamiento;
+=======
+	private int codActividadEntrenamiento;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	private Categoria categoria;
 	private DatoBasico datoBasico;
 	private String nombre;
@@ -35,22 +43,37 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 	public ActividadEntrenamiento() {
 	}
 
+<<<<<<< HEAD
 	public ActividadEntrenamiento(int codigoActividadEntrenamiento,
 			Categoria categoria, DatoBasico datoBasico, String nombre,
 			char estatus) {
 		this.codigoActividadEntrenamiento = codigoActividadEntrenamiento;
+=======
+	public ActividadEntrenamiento(int codActividadEntrenamiento,
+			Categoria categoria, DatoBasico datoBasico, String nombre,
+			char estatus) {
+		this.codActividadEntrenamiento = codActividadEntrenamiento;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.categoria = categoria;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
 		this.estatus = estatus;
 	}
 
+<<<<<<< HEAD
 	public ActividadEntrenamiento(int codigoActividadEntrenamiento,
+=======
+	public ActividadEntrenamiento(int codActividadEntrenamiento,
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 			Categoria categoria, DatoBasico datoBasico, String nombre,
 			char estatus, Set<ActividadPlanificada> actividadPlanificadas,
 			Set<ActividadesEjecutadas> actividadesEjecutadases,
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
+<<<<<<< HEAD
 		this.codigoActividadEntrenamiento = codigoActividadEntrenamiento;
+=======
+		this.codActividadEntrenamiento = codActividadEntrenamiento;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.categoria = categoria;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
@@ -61,6 +84,7 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 	}
 
 	@Id
+<<<<<<< HEAD
 	@Column(name = "codigo_actividad_entrenamiento", unique = true, nullable = false)
 	public int getCodigoActividadEntrenamiento() {
 		return this.codigoActividadEntrenamiento;
@@ -68,6 +92,15 @@ public class ActividadEntrenamiento implements java.io.Serializable {
 
 	public void setCodigoActividadEntrenamiento(int codigoActividadEntrenamiento) {
 		this.codigoActividadEntrenamiento = codigoActividadEntrenamiento;
+=======
+	@Column(name = "cod_actividad_entrenamiento", unique = true, nullable = false)
+	public int getCodActividadEntrenamiento() {
+		return this.codActividadEntrenamiento;
+	}
+
+	public void setCodActividadEntrenamiento(int codActividadEntrenamiento) {
+		this.codActividadEntrenamiento = codActividadEntrenamiento;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

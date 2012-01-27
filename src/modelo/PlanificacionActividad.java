@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,8 +38,11 @@ public class PlanificacionActividad implements java.io.Serializable {
 	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
 			0);
 	private Set<Periodicidad> periodicidads = new HashSet<Periodicidad>(0);
+<<<<<<< HEAD
 	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
 			0);
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
 
@@ -62,7 +69,10 @@ public class PlanificacionActividad implements java.io.Serializable {
 			Set<Actividad> actividads,
 			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
 			Set<Periodicidad> periodicidads,
+<<<<<<< HEAD
 			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
@@ -76,7 +86,10 @@ public class PlanificacionActividad implements java.io.Serializable {
 		this.actividads = actividads;
 		this.personalActividadPlanificadas = personalActividadPlanificadas;
 		this.periodicidads = periodicidads;
+<<<<<<< HEAD
 		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
 
@@ -195,6 +208,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
+<<<<<<< HEAD
 	public Set<ComisionActividadPlanificada> getComisionActividadPlanificadas() {
 		return this.comisionActividadPlanificadas;
 	}
@@ -205,6 +219,8 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public Set<TareaActividadPlanificada> getTareaActividadPlanificadas() {
 		return this.tareaActividadPlanificadas;
 	}

@@ -1,6 +1,7 @@
 <?page title="Lineup" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmCargarLineUp" ?>
+<<<<<<< HEAD
     
 	<window id="FrmCargarLineUp" title="Lineup" border="normal" width="690px"
 		height="auto" closable="true" apply="controlador.competencia.CntrlFrmCargarLineUp">
@@ -19,6 +20,29 @@
                      <textbox cols="28" readonly="true" value="@{cntrl.equipoCompetencia.equipo.nombre}"></textbox>
                      <label value="Categoria"></label>
                      <textbox cols="35" readonly="true" value="@{cntrl.equipoCompetencia.equipo.categoria.nombre}"></textbox>
+=======
+
+	<window id="FrmCargarLineUp" title="Lineup" border="normal" width="650px"
+		height="auto" closable="true" apply="controlador.competencia.CntrlFrmCargarLineUp">
+      
+        <panel title="Datos del Equipo" border="normal"  width="100%">
+          <panelchildren >
+            <grid style="border-style:none">
+               <columns>
+               </columns>
+               <rows>
+                  <row style="border-style:none">
+                     <label value="Nombre"></label>
+                     <textbox readonly="true" value="@{cntrl.equipoCompetencia.equipo.nombre}"></textbox>
+                     <label value="Categoria"></label>
+                     <textbox readonly="true" value="@{cntrl.equipoCompetencia.equipo.categoria.nombre}"></textbox>
+                  </row>
+                   <row style="border-style:none">
+                     <label value="Manager"></label>
+                     <textbox readonly="true"></textbox>
+                     <label value="Delegado"></label>
+                     <textbox readonly="true" id="txtDelegado"></textbox>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
                   </row>
                </rows>
             </grid>
@@ -30,6 +54,7 @@
 			<hbox width="40%" height="50%"><!-- Roster -->
 				<panel title="Roster">
 					<panelchildren>
+<<<<<<< HEAD
 						<listbox id="lsbxRoster" width="280px" height="250px" model="@{cntrl.rosters}" checkmark="true" multiple="true">
 							<listhead>
 								<listheader width="20%" label="#" />
@@ -40,6 +65,18 @@
 							    <listcell label="@{rosterCompetencia.roster.jugador.numero}"></listcell>
 							    <listcell label="@{rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></listcell>
 							    <listcell label="@{rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></listcell>
+=======
+						<listbox id="lsbxRoster" width="280px" height="250px" model="@{cntrl.rosters}">
+							<listhead>
+								<listheader width="10px" label="#" />
+								<listheader width="45%" label="NOMBRE" />
+								<listheader width="45%" label="APELLIDO" />
+							</listhead>
+							<listitem self="@{each=roster}" value="@{roster}">
+							    <listcell label="@{roster.jugador.numero}"></listcell>
+							    <listcell label="@{roster.jugador.personaNatural.primerNombre}"></listcell>
+							    <listcell label="@{roster.jugador.personaNatural.primerApellido}"></listcell>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 							</listitem >
 						</listbox>
 					</panelchildren>
@@ -57,11 +94,19 @@
 									</column>
 								</columns>
 								<rows>
+<<<<<<< HEAD
 									<row style="border-style:none">
 										<button id="btnAgregar" image="/Recursos/Imagenes/rightarrow_g.png" />
 									</row>
 									<row style="border-style:none">
 										<button id="btnQuitar"	image="/Recursos/Imagenes/leftarrow_g.png" />
+=======
+									<row>
+										<button image="/Recursos/Imagenes/rightarrow_g.png" />
+									</row>
+									<row>
+										<button	image="/Recursos/Imagenes/leftarrow_g.png" />
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 									</row>
 								</rows>
 							</grid>
@@ -74,6 +119,7 @@
 			<hbox width="40%" height="50%"><!-- Line-up -->
 				<panel title="Line-Up">
 					<panelchildren>
+<<<<<<< HEAD
 						<listbox id="lsbxLineUp"  model="@{cntrl.lineups}" width="290px" height="250px" checkmark="true" multiple="true">
 							<listhead>
 								<listheader width="20%" label="OB" />
@@ -92,6 +138,15 @@
 							   </combobox>
 							   </listcell>
 							</listitem>
+=======
+						<listbox width="250px" height="250px">
+							<listhead>
+								<listheader width="1%" label="OB" />
+								<listheader width="50%" label="NOMBRE" />
+								<listheader width="10%" label="POS" />
+							</listhead>
+							<listitem></listitem>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 						</listbox>
 					</panelchildren>
 				</panel>
@@ -106,11 +161,19 @@
 									<column align="center" width="100%"	height="100%" />
 								</columns>
 								<rows>
+<<<<<<< HEAD
 									<row style="border-style:none">
 										<button id="btnSubir" image="/Recursos/Imagenes/1uparrow.ico" />
 									</row>
 									<row style="border-style:none">
 										<button id="btnBajar" image="/Recursos/Imagenes/1downarrow.ico" />
+=======
+									<row>
+										<button image="/Recursos/Imagenes/1uparrow.ico" />
+									</row>
+									<row>
+										<button image="/Recursos/Imagenes/1downarrow.ico" />
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 									</row>
 								</rows>
 							</grid>
@@ -120,11 +183,34 @@
 			</hbox><!--Fin Botones  -->
 
 		</hbox>
+<<<<<<< HEAD
 		</panelchildren>
 		</panel>
 		<div align="right">
 		    <button image="/Recursos/Imagenes/guardar.ico" id="btnFinalizar" label="Finalizar" />
 			<button image="/Recursos/Imagenes/guardar.ico" id="btnGuardar" label="Guardar" />
+=======
+
+		<hbox width="40%" height="50%"><!--Reserva -->
+			<div >
+				<panel title="Reserva">
+					<panelchildren>
+						<listbox width="280px">
+							<listhead>
+								<listheader width="15%" label="#" />
+								<listheader width="75%" label="NOMBRE" />
+							</listhead>
+							<listitem></listitem>
+						</listbox>
+					</panelchildren>
+				</panel>
+			</div>
+		</hbox>
+		</panelchildren>
+		</panel>
+		<div align="right">
+			<button image="/Recursos/Imagenes/guardar.ico" label="Guardar" />
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 			<button image="/Recursos/Imagenes/cancelar.ico"	label="Cancelar" />
 			<button image="/Recursos/Imagenes/salir.png" label="Salir" />
 		</div>

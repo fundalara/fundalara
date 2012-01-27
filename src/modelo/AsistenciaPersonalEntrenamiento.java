@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -33,6 +37,7 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 	public AsistenciaPersonalEntrenamiento(
 			AsistenciaPersonalEntrenamientoId id,
 			SesionEjecutada sesionEjecutada, PersonalEquipo personalEquipo,
+<<<<<<< HEAD
 			DatoBasico datoBasico, boolean asistencia, char estatus) {
 		this.id = id;
 		this.sesionEjecutada = sesionEjecutada;
@@ -45,6 +50,8 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 	public AsistenciaPersonalEntrenamiento(
 			AsistenciaPersonalEntrenamientoId id,
 			SesionEjecutada sesionEjecutada, PersonalEquipo personalEquipo,
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 			DatoBasico datoBasico, boolean asistencia, String observacion,
 			char estatus) {
 		this.id = id;
@@ -107,7 +114,11 @@ public class AsistenciaPersonalEntrenamiento implements java.io.Serializable {
 		this.asistencia = asistencia;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "observacion")
+=======
+	@Column(name = "observacion", nullable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public String getObservacion() {
 		return this.observacion;
 	}

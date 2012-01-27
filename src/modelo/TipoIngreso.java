@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +30,10 @@ public class TipoIngreso implements java.io.Serializable {
 	private String descripcion;
 	private Double monto;
 	private char estatus;
+<<<<<<< HEAD
 	private char aplicacion;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	private Set<DocumentoAcreedor> documentoAcreedors = new HashSet<DocumentoAcreedor>(
 			0);
 
@@ -34,19 +41,30 @@ public class TipoIngreso implements java.io.Serializable {
 	}
 
 	public TipoIngreso(int codigoTipoIngreso,
+<<<<<<< HEAD
 			DatoBasico datoBasicoByCodigoTipo, String descripcion,
 			char estatus, char aplicacion) {
+=======
+			DatoBasico datoBasicoByCodigoTipo, String descripcion, char estatus) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.codigoTipoIngreso = codigoTipoIngreso;
 		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
+<<<<<<< HEAD
 		this.aplicacion = aplicacion;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	}
 
 	public TipoIngreso(int codigoTipoIngreso,
 			DatoBasico datoBasicoByCodigoPeriodicidad,
 			DatoBasico datoBasicoByCodigoTipo, String descripcion,
+<<<<<<< HEAD
 			Double monto, char estatus, char aplicacion,
+=======
+			Double monto, char estatus,
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 			Set<DocumentoAcreedor> documentoAcreedors) {
 		this.codigoTipoIngreso = codigoTipoIngreso;
 		this.datoBasicoByCodigoPeriodicidad = datoBasicoByCodigoPeriodicidad;
@@ -54,7 +72,10 @@ public class TipoIngreso implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.monto = monto;
 		this.estatus = estatus;
+<<<<<<< HEAD
 		this.aplicacion = aplicacion;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.documentoAcreedors = documentoAcreedors;
 	}
 
@@ -116,6 +137,7 @@ public class TipoIngreso implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "aplicacion", nullable = false, length = 1)
 	public char getAplicacion() {
 		return this.aplicacion;
@@ -125,6 +147,8 @@ public class TipoIngreso implements java.io.Serializable {
 		this.aplicacion = aplicacion;
 	}
 
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIngreso")
 	public Set<DocumentoAcreedor> getDocumentoAcreedors() {
 		return this.documentoAcreedors;

@@ -18,6 +18,10 @@ public interface IServicioLineUp {
 	public abstract List<LineUp> listarActivos();
 	
 	public abstract List<LineUp> listarPlanificados(Juego j,Equipo e);
+<<<<<<< HEAD
     
 	public abstract List<LineUp> listarDefinitivos(Juego j,Equipo e);
+=======
+
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 }

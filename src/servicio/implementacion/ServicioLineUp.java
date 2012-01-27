@@ -51,6 +51,7 @@ public class ServicioLineUp implements IServicioLineUp {
 
 	@Override
 	public List<LineUp> listarPlanificados(Juego j,Equipo e) {
+<<<<<<< HEAD
 		
 		return daoLineUp.listarPlanificados(j,e);
 	}
@@ -61,4 +62,10 @@ public class ServicioLineUp implements IServicioLineUp {
 		return daoLineUp.listarDefinivos(j, e);
 	}
 
+=======
+		// TODO Auto-generated method stub
+		return daoLineUp.listarPlanificados(j,e);
+	}
+
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 }

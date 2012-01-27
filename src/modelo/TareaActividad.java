@@ -1,12 +1,20 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
+=======
+import javax.persistence.JoinColumns;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,20 +30,30 @@ public class TareaActividad implements java.io.Serializable {
 	private Actividad actividad;
 	private PersonalActividad personalActividad;
 	private char estatus;
+<<<<<<< HEAD
 	private boolean tareaEjecutada;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 	public TareaActividad() {
 	}
 
 	public TareaActividad(int codigoTareaActividad, DatoBasico datoBasico,
 			Actividad actividad, PersonalActividad personalActividad,
+<<<<<<< HEAD
 			char estatus, boolean tareaEjecutada) {
+=======
+			char estatus) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 		this.codigoTareaActividad = codigoTareaActividad;
 		this.datoBasico = datoBasico;
 		this.actividad = actividad;
 		this.personalActividad = personalActividad;
 		this.estatus = estatus;
+<<<<<<< HEAD
 		this.tareaEjecutada = tareaEjecutada;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	}
 
 	@Id
@@ -69,7 +87,13 @@ public class TareaActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+<<<<<<< HEAD
 	@JoinColumn(name = "codigo_personal_actividad", nullable = false)
+=======
+	@JoinColumns({
+			@JoinColumn(name = "cedula_rif", referencedColumnName = "cedula_rif", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "codigo_actividad", referencedColumnName = "codigo_actividad", nullable = false, insertable = false, updatable = false) })
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public PersonalActividad getPersonalActividad() {
 		return this.personalActividad;
 	}
@@ -87,6 +111,7 @@ public class TareaActividad implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "tarea_ejecutada", nullable = false)
 	public boolean isTareaEjecutada() {
 		return this.tareaEjecutada;
@@ -96,4 +121,6 @@ public class TareaActividad implements java.io.Serializable {
 		this.tareaEjecutada = tareaEjecutada;
 	}
 
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 }

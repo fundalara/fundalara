@@ -1,6 +1,10 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 
 import java.util.HashSet;
 import java.util.Set;
@@ -75,7 +79,11 @@ public class ActividadesEjecutadas implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+<<<<<<< HEAD
 	@JoinColumn(name = "codigo_actividad_entrenamiento", nullable = false)
+=======
+	@JoinColumn(name = "cod_actividad_entrenamiento", nullable = false)
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
 	public ActividadEntrenamiento getActividadEntrenamiento() {
 		return this.actividadEntrenamiento;
 	}
