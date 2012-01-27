@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 <?xml version="1.0" encoding="UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/calendar.css"?>
 <?component name="calendario" macro-uri="Calendario/Calendario.zul" inline="true"?>
@@ -66,4 +73,89 @@
 				onTimer="updateMsg.close()" />
 		</popup>
 	</window>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/calendar.css"?>
+<?component name="calendario" macro-uri="Calendario/Calendario.zul" inline="true"?>
+<!-- <?component name="leftPanel" macro-uri="Calendario/Left_Panel.zul" inline="true"?> -->
+<?component name="create" macro-uri="Calendario/createEvent.zul" inline="true"?>
+<?component name="edit" macro-uri="Calendario/editEvent.zul" inline="true"?>
+<?component name="toolbar" macro-uri="Calendario/toolbar.zul" inline="true"?>
+<?component name="divtab" macro-uri="Calendario/divtab.zul" inline="true"?>
+<?component name="divarrow" macro-uri="Calendario/divarrow.zul" inline="true"?>
+<?page title="Calendario" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmAgenda"?>
+<zk>
+	<zscript>
+    <![CDATA[
+	String p = arg.get("disparador");
+	String controlador;
+	if (p.equals("entrenamiento"))
+		controlador = "CntrlFrmAgendaEntrenamiento";
+	else if (p.equals("competencia"))
+		controlador = "CntrlFrmAgendaCompetencia";
+	else
+		controlador = "CntrlFrmAgendaLogistica";
+]]>
+    </zscript>
+	<window border="none" closable="true" width="100%" height="600px"
+		apply="controlador.general.${controlador}" id="frmAgenda">
+		<caption id="titulo" label="Calendario">
+			<label sclass="labels" id="rangoCalendario"></label>
+		</caption>
+		<borderlayout>
+			<north>
+				<div>
+					<div height="10px" style="padding:5px;" align="right">
+						<hbox>
+							<div width="10px" height="10px" style="background-color:#32CD32; border: 1px solid; margin-left: 10px"></div>
+							<label value="Por registrar" />
+							<div width="10px" height="10px" style="background-color:#FDD017; border: 1px solid; margin-left: 10px"></div>
+							<label value="Registrada" />
+							<div width="10px" height="10px" style="background-color:#ff7700; border: 1px solid; margin-left: 10px"></div>
+							<label value="Pendientes" />
+							<div width="10px" height="10px" style="background-color:#f13616; border: 1px solid; margin-left: 10px"></div>
+							<label value="Suspendidas" />
+						</hbox>
+					</div>
+					<div class="float-left">
+						<hbox>
+							<divarrow type="arrow-left" />
+							<divarrow type="arrow-right" />
+							<div>
+								<button mold="os" label="Hoy" id="hoy" />
+								<span id="spnControles">
+
+								</span>
+								<separator orient="vertical" />
+							</div>
+						</hbox>
+					</div>
+					<div class="float-right">
+						<hbox>
+							<divtab forEach="Semana, Mes, Dia"
+								text="${each}" />
+						</hbox>
+					</div>
+				</div>
+			</north>
+			<west border="none"></west>
+			<center border="none">
+				<calendario />
+			</center>
+		</borderlayout>
+		<popup id="updateMsg" width="320px">
+			<label id="popupLabel" />
+			<timer id="timer" delay="1000" running="false"
+				onTimer="updateMsg.close()" />
+		</popup>
+	</window>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 </zk>

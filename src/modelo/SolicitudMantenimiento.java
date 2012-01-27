@@ -1,6 +1,18 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,19 +34,49 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 	private SolicitudMantenimientoId id;
 	private Actividad actividad;
 	private DatoBasico datoBasico;
+<<<<<<< HEAD
 	private String descripcionActividad;
+=======
+<<<<<<< HEAD
+	private String descripcionActividad;
+=======
+<<<<<<< HEAD
+	private String descripcionActividad;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private char estatus;
 
 	public SolicitudMantenimiento() {
 	}
 
 	public SolicitudMantenimiento(SolicitudMantenimientoId id,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			Actividad actividad, DatoBasico datoBasico,
 			String descripcionActividad, char estatus) {
 		this.id = id;
 		this.actividad = actividad;
 		this.datoBasico = datoBasico;
 		this.descripcionActividad = descripcionActividad;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+			Actividad actividad, DatoBasico datoBasico, char estatus) {
+		this.id = id;
+		this.actividad = actividad;
+		this.datoBasico = datoBasico;
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.estatus = estatus;
 	}
 
@@ -70,6 +112,13 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 		this.datoBasico = datoBasico;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@Column(name = "descripcion_actividad", nullable = false)
 	public String getDescripcionActividad() {
 		return this.descripcionActividad;
@@ -79,6 +128,14 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 		this.descripcionActividad = descripcionActividad;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;

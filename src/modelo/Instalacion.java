@@ -1,6 +1,18 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -31,8 +43,21 @@ public class Instalacion implements java.io.Serializable {
 	private Set<Almacen> almacens = new HashSet<Almacen>(0);
 	private Set<InstalacionUtilizada> instalacionUtilizadas = new HashSet<InstalacionUtilizada>(
 			0);
+<<<<<<< HEAD
 	private Set<InstalacionEjecutada> instalacionEjecutadas = new HashSet<InstalacionEjecutada>(
 			0);
+=======
+<<<<<<< HEAD
+	private Set<InstalacionEjecutada> instalacionEjecutadas = new HashSet<InstalacionEjecutada>(
+			0);
+=======
+<<<<<<< HEAD
+	private Set<InstalacionEjecutada> instalacionEjecutadas = new HashSet<InstalacionEjecutada>(
+			0);
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 	public Instalacion() {
 	}
@@ -48,8 +73,22 @@ public class Instalacion implements java.io.Serializable {
 	public Instalacion(int codigoInstalacion, DatoBasico datoBasico,
 			String descripcion, Integer capacidad, char estatus,
 			BigDecimal tamano, String ubicacion, Set<Almacen> almacens,
+<<<<<<< HEAD
 			Set<InstalacionUtilizada> instalacionUtilizadas,
 			Set<InstalacionEjecutada> instalacionEjecutadas) {
+=======
+<<<<<<< HEAD
+			Set<InstalacionUtilizada> instalacionUtilizadas,
+			Set<InstalacionEjecutada> instalacionEjecutadas) {
+=======
+<<<<<<< HEAD
+			Set<InstalacionUtilizada> instalacionUtilizadas,
+			Set<InstalacionEjecutada> instalacionEjecutadas) {
+=======
+			Set<InstalacionUtilizada> instalacionUtilizadas) {
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.codigoInstalacion = codigoInstalacion;
 		this.datoBasico = datoBasico;
 		this.descripcion = descripcion;
@@ -59,7 +98,18 @@ public class Instalacion implements java.io.Serializable {
 		this.ubicacion = ubicacion;
 		this.almacens = almacens;
 		this.instalacionUtilizadas = instalacionUtilizadas;
+<<<<<<< HEAD
 		this.instalacionEjecutadas = instalacionEjecutadas;
+=======
+<<<<<<< HEAD
+		this.instalacionEjecutadas = instalacionEjecutadas;
+=======
+<<<<<<< HEAD
+		this.instalacionEjecutadas = instalacionEjecutadas;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	}
 
 	@Id
@@ -146,6 +196,13 @@ public class Instalacion implements java.io.Serializable {
 		this.instalacionUtilizadas = instalacionUtilizadas;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "instalacion")
 	public Set<InstalacionEjecutada> getInstalacionEjecutadas() {
 		return this.instalacionEjecutadas;
@@ -156,4 +213,12 @@ public class Instalacion implements java.io.Serializable {
 		this.instalacionEjecutadas = instalacionEjecutadas;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 }

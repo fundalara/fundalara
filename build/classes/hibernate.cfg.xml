@@ -11,11 +11,31 @@
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <property name="hibernate.current_session_context_class">thread</property>
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.transaction.flush_before_completion">true</property>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<!--         <property name="hibernate.hbm2ddl.auto">create</property> -->
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
         <mapping class="modelo.IndicadorTest" />
         <mapping class="modelo.Personal" />
         <mapping class="modelo.DocumentoAcreedor" />
@@ -43,7 +63,18 @@
         <mapping class="modelo.Representante" />
         <mapping class="modelo.PersonalConceptoNomina" />
         <mapping class="modelo.PersonalCargo" />
+<<<<<<< HEAD
         <mapping class="modelo.ComisionActividadPlanificada" />
+=======
+<<<<<<< HEAD
+        <mapping class="modelo.ComisionActividadPlanificada" />
+=======
+<<<<<<< HEAD
+        <mapping class="modelo.ComisionActividadPlanificada" />
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
         <mapping class="modelo.Egreso" />
         <mapping class="modelo.EquipoJuego" />
         <mapping class="modelo.Ascenso" />
@@ -51,8 +82,23 @@
         <mapping class="modelo.PlanTemporada" />
         <mapping class="modelo.TareaActividadPlanificada" />
         <mapping class="modelo.EstadoActividad" />
+<<<<<<< HEAD
         <mapping class="modelo.DatoBasico" />
         <mapping class="modelo.CuentaPagar" />
+=======
+<<<<<<< HEAD
+        <mapping class="modelo.DatoBasico" />
+        <mapping class="modelo.CuentaPagar" />
+=======
+<<<<<<< HEAD
+        <mapping class="modelo.DatoBasico" />
+        <mapping class="modelo.CuentaPagar" />
+=======
+        <mapping class="modelo.CuentaPagar" />
+        <mapping class="modelo.DatoBasico" />
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
         <mapping class="modelo.TestEvaluativo" />
         <mapping class="modelo.EgresoCuentaPagar" />
         <mapping class="modelo.Liga" />
@@ -146,7 +192,18 @@
         <mapping class="modelo.PersonalEquipoCompetencia" />
         <mapping class="modelo.Almacen" />
         <mapping class="modelo.DatoAcademicoPersonal" />
+<<<<<<< HEAD
         <mapping class="modelo.ComisionActividad" />
+=======
+<<<<<<< HEAD
+        <mapping class="modelo.ComisionActividad" />
+=======
+<<<<<<< HEAD
+        <mapping class="modelo.ComisionActividad" />
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
         <mapping class="modelo.PersonalForaneo" />
         <mapping class="modelo.IndicadorActividadEscala" />
         <mapping class="modelo.DesempennoIndividual" />

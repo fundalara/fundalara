@@ -1,18 +1,47 @@
 <?page title="frmReporteDesempenoJugador" contentType="text/html;charset=UTF-8"?>
 <zk>
+<<<<<<< HEAD
 	<window title="Configuración de Reporte del Desempeño Deportivo"
+=======
+<<<<<<< HEAD
+<div align="center" >
+	<window title="Configuración de Reporte del Desempeño Deportivo"
+		border="normal" width="500px">
+		<grid style="border:none">
+			<columns>
+				<column label="" align="left" width="10%" />
+				<column label="" align="left" width="80%" />
+				<column label="" align="left" width="10%" />
+=======
+	<window title="Configuración de Reporte del Desempeño del Jugador"
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		border="normal" width="700px">
 		<grid style="border:none">
 			<columns>
 				<column label="" align="left" width="15%" />
 				<column label="" align="left" width="85%" />
+<<<<<<< HEAD
+=======
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			</columns>
 			<rows>
 				<row style="border:none">
 					<label value="Competencia" />
 					<hbox>
+<<<<<<< HEAD
 						<textbox value="CAMPEONATO NACIONAL CRIOLLITOS DE VENEZUELA" cols="40"></textbox>
 						<space></space>
+=======
+<<<<<<< HEAD
+						<textbox
+							value="CAMPEONATO NACIONAL CRIOLLITOS DE VENEZUELA" cols="40">
+						</textbox>
+=======
+						<textbox value="CAMPEONATO NACIONAL CRIOLLITOS DE VENEZUELA" cols="40"></textbox>
+						<space></space>
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 						<button id="btnBuscar"
 							image="/Recursos/Imagenes/consultar.ico">
 						</button>
@@ -29,6 +58,30 @@
 				</row>
 			</rows>
 		</grid>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		<grid style="border:none" width="100%">
+			<columns>
+				<column label="" align="left" width="19%" />
+				<column label="" align="left" width="10%" />
+				<column label="" align="left" width="20%" />
+				<column label="" align="left" width="10%" />
+			</columns>
+			<rows>
+				<row style="border:none">
+					<label value="Filtrar por"></label>
+					<combobox value="--Seleccione--" >
+						<comboitem label="Equipo" />
+						<comboitem label="Competencia" />
+					</combobox>
+				</row>
+				<row style="border:none">
+					<label value="Equipo"></label>
+					<hbox>
+						<textbox value="PREJUNIOR A" width="170px"></textbox>
+=======
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		<separator></separator>
 
 
@@ -42,6 +95,7 @@
 			<rows>
 
 				<row style="border:none">
+<<<<<<< HEAD
 				
 					<checkbox label="  Equipo" checked="true"></checkbox>
 					
@@ -49,16 +103,44 @@
 						<space></space>
 						<checkbox label="Competencia" disabled="true"></checkbox>
 					
+=======
+					<checkbox label="  Equipo" checked="true"></checkbox>
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			
 					<hbox>
 	
 					<textbox value="PREJUNIOR A" cols="17"></textbox>
+<<<<<<< HEAD
+=======
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 						<space></space>
 						<button id="btnBuscarEquipo"
 							image="/Recursos/Imagenes/consultar.ico">
 						</button>
 					</hbox>
+<<<<<<< HEAD
 					
+=======
+					<hbox>
+<<<<<<< HEAD
+						<label value="Modalidad"></label>
+						<combobox value="OFENSIVA" width="70px">
+							<comboitem label="" />
+							<comboitem label="" />
+						</combobox>
+					</hbox>
+				</row>
+				<row style="border:none">
+					<label value="Juego"></label>
+					<combobox value="PREJUNIOR A Vs DELFINES A"
+						cols="22">
+=======
+						
+						<space></space>
+						<checkbox label="Competencia" disabled="true"></checkbox>
+					</hbox>
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 				</row>
 
@@ -76,10 +158,38 @@
 					</hbox>
 
 					<combobox value="PREJUNIOR A Vs DELFINES A" cols="22">
+<<<<<<< HEAD
+=======
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 						<comboitem label="" />
 						<comboitem label="" />
 					</combobox>
 				</row>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+			</rows>
+		</grid>
+		<div align="right" height="30px">
+			<button id="btnGuardar"
+				image="/Recursos/Imagenes/reporte.ico" label="Generar"
+				orient="horizontal">
+			</button>
+
+			<button id="btnCancelar"
+				image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+				orient="horizontal">
+			</button>
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
+				label="Salir" orient="horizontal">
+			</button>
+
+		</div>
+	</window>
+	</div>
+=======
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 
 			</rows>
@@ -104,4 +214,8 @@
 
 						</div>
 	</window>
+<<<<<<< HEAD
+=======
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 </zk>

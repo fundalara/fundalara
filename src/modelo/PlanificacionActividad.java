@@ -1,6 +1,18 @@
 package modelo;
 
+<<<<<<< HEAD
 // Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+<<<<<<< HEAD
+// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+=======
+// Generated 24/01/2012 04:28:30 AM by Hibernate Tools 3.4.0.CR1
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,8 +46,21 @@ public class PlanificacionActividad implements java.io.Serializable {
 	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
 			0);
 	private Set<Periodicidad> periodicidads = new HashSet<Periodicidad>(0);
+<<<<<<< HEAD
 	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
 			0);
+=======
+<<<<<<< HEAD
+	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
+			0);
+=======
+<<<<<<< HEAD
+	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
+			0);
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
 
@@ -62,7 +87,18 @@ public class PlanificacionActividad implements java.io.Serializable {
 			Set<Actividad> actividads,
 			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
 			Set<Periodicidad> periodicidads,
+<<<<<<< HEAD
 			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
+=======
+<<<<<<< HEAD
+			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
+=======
+<<<<<<< HEAD
+			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
@@ -76,7 +112,18 @@ public class PlanificacionActividad implements java.io.Serializable {
 		this.actividads = actividads;
 		this.personalActividadPlanificadas = personalActividadPlanificadas;
 		this.periodicidads = periodicidads;
+<<<<<<< HEAD
 		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
+=======
+<<<<<<< HEAD
+		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
+=======
+<<<<<<< HEAD
+		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
 
@@ -195,6 +242,13 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	public Set<ComisionActividadPlanificada> getComisionActividadPlanificadas() {
 		return this.comisionActividadPlanificadas;
 	}
@@ -205,6 +259,14 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 7d4823278d0a354855f5032a99e2b48c65b33e7f
+>>>>>>> 9d67536bdd2e3b33aa6400eb3bb09741a4535bb0
+>>>>>>> 873ccb018e72b00b831aa9284cc0745bd1c2d514
 	public Set<TareaActividadPlanificada> getTareaActividadPlanificadas() {
 		return this.tareaActividadPlanificadas;
 	}
