@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,44 +23,46 @@ import javax.persistence.TemporalType;
 @Table(name = "ingreso", schema = "public")
 public class Ingreso implements java.io.Serializable {
 
-	private String numeroDocumento;
+	private int codigoIngreso;
 	private DatoBasico datoBasico;
+	private String numeroDocumento;
 	private Date fechaPago;
 	private char estatus;
-	private Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors = new HashSet<IngresoDocumentoAcreedor>(
-			0);
 	private Set<IngresoFormaPago> ingresoFormaPagos = new HashSet<IngresoFormaPago>(
+			0);
+	private Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors = new HashSet<IngresoDocumentoAcreedor>(
 			0);
 
 	public Ingreso() {
 	}
 
-	public Ingreso(String numeroDocumento, Date fechaPago, char estatus) {
-		this.numeroDocumento = numeroDocumento;
+	public Ingreso(int codigoIngreso, Date fechaPago, char estatus) {
+		this.codigoIngreso = codigoIngreso;
 		this.fechaPago = fechaPago;
 		this.estatus = estatus;
 	}
 
-	public Ingreso(String numeroDocumento, DatoBasico datoBasico,
-			Date fechaPago, char estatus,
-			Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors,
-			Set<IngresoFormaPago> ingresoFormaPagos) {
-		this.numeroDocumento = numeroDocumento;
+	public Ingreso(int codigoIngreso, DatoBasico datoBasico,
+			String numeroDocumento, Date fechaPago, char estatus,
+			Set<IngresoFormaPago> ingresoFormaPagos,
+			Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors) {
+		this.codigoIngreso = codigoIngreso;
 		this.datoBasico = datoBasico;
+		this.numeroDocumento = numeroDocumento;
 		this.fechaPago = fechaPago;
 		this.estatus = estatus;
-		this.ingresoDocumentoAcreedors = ingresoDocumentoAcreedors;
 		this.ingresoFormaPagos = ingresoFormaPagos;
+		this.ingresoDocumentoAcreedors = ingresoDocumentoAcreedors;
 	}
 
 	@Id
-	@Column(name = "numero_documento", unique = true, nullable = false)
-	public String getNumeroDocumento() {
-		return this.numeroDocumento;
+	@Column(name = "codigo_ingreso", unique = true, nullable = false)
+	public int getCodigoIngreso() {
+		return this.codigoIngreso;
 	}
 
-	public void setNumeroDocumento(String numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
+	public void setCodigoIngreso(int codigoIngreso) {
+		this.codigoIngreso = codigoIngreso;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -71,6 +73,15 @@ public class Ingreso implements java.io.Serializable {
 
 	public void setDatoBasico(DatoBasico datoBasico) {
 		this.datoBasico = datoBasico;
+	}
+
+	@Column(name = "numero_documento")
+	public String getNumeroDocumento() {
+		return this.numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -93,6 +104,15 @@ public class Ingreso implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ingreso")
+	public Set<IngresoFormaPago> getIngresoFormaPagos() {
+		return this.ingresoFormaPagos;
+	}
+
+	public void setIngresoFormaPagos(Set<IngresoFormaPago> ingresoFormaPagos) {
+		this.ingresoFormaPagos = ingresoFormaPagos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ingreso")
 	public Set<IngresoDocumentoAcreedor> getIngresoDocumentoAcreedors() {
 		return this.ingresoDocumentoAcreedors;
 	}
@@ -100,15 +120,6 @@ public class Ingreso implements java.io.Serializable {
 	public void setIngresoDocumentoAcreedors(
 			Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors) {
 		this.ingresoDocumentoAcreedors = ingresoDocumentoAcreedors;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ingreso")
-	public Set<IngresoFormaPago> getIngresoFormaPagos() {
-		return this.ingresoFormaPagos;
-	}
-
-	public void setIngresoFormaPagos(Set<IngresoFormaPago> ingresoFormaPagos) {
-		this.ingresoFormaPagos = ingresoFormaPagos;
 	}
 
 }

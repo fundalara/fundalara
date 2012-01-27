@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +26,9 @@ public class TipoIngreso implements java.io.Serializable {
 	private String descripcion;
 	private Double monto;
 	private char estatus;
-	private char aplicacion;
+	private boolean aplicaRepresentante;
+	private Set<IngresoInscripcion> ingresoInscripcions = new HashSet<IngresoInscripcion>(
+			0);
 	private Set<DocumentoAcreedor> documentoAcreedors = new HashSet<DocumentoAcreedor>(
 			0);
 
@@ -35,18 +37,19 @@ public class TipoIngreso implements java.io.Serializable {
 
 	public TipoIngreso(int codigoTipoIngreso,
 			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-			char estatus, char aplicacion) {
+			char estatus, boolean aplicaRepresentante) {
 		this.codigoTipoIngreso = codigoTipoIngreso;
 		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.aplicacion = aplicacion;
+		this.aplicaRepresentante = aplicaRepresentante;
 	}
 
 	public TipoIngreso(int codigoTipoIngreso,
 			DatoBasico datoBasicoByCodigoPeriodicidad,
 			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-			Double monto, char estatus, char aplicacion,
+			Double monto, char estatus, boolean aplicaRepresentante,
+			Set<IngresoInscripcion> ingresoInscripcions,
 			Set<DocumentoAcreedor> documentoAcreedors) {
 		this.codigoTipoIngreso = codigoTipoIngreso;
 		this.datoBasicoByCodigoPeriodicidad = datoBasicoByCodigoPeriodicidad;
@@ -54,7 +57,8 @@ public class TipoIngreso implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.monto = monto;
 		this.estatus = estatus;
-		this.aplicacion = aplicacion;
+		this.aplicaRepresentante = aplicaRepresentante;
+		this.ingresoInscripcions = ingresoInscripcions;
 		this.documentoAcreedors = documentoAcreedors;
 	}
 
@@ -116,13 +120,23 @@ public class TipoIngreso implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@Column(name = "aplicacion", nullable = false, length = 1)
-	public char getAplicacion() {
-		return this.aplicacion;
+	@Column(name = "aplica_representante", nullable = false)
+	public boolean isAplicaRepresentante() {
+		return this.aplicaRepresentante;
 	}
 
-	public void setAplicacion(char aplicacion) {
-		this.aplicacion = aplicacion;
+	public void setAplicaRepresentante(boolean aplicaRepresentante) {
+		this.aplicaRepresentante = aplicaRepresentante;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIngreso")
+	public Set<IngresoInscripcion> getIngresoInscripcions() {
+		return this.ingresoInscripcions;
+	}
+
+	public void setIngresoInscripcions(
+			Set<IngresoInscripcion> ingresoInscripcions) {
+		this.ingresoInscripcions = ingresoInscripcions;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoIngreso")

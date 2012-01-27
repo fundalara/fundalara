@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,25 +11,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class IngresoDocumentoAcreedorId implements java.io.Serializable {
 
-	private String numeroDocumento;
 	private int codigoDocumentoAcreedor;
+	private int codigoIngreso;
 
 	public IngresoDocumentoAcreedorId() {
 	}
 
-	public IngresoDocumentoAcreedorId(String numeroDocumento,
-			int codigoDocumentoAcreedor) {
-		this.numeroDocumento = numeroDocumento;
+	public IngresoDocumentoAcreedorId(int codigoDocumentoAcreedor,
+			int codigoIngreso) {
 		this.codigoDocumentoAcreedor = codigoDocumentoAcreedor;
-	}
-
-	@Column(name = "numero_documento", nullable = false)
-	public String getNumeroDocumento() {
-		return this.numeroDocumento;
-	}
-
-	public void setNumeroDocumento(String numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
+		this.codigoIngreso = codigoIngreso;
 	}
 
 	@Column(name = "codigo_documento_acreedor", nullable = false)
@@ -41,6 +32,15 @@ public class IngresoDocumentoAcreedorId implements java.io.Serializable {
 		this.codigoDocumentoAcreedor = codigoDocumentoAcreedor;
 	}
 
+	@Column(name = "codigo_ingreso", nullable = false)
+	public int getCodigoIngreso() {
+		return this.codigoIngreso;
+	}
+
+	public void setCodigoIngreso(int codigoIngreso) {
+		this.codigoIngreso = codigoIngreso;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -50,22 +50,16 @@ public class IngresoDocumentoAcreedorId implements java.io.Serializable {
 			return false;
 		IngresoDocumentoAcreedorId castOther = (IngresoDocumentoAcreedorId) other;
 
-		return ((this.getNumeroDocumento() == castOther.getNumeroDocumento()) || (this
-				.getNumeroDocumento() != null
-				&& castOther.getNumeroDocumento() != null && this
-				.getNumeroDocumento().equals(castOther.getNumeroDocumento())))
-				&& (this.getCodigoDocumentoAcreedor() == castOther
-						.getCodigoDocumentoAcreedor());
+		return (this.getCodigoDocumentoAcreedor() == castOther
+				.getCodigoDocumentoAcreedor())
+				&& (this.getCodigoIngreso() == castOther.getCodigoIngreso());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37
-				* result
-				+ (getNumeroDocumento() == null ? 0 : this.getNumeroDocumento()
-						.hashCode());
 		result = 37 * result + this.getCodigoDocumentoAcreedor();
+		result = 37 * result + this.getCodigoIngreso();
 		return result;
 	}
 

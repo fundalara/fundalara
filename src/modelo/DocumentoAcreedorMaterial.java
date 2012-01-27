@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,7 +22,6 @@ public class DocumentoAcreedorMaterial implements java.io.Serializable {
 	private DocumentoAcreedorMaterialId id;
 	private DocumentoAcreedor documentoAcreedor;
 	private Material material;
-	private Double montoEstimado;
 	private char estatus;
 	private int cantidad;
 
@@ -35,17 +34,6 @@ public class DocumentoAcreedorMaterial implements java.io.Serializable {
 		this.id = id;
 		this.documentoAcreedor = documentoAcreedor;
 		this.material = material;
-		this.estatus = estatus;
-		this.cantidad = cantidad;
-	}
-
-	public DocumentoAcreedorMaterial(DocumentoAcreedorMaterialId id,
-			DocumentoAcreedor documentoAcreedor, Material material,
-			Double montoEstimado, char estatus, int cantidad) {
-		this.id = id;
-		this.documentoAcreedor = documentoAcreedor;
-		this.material = material;
-		this.montoEstimado = montoEstimado;
 		this.estatus = estatus;
 		this.cantidad = cantidad;
 	}
@@ -80,15 +68,6 @@ public class DocumentoAcreedorMaterial implements java.io.Serializable {
 
 	public void setMaterial(Material material) {
 		this.material = material;
-	}
-
-	@Column(name = "monto_estimado", precision = 17, scale = 17)
-	public Double getMontoEstimado() {
-		return this.montoEstimado;
-	}
-
-	public void setMontoEstimado(Double montoEstimado) {
-		this.montoEstimado = montoEstimado;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 	private int codigoPlanificacionActividad;
 	private DatoBasico datoBasico;
 	private InstalacionUtilizada instalacionUtilizada;
+	private Personal personal;
 	private char estatus;
 	private boolean actividadPeriodico;
 	private boolean actividadPlantilla;
@@ -55,7 +56,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 
 	public PlanificacionActividad(int codigoPlanificacionActividad,
 			DatoBasico datoBasico, InstalacionUtilizada instalacionUtilizada,
-			char estatus, boolean actividadPeriodico,
+			Personal personal, char estatus, boolean actividadPeriodico,
 			boolean actividadPlantilla, String descripcion,
 			String descripcionInstalacion,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
@@ -67,6 +68,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
 		this.instalacionUtilizada = instalacionUtilizada;
+		this.personal = personal;
 		this.estatus = estatus;
 		this.actividadPeriodico = actividadPeriodico;
 		this.actividadPlantilla = actividadPlantilla;
@@ -109,6 +111,16 @@ public class PlanificacionActividad implements java.io.Serializable {
 	public void setInstalacionUtilizada(
 			InstalacionUtilizada instalacionUtilizada) {
 		this.instalacionUtilizada = instalacionUtilizada;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cedula_rif")
+	public Personal getPersonal() {
+		return this.personal;
+	}
+
+	public void setPersonal(Personal personal) {
+		this.personal = personal;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

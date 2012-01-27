@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,11 +39,11 @@ public class Personal implements java.io.Serializable {
 	private Set<PersonalSuplente> personalSuplentes = new HashSet<PersonalSuplente>(
 			0);
 	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
-	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
-			0);
 	private Usuario usuario;
 	private Set<Movimiento> movimientos = new HashSet<Movimiento>(0);
 	private Set<PersonalConceptoNomina> personalConceptoNominas = new HashSet<PersonalConceptoNomina>(
+			0);
+	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
 			0);
 	private Set<DatoAcademicoPersonal> datoAcademicoPersonals = new HashSet<DatoAcademicoPersonal>(
 			0);
@@ -52,6 +52,8 @@ public class Personal implements java.io.Serializable {
 	private Set<PersonalActividad> personalActividads = new HashSet<PersonalActividad>(
 			0);
 	private Set<PersonalCargo> personalCargos = new HashSet<PersonalCargo>(0);
+	private Set<PlanificacionActividad> planificacionActividads = new HashSet<PlanificacionActividad>(
+			0);
 
 	public Personal() {
 	}
@@ -70,14 +72,15 @@ public class Personal implements java.io.Serializable {
 			Set<PersonalTipoNomina> personalTipoNominas,
 			Set<PersonalContrato> personalContratos,
 			Set<PersonalSuplente> personalSuplentes,
-			Set<PersonalEquipo> personalEquipos,
-			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
-			Usuario usuario, Set<Movimiento> movimientos,
+			Set<PersonalEquipo> personalEquipos, Usuario usuario,
+			Set<Movimiento> movimientos,
 			Set<PersonalConceptoNomina> personalConceptoNominas,
+			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
 			Set<DatoAcademicoPersonal> datoAcademicoPersonals,
 			Set<AfeccionPersonal> afeccionPersonals,
 			Set<PersonalActividad> personalActividads,
-			Set<PersonalCargo> personalCargos) {
+			Set<PersonalCargo> personalCargos,
+			Set<PlanificacionActividad> planificacionActividads) {
 		this.datoBasico = datoBasico;
 		this.personaNatural = personaNatural;
 		this.cantidadHijos = cantidadHijos;
@@ -88,14 +91,15 @@ public class Personal implements java.io.Serializable {
 		this.personalContratos = personalContratos;
 		this.personalSuplentes = personalSuplentes;
 		this.personalEquipos = personalEquipos;
-		this.personalActividadPlanificadas = personalActividadPlanificadas;
 		this.usuario = usuario;
 		this.movimientos = movimientos;
 		this.personalConceptoNominas = personalConceptoNominas;
+		this.personalActividadPlanificadas = personalActividadPlanificadas;
 		this.datoAcademicoPersonals = datoAcademicoPersonals;
 		this.afeccionPersonals = afeccionPersonals;
 		this.personalActividads = personalActividads;
 		this.personalCargos = personalCargos;
+		this.planificacionActividads = planificacionActividads;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "personaNatural"))
@@ -203,16 +207,6 @@ public class Personal implements java.io.Serializable {
 		this.personalEquipos = personalEquipos;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
-	public Set<PersonalActividadPlanificada> getPersonalActividadPlanificadas() {
-		return this.personalActividadPlanificadas;
-	}
-
-	public void setPersonalActividadPlanificadas(
-			Set<PersonalActividadPlanificada> personalActividadPlanificadas) {
-		this.personalActividadPlanificadas = personalActividadPlanificadas;
-	}
-
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal")
 	public Usuario getUsuario() {
 		return this.usuario;
@@ -239,6 +233,16 @@ public class Personal implements java.io.Serializable {
 	public void setPersonalConceptoNominas(
 			Set<PersonalConceptoNomina> personalConceptoNominas) {
 		this.personalConceptoNominas = personalConceptoNominas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Set<PersonalActividadPlanificada> getPersonalActividadPlanificadas() {
+		return this.personalActividadPlanificadas;
+	}
+
+	public void setPersonalActividadPlanificadas(
+			Set<PersonalActividadPlanificada> personalActividadPlanificadas) {
+		this.personalActividadPlanificadas = personalActividadPlanificadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
@@ -276,6 +280,16 @@ public class Personal implements java.io.Serializable {
 
 	public void setPersonalCargos(Set<PersonalCargo> personalCargos) {
 		this.personalCargos = personalCargos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personal")
+	public Set<PlanificacionActividad> getPlanificacionActividads() {
+		return this.planificacionActividads;
+	}
+
+	public void setPlanificacionActividads(
+			Set<PlanificacionActividad> planificacionActividads) {
+		this.planificacionActividads = planificacionActividads;
 	}
 
 }

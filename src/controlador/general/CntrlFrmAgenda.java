@@ -40,8 +40,6 @@ import org.zkoss.zul.Window;
 import servicio.implementacion.ServicioCompetencia;
 import servicio.implementacion.ServicioEquipoJuego;
 
-import comun.EstadoCompetencia;
-
 public class CntrlFrmAgenda extends GenericForwardComposer {
 
 	Popup updateMsg;
@@ -64,10 +62,10 @@ public class CntrlFrmAgenda extends GenericForwardComposer {
 	ServicioEquipoJuego servicioEquipoJuego;
 
 	/*
-	 * 0->Evento no registrado, 1->Evento pendiente, 2->Evento cancelado,
-	 * 3->Evento Finalizado
+	 * 0->por registrar, 1->registrado, 2->pendientes,
+	 * 3->suspendidos
 	 */
-	String[] color = { "#EE5C42", "#32CD32", "#FDD017", "#FFA500" };
+	String[] color = { "#32CD32", "#FDD017", "#ff7700", "#f13616" };
 
 	@Override
 	public void doAfterCompose(Component component) throws Exception {
@@ -232,13 +230,13 @@ public class CntrlFrmAgenda extends GenericForwardComposer {
 		}
 	}
 
-	public void onEventEdit$calendars(CalendarsEvent e) {
-		EventoSimpleCalendario esc = (EventoSimpleCalendario) e.getCalendarEvent();		
-		Window w = (Window) Executions.createComponents("/Competencias/Vistas/FrmAccionJuego.zul", null, null);
-        w.setPosition("center");
-        Juego j = (Juego) esc.getValue();
-        w.setVariable("juego",j,false);
-	}
+//	public void onEventEdit$calendars(CalendarsEvent e) {
+//		EventoSimpleCalendario esc = (EventoSimpleCalendario) e.getCalendarEvent();		
+//		Window w = (Window) Executions.createComponents("/Competencias/Vistas/FrmAccionJuego.zul", null, null);
+//        w.setPosition("center");
+//        Juego j = (Juego) esc.getValue();
+//        w.setVariable("juego",j,false);
+//	}
 
 	/*
 	 * Programacion del toolbar del calendario

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 25/01/2012 12:32:42 AM by Hibernate Tools 3.4.0.CR1
+// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +43,6 @@ public class Equipo implements java.io.Serializable {
 	private Set<SesionEjecutada> sesionEjecutadas = new HashSet<SesionEjecutada>(
 			0);
 	private Set<Sesion> sesions = new HashSet<Sesion>(0);
-	private Set<ComisionEquipo> comisionEquipos = new HashSet<ComisionEquipo>(0);
 
 	public Equipo() {
 	}
@@ -71,8 +70,7 @@ public class Equipo implements java.io.Serializable {
 			Set<JugadorForaneo> jugadorForaneos, Set<RosterPlan> rosterPlans,
 			Set<EquipoCompetencia> equipoCompetencias,
 			Set<TestEvaluativo> testEvaluativos,
-			Set<SesionEjecutada> sesionEjecutadas, Set<Sesion> sesions,
-			Set<ComisionEquipo> comisionEquipos) {
+			Set<SesionEjecutada> sesionEjecutadas, Set<Sesion> sesions) {
 		this.codigoEquipo = codigoEquipo;
 		this.categoria = categoria;
 		this.divisa = divisa;
@@ -92,7 +90,6 @@ public class Equipo implements java.io.Serializable {
 		this.testEvaluativos = testEvaluativos;
 		this.sesionEjecutadas = sesionEjecutadas;
 		this.sesions = sesions;
-		this.comisionEquipos = comisionEquipos;
 	}
 
 	@Id
@@ -272,15 +269,6 @@ public class Equipo implements java.io.Serializable {
 
 	public void setSesions(Set<Sesion> sesions) {
 		this.sesions = sesions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<ComisionEquipo> getComisionEquipos() {
-		return this.comisionEquipos;
-	}
-
-	public void setComisionEquipos(Set<ComisionEquipo> comisionEquipos) {
-		this.comisionEquipos = comisionEquipos;
 	}
 
 }
