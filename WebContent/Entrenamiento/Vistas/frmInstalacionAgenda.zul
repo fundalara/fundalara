@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/calendar.css"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?component name="calendario" macro-uri="Calendario/Calendario.zul" inline="true"?>
+<!-- <?component name="leftPanel" macro-uri="Calendario/Left_Panel.zul" inline="true"?> -->
+<?component name="create" macro-uri="Calendario/createEvent.zul" inline="true"?>
+<?component name="edit" macro-uri="Calendario/editEvent.zul" inline="true"?>
+<?component name="toolbar" macro-uri="Calendario/toolbar.zul" inline="true"?>
+<?component name="divtab" macro-uri="Calendario/divtab.zul" inline="true"?>
+<?component name="divarrow" macro-uri="Calendario/divarrow.zul" inline="true"?>
+<?page title="Calendario" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window border="none" mode="embedded" closable="true" width="695px"
+		height="600px" apply="controlador.entrenamiento.CntrlfrmInstalacionAgenda"
+		id="wndCalendario">
+		<caption id="titulo" label="Calendario">
+			<label sclass="labels" id="rangoCalendario"></label>
+		</caption>
+		<borderlayout>
+			<north>
+				<div>
+					<div class="float-left">
+						<hbox>
+							<divarrow type="arrow-left" />
+							<divarrow type="arrow-right" />
+							<div>
+								<button mold="os" label="Hoy" id="btnHoy" />
+								<span id="FDOW"></span>
+								<separator orient="vertical" />
+							</div>
+						</hbox>
+					</div>
+					<div class="float-right">
+						<button
+							image="/Recursos/Imagenes/atras.ico" mold="os" id="btnAtras"
+							label="Atras" width="90px" />
+					</div>
+				</div>
+			</north>
+			<west border="none"></west>
+			<center border="none">
+				<calendario />
+			</center>
+		</borderlayout>
+		<popup id="updateMsg" width="320px">
+			<label id="popupLabel" />
+			<timer id="timer" delay="1000" running="false"
+				onTimer="updateMsg.close()" />
+		</popup>
+	</window>
+</zk>

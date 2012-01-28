@@ -1,0 +1,37 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winCatalogoEscalaMedicion"?>
+<zk>
+	<window id="winCatalogoEscalaMedicion" closable="true"
+		title="Escalas de Medición" border="normal" width="360px" apply="controlador.entrenamiento.CntrlFrmCatalogoEscalaMedicion">		
+		<listbox id="lboxValoresEscala" multiple="true" mold="paging"
+			pageSize="10" width="350px" height="150px" model="@{cntrl.listEscalaMedicion}">
+			<listhead>
+				<listheader label="Nombre" width="75px" align="center" />
+				<listheader label="Descripcion" align="center"
+					width="150px" />
+			</listhead>
+			<listitem self="@{each=escala}" value="@{escala}">
+				<listcell label="@{escala.nombre}"/>
+				<listcell label="@{escala.descripcion}"/>
+			</listitem>
+		</listbox>
+		<grid>
+			<columns>
+				<column width="500px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+			</columns>
+			<rows>
+				<row>
+					<label value="" />
+					<button id="btnAceptar"
+						image="Recursos/Imagenes/aceptar.ico" label="Aceptar"
+						width="100px" />
+					<button id="btnCancelar"
+						image="Recursos/Imagenes/salir.png" label="Cancelar"
+						width="100px"/>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

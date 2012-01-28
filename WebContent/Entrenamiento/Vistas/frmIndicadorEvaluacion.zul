@@ -1,0 +1,90 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndIndicadorEvaluacion"?>
+<?page title="Gestionar Indicadores"?>
+<zk xmlns:h="xhtml" xmlns:zk="zk">
+	<div align="center">
+		<separator height="15px" />
+		<window id="wndIndicadorEvaluacion"
+			title="Indicadores de Evaluación" border="normal" width="550px"
+			height="" closable="true"
+			apply="controlador.entrenamiento.CntrlFrmIndicadorEvaluacion">
+			<separator height="10px" />
+			<grid width="530px">
+				<columns>
+					<column align="left" />
+					<column />
+					<column align="left" />
+					<column />
+				</columns>
+				<rows>
+					<row height="30px">
+						<label value="Categoria" />
+						<combobox id="cmbCategoria" width="120px"
+							model="@{ctrl.listCategoria}" readonly="true">
+							<comboitem self="@{each=categoria}"
+								label="@{categoria.nombre}" value="@{categoria}" />
+						</combobox>
+						<label value="Actividad" />
+						<combobox id="cmbActividad" width="120px"
+							readonly="true" autocomplete="true">
+						</combobox>
+					</row>
+					<row height="30px">
+						<label value="Tipo Escala" />
+						<combobox id="cmbTipoEscala" width="120px"
+							readonly="true" model="@{ctrl.listTipoEscala}">
+							<comboitem self="@{each=tipoEscala}"
+								label="@{tipoEscala.nombre}" value="@{tipoEscala}" />
+						</combobox>
+						<label value="Nombre Escala" />
+						<combobox id="cmbEscala" width="120px"
+							model="@{ctrl.listEscala}" readonly="true">
+							<comboitem self="@{each=escala}"
+								label="@{escala.nombre}" value="@{escala}" />
+						</combobox>
+					</row>
+					<row height="30px">
+
+						<label value="Indicador" />
+						<combobox id="cmbIndicador" width="120px"
+							readonly="true" autocomplete="true"
+							model="@{ctrl.listIndicador}">
+							<comboitem self="@{each=datoBasico}"
+								label="@{datoBasico.nombre}" value="@{datoBasico}" />
+						</combobox>
+						<label value="Valores" />
+						<textbox id="txtValores" readonly="true" />
+					</row>
+				</rows>
+			</grid>
+			<separator height="10px" />
+			<hbox>
+				<listbox width="475px" id="lboxIndicador"
+					height="330px">
+					<listhead>
+						<listheader label="Indicador" width="150px"
+							align="center" />
+						<listheader label="Escala" width="150px"
+							align="center" />
+					</listhead>
+				</listbox>
+
+				<vbox>
+					<separator height="23px" />
+					<button image="/Recursos/Imagenes/agregar.ico"
+						id="btnAgregar" />
+					<separator height="5px" />
+					<button image="/Recursos/Imagenes/quitar.ico"
+						id="btnQuitar" />
+				</vbox>
+			</hbox>
+			<separator height="10px" />
+			<div align="right">
+				<button image="/Recursos/Imagenes/cancelar.ico"
+					label="Cancelar" width="100px" id="btnCancelar" />
+				<button image="/Recursos/Imagenes/salir.png"
+					label="Salir" width="100px" id="btnSalir" />
+			</div>
+		</window>
+	</div>
+</zk>

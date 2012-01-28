@@ -1,0 +1,324 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndCumplimientoEntrenamiento"?>
+
+<window closable="true" title="Cumplimiento de Entrenamiento"
+	apply="controlador.entrenamiento.CntrlCumplimientoEntrenamiento"
+	border="normal" width="635px" id="wndCumplimientoEntrenamiento">
+	<grid>
+		<rows>
+			<row>
+<!--  -->
+				<vbox>
+					<grid>
+						<columns>
+							<column label="" width="250PX" />
+								<column label="" width="190PX"
+									align="center" />
+								<column label="" width="105PX" align="center" />
+							</columns>
+						<rows>
+							<row height="40px">
+							<hbox>
+								<label value="Equipo" width="100px" />
+								<space width="75px"></space>
+								<combobox value="--SELECCIONE--"
+									width="170px" id="cmbEquipo" 
+									readonly="true">
+									
+								</combobox>
+								</hbox>
+								<label value="Entrenamiento Realizado"
+									width="100px" />
+								<hbox>
+									<radiogroup>
+										<radio checked="true" label="SI"
+											id="rdbtnSi" />
+										<space />
+										<radio label="NO" id="rdbtnNo" />
+									</radiogroup>
+								</hbox>
+							</row>
+							<row height="40px" spans="1,3">
+								<hbox>
+								<label value="Observación"></label>
+								<space width="45px"></space>
+								<combobox value="--SELECCIONE--"
+									width="170px" id="cmbObsEntrenamiento"
+									model="@{cntrl.listObsEntrenamiento}" readonly="true">
+									<comboitem self="@{each=dato}"
+										label="@{dato.nombre}" value="@{dato}" />
+								</combobox>
+								</hbox>
+								<textbox id="txtObsEntrenamiento" width="260px" ></textbox>								
+							</row>
+						</rows>
+					</grid>
+
+				</vbox>
+			</row>
+			<row>
+				<panel title="Horario de Entrenamiento"
+					collapsible="true">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label="" width="110px" />
+								<column label="" width="180px"
+									align="center" />
+								<column label="" width="80px" />
+								<column label="" width="180px"
+									align="center" />
+							</columns>
+							<rows>
+								<row height="40px">
+									<label value="Fecha"></label>
+									<datebox width="140px"
+										id="dtboxFecha" format="dd/MM/yyyy"/>
+									<label value="Hora"></label>
+									<hbox>
+										<timebox id="tboxHoraInicio" />
+										
+										<label value="--"></label>
+										
+										<timebox id="tboxHoraFinal" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</row>
+			<row>
+				<panel title="Manager Encargado" collapsible="true">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label="" width="110PX" />
+								<column label="" width="130PX"
+									align="center" />
+								<column label="" width="270PX" align="center" />
+							</columns>
+							<rows>
+								<row height="30px">
+									<label value="Manager"
+										width="100px" />
+										<textbox id="txtManager" width="180px" readonly="true"></textbox>
+									<combobox width="200px" value="--MANAGER AUXILIAR--"
+										id="cmbManager" model="@{cntrl.listManager}"
+										readonly="true">
+										<comboitem
+											self="@{each=manager}"
+											label="@{manager.personal.personaNatural.primerNombre}"
+											value="@{manager}" />
+									</combobox>
+									</row >
+									<row height="30px">
+									<label value="Observación"></label>
+									<combobox value="-SELECCIONE-"
+										width="170px" id="cmbObsManager"
+										model="@{cntrl.listObsManager}" readonly="true">
+										<comboitem self="@{each=dato}"
+											label="@{dato.nombre}" value="@{dato}" />
+									</combobox>
+									<textbox id="txtObsManager" width="220px"/>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</row>
+			<row>
+				<panel title="Monitor Encargado" collapsible="true">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label="" width="110PX" />
+								<column label="" width="130PX"
+									align="center" />
+								<column label="" width="270PX" align="center" />
+							</columns>
+							<rows>
+								<row height="30px">
+									<label value="Monitor"
+										width="100px" />
+										<textbox id="txtMonitor" width="180px" readonly="true"></textbox>
+									<combobox width="200px" value="--MONITOR AUXILIAR--"
+										id="cmbMonitor" model="@{cntrl.listMonitor}"
+										readonly="true">
+										<comboitem
+											self="@{each=monitor}"
+											label="@{monitor.personal.personaNatural.primerNombre}"
+											value="@{monitor}" />
+									</combobox>
+									</row>
+									<row height="30px">
+									<label value="Observación"></label>
+									<combobox value="--SELECCIONE--"
+										width="170px" id="cmbObsMonitor"
+										model="@{cntrl.listObsMonitor}" readonly="true">
+										<comboitem self="@{each=dato}"
+											label="@{dato.nombre}" value="@{dato}" />
+									</combobox>
+									<textbox id="txtObsMonitor" width="220px"/>
+								</row>
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</row>
+			<row>
+				<panel title="Instalacion Utilizada"
+					collapsible="true">
+					<panelchildren>
+						<grid>
+							<columns>
+								<column label="" width="110PX" />
+								<column label="" width="130PX"
+									align="center" />
+								<column label="" width="270PX" align="center" />
+								
+							</columns>
+							<rows>
+								<row height="30px">
+									<label value="Instalación"></label>
+									<textbox id="txtInstalacion" width="180px" readonly="true"></textbox>
+									<combobox width="200px" value="--INSTALACION AUXILIAR--"
+										id="cmbInstalacion" model="@{cntrl.listInstalacion}"
+										readonly="true">
+										<comboitem
+											self="@{each=instalacion}" label="@{instalacion.descripcion}"
+											value="@{instalacion}" />																					
+									</combobox>
+									</row>											
+											<row height="30px" spans="">
+									<label width="180px" value="Observación"></label>
+									
+									<combobox value="--SELECCIONE--"
+										width="170px" id="cmbObsInstalacion"
+										model="@{cntrl.listObsInstalacion}" readonly="true">
+										<comboitem self="@{each=dato}"
+											label="@{dato.nombre}" value="@{dato}" />
+									</combobox>
+									<textbox id="txtObsInstalacion" width="220px"/>
+								</row>
+							</rows>
+						</grid>
+						<panel title="Actividades Realizadas"
+							collapsible="true">
+							<panelchildren>
+								<grid height="150px">
+									<columns sizable="true"
+										menupopup="auto">
+										<column width="450px"
+											align="center" />
+										<column width="60px"
+											align="center" />
+									</columns>
+									<rows>
+										<row height="15px">
+										<hbox>
+											<listbox
+												id="lboxActividades" multiple="true" mold="paging"
+												pageSize="7" height="120px"
+												model="@{cntrl.listActividadPlanificada}">
+												<listhead>
+													<listheader
+														label="Actividad" sort="auto" width="230px"
+														align="center" />
+													<listheader
+														label="Tiempo (min)" sort="auto" align="center" width="120px"/>
+														<listheader
+														label="Estado" sort="auto" align="center" width="170px"/>
+												</listhead>
+												<listitem
+													self="@{each=actividad}"
+													value="@{actividad.indicadorActividadEscala.actividadEntrenamiento}">
+													<listcell
+														label="@{actividad.indicadorActividadEscala.actividadEntrenamiento.nombre}" />
+													<listcell
+														label="@{actividad.tiempo}" />
+													<listcell
+														label="EJECUTADA" />	
+												</listitem>
+												
+											</listbox>
+											<space ></space>
+											<vbox height="50px"> 
+											<button
+												image="/Recursos/Imagenes/eliminar.ico" id="btnQuitar" />
+												<button
+												image="/Recursos/Imagenes/aceptar.ico" id="btnHabilitar" visible="false" />
+												</vbox>
+											<space width="7px"></space>
+											</hbox>
+											
+										</row>
+									</rows>
+								</grid>
+								<grid>
+									<columns>
+										<column label="" width="90PX" />
+										<column label="" width="150PX"
+											align="center" />
+										<column label="" width="90PX" />
+										<column label="" width="150PX"
+											align="center" />
+										<column label="" width="40PX"
+											align="left" />
+									</columns>
+									<rows>
+										<row>
+											<label value="Actividad"></label>
+											<combobox width="150px"
+												id="cmbActividad" model="@{cntrl.listActividad}"
+												readonly="true">
+												<comboitem
+													self="@{each=actividad}" label="@{actividad.nombre}"
+													value="@{actividad}" />
+											</combobox>
+											<label value="Tiempo"></label>
+											<hbox width="130px"
+												align="center">
+												<intbox id="iboxTiempo"
+													width="70px" />
+												<label value=" min"
+													width="30px" />
+											</hbox>
+											<hbox>
+											<space width="5px"></space>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" id="btnAgregar" />
+										</hbox>
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</panelchildren>
+				</panel>
+			</row>
+		</rows>
+	</grid>
+	<separator />
+	<grid>
+		<columns>
+			<column width="220px" />
+			<column width="115px" align="right" />
+			<column width="115px" align="right" />
+			<column width="115px" align="right" />
+		</columns>
+		<rows>
+			<row height="15px">
+				<label />
+				<button image="/Recursos/Imagenes/guardar.ico"
+					label="Guardar" width="100px" id="btnGuardar" />
+				<button image="/Recursos/Imagenes/imprimir.ico"
+					label="Imprimir" width="100px" id="btnImprimir" />
+				<button image="/Recursos/Imagenes/cancelar.ico"
+					label="Cancelar" width="100px" id="btnCancelar" />
+				<button image="/Recursos/Imagenes/salir.png"
+					label="Salir" width="100px" id="btnSalir" />
+			</row>
+		</rows>
+	</grid>
+</window>

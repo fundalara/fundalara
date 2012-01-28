@@ -1,0 +1,295 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winSesionEntrenamiento"?>
+<zk>
+	<div align="center">
+		<separator height="15px" />
+		<window closable="true" id="winSesionEntrenamiento"
+			apply="controlador.entrenamiento.CntrlPlanEntrenamiento"
+			title="Plan de Entrenamiento " border="normal" width="600px">
+			<grid>
+				<columns sizable="true">
+					<column align="left" />
+				</columns>
+				<rows>
+					<row>
+						<panel>
+							<panelchildren>
+								<grid>
+									<columns>
+										<column width="120px" />
+										<column width="165px" />
+										<column width="135px" />
+										<column />
+									</columns>
+									<rows>
+										<row>
+											<label
+												value="Lapso Deportivo" />
+											<combobox
+												id="cmbLapsoDeportivo" model="@{ctrl.listLapsoDeportivo}"
+												readonly="true" value="--Seleccione--">
+												<comboitem
+													self="@{each=lapsoDeportivo}"
+													label="@{lapsoDeportivo.nombre}" value="@{lapsoDeportivo}" />
+											</combobox>
+											<label id="labEtapas"
+												value="Etapas de Temporada" visible="false" />
+											<combobox id="cmbEtapa"
+												value="--Seleccione--" model="@{ctrl.listEtapa}"
+												readonly="true" visible="false">
+												<comboitem
+													self="@{each=etapa}" label="@{etapa.nombre}"
+													value="@{etapa}" />
+											</combobox>
+										</row>
+										<row>
+											<label value="Categoria" />
+											<combobox id="cmbCategoria"
+												value="--Seleccione--" model="@{ctrl.listCategoria}"
+												readonly="true" disabled="true">
+												<comboitem
+													self="@{each=categoria}" label="@{categoria.nombre}"
+													value="@{categoria}" />
+											</combobox>
+											<label value="Equipo" />
+											<combobox id="cmbEquipo"
+												value="--Seleccione--" model="@{ctrl.listEquipo}"
+												readonly="true" disabled="true">
+												<comboitem
+													self="@{each=equipo}" label="@{equipo.nombre}"
+													value="@{equipo}" />
+											</combobox>
+										</row>
+										<row>
+											<label value="Días"
+												width="138px" />
+											<combobox id="cmbDias"
+												model="@{ctrl.listHorarioPlanTemporadas}" readonly="true"
+												disabled="true">
+												<comboitem
+													self="@{each=HorarioPlanTemporadas}"
+													label="@{HorarioPlanTemporadas.horario.datoBasico.nombre}"
+													value="@{HorarioPlanTemporadas}" />
+											</combobox>
+											<label value="Horario" />
+											<textbox id="txtHorario"
+												width="130px" readonly="true" />
+										</row>
+										<row>
+											<label value="Fecha Inicio" />
+											<datebox
+												id="dtboxFechaInicio" width="130px" disabled="true"
+												value="@{ctrl.planEntrenamiento.fechaInicio}" />
+											<label value="Fecha Fin" />
+											<datebox id="dtboxFechaFin"
+												width="130px" disabled="true"
+												value="@{ctrl.planEntrenamiento.fechaFin}" />
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</row>
+					<row>
+						<panel
+							title="Asignacion de Actividades de Entrenamiento"
+							collapsible="true">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row>
+											<grid>
+												<columns>
+													<column
+														width="120px" />
+													<column
+														width="165px" />
+													<column
+														width="135px" />
+													<column />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Fase" />
+														<combobox
+															id="cmbFase" value="--Seleccione--"
+															model="@{ctrl.listFase}" readonly="true"
+															disabled="true">
+															<comboitem
+																self="@{each=fase}" label="@{fase.nombre}"
+																value="@{fase}" />
+														</combobox>
+														<label
+															value="Actividad" />
+														<combobox
+															id="cmbActividad" value="--Seleccione--"
+															model="@{ctrl.listActividadEntrenamiento}"
+															readonly="true" disabled="true">
+															<comboitem
+																self="@{each=actividad_entrenamiento}"
+																label="@{actividad_entrenamiento.nombre}"
+																value="@{actividad_entrenamiento}" />
+														</combobox>
+													</row>
+													<row>
+														<label
+															value="Tiempo" />
+														<intbox
+															id="intTiempo" value="@{ctrl.actividadPlanificada.tiempo}"
+															width="130px" disabled="true" />
+														<label
+															value="minutos" />
+														<space /><!-- Esto es para mejorar estilo -->
+													</row>
+												</rows>
+											</grid>
+										</row>
+										<row>
+											<listbox id="lbxActividades"
+												model="@{ctrl.listActividadPlanificadas}">
+												<listhead>
+													<listheader
+														align="center" label="Fase" width="33%" />
+													<listheader
+														align="center" label="Actividad" width="33%" />
+													<listheader
+														align="center" label="Tiempo(Min)" width="33%" />
+												</listhead>
+												<listitem
+													self="@{each=actividadPlanificada}"
+													value="@{actividadPlanificada}">
+													<listcell
+														label="@{actividadPlanificada.actividadEntrenamiento.datoBasico.nombre}" />
+													<listcell
+														label="@{actividadPlanificada.actividadEntrenamiento.nombre}" />
+													<listcell
+														label="@{actividadPlanificada.tiempo}" />
+												</listitem>
+											</listbox>
+											<vbox>
+												<button id="btnAgregar1"
+													image="/Recursos/Imagenes/agregar.ico" disabled="true" />
+												<button id="btnQuitar1"
+													image="/Recursos/Imagenes/quitar.ico" disabled="true" />
+											</vbox>
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</row>
+					<row>
+						<panel
+							title="Asignacion de Materiales de Entrenamiento"
+							collapsible="true">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row>
+											<grid>
+												<columns>
+													<column
+														width="120px" />
+													<column
+														width="165px" />
+													<column
+														width="135px" />
+													<column />
+												</columns>
+												<rows>
+													<row>
+														<label
+															value="Tipo de Material" />
+														<combobox
+															id="cmbTipoMaterial" value="--Seleccione--"
+															model="@{ctrl.listTipoMaterial}" readonly="true"
+															disabled="true">
+															<comboitem
+																self="@{each=tipo}" label="@{tipo.nombre}"
+																value="@{tipo}" />
+														</combobox>
+														<label
+															value="Material" />
+														<combobox
+															id="cmbMaterial" value="--Seleccione--" readonly="true"/>
+<!-- 															model="@{ctrl.listMaterial}" readonly="true" -->
+<!-- 															disabled="true"> -->
+<!-- 															<comboitem -->
+<!-- 																self="@{each=material}" label="@{material.descripcion}" -->
+<!-- 																value="@{material}" /> -->
+<!-- 														</combobox> -->
+
+													</row>
+													<row>
+														<label
+															value="Cantidad" />
+														<spinner
+															id="spCantidad" disabled="true" />
+<!-- 															value="@{materialActividadPlanificada.cantidadRequerida}" -->
+															
+														<space /><!-- Esto es para mejorar estilo -->
+														<space /><!-- Esto es para mejorar estilo -->
+													</row>
+												</rows>
+											</grid>
+										</row>
+										<row>
+											<listbox
+												id="lbxMaterialPlanificado">
+<!-- 												model="@{ctrl.listMaterialActividadPlanificada}"> -->
+												<listhead>
+													<listheader
+														label="Material" align="center" />
+													<listheader
+														label="Cantidad" align="center" />
+												</listhead>
+												<listitem>
+<!-- 													self="@{each=materialActividadPlanificada}" -->
+<!-- 													value="@{materialActividadPlanificada}"> -->
+<!-- 													<listcell -->
+<!-- 														label="@{materialActividadPlanificada.material.descripcion}" /> -->
+<!-- 													<listcell -->
+<!-- 														label="@{materialActividadPlanificada.cantidadRequerida}" /> -->
+												</listitem>
+											</listbox>
+											<vbox>
+												<button
+													image="/Recursos/Imagenes/agregar.ico" id="btnAgregar2"
+													disabled="true" />
+												<button
+													image="/Recursos/Imagenes/quitar.ico" id="btnQuitar2"
+													disabled="true" />
+											</vbox>
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</row>
+				</rows>
+			</grid>
+			<grid>
+				<columns>
+					<column align="center" />
+					<column align="center" />
+					<column align="center" />
+					<column align="center" />
+				</columns>
+				<rows>
+					<row height="">
+						<label value="" />
+						<button image="Recursos/Imagenes/guardar.ico"
+							id="btnGuardar" label="Guardar" width="100px" disabled="true" />
+						<button image="/Recursos/Imagenes/imprimir.ico"
+							id="btnImprimir" label="Imprimir" width="100px" disabled="true" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							id="btnCancelar" label="Cancelar" width="100px" disabled="true" />
+						<button image="/Recursos/Imagenes/salir.png"
+							id="btnSalir" label="Salir" width="100px" />
+					</row>
+				</rows>
+			</grid>
+		</window>
+	</div>
+</zk>

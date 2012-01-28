@@ -1,0 +1,85 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndLapsoDeportivo"?>
+<?page title="Auto Generated index.zul"?>
+<!-- <?component name="Calen" macro-uri="index.zul" inline="true"?> -->
+<zk>
+	<div align="center">
+		<separator height="15px" />
+		<window id="wndLapsoDeportivo" title="Lapso Deportivo"
+			border="normal" width="500px" height="" closable="true"
+			apply="controlador.entrenamiento.CntrlLapsoDeportivo">
+			<grid>
+				<rows>
+					<row>
+						<grid>
+							<columns>
+								<column width="350px" />
+								<column width="165px" align="center" />
+								<column width="300px" />
+								<column width="165px" align="center" />
+							</columns>
+							<rows>
+								<row height="30px">
+									<label value="Tipo Lapso"
+										width="160px" />
+									<combobox id="cmbLapso"
+										model="@{ctrl.listlapso}" readonly="true" width="125px">
+										<comboitem self="@{each=lapso}"
+											label="@{lapso.nombre}" value="@{lapso}" />
+									</combobox>
+									<label value="Nombre" width="160px" />
+									<textbox id="txtNombre"
+										width="140px" />
+								</row>
+								<row height="30px">
+									<label value="Fecha Inicio"
+										width="160px" />
+									<datebox id="dbInicio"
+										width="125px" />
+									<label value="Fecha Final"
+										width="200px" />
+									<datebox id="dbFinal" width="125px" />
+								</row>
+								<row height="30px" spans="4"
+									align="center" id="rowAscenso">
+									<label value="Rango de Ascenso" />
+								</row>
+								<row height="30px" id="rowFecha">
+									<label value="Inicio" width="160px" />
+									<datebox id="dbAscenso"
+										width="125px" />
+									<label value="Fin" width="160px" />
+									<datebox id="dbAscenso1"
+										width="125px" />
+								</row>
+							</rows>
+						</grid>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<grid>
+				<columns>
+					<column width="140px" />
+					<column width="110px" align="right" />
+					<column width="110px" align="right" />
+					<column width="110px" align="right" />
+				</columns>
+				<rows>
+					<row>
+						<label></label>
+						<button id="btnGuardar"
+							image="/Recursos/Imagenes/guardar.ico" width="110px"
+							label="Guardar" />
+						<button id="btnCancelar"
+							image="/Recursos/Imagenes/cancelar.ico" width="110px"
+							label="Cancelar" />
+						<button id="btnSalir"
+							image="/Recursos/Imagenes/salir.png" width="110px" label="Salir" />
+					</row>
+				</rows>
+			</grid>
+			<include id="ventana" />
+		</window>
+	</div>
+</zk>

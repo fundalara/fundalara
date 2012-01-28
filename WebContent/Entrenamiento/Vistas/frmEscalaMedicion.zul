@@ -1,0 +1,100 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndEscalaMedicion"?>
+<zk>
+	<div align="center">
+	<separator height="15px"/>
+	<window id="wndEscalaMedicion" closable="true"
+		title="Escala de Medición" border="normal" width="650px" height=""
+		apply="controlador.entrenamiento.CntrlFrmEscalaMedicion">
+		<grid>
+			<rows>
+				<row>
+					<label value="Tipo Escala" />
+					<combobox id="cmbTipoEscala" width="140px"
+						model="@{cntrl.listTipoEscala}" readonly="true">
+						<comboitem self="@{each=tEscala}"
+							value="@{tEscala}" label="@{tEscala.nombre}" />
+					</combobox>
+					<label/>
+					<label value="Descripcion"/>
+					<label id="lbDescripcionTipo"/>
+				</row>
+				<row>
+					<label value="Nombre " />
+					<textbox id="txtNombreEscala" width="140px"
+						value="@{cntrl.escalaMedicion.nombre}" readonly="true"/>
+					<button id="btnConsultar"
+						image="/Recursos/Imagenes/consultar.ico"/>
+					<label value="Descripción " />
+					<textbox id="txtDescripcionEscala" width="140px"
+						value="@{cntrl.escalaMedicion.descripcion}" readonly="true"/>
+				</row>
+			</rows>
+		</grid>
+		<grid>
+			<rows>
+				<row>
+					<panel title="Valores de la Escala de Medición"
+						collapsible="true">
+						<panelchildren>
+							<grid>
+								<rows>
+									<row>
+										<label value="Valor" />
+										<textbox id="txtValorEscala"
+											width="140px" value="@{cntrl.valorEscala.valor}" readonly="true"/>
+										<label value="Descripción" />
+										<textbox width="140px"
+											id="txtDescripcionValor"
+											value="@{cntrl.valorEscala.descripcion}" readonly="true"/>
+									</row>
+								</rows>
+							</grid>
+							<hbox>
+								<listbox id="lboxValoresEscala"
+									multiple="true" mold="paging" pageSize="10" width="580px"
+									height="150px" model="@{cntrl.listValoresEscala}">
+									<listhead>
+										<listheader label="Valor"
+											width="75px" align="center" />
+										<listheader label="Descripción"
+											align="center" width="150px" />
+									</listhead>
+									<listitem self="@{each=valorEscala}" value="@{valorEscala}">
+										<listcell label="@{valorEscala.valor}"/>
+										<listcell label="@{valorEscala.descripcion}"/>
+									</listitem>
+								</listbox>
+								<vbox height="50px">
+									<button id="btnAgregar"
+										image="/Recursos/Imagenes/agregar.ico"/>
+									<button id="btnQuitar"
+										image="/Recursos/Imagenes/quitar.ico"/>
+								</vbox>
+							</hbox>
+						</panelchildren>
+					</panel>
+				</row>
+			</rows>
+		</grid>
+		<grid>
+			<columns>
+				<column width="500px" align="center" />
+				<column width="110px" align="center" />
+				<column width="110px" align="center" />
+			</columns>
+			<rows>
+				<row>
+					<label/>
+					<button id="btnCancelar"
+						image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+						width="100px" />
+					<button id="btnSalir"
+						image="/Recursos/Imagenes/salir.png" label="Salir"
+						width="100px" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+	</div>
+</zk>

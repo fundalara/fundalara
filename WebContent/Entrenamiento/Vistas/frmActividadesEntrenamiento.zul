@@ -1,0 +1,77 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winActividadEntrenamientoZul"?>
+<zk xmlns:h="xhtml" xmlns:zk="zk">
+	<div align="center">
+		<separator height="15px" />
+		<window title="Actividades de Entrenamiento" border="normal"
+			width="465px" closable="true"
+			apply="controlador.entrenamiento.CntrlFrmActividadEntrenamiento"
+			id="winActividadEntrenamientoZul">
+			<grid>
+				<columns>
+					<column label="" />
+					<column label="" />
+					<column label="" />
+					<column label="" />
+				</columns>
+				<rows>
+					<row>
+						<label value="Categoria" />
+						<combobox id="cmbCategoria"
+							model="@{ctrl.listCategoria}" readonly="true" width="160px">
+							<comboitem self="@{each=categoria}"
+								label="@{categoria.nombre}" value="@{categoria}" />
+						</combobox>
+						<label value="Fase" />
+						<combobox id="cmbFase" model="@{ctrl.listFase}"
+							readonly="true" width="120px">
+							<comboitem self="@{each=fase}"
+								label="@{fase.nombre}" value="@{fase}" />
+						</combobox>
+					</row>
+					<row>
+						<label value="Actividad " />
+						<textbox width="160px" id="txtActividades"
+							disabled="true" value="@{ctrl.actividadEntrenamiento.nombre}">
+						</textbox>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<hbox width="450px">
+				<listbox id="lboxActividades" mold="paging"
+					pageSize="10" height="300px" width="360px">
+					<listhead>
+						<listheader label="Actividades" sort="none"
+							height="" />
+						<listheader label="Id" visible="false" />
+					</listhead>
+				</listbox>
+				<vbox>
+					<button image="/Recursos/Imagenes/agregar.ico"
+						id="btnAgregar" />
+					<separator height="5px" />
+					<button image="/Recursos/Imagenes/quitar.ico"
+						id="btnQuitar" />
+				</vbox>
+			</hbox>
+			<separator />
+			<grid>
+				<columns>
+					<column width="200px" align="center" />
+					<column width="110px" align="center" />
+					<column width="110px" align="center" />
+				</columns>
+				<rows>
+					<row>
+						<label value="" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							label="Cancelar" width="100px" id="btnCancelar" />
+						<button image="/Recursos/Imagenes/salir.png"
+							label="Salir" width="100px" id="btnSalir" />
+					</row>
+				</rows>
+			</grid>
+		</window>
+	</div>
+</zk>

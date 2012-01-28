@@ -1,0 +1,240 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winTemporada"?>
+<?page title="Auto Generated index.zul"?>
+<div align="center">
+	<zk>
+		<separator height="15px" />
+		<window id="winTemporada"
+			apply="controlador.entrenamiento.CntrlPlanTemporada"
+			title="Planificacion de Temporada" border="normal" width="550px"
+			closable="true">
+			<grid>
+				<rows>
+					<row>
+						<grid>
+							<columns>
+								<column width="130px" />
+								<column width="130px" align="center" />
+								<column width="130px" />
+								<column width="130px" align="center" />
+							</columns>
+							<rows>
+								<row height="30px">
+									<label value="Lapso Deportivo"
+										width="100px" />
+									<combobox
+										model="@{ctrl.listLapsoDeportivos}" width="130px"
+										id="cmbTemporada" value="--SELECCIONE--">
+										<comboitem
+											self="@{each=temporada}" value="@{temporada}"
+											label="@{temporada.nombre}" />
+									</combobox>
+									<label value="Tipo:" width="30px" />
+									<label id="lblTipoTemporada"
+										width="100px" />
+								</row>
+								<row>
+									<label value="Categoria"
+										width="100px" />
+									<combobox id="cmbCategoria"
+										width="130px" value="--SELECCIONE--"
+										model="@{ctrl.listCategorias}" disabled="true">
+										<comboitem
+											self="@{each=categoria}" label="@{categoria.nombre}"
+											value="@{categoria}" />
+									</combobox>
+									<label value="Equipo:"
+										id="lblEquipoPV" width="30px" visible="false" />
+									<combobox
+										model="@{ctrl.listEquiposPV}" width="110px" id="cmbEquipoPV"
+										disabled="true" value="--SELECCIONE--" visible="false">
+										<comboitem self="@{each=eq}"
+											value="@{eq}" label="@{eq.nombre}" />
+									</combobox>
+								</row>
+							</rows>
+						</grid>
+					</row>
+					<row>
+						<panel title="Asignacion de Horario"
+							collapsible="true">
+							<panelchildren>
+								<hbox>
+									<grid>
+										<columns>
+											<column width="110px" />
+											<column width="130px"
+												align="center" />
+											<column width="130px" />
+											<column width="140px"
+												align="center" />
+										</columns>
+										<rows>
+											<row height="30px">
+												<label value="Día"
+													width="100px" />
+												<combobox width="130px"
+													value="--SELECCIONE--" model="@{ctrl.listDiasSemana}"
+													id="cmbdia" disabled="true">
+													<comboitem
+														self="@{each=dia}" value="@{dia}" label="@{dia.nombre}" />
+												</combobox>
+												<label />
+												<label />
+											</row>
+											<row>
+												<label
+													value="Hora Inicio" />
+												<timebox id="tmbInicio"
+													disabled="true" />
+												<label
+													value="Hora Final     " />
+												<timebox id="tmbFin"
+													disabled="true" />
+											</row>
+										</rows>
+									</grid>
+								</hbox>
+								<hbox>
+									<listbox id="lboxHorario">
+										<listhead>
+											<listheader label="Dia"
+												width="140px" align="Center" sort="auto" />
+											<listheader
+												label="Hora Inicio" width="140px" align="Center"
+												sort="auto" />
+											<listheader label="Hora Fin"
+												width="140px" align="Center" sort="auto" />
+										</listhead>
+									</listbox>
+									<vbox>
+										<button
+											image="/Recursos/Imagenes/agregar.ico" id="btnAgregarHorario"
+											disabled="true" />
+										<separator height="5px" />
+										<button
+											image="/Recursos/Imagenes/quitar.ico" id="btnQuitarHorario"
+											disabled="true" />
+									</vbox>
+								</hbox>
+							</panelchildren>
+						</panel>
+					</row>
+					<row>
+						<panel title="Asignacion de Personal Tecnico"
+							collapsible="true">
+							<panelchildren>
+								<grid>
+									<rows>
+										<row>
+											<grid>
+												<columns>
+													<column
+														width="120px" align="left" />
+													<column
+														width="150px" align="center" />
+													<column
+														width="120px" align="left" />
+													<column
+														width="150px" align="center" />
+													<column
+														align="center" />
+												</columns>
+												<rows>
+													<row id="rowEquipo"
+														height="35px" visible="true">
+														<label
+															value="Equipo" width="100px" height="25" />
+														<combobox
+															model="@{ctrl.listEquipos}" width="110px" id="cmbEquipo"
+															disabled="true" value="--SELECCIONE--">
+															<comboitem
+																self="@{each=eq}" value="@{eq}" label="@{eq.nombre}" />
+														</combobox>
+														<label
+															value="Clasificacion:" width="30px" />
+														<label
+															id="lblClasificacion" width="100px" />
+													</row>
+													<row>
+														<label
+															value="Tipo de Personal" width="100px" />
+														<combobox
+															value="--SELECCIONE--" width="110px" id="cmbTipoPersonal"
+															disabled="true" model="@{ctrl.listTipoPersonal}">
+															<comboitem
+																self="@{each=tP}" value="@{tP}" label="@{tP.nombre}" />
+														</combobox>
+														<label
+															value="Nombre" width="100px" />
+														<combobox
+															value="--SELECCIONE--" width="110px" id="cmbNombre"
+															disabled="true" model="@{ctrl.listPersonals}">
+															<comboitem
+																self="@{each=p}" value="@{p.personal}"
+																label="@{p.personal.personaNatural.primerNombre}" />
+														</combobox>
+													</row>
+												</rows>
+											</grid>
+										</row>
+										<row>
+											<hbox>
+												<listbox
+													id="lboxPersonal">
+													<listhead>
+														<listheader
+															label="Equipo" width="140px" align="Center" sort="auto" />
+														<listheader
+															label="Tipo Personal" width="140px" align="Center"
+															sort="auto" />
+														<listheader
+															label="Tecnico" width="140px" align="Center" sort="auto" />
+													</listhead>
+												</listbox>
+												<vbox
+													id="btnModificarPersTecnico">
+													<button
+														image="/Recursos/Imagenes/agregar.ico"
+														id="btnAgregarPersTecnico" disabled="true" />
+													<separator
+														height="5px" />
+													<button
+														image="/Recursos/Imagenes/quitar.ico"
+														id="btnQuitarPersTecnico" disabled="true" />
+												</vbox>
+											</hbox>
+										</row>
+									</rows>
+								</grid>
+							</panelchildren>
+						</panel>
+					</row>
+				</rows>
+			</grid>
+			<grid height="50px">
+				<columns>
+					<column width="220px" align="center" />
+					<column width="110px" align="center" />
+					<column width="110px" align="center" />
+					<column width="110px" align="center" />
+					<column width="110px" align="center" />
+				</columns>
+				<rows>
+					<row height="">
+						<button image="/Recursos/Imagenes/aceptar.ico"
+							label="Finalizar" width="95px" id="btnFinalizar" disabled="true" />
+						<button image="/Recursos/Imagenes/guardar.ico"
+							label="Guardar" width="95px" id="btnGuardar" disabled="true" />
+						<button image="/Recursos/Imagenes/imprimir.ico"
+							label="Imprimir" width="95px" id="btnImprimir" disabled="true" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							label="Cancelar" width="100px" id="btnCancelar" />
+						<button image="/Recursos/Imagenes/salir.png"
+							label="Salir" width="95px" id="btnSalir" />
+					</row>
+				</rows>
+			</grid>
+		</window>
+	</zk>
+</div>

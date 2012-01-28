@@ -1,9 +1,11 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wind"?>
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>	
-	<window title="new page title" id="wind" apply="controlador.entrenamiento.Auxiliar_Agenda" closable="true">
+	<window title="Registro de Resultados" id="wind" apply="controlador.entrenamiento.Auxiliar_Agenda" closable="true">
 		<combobox id="actividad">
-			<comboitem label="Desempeño atletas"/>
-			<comboitem label="Cumplimiento actividades"/>
+			<comboitem label="Cumplimiento de Entrenamiento"/>
+			<comboitem label="Rendimiento de jugadores"/>
 		</combobox>
 		<div>
 			<include id="include"/>

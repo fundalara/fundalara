@@ -1,0 +1,62 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winAsignarInstalacionZul"?>
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Asignar Instalacion" border="normal" width="465px"
+		height="260px" closable="true"
+		apply="controlador.entrenamiento.CntrlFrmAsignarInstalacion"
+		id="winAsignarInstalacionZul">
+		<grid>				
+		<columns>			
+			<column label="" align="center" width="160px" />
+			<column label="" align="center" width="200px"/>
+		</columns>
+		<rows>
+			<row>		
+				<label value="Instalaciones Disponibles"/>
+				<label value="Instalaciones Utilizada"/>
+			</row>
+		</rows>
+	</grid>	
+		<hbox>			
+			<listbox id="left" height="200px" width="200px"
+				onDrop="move(event.dragged)" droppable="true" oddRowSclass="non-odd"
+				fixedLayout="true" model="@{ctrl.listInstalacion}">						
+				<listitem draggable="true" droppable="true"
+					onDrop="move(event.dragged)" self="@{each=instalacion}"
+					value="@{instalacion}">
+					<listcell
+						src="/img/Centigrade-Widget-Icons/Briefcase-16x16.png"
+						label="@{instalacion.descripcion}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<listbox id="right" height="200px" width="200px"
+				oddRowSclass="non-odd" fixedLayout="true"
+				onDrop="move(event.dragged)" droppable="true" multiple="true"
+				model="@{ctrl.listInstalacionUtilizada}">
+				<listitem draggable="true" droppable="true"
+					onDrop="move(event.dragged)" self="@{each=instalacionUtilizada}"
+					value="@{instalacionUtilizada}">
+					<listcell
+						src="/img/Centigrade-Widget-Icons/Briefcase-16x16.png"
+						label="@{instalacionUtilizada.instalacion.descripcion}" />
+				</listitem>
+			</listbox>
+		</hbox>
+		<zscript><![CDATA[
+	void move(Component dragged) {
+		if (self instanceof Listitem) {
+			if (dragged.getParent().getId().equals("right")) {
+
+				//self.parent.insertBefore(dragged, self.getNextSibling());
+			} else {
+				//self.parent.insertBefore(dragged, self.getNextSibling());
+			}
+		} else {
+			self.appendChild(dragged);
+		}
+	}
+]]></zscript>
+	</window>
+</zk>

@@ -4,7 +4,7 @@
 <zk>
 <window title="Test Evaluativo" border="normal" width="680px" height=""
 	closable="true" id="winResEvaluativos"
-apply="controlador.entrenamiento.Resultados_Evaluativos"> 
+	apply="controlador.entrenamiento.CntrlFrmResultadosEvaluativos">
 	<grid>
 		<columns sizable="true">
 			<column align="left" />
@@ -65,52 +65,15 @@ apply="controlador.entrenamiento.Resultados_Evaluativos">
 			<row>
 				<listbox id="lista" mold="paging" pageSize="10"
 					width="660px">
-					<auxhead>
-						<auxheader colspan="3" label="" />
-						<auxheader colspan="4" label=""
-							id="ahEficiencia" align="center" />
-					</auxhead>
 					<listhead id="lhCabecera">
-						<listheader width="75px">
+						<listheader width="20px">
 							<checkbox id="chcGeneral" label=""></checkbox>
 						</listheader>
-						<listheader label="Nro" width="180px"
+						<listheader label="Nombre" width="200px" 
 							align="center" />
-						<listheader label="Nombre" width="180px"
-							align="center" />
-						<listheader label="" align="center"
-							width="400px" id="lhIndicador1"  />
-
 					</listhead>
-					<auxhead>
-						<auxheader label="" colspan="3" />
-						<auxheader label="" align="center">
-							<combobox width="80px" value="Seleccione"
-								id="cmbEscala1">
-								<comboitem label="4" tooltiptext="" />
-								<comboitem label="3" />
-								<comboitem label="2" />
-								<comboitem label="1" />
-							</combobox>
-						</auxheader>
-						<auxheader label="" align="center">
-							<combobox width="80px" value="Seleccione"
-								id="cmbEscala2">
-								<comboitem label="4" />
-								<comboitem label="3" />
-								<comboitem label="2" />
-								<comboitem label="1" />
-							</combobox>
-						</auxheader>
-						<auxheader label="" align="center">
-							<combobox width="80px" value="Seleccione"
-								id="cmbEscala3">
-								<comboitem label="4" />
-								<comboitem label="3" />
-								<comboitem label="2" />
-								<comboitem label="1" />
-							</combobox>
-						</auxheader>
+					<auxhead id="auxCabecera">
+						<auxheader label="" colspan="2" />
 					</auxhead>
 				</listbox>
 			</row>
@@ -126,6 +89,8 @@ apply="controlador.entrenamiento.Resultados_Evaluativos">
 			<column width="115px" align="center" />
 			<column width="115px" align="center" />
 			<column width="115px" align="center" />
+
+
 		</columns>
 		<rows>
 			<row height="15px">

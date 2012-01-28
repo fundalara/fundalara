@@ -1,0 +1,51 @@
+<div style="margin: 5px 5px 5px 5px;">
+	<button id="crearActividad" label="Crear" height="29px" width="95px"
+		left="-100px">
+	</button>
+	<space width="100%" height="10px"></space>
+	<calendar width="180px" height="145px"></calendar>
+	<space width="100%" height="10px"></space>
+	<tree width="180px" style="border:none;">
+		<treechildren>
+			<treeitem>
+				<treerow>
+					<treecell label="Actividad" />
+				</treerow>
+				<treechildren>
+					<treeitem>
+						<treerow>
+							<treecell label="Entrenamiento" />
+							<treecell>
+								<checkbox checked="false" />
+							</treecell>
+						</treerow>
+					</treeitem>
+					<treeitem>
+						<treerow>
+							<treecell label="Competencia" />
+							<treecell>
+								<checkbox />
+							</treecell>
+						</treerow>
+					</treeitem>
+					<treeitem>
+						<treerow>
+							<treecell label="Actividad Complementaria" />
+							<treecell>
+								<checkbox />
+							</treecell>
+						</treerow>
+					</treeitem>
+					<treeitem>
+						<treerow>
+							<treecell label="Mantenimiento" />
+							<treecell>
+								<checkbox />
+							</treecell>
+						</treerow>
+					</treeitem>
+				</treechildren>
+			</treeitem>
+		</treechildren>
+	</tree>
+</div>
