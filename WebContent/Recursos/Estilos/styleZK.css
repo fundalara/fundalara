@@ -1,0 +1,9 @@
+/*--------------------------------*/
+/* Estilo para componentes zk */
+/* Creado por Leyner Castillo*/
+/*--------------------------------*/
+
+/*Estilo para eliminar bordes a los grid*/
+tr.z-row td.z-row-inner{
+	border:none;
+}

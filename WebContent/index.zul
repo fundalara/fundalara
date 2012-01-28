@@ -1,5 +1,6 @@
 <?page id="frmMenu" title="menu.zul"?>
 <zk>
+	<style src="/Recursos/Estilos/styleZK.css"></style>
 	<zscript><![CDATA[
 	public void enlace(String cad) {
 		//cuerpo.setSrc(cad);
