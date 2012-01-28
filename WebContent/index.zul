@@ -9,7 +9,8 @@
 		divCuerpo.appendChild(comp);
 		
 		
-	}	
+	}
+
 	public void mostrarAgenda(){
         Map map = new Hashtable();
     	if (divCuerpo.getLastChild() != null)
@@ -84,21 +85,21 @@
 													<treerow>
 														<treecell
 															label="Actividades "
-															onClick='enlace("Entrenamiento/Vistas/Actividades_Entrenamiento.zul")' />
+															onClick='enlace("Entrenamiento/Vistas/frmActividadesEntrenamiento.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Escalas de Medición"
-															onClick='enlace("Entrenamiento/Vistas/Escala_Medicion.zul")' />
+															onClick='enlace("Entrenamiento/Vistas/frmEscalaMedicion.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Indicadores de Evaluación"
-															onClick='enlace("Entrenamiento/Vistas/Indicadores_Evaluacion.zul")' />
+															onClick='enlace("Entrenamiento/Vistas/frmIndicadoresEvaluacion.zul")' />
 													</treerow>
 												</treeitem>
 
@@ -320,22 +321,29 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
+													label="Lapso Deportivo"
+													onClick='enlace("/Entrenamiento/Vistas/frmLapsoDeportivo.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
 													label="Planificar Temporada"
-													onClick='enlace("/Entrenamiento/Vistas/Planificacion.zul")' />
+													onClick='enlace("/Entrenamiento/Vistas/frmPlanTemporada.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Planificar Entrenamientos"
-													onClick='enlace("/Entrenamiento/Vistas/Sesion_Entrenamiento.zul")' />
+													onClick='enlace("/Entrenamiento/Vistas/frmPlanEntrenamiento.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Asignar Instalaciones"
-													onClick='enlace("/Entrenamiento/Vistas/Asignar_Instalacion.zul")' />
+													onClick='enlace("/Entrenamiento/Vistas/frmInstalacionAgenda.zul")' />
 											</treerow>
 										</treeitem>
 									</treechildren>
