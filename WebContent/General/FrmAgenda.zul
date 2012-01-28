@@ -36,11 +36,11 @@
 							<div width="10px" height="10px" style="background-color:#32CD32; border: 1px solid; margin-left: 10px"></div>
 							<label value="Por registrar" />
 							<div width="10px" height="10px" style="background-color:#FDD017; border: 1px solid; margin-left: 10px"></div>
-							<label value="Registrada" />
+							<label value="Registrado(a)" />
 							<div width="10px" height="10px" style="background-color:#ff7700; border: 1px solid; margin-left: 10px"></div>
-							<label value="Pendientes" />
+							<label value="Pendiente" />
 							<div width="10px" height="10px" style="background-color:#f13616; border: 1px solid; margin-left: 10px"></div>
-							<label value="Suspendidas" />
+							<label value="Suspendido(a)" />
 						</hbox>
 					</div>
 					<div class="float-left">
