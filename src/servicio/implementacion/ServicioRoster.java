@@ -69,5 +69,9 @@ public class ServicioRoster implements IServicioRoster {
 		// TODO Auto-generated method stub
 		return daoRoster.listarCedxEquipo(Roster.class, codigo);
 	}
+	
+	public List<Roster> buscarPorEquipo(Equipo equipo){
+		return daoRoster.listarUnCampoActivos(Roster.class, "equipo", equipo);		
+	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonalCargo;
 
+import modelo.DatoBasico;
 import modelo.Nomina;
 import modelo.PersonalCargo;
 import servicio.interfaz.IServicioPersonalCargo;
@@ -50,5 +51,12 @@ public class ServicioPersonalCargo implements IServicioPersonalCargo {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<PersonalCargo> buscarListaCargo(DatoBasico db){
+		return daoPersonalCargo.listarUnCampo(PersonalCargo.class, "datoBasico", db);
+	}
 
+	public List<PersonalCargo> listarPorCargo(DatoBasico cargo) {
+		return daoPersonalCargo.listarUnCampo(PersonalCargo.class, "datoBasico", cargo);
+	}
 }

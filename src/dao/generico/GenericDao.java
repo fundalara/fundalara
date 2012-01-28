@@ -137,5 +137,45 @@ public class GenericDao {
 		List lista = cri.list();
 		return lista;
 	}
+
+	public List listarUnCampoActivos(Class o,String c, Object v) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c, v.getClass().cast(v)));
+		cri.add(Restrictions.eq("estatus", 'A'));
+		List lista = cri.list();
+		return lista;
+	}
+	
+	public Object buscarUnCampoActivos(Class o, String c, Object v) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c, v.getClass().cast(v)));
+		cri.add(Restrictions.eq("estatus", 'A'));
+	    return cri.uniqueResult();
+	}
+	
+	public Object buscarDosCamposActivos(Class o, String c1, Object v1, String c2, Object v2) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c1, v1.getClass().cast(v1)));
+		cri.add(Restrictions.eq(c2, v2.getClass().cast(v2)));
+		cri.add(Restrictions.eq("estatus", 'A'));
+	    return cri.uniqueResult();
+	}
+	
+	public List listarDosCamposActivos(Class o,String c1, Object v1, String c2, Object v2) {
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(o);
+		cri.add(Restrictions.eq(c1, v1.getClass().cast(v1)));
+		cri.add(Restrictions.eq(c2, v2.getClass().cast(v2)));
+		cri.add(Restrictions.eq("estatus", 'A'));
+		List lista = cri.list();
+		return lista;
+	}
 }
 

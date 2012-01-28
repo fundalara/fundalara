@@ -35,5 +35,9 @@ public class ServicioMaterialActividadPlanificada implements
 			DaoMaterialActividadPlanificada daoMaterialActividadPlanificada) {
 		this.daoMaterialActividadPlanificada = daoMaterialActividadPlanificada;
 	}
+	
+	public int generarCodigo(){
+		return daoMaterialActividadPlanificada.generarCodigo(MaterialActividadPlanificada.class);
+	}
 
 }

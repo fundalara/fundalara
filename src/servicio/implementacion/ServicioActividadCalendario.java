@@ -1,7 +1,10 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoActividadCalendario;
 import modelo.ActividadCalendario;
+import modelo.DatoBasico;
 import servicio.interfaz.IServicioActividadCalendario;
 
 public class ServicioActividadCalendario implements
@@ -34,6 +37,14 @@ public class ServicioActividadCalendario implements
 	public void setDaoActividadCalendario(
 			DaoActividadCalendario daoActividadCalendario) {
 		this.daoActividadCalendario = daoActividadCalendario;
+	}
+
+	public List<ActividadCalendario> listarPorTipoActividad(DatoBasico tipoActividad){
+		return daoActividadCalendario.listarPorTipoActividad(tipoActividad);
+	}
+	
+	public int generarCodigo(){
+		return daoActividadCalendario.generarCodigo(ActividadCalendario.class);
 	}
 
 }

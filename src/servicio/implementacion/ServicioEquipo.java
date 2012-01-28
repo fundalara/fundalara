@@ -6,6 +6,7 @@ import servicio.interfaz.IServicioEquipo;
 
 import dao.general.DaoEquipo;
 import modelo.Categoria;
+import modelo.DatoBasico;
 import modelo.Equipo;
 
 /**
@@ -59,14 +60,19 @@ public class ServicioEquipo implements IServicioEquipo {
 		return daoEquipo.listarEquipoForaneos();
 	}
 	
-	
 	public List<Equipo> buscarPorCategoria(Categoria categoria){
 		return daoEquipo.buscarEquiposPorCategoria(categoria);
 	}
+	
 	public List<Equipo> buscarEquiposForaneosPorCategoria(int categoria){
 		return daoEquipo.buscarEquiposForaneosPorCategoria(categoria);
 	}
+	
 	public boolean buscarPorCodigo (Equipo equipo) {
 		return daoEquipo.buscarPorCodigo(equipo);
+	}
+	
+	public List<Equipo> buscarPorCategoriaTipoEquipo(DatoBasico tipoLapso, Categoria categoria){
+		return daoEquipo.listarDosCamposActivos(Equipo.class, "datoBasicoByCodigoTipoLapso", tipoLapso, "categoria", categoria);
 	}
 }

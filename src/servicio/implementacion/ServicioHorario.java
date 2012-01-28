@@ -38,5 +38,9 @@ public class ServicioHorario implements IServicioHorario {
 	public List<Horario> listar() {
 		return daoHorario.listar(Horario.class);
 	}
+	
+	public int generarCodigo(){
+		return daoHorario.generarCodigo(Horario.class);
+	}
 
 }

@@ -41,6 +41,8 @@ public class ServicioPlanEntrenamiento implements IServicioPlanEntrenamiento {
 		this.daoPlanEntrenamiento = daoPlanEntrenamiento;
 	}
 	
-	
+	public int generarCodigo(){
+		return daoPlanEntrenamiento.generarCodigo(PlanEntrenamiento.class);
+	}
 
 }

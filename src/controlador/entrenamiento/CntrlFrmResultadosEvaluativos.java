@@ -107,7 +107,7 @@ public class CntrlFrmResultadosEvaluativos extends GenericForwardComposer {
 	public void onChange$cmbCategoria(){
 		cmbEquipo.setDisabled(false);
 		listEquipo = new ArrayList<Equipo>();
-		listEquipo = servicioEquipo.buscarporCategoria((Categoria)cmbCategoria.getSelectedItem().getValue());
+		listEquipo = servicioEquipo.buscarPorCategoria((Categoria)cmbCategoria.getSelectedItem().getValue());
 		binder.loadAll();
 	}
 	

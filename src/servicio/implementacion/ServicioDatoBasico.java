@@ -42,8 +42,6 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		// TODO Auto-generated method stub
 		return daoDatoBasico.buscarPorTipoDato(td);
 	}
-	
-
 
 	public DaoDatoBasico getDaoDatoBasico() {
 		return daoDatoBasico;
@@ -66,8 +64,7 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	
 	public List<DatoBasico> listarPorPadre(String s,Integer i){
 		return daoDatoBasico.listarPorPadre(s,i);
-		}
-
+	}
 
 	@Override
 	public DatoBasico buscarPorCodigo(String td) {
@@ -84,8 +81,6 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	public List<DatoBasico> listarParroquias() {
 		return daoDatoBasico.listarParroquias();
 	}
-	
-	
 	
 	@Override
 	public List<DatoBasico> listarMunicipios() {
@@ -151,6 +146,10 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	public List<DatoBasico> listarTipoDato(String nombre) {
 		// TODO Auto-generated method stub
 		return daoDatoBasico.listarTipoDato(nombre);
+	}
+	
+	public List<DatoBasico> buscarPadre(DatoBasico db) {
+		return daoDatoBasico.buscarPadre(db);
 	}
 	
 }

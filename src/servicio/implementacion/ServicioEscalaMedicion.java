@@ -6,6 +6,7 @@ import servicio.interfaz.IServicioEscalaMedicion;
 
 import dao.general.DaoEscalaMedicion;
 
+import modelo.DatoBasico;
 import modelo.EscalaMedicion;
 
 public class ServicioEscalaMedicion implements IServicioEscalaMedicion {
@@ -23,33 +24,33 @@ public class ServicioEscalaMedicion implements IServicioEscalaMedicion {
 	@Override
 	public void eliminar(EscalaMedicion e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void agregar(EscalaMedicion e) {
 		daoEscalaMedicion.guardar(e);
-
 	}
 
 	@Override
 	public void actualizar(EscalaMedicion e) {
 		daoEscalaMedicion.actualizar(e);
-
 	}
 
 	@Override
 	public List<EscalaMedicion> listar() {
-		
 		return  daoEscalaMedicion.listar(EscalaMedicion.class);
 	}
 
 	@Override
 	public EscalaMedicion buscar(Integer codigo) {
-		return daoEscalaMedicion.buscarCodigo(codigo);
-		
+		return daoEscalaMedicion.buscarCodigo(codigo);		
 	}
 
+	public List<EscalaMedicion> listarPorTipoEscala(DatoBasico db){
+		return daoEscalaMedicion.listarPorTipoEscala(db);
+	}
 	
-
+	public int generarCodigo(){
+		return daoEscalaMedicion.generarCodigo(EscalaMedicion.class);
+	}
 }

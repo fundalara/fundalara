@@ -4,6 +4,8 @@ import java.util.List;
 
 import dao.general.DaoPlanTemporada;
 
+import modelo.Categoria;
+import modelo.LapsoDeportivo;
 import modelo.PlanTemporada;
 import servicio.interfaz.IServicioPlanTemporada;
 
@@ -41,4 +43,12 @@ public class ServicioPlanTemporada implements IServicioPlanTemporada {
 		this.daoPlanTemporada = daoPlanTemporada;
 	}
 
+	public PlanTemporada buscarPorCategoriaLapDep(Categoria ct,
+			LapsoDeportivo ld) {
+		return daoPlanTemporada.buscarPorCategoriaLapsoDeportivo(ct, ld);
+	}
+	
+	public int generarCodigo() {
+		return daoPlanTemporada.generarCodigo(PlanTemporada.class);
+	}
 }

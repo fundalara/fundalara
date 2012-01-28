@@ -40,4 +40,12 @@ public class DaoActividadEntrenamiento extends GenericDao {
 		where.add(Restrictions.eq("categoria", c));
 		return where.list();
 	}
+	
+	public ActividadEntrenamiento buscarporCodigo(Integer i){		
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria where =  getSession().createCriteria(ActividadEntrenamiento.class);
+		where.add(Restrictions.eq("codigoActividadEntrenamiento", i));
+		return (ActividadEntrenamiento)where.list().get(0);
+	}
 }

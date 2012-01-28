@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoIndicadorActividadEscala;
 
+import modelo.ActividadEntrenamiento;
 import modelo.IndicadorActividadEscala;
 import servicio.interfaz.IServicioIndicadorActividadEscala;
 
@@ -41,6 +42,17 @@ public class ServicioIndicadorActividadEscala implements IServicioIndicadorActiv
 	public void setDaoIndicadorActividadEscala(
 			DaoIndicadorActividadEscala daoIndicadorActividadEscala) {
 		this.daoIndicadorActividadEscala = daoIndicadorActividadEscala;
+	}
+	
+	public List<IndicadorActividadEscala> buscarporActividad(
+			ActividadEntrenamiento ae) {
+		// TODO Auto-generated method stub
+		return daoIndicadorActividadEscala.buscarPorActividad(ae);
+	}
+
+	public IndicadorActividadEscala buscarporCodigo(Integer codigo) {
+		// TODO Auto-generated method stub
+		return daoIndicadorActividadEscala.buscarPorCodigo(codigo);
 	}
 
 }

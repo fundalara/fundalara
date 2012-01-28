@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+import modelo.DatoBasico;
 import modelo.EscalaMedicion;
 import dao.generico.GenericDao;
 
@@ -17,5 +19,13 @@ public class DaoEscalaMedicion extends GenericDao {
 		Criteria criteria = getSession().createCriteria(EscalaMedicion.class);
 		criteria.add(Restrictions.eq("codigoEscala", codigo));
 		return (EscalaMedicion) criteria.list().get(0);
+	}
+	
+	public List<EscalaMedicion> listarPorTipoEscala(DatoBasico db){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria criteria = getSession().createCriteria(EscalaMedicion.class);
+		criteria.add(Restrictions.eq("datoBasico", db));
+		return criteria.list();
 	}
 }

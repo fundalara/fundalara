@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoSesion;
 
+import modelo.Equipo;
 import modelo.Sesion;
 import servicio.interfaz.IServicioSesion;
 
@@ -37,6 +38,15 @@ public class ServicioSesion implements IServicioSesion {
 	@Override
 	public List<Sesion> listar() {
 		return daoSesion.listar(Sesion.class);
+	}
+
+	public List<Sesion> buscarPorEquipo(Equipo e) {
+		// TODO Auto-generated method stub		
+		return daoSesion.buscarPorEquipo(e);
+	}
+	
+	public int generarCodigo(){
+		return daoSesion.generarCodigo(Sesion.class);
 	}
 
 }

@@ -278,7 +278,16 @@ public class DaoDatoBasico extends GenericDao {
 
 		List list = c.add(Restrictions.eq("tipoDato", td)).list();
 		return list;
-
+	}
+	
+	public List<DatoBasico> buscarPadre(DatoBasico db) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria c = getSession().createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("datoBasico", db));
+		c.add(Restrictions.eq("estatus", "A"));
+		return c.list();
 	}
 
 }

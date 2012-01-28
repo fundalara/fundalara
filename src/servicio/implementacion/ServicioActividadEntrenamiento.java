@@ -1,5 +1,6 @@
 package servicio.implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.management.Query;
 
@@ -8,6 +9,7 @@ import dao.general.DaoActividadEntrenamiento;
 import modelo.ActividadEntrenamiento;
 import modelo.Categoria;
 import modelo.DatoBasico;
+import modelo.IndicadorActividadEscala;
 
 public class ServicioActividadEntrenamiento implements
 		IServicioActividadEntrenamiento {
@@ -67,6 +69,38 @@ public class ServicioActividadEntrenamiento implements
 	public ActividadEntrenamiento buscarPorCodigo(Integer i) {
 		// TODO Auto-generated method stub
 		return daoActividadEntrenamiento.buscarporCodigo(i);
+	}
+
+	public List<ActividadEntrenamiento> listarActividadesConIndicadores(
+			Categoria c, DatoBasico f) {
+		List<ActividadEntrenamiento> listActividades = daoActividadEntrenamiento
+				.buscarTodo(c, f);
+		for (int i = 0; i < listActividades.size(); i++) {
+			if (listActividades.get(i).getIndicadorActividadEscalas().isEmpty()) {
+				listActividades.remove(i);
+				i--;
+			}else{
+				List<IndicadorActividadEscala> listIndicadorActividadEscala = new ArrayList<IndicadorActividadEscala>(listActividades.get(i).getIndicadorActividadEscalas());
+				boolean eliminar = true;
+				for (IndicadorActividadEscala indicadorActividadEscala : listIndicadorActividadEscala) {
+					if (indicadorActividadEscala.getEstatus() == 'A')
+						eliminar = false;
+						break;
+				}
+				if (eliminar){
+					listActividades.remove(i);
+					i--;
+				}
+			}
+		}
+		return listActividades;
+	}
+
+	@Override
+	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,
+			int idActividad) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

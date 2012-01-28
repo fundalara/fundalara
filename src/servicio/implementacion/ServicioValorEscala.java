@@ -49,4 +49,7 @@ public class ServicioValorEscala implements
 		return daoValorEscala.buscarValores(escala);
 	}
 
+	public int generarCodigo(){
+		return daoValorEscala.generarCodigo(ValorEscala.class);
+	}
 }

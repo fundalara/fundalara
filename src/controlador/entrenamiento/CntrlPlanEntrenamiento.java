@@ -319,7 +319,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		listMaterialActividadPlanificada.clear();
 		binder.loadComponent(lbxMaterialPlanificado);
 		Categoria ca = (Categoria) cmbCategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarporCategoria(ca);
+		listEquipo = servicioEquipo.buscarPorCategoria(ca);
 		LapsoDeportivo ld = (LapsoDeportivo) cmbLapsoDeportivo
 				.getSelectedItem().getValue();
 		if (ld.getDatoBasico().getNombre().equals("TEMPORADA REGULAR")) {

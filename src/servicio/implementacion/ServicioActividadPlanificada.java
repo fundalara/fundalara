@@ -6,6 +6,7 @@ import dao.general.DaoActividadEntrenamiento;
 import dao.general.DaoActividadPlanificada;
 
 import modelo.ActividadPlanificada;
+import modelo.Sesion;
 import servicio.interfaz.IServicioActividadPlanificada;
 
 public class ServicioActividadPlanificada implements
@@ -43,6 +44,10 @@ public class ServicioActividadPlanificada implements
 	public void setDaoActividadPlanificada(
 			DaoActividadPlanificada daoActividadPlanificada) {
 		this.daoActividadPlanificada = daoActividadPlanificada;
+	}
+	
+	public List<ActividadPlanificada> buscarPorSesion(Sesion sesion){
+		return daoActividadPlanificada.listarUnCampo(ActividadPlanificada.class, "sesion", sesion);
 	}
 	
 }
