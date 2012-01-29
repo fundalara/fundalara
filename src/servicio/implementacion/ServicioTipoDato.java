@@ -61,4 +61,7 @@ public class ServicioTipoDato implements IServicioTipoDato {
 		return daoTipoDato.buscarPorTipo(td);
 	}
 
+	public List<TipoDato> listarTipoDatos() {
+		return daoTipoDato.listarTipoDatos();
+	}
 }

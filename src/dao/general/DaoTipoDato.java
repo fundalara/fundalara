@@ -59,4 +59,14 @@ public class DaoTipoDato extends GenericDao {
 		tx.commit();
 		return tipo;
 	}
+	
+	public List<TipoDato> listarTipoDatos() {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		List list = getSession().createCriteria(TipoDato.class).list();
+		List<TipoDato> l = list;
+		getSession().flush();
+		return l;
+	}
 }
