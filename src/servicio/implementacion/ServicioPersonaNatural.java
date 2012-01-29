@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonaNatural;
 
+import modelo.DatoBasico;
 import modelo.Nomina;
 import modelo.PersonaNatural;
 import servicio.interfaz.IServicoPersonaNatural;
@@ -57,4 +58,14 @@ public class ServicioPersonaNatural implements IServicoPersonaNatural {
 		return daoPersonaNatural.buscarPersonaNatural(d);
 	}
 
+	
+	public List<PersonaNatural> filtarPersonas(DatoBasico db, String ci, String pn, String pa) {
+		return daoPersonaNatural.filtrarPersonas(db, ci, pn, pa);
+	}
+
+	public List<PersonaNatural> filtarPersonasDistintas(DatoBasico db, String ci, String pn, String pa) {
+		return daoPersonaNatural.filtrarPersonasDistintas(db, ci, pn, pa);
+	}
+
+	
 }

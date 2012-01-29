@@ -23,4 +23,49 @@ public class DaoPersonaNatural extends GenericDao {
 		PersonaNatural objectPersona = (PersonaNatural) c.list().get(0);
 		return objectPersona;
 	}
+	
+
+	public List<PersonaNatural> filtrarPersonas(DatoBasico dB, String filtroCI,
+			String filtroNombre, String filtroApellido) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(PersonaNatural.class);
+		c.add(Restrictions.eq("estatus", 'A'));
+		if (filtroCI != "") {
+			c.add(Restrictions.eq("cedulaRif", filtroCI + "%"));
+		}
+		if (filtroNombre != "") {
+			c.add(Restrictions.eq("primerNombre", filtroNombre + "%"));
+		}
+		if (filtroApellido != "") {
+			c.add(Restrictions.eq("primerApellido", filtroApellido + "%"));
+		}
+		c.createCriteria("persona");
+		c.add(Restrictions.sqlRestriction("codigo_tipo_persona = "
+				+ dB.getCodigoDatoBasico() + ""));
+		return (List<PersonaNatural>) c.list();
+	}
+
+	public List<PersonaNatural> filtrarPersonasDistintas(DatoBasico dB,
+			String filtroCI, String filtroNombre, String filtroApellido) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(PersonaNatural.class);
+		c.add(Restrictions.eq("estatus", 'A'));
+		if (filtroCI != "") {
+			c.add(Restrictions.eq("cedulaRif", filtroCI + "%"));
+		}
+		if (filtroNombre != "") {
+			c.add(Restrictions.eq("primerNombre", filtroNombre + "%"));
+		}
+		if (filtroApellido != "") {
+			c.add(Restrictions.eq("primerApellido", filtroApellido + "%"));
+		}
+		c.createCriteria("persona");
+		c.add(Restrictions.sqlRestriction("codigo_tipo_persona <> "
+				+ dB.getCodigoDatoBasico() + ""));
+
+		return (List<PersonaNatural>) c.list();
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonaJuridica;
 
+import modelo.DatoBasico;
 import modelo.Nomina;
 import modelo.PersonaJuridica;
 import servicio.interfaz.IServicioPersonaJuridica;
@@ -55,4 +56,17 @@ public class ServicioPersonaJuridica implements IServicioPersonaJuridica {
 	public PersonaJuridica buscarPorCedulaRif(String s){
 		return (PersonaJuridica) daoPersonaJuridica.buscarPorCedulaRif(s);
 	}
+	
+	public List<PersonaJuridica> filtarPersonas(DatoBasico db, String ci, String pn) {
+		return daoPersonaJuridica.filtrarPersonas(db, ci, pn);
+	}
+
+	public List<PersonaJuridica> filtarPersonasDistintas(String ci, String pn) {
+		return daoPersonaJuridica.filtrarPersonasDistintas(ci, pn);
+	}
+	
+	public PersonaJuridica buscarByRazonSocial(String s) {
+		return (PersonaJuridica) daoPersonaJuridica.buscarByRazonSocial(s);
+	}
+
 }

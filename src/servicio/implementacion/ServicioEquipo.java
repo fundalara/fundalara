@@ -75,4 +75,8 @@ public class ServicioEquipo implements IServicioEquipo {
 	public List<Equipo> buscarPorCategoriaTipoEquipo(DatoBasico tipoLapso, Categoria categoria){
 		return daoEquipo.listarDosCamposActivos(Equipo.class, "datoBasicoByCodigoTipoLapso", tipoLapso, "categoria", categoria);
 	}
+	public List<Equipo> listarActivos() {
+		return daoEquipo.listarActivos(Equipo.class);
+	}
+
 }
