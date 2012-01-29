@@ -65,4 +65,17 @@ public class ServicioIndicador implements IServicioIndicador {
 		return daoIndicador.buscarPorDatoBasico(datoBasico);
 	}
 
+	@Override
+	public List<Indicador> listarIndicadorIndividualPorModalidad(DatoBasico db) {
+		// TODO Auto-generated method stub
+		return daoIndicador.listarIndicadorIndividualPorModalidad(db);
+	}
+
+	@Override
+	public List<Indicador> listarIndicadorColectivoPorModalidad(DatoBasico db) {
+		// TODO Auto-generated method stub
+		return daoIndicador.listarIndicadorColectivoPorModalidad(db);
+	}
+	
+
 }

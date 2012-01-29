@@ -5,13 +5,14 @@ import java.util.List;
 
 import modelo.Categoria;
 import modelo.CategoriaCompetencia;
+import modelo.IndicadorCategoriaCompetencia;
 
 
 public interface IServicioCategoriaCompetencia {
 
 	public abstract void eliminar(Categoria cc);
 
-	public abstract void agregar(List<CategoriaCompetencia> lista,int comp);
+	public abstract void agregar(IndicadorCategoriaCompetencia icc);
 
 	//public abstract void actualizar(Categoria cc);
 

@@ -3,36 +3,31 @@
 	<style src="/Recursos/Estilos/styleZK.css"></style>
 	<zscript><![CDATA[
 	public void enlace(String cad) {
-		//cuerpo.setSrc(cad);
 		if (divCuerpo.getLastChild() != null)
-		 divCuerpo.getLastChild().detach();
-		Component comp = Executions.createComponents(cad,null,null);
+			divCuerpo.getLastChild().detach();
+		Component comp = Executions.createComponents(cad, null, null);
 		divCuerpo.appendChild(comp);
-		
-		
 	}
-
-	public void mostrarAgenda(){
-        Map map = new Hashtable();
-    	if (divCuerpo.getLastChild() != null)
-   		 divCuerpo.getLastChild().detach();
-        if (event.getTarget().getId().equals("mnuAgendaEntrenamiento")){
-        	map.put("disparador","entrenamiento");
-        }else if (event.getTarget().getId().equals("mnuAgendaCompetencia")){
-        	map.put("disparador","competencia");
-        }else{
-        	map.put("disparador","logistica");
-        }
-        Component comp = Executions.createComponents("/General/FrmAgenda.zul",null,map);
+	public void mostrarAgenda() {
+		Map map = new Hashtable();
+		if (divCuerpo.getLastChild() != null)
+			divCuerpo.getLastChild().detach();
+		if (event.getTarget().getId().equals("mnuAgendaEntrenamiento")) {
+			map.put("disparador", "entrenamiento");
+		} else if (event.getTarget().getId().equals("mnuAgendaCompetencia")) {
+			map.put("disparador", "competencia");
+		} else {
+			map.put("disparador", "logistica");
+		}
+		Component comp = Executions.createComponents("/General/FrmAgenda.zul",
+				null, map);
 		divMenu.setVisible(false);
-		divCuerpo.appendChild(comp);		
+		divCuerpo.appendChild(comp);
 	}
-	
 ]]></zscript>
 	<style>
 		.z-tab-accordion, .z-tab-accordion-seld{ width:260px; }
 	</style>
-
 	<div style="display:inline">
 		<div id="divMenu" style="float:left">
 			<tabbox mold="accordion">
@@ -40,10 +35,9 @@
 					<tab label="Registros" tooltip="nombre" />
 					<tab label="Funcionalidades Deportivas" />
 					<tab label="Funcionalidades Operativas" />
-					<tab label="Agenda"/>
+					<tab label="Agenda" />
 					<tab label="Reportes" />
 					<tab label="Configuraciones" />
-
 				</tabs>
 				<tabpanels width="260px">
 					<tabpanel>
@@ -72,14 +66,14 @@
 													<treerow>
 														<treecell
 															label="Categorías"
-																onClick='enlace("Jugador/Vistas/frmConfigurarCategoria.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarCategoria.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
 															label="Equipos"
-																onClick='enlace("Jugador/Vistas/frmConfigurarEquipo.zul")' />
+															onClick='enlace("Jugador/Vistas/frmConfigurarEquipo.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -100,10 +94,9 @@
 													<treerow>
 														<treecell
 															label="Indicadores de Evaluación"
-															onClick='enlace("Entrenamiento/Vistas/frmIndicadoresEvaluacion.zul")' />
+															onClick='enlace("Entrenamiento/Vistas/frmIndicadorEvaluacion.zul")' />
 													</treerow>
 												</treeitem>
-
 											</treechildren>
 										</treeitem>
 										<treeitem open="false">
@@ -208,11 +201,11 @@
 															label="Recaudos"
 															onClick='enlace("Jugador/Vistas/configurarRecaudo.zul")' />
 													</treerow>
-												</treeitem>												
+												</treeitem>
 												<treeitem>
 													<treerow>
 														<treecell
-															label="Materiales" 
+															label="Materiales"
 															onClick='enlace("Logistica/Vistas/frmRegistrarMaterial.zul")' />
 													</treerow>
 												</treeitem>
@@ -263,8 +256,6 @@
 										</treeitem>
 									</treechildren>
 								</treeitem>
-
-
 							</treechildren>
 						</tree>
 					</tabpanel>
@@ -381,22 +372,22 @@
 													label="Seleccionar Indicadores"
 													onClick='enlace("/Competencias/Vistas/FrmIndicadores.zul")' />
 											</treerow>
-										</treeitem>										
+										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Programar Juegos"
 													onClick='enlace("/Competencias/Vistas/FrmCalendario.zul")' />
 											</treerow>
-										</treeitem>										
+										</treeitem>
 										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Hospedaje de Jugadores"
 													onClick='enlace("Jugador/Vistas/frmRegistrarHospedaje.zul")' />
 											</treerow>
-										</treeitem>										
-										
+										</treeitem>
+
 									</treechildren>
 								</treeitem>
 							</treechildren>
@@ -467,7 +458,7 @@
 										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Solicitudes de Mantenimiento" 
+													label="Solicitudes de Mantenimiento"
 													onClick='enlace("Logistica/Vistas/frmSolicitudMantenimiento.zul")' />
 											</treerow>
 										</treeitem>
@@ -495,22 +486,26 @@
 							<treechildren>
 								<treeitem open="false">
 									<treerow>
-										<treecell id="mnuAgendaEntrenamiento" label="Entrenamientos" onClick="mostrarAgenda()" />
-									</treerow>							
-								</treeitem>
-								<treeitem open="false">
-									<treerow>
-										<treecell id="mnuAgendaCompetencia"
-											label="Competencias" onClick="mostrarAgenda()"/>
-									</treerow>								
+										<treecell
+											id="mnuAgendaEntrenamiento" label="Entrenamientos"
+											onClick="mostrarAgenda()" />
+									</treerow>
 								</treeitem>
 								<treeitem open="false">
 									<treerow>
 										<treecell
-											label="Operaciones" onClick="mostrarAgenda()"/> <!--la verdad no que nombre necesita cronos aqui -->
+											id="mnuAgendaCompetencia" label="Competencias"
+											onClick="mostrarAgenda()" />
 									</treerow>
-							 </treeitem>
-							 </treechildren>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Operaciones"
+											onClick="mostrarAgenda()" />
+										<!--la verdad no que nombre necesita cronos aqui -->
+									</treerow>
+								</treeitem>
+							</treechildren>
 						</tree>
 					</tabpanel>
 					<tabpanel>
@@ -522,43 +517,34 @@
 											label="Consultas Dinámicas" />
 									</treerow>
 								</treeitem>
-<treeitem open="false">
+								<treeitem open="false">
+									<treerow>
+										<treecell label="Especiales" />
+									</treerow>
+									<treechildren>
+										<treeitem open="false">
 											<treerow>
 												<treecell
-													label="Especiales" />
+													label="Competencias" />
 											</treerow>
 											<treechildren>
 												<treeitem
 													open="false">
 													<treerow>
 														<treecell
-															label="Competencias" />
+															label="Desempeño Deportivo"
+															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
 													</treerow>
-													<treechildren>
-														<treeitem
-															open="false">
-															<treerow>
-																<treecell
-																	label="Desempeño Deportivo"
-																	onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
-															</treerow>
-														</treeitem>
-													</treechildren>
 												</treeitem>
 											</treechildren>
 										</treeitem>
-								
-
-
-
-
+									</treechildren>
+								</treeitem>
 								<treeitem open="false">
 									<treerow>
 										<treecell label="Estádisticos" />
 									</treerow>
 								</treeitem>
-
-		
 							</treechildren>
 						</tree>
 					</tabpanel>
@@ -595,7 +581,7 @@
 													onClick='enlace("Administracion/Vistas/FrmActualizarConcepto.zul")' />
 											</treerow>
 										</treeitem>
-										<treeitem >
+										<treeitem>
 											<treerow>
 												<treecell
 													label="Seguridad" />
@@ -627,7 +613,6 @@
 												</treeitem>
 											</treechildren>
 										</treeitem>
-										
 									</treechildren>
 								</treeitem>
 								<treeitem open="false">
@@ -676,14 +661,9 @@
 							</treechildren>
 						</tree>
 					</tabpanel>
-
-
 				</tabpanels>
 			</tabbox>
 		</div>
-		<div id="divCuerpo" style="display:inline">
-
-		</div>
-	
+		<div id="divCuerpo" style="display:inline"></div>
 	</div>
 </zk>

@@ -12,6 +12,7 @@ import modelo.Categoria;
 import modelo.CategoriaCompetencia;
 import modelo.CategoriaCompetenciaId;
 import modelo.Divisa;
+import modelo.IndicadorCategoriaCompetencia;
 
 public class ServicioCategoriaCompetencia implements
 		IServicioCategoriaCompetencia {
@@ -24,49 +25,19 @@ public class ServicioCategoriaCompetencia implements
 	}
 
 	@Override
-	public void agregar(List<CategoriaCompetencia> lista,int comp) {
-		// TODO Auto-generated method stub
-
-		
-//		int codigoCompetencia = daoCompetencia.listar(Competencia.class).size();
-		
-		for (Iterator i= lista.iterator(); i.hasNext();){
-			CategoriaCompetencia id = (CategoriaCompetencia) i.next();
-			
-			id.getCompetencia().setCodigoCompetencia(comp);
-			
-			
-			int codcateg = id.getCategoria().getCodigoCategoria();
-			
-			CategoriaCompetenciaId categID= new CategoriaCompetenciaId();
-			categID.setCodigoCategoria(codcateg);
-			categID.setCodigoCompetencia(comp);
-			
-			id.setId(categID);
-			
-			daoCategoriaCompetencia.guardar(id);		
-	    }
-
-//		daoCategoriaCompetencia.guardar(cc);		
-				
+	public void agregar(IndicadorCategoriaCompetencia icc) {
+	     if (icc.getCodigoIndicadorCategoriaCompetencia() == 0){
+	    	 int codigo = daoCategoriaCompetencia.listar(IndicadorCategoriaCompetencia.class).size()+1;
+	    	 icc.setCodigoIndicadorCategoriaCompetencia(codigo);
+	     }
+	     daoCategoriaCompetencia.guardar(icc);
 	}
 
 
-	/*@Override
-	public void actualizar(Categoria cc) {
-		// TODO Auto-generated method stub
-
-	}*/
-
-	/*@Override
-	public Categoria buscarPorCodigo(Categoria cc) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 	@Override
 	public List<Categoria> listar() {
-		return daoCategoriaCompetencia.listar(Categoria.class);
+		return daoCategoriaCompetencia.listar(IndicadorCategoriaCompetencia.class);
 	}
 
 	@Override

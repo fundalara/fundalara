@@ -7,7 +7,7 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.autocommit">true</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.password">123456</property>
+        <property name="hibernate.connection.password">123</property>
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="hibernate.connection.username">postgres</property>

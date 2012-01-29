@@ -32,7 +32,7 @@ public class ServicioIndicadorActividadEscala implements IServicioIndicadorActiv
 	@Override
 	public List<IndicadorActividadEscala> listar() {
 		// TODO Auto-generated method stub
-		return daoIndicadorActividadEscala.listar(IndicadorActividadEscala.class);
+		return daoIndicadorActividadEscala.listarActivos(IndicadorActividadEscala.class);
 	}
 
 	public DaoIndicadorActividadEscala getDaoIndicadorActividadEscala() {

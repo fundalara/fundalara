@@ -39,9 +39,7 @@ public class ServicioActividadEntrenamiento implements
 	}
 
 	public List<ActividadEntrenamiento> listar() {
-		List<ActividadEntrenamiento> a = daoActividadEntrenamiento
-				.listar(ActividadEntrenamiento.class);
-		return a;
+		return daoActividadEntrenamiento.listarActivos(ActividadEntrenamiento.class);
 	}
 
 	@Override

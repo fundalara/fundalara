@@ -1,5 +1,6 @@
 package controlador.entrenamiento;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import modelo.ActividadEntrenamiento;
@@ -58,7 +59,12 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listActividad = new ArrayList<ActividadEntrenamiento>();
+		listCategoria = new ArrayList<Categoria>();
+		listEscala = new ArrayList<EscalaMedicion>();
+		listIndicador = new ArrayList<DatoBasico>();
+		listTipoEscala = new ArrayList<DatoBasico>();
+		listCategoria = servicioCategoria.listarActivos();
 		listEscala = servicioEscalaMedicion.listar();
 		listActividad = servicioActividadEntrenamiento.listar();
 		listIndicador = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato

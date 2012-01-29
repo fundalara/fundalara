@@ -1,6 +1,6 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wind"?>
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page contentType="text/html;charset=UTF-8"?>
 <zk>	
 	<window title="Registro de Resultados" id="wind" apply="controlador.entrenamiento.Auxiliar_Agenda" closable="true">
 		<combobox id="actividad">
