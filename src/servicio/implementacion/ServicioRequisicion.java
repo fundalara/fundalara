@@ -1,5 +1,7 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoRequisicion;
 import modelo.Requisicion;
 import servicio.interfaz.IServicioRequisicion;
@@ -33,5 +35,12 @@ public class ServicioRequisicion implements IServicioRequisicion {
 	public void setDaoRequisicion(DaoRequisicion daoRequisicion) {
 		this.daoRequisicion = daoRequisicion;
 	}
+
+	@Override
+	public List<Requisicion> listar() {
+		// TODO Auto-generated method stub
+		return daoRequisicion.listar(Requisicion.class);
+	}
+	
 
 }

@@ -1,5 +1,7 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoDetalleRequisicion;
 import modelo.DetalleRequisicion;
 import servicio.interfaz.IServicioDetalleRequisicion;
@@ -7,7 +9,7 @@ import servicio.interfaz.IServicioDetalleRequisicion;
 public class ServicioDetalleRequisicion implements IServicioDetalleRequisicion {
 
 	DaoDetalleRequisicion daoDetalleRequisicion;
-	
+
 	@Override
 	public void eliminar(DetalleRequisicion dr) {
 		// TODO Auto-generated method stub
@@ -30,10 +32,15 @@ public class ServicioDetalleRequisicion implements IServicioDetalleRequisicion {
 		return daoDetalleRequisicion;
 	}
 
-	public void setDaoDetalleRequisicion(DaoDetalleRequisicion daoDetalleRequisicion) {
+	public void setDaoDetalleRequisicion(
+			DaoDetalleRequisicion daoDetalleRequisicion) {
 		this.daoDetalleRequisicion = daoDetalleRequisicion;
 	}
 
-	
-	
+	@Override
+	public List<DetalleRequisicion> listar() {
+		// TODO Auto-generated method stub
+		return daoDetalleRequisicion.listar(DetalleRequisicion.class);
+	}
+
 }

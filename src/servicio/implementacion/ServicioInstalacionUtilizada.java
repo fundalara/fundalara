@@ -1,19 +1,38 @@
 package servicio.implementacion;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import dao.general.DaoInstalacionUtilizada;
 
+import modelo.DatoBasico;
 import modelo.InstalacionUtilizada;
-import modelo.Instalacion;
-import modelo.Sesion;
 import servicio.interfaz.IServicioInstalacionUtilizada;
 
 public class ServicioInstalacionUtilizada implements
 		IServicioInstalacionUtilizada {
 
 	DaoInstalacionUtilizada daoInstalacionUtilizada;
+	List<InstalacionUtilizada> list2 = new ArrayList<InstalacionUtilizada>();
+	List<InstalacionUtilizada> list3 = new ArrayList<InstalacionUtilizada>();
+
+	@Override
+	public List<InstalacionUtilizada> listarInstalacionDisponible(
+			DatoBasico tipoInstalacion, Date fechaInic, Date fechaFin,
+			Date horaInic, Date horaFin) {
+		list2 = daoInstalacionUtilizada.listarInstalacionDisponible(fechaInic,
+				fechaFin, horaInic, horaFin);
+		for (int i = 0; i < list2.size(); i++) {
+			if (list2.get(i).getInstalacion().getDatoBasico()
+					.getCodigoDatoBasico() == tipoInstalacion
+					.getCodigoDatoBasico()) {
+				list3.add(list2.get(i));
+			}
+
+		}
+		return list3;
+	}
 
 	public DaoInstalacionUtilizada getDaoInstalacionUtilizada() {
 		return daoInstalacionUtilizada;
@@ -25,48 +44,21 @@ public class ServicioInstalacionUtilizada implements
 	}
 
 	@Override
-	public void guardar(InstalacionUtilizada pr) {
-		pr.setCodigoInstalacionUtilizada(daoInstalacionUtilizada
-				.generarCodigo(InstalacionUtilizada.class));
-		daoInstalacionUtilizada.guardar(pr);
-	}
-
-	@Override
-	public void actualizar(InstalacionUtilizada pr) {
-		daoInstalacionUtilizada.actualizar(pr);
-	}
-
-	@Override
-	public void eliminar(InstalacionUtilizada pr) {
-		daoInstalacionUtilizada.eliminar(pr);
+	public List<InstalacionUtilizada> listarInstalacionDisponible() {
+		// TODO Auto-generated method stub
+		return this.daoInstalacionUtilizada.listar(InstalacionUtilizada.class);
 	}
 
 	@Override
 	public List<InstalacionUtilizada> listar() {
+		// TODO Auto-generated method stub
 		return daoInstalacionUtilizada.listar(InstalacionUtilizada.class);
 	}
 
-	public List<InstalacionUtilizada> buscarporSesion(Sesion se) {
-		return daoInstalacionUtilizada.buscarporSesion(se);
-	}
-
-	public InstalacionUtilizada buscarPorCodigo(Integer i) {
-		// TODO Auto-generated method stub
-		return daoInstalacionUtilizada.buscarporCodigo(i);
-	}
-
-	public InstalacionUtilizada buscarporInstalacionFecha(Instalacion it,
-			Date fc) {
-		return daoInstalacionUtilizada.buscarporInstalacionFecha(it, fc);
-	}
-
-	public InstalacionUtilizada buscarPorSesionFecha(Date fec, Sesion se) {
-		return daoInstalacionUtilizada.buscarPorSesionFecha(fec, se);
-	}
-
-	public InstalacionUtilizada buscarPorSesion(Sesion sesion) {
-		return (InstalacionUtilizada) daoInstalacionUtilizada.buscarUnCampo(
-				InstalacionUtilizada.class, "sesion", sesion);
+	@Override
+	public void agregar(InstalacionUtilizada i) {
+		daoInstalacionUtilizada.guardar(i);
+		
 	}
 
 }

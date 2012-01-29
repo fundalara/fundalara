@@ -44,18 +44,27 @@ public class ServicioMaterial implements IServicioMaterial {
 	public List<Material> listarActivos() {		
 		return daoMaterial.listarActivos(Material.class);
 	}
-
-	public List<Material> listarPorTipo(DatoBasico tipo){
-		return daoMaterial.listarPorTipo(tipo);
-	}
-//	@Override
-//	public Material buscarPorCodigo(int cod) {
-//		return daoMaterial.buscarPorCodigo(cod);
-//	}	
-	
 	
 	public int generarCodigo(){		
 		return daoMaterial.generarCodigo(Material.class);
+	}
+
+	@Override
+	public List<Material> listarMateriales() {
+		// TODO Auto-generated method stub
+		return daoMaterial.listarMateriales();
+	}
+
+	@Override
+	public List<Material> listarMaterialPorTipo(DatoBasico tipoMaterial) {
+		// TODO Auto-generated method stub
+		return daoMaterial.listarMaterialesPorTipo(tipoMaterial);
+	}
+
+	@Override
+	public List<Material> buscarDatosPorRelacion(DatoBasico m) {
+		// TODO Auto-generated method stub
+		return daoMaterial.buscarPorRelacion(m);
 	}
 
 }

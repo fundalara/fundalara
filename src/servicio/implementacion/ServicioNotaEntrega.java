@@ -1,5 +1,7 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoNotaEntrega;
 import modelo.NotaEntrega;
 import servicio.interfaz.IServicioNotaEntrega;
@@ -32,6 +34,26 @@ public class ServicioNotaEntrega implements IServicioNotaEntrega {
 
 	public void setDaoNotaEntrega(DaoNotaEntrega daoNotaEntrega) {
 		this.daoNotaEntrega = daoNotaEntrega;
+	}	
+
+	public int generarCodigo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int devolverUltimo() {
+		// TODO Auto-generated method stub
+		return daoNotaEntrega.devolverUltimo();
+	}
+
+	public NotaEntrega buscar(Integer cod) {
+		return daoNotaEntrega.buscarPorCodigo(cod);
+	}
+
+	@Override
+	public List<NotaEntrega> listar() {
+		// TODO Auto-generated method stub
+		return daoNotaEntrega.listar(NotaEntrega.class);
 	}
 
 }

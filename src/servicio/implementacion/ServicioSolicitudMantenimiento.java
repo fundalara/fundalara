@@ -1,5 +1,7 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoSolicitudMantenimiento;
 import modelo.SolicitudMantenimiento;
 import servicio.interfaz.IServicioSolicitudMantenimiento;
@@ -7,8 +9,8 @@ import servicio.interfaz.IServicioSolicitudMantenimiento;
 public class ServicioSolicitudMantenimiento implements
 		IServicioSolicitudMantenimiento {
 
-	DaoSolicitudMantenimiento daoSolicitudMantenimiento;
-	
+	DaoSolicitudMantenimiento daoSolicitudMantenimiento = new DaoSolicitudMantenimiento();
+
 	@Override
 	public void eliminar(SolicitudMantenimiento sm) {
 		// TODO Auto-generated method stub
@@ -34,6 +36,20 @@ public class ServicioSolicitudMantenimiento implements
 	public void setDaoSolicitudMantenimiento(
 			DaoSolicitudMantenimiento daoSolicitudMantenimiento) {
 		this.daoSolicitudMantenimiento = daoSolicitudMantenimiento;
+	}
+
+	@Override
+	public List<SolicitudMantenimiento> listarActivos() {
+		System.out.println(daoSolicitudMantenimiento.listarActivos(
+				SolicitudMantenimiento.class).size());
+		return daoSolicitudMantenimiento
+				.listarActivos(SolicitudMantenimiento.class);
+	}
+
+	@Override
+	public List<SolicitudMantenimiento> listar() {
+		// TODO Auto-generated method stub
+		return daoSolicitudMantenimiento.listar(SolicitudMantenimiento.class);
 	}
 
 }

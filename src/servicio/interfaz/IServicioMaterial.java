@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.Material;
 
 public interface IServicioMaterial {
@@ -16,8 +17,12 @@ public interface IServicioMaterial {
 	
 	public abstract List<Material> listarActivos();
 	
-//	public Material buscarPorCodigo(int cod);
-	
 	public int generarCodigo();
+	
+	public List<Material> listarMateriales();
+
+	public List<Material> listarMaterialPorTipo(DatoBasico tipoMaterial);
+
+	public List<Material> buscarDatosPorRelacion(DatoBasico m);
 	
 }
