@@ -1,0 +1,96 @@
+<?page title="Morosidad de Representantes General" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+
+	<window id="frmRMorosidadGeneral" title="Morosidad de Representantes"
+		border="normal" closable="true" width="690px" apply="controlador.administracion.CntrlMorosidadGeneral">
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+
+		<panel width="100%">
+			<caption label="Filtros"></caption>
+			<panelchildren>
+
+				<groupbox width="90%">
+
+					<grid width="95%">
+						<columns width="100%">
+							<column width="20%"></column>
+							<column width="5%"></column>
+							<column width="35%"></column>
+							<column width="5%"></column>
+							<column width="35%"></column>
+
+						</columns>
+
+						<rows>
+
+							<row>
+								<label>Fecha Emisión:</label>
+								<label>Desde:</label>
+								<datebox id="dtbFechaEmiDesde" format="dd/MM/yyyy" width="70%"></datebox>
+								<label>Hasta:</label>
+								<datebox id="dtbFechaEmiHasta" format="dd/MM/yyyy" width="70%"></datebox>
+
+							</row>
+
+
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox width="90%">
+
+					<grid width="95%">
+						<columns width="100%">
+							<column width="20%"></column>
+							<column width="5%"></column>
+							<column width="35%"></column>
+							<column width="5%"></column>
+							<column width="35%"></column>
+
+						</columns>
+
+						<rows>
+
+							<row>
+								<label>Fecha Vencimiento:</label>
+								<label>Desde:</label>
+								<datebox id="dtbFechaVenDesde" format="dd/MM/yyyy" width="70%"></datebox>
+								<label>Hasta:</label>
+								<datebox width="70%" format="dd/MM/yyyy" id="dtbFechaVenHasta"></datebox>
+
+							</row>
+
+
+						</rows>
+					</grid>
+				</groupbox>
+				<iframe id="ifReport"></iframe>
+
+
+				<div align="right">
+				
+					<button image="/Recursos/Imagenes/imprimir.ico" id="btnImprimir"
+						onClick="" tooltiptext="/Generar"
+						label="Generar" />
+					<button image="/Recursos/Imagenes/cancelar.ico" id="btnCancelar"
+						onClick="" tooltiptext="Cancelar" label="Cancelar" />
+					<button image="/Recursos/Imagenes/atras.ico" 
+						onClick="" tooltiptext="Salir" label="Salir">
+						<attribute name="onClick">
+	winRMorosidad.onClose();
+</attribute>
+
+					</button>
+				</div>
+
+			</panelchildren>
+
+
+
+		</panel>
+	</window>
+</zk>

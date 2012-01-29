@@ -53,5 +53,9 @@ public class ServicioDatoAcademicoPersonal implements
 			DaoDatoAcademicoPersonal daoDatoAcademicoPersonal) {
 		this.daoDatoAcademicoPersonal = daoDatoAcademicoPersonal;
 	}
-
+	
+	public List<DatoAcademicoPersonal> listarPorCedula(String d) {
+		// TODO Auto-generated method stub
+		return daoDatoAcademicoPersonal.listarPorCedula(d);
+	}
 }

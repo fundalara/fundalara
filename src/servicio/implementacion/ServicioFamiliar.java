@@ -41,5 +41,11 @@ public class ServicioFamiliar implements IServicioFamiliar {
 	public List<Familiar> listar() {
 		return daoFamiliar.listar( Familiar.class);
 	}
+	
+	public Familiar buscarPorCedulaFamiliar(String d) {
+		System.out.println(d);
+		return daoFamiliar.buscarPorCedulaFamiliar(d);
+	}
+
 
 }

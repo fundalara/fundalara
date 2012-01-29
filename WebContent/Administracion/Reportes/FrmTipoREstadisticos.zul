@@ -1,0 +1,36 @@
+<?page title="Cuentas por Pagar" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winREstadistico" title=""  border="normal" closable="true" width="690px">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void mostrarOpciones() {
+		
+
+		if (cmbREstadistico.getSelectedItem().getValue().equals("CP")) {
+			Executions.createComponents("/Administracion/Reportes/FrmCuentasPagar.zul",
+					winREstadistico, null);
+			
+		} else if (cmbREstadistico.getSelectedItem().getValue().equals("CP1")) {
+		Window window = (Window) Executions.createComponents(
+				"/Administracion/Reportes/FrmCuentasCobrar.zul", null, null);
+		
+	}
+	}
+]]></zscript>
+
+		<panel title="Reporte Estadistico" collapsible="true">
+			<panelchildren>
+				<combobox id="cmbREstadistico" onSelect="mostrarOpciones()"
+					autocomplete="true">
+					<comboitem label="Cuentas por Pagar" value="CP" />
+					<comboitem label="Cuentas por Cobrar" value="CP1" />
+				</combobox>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

@@ -51,5 +51,10 @@ public class ServicioPersonalContrato implements IServicioPersonalContrato {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public PersonalContrato buscarPorCedulaRif(String s) {
+		// TODO Auto-generated method stub
+		return daoPersonalContrato.buscarPorCedulaRif(s);
+	}
 
 }

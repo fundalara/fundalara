@@ -4,6 +4,8 @@ import java.util.List;
 
 import dao.general.DaoPersonalConceptoNomina;
 
+import modelo.ConceptoNomina;
+import modelo.Personal;
 import modelo.PersonalCargo;
 import modelo.PersonalConceptoNomina;
 import servicio.interfaz.IServicioPersonalConceptoNomina;
@@ -52,6 +54,16 @@ public class ServicioPersonalConceptoNomina implements
 	public PersonalConceptoNomina buscarPorCodigo (PersonalConceptoNomina d) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	public List<PersonalConceptoNomina> listarConceptosByPersonal(Personal d) {
+		return daoPersonalConceptoNomina.listarConceptosByPersonal(d);
+	}
+	
+	
+	public PersonalConceptoNomina buscarConceptoByPersonal(ConceptoNomina c, Personal p) {
+		return daoPersonalConceptoNomina.buscarConceptoByPersonal(c,p);
 	}
 
 }

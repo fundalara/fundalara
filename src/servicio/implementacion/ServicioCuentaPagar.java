@@ -1,7 +1,6 @@
 package servicio.implementacion;
-
+import java.text.ParseException;
 import java.util.List;
-
 import servicio.interfaz.IServicioCuentaPagar;
 
 import dao.general.DaoCuentaPagar;
@@ -66,6 +65,14 @@ public class ServicioCuentaPagar implements IServicioCuentaPagar {
 		return daoCuentaPagar.buscarOrigen(cp);
 	}
 
+	public List<CuentaPagar> listarCuentaPorPagarFiltro(DatoBasico d, String s){
+		return daoCuentaPagar.listarCuentaPorPagarFiltro(d, s);
+	}
+	
+	
+	public List<CuentaPagar> listarCuentaPorPagarPorFecha(DatoBasico dato, String inicio, String fin, String filtro) throws ParseException{
+		return daoCuentaPagar.listarCuentaPorPagarPorFecha(dato,inicio,fin,filtro);
+	}
 	
 
 }

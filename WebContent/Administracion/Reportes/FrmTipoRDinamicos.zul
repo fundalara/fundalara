@@ -1,0 +1,29 @@
+<?page title="Reportes Dinámicos" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winRDinamicos" title="Reportes Dinámicos" closable="true" width="690px" border="normal">
+<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+	public void mostrarRDinamicos() {
+		if (cmbRDinamicos.getSelectedItem().getValue().equals("FC")) {
+			Executions.createComponents("/Administracion/Reportes/FrmReportesCompras.zul",
+					null, null);
+		}
+	}
+]]></zscript>
+
+		<panel title="Reportes Dinámicos" collapsible="true">
+			<panelchildren>
+				<combobox id="cmbRDinamicos" onSelect="mostrarRDinamicos()"
+					autocomplete="true">
+					
+					<comboitem label="Facturas de Compras" value="FC" />
+				</combobox>
+			</panelchildren>
+		</panel>
+</window>
+</zk>

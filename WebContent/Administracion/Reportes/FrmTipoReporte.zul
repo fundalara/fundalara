@@ -1,0 +1,104 @@
+<?page title="Reportes Estadisticos" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+
+	<window id="ReportesEstadisticos" title="Reportes Estadisticos" border="normal" 
+	closable="true" width="690px" apply="controlador.administracion.CntrlReporte" >
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	
+]]></zscript>
+		<zscript><![CDATA[
+	//@DECLARATION
+]]></zscript>
+
+		<panel width="100%">
+			<panelchildren>
+				<groupbox width="80%" >
+                    <caption label="Tipo de Reporte"></caption>        
+					<grid>
+						<columns>
+							
+							<column width="80%"></column>
+						</columns>
+						<rows>
+							<row>
+								
+								<combobox id="cmbReportes" value="--Seleccione--" width="80%">
+									<comboitem label="Cuentas por Pagar" value="cp">
+									</comboitem>
+								</combobox>
+								</row>
+									</rows>
+					       </grid>
+				    </groupbox>
+				  
+					
+				<groupbox id="grbFiltros" visible="false" width="80%">
+                    <caption label="Filtros"></caption>        
+					<grid>
+						<columns>
+							<column width="40%"></column>
+							<column width="60%"></column>
+						</columns>
+
+							<rows>
+
+							<row>
+								<label> Fecha Desde:</label>
+								<datebox id="dtFechaInicio" format="dd/MM/yyyy" width="80%"></datebox>
+
+							</row>
+							<row>
+
+								<label>Fecha Hasta</label>
+								<datebox id="dtFechaFin" format="dd/MM/yyyy" width="80%"></datebox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+<!-- 				<groupbox id="grbFormatos" visible="false" width="80%"> -->
+<!--                     <caption label="Formato"></caption>         -->
+<!-- 					<grid> -->
+<!-- 						<columns> -->
+							
+<!-- 							<column width="80%"></column> -->
+<!-- 						</columns> -->
+<!-- 						<rows> -->
+<!-- 							<row> -->
+								
+<!-- 								<combobox  width="80%" value="Seleccione"> -->
+<!-- 									<comboitem label="PDF" -->
+<!-- 										value=""> -->
+<!-- 									</comboitem> -->
+<!-- 									<comboitem label="Word" -->
+<!-- 										value=""> -->
+<!-- 									</comboitem> -->
+									
+<!-- 								</combobox> -->
+<!-- 								</row> -->
+<!-- 									</rows> -->
+<!-- 					       </grid> -->
+<!-- 				    </groupbox> -->
+				  <groupbox width="80%">
+				  	<iframe id="ifReporte" height="1px"></iframe>
+				  </groupbox>
+
+				<div align="right">
+					<button id="btnReportes" image="/Recursos/Imagenes/imprimir.ico"
+						 tooltiptext="/Generar" label="Generar" />
+					<button image="/Recursos/Imagenes/cancelar.ico"
+						id="btnCancelar" tooltiptext="Cancelar" label="Cancelar" />
+					<button image="/Recursos/Imagenes/atras.ico" id="btnSalir"
+					 tooltiptext="Salir" label="Salir" />
+				
+				</div>
+
+			</panelchildren>
+		
+					
+			
+		</panel>
+	</window>
+</zk>

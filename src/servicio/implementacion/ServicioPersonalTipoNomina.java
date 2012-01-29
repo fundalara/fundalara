@@ -51,5 +51,9 @@ public class ServicioPersonalTipoNomina implements IServicioPersonalTipoNomina {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public PersonalTipoNomina buscarPorCedulaRif(String s) {
+		// TODO Auto-generated method stub
+		return daoPersonalTipoNomina.buscarPorCedulaRif(s);
+	}
 }

@@ -1,0 +1,101 @@
+<?page title="Consultas Dinamicas" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winReportesCompras"?>
+<zk>
+<window title="Reporte de Facturas de Adquisiciones" width="690px" closable="true" id="winReportesCompras" border="normal"
+apply="controlador.administracion.CntrlReportesCompras">
+	
+
+	<panel collapsible="true" title="Filtros"
+		open="true" style="border:orange">
+			<panelchildren>
+				<grid id="gridFiltros" oddRowSclass="none">
+					<columns>
+						<column label="" width="180px"></column>
+						<column label="" width="140px"></column>
+						<column label="" width="180px"></column>
+						<column label="" width="140px"></column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							
+								
+								<label>Fecha Inicio</label>
+								
+							
+							<datebox id="dtInicio" width="140px"
+											 format="dd/MM/yyyy">
+							</datebox>
+						
+							<hbox>
+								<space width="20px"></space>
+								
+								<label>Fecha Final</label>
+							</hbox>
+							<datebox id="dtFin" width="140px"
+											 format="dd/MM/yyyy">
+							</datebox>
+						</row>
+						<row style="border:none">
+							
+								
+								<label>Estado</label>
+
+							<combobox id="cmbEstado" width="140px"
+								readonly="true" value="--Seleccione--">
+								<comboitem label="Cancelado" value="C"></comboitem>
+								<comboitem label="Eliminado" value="E"></comboitem>
+								<comboitem label="Pendiente" value="P"></comboitem>
+							</combobox>
+							<hbox>
+								<space width="20px"></space>
+								<button id="btnBuscarFact"
+									image="/Recursos/Imagenes/consultar.ico"
+									tooltiptext="Validar Factura" />
+							</hbox>				
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+	</panel>
+	<panel collapsible="true" title="Resultados"
+		open="true" style="border:orange">
+			<panelchildren>
+				<listbox height="100px" id="lbxReporte" width="650px" 
+				mold="paging" pageSize="5"  model="@{cntrl.lstFacturas}">
+					<listhead  >
+						<listheader label="Código Factura" width="90px" sort="auto"></listheader>
+						<listheader label="Concepto" width="180px" ></listheader>
+						<listheader label="Nombre Proveedor" width="200px" sort="auto"></listheader>
+						<listheader label="Monto Total" width="90px" sort="auto"></listheader>
+						<listheader label="Fecha Emisión" width="90px" sort="auto"></listheader>
+						
+					</listhead>
+					<listitem self="@{each='cuentaPagar'}">
+						<listcell label="@{cuentaPagar.origen}" />
+						<listcell label="@{cuentaPagar.concepto}" />
+						<listcell label="@{cuentaPagar.persona.personaJuridica.razonSocial }" />
+						<listcell label="@{cuentaPagar.montoTotal}" />
+						<listcell label="@{cuentaPagar.fechaEmision, converter='comun.converter.DateConverter'}" />
+						
+					</listitem>
+					
+				</listbox>
+							
+			</panelchildren>
+	</panel>
+	<div align="right">
+						<button id="btnExportar"
+							image="/Recursos/Imagenes/imprimir.ico" onClick="" label="Exportar" />
+						
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							id="btnCancelar" label="Cancelar" />
+						<button image="/Recursos/Imagenes/salir.png"
+							id="btnSalir" tooltiptext="Salir" label="Salir">
+
+						</button>
+	</div>
+	                   
+
+</window>
+</zk>

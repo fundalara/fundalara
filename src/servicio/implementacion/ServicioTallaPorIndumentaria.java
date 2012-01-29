@@ -44,4 +44,12 @@ public class ServicioTallaPorIndumentaria implements
 		return daoTallaPorIndumentaria.listar( TallaPorIndumentaria.class);
 	}
 
+	public TallaPorIndumentaria buscarPorTalla(int parseInt, int parseInt2) {
+		return daoTallaPorIndumentaria.buscarPorTalla(parseInt,parseInt2);
+	}
+	
+	
+	
+
+
 }
