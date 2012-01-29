@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.Indicador;
 
 public interface IServicioIndicador {
@@ -17,5 +18,9 @@ public interface IServicioIndicador {
 	public abstract List<Indicador> listar();
 
 	public abstract List<Indicador> listarActivos();
+	
+	public abstract List <Indicador> listarIndicadorIndividualPorModalidad (DatoBasico db);
+	
+	public abstract List <Indicador> listarIndicadorColectivoPorModalidad (DatoBasico db);
 
 }

@@ -6,6 +6,7 @@ import dao.general.DaoIndicadorCategoriaCompetencia;
 
 import modelo.Categoria;
 import modelo.Competencia;
+import modelo.DatoBasico;
 import modelo.Indicador;
 import modelo.IndicadorCategoriaCompetencia;
 import modelo.Liga;
@@ -33,7 +34,7 @@ public class ServicioIndicadorCategoriaCompetencia implements
 
 	@Override
 	public void agregar(IndicadorCategoriaCompetencia i) {
-		// TODO Auto-generated method stub
+		daoIndicadorCategoriaCompetencia.guardar(i);
 
 	}
 
@@ -50,9 +51,16 @@ public class ServicioIndicadorCategoriaCompetencia implements
 	}
 
 	@Override
-	public List<Indicador> listarIndicadoresPorCategoria(Categoria c, Competencia comp) {
-		return daoIndicadorCategoriaCompetencia.listarIndicadoresPorCategoria(c, comp);
+	public List<IndicadorCategoriaCompetencia> listarIndicadoresIndividualesPorCategoria(Categoria c, Competencia comp, DatoBasico db) {
+		return daoIndicadorCategoriaCompetencia.listarIndicadoresIndividualesPorCategoria(c, comp,db);
 		
+	}
+
+	@Override
+	public List<IndicadorCategoriaCompetencia> listarIndicadoresColectivosPorCategoria(
+			Categoria c, Competencia comp, DatoBasico db) {
+		
+		return daoIndicadorCategoriaCompetencia.listarIndicadoresColectivosPorCategoria(c, comp, db);
 	}
 	 
 	

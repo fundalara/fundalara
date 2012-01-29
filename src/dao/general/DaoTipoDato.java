@@ -45,7 +45,7 @@ public class DaoTipoDato extends GenericDao {
 	 */
 	public TipoDato buscarPorCodigo(TipoDatoBasico tipoDato) {
 		TipoDato tipo;
-		Session session = SessionManager.getSession();
+		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Query query = session.createSQLQuery(
 				"SELECT * FROM tipo_dato WHERE codigo_tipo_dato='"
