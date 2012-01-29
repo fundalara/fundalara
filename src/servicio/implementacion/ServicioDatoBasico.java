@@ -152,4 +152,18 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		return daoDatoBasico.buscarPadre(db);
 	}
 	
+	@Override
+	public List<DatoBasico> listarComisiones() {
+		// TODO Auto-generated method stub
+		return this.daoDatoBasico.listarComisiones();
+	}
+	
+	public List<DatoBasico> listarTipoInstalacion(){
+		return this.daoDatoBasico.listarTipoInstalacion();
+	}
+	
+	@Override
+	public List<DatoBasico> listarTipoMantenimiento() {
+		return this.daoDatoBasico.listarTipoMantenimiento();
+	}
 }

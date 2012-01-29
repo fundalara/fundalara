@@ -290,4 +290,35 @@ public class DaoDatoBasico extends GenericDao {
 		return c.list();
 	}
 
+	public List<DatoBasico> listarComisiones() {		
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c= session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("tipoDato.codigoTipoDato", 102));
+		c.add(Restrictions.eq("estatus", "A"));
+		List<DatoBasico> lista = c.list();
+		return lista;		
+	}
+	
+	public List<DatoBasico> listarTipoMantenimiento() {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("tipoDato.codigoTipoDato", 108));
+		c.add(Restrictions.eq("estatus", "A"));
+		List<DatoBasico> lista = c.list();
+		return lista;
+
+	}
+	
+	public List<DatoBasico> listarTipoInstalacion() {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("tipoDato.codigoTipoDato", 100));
+		c.add(Restrictions.eq("estatus", "A"));
+		List<DatoBasico> lista = c.list();
+		return lista;
+
+	}
 }

@@ -48,6 +48,12 @@ public interface IServicioDatoBasico {
 	public List<DatoBasico>listarTipoCompetencia();
 	
 	public List<DatoBasico> listarCondicion ();
+	
 	public abstract List<DatoBasico> listarTipoDato(String nombre);
 	
+	public abstract List<DatoBasico> listarComisiones();
+	
+	public abstract List<DatoBasico> listarTipoInstalacion();
+	
+	public abstract List<DatoBasico> listarTipoMantenimiento();
 }
