@@ -6,6 +6,7 @@ import dao.general.DaoPersonalCargo;
 
 import modelo.DatoBasico;
 import modelo.Nomina;
+import modelo.Personal;
 import modelo.PersonalCargo;
 import servicio.interfaz.IServicioPersonalCargo;
 
@@ -59,4 +60,20 @@ public class ServicioPersonalCargo implements IServicioPersonalCargo {
 	public List<PersonalCargo> listarPorCargo(DatoBasico cargo) {
 		return daoPersonalCargo.listarUnCampo(PersonalCargo.class, "datoBasico", cargo);
 	}
+	
+	public PersonalCargo buscarCargoActual(Personal personal) {
+		return daoPersonalCargo.buscarCargoActual(personal);
+	}
+	
+	public PersonalCargo buscarPorCodigo(int codigo) {
+		return daoPersonalCargo.buscarPorCodigo(codigo);
+	}
+	
+	public List<PersonalCargo> buscarHistorial(Personal personal) {
+		return daoPersonalCargo.buscarHistorial(personal);
+	}
+
+
+
+	
 }
