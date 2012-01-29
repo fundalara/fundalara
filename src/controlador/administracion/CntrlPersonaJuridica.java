@@ -5,8 +5,12 @@ import java.util.*;
 import modelo.DatoBasico;
 import modelo.Persona;
 import modelo.PersonaJuridica;
+import modelo.Personal;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.*;
@@ -28,64 +32,93 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 			codigosDeArea = new ArrayList<DatoBasico>();
 	DatoBasico estado, municipio, parroquia, codigoDeArea, tipoPersona;
 	AnnotateDataBinder binder;
-
-	Textbox txtTelefono, txtFax, txtDireccion,
-			txtRazonSocial, txtCorreoElectronico, txtTwitter, txtRif;
+	Window frmPersonas, frmProveedorServicios, frmBenefactorJuridico, frmClientes;
+	Textbox txtTelefono, txtFax, txtDireccion, txtRazonSocial,
+			txtCorreoElectronico, txtTwitter, txtRif;
 	Combobox cmbEstado, cmbParroquia, cmbMunicipio, cmbFax, cmbTelefono;
 	Button btnBuscar, btnEliminar, btnModificar, btnRegistrar, btnSalir;
+	Component formulario;
+	String formularioPadre = "";
 
+	// ------------------------------------------------------------------------------------------------------
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
-		if(comp.getId().equals("frmClientes")){
-			tipoPersona = servicioDatoBasico.buscarPorCodigo(173);
-		}
-		if(comp.getId().equals("frmBenefactorJuridico")){
-			System.out.println("asdsad");
-			tipoPersona = servicioDatoBasico.buscarPorCodigo(220);
-		}
-		if(comp.getId().equals("frmProveedorServicios")){
-			tipoPersona = servicioDatoBasico.buscarPorCodigo(174);
-		}
+		formulario = comp;
+		cambiar("frmClientes", "CLIENTE");
+		cambiar("frmBenefactorJuridico", "BENEFACTOR JURIDICO");
+		cambiar("frmProveedorServicios", "PROVEEDOR DE SERVICIO");
+		
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
-		estados = servicioDatoBasico.listarPorTipoDato("ESTADO_VENEZUELA");
-		codigosDeArea = servicioDatoBasico.listarPorTipoDato("CODIGO_AREA");
-	}
+		estados = servicioDatoBasico.listarPorTipoDato("ESTADO");
+		codigosDeArea = servicioDatoBasico.listarPorTipoDato("CODIGO AREA");
 
+	}
+	// ------------------------------------------------------------------------------------------------------
+	public void cambiar(String idCambiar, String dato) {
+		if (formulario.getId().equals(idCambiar)) {
+			tipoPersona = servicioDatoBasico.buscarPorString(dato);
+			formulario.setId("frmPersonas");
+			formulario.setAttribute("padre", dato);
+			formularioPadre = dato;
+		}
+	}
+	// ------------------------------------------------------------------------------------------------------
 	public void onSelect$cmbEstado() {
-		cmbParroquia.setDisabled(false);
-		cmbParroquia.setValue("-Seleccione-");
-		cmbMunicipio.setDisabled(false);
-		cmbMunicipio.setValue("-Seleccione-");
-		municipios = new ArrayList<DatoBasico>();
-		municipios = servicioDatoBasico.listarPorPadre("MUNICIPIO",
-				Integer.parseInt(cmbEstado.getSelectedItem().getContext()));
-		binder.loadComponent(cmbMunicipio);
+		try {
+			cmbParroquia.setDisabled(true);
+			cmbParroquia.setValue("--Seleccione--");
+			cmbMunicipio.setDisabled(false);
+			cmbMunicipio.setValue("--Seleccione--");
+			municipios = new ArrayList<DatoBasico>();
+			municipios = servicioDatoBasico.listarPorPadre("MUNICIPIO",
+					((DatoBasico) cmbEstado.getSelectedItem().getValue())
+							.getCodigoDatoBasico());
+			binder.loadComponent(cmbMunicipio);
+		} catch (Exception e) {
+			// -----------
+		}
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onSelect$cmbMunicipio() {
-		cmbParroquia.setDisabled(false);
-		cmbParroquia.setValue("-Seleccione-");
-		parroquias = new ArrayList<DatoBasico>();
-		parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA",
-				Integer.parseInt(cmbMunicipio.getSelectedItem().getContext()));
-		binder.loadComponent(cmbParroquia);
+		try {
+			cmbParroquia.setDisabled(false);
+			cmbParroquia.setValue("--Seleccione--");
+			parroquias = new ArrayList<DatoBasico>();
+			parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", Integer
+					.parseInt(cmbMunicipio.getSelectedItem().getContext()));
+			binder.loadComponent(cmbParroquia);
+		} catch (Exception e) {
+			// -----------
+		}
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onSelect$cmbParroquia() {
-		cmbParroquia.setContext(cmbParroquia.getSelectedItem().getContext());
+		try {
+			cmbParroquia
+					.setContext(cmbParroquia.getSelectedItem().getContext());
+		} catch (Exception e) {
+			// -----------
+		}
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void actualizarPersona() {
-		String telefono = cmbTelefono.getValue().toString()
-				+ txtTelefono.getValue().toString();
-		String fax = cmbFax.getValue().toString()
-				+ txtFax.getValue().toString();
+		String telefono = null;
+		if (cmbTelefono.getSelectedItem() != null){
+		telefono = cmbTelefono.getValue().toString() + "-"+ txtTelefono.getValue().toString();
+		}
+		String fax = null;
+		if (cmbFax.getSelectedItem() != null){
+			fax = cmbFax.getValue().toString() + "-"+ txtFax.getValue().toString();
+		}
+		
 		String rif = "J-" + txtRif.getValue();
 		persona.setCedulaRif(rif);
-		
-		
+
 		persona.setDatoBasicoByCodigoTipoPersona(tipoPersona);
 		persona.setTelefonoHabitacion(telefono);
 		persona.setDatoBasicoByCodigoParroquia(servicioDatoBasico
@@ -101,16 +134,44 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 		servicioPersonaJuridica.agregar(personaJuridica);
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnBuscar() {
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
-		persona = servicioPersona.buscarPorTipoPersona("J-" + txtRif.getValue(), tipoPersona.getCodigoDatoBasico());
-		if (persona == null) {
-			alert("Registro no encontrado");
+		Component catalogo = Executions.createComponents(
+				"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
+				formulario, null);
+		System.out.println("Buscando");
+		formulario.addEventListener("onCierre", new EventListener() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				persona = (Persona) formulario.getVariable("persona", false);
+				cargarDatos();
+			}
+		});
+	}
+
+	// ------------------------------------------------------------------------------------------------------
+	public void onClick$btnRegistrar() {
+		try {
+		Persona auxPersona = servicioPersona.buscarPorCedulaRif("J-"
+				+ txtRif.getValue());
+		if (auxPersona != null) {
+			Messagebox.show("Registro Existente. Favor verifique datos.", "Información", Messagebox.OK, Messagebox.INFORMATION);
 			return;
 		}
-		personaJuridica = servicioPersonaJuridica.buscarPorCedulaRif("J-"
-				+ txtRif.getValue());
+		actualizarPersona();
+		clear();
+		alert("Guardado");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// ------------------------------------------------------------------------------------------------------
+	public void cargarDatos() {
+		txtRif.setValue(persona.getCedulaRif().substring(2));
+		personaJuridica = persona.getPersonaJuridica();
 		parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
 				.getDatoBasicoByCodigoParroquia().getDatoBasico()
 				.getCodigoDatoBasico());
@@ -127,43 +188,52 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 				.getDatoBasico().getNombre());
 		cmbEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
 				.getDatoBasico().getDatoBasico().getNombre());
-		cmbFax.setValue(personaJuridica.getFax().substring(0, 4));
+		if (personaJuridica.getFax() != null) {
+			cmbFax.setValue(personaJuridica.getFax().substring(0, 4));
+			txtFax.setValue(personaJuridica.getFax().substring(5));
+		} else {
+			cmbFax.setValue("");
+			txtFax.setText("");
+		}
+		if (persona.getTelefonoHabitacion() != null){
 		cmbTelefono.setValue(persona.getTelefonoHabitacion().substring(0, 4));
-		txtFax.setValue(personaJuridica.getFax().substring(4));
-		txtTelefono.setValue(persona.getTelefonoHabitacion().substring(4));
+		txtTelefono.setValue(persona.getTelefonoHabitacion().substring(5));
+		} else {
+			cmbTelefono.setValue("");
+			txtTelefono.setText("");
+		}
+		
 		btnRegistrar.setDisabled(true);
 		btnEliminar.setDisabled(false);
 		btnModificar.setDisabled(false);
 		binder.loadAll();
 	}
 
-	public void onClick$btnRegistrar() {
-		Persona auxPersona = servicioPersona.buscarPorCedulaRif("J-"
-				+ txtRif.getValue());
-		if (auxPersona != null) {
-			alert("Registro ya existente");
-			return;
-		}
-
-		actualizarPersona();
-		clear();
-		alert("Guardado");
-	}
-
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnModificar() {
-		actualizarPersona();
-		clear();
-		alert("Modificado");
+		try {
+			Integer qs = Messagebox.show("Presione Ok si desea Modificar: " + personaJuridica.getRazonSocial(),
+					"Importante", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION);
+			if (qs.equals(1)) {
+				actualizarPersona();
+				clear();
+				Messagebox.show("Registro Modificado Exitosamente", "Información", Messagebox.OK, Messagebox.INFORMATION);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void clear() {
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
-		cmbEstado.setValue("-Seleccione-");
+		cmbEstado.setValue("--Seleccione--");
 		cmbMunicipio.setDisabled(true);
-		cmbMunicipio.setValue("-Seleccione-");
+		cmbMunicipio.setValue("--Seleccione--");
 		cmbParroquia.setDisabled(true);
-		cmbParroquia.setValue("-Seleccione-");
+		cmbParroquia.setValue("--Seleccione--");
 		cmbTelefono.setValue(null);
 		cmbFax.setValue(null);
 		txtTelefono.setValue(null);
@@ -175,19 +245,44 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnEliminar() {
-		persona.setEstatus('E');
-		personaJuridica.setEstatus('E');
-		servicioPersona.actualizar(persona);
-		servicioPersonaJuridica.actualizar(personaJuridica);
-		alert("Eliminado");
-		clear();
+		try {
+			Integer qs = Messagebox.show("Presione Ok si desea Eliminar: " + personaJuridica.getRazonSocial(),
+					"Importante", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION);
+			if (qs.equals(1)) {
+				persona.setEstatus('E');
+				personaJuridica.setEstatus('E');
+				servicioPersona.actualizar(persona);
+				servicioPersonaJuridica.actualizar(personaJuridica);
+				clear();
+				Messagebox.show("Registro Eliminado Exitosamente", "Información", Messagebox.OK, Messagebox.INFORMATION);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
+	// ------------ GETTERS AND SETTERS
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnCancelar() {
 		clear();
 	}
-
+	
+//	public void onClick$btnSalir(){
+//		System.out.println(formularioPadre);
+//		if (formularioPadre == "BENEFACTOR"){
+//			frmBenefactorJuridico.detach();
+//		}
+//		if (formularioPadre == "CLIENTE"){
+//			frmClientes.detach();
+//		}
+//		if (formularioPadre == "PROVEEDOR SERVICIO"){
+//			
+//		}
+//	}
+	// ------------------------------------------------------------------------------------------------------
 	public Persona getPersona() {
 		return persona;
 	}
@@ -267,5 +362,5 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	public void setCodigoDeArea(DatoBasico codigoDeArea) {
 		this.codigoDeArea = codigoDeArea;
 	}
-
+	// ------------------------------------------------------------------------------------------------------
 }

@@ -62,6 +62,10 @@ public class ServicioCuentaPagar implements IServicioCuentaPagar {
 		return  daoCuentaPagar.listarCuentaPorPagar(dato);
 	}
 
+	public CuentaPagar buscarOrigen(String cp) {
+		return daoCuentaPagar.buscarOrigen(cp);
+	}
+
 	
 
 }
