@@ -32,4 +32,35 @@ public class DaoIndicador extends GenericDao {
 		criteria.add(Restrictions.eq("estatus", 'A'));
 		return criteria.list();
 	}
+	
+	public List <Indicador> listarIndicadorIndividualPorModalidad (DatoBasico modalidad){
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(DatoBasico.class);
+		criteria.add(Restrictions.eq("nombre","INDIVIDUAL"));
+		DatoBasico medicion = (DatoBasico) criteria.list().get(0);
+		criteria = session.createCriteria(Indicador.class);
+		criteria.add(Restrictions.eq("datoBasicoByCodigoModalidad", modalidad));
+		criteria.add(Restrictions.eq("datoBasicoByCodigoMedicion", medicion));
+		criteria.add(Restrictions.eq("estatus", 'A'));
+		return criteria.list();
+				
+	}
+	
+	public List <Indicador> listarIndicadorColectivoPorModalidad (DatoBasico modalidad){
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(DatoBasico.class);
+		criteria.add(Restrictions.eq("nombre","COLECTIVO"));
+		DatoBasico medicion = (DatoBasico) criteria.list().get(0);
+		criteria = session.createCriteria(Indicador.class);
+		criteria.add(Restrictions.eq("datoBasicoByCodigoModalidad", modalidad));
+		criteria.add(Restrictions.eq("datoBasicoByCodigoMedicion", medicion));
+		criteria.add(Restrictions.eq("estatus", 'A'));
+		return criteria.list();
+				
+	}
+	
+	
+	
 }

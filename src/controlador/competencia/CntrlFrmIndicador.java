@@ -9,6 +9,7 @@ import java.util.Set;
 
 import modelo.Categoria;
 import modelo.CategoriaCompetencia;
+import modelo.ClasificacionCompetencia;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.Indicador;
@@ -46,7 +47,10 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	Competencia competencia;
 	AnnotateDataBinder binder;
 	List<Indicador> indicadores;
-	List<IndicadorCategoriaCompetencia> indicadoresAux = new ArrayList<IndicadorCategoriaCompetencia>();
+	List<Indicador> indicadoresColectivo;
+	List<IndicadorCategoriaCompetencia> indicadoresSeleccionados = new ArrayList<IndicadorCategoriaCompetencia>();
+	List<IndicadorCategoriaCompetencia> indicadoresSeleccionadosColectivos = new ArrayList<IndicadorCategoriaCompetencia>();
+	List<Indicador> indicadoresAux = new ArrayList<Indicador>();
 	Listbox lsbxIndicadores, lsbxIndicadoresSeleccionados, lsbxIndicadoresColectivos, lsbxIndicadoresSeleccionadosColectivos;
 	Component formulario;
 	Combobox cmbSeleccionarCategoria, cmbSeleccionarCategoriaColectivo, cmbSeleccionarModalidad, cmbSeleccionarModalidadColectivo;
@@ -54,7 +58,8 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	ServicioTipoDato servicioTipoDato;
 	ServicioDatoBasico servicioDatoBasico;
 	org.zkoss.zul.Button btnGuardar, btnEliminar, btnCancelar, btnMoverDerecha, btnMoverIzquierda, btnMoverDerechaColectivo, btnMoverIzquierdaColectivo;
-	Textbox txtNombreCompetencia, txtTipoCompetencia, txtModalidadCompetencia, txtFechaInicioCompetencia, txtFechaFin;
+	Textbox txtNombreCompetencia, txtTipoCompetencia, txtClasificacion, txtFechaInicioCompetencia, txtFechaFin;
+	List<IndicadorCategoriaCompetencia> eliminar = new ArrayList<IndicadorCategoriaCompetencia>();
 	Window frmIndicador;
 	
 	
@@ -72,66 +77,58 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
-
-		
 		inicializar();
-		TipoDato modalidadIndicador = servicioTipoDato
-				.buscarPorTipo("MODALIDAD INDICADOR");
-		lsbxModalidadIndicador = servicioDatoBasico
-				.buscarPorTipoDato(modalidadIndicador);
-		
+		TipoDato modalidadIndicador = servicioTipoDato.buscarPorTipo("MODALIDAD INDICADOR");
+		lsbxModalidadIndicador = servicioDatoBasico.buscarPorTipoDato(modalidadIndicador);
 		formulario = c;
-			}
+	}
 
 	public void inicializar() {
 		
 		btnGuardar.setDisabled(true);
-		btnEliminar.setDisabled(true);
 		btnCancelar.setDisabled(true);
-		btnMoverDerecha.setDisabled(true);
-		btnMoverIzquierda.setDisabled(true);
-		btnMoverDerechaColectivo.setDisabled(true);
-		btnMoverIzquierdaColectivo.setDisabled(true);
-		cmbSeleccionarCategoria.setDisabled(true);
-		cmbSeleccionarModalidad.setDisabled(true);
-		cmbSeleccionarCategoriaColectivo.setDisabled(true);
-		cmbSeleccionarModalidadColectivo.setDisabled(true);
-		txtNombreCompetencia.setDisabled(true);
-		txtTipoCompetencia.setDisabled(true);
-		txtModalidadCompetencia.setDisabled(true);
+		cmbSeleccionarCategoria.setReadonly(true);
+		cmbSeleccionarModalidad.setReadonly(true);
+		cmbSeleccionarCategoriaColectivo.setReadonly(true);
+		cmbSeleccionarModalidadColectivo.setReadonly(true);
+		txtNombreCompetencia.setReadonly(true);
+		txtTipoCompetencia.setReadonly(true);
+		txtClasificacion.setReadonly(true);
 		lsbxIndicadores.setDisabled(true);
 		lsbxIndicadoresSeleccionados.setDisabled(true);
 		lsbxIndicadoresColectivos.setDisabled(true);
-		lsbxIndicadoresSeleccionadosColectivos.setDisabled(true);
 		indicador = new Indicador(); 
 		
 	}
 	
 	public void camposHabilitados (){
-		cmbSeleccionarCategoria.setDisabled(false);
-		cmbSeleccionarModalidad.setDisabled(false);
-		cmbSeleccionarCategoriaColectivo.setDisabled(false);
-		cmbSeleccionarModalidadColectivo.setDisabled(false);
+		cmbSeleccionarCategoria.setReadonly(false);
+		cmbSeleccionarModalidad.setReadonly(false);
+		cmbSeleccionarCategoriaColectivo.setReadonly(false);
+		cmbSeleccionarModalidadColectivo.setReadonly(false);
 		btnGuardar.setDisabled(false);
-		btnEliminar.setDisabled(false);
 		btnCancelar.setDisabled(false);
 		lsbxIndicadores.setDisabled(false);
 		lsbxIndicadoresSeleccionados.setDisabled(false);
 		btnMoverDerecha.setDisabled(false);
 		btnMoverIzquierda.setDisabled(false);
 		
-		
-		
 	}
 	
 	public void limpiar() {
-		cmbSeleccionarCategoria.setValue("--Seleccione--");
-		cmbSeleccionarModalidad.setValue("--Seleccione--");
-		txtNombreCompetencia.setValue("");
-		txtTipoCompetencia.setValue("");
-		txtModalidadCompetencia.setValue("");
-		/*txtFechaInicioCompetencia.setValue("00/00/00");
-		txtFechaFin.setValue("");*/
+		cmbSeleccionarCategoria.setText("--Seleccione--");
+		cmbSeleccionarModalidad.setText("--Seleccione--");
+		cmbSeleccionarCategoriaColectivo.setText("--Seleccione--");
+		cmbSeleccionarModalidadColectivo.setText("--Seleccione--");
+		txtTipoCompetencia.setText("");
+		txtClasificacion.setText("");
+		competencia = new Competencia();
+		competencia.setClasificacionCompetencia(new ClasificacionCompetencia());
+		indicadoresSeleccionadosColectivos = new ArrayList<IndicadorCategoriaCompetencia>();
+		indicadoresSeleccionados = new ArrayList<IndicadorCategoriaCompetencia>();
+		indicadores = new ArrayList<Indicador>();
+		indicadoresColectivo = new ArrayList<Indicador>();
+		eliminar = new ArrayList<IndicadorCategoriaCompetencia>();
 		
 		
 	}
@@ -164,6 +161,7 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 
 	public void onClick$btnCancelar() {
 		limpiar();
+		binder.loadAll();
 	}
 	
 	public void onClick$btnBuscarCompetencia() {
@@ -177,10 +175,10 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				competencia = (Competencia) formulario.getVariable(
-						"competencia", false);
-				categorias = ConvertirConjuntoALista(competencia
-						.getCategoriaCompetencias());
+				competencia = (Competencia) formulario.getVariable("competencia", false);
+				categorias = ConvertirConjuntoALista(competencia.getCategoriaCompetencias());
+				txtTipoCompetencia.setText(competencia.getClasificacionCompetencia().getDatoBasico().getNombre());
+				txtClasificacion.setText(competencia.getClasificacionCompetencia().getNombre());
 				camposHabilitados();
 				binder.loadAll();
 			}
@@ -189,60 +187,118 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	}
 	
 	public void onClick$btnGuardar() throws InterruptedException {
-		/*servicioIndicadorCategoriaCompetencia.agregar(indicador);
+		for (int i=0;i<indicadoresSeleccionados.size();i++){
+			servicioCategoriaCompetencia.agregar(indicadoresSeleccionados.get(i));
+		}
+		for (int i=0;i<indicadoresSeleccionadosColectivos.size();i++){
+			servicioCategoriaCompetencia.agregar(indicadoresSeleccionadosColectivos.get(i));
+		}
+		
+		
+			
 		Messagebox.show("Datos agregados exitosamente", "Mensaje",
 				Messagebox.OK, Messagebox.EXCLAMATION);
-		binder.loadAll();*/
-	}
-	
-
-	public void onChange$cmbSeleccionarCategoria() {
-		Categoria cat =  (Categoria) cmbSeleccionarCategoria.getSelectedItem().getValue();
-		indicadores = servicioIndicadorCategoriaCompetencia
-				.listarIndicadoresPorCategoria(cat, competencia);
+		limpiar();
 		binder.loadAll();
-
 	}
 	
-	
+
+	public List<IndicadorCategoriaCompetencia> getIndicadoresSeleccionados() {
+		return indicadoresSeleccionados;
+	}
+
+	public void setIndicadoresSeleccionados(
+			List<IndicadorCategoriaCompetencia> indicadoresSeleccionados) {
+		this.indicadoresSeleccionados = indicadoresSeleccionados;
+	}
 
 	public void onChange$cmbSeleccionarModalidad(){
 	
+		indicadores= servicioIndicador.listarIndicadorIndividualPorModalidad((DatoBasico) cmbSeleccionarModalidad.getSelectedItem().getValue());
+		if (competencia != null){
+			String categoria =  cmbSeleccionarCategoria.getValue();
+			if (!categoria.equals("--Seleccione--")){
+				Categoria cat = (Categoria) cmbSeleccionarCategoria.getSelectedItem().getValue();
+			    DatoBasico db = (DatoBasico) cmbSeleccionarModalidad.getSelectedItem().getValue();
+				indicadoresSeleccionados = servicioIndicadorCategoriaCompetencia.listarIndicadoresIndividualesPorCategoria(cat, competencia,db);
+			}
+		}
+		binder.loadAll();
+		
+	}
+	
+	public void onChange$cmbSeleccionarModalidadColectivo(){
+		indicadoresColectivo= servicioIndicador.listarIndicadorColectivoPorModalidad((DatoBasico) cmbSeleccionarModalidadColectivo.getSelectedItem().getValue());
+		if (competencia != null){
+			String categoria =  cmbSeleccionarCategoriaColectivo.getValue();
+			if (!categoria.equals("--Seleccione--")){
+				Categoria cat = (Categoria) cmbSeleccionarCategoriaColectivo.getSelectedItem().getValue();
+			    DatoBasico db = (DatoBasico) cmbSeleccionarModalidadColectivo.getSelectedItem().getValue();
+				indicadoresSeleccionadosColectivos = servicioIndicadorCategoriaCompetencia.listarIndicadoresColectivosPorCategoria(cat, competencia,db);
+			}
+		}
+		binder.loadAll();
 		
 	}
 
-	// Mueve los indicadores del lsbxIndicadores a lsbxIndicadoresSeleccionados
-	public void seleccionarIndicadores() {
-		Set set = lsbxIndicadores.getSelectedItems();
-		for (Object obj : new ArrayList(set)) {
-			IndicadorCategoriaCompetencia ind = (IndicadorCategoriaCompetencia) ((Listitem) obj).getValue();
+	public void Agregar(Listbox origen, Listbox destino, List lista, Combobox combo) {
 
-			indicadoresAux.add(ind);
-			binder.loadAll();
+		Set seleccionados = origen.getSelectedItems();
+		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
+			boolean sw = false;
+			Listitem li = (Listitem) i.next();
+			Indicador ind = (Indicador) li.getValue();
+			IndicadorCategoriaCompetencia icc =new IndicadorCategoriaCompetencia();
+			icc.setCompetencia(competencia);
+			icc.setIndicador(ind);
+			icc.setCategoria((Categoria) combo.getSelectedItem().getValue());
+			List seleccionDestino = destino.getItems();
+			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {
+				Listitem li2 = (Listitem) j.next();
+				IndicadorCategoriaCompetencia ic = (IndicadorCategoriaCompetencia ) li2.getValue();
+				if (icc.getIndicador().getNombre().equals(ic.getIndicador().getNombre())) {
+					sw = true;
+					break;
+				}
+			}
+			if (!sw) {
+				lista.add(icc);
+			}
 		}
-	}
-
-	public void indicadoresSeleccionados() {
-		Set set = lsbxIndicadoresSeleccionados.getSelectedItems();
-		for (Object obj : new ArrayList(set)) {
-			IndicadorCategoriaCompetencia ind = (IndicadorCategoriaCompetencia) ((Listitem) obj).getValue();
-
-			indicadoresAux.remove(ind);
-			binder.loadAll();
-
-		}
-
 	}
 	
 
-	public void onClick$btnMoverDerecha() {
-		seleccionarIndicadores();
+	public void Quitar(Listbox origen, List lista,List elim) {
+		Set seleccionados = origen.getSelectedItems();
+		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
+			Listitem li = (Listitem) i.next();
+			IndicadorCategoriaCompetencia icc = (IndicadorCategoriaCompetencia) li.getValue();
+			if (icc.getCodigoIndicadorCategoriaCompetencia() == 0)
+				eliminar.add(icc);
+			lista.remove(icc);
+		}
+	}
 
+	
+
+	public void onClick$btnMoverDerecha() {
+		Agregar(lsbxIndicadores,lsbxIndicadoresSeleccionados,indicadoresSeleccionados,cmbSeleccionarCategoria);
+		binder.loadAll();
+	}
+	
+	public void onClick$btnMoverDerechaColectivo() {
+		Agregar(lsbxIndicadoresColectivos,lsbxIndicadoresSeleccionadosColectivos,indicadoresSeleccionadosColectivos,cmbSeleccionarCategoriaColectivo);
+		binder.loadAll();
 	}
 
 	public void onClick$btnMoverIzquierda() {
-		indicadoresSeleccionados();
-
+		Quitar(lsbxIndicadoresSeleccionados, indicadoresSeleccionados,eliminar);
+		binder.loadAll();
+	}
+	
+	public void onClick$btnMoverIzquierdaColectivo() {
+		Quitar(lsbxIndicadoresSeleccionadosColectivos, indicadoresSeleccionadosColectivos,eliminar);
+		binder.loadAll();
 	}
 
 	public List<CategoriaCompetencia> getCategorias() {
@@ -279,11 +335,11 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		this.indicadores = indicadores;
 	}
 
-	public List<IndicadorCategoriaCompetencia> getIndicadoresAux() {
+	public List<Indicador> getIndicadoresAux() {
 		return indicadoresAux;
 	}
 
-	public void setIndicadoresAux(List<IndicadorCategoriaCompetencia> indicadoresAux) {
+	public void setIndicadoresAux(List<Indicador> indicadoresAux) {
 		this.indicadoresAux = indicadoresAux;
 	}
 
@@ -302,6 +358,27 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	public void setLsbxIndicadoresSeleccionados(
 			Listbox lsbxIndicadoresSeleccionados) {
 		this.lsbxIndicadoresSeleccionados = lsbxIndicadoresSeleccionados;
+	}
+	
+	
+
+	public List<Indicador> getIndicadoresColectivo() {
+		return indicadoresColectivo;
+	}
+
+	public void setIndicadoresColectivo(List<Indicador> indicadoresColectivo) {
+		this.indicadoresColectivo = indicadoresColectivo;
+	}
+	
+	
+
+	public List<IndicadorCategoriaCompetencia> getIndicadoresSeleccionadosColectivos() {
+		return indicadoresSeleccionadosColectivos;
+	}
+
+	public void setIndicadoresSeleccionadosColectivos(
+			List<IndicadorCategoriaCompetencia> indicadoresSeleccionadosColectivos) {
+		this.indicadoresSeleccionadosColectivos = indicadoresSeleccionadosColectivos;
 	}
 
 	// Agregado Convierte un conjunto a una lista...

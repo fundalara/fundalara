@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.Categoria;
 import modelo.Competencia;
+import modelo.DatoBasico;
 import modelo.Indicador;
 import modelo.IndicadorCategoriaCompetencia;
 
@@ -18,6 +19,8 @@ public interface IServicioIndicadorCategoriaCompetencia {
 
 	public abstract List<IndicadorCategoriaCompetencia> listarActivos();
 	
-	public abstract List<Indicador> listarIndicadoresPorCategoria(Categoria c, Competencia comp);
+	public abstract List<IndicadorCategoriaCompetencia> listarIndicadoresIndividualesPorCategoria(Categoria c, Competencia comp, DatoBasico db);
+	
+	public abstract List<IndicadorCategoriaCompetencia> listarIndicadoresColectivosPorCategoria(Categoria c, Competencia comp, DatoBasico db);
 
 }
