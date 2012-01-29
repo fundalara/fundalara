@@ -54,5 +54,9 @@ public class ServicioCuentaPagarMaterial implements
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public List<CuentaPagarMaterial> listarMaterialesCP(String nf) {
+		return daoCuentaPagarMaterial.listarMaterialesCP(nf);
+	}
+
 
 }

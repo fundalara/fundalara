@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoEgresoCuentaPagar;
 
+import modelo.CuentaPagar;
 import modelo.Egreso;
 import modelo.EgresoCuentaPagar;
 import servicio.interfaz.IServicioEgresoCuentaPagar;
@@ -51,6 +52,9 @@ public class ServicioEgresoCuentaPagar implements IServicioEgresoCuentaPagar {
 	public EgresoCuentaPagar buscarPorCodigo (EgresoCuentaPagar d) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public List<EgresoCuentaPagar> listarPorOrigen(CuentaPagar td) {
+		return daoEgresoCuentaPagar.listarPorOrigen(td);
 	}
 
 }

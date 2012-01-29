@@ -6,6 +6,7 @@ import dao.general.DaoDocumentoAcreedor;
 
 import modelo.CuentaPagar;
 import modelo.DocumentoAcreedor;
+import modelo.Persona;
 import servicio.interfaz.IServicioDocumentoAcreedor;
 
 public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
@@ -52,5 +53,29 @@ public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<DocumentoAcreedor> buscarPendientesPorRif(Persona td) {
+		return daoDocumentoAcreedor.buscarPendientesPorRif(td);
+	}
+	
+	
+	public List<DocumentoAcreedor> buscarPendientesPorRifAtleta(Persona td) {
+		return daoDocumentoAcreedor.buscarPendientesPorRifAtleta(td);
+	}
+	
+	
+	public List<DocumentoAcreedor> buscarAdelantosPorRifAtleta(Persona td) {
+		return daoDocumentoAcreedor.buscarAdelantosPorRifAtleta(td);
+	}
+	
+	
+	public DocumentoAcreedor buscarPorCedulaAtleta(Persona td) {
+		return daoDocumentoAcreedor.buscarPorCedulaAtleta(td);
+	}
+
+	public List<DocumentoAcreedor> buscarAdelantosPorRif(Persona td) {
+		return daoDocumentoAcreedor.buscarAdelantosPorRif(td);
+	}
+
 
 }

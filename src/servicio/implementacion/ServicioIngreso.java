@@ -52,5 +52,9 @@ public class ServicioIngreso implements IServicioIngreso {
 		// TODO Auto-generated method stub
 		return null;
 	}
+    
+	public List<Ingreso> ListarRecibo(){
+		return daoIngreso.ListarRecibo();
+	}
 
 }
