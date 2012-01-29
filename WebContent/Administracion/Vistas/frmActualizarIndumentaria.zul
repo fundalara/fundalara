@@ -1,0 +1,127 @@
+<?page title="Actualizar Indumentaria"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+
+<window id="frmActualizarIndumentaria"
+	apply="controlador.administracion.CntrlActualizarIndumentaria"
+	title="Actualizar Indumentaria" border="normal" width="690px">
+
+	<groupbox style="border-color:orange;">
+		<separator></separator>
+		<grid fixedLayout="true" oddRowSclass="none"
+			style="border:none;">
+			<columns>
+				<column width="3%" />
+				<column width="17%" />
+				<column width="80%" />
+			</columns>
+			<rows>
+				<row style="border:none;">
+					<space></space>
+					<label value="Tipo de Uniforme"></label>
+					<hbox>
+						<combobox id="cmbTipoUniforme"
+							value="--Seleccione--" width="110px"
+							model="@{cntrl.tipoUniformes}" readonly="true">
+							<comboitem self="@{each='tipoUniforme'}"
+								label="@{tipoUniforme.nombre}" value="@{tipoUniforme}"
+								context="@{tipoUniforme.codigoDatoBasico}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Nombre" />
+					<hbox>
+						<combobox id="cmbTipoIndumentaria"
+							value="--Seleccione--" width="110px"
+							model="@{cntrl.tipoIndumentarias}" readonly="true">
+							<comboitem self="@{each='tipoIndumentaria'}"
+								label="@{tipoIndumentaria.nombre}" value="@{tipoIndumentaria}"
+								context="@{tipoIndumentaria.codigoDatoBasico}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+						<space></space>
+						<space></space>
+						<label value=" Talla" />
+						<combobox id="cmbTipoTalla"
+							value="--Seleccione--" width="110px" model="@{cntrl.tipoTallas}"
+							readonly="true" disabled="true">
+							<comboitem self="@{each='tipoTalla'}"
+								label="@{tipoTalla.nombre}" value="@tipoTalla}"
+								context="@{tipoTalla.codigoDatoBasico}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Valor" />
+					<doublebox id="dbxMonto" width="90px"></doublebox>
+				</row>
+
+			</rows>
+		</grid>
+		<hbox>
+			<space width="5px"></space>
+			<listbox height="220px" id="lbxTallasPorIndumentaria"
+				model="@{cntrl.tallasPorIndumentaria}" width="600px" mold="paging"
+				pageSize="10" oddRowSclass="none">
+				<listhead>
+					<listheader label="Tipo de Uniforme" width="40%"
+						align="left" />
+					<listheader label="Indumentaria" align="center"
+						width="20%" />
+					<listheader label="Talla" align="center"
+						width="15%" />
+					<listheader label="Precio" align="center"
+						width="15%" />
+				</listhead>
+
+				<listitem self="@{each='tallaPorIndumentaria'}"
+					value="@{tallaPorIndumentaria}">
+					<listcell
+						label="@{tallaPorIndumentaria.datoBasicoByCodigoTipoUniforme.nombre}" />
+					<listcell
+						label="@{tallaPorIndumentaria.datoBasicoByCodigoTalla.nombre }" />
+					<listcell
+						label="@{tallaPorIndumentaria.datoBasicoByCodigoTalla.datoBasico.nombre}" />
+					<listcell label="@{tallaPorIndumentaria.precio}" />
+				</listitem>
+
+			</listbox>
+			<vbox>
+				<button image="/Recursos/Imagenes/agregar.ico"
+					id="btnAgregar">
+				</button>
+				<button image="/Recursos/Imagenes/ed.ico"
+					id="btnEditar">
+				</button>
+				<button image="/Recursos/Imagenes/quitar.ico"
+					id="btnQuitar">
+				</button>
+			</vbox>
+		</hbox>
+		<separator></separator>
+	</groupbox>
+	<separator></separator>
+	<label value="(*) Campo Obligatorio" style="color:red" />
+	<div align="right">
+		<button id="btnRegistrar" image="/Recursos/Imagenes/guardar.ico"
+			label="Guardar" width="100px" height="35px" />
+		<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico"
+			label="Cancelar" width="100px" height="35px" />
+		<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+			tooltiptext="Salir del Actualizar Concepto de Nómina" label="Salir"
+			width="100px" height="35px">
+			<attribute name="onClick">
+	{
+		frmActualizarIndumentaria.detach();
+	}
+</attribute>
+		</button>
+	</div>
+</window>
+

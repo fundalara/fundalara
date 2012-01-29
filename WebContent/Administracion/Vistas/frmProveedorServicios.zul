@@ -3,18 +3,11 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
 	<window apply="controlador.administracion.CntrlPersonaJuridica"
-		id="frmProveedorServicios" title="Proveedores de Servicios" border="normal"
-		width="690px">
-		<zscript>
-		<![CDATA[
-	public void MostrarCatalogoProveedores() {
-		Window window = (Window) Executions.createComponents(
-				"/Administracion/FrmCatalogoProveedor.zul", null, null);
-	}
-]]>
-	</zscript>
-		<panel title="Datos del Proveedor de Servicios" collapsible="true"
-			open="true">
+		id="frmProveedorServicios" title="Proveedores de Servicios"
+		border="normal" width="690px">
+
+		<panel title="Datos del Proveedor de Servicios"
+			collapsible="true" open="true">
 			<panelchildren>
 				<groupbox style="border:none;">
 					<grid width="100%" oddRowSclass="none"
@@ -44,7 +37,8 @@
 								<label value="Razón Social" />
 								<hbox align="center">
 									<textbox width="350px"
-										id="txtRazonSocial" constraint="no empty"
+										style='text-transform:uppercase;' id="txtRazonSocial"
+										constraint="no empty"
 										value="@{cntrl.personaJuridica.razonSocial}" />
 									<label value="(*)"
 										style="color:red" />
@@ -75,7 +69,6 @@
 											value="@{codigoDeArea}">
 										</comboitem>
 									</combobox>
-
 									<textbox width="120px"
 										id="txtTelefono">
 									</textbox>
@@ -100,10 +93,11 @@
 							<row style="border:none;">
 								<label value="Correo Electrónico" />
 								<textbox width="210px"
-									id="txtCorreoElectronico"
+									style='text-transform:uppercase;' id="txtCorreoElectronico"
 									value="@{cntrl.persona.correoElectronico}" />
 								<label value="Twitter" id="txtTwitter" />
 								<textbox width="185px"
+									style='text-transform:uppercase;'
 									value="@{cntrl.persona.twitter}" />
 							</row>
 
@@ -127,7 +121,7 @@
 								<hbox>
 									<combobox readonly="true"
 										width="160px" id="cmbEstado" model="@{cntrl.estados}"
-										value="-Seleccione-">
+										value="--Seleccione--">
 										<comboitem
 											self="@{each='estado'}" label="@{estado.nombre}"
 											context="@{estado.codigoDatoBasico}" value="@{estado}">
@@ -140,7 +134,7 @@
 								<hbox>
 									<combobox readonly="true"
 										disabled="true" width="160px" id="cmbMunicipio"
-										model="@{cntrl.municipios}" value="-Seleccione-">
+										model="@{cntrl.municipios}" value="--Seleccione--">
 										<comboitem
 											self="@{each='municipio'}" label="@{municipio.nombre}"
 											context="@{municipio.codigoDatoBasico}"
@@ -156,7 +150,7 @@
 								<hbox>
 									<combobox readonly="true"
 										disabled="true" width="160px" id="cmbParroquia"
-										model="@{cntrl.parroquias}" value="-Seleccione-">
+										model="@{cntrl.parroquias}" value="--Seleccione--">
 										<comboitem
 											self="@{each='parroquia'}" label="@{parroquia.nombre}"
 											value="@{parroquia}"
@@ -171,6 +165,7 @@
 								<label value="Dirección" />
 								<hbox align="center">
 									<textbox id="txtDireccion"
+										style='text-transform:uppercase;'
 										value="@{cntrl.persona.direccion}" maxlength="200"
 										height="40px" width="505px" multiline="true" />
 									<label value="(*)"
@@ -186,20 +181,22 @@
 		<div align="right">
 			<button image="/Recursos/Imagenes/guardar.ico"
 				id="btnRegistrar" tooltiptext="Registrar" label="Registrar"
-				width="100px" />
+				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/editar.ico"
 				disabled="true" id="btnModificar" tooltiptext="Modificar"
-				label="Modificar" width="100px" />
+				label="Modificar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/quitar.ico"
 				disabled="true" id="btnEliminar" tooltiptext="Eliminar"
-				label="Eliminar" width="100px" />
+				label="Eliminar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/cancelar.ico"
 				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
-				width="100px" />
+				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
-				tooltiptext="Salir" label="Salir" width="100px">
+				tooltiptext="Salir" label="Salir" width="100px" height="35px">
 				<attribute name="onClick">
-	frmProveedorServicios .onClose();
+	{
+		frmPersonas.onClose();
+	}
 </attribute>
 			</button>
 		</div>

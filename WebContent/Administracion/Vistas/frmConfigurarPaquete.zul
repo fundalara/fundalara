@@ -1,0 +1,127 @@
+<?page title="Actualizar Compromisos de Pago"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+
+<window id="frmConfigurarPaquete"
+	title="Configurar Paquete" border="normal" width="690px"
+   		apply="controlador.administracion.CntrlConfigurarPaquete" >
+
+	<groupbox style="border-color:orange;">
+		<separator></separator>
+		<grid fixedLayout="true" oddRowSclass="none"
+			style="border:none;">
+			<columns>
+				<column width="3%" />
+				<column width="25%" />
+				<column width="80%" />
+			</columns>
+			<rows>
+
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value=" Tipo de Inscripcion" />
+					<hbox> 
+						<combobox id="cmbTipoInscripcion" model="@{cntrl.listaInscripcion}" readonly="true" width="184px" >
+						 <comboitem self="@{each='tipoInscripcion'}"
+						 	label="@{tipoInscripcion.nombre}" value="@{tipoInscripcion}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Cuotas" />
+					<hbox>
+						<combobox id="cmbCuotas"  model="@{cntrl.cuotas}"
+						 width="184px"  readonly="true">
+						 <comboitem self="@{each='cuota'}"
+						 	label="@{cuota.descripcion}" value="@{cuota}"
+						 	context="@{cuota.codigoDatoBasico}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+					</hbox>
+					
+					
+				</row>
+				
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Monto" />
+					<hbox>
+						<doublebox id="dbxPrecio" width="150px" />
+						<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				
+				
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Cantidad" />
+					<hbox>
+						<spinner id="sprCantidad"></spinner>
+			 		<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+						<row align="left" style="border:none;">
+					<space></space>
+					<label value="Adelantos" />
+					<hbox>
+						<spinner id="sprAdelantos"></spinner>	
+				 		<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				
+				
+
+			</rows>
+		</grid>
+		<hbox>
+			<space width="5px"></space>
+			<listbox height="220px" id="lbxIngresoInscripcion"
+				model="@{cntrl.listaIngresoInscripcion}" width="600px" mold="paging"
+				pageSize="10" oddRowSclass="none">
+				<listhead> 
+<!-- 					<listheader label=" Tipo de Inscripcion" width="150px" align="left" /> -->
+					<listheader label="Cuotas" align="center" width="120px" />
+					<listheader label="Monto" align="center" width="120px" />
+					<listheader label="Cantidad" align="center" width="105px" />
+					<listheader label="Adelantos" align="center" width="105px" />
+					
+				</listhead>
+
+				<listitem self="@{each='ingresoInscripcion'}"
+					value="@{tipoIngreso}">
+<!-- 					<listcell label="@{ingresoInscripcion.descripcion}" /> -->
+					<listcell label="@{ingresoInscripcion.tipoIngreso.descripcion}" />
+						<listcell label="@{ingresoInscripcion.monto}" />
+					<listcell label="@{ingresoInscripcion.cantidad}" />
+					<listcell label="@{ingresoInscripcion.adelantos}" />
+				</listitem>
+
+			</listbox>
+			<vbox>
+				<button image="/Recursos/Imagenes/agregar.ico"
+					id="btnAgregar">
+				</button>
+				<button  disabled="true" image="/Recursos/Imagenes/quitar.ico"
+					id="btnQuitar">
+				</button>
+			</vbox>
+		</hbox>
+		<separator></separator>
+	</groupbox>
+	<separator></separator>
+	<label value="(*) Campo Obligatorio" style="color:red" />
+	<div align="right">
+		<button id="btnRegistrar" image="/Recursos/Imagenes/guardar.ico"
+			label="Guardar" width="100px" height="35px" />
+		<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico"
+			label="Cancelar" width="100px" height="35px" />
+		<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+			tooltiptext="Salir del Actualizar Concepto de Nómina" label="Salir"
+			width="100px" height="35px">
+		</button>
+	</div>
+</window>

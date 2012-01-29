@@ -1,0 +1,99 @@
+<?page title="Actualizar Cargo" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<zk>
+	<window title="Actualizar Cargos " border="normal" apply=""
+		closable="true" id="frmCargoEmpleado" width="690px">
+
+		<groupbox style="border-color:orange;" closable="false">
+			<caption>Datos del Empleado</caption>
+
+			<grid style="border:none;" oddRowSclass="none"
+				width="100%">
+				<columns>
+					<column label="" width="110px" />
+					<column label="" width="220px" />
+					<column label="" width="180px" />
+					<column label="" width="200px" />
+				</columns>
+				<rows style="border:none;">
+					<row style="border:none">
+						<label value="Cédula" />
+						<hbox align="center">
+							<textbox width="110px" id="txtCed"
+								readonly="true">
+							</textbox>
+
+							<space width="5px"></space>
+							<button label="" onClick=""
+								id="btnBuscarCed" image="/Recursos/Imagenes/consultar.ico"
+								tooltiptext="Buscar" />
+						</hbox>
+					</row>
+					<row style="border:none" spans="1,3">
+						<label value="Nombre" />
+						<textbox readonly="true" width="81.5%"></textbox>
+					</row>
+
+					<row style="border:none">
+						<label value="Cargo Actual" />
+						<textbox readonly="true" width="186px"
+							id="txtCargo">
+						</textbox>
+						<label value="Fecha de Finalización" />
+						<hbox>
+							<datebox id="dbxFechaFin"></datebox>
+							<label value="(*)" style="color:red">
+							</label>
+						</hbox>
+					</row>
+					<row style="border:none">
+						<label value=" Nuevo Cargo" />
+						<hbox>
+							<combobox width="170px" id="cmbCargo"></combobox>
+
+							<label value="(*)" style="color:red" />
+						</hbox>
+						<label value="Fecha de Inicio" />
+						<hbox>
+							<datebox id="dbxFechaInicio"></datebox>
+							<label value="(*)" style="color:red">
+							</label>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox style="border-color:orange;" closable="false">
+			<caption label="Historial de Cargos"></caption>
+			<listbox mold="paging" pageSize="5" height="100px"
+				style="border:none;" oddRowSclass="none" width="100%">
+				<listhead>
+					<listheader label="Cargo" width="100px" />
+					<listheader label="Fecha de Inicio" width="100px" />
+					<listheader label="Fecha de  Finalización"
+						width="100px" />
+				</listhead>
+				<listitem>
+					<listcell />
+					<listcell />
+					<listcell />
+				</listitem>
+			</listbox>
+		</groupbox>
+		<label value="(*) Campo Obligarorio" style="color:red"></label>
+		<separator></separator>
+		<div align="right">
+
+			<button image="/Recursos/Imagenes/guardar.ico" width="100px"
+				onClick="" label="Guardar" id="btnGuardar" />
+			<button image="/Recursos/Imagenes/editar.ico"
+				label="Modificar" width="100px" onClick="" id="btnModificar" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				width="100px" onClick="" label="Cancelar" id="btnCancelar" />
+			<button image="/Recursos/Imagenes/salir.png" width="100px"
+				onClick="" label="Salir" id="btnSalir">
+			</button>
+		</div>
+	</window>
+</zk>

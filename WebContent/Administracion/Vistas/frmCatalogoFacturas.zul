@@ -1,0 +1,67 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="CatFacturas"?>
+<zk>
+	<window id="CatFacturas" title="Catálogo de Facturas por Pagar"
+		apply="controlador.administracion.CntrlCatalogoFacturas"
+		border="normal" width="600px" left="500px" top="100px" mode="modal">
+		<listbox id="lbxFacturasPagar" width="600px"
+			model="@{cntrl.facturas}" mold="paging" pageSize="5">
+			<listhead>
+				<listheader label="Nro. Factura" width="100px" />
+				<listheader label="Monto" width="75px" />
+				<listheader label="Fecha" width="90px" />
+				<listheader label="Rif" width="120px" />
+				<listheader label="Proveedor" width="200px" />
+
+			</listhead>
+			<auxhead width="100%">
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter1" width="70%" />
+				</auxheader>
+				<auxheader colspan="1"></auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter3" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter4" width="70%" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filter5" width="70%" />
+				</auxheader>
+			</auxhead>
+
+			<listitem self="@{each='cuentaPagar'}">
+				<listcell label="@{cuentaPagar.origen}" />
+				<listcell label="@{cuentaPagar.montoTotal}" />
+				<listcell
+					label="@{cuentaPagar.fechaEmision, converter='comun.converter.DateConverter'}" />
+				<listcell
+					label="@{cuentaPagar.persona.personaJuridica.cedulaRif}" />
+				<listcell
+					label="@{cuentaPagar.persona.personaJuridica.razonSocial}" />
+
+			</listitem>
+
+		</listbox>
+		<separator></separator>
+		<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico"
+				id="btnAceptar" tooltiptext="Seleccionar Cliente" label="Aceptar"
+				width="100px" height="35px">
+			</button>
+			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+				tooltiptext="Salir del Catálogo" label="Salir" width="100px"
+				height="35px">
+			</button>
+		</div>
+	</window>
+</zk>

@@ -1,0 +1,475 @@
+<?page title="Pagos de Representante" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window id="frmPagoRepresentante" title="Cobro Por Representante"
+		border="normal"
+		apply="controlador.administracion.CntrlPagoRepresentante"
+		width="690px">
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+
+		<zscript><![CDATA[
+	//@DECLARATION
+	void setOn() {
+		uno.setChecked(true);
+	}
+	void setOn1() {
+		one.setChecked(true);
+		two.setChecked(true);
+	}
+	public void mostrar() {
+		String var = cmbFormaPago.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+		}
+	}
+	public void mostrar1() {
+		//PagA.setVisible(true);
+		PagAd.setVisible(true);
+	}
+	public void mostrar2() {
+		grboxPagosRealizar.setVisible(true);
+		grboxDetallepago.setVisible(true);
+	}
+]]></zscript>
+		<groupbox style="border-color:orange;">
+			<caption label="Datos Personales"></caption>
+			<grid oddRowSclass="none" style="border:none;">
+				<columns>
+					<column label="" width="130px" />
+					<column label="" width="250px" />
+					<column label="" width="80px" />
+					<column label="" width="250px" />
+				</columns>
+				<rows>
+					<row style="border:none;" spans="1,3">
+						<label value="Cédula"></label>
+						<hbox align="center">
+							<textbox id="txtCedula" width="100px"
+								readonly="true" />
+							<space width="5px"></space>
+							<button id="btnBuscar"
+								image="/Recursos/Imagenes/consultar.ico">
+							</button>
+						</hbox>
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Nombre"></label>
+						<textbox id="txtNombre" width="75%"
+							readonly="true" style='text-transform:uppercase;'>
+						</textbox>
+					</row>
+					<row style="border:none;">
+						<label value="Estado" />
+						<textbox id="txtEstado" readonly="true"
+							width="210px" style='text-transform:uppercase;'>
+						</textbox>
+						<label value="Municipio" />
+						<textbox id="txtMunicipio" width="210px"
+							readonly="true" style='text-transform:uppercase;'>
+						</textbox>
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Parroquia" />
+						<textbox id="txtparro" readonly="true"
+							width="210px" style='text-transform:uppercase;'>
+						</textbox>
+					</row>
+					<row spans="1,3" style="border:none;">
+						<label value="Dirección Habitación" />
+						<textbox id="txtDireccion" maxlength="200"
+							width="530px" readonly="true" style='text-transform:uppercase;' />
+					</row>
+				</rows>
+			</grid>
+			<!-- <groupbox style="border-color:orange;">
+				<caption label="Jugadores Asociados"></caption>
+				<listbox id="lisAtletaAsociado" mold="paging"
+					pageSize="5" model="@{cntrl.listaFamiliarJugador}">
+					<listhead>
+						<listheader label="Cédula" align="center"
+							width="13%">
+						</listheader>
+						<listheader label="Jugador" align="center"
+							width="42%">
+						</listheader>
+						<listheader label="Equipo" align="center"
+							width="15%">
+						</listheader>
+						<listheader label="Categoria" align="center"
+							width="25%">
+						</listheader>
+					</listhead>
+
+					<listitem self="@{each=familiarJugador}"
+						value="@{familiarJugador}">
+						<listcell
+							label="@{familiarJugador.jugador.persona.personaNatural.cedulaRif}">
+						</listcell>
+						<listcell
+							label="@{familiarJugador.jugador.persona.personaNatural, converter='comun.converter.NameConverter'}">
+						</listcell>
+						<listcell
+							label="@{familiarJugador.jugador, converter='controlador.administracion.converter.EquipoJugadorConverter'}">
+						</listcell>
+						<listcell
+							label="@{familiarJugador.jugador, converter='controlador.administracion.converter.CategoriaJugadorConverter'}">
+						</listcell>
+						<listcell label=""></listcell>
+					</listitem>
+
+				</listbox>
+			</groupbox>-->
+		</groupbox> 
+		<separator></separator>
+
+		<!-- Inicio Compromisos Asociados -->
+		<panel title="Compromisos Asociados" collapsible="true"
+			open="false" id="panelCA">
+			<panelchildren>
+				<separator></separator>
+				<!--  <grid oddRowSclass="none" style="border:none" width="380px">
+					<columns>
+						<column label="" width="130px" />
+					<column label="" width="250px" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="Jugador"></label>
+							<textbox id="txtJugador1" readonly="true"
+								value="@{cntrl.auxjugador.jugador.personaNatural, converter='comun.converter.NameConverter'}">
+							</textbox>
+						</row>
+					</rows>
+				</grid>-->
+				<!-- Inicio Pagos Pendientes -->
+				<groupbox id="grboxPagosPendientes" style="border-color:orange;" >
+					
+					<caption id="cptJugador" label="Compromisos Asociados"> 
+					
+					
+					</caption>
+
+					<hbox>
+						<listbox id="lboxPPendientes" mold="paging"
+							pageSize="5" model="@{cntrl.listadocumentoacre}"
+							multiple="true">
+							<listhead>
+								<listheader width="30px">
+
+									<checkbox id="chbox"
+										onClick="setOn()">
+									</checkbox>
+								</listheader>
+								 <listheader label="Jugador"
+									align="center" width="150px">
+									</listheader>
+								<listheader label="Descripción"
+									align="left" width="150px">
+								</listheader>
+								<listheader label="Fecha"
+									align="left" width="130px">
+								</listheader>
+								<listheader label="Monto" align="center"
+									width="150px">
+								</listheader>
+
+							</listhead>
+
+							<listitem self="@{each=documentoacreedor}"
+								value="@{documentoacreedor}">
+								<listcell>
+									<checkbox id="uno"></checkbox>
+								</listcell>
+								<listcell
+									label="@{documentoacreedor.personaByCedulaAtleta.persona.personaNatural, converter='comun.converter.NameConverter'}">
+									</listcell>
+								<listcell
+									label="@{documentoacreedor.concepto}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor, converter='controlador.administracion.converter.MesConverter'}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor.saldo}">
+								</listcell>
+
+							</listitem>
+						</listbox>
+						<div align="right">
+							<vbox>
+								<button id="btnPAdelantados" label=""
+									tooltiptext="Pagos Adelantados"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+							</vbox>
+						</div>
+
+					</hbox>
+					<separator></separator>
+					<div align="right">
+						<hbox align="center">
+							<label value="Monto Pendiente"></label>
+							<space width="10px"></space>
+							<doublebox id="dboxMontoP" readonly="true" />
+							<separator width="5px" />
+							<label value="Bsf"></label>
+							<space width="10px"></space>
+						</hbox>
+					</div>
+				</groupbox>
+
+				<separator></separator>
+				<div id="PagAd" align="left" visible="false">
+					<label value="Cantidad de Cuotas"></label>
+					<spinner id="spCantidadC"></spinner>
+					<button id="btnCalcular" label="Calcular"></button>
+				</div>
+				<!-- Fin Pagos Pendientes -->
+				<separator></separator>
+
+				<groupbox id="grboxPagosRealizar" style="border-color:orange;">
+					<caption label="Pagos a Realizar"></caption>
+					
+					<hbox>
+						<listbox id="lboxPagosRealizar" mold="paging"
+							pageSize="5" model="@{cntrl.listaPagos}">
+							<listhead>
+								<listheader label="Jugador"
+									align="center" width="160px">
+								</listheader>
+								<listheader label="Descripción"
+									align="left" width="180px">
+								</listheader>
+								<listheader label="Fecha"
+									align="left" width="100px">
+								</listheader>
+								<listheader label="Monto" align="center"
+									width="80px">
+								</listheader>
+								<listheader label="Abonar"
+									align="center" width="80px">
+								</listheader>
+							</listhead>
+							<listitem
+								self="@{each='documentoacreedor1'}"
+								value="@{documentoacreedor1}">
+								<listcell
+									label="@{documentoacreedor1.personaByCedulaAtleta.persona.personaNatural, converter='comun.converter.NameConverter'}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor1.concepto}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor1, converter='controlador.administracion.converter.MesConverter'}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor1.saldo}" style="border:none">
+								</listcell>
+								<listcell>
+									<doublebox id="txtMontoAbono"
+										style="border:none">
+									</doublebox>
+								</listcell>
+							</listitem>
+						</listbox>
+						<div align="right">
+							<vbox>
+								<button id="btnPagar" label=""
+									tooltiptext="Agregar los pagos a realizar"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+								<button id="btnQuitar1"
+									image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+									tooltiptext="Quitar de la lista" />
+							</vbox>
+						</div>
+					</hbox>
+					<separator></separator>
+					<div align="right">
+						<hbox align="center">
+							<label value="Total a Pagar"></label>
+							<separator width="10px" />
+							<doublebox id="dboxBsfPagar"
+								readonly="true" />
+							<separator width="5px" />
+							<label value="BsF"></label>
+							<separator width="10px" />
+						</hbox>
+					</div>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<!-- Fin Pagos a Realizar -->
+		<panel collapsible="true" title="Datos del Pago" open="false"
+			style="border:orange" id="panelPagosARealizar">
+			<panelchildren>
+				<!-- Inicio Detalle de Pago -->
+				<separator></separator>
+
+				<grid width="100%" style="border:none"
+					oddRowSclass="none">
+					<columns>
+						<column label="" width="20%"></column>
+						<column label="" width="30%"></column>
+						<column label="" width="20%"></column>
+						<column label="" width="30%"></column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="Nro. Recibo"></label>
+							<textbox id="NroRecibo" readonly="true"
+								width="180px">
+							</textbox>
+							<label value="Fecha del Pago"></label>
+							<datebox id="dtIngreso" format="dd/MM/yyyy"
+								width="100px" value="@{cntrl.ingreso.fechaPago}">
+							</datebox>
+
+						</row>
+						<row align="left" style="border:none">
+							<label value="Forma de Pago" />
+							<combobox id="cmbFormaPago"
+								model="@{cntrl.formaPago}" width="180px">
+								<comboitem self="@{each=formaPago}"
+									value="@{formaPago}" label="@{formaPago.nombre}"
+									context="@{formaPago.codigoDatoBasico}">
+								</comboitem>
+							</combobox>
+							<label value="Monto Cancelado" />
+							<doublebox width="100px"
+								value="@{cntrl.ingresoFormaPago.monto}" id="dboxMontoC">
+							</doublebox>
+						</row>
+
+
+						<row align="left" style="border:none;" id="row1"
+							visible="false">
+							<label value="Nro. Documento" />
+							<textbox
+								value="@{cntrl.ingresoFormaPago.numeroDocumentoPago}"
+								id="txtNroDocumento" width="180px">
+							</textbox>
+							<label value="Entidad Bancaria" />
+							<combobox model="@{cntrl.banco}"
+								id="cmbEntidadBancaria" value="--Seleccione--" width="180px">
+								<comboitem self="@{each=banco}"
+									value="@{banco}" label="@{banco.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+						<row align="left" style="border:none;" id="row2"
+							visible="false">
+							<label value="Tipo de Tarjeta" />
+							<combobox model="@{cntrl.tipoTarjeta}"
+								id="cmbTipoTarjeta" width="150px" value="--Seleccione--">
+								<comboitem self="@{each=tipoTarjeta}"
+									value="@{tipoTarjeta}" label="@{tipoTarjeta.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+					</rows>
+				</grid>
+
+				<!-- Inicio Diferentes Metodos de Pago -->
+				<separator></separator>
+				<groupbox id="grboxDiferentesMetPago" style="border-color:orange;">
+					<caption label="Diferentes Métodos de Pago" ></caption>
+					<hbox>
+						<listbox id="lbxCuentas" width="620px"
+							model="@{cntrl.listaIngresoFormaPago}">
+							<listhead>
+								<listheader label="Forma de Pago"
+									width="160px" />
+								<listheader label="Tarjeta"
+									width="110px" />
+								<listheader label="Banco" width="120px" />
+								<listheader label="Documento"
+									width="120px" />
+								<listheader label="Monto" width="80px" />
+							</listhead>
+							<listitem self="@{each='ingresoformapago'}"
+								value="@{ingresoformapago}">
+								<listcell
+									label="@{ingresoformapago.datoBasicoByCodigoFormaPago.nombre}" />
+								<listcell
+									label="@{ingresoformapago.datoBasicoByCodigoTarjeta.nombre}" />
+								<listcell
+									label="@{ingresoformapago.datoBasicoByCodigoBanco.nombre}" />
+								<listcell
+									label="@{ingresoformapago.numeroDocumentoPago}" />
+								<listcell
+									label="@{ingresoformapago.monto}" />
+							</listitem>
+						</listbox>
+						<div>
+							<vbox>
+								<button
+									image="//Recursos/Imagenes/agregar.ico" tooltiptext="Agregar"
+									id="btnAgregar1" />
+								<button
+									image="//Recursos/Imagenes/quitar.ico" tooltiptext="Eliminar"
+									id="btnQuitar" />
+							</vbox>
+						</div>
+					</hbox>
+					<separator></separator>
+
+					<div align="right">
+						<hbox align="center">
+							<label value="Monto Total"></label>
+							<separator width="10px" />
+							<doublebox id="dboxMontoT" readonly="true" />
+							<separator width="5px" />
+							<label value="BsF"></label>
+							<separator width="10px" />
+						</hbox>
+					</div>
+
+				</groupbox>
+			
+			</panelchildren>
+		</panel>
+		<!-- Fin Detalle de Pago -->
+
+		<!-- Fin Datos de pago -->
+		<iframe visible="false" id="ifReporte"></iframe>
+
+		<label value="(*) Campo Obligatorio" style="color:red" />
+		<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				tooltiptext="Guardar Registro" label="Guardar" width="100px"
+				id="btnGuardar" />
+<!-- 			<button image="/Recursos/Imagenes/imprimir.ico" width="100px" -->
+<!-- 				id="btnImprimir" onClick="" tooltiptext="/Generar" label="Generar" /> -->
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar" width="100px" id="btnCancelar" />
+			<button image="/Recursos/Imagenes/salir.png" onClick=""
+				tooltiptext="Salir" label="Salir" width="100px">
+				<attribute name="onClick">
+	{
+		frmPagoRepresentante.onClose();
+	}
+</attribute>
+			</button>
+		</div>
+	</window>
+</zk>

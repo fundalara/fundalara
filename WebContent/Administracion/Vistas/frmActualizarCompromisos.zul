@@ -1,0 +1,131 @@
+<?page title="Actualizar Compromisos de Pago"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+
+<window id="frmActualizarCompromisos"
+	title="Actualizar Compromisos de Pago" border="normal" width="690px"
+   		apply="controlador.administracion.CntrlActualizarCompromisos" >
+
+	<groupbox style="border-color:orange;">
+		<separator></separator>
+		<grid fixedLayout="true" oddRowSclass="none"
+			style="border:none;">
+			<columns>
+				<column width="3%" />
+				<column width="17%" />
+				<column width="80%" />
+			</columns>
+			<rows>
+
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Descripción" />
+					<hbox>
+						<textbox id="txtDescripcion" width="200px" />
+						<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Monto" />
+					<hbox>
+						<doublebox id="dbxPrecio" width="150px" />
+						<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Tipo de Ingreso" />
+					<hbox>
+						<combobox id="cmbTipoIngreso"  model="@{cntrl.tipoIngresoCombos}"
+						 width="184px"  readonly="true">
+						 <comboitem self="@{each='tipoIngresoCombo'}"
+						 	label="@{tipoIngresoCombo.nombre}" value="@{tipoIngresoCombo}"
+						 	context="@{tipoIngresoCombo.codigoDatoBasico}" />
+						</combobox>
+						<label value="(*)" style="color:red" />
+					</hbox>
+					
+					
+				</row>
+				<row align="left" style="border:none;">
+					<space></space>
+					<label value="Periodicidad" />
+					<hbox>
+						<combobox id="cmbPeriodicidad"   model="@{cntrl.periodicidades}" width="184px">
+						<comboitem self="@{each='periodicidad'}"
+						 	label="@{periodicidad.nombre}" value="@{periodicidad}"
+						 	context="@{periodicidad.codigoDatoBasico}" />
+						
+						</combobox>
+			 		<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+						<row align="left" style="border:none;">
+					<space></space>
+					<label value="Cuota Representante" />
+					<hbox>
+						<radiogroup >
+							<radio id="rdoSi" label="Si"></radio>
+							<radio id="rdoNo" label="No"></radio>
+						</radiogroup>
+			 		<label value="(*)" style="color:red" />
+					</hbox>
+				</row>
+				
+				
+
+			</rows>
+		</grid>
+		<hbox>
+			<space width="5px"></space>
+			<listbox height="220px" id="lbxTipoIngresos"
+				model="@{cntrl.listaTipoIngresos}" width="600px" mold="paging"
+				pageSize="10" oddRowSclass="none">
+				<listhead>
+					<listheader label="Descripción" width="40%" align="left" />
+					<listheader label="Monto" align="center" width="20%" />
+					<listheader label="Tipo de Ingreso" align="center" width="20%" />
+					<listheader label="Periodicidad" align="center" width="20%" />
+				</listhead>
+
+				<listitem self="@{each='tipoIngreso'}"
+					value="@{tipoIngreso}">
+					<listcell label="@{tipoIngreso.descripcion}" />
+					<listcell label="@{tipoIngreso.monto}" />
+					<listcell label="@{tipoIngreso.datoBasicoByCodigoTipo.nombre}" />
+					<listcell label="@{tipoIngreso.datoBasicoByCodigoPeriodicidad.nombre}" />
+				</listitem>
+
+			</listbox>
+			<vbox>
+				<button image="/Recursos/Imagenes/agregar.ico"
+					id="btnAgregar">
+				</button>
+				<button  disabled="true" image="/Recursos/Imagenes/quitar.ico"
+					id="btnQuitar">
+				</button>
+			</vbox>
+		</hbox>
+		<separator></separator>
+	</groupbox>
+	<separator></separator>
+	<label value="(*) Campo Obligatorio" style="color:red" />
+	<div align="right">
+		<button id="btnRegistrar" image="/Recursos/Imagenes/guardar.ico"
+			label="Guardar" width="100px" height="35px" />
+		<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico"
+			label="Cancelar" width="100px" height="35px" />
+		<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+			tooltiptext="Salir del Actualizar Concepto de Nómina" label="Salir"
+			width="100px" height="35px">
+			<attribute name="onClick">
+	{
+		frmActualizarCompromisos.detach();
+	}
+</attribute>
+		</button>
+	</div>
+</window>

@@ -6,12 +6,12 @@
 	public void mostrar() {
 		if (cmbBenefactor.getSelectedItem().getValue().equals("2")) {
 			Window window = (Window) Executions.createComponents(
-					"frmBenefactorJuridico.zul", null, null);
+					"/administracion/vistas/frmBenefactorJuridico.zul", null, null);
 			frmBenefactor.onClose();
 		}
 		if (cmbBenefactor.getSelectedItem().getValue().equals("1")) {
 			Window window = (Window) Executions.createComponents(
-					"frmBenefactorNatural.zul", null, null);
+					"/administracion/vistas/frmBenefactorNatural.zul", null, null);
 			frmBenefactor.onClose();
 
 		}
@@ -20,7 +20,7 @@
 
 		<combobox onSelect="mostrar()" id="cmbBenefactor">
 			<comboitem label="Natural" value="1"></comboitem>
-			<comboitem label="Juridica" value="2"></comboitem>
+			<comboitem label="Juridico" value="2"></comboitem>
 		</combobox>
 	</window>
 </zk>

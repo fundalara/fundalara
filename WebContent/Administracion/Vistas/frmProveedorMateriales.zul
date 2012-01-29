@@ -5,14 +5,7 @@
 	<window apply="controlador.administracion.CntrlProveedores"
 		id="frmProveedores" title="Proveedores" border="normal"
 		width="690px">
-		<zscript>
-		<![CDATA[
-	public void MostrarCatalogoProveedores() {
-		Window window = (Window) Executions.createComponents(
-				"/Administracion/FrmCatalogoProveedor.zul", null, null);
-	}
-]]>
-	</zscript>
+
 		<panel title="Datos del Proveedor" collapsible="true"
 			open="true">
 			<panelchildren>
@@ -43,7 +36,7 @@
 							<row spans="1,3" style="border:none;">
 								<label value="Razón Social" />
 								<hbox align="center">
-									<textbox width="350px"
+									<textbox width="350px" style='text-transform:uppercase;' 
 										id="txtRazonSocial" constraint="no empty"
 										value="@{cntrl.personaJuridica.razonSocial}" />
 									<label value="(*)"
@@ -100,10 +93,10 @@
 							<row style="border:none;">
 								<label value="Correo Electrónico" />
 								<textbox width="210px"
-									id="txtCorreoElectronico"
+									id="txtCorreoElectronico" style='text-transform:uppercase;' 
 									value="@{cntrl.persona.correoElectronico}" />
 								<label value="Twitter" id="txtTwitter" />
-								<textbox width="185px"
+								<textbox width="185px" style='text-transform:uppercase;'
 									value="@{cntrl.persona.twitter}" />
 							</row>
 
@@ -127,7 +120,7 @@
 								<hbox>
 									<combobox readonly="true"
 										width="160px" id="cmbEstado" model="@{cntrl.estados}"
-										value="-Seleccione-">
+										value="--Seleccione--">
 										<comboitem
 											self="@{each='estado'}" label="@{estado.nombre}"
 											context="@{estado.codigoDatoBasico}" value="@{estado}">
@@ -140,7 +133,7 @@
 								<hbox>
 									<combobox readonly="true"
 										disabled="true" width="160px" id="cmbMunicipio"
-										model="@{cntrl.municipios}" value="-Seleccione-">
+										model="@{cntrl.municipios}" value="--Seleccione--">
 										<comboitem
 											self="@{each='municipio'}" label="@{municipio.nombre}"
 											context="@{municipio.codigoDatoBasico}"
@@ -156,7 +149,7 @@
 								<hbox>
 									<combobox readonly="true"
 										disabled="true" width="160px" id="cmbParroquia"
-										model="@{cntrl.parroquias}" value="-Seleccione-">
+										model="@{cntrl.parroquias}" value="--Seleccione--">
 										<comboitem
 											self="@{each='parroquia'}" label="@{parroquia.nombre}"
 											value="@{parroquia}"
@@ -170,7 +163,7 @@
 							<row spans="1,3" style="border:none;">
 								<label value="Dirección" />
 								<hbox align="center">
-									<textbox id="txtDireccion"
+									<textbox id="txtDireccion" style='text-transform:uppercase;'
 										value="@{cntrl.persona.direccion}" maxlength="200"
 										height="40px" width="505px" multiline="true" />
 									<label value="(*)"
@@ -198,7 +191,7 @@
 							<row style="border:none;">
 								<label value="Banco" />
 								<combobox width="120px" readonly="true"
-									id="cmbBanco" value="-Seleccione-" model="@{cntrl.bancos}">
+									id="cmbBanco" value="--Seleccione--" model="@{cntrl.bancos}">
 									<comboitem self="@{each='banco'}"
 										label="@{banco.nombre}" value="@{banco}" />
 								</combobox>
@@ -208,7 +201,7 @@
 							<row style="border:none;">
 								<label value="Tipo Cuenta" />
 								<combobox width="120px" readonly="true"
-									value="-Seleccione-" id="cmbTipoCuenta"
+									value="--Seleccione--" id="cmbTipoCuenta"
 									model="@{cntrl.tiposDeCuentas}">
 									<comboitem
 										self="@{each='tipoDeCuenta'}" label="@{tipoDeCuenta.nombre}"
@@ -222,7 +215,7 @@
 							</row>
 							<row style="border:none;">
 								<label value="Titular" />
-								<textbox width="96%"
+								<textbox width="96%" style='text-transform:uppercase;'
 									id="txtTitularCuenta" />
 							</row>
 							<row style="border:none;">
@@ -231,17 +224,17 @@
 							<row spans="4" style="border:none;">
 								<hbox>
 									<listbox id="lbxCuentas"
-										model="@{cntrl.cuentasBancarias}">
+										model="@{cntrl.cuentasBancarias}" width="100%" >
 										<listhead>
-											<listheader label="Banco"></listheader>
+											<listheader label="Banco" width="100px" ></listheader>
 											<listheader
-												label="Tipo Cuenta">
+												label="Tipo Cuenta" width="100px" >
 											</listheader>
 											<listheader
-												label="Nro. de Cuenta">
+												label="Nro. de Cuenta" width="200px" >
 											</listheader>
 											<listheader
-												label="Titular de la Cuenta">
+												label="Titular de la Cuenta" width="200px" >
 											</listheader>
 										</listhead>
 										<listitem
@@ -282,20 +275,20 @@
 		<div align="right">
 			<button image="/Recursos/Imagenes/guardar.ico"
 				id="btnRegistrar" tooltiptext="Registrar" label="Registrar"
-				width="100px" />
+				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/editar.ico"
 				disabled="true" id="btnModificar" tooltiptext="Modificar"
-				label="Modificar" width="100px" />
+				label="Modificar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/quitar.ico"
 				disabled="true" id="btnEliminar" tooltiptext="Eliminar"
-				label="Eliminar" width="100px" />
+				label="Eliminar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/cancelar.ico"
 				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
-				width="100px" />
+				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
-				tooltiptext="Salir" label="Salir" width="100px">
+				tooltiptext="Salir" label="Salir" width="100px" height="35px" >
 				<attribute name="onClick">
-	frmProveedores.onClose();
+	frmProveedores.detach();
 </attribute>
 			</button>
 		</div>

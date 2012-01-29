@@ -1,0 +1,237 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPagarFactura" ?>
+<zk>
+	<window id="frmPagarFactura" title="Pagar Compras" border="normal"
+		apply="controlador.administracion.CntrlPagarFactura" width="690px">
+
+		<panel title="Datos Básicos" collapsible="true" open="true">
+			<panelchildren>
+				<grid oddRowSclass="none" style="border:none">
+					<columns>
+						<column label="" width="15%" align="left">
+						</column>
+						<column label="" width="35%" align="left">
+						</column>
+						<column label="" width="15%" align="left">
+						</column>
+						<column label="" width="35%" align="left">
+						</column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="Rif"></label>
+							<hbox>
+								<textbox id="txtRif2" readonly="true"
+									value="@{cntrlfactura.cuentaPagarFact.persona.personaJuridica.cedulaRif}">
+								</textbox>
+
+								<space></space>
+								<button id="btnBuscarProveedor"
+									image="/Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+						</row>
+						<row style="border:none" spans="1,3">
+							<label value="Razón Social"></label>
+							<textbox width="75%"
+								id="txtCodigoProveedor2" readonly="true"
+								value="@{cntrlfactura.cuentaPagarFact.persona.personaJuridica.razonSocial}">
+							</textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<groupbox width="310" style="border:orange">
+			<caption label="Detalles de Factura"></caption>
+			<listbox id="lbxFacturas" mold="paging" pageSize="5">
+				<listhead>
+					<listheader label="Factura" width="50%">
+					</listheader>
+					<listheader label="Emisión" align="Center"
+						width="25%">
+					</listheader>
+					<listheader align="center" label="Monto"
+						width="25%">
+					</listheader>
+					<listheader align="center" label="Actual"
+						width="25%">
+					</listheader>
+				</listhead>
+				<!-- 				<listitem self="@{each='material2'}"> -->
+				<!-- 					<listcell label="@{material2.material.descripcion}" /> -->
+				<!-- 					<listcell label="@{material2.cantidad}" /> -->
+				<!-- 					<listcell label="@{material2.precioUnitario}" /> -->
+				<!-- 					<listcell /> -->
+				<!-- 				</listitem> -->
+			</listbox>
+		</groupbox>
+		<groupbox width="310" style="border:orange">
+			<caption label="Detalles de Factura"></caption>
+			<listbox id="lbxDetalles"
+				model="@{cntrlfactura.materiales2}" mold="paging" pageSize="5">
+				<listhead>
+					<listheader label="Material" width="50%">
+					</listheader>
+					<listheader label="Cantidad" align="Center"
+						width="25%">
+					</listheader>
+					<listheader align="center" label="Precio Unitario"
+						width="25%">
+					</listheader>
+				</listhead>
+				<listitem self="@{each='material2'}">
+					<listcell label="@{material2.material.descripcion}" />
+					<listcell label="@{material2.cantidad}" />
+					<listcell label="@{material2.precioUnitario}" />
+					<listcell />
+				</listitem>
+			</listbox>
+		</groupbox>
+		<separator />
+		<panel collapsible="true" title="Datos del Pago" open="false"
+			style="border:orange">
+			<panelchildren>
+				<div>
+					<grid id="gridDiferentesFormasPago"
+						oddRowSclass="none" style="border:none">
+						<columns>
+							<column label="" width="15%"></column>
+							<column label="" width="35%"></column>
+							<column label="" width="15%"></column>
+							<column label="" width="35%"></column>
+						</columns>
+						<rows>
+
+							<row align="left" style="border:none">
+								<label value="Forma de Pago" />
+								<combobox id="cmbFormaPago"
+									model="@{cntrlfactura.formaPago}" width="180px">
+									<comboitem self="@{each=formaPago}"
+										value="@{formaPago}" label="@{formaPago.nombre}"
+										context="@{formaPago.codigoDatoBasico}">
+									</comboitem>
+								</combobox>
+								<label value="Monto Cancelado" />
+								<doublebox
+									value="@{cntrlfactura.egresoFormaPago.monto}" width="100px"
+									id="dboxMonto" />
+							</row>
+							<row align="left" style="border:none"
+								id="row1" visible="false">
+								<label value="Nro. Documento" />
+								<textbox
+									value="@{cntrlfactura.egresoFormaPago.numeroDocuemntoPago}"
+									id="txtNroDocumento" width="180px">
+								</textbox>
+								<label value="Entidad Bancaria" />
+								<combobox model="@{cntrlfactura.banco}"
+									id="cmbEntidadBancaria" value="--Seleccione--" width="180px">
+									<comboitem self="@{each=banco}"
+										value="@{banco}" label="@{banco.nombre}">
+									</comboitem>
+								</combobox>
+							</row>
+							<row align="left" style="border:none"
+								id="row2" visible="false">
+								<label value="Tipo de Tarjeta" />
+								<combobox
+									model="@{cntrlfactura.tipoTarjeta}" id="cmbTipoTarjeta"
+									width="180px" value="--Seleccione--">
+									<comboitem
+										self="@{each=tipoTarjeta}" value="@{tipoTarjeta}"
+										label="@{tipoTarjeta.nombre}">
+									</comboitem>
+								</combobox>
+							</row>
+							<row style="border:none">
+								<label value="Fecha del Pago"></label>
+								<datebox id="dtFactura2"
+									format="dd/MM/yyyy" value="@{cntrlfactura.egreso.fechaPago}">
+								</datebox>
+								<label value="Nro. Recibo"></label>
+								<textbox id="txtNroRecibo" width="180px"
+									value="@{cntrlfactura.egreso.numeroDocumento}">
+								</textbox>
+							</row>
+						</rows>
+					</grid>
+				</div>
+				<separator></separator>
+				<groupbox width="675px" style="border-color:orange">
+					<caption label="Formas de Pago"></caption>
+					<separator></separator>
+					<hbox>
+						<listbox id="lbxCuentas" width="100%"
+							model="@{cntrlfactura.listaEgresoFormaPago}" mold="paging"
+							pageSize="5">
+							<listhead>
+								<listheader label="Forma de Pago"
+									width="160px" />
+								<listheader label="Tarjeta"
+									width="120px" />
+								<listheader label="Banco" width="120px" />
+								<listheader label="Documento"
+									width="120px" />
+								<listheader label="Monto" width="80px" />
+							</listhead>
+							<listitem self="@{each='egresoFormaPago'}"
+								value="@{egresoFormaPago}">
+								<listcell
+									label="@{egresoFormaPago.datoBasicoByCodigoFormaPago.nombre}" />
+								<listcell
+									label="@{egresoFormaPago.datoBasicoByCodigoTarjeta.nombre}" />
+								<listcell
+									label="@{egresoFormaPago.datoBasicoByCodigoBanco.nombre}" />
+								<listcell
+									label="@{egresoFormaPago.numeroDocuemntoPago}" />
+								<listcell
+									label="@{egresoFormaPago.monto}" />
+							</listitem>
+						</listbox>
+						<separator></separator>
+						<vbox>
+							<button id="btnAgregar3"
+								image="/Recursos/Imagenes/agregar.ico" onClick="" label=""
+								tooltiptext="Agregar a la Lista" />
+							<button id="btnQuitar3"
+								image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+								tooltiptext="Quitar de la Lista" />
+							<button id="btnEditar2"
+								image="/Recursos/Imagenes/cancelar.ico" onClick="" label=""
+								tooltiptext="Editar" />
+						</vbox>
+					</hbox>
+					<separator></separator>
+					<div align="right">
+						<hbox align="center">
+							<label value="Monto Total"></label>
+							<separator width="10px" />
+							<doublebox width="100px" id="dboxSubTotal"
+								value="@{cntrlfactura.egresoCuentaPagar.montoAbonado}" />
+							<separator width="5px" />
+							<label value="BsF"></label>
+							<separator width="10px" />
+						</hbox>
+					</div>
+				</groupbox>
+				<separator></separator>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button id="btnPagar" image="/Recursos/Imagenes/guardar.ico"
+				onClick="" label="Pagar" width="100px" height="35px" />
+			<button id="btnAnular"
+				image="/Recursos/Imagenes/eliminar.ico" onClick="" label="Anular"
+				width="100px" height="35px" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				id="btnCancelar3" label="Cancelar" width="100px" height="35px" />
+			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+				tooltiptext="Salir" label="Salir" width="100px" height="35px">
+
+			</button>
+		</div>
+		<separator></separator>
+	</window>
+</zk>

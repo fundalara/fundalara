@@ -1,0 +1,72 @@
+<?page title="Catalogo de Personas Naturales" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPersonas"?>
+<zk>
+	<window id="frmCatalogoNaturales"
+		title="Catálogo de Personas Naturales"
+		apply="controlador.administracion.CntrlCatalogoPersonasNaturales"
+		border="normal" width="600px" left="500px" top="100px" mode="modal">
+
+		<listbox mold="paging" pageSize="10" width="580px"
+			height="350px" oddRowSclass="none" id="lbxPersonas"
+			model="@{cntrl.listaPersonas}">
+			<listhead>
+				<listheader label="Cédula" width="20%" align="center" />
+				<listheader label="Primer Nombre" align="left" width="20%" />
+				<listheader label="Segundo Nombre" align="left" width="20%" />
+				<listheader label="Primer Apellido" align="left" width="20%" />
+				<listheader label="Segundo Apellido" align="left" width="20%" />
+			</listhead>
+			<auxhead>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="txtFiltroCI" width="70%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="txtFiltroPNombre" width="90%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+				<auxheader colspan="1">
+					
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="txtFiltroPApellido" width="90%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+				<auxheader colspan="1">
+					
+				</auxheader>
+			</auxhead>
+			<listitem self="@{each='personaNatural'}">
+				<listcell label="@{personaNatural.cedulaRif }" />
+				<listcell
+					label="@{personaNatural.primerNombre }" style='text-transform:uppercase;'/>
+					<listcell
+					label="@{personaNatural.segundoNombre }" style='text-transform:uppercase;'/>
+					<listcell
+					label="@{personaNatural.primerApellido }" style='text-transform:uppercase;'/>
+					<listcell
+					label="@{personaNatural.segundoApellido }" style='text-transform:uppercase;'/>
+			</listitem>
+		</listbox>
+
+		<separator />
+		<div align="right" width="580px">
+			<button image="/Recursos/Imagenes/aceptar.ico"
+				id="btnAceptar" tooltiptext="Seleccionar Persona" label="Seleccionar"
+				width="100px" height="35px">
+			</button>
+			<button image="/Recursos/Imagenes/salir.png"
+				tooltiptext="Salir del Catálogo" label="Salir" width="100px"
+				height="35px" id="btnSalir">
+			</button>
+		</div>
+		<separator />
+	</window>
+</zk>

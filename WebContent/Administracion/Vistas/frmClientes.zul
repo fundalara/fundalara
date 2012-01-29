@@ -3,16 +3,8 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
 	<window apply="controlador.administracion.CntrlPersonaJuridica"
-		id="frmClientes" title="Clientes" border="normal"
-		width="690px">
-		<zscript>
-		<![CDATA[
-	public void MostrarCatalogoProveedores() {
-		Window window = (Window) Executions.createComponents(
-				"/Administracion/FrmCatalogoProveedor.zul", null, null);
-	}
-]]>
-	</zscript>
+		id="frmClientes" title="Clientes" border="normal" width="690px">
+		
 		<panel title="Datos del Cliente" collapsible="true"
 			open="true">
 			<panelchildren>
@@ -45,7 +37,7 @@
 								<hbox align="center">
 									<textbox width="350px"
 										id="txtRazonSocial" constraint="no empty"
-										value="@{cntrl.personaJuridica.razonSocial}" />
+										value="@{cntrl.personaJuridica.razonSocial}" style='text-transform:uppercase;' />
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
@@ -101,10 +93,10 @@
 								<label value="Correo Electrónico" />
 								<textbox width="210px"
 									id="txtCorreoElectronico"
-									value="@{cntrl.persona.correoElectronico}" />
+									value="@{cntrl.persona.correoElectronico}" style='text-transform:uppercase;' />
 								<label value="Twitter" id="txtTwitter" />
 								<textbox width="185px"
-									value="@{cntrl.persona.twitter}" />
+									value="@{cntrl.persona.twitter}" style='text-transform:uppercase;' />
 							</row>
 
 						</rows>
@@ -172,7 +164,7 @@
 								<hbox align="center">
 									<textbox id="txtDireccion"
 										value="@{cntrl.persona.direccion}" maxlength="200"
-										height="40px" width="505px" multiline="true" />
+										height="40px" width="505px" multiline="true" style='text-transform:uppercase;' />
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
@@ -199,7 +191,9 @@
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
 				tooltiptext="Salir" label="Salir" width="100px">
 				<attribute name="onClick">
-	frmClientes .onClose();
+	{
+		frmPersonas.onClose();
+	}
 </attribute>
 			</button>
 		</div>

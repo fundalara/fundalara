@@ -1,0 +1,634 @@
+<?page title="VistaRegistrarPersonal" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+
+<zk>
+	<window closable="true" id="RegPers" title="Ingreso de Personal"
+		apply="controlador.administracion.CntrlRegistrarPersonal"
+		border="normal" width="690px">
+
+		<tabbox>
+			<tabs>
+				<tab label="Datos Personales"></tab>
+				<tab label="Datos Médicos"></tab>
+				<tab label="Datos Académicos"></tab>
+				<tab label=" Datos del Cargo"></tab>
+
+			</tabs>
+			<tabpanels>
+				<tabpanel id="tab1">
+					<groupbox style="border-color:orange;"
+						closable="false">
+						<caption>Datos Básicos</caption>
+						<grid style="border:none;" oddRowSclass="none"
+							width="100%">
+							<columns>
+								<column label="" width="130px"></column>
+								<column label="" width="225px"></column>
+								<column label="" width="130px"></column>
+								<column label="" width="225px"></column>
+							</columns>
+							<rows style="border:none;">
+								<row style="border:none" spans="1,3">
+									<label value="Cédula" />
+									<hbox align="center">
+										<combobox value=" " width="20px"
+											readonly="true" id="cmbCed">
+											<comboitem label="V-"
+												value="V-">
+											</comboitem>
+											<comboitem label="E-"
+												value="E-">
+											</comboitem>
+										</combobox>
+										<textbox width="95px"
+											id="txtCed">
+										</textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+										<space width="5px"></space>
+										<button label="" onClick=""
+											id="btnBuscarCed" image="/Recursos/Imagenes/consultar.ico"
+											tooltiptext="Buscar" />
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Primer Nombre" />
+									<hbox>
+										<textbox id="txtPrimNombre"
+											width="140px">
+										</textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Segundo Nombre" />
+									<textbox id="txtSegNombre">
+									</textbox>
+								</row>
+								<row style="border:none">
+									<label value="Primer Apellido" />
+									<hbox>
+										<textbox id="txtPrimApellido"
+											width="140px">
+
+										</textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Segundo Apellido" />
+									<textbox id="txtSegApellido">
+
+									</textbox>
+
+								</row>
+								<row style="border:none">
+									<label value="Fecha Nacimiento" />
+									<hbox>
+
+										<datebox width="80px"
+											id="dtFechaNac">
+										</datebox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Género" />
+									<hbox>
+										<combobox width="80px"
+											id="cmbGenero">
+										</combobox>
+
+
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Estado Civil" />
+									<hbox>
+										<combobox value="--Seleccione--"
+											readonly="true" id="cmbEdoCivil">
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Nro Hijos" />
+									<hbox>
+										<spinner width="30px"
+											id="spNroHijos">
+										</spinner>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox style=" border-color:orange "
+						closable="false">
+						<caption label="Datos de Contacto"></caption>
+						<grid oddRowSclass="none" style="border:none">
+							<columns>
+								<column width="110px"></column>
+								<column width="225px"></column>
+								<column width="110px"></column>
+								<column width="225px"></column>
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Teléfono Habitación" />
+									<hbox>
+										<combobox value="-" width="40px"
+											readonly="true" id="cmbCodArea">
+
+										</combobox>
+										<textbox width="100px"
+											id="txtTelfHab">
+										</textbox>
+									</hbox>
+
+									<label value="Teléfono Celular" />
+									<hbox>
+										<combobox value="-" width="40px"
+											readonly="true" id="cmbCodOper">
+
+										</combobox>
+
+										<textbox width="100px"
+											id="txtTelfCel">
+										</textbox>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Correo Electrónico" />
+									<textbox width="95%"
+										id="txtCorreo">
+									</textbox>
+									<label value="Twitter  @" />
+									<textbox width="165px"
+										id="txtTwitter">
+									</textbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox style="border-color:orange"
+						closable="false">
+						<caption label="Datos de Residencia" />
+						<grid style="border:none;" oddRowSclass="none"
+							width="100%">
+							<columns>
+								<column width="110px" />
+								<column width="225px" />
+								<column width="110px" />
+								<column width="225px" />
+							</columns>
+							<rows>
+								<row style="border:none;">
+									<label value="Estado" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--" id="cmbEdo">
+
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+									<label value="Municipio" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--" id="cmbMunicipio"
+											model="@{cntrl.municipios}">
+											<comboitem
+												self="@{each=datoBasico}"
+												value="@{datoBasico.codigoDatoBasico}"
+												label="@{datoBasico.nombre}">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Parroquia" />
+									<hbox>
+										<combobox readonly="true"
+											value="--Seleccione--" id="cmbParroquia"
+											model="@{cntrl.parroquias}">
+											<comboitem
+												self="@{each=datoBasico}"
+												value="@{datoBasico.codigoDatoBasico}"
+												label="@{datoBasico.nombre}">
+											</comboitem>
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Dirección Habitación" />
+									<hbox align="center">
+										<textbox maxlength="200"
+											id="txtDir" height="40px" width="510px" multiline="true">
+										</textbox>
+										<label value="(*)"
+											style="color:red" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+
+					<separator></separator>
+					<div align="left">
+						<label value="(*) Campo Obligarorio"
+							style="color:red">
+						</label>
+					</div>
+
+				</tabpanel>
+
+				<tabpanel id="tab2">
+					<groupbox style="border-color:orange;"
+						closable="false">
+						<caption label="Datos Médicos"></caption>
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="110px"></column>
+								<column width="225px"></column>
+								<column width="110px"></column>
+								<column width="225px"></column>
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Grupo Sanguíneo" />
+									<hbox>
+										<combobox value="--Seleccione--"
+											readonly="true" id="cmbGrupSanguineo">
+
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+									<label value="Factor" />
+									<hbox>
+										<combobox width="130px"
+											value="--Seleccione--" readonly="true" id="cmbFactor">
+
+										</combobox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none">
+									<label value="Alergia"></label>
+									<hbox style="border:none;">
+										<combobox id="cmbAlergia">
+
+										</combobox>
+										<button label=""
+											tooltiptext="Incluir Nueva Alergia" onClick=""
+											image="/Recursos/Imagenes/reporte.ico" id="btnNvaAlergia" />
+
+									</hbox>
+
+								</row>
+								<row style="border:none" spans="1,3">
+									<space></space>
+									<hbox width="300px">
+
+										<listbox id="gridAlergia"
+											oddRowSclass="none" mold="paging" pageSize="3"
+											model="@{cntrl.afeccionPersonales}">
+											<listhead>
+												<listheader
+													label="Alergias" width="300px" align="center" sort="auto" />
+											</listhead>
+											<listitem
+												self="@{each='afeccionPersonal'}">
+												<listcell
+													label="@{afeccionPersonal.datoBasico.nombre}">
+												</listcell>
+											</listitem>
+										</listbox>
+
+										<separator></separator>
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												tooltiptext="Agregar Alergia" id="btnAgregarAlerg" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" onClick=""
+												id="btnQuitarAlerg" tooltiptext="Eliminar Alergia" />
+										</vbox>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<separator></separator>
+					<div align="left">
+						<label value="(*) Campo Obligarorio"
+							style="color:red">
+						</label>
+					</div>
+
+
+				</tabpanel>
+
+				<tabpanel id="tab3">
+					<groupbox style="border-color:orange;"
+						closable="false">
+						<caption>Datos Académicos</caption>
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="25%"></column>
+								<column width="35%"></column>
+								<column width="15%"></column>
+								<column width="35%"></column>
+							</columns>
+							<rows>
+								<row spans="1,3" style="border:none;">
+									<label value="Instituto" />
+									<hbox>
+										<textbox width="300px"
+											id="txtInstituto">
+										</textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Título Obtenido" />
+									<hbox>
+										<textbox width="300px"
+											id="txtTituloObt">
+										</textbox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Fecha de Egreso" />
+									<hbox>
+										<datebox format="dd/MM/yyyy"
+											width="80px" id="dtFechaEgreso">
+										</datebox>
+										<label value="(*)"
+											style="color:red">
+										</label>
+									</hbox>
+								</row>
+								<row style="border:none;">
+									<space></space>
+								</row>
+								<row spans="4" style="border:none;">
+									<hbox>
+										<listbox mold="paging"
+											pageSize="3" width="590px" id="gridDatoAcademicos">
+											<listhead>
+												<listheader
+													label="Instituto" width="100px" sort="auto" />
+												<listheader
+													label="Título" width="110px" sort="auto" />
+												<listheader
+													label="Fecha Egreso" sort="auto" width="95px" />
+											</listhead>
+
+										</listbox>
+										
+										<vbox>
+											<button
+												image="/Recursos/Imagenes/agregar.ico" onClick=""
+												tooltip="Agregar" id="btnAgregarDatAcad" />
+											<button
+												image="/Recursos/Imagenes/quitar.ico" tooltip="Quitar"
+												id="btnQuitarDatAcad" />
+										</vbox>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<div align="left">
+						<label value="(*) Campo Obligarorio"
+							style="color:red">
+						</label>
+					</div>
+
+
+				</tabpanel>
+				<tabpanel id="tab4">
+					<groupbox style="border-color:orange;"
+						closable="false">
+						<caption>Datos del Cargo</caption>
+						<grid oddRowSclass="none" style="border:none">
+							<columns>
+								<column label="" width="25%"></column>
+								<column label="" width="25%"></column>
+								<column label="" width="20%"></column>
+								<column label="" width="30%"></column>
+
+							</columns>
+
+							<rows>
+
+							<row id="rowCargo" style="border:none">
+
+								<label value="Cargo"></label>
+								<hbox>
+									<combobox width="110px"
+										height="20px" id="cmbCargo">
+									</combobox>
+									<label value="(*)"
+										style="color:red">
+									</label>
+								</hbox>
+								<label
+									value="Fecha de Ingreso al Cargo">
+								</label>
+								<hbox>
+									<datebox format="dd/MM/yyyy"
+										width="100px" id="dtFechaCargo" />
+									<label value="(*)"
+										style="color:red">
+									</label>
+								</hbox>
+
+							</row>
+
+							<row id="rowTipoEmpleado"
+								style="border:none">
+								<label value="Tipo de Nómina"></label>
+								<hbox>
+									<combobox width="110px"
+										height="20px" id="cmbTipoNomina">
+									</combobox>
+									<label value="(*)"
+										style="color:red">
+									</label>
+									
+								</hbox>
+
+								<label value="Tipo de Empleado"></label>
+								<hbox>
+
+									<combobox id="cmbTipoEmpleado"
+										width="100px" height="20px">
+
+									</combobox>
+									<label value="(*)"
+										style="color:red">
+									</label>
+									<space width="6px"></space>
+									<button label="" onClick=""
+										tooltiptext="Incluir Nuevas Categorias"
+										image="/Recursos/Imagenes/reporte.ico"
+										id="btnNvoTipoEmpleado" />
+
+								</hbox>
+							</row>
+
+							<row style="border:none;">
+								<label
+									value="Fecha de Ingreso a la Escuela" />
+								<hbox>
+									<datebox format="dd/MM/yyyy"
+										width="110px" id="dtFechaIngresoEsc" />
+									<label value="(*)"
+										style="color:red">
+									</label>
+								</hbox>
+								<label
+									value="Fecha de Egreso de la Escuela" />
+								<hbox>
+									<datebox format="dd/MM/yyyy"
+										width="100px" id="dtFechaEgresoEsc" />
+
+								</hbox>
+							</row>
+
+							</rows>
+						</grid>
+					</groupbox>
+
+
+
+
+					<groupbox id="group1" visible="false"
+						style="border-color:orange">
+
+						<caption>Asignaciones</caption>
+
+
+						<grid oddRowSclass="none" style="border:none">
+							<columns>
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Fecha de creación" />
+									<datebox width="85%"
+										format="dd/MM/yyyy" id="dtFechaCreaAsig" />
+									<label value="Asignación" />
+									<combobox width="85%"
+										id="cmbAsignacion">
+
+									</combobox>
+
+								</row>
+
+							</rows>
+						</grid>
+
+					</groupbox>
+
+					<!--Deducciones-->
+
+					<groupbox style="border-color:orange"
+						visible="false" id="group2">
+
+						<caption>Deducciones</caption>
+
+
+						<grid oddRowSclass="none" style="border:none">
+							<columns>
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Fecha de creación" />
+									<datebox width="85%"
+										format="dd/MM/yyyy" id="dtFechaDeduc">
+									</datebox>
+									<label value="Deducción" />
+									<combobox width="85%"
+										id="cmbDeduccion">
+
+									</combobox>
+
+								</row>
+							</rows>
+						</grid>
+
+
+
+
+					</groupbox>
+
+
+					<label value="(*) Campo Obligarorio"
+						style="color:red">
+					</label>
+
+					<separator></separator>
+
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+		<div align="right">
+			<button image="/Recursos/Imagenes/consultar.ico"
+				label="Historial Laboral" width="100px" id="btnHistorial">
+			</button>
+			<button image="/Recursos/Imagenes/guardar.ico" width="100px"
+				onClick="" label="Guardar" id="btnGuardar" />
+			<button image="/Recursos/Imagenes/editar.ico"
+				label="Modificar" width="100px" onClick="" id="btnModificar" />
+			<button image="/Recursos/Imagenes/eliminar.ico"
+				label="Eliminar" width="100px" onClick="" id="btnEliminar" />
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				width="100px" onClick="" label="Cancelar" id="btnCancelar" />
+			<button image="/Recursos/Imagenes/salir.png" width="100px"
+				onClick="" label="Salir" id="btnSalir">
+				<attribute name="onClick">
+	RegPers.onClose();
+</attribute>
+			</button>
+		</div>
+
+	</window>
+</zk>
+
+
+
+

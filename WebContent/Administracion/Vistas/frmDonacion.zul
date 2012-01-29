@@ -1,0 +1,266 @@
+<?page title="Donaciones" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window id="frmDonaciones" title="Donaciones" border="normal"
+		apply="controlador.administracion.CntrlDonaciones" width="690px">
+		<grid style="border:none" oddRowSclass="none">
+			<columns>
+				<column label="" width="110px"></column>
+				<column label="" width="220px"></column>
+				<column label="" width="110px"></column>
+				<column label="" width="220px"></column>
+			</columns>
+			<rows>
+				<row style="border:none">
+					<label value="Donador"></label>
+					<combobox readonly="true" id="cmbDonador">
+						<comboitem label="NATURAL" value="NATURAL"></comboitem>
+						<comboitem label="JURIDICO" value="JURIDICO"></comboitem>
+					</combobox>
+				</row>
+				<row style="border:none">
+					<label value="Cédula/RIF"></label>
+					<hbox align="center">
+						<textbox id="txtCedulaRif" readonly="true"
+							width="150px" style='text-transform:uppercase;'
+							 />
+						<space width="5px"></space>
+						<button label="" id="btnCatalogoProv"
+							image="/Recursos/Imagenes/consultar.ico"
+							tooltiptext="Catálogo de Benefactores" />
+					</hbox>
+				</row>
+				<row spans="1,3" style="border:none">
+					<label value="Nombre/Razón"></label>
+					<textbox id="txtNombre" readonly="true" width="75%"
+						style='text-transform:uppercase;' />
+				</row>
+				<row style="border:none">
+
+
+					<label value="Fecha Donación"></label>
+					<datebox id="dtIngreso" format="dd/MM/yyyy"
+						width="100px" value="@{cntrl.ingreso.fechaPago}">
+					</datebox>
+				</row>
+				<row style="border:none">
+
+				</row>
+			</rows>
+		</grid>
+		<panel id="panelDM" title="Datos Donación Monetaria" collapsible="true"
+			open="false">
+			<panelchildren>
+				<grid width="100%" style="border:none"
+					oddRowSclass="none">
+					<columns>
+						<column label="" width="20%"></column>
+						<column label="" width="30%"></column>
+						<column label="" width="20%"></column>
+						<column label="" width="30%"></column>
+					</columns>
+					<rows>
+						<row align="left" style="border:none">
+							<label value="Forma de Pago" />
+							<combobox id="cmbFormaPago"
+								model="@{cntrl.formaPago}" width="180px">
+								<comboitem self="@{each=formaPago}"
+									value="@{formaPago}" label="@{formaPago.nombre}"
+									context="@{formaPago.codigoDatoBasico}">
+								</comboitem>
+							</combobox>
+							<label value="Monto a Donar" />
+							<doublebox width="100px"
+								value="@{cntrl.ingresoFormaPago.monto}" id="dboxMontoC">
+							</doublebox>
+						</row>
+
+
+						<row align="left" style="border:none;" id="row1"
+							visible="false">
+							<label value="Nro. Documento" />
+							<textbox
+								value="@{cntrl.ingresoFormaPago.numeroDocumentoPago}"
+								id="txtNroDocumento" width="180px">
+							</textbox>
+							<label value="Entidad Bancaria" />
+							<combobox model="@{cntrl.banco}"
+								id="cmbEntidadBancaria" value="--Seleccione--" width="180px">
+								<comboitem self="@{each=banco}"
+									value="@{banco}" label="@{banco.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+						<row align="left" style="border:none;" id="row2"
+							visible="false">
+							<label value="Tipo de Tarjeta" />
+							<combobox model="@{cntrl.tipoTarjeta}"
+								id="cmbTipoTarjeta" width="150px" value="--Seleccione--">
+								<comboitem self="@{each=tipoTarjeta}"
+									value="@{tipoTarjeta}" label="@{tipoTarjeta.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+					</rows>
+				</grid>
+
+				<!-- Inicio Diferentes Metodos de Pago -->
+				<separator></separator>
+				<groupbox id="grboxDiferentesMetPago">
+					<caption>Diferentes Métodos de Pago</caption>
+					<hbox>
+						<listbox id="lbxCuentas" width="620px"
+							model="@{cntrl.listaIngresoFormaPago}">
+							<listhead>
+								<listheader label="Forma de Pago"
+									width="160px" />
+								<listheader label="Tarjeta"
+									width="110px" />
+								<listheader label="Banco" width="120px" />
+								<listheader label="Nro. de Documento"
+									width="120px" />
+								<listheader label="Monto" width="80px" />
+							</listhead>
+							<listitem self="@{each='ingresoformapago'}"
+								value="@{ingresoformapago}">
+								<listcell
+									label="@{ingresoformapago.datoBasicoByCodigoFormaPago.nombre}" />
+								<listcell
+									label="@{ingresoformapago.datoBasicoByCodigoTarjeta.nombre}" />
+								<listcell
+									label="@{ingresoformapago.datoBasicoByCodigoBanco.nombre}" />
+								<listcell
+									label="@{ingresoformapago.numeroDocumentoPago}" />
+								<listcell
+									label="@{ingresoformapago.monto}" />
+							</listitem>
+						</listbox>
+						<div>
+							<vbox>
+								<button
+									image="//Recursos/Imagenes/agregar.ico" tooltiptext="Agregar"
+									id="btnAgregar1" />
+								<button
+									image="//Recursos/Imagenes/quitar.ico" tooltiptext="Eliminar"
+									id="btnQuitar1" />
+							</vbox>
+						</div>
+					</hbox>
+					<separator></separator>
+
+					<div align="right">
+						<hbox align="center">
+							<label value="Monto Total"></label>
+							<separator width="10px" />
+							<doublebox id="dboxMontoT" readonly="true" />
+							<separator width="5px" />
+							<label value="BsF"></label>
+							<separator width="10px" />
+						</hbox>
+					</div>
+
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<panel id="panelDMt" title="Datos Donación Materiales" collapsible="true"
+			open="false">
+			<panelchildren>
+
+				<grid oddRowSclass="none" style="border:none">
+					<columns>
+						<column width="110px" />
+						<column width="220px" />
+						<column width="110px" />
+						<column width="220px" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="Material"></label>
+							<hbox align="center">
+								<combobox id="cmbMateriales"
+									width="150px" readonly="true" style='text-transform:uppercase;'
+									model="@{cntrl.listaMateriales}" value="--Seleccione--">
+									<comboitem self="@{each='material'}"
+										label="@{material.descripcion}" value="@{material}">
+									</comboitem>
+								</combobox>
+								<space></space>
+								<button label="" id="btnAgregarMaterial"
+									image="/Recursos/Imagenes/agregar.ico"
+									tooltiptext="Nuevo Artículo" />
+							</hbox>
+							<label value="Cantidad"></label>
+							<spinner id="psrCantidad"
+								constraint="no negative">
+							</spinner>
+						</row>
+					</rows>
+				</grid>
+				<separator></separator>
+				<groupbox style="border-color:orange">
+					<caption label="Lista Materiales a Donar"></caption>
+					<hbox>
+						<separator></separator>
+
+						<listbox id="lbxMateriales"
+							model="@{cntrl.listaDocumentoAcreedorMaterial}" width="620px">
+							<listhead>
+								<listheader label="Material Donado"
+									width="50%">
+								</listheader>
+								<listheader label="Cantidad"
+									width="25%">
+								</listheader>
+								
+							</listhead>
+							<listitem
+								self="@{each='documentoAcreedorMaterial'}"
+								value="@{documentoAcreedorMaterial}">
+								<listcell
+									label="@{documentoAcreedorMaterial.material.descripcion}" />
+
+								<listcell
+									label="@{documentoAcreedorMaterial.cantidad}" />
+								
+							</listitem>
+						</listbox>
+						<vbox>
+							<button label="" id="btnAgregar"
+								image="/Recursos/Imagenes/agregar.ico"
+								tooltiptext="Agregar material a la lista" />
+							<button label="" id="btnQuitar"
+								image="/Recursos/Imagenes/quitar.ico"
+								tooltiptext="Quitar material de la lista" />
+						</vbox>
+						<separator></separator>
+
+					</hbox>
+					<separator></separator>
+				</groupbox>
+				<separator></separator>
+
+			</panelchildren>
+		</panel>
+		<separator></separator>
+		<div align="right">
+			<button image="/Recursos/Imagenes/aceptar.ico" onClick=""
+				id="btnAceptar" tooltiptext="Guardar" label="Guardar" width="100px"
+				height="35px" />
+			<button image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
+				width="100px" height="35px" />
+			<button image="/Recursos/Imagenes/atras.ico" onClick=""
+				id="btnSalir" tooltiptext="Salir" label="Salir" width="100px"
+				height="35px">
+				<attribute name="onClick">
+	{
+		frmDonaciones.onClose();
+	}
+</attribute>
+			</button>
+		</div>
+		<separator></separator>
+
+	</window>
+</zk>

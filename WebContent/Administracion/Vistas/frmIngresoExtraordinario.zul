@@ -1,0 +1,59 @@
+<?page title="Ingresos
+ Extraordinario" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+	<window id="frmIngresoExtraordinario" title="Ingreso Extraordinario" border="normal"
+		closable="true" width="690px" mode="embedded" apply="controlador.administracion.CntrlIngresoExtraordinario">
+		<separator height="10px"></separator>
+		<groupbox style="border-color:orange" id="gbxDatos" visible="true" >
+			<caption label="Detalles del Ingreso"></caption>
+			<grid oddRowSclass="none" style="border: none">
+				<columns>
+					<column width="16%" />
+					<column width="30%" />
+					<column width="20%" />
+					<column width="30%" />
+				</columns>
+				<rows>
+					<row style="border: none" spans="1,3">
+						<label value="Concepto" />
+						<hbox>
+							<textbox id="txtConcepto" width="250px" />
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row >
+					<row style="border: none" spans="1,3">
+						<label value="Monto en Bs." />
+						<hbox>
+							<doublebox id="dbxMonto" width="111px" />
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row>
+					<row style="border: none" spans="1,3">
+						<label value="Fecha Emisión" />
+						<hbox>
+							<datebox id="dtxFechaEmision"/>
+							<label value="(*)" style="color:red" />
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<label value="(*) Campo Obligatorio" style="color:red" />
+
+		<space />
+
+		<div align="right">
+			<button id="btnRegistrar" label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" height="35px" />
+			<button id="btnCancelar" label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" height="35px" />
+			<button id="btnSalir" label="Salir" image="/Recursos/Imagenes/salir.png"
+				orient="horizontal" width="100px" height="35px" />
+		</div>
+	</window>
+</zk>

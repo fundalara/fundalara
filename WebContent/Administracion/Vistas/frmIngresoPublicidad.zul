@@ -1,0 +1,476 @@
+<?page title="Ingreso por Publicidad" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="IngP" ?>
+<zk>
+	<window id="IngP" title="Ingreso por Publicidad" border="normal"
+		width="690px" mode="embedded" closable="true"
+		apply="controlador.administracion.CntrlIngresoPublicidad">
+
+		<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
+
+		<zscript><![CDATA[
+	//@DECLARATION
+	void setOn() {
+		uno.setChecked(true);
+	}
+	void setOn1() {
+		one.setChecked(true);
+		two.setChecked(true);
+	}
+	public void mostrar() {
+		String var = cmbFormaPago.getSelectedItem().getValue().toString();
+
+		if (var.equals("1")) {
+			row1.setVisible(false);
+			row2.setVisible(false);
+
+		} else if (var.equals("2")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else if (var.equals("3")) {
+			row1.setVisible(true);
+			row2.setVisible(true);
+
+		} else {
+			row1.setVisible(true);
+			row2.setVisible(false);
+		}
+	}
+	public void mostrar1() {
+		PagA.setVisible(true);
+		PagAd.setVisible(true);
+	}
+	public void mostrar2() {
+		grboxPagosRealizar.setVisible(true);
+		grboxDetallepago.setVisible(true);
+	}
+]]></zscript>
+
+		<!-- Inicio datos de la empresa -->
+		<panel title="Datos de la empresa" collapsible="true"
+			open="true" style="border:orange">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column label="" width="130px" />
+						<column label="" width="560px" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="R.I.F"></label>
+							<hbox align="center">
+								<combobox value="" width="20px"
+									readonly="true" id="cmbCed" disabled="true">
+								</combobox>
+								<!-- <space width="5px"></space>-->
+								<textbox id="txtRif" width="90px"></textbox>
+								<button id="btnBuscarRif"
+									image="/Recursos/Imagenes/consultar.ico" tooltiptext="Buscar"
+									onClick="">
+								</button>
+							</hbox>
+
+						</row>
+						<row style="border:none;">
+							<label value="Razón Social" />
+							<textbox id="txtRazonS" disabled="true"
+								width="350px" style='text-transform:uppercase;'>
+							</textbox>
+						</row>
+						<row style="border:none">
+							<label value="Teléfono" />
+							<hbox>
+								<combobox width="40px" readonly="true"
+									id="cmbTelefono" value="-">
+									<comboitem></comboitem>
+								</combobox>
+								<textbox id="txtTlf" disabled="true" />
+							</hbox>
+						</row>
+						<row style="border:none;">
+							<label value="Fax" />
+							<hbox>
+								<combobox width="40px" readonly="true"
+									id="cmbFax" value="-">
+									<comboitem></comboitem>
+								</combobox>
+								<textbox id="txtFax" disabled="true" />
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<!-- Fin de datos de la empresa -->
+
+
+		<!-- Inicio Compromisos Asociados -->
+		<panel title="Compromisos Asociados" collapsible="true"
+			open="false" id="panel1">
+			<panelchildren>
+				<separator></separator>
+				<!-- Inicio Pagos Pendientes -->
+				<groupbox id="grboxPagosPendientes">
+					<caption>Compromisos de pago</caption>
+					<hbox>
+						<listbox id="lboxPPendientes" mold="paging"
+							width="100%" pageSize="5" model="@{cntrl.listadocumentoacre}">
+							<listhead>
+								<listheader width="30px">
+									<checkbox id="chbox"
+										onClick="setOn()">
+									</checkbox>
+								</listheader>
+								<listheader label="Descripción"
+									align="left" width="450px">
+								</listheader>
+								<listheader label="Monto" align="center"
+									width="140px">
+								</listheader>
+							</listhead>
+
+							<listitem
+								self="@{each=documentoacreedor}">
+								<listcell>
+									<checkbox id="uno"></checkbox>
+								</listcell>
+								<listcell
+									label="@{documentoacreedor.concepto}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor.monto}">
+								</listcell>
+							</listitem>
+						</listbox>
+						<div align="right">
+							<vbox>
+								<button id="btnPAdelantados" label=""
+									tooltiptext="Pagos Adelantados"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+							</vbox>
+						</div>
+					</hbox>
+					<div align="right">
+						<grid width="300px" oddRowSclass="none">
+							<rows>
+								<row align="left" style="border:none">
+
+									<label
+										value="Monto Pendiente a Pagar">
+									</label>
+									<doublebox id="dboxMontoP"
+										readonly="true">
+									</doublebox>
+									<label value="Bsf"></label>
+									<space width="5px"></space>
+								</row>
+							</rows>
+						</grid>
+					</div>
+				</groupbox>
+
+				<separator></separator>
+				<div id="PagAd" align="left" visible="false">
+					<label value="Cantidad de Cuotas"></label>
+					<spinner id="spCantidadC"></spinner>
+					<button id="btnCalcular" label="Calcular"></button>
+				</div>
+
+				<!-- Fin Pagos Pendientes -->
+
+				<!-- Inicio de los pagos adelantados -->
+				<!--  <separator></separator>-->
+				<!--  <div align="center">
+					<button id="btnPAdelantados"
+					label="Pagos Adelantados" onClick="mostrar1()">
+					</button>
+					<button id="btnPagar" label="Pagar"
+					onClick="mostrar2()">
+					</button>
+					</div>-->
+				<!--  <separator></separator>-->
+				<!--  <div id="PagAd" align="left" visible="false">
+					<label value="Cantidad de Cuotas"></label>
+					<spinner id="spCantidadC"></spinner>
+					<button id="btnCalcular" label="Calcular"></button>
+					</div>-->
+
+				<groupbox id="PagA" width="630px" visible="false">
+					<caption>Pagos Adelantados</caption>
+					<hbox>
+						<listbox id="lboxPAdelantados" mold="paging"
+							pageSize="5" model="@{cntrl.listapagosadelantados}">
+							<listhead>
+								<listheader width="30px">
+									<checkbox id="chbox1"
+										onClick="setOn1()">
+									</checkbox>
+								</listheader>
+								<listheader label="Descripción"
+									align="left" width="450px">
+								</listheader>
+								<listheader label="Monto" align="center"
+									width="140px">
+								</listheader>
+							</listhead>
+
+							<listitem
+								self="@{each='documentoacreedor'}">
+								<listcell>
+									<checkbox id="one"></checkbox>
+								</listcell>
+								<listcell
+									label="@{documentoacreedor.concepto}">
+								</listcell>
+								<listcell
+									label="@{documentoacreedor.monto}">
+								</listcell>
+							</listitem>
+						</listbox>
+					</hbox>
+				</groupbox>
+				<!-- Fin de los pagos adelantados -->
+				<!-- Fin Compromisos Asociados -->
+
+
+				<!-- Inicio Datos de pago -->
+				<separator></separator>
+				<!-- Inicio Pagos a Realizar -->
+				<groupbox id="grboxPagosRealizar" visible="true">
+					<caption>Pagos a Realizar</caption>
+					<hbox>
+						<listbox id="lboxPagosRealizar" mold="paging"
+							pageSize="10" model="@{cntrl.listaPagos }">
+							<listhead>
+								<listheader label="Descripción"
+									align="left" width="470px">
+								</listheader>
+								<listheader label="Monto" align="center"
+									width="150px">
+								</listheader>
+							</listhead>
+
+							<listitem
+								self="@{each='documentoAcreedor' }">
+								<listcell
+									label="@{documentoAcreedor.concepto}">
+								</listcell>
+								<listcell
+									label="@{documentoAcreedor.monto}">
+								</listcell>
+							</listitem>
+						</listbox>
+						<div align="right">
+							<vbox>
+								<button id="btnPagar" label=""
+									tooltiptext="Agregar los pagos a realizar"
+									image="/Recursos/Imagenes/agregar.ico">
+									<!-- onClick="mostrar2()" -->
+
+								</button>
+								<button id="btnQuitar1"
+									image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
+									tooltiptext="Quitar de la Lista" />
+							</vbox>
+						</div>
+					</hbox>
+					<div align="right">
+						<grid width="240px" oddRowSclass="none">
+							<rows>
+								<row align="left" style="border:none">
+									<label value="Total a Pagar"></label>
+									<doublebox id="dboxBsfPagar"
+										readonly="true">
+									</doublebox>
+									<label value="BsF"></label>
+									<separator width="5px" />
+								</row>
+
+							</rows>
+
+						</grid>
+					</div>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<!-- Fin Pagos a Realizar -->
+
+		<!-- Inicio Detalle de Pago -->
+
+		<panel collapsible="true" title="Datos del Pago" open="false"
+			style="border:orange" id="panel2">
+			<panelchildren>
+				<separator></separator>
+
+				<grid width="680px">
+					<columns>
+						<column label="" width="20%"></column>
+						<column label="" width="30%"></column>
+						<column label="" width="20%"></column>
+						<column label="" width="30%"></column>
+					</columns>
+					<rows>
+						<row style="border:none">
+
+							<label value="Nro. Recibo"></label>
+							<textbox id="NroRecibo" readonly="true"></textbox>
+							<label value="Fecha del Pago"></label>
+							<datebox id="dtIngreso" format="dd/MM/yyyy"
+								value="@{cntrl.ingreso.fechaPago}">
+							</datebox>
+						</row>
+						<row align="left" style="border:none;">
+							<label value="Forma de Pago" />
+							<combobox id="cmbFormaPago"
+								model="@{cntrl.formaPago}" width="180px">
+								<comboitem self="@{each=formaPago}"
+									value="@{formaPago}" label="@{formaPago.nombre}"
+									context="@{formaPago.codigoDatoBasico}">
+								</comboitem>
+							</combobox>
+							<label value="Monto Cancelado" />
+							<doublebox
+								value="@{cntrl.ingresoformapago.monto}" id="dboxMontoC"
+								width="180px">
+							</doublebox>
+						</row>
+						<row align="left" style="border:none;" id="row1"
+							visible="false">
+							<label value="Nro. Documento" />
+							<textbox
+								value="@{cntrl.ingresoformapago.numeroDocumentoPago}"
+								id="txtNroDocumento" width="180px">
+							</textbox>
+							<label value="Entidad Bancaria" />
+							<combobox model="@{cntrl.banco}"
+								id="cmbEntidadBancaria" value="--Seleccione--" width="180px">
+								<comboitem self="@{each=banco}"
+									value="@{banco}" label="@{banco.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+						<row align="left" style="border:none;" id="row2"
+							visible="false">
+							<label value="Tipo de Tarjeta" />
+							<combobox model="@{cntrl.tipoTarjeta}"
+								id="cmbTipoTarjeta" width="150px" value="--Seleccione--">
+								<comboitem self="@{each=tipoTarjeta}"
+									value="@{tipoTarjeta}" label="@{tipoTarjeta.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+					</rows>
+				</grid>
+
+				<!-- Inicio Diferentes Metodos de Pago -->
+				<separator></separator>
+				<groupbox id="grboxDiferentesMetPago">
+					<caption>Diferentes Métodos de Pago</caption>
+					<div>
+						<grid id="gridMetodosP">
+							<columns>
+								<column width="14%" />
+								<column width="20%" />
+								<column width="20%" />
+								<column width="26%" />
+								<column width="20%" />
+							</columns>
+							<rows>
+								<row align="left" spans="5"
+									style="border:none;">
+									<hbox>
+										<listbox id="lbxCuentas"
+											model="@{cntrl.listaIngresoFormaPago}">
+											<listhead>
+												<listheader
+													label="Forma de Pago" width="160px" />
+												<listheader
+													label="Tarjeta" width="120px" />
+												<listheader
+													label="Banco" width="120px" />
+												<listheader
+													label="Nro. Documento" width="120px" />
+												<listheader
+													label="Monto" width="80px" />
+											</listhead>
+											<listitem
+												self="@{each='ingresoformapago'}"
+												value="@{ingresoformapago}">
+												<listcell
+													label="@{ingresoformapago.datoBasicoByCodigoFormaPago.nombre}" />
+												<listcell
+													label="@{ingresoformapago.datoBasicoByCodigoTarjeta.nombre}" />
+												<listcell
+													label="@{ingresoformapago.datoBasicoByCodigoBanco.nombre}" />
+												<listcell
+													label="@{ingresoformapago.numeroDocumentoPago}" />
+												<listcell
+													label="@{ingresoformapago.monto}" />
+											</listitem>
+										</listbox>
+										<!--  <separator></separator>-->
+										<vbox>
+											<button
+												image="//Recursos/Imagenes/agregar.ico"
+												tooltiptext="Agregar" id="btnAgregar" />
+											<button
+												image="//Recursos/Imagenes/editar.ico" tooltiptext="Editar"
+												id="btnEditar" />
+											<button
+												image="//Recursos/Imagenes/quitar.ico"
+												tooltiptext="Eliminar" id="btnQuitar" />
+										</vbox>
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+
+						<separator></separator>
+						<div align="right">
+							<grid width="300px">
+								<rows>
+									<row align="left"
+										style="border:none;">
+										<label value="Monto Total" />
+										<doublebox width="90px"
+											id="dboxMontoT" disabled="true">
+										</doublebox>
+										<label value="Bsf"></label>
+									</row>
+								</rows>
+							</grid>
+						</div>
+					</div>
+				</groupbox>
+				<separator></separator>
+			</panelchildren>
+		</panel>
+		<!-- Fin Detalle de Pago -->
+
+
+		<!-- Fin Datos de pago -->
+
+		<div align="right">
+			<button id="btnGuardar"
+				image="/Recursos/Imagenes/guardar.ico" onClick=""
+				tooltiptext="Guardar" label="Guardar">
+			</button>
+			<button id="btnCancelar"
+				image="/Recursos/Imagenes/cancelar.ico" onClick=""
+				tooltiptext="Cancelar" label="Cancelar">
+			</button>
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
+				onClick="" tooltiptext="Salir" label="Salir">
+				<!-- 				<attribute name="onClick"> -->
+				<!-- 					IngP.onClose(); -->
+				<!-- 				</attribute> -->
+			</button>
+		</div>
+	</window>
+</zk>

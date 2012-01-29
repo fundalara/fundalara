@@ -1,18 +1,16 @@
-<?page title="Benefactores" contentType="text/html;charset=UTF-8"?>
+<?page title="Benefactor Jurídico" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
 	<window apply="controlador.administracion.CntrlPersonaJuridica"
 		id="frmBenefactorJuridico" title="Benefactor" border="normal"
 		width="690px">
-		<zscript>
-		<![CDATA[
-	public void MostrarCatalogoProveedores() {
-		Window window = (Window) Executions.createComponents(
-				"/Administracion/FrmCatalogoProveedor.zul", null, null);
+		<zscript><![CDATA[
+	public void convertir() {
+		System.out.println("----");
+		//return "XXXXXX";
 	}
-]]>
-	</zscript>
+]]></zscript>
 		<panel title="Datos del Benefactor" collapsible="true"
 			open="true">
 			<panelchildren>
@@ -45,7 +43,8 @@
 								<hbox align="center">
 									<textbox width="350px"
 										id="txtRazonSocial" constraint="no empty"
-										value="@{cntrl.personaJuridica.razonSocial}" />
+										value="@{cntrl.personaJuridica.razonSocial}"
+										style='text-transform:uppercase;' />
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
@@ -86,7 +85,6 @@
 								<hbox>
 									<combobox width="40px"
 										model="@{cntrl.codigosDeArea}" readonly="true" id="cmbFax">
-
 										<comboitem
 											self="@{each='codigoDeArea'}" label="@{codigoDeArea.nombre}"
 											value="@{codigoDeArea}">
@@ -101,10 +99,12 @@
 								<label value="Correo Electrónico" />
 								<textbox width="210px"
 									id="txtCorreoElectronico"
-									value="@{cntrl.persona.correoElectronico}" />
+									value="@{cntrl.persona.correoElectronico}"
+									style='text-transform:uppercase;' />
 								<label value="Twitter" id="txtTwitter" />
 								<textbox width="185px"
-									value="@{cntrl.persona.twitter}" />
+									value="@{cntrl.persona.twitter}"
+									style='text-transform:uppercase;' />
 							</row>
 
 						</rows>
@@ -127,7 +127,7 @@
 								<hbox>
 									<combobox readonly="true"
 										width="160px" id="cmbEstado" model="@{cntrl.estados}"
-										value="-Seleccione-">
+										value="--Seleccione--">
 										<comboitem
 											self="@{each='estado'}" label="@{estado.nombre}"
 											context="@{estado.codigoDatoBasico}" value="@{estado}">
@@ -140,7 +140,7 @@
 								<hbox>
 									<combobox readonly="true"
 										disabled="true" width="160px" id="cmbMunicipio"
-										model="@{cntrl.municipios}" value="-Seleccione-">
+										model="@{cntrl.municipios}" value="--Seleccione--">
 										<comboitem
 											self="@{each='municipio'}" label="@{municipio.nombre}"
 											context="@{municipio.codigoDatoBasico}"
@@ -156,7 +156,7 @@
 								<hbox>
 									<combobox readonly="true"
 										disabled="true" width="160px" id="cmbParroquia"
-										model="@{cntrl.parroquias}" value="-Seleccione-">
+										model="@{cntrl.parroquias}" value="--Seleccione--">
 										<comboitem
 											self="@{each='parroquia'}" label="@{parroquia.nombre}"
 											value="@{parroquia}"
@@ -172,7 +172,8 @@
 								<hbox align="center">
 									<textbox id="txtDireccion"
 										value="@{cntrl.persona.direccion}" maxlength="200"
-										height="40px" width="505px" multiline="true" />
+										height="40px" width="505px" multiline="true"
+										style='text-transform:uppercase;' />
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
@@ -183,23 +184,26 @@
 				<separator></separator>
 			</panelchildren>
 		</panel>
+		<label value="(*) Campo Obligatorio" style="color:red" />
 		<div align="right">
 			<button image="/Recursos/Imagenes/guardar.ico"
 				id="btnRegistrar" tooltiptext="Registrar" label="Registrar"
-				width="100px" />
+				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/editar.ico"
 				disabled="true" id="btnModificar" tooltiptext="Modificar"
-				label="Modificar" width="100px" />
+				label="Modificar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/quitar.ico"
 				disabled="true" id="btnEliminar" tooltiptext="Eliminar"
-				label="Eliminar" width="100px" />
+				label="Eliminar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/cancelar.ico"
 				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
-				width="100px" />
+				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
-				tooltiptext="Salir" label="Salir" width="100px">
+				tooltiptext="Salir" label="Salir" width="100px" height="35px">
 				<attribute name="onClick">
-	frmBenefactorJuridico .onClose();
+	{
+		frmPersonas.onClose();
+	}
 </attribute>
 			</button>
 		</div>

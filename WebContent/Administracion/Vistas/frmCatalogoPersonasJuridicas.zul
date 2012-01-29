@@ -1,0 +1,52 @@
+<?page title="Catalogo Personas Jurídicas" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPersonas"?>
+<zk>
+	<window id="frmCatalogoJuridica"
+		title="Catálogo de Personas Jurídicas"
+		apply="controlador.administracion.CntrlCatalogoPersonasJuridicas"
+		border="normal" width="500px" left="500px" top="100px" mode="modal">
+
+		<listbox mold="paging" pageSize="10" width="480px"
+			height="350px" oddRowSclass="none" id="lbxPersonas"
+			model="@{cntrl.listaPersonas}">
+			<listhead>
+				<listheader label="Cédula" width="20%" align="center" />
+				<listheader label="Razón Social" align="left"
+					width="80%" />
+			</listhead>
+			<auxhead>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="txtFiltroCI" width="70%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="txtFiltroRazon" width="90%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+			</auxhead>
+			<listitem self="@{each='personaJuridica'}">
+				<listcell label="@{personaJuridica.cedulaRif }" />
+				<listcell
+					label="@{personaJuridica.razonSocial }" />
+			</listitem>
+		</listbox>
+
+		<separator />
+		<div align="right" width="480px">
+			<button image="/Recursos/Imagenes/aceptar.ico"
+				id="btnAceptar" tooltiptext="Seleccionar PersonaJuridica" label="Seleccionar"
+				width="100px" height="35px">
+			</button>
+			<button image="/Recursos/Imagenes/salir.png"
+				tooltiptext="Salir del Catálogo" label="Salir" width="100px"
+				height="35px" id="btnSalir">
+			</button>
+		</div>
+		<separator />
+	</window>
+</zk>
