@@ -1,5 +1,7 @@
 package dao.general;
 
+import java.util.List;
+
 import modelo.Persona;
 
 import org.hibernate.Criteria;
@@ -31,5 +33,16 @@ public class DaoPersona extends GenericDao {
 			return null;
 		else
 			return (Persona) c.list().get(0);
+	}
+	
+	public List<Persona> listarPorTipo(String tipoPersona){		
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(Persona.class);
+		c.add(Restrictions.eq("datoBasicoByCodigoTipoPersona.codigoDatoBasico",168));
+		c.add(Restrictions.eq("estatus", "A"));
+		List<Persona> lista = c.list();
+		
+		return lista;
 	}
 }

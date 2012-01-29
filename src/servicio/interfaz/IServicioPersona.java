@@ -19,5 +19,6 @@ public interface IServicioPersona {
 	
 	public abstract Persona buscarPorCodigo (Persona d);
 
+	public abstract List<Persona> listarPorTipos(String tipoPersona);
 
 }

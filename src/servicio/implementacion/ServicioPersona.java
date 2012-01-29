@@ -59,5 +59,10 @@ public class ServicioPersona implements IServicioPersona {
 	public Persona buscarPorTipoPersona(String s, Integer i) {
 		return daoPersona.buscarPorTipoPersona(s, i);
 	}
+	
+	@Override
+	public List<Persona> listarPorTipos(String tipoPersona) {
+		return daoPersona.listarPorTipo(tipoPersona);
+	}
 
 }
