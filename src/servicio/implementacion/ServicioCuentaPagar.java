@@ -7,6 +7,7 @@ import servicio.interfaz.IServicioCuentaPagar;
 import dao.general.DaoCuentaPagar;
 
 import modelo.CuentaPagar;
+import modelo.DatoBasico;
 import modelo.Divisa;
 
 
@@ -56,6 +57,11 @@ public class ServicioCuentaPagar implements IServicioCuentaPagar {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<CuentaPagar> listarCuentaPorPagar(DatoBasico dato) {
+		return  daoCuentaPagar.listarCuentaPorPagar(dato);
+	}
+
 	
 
 }
