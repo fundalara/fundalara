@@ -6,6 +6,7 @@ import dao.general.DaoPersonaNatural;
 
 import modelo.DatoBasico;
 import modelo.Nomina;
+import modelo.Persona;
 import modelo.PersonaNatural;
 import servicio.interfaz.IServicoPersonaNatural;
 
@@ -67,5 +68,9 @@ public class ServicioPersonaNatural implements IServicoPersonaNatural {
 		return daoPersonaNatural.filtrarPersonasDistintas(db, ci, pn, pa);
 	}
 
+	@Override
+	public PersonaNatural buscarPorCodigo(Persona d) {
+		return this.daoPersonaNatural.buscar(d.getCedulaRif());
+	}
 	
 }

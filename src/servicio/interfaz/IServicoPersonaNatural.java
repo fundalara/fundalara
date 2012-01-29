@@ -20,6 +20,8 @@ public interface IServicoPersonaNatural {
 	public abstract PersonaNatural buscarPorCodigo (PersonaNatural d);
 	
 	public abstract PersonaNatural  buscarPersonaNatural(String d);
+	
+	public abstract PersonaNatural buscarPorCodigo(Persona d);
 
 
 }
