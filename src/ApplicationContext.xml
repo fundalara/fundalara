@@ -11,6 +11,13 @@
 	<!-- <bean id="servicioConceptoNomina" class="servicio.implementacion.ServicioConceptoNomina"> -->
 	<!-- <property name="daoConceptoNomina" ref="daoConceptoNomina"></property> -->
 	<!-- </bean> -->
+	
+	<bean id="daoComisionActividadPlanificada" class="dao.general.DaoComisionActividadPlanificada">
+	</bean>
+
+	<bean id="servicioComisionActividadPlanificada" class="servicio.implementacion.ServicioComisionActividadPlanificada">
+		<property name="daoComisionActividadPlanificada" ref="daoComisionActividadPlanificada"></property>
+	</bean>
 
 	<bean id="daoCuentaPagar" class="dao.general.DaoCuentaPagar">
 	</bean>

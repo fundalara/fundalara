@@ -16,12 +16,14 @@
 			map.put("disparador", "entrenamiento");
 		} else if (event.getTarget().getId().equals("mnuAgendaCompetencia")) {
 			map.put("disparador", "competencia");
-		} else {
-			map.put("disparador", "logistica");
-		}
-		Component comp = Executions.createComponents("/General/FrmAgenda.zul",
-				null, map);
+		} else if(event.getTarget().getId().equals("mnuAgendaComplementaria")) {
+			map.put("disparador", "complementaria");
+		}else
+			map.put("disparador", "mantenimiento");
+		
 		divMenu.setVisible(false);
+		Component comp = Executions.createComponents("/General/FrmAgenda.zul",
+				null, map);		
 		divCuerpo.appendChild(comp);
 	}
 ]]></zscript>
@@ -500,9 +502,14 @@
 								</treeitem>
 								<treeitem open="false">
 									<treerow>
-										<treecell label="Operaciones"
-											onClick="mostrarAgenda()" />
-										<!--la verdad no que nombre necesita cronos aqui -->
+										<treecell id="mnuAgendaComplementaria" label="Actividades Complementarias"
+											onClick="mostrarAgenda()" />										
+									</treerow>
+								</treeitem>
+								<treeitem open="false">
+									<treerow>
+										<treecell id="mnuAgendaMantenimiento" label="Mantenimientos"
+											onClick="mostrarAgenda()" />										
 									</treerow>
 								</treeitem>
 							</treechildren>

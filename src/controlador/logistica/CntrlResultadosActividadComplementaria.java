@@ -83,7 +83,11 @@ public class CntrlResultadosActividadComplementaria extends
 
 		frmResultadosActividadComplementaria = comp;
 
+	}
+	
+	public void onCreate$ejecucionActividadComplementaria() {
 		this.prueba();
+
 		this.listadoCAP = this.servicioComisionActividadPlanificada
 				.listar(planificacionActividad);
 		this.tareasPlanificadas = servicioTareaActividadPlanificada
@@ -91,8 +95,7 @@ public class CntrlResultadosActividadComplementaria extends
 		materialesPlanificados = servicioMaterialActividadPlanificada
 				.listarMateriales(actividad.getPlanificacionActividad());
 
-		 this.agregarComisionAlListado();
-
+		this.agregarComisionAlListado();
 	}
 
 	public void agregarComisionAlListado() {
@@ -109,9 +112,7 @@ public class CntrlResultadosActividadComplementaria extends
 						.getPersona());
 				System.out.println(this.listadoPersonalComision.get(j).getPersonaNatural().getCedulaRif());
 			}
-		}
-
-		
+		}		
 	}
 
 	public void onClick$btnAgregarComision() {

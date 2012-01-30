@@ -74,5 +74,13 @@
 			<timer id="timer" delay="1000" running="false"
 				onTimer="updateMsg.close()" />
 		</popup>
+		<zscript>
+    	<![CDATA[
+			if (p.equals("complementaria"))
+				frmAgenda.setAttribute("opcion","ActividadComplementaria");
+			else if(p.equals("mantenimiento"))
+				frmAgenda.setAttribute("opcion","Mantenimiento");
+		]]>
+    	</zscript>		
 	</window>
 </zk>
