@@ -1,0 +1,53 @@
+<?page title="Reporte Estado de la Actividad" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Reporte Estado de la Actividad" border="normal" apply="controlador.logistica.CntrlReporteEstadoActividad"
+		width="500px" maximizable="true" minimizable="true">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid height="100%" width="100%">
+					<columns>
+						<column></column>
+						<column></column>
+
+					</columns>
+
+					<rows>
+						<row>
+
+							<label value="Actividad Complementaria"></label>
+							
+						</row>
+						
+						<row>
+							<div>
+								 <label value="Desde"></label>
+								 <datebox id="dboxFechaInicio"/>
+							</div>
+							
+								<div>
+								<label value="Hasta"></label>
+								<datebox id="dboxFechaFin"/>
+							</div>
+								</row>
+						
+						
+						<row spans="2" align="right">
+						
+						<iframe id="ifReport"></iframe>	
+							<div align="right">
+								<button label="Imprimir" id="btnImprimir"
+								width="100px" height="30px"
+									image="../../Recursos/Imagenes/imprimir.ico" />
+							
+							</div>
+						</row>
+						
+					</rows>
+
+				</grid>
+
+			</panelchildren>
+
+		</panel>
+	</window>
+</zk>
