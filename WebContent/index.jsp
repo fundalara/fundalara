@@ -8,7 +8,7 @@
     Base template (without user's data) checked by http://validator.w3.org : "This page is valid XHTML 1.0 Transitional"
     -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Sistema E.B.M Fundalara </title>
+    <title>Sistema F.E.B. Fundalara </title>
     <link rel="stylesheet" href="Recursos/Estilos/style.css" type="text/css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" href="Recursos/Estilos/style.ie6.css" type="text/css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" href="Recursos/Estilos/style.ie7.css" type="text/css" media="screen" /><![endif]-->
@@ -62,7 +62,7 @@
                     </div>
                     <script type="text/javascript">swfobject.switchOffAutoHideShow();swfobject.registerObject("art-flash-object", "9.0.0", "Recursos/Animaciones/expressInstall.swf");</script>
                     <div class="art-logo">
-                     <h1 id="name-text" class="art-logo-name"><a href="#">ESCUELA DE BEISBOL MENOR </a></h1>
+                     <h1 id="name-text" class="art-logo-name"><a href="#">FUNDACION ESCUELA DE BEISBOL</a></h1>
                      <h2 id="slogan-text" class="art-logo-text">FUNDALARA</h2>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="art-footer-r"></div>
                     <div class="art-footer-body">                         
                         <div class="art-footer-text">
-                            <p>   2011 E.B.M. Fundalara. Todos los derechos reservados.</p>
+                            <p>   2012 F.E.B. Fundalara. Todos los derechos reservados.</p>
                         </div>
                 		<div class="cleared"></div>
                     </div>
