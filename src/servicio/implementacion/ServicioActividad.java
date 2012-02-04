@@ -5,6 +5,7 @@ import java.util.List;
 import dao.general.DaoActividad;
 import modelo.Actividad;
 import modelo.PlanificacionActividad;
+import modelo.TareaActividad;
 import servicio.interfaz.IServicioActividad;
 
 public class ServicioActividad implements IServicioActividad {
@@ -44,6 +45,11 @@ public class ServicioActividad implements IServicioActividad {
 		// TODO Auto-generated method stub
 		return daoActividad.listarActivos(Actividad.class);
 	}
+
+	@Override
+	public List<TareaActividad> listar(Actividad actividad) {
+		return this.daoActividad.listar(actividad);
+	}
 	
 	public DaoActividad getDaoActividad() {
 		return daoActividad;
@@ -52,5 +58,8 @@ public class ServicioActividad implements IServicioActividad {
 	public void setDaoActividad(DaoActividad daoActividad) {
 		this.daoActividad = daoActividad;
 	}
-
+	public List<TareaActividad> listar() {
+		return this.daoActividad.listar(Actividad.class);
+	}
+	
 }

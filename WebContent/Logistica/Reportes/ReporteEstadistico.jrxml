@@ -2,38 +2,44 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Etadistico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="302"/>
+	<property name="ireport.y" value="192"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="FechaInicio" class="java.util.Date"/>
 	<parameter name="FechaFin" class="java.util.Date"/>
 	<queryString>
 		<![CDATA[select
-	estado_actividad.codigo_estado,
+	distinct estado_actividad.codigo_estado,
 	count (estado_actividad.codigo_estado) as cantidadEstado,
-	dato_basico.nombre
+	tablaEstado.NombreEstado
+
 
 from
-	estado_actividad, dato_basico, actividad, planificacion_actividad
+	estado_actividad, dato_basico, actividad, planificacion_actividad,
+	(select dato_basico.nombre as NombreEstado,
+	dato_basico.codigo_dato_basico as CodigoEstado
+
+		from dato_basico
+
+		where dato_basico.codigo_tipo_dato = 104) tablaEstado
 where
 
-	dato_basico.codigo_dato_basico = estado_actividad.codigo_estado and
 	dato_basico.estatus ='A' and
 	estado_actividad.codigo_actividad = actividad.codigo_actividad and
 	actividad.codigo_planificacion_actividad = planificacion_actividad.codigo_planificacion_actividad and
 	planificacion_actividad.codigo_tipo_actividad = dato_basico.codigo_dato_basico and
-	dato_basico.parent_codigo_dato_basico = 501 and
+	dato_basico.parent_codigo_dato_basico = 501  and
+	tablaEstado.CodigoEstado = estado_actividad.codigo_estado and
 	actividad.fecha_inicio between $P{FechaInicio} and $P{FechaFin} and
-	actividad.fecha_culminacion between $P{FechaInicio} and $P{FechaFin}
+	actividad.fecha_culminacion between $P{FechaInicio}  and $P{FechaFin}
 
 
 
-group by estado_actividad.codigo_estado, dato_basico.nombre
-
+group by estado_actividad.codigo_estado, tablaEstado.NombreEstado
 order by codigo_estado]]>
 	</queryString>
 	<field name="codigo_estado" class="java.lang.Integer"/>
 	<field name="cantidadestado" class="java.lang.Long"/>
-	<field name="nombre" class="java.lang.String"/>
+	<field name="nombreestado" class="java.lang.String"/>
 	<variable name="cantidadestado_SUM" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{cantidadestado}]]></variableExpression>
 	</variable>
@@ -80,7 +86,7 @@ order by codigo_estado]]>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="0" y="0" width="555" height="152"/>
+				<reportElement x="0" y="0" width="555" height="132"/>
 				<imageExpression><![CDATA["C:\\Users\\Reinaldo López\\Documents\\repositorio\\fundalara\\WebContent\\Recursos\\Imagenes\\Encabezado.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -88,39 +94,39 @@ order by codigo_estado]]>
 	<pageHeader>
 		<band height="45" splitType="Stretch">
 			<staticText>
-				<reportElement x="34" y="8" width="424" height="28"/>
+				<reportElement x="0" y="0" width="555" height="45"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Estado de las Actividades Complementarias]]></text>
+				<text><![CDATA[Actividades Complementarias Por Estado]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="89" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<staticText>
-				<reportElement x="72" y="34" width="45" height="20"/>
+				<reportElement x="72" y="7" width="45" height="20"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="34" width="61" height="20"/>
+				<reportElement x="304" y="7" width="61" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
-			<textField pattern="yyyy/MM/dd">
-				<reportElement x="118" y="34" width="100" height="20"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="118" y="7" width="100" height="20"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{FechaInicio}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy/MM/dd">
-				<reportElement x="365" y="34" width="100" height="20"/>
+				<reportElement x="365" y="7" width="100" height="20"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -129,7 +135,7 @@ order by codigo_estado]]>
 		</band>
 	</columnHeader>
 	<pageFooter>
-		<band height="129" splitType="Stretch">
+		<band height="111" splitType="Stretch">
 			<textField>
 				<reportElement x="441" y="80" width="67" height="20"/>
 				<textElement textAlignment="Right">
@@ -163,9 +169,9 @@ order by codigo_estado]]>
 					</chartLegend>
 				</chart>
 				<pieDataset>
-					<keyExpression><![CDATA[$F{nombre}]]></keyExpression>
+					<keyExpression><![CDATA[$F{nombreestado}]]></keyExpression>
 					<valueExpression><![CDATA[$F{cantidadestado}]]></valueExpression>
-					<labelExpression><![CDATA[$F{nombre}+"="+$F{cantidadestado}]]></labelExpression>
+					<labelExpression><![CDATA[$F{nombreestado}+"="+$F{cantidadestado}]]></labelExpression>
 				</pieDataset>
 				<piePlot>
 					<plot/>
@@ -173,14 +179,14 @@ order by codigo_estado]]>
 				</piePlot>
 			</pieChart>
 			<staticText>
-				<reportElement x="172" y="5" width="129" height="23"/>
+				<reportElement x="182" y="7" width="129" height="23"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total de Actividaddes:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="302" y="8" width="40" height="20"/>
+				<reportElement x="312" y="8" width="40" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>

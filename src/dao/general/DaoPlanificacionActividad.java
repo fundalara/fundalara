@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.Date;
 
 import modelo.Actividad;
+import modelo.DatoBasico;
 import modelo.PlanificacionActividad;
 import dao.generico.GenericDao;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+import servicio.implementacion.ServicioDatoBasico;
 
 public class DaoPlanificacionActividad extends GenericDao {
 
@@ -59,13 +63,9 @@ public class DaoPlanificacionActividad extends GenericDao {
 	
 	public List<PlanificacionActividad> listarComplementarias(){
 		Session session = getSession(); 
-		Transaction tx =  session.beginTransaction();
-		Criteria c = session.createCriteria(PlanificacionActividad.class);
-//		c.add(Restrictions.eq("actividadPlantilla", false));
-		//Se filtran las actividades complementarias
-		c.add(Restrictions.eq("datoBasico.codigoDatoBasico", 501));
-		c.add(Restrictions.eq("estatus", "A"));
-		List<PlanificacionActividad> lista = c.list();
+		Transaction tx =  session.beginTransaction();	
+		Query q = session.createQuery("FROM PlanificacionActividad WHERE datoBasico.datoBasico.codigoDatoBasico = 501");
+		List<PlanificacionActividad> lista = q.list();
 		return lista;
 	}
 

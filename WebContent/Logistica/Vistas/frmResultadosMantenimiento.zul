@@ -1,251 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <?page title="Ejecucion Mantenimiento" contentType="text/html;charset=UTF-8"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="ejecucionMantenimiento" ?>
 <zk>
-	<window id="ejecucionMantenimiento" title="Ejecución Mantenimiento"
-		border="normal" width="690px" mode="modal"
+	<window id="ejecucionMantenimiento"
+		title="Control y Resultados de Mantenimiento"
+		border="normal" mode="modal" width="80%"
 		apply="controlador.logistica.CntrlResultadosMantenimiento">
-		<tabbox height="100%" width="100%">
-			<tabs>
-				<tab label="Mantenimiento"></tab>
-				<tab label="Act. Complementarias"></tab>
-			</tabs>
-			<tabpanels height="100%" width="100%">
-				<tabpanel height="100%">
+		<panel id="panel1" collapsible="true" width="100%"
+			title="Listado de Mantenimiento">
+			<panelchildren>
+				<div width="100%" height="100%">
+					<space width="15%" />
+					<label style="font-weight:bold">Descripción:</label>
+					<label
+						value="@{cntrl.actividad.planificacionActividad.descripcion}">
+					</label>
 
-					<panel collapsible="false" width="100%"
-						title="Listado de Actividades en Ejecución">
-						<panelchildren>
-							<div width="100%" height="100%">
-								<space width="15%" />
-								<label style="font-weight:bold">
-									Descripción:
+					<grid style="boder:none">
+						<columns>
+							<column width="17%"></column>
+							<column width="30%"></column>
+							<column width="17%"></column>
+							<column width="36%"></column>
+						</columns>
+						<rows style="border:none">
+							<row style="border:none">
+								<label style="font-weight: bold;"
+									value="Fecha de inicio">
 								</label>
-								<label
-									value="@{cntrl.actividad.planificacionActividad.descripcion}">
+								<datebox
+									value="@{cntrl.actividad.fechaInicio}" width=" 50%"
+									style="color:black !important;">
+								</datebox>
+
+								<label style="font-weight: bold;"
+									value="Hora de Inicio">
 								</label>
-								<grid height="40%" style="boder:none">
-									<columns>
-										<column width="17%"></column>
-										<column width="30%"></column>
-										<column width="17%"></column>
-										<column width="36%"></column>
-									</columns>
-									<rows style="border:none">
-
-										<row style="border:none">
-											<label
-												style="font-weight: bold;" value="Fecha de inicio">
-											</label>
-											<datebox
-												value="@{cntrl.actividad.fechaInicio}" width=" 50%"
-												style="color:black !important;">
-											</datebox>
-
-											<label
-												style="font-weight: bold;" value="Hora de Inicio">
-											</label>
-											<timebox
-												value="@{cntrl.actividad.horaInicio}" />
-										</row>
-
-										<row style="border:none">
-											<label
-												style="font-weight: bold;" value="Fecha de Culminación">
-											</label>
-											<datebox id="ppend"
-												value="@{cntrl.actividad.fechaCulminacion}" width="50%" />
-											<label
-												style="font-weight: bold;" value="Hora de Culminación">
-											</label>
-											<timebox
-												value="@{cntrl.actividad.horaFin}" />
-										</row>
-
-										<row style="border:none">
-											<label value="Estado"
-												style="font-weight: bold;">
-											</label>
-											<progressmeter
-												id="barraProgreso" width="90%">
-											</progressmeter>
-											<label
-												style="font-weight: bold;" value="Instalación">
-											</label>
-											<textbox disabled="true"
-												value="@{cntrl.actividad.instalacionUtilizada.instalacion.descripcion}"
-												width=" 80%" style="color:black !important;">
-											</textbox>
-										</row>
-
-										<row style="border:none">
-											<label
-												style="font-weight: bold;" value="Responsable"
-												visible="true">
-											</label>
-											<label value="sdhgaf"></label>
-										</row>
-									</rows>
-								</grid>
-								<panel collapsible="false"
-									title="Lista de Tareas" width="100%" height="100%">
-									<panelchildren>
-										<hbox>
-											<listbox id="lboxtareas"
-												model="@{cntrl.tareasPlanificadas}"
-												selectedItem="@{cntrl.tareaActividadP}"  width="95%">
-												<listhead>
-													<listheader
-														label="Tarea">
-													</listheader>
-													<listheader
-														label="Personal Asignado">
-													</listheader>
-												</listhead>
-												<listitem
-													self="@{each='a'}" value="@{a}">
-													<listcell
-														label="@{a.datoBasico.nombre}" />
-													<listcell
-														label="@{a.personalActividadPlanificada.personal.personaNatural, converter='comun.converter.NameConverter'}">
-													</listcell>
-												</listitem>
-											</listbox>
-											<div>
-												<button id="btnPersonal"
-													image="/Recursos/Imagenes/consultar.ico" disabled="true">
-												</button>
-												<button
-													id="btnEjecutada" image="/Recursos/Imagenes/aceptar.ico"
-													disabled="true">
-												</button>
-											</div>
-										</hbox>
-
-									</panelchildren>
-								</panel>
-							</div>
-						</panelchildren>
-					</panel>
-					<div align="center">
-						<hbox>
-							<label>Desea Agregar Tareas</label>
-							<checkbox id="checkAgregarTareas">
-							</checkbox>
-						</hbox>
-					</div>
-					<panel collapsible="false"
-						title="Lista Materiales Requeridos" width="100%" height="100%"
-						border="none">
+								<timebox
+									value="@{cntrl.actividad.horaInicio}" />
+							</row>
+							<row style="border:none">
+								<label style="font-weight: bold;"
+									value="Fecha de Culminación">
+								</label>
+								<datebox id="ppend"
+									value="@{cntrl.actividad.fechaCulminacion}" width="50%" />
+								<label style="font-weight: bold;"
+									value="Hora de Culminación">
+								</label>
+								<timebox
+									value="@{cntrl.actividad.horaFin}" />
+							</row>
+							<row style="border:none">
+								<label value="Avance de Actividad"
+									style="font-weight: bold;">
+								</label>
+								<progressmeter id="barraProgreso"
+									width="90%">
+								</progressmeter>
+								<label style="font-weight: bold;"
+									value="Instalación">
+								</label>
+								<textbox disabled="true"
+									value="@{cntrl.actividad.instalacionUtilizada.instalacion.descripcion}"
+									width=" 80%" style="color:black !important;">
+								</textbox>
+							</row>
+							<row style="border:none">
+								<label value="Responsable"
+									style="font-weight: bold;">
+								</label>
+								<textbox disabled="true"
+									value="Daniel Contreras" width="80%"
+									style="color:black !important;">
+								</textbox>
+							</row>
+						</rows>
+					</grid>
+					<panel collapsible="false" title="Lista de Tareas"
+						width="100%">
 						<panelchildren>
-							<hbox width="670px">
-								<listbox id="lboxMateriales"
-									width="570px" mold="paging" pageSize="5" vflex="true"
-									model="@{cntrl.materialesPlanificados, load-after='btnAgregarMaterial.onClick'}"
-									selectedItem="@{cntrl.materialP}">
+							<hbox>
+								<listbox id="lboxtareas"
+									model="@{cntrl.tareasPlanificadas}"
+									selectedItem="@{cntrl.tareaActividad}" mold="paging"
+									pageSize="6">
 									<listhead>
-										<listheader label="Material"
-											width="20%">
-										</listheader>
-										<listheader label="Descripcion"
+										<listheader label="Tarea"
 											width="30%">
 										</listheader>
-										<listheader label="Cantidad">
+										<listheader
+											label="Responsable" width="50%">
+										</listheader>
+										<listheader
+											label="Estado de Ejecucion">
 										</listheader>
 									</listhead>
-									<listitem self="@{each='b'}"
-										value="@{b}">
+									<listitem self="@{each='a'}"
+										value="@{a}">
 										<listcell
-											label="@{b.material.datoBasicoByCodigoTipoMaterial.nombre}">
+											label="@{a.datoBasicoByCodigoTarea.nombre}" />
+										<listcell>
+											<label
+												value="@{a.tareasPlanificadas.personalActividad.personal.personaNatural.primerNombre}">
+											</label>
+											<label
+												value="@{a.tareasPlanificadas.comisionFamiliar.familiarJugador.familiar.personaNatural.primerNombre}">
+											</label>
 										</listcell>
 										<listcell
-											label="@{b.material.descripcion}">
-										</listcell>
-										<listcell
-											label="@{b.cantidadRequerida}">
+											label="@{a.datoBasicoByEstadoTarea.nombre}">
 										</listcell>
 									</listitem>
 								</listbox>
-								<div width="100%">
-									<button id="btnAgregarMaterial"
-										image="/Recursos/Imagenes/agregar.ico" disabled="true">
+								<vbox align="center">
+									<button id="btnEjecutada"
+										image="/Recursos/Imagenes/aceptar.ico" disabled="true">
 									</button>
-									<intbox id="textCantidad"
-										width="50%" disabled="true">
-									</intbox>
-								</div>
+									<button id="btnAgregarPersonal"
+										image="/Recursos/Imagenes/agreg.jpg" disabled="true">
+									</button>
+								</vbox>
+							</hbox>
+							<div width="100%" align="right">
+								<button id="btnAgregarTarea"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+								<button id="btnDescartarTarea"
+									image="/Recursos/Imagenes/eliminar.ico" disabled="true">
+								</button>
+							</div>
+						</panelchildren>
+					</panel>
+					<panel collapsible="false"
+						title="Lista de Materiales" width="100%">
+						<panelchildren>
+							<hbox>
+								<listbox id="lboxListadoMateriales"
+									mold="paging" pageSize="5"
+									model="@{cntrl.materialesPlanificados}"
+									selectedItem="@{cntrl.materialP}">
+									<listhead>
+										<listheader label="Nombre"
+											width="25%">
+										</listheader>
+										<listheader label="Descripcion"
+											width="40%">
+										</listheader>
+										<listheader label="Almacen"
+											width="25%">
+										</listheader>
+										<listheader label="Cant.">
+										</listheader>
+									</listhead>
+									<listitem self="@{each='w'}"
+										value="@{w}">
+										<listcell
+											label="@{w.material.datoBasicoByCodigoTipoMaterial.nombre}">
+										</listcell>
+										<listcell
+											label="@{w.material.descripcion}">
+										</listcell>
+										<listcell
+											label="@{w.material.almacen.nombre}">
+										</listcell>
+										<listcell
+											label="@{w.cantidadRequerida}">
+										</listcell>
+									</listitem>
+								</listbox>
+								<vbox align="center">
+									<button id="btnAgregarMaterial"
+										image="/Recursos/Imagenes/agregar.ico">
+									</button>
+									<button id="btnMostrarMaterialesAprobados" image="/Recursos/Imagenes/consultar.ico">
+									</button>
+								</vbox>
 							</hbox>
 						</panelchildren>
 					</panel>
-
-				</tabpanel>
-
-			</tabpanels>
-		</tabbox>
-
-
-		<div align="center">
-			<hbox>
-				<label>Desea Agregar Materiales</label>
-				<checkbox onCheck="mostrarMateriales()"
-					id="seleccionar">
-				</checkbox>
-
-			</hbox>
+				</div>
+			</panelchildren>
+		</panel>
+		<div width="100%" align="right">
+			<button id="btnGuardar"
+				image="/Recursos/Imagenes/aceptar.ico" label="Terminar Mantenimiento">
+			</button>
+			<button id="btnSuspender"
+				image="/Recursos/Imagenes/obligatorio.png"
+				label="Suspender Mantenimiento">
+			</button>
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
+				label="Salir">
+			</button>
 		</div>
-
-
-
-		<grid>
-			<columns>
-				<column width="100%"></column>
-			</columns>
-			<rows>
-				<row width="100%">
-					<div align="right">
-						<button id="guardar" label="Guardar"
-							image="/Recursos/Imagenes/guardar.ico">
-						</button>
-						<button id="modificar" label="Modificar"
-							image="/Recursos/Imagenes/editar.ico">
-						</button>
-						<button id="imprimir" label="Imprimir"
-							image="/Recursos/Imagenes/imprimir.ico">
-						</button>
-						<button id="cancelar" label="Cancelar"
-							image="/Recursos/Imagenes/cancelar.ico">
-						</button>
-						<button id="salir" label="Salir"
-							image="/Recursos/Imagenes/salir.png">
-						</button>
-					</div>
-
-				</row>
-			</rows>
-		</grid>
-
-		<zscript>
-	public void Alerta() {
-		PanelDetalle.setOpen(true);
-	}
-	public void mostrarPanelTareas() {
-		if (check.isChecked() == true)
-			panelTarea.setVisible(true);
-		else
-			panelTarea.setVisible(false);
-
-	}
-	public void mostrarTareas() {
-		Executions.createComponents(
-				"/Logistica/Vistas/frmTareasMantenimiento.zul",
-				ejecucionMantenimiento, null);
-	}
-	public void mostrarMateriales() {
-		Executions.createComponents("/Logistica/Materiales_Mantenimiento.zul",
-				ejecucionMantenimiento, null);
-	}
-</zscript>
-
-
+		<panel id="panel2" collapsible="true" open="false"
+			width="100%">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="25%"></column>
+						<column></column>
+					</columns>
+					<rows>
+						<row>
+							<label style="font-weight: bold;"
+								value="Estado del Mantenimiento">
+							</label>
+							<div>
+								<combobox id="cmbEstados" width="60%"
+									model="@{cntrl.listadoEstados}"
+									selectedItem="@{cntrl.estadoActividad}">
+									<comboitem self="@{each='ea'}"
+										label="@{ea.nombre}">
+									</comboitem>
+								</combobox>
+								<button id="btnAgregarEstadoActividad"
+									image="/Recursos/Imagenes/agregar.ico">
+								</button>
+							</div>
+						</row>
+						<row>
+							<label style="font-weight: bold;"
+								value="Observacion">
+							</label>
+							<textbox multiline="true" width="60%"
+								height="70px" value="@{cntrl.Observacion}">
+							</textbox>
+						</row>
+					</rows>
+				</grid>
+				<listbox mold="paging" pageSize="5"
+					model="@{cntrl.listadosEstados2}" selectedItem="@{cntrl.aux}">
+					<listhead>
+						<listheader label="Estado"></listheader>
+						<listheader label="Observacion"></listheader>
+					</listhead>
+					<listitem self="@{each='es'}" value="@{es}">
+						<listcell label="@{es.datoBasico.nombre}"></listcell>
+						<listcell label="@{es.observaciones}"></listcell>
+					</listitem>
+				</listbox>
+				<div width="100%" align="center">
+					<button id="btnGuardarFinal"
+						image="/Recursos/Imagenes/guardar.ico" label="Guardar">
+					</button>
+				</div>
+			</panelchildren>
+		</panel>
 	</window>
 </zk>

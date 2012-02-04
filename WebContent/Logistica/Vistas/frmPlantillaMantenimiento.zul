@@ -4,7 +4,7 @@
 <?page title="Planificacion de mantenimiento" contentType="text/html;charset=UTF-8"?>
 
 <window title="Plantilla de Mantenimiento" border="normal" mode="modal"
-	width="100%" id="frmPlanMantenimiento"
+	width="60%" id="frmPlanMantenimiento"
 	apply="controlador.logistica.CntrlFrmPlantillaMantenimiento"
 	closable="false">
 
@@ -16,18 +16,15 @@
 			<column width="30%" />
 		</columns>
 		<rows style="border:none">
-
 			<row style="border:none">
-				<label value="Tipo" style="font-weight: bold;" />
+				<label value="Tipo"  />
 				<combobox id="cmbTipo"
 					selectedItem="@{cntrl.tipoMantenimiento}"
 					model="@{cntrl.tiposMantenimientos}">
 					<comboitem id="cmbITipos" self="@{each=tm}"
 						label="@{tm.nombre}" />
 				</combobox>
-			</row>
-			<row style="border:none">
-				<label style="font-weight: bold;" value="Descripción" />
+				<label  value="Descripción" />
 				<combobox id="cmbClase"
 					selectedItem="@{cntrl.claseMantenimiento}" width="90%"
 					model="@{cntrl.clasificacionMantenimientos, load-after='cmbTipo.onSelect' }">
@@ -36,9 +33,9 @@
 				</combobox>
 			</row>
 			<row style="border:none">
-				<label value="Plantilla" style="font-weight: bold;" />
+				<label value="Plantilla"  />
 
-				<textbox id="txtCodPlantilla" style='text-transform:uppercase;'
+				<textbox id="txtCodPlantilla"
 					value="@{cntrl.plantilla.descripcion}" width="95%" />
 				<button id="btnPredisennada"
 					image="/Recursos/Imagenes/consultar.ico"
@@ -73,9 +70,10 @@
 									<listheader label="Tarea"
 										width="20%" />
 									<listheader label="Descripción"
-										width="40%" />
+										width="50%" />
 									<listheader label="Personal"
-										width="40%" />
+										width="15%" />
+									<listheader width="15%" />	
 
 								</listhead>
 								<listitem self="@{each='t'}"
@@ -85,7 +83,10 @@
 									<listcell
 										label="@{t.getDatoBasico.Descripcion}" />
 									<listcell
-										label="@{t.getPersonalActividadPlanificada.getPersonal.getPersonaNatural, converter='comun.converter.NameConverter'}" />
+										label="@{t.getPersonalActividadPlanificada.getPersonal.getPersonaNatural.getPrimerNombre}" />
+									<listcell
+										label="@{t.getPersonalActividadPlanificada.getPersonal.getPersonaNatural.getPrimerApellido}" />
+										
 								</listitem>
 
 							</listbox>
@@ -162,7 +163,7 @@
 					<button id="btnGuardar" label="Guardar"
 						image="/Recursos/Imagenes/guardar.ico" />
 
-					<button id="modificar" label="Modificar"
+					<button id="btnModificar" label="Modificar"
 						image="/Recursos/Imagenes/editar.ico" />
 
 					<!-- 					<button id="imprimir" label="Imprimir" -->

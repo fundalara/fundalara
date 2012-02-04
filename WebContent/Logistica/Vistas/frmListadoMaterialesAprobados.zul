@@ -1,0 +1,38 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmListadoMaterialesAprobados" ?>
+<?page title="Listado de Materiales Aprobados" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="frmListadoMaterialesAprobados"
+		title="Listado de Materiales Aprobados" border="normal" mode="modal"
+		width="70%"
+		apply="controlador.logistica.CntrlListadoMaterialesAprobados">
+		<listbox id="lboxListadoMaterialesAprobados" mold="paging"
+			pageSize="5" model="@{cntrl.listadoMaterialActividad}"
+			selectedItem="@{cntrl.materialActividad}">
+			<listhead>
+				<listheader label="Nombre" width="25%"></listheader>
+				<listheader label="Descripcion" width="40%">
+				</listheader>
+				<listheader label="Almacen" width="25%"></listheader>
+				<listheader label="Cant."></listheader>
+			</listhead>
+			<listitem self="@{each='ea'}" value="@{ea}">
+				<listcell
+					label="@{ea.listadoMaterialActividad.material.datoBasicoByCodigoTipoMaterial.nombre}">
+				</listcell>
+				<listcell
+					label="@{ea.listadoMaterialActividad.material.descripcion}">
+				</listcell>
+				<listcell
+					label="@{ea.listadoMaterialActividad.material.almacen.nombre}">
+				</listcell>
+				<listcell
+					label="@{ea.listadoMaterialActividad.cantidadEntregada}">
+				</listcell>
+			</listitem>
+		</listbox>
+		<div width="100%" align="right">
+			<button id="btnSalir" label="Salir" image="/Recursos/Imagenes/salir.png"></button>
+		</div>
+	</window>
+</zk>

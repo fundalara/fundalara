@@ -3,10 +3,16 @@
 <?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatPersonal"?>
 <?page title="Personal de Mantenimiento" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Personal de Mantenimiento" id="frmCatPersonal"
+	<window title="Personal" id="frmCatPersonal"
 		border="normal" mode="modal" width="50%"
 		apply="controlador.logistica.CntrlFrmCatalogoPersonal">
-		<listbox id="lboxPersonal" mold="paging" pageSize="5"
+		<hbox width="100%">
+			<label value="Nombre" ></label>
+			<textbox></textbox>
+			<label value="Apellido" ></label>
+			<textbox ></textbox>
+		</hbox >
+		<listbox id="lboxPersonal" mold="paging" pageSize="10"
 			model="@{cntrl.listaPersona}" selectedItem="@{cntrl.persona}"
 			checkmark="true">
 			<listhead>
@@ -22,7 +28,7 @@
 		</listbox>
 
 		<div align="right">
-			<button id="btnGuardar" label="Guardar"
+			<button id="btnGuardar" label="Seleccionar"
 				image="/Recursos/Imagenes/guardar.ico" />
 
 			<button id="btnSalir" label="Salir"

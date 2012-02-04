@@ -1,6 +1,9 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoEstadoActividad;
+import modelo.Actividad;
 import modelo.EstadoActividad;
 import servicio.interfaz.IServicioEstadoActividad;
 
@@ -32,6 +35,16 @@ public class ServicioEstadoActividad implements IServicioEstadoActividad {
 
 	public void setDaoEstadoActividad(DaoEstadoActividad daoEstadoActividad) {
 		this.daoEstadoActividad = daoEstadoActividad;
+	}
+
+	@Override
+	public EstadoActividad buscar(Actividad a) {
+		return this.daoEstadoActividad.buscar(a);
+	}
+
+	@Override
+	public List<EstadoActividad> listar() {
+		return this.daoEstadoActividad.listar(EstadoActividad.class);
 	}
 
 }

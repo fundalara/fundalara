@@ -1,6 +1,9 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoPersonalActividad;
+import modelo.Persona;
 import modelo.PersonalActividad;
 import servicio.interfaz.IServicioPersonalActividad;
 
@@ -32,6 +35,17 @@ public class ServicioPersonalActividad implements IServicioPersonalActividad {
 
 	public void setDaoPersonalActividad(DaoPersonalActividad daoPersonalActividad) {
 		this.daoPersonalActividad = daoPersonalActividad;
+	}
+
+	@Override
+	public List<PersonalActividad> listar() {
+		return this.daoPersonalActividad.listar(PersonalActividad.class);
+	}
+
+	@Override
+	public PersonalActividad Buscar(Persona persona) {
+		
+		return this.daoPersonalActividad.Buscar(persona.getCedulaRif());
 	}
 
 }

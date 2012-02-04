@@ -3,53 +3,39 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatRepresentante"?>
 <?page title="Representantes" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Representantes" id="frmCatRepresentante"  border="normal" mode="modal"  width="50%"  closable="true" 
-	apply="controlador.logistica.CntrlCatalogoRepresentante">
-		<div width="100%">
-		<label value="Buscar" width="10%"/>
-		<label value="Nombre" width="15%"></label>
-		<textbox width="30%"></textbox>
-		<label value="Apellido" width="15%"></label>
-		<textbox width="30%"></textbox>
-		</div>
-<!-- 		<listbox id="lboxPersona" mold="paging" pageSize="5" -->
-<!-- 			model="@{cntrl.listaFamiliarComision}" -->
-<!-- 			selectedItem="@{cntrl.familiarComision}" checkmark="true" > -->
-			
-		<listbox id="lboxPersona" mold="paging" pageSize="5" >
-			
+	<window title="Representantes" id="frmCatRepresentante"
+		apply="controlador.logistica.CntrlCatalogoRepresentante"
+		border="normal" mode="modal" closable="true" width="60%">
+		<hbox width="100%">
+			<label value="Nombre" ></label>
+			<textbox></textbox>
+			<label value="Apellido" ></label>
+			<textbox ></textbox>
+		</hbox >
+		<listbox id="lboxRepresentante" width="100%" height="100%" mold="paging" pageSize="10"
+			model="@{cntrl.listaComisionFamiliar, load-after='frmCatRepresentante.onCreate'}"
+			selectedItem="@{cntrl.comisionFamiliar}" checkmark="true">
 			<listhead>
-				<listheader label="Nombre" sort="auto" />
-				<listheader label="Apellido"/>
+				<listheader label="Nombre"></listheader>
+				<listheader label="Apellido"></listheader>
 			</listhead>
-<!-- 			<listitem self="@{each='pm'}" value="@{pm}"> -->
-<!-- 				<listcell label="@{pm.getFamiliarJugador().getFamiliar().getPersonaNatural().primerNombre}" /> -->
-<!-- 				<listcell label="@{pm.getFamiliarJugador().getFamiliar().getPersonaNatural().primerApellido}" /> -->
-<!-- 			</listitem> -->
-	
-			<listitem>
-				<listcell>ANTONIO</listcell>
-				<listcell>RODRÍGUEZ</listcell>
+			<listitem self="@{each='cf'}" value="@{cf}">
+				<listcell
+					label="@{cf.getFamiliarJugador.getFamiliar.getPersonaNatural.getPrimerNombre}">
+				</listcell>
+				<listcell
+					label="@{cf.getFamiliarJugador.getFamiliar.getPersonaNatural.getPrimerApellido}">
+				</listcell>
 			</listitem>
-			
-			<listitem>
-				<listcell>JOSÉ</listcell>
-				<listcell>PÉREZ</listcell>
-			</listitem>
-			
-			<listitem>
-				<listcell>ANDREA</listcell>
-				<listcell>ALVARADO</listcell>
-			</listitem>
-
 
 		</listbox>
-		
+		<hbox width="100%">
 		<div align="right">
-					<button id="btnGuardar" label="Seleccionar"
-						image="/Recursos/Imagenes/guardar.ico" />
-					<button id="btnSalir" label="Salir"
-						image="/Recursos/Imagenes/salir.png" />
+			<button id="btnGuardar" label="Seleccionar"
+				image="/Recursos/Imagenes/guardar.ico" />
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" />
 		</div>
+		</hbox>
 	</window>
 </zk>

@@ -5,7 +5,7 @@
 	<window id="frmCatPerComision"
 		title="Listado del Personal por Comision" border="normal" mode="modal"
 		width="50%"
-		apply="controlador.logistica.CntrlResultadosActividadComplementaria">
+		apply="controlador.logistica.CntrlCatalogoPersonalComision">
 		<listbox id="lboxPersonalComision" mold="paging" pageSize="5"
 			model="@{cntrl.listadoPersonalComision}"
 			selectedItem="@{cntrl.personaComision}" checkmark="true">

@@ -3,9 +3,14 @@ package controlador.logistica;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Actividad;
+import modelo.MaterialActividad;
 import modelo.SolicitudMantenimiento;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 
 import servicio.implementacion.ServicioSolicitudMantenimiento;
@@ -21,7 +26,8 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 	private List<SolicitudMantenimiento> solicitudesMantenimiento;
 	private ServicioSolicitudMantenimiento servicioSolicitudMantenimiento = new ServicioSolicitudMantenimiento();
 	private SolicitudMantenimiento solicitudMantenimiento = new SolicitudMantenimiento();
-								   
+	private Component formPlanificarMantenimiento;
+	private Component frmSolMantenimiento;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -31,8 +37,9 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 	}
 
 	public void onSelect$lboxSolicitudMantenimiento() {
-		alert("Pantalla de planificacion del mantenimiento" + solicitudMantenimiento.getDescripcionActividad());
-//		binder.loadAll();
+		// alert("Pantalla de planificacion del mantenimiento"
+		// + solicitudMantenimiento.getDescripcionActividad());
+		// binder.loadAll();
 	}
 
 	public void Cancelar() {
@@ -42,9 +49,32 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 
 	public void onClick$btnAceptar() {
 
-		alert("debe salirse");
+		formPlanificarMantenimiento = Executions.createComponents(
+				"/Logistica/Vistas/frmPlanificarMantenimiento.zul", null, null);
+		formPlanificarMantenimiento.setVariable("frmSolMantenimiento",
+				frmSolMantenimiento, false);
+		formPlanificarMantenimiento.setVariable("fechaFinal",
+				solicitudMantenimiento.getFechaSolicitud(), false);
+
+		frmSolMantenimiento.addEventListener(
+				"onPlanificarMantenimientoCerrado", new EventListener() {
+					public void onEvent(Event arg0) throws Exception {
+						Integer i = (Integer) frmSolMantenimiento.getVariable(
+								"booleano", false);
+						if (i == 1) {
+							solicitudMantenimiento.setEstatus('E');
+							servicioSolicitudMantenimiento
+									.actualizar(solicitudMantenimiento);
+						}
+						Cancelar();
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
 
 	}
+
+	// alert("debe salirse");
 
 	public void onClick$btnCancelar() {
 		this.Cancelar();
@@ -92,7 +122,5 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 	public void setLboxSolicitudMantenimiento(Listbox lboxSolicitudMantenimiento) {
 		this.lboxSolicitudMantenimiento = lboxSolicitudMantenimiento;
 	}
-	
-	
 
 }

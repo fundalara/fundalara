@@ -4,7 +4,7 @@
 <?page title="Planificacion de mantenimiento" contentType="text/html;charset=UTF-8"?>
 
 <window title="Planificación de Mantenimiento" border="normal"
-	mode="modal" width="100%" id="frmPlanMantenimiento"
+	mode="modal" width="70%" id="frmPlanMantenimiento"
 	apply="controlador.logistica.CntrlFrmPlanificarMantenimiento"
 	closable="false">
 
@@ -17,21 +17,16 @@
 		</columns>
 		<rows style="border:none">
 			<row style="border:none">
-				<label value="Tipo" style="font-weight: bold;" />
-
-
-				<combobox id="cmbTipo"
+				<label value="Tipo"  />
+				<combobox id="cmbTipo" readonly="true"
 					selectedItem="@{cntrl.tipoMantenimiento}"
 					model="@{cntrl.tiposMantenimientos}">
 					<comboitem id="cmbITipos" self="@{each=tm}"
 						label="@{tm.nombre}" />
 				</combobox>
-
-
-
-				<label style="font-weight: bold;" value="Descripción" />
+				<label                   value="Descripción" />
 				<hbox width="100%">
-					<combobox id="cmbClase"
+					<combobox id="cmbClase" readonly="true"
 						selectedItem="@{cntrl.claseMantenimiento}" width="90%"
 						model="@{cntrl.clasificacionMantenimientos, load-after='cmbTipo.onSelect' }">
 						<comboitem id="cmbIClase" self="@{each=cm}"
@@ -42,25 +37,25 @@
 			</row>
 
 			<row style="border:none">
-				<label value="Prediseñada" style="font-weight: bold;" />
+				<label value="Prediseñada"                   />
 				<hbox width="100%">
-					<textbox id="txtCodPlantilla"
+					<textbox id="txtCodPlantilla" 
 						value="@{cntrl.plantilla.descripcion}" width="95%" />
 					<button id="btnPredisennada"
 						image="/Recursos/Imagenes/consultar.ico"
 						tooltiptext="Buscar una plantilla" />
 				</hbox>
-				<label style="font-weight: bold;" value="Instalación" />
+				<label                   value="Instalación" />
 				<hbox width="100%">
 
-					<combobox id="cmbTipoInstalacion"
+					<combobox id="cmbTipoInstalacion" readonly="true"
 						selectedItem="@{cntrl.tipoInstalacion}"
 						model="@{cntrl.tiposInstalaciones}" width="80%">
 						<comboitem id="cmbTiposInst" self="@{each=ti}"
 							label="@{ti.nombre}" />
 					</combobox>
 
-					<combobox id="cmbInstalacion"
+					<combobox id="cmbInstalacion" readonly="true"
 						selectedItem="@{cntrl.instalacionUtilizada}" width="80%"
 						model="@{cntrl.listaInstalacionUtilizada, load-after='cmbTipoInstalacion.onSelect'}">
 						<comboitem id="cmbIInstalacion" self="@{each=i}"
@@ -70,24 +65,24 @@
 			</row>
 
 			<row style="border:none">
-				<label style="font-weight: bold;"
+				<label                  
 					value="Fecha de inicio" />
 
-				<datebox id="fechaInicio" width="80%" />
-				<label style="font-weight: bold;"
+				<datebox id="fechaInicio" width="45%" readonly="true" />
+				<label                  
 					value="Hora de Inicio" />
 
-				<timebox id="horaInicio" width="30%" />
+				<timebox id="horaInicio" width="45%" readonly="true"/>
 			</row>
 			<row style="border:none">
-				<label style="font-weight: bold;"
+				<label                  
 					value="Fecha de Culminación" />
 
-				<datebox id="fechaFin" width="80%" />
-				<label style="font-weight: bold;"
+				<datebox id="fechaFin" width="45%" readonly="true"/>
+				<label                  
 					value="Hora de Culminación" />
 				<hbox width="100%">
-					<timebox id="horaFin" width="50%" />
+					<timebox id="horaFin" width="45%" readonly="true" />
 					<!-- 				<button  id="btnPeriodicidad" tooltiptext="Periodicidad" width="30%" -->
 					<!-- 						image="/Recursos/Imagenes/calendario.ico" /> -->
 
@@ -95,11 +90,22 @@
 
 			</row>
 			<row style="border:none">
+			<label value="Responsable" visible="true"></label>
+			 <hbox width="100%">
+					<textbox width="95%"
+					value="@{cntrl.responsable.personaNatural converter='comun.converter.NameConverter'}"
+					readonly="true">						
+					</textbox>
+					<button image="/Recursos/Imagenes/consultar.ico"
+						id="btnResponsable" visible="true">
+					</button>
+				</hbox>
+			</row>
+			<row style="border:none">
 				<!-- Estos campos de codigo no son visibles porque es para el control 
 					de la base de datos -->
 				<label value="Codigo" style="font-weight: bold"
 					visible="false" />
-
 				<textbox value=" " visible="false" />
 
 			</row>
@@ -118,7 +124,7 @@
 				</columns>
 				<rows>
 					<row id="fila2" visible="true">
-						<window title="Lista de Tareas Agregadas"
+						<window title="Lista de Tareas"
 							id="winTareas" height="175px" width="100%">
 							<listbox id="lboxTareas" mold="paging"
 								checkmark="true" pageSize="5" model="@{cntrl.tareasActividades}"
@@ -127,9 +133,10 @@
 									<listheader label="Tarea"
 										width="20%" />
 									<listheader label="Descripción"
-										width="40%" />
+										width="50%" />
 									<listheader label="Personal"
-										width="40%" />
+										width="15%" />
+									<listheader width="15%" />	
 
 								</listhead>
 								<listitem self="@{each='t'}"
@@ -139,7 +146,10 @@
 									<listcell
 										label="@{t.getDatoBasico.Descripcion}" />
 									<listcell
-										label="@{t.getPersonalActividadPlanificada.getPersonal.getPersonaNatural, converter='comun.converter.NameConverter'}" />
+										label="@{t.getPersonalActividadPlanificada.getPersonal.getPersonaNatural.getPrimerNombre}" />
+									<listcell
+										label="@{t.getPersonalActividadPlanificada.getPersonal.getPersonaNatural.getPrimerApellido}" />
+										
 								</listitem>
 
 							</listbox>
@@ -161,7 +171,7 @@
 
 					</row>
 					<row height="50%">
-						<window title="Lista de Materiales Solicitados"
+						<window title="Lista de Materiales "
 							id="winMateriales" height="175px" width="100%">
 
 							<listbox width="100%" height="100%"
@@ -215,12 +225,6 @@
 				<div align="right">
 					<button id="btnGuardar" label="Guardar"
 						image="/Recursos/Imagenes/guardar.ico" />
-
-					<button id="modificar" label="Modificar"
-						image="/Recursos/Imagenes/editar.ico" />
-
-					<!-- 					<button id="imprimir" label="Imprimir" -->
-					<!-- 						image="/Recursos/Imagenes/imprimir.ico" /> -->
 
 					<button id="cancelar" label="Cancelar"
 						image="/Recursos/Imagenes/cancelar.ico" />

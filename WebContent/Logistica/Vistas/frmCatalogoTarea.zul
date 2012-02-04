@@ -9,7 +9,7 @@
 		<textbox ></textbox>
 		<listbox id="lboxTarea" mold="paging" pageSize="5"
 			model="@{cntrl.listaTarea}"
-			selectedItem="@{cntrl.tarea}" checkmark="true" >
+			selectedItem="@{cntrl.tarea}" checkmark="true" multiple="true" >
 			<listhead>
 				<listheader label="Nombre" sort="auto" />
 				<listheader label="Descripcion"/>

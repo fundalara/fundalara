@@ -1,5 +1,6 @@
 package dao.general;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Actividad;
@@ -20,6 +21,22 @@ public class DaoMaterialActividad extends GenericDao {
 		Criteria c = getSession().createCriteria(MaterialActividad.class);
 		List lista = c.add(Restrictions.eq("actividad", a)).list();
 		return lista;
+	}
+
+	public List<MaterialActividad> listarPorActividad(Actividad actividad) {
+		
+		List<MaterialActividad> a = this.listar(MaterialActividad.class);
+		List<MaterialActividad> b = new ArrayList<MaterialActividad>();
+		
+		for(int i = 0; i < a.size(); i++){
+			if(a.get(i).getActividad().getCodigoActividad() == actividad.getCodigoActividad()){
+				b.add(a.get(i));
+			}
+		}
+		
+		
+		
+		return b;
 	}
 
 }

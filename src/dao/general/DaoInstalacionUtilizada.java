@@ -24,9 +24,9 @@ public class DaoInstalacionUtilizada extends GenericDao {
 		Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(InstalacionUtilizada.class);
 		c.add(Restrictions.ne("fechaInicio", fechaInicio));
-		c.add(Restrictions.ne("fechaFin", fechaInicio));
-		c.add(Restrictions.ne("horaInicio", fechaInicio));
-		c.add(Restrictions.ne("horaFin", fechaInicio));
+		c.add(Restrictions.ne("fechaFin", fechaFin));
+		c.add(Restrictions.ne("horaInicio", horaInicio));
+		c.add(Restrictions.ne("horaFin", horaFin));
 		c.add(Restrictions.eq("estatus", "A"));
 		List<InstalacionUtilizada> lista = c.list();
 		return lista;

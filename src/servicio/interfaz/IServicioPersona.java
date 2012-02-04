@@ -21,4 +21,8 @@ public interface IServicioPersona {
 
 	public abstract List<Persona> listarPorTipos(String tipoPersona);
 
+	public abstract Persona buscarPorCodigo(String Cedula);
+	
+	public abstract List<Persona> listarTrabajadores();
+
 }

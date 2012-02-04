@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.Actividad;
 import modelo.PlanificacionActividad;
+import modelo.TareaActividad;
 
 public interface IServicioActividad {
 	
@@ -18,5 +19,9 @@ public interface IServicioActividad {
 	public Actividad Buscar(PlanificacionActividad a, Class<Actividad> class1);
 	
 	public abstract List<Actividad> listarActivos();
+
+	public abstract List<TareaActividad> listar(Actividad actividad);
+	
+	public abstract List<TareaActividad> listar();
 
 }

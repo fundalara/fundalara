@@ -25,4 +25,7 @@ public interface IServicioMaterialActividad {
 
 	public abstract List<MaterialActividad> listarPorDevolverMantenimiento(Actividad a);
 
+	public abstract List<MaterialActividad> ListarPorActividad(
+			Actividad actividad);
+
 }

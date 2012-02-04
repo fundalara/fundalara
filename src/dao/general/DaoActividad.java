@@ -1,9 +1,11 @@
 package dao.general;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Actividad;
 import modelo.PlanificacionActividad;
+import modelo.TareaActividad;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -46,4 +48,17 @@ public class DaoActividad extends GenericDao {
 		return h;
 	}
 
+	public List<TareaActividad> listar(Actividad actividad) {
+
+		List<TareaActividad> a = this.listar(TareaActividad.class);
+		List<TareaActividad> b = new ArrayList<TareaActividad>();
+
+		for (int i = 0; i < a.size(); i++) {
+			if (a.get(i).getActividad().getCodigoActividad() == actividad
+					.getCodigoActividad()) {
+				b.add(a.get(i));
+			}
+		}
+		return b;
+	}
 }

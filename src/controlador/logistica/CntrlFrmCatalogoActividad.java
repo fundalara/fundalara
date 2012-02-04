@@ -55,14 +55,23 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 
 			Component frmPrestamoDevolucion = (Component) frmCatActPla
 					.getVariable("frmPrestamoDevolucion", false);
+			Integer numero = (Integer) frmCatActPla
+					.getVariable("numero", false);
 
 			// se le asigna el objeto plantilla al formulario
 			frmPrestamoDevolucion.setVariable("actividad", actividad, false);
 
 			// se le envia una señal al formulario indicado que el formulario se
 			// cerro y que los datos se han enviado
-			Events.sendEvent(new Event("onCatalogoActividadCerrado",
-					frmPrestamoDevolucion));
+			if (numero == 1) {
+				Events.sendEvent(new Event("onCatalogoActividadCerradoP",
+						frmPrestamoDevolucion));
+				System.out.println(1);
+			} else if (numero == 2) {
+				Events.sendEvent(new Event("onCatalogoActividadCerradoD",
+						frmPrestamoDevolucion));
+				System.out.println(2);
+			}
 
 			// se cierra el catalogo
 			frmCatActPla.detach();

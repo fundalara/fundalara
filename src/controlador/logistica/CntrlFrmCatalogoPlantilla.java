@@ -3,6 +3,7 @@ package controlador.logistica;
 
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.PlanificacionActividad;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -25,29 +26,23 @@ public class CntrlFrmCatalogoPlantilla extends GenericForwardComposer {
 	
 	Component catalogoPlantilla;
     AnnotateDataBinder binder;
-	PlanificacionActividad plantilla;
 	CntrlFrmPlanificarMantenimiento cntrl; 
 	List <PlanificacionActividad> listaPlantilla;
-	BeanFactory beanFactory;
 	IServicioPlanificacionActividad servicioPlanificacionActividad;
-	
+	 PlanificacionActividad plantilla = new PlanificacionActividad();
 	// Componentes
 	Window frmCatPlantilla;
     Listbox lboxPlantilla;
-	
+	DatoBasico tipo = new DatoBasico();
 		public void doAfterCompose(Component comp)throws Exception{
 			super.doAfterCompose(comp);
 			comp.setVariable("cntrl",this, true);
 			
 			catalogoPlantilla=comp;
-			
-			beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");			
-			plantilla = new PlanificacionActividad();
-			servicioPlanificacionActividad = (IServicioPlanificacionActividad) beanFactory.getBean("servicioPlanificacionActividad");
 			listaPlantilla = servicioPlanificacionActividad.listarPlantilla();
-			
-			
 		}
+		
+	
 		
 		
 		public void onClick$btnGuardar() throws InterruptedException{

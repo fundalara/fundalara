@@ -1,5 +1,6 @@
 package controlador.logistica;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.Actividad;
@@ -165,7 +166,9 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	}
 
 	public void onClick$btnGuardarDevolucion() throws InterruptedException {
+		Date fechaDevolucion = new Date();
 		materialActividadD.setEstatus('E');
+		materialActividadD.setFechaDevolucion(fechaDevolucion);
 		materialActividadD.getMaterial().setCantidadDisponible(
 				materialActividadD.getMaterial().getCantidadDisponible()
 						+ materialActividadD.getCantidadDevuelta());
@@ -219,8 +222,6 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		materialActividad.setCodigoMaterialActividad(servicioMaterialActividad
 				.listar().size());
 
-		System.out.println(materialActividad);
-
 		formRequisicion.setVariable("material", materialActividad, false);
 
 		formRequisicion.addEventListener("onRequisicionCerrado",
@@ -243,9 +244,10 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		// asigna una referencia del formulario al catalogo.
 		catalogoPlanificarActividad.setVariable("frmPrestamoDevolucion",
 				frmPrestamoDevolucion, false);
+		catalogoPlanificarActividad.setVariable("numero", 1, false);
 
 		// Este metodo se llama cuando se envia la señal desde el catalogo
-		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerrado",
+		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerradoP",
 				new EventListener() {
 
 					public void onEvent(Event arg0) throws Exception {
@@ -260,9 +262,13 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	}
 
 	public void onClick$menuTodasP() {
-		solicitudes = servicioMaterialActividadPlanificada
-				.listarPorPrestar(actividad.getPlanificacionActividad());
-		binder.loadAll();
+		try {
+			solicitudes = servicioMaterialActividadPlanificada
+					.listarPorPrestar(actividad.getPlanificacionActividad());
+			binder.loadAll();
+		} catch (Exception e) {
+			binder.loadAll();
+		}
 	}
 
 	public void onClick$menuCP() {
@@ -305,16 +311,20 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		// asigna una referencia del formulario al catalogo.
 		catalogoPlanificarActividad.setVariable("frmPrestamoDevolucion",
 				frmPrestamoDevolucion, false);
+		catalogoPlanificarActividad.setVariable("numero", 2, false);
 
 		// Este metodo se llama cuando se envia la señal desde el catalogo
-		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerrado",
+		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerradoD",
 				new EventListener() {
 					public void onEvent(Event arg0) throws Exception {
 						actividadD = new Actividad();
 						actividadD = (Actividad) frmPrestamoDevolucion
 								.getVariable("actividad", false);
+
 						txtActividadDevolucion.setValue(actividadD
 								.getPlanificacionActividad().getDescripcion());
+						// alert(actividadD.getPlanificacionActividad()
+						// .getDescripcion());
 						onClick$menuTodasD();
 						binder.loadAll();
 						arg0.stopPropagation();

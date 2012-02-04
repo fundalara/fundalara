@@ -1,6 +1,6 @@
 <?page title="Reporte Estado de la Actividad" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Reporte Estado de la Actividad" border="normal" apply="controlador.logistica.CntrlReporteEstadoActividad"
+	<window title="Reporte de las Actividades por Estados" border="normal" apply="controlador.logistica.CntrlReporteEstadoActividad"
 		width="500px" maximizable="true" minimizable="true">
 		<panel width="100%" height="100%">
 			<panelchildren>
@@ -12,28 +12,23 @@
 					</columns>
 
 					<rows>
-						<row>
-
-							<label value="Actividad Complementaria"></label>
-							
-						</row>
-						
+							<row></row>					
 						<row>
 							<div>
-								 <label value="Desde"></label>
-								 <datebox id="dboxFechaInicio"/>
+								 <label value="Desde:"></label>
+								 <datebox id="dboxFechaInicio" format="dd/MM/yyyy"/>
 							</div>
 							
 								<div>
-								<label value="Hasta"></label>
-								<datebox id="dboxFechaFin"/>
+								<label value="Hasta:"></label>
+								<datebox id="dboxFechaFin" format="dd/MM/yyyy"/>
 							</div>
 								</row>
 						
 						
-						<row spans="2" align="right">
+						<row align="right">
 						
-						<iframe id="ifReport"></iframe>	
+						<iframe id="ifReport" visible="false"></iframe>	
 							<div align="right">
 								<button label="Imprimir" id="btnImprimir"
 								width="100px" height="30px"

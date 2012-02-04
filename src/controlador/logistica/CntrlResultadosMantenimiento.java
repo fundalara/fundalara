@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.Actividad;
+import modelo.ComisionActividad;
+import modelo.ComisionActividadPlanificada;
+import modelo.ComisionFamiliar;
 import modelo.DatoBasico;
 import modelo.EstadoActividad;
-import modelo.EstadoActividadId;
 import modelo.Instalacion;
 import modelo.Material;
 import modelo.MaterialActividad;
@@ -20,10 +22,10 @@ import modelo.Persona;
 import modelo.PersonaNatural;
 import modelo.Personal;
 import modelo.PersonalActividad;
-import modelo.PersonalActividadId;
 import modelo.PersonalActividadPlanificada;
-import modelo.PersonalActividadPlanificadaId;
 import modelo.PlanificacionActividad;
+import modelo.ResultadoActividad;
+import modelo.ResultadoActividadId;
 import modelo.TareaActividad;
 import modelo.TareaActividadPlanificada;
 
@@ -33,14 +35,25 @@ import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.IdSpace;
 import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.metainfo.ComponentDefinition;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.*;
+import org.zkoss.zul.api.Combobox;
+import org.zkoss.zul.api.Listbox;
+import org.zkoss.zul.api.Panel;
+import org.zkoss.zul.api.Progressmeter;
+import org.zkoss.zul.api.Window;
 
 import comun.TipoDatoBasico;
 
 import servicio.interfaz.IServicioActividad;
+import servicio.interfaz.IServicioComisionActividad;
+import servicio.interfaz.IServicioComisionActividadPlanificada;
+import servicio.interfaz.IServicioComisionFamiliar;
+import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioEstadoActividad;
 import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioMaterialActividad;
@@ -50,6 +63,7 @@ import servicio.interfaz.IServicioPersonal;
 import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioPersonalActividad;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
+import servicio.interfaz.IServicioResultadoActividad;
 import servicio.interfaz.IServicioTareaActividad;
 import servicio.interfaz.IServicioTareaActividadPlanificada;
 import servicio.interfaz.IServicoPersonaNatural;
@@ -58,85 +72,286 @@ public class CntrlResultadosMantenimiento extends GenericForwardComposer {
 
 	Actividad actividad = new Actividad();
 	PlanificacionActividad planificacionActividad = new PlanificacionActividad();
-	Instalacion instalacion = new Instalacion();
+	PersonalActividad personalA = new PersonalActividad();
 	TareaActividad tareaActividad = new TareaActividad();
 	TareaActividadPlanificada tareaActividadP = new TareaActividadPlanificada();
-	PersonalActividad PersonalA = new PersonalActividad();
-	PersonalActividadId PersonalAId = new PersonalActividadId();
-	PersonalActividadPlanificadaId PersonalAPId = new PersonalActividadPlanificadaId();
-	PersonalActividadPlanificada PersonalAP = new PersonalActividadPlanificada();
 	MaterialActividadPlanificada materialP = new MaterialActividadPlanificada();
-	MaterialActividad materialA = new MaterialActividad();
-	EstadoActividadId estadoActividadId = new EstadoActividadId();
-	EstadoActividad estadoActividad = new EstadoActividad();
-
-	List<TareaActividadPlanificada> tareasPlanificadas;
-	List<MaterialActividadPlanificada> materialesPlanificados;
+	DatoBasico estadoTarea = new DatoBasico();
+	DatoBasico estadoActividad = new DatoBasico();
+	ResultadoActividad resultadoActividad = new ResultadoActividad();
+	ResultadoActividadId resultadoActividadId = new ResultadoActividadId();
+	ResultadoActividad aux;
+	String Observacion;
+	EstadoActividad estadoActividadFinal = new EstadoActividad();
 
 	IServicioActividad servicioActividad;
 	IServicioPlanificacionActividad servicioPlanificacionActividad;
-	IServicioInstalacion servicioInstalacion;
 	IServicioPersonalActividad servicioPersonalActividad;
-	IServicioPersonalActividadPlanificada servicioPersonalActividadPlanificada;
 	IServicioTareaActividad servicioTareaActividad;
 	IServicioTareaActividadPlanificada servicioTareaActividadPlanificada;
-	
 	IServicioMaterialActividadPlanificada servicioMaterialActividadPlanificada;
-	IServicioMaterialActividad servicioMaterialActividad;
+	IServicioDatoBasico servicioDatoBasico;
+	IServicioResultadoActividad servicioResultadoActividad;
 	IServicioEstadoActividad servicioEstadoActividad;
-	
-	IServicioPersona servicioPersona;
-	IServicoPersonaNatural servicioPersonaNatural;
-	IServicioPersonal servicioPersonal;
 
-	Button btnPersonal, btnEjecutada, btnAgregarMaterial;
-	Intbox textCantidad;
+	List<TareaActividad> tareasPlanificadas;
+	List<MaterialActividadPlanificada> materialesPlanificados;
+	List<DatoBasico> listadoEstados;
+	List<ResultadoActividad> listadosEstados2 = new ArrayList<ResultadoActividad>();
+
+	Component frmResultadosMantenimiento;
+	AnnotateDataBinder binder;
+
+	Button btnAgregarPersonal, btnEjecutada, btnGuardar, btnSalir,
+			btnDescartarTarea;
+	Panel panel1, panel2;
+	Combobox cmbEstados;
+	Listbox lboxlistadocomision, lboxPersonalComision, lboxtareas;
+	Window frmCatPerComision;
 	Progressmeter barraProgreso;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, false);
 
+		this.frmResultadosMantenimiento = comp;
+
 		this.prueba();
-		tareasPlanificadas = servicioTareaActividadPlanificada
-				.listarTareas(actividad);
+		this.tareasPlanificadas = servicioActividad.listar(actividad);
 		materialesPlanificados = servicioMaterialActividadPlanificada
 				.listarMateriales(actividad.getPlanificacionActividad());
-		this.barraProgreso.setValue(this.ActualizarBarra());
+		this.cargarEstados();
+		cargarBarraProgreso();
+		
+		for(TareaActividad ta: tareasPlanificadas){
+			System.out.println("Tarea: "+ta.getDatoBasicoByCodigoTarea().getNombre());
+			
+			if(ta.getPersonalActividad() != null){
+				System.out.println("Responsable: "+ta.getPersonalActividad().getPersonal().getPersonaNatural().getPrimerNombre());
+			}else if(ta.getComisionFamiliar() != null){
+				System.out.println("Responsable: "+ta.getComisionFamiliar().getFamiliarJugador().getFamiliar().getPersonaNatural().getPrimerNombre());
+			}
+			
+			System.out.println("Estado: "+ta.getDatoBasicoByEstadoTarea().getNombre());
+		}
+	}
+
+	public void cargarEstados() {
+		listadoEstados = servicioDatoBasico.buscar(TipoDatoBasico.ESTADOS);
+	}
+	
+	public void cargarBarraProgreso() {
+		int  inactivos = 0;
+		for (int i = 0; i < this.tareasPlanificadas.size(); i++) {
+			if (this.tareasPlanificadas.get(i).getDatoBasicoByEstadoTarea()
+					.getCodigoDatoBasico() == 415
+					|| this.tareasPlanificadas.get(i)
+							.getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 416) {
+				inactivos++;
+			}
+		}
+		int todas = this.tareasPlanificadas.size();
+		int total;
+		if(todas != 0)
+			total = (inactivos * 100)/todas;
+		else
+			total = 0;
+		
+		this.barraProgreso.setValue(total);
+	}
+
+	public void onClick$btnAgregarTarea() {
+		Component catalogoPersonal = Executions.createComponents(
+				"/Logistica/Vistas/frmListarTareas.zul", null, null);
+
+		catalogoPersonal.setVariable("General",
+				this.frmResultadosMantenimiento, false);
+
+		this.frmResultadosMantenimiento.addEventListener("onCatalogoCerrado",
+				new EventListener() {
+
+					public void onEvent(Event arg0) throws Exception {
+						DatoBasico tare = new DatoBasico();
+						tare = (DatoBasico) frmResultadosMantenimiento
+								.getVariable("tareaSeleccionada", false);
+						tareaActividad = new TareaActividad();
+						tareaActividad
+								.setCodigoTareaActividad(servicioTareaActividad
+										.listar().size() + 1);
+						tareaActividad.setDatoBasicoByCodigoTarea(tare);
+						tareaActividad.setActividad(actividad);
+						tareasPlanificadas.add(tareaActividad);
+						tareaActividad.setEstatus('A');
+						estadoTarea = servicioDatoBasico.buscarPorCodigo(414);
+						tareaActividad.setDatoBasicoByEstadoTarea(estadoTarea);
+						servicioTareaActividad.agregar(tareaActividad);
+						cargarBarraProgreso();
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
+		this.binder.loadAll();
+	}
+
+	public void onClick$btnDescartarTarea() {
+		estadoTarea = servicioDatoBasico.buscarPorCodigo(416);
+		this.tareaActividad.setDatoBasicoByEstadoTarea(estadoTarea);
+		this.servicioTareaActividad.actualizar(tareaActividad);
+		this.binder.loadAll();
+		this.onSelect$lboxtareas();
+		cargarBarraProgreso();
 
 	}
 
-	public IServicioActividad getServicioActividad() {
-		return servicioActividad;
+	public void agregarPersonal(Persona p) {
+		PersonalActividad pa = new PersonalActividad();
+		pa = servicioPersonalActividad.Buscar(p);
+		if (pa == null) {
+			pa = new PersonalActividad();
+			pa.setActividad(actividad);
+			pa.setEstatus('A');
+			pa.setCodigoPersonalActividad(servicioPersonalActividad.listar()
+					.size() + 1);
+			pa.setPersonal(p.getPersonaNatural().getPersonal());
+			servicioPersonalActividad.agregar(pa);
+		} else {
+			pa = servicioPersonalActividad.Buscar(p);
+		}
+		personalA = pa;
 	}
 
-	public void setServicioActividad(IServicioActividad servicioActividad) {
-		this.servicioActividad = servicioActividad;
+	public void onClick$btnAgregarPersonal() {
+		Component catalogoPersonal = Executions.createComponents(
+				"/Logistica/Vistas/frmCatalogoPersonal2.zul", null, null);
+
+		catalogoPersonal.setVariable("frmPadre",
+				this.frmResultadosMantenimiento, false);
+		int num = 2;
+		catalogoPersonal.setVariable("numero", num, false);
+
+		this.frmResultadosMantenimiento.addEventListener(
+				"onCatalogoCerradoPersonal", new EventListener() {
+
+					public void onEvent(Event arg0) throws Exception {
+						Persona persona = new Persona();
+						persona = (Persona) frmResultadosMantenimiento
+								.getVariable("persona", false);
+						agregarPersonal(persona);
+						tareaActividad.setPersonalActividad(personalA);
+						tareaActividad.setComisionFamiliar(null);
+						servicioTareaActividad.actualizar(tareaActividad);
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
 	}
 
-	public IServicioPlanificacionActividad getServicioPlanificacionActividad() {
-		return servicioPlanificacionActividad;
+	public void onClick$btnAgregarMaterial() {
+
+		final Component catalogoMaterial = Executions.createComponents(
+				"/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
+
+		catalogoMaterial.setVariable("frmPlanificarActividad",
+				catalogoMaterial, false);
+
+		catalogoMaterial.addEventListener("onCatalogoMaterialCerrado",
+				new EventListener() {
+
+					@Override
+					public void onEvent(Event arg0) throws Exception {
+						Material mat = new Material();
+						mat = (Material) catalogoMaterial.getVariable(
+								"material", false);
+						int cant = (Integer) catalogoMaterial.getVariable(
+								"cantidad", false);
+
+						materialP.setCantidadRequerida(cant);
+						materialP
+								.setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada
+										.listar().size() + 1);
+						materialP.setEstatus('A');
+						materialP.setMaterial(mat);
+						materialP
+								.setPlanificacionActividad(planificacionActividad);
+
+						servicioMaterialActividadPlanificada.agregar(materialP);
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
+
 	}
 
-	public void setServicioPlanificacionActividad(
-			IServicioPlanificacionActividad servicioPlanificacionActividad) {
-		this.servicioPlanificacionActividad = servicioPlanificacionActividad;
+	public void onClick$btnMostrarMaterialesAprobados() {
+
+		Component ListadoMaterialesAprobados = Executions.createComponents(
+				"/Logistica/Vistas/frmListadoMaterialesAprobados.zul", null,
+				null);
+		ListadoMaterialesAprobados.setVariable("General", actividad, false);
+
 	}
 
-	public IServicioInstalacion getServicioInstalacion() {
-		return servicioInstalacion;
+	public void onClick$btnAgregarEstadoActividad() {
+
+		if (this.cmbEstados.getSelectedIndex() != -1) {
+			resultadoActividad = new ResultadoActividad();
+			resultadoActividadId = new ResultadoActividadId();
+			this.resultadoActividadId.setCodigoActividad(actividad
+					.getCodigoActividad());
+			this.resultadoActividadId.setCodigoResultado(estadoActividad
+					.getCodigoDatoBasico());
+			this.resultadoActividad.setEstatus('A');
+			this.resultadoActividad.setId(resultadoActividadId);
+			this.resultadoActividad.setDatoBasico(estadoActividad);
+			this.resultadoActividad.setObservaciones(Observacion);
+			this.resultadoActividad.setActividad(actividad);
+			servicioResultadoActividad.agregar(resultadoActividad);
+			if (!buscarEnLista()) {
+				this.listadosEstados2.add(resultadoActividad);
+			}
+			this.binder.loadAll();
+		}
 	}
 
-	public void setServicioInstalacion(IServicioInstalacion servicioInstalacion) {
-		this.servicioInstalacion = servicioInstalacion;
+	public boolean buscarEnLista() {
+		boolean respuesta = false;
+		for (int i = 0; i < listadosEstados2.size(); i++) {
+			if (listadosEstados2.get(i).getId().getCodigoResultado() == resultadoActividadId
+					.getCodigoResultado()) {
+				respuesta = true;
+			}
+		}
+		return respuesta;
+	}
+
+	public void onSelect$lboxtareas() {
+
+		if (this.tareaActividad.getDatoBasicoByEstadoTarea()
+				.getCodigoDatoBasico() == 414) {
+			this.btnAgregarPersonal.setDisabled(false);
+			this.btnEjecutada.setDisabled(false);
+			this.btnDescartarTarea.setDisabled(false);
+		} else {
+			this.btnAgregarPersonal.setDisabled(true);
+			this.btnEjecutada.setDisabled(true);
+			this.btnDescartarTarea.setDisabled(true);
+		}
+	}
+
+	public void onClick$btnEjecutada() {
+		estadoTarea = servicioDatoBasico.buscarPorCodigo(415);
+		this.tareaActividad.setDatoBasicoByEstadoTarea(estadoTarea);
+		this.servicioTareaActividad.actualizar(tareaActividad);
+		cargarBarraProgreso();
+		this.binder.loadAll();
+		this.onSelect$lboxtareas();
 	}
 
 	public void prueba() {
-		this.planificacionActividad.setCodigoPlanificacionActividad(1);
+		this.planificacionActividad.setCodigoPlanificacionActividad(6);
 		this.actividad.setPlanificacionActividad(planificacionActividad);
 		this.actividad = this.servicioActividad.Buscar(planificacionActividad,
 				Actividad.class);
-		System.out.println(actividad.getFechaInicio());
 	}
 
 	public Actividad getActividad() {
@@ -145,14 +360,6 @@ public class CntrlResultadosMantenimiento extends GenericForwardComposer {
 
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
-	}
-
-	public Progressmeter getBarraProgreso() {
-		return barraProgreso;
-	}
-
-	public void setBarraProgreso(Progressmeter barraProgreso) {
-		this.barraProgreso = barraProgreso;
 	}
 
 	public PlanificacionActividad getPlanificacionActividad() {
@@ -164,12 +371,13 @@ public class CntrlResultadosMantenimiento extends GenericForwardComposer {
 		this.planificacionActividad = planificacionActividad;
 	}
 
-	public Instalacion getInstalacion() {
-		return instalacion;
+	public Component getfrmResultadosMantenimiento() {
+		return frmResultadosMantenimiento;
 	}
 
-	public void setInstalacion(Instalacion instalacion) {
-		this.instalacion = instalacion;
+	public void setfrmResultadosMantenimiento(
+			Component frmResultadosMantenimiento) {
+		this.frmResultadosMantenimiento = frmResultadosMantenimiento;
 	}
 
 	public TareaActividad getTareaActividad() {
@@ -188,30 +396,13 @@ public class CntrlResultadosMantenimiento extends GenericForwardComposer {
 		this.tareaActividadP = tareaActividadP;
 	}
 
-	public PersonalActividad getPersonalA() {
-		return PersonalA;
+	public List<TareaActividad> getTareasPlanificadas() {
+		return tareasPlanificadas;
 	}
 
-	public void setPersonalA(PersonalActividad personalA) {
-		PersonalA = personalA;
+	public void setTareasPlanificadas(List<TareaActividad> tareasPlanificadas) {
+		this.tareasPlanificadas = tareasPlanificadas;
 	}
-
-	public PersonalActividadId getPersonalAId() {
-		return PersonalAId;
-	}
-
-	public void setPersonalAId(PersonalActividadId personalAId) {
-		PersonalAId = personalAId;
-	}
-
-	public PersonalActividadPlanificadaId getPersonalAPId() {
-		return PersonalAPId;
-	}
-
-	public void setPersonalAPId(PersonalActividadPlanificadaId personalAPId) {
-		PersonalAPId = personalAPId;
-	}
-
 
 	public MaterialActividadPlanificada getMaterialP() {
 		return materialP;
@@ -219,14 +410,6 @@ public class CntrlResultadosMantenimiento extends GenericForwardComposer {
 
 	public void setMaterialP(MaterialActividadPlanificada materialP) {
 		this.materialP = materialP;
-	}
-
-	public MaterialActividad getMaterialA() {
-		return materialA;
-	}
-
-	public void setMaterialA(MaterialActividad materialA) {
-		this.materialA = materialA;
 	}
 
 	public List<MaterialActividadPlanificada> getMaterialesPlanificados() {
@@ -238,187 +421,138 @@ public class CntrlResultadosMantenimiento extends GenericForwardComposer {
 		this.materialesPlanificados = materialesPlanificados;
 	}
 
-	public PersonalActividadPlanificada getPersonalAP() {
-		return PersonalAP;
+	// public List<TareaActividadPlanificada> getListadoTAP() {
+	// return listadoTAP;
+	// }
+	//
+	// public void setListadoTAP(List<TareaActividadPlanificada> listadoTAP) {
+	// this.listadoTAP = listadoTAP;
+	// }
+
+	public Window getFrmCatPerComision() {
+		return frmCatPerComision;
 	}
 
-	public void setPersonalAP(PersonalActividadPlanificada personalAP) {
-		PersonalAP = personalAP;
+	public void setFrmCatPerComision(Window frmCatPerComision) {
+		this.frmCatPerComision = frmCatPerComision;
 	}
 
-	public List<TareaActividadPlanificada> getTareasPlanificadas() {
-		return tareasPlanificadas;
+	public PersonalActividad getPersonalA() {
+		return personalA;
 	}
 
-	public void setTareasPlanificadas(
-			List<TareaActividadPlanificada> tareasPlanificadas) {
-		this.tareasPlanificadas = tareasPlanificadas;
+	public void setPersonalA(PersonalActividad personalA) {
+		this.personalA = personalA;
 	}
 
-
-	public IServicioPersonal getServicioPersonal() {
-		return servicioPersonal;
+	public void onClick$btnSalirPC() {
+		this.frmCatPerComision.detach();
 	}
 
-	public void setServicioPersonal(IServicioPersonal servicioPersonal) {
-		this.servicioPersonal = servicioPersonal;
+	public DatoBasico getEstadoTarea() {
+		return estadoTarea;
 	}
 
-	public Intbox getTextCantidad() {
-		return textCantidad;
+	public void setEstadoTarea(DatoBasico estadoTarea) {
+		this.estadoTarea = estadoTarea;
 	}
 
-	public void setTextCantidad(Intbox textCantidad) {
-		this.textCantidad = textCantidad;
+	public DatoBasico getEstadoActividad() {
+		return estadoActividad;
 	}
 
-	public void onSelect$lboxtareas() {
-		btnPersonal.setDisabled(false);
-		if (this.tareaActividadP.getEstatus() == 'E') {
-			btnEjecutada.setDisabled(true);
-		} else {
-			btnEjecutada.setDisabled(false);
-		}
+	public void setEstadoActividad(DatoBasico estadoActividad) {
+		this.estadoActividad = estadoActividad;
 	}
 
-	public void onSelect$lboxMateriales() {
-		this.btnAgregarMaterial.setDisabled(false);
-		this.textCantidad.setDisabled(false);
+	public List<DatoBasico> getListadoEstados() {
+		return listadoEstados;
 	}
 
-	public void onClick$btnAgregarMaterial() {
-		if (!this.textCantidad.getText().isEmpty()) {
-			int aux = this.materialP.getCantidadRequerida();
-			aux = aux + Integer.valueOf(this.textCantidad.getText());
-			this.materialP.setCantidadRequerida(aux);
-			this.servicioMaterialActividadPlanificada.actualizar(materialP);
-			this.textCantidad.setText("");
-			this.btnAgregarMaterial.setDisabled(true);
-			this.textCantidad.setDisabled(true);
-		}
+	public void setListadoEstados(List<DatoBasico> listadoEstados) {
+		this.listadoEstados = listadoEstados;
 	}
 
-	public void onClick$btnPersonal() {
-
+	public ResultadoActividad getResultadoActividad() {
+		return resultadoActividad;
 	}
 
-	public int ActualizarBarra() {
-		int aux = 0;
-		int total = this.tareasPlanificadas.size();
-		for (int i = 0; i < this.tareasPlanificadas.size(); i++) {
-			if (this.tareasPlanificadas.get(i).getEstatus() == 'E') {
-				aux++;
-			}
-		}
-
-		int porcentaje = (aux * 100) / total;
-		return porcentaje;
+	public void setResultadoActividad(ResultadoActividad resultadoActividad) {
+		this.resultadoActividad = resultadoActividad;
 	}
 
-	public boolean verificarCulminacionActividad() {
-		boolean terminado = false;
-		int aux = 0;
-		int total = this.tareasPlanificadas.size();
-		for (int i = 0; i < this.tareasPlanificadas.size(); i++) {
-			if (this.tareasPlanificadas.get(i).getEstatus() == 'E') {
-				aux++;
-			}
-		}
-		if (aux == total) {
-			terminado = true;
-		} else {
-			terminado = false;
-		}
-
-		return terminado;
+	public ResultadoActividadId getResultadoActividadId() {
+		return resultadoActividadId;
 	}
 
-	public void onCheck$checkAgregarTareas() {
-		Component catalogoTareas = 	Executions.createComponents(
-				"/Logistica/Vistas/frmTareasMantenimiento.zul",
-				null, null);
+	public void setResultadoActividadId(
+			ResultadoActividadId resultadoActividadId) {
+		this.resultadoActividadId = resultadoActividadId;
 	}
 
-	public void onClick$btnEjecutada() {
-		if (this.tareaActividadP.getEstatus() == 'A') {
-			this.tareaActividadP.setEstatus('A');
-			this.btnEjecutada.setDisabled(true);
-
-			Persona persona = new Persona();		
-			persona = servicioPersona.buscarPorCodigo(tareaActividadP.getPersonalActividadPlanificada().getId().getCedulaRif());
-			PersonaNatural personaN = new PersonaNatural();
-			personaN = this.servicioPersonaNatural.buscarPorCodigo(persona);
-			personaN.setPersona(persona);
-			Personal personal = new Personal();
-			personal = this.servicioPersonal.buscarPorCodigo(personaN);
-			personal.setPersonaNatural(personaN);
-					
-			PersonalAP = this.tareaActividadP.getPersonalActividadPlanificada();
-			
-			this.PersonalAId.setCedulaRif(PersonalAP.getId().getCedulaRif());
-			this.PersonalAId.setCodigoActividad(actividad.getCodigoActividad());
-			this.PersonalA.setId(PersonalAId);
-			this.PersonalA.setActividad(actividad);
-			this.PersonalA.setEstatus('A');		
-
-			this.servicioPersonalActividad.agregar(PersonalA);
-		
-			this.tareaActividad.setActividad(PersonalA.getActividad());
-			this.tareaActividad.setCodigoTareaActividad(tareaActividadP.getCodigoPersonalActividadPlanificada());
-			this.tareaActividad.setDatoBasico(tareaActividadP.getDatoBasico());
-			this.tareaActividad.setPersonalActividad(PersonalA);
-			this.tareaActividad.setEstatus('A');
-
-			//this.servicioTareaActividad.agregar(tareaActividad);
-			
-			this.servicioTareaActividadPlanificada.actualizar(tareaActividadP);
-			this.barraProgreso.setValue(this.ActualizarBarra());
-			
-			personal = new Personal();
-			PersonalA = new PersonalActividad();
-			PersonalAId = new PersonalActividadId();
-			tareaActividad = new TareaActividad();
-
-		} else {
-			btnEjecutada.setDisabled(false);
-		}
+	public List<ResultadoActividad> getListadosEstados2() {
+		return listadosEstados2;
 	}
 
-	public void onClick$guardar() {
-		if (this.verificarCulminacionActividad()) {
+	public void setListadosEstados2(List<ResultadoActividad> listadosEstados2) {
+		this.listadosEstados2 = listadosEstados2;
+	}
 
-			this.estadoActividad = this.servicioEstadoActividad
-					.buscar(actividad);
+	public String getObservacion() {
+		return Observacion;
+	}
 
-			if ((estadoActividad != null)
-					&& (estadoActividad.getId().getCodigoEstado() != 254)) {
+	public void setObservacion(String observacion) {
+		Observacion = observacion;
+	}
 
-				this.estadoActividad.setEstatus('E');
-				this.servicioEstadoActividad.actualizar(estadoActividad);
+	public void onClick$btnGuardar() {
+		this.panel1.setOpen(false);
+		this.panel1.setCollapsible(false);
+		this.btnGuardar.setVisible(false);
+		this.btnSalir.setVisible(false);
+		this.panel2.setOpen(true);
+	}
 
-				this.estadoActividad = new EstadoActividad();
+	public void onClick$btnGuardarFinal() {
 
-				this.estadoActividadId.setCodigoActividad(actividad
-						.getCodigoActividad());
-				this.estadoActividadId.setCodigoEstado(254);
+		estadoActividadFinal = new EstadoActividad();
+		this.estadoActividadFinal = servicioEstadoActividad.buscar(actividad);
+		System.out.println(estadoActividadFinal);
+		this.estadoActividadFinal.setEstatus('E');
+		servicioEstadoActividad.actualizar(estadoActividadFinal);
 
-				this.estadoActividad = new EstadoActividad();
-				this.estadoActividad.setActividad(actividad);
-				this.estadoActividad.setId(estadoActividadId);
-				this.estadoActividad.setEstatus('A');
-				this.servicioEstadoActividad.agregar(estadoActividad);
+		DatoBasico superEstadoActividadFinal = new DatoBasico();
+		superEstadoActividadFinal.setCodigoDatoBasico(254);
+		estadoActividadFinal = new EstadoActividad();
+		estadoActividadFinal.setActividad(actividad);
+		estadoActividadFinal.setDatoBasico(superEstadoActividadFinal);
+		estadoActividadFinal.setEstatus('A');
+		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad
+				.listar().size() + 1);
+		servicioEstadoActividad.agregar(estadoActividadFinal);
+		this.frmResultadosMantenimiento.detach();
+		alert("Actividad Terminada");
+	}
 
-				this.estadoActividad = new EstadoActividad();
-				this.estadoActividadId = new EstadoActividadId();
+	public void onClick$btnSuspender() {
+		estadoActividadFinal = new EstadoActividad();
+		this.estadoActividadFinal = servicioEstadoActividad.buscar(actividad);
+		System.out.println(estadoActividadFinal);
+		this.estadoActividadFinal.setEstatus('E');
+		servicioEstadoActividad.actualizar(estadoActividadFinal);
 
-				alert("Esta Actividad ha sido culminada");
-			} else if (estadoActividad.getId().getCodigoEstado() == 254) {
-				alert("Esta Actividad ya fue Terminada");
-			}
-
-		} else {
-			alert("Aun faltan tareas por terminar para culminar la Actividad");
-		}
+		DatoBasico superEstadoActividadFinal = new DatoBasico();
+		superEstadoActividadFinal.setCodigoDatoBasico(253);
+		estadoActividadFinal = new EstadoActividad();
+		estadoActividadFinal.setActividad(actividad);
+		estadoActividadFinal.setDatoBasico(superEstadoActividadFinal);
+		estadoActividadFinal.setEstatus('A');
+		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad
+				.listar().size() + 1);
+		servicioEstadoActividad.agregar(estadoActividadFinal);
+		this.frmResultadosMantenimiento.detach();
+		alert("Actividad Suspendida");
 	}
 
 }

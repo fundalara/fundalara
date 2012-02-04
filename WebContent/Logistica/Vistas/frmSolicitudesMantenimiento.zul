@@ -6,7 +6,7 @@
 	<window title="Solicitud de Mantenimientos" border="normal"
 		width="100%"
 		apply="controlador.logistica.CntrlSolicitudesMantenimiento"
-		mode="modal" closable="true">
+		mode="modal" closable="true" id="frmSolMantenimiento">
 		<menubar>
 			<menuitem label="Filtrar por:" style="font-weight:bold"
 				disabled="true" />

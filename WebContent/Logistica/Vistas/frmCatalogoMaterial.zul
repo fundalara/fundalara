@@ -9,7 +9,7 @@
 
 		<rows>
 			<row style="border:none">
-				<label value="Clase"></label>
+				<label value="Material"></label>
 				<combobox id="cmbClase"
 					selectedItem="@{cntrl.claseMaterial}"
 					model="@{cntrl.clasificacionMaterial}">

@@ -1,10 +1,13 @@
 package controlador.logistica;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.ComisionFamiliar;
 import modelo.DatoBasico;
+import modelo.EstadoActividad;
 import modelo.Instalacion;
 import modelo.InstalacionUtilizada;
 import modelo.Material;
@@ -12,6 +15,7 @@ import modelo.MaterialActividadPlanificada;
 import modelo.Persona;
 import modelo.PersonaNatural;
 import modelo.Personal;
+import modelo.PersonalActividad;
 //import modelo.PersonalActividadId;
 import modelo.PersonalActividadPlanificada;
 //import modelo.PersonalActividadPlanificadaId;
@@ -38,16 +42,21 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
+import controlador.logistica.CntrlPlanificarActividad.ClaseAux;
+
 import dao.generico.SessionManager;
 
 import servicio.implementacion.ServicioPlanificacionActividad;
 import servicio.implementacion.ServicioTareaActividadPlanificada;
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioDatoBasico;
+import servicio.interfaz.IServicioEstadoActividad;
 import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioInstalacionUtilizada;
 import servicio.interfaz.IServicioMaterial;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
+import servicio.interfaz.IServicioPersonal;
+import servicio.interfaz.IServicioPersonalActividad;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
 import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioTareaActividad;
@@ -62,6 +71,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	int i = 0;
 
 	// Variables
+	
 	int codigoPlantilla;
 	DatoBasico tipoPersonal;
 	DatoBasico tipoMantenimiento = new DatoBasico();
@@ -71,6 +81,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	TareaActividadPlanificada tareaActividad;
 	PlanificacionActividad actividadPlanificada;
 	PlanificacionActividad plantilla;
+	Persona responsable = new Persona();
 	Persona persona;
 	Personal personal;
 	PersonaNatural personaNatural;
@@ -88,6 +99,10 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	IServicioInstalacionUtilizada servicioInstalacionUtilizada;
 	IServicioInstalacion servicioInstalacion;
 	IServicioActividad servicioActividad;
+	IServicioPersonal servicioPersonal;
+	IServicioPersonalActividad servicioPersonalActividad;
+	IServicioEstadoActividad servicioEstadoActividad;
+	IServicioTareaActividad servicioTareaActividad;
 
 	List<DatoBasico> tiposMantenimientos;
 	List<DatoBasico> descripciones;
@@ -127,37 +142,19 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		comp.setVariable("cntrl", this, true);
 
 		frmPlanificarMantenimiento = comp;
-
 		lboxTareas = (Listbox) winTareas.getFellow("lboxTareas");
 		lboxMateriales = (Listbox) winMateriales.getFellow("lboxMateriales");
-
-		personaNatural = new PersonaNatural();
-		personal = new Personal();
-		personaActividadPlanificada = new PersonalActividadPlanificada();
-
-		beanFactory = new ClassPathXmlApplicationContext(
-				"ApplicationContext.xml");
-		servicioDatoBasico = (IServicioDatoBasico) beanFactory
-				.getBean("servicioDatoBasico");
-		servicioInstalacion = (IServicioInstalacion) beanFactory
-				.getBean("servicioInstalacion");
-
+		
 		tiposMantenimientos = servicioDatoBasico.listarTipoMantenimiento();
-	
 		tiposInstalaciones = servicioDatoBasico.listarTipoInstalacion();
-		cmbClase.setDisabled(true);
-		cmbInstalacion.setDisabled(true);
 		cmbTipo.focus();
-		System.out.println("hola");
-		System.out.println(tiposInstalaciones.size());
 		panelS.setCollapsible(false);
 
 	}
 
 	// Metodos de los componentes
 	public void onSelect$cmbTipo() {
-		cmbClase.setDisabled(false);
-		cmbClase.open();
+		//cmbClase.open();
 		clasificacionMantenimientos = servicioDatoBasico
 				.buscarDatosPorRelacion(tipoMantenimiento);
 	}
@@ -168,7 +165,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void onSelect$cmbTipoInstalacion() {
 		cmbInstalacion.setDisabled(false);
-		cmbInstalacion.open();
+		//cmbInstalacion.open();
 		listaInstalacionUtilizada = servicioInstalacionUtilizada
 				.listarInstalacionDisponible(tipoInstalacion,
 						fechaInicio.getValue(), fechaFin.getValue(),
@@ -191,14 +188,11 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 					public void onEvent(Event arg0) throws Exception {
 						plantilla = new PlanificacionActividad();
-						plantilla = (PlanificacionActividad) frmPlanificarMantenimiento
-								.getVariable("plantilla", false);
-						tareasActividades = servicioTareaActividadPlanificada
-								.listarTareas(plantilla);
-
-						materialesActividades = servicioMaterialActividadPlanificada
-								.listarMateriales(plantilla);
+						plantilla = (PlanificacionActividad) frmPlanificarMantenimiento.getVariable("plantilla", false);
+						tareasActividades = servicioTareaActividadPlanificada.listarTareas(plantilla);
+						materialesActividades = servicioMaterialActividadPlanificada.listarMateriales(plantilla);
 						panelS.setOpen(true);
+						txtCodPlantilla.setReadonly(true);
 						cmbTipoInstalacion.focus();
 						binder.loadAll();
 
@@ -206,6 +200,26 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 				});
 
+	}
+	public void onClick$btnResponsable() {
+		final Component catalogoPersonal = Executions.createComponents(
+				"/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
+		catalogoPersonal.setVariable("frmPadre", frmPlanificarMantenimiento, false);
+		int numero = 1;
+		catalogoPersonal.setVariable("numero", numero, false);
+
+		frmPlanificarMantenimiento.addEventListener("onCatalogoCerradoResponsable",
+				new EventListener() {
+					public void onEvent(Event arg0) throws Exception {
+						Persona persona = new Persona();
+						persona = (Persona) frmPlanificarMantenimiento.getVariable(
+								"persona", false);
+                        responsable = new Persona();
+						responsable = persona;
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
 	}
 
 	public void onClick$btnPeriodicidad() {
@@ -219,27 +233,21 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 			Component catalogoPersonal = Executions.createComponents(
 					"/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
-
-			catalogoPersonal.setVariable("frmPlanificarMantenimiento",
-					frmPlanificarMantenimiento, false);
+           
+			int numero= 2;
+			catalogoPersonal.setVariable("numero", numero, false);
+			catalogoPersonal.setVariable("frmPadre",frmPlanificarMantenimiento, false);
 
 			frmPlanificarMantenimiento.addEventListener(
-					"onCatalogoPersonalCerrado", new EventListener() {
+					"onCatalogoCerradoPersonal", new EventListener() {
 
 						public void onEvent(Event arg0) throws Exception {
-							//tareaActividad = new TareaActividadPlanificada();
-							persona = new Persona();
-							personaNatural = new PersonaNatural();
+						    persona = new Persona();
 							personal = new Personal();
-							personaActividadPlanificada = new PersonalActividadPlanificada();
-
-							persona = (Persona) frmPlanificarMantenimiento
-									.getVariable("persona", false);
-							personaNatural = persona.getPersonaNatural();
-							
-							personal.setPersonaNatural(personaNatural);
-							personaActividadPlanificada.setPersonal(personal);
-							personaActividadPlanificada.getPersonal().setCedulaRif(personaNatural.getCedulaRif());
+							System.out.println("hola estoy aqui en onCatalogoCarreado");
+						    persona = (Persona) frmPlanificarMantenimiento.getVariable("persona", false);
+						    personaActividadPlanificada = new PersonalActividadPlanificada();
+							personaActividadPlanificada = servicioPersonalActividadPlanificada.Buscar(persona);
 							tareaActividad.setPersonalActividadPlanificada(personaActividadPlanificada);
 							binder.loadAll();
 							arg0.stopPropagation();
@@ -258,31 +266,32 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		Component catalogoTarea = Executions.createComponents(
 				"/Logistica/Vistas/frmCatalogoTarea.zul", null, null);
 
-		catalogoTarea.setVariable("frmPlanificarMantenimiento",
-				frmPlanificarMantenimiento, false);
-
+		catalogoTarea.setVariable("frmPadre", frmPlanificarMantenimiento, false);
+		List<DatoBasico> aux = new ArrayList<DatoBasico>();
+		for (TareaActividadPlanificada datoBasico : tareasActividades) {
+			aux.add(datoBasico.getDatoBasico());
+		}
+		
+		catalogoTarea.setVariable("tarea",aux , false);
 		frmPlanificarMantenimiento.addEventListener("onCatalogoTareaCerrado",
 				new EventListener() {
 
 					public void onEvent(Event arg0) throws Exception {
-
-						TareaActividadPlanificada aux = new TareaActividadPlanificada();
-						tarea = new DatoBasico();
-						tarea = (DatoBasico) frmPlanificarMantenimiento
+						List<DatoBasico> tareas = new ArrayList<DatoBasico>();
+						tareas = (List<DatoBasico>) frmPlanificarMantenimiento
 								.getVariable("tarea", false);
+						for (DatoBasico e : tareas) {
+							TareaActividadPlanificada aux = new TareaActividadPlanificada();
+							aux.setDatoBasico(e);
+							tareasActividades.add(aux);
+						}
 
-						aux.setDatoBasico(tarea);
-						aux.setEstatus('A');
-						
-						aux.setPersonalActividadPlanificada(personaActividadPlanificada);
-						aux.setPlanificacionActividad(plantilla);
-						tareasActividades.add(aux);
-						//alert(personaActividadPlanificada.getPersonal().getPersonaNatural().getPrimerNombre());
-						//alert(String.valueOf(tareasActividades.get(2).getPersonalActividadPlanificada().getPersonal().getPersonaNatural().getPrimerNombre()));
 						binder.loadAll();
+
 						arg0.stopPropagation();
 					}
 				});
+
 		
 	}
 
@@ -351,60 +360,91 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void onClick$btnGuardar() throws InterruptedException {
 
-			
-	
-
+		Actividad actividad = new Actividad();
+		
 		actividadPlanificada = new PlanificacionActividad();
-		actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.getDaoPlanificacionActividad().listar(PlanificacionActividad.class).size());
+		actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.listar().size()+1);
 		actividadPlanificada.setDatoBasico(claseMantenimiento);
 		actividadPlanificada.setInstalacionUtilizada(instalacionUtilizada);
 		actividadPlanificada.setDescripcion(plantilla.getDescripcion());
 		actividadPlanificada.setEstatus('A');
+		actividadPlanificada.setPersonal(null);
 		actividadPlanificada.setActividadPeriodico(false);
 		actividadPlanificada.setActividadPlantilla(false);
-
 		servicioPlanificacionActividad.agregar(actividadPlanificada);
+		
+		
+		actividad.setCodigoActividad(servicioActividad.listar().size()+1);
+		actividad.setEstatus('A');
+		actividad.setFechaCulminacion(fechaFin.getValue());
+		actividad.setFechaInicio(fechaInicio.getValue());
+		actividad.setHoraFin(horaFin.getValue());
+		actividad.setHoraInicio(horaInicio.getValue());
+		actividad.setPersonal(null);
+		actividad.setInstalacionUtilizada(instalacionUtilizada);
+		actividad.setPlanificacionActividad(actividadPlanificada);
+		servicioActividad.agregar(actividad);
+		
+		EstadoActividad estadoActividad = new EstadoActividad();
+	    estadoActividad.setCodigoEstadoActividad(servicioEstadoActividad.listar().size()+1);
+		estadoActividad.setDatoBasico(servicioDatoBasico.buscarPorCodigo(251));
+		estadoActividad.setActividad(actividad);
+		estadoActividad.setEstatus('A');
+		servicioEstadoActividad.agregar(estadoActividad);
 	
-		
-        
-		
-		// hasta aqui guarda la planificacion de actividad
-//
 	
 		 PersonalActividadPlanificada personalA;
-//		 PersonalActividadPlanificadaId personalID;
+
 		 for (int i = 0; i < tareasActividades.size(); i++) {
+			 
 			 personalA = new PersonalActividadPlanificada();
-//			 alert(String.valueOf(i));
-//			 alert(tareasActividades.get(i).getPersonalActividadPlanificada().getPersonal().getCedulaRif());
-			 personalA.setPersonal(tareasActividades.get(i).getPersonalActividadPlanificada().getPersonal());
-	         personalA.setPlanificacionActividad(actividadPlanificada);
-	         personalA.setEstatus('A');
-	         // los ids deben setearse manualmente
+			PersonalActividad personalAct = new PersonalActividad(); 		
+			
+				Personal p = new Personal();
+				personalA.setCodigoPersonalActividadPlan(servicioPersonalActividadPlanificada.listar().size() + 1);
+				personalA.setPlanificacionActividad(actividadPlanificada);
+				personalA.setEstatus('A');
+				p = servicioPersonal.buscarPorCodigo(tareasActividades.get(i).getPersonalActividadPlanificada().getPersonal());
+				personalA.setPersonal(p);
+				servicioPersonalActividadPlanificada.agregar(personalA);
+
+				personalAct.setCodigoPersonalActividad(servicioPersonalActividad.listar().size() + 1);
+
+				personalAct.setActividad(actividad);
+				personalAct.setPersonal(p);
+				personalAct.setEstatus('A');
+ 				servicioPersonalActividad.agregar(personalAct);
+ 				
+			System.out.println("En el ciclo---------------------------------------------------------------------");
+			TareaActividad ta = new TareaActividad();
+			
+			TareaActividadPlanificada tap = new TareaActividadPlanificada();
+			tap.setCodigoTareaActividadPlanificada(servicioTareaActividadPlanificada.listar().size() + 1);
+			tap.setDatoBasico(tareasActividades.get(i).getDatoBasico());
+			tap.setPersonalActividadPlanificada(personalA);
+			tap.setComisionFamiliar(null);
+			tap.setPlanificacionActividad(actividadPlanificada);
+			tap.setEstatus('A');
+			servicioTareaActividadPlanificada.agregar(tap);
+			System.out.println("en el ciclo2----------------------------------------------------------------------");
+			
+			ta.setActividad(actividad);
+			ta.setCodigoTareaActividad(servicioTareaActividad.listar().size() + 1);
+			ta.setEstatus('A');
+			ta.setDatoBasicoByEstadoTarea(servicioDatoBasico.buscarPorCodigo(414));
+			ta.setPersonalActividad(personalAct);
+			ta.setComisionFamiliar(null);
+			ta.setDatoBasicoByCodigoTarea(tareasActividades.get(i).getDatoBasico());
+			servicioTareaActividad.agregar(ta);
 	         
-//	         personalID = new PersonalActividadPlanificadaId();
-//	         personalID.setCedulaRif(personalA.getPersonal().getCedulaRif());
-//	         personalID.setCodigoPlanificacionActividad(actividadPlanificada.getCodigoPlanificacionActividad());
-//	         personalA.setId(personalID);
-	         servicioPersonalActividadPlanificada.agregar(personalA);
+	    
 	         
-//	         
-//	         // guardar solo codigo
-//	         TareaActividadPlanificada tap = new TareaActividadPlanificada();
-//	         
-//	         int codigo = servicioTareaActividadPlanificada.getDaoTareaActividadPlanificada().listar(TareaActividadPlanificada.class).size()+1;
-//             servicioTareaActividadPlanificada.getDaoTareaActividadPlanificada().insertar(codigo);
-//             tap.setCodigoPersonalActividadPlanificada(codigo);
-//	         tap.setDatoBasico(tareasActividades.get(i).getDatoBasico());
-//	         tap.setPersonalActividadPlanificada(tareasActividades.get(i).getPersonalActividadPlanificada());
-//	         tap.setPlanificacionActividad(actividadPlanificada);
-//	         servicioTareaActividadPlanificada.agregar(tap);
 	    }
 		for (int j = 0; j < materialesActividades.size(); j++) {
 			materialesActividades.get(j).setPlanificacionActividad(actividadPlanificada);
 		 servicioMaterialActividadPlanificada.agregar(materialesActividades.get(j));
 		}
-
+		Messagebox.show("Datos agregados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
 		frmPlanificarMantenimiento.detach();
 		}
 
@@ -666,6 +706,14 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void setInstalacion(Instalacion instalacion) {
 		this.instalacion = instalacion;
+	}
+
+	public Persona getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(Persona responsable) {
+		this.responsable = responsable;
 	}
 
 }

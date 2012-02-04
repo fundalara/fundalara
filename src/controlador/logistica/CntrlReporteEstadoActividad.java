@@ -4,6 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,15 +63,21 @@ public class CntrlReporteEstadoActividad extends GenericForwardComposer{
 		arrayOutputStream.close();
 		final AMedia amedia = new AMedia("ReporteEstadistico.pdf","pdf","pdf/application", arrayOutputStream.toByteArray());
 		ifReport.setContent(amedia);
+		    		    
+//		JasperExportManager.exportReportToPdfFile(jaspPrint,"C:\\Users\\Reinaldo López\\Documents\\repositorio\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteEstadistico.pdf");
+		    
+		//Para visualizar el pdf directamente desde java
+		JasperViewer.viewReport(jaspPrint, false);
 	}
-	// ---------------------------------------------------------------------------------------------------
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
-		con = ConeccionBD.getCon("postgres","postgres","123456");
+	
+	public void onClick$btnImprimir() throws SQLException, JRException, IOException, ParseException {
+		con = ConeccionBD.getCon("postgres","postgres","admin");
 		//jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/Logistica/Reportes/ReporteEstadistico.jrxml");
-		jrxmlSrc = "C:\\Users\\Reinaldo López\\Documents\\repositorio\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteEstadistico.jrxml";
+		jrxmlSrc = "C:\\Users\\Reinaldo López\\Documents\\repositorio\\fundalara\\WebContent\\Logistica\\Reportes\\ReporteEstadistico.jrxml";				
+				
+		Date fi = new Date(dboxFechaInicio.getValue().getYear(), dboxFechaInicio.getValue().getMonth(), dboxFechaInicio.getValue().getDay());
 		
-		
-		parameters.put("FechaInicio", dboxFechaInicio.getValue());
+		parameters.put("FechaInicio", fi);
 	    parameters.put("FechaFin", dboxFechaFin.getValue());
 		
 		showReportfromJrxml();

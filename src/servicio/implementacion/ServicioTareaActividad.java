@@ -1,5 +1,7 @@
 package servicio.implementacion;
 
+import java.util.List;
+
 import dao.general.DaoTareaActividad;
 import modelo.TareaActividad;
 import servicio.interfaz.IServicioTareaActividad;
@@ -34,4 +36,11 @@ public class ServicioTareaActividad implements IServicioTareaActividad {
 		daoTareaActividad.actualizar(ta);
 	}
 
+	@Override
+	public List<TareaActividad> listar() {
+		return this.daoTareaActividad.listar(TareaActividad.class);
+	}
 }
+
+
+

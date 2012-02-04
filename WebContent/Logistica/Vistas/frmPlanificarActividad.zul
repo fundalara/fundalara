@@ -5,83 +5,95 @@
 <zk>
 <window title="Planificar Actividad" border="normal" mode="modal" 
 	apply="controlador.logistica.CntrlPlanificarActividad"
-	 id="frmPlanificarActividad" closable="true">
+	width="80%" id="frmPlanificarActividad" closable="true">
 
-	<grid height="30%" style="boder:none">
+	<grid height="100%" width="100%" style="boder:none">
 		<columns>
-			<column width="17%"></column>
+			<column width="20%"></column>
 			<column width="30%"></column>
-			<column width="17%"></column>
-			<column width="36%"></column>
+			<column width="20%"></column>
+			<column width="30%"></column>
 		</columns>
 		<rows style="border:none">
 			<row style="border:none">
 				<label value="Descripción"></label>
-				<textbox disabled="false" width="95%" id="txtDescripcion" style='text-transform:uppercase;'></textbox>
+				<hbox width="100%">
+					<textbox value="@{cntrl.descripcionActividad}" disabled="false" width="95%"
+						id="txtDescripcion">
+					</textbox>
+					<label value="(*)" style="color:red" />
+				</hbox>
 				<label value="Tipo" />
-				
-				<combobox id="cmbTipo" selectedItem="@{cntrl.tipoActividad}" model="@{cntrl.tiposActividades}" readonly="true" tooltiptext="Seleccione el tipo de actividad">
-					<comboitem  self="@{each=tm}" label="@{tm.nombre}" />
-				</combobox>
-				
+				<hbox width="100%">
+					<combobox id="cmbTipo" width="70%"
+						selectedItem="@{cntrl.tipoActividad}"
+						model="@{cntrl.tiposActividades}" readonly="true">
+						<comboitem self="@{each=tm}"
+							label="@{tm.nombre}" />
+					</combobox>
+					<label value="(*)" style="color:red"/>
+				</hbox>
 			</row>
 			<row style="border:none">
-				<label
-					value="Fecha de inicio">
-				</label>
-				<datebox id="fechaInicio" width="50%" />
-				<label
-					value="Hora de Inicio">
-				</label>
-				<hbox>
-					<timebox id="horaInicio"/>
-					<button id="btnPeriodicidad" tooltiptext="Periodicidad"		
+				<label value="Fecha de inicio"></label>
+				<hbox width="100%">
+					<datebox id="fechaInicio" width="50%"
+						readonly="true" />
+					<label value="(*)" style="color:red"  />
+				</hbox>
+				<label value="Hora de Inicio"></label>
+				<hbox width="100%">
+					<timebox id="horaInicio" width="72%" readonly="true"/>
+					<label value="(*)" style="color:red" />
+					<button id="btnPeriodicidad"  tooltiptext="Periodicidad" 
 						image="/Recursos/Imagenes/calendario.ico">
 					</button>
 				</hbox>
 			</row>
 
 			<row style="border:none">
-				<label
-					value="Fecha de Culminación">
-				</label>
-				<datebox id="fechaFin" width="50%" />
-				<label
-					value="Hora de Culminación">
-				</label>
-				<timebox id="horaFin" width="15%" />
-			</row>			
-			<row style="border:none">
-			<label value="Instalación" />
+				<label value="Fecha de Culminación"></label>
 				<hbox width="100%">
-					<combobox id="cmbTipoInstalacion" tooltiptext="Seleccione el tipo de instalación" width="80%" readonly="true"
+					<datebox id="fechaFin" width="50%" readonly="true" />
+					<label value="(*)" style="color:red" />
+				</hbox>
+				<label value="Hora de Culminación"></label>
+				<hbox width="100%">
+					<timebox id="horaFin" width="50%" readonly="true"/>
+					<label value="(*)" style="color:red"  />
+				</hbox>
+			</row>
+			<row style="border:none">
+				<label value="Instalación" />
+				<hbox width="100%">
+					<combobox id="cmbTipoInstalacion"
 						selectedItem="@{cntrl.tipoInstalacion}"
-						model="@{cntrl.tiposInstalaciones}">
-						<comboitem id="cmbTiposInst" self="@{each=ti}" 
-						     label="@{ti.nombre}" />
+						model="@{cntrl.tiposInstalaciones}" readonly="true">
+						<comboitem id="cmbTiposInst" self="@{each=ti}"
+							label="@{ti.nombre}" />
 					</combobox>
-					
-<!-- 					<combobox id="cmbInstalacion" tooltiptext="Seleccione la instalación" width="80%" readonly="true" -->
-<!-- 						selectedItem="@{cntrl.instalacionUtilizada}"  -->
-<!-- 						model="@{cntrl.listaInstalacionUtilizada, load-after='cmbTipoInstalacion.onSelect'}"> -->
-<!-- 						<comboitem  id="cmbIInstalacion" self="@{each=i}" -->
-<!-- 							label="@{i.getInstalacion.descripcion}" /> -->
-<!-- 					</combobox> -->
-
-					<combobox id="cmbInstalacion" tooltiptext="Seleccione la instalación" width="80%" readonly="true"
-						selectedItem="@{cntrl.instalacionUtilizada}">
-						<comboitem  id="cmbIInstalacion" self="@{each=i}"
+					<combobox id="cmbInstalacion"
+						selectedItem="@{cntrl.instalacionUtilizada}"
+						model="@{cntrl.listaInstalacionUtilizada, load-after='cmbTipoInstalacion.onSelect'}"
+						readonly="true">
+						<comboitem id="cmbIInstalacion" self="@{each=i}"
 							label="@{i.getInstalacion.descripcion}" />
 					</combobox>
-
-
-					<textbox id="txtInstalacion" ></textbox>
+					<textbox id="txtInstalacion" value="@{cntrl.descripcionInstalacion}"></textbox>
+					<label value="(*)" style="color:red" />
 				</hbox>
-			    <label value="Responsable" visible="true"></label>
-				<hbox>
-					<textbox value="@{cntrl.personalActividadPlanificada.personal.personaNatural converter='comun.converter.NameConverter'}"></textbox>
-					<button image="/Recursos/Imagenes/consultar.ico"  id="btnResponsable" visible="true" tooltiptext="Buscar Responsable"></button>
-				</hbox>				
+				<label value="Responsable" visible="true"></label>
+				<hbox width="100%">
+					<textbox width="95%"
+					value="@{cntrl.responsable.personaNatural converter='comun.converter.NameConverter'}"
+					readonly="true">						
+					</textbox>
+					<label value="(*)" style="color:red" />
+					<button image="/Recursos/Imagenes/consultar.ico"
+						id="btnResponsable" visible="true">
+					</button>
+
+				</hbox>
 			</row>
 		</rows>
 	</grid>
@@ -95,130 +107,111 @@
 					<column width="5%"></column>
 				</columns>
 				<rows>
-				
-				<row id="fila6" visible="true">
-				<window title="Lista de Comisiones" id="winComision">
-						<listbox id="lboxComisiones" mold="paging" height="100px" pageSize="5" model="@{cntrl.listaComisiones}" selectedItem="@{cntrl.comision}" checkmark="true">
-					<listhead>
-						<listheader label="Nombre de la Comisión"></listheader>
-						<listheader label="Descripción de la Comisión"></listheader>
-					</listhead>
-					<listitem self="@{each='r'}" value="@{r}">
-						<listcell label="@{r.nombre}"></listcell>
-						<listcell label="@{r.descripcion}"></listcell>
-					</listitem>
-				</listbox>
+
+					<row id="fila6" visible="true">
+						<window title="Lista de Comisiones"
+							id="winComision">
+							<listbox id="lboxComisiones" mold="paging"
+								height="150px" pageSize="5" model="@{cntrl.listaComisiones}"
+								selectedItem="@{cntrl.comision}" checkmark="true">
+								<listhead>
+									<listheader
+										label="Nombre de la Comision">
+									</listheader>
+									<listheader
+										label="Descripcion de la Comision">
+									</listheader>
+								</listhead>
+								<listitem self="@{each='r'}"
+									value="@{r}">
+									<listcell label="@{r.nombre}"></listcell>
+									<listcell
+										label="@{r.descripcion}">
+									</listcell>
+								</listitem>
+							</listbox>
 						</window>
-							<vbox>
-								<button id="btnAgregarComision" tooltiptext="Agregar Comisión"
-									image="/Recursos/Imagenes/agregar.ico">
-								</button>							
-								<button id="btnEliminarComision" tooltiptext="Eliminar Comisión"
-									image="/Recursos/Imagenes/quitar.ico">
-								</button>
-							</vbox>						
-					
+						<vbox>
+							<button id="btnAgregarComision"
+								tooltiptext="Agregar Comision"
+								image="/Recursos/Imagenes/agregar.ico">
+							</button>
+							<button id="btnEliminarComision"
+								tooltiptext="Eliminar Comision"
+								image="/Recursos/Imagenes/quitar.ico">
+							</button>
+						</vbox>
+
 
 					</row>
 					<row id="fila2" visible="true">
-					   <window title="Lista de Tareas" id="winTarea">
-							<listbox id="lboxTareas" mold="paging" width="100%" pageSize="5" height="120px" model="@{cntrl.tareasActividades}" selectedItem="@{cntrl.tareaActividad}" checkmark="true">
+						<window title="Lista de Tareas" id="winTarea">
+							<listbox id="lboxTareas" mold="paging"
+								width="100%" pageSize="5" height="250px"
+								model="@{cntrl.listaPersonaResponsable}"
+								selectedItem="@{cntrl.personaResponsable}" checkmark="true">
 								<listhead>
-									<listheader label="Tarea" width="15%"></listheader>
-									<listheader label="Descripción" width="35%"></listheader>
-									<listheader label="Personal" width="25%" />
-									<listheader label="Representante" width="25%" ></listheader>
+									<listheader label="Tarea"
+										width="15%">
+									</listheader>
+									<listheader label="Descripción"
+										width="35%">
+									</listheader>
+									<listheader label="Responsable"
+										width="25%" />
+									<listheader label="" width="25%" />
 								</listhead>
-								<listitem self="@{each='tarea'}" value="@{tarea }">
-									<listcell label="@{tarea.datoBasico.nombre}" />
-									<listcell label="@{tarea.datoBasico.descripcion}" />
-									<listcell label="@{tarea.getPersonalActividadPlanificada.getPersonal.getPersonaNatural, converter='comun.converter.NameConverter'}"  />
-									<listcell></listcell>
-<!-- 									<listcell label="@{tarea.getFamiliarComisionEquipo.getFamiliarJugador.getFamiliar.getPersonaNatural, converter='comun.converter.NameConverter'}" ></listcell> -->
+								<listitem self="@{each='tarea'}"
+									value="@{tarea }">
+									<listcell
+										label="@{tarea.getTarea.getNombre}" />
+									<listcell
+										label="@{tarea.getTarea.getDescripcion}" />
+									<listcell
+										label="@{tarea.getResponsableA.getPrimerNombre}" />
+									<listcell
+										label="@{tarea.getResponsableA.getPrimerApellido}" />
 								</listitem>
 							</listbox>
-								</window>
+						</window>
 						<div align="center">
 							<vbox>
-								<button id="btnAsignarRepresentante" tooltiptext="Asignar Representante"
-									image="/Recursos/Imagenes/zs.jpg">
+								<button id="btnAsignarRepresentante"
+									tooltiptext="Asignar Representante"
+									image="/Recursos/Imagenes/agregR.jpg">
 								</button>
-								<button id="btnAgregarTarea"  tooltiptext="Agregar Tarea"
+								<button id="btnAgregarTarea"
+									tooltiptext="Agregar Tarea"
 									image="/Recursos/Imagenes/agregar.ico">
 								</button>
-								<button id="btnEliminarTarea"  tooltiptext="Eliminar Tarea"
+								<button id="btnEliminarTarea"
+									tooltiptext="Eliminar Tarea"
 									image="/Recursos/Imagenes/quitar.ico">
-								</button>
-								
-								<button id="btnAsignarPersonal"  tooltiptext="Asignar Personal"
-									image="/Recursos/Imagenes/personal.png">
 								</button>
 
-							</vbox>
-						</div>					
-		
-					</row>
-					
-				<row id="filaInvisible" visible="false">
-					<vbox align="start" height="100%" width="100%">
-					<panel title="Lista de Tareas" height="100px">
-				      <panelchildren>
-							<listbox id="lboxTareasAgregadas2" width="100%" height="120px" >
-								<listhead>
-									<listheader label="Tarea" width="15%"></listheader>
-									<listheader label="Descripción" width="35%"></listheader>
-									<listheader label="Personal" width="25%" />
-									<listheader label="Representante" width="25%" ></listheader>
-								</listhead>								
-								<listitem>
-									<listcell label="ADORNAR INSTALACIONES" />
-									<listcell label="TAREA REALIZADA PARA AMBIENTAR LAS INSTLACIONES" />
-									<listcell label="GABRIELA PÉREZ"/>
-									<listcell label=""  />									
-								</listitem>
-								<listitem>
-									<listcell label="CONTRATAR SONIDO" />
-									<listcell label="TAREA REALIZADA PARA BRINDAR SONIDO A LAS ACTIVIDADES" />
-									<listcell label=""/>
-									<listcell label="ANTONIO RODRÍGUEZ"  />									
-								</listitem>
-							</listbox>
-						</panelchildren>
-					</panel>
-					</vbox>
-						<div align="center">
-							<vbox>
-								<button id="btnAsignarRepresentante2"
-									image="/Recursos/Imagenes/zs.jpg">
-								</button>
-								<button id="btnAgregarTarea2"
-									image="/Recursos/Imagenes/agregar.ico">
-								</button>
-								<button id="btnEliminarTarea2"
-									image="/Recursos/Imagenes/quitar.ico">
-								</button>
-								
-								<button id="btnAsignarPersonal2"
-									image="/Recursos/Imagenes/personal.png">
+								<button id="btnAsignarPersonal"
+									tooltiptext="Asignar Personal"
+									image="/Recursos/Imagenes/agreg.jpg">
 								</button>
 
 							</vbox>
 						</div>
-						
-			
+
+
 					</row>
-					
-					
-						<row>
-                         				 <window title="Lista de Materiales" id="winMaterial">
-							<listbox width="100%" height="120px"	id="lboxMateriales" mold="paging" pageSize="5"  model="@{cntrl.materialesActividades}" checkmark="true">
+					<row>
+						<window title="Lista de Materiales"
+							id="winMaterial">
+							<listbox width="100%" height="150px"
+								id="lboxMateriales" mold="paging" pageSize="5"
+								model="@{cntrl.materialesActividades}" checkmark="true">
 								<listhead>
 									<listheader label="Material"
 										width="20%" />
 									<listheader label="Descripción"
 										width="45%" />
 									<listheader
-										label="Cantidad Solicitada" />
+										label="Cant. Solicitada" />
 								</listhead>
 								<listitem self="@{each='m'}"
 									value="@{m}">
@@ -231,17 +224,24 @@
 
 								</listitem>
 							</listbox>
-										</window>
-							<div align="center">
-								<vbox>
-									<button id="btnAgregarMateriales" tooltiptext="Agregar un material"	image="/Recursos/Imagenes/agregar.ico" />
-						    	    <button id="btnEliminarMateriales" tooltiptext="Quitar un material" image="/Recursos/Imagenes/quitar.ico" />
-								</vbox>
-							</div>
+						</window>
+						<div align="center">
+							<vbox>
+								<button id="btnAgregarMateriales"
+									tooltiptext="Agregar un material"
+									image="/Recursos/Imagenes/agregar.ico" />
+								<button id="btnEliminarMateriales"
+									tooltiptext="Quitar un material"
+									image="/Recursos/Imagenes/quitar.ico" />
+							</vbox>
+						</div>
 
-						</row>
-			<row width="100%" spans="4">
-				<div align="right">
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<div align="right">
 					<button id="btnGuardar" label="Guardar"
 						image="/Recursos/Imagenes/guardar.ico">
 					</button>
@@ -252,11 +252,6 @@
 						image="/Recursos/Imagenes/salir.png">
 					</button>
 				</div>
-			</row>
-		</rows>
-	</grid>
-	</panelchildren>
-	</panel>
 
 </window>
 </zk>

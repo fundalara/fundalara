@@ -99,4 +99,9 @@ public class ServicioMaterialActividad implements IServicioMaterialActividad {
 		this.daoMaterialActividad = daoMaterialActividad;
 	}
 
+	@Override
+	public List<MaterialActividad> ListarPorActividad(Actividad actividad) {
+		return this.daoMaterialActividad.listarPorActividad(actividad);
+	}
+
 }

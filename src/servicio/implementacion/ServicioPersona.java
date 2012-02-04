@@ -1,5 +1,6 @@
 package servicio.implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.general.DaoPersona;
@@ -65,4 +66,24 @@ public class ServicioPersona implements IServicioPersona {
 		return daoPersona.listarPorTipo(tipoPersona);
 	}
 
+	@Override
+	public Persona buscarPorCodigo(String Cedula) {
+		return this.daoPersona.buscarPorCedulaRif(Cedula);
+	}
+
+	@Override
+	public List<Persona> listarTrabajadores() {
+		// TODO Auto-generated method stub
+		List<Persona> a = new ArrayList<Persona>();
+		List<Persona> b = new ArrayList<Persona>();
+		b = daoPersona.listarActivos(Persona.class);
+		for (Persona persona : b) {
+			if (persona.getDatoBasicoByCodigoTipoPersona().getCodigoDatoBasico() == 169 || persona.getDatoBasicoByCodigoTipoPersona().getCodigoDatoBasico() ==168){
+				a.add(persona);
+			}
+		}
+		
+		
+		return a;
+	}
 }

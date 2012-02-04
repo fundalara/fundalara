@@ -21,13 +21,22 @@ public class ServicioInstalacionUtilizada implements
 	public List<InstalacionUtilizada> listarInstalacionDisponible(
 			DatoBasico tipoInstalacion, Date fechaInic, Date fechaFin,
 			Date horaInic, Date horaFin) {
+		//declaraciones de variables locales
+		
+		List<InstalacionUtilizada> list2 = new ArrayList<InstalacionUtilizada>();
+		List<InstalacionUtilizada> list3 = new ArrayList<InstalacionUtilizada>();
+		List<String> aux = new ArrayList<String>();
+		
+		System.out.println("estoy en servicio Instalacion");
+		
 		list2 = daoInstalacionUtilizada.listarInstalacionDisponible(fechaInic,
-				fechaFin, horaInic, horaFin);
+				fechaFin, horaInic, horaFin);	
 		for (int i = 0; i < list2.size(); i++) {
-			if (list2.get(i).getInstalacion().getDatoBasico()
-					.getCodigoDatoBasico() == tipoInstalacion
-					.getCodigoDatoBasico()) {
-				list3.add(list2.get(i));
+			if (list2.get(i).getInstalacion().getDatoBasico().getCodigoDatoBasico() == tipoInstalacion.getCodigoDatoBasico())  {
+				    if (!aux.contains(list2.get(i).getInstalacion().getDescripcion())){
+				    	list3.add(list2.get(i));
+					    aux.add(list2.get(i).getInstalacion().getDescripcion());
+				    }
 			}
 
 		}
