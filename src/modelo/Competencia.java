@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,7 +48,8 @@ public class Competencia implements java.io.Serializable {
 			0);
 	private Set<EquipoCompetencia> equipoCompetencias = new HashSet<EquipoCompetencia>(
 			0);
-	private Set<Liga> ligas = new HashSet<Liga>(0);
+	private Set<LigaCompetencia> ligaCompetencias = new HashSet<LigaCompetencia>(
+			0);
 	private Set<DatoDeportivo> datoDeportivos = new HashSet<DatoDeportivo>(0);
 	private Set<Hospedaje> hospedajes = new HashSet<Hospedaje>(0);
 	private Set<RosterCompetencia> rosterCompetencias = new HashSet<RosterCompetencia>(
@@ -98,7 +98,8 @@ public class Competencia implements java.io.Serializable {
 			char estatus, Set<ActividadCalendario> actividadCalendarios,
 			Set<FaseCompetencia> faseCompetencias,
 			Set<CategoriaCompetencia> categoriaCompetencias,
-			Set<EquipoCompetencia> equipoCompetencias, Set<Liga> ligas,
+			Set<EquipoCompetencia> equipoCompetencias,
+			Set<LigaCompetencia> ligaCompetencias,
 			Set<DatoDeportivo> datoDeportivos, Set<Hospedaje> hospedajes,
 			Set<RosterCompetencia> rosterCompetencias,
 			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias,
@@ -125,7 +126,7 @@ public class Competencia implements java.io.Serializable {
 		this.faseCompetencias = faseCompetencias;
 		this.categoriaCompetencias = categoriaCompetencias;
 		this.equipoCompetencias = equipoCompetencias;
-		this.ligas = ligas;
+		this.ligaCompetencias = ligaCompetencias;
 		this.datoDeportivos = datoDeportivos;
 		this.hospedajes = hospedajes;
 		this.rosterCompetencias = rosterCompetencias;
@@ -336,13 +337,13 @@ public class Competencia implements java.io.Serializable {
 		this.equipoCompetencias = equipoCompetencias;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "competencias")
-	public Set<Liga> getLigas() {
-		return this.ligas;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competencia")
+	public Set<LigaCompetencia> getLigaCompetencias() {
+		return this.ligaCompetencias;
 	}
 
-	public void setLigas(Set<Liga> ligas) {
-		this.ligas = ligas;
+	public void setLigaCompetencias(Set<LigaCompetencia> ligaCompetencias) {
+		this.ligaCompetencias = ligaCompetencias;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competencia")

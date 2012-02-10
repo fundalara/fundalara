@@ -19,7 +19,7 @@
 						pageSize="10" style="margin-top:5px" model="@{cntrl.EquipoCompetencia}"
 						height="240px" >
 						<listhead>
-							<listheader label="Nombre" align="center" width="10%"></listheader>
+							<listheader label="Nombre" align="leftr" width="10%"></listheader>
 							<listheader label="Categoria" align="center" width="auto"></listheader>
 							<listheader label="Divisa" align="center"  width="auto"></listheader>
 							

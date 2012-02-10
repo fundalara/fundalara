@@ -11,7 +11,7 @@ import modelo.LineUp;
 import servicio.interfaz.IServicioLineUp;
 
 public class ServicioLineUp implements IServicioLineUp {
-	
+
 	DaoLineUp daoLineUp;
 
 	public DaoLineUp getDaoLineUp() {
@@ -30,8 +30,8 @@ public class ServicioLineUp implements IServicioLineUp {
 
 	@Override
 	public void agregar(LineUp l) {
-		if (l.getCodigoLineUp() == 0){
-			int codigo = daoLineUp.listar(LineUp.class).size()+1;
+		if (l.getCodigoLineUp() == 0) {
+			int codigo = daoLineUp.listar(LineUp.class).size() + 1;
 			l.setCodigoLineUp(codigo);
 		}
 		daoLineUp.guardar(l);
@@ -50,15 +50,19 @@ public class ServicioLineUp implements IServicioLineUp {
 	}
 
 	@Override
-	public List<LineUp> listarPlanificados(Juego j,Equipo e) {
-		
-		return daoLineUp.listarPlanificados(j,e);
+	public List<LineUp> listarPlanificados(Juego j, Equipo e) {
+
+		return daoLineUp.listarPlanificados(j, e);
 	}
 
 	@Override
 	public List<LineUp> listarDefinitivos(Juego j, Equipo e) {
-		
+
 		return daoLineUp.listarDefinivos(j, e);
 	}
 
+	@Override
+	public List<LineUp> listarDefinitivosReserva(Juego j, Equipo e) {
+		return daoLineUp.listarDefinitivosReserva(j, e);
+	}
 }

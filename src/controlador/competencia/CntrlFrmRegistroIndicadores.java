@@ -15,6 +15,8 @@ import modelo.Constante;
 import modelo.DatoBasico;
 import modelo.Indicador;
 import modelo.TipoDato;
+
+import org.jruby.RubyProcess.Sys;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -36,7 +38,7 @@ import servicio.implementacion.ServicioIndicador;
 import servicio.implementacion.ServicioTipoDato;
 
 /**
- * Clase que tiene como función controlar la interfaz de igual nombre y los
+ * Clase que tiene como funciï¿½n controlar la interfaz de igual nombre y los
  * servicios relacionados con el registro de los indicadores.
  * 
  * @author Nohely P.
@@ -80,8 +82,25 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	Button btnParentesisAbre;
 	Button btnParentesisCierra;
 	Button btnBorrar;
+	Button btnCero;
+	Button btnUno;
+	Button btnDos;
+	Button btnTres;
+	Button btnCuatro;
+	Button btnCinco;
+	Button btnSeis;
+	Button btnSiete;
+	Button btnOcho;
+	Button btnNueve;
+	Button btnComa;
+	Button btnBorrarUnidad;
 	Button btnBuscarIndicador;
 	Boolean agregarFormula = true;
+	Boolean agregarNumero = true;
+	Boolean agregarComa = false;
+	Boolean agregandoNumero = false;
+	Boolean modificando = false;
+	Boolean ultimaComa = false;
 	Stack<Integer> pilaString = new Stack<Integer>();
 
 	public void inicializarPanel() {
@@ -115,7 +134,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		txtNombre.setReadonly(true);
 		txtNombre.setConstraint("");
 		txtNombre.setText("");
-		// txtNombre.setConstraint("/[a-z A-Z 0-9 áéíóúÁÉÍÓÚñÑ]+/ : Sólo números y letras");
+		// txtNombre.setConstraint("/[a-z A-Z 0-9 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]+/ : Sï¿½lo nï¿½meros y letras");
 		txtFormula.setReadonly(true);
 		txtFormula.setValue("");
 	}
@@ -132,6 +151,18 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		btnParentesisAbre.setDisabled(true);
 		btnParentesisCierra.setDisabled(true);
 		btnBorrar.setDisabled(true);
+		btnBorrarUnidad.setDisabled(true);
+		btnCero.setDisabled(true);
+		btnUno.setDisabled(true);
+		btnDos.setDisabled(true);
+		btnTres.setDisabled(true);
+		btnCuatro.setDisabled(true);
+		btnCinco.setDisabled(true);
+		btnSeis.setDisabled(true);
+		btnSiete.setDisabled(true);
+		btnOcho.setDisabled(true);
+		btnNueve.setDisabled(true);
+		btnComa.setDisabled(true);
 	}
 
 	public void inicializar() {
@@ -141,12 +172,15 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		inicializarTexto();
 		inicializarBoton();
 		agregarFormula = true;
+		agregarNumero = true;
+		agregarComa = false;
+		agregandoNumero = false;
+		pilaString.clear();
 	}
 
 	public static void ordenarLista(List lista) {
 		Collections.sort(lista, new Comparator<Object>() {
 			public int compare(Object obj1, Object obj2) {
-
 				Class clase = obj1.getClass();
 				String getter = "get"
 						+ Character.toUpperCase("nombre".charAt(0))
@@ -156,7 +190,6 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 
 					Object propiedad1 = getPropiedad.invoke(obj1);
 					Object propiedad2 = getPropiedad.invoke(obj2);
-
 					if (propiedad1 instanceof Comparable
 							&& propiedad2 instanceof Comparable) {
 						Comparable prop1 = (Comparable) propiedad1;
@@ -167,9 +200,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 							return 0;
 						else
 							return 1;
-
 					}
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -257,6 +288,19 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				btnParentesisAbre.setDisabled(false);
 				btnParentesisCierra.setDisabled(false);
 				btnBorrar.setDisabled(false);
+				btnBorrar.setDisabled(false);
+				btnBorrarUnidad.setDisabled(false);
+				btnCero.setDisabled(false);
+				btnUno.setDisabled(false);
+				btnDos.setDisabled(false);
+				btnTres.setDisabled(false);
+				btnCuatro.setDisabled(false);
+				btnCinco.setDisabled(false);
+				btnSeis.setDisabled(false);
+				btnSiete.setDisabled(false);
+				btnOcho.setDisabled(false);
+				btnNueve.setDisabled(false);
+				btnComa.setDisabled(false);
 			}
 		} else {
 			txtNombre.setReadonly(false);
@@ -277,55 +321,51 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		validarModalidadMedicion();
 	}
 
-	public void onClick$btnSumar() {
+	public void agregarOperador(String operador) {
 		if (indicador.getFormula() != null)
 			if (!agregarFormula) {
-				indicador.setFormula(indicador.getFormula() + "+");
+				indicador.setFormula(indicador.getFormula() + operador);
 				agregarFormula = true;
+				agregarNumero = true;
+				agregarComa = false;
+				agregandoNumero = false;
 				pilaString.push(1);
 			} else
 				alert("Debe seleccionar primero una constante o un indicador");
 		else
 			alert("Debe seleccionar primero una constante o un indicador");
 		binder.loadAll();
+	}
+
+	public void onClick$btnSumar() {
+		agregarOperador("+");
 	}
 
 	public void onClick$btnRestar() {
-		if (indicador.getFormula() != null)
-			if (!agregarFormula) {
-				indicador.setFormula(indicador.getFormula() + "-");
-				agregarFormula = true;
-				pilaString.push(1);
-			} else
-				alert("Debe seleccionar primero una constante o un indicador");
-		else
-			alert("Debe seleccionar primero una constante o un indicador");
-		binder.loadAll();
+		agregarOperador("-");
 	}
 
 	public void onClick$btnMultiplicar() {
-		if (indicador.getFormula() != null)
-			if (!agregarFormula) {
-				indicador.setFormula(indicador.getFormula() + "*");
-				agregarFormula = true;
-				pilaString.push(1);
-			} else
-				alert("Debe seleccionar primero una constante o un indicador");
-		else
-			alert("Debe seleccionar primero una constante o un indicador");
-		binder.loadAll();
+		agregarOperador("*");
 	}
 
 	public void onClick$btnDividir() {
-		if (indicador.getFormula() != null)
-			if (!agregarFormula) {
-				indicador.setFormula(indicador.getFormula() + "/");
-				agregarFormula = true;
+		agregarOperador("/");
+	}
+
+	public void onClick$btnComa() {
+		if (indicador.getFormula() != null) {
+			if (agregarComa) {
+				indicador.setFormula(indicador.getFormula() + ",");
 				pilaString.push(1);
+				agregarFormula = false;
+				agregarComa = false;
+				agregarNumero = true;
+				// ultimaComa = true;
 			} else
-				alert("Debe seleccionar primero una constante o un indicador");
-		else
-			alert("Debe seleccionar primero una constante o un indicador");
+				alert("Debe seleccionar primero un numero");
+		} else
+			alert("Debe seleccionar primero un numero");
 		binder.loadAll();
 	}
 
@@ -333,11 +373,14 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		if (indicador.getFormula() != null) {
 			if (agregarFormula) {
 				indicador.setFormula(indicador.getFormula() + "(");
+				agregarComa = false;
 				pilaString.push(1);
 			} else
 				alert("Debe seleccionar primero un operador");
-		} else
+		} else {
 			indicador.setFormula("(");
+			agregarComa = false;
+		}
 		binder.loadAll();
 	}
 
@@ -347,13 +390,89 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				if (contarCaracter(indicador.getFormula(), '(') > contarCaracter(
 						indicador.getFormula(), ')')) {
 					indicador.setFormula(indicador.getFormula() + ")");
+					agregarComa = false;
 					pilaString.push(1);
 				} else
 					alert("No puede agregar un \")\" ..");
 			} else
-				alert("Debe seleccionar primero ..");
+				alert("Debe seleccionar primero otros elementos..");
 		} else
 			alert("Debe seleccionar primero un indicador o \"(\"...");
+		binder.loadAll();
+	}
+
+	public void agregarNumeros(int num) {
+		if (indicador.getFormula() != null) {
+			if (agregarFormula || agregarNumero) {
+				indicador.setFormula(indicador.getFormula() + num);
+				agregarNumero = true;
+				agregarFormula = false;
+				if (!agregandoNumero) {
+					agregandoNumero = true;
+					agregarComa = true;
+				}
+				pilaString.push(1);
+			} else
+				alert("Debe seleccionar primero un operador");
+		} else if (agregarFormula || agregarNumero) {
+			indicador.setFormula("1");
+			agregandoNumero = true;
+			agregarNumero = true;
+			agregarFormula = false;
+			agregarComa = true;
+			pilaString.push(1);
+		} else
+			alert("Debe seleccionar primero un operador");
+		binder.loadAll();
+	}
+
+	public void onClick$btnUno() {
+		agregarNumeros(1);
+	}
+
+	public void onClick$btnDos() {
+		agregarNumeros(2);
+	}
+
+	public void onClick$btnTres() {
+		agregarNumeros(3);
+	}
+
+	public void onClick$btnCuatro() {
+		agregarNumeros(4);
+	}
+
+	public void onClick$btnCinco() {
+		agregarNumeros(5);
+	}
+
+	public void onClick$btnSeis() {
+		agregarNumeros(6);
+	}
+
+	public void onClick$btnSiete() {
+		agregarNumeros(7);
+	}
+
+	public void onClick$btnOcho() {
+		agregarNumeros(8);
+	}
+
+	public void onClick$btnNueve() {
+		agregarNumeros(9);
+	}
+
+	public void onClick$btnCero() {
+		agregarNumeros(0);
+	}
+
+	public void onClick$btnBorrar() {
+		pilaString.clear();
+		indicador.setFormula(null);
+		agregarFormula = true;
+		agregarNumero = true;
+		agregarComa = false;
+		agregandoNumero = false;
 		binder.loadAll();
 	}
 
@@ -364,12 +483,16 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				indicador.setFormula(indicador.getFormula()
 						+ I.getAbreviatura());
 				agregarFormula = false;
+				agregarNumero = false;
+				agregandoNumero = false;
 				pilaString.push(I.getAbreviatura().length());
 			} else
 				alert("Debe seleccionar primero un operador");
 		} else if (agregarFormula) {
 			indicador.setFormula(I.getAbreviatura());
 			agregarFormula = false;
+			agregarNumero = false;
+			agregandoNumero = false;
 			pilaString.push(I.getAbreviatura().length());
 		} else
 			alert("Debe seleccionar primero un operador");
@@ -384,12 +507,16 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				indicador.setFormula(indicador.getFormula()
 						+ C.getAbreviatura());
 				agregarFormula = false;
+				agregarNumero = false;
+				agregandoNumero = false;
 				pilaString.push(C.getAbreviatura().length());
 			} else
 				alert("Debe seleccionar primero un operador");
 		} else if (agregarFormula) {
 			indicador.setFormula(C.getAbreviatura());
 			agregarFormula = false;
+			agregarNumero = false;
+			agregandoNumero = false;
 			pilaString.push(C.getAbreviatura().length());
 		} else
 			alert("Debe seleccionar primero un operador");
@@ -406,21 +533,23 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		return x;
 	}
 
-	public void onClick$btnBorrar() { // Se utiliza para borrar formula
-		Integer auxInt = pilaString.pop();
-		if (auxInt == 1) {
-			String borrar = indicador.getFormula().substring(
-					indicador.getFormula().length() - auxInt);
-			if (borrar.compareTo(")") != 0 && borrar.compareTo("(") != 0)
+	public void onClick$btnBorrarUnidad() { // Se utiliza para borrar elementos
+											// de formula
+		if (!pilaString.isEmpty()) {
+			Integer auxInt = pilaString.pop();
+			if (auxInt == 1) {
+				String borrar = indicador.getFormula().substring(
+						indicador.getFormula().length() - auxInt);
+				if (borrar.compareTo(")") != 0 && borrar.compareTo("(") != 0)
+					agregarFormula = !agregarFormula;
+			} else
 				agregarFormula = !agregarFormula;
-		} else {
-			System.out.println("2");
-			agregarFormula = !agregarFormula;
-		}
-		String auxFormula = indicador.getFormula().substring(0,
-				indicador.getFormula().length() - auxInt);
-		indicador.setFormula(auxFormula);
-		binder.loadAll();
+			String auxFormula = indicador.getFormula().substring(0,
+					indicador.getFormula().length() - auxInt);
+			indicador.setFormula(auxFormula);
+			binder.loadAll();
+		} else
+			throw new WrongValueException(txtFormula, "Esta vacia la formula");
 	}
 
 	public void onClick$btnCancelar() {
@@ -434,11 +563,9 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			onClick$btnCancelar();
 			binder.loadAll();
 			winRegistroIndicador.detach();
-
 		} else {
-
 			int result = Messagebox
-					.show("Existen elementos en el formulario ¿Realmente desea salir?",
+					.show("Existen elementos en el formulario ï¿½Realmente desea salir?",
 							"Question", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION);
 			switch (result) {
@@ -455,11 +582,10 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 	}
 
-	public void onClick$btnGuardar() throws InterruptedException {
-		if (txtNombre.getValue().isEmpty()) { // ----- MODIFICAAAR -----
+	public void modificarIndicador() throws InterruptedException {
+		if (txtNombre.getValue().isEmpty()) {
 			throw new WrongValueException(txtNombre, "Debe ingresar un nombre");
-		} else if (txtAbreviatura.getValue().isEmpty()) { // ----- MODIFICAAAR
-															// -----
+		} else if (txtAbreviatura.getValue().isEmpty()) {
 			throw new WrongValueException(txtAbreviatura,
 					"Debe ingresar una abreviatura");
 		} else if (agregarFormula) {
@@ -478,10 +604,8 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				indicador
 						.setDatoBasicoByCodigoMedicion((DatoBasico) cmbMedicion
 								.getSelectedItem().getValue());
-
 			}
 			indicador.setEstatus('A');
-			indicador.setCodigoIndicador(servicioIndicador.generarCodigo());
 			indicador.setAbreviatura(indicador.getAbreviatura().toUpperCase());
 			indicador.setNombre(indicador.getNombre().toUpperCase());
 			servicioIndicador.agregar(indicador);
@@ -492,68 +616,47 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 	}
 
-	// public void onClick$btnGuardar() throws InterruptedException {
-	// indicador.setDatoBasicoByCodigoTipoIndicador((DatoBasico) cmbTipo
-	// .getSelectedItem().getValue());
-	// indicador.setDatoBasicoByCodigoModalidad((DatoBasico) cmbModalidad
-	// .getSelectedItem().getValue());
-	// if (cmbTipo.getText().equals("SENCILLO")) {
-	// DatoBasico medicion = servicioDatoBasico
-	// .buscarPorString("INDIVIDUAL");
-	// indicador.setDatoBasicoByCodigoMedicion(medicion);
-	// } else {
-	// indicador.setDatoBasicoByCodigoMedicion((DatoBasico) cmbMedicion
-	// .getSelectedItem().getValue());
-	// indicador.setFormula(indicador.getFormula().toUpperCase());
-	// }
-	// indicador.setEstatus('A');
-	// indicador.setCodigoIndicador(servicioIndicador.generarCodigo());
-	// indicador.setAbreviatura(indicador.getAbreviatura().toUpperCase());
-	// indicador.setNombre(indicador.getNombre().toUpperCase());
-	// servicioIndicador.agregar(indicador);
-	// Messagebox.show("Datos agregados exitosamente", "Mensaje",
-	// Messagebox.OK, Messagebox.EXCLAMATION);
-	// inicializar();
-	// binder.loadAll();
-	// }
-
-	public void onClick$btnGuardar2() throws InterruptedException {
-		// indicador.setDatoBasicoByCodigoTipoIndicador((DatoBasico)
-		// cmbTipo.getSelectedItem().getValue());
-		// if (pnlSencillo.setVisible(true)) {
-		// indicador
-		// .setDatoBasicoByCodigoModalidad((DatoBasico) cmbModalidadSencillo
-		// .getSelectedItem().getValue());
-		// if (cmbTipo.getText().equals("SENCILLO")) {
-		// DatoBasico medicion = servicioDatoBasico
-		// .buscarPorString("INDIVIDUAL");
-		// indicador.setDatoBasicoByCodigoMedicion(medicion);
-		// } else {
-		// indicador
-		// .setDatoBasicoByCodigoMedicion((DatoBasico) cmbMedicion
-		// .getSelectedItem().getValue());
-		// }
-		// indicador.setFormula("");
-		// } //else if (pnlCompuesto.setVisible(true)) {
-		//
-		// indicador
-		// .setDatoBasicoByCodigoModalidad((DatoBasico) cmbModalidadCompuesto
-		// .getSelectedItem().getValue());
-		// indicador.setDatoBasicoByCodigoMedicion((DatoBasico) cmbMedicion
-		// .getSelectedItem().getValue());
-		// }
-		// indicador.setEstatus('A');
-		// indicador.setCodigoIndicador(servicioIndicador.generarCodigo());
-		// servicioIndicador.agregar(indicador);
-		// Messagebox.show("Datos agregados exitosamente", "Mensaje",
-		// Messagebox.OK, Messagebox.EXCLAMATION);
-		// limpiar();
-		// inicializar();
-		// binder.loadAll();
-		// else if (txtDescripcionValor.getValue().isEmpty()) { (USAR PARA
-		// MENSAJES DE VALIDACION)
-		// throw new WrongValueException(txtDescripcionValor,
-		// "Debes ingresar una descripcion al valor de la escala");
+	public void onClick$btnGuardar() throws InterruptedException {
+		if (modificando)
+			modificarIndicador();
+		else {
+			if (txtNombre.getValue().isEmpty()) {
+				throw new WrongValueException(txtNombre,
+						"Debe ingresar un nombre");
+			} else if (txtAbreviatura.getValue().isEmpty()) {
+				throw new WrongValueException(txtAbreviatura,
+						"Debe ingresar una abreviatura");
+			} else if (agregarFormula || ultimaComa) {
+				throw new WrongValueException(txtFormula,
+						"Debe completar la formula");
+			} else {
+				indicador
+						.setDatoBasicoByCodigoTipoIndicador((DatoBasico) cmbTipo
+								.getSelectedItem().getValue());
+				indicador
+						.setDatoBasicoByCodigoModalidad((DatoBasico) cmbModalidad
+								.getSelectedItem().getValue());
+				if (cmbTipo.getText().equals("SENCILLO")) {
+					DatoBasico medicion = servicioDatoBasico
+							.buscarPorString("INDIVIDUAL");
+					indicador.setDatoBasicoByCodigoMedicion(medicion);
+				} else {
+					indicador
+							.setDatoBasicoByCodigoMedicion((DatoBasico) cmbMedicion
+									.getSelectedItem().getValue());
+				}
+				indicador.setEstatus('A');
+				indicador.setCodigoIndicador(servicioIndicador.generarCodigo());
+				indicador.setAbreviatura(indicador.getAbreviatura()
+						.toUpperCase());
+				indicador.setNombre(indicador.getNombre().toUpperCase());
+				servicioIndicador.agregar(indicador);
+				Messagebox.show("Datos agregados exitosamente", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+				inicializar();
+				binder.loadAll();
+			}
+		}
 	}
 
 	public void onClick$btnEliminar() throws InterruptedException {
@@ -592,23 +695,57 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				// se obtiene el indicador
 				indicador = (Indicador) formulario.getVariable("indicador",
 						false);
+				modificando = (Boolean) formulario.getVariable("modificar",
+						false);
 				cmbTipo.setSelectedIndex(buscarCombo(indicador,
 						listTipoIndicador, 1));
 				cmbModalidad.setSelectedIndex(buscarCombo(indicador,
 						listModalidadIndicador, 2));
 				cmbMedicion.setSelectedIndex(buscarCombo(indicador,
 						listMedicionIndicador, 3));
+				llenarPila(indicador); // HACER habilitar calculadora
 				cambiarTipo();
 				cargarIndicador();
 				deshabilitarCatalogo();
-				agregarFormula = false;
+				indicador.setFormula(indicador.getFormula());
 				binder.loadAll();
 			}
 		});
 	}
 
+	public void llenarPila(Indicador indicador) {
+		String auxIndicador = indicador.getFormula();
+		Integer aux = 0;
+		if (auxIndicador != null) {
+			if (auxIndicador.substring(auxIndicador.length() - 1).equals(")")) {
+				agregarFormula = false;
+			}
+			for (int i = 0; i < indicador.getFormula().length(); i++) {
+				if (auxIndicador.substring(i, i + 1).equals(")")
+						|| auxIndicador.substring(i, i + 1).equals("(")
+						|| auxIndicador.substring(i, i + 1).equals("+")
+						|| auxIndicador.substring(i, i + 1).equals("-")
+						|| auxIndicador.substring(i, i + 1).equals("*")
+						|| auxIndicador.substring(i, i + 1).equals("/")) {
+					if (aux != 0) {
+						pilaString.push(aux);
+						pilaString.push(1);
+						aux = 0;
+					} else
+						pilaString.push(1);
+				} else {
+					aux++;
+				}
+			}
+			if (aux != 0) {
+				pilaString.push(aux);
+			}
+			else;
+		}
+	}
+
 	/**
-	 * Busca el índice correspondiente al ítem seleccionado en un combo, para
+	 * Busca el ï¿½ndice correspondiente al ï¿½tem seleccionado en un combo, para
 	 * relacionarlo con un objeto
 	 * 
 	 * @param objeto
@@ -618,7 +755,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	 * @param campo
 	 *            valor utilizado en los casos del switch
 	 * 
-	 * @return índice del ítem seleccionado
+	 * @return ï¿½ndice del ï¿½tem seleccionado
 	 */
 
 	public int buscarCombo(Indicador objeto, List<DatoBasico> lista,
@@ -639,7 +776,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 						objeto.getDatoBasicoByCodigoModalidad().getNombre())) {
 					return j;
 				}
-			case 3: // Medición Indicador
+			case 3: // Mediciï¿½n Indicador
 				if (db.getNombre().equals(
 						objeto.getDatoBasicoByCodigoMedicion().getNombre())) {
 					return j;
@@ -647,7 +784,6 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			default:
 				break;
 			}
-
 		}
 		return j;
 	}

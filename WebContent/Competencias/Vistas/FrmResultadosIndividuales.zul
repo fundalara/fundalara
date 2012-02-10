@@ -4,18 +4,7 @@
 <zk>
 	<window id="FrmResultadosIndividuales"
 		title="Resultados Individuales" border="normal" width="780px"
-		mode="modal" closable="true">
-		<zscript>
-		<![CDATA[ 
-		    public void guardar(){
-		      try{	
-		    	Messagebox.show("Datos almacenados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
-		      }catch (Exception e){
-		    	  
-		      }
-		      FrmResultadosIndividuales.detach();
-		    }
-		]]></zscript>
+		mode="modal" closable="true" apply="controlador.competencia.CntrlFrmResultadosIndividuales">
 		<panel border="normal" title="RESULTADOS  INDIVIDUALES">
 			<panelchildren>
 
@@ -23,7 +12,7 @@
 					<tabs>
 						<tab label="Ofensiva" />
 						<tab label="Defensiva" />
-						<tab label="Picheo" />
+						<tab label="Pitcheo" />
 					</tabs>
 					<tabpanels>
 						<tabpanel>
@@ -33,7 +22,7 @@
 										style="float:left">
 										<panel title="LINE-UP">
 											<panelchildren>
-												<grid>
+												<grid id="gridLineUpOfensivos" model="@{cntrl.lineups}">
 													<columns>
 														<column	label="OB" width="8%" />
 														<column label="N" width="8%"  />
@@ -41,80 +30,21 @@
 														<column	label="APELLIDO" width="35%" />
 														<column	label="POS" width="10%" />
 													</columns>
-													<rows>													
-													   <row height="25px">
-													     <label value="1"></label>
-													     <label value="44"></label>
-													     <label value="JOSE"></label>
-													     <label value="RODRIGUEZ"></label>
-													     <label value="3B"></label>
-													   </row> 
-													   <row height="25px">
-													     <label value="2"></label>
-													     <label value="23"></label>
-													     <label value="EDUARDO"></label>
-													     <label value="OCHOA"></label>
-													     <label value="2B"></label>
-													   </row>
-													   
-													    <row height="25px">
-													     <label value="3"></label>
-													     <label value="15"></label>
-													     <label value="YOVANNY"></label>
-													     <label value="MANOSALVA"></label>
-													     <label value="LF"></label>
-													   </row>
-													   
-													    <row height="25px">
-													     <label value="4"></label>
-													     <label value="22"></label>
-													     <label value="RAFAEL"></label>
-													     <label value="ESCOBAR"></label>
-													     <label value="SS"></label>
-													   </row>				   
-													   <row height="25px">
-													     <label value="5"></label>
-													     <label value="26"></label>
-													     <label value="FRANCISCO"></label>
-													     <label value="MACHADO"></label>
-													     <label value="P"></label>
-													   </row>
-													  <row height="25px">
-													     <label value="6"></label>
-													     <label value="11"></label>
-													     <label value="JHOINNEL"></label>
-													     <label value="LISCANO"></label>
-													     <label value="3B"></label>
-													   </row>
-													   <row height="25px">
-													     <label value="7"></label>
-													     <label value="8"></label>
-													     <label value="JESUS"></label>
-													     <label value="ROJAS"></label>
-													     <label value="CF"></label>
-													   </row>
-													   <row height="25px">
-													     <label value="8"></label>
-													     <label value="14"></label>
-													     <label value="JESUS"></label>
-													     <label value="CASTILLO"></label>
-													     <label value="RF"></label>
-													   </row>
-													   <row height="25px">
-													     <label value="9"></label>
-													     <label value="60"></label>
-													     <label value="JUAN"></label>
-													     <label value="HERNANDEZ"></label>
-													     <label value="C"></label>
-													   </row>
-													   
+													<rows >
+														<row self="@{each=lineup}" height="27px">
+														<label value="@{lineup.ordenBate}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
+														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
+														</row>
 													</rows>
 												</grid>
 											</panelchildren>
 										</panel>
 										<panel title="RESERVA" >
 											<panelchildren>
-												<grid>
+												<grid id="gridReservaOfensivos" model="@{cntrl.lineupsReserva}" >
 													<columns>
 														<column label="N" width="8%" />
 														<column	label="OB" width="8%" />
@@ -122,7 +52,15 @@
 														<column label="APELLIDO" width="35%" />
 														<column label="POS" width="10%" />
 													</columns>
-													<rows></rows>
+													<rows>
+													    <row self="@{each=lineup}">
+														<label value="@{lineup.ordenBate}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
+														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
+														</row>
+													</rows>
 												</grid>
 											</panelchildren>
 										</panel>
@@ -131,100 +69,10 @@
 										width="59%">
 										<panel title="INDICADORES" >
 											<panelchildren>
-												<grid>
-													<columns>
-													   <column label="VB" align="center"></column>
-													   <column label="H"  align="center"></column>
-													   <column label="2B" align="center"></column>
-													   <column label="3B" align="center"></column>
-													   <column label="CA" align="center"></column>
-													   <column label="CI" align="center"></column>
-													   <column label="O"  align="center"></column>
-													   
+												<grid id="gridIndicadoresOfensivos">
+													<columns>													  											   
 													</columns>
-													<rows>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>													    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>													    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													  <row>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>
-													    <spinner value="0" cols="2"></spinner>														    
-													  </row>
-													
+													<rows>													 
 													</rows>
 												</grid>
 											</panelchildren>
@@ -234,15 +82,8 @@
 										style="float:left;margin-left:2px">
 										<panel title="INDICADORES">
 											<panelchildren>
-												<grid>
-													<columns>
-													   <column label="VB" align="center"></column>
-													   <column label="H"  align="center"></column>
-													   <column label="2B" align="center"></column>
-													   <column label="3B" align="center"></column>
-													   <column label="CA" align="center"></column>
-													   <column label="CI" align="center"></column>
-													   <column label="O"  align="center"></column>													
+												<grid id="gridIndicadoresOfensivosReserva">
+													<columns>							
 													</columns>
 													<rows></rows>
 												</grid>
@@ -251,7 +92,163 @@
 									</div>
 								</panelchildren>
 							</panel>
-						</tabpanel><!-- Fin indicadores ofensivos -->
+					</tabpanel><!-- Fin indicadores ofensivos -->
+					<tabpanel> 
+					  <panel>   <!--  indicadores defensivos -->
+							<panelchildren>
+									<div width="40%"
+										style="float:left">
+										<panel title="LINE-UP">
+											<panelchildren>
+												<grid id="gridLineUpDefensivos" model="@{cntrl.lineups}">
+													<columns>
+														<column	label="OB" width="8%" />
+														<column label="N" width="8%"  />
+														<column	label="NOMBRE" width="35%" />
+														<column	label="APELLIDO" width="35%" />
+														<column	label="POS" width="10%" />
+													</columns>
+													<rows >
+														<row self="@{each=lineup}" height="27px">
+														<label value="@{lineup.ordenBate}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
+														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
+														</row>
+													</rows>
+												</grid>
+											</panelchildren>
+										</panel>
+										<panel title="RESERVA" >
+											<panelchildren>
+												<grid id="gridReservaDefensivos" model="@{cntrl.lineupsReserva}" >
+													<columns>
+														<column label="N" width="8%" />
+														<column	label="OB" width="8%" />
+														<column	label="NOMBRE" align="35%" />
+														<column label="APELLIDO" width="35%" />
+														<column label="POS" width="10%" />
+													</columns>
+													<rows>
+													    <row self="@{each=lineup}">
+														<label value="@{lineup.ordenBate}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
+														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
+														</row>
+													</rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div style="float:left;margin-left:2px"
+										width="59%">
+										<panel title="INDICADORES" >
+											<panelchildren>
+												<grid id="gridIndicadoresDefensivos">
+													<columns>													  											   
+													</columns>
+													<rows>													 
+													</rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div align="left" width="59%"
+										style="float:left;margin-left:2px">
+										<panel title="INDICADORES">
+											<panelchildren>
+												<grid id="gridIndicadoresDefensivosReserva">
+													<columns>							
+													</columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+								</panelchildren>
+							</panel>
+					  </tabpanel> <!-- Fin indicadores defensivos -->
+					  <tabpanel> 
+					  <panel>   <!--  indicadores pitcheo -->
+							<panelchildren>
+									<div width="40%"
+										style="float:left">
+										<panel title="LINE-UP">
+											<panelchildren>
+												<grid id="gridLineUpPitcheo" model="@{cntrl.lineups}">
+													<columns>
+														<column	label="OB" width="8%" />
+														<column label="N" width="8%"  />
+														<column	label="NOMBRE" width="35%" />
+														<column	label="APELLIDO" width="35%" />
+														<column	label="POS" width="10%" />
+													</columns>
+													<rows >
+														<row self="@{each=lineup}" height="27px">
+														<label value="@{lineup.ordenBate}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
+														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
+														</row>
+													</rows>
+												</grid>
+											</panelchildren>
+										</panel>
+										<panel title="RESERVA" >
+											<panelchildren>
+												<grid id="gridReservaPitcheo" model="@{cntrl.lineupsReserva}" >
+													<columns>
+														<column label="N" width="8%" />
+														<column	label="OB" width="8%" />
+														<column	label="NOMBRE" align="35%" />
+														<column label="APELLIDO" width="35%" />
+														<column label="POS" width="10%" />
+													</columns>
+													<rows>
+													    <row self="@{each=lineup}">
+														<label value="@{lineup.ordenBate}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
+														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
+														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
+														</row>
+													</rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div style="float:left;margin-left:2px"
+										width="59%">
+										<panel title="INDICADORES" >
+											<panelchildren>
+												<grid id="gridIndicadoresPitcheo">
+													<columns>													  											   
+													</columns>
+													<rows>													 
+													</rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+									<div align="left" width="59%"
+										style="float:left;margin-left:2px">
+										<panel title="INDICADORES">
+											<panelchildren>
+												<grid id="gridIndicadoresPitcheoReserva">
+													<columns>							
+													</columns>
+													<rows></rows>
+												</grid>
+											</panelchildren>
+										</panel>
+									</div>
+								</panelchildren>
+							</panel>
+					  </tabpanel> <!-- Fin indicadores defensivos -->
 					</tabpanels>
 				</tabbox>
 				<div align="right">

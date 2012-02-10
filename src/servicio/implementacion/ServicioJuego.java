@@ -47,5 +47,10 @@ public class ServicioJuego implements IServicioJuego {
 	public int listarJuegosProgramados(DatoBasico datoBasico) {
 		return daoJuego.listarJuegosProgramados(datoBasico );
 }
+	
+	@Override
+	public Juego buscarJuego(int codigo) {
+		return daoJuego.buscarJuego(codigo);
+	}
 
 }

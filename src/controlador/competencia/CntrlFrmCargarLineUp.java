@@ -17,6 +17,7 @@ import modelo.LineUp;
 import modelo.Roster;
 import modelo.RosterCompetencia;
 
+import org.jfree.chart.util.LineUtilities;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.WrongValueException;
@@ -32,6 +33,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import servicio.implementacion.ServicioDatoBasico;
+import servicio.implementacion.ServicioJuego;
 import servicio.implementacion.ServicioLineUp;
 
 public class CntrlFrmCargarLineUp extends GenericForwardComposer {
@@ -47,6 +49,7 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 	Listbox lsbxLineUp;
 	ServicioDatoBasico servicioDatoBasico;
 	ServicioLineUp servicioLineUp;
+	ServicioJuego servicioJuego;
 	Juego juego;
 
 	@Override
@@ -56,18 +59,19 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 		comp.setVariable("cntrl", this, true);
 		formulario = comp;
 		lineups = new ArrayList<LineUp>();
-
+		
 	}
 
 	public void onCreate$FrmCargarLineUp() {
 		equipoCompetencia = (EquipoCompetencia) formulario.getVariable(
 				"equipo", false);
-		juego = (Juego) formulario.getVariable("juego", false);
+		int codigo = (Integer) formulario.getVariable("juego", false);
+		juego = servicioJuego.buscarJuego(codigo);
 		List<EquipoJuego> equipos =ConvertirConjuntoALista(juego.getEquipoJuegos());		
 		String equipoA = equipos.get(0).getEquipoCompetencia().getEquipo().getNombre();
 		String equipoB = equipos.get(1).getEquipoCompetencia().getEquipo().getNombre();
 		txtJuego.setText(equipoA + " vs " + equipoB);
-		lineups = servicioLineUp.listarPlanificados(juego,equipos.get(0).getEquipoCompetencia().getEquipo());
+		lineups = servicioLineUp.listarPlanificados(juego,equipoCompetencia.getEquipo());
 		posiciones = servicioDatoBasico.listarPosicionesJugadores();
 		Set conjunto = equipoCompetencia.getEquipo().getRosterCompetencias();
 		rosters = ConvertirConjuntoALista(conjunto);
@@ -147,6 +151,7 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 			Window w = (Window)c;
 			w.setPosition("center");   	
 		    w.setVariable("equipo",equipoCompetencia,false);
+		    w.setVariable("juego", juego.getCodigoJuego(), false);
 		    w.doHighlighted();
 		   
 		} else
@@ -258,6 +263,8 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 			lista.remove(o);
 		}
 	}
+	
+	
 
 	public List ConvertirConjuntoALista(Set conjunto) {
 		List l = new ArrayList();
@@ -314,5 +321,7 @@ public class CntrlFrmCargarLineUp extends GenericForwardComposer {
 	public void setJuego(Juego juego) {
 		this.juego = juego;
 	}
+
+		
 
 }

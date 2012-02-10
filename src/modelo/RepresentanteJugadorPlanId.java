@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class RepresentanteJugadorPlanId implements java.io.Serializable {
 
-	private String cedulaRif;
+	private String cedulaJugador;
 	private String cedulaFamiliar;
 
 	public RepresentanteJugadorPlanId() {
 	}
 
-	public RepresentanteJugadorPlanId(String cedulaRif, String cedulaFamiliar) {
-		this.cedulaRif = cedulaRif;
+	public RepresentanteJugadorPlanId(String cedulaJugador,
+			String cedulaFamiliar) {
+		this.cedulaJugador = cedulaJugador;
 		this.cedulaFamiliar = cedulaFamiliar;
 	}
 
-	@Column(name = "cedula_rif", nullable = false)
-	public String getCedulaRif() {
-		return this.cedulaRif;
+	@Column(name = "cedula_jugador", nullable = false)
+	public String getCedulaJugador() {
+		return this.cedulaJugador;
 	}
 
-	public void setCedulaRif(String cedulaRif) {
-		this.cedulaRif = cedulaRif;
+	public void setCedulaJugador(String cedulaJugador) {
+		this.cedulaJugador = cedulaJugador;
 	}
 
 	@Column(name = "cedula_familiar", nullable = false)
@@ -49,9 +50,10 @@ public class RepresentanteJugadorPlanId implements java.io.Serializable {
 			return false;
 		RepresentanteJugadorPlanId castOther = (RepresentanteJugadorPlanId) other;
 
-		return ((this.getCedulaRif() == castOther.getCedulaRif()) || (this
-				.getCedulaRif() != null && castOther.getCedulaRif() != null && this
-				.getCedulaRif().equals(castOther.getCedulaRif())))
+		return ((this.getCedulaJugador() == castOther.getCedulaJugador()) || (this
+				.getCedulaJugador() != null
+				&& castOther.getCedulaJugador() != null && this
+				.getCedulaJugador().equals(castOther.getCedulaJugador())))
 				&& ((this.getCedulaFamiliar() == castOther.getCedulaFamiliar()) || (this
 						.getCedulaFamiliar() != null
 						&& castOther.getCedulaFamiliar() != null && this
@@ -62,8 +64,10 @@ public class RepresentanteJugadorPlanId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result
-				+ (getCedulaRif() == null ? 0 : this.getCedulaRif().hashCode());
+		result = 37
+				* result
+				+ (getCedulaJugador() == null ? 0 : this.getCedulaJugador()
+						.hashCode());
 		result = 37
 				* result
 				+ (getCedulaFamiliar() == null ? 0 : this.getCedulaFamiliar()

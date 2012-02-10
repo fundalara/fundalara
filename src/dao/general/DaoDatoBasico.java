@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import comun.TipoDatoBasico;
@@ -320,5 +321,20 @@ public class DaoDatoBasico extends GenericDao {
 		List<DatoBasico> lista = c.list();
 		return lista;
 
+	}
+	
+	public List<DatoBasico> listarPersonalForaneo(DatoBasico datoBasico) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();		
+        
+        Criteria x = session.createCriteria(DatoBasico.class);
+        Criterion cr1 = Restrictions.eq("nombre", "UMPIRE");
+		Criterion cr2 = Restrictions.eq("nombre", "ANOTADOR");
+		
+		x.add(Restrictions.or(cr1, cr2));
+			
+		return (x.list());
+    
+        
 	}
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +31,9 @@ public class LapsoDeportivo implements java.io.Serializable {
 	private char estatus;
 	private Date fechaInicioAscenso;
 	private Date fechaFinAscenso;
+	private Date fechaFinalizacion;
+	private String observacion;
+	private Set<Anuario> anuarios = new HashSet<Anuario>(0);
 	private Set<Competencia> competencias = new HashSet<Competencia>(0);
 	private Set<PlanTemporada> planTemporadas = new HashSet<PlanTemporada>(0);
 
@@ -38,18 +41,21 @@ public class LapsoDeportivo implements java.io.Serializable {
 	}
 
 	public LapsoDeportivo(int codigoLapsoDeportivo, DatoBasico datoBasico,
-			Date fechaInicio, Date fechaFin, String nombre, char estatus) {
+			Date fechaInicio, Date fechaFin, String nombre, char estatus,
+			Date fechaFinalizacion) {
 		this.codigoLapsoDeportivo = codigoLapsoDeportivo;
 		this.datoBasico = datoBasico;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.nombre = nombre;
 		this.estatus = estatus;
+		this.fechaFinalizacion = fechaFinalizacion;
 	}
 
 	public LapsoDeportivo(int codigoLapsoDeportivo, DatoBasico datoBasico,
 			Date fechaInicio, Date fechaFin, String nombre, char estatus,
 			Date fechaInicioAscenso, Date fechaFinAscenso,
+			Date fechaFinalizacion, String observacion, Set<Anuario> anuarios,
 			Set<Competencia> competencias, Set<PlanTemporada> planTemporadas) {
 		this.codigoLapsoDeportivo = codigoLapsoDeportivo;
 		this.datoBasico = datoBasico;
@@ -59,6 +65,9 @@ public class LapsoDeportivo implements java.io.Serializable {
 		this.estatus = estatus;
 		this.fechaInicioAscenso = fechaInicioAscenso;
 		this.fechaFinAscenso = fechaFinAscenso;
+		this.fechaFinalizacion = fechaFinalizacion;
+		this.observacion = observacion;
+		this.anuarios = anuarios;
 		this.competencias = competencias;
 		this.planTemporadas = planTemporadas;
 	}
@@ -139,6 +148,34 @@ public class LapsoDeportivo implements java.io.Serializable {
 
 	public void setFechaFinAscenso(Date fechaFinAscenso) {
 		this.fechaFinAscenso = fechaFinAscenso;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_finalizacion", nullable = false, length = 13)
+	public Date getFechaFinalizacion() {
+		return this.fechaFinalizacion;
+	}
+
+	public void setFechaFinalizacion(Date fechaFinalizacion) {
+		this.fechaFinalizacion = fechaFinalizacion;
+	}
+
+	@Column(name = "observacion")
+	public String getObservacion() {
+		return this.observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "lapsoDeportivo")
+	public Set<Anuario> getAnuarios() {
+		return this.anuarios;
+	}
+
+	public void setAnuarios(Set<Anuario> anuarios) {
+		this.anuarios = anuarios;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "lapsoDeportivo")

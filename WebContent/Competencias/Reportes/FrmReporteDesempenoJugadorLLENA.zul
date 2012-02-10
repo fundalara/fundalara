@@ -2,7 +2,8 @@
 <zk>
 	<div align="center">
 		<window title="Configuración de Reporte del Desempeño Deportivo"
-			border="normal" width="500px">
+			border="normal" width="500px" apply="controlador.competencia.CntrlFrmReporteDesempenojugador">
+			<iframe id="ifReporte" height="0px"></iframe>
 			<grid style="border:none">
 				<columns>
 					<column label="" align="left" width="10%" />
@@ -15,7 +16,7 @@
 						<hbox>
 
 							<textbox
-								value="CAMPEONATO NACIONAL CRIOLLITOS DE VENEZUELA" cols="40">
+								value="COPA CARNAVAL 2012" cols="45">
 							</textbox>
 							<button id="btnBuscar"
 								image="/Recursos/Imagenes/consultar.ico">
@@ -36,15 +37,15 @@
 
 			<grid style="border:none" width="100%">
 				<columns>
+					<column label="" align="left" width="27%" />
 					<column label="" align="left" width="15%" />
-					<column label="" align="left" width="10%" />
 					<column label="" align="left" width="20%" />
 					<column label="" align="left" width="10%" />
 				</columns>
 				<rows>
 					<row style="border:none">
 						<label value="Filtrar por"></label>
-						<combobox value="Equipo">
+						<combobox value="EQUIPO">
 							<comboitem label="Equipo" />
 							<comboitem label="Competencia" />
 						</combobox>
@@ -71,14 +72,16 @@
 					</row>
 					<row style="border:none">
 						<label value="Juego"></label>
-						<combobox value="PREJUNIOR A Vs DELFINES A"
-							cols="22" />
+						<combobox value="PREJUNIOR A Vs PREJUNIOR B"
+							cols="32" />
+									
 					</row>
 				</rows>
 			</grid>
 			<div align="right" height="30px">
-				<button id="btnGuardar"
-					image="/Recursos/Imagenes/reporte.ico" label="Generar"
+	
+				<button id="btnGenerar"
+					image="/Recursos/Imagenes/imprimir.ico" label="Imprimir"
 					orient="horizontal">
 				</button>
 

@@ -30,8 +30,8 @@
 						    <listcell label="@{competencia.clasificacionCompetencia.datoBasico.nombre}"></listcell>
 						    <listcell label="@{competencia.clasificacionCompetencia.nombre}"></listcell>
 							<listcell label="@{competencia.nombre}"></listcell>
-							<listcell label="@{competencia.fechaInicio}"></listcell>
-							<listcell label="@{competencia.fechaFin}"></listcell>
+							<listcell label="@{competencia.fechaInicio,converter='controlador.jugador.converter.DateConverter'}"></listcell>
+							<listcell label="@{competencia.fechaFin,converter='controlador.jugador.converter.DateConverter'}"></listcell>
 							<listcell label="@{competencia.cantidadJugador}"></listcell>
 							<listcell label="@{competencia.cantidadFase}"></listcell>
 							<listcell label="@{competencia.montoInscripcion}"></listcell>

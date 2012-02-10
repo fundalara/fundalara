@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class IndicadorCategoriaCompetencia implements java.io.Serializable {
 	private Categoria categoria;
 	private Competencia competencia;
 	private Indicador indicador;
+	private char estatus;
 	private Set<DesempennoIndividual> desempennoIndividuals = new HashSet<DesempennoIndividual>(
 			0);
 	private Set<DesempennoColectivo> desempennoColectivos = new HashSet<DesempennoColectivo>(
@@ -34,22 +35,24 @@ public class IndicadorCategoriaCompetencia implements java.io.Serializable {
 
 	public IndicadorCategoriaCompetencia(
 			int codigoIndicadorCategoriaCompetencia, Categoria categoria,
-			Competencia competencia, Indicador indicador) {
+			Competencia competencia, Indicador indicador, char estatus) {
 		this.codigoIndicadorCategoriaCompetencia = codigoIndicadorCategoriaCompetencia;
 		this.categoria = categoria;
 		this.competencia = competencia;
 		this.indicador = indicador;
+		this.estatus = estatus;
 	}
 
 	public IndicadorCategoriaCompetencia(
 			int codigoIndicadorCategoriaCompetencia, Categoria categoria,
-			Competencia competencia, Indicador indicador,
+			Competencia competencia, Indicador indicador, char estatus,
 			Set<DesempennoIndividual> desempennoIndividuals,
 			Set<DesempennoColectivo> desempennoColectivos) {
 		this.codigoIndicadorCategoriaCompetencia = codigoIndicadorCategoriaCompetencia;
 		this.categoria = categoria;
 		this.competencia = competencia;
 		this.indicador = indicador;
+		this.estatus = estatus;
 		this.desempennoIndividuals = desempennoIndividuals;
 		this.desempennoColectivos = desempennoColectivos;
 	}
@@ -93,6 +96,15 @@ public class IndicadorCategoriaCompetencia implements java.io.Serializable {
 
 	public void setIndicador(Indicador indicador) {
 		this.indicador = indicador;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "indicadorCategoriaCompetencia")

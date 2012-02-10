@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,11 +26,13 @@ public class Juego implements java.io.Serializable {
 	private int codigoJuego;
 	private Estadio estadio;
 	private Competencia competencia;
+	private FaseCompetencia faseCompetencia;
 	private DatoBasico datoBasico;
 	private Date horaInicio;
 	private Date fecha;
 	private String observaciones;
-	private int cantidadInning;
+	private Integer cantidadInning;
+	private char estatus;
 	private Set<ActividadCalendario> actividadCalendarios = new HashSet<ActividadCalendario>(
 			0);
 	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
@@ -46,20 +48,22 @@ public class Juego implements java.io.Serializable {
 	}
 
 	public Juego(int codigoJuego, Estadio estadio, Competencia competencia,
-			DatoBasico datoBasico, Date horaInicio, Date fecha,
-			int cantidadInning) {
+			FaseCompetencia faseCompetencia, DatoBasico datoBasico,
+			Date horaInicio, Date fecha, char estatus) {
 		this.codigoJuego = codigoJuego;
 		this.estadio = estadio;
 		this.competencia = competencia;
+		this.faseCompetencia = faseCompetencia;
 		this.datoBasico = datoBasico;
 		this.horaInicio = horaInicio;
 		this.fecha = fecha;
-		this.cantidadInning = cantidadInning;
+		this.estatus = estatus;
 	}
 
 	public Juego(int codigoJuego, Estadio estadio, Competencia competencia,
-			DatoBasico datoBasico, Date horaInicio, Date fecha,
-			String observaciones, int cantidadInning,
+			FaseCompetencia faseCompetencia, DatoBasico datoBasico,
+			Date horaInicio, Date fecha, String observaciones,
+			Integer cantidadInning, char estatus,
 			Set<ActividadCalendario> actividadCalendarios,
 			Set<MaterialActividad> materialActividads,
 			Set<EquipoJuego> equipoJuegos,
@@ -68,11 +72,13 @@ public class Juego implements java.io.Serializable {
 		this.codigoJuego = codigoJuego;
 		this.estadio = estadio;
 		this.competencia = competencia;
+		this.faseCompetencia = faseCompetencia;
 		this.datoBasico = datoBasico;
 		this.horaInicio = horaInicio;
 		this.fecha = fecha;
 		this.observaciones = observaciones;
 		this.cantidadInning = cantidadInning;
+		this.estatus = estatus;
 		this.actividadCalendarios = actividadCalendarios;
 		this.materialActividads = materialActividads;
 		this.equipoJuegos = equipoJuegos;
@@ -109,6 +115,16 @@ public class Juego implements java.io.Serializable {
 
 	public void setCompetencia(Competencia competencia) {
 		this.competencia = competencia;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_fase_competencia", nullable = false)
+	public FaseCompetencia getFaseCompetencia() {
+		return this.faseCompetencia;
+	}
+
+	public void setFaseCompetencia(FaseCompetencia faseCompetencia) {
+		this.faseCompetencia = faseCompetencia;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -150,13 +166,22 @@ public class Juego implements java.io.Serializable {
 		this.observaciones = observaciones;
 	}
 
-	@Column(name = "cantidad_inning", nullable = false)
-	public int getCantidadInning() {
+	@Column(name = "cantidad_inning")
+	public Integer getCantidadInning() {
 		return this.cantidadInning;
 	}
 
-	public void setCantidadInning(int cantidadInning) {
+	public void setCantidadInning(Integer cantidadInning) {
 		this.cantidadInning = cantidadInning;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "juego")

@@ -1,7 +1,8 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -36,6 +39,7 @@ public class Jugador implements java.io.Serializable {
 	private String brazoLanzar;
 	private String posicionBateo;
 	private char estatus;
+	private Date fechaInscripcion;
 	private Set<RetiroTraslado> retiroTraslados = new HashSet<RetiroTraslado>(0);
 	private Set<TallaPorJugador> tallaPorJugadors = new HashSet<TallaPorJugador>(
 			0);
@@ -63,7 +67,7 @@ public class Jugador implements java.io.Serializable {
 			DatoBasico datoBasicoByCodigoParroquiaNacimiento,
 			PersonaNatural personaNatural, Integer numero, String tipoDeSangre,
 			Double peso, Double altura, String brazoLanzar,
-			String posicionBateo, char estatus,
+			String posicionBateo, char estatus, Date fechaInscripcion,
 			Set<RetiroTraslado> retiroTraslados,
 			Set<TallaPorJugador> tallaPorJugadors,
 			Set<FamiliarJugador> familiarJugadors, Set<DatoMedico> datoMedicos,
@@ -81,6 +85,7 @@ public class Jugador implements java.io.Serializable {
 		this.brazoLanzar = brazoLanzar;
 		this.posicionBateo = posicionBateo;
 		this.estatus = estatus;
+		this.fechaInscripcion = fechaInscripcion;
 		this.retiroTraslados = retiroTraslados;
 		this.tallaPorJugadors = tallaPorJugadors;
 		this.familiarJugadors = familiarJugadors;
@@ -198,6 +203,16 @@ public class Jugador implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "fecha_inscripcion", length = 13)
+	public Date getFechaInscripcion() {
+		return this.fechaInscripcion;
+	}
+
+	public void setFechaInscripcion(Date fechaInscripcion) {
+		this.fechaInscripcion = fechaInscripcion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")

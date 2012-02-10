@@ -54,7 +54,7 @@
 												<hbox width="100%">
 													<textbox
 														id="txtNombre" value="@{cntrl.competencia.nombre}"
-														constraint="no empty:El campo 'nombre' es obligatorio"
+														
 														width="98%">
 													</textbox>
 
@@ -102,14 +102,14 @@
 												</label>
 												<datebox
 													id="datefechaInicio"
-													value="@{cntrl.competencia.fechaInicio}">
+													value="@{cntrl.competencia.fechaInicio}" readonly="true">
 												</datebox>
 
 												<label
 													value="Fecha Fin">
 												</label>
 												<datebox
-													id="datefechaFin" value="@{cntrl.competencia.fechaFin}">
+													id="datefechaFin" value="@{cntrl.competencia.fechaFin}" readonly="true">
 												</datebox>
 											</row>
 
@@ -428,7 +428,7 @@
 											label="@{categoriaCompetencia.categoria.nombre}">
 										</listcell>
 										<listcell>
-											<timebox id="spnHora"
+											<timebox id="spnHora" 
 												value="@{categoriaCompetencia.duracionHora}" />
 										</listcell>
 										<!-- <spinner id="spnHora" value="@{categoriaCompetencia.duracionHora}" cols="5" constraint="no empty,min 0 max 25"></spinner> -->
@@ -533,19 +533,31 @@
 			</tabbox>
 
 			<!-- BOTONES -->
-			<div>
-				<div align="right" height="30px">
+			
+		<grid oddRowSclass="none">
+
+			<columns>
+				<column width="25%"/>
+				<column width="75%"/>
+			</columns>
+
+			<rows>
+
+				<row style="border-style:none" spans="1,3">
+
+			<hbox>
+				<div align="left" height="30px">	
 				    
 				    <button id="btnApertura" disabled="false"
-						image="/Recursos/Imagenes/guardar.ico" label="Apertura"
-						orient="horizontal" width="90px">
+						image="/Recursos/Imagenes/apertura.png" 
+						orient="horizontal" width="120px">
 					</button>
-					
-					 <button id="btnClausura"  disabled="true"
-						image="/Recursos/Imagenes/guardar.ico" label="Clausura"
-						orient="horizontal" width="90px">
-					</button>
-				   
+				</div>	
+		</hbox>
+	
+	<div align="right" height="30px">	
+		<hbox >	
+			<div align="right" height="30px">	   
 					<button id="btnGuardar"
 						image="/Recursos/Imagenes/guardar.ico" label="Guardar"
 						orient="horizontal" width="90px">
@@ -566,6 +578,17 @@
 						orient="horizontal" width="90px">
 					</button>
 				</div>
+
+		</hbox>
+		</div>
+				</row>
+			
+			
+			</rows>
+		</grid>
+			
+			
+			<div>
 			</div>
 		</window>
 

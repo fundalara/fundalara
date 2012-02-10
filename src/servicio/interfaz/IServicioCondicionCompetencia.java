@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.ClasificacionCompetencia;
 import modelo.CondicionCompetencia;
 import modelo.DatoBasico;
 
@@ -15,6 +16,9 @@ public interface IServicioCondicionCompetencia {
 
 	public abstract List<CondicionCompetencia> listarActivos();
 	
-	public List<CondicionCompetencia> listarCondicion(DatoBasico cc);
+	public abstract List<CondicionCompetencia> listarCondicion(DatoBasico cc);
+
+	public abstract List<CondicionCompetencia> listarCondicionSeleccionada(
+			ClasificacionCompetencia cc);
 
 }

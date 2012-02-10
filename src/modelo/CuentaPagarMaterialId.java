@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,14 +12,14 @@ import javax.persistence.Embeddable;
 public class CuentaPagarMaterialId implements java.io.Serializable {
 
 	private int codigoMaterial;
-	private String origen;
+	private int codigoCuentaPagar;
 
 	public CuentaPagarMaterialId() {
 	}
 
-	public CuentaPagarMaterialId(int codigoMaterial, String origen) {
+	public CuentaPagarMaterialId(int codigoMaterial, int codigoCuentaPagar) {
 		this.codigoMaterial = codigoMaterial;
-		this.origen = origen;
+		this.codigoCuentaPagar = codigoCuentaPagar;
 	}
 
 	@Column(name = "codigo_material", nullable = false)
@@ -31,13 +31,13 @@ public class CuentaPagarMaterialId implements java.io.Serializable {
 		this.codigoMaterial = codigoMaterial;
 	}
 
-	@Column(name = "origen", nullable = false)
-	public String getOrigen() {
-		return this.origen;
+	@Column(name = "codigo_cuenta_pagar", nullable = false)
+	public int getCodigoCuentaPagar() {
+		return this.codigoCuentaPagar;
 	}
 
-	public void setOrigen(String origen) {
-		this.origen = origen;
+	public void setCodigoCuentaPagar(int codigoCuentaPagar) {
+		this.codigoCuentaPagar = codigoCuentaPagar;
 	}
 
 	public boolean equals(Object other) {
@@ -50,17 +50,15 @@ public class CuentaPagarMaterialId implements java.io.Serializable {
 		CuentaPagarMaterialId castOther = (CuentaPagarMaterialId) other;
 
 		return (this.getCodigoMaterial() == castOther.getCodigoMaterial())
-				&& ((this.getOrigen() == castOther.getOrigen()) || (this
-						.getOrigen() != null && castOther.getOrigen() != null && this
-						.getOrigen().equals(castOther.getOrigen())));
+				&& (this.getCodigoCuentaPagar() == castOther
+						.getCodigoCuentaPagar());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
 		result = 37 * result + this.getCodigoMaterial();
-		result = 37 * result
-				+ (getOrigen() == null ? 0 : this.getOrigen().hashCode());
+		result = 37 * result + this.getCodigoCuentaPagar();
 		return result;
 	}
 

@@ -78,8 +78,20 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
 		inicializar();
+		btnMoverDerecha.setDisabled(true);
+		btnMoverIzquierda.setDisabled(true);
+		btnMoverDerechaColectivo.setDisabled(true);
+		btnMoverIzquierdaColectivo.setDisabled(true);
 		TipoDato modalidadIndicador = servicioTipoDato.buscarPorTipo("MODALIDAD INDICADOR");
 		lsbxModalidadIndicador = servicioDatoBasico.buscarPorTipoDato(modalidadIndicador);
+		btnMoverDerecha.setDisabled(true);
+		btnMoverIzquierda.setDisabled(true);
+		btnMoverDerechaColectivo.setDisabled(true);
+		btnMoverIzquierdaColectivo.setDisabled(true);	
+		cmbSeleccionarCategoria.setDisabled(true);
+		cmbSeleccionarCategoriaColectivo.setDisabled(true);
+		cmbSeleccionarModalidad.setDisabled(true);
+		cmbSeleccionarModalidadColectivo.setDisabled(true);
 		formulario = c;
 	}
 
@@ -106,12 +118,15 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		cmbSeleccionarModalidad.setReadonly(false);
 		cmbSeleccionarCategoriaColectivo.setReadonly(false);
 		cmbSeleccionarModalidadColectivo.setReadonly(false);
+		cmbSeleccionarCategoria.setDisabled(false);
+		cmbSeleccionarCategoriaColectivo.setDisabled(false);
+		cmbSeleccionarModalidad.setDisabled(false);
+		cmbSeleccionarModalidadColectivo.setDisabled(false);
 		btnGuardar.setDisabled(false);
 		btnCancelar.setDisabled(false);
 		lsbxIndicadores.setDisabled(false);
 		lsbxIndicadoresSeleccionados.setDisabled(false);
-		btnMoverDerecha.setDisabled(false);
-		btnMoverIzquierda.setDisabled(false);
+
 		
 	}
 	
@@ -129,6 +144,14 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		indicadores = new ArrayList<Indicador>();
 		indicadoresColectivo = new ArrayList<Indicador>();
 		eliminar = new ArrayList<IndicadorCategoriaCompetencia>();
+		btnMoverDerecha.setDisabled(true);
+		btnMoverIzquierda.setDisabled(true);
+		btnMoverDerechaColectivo.setDisabled(true);
+		btnMoverIzquierdaColectivo.setDisabled(true);
+		cmbSeleccionarCategoria.setDisabled(true);
+		cmbSeleccionarCategoriaColectivo.setDisabled(true);
+		cmbSeleccionarModalidad.setDisabled(true);
+		cmbSeleccionarModalidadColectivo.setDisabled(true);
 		
 		
 	}
@@ -188,12 +211,15 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	
 	public void onClick$btnGuardar() throws InterruptedException {
 		for (int i=0;i<indicadoresSeleccionados.size();i++){
-			servicioCategoriaCompetencia.agregar(indicadoresSeleccionados.get(i));
+			servicioIndicadorCategoriaCompetencia.agregar(indicadoresSeleccionados.get(i));
 		}
 		for (int i=0;i<indicadoresSeleccionadosColectivos.size();i++){
-			servicioCategoriaCompetencia.agregar(indicadoresSeleccionadosColectivos.get(i));
+			servicioIndicadorCategoriaCompetencia.agregar(indicadoresSeleccionadosColectivos.get(i));
 		}
 		
+		for (int i=0;i<eliminar.size();i++){
+			servicioIndicadorCategoriaCompetencia.eliminar(eliminar.get(i));
+		}
 		
 			
 		Messagebox.show("Datos agregados exitosamente", "Mensaje",
@@ -221,6 +247,8 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 				Categoria cat = (Categoria) cmbSeleccionarCategoria.getSelectedItem().getValue();
 			    DatoBasico db = (DatoBasico) cmbSeleccionarModalidad.getSelectedItem().getValue();
 				indicadoresSeleccionados = servicioIndicadorCategoriaCompetencia.listarIndicadoresIndividualesPorCategoria(cat, competencia,db);
+			    btnMoverDerecha.setDisabled(false);
+			    btnMoverIzquierda.setDisabled(false);
 			}
 		}
 		binder.loadAll();
@@ -235,6 +263,8 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 				Categoria cat = (Categoria) cmbSeleccionarCategoriaColectivo.getSelectedItem().getValue();
 			    DatoBasico db = (DatoBasico) cmbSeleccionarModalidadColectivo.getSelectedItem().getValue();
 				indicadoresSeleccionadosColectivos = servicioIndicadorCategoriaCompetencia.listarIndicadoresColectivosPorCategoria(cat, competencia,db);
+				btnMoverDerechaColectivo.setDisabled(false);
+			    btnMoverIzquierdaColectivo.setDisabled(false);
 			}
 		}
 		binder.loadAll();
@@ -273,7 +303,7 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
 			Listitem li = (Listitem) i.next();
 			IndicadorCategoriaCompetencia icc = (IndicadorCategoriaCompetencia) li.getValue();
-			if (icc.getCodigoIndicadorCategoriaCompetencia() == 0)
+			if (icc.getCodigoIndicadorCategoriaCompetencia() != 0)
 				eliminar.add(icc);
 			lista.remove(icc);
 		}

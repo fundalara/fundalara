@@ -1,15 +1,16 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,44 +20,71 @@ import javax.persistence.Table;
 @Table(name = "fase_competencia", schema = "public")
 public class FaseCompetencia implements java.io.Serializable {
 
-	private FaseCompetenciaId id;
+	private int codigoFaseCompetencia;
 	private Competencia competencia;
+	private int numeroFase;
 	private int equipoIngresan;
 	private int equipoClasifican;
 	private char estatus;
+	private Set<Juego> juegos = new HashSet<Juego>(0);
+	private Set<EquipoFaseCompetencia> equipoFaseCompetencias = new HashSet<EquipoFaseCompetencia>(
+			0);
 
 	public FaseCompetencia() {
 	}
 
-	public FaseCompetencia(FaseCompetenciaId id, Competencia competencia,
-			int equipoIngresan, int equipoClasifican, char estatus) {
-		this.id = id;
+	public FaseCompetencia(int codigoFaseCompetencia, Competencia competencia,
+			int numeroFase, int equipoIngresan, int equipoClasifican,
+			char estatus) {
+		this.codigoFaseCompetencia = codigoFaseCompetencia;
 		this.competencia = competencia;
+		this.numeroFase = numeroFase;
 		this.equipoIngresan = equipoIngresan;
 		this.equipoClasifican = equipoClasifican;
 		this.estatus = estatus;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoCompetencia", column = @Column(name = "codigo_competencia", nullable = false)),
-			@AttributeOverride(name = "numeroFase", column = @Column(name = "numero_fase", nullable = false)) })
-	public FaseCompetenciaId getId() {
-		return this.id;
+	public FaseCompetencia(int codigoFaseCompetencia, Competencia competencia,
+			int numeroFase, int equipoIngresan, int equipoClasifican,
+			char estatus, Set<Juego> juegos,
+			Set<EquipoFaseCompetencia> equipoFaseCompetencias) {
+		this.codigoFaseCompetencia = codigoFaseCompetencia;
+		this.competencia = competencia;
+		this.numeroFase = numeroFase;
+		this.equipoIngresan = equipoIngresan;
+		this.equipoClasifican = equipoClasifican;
+		this.estatus = estatus;
+		this.juegos = juegos;
+		this.equipoFaseCompetencias = equipoFaseCompetencias;
 	}
 
-	public void setId(FaseCompetenciaId id) {
-		this.id = id;
+	@Id
+	@Column(name = "codigo_fase_competencia", unique = true, nullable = false)
+	public int getCodigoFaseCompetencia() {
+		return this.codigoFaseCompetencia;
+	}
+
+	public void setCodigoFaseCompetencia(int codigoFaseCompetencia) {
+		this.codigoFaseCompetencia = codigoFaseCompetencia;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_competencia", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_competencia", nullable = false)
 	public Competencia getCompetencia() {
 		return this.competencia;
 	}
 
 	public void setCompetencia(Competencia competencia) {
 		this.competencia = competencia;
+	}
+
+	@Column(name = "numero_fase", nullable = false)
+	public int getNumeroFase() {
+		return this.numeroFase;
+	}
+
+	public void setNumeroFase(int numeroFase) {
+		this.numeroFase = numeroFase;
 	}
 
 	@Column(name = "equipo_ingresan", nullable = false)
@@ -84,6 +112,25 @@ public class FaseCompetencia implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "faseCompetencia")
+	public Set<Juego> getJuegos() {
+		return this.juegos;
+	}
+
+	public void setJuegos(Set<Juego> juegos) {
+		this.juegos = juegos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "faseCompetencia")
+	public Set<EquipoFaseCompetencia> getEquipoFaseCompetencias() {
+		return this.equipoFaseCompetencias;
+	}
+
+	public void setEquipoFaseCompetencias(
+			Set<EquipoFaseCompetencia> equipoFaseCompetencias) {
+		this.equipoFaseCompetencias = equipoFaseCompetencias;
 	}
 
 }

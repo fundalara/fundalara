@@ -47,6 +47,7 @@ import comun.Inning;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDatoBasico;
+import servicio.implementacion.ServicioJuego;
 import servicio.implementacion.ServicioLineUp;
 import servicio.implementacion.ServicioPersonalForaneo;
 
@@ -82,6 +83,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	ServicioPersonalForaneo servicioPersonalForaneo;
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	ServicioLineUp servicioLineUp;
+	ServicioJuego servicioJuego;
 	List<PersonalForaneo> umpires;
 	List<DatoBasico> posiciones;
 	Combobox cmbUmpires;
@@ -131,7 +133,8 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	}
 
 	public void onCreate$FrmRegistroResultados() {
-		juego = (Juego) formulario.getVariable("juego", false);
+		int codigo = (Integer) formulario.getVariable("juego", false);
+		juego = servicioJuego.buscarJuego(codigo);
 		equipos = ConvertirConjuntoALista(juego.getEquipoJuegos());
 		
 		equipoA = equipos.get(0).getEquipoCompetencia().getEquipo();
@@ -183,19 +186,17 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	
 	public void onIndividualesA(){
 
-		int contP = servicioLineUp.listarPlanificados(juego, equipoB).size();
-    	int contD = servicioLineUp.listarDefinitivos(juego, equipoB).size();
+		int contP = servicioLineUp.listarPlanificados(juego, equipoA).size();
+    	int contD = servicioLineUp.listarDefinitivos(juego, equipoA).size();
 		Component f;
-		
-		//if (contD == 9)
+		if (contD >= 9)
 			f = Executions.createComponents("/Competencias/Vistas/FrmResultadosIndividuales.zul",null,null);
-		//else 
-			//f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);	
-		
+		else 
+			f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);	
 		Window w = (Window)f;
 		w.setPosition("center");   	
 	    w.setVariable("equipo",equipos.get(0).getEquipoCompetencia(),false);
-	    w.setVariable("juego",juego,false);
+	    w.setVariable("juego",juego.getCodigoJuego(),false);
 	    w.doHighlighted();
 	}
 	
@@ -204,8 +205,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
     	int contP = servicioLineUp.listarPlanificados(juego, equipoB).size();
     	int contD = servicioLineUp.listarDefinitivos(juego, equipoB).size();
     	Component f;
-    	
-    	if (contD == 9)
+    	if (contD >= 9)
 			f = Executions.createComponents("/Competencias/Vistas/FrmResultadosIndividuales.zul",null,null);
 		else 
 			f = Executions.createComponents("/Competencias/Vistas/FrmCargarLineUp.zul",null,null);	
@@ -213,7 +213,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	    Window w = (Window)f;
 		w.setPosition("center");
 		w.setVariable("equipo",equipos.get(1).getEquipoCompetencia(),false);
-		w.setVariable("juego",juego,false);
+		w.setVariable("juego",juego.getCodigoJuego(),false);
 		w.doHighlighted();
 	}
     

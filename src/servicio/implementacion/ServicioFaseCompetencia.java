@@ -13,11 +13,9 @@ import modelo.Competencia;
 import modelo.FaseCompetencia;
 
 public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
-    
-	
+
 	DaoFaseCompetencia daoFaseCompetencia;
-	
-	
+
 	public DaoFaseCompetencia getDaoFaseCompetencia() {
 		return daoFaseCompetencia;
 	}
@@ -33,34 +31,52 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 	}
 
 	@Override
-	public void agregar(List<FaseCompetencia> lista,int comp) {
+	public void agregar(List<FaseCompetencia> lista, int comp) {
 		// TODO Auto-generated method stub
-		
-		for (Iterator i= lista.iterator(); i.hasNext();){
+
+		for (Iterator i = lista.iterator(); i.hasNext();) {
 			FaseCompetencia id = (FaseCompetencia) i.next();
-			
+
 			id.getCompetencia().setCodigoCompetencia(comp);
 			id.setEstatus('A');
-				
-//			FaseCompetenciaId faseID= new FaseCompetenciaId();
-//			faseID.setCodigoCompetencia(comp);
+
+			// FaseCompetenciaId faseID= new FaseCompetenciaId();
+			// faseID.setCodigoCompetencia(comp);
 
 			id.getId().setCodigoCompetencia(comp);
-//			id.setId(faseID);
-			
-			daoFaseCompetencia.guardar(id);		
-	    }
-		
+			// id.setId(faseID);
+
+			daoFaseCompetencia.guardar(id);
+		}
 
 	}
-
-
-	/*@Override
-	public void actualizar(FaseCompetencia fc) {
-		// TODO Auto-generated method stub
-
-	}*/
 	
+	
+	@Override
+	public void actualizar(List<FaseCompetencia> lista1, Competencia comp) {
+		// TODO Auto-generated method stub
+		
+		int cod_comp = comp.getCodigoCompetencia();
+		for (Iterator i= lista1.iterator(); i.hasNext();){
+			FaseCompetencia fc = (FaseCompetencia) i.next();
+
+			fc.getCompetencia().setCodigoCompetencia(cod_comp);
+			fc.getId().setCodigoCompetencia(cod_comp);
+			fc.setEstatus('A');
+			
+			daoFaseCompetencia.actualizar(fc);
+	    }	
+		
+				
+	}
+
+	/*
+	 * @Override public void actualizar(FaseCompetencia fc) { // TODO
+	 * Auto-generated method stub
+	 * 
+	 * }
+	 */
+
 	@Override
 	public List<FaseCompetencia> listar() {
 		return daoFaseCompetencia.listar(FaseCompetencia.class);
@@ -80,5 +96,15 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 	@Override
 	public FaseCompetencia EquiposRegistrados(Competencia competencia) {
 		return daoFaseCompetencia.EquiposRegistrados(competencia);
-}
+	}
+
+	@Override
+	public List<FaseCompetencia> listarFaseCompetencia(Competencia cp) {
+		return daoFaseCompetencia.listarFaseCompetencia(cp);
+	}
+
+	@Override
+	public List<FaseCompetencia> listarPorCompetencia(int codigo) {
+		return daoFaseCompetencia.listarPorCompetencia(codigo);
+	}
 }

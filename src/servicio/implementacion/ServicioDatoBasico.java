@@ -166,4 +166,9 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	public List<DatoBasico> listarTipoMantenimiento() {
 		return this.daoDatoBasico.listarTipoMantenimiento();
 	}
+	
+	@Override
+	public List<DatoBasico> listarPersonalForaneo(DatoBasico datoBasico) {
+		return daoDatoBasico.listarPersonalForaneo(datoBasico);
+	}
 }

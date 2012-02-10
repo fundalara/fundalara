@@ -1,5 +1,6 @@
 package controlador.competencia;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;//
 import java.util.Collection;
 import java.util.Collections;//
@@ -25,6 +26,7 @@ import modelo.LapsoDeportivo;
 import modelo.DatoBasico;
 //import modelo.ModalidadCompetencia;
 import modelo.Categoria;
+import modelo.EquipoJuego;
 import modelo.Liga;
 import modelo.FaseCompetencia;
 import modelo.TipoDato;
@@ -36,6 +38,7 @@ import modelo.ClasificacionCompetencia;
 import org.zkoss.zk.scripting.Namespace;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.InputEvent;
@@ -78,43 +81,33 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 
 	Competencia competencia;
 
+	ServicioCategoria servicioCategoria;
+	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
 	ServicioCompetencia servicioCompetencia;
-	// ServicioTipoCompetencia servicioTipoCompetencia;
-	ServicioLapsoDeportivo servicioLapsoDeportivo;
 	ServicioDatoBasico servicioDatoBasico;
-	// ServicioModalidadCompetencia servicioModalidadCompetencia;
-	ServicioCategoria servicioCategoria;
-	ServicioLiga servicioLiga, servicioLigaAux;
-	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	ServicioFaseCompetencia servicioFaseCompetencia;
+	ServicioLapsoDeportivo servicioLapsoDeportivo;
+	ServicioLiga servicioLiga, servicioLigaAux;
 
 	// List<ClasificacionCompetencia> clasificacionCompetencias;
-	List<DatoBasico> tiposCompetencias;
-	List<ClasificacionCompetencia> clasificacionCompetencias;
-
-	// List<TipoCompetencia> tipoCompetencias;
-
-	List<LapsoDeportivo> lapsoDeportivos;
-	List<DatoBasico> estados, OrganizacionCompetencias;
-	// List<ModalidadCompetencia> modalidadCompetencias;
 	List<Categoria> categorias, categoriaLigas2;
-	List<Liga> ligas, ligasAux = new ArrayList<Liga>();
-	List<String> fases = new ArrayList<String>();
 	List<CategoriaCompetencia> categoriaCompetencias = new ArrayList<CategoriaCompetencia>(),
 			categoriaCompetenciasAux = new ArrayList<CategoriaCompetencia>(),
 			categoriaLigas = new ArrayList<CategoriaCompetencia>();
-	List<FaseCompetencia> faseCompetencias = new ArrayList<FaseCompetencia>();
+	List<ClasificacionCompetencia> clasificacionCompetencias;
+	List<DatoBasico> tiposCompetencias,estados, OrganizacionCompetencias;;
+	List<FaseCompetencia> faseCompetencias = new ArrayList<FaseCompetencia>(), faseCompetenciasAux = new ArrayList<FaseCompetencia>();
+	List<LapsoDeportivo> lapsoDeportivos;
+	List<Liga> ligas, ligasAux = new ArrayList<Liga>();
 
-	// TipoCompetencia tipoCompetencia;
 	ClasificacionCompetencia clacificacionCompetencia;
 	LapsoDeportivo lapsoDeportivo;
 	DatoBasico datoBasio, organizacionCompetencia, estado;
-	// ModalidadCompetencia modalidadCompetencia;
 	Categoria categoria;
 	Liga liga, ligaAux;
-	FaseCompetencia faseCompetencia = new FaseCompetencia();
-	FaseCompetenciaId faseID = new FaseCompetenciaId();
+	FaseCompetencia faseCompetencia;
+	FaseCompetenciaId faseID;
 	CategoriaCompetencia categoriaCompetencia, ligaCategCompetencia;
 	CategoriaCompetenciaId categCompID;
 
@@ -128,15 +121,17 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 	Listitem itemFases;
 	Panel pnlCategorias;
 	Spinner spnNroFases, spnNroJugadores;
-	Tab tabLigaPorCompetencia, tabCategoriaPorCompetencia;
-	Textbox txtNombre;
+	Tab tabRegistrosBasicos, tabLigaPorCompetencia, tabCategoriaPorCompetencia;
+	Textbox txtNombre,txtcondicionesGenerales,txtdesempate,txtextrainning;
 
 	String fase, tipoOrg;
 
-	int ining, horas;
+	int ining, horas ;
+	int codigoliga;
+	boolean actualizar = false;
+	DatoBasico dato;
+	TipoDato tipo;
 
-	private Image img;
-	private EventListener arg;
 
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
@@ -144,16 +139,20 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		formulario = c;
 		competencia = new Competencia();
 		tipoOrg = new String();
-		// clasificacionCompetencias =
-		// servicioClasificacionCompetencia.listarActivos();
-		tiposCompetencias = servicioDatoBasico
-				.listarTipoDato("TIPO COMPETENCIA");
+		tipo = new TipoDato();
+		dato = new DatoBasico();
+		faseCompetencia = new FaseCompetencia();
+		faseID = new FaseCompetenciaId();
+		tiposCompetencias = servicioDatoBasico.listarTipoDato("TIPO COMPETENCIA");
+		ordenarDatoBasico(tiposCompetencias);
 		lapsoDeportivos = servicioLapsoDeportivo.listarActivos();
+		ordenarlapso(lapsoDeportivos);
 		estados = servicioDatoBasico.listarEstados();
-		ordenarEstado(estados);
-		OrganizacionCompetencias = servicioDatoBasico
-				.listarOrganizacionCompetencia();
+		ordenarDatoBasico(estados);
+		OrganizacionCompetencias = servicioDatoBasico.listarOrganizacionCompetencia();
+		ordenarDatoBasico(OrganizacionCompetencias);
 		categorias = servicioCategoria.listarActivos();
+		
 		ligas = servicioLiga.listarActivos();
 		ordenarLiga(ligas);
 		competencia.setCantidadFase(1);
@@ -161,21 +160,24 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		txtmontoInscripcion.setText("");
 
 		faseID.setNumeroFase(1);
-		faseCompetencia.setId(faseID);
+		
+//		faseCompetencia.setId(faseID);
 		faseCompetencia.setEquipoIngresan(2);
 		faseCompetencia.setEquipoClasifican(2);
 		faseCompetencias.add(faseCompetencia);
+		
+		cmbClasificacion.setDisabled(true);
 
 		// datefechaInicio.setDisabled(true);
 		// datefechaFin.setDisabled(true);
+		codigoliga = 0;
 	}
 
 	// Habilita y desabilita los tabs de LigaPorCategoria y
 	// CategoriaPorCompetencia
 	public void onChange$cmbTipoOrganizacion() {
 
-		DatoBasico org = (DatoBasico) cmbTipoOrganizacion.getSelectedItem()
-				.getValue();
+		DatoBasico org = (DatoBasico) cmbTipoOrganizacion.getSelectedItem().getValue();
 
 		if (org.getCodigoDatoBasico() == 312) {
 			tabLigaPorCompetencia.setVisible(false);
@@ -190,29 +192,16 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		}
 	}
 
+	
 	public void onChanging$spnNroFases(InputEvent event) {
 
 		faseCompetencias.removeAll(faseCompetencias);
-
 		Integer cantFases = Integer.valueOf(event.getValue());
-
 		agregarFases(cantFases);
-		/*
-		 * for(int i =1;i<=cantFases;i++){
-		 * 
-		 * faseCompetencia = new FaseCompetencia(); FaseCompetenciaId faseID =
-		 * new FaseCompetenciaId();
-		 * 
-		 * faseID.setNumeroFase(i);
-		 * 
-		 * faseCompetencia.setId(faseID);
-		 * System.out.println(faseCompetencia.getId().getNumeroFase());
-		 * faseCompetencias.add(faseCompetencia); binder.loadAll();
-		 * 
-		 * }
-		 */
-	}
 
+	}
+	
+	
 	// Agrega fases de la cometencia segun la cantidad de fases indicada
 	public void agregarFases(int cantfase) {
 
@@ -222,104 +211,144 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 			FaseCompetenciaId faseID = new FaseCompetenciaId();
 			faseID.setNumeroFase(i);
 
-			faseCompetencia.setId(faseID);
+//			faseCompetencia.setId(faseID);
 			faseCompetencia.setCompetencia(competencia);
-			// System.out.println(faseCompetencia.getId().getNumeroFase());
+			faseCompetencia.setEquipoIngresan(2);
+			faseCompetencia.setEquipoClasifican(2);
 			faseCompetencias.add(faseCompetencia);
 			binder.loadAll();
 
 		}
 	}
 
+	
 	// Determina los valores tope para las fechas de inicio y de fin
 	public void onChange$cmbTemporada() {
 
-		LapsoDeportivo lapso = (LapsoDeportivo) cmbTemporada.getSelectedItem()
-				.getValue();
-		// Date fechainicio = lapso.getFechaInicio();
-		// Date fechafin = lapso.getFechaFin();
-		// binder.loadAll();
-		//
-		//
-		// datefechaInicio.setValue(fechainicio);
-		// datefechaFin.setValue(fechafin);
-		//
-		// datefechaInicio.setDisabled(false);
-		// datefechaFin.setDisabled(false);
+		LapsoDeportivo lapso = (LapsoDeportivo) cmbTemporada.getSelectedItem().getValue();
+		Date fechamin = lapso.getFechaInicio();
+		Date fechamax = lapso.getFechaFin();
+		binder.loadAll();
 
+		String fechaminima, fechamaxima;
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		fechaminima=formato.format(lapso.getFechaInicio());
+		fechamaxima=formato.format(lapso.getFechaFin());
+		
+		if(datefechaInicio.getText()!=""){		
+			Date fechainicio = datefechaInicio.getValue(); 
+			
+			if(fechainicio.before(fechamin)){
+				
+				throw new WrongValueException(datefechaInicio, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			} 
+			if(fechainicio.after(fechamax)){
+				
+				throw new WrongValueException(datefechaInicio, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			}		
+		}
+		if(datefechaFin.getText()!=""){
+			Date fechafin = datefechaFin.getValue();
+		
+			if(fechafin.before(fechamin)){
+		
+				throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			} 		
+			if(fechafin.after(fechamax)){
+			
+				throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			}
+		}
 	}
 
+	
 	// Valida que la fecha de inicio para la competencia sea correcta
-	public void onChange$datefechaInicio() throws InterruptedException {
+	public void onChange$datefechaInicio() {
 
-		// Date fecha;
-		//
-		// LapsoDeportivo lapso = (LapsoDeportivo)
-		// cmbTemporada.getSelectedItem().getValue();
-		// Date fechainicio = lapso.getFechaInicio();
-		// Date fechafin = lapso.getFechaFin();
-		//
-		// fecha = datefechaInicio.getValue();
-		//
-		// if (fecha.before(fechainicio)){
-		// Messagebox.show("Debe introducir una fecha dentro del rango("+fechainicio+" / "+fechafin+")",
-		// "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
-		// datefechaInicio.setValue(fechainicio);
-		// }
-		//
-		// if (fecha.after(fechafin)){
-		// Messagebox.show("Debe introducir una fecha dentro del rango("+fechainicio+" / "+fechafin+")",
-		// "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
-		// datefechaInicio.setValue(fechainicio);
-		// }
+		Date fecha = datefechaInicio.getValue();
+		binder.loadAll();
+	
+		if (cmbTemporada.getText().equalsIgnoreCase("-- Seleccione --")) {
+			
+		}else{
+			
+			LapsoDeportivo lapso = (LapsoDeportivo) cmbTemporada.getSelectedItem().getValue();
+			Date fechamin = lapso.getFechaInicio();
+			Date fechamax = lapso.getFechaFin();
+			
+			String fechaminima, fechamaxima, fechafin;
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			fechaminima=formato.format(lapso.getFechaInicio());
+			fechamaxima=formato.format(lapso.getFechaFin());
+			
+			if(fecha.before(fechamin)){
+				datefechaInicio.setValue(fechamin);
+				throw new WrongValueException(datefechaInicio, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+				
+			} 
+			if(fecha.after(fechamax)){
+				datefechaInicio.setValue(fechamax);
+				throw new WrongValueException(datefechaInicio, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			}
+			if (datefechaFin.getText()!="") {
+				fechafin=formato.format(datefechaFin.getValue());	
+				
+				if(fecha.after(datefechaFin.getValue())){ 				
+					throw new WrongValueException(datefechaInicio, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechafin+")");
+				}
+			}
+		} 	
+	}		
 
+
+	public void onChange$datefechaFin() {
+
+		Date fecha = datefechaFin.getValue();
+		binder.loadAll();
+		
+		if (cmbTemporada.getText().equalsIgnoreCase("-- Seleccione --")) {
+			
+		}else{
+			
+			LapsoDeportivo lapso = (LapsoDeportivo) cmbTemporada.getSelectedItem().getValue();
+			Date fechamin = lapso.getFechaInicio();
+			Date fechamax = lapso.getFechaFin();
+			
+			String fechaminima, fechamaxima, fechainicio;
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			fechaminima=formato.format(lapso.getFechaInicio());
+			fechamaxima=formato.format(lapso.getFechaFin());
+			
+			if(fecha.before(fechamin)){
+				datefechaFin.setValue(fechamin);
+				throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			} 
+			if(fecha.after(fechamax)){
+				datefechaFin.setValue(fechamax);
+				throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha Valida("+fechaminima+" - "+fechamaxima+")");
+			}
+			if (datefechaInicio.getText()!="") {
+				fechainicio=formato.format(datefechaInicio.getValue());		
+				if(fecha.before(datefechaInicio.getValue())){
+					throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha Valida("+fechainicio+" - "+fechamaxima+")");
+				}
+			}
+			} 
 	}
 
-	public void onChange$datefechaFin() throws InterruptedException {
-
-		// Date fecha;
-		//
-		//
-		// LapsoDeportivo lapso = (LapsoDeportivo)
-		// cmbTemporada.getSelectedItem().getValue();
-		// Date fechainicio = lapso.getFechaInicio();
-		// Date fechafin = lapso.getFechaFin();
-		//
-		// fecha = datefechaFin.getValue();
-		//
-		//
-		// if (fecha.before(fechainicio)){
-		// Messagebox.show("Debe introducir una fecha dentro del rango("+fechainicio+" / "+fechafin+")",
-		// "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
-		// datefechaFin.setValue(fechafin);
-		// }
-		//
-		// if (fecha.after(fechafin)){
-		// Messagebox.show("Debe introducir una fecha dentro del rango("+fechainicio+" / "+fechafin+")",
-		// "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
-		// datefechaFin.setValue(fechafin);
-		// }
-
-	}
 
 	public void onChange$cmbTipoCompetencia() {
 
-		DatoBasico db = (DatoBasico) cmbTipoCompetencia.getSelectedItem()
-				.getValue();
-		System.out.println(db.getNombre());
+		DatoBasico db = (DatoBasico) cmbTipoCompetencia.getSelectedItem().getValue();
 
-		clasificacionCompetencias = servicioClasificacionCompetencia
-				.listarClasificacion(db);
-		cmbClasificacion.setText("--Seleccione--");
+		cmbClasificacion.setDisabled(false);
+		clasificacionCompetencias = servicioClasificacionCompetencia.listarClasificacion(db);
+		ordenarClasificacion(clasificacionCompetencias);
 
-		// TipoCompetencia tipocomp = (TipoCompetencia)
-		// cmbTipoCompetencia.getSelectedItem().getValue();
-
-		// modalidadCompetencias =
-		// servicioModalidadCompetencia.listarModalidad(tipocomp);
 		binder.loadAll();
 	}
 
+	
 	// Llama al metodo que permite seleccionar Ligas por Competencia
 	public void onClick$btnMoverD() {
 
@@ -351,11 +380,13 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 
 		int cant = ligasAux.size();
 
+
 		Set set = lsbxLigas.getSelectedItems();
 		for (Object obj : new ArrayList(set)) {
 			Liga lig = (Liga) ((Listitem) obj).getValue();
 
 			if (cant > 0) {
+
 				Set conjligasAux = ConvertirListaAConjunto(ligasAux);
 				Iterator iter = conjligasAux.iterator();
 				Liga ligaAux;
@@ -365,113 +396,91 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 
 					if (lig != ligaAux) {
 						ligasAux.add(lig);
-
-						categoriaLigas2 = ConvertirConjuntoALista(lig
-								.getCategorias());
+						categoriaLigas2 = ConvertirConjuntoALista(lig.getCategoriaLigas());
 
 						Set conj = ConvertirListaAConjunto(categoriaLigas2);
-
 						Iterator iter2 = conj.iterator();
-
 						Categoria cat;
 
 						while (iter2.hasNext()) {
 							cat = (Categoria) iter2.next();
 							// System.out.println(cat.getNombre());
-
 							CategoriaCompetencia cc = new CategoriaCompetencia();
-
 							cc.setCategoria(cat);
 							cc.setCompetencia(competencia);
 							// System.out.println(cc.getCategoria().getNombre());
 							categoriaLigas.add(cc);
 							binder.loadAll();
-
 						}
-
 						binder.loadAll();
 					}
-
 				}
 			} else {
 
 				ligasAux.add(lig);
+				lsbxligasCategorias.setVisible(true);
 
-				categoriaLigas2 = ConvertirConjuntoALista(lig.getCategorias());
-
+				categoriaLigas2 = ConvertirConjuntoALista(lig.getCategoriaLigas());
 				Set conj = ConvertirListaAConjunto(categoriaLigas2);
-
 				Iterator iter2 = conj.iterator();
-
 				Categoria cat;
 
 				while (iter2.hasNext()) {
 					cat = (Categoria) iter2.next();
 					// System.out.println(cat.getNombre());
-
 					CategoriaCompetencia cc = new CategoriaCompetencia();
-
 					cc.setCategoria(cat);
 					cc.setCompetencia(competencia);
 					// System.out.println(cc.getCategoria().getNombre());
 					categoriaLigas.add(cc);
 					binder.loadAll();
-
 				}
 
 				binder.loadAll();
-
 			}
 
 			binder.loadAll();
-
 		}
 		ordenarLiga(ligasAux);
-
 	}
+	
 
 	// Mueve las ligas del lsbxligasseleccionadas a lsbxLigas
 	public void seleccionarLigasI() {
+		
 		Set set = lsbxLigasSeleccionadas.getSelectedItems();
 		for (Object obj : new ArrayList(set)) {
 			Liga lig = (Liga) ((Listitem) obj).getValue();
 
 			// ligas.add(lig);
 			ligasAux.remove(lig);
-
-			categoriaLigas2 = ConvertirConjuntoALista(lig.getCategorias());
-
+			
+			if(ligasAux.size()<=0){lsbxligasCategorias.setVisible(false);}
+			
+			categoriaLigas2 = ConvertirConjuntoALista(lig.getCategoriaLigas());
 			Set conj = ConvertirListaAConjunto(categoriaLigas2);
-
 			Iterator iter = conj.iterator();
-
 			Categoria cat;
 
 			while (iter.hasNext()) {
 				cat = (Categoria) iter.next();
 				// System.out.println(cat.getNombre());
-
 				CategoriaCompetencia cc = new CategoriaCompetencia();
-
 				Set conjligacatg = ConvertirListaAConjunto(categoriaLigas);
-
 				Iterator iter2 = conjligacatg.iterator();
 
 				while (iter2.hasNext()) {
 					cc = (CategoriaCompetencia) iter2.next();
 
 					if (cat == cc.getCategoria()) {
-
 						categoriaLigas.remove(cc);
 					}
 				}
 				binder.loadAll();
-
 			}
-
 			// while (iter.hasNext()){ cat = (Categoria) iter.next();
 			// categoriaLigas.remove(cat);}
-
+			
 			binder.loadAll();
 		}
 		ordenarLiga(ligas);
@@ -491,19 +500,30 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 	}
 
 	// Ordena una lista de Estados por nombre
-	public void ordenarEstado(List<DatoBasico> estadoLista) {
+	public void ordenarDatoBasico(List<DatoBasico> datoLista) {
 
-		Collections.sort(estadoLista, new Comparator() {
+		Collections.sort(datoLista, new Comparator() {
 
 			public int compare(Object o1, Object o2) {
-				DatoBasico estado1 = (DatoBasico) o1;
-				DatoBasico estado2 = (DatoBasico) o2;
-				return estado1.getNombre().compareToIgnoreCase(
-						estado2.getNombre());
+				DatoBasico dato1 = (DatoBasico) o1;
+				DatoBasico dato2 = (DatoBasico) o2;
+				return dato1.getNombre().compareToIgnoreCase(dato2.getNombre());
 			}
 		});
 	}
 
+	public void ordenarClasificacion(List<ClasificacionCompetencia> clasiflista){
+		
+		Collections.sort(clasiflista, new Comparator() {
+
+		public int compare(Object o1, Object o2) {  
+			ClasificacionCompetencia clasif1 = (ClasificacionCompetencia) o1;  
+			ClasificacionCompetencia clasif2 = (ClasificacionCompetencia) o2;
+		    return clasif1.getNombre().compareToIgnoreCase(clasif2.getNombre());  
+		}
+		});  		
+	}	
+	
 	// Ordena una lista de LapsoDeportivo por nombre
 	public void ordenarlapso(List<LapsoDeportivo> lapsoLista) {
 
@@ -517,6 +537,21 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 			}
 		});
 	}
+	
+	
+	// Ordena una lista de LapsoDeportivo por nombre
+	public void ordenarCategorias(List<CategoriaCompetencia> categLista) {
+
+		for (Iterator i= categLista.iterator(); i.hasNext();){
+			
+		CategoriaCompetencia categ,categaux;
+		
+		categ = (CategoriaCompetencia) i.next();
+	
+		}
+			
+	}	
+	
 
 	// Agregado Convierte un conjunto a una lista...
 	public List ConvertirConjuntoALista(Set conjunto) {
@@ -556,49 +591,104 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 
 	public void onClick$btnBuscarCompetencia() {
 
+		clasificacionCompetencias = servicioClasificacionCompetencia.listarActivos();
+		binder.loadAll();		
+		
 		Component catalogo = Executions.createComponents(
 				"/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
 		catalogo.setVariable("formulario", formulario, false);
-		catalogo.setVariable("estatus", EstadoCompetencia.REGISTRADA, false);
+		catalogo.setVariable("estado_comp", EstadoCompetencia.REGISTRADA + EstadoCompetencia.APERTURADA, false);
 		catalogo.setVariable("codigo", EstadoCompetencia.REGISTRADA, false);
 
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				competencia = (Competencia) formulario.getVariable(
-						"competencia", false);
+				competencia = (Competencia) formulario.getVariable("competencia", false);
 
-				cmbTemporada.setSelectedIndex(buscarLapsoDeportivo(
-						competencia.getLapsoDeportivo(), lapsoDeportivos));
-				cmbEstado.setSelectedIndex(buscarDatoBasico(
-						competencia.getDatoBasicoByCodigoEstado(), estados));
-				cmbTipoOrganizacion.setSelectedIndex(buscarDatoBasico(
-						competencia.getDatoBasicoByCodigoOrganizacion(),
-						OrganizacionCompetencias));
-
-				DatoBasico org = (DatoBasico) cmbTipoOrganizacion
-						.getSelectedItem().getValue();
+				cmbTemporada.setSelectedIndex(buscarLapsoDeportivo(competencia.getLapsoDeportivo(), lapsoDeportivos));
+				cmbEstado.setSelectedIndex(buscarDatoBasico(competencia.getDatoBasicoByCodigoEstado(), estados));
+				cmbTipoOrganizacion.setSelectedIndex(buscarDatoBasico(competencia.getDatoBasicoByCodigoOrganizacion(),OrganizacionCompetencias));
+								
+				DatoBasico org = (DatoBasico) cmbTipoOrganizacion.getSelectedItem().getValue();
 
 				if (org.getCodigoDatoBasico() == 312) {
 					tabLigaPorCompetencia.setVisible(false);
 					tabCategoriaPorCompetencia.setVisible(true);
 					tipoOrg = "C";
+//					categoriaCompetencias = ConvertirConjuntoALista(competencia.getCategoriaCompetencias());
+					categoriaCompetencias = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
 
 				} else {
 					tabLigaPorCompetencia.setVisible(true);
 					tipoOrg = "L";
 					tabCategoriaPorCompetencia.setVisible(false);
+//					categoriaLigas = ConvertirConjuntoALista(competencia.getCategoriaCompetencias());
+					categoriaLigas = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
+					ligasAux.removeAll(ligasAux);
+					binder.loadAll();
+					
+					for (Iterator i= categoriaLigas.iterator(); i.hasNext();){						
+						CategoriaCompetencia id = (CategoriaCompetencia) i.next();
+														
+						List<Liga> lig =  ConvertirConjuntoALista(id.getCategoria().getCategoriaLigas());
+					
+						Set conjlig2 = ConvertirListaAConjunto(ligasAux);						
+						binder.loadAll();	
+						
+						for (Iterator i2 = lig.iterator(); i2.hasNext();){
+							Liga liga1 = (Liga) i2.next();
+						
+							binder.loadAll();
+							int cant = ligasAux.size();	
+							
+							if (cant == 0){
+								ligasAux.add(liga1);
+								binder.loadAll();							
+							}else{
+								Iterator iter = conjlig2.iterator();
+								Liga liga2;
+								boolean encont=false;
+								
+								while(iter.hasNext() && encont==false){
+									liga2 = (Liga) iter.next();
+								
+									codigoliga = liga2.getCodigoLiga();
+									binder.loadAll();
+									
+									if(liga1.getCodigoLiga()!=codigoliga){	
+									}
+									else{
+										encont=true;
+									}								
+								}
+								if (encont== false){ 	
+									ligasAux.add(liga1);
+								}
+								binder.loadAll();
+								}							
+							binder.loadAll();
+						}						
+					}
+					binder.loadAll();				
 				}
+                ordenarLiga(ligasAux);
+                cmbTipoCompetencia.setSelectedIndex(buscarDatoBasico(competencia.getClasificacionCompetencia().getDatoBasico(),tiposCompetencias));                     
+        		DatoBasico db = (DatoBasico) cmbTipoCompetencia.getSelectedItem().getValue();        		
 
-				categorias = ConvertirConjuntoALista(competencia
-						.getCategoriaCompetencias());
-
-                
-                cmbTipoCompetencia.setSelectedIndex(buscarDatoBasico(competencia.getClasificacionCompetencia().getDatoBasico(),tiposCompetencias));
-                cmbClasificacion.setText(competencia.getClasificacionCompetencia().getNombre());
+        		cmbClasificacion.setSelectedIndex(buscarClasificacion(competencia.getClasificacionCompetencia(),clasificacionCompetencias));               
+        		cmbClasificacion.setDisabled(false);
+                clasificacionCompetencias = servicioClasificacionCompetencia.listarClasificacion(db);
+//                faseCompetencias = ConvertirConjuntoALista(competencia.getFaseCompetencias());
+                faseCompetencias = servicioFaseCompetencia.listarPorCompetencia(competencia.getCodigoCompetencia());
+//                faseCompetenciasAux = ConvertirConjuntoALista(competencia.getFaseCompetencias());
+                spnNroFases.setDisabled(true);
+                btnMoverI.setDisabled(true);
+                btnMoverD.setDisabled(true);
+        		actualizar = true;
 				binder.loadAll();
 			}
 		});
+		
 	}
     	
 	public void llenar(List<DatoBasico> lista, Combobox combo) {
@@ -633,7 +723,35 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		}
 		return j;
 	}
+	
+	public int buscarClasificacion(ClasificacionCompetencia d, List l) {
+		int j = -1;
+		for (Iterator<ClasificacionCompetencia> i = l.iterator(); i.hasNext();) {
+			ClasificacionCompetencia db = i.next();
+			j++;
+			if (db.getNombre().equals(d.getNombre())) {
+				return j;
+			}
+		}
+		return j;
+	}
+	
+	
 
+	public int buscarTipoCompetencia(DatoBasico d, List l) {
+		int j = -1;
+		for (Iterator<LapsoDeportivo> i = l.iterator(); i.hasNext();) {
+			LapsoDeportivo db = i.next();
+			j++;
+			if (db.getNombre().equals(d.getNombre())) {
+				return j;
+			}
+		}
+		return j;
+	}	
+	
+	
+	
 	public void seleccionarCategoriasAGuardar(Listbox listaCategComp) {
 
 		Set set = listaCategComp.getSelectedItems();
@@ -645,26 +763,26 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 			categ.setCompetencia(competencia);
 			categoriaCompetenciasAux.add(categ);
 		}
-
 	}
 
+	
 	public void llevarAMayusculas() {
 
-		competencia.setNombre(competencia.getNombre().toUpperCase()
-				.toUpperCase());
-		competencia.setCondicionesGenerales(competencia
-				.getCondicionesGenerales().toUpperCase());
-		competencia.setDesempate(competencia.getDesempate().toUpperCase());
-		competencia.setExtrainning(competencia.getExtrainning().toUpperCase());
-
+		competencia.setNombre(competencia.getNombre().toUpperCase().toUpperCase());
+		
+		if (txtcondicionesGenerales.getValue()!=""){
+			competencia.setCondicionesGenerales(competencia.getCondicionesGenerales().toUpperCase());
+		}
+		if (txtdesempate.getValue()!=""){
+			competencia.setDesempate(competencia.getDesempate().toUpperCase());
+		}
+		if (txtextrainning.getValue()!=""){
+			competencia.setExtrainning(competencia.getExtrainning().toUpperCase());
+		}	
 	}
 
+	
 	public void agregarEstadoCompetencia() {
-
-		DatoBasico dato;
-		TipoDato tipo;
-		tipo = new TipoDato();
-		dato = new DatoBasico();
 
 		tipo.setCodigoTipoDato(114);
 		tipo.setNombre("ESTADO COMPETENCIA");
@@ -678,7 +796,8 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		dato.setEstatus('A');
 
 	}
-
+	
+	
 	public void onClick$btnApertura() throws InterruptedException {
 		if (Messagebox
 				.show("Una vez aperturada una competencia no se podran agregar equipos ni jugadores adicionales. ¿Desea continuar?",
@@ -691,110 +810,182 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 			btnClausura.setDisabled(false);
 		}
 	}
+	
+	
+	public void validarDatosAGuardar(){
+		
+		
+		if (txtNombre.getValue().isEmpty()) {
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(txtNombre, "Debe Ingresar el Nombre de la Competencia");
+		} 
+		else if (cmbTipoCompetencia.getText().equalsIgnoreCase("-- Seleccione --")) { 
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(cmbTipoCompetencia, "Debe Seleccionar un Tipo de Competencia");
+		} 
+		else if (cmbClasificacion.getText().equalsIgnoreCase("-- Seleccione --")) {
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(cmbClasificacion, "Debe Seleccionar un Tipo de Clasificaci�n");
+		} 		
+		else if (datefechaInicio.getText().equalsIgnoreCase("")) { // , 
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(datefechaInicio, "Debe Seleccionar una Fecha de Inicio");
+		} 		
+		else if (datefechaFin.getText().equalsIgnoreCase("")) { // , datefechaFin
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha de Fin");
+		}
+		
+		else if (competencia.getFechaInicio().after(competencia.getFechaFin())){
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			String fechainicio=formato.format(competencia.getFechaInicio());
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(datefechaFin, "Debe Seleccionar una Fecha Valida despues de la Fecha de Inicio("+fechainicio+")");
+					
+		}
+				
+		else if (cmbTemporada.getText().equalsIgnoreCase("-- Seleccione --")) {
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(cmbTemporada, "Debe Seleccionar una Temporada");
+		} 
+		else if (cmbEstado.getText().equalsIgnoreCase("-- Seleccione --")) {
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(cmbEstado, "Debe Seleccionar un Estado");
+		}
+		else if (cmbTipoOrganizacion.getText().equalsIgnoreCase("-- Seleccione --")) {
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(cmbTipoOrganizacion, "Debe Seleccionar un Tipo de Organizaci�n");
+		}
+		else if (txtmontoInscripcion.getValue()==0) {
+			tabRegistrosBasicos.setSelected(true);
+			throw new WrongValueException(txtmontoInscripcion, "Debe Ingresar un Monto de Inscripci�n");
+		}				
+		else if(categoriaCompetenciasAux.size()<=0){ 
+			
+			if (tipoOrg == "C") {
+				tabCategoriaPorCompetencia.setSelected(true);
+				throw new WrongValueException(lsbxCategorias, "Debe Seleccionar Al menos una Categoria");
+			} else {
+				tabLigaPorCompetencia.setSelected(true);
+				throw new WrongValueException(lsbxLigasSeleccionadas, "Debe Seleccionar Al menos una Liga");
+			}	
+		}		
+	}
 
+	
 	public void onClick$btnGuardar() throws InterruptedException {
+	
+		agregarEstadoCompetencia();
+		
+		if (tipoOrg == "C") {
+			seleccionarCategoriasAGuardar(lsbxCategorias);
+		} else {
+			categoriaCompetenciasAux = categoriaLigas;
+		}
+	
+		validarDatosAGuardar();		
 
-//		DatoBasico dato;
-//		TipoDato tipo;
-//		tipo = new TipoDato();
-//		dato = new DatoBasico();
-//
-//		tipo.setCodigoTipoDato(114);
-//		tipo.setNombre("ESTADO COMPETENCIA");
-//		tipo.setDescripcion("ALMACENA LOS DIFERENTES ESTADOS DE UNA COMPETENCIA");
-//		tipo.setEstatus('A');
-//		tipo.setTipo(true);
-//
-//		dato.setCodigoDatoBasico(287);
-//		dato.setNombre("REGISTRADA");
-//		dato.setTipoDato(tipo);
-//		dato.setEstatus('A');
-//
-//		if (tipoOrg == "C") {
-//			seleccionarCategoriasAGuardar(lsbxCategorias);
-//		} else {
-//			categoriaCompetenciasAux = categoriaLigas;
-//		}
-//
-//		llevarAMayusculas();
+		llevarAMayusculas();
 
-		// competencia.setModalidadCompetencia((ModalidadCompetencia)
-		// cmbModalidadCompetencia.getSelectedItem().getValue());
+		competencia.setClasificacionCompetencia((ClasificacionCompetencia) cmbClasificacion.getSelectedItem().getValue());
+		competencia.setDatoBasicoByCodigoOrganizacion((DatoBasico) cmbTipoOrganizacion.getSelectedItem().getValue());
+		competencia.setLapsoDeportivo((LapsoDeportivo) cmbTemporada.getSelectedItem().getValue());
+		competencia.setDatoBasicoByCodigoEstado((DatoBasico) cmbEstado.getSelectedItem().getValue());
+		competencia.setDatoBasicoByCodigoEstadoCompetencia(dato);
+		
+		if(actualizar==true){
+			servicioCompetencia.actualizar(competencia);
+			servicioFaseCompetencia.actualizar(faseCompetencias, competencia);
+			servicioCategoriaCompetencia.actualizar(categoriaCompetenciasAux,competencia);
+			Messagebox.show("Datos actualizados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
+			binder.loadAll();
+		}else{
+			servicioCompetencia.agregar(competencia);
+			int codcomp = servicioCompetencia.obtenerCodigoCompetencia();
+			servicioCategoriaCompetencia.agregar(categoriaCompetenciasAux, codcomp);
+			servicioFaseCompetencia.agregar(faseCompetencias,codcomp);		
 
-//		competencia
-//				.setClasificacionCompetencia((ClasificacionCompetencia) cmbClasificacion
-//						.getSelectedItem().getValue());
-//		competencia
-//				.setDatoBasicoByCodigoOrganizacion((DatoBasico) cmbTipoOrganizacion
-//						.getSelectedItem().getValue());
-//		competencia.setLapsoDeportivo((LapsoDeportivo) cmbTemporada
-//				.getSelectedItem().getValue());
-//		competencia.setDatoBasicoByCodigoEstado((DatoBasico) cmbEstado
-//				.getSelectedItem().getValue());
-//		competencia.setDatoBasicoByCodigoEstadoCompetencia(dato);
-//
-//		System.out.println(faseCompetencias.size());
-//
-//		servicioCompetencia.agregar(competencia);
-//		int codcomp = servicioCompetencia.obtenerCodigoCompetencia();
-//		servicioCategoriaCompetencia.agregar(categoriaCompetenciasAux, codcomp);
-		// servicioFaseCompetencia.agregar(faseCompetencias,codcomp);
-
-		Messagebox.show("Datos agregados exitosamente", "Mensaje",
-				Messagebox.OK, Messagebox.EXCLAMATION);
-		restaurar();
+			Messagebox.show("Datos agregados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);		
+		}
+			
+		restaurar();	
 		binder.loadAll();
 	}
 
+	
 	public void onClick$btnEliminar() throws InterruptedException {
+		
+		
+		if (actualizar==true){
 
-		if (Messagebox.show("¿Realmente desea eliminar esta Competencia",
-				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
-			servicioCompetencia.eliminar(competencia);
-			restaurar();
-			binder.loadAll();
-			Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+			if (Messagebox.show("¿Realmente desea eliminar esta Competencia",
+					"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
+				servicioCompetencia.eliminar(competencia);
+				restaurar();
+				binder.loadAll();
+				Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+			}
+		}
+		else{
+			Messagebox.show("Seleccione una competencia", "Mensaje",
 					Messagebox.OK, Messagebox.EXCLAMATION);
 		}
-
 	}
 
 	public void restaurar() {
 
 		competencia = new Competencia();
+		tipoOrg = new String();
+		tipo = new TipoDato();
+		dato = new DatoBasico();
+		faseCompetencia = new FaseCompetencia();
+		faseID = new FaseCompetenciaId();
 
 		// tipoCompetencias = servicioTipoCompetencia.listarActivos();
 		lapsoDeportivos = servicioLapsoDeportivo.listarActivos();
 		estados = servicioDatoBasico.listarEstados();
-		ordenarEstado(estados);
+		ordenarDatoBasico(estados);
 		categorias = servicioCategoria.listarActivos();
 		ligas = servicioLiga.listarActivos();
 		ordenarLiga(ligas);
 
 		cmbTipoCompetencia.setText("-- Seleccione --");
-		// cmbModalidadCompetencia.setText("-- Seleccione --");
 		cmbTipoOrganizacion.setText("-- Seleccione --");
 		cmbTemporada.setText("-- Seleccione --");
 		cmbEstado.setText("-- Seleccione --");
+		cmbClasificacion.setText("-- Seleccione --");
 
 		tabLigaPorCompetencia.setVisible(false);
 		tabCategoriaPorCompetencia.setVisible(false);
 
-		datefechaInicio.setDisabled(true);
-		datefechaFin.setDisabled(true);
+//		datefechaInicio.setDisabled(true);
+//		datefechaFin.setDisabled(true);
 
+		competencia.setCantidadFase(1);
+		competencia.setCantidadJugador(9);		
+		
 		faseCompetencias.removeAll(faseCompetencias);
 		faseID.setNumeroFase(1);
-		faseCompetencia.setId(faseID);
+//		faseCompetencia.setId(faseID);
 		faseCompetencia.setEquipoIngresan(2);
 		faseCompetencia.setEquipoClasifican(2);
 		faseCompetencias.add(faseCompetencia);
 
 		categoriaCompetenciasAux.removeAll(categoriaCompetenciasAux);
+		categoriaCompetencias.removeAll(categoriaCompetencias);
 
 		categoriaLigas.removeAll(categoriaLigas);
+		cmbClasificacion.setDisabled(true);
 
+		lsbxligasCategorias.setVisible(false);
+		spnNroFases.setDisabled(false);
+        btnMoverI.setDisabled(false);
+        btnMoverD.setDisabled(false);
 		ligasAux.removeAll(ligasAux);
+		actualizar = false;
+		tabRegistrosBasicos.setSelected(true);
+		binder.loadAll();
 
 	}
 
@@ -803,9 +994,11 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
-	public void onClick$btnSalir() {
-
-		// formulario.detach();
+	public void onClick$btnSalir()  throws InterruptedException {
+		if (Messagebox.show("�Desea salir?",
+				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
+			 formulario.detach();
+		}
 
 	}
 
@@ -829,17 +1022,6 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		this.servicioCompetencia = servicioCompetencia;
 	}
 
-	// ////
-
-	// GET y SET para Tipo de Competencia
-	// public List<ClasificacionCompetencia> getClasificacionCompetencias() {
-	// return clasificacionCompetencias;
-	// }
-	//
-	// public void ClasificacionCompetencias(List<ClasificacionCompetencia>
-	// clasificacionCompetencias) {
-	// this.clasificacionCompetencias = clasificacionCompetencias;
-	// }
 	// ////
 
 	// GET y SET para Lapso Deportivo
@@ -896,14 +1078,6 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 	}
 
 	// ////
-
-	public List<String> getFases() {
-		return fases;
-	}
-
-	public void setFases(List<String> fases) {
-		this.fases = fases;
-	}
 
 	public String getFase() {
 		return fase;
@@ -975,59 +1149,6 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		this.faseCompetencias = faseCompetencias;
 	}
 
-	public void onChanging$txtNombre(InputEvent event) {
-
-		String valor = event.getValue();
-
-		String viejo = new String();
-		String nuevo = new String();
-
-		if (valor.length() > 0) {
-			// char v = valor.charAt(valor.length()-1);
-
-			Character caracter = valor.charAt(valor.length() - 1);
-
-			// System.out.println(caracter);
-
-			if (!esValido(caracter)) {
-				String texto = "";
-
-				for (int i = 0; i < valor.length() - 1; i++) {
-
-					// System.out.println(valor);
-					// System.out.println(valor.charAt(i));
-					// viejo += valor.charAt(i);
-
-					// nuevo += valor.charAt(i);
-					viejo += valor.charAt(i);
-
-					// if (esValido(new Character(valor.charAt(i+1))))
-					// texto += valor.charAt(i);
-
-					// competencia.setNombre(viejo);
-				}
-
-				// System.out.println(viejo);
-				// txtNombre.setValue(viejo);
-				// txtNombre.setText(viejo);
-				competencia.setNombre(viejo);
-				binder.loadAll();
-
-			}
-		}
-	}
-
-	public boolean esValido(Character caracter) {
-		char c = caracter.charValue();
-		if (!(Character.isLetter(c) // si es letra
-				|| c == ' ' // o un espacio
-		|| c == 8 // o backspace
-		))
-			return false;
-		else
-			return true;
-	}
-
 	// Get and Set de tiposCompetencias
 	public List<DatoBasico> getTiposCompetencias() {
 		return tiposCompetencias;
@@ -1045,6 +1166,38 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 	public void setClasificacionCompetencias(
 			List<ClasificacionCompetencia> clasificacionCompetencias) {
 		this.clasificacionCompetencias = clasificacionCompetencias;
+	}
+
+	public int getCodigoliga() {
+		return codigoliga;
+	}
+
+	public void setCodigoliga(int codigoliga) {
+		this.codigoliga = codigoliga;
+	}
+
+	public boolean isActualizar() {
+		return actualizar;
+	}
+
+	public void setActualizar(boolean actualizar) {
+		this.actualizar = actualizar;
+	}
+
+	public DatoBasico getDatoBasio() {
+		return datoBasio;
+	}
+
+	public void setDatoBasio(DatoBasico datoBasio) {
+		this.datoBasio = datoBasio;
+	}
+
+	public TipoDato getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoDato tipo) {
+		this.tipo = tipo;
 	}
 
 }

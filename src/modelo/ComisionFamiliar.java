@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,29 +23,36 @@ public class ComisionFamiliar implements java.io.Serializable {
 	private int codigoComisionFamiliar;
 	private DatoBasico datoBasico;
 	private FamiliarJugador familiarJugador;
-	private char estatus1;
+	private char estatus;
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
+	private Set<PlanificacionActividad> planificacionActividads = new HashSet<PlanificacionActividad>(
+			0);
+	private Set<TareaActividad> tareaActividads = new HashSet<TareaActividad>(0);
 
 	public ComisionFamiliar() {
 	}
 
 	public ComisionFamiliar(int codigoComisionFamiliar, DatoBasico datoBasico,
-			FamiliarJugador familiarJugador, char estatus1) {
+			FamiliarJugador familiarJugador, char estatus) {
 		this.codigoComisionFamiliar = codigoComisionFamiliar;
 		this.datoBasico = datoBasico;
 		this.familiarJugador = familiarJugador;
-		this.estatus1 = estatus1;
+		this.estatus = estatus;
 	}
 
 	public ComisionFamiliar(int codigoComisionFamiliar, DatoBasico datoBasico,
-			FamiliarJugador familiarJugador, char estatus1,
-			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
+			FamiliarJugador familiarJugador, char estatus,
+			Set<TareaActividadPlanificada> tareaActividadPlanificadas,
+			Set<PlanificacionActividad> planificacionActividads,
+			Set<TareaActividad> tareaActividads) {
 		this.codigoComisionFamiliar = codigoComisionFamiliar;
 		this.datoBasico = datoBasico;
 		this.familiarJugador = familiarJugador;
-		this.estatus1 = estatus1;
+		this.estatus = estatus;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
+		this.planificacionActividads = planificacionActividads;
+		this.tareaActividads = tareaActividads;
 	}
 
 	@Id
@@ -78,13 +85,13 @@ public class ComisionFamiliar implements java.io.Serializable {
 		this.familiarJugador = familiarJugador;
 	}
 
-	@Column(name = "estatus_1", nullable = false, length = 1)
-	public char getEstatus1() {
-		return this.estatus1;
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
 	}
 
-	public void setEstatus1(char estatus1) {
-		this.estatus1 = estatus1;
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
@@ -95,6 +102,25 @@ public class ComisionFamiliar implements java.io.Serializable {
 	public void setTareaActividadPlanificadas(
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
+	public Set<PlanificacionActividad> getPlanificacionActividads() {
+		return this.planificacionActividads;
+	}
+
+	public void setPlanificacionActividads(
+			Set<PlanificacionActividad> planificacionActividads) {
+		this.planificacionActividads = planificacionActividads;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
+	public Set<TareaActividad> getTareaActividads() {
+		return this.tareaActividads;
+	}
+
+	public void setTareaActividads(Set<TareaActividad> tareaActividads) {
+		this.tareaActividads = tareaActividads;
 	}
 
 }

@@ -11,6 +11,7 @@ import dao.general.DaoCategoriaCompetencia;
 import modelo.Categoria;
 import modelo.CategoriaCompetencia;
 import modelo.CategoriaCompetenciaId;
+import modelo.Competencia;
 import modelo.Divisa;
 import modelo.IndicadorCategoriaCompetencia;
 
@@ -73,4 +74,46 @@ public class ServicioCategoriaCompetencia implements
 		return daoCategoriaCompetencia.getDuraccionCategoriaHoras(cat);
 	}
 
+	
+	@Override
+	public void agregar(List<CategoriaCompetencia> lista,int comp) {
+		// TODO Auto-generated method stub
+
+		
+//		int codigoCompetencia = daoCompetencia.listar(Competencia.class).size();
+		
+		for (Iterator i= lista.iterator(); i.hasNext();){
+			CategoriaCompetencia id = (CategoriaCompetencia) i.next();
+			
+			id.getCompetencia().setCodigoCompetencia(comp);
+			
+			
+			int codcateg = id.getCategoria().getCodigoCategoria();
+			
+			CategoriaCompetenciaId categID= new CategoriaCompetenciaId();
+			categID.setCodigoCategoria(codcateg);
+			categID.setCodigoCompetencia(comp);
+			
+			id.setId(categID);
+			
+			daoCategoriaCompetencia.guardar(id);		
+	    }
+
+//		daoCategoriaCompetencia.guardar(cc);		
+				
+	}
+	
+	@Override
+	public void actualizar(List<CategoriaCompetencia> lista, Competencia comp) {
+		// TODO Auto-generated method stub
+
+		
+		for (Iterator i= lista.iterator(); i.hasNext();){
+			CategoriaCompetencia id = (CategoriaCompetencia) i.next();
+			
+			daoCategoriaCompetencia.actualizar(id);			
+		}
+		
+
+	}
 }

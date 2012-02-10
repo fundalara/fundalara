@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,16 +21,18 @@ public class ConstanteCategoria implements java.io.Serializable {
 	private Constante constante;
 	private Categoria categoria;
 	private int valor;
+	private char estatus;
 
 	public ConstanteCategoria() {
 	}
 
 	public ConstanteCategoria(int codigoConstanteCategoria,
-			Constante constante, Categoria categoria, int valor) {
+			Constante constante, Categoria categoria, int valor, char estatus) {
 		this.codigoConstanteCategoria = codigoConstanteCategoria;
 		this.constante = constante;
 		this.categoria = categoria;
 		this.valor = valor;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -70,6 +72,15 @@ public class ConstanteCategoria implements java.io.Serializable {
 
 	public void setValor(int valor) {
 		this.valor = valor;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

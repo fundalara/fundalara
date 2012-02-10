@@ -2,19 +2,22 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmEstadio" ?>
 <zk>
-	<div align="center">
+<div align="center">
 		<window apply="controlador.competencia.CntrlFrmEstadio" 
-				id="frmEstadio" title="Registro de Estadios" border="normal" width="370px">
+				id="frmEstadio" title="Registro de Estadios" 
+				border="normal" width="370px" closable="true">
 			<panel>
 				<panelchildren>
-					<grid>
+					<grid oddRowSclass="none">
+					
+					
 				
 						<rows>
 							<row align="left"  style="border:none">
 								<label value="Nombre"></label>
 								
 								<textbox value="@{cntrl.estadio.nombre}" id="txtNombre" 
-								constraint="/.[a-z]+/:El campo 'nombre' es obligatorio"  width="88%"/>
+								  width="88%"/>
 								<button id="btnBuscar"
 										image="/Recursos/Imagenes/consultar.ico" >								
 								</button>
@@ -50,7 +53,6 @@
 							<row align="left" style="border:none">
 								<label value="Dirección"></label>
 								<textbox id="txtDireccion" value="@{cntrl.estadio.direccion}" 
-								constraint="no empty:El campo 'dirección' es obligatorio"
 								width="88%" multiline="true" height="50px"/>
 
 							</row>
@@ -93,5 +95,5 @@
 
 
 		</window>
-	</div>
+</div>
 </zk>

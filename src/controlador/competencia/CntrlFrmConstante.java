@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -15,6 +16,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import modelo.Categoria;
 import modelo.Constante;
 import modelo.ConstanteCategoria;
+import modelo.IndicadorCategoriaCompetencia;
 
 
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
@@ -43,6 +45,7 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 	ServicioConstanteCategoria servicioConstanteCategoria;
 	List<Categoria> categorias;
 	List<ConstanteCategoria> categoriasSeleccionadas;
+	List<ConstanteCategoria> listaEliminar;
 	
 	//Vista
 	Textbox txtAbreviatura;
@@ -51,6 +54,9 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 	Listbox lsbxCategorias;
 	Listbox lsbxCategoriasSeleccionadas;
 	Button btnEliminar;
+	
+	Boolean lista = false;
+	Boolean actualizar;
 	
 	
 	//SETTERS Y GETTERS
@@ -70,16 +76,7 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
-	
-	/*public List<Categoria> getCategoriasSeleccionadas() {
-		return categoriasSeleccionadas;
-	}
 
-	public void setCategoriasSeleccionadas(List<Categoria> categoriasSeleccionadas) {
-		this.categoriasSeleccionadas = categoriasSeleccionadas;
-	}*/
-	
-	
 	public ConstanteCategoria getConstanteCategoria() {
 		return constanteCategoria;
 	}
@@ -97,7 +94,7 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 		this.constanteCategoria = constanteCategoria;
 	}
 
-	//Método que se llama al cargar la ventana
+	//Mï¿½todo que se llama al cargar la ventana
 	public void doAfterCompose (Component c) throws Exception{		
 		super.doAfterCompose(c);
 		c.setVariable("cntrl",this,true);
@@ -111,6 +108,8 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 		constante = new Constante();
 		categoriasSeleccionadas = new ArrayList<ConstanteCategoria>();
 		categorias = servicioCategoria.listarActivos();
+		listaEliminar = new ArrayList<ConstanteCategoria>();
+		actualizar = false;
 		
 	}
 	
@@ -133,7 +132,7 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 			}
 	
 	
-	// Método que permite pasar de una lista a otra
+	// Mï¿½todo que permite pasar de una lista a otra
 	public void Agregar(Listbox origen, Listbox destino, List lista) {
 
 		Set seleccionados = origen.getSelectedItems();
@@ -142,7 +141,7 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 			Listitem li = (Listitem) i.next();
 			Categoria c1 = (Categoria) li.getValue();
 			ConstanteCategoria cc = new ConstanteCategoria();
-			//cc.setValor(0);
+			cc.setValor(0);
 			cc.setConstante(constante);
 			cc.setCategoria(c1);
 			List seleccionDestino = destino.getItems();
@@ -160,13 +159,28 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 		}
 	}
 	
-	//Método que permite quitar de la lista
-	public void Quitar(Listbox origen, List lista) {
+	
+	/*public void Quitar(Listbox origen, List lista,List elim) {
 		Set seleccionados = origen.getSelectedItems();
 		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
 			Listitem li = (Listitem) i.next();
-			Object o = li.getValue();
-			lista.remove(o);
+			IndicadorCategoriaCompetencia icc = (IndicadorCategoriaCompetencia) li.getValue();
+			if (icc.getCodigoIndicadorCategoriaCompetencia() != 0)
+				eliminar.add(icc);
+			lista.remove(icc);
+		}
+	}*/
+	
+	//Mï¿½todo que permite quitar de la lista
+	public void Quitar(Listbox origen, List lista,List elim ) {
+		Set seleccionados = origen.getSelectedItems();
+		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
+			Listitem li = (Listitem) i.next();
+			ConstanteCategoria cc = (ConstanteCategoria) li.getValue();
+			if(cc.getCodigoConstanteCategoria() != 0)
+				listaEliminar.add(cc);
+			//Object o = li.getValue();
+			lista.remove(cc);
 		}
 	}
 	
@@ -184,9 +198,12 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 			public void onEvent(Event arg0) throws Exception {
 				//se obtiene la constante.
 				constante = (Constante) formulario.getVariable("constante",false);
-				categoriasSeleccionadas = ConvertirConjuntoALista(constante.getConstanteCategorias());
-				categoriasSeleccionadas.get(0);
+				categoriasSeleccionadas= servicioConstanteCategoria.listarConstantesPorCategoria(constante);
+				//categoriasSeleccionadas = ConvertirConjuntoALista(constante.getConstanteCategorias());
+				//categoriasSeleccionadas.get(0);
 				btnEliminar.setDisabled(false);
+				lista = true;
+				actualizar = true;
 				binder.loadAll();				
 			}
 		});
@@ -201,43 +218,67 @@ public class CntrlFrmConstante extends GenericForwardComposer{
 	
 	
 	public void onClick$btnQuitar(){
-        Quitar(lsbxCategoriasSeleccionadas,categoriasSeleccionadas);
+        Quitar(lsbxCategoriasSeleccionadas,categoriasSeleccionadas,listaEliminar);
 		binder.loadAll();
 	
 	}
 	
+	/*for (int i=0;i<indicadoresSeleccionados.size();i++){
+			servicioIndicadorCategoriaCompetencia.agregar(indicadoresSeleccionados.get(i));
+		}
+		for (int i=0;i<indicadoresSeleccionadosColectivos.size();i++){
+			servicioIndicadorCategoriaCompetencia.agregar(indicadoresSeleccionadosColectivos.get(i));
+		}
+		
+		for (int i=0;i<eliminar.size();i++){
+			servicioIndicadorCategoriaCompetencia.eliminar(eliminar.get(i));
+		}*/
 		
 	//BOTONES GUARDAR, ELIMINAR, CANCELAR Y SALIR
 	public void onClick$btnGuardar() throws InterruptedException{
-		if (txtAbreviatura.getText() != null)
-			if (txtNombre.getText() != null)
-				if (categoriasSeleccionadas.size() > 0) {
-					
-					System.out.println(categoriasSeleccionadas.size());
-					System.out.println(categoriasSeleccionadas.get(0).getCategoria().getNombre());
-					//constante.setConstanteCategorias(ConvertirListaAConjunto(categoriasSeleccionadas));
-					servicioConstante.agregar(constante);
-					servicioConstanteCategoria.agregar(categoriasSeleccionadas);
-					
+		if (txtAbreviatura.getValue().isEmpty()){
+			throw new WrongValueException(txtAbreviatura, "Debe ingresar la abreviatura");
+		}else if (txtNombre.getValue().isEmpty()){
+			throw new WrongValueException(txtNombre, "Debe ingresar el nombre");
+		}else if (categoriasSeleccionadas.size() > 0) {
+				constante.setAbreviatura(constante.getAbreviatura().toUpperCase());
+				constante.setNombre(constante.getNombre().toUpperCase());
+				servicioConstante.agregar(constante);
+				for (int i=0;i<categoriasSeleccionadas.size();i++){
+					servicioConstanteCategoria.agregar(categoriasSeleccionadas.get(i));
+				}
+				for (int i=0;i<listaEliminar.size();i++){
+					servicioConstanteCategoria.eliminar(listaEliminar.get(i));
+				}				
+				if (actualizar == false){
 					Messagebox.show("Datos agregados exitosamente", "Mensaje",
 							Messagebox.OK, Messagebox.EXCLAMATION);
-					restaurar();
-					binder.loadAll();
+						
+				} else {
+					Messagebox.show("Datos actualizados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
+				}
+				restaurar();
+				binder.loadAll();
+				
 
-				} else
+			 } else
 					Messagebox.show("Seleccione la Categoria e Ingrese un Valor", "Mensaje",
-							Messagebox.OK, Messagebox.EXCLAMATION);
+									Messagebox.OK, Messagebox.EXCLAMATION);
 	}
 	
 	public void onClick$btnEliminar() throws InterruptedException{
-		if(Messagebox.show("¿Realmente desea eliminar esta constante","Mensaje",Messagebox.YES+Messagebox.NO,Messagebox.QUESTION) == Messagebox.YES){
-			
-			servicioConstante.eliminar(constante);
-			constante = new Constante();
-			binder.loadAll();
-			Messagebox.show("Datos eliminados exitosamente","Mensaje",Messagebox.OK,Messagebox.EXCLAMATION);
-			}
+		if (lista == true){
+			if(Messagebox.show("ï¿½Realmente desea eliminar esta constante","Mensaje",Messagebox.YES+Messagebox.NO,Messagebox.QUESTION) == Messagebox.YES){
+				
+				servicioConstante.eliminar(constante);
+				restaurar();
+				binder.loadAll();
+				Messagebox.show("Datos eliminados exitosamente","Mensaje",Messagebox.OK,Messagebox.EXCLAMATION);
+				}
+		}else{
+			Messagebox.show("Debe seleccionar una constante","Mensaje",Messagebox.OK,Messagebox.EXCLAMATION);
 		}
+	}
 	
 	public void onClick$btnCancelar(){
 		restaurar();

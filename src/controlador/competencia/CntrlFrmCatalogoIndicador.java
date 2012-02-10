@@ -1,4 +1,4 @@
-package controlador.competencia;
+                package controlador.competencia;
 
 import java.util.List;
 
@@ -42,7 +42,13 @@ public class CntrlFrmCatalogoIndicador extends GenericForwardComposer {
 
 	public void onClick$btnAceptar() throws InterruptedException {
 		// Se comprueba que se haya seleccionado un elemento de la lista
+		
 		if (lsbxIndicadores.getSelectedIndex() != -1) {
+			Boolean mod = true;
+//			Boolean agregarForm = true;
+//			Boolean agregarNum = true;
+//			Boolean agregarCom = false;
+//			Boolean agregandoNum = false;
 			// se obtiene la divisa seleccionada
 			Indicador i = listIndicador.get(lsbxIndicadores.getSelectedIndex());
 			// se obtiene la referencia del formulario
@@ -50,18 +56,19 @@ public class CntrlFrmCatalogoIndicador extends GenericForwardComposer {
 					"formulario", false);
 			// se le asigna el objeto divisa al formulario
 			formulario.setVariable("indicador", i, false);
+			formulario.setVariable("modificar", mod, true);
+//			formulario.setVariable("modificar", mod, true);
+//			formulario.setVariable("modificar", mod, true);
+//			formulario.setVariable("modificar", mod, true);
 			// se le envia una señal al formulario indicado que el formulario
 			// se cerro y que los datos se han enviado
 			Events.sendEvent(new Event("onCatalogoCerrado", formulario));
 			// se cierra el catalogo
 			catalogo.detach();
-
 		} else {
-			Messagebox.show("Seleccione una divisa", "Mensaje", Messagebox.YES,
+			Messagebox.show("Seleccione un indicador", "Mensaje", Messagebox.YES,
 					Messagebox.INFORMATION);
-
 		}
-
 	}
 	
 

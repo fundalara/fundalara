@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,6 @@ public class AsistenciaJugador implements java.io.Serializable {
 	private Roster roster;
 	private RosterPlan rosterPlan;
 	private SesionEjecutada sesionEjecutada;
-	private DatoBasico datoBasico;
 	private boolean asistencia;
 	private String observacion;
 	private char estatus;
@@ -35,24 +34,21 @@ public class AsistenciaJugador implements java.io.Serializable {
 	}
 
 	public AsistenciaJugador(int codigoAsistencia,
-			SesionEjecutada sesionEjecutada, DatoBasico datoBasico,
-			boolean asistencia, char estatus) {
+			SesionEjecutada sesionEjecutada, boolean asistencia, char estatus) {
 		this.codigoAsistencia = codigoAsistencia;
 		this.sesionEjecutada = sesionEjecutada;
-		this.datoBasico = datoBasico;
 		this.asistencia = asistencia;
 		this.estatus = estatus;
 	}
 
 	public AsistenciaJugador(int codigoAsistencia, Roster roster,
 			RosterPlan rosterPlan, SesionEjecutada sesionEjecutada,
-			DatoBasico datoBasico, boolean asistencia, String observacion,
-			char estatus, Set<DesempennoJugador> desempennoJugadors) {
+			boolean asistencia, String observacion, char estatus,
+			Set<DesempennoJugador> desempennoJugadors) {
 		this.codigoAsistencia = codigoAsistencia;
 		this.roster = roster;
 		this.rosterPlan = rosterPlan;
 		this.sesionEjecutada = sesionEjecutada;
-		this.datoBasico = datoBasico;
 		this.asistencia = asistencia;
 		this.observacion = observacion;
 		this.estatus = estatus;
@@ -97,16 +93,6 @@ public class AsistenciaJugador implements java.io.Serializable {
 
 	public void setSesionEjecutada(SesionEjecutada sesionEjecutada) {
 		this.sesionEjecutada = sesionEjecutada;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "eventualidad", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
 	}
 
 	@Column(name = "asistencia", nullable = false)

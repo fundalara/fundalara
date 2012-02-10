@@ -5,101 +5,98 @@
 	<div align="center">
 		<window id="frmEstatusCompetencia"
 			apply="controlador.competencia.CntrlFrmEstatusCompetencia"
-			title="Estatus de Competencia" width="690px" height=""
-			border="normal" closable="true">
+			title="Aperturar Competencia" width="600px" height=""
+			border="normal" closable="true" mode="modal">
 			<div align="left">
-				<panel height="90%" title="Datos de la Competencia">
+				<panel  title="Datos de la Competencia">
 					<panelchildren>
 						<div>
-							<grid width="100%">
+							<grid  oddRowSclass="none">
 								<columns>
-									<column width="" align="left" />
-									<column width="" align="left" />
-									<column width="" align="left" />
-									<column width="" align="left" />
+									<column width="25%" align="left" />
+									<column width="25%" align="left" />
+									<column width="25%" align="left" />
+									<column width="25%" align="left" />
 								</columns>
 								<rows>
-									<row spans="4"
+									<row spans="1,3"
 										style="border-style:none">
-										<hbox>
+					
 											<label
 												value="Nombre">
 											</label>
-											<space width="75px"></space>
+										
 											<textbox id="txtNombre"
-												value="@{cntrl.competencia.nombre}" cols="25">
+												value="@{cntrl.competencia.nombre}" width="98%">
 											</textbox>
 
-											<button id="btnBuscar"
-												onClick="" image="../../Recursos/Imagenes/consultar.ico" />
-										</hbox>
-										<label value="Tipo" />
-										<textbox
-											value="@{cntrl.competencia.modalidadCompetencia.tipoCompetencia.nombre}"
-											id="txtTipoCompetencia">
-										</textbox>
+							
+
 									</row>
 
-									<row spans="4"
+									<row 
 										style="border-style:none" align="left">
-										<hbox>
-											<label value="Modalidad " />
-											<space width="60px"></space>
-											<textbox
-												value="@{cntrl.competencia.modalidadCompetencia.nombre}"
-												id="txtModalidad" cols="25">
-										</textbox>
-										</hbox>
-										<label value="Estatus"></label>
-										<textbox
-											value="@{cntrl.competencia.datoBasicoByCodigoEstadoCompetencia.nombre}"
-											id="txtEstatus">
-										</textbox>
-									</row>
-									<row spans="4"
-										style="border-style:none" align="left">
-										<hbox>
+									
 											<label
 												value="Fecha Inicio">
 											</label>
-											<space width="50px"></space>
+									
 											<textbox
-												value="@{cntrl.competencia.fechaInicio}"
-												id="txtfechaInicio" cols="25">
+												
+												id="txtfechaInicio" width="80%">
 											</textbox>
-										</hbox>
+									
 										<label
-											value="Fecha Estimada Fin">
+											value="Fecha Fin">
 										</label>
 										<textbox
-											value="@{cntrl.competencia.fechaFin}" id="txtfechaFin">
+											 id="txtfechaFin" width="80%">
 										</textbox>
 									</row>
-									<row spans="4"
+
+									<row 
 										style="border-style:none" align="left">
-										<hbox>
-										<label value="Cantidad Equipos" />
-										<space width="13px"></space>
-										<textbox id="txtCantEquipos" cols="25">
+										
+											<label value="Temporada " />
+									
+											<textbox
+												value="@{cntrl.competencia.lapsoDeportivo.nombre}"
+												id="txtTemporada" width="80%">
 										</textbox>
-										</hbox>
+									
+										<label value="Clasificacion"></label>
+										<textbox
+											value="@{cntrl.competencia.clasificacionCompetencia.nombre}"
+											id="txtClasificacion" width="95%">
+										</textbox>
+									</row>
+																	
+									<row 
+										style="border-style:none" align="left">
+									
+										<label value="Cantidad Equipos" />
+								
+										<textbox id="txtCantEquipos" width="40%">
+										</textbox>
+									
 										<label
 											value="Jugadores por Roster" />
-										<textbox id="txtJugRoster"></textbox>
+										<textbox id="txtJugRoster" value="@{cntrl.competencia.cantidadJugador}" width="40%"></textbox>
 									</row>
-									<row spans="4"
+									
+									<row 
 										style="border-style:none">
-										<hbox>
+								
 											<label
 												value="Juegos Programados" />
 											<textbox
-												id="txtJuegosProgramados" cols="24">
+												id="txtJuegosProgramados" width="40%">
 											</textbox>
-										</hbox>
+									
 										<label
-											value="Juegos Registrados" />
+											value="Juegos Realizados" />
 										<textbox
-											id="txtJuegosRegistrados" value="">
+											id="txtJuegosRegistrados" width="40%">
 										</textbox>
 
 									</row>
@@ -111,20 +108,17 @@
 			</div>
 			<div align="right">
 				<button id="btnAperturar"
-					image="/Recursos/Imagenes/apertura.png" label="Aperturar"
-					disabled="true">
+					image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" visible="false"
+					 width="90px">
 				</button>
 				<button id="btnCulminar"
-					image="/Recursos/Imagenes/apertura.png" label="Culminar"
-					disabled="true">
+					image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" visible="false"
+					width="90px">
 				</button>
-				<button id="btnCancelar"
-					image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
-					orient="horizontal">
-				</button>
+
 				<button id="btnSalir"
 					image="/Recursos/Imagenes/salir.png" label="Salir"
-					orient="horizontal">
+					orient="horizontal" width="90px">
 				</button>
 			</div>
 		</window>

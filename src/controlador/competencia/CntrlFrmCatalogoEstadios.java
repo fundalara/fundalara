@@ -7,6 +7,7 @@ import modelo.Estadio;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
@@ -49,19 +50,18 @@ public class CntrlFrmCatalogoEstadios extends GenericForwardComposer{
 	}
 	
 	public void onCtrlKey$txtFiltro(){
-		System.out.println("changing...");
+
 	}
 	
-	public void onClick$btnBuscar(){
-		estadios = servicioEstadio.filtrar(txtFiltro.getText()+"%");
-		binder.loadAll();
-	}
 	
-		/*public void onChanging$txtFiltro(){
+	
+		public void onChanging$txtFiltro(InputEvent event ){
 		
-		estadios = servicioEstadio.filtrar(txtFiltro.getText()+"%");
-		binder.loadAll();
-	}*/
+		String dato = event.getValue().toUpperCase();
+
+		estadios = servicioEstadio.listarEstadiosPorFiltro(dato);
+		  binder.loadAll();
+	}
 
 	public void onClick$btnAceptar() throws InterruptedException {
 		//Se comprueba que se haya seleccionado un elemento de la lista

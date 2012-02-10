@@ -1,17 +1,14 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,41 +21,34 @@ import javax.persistence.TemporalType;
 public class SeguridadFuncional implements java.io.Serializable {
 
 	private int codigoSeguridad;
-	private TipoDato tipoDato;
 	private Usuario usuario;
 	private Date fechaRegistro;
-	private int codigoRegistro;
+	private String nombreTabla;
 	private Boolean agregar;
 	private Boolean modificar;
 	private Boolean eliminar;
-	private Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals = new HashSet<DetalleSeguridadFuncional>(
-			0);
 
 	public SeguridadFuncional() {
 	}
 
-	public SeguridadFuncional(int codigoSeguridad, TipoDato tipoDato,
-			Usuario usuario, Date fechaRegistro, int codigoRegistro) {
+	public SeguridadFuncional(int codigoSeguridad, Usuario usuario,
+			Date fechaRegistro, String nombreTabla) {
 		this.codigoSeguridad = codigoSeguridad;
-		this.tipoDato = tipoDato;
 		this.usuario = usuario;
 		this.fechaRegistro = fechaRegistro;
-		this.codigoRegistro = codigoRegistro;
+		this.nombreTabla = nombreTabla;
 	}
 
-	public SeguridadFuncional(int codigoSeguridad, TipoDato tipoDato,
-			Usuario usuario, Date fechaRegistro, int codigoRegistro,
-			Boolean agregar, Boolean modificar, Boolean eliminar,
-			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
+	public SeguridadFuncional(int codigoSeguridad, Usuario usuario,
+			Date fechaRegistro, String nombreTabla, Boolean agregar,
+			Boolean modificar, Boolean eliminar) {
 		this.codigoSeguridad = codigoSeguridad;
-		this.tipoDato = tipoDato;
 		this.usuario = usuario;
 		this.fechaRegistro = fechaRegistro;
-		this.codigoRegistro = codigoRegistro;
+		this.nombreTabla = nombreTabla;
 		this.agregar = agregar;
 		this.modificar = modificar;
 		this.eliminar = eliminar;
-		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 	}
 
 	@Id
@@ -69,16 +59,6 @@ public class SeguridadFuncional implements java.io.Serializable {
 
 	public void setCodigoSeguridad(int codigoSeguridad) {
 		this.codigoSeguridad = codigoSeguridad;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_dato", nullable = false)
-	public TipoDato getTipoDato() {
-		return this.tipoDato;
-	}
-
-	public void setTipoDato(TipoDato tipoDato) {
-		this.tipoDato = tipoDato;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -101,13 +81,13 @@ public class SeguridadFuncional implements java.io.Serializable {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	@Column(name = "codigo_registro", nullable = false)
-	public int getCodigoRegistro() {
-		return this.codigoRegistro;
+	@Column(name = "nombre_tabla", nullable = false)
+	public String getNombreTabla() {
+		return this.nombreTabla;
 	}
 
-	public void setCodigoRegistro(int codigoRegistro) {
-		this.codigoRegistro = codigoRegistro;
+	public void setNombreTabla(String nombreTabla) {
+		this.nombreTabla = nombreTabla;
 	}
 
 	@Column(name = "agregar")
@@ -135,16 +115,6 @@ public class SeguridadFuncional implements java.io.Serializable {
 
 	public void setEliminar(Boolean eliminar) {
 		this.eliminar = eliminar;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seguridadFuncional")
-	public Set<DetalleSeguridadFuncional> getDetalleSeguridadFuncionals() {
-		return this.detalleSeguridadFuncionals;
-	}
-
-	public void setDetalleSeguridadFuncionals(
-			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
-		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
 	}
 
 }

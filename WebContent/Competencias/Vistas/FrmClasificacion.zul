@@ -1,0 +1,144 @@
+<?page title="Clasificacion Competencia" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmClasificacion" ?>
+<zk>
+	<div align="center">
+		<window id="frmClasificacion" title="Registro Modalidad"
+			border="normal" height="" width="515px"
+			apply="controlador.competencia.CntrlFrmClasificacion"
+			closable="true">
+			<panel border="normal">
+				<caption label="Datos de la Modalidad"></caption>
+				<panelchildren style="margin-top:5px ">
+					<grid style="border:none">
+						<columns>
+							<column label="" width="" />
+							<column label="" width="" />
+							<column label="" width="" />
+						</columns>
+						<rows>
+							<row align="left" style="border:none">
+								<label value="Tipo Competencia"></label>
+								<hbox>
+								<combobox id="cmbTipoCompetencia"
+									model="@{cntrl.tipoCompetencias}" readonly="true" cols="22">
+									<comboitem self="@{each=TipoCompe}"
+										value="@{TipoCompe}" label="@{TipoCompe.nombre}">
+									</comboitem>
+								</combobox>
+								<button id="btnBuscar"
+									image="/Recursos/Imagenes/consultar.ico">
+								</button>
+								</hbox>
+							</row>
+							<row align="left" style="border:none">
+								<label value="Clasificación"></label>
+								<textbox id="txtClasificacion"
+									width="80%" value="@{cntrl.clasificacionCompetencia.nombre}"
+									constraint="no empty:El campo 'Clasificación' es obligatorio">
+								</textbox>
+
+
+							</row>
+							<row align="left" style="border:none">
+								<label value="Descripción"></label>
+								<textbox width="80%" multiline="true"
+									height="50px" id="txtDescripcion"
+									value="@{cntrl.clasificacionCompetencia.descripcion}"
+									constraint="no empty:El campo 'Descripción' es obligatorio">
+								</textbox>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel>
+				<caption label="Selección de Condiciones"></caption>
+				<panelchildren>
+					<grid>
+						<rows>
+							<row align="left" style="border:none">
+								<listbox id="lsbxCondiciones"
+									checkmark="true" multiple="true" mold="paging" pageSize="10"
+									style="margin-top:5px" height="200px" width="220px"
+									model="@{cntrl.condicionCompetencias}">
+									<listhead>
+										<listheader label="Condiciones" />
+									</listhead>
+									<listitem self="@{each=condicion}"
+										value="@{condicion}">
+										<listcell
+											label="@{condicion.CondicionCompetencia.nombre}" />
+									</listitem>
+								</listbox>
+
+								<div align="left">
+									<grid>
+										<rows>
+											<row style="border:none"
+												align="center">
+												<button id="btnAgregar"
+													image="/Recursos/Imagenes/rightarrow_g.png" style="center" />
+											</row>
+											<row style="border:none"
+												align="center">
+												<button id="btnQuitar"
+													image="/Recursos/Imagenes/leftarrow_g.png" style="center" />
+											</row>
+										</rows>
+									</grid>
+								</div>
+
+								<listbox
+									id="lsbxCondicionesSeleccionadas" checkmark="true"
+									multiple="true" mold="paging" pageSize="10"
+									style="margin-top:5px" height="200px" width="220px"
+									model="@{cntrl.condicionesSeleccionadas}">
+									<listhead>
+										<listheader
+											label="Condiciones Seleccionadas">
+										</listheader>
+									</listhead>
+									<listitem self="@{each=condicion}"
+										value="@{condicion}">
+										<listcell
+											label="@{condicion.datoBasico.nombre}" />
+									</listitem>
+								</listbox>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+
+
+			<!-- BOTONES -->
+
+			<panel>
+				<panelchildren style="margin-top:5px ">
+					<div>
+						<div align="right" height="35px">
+							<button
+								image="/Recursos/Imagenes/guardar.ico" label="Guardar"
+								orient="horizontal" id="btnGuardar">
+							</button>
+							<button
+								image="/Recursos/Imagenes/eliminar.ico" label="Eliminar"
+								orient="horizontal" id="btnEliminar">
+
+							</button>
+							<button
+								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+								orient="horizontal" id="btnCancelar">
+							</button>
+
+							<button image="/Recursos/Imagenes/salir.png"
+								label="Salir" orient="horizontal" id="btnSalir">
+							</button>
+						</div>
+					</div>
+				</panelchildren>
+			</panel>
+		</window>
+	</div>
+</zk>

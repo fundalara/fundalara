@@ -1,0 +1,100 @@
+<?page title="frmReporteDesempenoJugador" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<window title="Configuración de Reporte del Desempeño Deportivo"
+			border="normal" width="500px" apply="controlador.competencia.CntrlFrmReporteDesempenojugador">
+			<iframe id="ifReporte" height="0px"></iframe>
+			<grid style="border:none">
+				<columns>
+					<column label="" align="left" width="10%" />
+					<column label="" align="left" width="80%" />
+					<column label="" align="left" width="10%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<label value="Competencia" />
+						<hbox>
+
+							<textbox
+								value="" cols="45">
+							</textbox>
+							<button id="btnBuscar"
+								image="/Recursos/Imagenes/consultar.ico">
+							</button>
+						</hbox>
+					</row>
+					<row style="border:none">
+						<label value="Categoría"></label>
+						<hbox>
+							<combobox value="" cols="15">
+								<comboitem label="" />
+								<comboitem label="" />
+							</combobox>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid style="border:none" width="100%">
+				<columns>
+					<column label="" align="left" width="27%" />
+					<column label="" align="left" width="15%" />
+					<column label="" align="left" width="20%" />
+					<column label="" align="left" width="10%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<label value="Filtrar por"></label>
+						<combobox value="">
+							<comboitem label="" />
+							<comboitem label="" />
+						</combobox>
+					</row>
+
+					<row style="border:none">
+
+						<label value="Equipo"></label>
+						<hbox>
+							<textbox value="" cols="17">
+							</textbox>
+							<button id="btnBuscarEquipo"
+								image="/Recursos/Imagenes/consultar.ico">
+							</button>
+						</hbox>
+						<hbox>
+
+							<label value="Modalidad"></label>
+							<combobox value="" width="70px">
+								<comboitem label="" />
+								<comboitem label="" />
+							</combobox>
+						</hbox>
+					</row>
+					<row style="border:none">
+						<label value="Juego"></label>
+						<combobox value=""
+							cols="32" />
+									
+					</row>
+				</rows>
+			</grid>
+			<div align="right" height="30px">
+	
+				<button id="btnGenerar"
+					image="/Recursos/Imagenes/imprimir.ico" label="Imprimir"
+					orient="horizontal">
+				</button>
+
+				<button id="btnCancelar"
+					image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
+					orient="horizontal">
+				</button>
+				<button id="btnSalir"
+					image="/Recursos/Imagenes/salir.png" label="Salir"
+					orient="horizontal">
+				</button>
+			</div>
+
+		</window>
+	</div>
+</zk>

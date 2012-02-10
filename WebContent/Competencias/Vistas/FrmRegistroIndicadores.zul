@@ -10,10 +10,10 @@
 			<div align="left">
 				<grid>
 					<columns>
-						<column width="25%" />
+						<column width="30%" />
 						<column width="5%" />
 						<column width="5%" />
-						<column width="65%" />
+						<column width="60%" />
 					</columns>
 					<rows>
 						<row style="border:none">
@@ -24,7 +24,6 @@
 								<comboitem self="@{each=tipoIndicador}"
 									label="@{tipoIndicador.nombre}" value="@{tipoIndicador}" />
 							</combobox>
-
 							<button id="btnBuscarIndicador"
 								image="/Recursos/Imagenes/consultar.ico">
 							</button>
@@ -33,22 +32,20 @@
 				</grid>
 				<panel id="pnlIndicador" border="normal">
 					<panelchildren>
-						<grid width="100%">
+						<grid width="100%" oddRowSclass="none">
 							<columns>
+								<column width="22,5%" />
+								<column width="30%" />
+								<column width="22,5%" />
 								<column width="25%" />
-								<column width="25%" />
-								<column width="5%" />
-								<column width="20%" />
-								<column width="20%" />
-								<column width="2%" />
 							</columns>
 							<rows>
 								<row></row>
 								<row align="left" style="border:none">
 									<label value="Modalidad" />
 									<combobox id="cmbModalidad"
-										cols="13" value="--Seleccione--"
-										model="@{cntrl.listModalidadIndicador}">
+										cols="12" value="--Seleccione--"
+										model="@{cntrl.listModalidadIndicador}" width="75%">
 										<comboitem
 											self="@{each=modalidadIndicador}"
 											label="@{modalidadIndicador.nombre}"
@@ -56,24 +53,25 @@
 									</combobox>
 									<label id="lblMedicion"
 										value="Medición " />
-									<combobox id="cmbMedicion" cols="13"
-										value="--Seleccione--"
-										model="@{cntrl.listMedicionIndicador}">
+									<combobox id="cmbMedicion" cols="12"
+										value="--Seleccione--" model="@{cntrl.listMedicionIndicador}"
+										width="80%">
 										<comboitem
 											self="@{each=medicionIndicador}"
 											label="@{medicionIndicador.nombre}"
 											value="@{medicionIndicador}" />
 									</combobox>
 								</row>
-								<row align="left" style="border:none">
+								<row align="left" style="border:none"
+									spans="1,3">
 									<label value="Nombre"></label>
-									<textbox id="txtNombre" cols="35"
+									<textbox id="txtNombre" width="98%"
 										value="@{cntrl.indicador.nombre}" />
 								</row>
 								<row align="left" style="border:none">
 									<label value="Abreviatura"></label>
 									<textbox id="txtAbreviatura"
-										cols="16" value="@{cntrl.indicador.abreviatura}" />
+										value="@{cntrl.indicador.abreviatura}" width="85%" />
 								</row>
 								<row />
 							</rows>
@@ -83,22 +81,20 @@
 				<panel id="pnlFormula" title="Fórmula"
 					border="normal">
 					<panelchildren>
-						<grid width="100%" style="border:none">
+						<grid width="100%" style="border:none"
+							oddRowSclass="none">
 							<columns>
-								<column width="25%" />
-								<column width="75%" />
+								<column width="50%" />
+								<column width="50%" />
 							</columns>
 							<rows>
-								<row style="border:none">
-									<label value="Fórmula" />
+								<row style="border:none" spans="1,2">
+									<label value="         Fórmula"/>
 									<textbox id="txtFormula"
 										multiline="true" cols="45" value="@{cntrl.indicador.formula}" />
-									<button id="btnBorrar"
-										image="/Recursos/Imagenes/atras.ico">
-									</button>
 								</row>
-								<row width="75%">
-									<vbox width="50px">
+								<row width="100%">
+									<vbox width="50%">
 										<label value="Indicador "></label>
 										<combobox id="cmbIndicador"
 											disabled="true" cols="13" value="--Seleccione--"
@@ -116,54 +112,59 @@
 												value="@{Constante}" />
 										</combobox>
 									</vbox>
-									<vbox width="50px">
-										<hbox>
-											<button id="btnSiete"
-												label="7" width="20px" />
-											<button id="btnOcho"
-												label="8" width="20px" />
-											<button id="btnNueve"
-												label="9" width="20px" />
-											<button id="btnDividir"
-												label="/" width="20px" />
-										</hbox>
-										<hbox>
-											<button id="btnCuatro"
-												label="4" width="20px" />
-											<button id="btnCinco"
-												label="5" width="20px" />
-											<button id="btnSeis"
-												label="6" />
-											<button id="btnMultiplicar"
-												label="x" width="20px" />
-										</hbox>
-										<hbox>
-											<button id="btnUno"
-												label="1" width="20px" />
-											<button id="btnDos"
-												label="2" width="20px" />
-											<button id="btnTres"
-												label="3" width="20px" />
-											<button id="btnRestar"
-												label="-" width="20px" />
-										</hbox>
-										<hbox>
-											<button
-												id="btnParentesisAbre" label="(" width="20px" />
-											<button id="btnCero"
-												label="0" width="20px" />
-											<button
-												id="btnParentesisCierra" label=")" width="20px" />
-											<button id="btnSumar"
-												label="+" width="20px" />
-										</hbox>
-										<hbox>
-											<button id="btnComa"
-												label="," width="50px" />
-											<button id="btnBorrarUnidad"
-												label="borrar" width="50px" />
-										</hbox>
-									</vbox>
+									<div align="center">
+										<vbox width="50%">
+											<hbox align="center">
+												<button id="btnSiete"
+													label="7" width="60px" left="40px" />
+												<button id="btnOcho"
+													label="8" width="60px" left="40px" />
+												<button id="btnNueve"
+													label="9" width="60px" left="40px" />
+												<button
+													id="btnBorrarUnidad" image="/Recursos/Imagenes/atras.ico"
+													width="60px" left="40px" />
+											</hbox>
+											<hbox align="center">
+												<button id="btnCuatro"
+													label="4" width="60px" />
+												<button id="btnCinco"
+													label="5" width="60px" />
+												<button id="btnSeis"
+													label="6" width="60px" />
+												<button id="btnSumar"
+													label="+" width="60px" />
+											</hbox>
+											<hbox align="center">
+												<button id="btnUno"
+													label="1" width="60px" />
+												<button id="btnDos"
+													label="2" width="60px" />
+												<button id="btnTres"
+													label="3" width="60px" />
+												<button id="btnRestar"
+													label="-" width="60px" />
+											</hbox>
+											<hbox align="center">
+												<button
+													id="btnParentesisAbre" label="(" width="60px" />
+												<button id="btnCero"
+													label="0" width="60px" />
+												<button
+													id="btnParentesisCierra" label=")" width="60px" />
+												<button id="btnDividir"
+													label="/" width="60px" />
+											</hbox>
+											<hbox align="center">
+												<button id="btnBorrar"
+													label="borrar" width="120px" />
+												<button id="btnComa"
+													label="," width="60px" />
+												<button
+													id="btnMultiplicar" label="*" width="60px" />
+											</hbox>
+										</vbox>
+									</div>
 								</row>
 							</rows>
 						</grid>
@@ -177,12 +178,10 @@
 									image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 								</button>
 								<button id="btnEliminar"
-									image="/Recursos/Imagenes/eliminar.ico"
-									label="Eliminar">
+									image="/Recursos/Imagenes/eliminar.ico" label="Eliminar">
 								</button>
 								<button id="btnCancelar"
-									image="/Recursos/Imagenes/cancelar.ico"
-									label="Cancelar">
+									image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
 								</button>
 								<button id="btnSalir"
 									image="/Recursos/Imagenes/salir.png" label="Salir">

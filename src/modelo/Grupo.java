@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,8 +21,8 @@ public class Grupo implements java.io.Serializable {
 	private int codigoGrupo;
 	private String nombre;
 	private char estatus;
-	private Set<PerfilGrupo> perfilGrupos = new HashSet<PerfilGrupo>(0);
-	private Set<Funcionalidad> funcionalidads = new HashSet<Funcionalidad>(0);
+	private Set<RolGrupo> rolGrupos = new HashSet<RolGrupo>(0);
+	private Set<GrupoUsuario> grupoUsuarios = new HashSet<GrupoUsuario>(0);
 
 	public Grupo() {
 	}
@@ -35,12 +34,12 @@ public class Grupo implements java.io.Serializable {
 	}
 
 	public Grupo(int codigoGrupo, String nombre, char estatus,
-			Set<PerfilGrupo> perfilGrupos, Set<Funcionalidad> funcionalidads) {
+			Set<RolGrupo> rolGrupos, Set<GrupoUsuario> grupoUsuarios) {
 		this.codigoGrupo = codigoGrupo;
 		this.nombre = nombre;
 		this.estatus = estatus;
-		this.perfilGrupos = perfilGrupos;
-		this.funcionalidads = funcionalidads;
+		this.rolGrupos = rolGrupos;
+		this.grupoUsuarios = grupoUsuarios;
 	}
 
 	@Id
@@ -72,21 +71,21 @@ public class Grupo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grupo")
-	public Set<PerfilGrupo> getPerfilGrupos() {
-		return this.perfilGrupos;
+	public Set<RolGrupo> getRolGrupos() {
+		return this.rolGrupos;
 	}
 
-	public void setPerfilGrupos(Set<PerfilGrupo> perfilGrupos) {
-		this.perfilGrupos = perfilGrupos;
+	public void setRolGrupos(Set<RolGrupo> rolGrupos) {
+		this.rolGrupos = rolGrupos;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "grupos")
-	public Set<Funcionalidad> getFuncionalidads() {
-		return this.funcionalidads;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "grupo")
+	public Set<GrupoUsuario> getGrupoUsuarios() {
+		return this.grupoUsuarios;
 	}
 
-	public void setFuncionalidads(Set<Funcionalidad> funcionalidads) {
-		this.funcionalidads = funcionalidads;
+	public void setGrupoUsuarios(Set<GrupoUsuario> grupoUsuarios) {
+		this.grupoUsuarios = grupoUsuarios;
 	}
 
 }

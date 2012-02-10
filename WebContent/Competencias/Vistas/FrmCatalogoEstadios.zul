@@ -15,17 +15,16 @@
 					<div style="margin-top:5px">
 					<label value="Filtro"></label>
 					<textbox id="txtFiltro"></textbox>
-					<button id="btnBuscar" label="Buscar"></button>
 					</div>
 					<listbox id="lsbxEstadios" mold="paging" width="100%" 
 							pageSize="10" style="margin-top:5px" model="@{cntrl.estadios}"
 							height="240px">
 						<listhead>
 							<listheader label="Nombre" width="20%" align="center"/>
-							<listheader label="Estado" width="auto" align="center"/>
-							<listheader label="Municipio" width="auto" align="center"/>
-							<listheader label="Parroquia" width="auto" align="center"/>
-							<listheader label="Dirección" width="auto" align="center"/>
+							<listheader label="Estado" width="20%" align="center"/>
+							<listheader label="Municipio" width="20%" align="center"/>
+							<listheader label="Parroquia" width="20%" align="center"/>
+							<listheader label="Dirección" width="20%" align="center"/>
 						</listhead>
 						
 						<listitem self="@{each=estadio}">

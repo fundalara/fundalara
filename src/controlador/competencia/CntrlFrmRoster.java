@@ -511,7 +511,7 @@ public class CntrlFrmRoster extends GenericForwardComposer {
 	  else
 	  {
 		  //agregar
-				jugadorForaneo.setEquipoCompetencia(equipoCompetencia);
+				//jugadorForaneo.setEquipoCompetencia(equipoCompetencia);
 				
 				servicioJugadorForaneo.agregar(jugadorForaneo);
 				Messagebox.show("Datos agregados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);

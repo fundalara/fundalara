@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,39 +23,32 @@ public class RosterCompetencia implements java.io.Serializable {
 	private int codigoRosterCompetencia;
 	private Roster roster;
 	private Competencia competencia;
+	private JugadorForaneo jugadorForaneo;
 	private Equipo equipo;
 	private char estatus;
 	private Set<LineUp> lineUps = new HashSet<LineUp>(0);
-	private Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias = new HashSet<JugadorForaneoRosterCompetencia>(
-			0);
 
 	public RosterCompetencia() {
 	}
 
-	public RosterCompetencia(int codigoRosterCompetencia, Roster roster,
+	public RosterCompetencia(int codigoRosterCompetencia,
 			Competencia competencia, Equipo equipo, char estatus) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
-		this.roster = roster;
 		this.competencia = competencia;
 		this.equipo = equipo;
 		this.estatus = estatus;
 	}
 
-	public RosterCompetencia(
-			int codigoRosterCompetencia,
-			Roster roster,
-			Competencia competencia,
-			Equipo equipo,
-			char estatus,
-			Set<LineUp> lineUps,
-			Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias) {
+	public RosterCompetencia(int codigoRosterCompetencia, Roster roster,
+			Competencia competencia, JugadorForaneo jugadorForaneo,
+			Equipo equipo, char estatus, Set<LineUp> lineUps) {
 		this.codigoRosterCompetencia = codigoRosterCompetencia;
 		this.roster = roster;
 		this.competencia = competencia;
+		this.jugadorForaneo = jugadorForaneo;
 		this.equipo = equipo;
 		this.estatus = estatus;
 		this.lineUps = lineUps;
-		this.jugadorForaneoRosterCompetencias = jugadorForaneoRosterCompetencias;
 	}
 
 	@Id
@@ -69,7 +62,7 @@ public class RosterCompetencia implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_roster", nullable = false)
+	@JoinColumn(name = "codigo_roster")
 	public Roster getRoster() {
 		return this.roster;
 	}
@@ -86,6 +79,16 @@ public class RosterCompetencia implements java.io.Serializable {
 
 	public void setCompetencia(Competencia competencia) {
 		this.competencia = competencia;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_jugador_foraneo")
+	public JugadorForaneo getJugadorForaneo() {
+		return this.jugadorForaneo;
+	}
+
+	public void setJugadorForaneo(JugadorForaneo jugadorForaneo) {
+		this.jugadorForaneo = jugadorForaneo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -114,16 +117,6 @@ public class RosterCompetencia implements java.io.Serializable {
 
 	public void setLineUps(Set<LineUp> lineUps) {
 		this.lineUps = lineUps;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "rosterCompetencia")
-	public Set<JugadorForaneoRosterCompetencia> getJugadorForaneoRosterCompetencias() {
-		return this.jugadorForaneoRosterCompetencias;
-	}
-
-	public void setJugadorForaneoRosterCompetencias(
-			Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias) {
-		this.jugadorForaneoRosterCompetencias = jugadorForaneoRosterCompetencias;
 	}
 
 }

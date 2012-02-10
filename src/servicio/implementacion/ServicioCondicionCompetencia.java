@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoCondicionCompetencia;
 
+import modelo.ClasificacionCompetencia;
 import modelo.CondicionCompetencia;
 import modelo.DatoBasico;
 import modelo.Roster;
@@ -51,6 +52,11 @@ public class ServicioCondicionCompetencia implements IServicioCondicionCompetenc
 
 	public List<CondicionCompetencia> listarCondicion(DatoBasico cc) {
 	    return null;
+	}
+	
+	@Override
+	public List<CondicionCompetencia> listarCondicionSeleccionada(ClasificacionCompetencia cc) {
+		return daoCondicionCompetencia.listarCondicionSeleccionada(cc);
 	}
 
 }

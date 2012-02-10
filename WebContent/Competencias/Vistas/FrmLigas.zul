@@ -1,4 +1,4 @@
-<?page title="Auto Generated index.zul"?>
+<?page title="REGISTRO DE LIGAS"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmLiga" ?>
 <div align="center">
@@ -16,13 +16,11 @@
 					</columns>
 
 					<rows>
-
 						<row style="border-style:none">
 							<label value="Nombre"></label>
 							<hbox>
 								<textbox id="txtNombre"
-									value="@{cntrl.liga.nombre}" cols="30"
-									constraint="no empty:El campo 'Nombre' es obligatorio">
+									value="@{cntrl.liga.nombre}" cols="30">
 								</textbox>
 								<space></space>
 								<button id="btnBuscar"
@@ -33,8 +31,7 @@
 						<row style="border-style:none">
 							<label value="Localidad"></label>
 							<textbox id="txtLocalidad" multiline="true"
-								rows="3" cols="30" value="@{cntrl.liga.localidad}"
-								constraint="no empty:El campo 'Localidad' es obligatorio">
+								rows="3" cols="30" value="@{cntrl.liga.localidad}">
 							</textbox>
 						</row>
 						<row style="border-style:none">
@@ -45,10 +42,6 @@
 							</div>
 						</row>
 					</rows>
-
-
-
-
 				</grid>
 
 			</panelchildren>
@@ -133,8 +126,7 @@
 							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
 						<button id="btnEliminar"
-							image="/Recursos/Imagenes/eliminar.ico" label="Eliminar"
-							disabled="true">
+							image="/Recursos/Imagenes/eliminar.ico" label="Eliminar">
 						</button>
 						<button id="btnCancelar"
 							image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">

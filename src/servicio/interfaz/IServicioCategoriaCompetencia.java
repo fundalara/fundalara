@@ -27,4 +27,6 @@ public interface IServicioCategoriaCompetencia {
 	public abstract int getDuraccionCategoria (Categoria cat);
 	
 	public abstract Date getDuraccionCategoriaHora(Categoria cat);
+
+	public abstract void agregar(List<CategoriaCompetencia> lista, int comp);
 }

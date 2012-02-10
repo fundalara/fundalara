@@ -36,26 +36,6 @@ public class CntrlFrmSelectorCompetencia extends GenericForwardComposer {
 	ServicioCategoriaCompetencia servicioCategoriaCompetencia;
 	List<CategoriaCompetencia> categoria;
 
-	public void determinarTitulo(int estatus) {
-		Window w = (Window) catalogo;
-		switch (estatus) {
-		    
-		case 6:
-			w.setTitle("Competencias Registradas");
-			break;
-		case 7:
-			w.setTitle("Competencias Aperturadas");
-			break;
-		case 8:
-			w.setTitle("Competencias Eliminadas");
-			break;
-		case 9:
-			w.setTitle("Competencias Clausuradas");
-			break;
-		   
-		}
-	}
-	
 	
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);

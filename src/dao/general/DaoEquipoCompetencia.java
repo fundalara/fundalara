@@ -2,6 +2,7 @@ package dao.general;
 
 import java.util.List;
 
+import modelo.Categoria;
 import modelo.Competencia;
 import modelo.EquipoCompetencia;
 
@@ -37,6 +38,15 @@ public List<EquipoCompetencia> buscarEquipoporCompetencia(Competencia c) {
 	
 	
 	
-	
+//Para calendario..
+	public List listarEquipoPorCategoria(Class o, Categoria codigo){
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(EquipoCompetencia.class);
+		Criteria c1 = c.createCriteria("equipo");
+		c1.add(Restrictions.eq("categoria", codigo));	
+		List <EquipoCompetencia> lista = c.list(); 
+		return lista;
+	}
 
 }

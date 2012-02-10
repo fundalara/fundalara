@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,11 +26,13 @@ public class Actividad implements java.io.Serializable {
 	private int codigoActividad;
 	private InstalacionUtilizada instalacionUtilizada;
 	private PlanificacionActividad planificacionActividad;
+	private Personal personal;
 	private Date fechaInicio;
 	private Date fechaCulminacion;
 	private char estatus;
 	private Date horaInicio;
 	private Date horaFin;
+	private String descripcionInstalacion;
 	private Set<SolicitudMantenimiento> solicitudMantenimientos = new HashSet<SolicitudMantenimiento>(
 			0);
 	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
@@ -52,11 +54,13 @@ public class Actividad implements java.io.Serializable {
 
 	public Actividad(int codigoActividad,
 			InstalacionUtilizada instalacionUtilizada,
-			PlanificacionActividad planificacionActividad, Date fechaInicio,
-			Date fechaCulminacion, char estatus, Date horaInicio, Date horaFin) {
+			PlanificacionActividad planificacionActividad, Personal personal,
+			Date fechaInicio, Date fechaCulminacion, char estatus,
+			Date horaInicio, Date horaFin) {
 		this.codigoActividad = codigoActividad;
 		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
+		this.personal = personal;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.estatus = estatus;
@@ -66,8 +70,9 @@ public class Actividad implements java.io.Serializable {
 
 	public Actividad(int codigoActividad,
 			InstalacionUtilizada instalacionUtilizada,
-			PlanificacionActividad planificacionActividad, Date fechaInicio,
-			Date fechaCulminacion, char estatus, Date horaInicio, Date horaFin,
+			PlanificacionActividad planificacionActividad, Personal personal,
+			Date fechaInicio, Date fechaCulminacion, char estatus,
+			Date horaInicio, Date horaFin, String descripcionInstalacion,
 			Set<SolicitudMantenimiento> solicitudMantenimientos,
 			Set<MaterialActividad> materialActividads,
 			Set<PersonalActividad> personalActividads,
@@ -79,11 +84,13 @@ public class Actividad implements java.io.Serializable {
 		this.codigoActividad = codigoActividad;
 		this.instalacionUtilizada = instalacionUtilizada;
 		this.planificacionActividad = planificacionActividad;
+		this.personal = personal;
 		this.fechaInicio = fechaInicio;
 		this.fechaCulminacion = fechaCulminacion;
 		this.estatus = estatus;
 		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
+		this.descripcionInstalacion = descripcionInstalacion;
 		this.solicitudMantenimientos = solicitudMantenimientos;
 		this.materialActividads = materialActividads;
 		this.personalActividads = personalActividads;
@@ -124,6 +131,16 @@ public class Actividad implements java.io.Serializable {
 	public void setPlanificacionActividad(
 			PlanificacionActividad planificacionActividad) {
 		this.planificacionActividad = planificacionActividad;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cedula_rif", nullable = false)
+	public Personal getPersonal() {
+		return this.personal;
+	}
+
+	public void setPersonal(Personal personal) {
+		this.personal = personal;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -173,6 +190,15 @@ public class Actividad implements java.io.Serializable {
 
 	public void setHoraFin(Date horaFin) {
 		this.horaFin = horaFin;
+	}
+
+	@Column(name = "descripcion_instalacion")
+	public String getDescripcionInstalacion() {
+		return this.descripcionInstalacion;
+	}
+
+	public void setDescripcionInstalacion(String descripcionInstalacion) {
+		this.descripcionInstalacion = descripcionInstalacion;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "actividad")

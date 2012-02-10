@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,8 +20,8 @@ import javax.persistence.Table;
 public class CuentaPagarMaterial implements java.io.Serializable {
 
 	private CuentaPagarMaterialId id;
-	private CuentaPagar cuentaPagar;
 	private Material material;
+	private CuentaPagar cuentaPagar;
 	private int cantidad;
 	private double precioUnitario;
 	private char estatus;
@@ -29,12 +29,12 @@ public class CuentaPagarMaterial implements java.io.Serializable {
 	public CuentaPagarMaterial() {
 	}
 
-	public CuentaPagarMaterial(CuentaPagarMaterialId id,
-			CuentaPagar cuentaPagar, Material material, int cantidad,
-			double precioUnitario, char estatus) {
+	public CuentaPagarMaterial(CuentaPagarMaterialId id, Material material,
+			CuentaPagar cuentaPagar, int cantidad, double precioUnitario,
+			char estatus) {
 		this.id = id;
-		this.cuentaPagar = cuentaPagar;
 		this.material = material;
+		this.cuentaPagar = cuentaPagar;
 		this.cantidad = cantidad;
 		this.precioUnitario = precioUnitario;
 		this.estatus = estatus;
@@ -43,23 +43,13 @@ public class CuentaPagarMaterial implements java.io.Serializable {
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "codigoMaterial", column = @Column(name = "codigo_material", nullable = false)),
-			@AttributeOverride(name = "origen", column = @Column(name = "origen", nullable = false)) })
+			@AttributeOverride(name = "codigoCuentaPagar", column = @Column(name = "codigo_cuenta_pagar", nullable = false)) })
 	public CuentaPagarMaterialId getId() {
 		return this.id;
 	}
 
 	public void setId(CuentaPagarMaterialId id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "origen", nullable = false, insertable = false, updatable = false)
-	public CuentaPagar getCuentaPagar() {
-		return this.cuentaPagar;
-	}
-
-	public void setCuentaPagar(CuentaPagar cuentaPagar) {
-		this.cuentaPagar = cuentaPagar;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -70,6 +60,16 @@ public class CuentaPagarMaterial implements java.io.Serializable {
 
 	public void setMaterial(Material material) {
 		this.material = material;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_cuenta_pagar", nullable = false, insertable = false, updatable = false)
+	public CuentaPagar getCuentaPagar() {
+		return this.cuentaPagar;
+	}
+
+	public void setCuentaPagar(CuentaPagar cuentaPagar) {
+		this.cuentaPagar = cuentaPagar;
 	}
 
 	@Column(name = "cantidad", nullable = false)

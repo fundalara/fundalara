@@ -4,7 +4,7 @@
 
 <zk>
 	<div align="center">
-		<window title="Registrar Indicadores" border="normal"
+		<window title="Seleccionar Indicadores" border="normal"
 			closable="true" width="690px" id="frmIndicador"
 			apply="controlador.competencia.CntrlFrmIndicador" style="left">
 			<panel border="normal">

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,22 +23,27 @@ public class PersonalForaneo implements java.io.Serializable {
 	private int codigoPersonalForaneo;
 	private DatoBasico datoBasico;
 	private String nombre;
+	private char estatus;
 	private Set<PersonalForaneoJuego> personalForaneoJuegos = new HashSet<PersonalForaneoJuego>(
 			0);
 
 	public PersonalForaneo() {
 	}
 
-	public PersonalForaneo(int codigoPersonalForaneo, DatoBasico datoBasico) {
+	public PersonalForaneo(int codigoPersonalForaneo, DatoBasico datoBasico,
+			char estatus) {
 		this.codigoPersonalForaneo = codigoPersonalForaneo;
 		this.datoBasico = datoBasico;
+		this.estatus = estatus;
 	}
 
 	public PersonalForaneo(int codigoPersonalForaneo, DatoBasico datoBasico,
-			String nombre, Set<PersonalForaneoJuego> personalForaneoJuegos) {
+			String nombre, char estatus,
+			Set<PersonalForaneoJuego> personalForaneoJuegos) {
 		this.codigoPersonalForaneo = codigoPersonalForaneo;
 		this.datoBasico = datoBasico;
 		this.nombre = nombre;
+		this.estatus = estatus;
 		this.personalForaneoJuegos = personalForaneoJuegos;
 	}
 
@@ -69,6 +74,15 @@ public class PersonalForaneo implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personalForaneo")

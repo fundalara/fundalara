@@ -1,6 +1,8 @@
 package controlador.competencia;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +23,9 @@ import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
+
+import comun.EstadoCompetencia;
 
 import servicio.implementacion.ServicioCompetencia;
 import servicio.implementacion.ServicioDatoBasico;
@@ -37,6 +42,7 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 	Competencia competencia;
 	ServicioDatoBasico servicioDatoBasico;
 	DatoBasico datoBasico;
+	Component catalogo;
 
 	FaseCompetenciaId faseCompetenciaId;
 	FaseCompetencia faseCompetencia;
@@ -46,10 +52,11 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 	// Vista...
 	Button btnAperturar;
 	Button btnCulminar;
-	Textbox txtCantEquipos;
+	Textbox txtNombre,txtfechaInicio,txtfechaFin,txtTemporada,txtClasificacion,txtCantEquipos;
 	Textbox txtJugRoster;
 	Textbox txtJuegosProgramados;
 	Textbox txtJuegosRegistrados;
+	Window frmEstatusCompetencia;
 
 	public Competencia getCompetencia() {
 		return competencia;
@@ -80,6 +87,9 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 		c.setVariable("cntrl", this, true);
 		formulario = c;
 		restaurar();
+		
+		competencia = new Competencia();
+		datoBasico = new DatoBasico();
 	}
 
 	private void restaurar() {
@@ -98,91 +108,118 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 
 	// BOTONES BUSCAR, CANCELAR,SALIR ................
 	public void onClick$btnBuscar() {
-		Component catalogo = Executions.createComponents(
-				"/Competencias/Vistas/FrmCatalogoEstatusCompetencia.zul", null,
-				null);
-		catalogo.setVariable("formulario", formulario, false);
-		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
-			@Override
-			// Este metodo se llama cuando se envia la señal desde el catalogo
-			public void onEvent(Event arg0) throws Exception {
-				// se obtiene la competencia...
-				competencia = (Competencia) formulario.getVariable(
-						"competencia", false);
-				// Habilitar Botones...
 
-				if (competencia.getDatoBasicoByCodigoEstadoCompetencia()
-						.getNombre().equals("REGISTRADA"))
-					btnAperturar.setDisabled(false);
-
-				if (competencia.getDatoBasicoByCodigoEstadoCompetencia()
-						.getNombre().equals("APERTURADA"))
-					btnCulminar.setDisabled(false);
-
-				// cambie EquiposIngresan de tipo String
-				txtCantEquipos.setValue(String.valueOf(servicioFaseCompetencia
-						.EquiposRegistrados(competencia).getEquipoIngresan()));
-				txtJugRoster.setValue(String.valueOf(competencia
-						.getCantidadJugador()));
-				txtJuegosRegistrados.setValue(String.valueOf(competencia
-						.getJuegos().size()));
-				txtJuegosProgramados.setValue(String.valueOf(servicioJuego.listarJuegosProgramados(datoBasico)));
-
-				binder.loadAll();
-			}
-		});
 	}
 
 	public void onClick$btnAperturar() throws InterruptedException {
-		if (Messagebox.show("¿Realmente desea aperturar la competencia",
-				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
+		
+		if (competencia.getDatoBasicoByCodigoEstadoCompetencia().getCodigoDatoBasico() == EstadoCompetencia.REGISTRADA){
+			
+			if (servicioJuego.listarJuegosProgramados(datoBasico) == 0){
 
-			if (competencia.getDatoBasicoByCodigoEstadoCompetencia()
-					.getNombre().equals("REGISTRADA"))
-				datoBasico = servicioDatoBasico.buscarPorString("APERTURADA");
+				Messagebox.show("Deben haber juegos Programados para poder Aperturar esta Competencia", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+				
+			}else{
 
+			datoBasico = servicioDatoBasico.buscarPorCodigo(288);			
 			competencia.setDatoBasicoByCodigoEstadoCompetencia(datoBasico);
+			servicioCompetencia.aperturarClausurarcompetencia(competencia, datoBasico);
 
 			restaurar();
 			binder.loadAll();
 			Messagebox.show("La compentencia ha sido aperturada...", "Mensaje",
 					Messagebox.OK, Messagebox.EXCLAMATION);
-		}
-		onClick$btnCancelar();
+			}
+			}
+		
+		formulario.detach();
 	}
+	
 
 	public void onClick$btnCulminar() throws InterruptedException {
-		if (Messagebox.show("¿Realmente desea culminar la competencia ",
-				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
-			if (competencia.getDatoBasicoByCodigoEstadoCompetencia()
-					.getNombre().equals("APERTURADA"))
-				datoBasico = servicioDatoBasico.buscarPorString("CLAUSURADA");
+		
+		if (competencia.getDatoBasicoByCodigoEstadoCompetencia().getCodigoDatoBasico() == EstadoCompetencia.APERTURADA){
+			
+			if (competencia.getJuegos().size() < servicioJuego.listarJuegosProgramados(datoBasico) || competencia.getJuegos().size() == 0){
+				
+				Messagebox.show("No se puede Clausurar esta Competencia, Aun hay juegos sin realizar", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
 
+			}else{
+
+			datoBasico = servicioDatoBasico.buscarPorCodigo(289);
 			competencia.setDatoBasicoByCodigoEstadoCompetencia(datoBasico);
+			servicioCompetencia.aperturarClausurarcompetencia(competencia, datoBasico);
 
 			restaurar();
 			binder.loadAll();
 			Messagebox.show("La competencia ha sido culminada...", "Mensaje",
 					Messagebox.OK, Messagebox.EXCLAMATION);
+			}
 		}
-		onClick$btnCancelar();
+		
+		formulario.detach();
+		
 	}
 
-	public void onClick$btnCancelar() {
-		restaurar();
-
-		txtCantEquipos.setValue("");
-		txtJugRoster.setValue("");
-		txtJuegosProgramados.setValue("");
-
-		btnAperturar.setDisabled(true);
-		btnCulminar.setDisabled(true);
-		binder.loadAll();
-	}
 
 	public void onClick$btnSalir() {
 		formulario.detach();
 
 	}
 
+	
+	public void onCreate$frmEstatusCompetencia(){
+	    Competencia compt = (Competencia) formulario.getVariable("comp",false);	
+
+	    int cantequipos, cantjugador, juegosreg, juegosprog;
+		btnAperturar.setFocus(true);
+		
+		competencia = compt;
+		
+		Date fechaI = compt.getFechaInicio();
+		Date fechaF = compt.getFechaFin();
+		String fechaInicio, fechaFin; 
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		fechaInicio=formato.format(fechaI);
+		fechaFin=formato.format(fechaF);
+		
+	    
+	    competencia.setCodigoCompetencia(compt.getCodigoCompetencia());
+	    competencia.setNombre(compt.getNombre());
+	    competencia.setFechaInicio(compt.getFechaInicio());
+	    competencia.setFechaFin(compt.getFechaFin());
+	    competencia.setClasificacionCompetencia(compt.getClasificacionCompetencia());
+	    competencia.setLapsoDeportivo(compt.getLapsoDeportivo());
+	    competencia.setCantidadJugador(compt.getCantidadJugador());
+	    competencia.setDatoBasicoByCodigoEstadoCompetencia(compt.getDatoBasicoByCodigoEstadoCompetencia());
+	    
+		txtfechaInicio.setText(fechaInicio);
+		txtfechaFin.setText(fechaFin);
+	    
+		txtCantEquipos.setText(String.valueOf(servicioFaseCompetencia.EquiposRegistrados(competencia).getEquipoIngresan()));
+		
+		txtJuegosRegistrados.setValue(String.valueOf(competencia.getJuegos().size()));
+		txtJuegosProgramados.setValue(String.valueOf(servicioJuego.listarJuegosProgramados(datoBasico)));
+				
+		
+		
+		if(compt.getDatoBasicoByCodigoEstadoCompetencia().getCodigoDatoBasico() == EstadoCompetencia.REGISTRADA){
+			
+			frmEstatusCompetencia.setTitle("Aperturar Competencia");
+			btnAperturar.setVisible(true);
+			btnCulminar.setVisible(false);
+			
+			
+		}else if (compt.getDatoBasicoByCodigoEstadoCompetencia().getCodigoDatoBasico() == EstadoCompetencia.APERTURADA){
+		
+			frmEstatusCompetencia.setTitle("Clausurar Competencia");
+			btnAperturar.setVisible(false);
+			btnCulminar.setVisible(true);
+		
+		
+		}
+	    binder.loadAll();
+	}
 }

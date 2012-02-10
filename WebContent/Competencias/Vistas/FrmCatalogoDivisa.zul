@@ -12,35 +12,41 @@
 				<panelchildren>
 					<div style="margin-top:5px">
 						<label value="Filtro"></label>
-						<textbox id="txtFiltro" ></textbox>
-						<button label="Buscar"></button>
+						<textbox id="txtFiltro"></textbox>
 					</div>
 					<listbox id="lsbxDivisas" mold="paging" width="100%"
 						pageSize="10" style="margin-top:5px" model="@{cntrl.divisas}"
-						height="240px" >
+						height="240px">
 						<listhead>
-							<listheader label="Nombre" align="center" width="10%"></listheader>
-							<listheader label="Dirección" align="center" width="auto"></listheader>
-							<listheader label="Parroquia" align="center"  width="auto"></listheader>
-							<listheader label="Telefono" align="center"  width="auto"></listheader>
-							<listheader label="Correo" align="center"  width="auto"></listheader>
-							<listheader label="Contacto" align="center"  width="10%"></listheader>
+							<listheader label="Nombre" align="center"
+								width="20%">
+							</listheader>
+							<listheader label="Dirección" align="center"
+								width="40%">
+							</listheader>
+							<listheader label="Parroquia" align="center"
+								width="20%">
+							</listheader>
+							<listheader label="Telefono" align="center"
+								width="20%">
+							</listheader>
 						</listhead>
 
 						<listitem self="@{each=divisa}">
 							<listcell label="@{divisa.nombre}"></listcell>
 							<listcell label="@{divisa.direccion}"></listcell>
-							<listcell label="@{divisa.datoBasico.nombre}"></listcell>
+							<listcell
+								label="@{divisa.datoBasico.nombre}">
+							</listcell>
 							<listcell label="@{divisa.telefono}"></listcell>
-							<listcell label="@{divisa.correoElectronico}"></listcell>
-							<listcell label="@{divisa.montoInscripcion;"></listcell>
 						</listitem>
-
 
 					</listbox>
 					<div align="right">
-						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" />
-						<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
+						<button id="btnAceptar"
+							image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" />
+						<button id="btnSalir"
+							image="/Recursos/Imagenes/salir.png" label="Salir" onClick="" />
 					</div>
 				</panelchildren>
 			</panel>

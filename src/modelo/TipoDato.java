@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,10 +26,6 @@ public class TipoDato implements java.io.Serializable {
 	private String descripcion;
 	private char estatus;
 	private boolean tipo;
-	private Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals = new HashSet<DetalleSeguridadFuncional>(
-			0);
-	private Set<SeguridadFuncional> seguridadFuncionals = new HashSet<SeguridadFuncional>(
-			0);
 	private Set<DatoBasico> datoBasicos = new HashSet<DatoBasico>(0);
 	private Set<TipoDato> tipoDatos = new HashSet<TipoDato>(0);
 
@@ -46,8 +42,6 @@ public class TipoDato implements java.io.Serializable {
 
 	public TipoDato(int codigoTipoDato, TipoDato tipoDato, String nombre,
 			String descripcion, char estatus, boolean tipo,
-			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals,
-			Set<SeguridadFuncional> seguridadFuncionals,
 			Set<DatoBasico> datoBasicos, Set<TipoDato> tipoDatos) {
 		this.codigoTipoDato = codigoTipoDato;
 		this.tipoDato = tipoDato;
@@ -55,8 +49,6 @@ public class TipoDato implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.tipo = tipo;
-		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
-		this.seguridadFuncionals = seguridadFuncionals;
 		this.datoBasicos = datoBasicos;
 		this.tipoDatos = tipoDatos;
 	}
@@ -115,26 +107,6 @@ public class TipoDato implements java.io.Serializable {
 
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")
-	public Set<DetalleSeguridadFuncional> getDetalleSeguridadFuncionals() {
-		return this.detalleSeguridadFuncionals;
-	}
-
-	public void setDetalleSeguridadFuncionals(
-			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
-		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")
-	public Set<SeguridadFuncional> getSeguridadFuncionals() {
-		return this.seguridadFuncionals;
-	}
-
-	public void setSeguridadFuncionals(
-			Set<SeguridadFuncional> seguridadFuncionals) {
-		this.seguridadFuncionals = seguridadFuncionals;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDato")

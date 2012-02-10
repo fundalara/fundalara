@@ -10,10 +10,12 @@ import modelo.Categoria;
 import modelo.Divisa;
 import modelo.Liga;
 
+import org.python.tests.ExceptionTest.Thrower;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -37,15 +39,15 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 	List<Categoria> categoriaSeleccionada;
 	List<Categoria> categorias;
 	ServicioCategoria servicioCategoria;
+	Boolean ligaBuscada;
 
 	// Vista...
 	Textbox txtNombre;
 	Textbox txtLocalidad;
 	Listbox lsbxCategorias;
 	Listbox lsbxCategoriaSeleccionada;
-	Button btnEliminar;
+	Button btnBuscar;
 
-	
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
@@ -70,7 +72,6 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		this.liga = liga;
 	}
 
-	
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
@@ -78,16 +79,13 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		restaurar();
 		categorias = servicioCategoria.listar();
 	}
-	
-	
-	
 
 	private void restaurar() {
 		liga = new Liga();
 		categoriaSeleccionada = new ArrayList<Categoria>();
+		ligaBuscada = false;
 	}
 
-	
 	// Agregado Convierte un conjunto a una lista...
 	public List ConvertirConjuntoALista(Set conjunto) {
 		List l = new ArrayList();
@@ -96,7 +94,6 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		}
 		return l;
 	}
-	
 
 	// Agregado Convierte una lista a un conjunto...
 	public Set ConvertirListaAConjunto(List lista) {
@@ -107,7 +104,6 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		return c;
 	}
 
-	
 	public void Agregar(Listbox origen, Listbox destino, List lista) {
 
 		Set seleccionados = origen.getSelectedItems();
@@ -129,7 +125,6 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 			}
 		}
 	}
-	
 
 	public void Quitar(Listbox origen, List lista) {
 		Set seleccionados = origen.getSelectedItems();
@@ -153,69 +148,74 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 				// se obtiene la divisa
 				liga = (Liga) formulario.getVariable("liga", false);
 				categoriaSeleccionada = ConvertirConjuntoALista(liga
-						.getCategorias());
-				btnEliminar.setDisabled(false);
+						.getCategoriaLigas());
+				ligaBuscada = true; // se cargaron los datos...
 				binder.loadAll();
 			}
 		});
 	}
-	
 
 	public void onClick$btnAgregar() {
 		Agregar(lsbxCategorias, lsbxCategoriaSeleccionada,
 				categoriaSeleccionada);
 		binder.loadAll();
 	}
-	
 
 	public void onClick$btnQuitar() {
 		Quitar(lsbxCategoriaSeleccionada, categoriaSeleccionada);
 		binder.loadAll();
 	}
-	
-	
-	
 
 	// BOTONES GUARDAR,ELIMINAR,CANCELAR,SALIR................
 
 	public void onClick$btnGuardar() throws InterruptedException {
-		if (txtNombre.getText() != null)
-			if (txtLocalidad.getText() != null)
+
+		if (!txtNombre.getValue().isEmpty())
+			if (!txtLocalidad.getText().isEmpty())
 				if (lsbxCategoriaSeleccionada.getItems().size() > 0) {
-					liga.setCategorias(ConvertirListaAConjunto(categoriaSeleccionada));
+					liga.setCategoriaLigas(ConvertirListaAConjunto(categoriaSeleccionada));
 					servicioLiga.agregar(liga);
 					Messagebox.show("Datos agregados exitosamente", "Mensaje",
 							Messagebox.OK, Messagebox.EXCLAMATION);
 					restaurar();
 					binder.loadAll();
-				} 
-				else
-					Messagebox.show("Seleccione la Categoria", "Mensaje",
-							Messagebox.OK, Messagebox.EXCLAMATION);
+				} else
+					throw new WrongValueException(lsbxCategoriaSeleccionada,
+							"Debe seleccionar al menos una 'Categoria'");
+			else
+				throw new WrongValueException(txtLocalidad,
+						"El campo 'Localidad' es obligatorio");
+		else
+			throw new WrongValueException(txtNombre,
+					"El campo 'Nombre' es obligatorio");
 	}
-	
 
-	public void onClick$btnEliminar() throws InterruptedException{
-		
-		if (Messagebox.show("Â¿Realmente desea eliminar esta liga", "Mensaje",
-				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
+	public void onClick$btnEliminar() throws InterruptedException {
+
+		if (ligaBuscada == false)
+			throw new WrongValueException(btnBuscar,
+					" Debe seleccionar una 'Liga'");
+
+		else if (Messagebox.show("¿Realmente desea eliminar esta liga?",
+				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
 			servicioLiga.eliminar(liga);
-            restaurar();
-            binder.loadAll();
-			Messagebox.show("Datos eliminados exitosamente", "Mensaje",	Messagebox.OK, Messagebox.EXCLAMATION);
+			restaurar();
+			binder.loadAll();
+			Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+					Messagebox.OK, Messagebox.EXCLAMATION);
 		}
+
 	}
-	
-	
+
 	public void onClick$btnCancelar() {
 		restaurar();
-		btnEliminar.setDisabled(true);
 		binder.loadAll();
 	}
-	
 
-	public void onClick$btnSalir() {
-		formulario.detach();
+	public void onClick$btnSalir() throws InterruptedException {
+		if (Messagebox.show("¿Desea salir?", "Mensaje",
+				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
+			formulario.detach();
 
 	}
 

@@ -8,6 +8,7 @@ import modelo.Competencia;
 import modelo.FaseCompetencia;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -38,6 +39,15 @@ public class DaoFaseCompetencia extends GenericDao {
 		c.add(Restrictions.eq("competencia",cp));
 		
 		return c.list();
+	}
+	
+	public List<FaseCompetencia> listarPorCompetencia(int dato) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"select * from fase_competencia where codigo_competencia = '" +dato+  "' and estatus='A' order by numero_fase  ").addEntity(FaseCompetencia.class);
+		List<FaseCompetencia> lista = query.list();
+		return lista;
 	}
 
 }

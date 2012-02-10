@@ -70,7 +70,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	ServicioPersonaNatural servicioPersonaNaturalForaneo;
 	List<CategoriaCompetencia> categorias;
 	List<Persona> persona;
-	List<EquipoCompetencia> equipocompetencia, equipocompetenciaforaneo;
+	List<EquipoCompetencia> equipocompetencia, equipocompetenciaforaneo,
+			equipocompetenciaAuxiliar, equipocompetenciaforaneoauxiliar;
 	List<Equipo> equipos, equiposforaneos;
 	List<Divisa> divisas;
 	Combobox cmbCategorias, cmbCategoriasForaneas;
@@ -92,13 +93,12 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		formulario = c;
 		restaurar();
 		equipoCompetencia = new EquipoCompetencia();
+		equipocompetenciaforaneoauxiliar = new ArrayList<EquipoCompetencia>();
+		equipocompetenciaAuxiliar = new ArrayList<EquipoCompetencia>();
 	}
 
 	public void restaurar() {
 		competencia = new Competencia();
-		// personaNaturalForaneo =
-		// servicioPersonaNaturalForaneo.buscarPersonaNatural();
-
 	}
 
 	// Llama al evento select de la lista de equipos locales
@@ -110,7 +110,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	// Llama al evento select de la lista de equipos locales
 	public void onClick$btnAgregarEquiposForaneos() {
-		personaNatural=personaNaturalForaneo;
+		// personaNatural=personaNaturalForaneo;
 		Agregar(lsbxEquiposForaneos, lsbxEquiposForaneosSeleccionados,
 				equipocompetenciaforaneo);
 		binder.loadAll();
@@ -134,8 +134,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				}
 			}
 			if (!sw) {
-				equipoCompetencia = new EquipoCompetencia();				
-				equipoCompetencia.setPersonaNatural(personaNatural);				
+				equipoCompetencia = new EquipoCompetencia();
+				equipoCompetencia.setPersonaNatural(personaNatural);
 				equipoCompetencia.setCompetencia(competencia);
 				equipoCompetencia.setEstatus('A');
 				equipoCompetencia.setEquipo(c1);
@@ -148,7 +148,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	// /////////////// Evento Click del Boton Quitar Equipo Local
 	// ///////////////
 	public void onClick$btnQuitar() {
-		Quitar(lsbxEquiposLocales, equipocompetencia);
+		Quitar1(posicion);
 		binder.loadAll();
 	}
 
@@ -166,6 +166,26 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 			Listitem li = (Listitem) i.next();
 			Object o = li.getValue();
 			lista.remove(o);
+			EquipoCompetencia old = (EquipoCompetencia) li.getValue();
+			if (old.getCodigoEquipoCompetencia() > 0) {
+				old.setEstatus('E');
+				equipocompetenciaforaneoauxiliar.add(old);
+			}
+
+		}
+	}
+
+	public void Quitar1(int pos) {
+		// Set seleccionados = origen.setSelectedIndex(posicion);
+		if (pos >= 0) {
+			EquipoCompetencia old = equipocompetencia.get(pos);
+			EquipoCompetencia old1 = equipocompetencia.get(pos);
+			old.setEstatus('E');
+			equipocompetencia.remove(posicion);
+			if (old1.getCodigoEquipoCompetencia() > 0) {
+				equipocompetenciaAuxiliar.add(old);
+			}
+			personaNatural = new PersonaNatural();
 		}
 	}
 
@@ -178,7 +198,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				"/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
 		// asigna una referencia del formulario al catalogo.
 		catalogo.setVariable("formulario", formulario, false);
-		catalogo.setVariable("estatus", EstadoCompetencia.REGISTRADA, false);
+		catalogo.setVariable("estado_comp", EstadoCompetencia.REGISTRADA, false);
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			// Este metodo se llama cuando se envia la señal desde el catalogo
@@ -186,16 +206,13 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 				// se obtiene la competencia
 				competencia = (Competencia) formulario.getVariable(
 						"competencia", false);
-				categorias = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
-				
+				categorias = servicioCategoriaCompetencia
+						.listarCategoriaPorCompetencia(competencia
+								.getCodigoCompetencia());
 				divisas = servicioDivisa.listarDivisaForanea();
-				
-				//personaNaturalForaneo = servicioPersonaNatural.buscarPersonaNatural("V-0000000");
-				
 				if (equipocompetencia.size() == 0) {
 					CargarEquipos();
 				}
-
 				binder.loadAll();
 			}
 		});
@@ -206,8 +223,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		posicion = lsbxEquiposSeleccionadosLocales.getSelectedIndex();
 		personaNatural = equipocompetencia.get(posicion).getPersonaNatural();
 		btnBuscarDelegado.setDisabled(false);
-		
-		binder.loadAll();
+		 binder.loadAll();
 
 	}
 
@@ -245,6 +261,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	public void onClick$btnAgregarEquipoForaneo() throws InterruptedException {
 		if (cmbCategoriasForaneas.getText() != "--Seleccione--") {
 		} else {
+			personaNatural = new PersonaNatural();
 			// se crea el catalogo y se llama
 			Component catalogos = Executions.createComponents(
 					"/Jugador/Vistas/frmConfigurarEquipo.zul", null, null);
@@ -298,49 +315,51 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 
 	// // llamando el evento guardar
 	public void onClick$btnGuardar() throws InterruptedException {
-//		int estado;
-//		estado = 0;
-//		if (txtNombreCompetencia.getText() != null) {
-//			
-//				if (equipocompetencia.size() > 0) {
-//					if (tipoOperacionLocal == 2) {
-//						servicioEquipoCompetencia.actualizar(equipocompetencia);
-//					} else {
-////						alert("entro en agregar");
-//						servicioEquipoCompetencia.agregar(equipocompetencia);
-//					}
-//					estado = 1;
-//				}
-//				if (equipocompetenciaforaneo.size() > 0) {
-//					if (tipoOperacionForaneo == 2) {
-//						servicioEquipoCompetencia
-//								.actualizar(equipocompetenciaforaneo);
-//					} else {
-//						servicioEquipoCompetencia
-//								.agregar(equipocompetenciaforaneo);
-//					}
-//					estado = estado+1;
-//				}
-//			
-//
-//			if (estado > 0) {
-//				Messagebox.show("Datos agregados exitosamente", "Mensaje",
-//						Messagebox.OK, Messagebox.EXCLAMATION);
-//				restaurar();
-//				onClick$btnCancelar();
-//				binder.loadAll();
-//			} else {
-//				Messagebox.show("Seleccione los Equipos ", "Mensaje",
-//						Messagebox.OK, Messagebox.EXCLAMATION);
-//
-//			}
-//	}
-		Messagebox.show("Datos agregados exitosamente", "Mensaje",
-				Messagebox.OK, Messagebox.EXCLAMATION);
-		restaurar();
-		onClick$btnCancelar();
-		binder.loadAll();
-		   
+		int estado;
+		estado = 0;
+		if (txtNombreCompetencia.getText() != null) {
+
+			if ((equipocompetencia.size() > 0) || (equipocompetenciaAuxiliar.size()>0)) {
+				if (tipoOperacionLocal == 2) {
+					servicioEquipoCompetencia.actualizar(equipocompetencia);
+					if (equipocompetenciaAuxiliar.size() > 0) {
+						servicioEquipoCompetencia
+								.actualizar(equipocompetenciaAuxiliar);
+					}
+				} else {
+					servicioEquipoCompetencia.agregar(equipocompetencia);
+				}
+				estado = 1;
+			}
+
+			if ((equipocompetenciaforaneo.size() > 0)
+					|| equipocompetenciaforaneoauxiliar.size() > 0) {
+				if (tipoOperacionForaneo == 2) {
+					servicioEquipoCompetencia
+							.actualizar(equipocompetenciaforaneo);
+					if (equipocompetenciaforaneoauxiliar.size() > 0) {
+						servicioEquipoCompetencia
+								.actualizar(equipocompetenciaforaneoauxiliar);
+						estado = estado + 1;
+					}
+				} else {
+					servicioEquipoCompetencia.agregar(equipocompetenciaforaneo);
+				}
+				estado = estado + 1;
+			}
+
+			if (estado > 0) {
+				Messagebox.show("Datos agregados exitosamente", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+				restaurar();
+				onClick$btnCancelar();
+				binder.loadAll();
+			} else {
+				Messagebox.show("Seleccione los Equipos ", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+			}
+		}
+
 	}
 
 	public void onClick$btnEliminar() throws InterruptedException {
@@ -365,9 +384,12 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		txtModalidadCompetencia.setValue("");
 		equipocompetencia = new ArrayList<EquipoCompetencia>();
 		equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
+		equipocompetenciaAuxiliar = new ArrayList<EquipoCompetencia>();
+		equipocompetenciaforaneoauxiliar = new ArrayList<EquipoCompetencia>();
 		equipos = new ArrayList<Equipo>();
 		equiposforaneos = new ArrayList<Equipo>();
 		categorias = new ArrayList<CategoriaCompetencia>();
+		personaNatural = new PersonaNatural();
 		competencia = new Competencia();
 		binder.loadAll();
 
@@ -410,7 +432,7 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		for (Iterator i = EC.iterator(); i.hasNext();) {
 			EquipoCompetencia c1 = (EquipoCompetencia) i.next();
 			if (c1.getEquipo().getDivisa().getCodigoDivisa() == 1) {
-				//equipocompetencia.add(c1);
+				equipocompetencia.add(c1);
 				tipoOperacionLocal = 2;
 			} else {
 				equipocompetenciaforaneo.add(c1);

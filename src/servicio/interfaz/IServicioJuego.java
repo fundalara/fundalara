@@ -17,4 +17,6 @@ public interface IServicioJuego {
 	
 	public abstract int listarJuegosProgramados(DatoBasico datoBasico);
 
+	public abstract Juego buscarJuego(int codigo);
+
 }

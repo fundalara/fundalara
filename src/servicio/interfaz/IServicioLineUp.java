@@ -20,4 +20,6 @@ public interface IServicioLineUp {
 	public abstract List<LineUp> listarPlanificados(Juego j,Equipo e);
     
 	public abstract List<LineUp> listarDefinitivos(Juego j,Equipo e);
+
+	public abstract List<LineUp> listarDefinitivosReserva(Juego j, Equipo e);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.general.DaoConstanteCategoria;
 
+import modelo.Constante;
 import modelo.ConstanteCategoria;
 import servicio.interfaz.IServicioConstanteCategoria;
 
@@ -45,10 +46,25 @@ public class ServicioConstanteCategoria implements IServicioConstanteCategoria {
 		return daoConstanteCategoria.listar(ConstanteCategoria.class);
 	}
 
-	//@Override
-	//public List<ConstanteCategoria> listarActivos() {
-		// TODO Auto-generated method stub
-		//return daoConstanteCategoria.listarActivos();
-	//}
+	
+	
+	@Override
+	public List<ConstanteCategoria> listarConstantesPorCategoria( Constante c){
+		return daoConstanteCategoria.listarConstantesPorCategoria(c);
+	}
+	
+	
+	@Override
+	public void agregar(ConstanteCategoria cc) {
+
+		if (cc.getCodigoConstanteCategoria() == 0) {
+			int codigo = daoConstanteCategoria.listar(ConstanteCategoria.class).size() + 1;
+			cc.setCodigoConstanteCategoria(codigo);
+			cc.setEstatus('A');
+		    
+		}
+		daoConstanteCategoria.guardar(cc);
+
+	}
 
 }

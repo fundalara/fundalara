@@ -5,49 +5,85 @@
 
 	<div align="center">
 		<window id="FrmCatalogoC" title="Competencias Existentes" apply="controlador.competencia.CntrlFrmCatalogoCompetencia"
-			border="normal" mode="modal" closable="true" width="690px" height="350px">
+			border="normal" mode="modal" closable="true" width="900px">
 			<panel width="100%" border="normal" >
 				<panelchildren>
+				
+							<grid oddRowSclass="none">
+
+								<columns>
+									<column width="5%"/>
+									<column width="75%"/>
+									<column width="5%"/>
+									<column width="15%"/>
+								</columns>
+
+								<rows>
+								
+									<row style="border-style:none">
+
+															
+						<label value="Filtro"></label>
+						<textbox id="txtfiltro" width="50%"></textbox>
+						
+						<label value="Mostrar" id="lblMostrar" visible="false"/>
+						<combobox id="cmbEstadoCompetencia" cols="15" value="REGISTRADA" readonly="true" visible="false">
+
+							<comboitem label="APERTURADA" />
+							<comboitem label="REGISTRADA" />
+						</combobox>
+									
+									
+									</row>
+								
+								</rows>
+							</grid>					
+				
+								
+				
 					<div style="margin-top:5px">
-					<label value="Filtro"></label>
-					<textbox></textbox>
-					<button label="Buscar"></button>
-					</div>
+
+					</div>					
+					
+				</panelchildren>
+			</panel> 
+								
 					<listbox id="lsbxCompetencias" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.competencias}" height="240px">
 						<listhead>
-						    <listheader label="Tipo" align="center" width="auto"/>		
-						    <listheader label="Clasificacion" align="center" width="12%"/>			
-							<listheader label="Nombre" align="center" width="auto"/>
-							<listheader label="Fecha de Inicio" align="center" width="auto"/>
-							<listheader label="Fecha de Fin" align="center" width="auto"/>
-							<listheader label="Cant.Fases" align="center" width="12%"/>
-							<listheader label="Monto Inscripcion" align="center" width="17%"/>
+						    <listheader label="Tipo" align="left" width="10%"/>		
+						    <listheader label="Clasificacion" align="left" width="20%"/>			
+							<listheader label="Nombre" align="left" width="36%"/> 
+							<listheader label="Fecha de Inicio" align="center" width="12%"/> 
+							<listheader label="Fecha de Fin" align="center" width="12%"/> 
+							<listheader label="Cant.Fases" align="center" width="10%"/> 
+						<!--  	<listheader label="Monto Inscripcion" align="center" width="10%"/>  -->
+						<!--  	<listheader label="Estado Comp" align="center" width="auto"/> --> 
 												
 						</listhead>
 						
 						<listitem self="@{each=competencia}">
-						    <listcell label="@{competencia.clasificacionCompetencia.datoBasico.nombre}"></listcell>
+						    <listcell label="@{competencia.clasificacionCompetencia.datoBasico.nombre}" ></listcell>
 						    <listcell label="@{competencia.clasificacionCompetencia.nombre}"></listcell>
 							<listcell label="@{competencia.nombre}"></listcell>
-							<listcell label="@{competencia.fechaInicio}"></listcell>
-							<listcell label="@{competencia.fechaFin}"></listcell>							
+							<listcell label="@{competencia.fechaInicio,converter='controlador.jugador.converter.DateConverter'}"></listcell>
+							<listcell label="@{competencia.fechaFin,converter='controlador.jugador.converter.DateConverter'}"></listcell>							
 							<listcell label="@{competencia.cantidadFase}"></listcell>
-							<listcell label="@{competencia.montoInscripcion}"></listcell>
+						<!--  	<listcell label="@{competencia.montoInscripcion}"></listcell> -->
+						<!--  	<listcell label="@{competencia.datoBasicoByCodigoEstadoCompetencia.nombre}"></listcell> -->							
 						</listitem>
 									
 						
 					</listbox>
 					<div align="right">
 						<button id="btnAceptar"
-							image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
+							image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" width="90px">
 						</button>
 						<button id="btnSalir"
-							image="/Recursos/Imagenes/salir.png" label="Salir"
+							image="/Recursos/Imagenes/salir.png" label="Salir" width="90px"
 							onClick="">
 						</button>
 					</div>
-				</panelchildren>
-			</panel>
+
 
 
 			<zscript><![CDATA[

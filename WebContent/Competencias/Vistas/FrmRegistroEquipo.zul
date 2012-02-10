@@ -17,7 +17,7 @@
 							<label value="Nombre"></label>
 							<hbox>
 								<textbox id="txtNombreCompetencia"
-									cols="40" style="margin-top:5px" readonly="true"
+									cols="80" style="margin-top:5px" readonly="true"
 									value="@{cntrl.competencia.nombre }">
 								</textbox>
 								<button id="btnBuscar"
@@ -156,9 +156,8 @@
 														<row
 															style="border:none">
 															<listbox
-																id="lsbxEquiposLocales" model="@{cntrl.equipos}"
-																style="margin-top:5px" height="200px" multiple="true"
-																mold="paging" checkmark="true">
+																id="lsbxEquiposLocales" model="@{cntrl.equipos}" checkmark="true" multiple="true"
+																style="margin-top:5px" height="200px" mold="paging" >
 
 																<listhead>
 																	<listheader
@@ -334,9 +333,9 @@
 						<button id="btnGuardar"
 							image="/Recursos/Imagenes/guardar.ico" label="Guardar">
 						</button>
-						<button image="/Recursos/Imagenes/eliminar.ico"
-							label="Eliminar" id="btnEliminar">
-						</button>
+<!-- 						<button image="/Recursos/Imagenes/eliminar.ico" -->
+<!-- 							label="Eliminar" id="btnEliminar"> -->
+<!-- 						</button> -->
 						<button image="/Recursos/Imagenes/cancelar.ico"
 							label="Cancelar" id="btnCancelar">
 						</button>

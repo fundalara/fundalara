@@ -63,6 +63,11 @@ public class ServicioIndicadorCategoriaCompetencia implements
 		return daoIndicadorCategoriaCompetencia.listarIndicadoresColectivosPorCategoria(c, comp, db);
 	}
 	 
+	@Override
+	public List<IndicadorCategoriaCompetencia> listarIndicadoresSencillosIndividuales(
+			Categoria c, Competencia comp, DatoBasico modalidad) {
+		return daoIndicadorCategoriaCompetencia.listarIndicadoresSencillosIndividuales(c, comp, modalidad);
+	}
 	
 	
 	

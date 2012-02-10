@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.general.DaoEquipoCompetencia;
 
+import modelo.Categoria;
 import modelo.Competencia;
 import modelo.ConstanteCategoria;
 import modelo.EquipoCompetencia;
@@ -78,5 +79,10 @@ public class ServicioEquipoCompetencia implements IServicioEquipoCompetencia {
 		return daoEquipoCompetencia.buscarEquipoporCompetencia(c);
 
 	}
+	
+	public List<EquipoCompetencia> listarEquipoPorCategoria(Categoria codigo){
+		return daoEquipoCompetencia.listarEquipoPorCategoria(EquipoCompetencia.class, codigo);
+	}
+
 
 }

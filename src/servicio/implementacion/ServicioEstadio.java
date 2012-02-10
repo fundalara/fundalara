@@ -5,6 +5,7 @@ import java.util.List;
 import dao.general.DaoEstadio;
 
 
+import modelo.Competencia;
 import modelo.Divisa;
 import modelo.Estadio;
 import servicio.interfaz.IServicioEstadio;
@@ -62,5 +63,13 @@ public class ServicioEstadio implements IServicioEstadio {
 		System.out.println(cad);
 		return daoEstadio.filtar(cad);
 	}
+	
+	
+	public List listarEstadiosPorCompetencia(Competencia competencia,Estadio estadio){
+		return daoEstadio.listarEstadiosPorCompetencia( competencia, estadio);
+	}
 
+	public List<Estadio> listarEstadiosPorFiltro(String dato){
+		return daoEstadio.listarEstadiosPorFiltro(dato);
+	}
 }

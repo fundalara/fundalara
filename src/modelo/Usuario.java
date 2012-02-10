@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,9 +28,7 @@ public class Usuario implements java.io.Serializable {
 	private String nick;
 	private String password;
 	private char estatus;
-	private Set<Perfil> perfils = new HashSet<Perfil>(0);
-	private Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals = new HashSet<DetalleSeguridadFuncional>(
-			0);
+	private Set<GrupoUsuario> grupoUsuarios = new HashSet<GrupoUsuario>(0);
 	private Set<SeguridadFuncional> seguridadFuncionals = new HashSet<SeguridadFuncional>(
 			0);
 
@@ -45,15 +43,13 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	public Usuario(Personal personal, String nick, String password,
-			char estatus, Set<Perfil> perfils,
-			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals,
+			char estatus, Set<GrupoUsuario> grupoUsuarios,
 			Set<SeguridadFuncional> seguridadFuncionals) {
 		this.personal = personal;
 		this.nick = nick;
 		this.password = password;
 		this.estatus = estatus;
-		this.perfils = perfils;
-		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
+		this.grupoUsuarios = grupoUsuarios;
 		this.seguridadFuncionals = seguridadFuncionals;
 	}
 
@@ -107,22 +103,12 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	public Set<Perfil> getPerfils() {
-		return this.perfils;
+	public Set<GrupoUsuario> getGrupoUsuarios() {
+		return this.grupoUsuarios;
 	}
 
-	public void setPerfils(Set<Perfil> perfils) {
-		this.perfils = perfils;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	public Set<DetalleSeguridadFuncional> getDetalleSeguridadFuncionals() {
-		return this.detalleSeguridadFuncionals;
-	}
-
-	public void setDetalleSeguridadFuncionals(
-			Set<DetalleSeguridadFuncional> detalleSeguridadFuncionals) {
-		this.detalleSeguridadFuncionals = detalleSeguridadFuncionals;
+	public void setGrupoUsuarios(Set<GrupoUsuario> grupoUsuarios) {
+		this.grupoUsuarios = grupoUsuarios;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")

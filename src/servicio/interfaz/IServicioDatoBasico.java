@@ -56,4 +56,6 @@ public interface IServicioDatoBasico {
 	public abstract List<DatoBasico> listarTipoInstalacion();
 	
 	public abstract List<DatoBasico> listarTipoMantenimiento();
+
+	public abstract List<DatoBasico> listarPersonalForaneo(DatoBasico datoBasico);
 }

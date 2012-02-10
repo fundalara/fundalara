@@ -7,12 +7,14 @@ import servicio.interfaz.IServicioCompetencia;
 import dao.general.DaoCompetencia;
 
 import modelo.Competencia;
+import modelo.DatoBasico;
 import modelo.Divisa;
 import modelo.Juego;
 
 public class ServicioCompetencia implements IServicioCompetencia {
 
 	DaoCompetencia daoCompetencia;
+
 	@Override
 	public void eliminar(Competencia c) {
 		// TODO Auto-generated method stub
@@ -23,18 +25,38 @@ public class ServicioCompetencia implements IServicioCompetencia {
 	@Override
 	public void agregar(Competencia c) {
 		// TODO Auto-generated method stub
-		if (c.getCodigoCompetencia()==0){
-			int cod = daoCompetencia.listar(Competencia.class).size()+1;
+		if (c.getCodigoCompetencia() == 0) {
+			int cod = daoCompetencia.listar(Competencia.class).size() + 1;
 			c.setCodigoCompetencia(cod);
 			c.setEstatus('A');
 		}
-		daoCompetencia.guardar(c);		
+		daoCompetencia.guardar(c);
 
 	}
 
 	@Override
-	public int obtenerCodigoCompetencia(){ return daoCompetencia.listar(Competencia.class).size();}	
-	
+	public void actualizar(Competencia c) {
+		// TODO Auto-generated method stub
+		daoCompetencia.actualizar(c);
+	}
+
+	@Override
+	public List<Competencia> listarPorfiltro(String dato, int estadoComp) {
+		return daoCompetencia.listarCompetenciasPorFiltro(dato, estadoComp);
+	}
+
+	@Override
+	public void aperturarClausurarcompetencia(Competencia c, DatoBasico datob) {
+		// TODO Auto-generated method stub
+		c.setDatoBasicoByCodigoEstadoCompetencia(datob);
+		daoCompetencia.actualizar(c);
+	}
+
+	@Override
+	public int obtenerCodigoCompetencia() {
+		return daoCompetencia.listar(Competencia.class).size();
+	}
+
 	@Override
 	public List<Competencia> listar() {
 		return daoCompetencia.listar(Competencia.class);
@@ -42,7 +64,7 @@ public class ServicioCompetencia implements IServicioCompetencia {
 
 	@Override
 	public List<Competencia> listarActivos() {
-	
+
 		return null;
 	}
 
@@ -64,4 +86,8 @@ public class ServicioCompetencia implements IServicioCompetencia {
 		return daoCompetencia.listarRegistradasAperturadas();
 	}
 
+	@Override
+	public List<Competencia> listarPorfiltro(String dato) {
+		return daoCompetencia.listarCompetenciasPorFiltro(dato);
+	}
 }

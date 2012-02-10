@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 27/01/2012 03:27:22 PM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -30,11 +30,9 @@ public class PersonalSuplente implements java.io.Serializable {
 	}
 
 	public PersonalSuplente(PersonalSuplenteId id,
-			SesionEjecutada sesionEjecutada, DatoBasico datoBasico,
-			Personal personal, char estatus) {
+			SesionEjecutada sesionEjecutada, Personal personal, char estatus) {
 		this.id = id;
 		this.sesionEjecutada = sesionEjecutada;
-		this.datoBasico = datoBasico;
 		this.personal = personal;
 		this.estatus = estatus;
 	}
@@ -73,7 +71,7 @@ public class PersonalSuplente implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "eventualidad_entrenador", nullable = false)
+	@JoinColumn(name = "eventualidad_entrenador")
 	public DatoBasico getDatoBasico() {
 		return this.datoBasico;
 	}
