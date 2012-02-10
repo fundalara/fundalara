@@ -135,7 +135,7 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 		Window w = (Window) Executions.createComponents("/Competencias/Vistas/FrmRegistroResultados.zul", null, null);
         w.setPosition("center");
         Juego j = (Juego) esc.getValue();
-        w.setVariable("juego",j,false);
+        w.setVariable("juego",j.getCodigoJuego(),false);
         w.doHighlighted();
 	}
 	

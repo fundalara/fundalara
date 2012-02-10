@@ -134,7 +134,7 @@
 													<treerow>
 														<treecell
 															label="Clasificación"
-															onClick='enlace("/Competencias/Vistas/FrmNuevaModalidad.zul")' />
+															onClick='enlace("/Competencias/Vistas/FrmClasificacion.zul")' />
 													</treerow>
 												</treeitem>
 												<treeitem>
@@ -149,6 +149,13 @@
 														<treecell
 															label="Estadios"
 															onClick='enlace("/Competencias/Vistas/FrmEstadio.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Personal Foraneo"
+															onClick='enlace("/Competencias/Vistas/FrmPersonalForaneo.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
