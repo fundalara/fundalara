@@ -192,8 +192,7 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		Component catalogo = Executions.createComponents(
 				"/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
 		catalogo.setVariable("formulario", formulario, false);
-		catalogo.setVariable("estatus", EstadoCompetencia.REGISTRADA, false);
-		catalogo.setVariable("codigo", EstadoCompetencia.REGISTRADA, false);
+		catalogo.setVariable("estado_comp", EstadoCompetencia.REGISTRADA, false);		
 
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override

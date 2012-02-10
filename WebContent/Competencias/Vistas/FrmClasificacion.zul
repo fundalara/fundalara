@@ -1,14 +1,19 @@
 <?page title="Clasificacion Competencia" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmClasificacion" ?>
+
+<!--@author Merielen Gaspar -->
+<!--@author Diana Santiago -->
+<!--@version 2.0 01/02/2012-->
+
 <zk>
 	<div align="center">
-		<window id="frmClasificacion" title="Registro Modalidad"
+		<window id="frmClasificacion" title="Registro de Clasificación"
 			border="normal" height="" width="515px"
 			apply="controlador.competencia.CntrlFrmClasificacion"
 			closable="true">
-			<panel border="normal">
-				<caption label="Datos de la Modalidad"></caption>
+			<div align="left"> 
+			<panel  border="normal" title="Datos de la Clasificación">
 				<panelchildren style="margin-top:5px ">
 					<grid style="border:none">
 						<columns>
@@ -34,8 +39,7 @@
 							<row align="left" style="border:none">
 								<label value="Clasificación"></label>
 								<textbox id="txtClasificacion"
-									width="80%" value="@{cntrl.clasificacionCompetencia.nombre}"
-									constraint="no empty:El campo 'Clasificación' es obligatorio">
+									width="80%" value="@{cntrl.clasificacionCompetencia.datobasico.nombre}">
 								</textbox>
 
 
@@ -44,16 +48,16 @@
 								<label value="Descripción"></label>
 								<textbox width="80%" multiline="true"
 									height="50px" id="txtDescripcion"
-									value="@{cntrl.clasificacionCompetencia.descripcion}"
-									constraint="no empty:El campo 'Descripción' es obligatorio">
+									value="@{cntrl.clasificacionCompetencia.descripcion}">
 								</textbox>
 							</row>
 						</rows>
 					</grid>
 				</panelchildren>
 			</panel>
-			<panel>
-				<caption label="Selección de Condiciones"></caption>
+			</div>
+			<div align="left">
+			<panel title="Selección de Condiciones">
 				<panelchildren>
 					<grid>
 						<rows>
@@ -110,6 +114,7 @@
 					</grid>
 				</panelchildren>
 			</panel>
+			</div>
 
 
 			<!-- BOTONES -->

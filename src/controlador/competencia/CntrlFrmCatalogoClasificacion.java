@@ -16,24 +16,39 @@ import org.zkoss.zul.Textbox;
 
 import servicio.implementacion.ServicioClasificacionCompetencia;
 
+/**
+ * @author Merielen Gaspar
+ * @author Diana Santiago
+ * 
+ */
+
 public class CntrlFrmCatalogoClasificacion extends GenericForwardComposer {
 
-	AnnotateDataBinder binder;
-	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
+	/**
+	 * @version 2.0 01/02/2012
+	 * Clase CntrlFrmCatalogoClasificacion para acceso/manejo de la interfaz (vista) de los tipos
+	 * de competencias (FrmCatalogoClasificacion.zul) 
+	 * Utiliza los Servicios ServicioClasificacionCompetencia
+	 */
+	
+	
+	/** ATRIBUTOS */
 	List<ClasificacionCompetencia> clasificacionCompetencias;
-	Listbox lsbxClasificacion;
+	AnnotateDataBinder binder;
 	Component catalogo;
-	Textbox txtFiltro;
+	
+	
+	/** SERVICIOS UTILIZADOS */
+	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
+	
+	
+	/** VISTAS */
 	Combobox cmbTipoCompetencia;
+	Listbox lsbxClasificacion;
+	Textbox txtFiltro;
 
-	// public void onCreate$frm(){
-	// //OBTIENE LA VARIABLE DEL FORMULARIO ANTERIOR EN EL CMB
-	// TipoCompetencia tc = (TipoCompetencia) catalogo.getVariable("tc",false);
-	// modalidades = servicioModalidadCompetencia.listarModalidad(tc);
-	// binder.loadAll();
-	//
-	// }
 
+	/** ESTE METODO SE LLAMA AL CARGAR LA VENTANA */
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
@@ -46,7 +61,7 @@ public class CntrlFrmCatalogoClasificacion extends GenericForwardComposer {
 	}
 
 
-
+	/** ESTE METODO PARA ENVIAR EL TIPO DE COMPETENCIA SELECCIONADO A LA PANTALLA PRINCIPAL (FrmClasificacion.zul) */
 	public void onClick$btnAceptar() throws Exception {
 		if (lsbxClasificacion.getSelectedIndex() != -1) {
 			ClasificacionCompetencia m = clasificacionCompetencias
@@ -62,19 +77,26 @@ public class CntrlFrmCatalogoClasificacion extends GenericForwardComposer {
 		}
 	}
 
-	public void onCtrlKey$txtFiltro() {
-		System.out.println("changing...");
+
+	/** ESTE METODO SE USA PARA SALIR DE LA PANTALLA ACTUAL */
+	public void onClick$btnSalir() throws InterruptedException {
+		if (Messagebox.show("                  ¿Desea salir?", "Mensaje",
+				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
+			catalogo.detach();
+
 	}
 
-	public void onChanging$txtFiltro() {
-		// divisas = servicioDivisa.filtar(txtFiltro.getText()+"%");
-		binder.loadAll();
-	}
 
-	public void onClick$btnSalir() {
-		catalogo.detach();
-	}
-
+//	public void onCtrlKey$txtFiltro() {
+//		System.out.println("changing...");
+//	}
+//
+//	public void onChanging$txtFiltro() {
+//		binder.loadAll();
+//	}
+	
+	
+	/** GETTERS AND SETTERS */
 	public List<ClasificacionCompetencia> getClasificacionCompetencias() {
 		return clasificacionCompetencias;
 	}
