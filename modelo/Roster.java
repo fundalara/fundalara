@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,8 +22,8 @@ import javax.persistence.TemporalType;
 public class Roster implements java.io.Serializable {
 
 	private int codigoRoster;
-	private Jugador jugador;
-	private Equipo equipo;
+	private String cedulaRif;
+	private int codigoEquipo;
 	private Date fechaIngreso;
 	private char estatus;
 	private Set<TestJugador> testJugadors = new HashSet<TestJugador>(0);
@@ -39,23 +37,23 @@ public class Roster implements java.io.Serializable {
 	public Roster() {
 	}
 
-	public Roster(int codigoRoster, Jugador jugador, Equipo equipo,
+	public Roster(int codigoRoster, String cedulaRif, int codigoEquipo,
 			Date fechaIngreso, char estatus) {
 		this.codigoRoster = codigoRoster;
-		this.jugador = jugador;
-		this.equipo = equipo;
+		this.cedulaRif = cedulaRif;
+		this.codigoEquipo = codigoEquipo;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 	}
 
-	public Roster(int codigoRoster, Jugador jugador, Equipo equipo,
+	public Roster(int codigoRoster, String cedulaRif, int codigoEquipo,
 			Date fechaIngreso, char estatus, Set<TestJugador> testJugadors,
 			Set<Ascenso> ascensos, Set<Anuario> anuarios,
 			Set<AsistenciaJugador> asistenciaJugadors,
 			Set<RosterCompetencia> rosterCompetencias) {
 		this.codigoRoster = codigoRoster;
-		this.jugador = jugador;
-		this.equipo = equipo;
+		this.cedulaRif = cedulaRif;
+		this.codigoEquipo = codigoEquipo;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 		this.testJugadors = testJugadors;
@@ -75,24 +73,22 @@ public class Roster implements java.io.Serializable {
 		this.codigoRoster = codigoRoster;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false)
-	public Jugador getJugador() {
-		return this.jugador;
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_equipo", nullable = false)
-	public Equipo getEquipo() {
-		return this.equipo;
+	@Column(name = "codigo_equipo", nullable = false)
+	public int getCodigoEquipo() {
+		return this.codigoEquipo;
 	}
 
-	public void setEquipo(Equipo equipo) {
-		this.equipo = equipo;
+	public void setCodigoEquipo(int codigoEquipo) {
+		this.codigoEquipo = codigoEquipo;
 	}
 
 	@Temporal(TemporalType.DATE)

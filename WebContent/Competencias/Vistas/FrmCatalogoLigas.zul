@@ -10,9 +10,8 @@
 			<panel width="100%">
 				<panelchildren>
 					<div style="margin-top:5px">
-						<label value="Filtro"></label>
-						<textbox></textbox>
-						
+					<label value="Filtro"></label>
+					<textbox id="txtFiltro"></textbox>
 					</div>
 					<listbox id="lsbxLigas" mold="paging" pageSize="10" style="margin-top:5px" model="@{cntrl.ligas}"
 						height="240px" >

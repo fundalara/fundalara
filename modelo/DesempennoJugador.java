@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class DesempennoJugador implements java.io.Serializable {
 
 	private int codigoDesempennoJugador;
 	private AsistenciaJugador asistenciaJugador;
-	private ActividadesEjecutadas actividadesEjecutadas;
+	private ActividadEjecutada actividadEjecutada;
 	private char estatus;
 	private Set<PuntuacionJugador> puntuacionJugadors = new HashSet<PuntuacionJugador>(
 			0);
@@ -32,20 +32,20 @@ public class DesempennoJugador implements java.io.Serializable {
 
 	public DesempennoJugador(int codigoDesempennoJugador,
 			AsistenciaJugador asistenciaJugador,
-			ActividadesEjecutadas actividadesEjecutadas, char estatus) {
+			ActividadEjecutada actividadEjecutada, char estatus) {
 		this.codigoDesempennoJugador = codigoDesempennoJugador;
 		this.asistenciaJugador = asistenciaJugador;
-		this.actividadesEjecutadas = actividadesEjecutadas;
+		this.actividadEjecutada = actividadEjecutada;
 		this.estatus = estatus;
 	}
 
 	public DesempennoJugador(int codigoDesempennoJugador,
 			AsistenciaJugador asistenciaJugador,
-			ActividadesEjecutadas actividadesEjecutadas, char estatus,
+			ActividadEjecutada actividadEjecutada, char estatus,
 			Set<PuntuacionJugador> puntuacionJugadors) {
 		this.codigoDesempennoJugador = codigoDesempennoJugador;
 		this.asistenciaJugador = asistenciaJugador;
-		this.actividadesEjecutadas = actividadesEjecutadas;
+		this.actividadEjecutada = actividadEjecutada;
 		this.estatus = estatus;
 		this.puntuacionJugadors = puntuacionJugadors;
 	}
@@ -72,13 +72,12 @@ public class DesempennoJugador implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_actividad_ejecutada", nullable = false)
-	public ActividadesEjecutadas getActividadesEjecutadas() {
-		return this.actividadesEjecutadas;
+	public ActividadEjecutada getActividadEjecutada() {
+		return this.actividadEjecutada;
 	}
 
-	public void setActividadesEjecutadas(
-			ActividadesEjecutadas actividadesEjecutadas) {
-		this.actividadesEjecutadas = actividadesEjecutadas;
+	public void setActividadEjecutada(ActividadEjecutada actividadEjecutada) {
+		this.actividadEjecutada = actividadEjecutada;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

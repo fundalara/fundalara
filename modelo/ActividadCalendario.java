@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -30,7 +30,6 @@ public class ActividadCalendario implements java.io.Serializable {
 	private Date fechaCulminacion;
 	private String descripcion;
 	private char estatus;
-	private String color;
 	private Date horaInicio;
 	private Date horaFin;
 
@@ -54,7 +53,7 @@ public class ActividadCalendario implements java.io.Serializable {
 			DatoBasico datoBasico, Competencia competencia, Juego juego,
 			Actividad actividad, Sesion sesion, Date fechaInicio,
 			Date fechaCulminacion, String descripcion, char estatus,
-			String color, Date horaInicio, Date horaFin) {
+			Date horaInicio, Date horaFin) {
 		this.codigoActividadCalendario = codigoActividadCalendario;
 		this.datoBasico = datoBasico;
 		this.competencia = competencia;
@@ -65,7 +64,6 @@ public class ActividadCalendario implements java.io.Serializable {
 		this.fechaCulminacion = fechaCulminacion;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
-		this.color = color;
 		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
 	}
@@ -166,15 +164,6 @@ public class ActividadCalendario implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Column(name = "color")
-	public String getColor() {
-		return this.color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
 	}
 
 	@Temporal(TemporalType.TIME)

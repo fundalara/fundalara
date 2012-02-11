@@ -1,6 +1,8 @@
 package servicio.interfaz;
 
 import java.util.List;
+
+import modelo.Estadio;
 import modelo.Liga;
 
 
@@ -17,4 +19,5 @@ public interface IServicioLiga {
 	public abstract  List<Liga> listar ();
 	
 	public abstract List<Liga> listarActivos();
+	public List<Liga> filtrar (String cad);
 }

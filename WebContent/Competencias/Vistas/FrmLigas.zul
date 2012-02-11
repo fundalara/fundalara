@@ -12,7 +12,8 @@
 				<grid>
 					<columns>
 						<column label="" width="10%" align="left"></column>
-						<column label="" width="90%" align="left"></column>
+						<column label="" width="60%" align="left"></column>
+
 					</columns>
 
 					<rows>
@@ -35,11 +36,26 @@
 							</textbox>
 						</row>
 						<row style="border-style:none">
-							<label value="Logo"></label>
-							<div>
-								<textbox cols="17"></textbox>
-								<button label="Examinar"></button>
-							</div>
+							<label value="Logo"
+								style="margin-left:3px">
+							</label>
+							<hbox>
+								<div style="float:lefs">
+									<groupbox
+										style="border-color:orange" width="100px" mold="3d">
+										<image  id="imgLogo" 
+											width="80px" />
+									</groupbox>
+								</div>
+								<div>
+									<button style="margin-top:40px"
+										id="btnExaminar" label="Examinar">
+									</button>
+								</div>
+
+							</hbox>
+
+
 						</row>
 					</rows>
 				</grid>
@@ -74,7 +90,7 @@
 								</listitem>
 							</listbox>
 
-							<grid>
+							<grid oddRowSclass="none">
 								<rows>
 									<row style="border:none"
 										align="center">
@@ -99,11 +115,10 @@
 									<listheader
 										label="Categorias Seleccionadas" />
 								</listhead>
-								<listitem self="@{each=categorias}"
-									value="@{categorias}">
-
+								<listitem self="@{each=categoriaLiga}"
+									value="@{categoriaLiga}">
 									<listcell
-										label="@{categorias.nombre}">
+										label="@{categoriaLiga.categoria.nombre}">
 									</listcell>
 
 								</listitem>

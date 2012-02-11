@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import modelo.Categoria;
 import modelo.EquipoFaseCompetencia;
 import modelo.FaseCompetencia;
 
@@ -14,13 +15,16 @@ import dao.generico.GenericDao;
 
 public class DaoEquipoFaseCompetencia extends GenericDao {
 	
-	public List<EquipoFaseCompetencia> buscarEquipoFase (FaseCompetencia fase) {
+	public List<EquipoFaseCompetencia> buscarEquipoPorFaseYCategoria (FaseCompetencia fase,Categoria categoria) {
 		Session session = this.getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
-		Criteria cc = session.createCriteria(EquipoFaseCompetencia.class);
-		cc.add(Restrictions.eq("faseCompetencia", fase));
-		cc.add(Restrictions.eq("estatus", 'A'));
-		List<EquipoFaseCompetencia> lista = cc.list();
+		Criteria c = session.createCriteria(EquipoFaseCompetencia.class);		
+		c.add(Restrictions.eq("faseCompetencia", fase));
+		c.add(Restrictions.eq("estatus", 'A'));
+		Criteria c2 = c.createCriteria("equipoCompetencia");
+		Criteria c3 = c2.createCriteria("equipo");
+		c3.add(Restrictions.eq("categoria",categoria));
+		List<EquipoFaseCompetencia> lista = c.list();
 		return lista;
 	}
 	

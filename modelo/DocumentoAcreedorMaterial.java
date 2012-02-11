@@ -1,15 +1,12 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,8 +17,6 @@ import javax.persistence.Table;
 public class DocumentoAcreedorMaterial implements java.io.Serializable {
 
 	private DocumentoAcreedorMaterialId id;
-	private DocumentoAcreedor documentoAcreedor;
-	private Material material;
 	private char estatus;
 	private int cantidad;
 
@@ -29,11 +24,8 @@ public class DocumentoAcreedorMaterial implements java.io.Serializable {
 	}
 
 	public DocumentoAcreedorMaterial(DocumentoAcreedorMaterialId id,
-			DocumentoAcreedor documentoAcreedor, Material material,
 			char estatus, int cantidad) {
 		this.id = id;
-		this.documentoAcreedor = documentoAcreedor;
-		this.material = material;
 		this.estatus = estatus;
 		this.cantidad = cantidad;
 	}
@@ -48,26 +40,6 @@ public class DocumentoAcreedorMaterial implements java.io.Serializable {
 
 	public void setId(DocumentoAcreedorMaterialId id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_documento_acreedor", nullable = false, insertable = false, updatable = false)
-	public DocumentoAcreedor getDocumentoAcreedor() {
-		return this.documentoAcreedor;
-	}
-
-	public void setDocumentoAcreedor(DocumentoAcreedor documentoAcreedor) {
-		this.documentoAcreedor = documentoAcreedor;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_material", nullable = false, insertable = false, updatable = false)
-	public Material getMaterial() {
-		return this.material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

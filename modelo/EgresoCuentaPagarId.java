@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,24 +11,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EgresoCuentaPagarId implements java.io.Serializable {
 
-	private String origen;
 	private int codigoEgreso;
+	private int codigoCuentaPagar;
 
 	public EgresoCuentaPagarId() {
 	}
 
-	public EgresoCuentaPagarId(String origen, int codigoEgreso) {
-		this.origen = origen;
+	public EgresoCuentaPagarId(int codigoEgreso, int codigoCuentaPagar) {
 		this.codigoEgreso = codigoEgreso;
-	}
-
-	@Column(name = "origen", nullable = false)
-	public String getOrigen() {
-		return this.origen;
-	}
-
-	public void setOrigen(String origen) {
-		this.origen = origen;
+		this.codigoCuentaPagar = codigoCuentaPagar;
 	}
 
 	@Column(name = "codigo_egreso", nullable = false)
@@ -40,6 +31,15 @@ public class EgresoCuentaPagarId implements java.io.Serializable {
 		this.codigoEgreso = codigoEgreso;
 	}
 
+	@Column(name = "codigo_cuenta_pagar", nullable = false)
+	public int getCodigoCuentaPagar() {
+		return this.codigoCuentaPagar;
+	}
+
+	public void setCodigoCuentaPagar(int codigoCuentaPagar) {
+		this.codigoCuentaPagar = codigoCuentaPagar;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -49,18 +49,16 @@ public class EgresoCuentaPagarId implements java.io.Serializable {
 			return false;
 		EgresoCuentaPagarId castOther = (EgresoCuentaPagarId) other;
 
-		return ((this.getOrigen() == castOther.getOrigen()) || (this
-				.getOrigen() != null && castOther.getOrigen() != null && this
-				.getOrigen().equals(castOther.getOrigen())))
-				&& (this.getCodigoEgreso() == castOther.getCodigoEgreso());
+		return (this.getCodigoEgreso() == castOther.getCodigoEgreso())
+				&& (this.getCodigoCuentaPagar() == castOther
+						.getCodigoCuentaPagar());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result
-				+ (getOrigen() == null ? 0 : this.getOrigen().hashCode());
 		result = 37 * result + this.getCodigoEgreso();
+		result = 37 * result + this.getCodigoCuentaPagar();
 		return result;
 	}
 

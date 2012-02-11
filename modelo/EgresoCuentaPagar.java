@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,7 +21,6 @@ public class EgresoCuentaPagar implements java.io.Serializable {
 
 	private EgresoCuentaPagarId id;
 	private Egreso egreso;
-	private CuentaPagar cuentaPagar;
 	private double montoAbonado;
 	private char estatus;
 
@@ -29,18 +28,17 @@ public class EgresoCuentaPagar implements java.io.Serializable {
 	}
 
 	public EgresoCuentaPagar(EgresoCuentaPagarId id, Egreso egreso,
-			CuentaPagar cuentaPagar, double montoAbonado, char estatus) {
+			double montoAbonado, char estatus) {
 		this.id = id;
 		this.egreso = egreso;
-		this.cuentaPagar = cuentaPagar;
 		this.montoAbonado = montoAbonado;
 		this.estatus = estatus;
 	}
 
 	@EmbeddedId
 	@AttributeOverrides({
-			@AttributeOverride(name = "origen", column = @Column(name = "origen", nullable = false)),
-			@AttributeOverride(name = "codigoEgreso", column = @Column(name = "codigo_egreso", nullable = false)) })
+			@AttributeOverride(name = "codigoEgreso", column = @Column(name = "codigo_egreso", nullable = false)),
+			@AttributeOverride(name = "codigoCuentaPagar", column = @Column(name = "codigo_cuenta_pagar", nullable = false)) })
 	public EgresoCuentaPagarId getId() {
 		return this.id;
 	}
@@ -57,16 +55,6 @@ public class EgresoCuentaPagar implements java.io.Serializable {
 
 	public void setEgreso(Egreso egreso) {
 		this.egreso = egreso;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "origen", nullable = false, insertable = false, updatable = false)
-	public CuentaPagar getCuentaPagar() {
-		return this.cuentaPagar;
-	}
-
-	public void setCuentaPagar(CuentaPagar cuentaPagar) {
-		this.cuentaPagar = cuentaPagar;
 	}
 
 	@Column(name = "monto_abonado", nullable = false, precision = 17, scale = 17)

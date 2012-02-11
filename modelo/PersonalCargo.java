@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,8 +21,8 @@ import javax.persistence.TemporalType;
 public class PersonalCargo implements java.io.Serializable {
 
 	private int codigoPersonalCargo;
-	private DatoBasico datoBasico;
 	private Personal personal;
+	private int codigoCargo;
 	private Date fechaFin;
 	private Date fechaInicio;
 	private char estatus;
@@ -30,20 +30,20 @@ public class PersonalCargo implements java.io.Serializable {
 	public PersonalCargo() {
 	}
 
-	public PersonalCargo(int codigoPersonalCargo, DatoBasico datoBasico,
-			Personal personal, Date fechaInicio, char estatus) {
+	public PersonalCargo(int codigoPersonalCargo, Personal personal,
+			int codigoCargo, Date fechaInicio, char estatus) {
 		this.codigoPersonalCargo = codigoPersonalCargo;
-		this.datoBasico = datoBasico;
 		this.personal = personal;
+		this.codigoCargo = codigoCargo;
 		this.fechaInicio = fechaInicio;
 		this.estatus = estatus;
 	}
 
-	public PersonalCargo(int codigoPersonalCargo, DatoBasico datoBasico,
-			Personal personal, Date fechaFin, Date fechaInicio, char estatus) {
+	public PersonalCargo(int codigoPersonalCargo, Personal personal,
+			int codigoCargo, Date fechaFin, Date fechaInicio, char estatus) {
 		this.codigoPersonalCargo = codigoPersonalCargo;
-		this.datoBasico = datoBasico;
 		this.personal = personal;
+		this.codigoCargo = codigoCargo;
 		this.fechaFin = fechaFin;
 		this.fechaInicio = fechaInicio;
 		this.estatus = estatus;
@@ -60,16 +60,6 @@ public class PersonalCargo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_cargo", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
@@ -77,6 +67,15 @@ public class PersonalCargo implements java.io.Serializable {
 
 	public void setPersonal(Personal personal) {
 		this.personal = personal;
+	}
+
+	@Column(name = "codigo_cargo", nullable = false)
+	public int getCodigoCargo() {
+		return this.codigoCargo;
+	}
+
+	public void setCodigoCargo(int codigoCargo) {
+		this.codigoCargo = codigoCargo;
 	}
 
 	@Temporal(TemporalType.DATE)

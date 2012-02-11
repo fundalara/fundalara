@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +19,7 @@ import javax.persistence.Table;
 public class ClasificacionCompetencia implements java.io.Serializable {
 
 	private int codigoClasificacionCompetencia;
-	private DatoBasico datoBasico;
+	private int tipoCompetencia;
 	private String nombre;
 	private String descripcion;
 	private char estatus;
@@ -33,19 +31,19 @@ public class ClasificacionCompetencia implements java.io.Serializable {
 	}
 
 	public ClasificacionCompetencia(int codigoClasificacionCompetencia,
-			DatoBasico datoBasico, String nombre, char estatus) {
+			int tipoCompetencia, String nombre, char estatus) {
 		this.codigoClasificacionCompetencia = codigoClasificacionCompetencia;
-		this.datoBasico = datoBasico;
+		this.tipoCompetencia = tipoCompetencia;
 		this.nombre = nombre;
 		this.estatus = estatus;
 	}
 
 	public ClasificacionCompetencia(int codigoClasificacionCompetencia,
-			DatoBasico datoBasico, String nombre, String descripcion,
+			int tipoCompetencia, String nombre, String descripcion,
 			char estatus, Set<CondicionCompetencia> condicionCompetencias,
 			Set<Competencia> competencias) {
 		this.codigoClasificacionCompetencia = codigoClasificacionCompetencia;
-		this.datoBasico = datoBasico;
+		this.tipoCompetencia = tipoCompetencia;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
@@ -64,14 +62,13 @@ public class ClasificacionCompetencia implements java.io.Serializable {
 		this.codigoClasificacionCompetencia = codigoClasificacionCompetencia;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipo_competencia", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "tipo_competencia", nullable = false)
+	public int getTipoCompetencia() {
+		return this.tipoCompetencia;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setTipoCompetencia(int tipoCompetencia) {
+		this.tipoCompetencia = tipoCompetencia;
 	}
 
 	@Column(name = "nombre", nullable = false)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +24,7 @@ public class Categoria implements java.io.Serializable {
 	private int edadSuperior;
 	private int cantidadEquipo;
 	private char estatus;
-	private Set<Liga> ligas = new HashSet<Liga>(0);
+	private Set<CategoriaLiga> categoriaLigas = new HashSet<CategoriaLiga>(0);
 	private Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias = new HashSet<IndicadorCategoriaCompetencia>(
 			0);
 	private Set<ConstanteCategoria> constanteCategorias = new HashSet<ConstanteCategoria>(
@@ -52,7 +51,7 @@ public class Categoria implements java.io.Serializable {
 
 	public Categoria(int codigoCategoria, String nombre, int edadInferior,
 			int edadSuperior, int cantidadEquipo, char estatus,
-			Set<Liga> ligas,
+			Set<CategoriaLiga> categoriaLigas,
 			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias,
 			Set<ConstanteCategoria> constanteCategorias,
 			Set<CategoriaCompetencia> categoriaCompetencias,
@@ -65,7 +64,7 @@ public class Categoria implements java.io.Serializable {
 		this.edadSuperior = edadSuperior;
 		this.cantidadEquipo = cantidadEquipo;
 		this.estatus = estatus;
-		this.ligas = ligas;
+		this.categoriaLigas = categoriaLigas;
 		this.indicadorCategoriaCompetencias = indicadorCategoriaCompetencias;
 		this.constanteCategorias = constanteCategorias;
 		this.categoriaCompetencias = categoriaCompetencias;
@@ -129,13 +128,13 @@ public class Categoria implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categorias")
-	public Set<Liga> getLigas() {
-		return this.ligas;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	public Set<CategoriaLiga> getCategoriaLigas() {
+		return this.categoriaLigas;
 	}
 
-	public void setLigas(Set<Liga> ligas) {
-		this.ligas = ligas;
+	public void setCategoriaLigas(Set<CategoriaLiga> categoriaLigas) {
+		this.categoriaLigas = categoriaLigas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")

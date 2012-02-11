@@ -1,8 +1,10 @@
 package dao.general;
 import modelo.DatoBasico;
+import modelo.Estadio;
 import modelo.PersonalForaneo;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -46,7 +48,15 @@ public class DaoPersonalForaneo extends GenericDao {
 	}
 	
 	
-	
+	public List<PersonalForaneo> listarPersonalPorFiltro(String dato) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"select *from personal_foraneo,dato_basico where personal_foraneo.nombre like '" +dato+  "%' and personal_foraneo.codigo_tipo_personal_foraneo = dato_basico.codigo_dato_basico and personal_foraneo.codigo_tipo_personal_foraneo = dato_basico.codigo_dato_basico or dato_basico.nombre like '" +dato+  "%' and personal_foraneo.codigo_tipo_personal_foraneo = dato_basico.codigo_dato_basico ").addEntity(PersonalForaneo.class);
+		
+		List<PersonalForaneo> lista = query.list();
+		return lista;
+	}
 	
 	
 	

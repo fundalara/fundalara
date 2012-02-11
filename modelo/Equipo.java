@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,20 +29,9 @@ public class Equipo implements java.io.Serializable {
 	private char estatus;
 	private int minimoJugador;
 	private int maximoJugador;
-	private Set<PersonalEquipo> personalEquipos = new HashSet<PersonalEquipo>(0);
-	private Set<RosterCompetencia> rosterCompetencias = new HashSet<RosterCompetencia>(
-			0);
-	private Set<Roster> rosters = new HashSet<Roster>(0);
-	private Set<HorarioPlanTemporada> horarioPlanTemporadas = new HashSet<HorarioPlanTemporada>(
-			0);
 	private Set<JugadorForaneo> jugadorForaneos = new HashSet<JugadorForaneo>(0);
 	private Set<RosterPlan> rosterPlans = new HashSet<RosterPlan>(0);
-	private Set<EquipoCompetencia> equipoCompetencias = new HashSet<EquipoCompetencia>(
-			0);
 	private Set<TestEvaluativo> testEvaluativos = new HashSet<TestEvaluativo>(0);
-	private Set<SesionEjecutada> sesionEjecutadas = new HashSet<SesionEjecutada>(
-			0);
-	private Set<Sesion> sesions = new HashSet<Sesion>(0);
 
 	public Equipo() {
 	}
@@ -64,13 +53,8 @@ public class Equipo implements java.io.Serializable {
 			DatoBasico datoBasicoByCodigoClasificacion,
 			DatoBasico datoBasicoByCodigoTipoLapso, String nombre,
 			char estatus, int minimoJugador, int maximoJugador,
-			Set<PersonalEquipo> personalEquipos,
-			Set<RosterCompetencia> rosterCompetencias, Set<Roster> rosters,
-			Set<HorarioPlanTemporada> horarioPlanTemporadas,
 			Set<JugadorForaneo> jugadorForaneos, Set<RosterPlan> rosterPlans,
-			Set<EquipoCompetencia> equipoCompetencias,
-			Set<TestEvaluativo> testEvaluativos,
-			Set<SesionEjecutada> sesionEjecutadas, Set<Sesion> sesions) {
+			Set<TestEvaluativo> testEvaluativos) {
 		this.codigoEquipo = codigoEquipo;
 		this.categoria = categoria;
 		this.divisa = divisa;
@@ -80,16 +64,9 @@ public class Equipo implements java.io.Serializable {
 		this.estatus = estatus;
 		this.minimoJugador = minimoJugador;
 		this.maximoJugador = maximoJugador;
-		this.personalEquipos = personalEquipos;
-		this.rosterCompetencias = rosterCompetencias;
-		this.rosters = rosters;
-		this.horarioPlanTemporadas = horarioPlanTemporadas;
 		this.jugadorForaneos = jugadorForaneos;
 		this.rosterPlans = rosterPlans;
-		this.equipoCompetencias = equipoCompetencias;
 		this.testEvaluativos = testEvaluativos;
-		this.sesionEjecutadas = sesionEjecutadas;
-		this.sesions = sesions;
 	}
 
 	@Id
@@ -181,43 +158,6 @@ public class Equipo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<PersonalEquipo> getPersonalEquipos() {
-		return this.personalEquipos;
-	}
-
-	public void setPersonalEquipos(Set<PersonalEquipo> personalEquipos) {
-		this.personalEquipos = personalEquipos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<RosterCompetencia> getRosterCompetencias() {
-		return this.rosterCompetencias;
-	}
-
-	public void setRosterCompetencias(Set<RosterCompetencia> rosterCompetencias) {
-		this.rosterCompetencias = rosterCompetencias;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<Roster> getRosters() {
-		return this.rosters;
-	}
-
-	public void setRosters(Set<Roster> rosters) {
-		this.rosters = rosters;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<HorarioPlanTemporada> getHorarioPlanTemporadas() {
-		return this.horarioPlanTemporadas;
-	}
-
-	public void setHorarioPlanTemporadas(
-			Set<HorarioPlanTemporada> horarioPlanTemporadas) {
-		this.horarioPlanTemporadas = horarioPlanTemporadas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
 	public Set<JugadorForaneo> getJugadorForaneos() {
 		return this.jugadorForaneos;
 	}
@@ -236,39 +176,12 @@ public class Equipo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<EquipoCompetencia> getEquipoCompetencias() {
-		return this.equipoCompetencias;
-	}
-
-	public void setEquipoCompetencias(Set<EquipoCompetencia> equipoCompetencias) {
-		this.equipoCompetencias = equipoCompetencias;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
 	public Set<TestEvaluativo> getTestEvaluativos() {
 		return this.testEvaluativos;
 	}
 
 	public void setTestEvaluativos(Set<TestEvaluativo> testEvaluativos) {
 		this.testEvaluativos = testEvaluativos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<SesionEjecutada> getSesionEjecutadas() {
-		return this.sesionEjecutadas;
-	}
-
-	public void setSesionEjecutadas(Set<SesionEjecutada> sesionEjecutadas) {
-		this.sesionEjecutadas = sesionEjecutadas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipo")
-	public Set<Sesion> getSesions() {
-		return this.sesions;
-	}
-
-	public void setSesions(Set<Sesion> sesions) {
-		this.sesions = sesions;
 	}
 
 }

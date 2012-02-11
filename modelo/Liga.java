@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,9 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,8 +22,9 @@ public class Liga implements java.io.Serializable {
 	private String nombre;
 	private String localidad;
 	private char estatus;
-	private Set<Competencia> competencias = new HashSet<Competencia>(0);
-	private Set<Categoria> categorias = new HashSet<Categoria>(0);
+	private byte[] logo;
+	private Set<LigaCompetencia> ligaCompetencias = new HashSet<LigaCompetencia>(
+			0);
 
 	public Liga() {
 	}
@@ -38,13 +37,13 @@ public class Liga implements java.io.Serializable {
 	}
 
 	public Liga(int codigoLiga, String nombre, String localidad, char estatus,
-			Set<Competencia> competencias, Set<Categoria> categorias) {
+			byte[] logo, Set<LigaCompetencia> ligaCompetencias) {
 		this.codigoLiga = codigoLiga;
 		this.nombre = nombre;
 		this.localidad = localidad;
 		this.estatus = estatus;
-		this.competencias = competencias;
-		this.categorias = categorias;
+		this.logo = logo;
+		this.ligaCompetencias = ligaCompetencias;
 	}
 
 	@Id
@@ -84,24 +83,22 @@ public class Liga implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "liga_competencia", schema = "public", joinColumns = { @JoinColumn(name = "codigo_liga", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_competencia", nullable = false, updatable = false) })
-	public Set<Competencia> getCompetencias() {
-		return this.competencias;
+	@Column(name = "logo")
+	public byte[] getLogo() {
+		return this.logo;
 	}
 
-	public void setCompetencias(Set<Competencia> competencias) {
-		this.competencias = competencias;
+	public void setLogo(byte[] logo) {
+		this.logo = logo;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "categoria_liga", schema = "public", joinColumns = { @JoinColumn(name = "codigo_liga", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_categoria", nullable = false, updatable = false) })
-	public Set<Categoria> getCategorias() {
-		return this.categorias;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "liga")
+	public Set<LigaCompetencia> getLigaCompetencias() {
+		return this.ligaCompetencias;
 	}
 
-	public void setCategorias(Set<Categoria> categorias) {
-		this.categorias = categorias;
+	public void setLigaCompetencias(Set<LigaCompetencia> ligaCompetencias) {
+		this.ligaCompetencias = ligaCompetencias;
 	}
 
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,10 +24,10 @@ import javax.persistence.TemporalType;
 public class DatoAcademico implements java.io.Serializable {
 
 	private int codigoAcademico;
-	private DatoBasico datoBasicoByCodigoCurso;
 	private Institucion institucion;
-	private DatoBasico datoBasicoByCodigoAnnoEscolar;
-	private Jugador jugador;
+	private String cedulaRif;
+	private int codigoAnnoEscolar;
+	private int codigoCurso;
 	private Date fechaIngreso;
 	private char estatus;
 	private Set<DocumentoAcademico> documentoAcademicos = new HashSet<DocumentoAcademico>(
@@ -36,29 +36,27 @@ public class DatoAcademico implements java.io.Serializable {
 	public DatoAcademico() {
 	}
 
-	public DatoAcademico(int codigoAcademico,
-			DatoBasico datoBasicoByCodigoCurso, Institucion institucion,
-			DatoBasico datoBasicoByCodigoAnnoEscolar, Jugador jugador,
+	public DatoAcademico(int codigoAcademico, Institucion institucion,
+			String cedulaRif, int codigoAnnoEscolar, int codigoCurso,
 			Date fechaIngreso, char estatus) {
 		this.codigoAcademico = codigoAcademico;
-		this.datoBasicoByCodigoCurso = datoBasicoByCodigoCurso;
 		this.institucion = institucion;
-		this.datoBasicoByCodigoAnnoEscolar = datoBasicoByCodigoAnnoEscolar;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
+		this.codigoAnnoEscolar = codigoAnnoEscolar;
+		this.codigoCurso = codigoCurso;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 	}
 
-	public DatoAcademico(int codigoAcademico,
-			DatoBasico datoBasicoByCodigoCurso, Institucion institucion,
-			DatoBasico datoBasicoByCodigoAnnoEscolar, Jugador jugador,
+	public DatoAcademico(int codigoAcademico, Institucion institucion,
+			String cedulaRif, int codigoAnnoEscolar, int codigoCurso,
 			Date fechaIngreso, char estatus,
 			Set<DocumentoAcademico> documentoAcademicos) {
 		this.codigoAcademico = codigoAcademico;
-		this.datoBasicoByCodigoCurso = datoBasicoByCodigoCurso;
 		this.institucion = institucion;
-		this.datoBasicoByCodigoAnnoEscolar = datoBasicoByCodigoAnnoEscolar;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
+		this.codigoAnnoEscolar = codigoAnnoEscolar;
+		this.codigoCurso = codigoCurso;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 		this.documentoAcademicos = documentoAcademicos;
@@ -75,16 +73,6 @@ public class DatoAcademico implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_curso", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoCurso() {
-		return this.datoBasicoByCodigoCurso;
-	}
-
-	public void setDatoBasicoByCodigoCurso(DatoBasico datoBasicoByCodigoCurso) {
-		this.datoBasicoByCodigoCurso = datoBasicoByCodigoCurso;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_institucion", nullable = false)
 	public Institucion getInstitucion() {
 		return this.institucion;
@@ -94,25 +82,31 @@ public class DatoAcademico implements java.io.Serializable {
 		this.institucion = institucion;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_anno_escolar", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoAnnoEscolar() {
-		return this.datoBasicoByCodigoAnnoEscolar;
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setDatoBasicoByCodigoAnnoEscolar(
-			DatoBasico datoBasicoByCodigoAnnoEscolar) {
-		this.datoBasicoByCodigoAnnoEscolar = datoBasicoByCodigoAnnoEscolar;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false)
-	public Jugador getJugador() {
-		return this.jugador;
+	@Column(name = "codigo_anno_escolar", nullable = false)
+	public int getCodigoAnnoEscolar() {
+		return this.codigoAnnoEscolar;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setCodigoAnnoEscolar(int codigoAnnoEscolar) {
+		this.codigoAnnoEscolar = codigoAnnoEscolar;
+	}
+
+	@Column(name = "codigo_curso", nullable = false)
+	public int getCodigoCurso() {
+		return this.codigoCurso;
+	}
+
+	public void setCodigoCurso(int codigoCurso) {
+		this.codigoCurso = codigoCurso;
 	}
 
 	@Temporal(TemporalType.DATE)

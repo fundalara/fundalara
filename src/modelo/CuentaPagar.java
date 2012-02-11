@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/02/2012 01:49:19 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -47,13 +47,11 @@ public class CuentaPagar implements java.io.Serializable {
 
 	public CuentaPagar(int codigoCuentaPagar,
 			DatoBasico datoBasicoByCodigoTipoEgreso, Date fechaEmision,
-			double montoTotal, Date fechaVencimiento, char estado,
-			char estatus, double saldo) {
+			double montoTotal, char estado, char estatus, double saldo) {
 		this.codigoCuentaPagar = codigoCuentaPagar;
 		this.datoBasicoByCodigoTipoEgreso = datoBasicoByCodigoTipoEgreso;
 		this.fechaEmision = fechaEmision;
 		this.montoTotal = montoTotal;
-		this.fechaVencimiento = fechaVencimiento;
 		this.estado = estado;
 		this.estatus = estatus;
 		this.saldo = saldo;
@@ -156,7 +154,7 @@ public class CuentaPagar implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_vencimiento", nullable = false, length = 13)
+	@Column(name = "fecha_vencimiento", length = 13)
 	public Date getFechaVencimiento() {
 		return this.fechaVencimiento;
 	}

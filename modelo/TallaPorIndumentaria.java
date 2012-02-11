@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,8 +19,8 @@ import javax.persistence.Table;
 public class TallaPorIndumentaria implements java.io.Serializable {
 
 	private int codigoTallaIndumentaria;
-	private DatoBasico datoBasicoByCodigoTalla;
-	private DatoBasico datoBasicoByCodigoTipoUniforme;
+	private int codigoTipoUniforme;
+	private int codigoTalla;
 	private float precio;
 	private char estatus;
 	private Set<DocumentoIndumentaria> documentoIndumentarias = new HashSet<DocumentoIndumentaria>(
@@ -35,24 +33,21 @@ public class TallaPorIndumentaria implements java.io.Serializable {
 	}
 
 	public TallaPorIndumentaria(int codigoTallaIndumentaria,
-			DatoBasico datoBasicoByCodigoTalla,
-			DatoBasico datoBasicoByCodigoTipoUniforme, float precio,
-			char estatus) {
+			int codigoTipoUniforme, int codigoTalla, float precio, char estatus) {
 		this.codigoTallaIndumentaria = codigoTallaIndumentaria;
-		this.datoBasicoByCodigoTalla = datoBasicoByCodigoTalla;
-		this.datoBasicoByCodigoTipoUniforme = datoBasicoByCodigoTipoUniforme;
+		this.codigoTipoUniforme = codigoTipoUniforme;
+		this.codigoTalla = codigoTalla;
 		this.precio = precio;
 		this.estatus = estatus;
 	}
 
 	public TallaPorIndumentaria(int codigoTallaIndumentaria,
-			DatoBasico datoBasicoByCodigoTalla,
-			DatoBasico datoBasicoByCodigoTipoUniforme, float precio,
+			int codigoTipoUniforme, int codigoTalla, float precio,
 			char estatus, Set<DocumentoIndumentaria> documentoIndumentarias,
 			Set<JugadorPlan> jugadorPlans, Set<TallaPorJugador> tallaPorJugadors) {
 		this.codigoTallaIndumentaria = codigoTallaIndumentaria;
-		this.datoBasicoByCodigoTalla = datoBasicoByCodigoTalla;
-		this.datoBasicoByCodigoTipoUniforme = datoBasicoByCodigoTipoUniforme;
+		this.codigoTipoUniforme = codigoTipoUniforme;
+		this.codigoTalla = codigoTalla;
 		this.precio = precio;
 		this.estatus = estatus;
 		this.documentoIndumentarias = documentoIndumentarias;
@@ -70,25 +65,22 @@ public class TallaPorIndumentaria implements java.io.Serializable {
 		this.codigoTallaIndumentaria = codigoTallaIndumentaria;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_talla", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoTalla() {
-		return this.datoBasicoByCodigoTalla;
+	@Column(name = "codigo_tipo_uniforme", nullable = false)
+	public int getCodigoTipoUniforme() {
+		return this.codigoTipoUniforme;
 	}
 
-	public void setDatoBasicoByCodigoTalla(DatoBasico datoBasicoByCodigoTalla) {
-		this.datoBasicoByCodigoTalla = datoBasicoByCodigoTalla;
+	public void setCodigoTipoUniforme(int codigoTipoUniforme) {
+		this.codigoTipoUniforme = codigoTipoUniforme;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_uniforme", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoTipoUniforme() {
-		return this.datoBasicoByCodigoTipoUniforme;
+	@Column(name = "codigo_talla", nullable = false)
+	public int getCodigoTalla() {
+		return this.codigoTalla;
 	}
 
-	public void setDatoBasicoByCodigoTipoUniforme(
-			DatoBasico datoBasicoByCodigoTipoUniforme) {
-		this.datoBasicoByCodigoTipoUniforme = datoBasicoByCodigoTipoUniforme;
+	public void setCodigoTalla(int codigoTalla) {
+		this.codigoTalla = codigoTalla;
 	}
 
 	@Column(name = "precio", nullable = false, precision = 8, scale = 8)

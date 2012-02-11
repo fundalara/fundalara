@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,10 +22,10 @@ import javax.persistence.TemporalType;
 public class Ingreso implements java.io.Serializable {
 
 	private int codigoIngreso;
-	private DatoBasico datoBasico;
 	private String numeroDocumento;
 	private Date fechaPago;
 	private char estatus;
+	private Integer codigoTipoDocumento;
 	private Set<IngresoFormaPago> ingresoFormaPagos = new HashSet<IngresoFormaPago>(
 			0);
 	private Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors = new HashSet<IngresoDocumentoAcreedor>(
@@ -42,15 +40,15 @@ public class Ingreso implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public Ingreso(int codigoIngreso, DatoBasico datoBasico,
-			String numeroDocumento, Date fechaPago, char estatus,
+	public Ingreso(int codigoIngreso, String numeroDocumento, Date fechaPago,
+			char estatus, Integer codigoTipoDocumento,
 			Set<IngresoFormaPago> ingresoFormaPagos,
 			Set<IngresoDocumentoAcreedor> ingresoDocumentoAcreedors) {
 		this.codigoIngreso = codigoIngreso;
-		this.datoBasico = datoBasico;
 		this.numeroDocumento = numeroDocumento;
 		this.fechaPago = fechaPago;
 		this.estatus = estatus;
+		this.codigoTipoDocumento = codigoTipoDocumento;
 		this.ingresoFormaPagos = ingresoFormaPagos;
 		this.ingresoDocumentoAcreedors = ingresoDocumentoAcreedors;
 	}
@@ -63,16 +61,6 @@ public class Ingreso implements java.io.Serializable {
 
 	public void setCodigoIngreso(int codigoIngreso) {
 		this.codigoIngreso = codigoIngreso;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_documento")
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
 	}
 
 	@Column(name = "numero_documento")
@@ -101,6 +89,15 @@ public class Ingreso implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "codigo_tipo_documento")
+	public Integer getCodigoTipoDocumento() {
+		return this.codigoTipoDocumento;
+	}
+
+	public void setCodigoTipoDocumento(Integer codigoTipoDocumento) {
+		this.codigoTipoDocumento = codigoTipoDocumento;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ingreso")

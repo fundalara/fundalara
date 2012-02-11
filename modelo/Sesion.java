@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +22,8 @@ public class Sesion implements java.io.Serializable {
 
 	private int codigoSesion;
 	private PlanEntrenamiento planEntrenamiento;
-	private DatoBasico datoBasico;
-	private Equipo equipo;
+	private int diaSemana;
+	private int codigoEquipo;
 	private char estatus;
 	private Set<SesionEjecutada> sesionEjecutadas = new HashSet<SesionEjecutada>(
 			0);
@@ -40,16 +40,16 @@ public class Sesion implements java.io.Serializable {
 	}
 
 	public Sesion(int codigoSesion, PlanEntrenamiento planEntrenamiento,
-			DatoBasico datoBasico, Equipo equipo, char estatus) {
+			int diaSemana, int codigoEquipo, char estatus) {
 		this.codigoSesion = codigoSesion;
 		this.planEntrenamiento = planEntrenamiento;
-		this.datoBasico = datoBasico;
-		this.equipo = equipo;
+		this.diaSemana = diaSemana;
+		this.codigoEquipo = codigoEquipo;
 		this.estatus = estatus;
 	}
 
 	public Sesion(int codigoSesion, PlanEntrenamiento planEntrenamiento,
-			DatoBasico datoBasico, Equipo equipo, char estatus,
+			int diaSemana, int codigoEquipo, char estatus,
 			Set<SesionEjecutada> sesionEjecutadas,
 			Set<ActividadPlanificada> actividadPlanificadas,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
@@ -57,8 +57,8 @@ public class Sesion implements java.io.Serializable {
 			Set<ActividadCalendario> actividadCalendarios) {
 		this.codigoSesion = codigoSesion;
 		this.planEntrenamiento = planEntrenamiento;
-		this.datoBasico = datoBasico;
-		this.equipo = equipo;
+		this.diaSemana = diaSemana;
+		this.codigoEquipo = codigoEquipo;
 		this.estatus = estatus;
 		this.sesionEjecutadas = sesionEjecutadas;
 		this.actividadPlanificadas = actividadPlanificadas;
@@ -87,24 +87,22 @@ public class Sesion implements java.io.Serializable {
 		this.planEntrenamiento = planEntrenamiento;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dia_semana", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "dia_semana", nullable = false)
+	public int getDiaSemana() {
+		return this.diaSemana;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setDiaSemana(int diaSemana) {
+		this.diaSemana = diaSemana;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_equipo", nullable = false)
-	public Equipo getEquipo() {
-		return this.equipo;
+	@Column(name = "codigo_equipo", nullable = false)
+	public int getCodigoEquipo() {
+		return this.codigoEquipo;
 	}
 
-	public void setEquipo(Equipo equipo) {
-		this.equipo = equipo;
+	public void setCodigoEquipo(int codigoEquipo) {
+		this.codigoEquipo = codigoEquipo;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

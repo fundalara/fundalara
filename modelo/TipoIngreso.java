@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,8 +19,8 @@ import javax.persistence.Table;
 public class TipoIngreso implements java.io.Serializable {
 
 	private int codigoTipoIngreso;
-	private DatoBasico datoBasicoByCodigoPeriodicidad;
-	private DatoBasico datoBasicoByCodigoTipo;
+	private int codigoTipo;
+	private Integer codigoPeriodicidad;
 	private String descripcion;
 	private Double monto;
 	private char estatus;
@@ -35,25 +33,23 @@ public class TipoIngreso implements java.io.Serializable {
 	public TipoIngreso() {
 	}
 
-	public TipoIngreso(int codigoTipoIngreso,
-			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-			char estatus, boolean aplicaRepresentante) {
+	public TipoIngreso(int codigoTipoIngreso, int codigoTipo,
+			String descripcion, char estatus, boolean aplicaRepresentante) {
 		this.codigoTipoIngreso = codigoTipoIngreso;
-		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
+		this.codigoTipo = codigoTipo;
 		this.descripcion = descripcion;
 		this.estatus = estatus;
 		this.aplicaRepresentante = aplicaRepresentante;
 	}
 
-	public TipoIngreso(int codigoTipoIngreso,
-			DatoBasico datoBasicoByCodigoPeriodicidad,
-			DatoBasico datoBasicoByCodigoTipo, String descripcion,
-			Double monto, char estatus, boolean aplicaRepresentante,
+	public TipoIngreso(int codigoTipoIngreso, int codigoTipo,
+			Integer codigoPeriodicidad, String descripcion, Double monto,
+			char estatus, boolean aplicaRepresentante,
 			Set<IngresoInscripcion> ingresoInscripcions,
 			Set<DocumentoAcreedor> documentoAcreedors) {
 		this.codigoTipoIngreso = codigoTipoIngreso;
-		this.datoBasicoByCodigoPeriodicidad = datoBasicoByCodigoPeriodicidad;
-		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
+		this.codigoTipo = codigoTipo;
+		this.codigoPeriodicidad = codigoPeriodicidad;
 		this.descripcion = descripcion;
 		this.monto = monto;
 		this.estatus = estatus;
@@ -72,25 +68,22 @@ public class TipoIngreso implements java.io.Serializable {
 		this.codigoTipoIngreso = codigoTipoIngreso;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_periodicidad")
-	public DatoBasico getDatoBasicoByCodigoPeriodicidad() {
-		return this.datoBasicoByCodigoPeriodicidad;
+	@Column(name = "codigo_tipo", nullable = false)
+	public int getCodigoTipo() {
+		return this.codigoTipo;
 	}
 
-	public void setDatoBasicoByCodigoPeriodicidad(
-			DatoBasico datoBasicoByCodigoPeriodicidad) {
-		this.datoBasicoByCodigoPeriodicidad = datoBasicoByCodigoPeriodicidad;
+	public void setCodigoTipo(int codigoTipo) {
+		this.codigoTipo = codigoTipo;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoTipo() {
-		return this.datoBasicoByCodigoTipo;
+	@Column(name = "codigo_periodicidad")
+	public Integer getCodigoPeriodicidad() {
+		return this.codigoPeriodicidad;
 	}
 
-	public void setDatoBasicoByCodigoTipo(DatoBasico datoBasicoByCodigoTipo) {
-		this.datoBasicoByCodigoTipo = datoBasicoByCodigoTipo;
+	public void setCodigoPeriodicidad(Integer codigoPeriodicidad) {
+		this.codigoPeriodicidad = codigoPeriodicidad;
 	}
 
 	@Column(name = "descripcion", nullable = false)

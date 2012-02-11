@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/02/2012 01:49:19 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,16 +20,18 @@ public class EquipoFaseCompetencia implements java.io.Serializable {
 	private int codigoEquipoFaseCompetencia;
 	private FaseCompetencia faseCompetencia;
 	private EquipoCompetencia equipoCompetencia;
-	private char estatus; 
+	private char estatus;
 
 	public EquipoFaseCompetencia() {
 	}
 
 	public EquipoFaseCompetencia(int codigoEquipoFaseCompetencia,
-			FaseCompetencia faseCompetencia, EquipoCompetencia equipoCompetencia) {
+			FaseCompetencia faseCompetencia,
+			EquipoCompetencia equipoCompetencia, char estatus) {
 		this.codigoEquipoFaseCompetencia = codigoEquipoFaseCompetencia;
 		this.faseCompetencia = faseCompetencia;
 		this.equipoCompetencia = equipoCompetencia;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -61,7 +63,7 @@ public class EquipoFaseCompetencia implements java.io.Serializable {
 	public void setEquipoCompetencia(EquipoCompetencia equipoCompetencia) {
 		this.equipoCompetencia = equipoCompetencia;
 	}
-	
+
 	@Column(name = "estatus", nullable = false, length = 1)
 	public char getEstatus() {
 		return this.estatus;

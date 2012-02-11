@@ -6,6 +6,7 @@ import modelo.Categoria;
 import modelo.Constante;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -15,7 +16,7 @@ import dao.generico.GenericDao;
 /** 
  * DAO para la clase Constante 
  * 
- * @author Niurka G�mez
+ * @author Niurka Gomez
  * @version 1.0
  *  
  */
@@ -48,6 +49,18 @@ public class DaoConstante extends dao.generico.GenericDao {
 				Criteria c = session.createCriteria(Constante.class);
 				c.add(Restrictions.eq("estatus",'A'));
 				return c.list();
+	}
+	
+	public List<Constante> listarConstantesPorFiltro(String dato) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"select *from constante where constante.abreviatura like '" +dato+ "%' or constante.nombre like '" +dato+ "%' and estatus = 'A'").addEntity(Constante.class);
+		
+		List<Constante> lista = query.list();
+		
+		System.out.println(lista.size());
+		return lista;
 	}
 
 }

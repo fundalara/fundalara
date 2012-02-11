@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,45 +20,45 @@ import javax.persistence.Table;
 @Table(name = "jugador_foraneo", schema = "public")
 public class JugadorForaneo implements java.io.Serializable {
 
-	private String cedula;
+	private int codigoJugadorForaneo;
 	private Equipo equipo;
+	private String cedula;
 	private String nombre;
 	private char estatus;
-	private Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias = new HashSet<JugadorForaneoRosterCompetencia>(
+	private Set<RosterCompetencia> rosterCompetencias = new HashSet<RosterCompetencia>(
 			0);
 
 	public JugadorForaneo() {
 	}
 
-	public JugadorForaneo(String cedula, Equipo equipo, String nombre,
-			char estatus) {
-		this.cedula = cedula;
+	public JugadorForaneo(int codigoJugadorForaneo, Equipo equipo,
+			String cedula, String nombre, char estatus) {
+		this.codigoJugadorForaneo = codigoJugadorForaneo;
 		this.equipo = equipo;
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.estatus = estatus;
 	}
 
-	public JugadorForaneo(
-			String cedula,
-			Equipo equipo,
-			String nombre,
-			char estatus,
-			Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias) {
-		this.cedula = cedula;
+	public JugadorForaneo(int codigoJugadorForaneo, Equipo equipo,
+			String cedula, String nombre, char estatus,
+			Set<RosterCompetencia> rosterCompetencias) {
+		this.codigoJugadorForaneo = codigoJugadorForaneo;
 		this.equipo = equipo;
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.estatus = estatus;
-		this.jugadorForaneoRosterCompetencias = jugadorForaneoRosterCompetencias;
+		this.rosterCompetencias = rosterCompetencias;
 	}
 
 	@Id
-	@Column(name = "cedula", unique = true, nullable = false)
-	public String getCedula() {
-		return this.cedula;
+	@Column(name = "codigo_jugador_foraneo", unique = true, nullable = false)
+	public int getCodigoJugadorForaneo() {
+		return this.codigoJugadorForaneo;
 	}
 
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
+	public void setCodigoJugadorForaneo(int codigoJugadorForaneo) {
+		this.codigoJugadorForaneo = codigoJugadorForaneo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -69,6 +69,15 @@ public class JugadorForaneo implements java.io.Serializable {
 
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
+	}
+
+	@Column(name = "cedula", nullable = false)
+	public String getCedula() {
+		return this.cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	@Column(name = "nombre", nullable = false)
@@ -90,13 +99,12 @@ public class JugadorForaneo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugadorForaneo")
-	public Set<JugadorForaneoRosterCompetencia> getJugadorForaneoRosterCompetencias() {
-		return this.jugadorForaneoRosterCompetencias;
+	public Set<RosterCompetencia> getRosterCompetencias() {
+		return this.rosterCompetencias;
 	}
 
-	public void setJugadorForaneoRosterCompetencias(
-			Set<JugadorForaneoRosterCompetencia> jugadorForaneoRosterCompetencias) {
-		this.jugadorForaneoRosterCompetencias = jugadorForaneoRosterCompetencias;
+	public void setRosterCompetencias(Set<RosterCompetencia> rosterCompetencias) {
+		this.rosterCompetencias = rosterCompetencias;
 	}
 
 }

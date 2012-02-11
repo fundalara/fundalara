@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,7 +22,7 @@ import javax.persistence.TemporalType;
 public class Medico implements java.io.Serializable {
 
 	private String numeroColegio;
-	private DatoBasico datoBasico;
+	private Integer codigoEspecialidad;
 	private String matricula;
 	private String cedulaMedico;
 	private String nombre;
@@ -47,12 +45,12 @@ public class Medico implements java.io.Serializable {
 		this.estatus = estatus;
 	}
 
-	public Medico(String numeroColegio, DatoBasico datoBasico,
+	public Medico(String numeroColegio, Integer codigoEspecialidad,
 			String matricula, String cedulaMedico, String nombre,
 			String apellido, String telefonoOficina, String telefonoCelular,
 			Date fechaIngreso, char estatus, Set<DatoMedico> datoMedicos) {
 		this.numeroColegio = numeroColegio;
-		this.datoBasico = datoBasico;
+		this.codigoEspecialidad = codigoEspecialidad;
 		this.matricula = matricula;
 		this.cedulaMedico = cedulaMedico;
 		this.nombre = nombre;
@@ -74,14 +72,13 @@ public class Medico implements java.io.Serializable {
 		this.numeroColegio = numeroColegio;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_especialidad")
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "codigo_especialidad")
+	public Integer getCodigoEspecialidad() {
+		return this.codigoEspecialidad;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCodigoEspecialidad(Integer codigoEspecialidad) {
+		this.codigoEspecialidad = codigoEspecialidad;
 	}
 
 	@Column(name = "matricula")

@@ -65,6 +65,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	Component formulario;
 	AnnotateDataBinder binder;
 
+	FaseCompetencia fase;
 	Competencia competencia;
 	Estadio estadio;
 	Juego juego;
@@ -80,6 +81,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	ServicioEquipoCompetencia servicioEquipoCompetencia;
 	ServicioJuego servicioJuego;
 	ServicioEquipoJuego servicioEquipoJuego;
+	
 
 	List<CategoriaCompetencia> categorias;
 	List<FaseCompetencia> fases;
@@ -141,43 +143,51 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	// LLAMA AL CATALOGO DE COMPETENCIAS
 	public void onClick$btnBuscarCompetencia() {
 
-		Component catalogo = Executions.createComponents(
-				"/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
+		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
 		catalogo.setVariable("formulario", formulario, false);
 		catalogo.setVariable("estado_comp", EstadoCompetencia.REGISTRADA, false);
 
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				competencia = (Competencia) formulario.getVariable(
-						"competencia", false);
-				categorias = ConvertirConjuntoALista(competencia
-						.getCategoriaCompetencias());
-				estadios = servicioEstadio.listarEstadiosPorCompetencia(
-						competencia, estadio);
-				fases = servicioFaseCompetencia
-						.listarFaseCompetencia(competencia);
-				// juego.setCompetencia(competencia);
-
-				// juegos = ConvertirConjuntoALista(competencia.getJuegos());
-
+				competencia = (Competencia) formulario.getVariable("competencia", false);
+				categorias = ConvertirConjuntoALista(competencia.getCategoriaCompetencias());
+				estadios = servicioEstadio.listarEstadiosPorCompetencia(competencia, estadio);
+				fases = servicioFaseCompetencia.listarFaseCompetencia(competencia);
 				binder.loadAll();
 			}
 		});
 
 	}
 
-	public void onChange$cmbCategoria() throws InterruptedException {
-
-		if (cmbCategoria.getText() != "-- Seleccione --") {
-			Comboitem cmbItem = cmbCategoria.getSelectedItem();
-			CategoriaCompetencia cat = (CategoriaCompetencia) cmbItem
-					.getValue();
-			categ = cat.getCategoria();
-			binder.loadAll();
-		}
-
+	public void onSelect$cmbFases() {
+		restaurarJuego();
+		fase = (FaseCompetencia) cmbFases.getSelectedItem().getValue();
+		juegos = filtrarJuegosPorCategoria(servicioJuego.listarJuegosPorFaseCompetenciaYCategoria(competencia,fase,categ));		
+		binder.loadAll();
 	}
+	
+	public void onChange$cmbCategoria()  {
+	    restaurarJuego();
+	    cmbFases.setText("--Seleccione--");
+		Comboitem cmbItem = cmbCategoria.getSelectedItem();
+		CategoriaCompetencia cat = (CategoriaCompetencia) cmbItem.getValue();
+		categ = cat.getCategoria();
+		binder.loadAll();		
+
+}
+	
+	public List<Juego> filtrarJuegosPorCategoria(List<Juego> js){
+		List<Juego> aux = new ArrayList<Juego>();
+		for (Juego j:js){
+			List<EquipoJuego> equipos = ConvertirConjuntoALista(j.getEquipoJuegos());
+			if ((equipos.get(0).getEquipoCompetencia().getEquipo().getCategoria().getCodigoCategoria() == categ.getCodigoCategoria()))
+				aux.add(j);
+		}		
+		return aux;
+	}
+
+	
 
 	// LLAMA AL CATALOGO DE EQUIPOS
 	public void onClick$btnBuscarEquipo() {
@@ -191,6 +201,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 		catalogo.setVariable("id", 1, false);
 		catalogo.setVariable("equipoCompetencia", equipoCompetencia2, false);
 		catalogo.setVariable("categoria", categ, false);
+		catalogo.setVariable("fase", fase, false);
 		formulario.addEventListener("onCatalogoCerrado1", new EventListener() {
 			// Este metodo se llama cuando se envia la se�al desde el catalogo
 			@Override
@@ -206,21 +217,19 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	// LLAMA AL CATALOGO DE EQUIPOS
 	public void onClick$btnBuscarEquipo2() {
 		// se crea el catalogo y se llama
-		Component catalogo = Executions.createComponents(
-				"/Competencias/Vistas/FrmCatalogoEquipoCompetencia.zul", null,
-				null);
+		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmCatalogoEquipoCompetencia.zul", null,	null);
 		// asigna una referencia del formulario al catalogo.
 		catalogo.setVariable("competencia", competencia, false);
 		catalogo.setVariable("formulario", formulario, false);
 		catalogo.setVariable("equipoCompetencia", equipoCompetencia1, false);
 		catalogo.setVariable("id", 2, false);
+		catalogo.setVariable("fase", fase, false);
 		formulario.addEventListener("onCatalogoCerrado2", new EventListener() {
 			// Este metodo se llama cuando se envia la se�al desde el catalogo
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				// SE OBTIENE LOS EQUIPOS
-				equipoCompetencia2 = (EquipoCompetencia) formulario
-						.getVariable("equipoCompetencia", false);
+				equipoCompetencia2 = (EquipoCompetencia) formulario.getVariable("equipoCompetencia", false);
 				binder.loadAll();
 			}
 		});
@@ -261,52 +270,60 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 		} else {
 			EquipoJuego ej = new EquipoJuego();
 			ej.setEquipoCompetencia(equipoCompetencia1);
-			if (BuscarLista(ej) == false) {
 
-				Set<EquipoJuego> equipos = new HashSet<EquipoJuego>();
-				EquipoJuego equipoJuego1 = new EquipoJuego();
-				equipoJuego1.setJuego(juego);
-				equipoJuego1.setHomeClub(true);
-				EquipoJuego equipoJuego2 = new EquipoJuego();
-				equipoJuego2.setJuego(juego);
-				equipoJuego2.setHomeClub(false);
-				equipoJuego1.setEquipoCompetencia(equipoCompetencia1);
-				equipoJuego2.setEquipoCompetencia(equipoCompetencia2);
-				equipos.add(equipoJuego2);
-				equipos.add(equipoJuego1);
-				juego.setEquipoJuegos(equipos);
-				if (buscarJuego(juego)){
-					throw new WrongValueException(lsbxEnfrentamientos,"juego duplicado");
-				}
-				juegos.add(juego);
-				juego = new Juego();
-				equipoCompetencia1 = new EquipoCompetencia();
-				equipoCompetencia2 = new EquipoCompetencia();
-				binder.loadAll();
+			juego.setCompetencia(competencia);
+			juego.setFaseCompetencia(fase);
+			juego.setDatoBasico(servicioDatoBasico
+					.buscarPorString("POR REALIZAR"));
+			Set<EquipoJuego> equipos = new HashSet<EquipoJuego>();
+			EquipoJuego equipoJuego1 = new EquipoJuego();
+			equipoJuego1.setJuego(juego);
+			equipoJuego1.setHomeClub(true);
+			EquipoJuego equipoJuego2 = new EquipoJuego();
+			equipoJuego2.setJuego(juego);
+			equipoJuego2.setHomeClub(false);
+			equipoJuego1.setEquipoCompetencia(equipoCompetencia1);
+			equipoJuego2.setEquipoCompetencia(equipoCompetencia2);
+			equipos.add(equipoJuego2);
+			equipos.add(equipoJuego1);
+			juego.setEquipoJuegos(equipos);
+			if (buscarJuego(juego)) {
+				throw new WrongValueException(lsbxEnfrentamientos,"juego duplicado");
 			}
+			juegos.add(juego);
+			juego = new Juego();
+			equipoCompetencia1 = new EquipoCompetencia();
+			equipoCompetencia2 = new EquipoCompetencia();
+			binder.loadAll();
+
 		}
 
 	}
 
 	public boolean buscarJuego(Juego j) {
-          
-	    SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
-		List<EquipoJuego> equipos1 = ConvertirConjuntoALista(j.getEquipoJuegos());
+
+		SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+		List<EquipoJuego> equipos1 = ConvertirConjuntoALista(j
+				.getEquipoJuegos());
 		for (Juego j2 : juegos) {
 			List<EquipoJuego> equipos2 = ConvertirConjuntoALista(j2.getEquipoJuegos());
-			if (j.getFecha() == j2.getFecha()
-					&& j.getHoraInicio() == j2.getHoraInicio()
-					&& j.getEstadio().getCodigoEstadio() == j2.getEstadio().getCodigoEstadio()) {
-		
+			if (j.getFecha() == j2.getFecha() && j.getHoraInicio() == j2.getHoraInicio()
+					&& j.getEstadio().getCodigoEstadio() == j2.getEstadio()
+							.getCodigoEstadio()) {
+
 				return true;
 			}
-			System.out.println(format.format(j.getHoraInicio()) == format.format(j2.getHoraInicio()));
-			System.out.println(j.getHoraInicio());
-			System.out.println(j2.getHoraInicio());
+		
 
 		}
 
 		return false;
+	} 
+	
+	public void restaurarJuego(){
+		  juego = new Juego();
+		  equipoCompetencia1 = new EquipoCompetencia();
+		  equipoCompetencia2 = new EquipoCompetencia();
 	}
 
 	public boolean BuscarLista(EquipoJuego enfrentamientoNuevo) {
@@ -344,28 +361,29 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	public void onClick$btnGuardar() throws InterruptedException {
 		if (juegos.size() > 0) {
 
-			juego.setCompetencia(competencia);
-			servicioJuego.agregar(juego);
-
-			equipoHomeClubJuego.setEquipoCompetencia(equipoCompetencia1);
-			equipoHomeClubJuego.setHomeClub(true);
-			equipoHomeClubJuego.setJuego(juego);
-			servicioEquipoJuego.agregar(equipoHomeClubJuego);
-
-			equipoVisitanteJuego.setEquipoCompetencia(equipoCompetencia2);
-			equipoVisitanteJuego.setHomeClub(false);
-			equipoVisitanteJuego.setJuego(juego);
-			servicioEquipoJuego.agregar(equipoVisitanteJuego);
-
-			Messagebox.show("Datos agregados exitosamente", "Mensaje",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			for (Juego j : juegos) {
+				 servicioJuego.agregar(j);
+				 List<EquipoJuego> equipos = ConvertirConjuntoALista(j.getEquipoJuegos());
+				 for (EquipoJuego ej: j.getEquipoJuegos()){
+					  servicioEquipoJuego.agregar(ej);
+				 }
+			}
+			Messagebox.show("Datos agregados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
 			restaurar();
 			binder.loadAll();
 
 		} else
-			Messagebox.show("Seleccione la Categoria e Ingrese un Valor",
-					"Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+			Messagebox.show("Seleccione la Categoria e Ingrese un Valor","Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
 
+	}
+
+	public void onSelect$lsbxEnfrentamientos() {
+		juego = (Juego) lsbxEnfrentamientos.getSelectedItem().getValue();
+		List<EquipoJuego> equipos = ConvertirConjuntoALista(juego.getEquipoJuegos());
+		equipoCompetencia1 = equipos.get(0).getEquipoCompetencia();
+		equipoCompetencia2 = equipos.get(1).getEquipoCompetencia();
+
+		binder.loadAll();
 	}
 
 	public void onClick$btnCancelar() {
@@ -374,8 +392,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	}
 
 	public void onClick$btnTablaPosiciones() {
-		Component catalogo = Executions.createComponents(
-				"/Competencias/Vistas/FrmTablaPosiciones.zul", null, null);
+		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmTablaPosiciones.zul", null, null);
 		binder.loadAll();
 	}
 

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,18 +18,20 @@ import javax.persistence.Table;
 public class CondicionCompetencia implements java.io.Serializable {
 
 	private int codigoCondicionCompetencia;
-	private DatoBasico datoBasico;
 	private ClasificacionCompetencia clasificacionCompetencia;
+	private int codigoCondicion;
+	private char estatus;
 
 	public CondicionCompetencia() {
 	}
 
 	public CondicionCompetencia(int codigoCondicionCompetencia,
-			DatoBasico datoBasico,
-			ClasificacionCompetencia clasificacionCompetencia) {
+			ClasificacionCompetencia clasificacionCompetencia,
+			int codigoCondicion, char estatus) {
 		this.codigoCondicionCompetencia = codigoCondicionCompetencia;
-		this.datoBasico = datoBasico;
 		this.clasificacionCompetencia = clasificacionCompetencia;
+		this.codigoCondicion = codigoCondicion;
+		this.estatus = estatus;
 	}
 
 	@Id
@@ -43,16 +45,6 @@ public class CondicionCompetencia implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_condicion", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_clasificacion_competencia", nullable = false)
 	public ClasificacionCompetencia getClasificacionCompetencia() {
 		return this.clasificacionCompetencia;
@@ -61,6 +53,24 @@ public class CondicionCompetencia implements java.io.Serializable {
 	public void setClasificacionCompetencia(
 			ClasificacionCompetencia clasificacionCompetencia) {
 		this.clasificacionCompetencia = clasificacionCompetencia;
+	}
+
+	@Column(name = "codigo_condicion", nullable = false)
+	public int getCodigoCondicion() {
+		return this.codigoCondicion;
+	}
+
+	public void setCodigoCondicion(int codigoCondicion) {
+		this.codigoCondicion = codigoCondicion;
+	}
+
+	@Column(name = "estatus", nullable = false, length = 1)
+	public char getEstatus() {
+		return this.estatus;
+	}
+
+	public void setEstatus(char estatus) {
+		this.estatus = estatus;
 	}
 
 }

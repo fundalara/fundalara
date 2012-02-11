@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/02/2012 01:49:19 AM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,36 +17,44 @@ import javax.persistence.Table;
 @Table(name = "afeccion_personal", schema = "public")
 public class AfeccionPersonal implements java.io.Serializable {
 
-	private AfeccionPersonalId id;
+	private int codigoAfeccionPersonal;
 	private DatoBasico datoBasico;
 	private Personal personal;
 	private char estatus;
+	private String observacion;
 
 	public AfeccionPersonal() {
 	}
 
-	public AfeccionPersonal(AfeccionPersonalId id, DatoBasico datoBasico,
+	public AfeccionPersonal(int codigoAfeccionPersonal, DatoBasico datoBasico,
 			Personal personal, char estatus) {
-		this.id = id;
+		this.codigoAfeccionPersonal = codigoAfeccionPersonal;
 		this.datoBasico = datoBasico;
 		this.personal = personal;
 		this.estatus = estatus;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "cedulaRif", column = @Column(name = "cedula_rif", nullable = false)),
-			@AttributeOverride(name = "codigoTipoAfeccion", column = @Column(name = "codigo_tipo_afeccion", nullable = false)) })
-	public AfeccionPersonalId getId() {
-		return this.id;
+	public AfeccionPersonal(int codigoAfeccionPersonal, DatoBasico datoBasico,
+			Personal personal, char estatus, String observacion) {
+		this.codigoAfeccionPersonal = codigoAfeccionPersonal;
+		this.datoBasico = datoBasico;
+		this.personal = personal;
+		this.estatus = estatus;
+		this.observacion = observacion;
 	}
 
-	public void setId(AfeccionPersonalId id) {
-		this.id = id;
+	@Id
+	@Column(name = "codigo_afeccion_personal", unique = true, nullable = false)
+	public int getCodigoAfeccionPersonal() {
+		return this.codigoAfeccionPersonal;
+	}
+
+	public void setCodigoAfeccionPersonal(int codigoAfeccionPersonal) {
+		this.codigoAfeccionPersonal = codigoAfeccionPersonal;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_afeccion", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_tipo_afeccion", nullable = false)
 	public DatoBasico getDatoBasico() {
 		return this.datoBasico;
 	}
@@ -58,7 +64,7 @@ public class AfeccionPersonal implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
 	}
@@ -74,6 +80,15 @@ public class AfeccionPersonal implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
+	}
+
+	@Column(name = "observacion")
+	public String getObservacion() {
+		return this.observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
 }

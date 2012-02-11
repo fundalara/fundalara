@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,9 +25,9 @@ import javax.persistence.TemporalType;
 public class FamiliarJugador implements java.io.Serializable {
 
 	private int codigoFamiliarJugador;
-	private DatoBasico datoBasico;
 	private Familiar familiar;
-	private Jugador jugador;
+	private String cedulaRif;
+	private int codigoParentesco;
 	private boolean representanteActual;
 	private Date fechaIngreso;
 	private char estatus;
@@ -39,27 +39,27 @@ public class FamiliarJugador implements java.io.Serializable {
 	public FamiliarJugador() {
 	}
 
-	public FamiliarJugador(int codigoFamiliarJugador, DatoBasico datoBasico,
-			Familiar familiar, Jugador jugador, boolean representanteActual,
-			Date fechaIngreso, char estatus) {
+	public FamiliarJugador(int codigoFamiliarJugador, Familiar familiar,
+			String cedulaRif, int codigoParentesco,
+			boolean representanteActual, Date fechaIngreso, char estatus) {
 		this.codigoFamiliarJugador = codigoFamiliarJugador;
-		this.datoBasico = datoBasico;
 		this.familiar = familiar;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
+		this.codigoParentesco = codigoParentesco;
 		this.representanteActual = representanteActual;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
 	}
 
-	public FamiliarJugador(int codigoFamiliarJugador, DatoBasico datoBasico,
-			Familiar familiar, Jugador jugador, boolean representanteActual,
-			Date fechaIngreso, char estatus,
+	public FamiliarJugador(int codigoFamiliarJugador, Familiar familiar,
+			String cedulaRif, int codigoParentesco,
+			boolean representanteActual, Date fechaIngreso, char estatus,
 			Set<ComisionFamiliar> comisionFamiliars,
 			Representante representante, Set<Hospedaje> hospedajes) {
 		this.codigoFamiliarJugador = codigoFamiliarJugador;
-		this.datoBasico = datoBasico;
 		this.familiar = familiar;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
+		this.codigoParentesco = codigoParentesco;
 		this.representanteActual = representanteActual;
 		this.fechaIngreso = fechaIngreso;
 		this.estatus = estatus;
@@ -79,16 +79,6 @@ public class FamiliarJugador implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_parentesco", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cedula_familiar", nullable = false)
 	public Familiar getFamiliar() {
 		return this.familiar;
@@ -98,14 +88,22 @@ public class FamiliarJugador implements java.io.Serializable {
 		this.familiar = familiar;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false)
-	public Jugador getJugador() {
-		return this.jugador;
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
+	}
+
+	@Column(name = "codigo_parentesco", nullable = false)
+	public int getCodigoParentesco() {
+		return this.codigoParentesco;
+	}
+
+	public void setCodigoParentesco(int codigoParentesco) {
+		this.codigoParentesco = codigoParentesco;
 	}
 
 	@Column(name = "representante_actual", nullable = false)

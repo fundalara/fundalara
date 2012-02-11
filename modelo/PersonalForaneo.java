@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +19,7 @@ import javax.persistence.Table;
 public class PersonalForaneo implements java.io.Serializable {
 
 	private int codigoPersonalForaneo;
-	private DatoBasico datoBasico;
+	private int codigoTipoPersonalForaneo;
 	private String nombre;
 	private char estatus;
 	private Set<PersonalForaneoJuego> personalForaneoJuegos = new HashSet<PersonalForaneoJuego>(
@@ -30,18 +28,18 @@ public class PersonalForaneo implements java.io.Serializable {
 	public PersonalForaneo() {
 	}
 
-	public PersonalForaneo(int codigoPersonalForaneo, DatoBasico datoBasico,
-			char estatus) {
+	public PersonalForaneo(int codigoPersonalForaneo,
+			int codigoTipoPersonalForaneo, char estatus) {
 		this.codigoPersonalForaneo = codigoPersonalForaneo;
-		this.datoBasico = datoBasico;
+		this.codigoTipoPersonalForaneo = codigoTipoPersonalForaneo;
 		this.estatus = estatus;
 	}
 
-	public PersonalForaneo(int codigoPersonalForaneo, DatoBasico datoBasico,
-			String nombre, char estatus,
+	public PersonalForaneo(int codigoPersonalForaneo,
+			int codigoTipoPersonalForaneo, String nombre, char estatus,
 			Set<PersonalForaneoJuego> personalForaneoJuegos) {
 		this.codigoPersonalForaneo = codigoPersonalForaneo;
-		this.datoBasico = datoBasico;
+		this.codigoTipoPersonalForaneo = codigoTipoPersonalForaneo;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.personalForaneoJuegos = personalForaneoJuegos;
@@ -57,14 +55,13 @@ public class PersonalForaneo implements java.io.Serializable {
 		this.codigoPersonalForaneo = codigoPersonalForaneo;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_personal_foraneo", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "codigo_tipo_personal_foraneo", nullable = false)
+	public int getCodigoTipoPersonalForaneo() {
+		return this.codigoTipoPersonalForaneo;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCodigoTipoPersonalForaneo(int codigoTipoPersonalForaneo) {
+		this.codigoTipoPersonalForaneo = codigoTipoPersonalForaneo;
 	}
 
 	@Column(name = "nombre")

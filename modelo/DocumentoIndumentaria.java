@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,7 +21,6 @@ public class DocumentoIndumentaria implements java.io.Serializable {
 
 	private DocumentoIndumentariaId id;
 	private TallaPorIndumentaria tallaPorIndumentaria;
-	private DocumentoAcreedor documentoAcreedor;
 	private double monto;
 	private int cantidad;
 	private char estatus;
@@ -30,12 +29,10 @@ public class DocumentoIndumentaria implements java.io.Serializable {
 	}
 
 	public DocumentoIndumentaria(DocumentoIndumentariaId id,
-			TallaPorIndumentaria tallaPorIndumentaria,
-			DocumentoAcreedor documentoAcreedor, double monto, int cantidad,
-			char estatus) {
+			TallaPorIndumentaria tallaPorIndumentaria, double monto,
+			int cantidad, char estatus) {
 		this.id = id;
 		this.tallaPorIndumentaria = tallaPorIndumentaria;
-		this.documentoAcreedor = documentoAcreedor;
 		this.monto = monto;
 		this.cantidad = cantidad;
 		this.estatus = estatus;
@@ -62,16 +59,6 @@ public class DocumentoIndumentaria implements java.io.Serializable {
 	public void setTallaPorIndumentaria(
 			TallaPorIndumentaria tallaPorIndumentaria) {
 		this.tallaPorIndumentaria = tallaPorIndumentaria;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_documento_acreedor", nullable = false, insertable = false, updatable = false)
-	public DocumentoAcreedor getDocumentoAcreedor() {
-		return this.documentoAcreedor;
-	}
-
-	public void setDocumentoAcreedor(DocumentoAcreedor documentoAcreedor) {
-		this.documentoAcreedor = documentoAcreedor;
 	}
 
 	@Column(name = "monto", nullable = false, precision = 17, scale = 17)

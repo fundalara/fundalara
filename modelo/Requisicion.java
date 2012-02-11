@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,8 +24,8 @@ import javax.persistence.TemporalType;
 public class Requisicion implements java.io.Serializable {
 
 	private int codigoRequisicion;
-	private DatoBasico datoBasico;
 	private Personal personal;
+	private int codigoEstadoRequisicion;
 	private Date fechaEmision;
 	private Date fechaEntrega;
 	private String motivoRequisicion;
@@ -36,24 +36,24 @@ public class Requisicion implements java.io.Serializable {
 	public Requisicion() {
 	}
 
-	public Requisicion(int codigoRequisicion, DatoBasico datoBasico,
-			Personal personal, Date fechaEmision, Date fechaEntrega,
+	public Requisicion(int codigoRequisicion, Personal personal,
+			int codigoEstadoRequisicion, Date fechaEmision, Date fechaEntrega,
 			char estatus) {
 		this.codigoRequisicion = codigoRequisicion;
-		this.datoBasico = datoBasico;
 		this.personal = personal;
+		this.codigoEstadoRequisicion = codigoEstadoRequisicion;
 		this.fechaEmision = fechaEmision;
 		this.fechaEntrega = fechaEntrega;
 		this.estatus = estatus;
 	}
 
-	public Requisicion(int codigoRequisicion, DatoBasico datoBasico,
-			Personal personal, Date fechaEmision, Date fechaEntrega,
+	public Requisicion(int codigoRequisicion, Personal personal,
+			int codigoEstadoRequisicion, Date fechaEmision, Date fechaEntrega,
 			String motivoRequisicion, char estatus,
 			Set<DetalleRequisicion> detalleRequisicions) {
 		this.codigoRequisicion = codigoRequisicion;
-		this.datoBasico = datoBasico;
 		this.personal = personal;
+		this.codigoEstadoRequisicion = codigoEstadoRequisicion;
 		this.fechaEmision = fechaEmision;
 		this.fechaEntrega = fechaEntrega;
 		this.motivoRequisicion = motivoRequisicion;
@@ -72,16 +72,6 @@ public class Requisicion implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_estado_requisicion", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
@@ -89,6 +79,15 @@ public class Requisicion implements java.io.Serializable {
 
 	public void setPersonal(Personal personal) {
 		this.personal = personal;
+	}
+
+	@Column(name = "codigo_estado_requisicion", nullable = false)
+	public int getCodigoEstadoRequisicion() {
+		return this.codigoEstadoRequisicion;
+	}
+
+	public void setCodigoEstadoRequisicion(int codigoEstadoRequisicion) {
+		this.codigoEstadoRequisicion = codigoEstadoRequisicion;
 	}
 
 	@Temporal(TemporalType.DATE)

@@ -7,6 +7,7 @@ import modelo.Divisa;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
@@ -39,6 +40,14 @@ public class CntrlFrmCatalogoDivisa extends GenericForwardComposer {
 			lsbxDivisas.setSelectedIndex(0);
 		}
 
+	}
+	
+	public void onChanging$txtFiltro(InputEvent event ){
+		
+		String dato = event.getValue().toUpperCase();
+
+		divisas = servicioDivisa.listarDivisasPorFiltro(dato);
+		binder.loadAll();
 	}
 
 	public void onClick$btnAceptar() throws InterruptedException {

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,18 +21,15 @@ public class TallaPorJugador implements java.io.Serializable {
 
 	private TallaPorJugadorId id;
 	private TallaPorIndumentaria tallaPorIndumentaria;
-	private Jugador jugador;
 	private char estatus;
 
 	public TallaPorJugador() {
 	}
 
 	public TallaPorJugador(TallaPorJugadorId id,
-			TallaPorIndumentaria tallaPorIndumentaria, Jugador jugador,
-			char estatus) {
+			TallaPorIndumentaria tallaPorIndumentaria, char estatus) {
 		this.id = id;
 		this.tallaPorIndumentaria = tallaPorIndumentaria;
-		this.jugador = jugador;
 		this.estatus = estatus;
 	}
 
@@ -57,16 +54,6 @@ public class TallaPorJugador implements java.io.Serializable {
 	public void setTallaPorIndumentaria(
 			TallaPorIndumentaria tallaPorIndumentaria) {
 		this.tallaPorIndumentaria = tallaPorIndumentaria;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false, insertable = false, updatable = false)
-	public Jugador getJugador() {
-		return this.jugador;
-	}
-
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

@@ -1,20 +1,20 @@
-<?page title="Umpire" contentType="text/html;charset=UTF-8"?>
+<?page title="Personal Foraneo" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmUmpire"?>
 
 <zk>
-	<div align="center">
+	
 		<window id="FrmUmpire" title="Personal Foraneo" border="normal"
 			width="450px" height="" closable="true"
 			apply="controlador.competencia.CntrlFrmPersonalForaneo">
 
 
-			<panel>
-				<caption label="Datos Personal Foraneo"></caption>
+			<panel title="Datos Personal Foraneo">
+				
 				<panelchildren>
 					<separator height="5px"></separator>
 					<div align="center">
-						<grid  style="border:none">
+						<grid oddRowSclass="none" style="border:none">
 							<columns>
 								<column label="" width="30%"
 									align="left" />
@@ -76,5 +76,5 @@
 
 
 		</window>
-	</div>
+	
 </zk>

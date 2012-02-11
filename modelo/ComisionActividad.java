@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,17 +18,17 @@ import javax.persistence.Table;
 public class ComisionActividad implements java.io.Serializable {
 
 	private int codigoComisionActividad;
-	private DatoBasico datoBasico;
 	private Actividad actividad;
+	private int codigoComision;
 
 	public ComisionActividad() {
 	}
 
-	public ComisionActividad(int codigoComisionActividad,
-			DatoBasico datoBasico, Actividad actividad) {
+	public ComisionActividad(int codigoComisionActividad, Actividad actividad,
+			int codigoComision) {
 		this.codigoComisionActividad = codigoComisionActividad;
-		this.datoBasico = datoBasico;
 		this.actividad = actividad;
+		this.codigoComision = codigoComision;
 	}
 
 	@Id
@@ -42,16 +42,6 @@ public class ComisionActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_comision", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_actividad", nullable = false)
 	public Actividad getActividad() {
 		return this.actividad;
@@ -59,6 +49,15 @@ public class ComisionActividad implements java.io.Serializable {
 
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
+	}
+
+	@Column(name = "codigo_comision", nullable = false)
+	public int getCodigoComision() {
+		return this.codigoComision;
+	}
+
+	public void setCodigoComision(int codigoComision) {
+		this.codigoComision = codigoComision;
 	}
 
 }

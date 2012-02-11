@@ -21,4 +21,6 @@ public interface IServicioDivisa {
 	public List<Divisa> filtrar (String cad);
 	
 	public abstract List<Divisa> listarDivisaForanea();
+	
+	public List<Divisa> listarDivisasPorFiltro(String dato);
 }

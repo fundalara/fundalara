@@ -8,6 +8,7 @@ import modelo.Liga;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
@@ -23,6 +24,25 @@ public class CntrlFrmCatalogoLigas extends GenericForwardComposer {
 	//Objeto Lista de lisgas que se mostraran en el catalogo...
 	List<Liga> ligas;
 	Listbox lsbxLigas;
+	
+	
+	
+	public void onCtrlKey$txtFiltro(){
+
+	}
+	
+		public void onChanging$txtFiltro(InputEvent event ){
+		
+		String dato = event.getValue().toUpperCase();
+
+		ligas= servicioLiga.listarLigasPorFiltro(dato);
+		binder.loadAll();
+	}
+
+	
+	
+	
+	
 	
 	
 	public void doAfterCompose(Component c) throws Exception {

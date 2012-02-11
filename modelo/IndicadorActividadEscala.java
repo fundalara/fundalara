@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +22,8 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 
 	private int codigoIndicadorActividadEscala;
 	private EscalaMedicion escalaMedicion;
-	private DatoBasico datoBasico;
 	private ActividadEntrenamiento actividadEntrenamiento;
+	private int indicador;
 	private char estatus;
 	private Set<IndicadorTest> indicadorTests = new HashSet<IndicadorTest>(0);
 	private Set<PuntuacionJugador> puntuacionJugadors = new HashSet<PuntuacionJugador>(
@@ -33,24 +33,25 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	}
 
 	public IndicadorActividadEscala(int codigoIndicadorActividadEscala,
-			EscalaMedicion escalaMedicion, DatoBasico datoBasico,
-			ActividadEntrenamiento actividadEntrenamiento, char estatus) {
+			EscalaMedicion escalaMedicion,
+			ActividadEntrenamiento actividadEntrenamiento, int indicador,
+			char estatus) {
 		this.codigoIndicadorActividadEscala = codigoIndicadorActividadEscala;
 		this.escalaMedicion = escalaMedicion;
-		this.datoBasico = datoBasico;
 		this.actividadEntrenamiento = actividadEntrenamiento;
+		this.indicador = indicador;
 		this.estatus = estatus;
 	}
 
 	public IndicadorActividadEscala(int codigoIndicadorActividadEscala,
-			EscalaMedicion escalaMedicion, DatoBasico datoBasico,
-			ActividadEntrenamiento actividadEntrenamiento, char estatus,
-			Set<IndicadorTest> indicadorTests,
+			EscalaMedicion escalaMedicion,
+			ActividadEntrenamiento actividadEntrenamiento, int indicador,
+			char estatus, Set<IndicadorTest> indicadorTests,
 			Set<PuntuacionJugador> puntuacionJugadors) {
 		this.codigoIndicadorActividadEscala = codigoIndicadorActividadEscala;
 		this.escalaMedicion = escalaMedicion;
-		this.datoBasico = datoBasico;
 		this.actividadEntrenamiento = actividadEntrenamiento;
+		this.indicador = indicador;
 		this.estatus = estatus;
 		this.indicadorTests = indicadorTests;
 		this.puntuacionJugadors = puntuacionJugadors;
@@ -78,16 +79,6 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "indicador", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_actividad_entrenamiento", nullable = false)
 	public ActividadEntrenamiento getActividadEntrenamiento() {
 		return this.actividadEntrenamiento;
@@ -96,6 +87,15 @@ public class IndicadorActividadEscala implements java.io.Serializable {
 	public void setActividadEntrenamiento(
 			ActividadEntrenamiento actividadEntrenamiento) {
 		this.actividadEntrenamiento = actividadEntrenamiento;
+	}
+
+	@Column(name = "indicador", nullable = false)
+	public int getIndicador() {
+		return this.indicador;
+	}
+
+	public void setIndicador(int indicador) {
+		this.indicador = indicador;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

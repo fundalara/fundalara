@@ -3,8 +3,10 @@ package dao.general;
 import java.util.List;
 
 import modelo.Divisa;
+import modelo.Estadio;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -42,5 +44,19 @@ public class DaoDivisa extends GenericDao {
 		List <Divisa> lista = c.list();		
 		return lista;
 	}
+	
+	public List<Divisa> listarDivisasPorFiltro(String dato) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"select *from divisa,dato_basico where divisa.nombre like '" +dato+  "%' and divisa.codigo_parroquia = dato_basico.codigo_dato_basico or divisa.direccion like '" +dato+  "%' and divisa.codigo_parroquia = dato_basico.codigo_dato_basico or dato_basico.nombre like '" +dato+  "%' and divisa.codigo_parroquia = dato_basico.codigo_dato_basico ").addEntity(Divisa.class);
+		
+		List<Divisa> lista = query.list();
+		
+		//System.out.println(lista.size());
+		return lista;
+	}
 
 }
+
+

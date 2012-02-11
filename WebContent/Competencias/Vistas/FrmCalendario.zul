@@ -154,7 +154,6 @@
 
 				<caption label="Juegos Programados "></caption>
 				<panelchildren>
-
 					<listbox id="lsbxEnfrentamientos" multiple="true"
 						model="@{cntrl.juegos}" style="margin-top:5px" height="100px"
 						mold="paging">
@@ -169,7 +168,7 @@
 								align="center" />
 
 						</listhead>
-						<listitem self="@{each=juego }"
+						<listitem self="@{each=juego}"
 							value="@{juego}">
 							<listcell 
 								label="@{juego.equipoJuegos,converter='controlador.competencia.converter.JuegoConverter'}">

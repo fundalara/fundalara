@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,31 +21,38 @@ import javax.persistence.Table;
 public class ComisionFamiliar implements java.io.Serializable {
 
 	private int codigoComisionFamiliar;
-	private DatoBasico datoBasico;
 	private FamiliarJugador familiarJugador;
+	private int codigoComision;
 	private char estatus;
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
+	private Set<PlanificacionActividad> planificacionActividads = new HashSet<PlanificacionActividad>(
+			0);
+	private Set<TareaActividad> tareaActividads = new HashSet<TareaActividad>(0);
 
 	public ComisionFamiliar() {
 	}
 
-	public ComisionFamiliar(int codigoComisionFamiliar, DatoBasico datoBasico,
-			FamiliarJugador familiarJugador, char estatus) {
+	public ComisionFamiliar(int codigoComisionFamiliar,
+			FamiliarJugador familiarJugador, int codigoComision, char estatus) {
 		this.codigoComisionFamiliar = codigoComisionFamiliar;
-		this.datoBasico = datoBasico;
 		this.familiarJugador = familiarJugador;
+		this.codigoComision = codigoComision;
 		this.estatus = estatus;
 	}
 
-	public ComisionFamiliar(int codigoComisionFamiliar, DatoBasico datoBasico,
-			FamiliarJugador familiarJugador, char estatus,
-			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
+	public ComisionFamiliar(int codigoComisionFamiliar,
+			FamiliarJugador familiarJugador, int codigoComision, char estatus,
+			Set<TareaActividadPlanificada> tareaActividadPlanificadas,
+			Set<PlanificacionActividad> planificacionActividads,
+			Set<TareaActividad> tareaActividads) {
 		this.codigoComisionFamiliar = codigoComisionFamiliar;
-		this.datoBasico = datoBasico;
 		this.familiarJugador = familiarJugador;
+		this.codigoComision = codigoComision;
 		this.estatus = estatus;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
+		this.planificacionActividads = planificacionActividads;
+		this.tareaActividads = tareaActividads;
 	}
 
 	@Id
@@ -59,16 +66,6 @@ public class ComisionFamiliar implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_comision", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_familiar_jugador", nullable = false)
 	public FamiliarJugador getFamiliarJugador() {
 		return this.familiarJugador;
@@ -76,6 +73,15 @@ public class ComisionFamiliar implements java.io.Serializable {
 
 	public void setFamiliarJugador(FamiliarJugador familiarJugador) {
 		this.familiarJugador = familiarJugador;
+	}
+
+	@Column(name = "codigo_comision", nullable = false)
+	public int getCodigoComision() {
+		return this.codigoComision;
+	}
+
+	public void setCodigoComision(int codigoComision) {
+		this.codigoComision = codigoComision;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
@@ -95,6 +101,25 @@ public class ComisionFamiliar implements java.io.Serializable {
 	public void setTareaActividadPlanificadas(
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
+	public Set<PlanificacionActividad> getPlanificacionActividads() {
+		return this.planificacionActividads;
+	}
+
+	public void setPlanificacionActividads(
+			Set<PlanificacionActividad> planificacionActividads) {
+		this.planificacionActividads = planificacionActividads;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
+	public Set<TareaActividad> getTareaActividads() {
+		return this.tareaActividads;
+	}
+
+	public void setTareaActividads(Set<TareaActividad> tareaActividads) {
+		this.tareaActividads = tareaActividads;
 	}
 
 }

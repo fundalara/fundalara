@@ -17,5 +17,7 @@ public interface IServicioConstante {
 	public abstract List<Constante> listarActivos();
 	
 	public abstract List<Constante> listarConstantesActivos();
+	
+	public List<Constante> listarConstantesPorFiltro(String dato);
 
 }

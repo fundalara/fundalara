@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 10/02/2012 01:24:38 AM by Hibernate Tools 3.4.0.CR1
+// Generated 11/02/2012 01:49:19 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +27,7 @@ public class EquipoJuego implements java.io.Serializable {
 	private Integer carrera;
 	private Integer hit;
 	private Integer error;
-	private boolean ganado;
+	private char ganado;
 	private char estatus;
 	private Set<DesempennoColectivo> desempennoColectivos = new HashSet<DesempennoColectivo>(
 			0);
@@ -38,8 +38,8 @@ public class EquipoJuego implements java.io.Serializable {
 	}
 
 	public EquipoJuego(int codigoEquipoJuego, Juego juego,
-			EquipoCompetencia equipoCompetencia, boolean homeClub,
-			boolean ganado, char estatus) {
+			EquipoCompetencia equipoCompetencia, boolean homeClub, char ganado,
+			char estatus) {
 		this.codigoEquipoJuego = codigoEquipoJuego;
 		this.juego = juego;
 		this.equipoCompetencia = equipoCompetencia;
@@ -50,7 +50,7 @@ public class EquipoJuego implements java.io.Serializable {
 
 	public EquipoJuego(int codigoEquipoJuego, Juego juego,
 			EquipoCompetencia equipoCompetencia, boolean homeClub,
-			Integer carrera, Integer hit, Integer error, boolean ganado,
+			Integer carrera, Integer hit, Integer error, char ganado,
 			char estatus, Set<DesempennoColectivo> desempennoColectivos,
 			Set<PersonalEquipoJuego> personalEquipoJuegos) {
 		this.codigoEquipoJuego = codigoEquipoJuego;
@@ -132,12 +132,12 @@ public class EquipoJuego implements java.io.Serializable {
 		this.error = error;
 	}
 
-	@Column(name = "ganado", nullable = false)
-	public boolean isGanado() {
+	@Column(name = "ganado", nullable = false, length = 1)
+	public char getGanado() {
 		return this.ganado;
 	}
 
-	public void setGanado(boolean ganado) {
+	public void setGanado(char ganado) {
 		this.ganado = ganado;
 	}
 

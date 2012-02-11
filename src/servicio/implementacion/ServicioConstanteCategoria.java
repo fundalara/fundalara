@@ -23,7 +23,8 @@ public class ServicioConstanteCategoria implements IServicioConstanteCategoria {
 
 	@Override
 	public void eliminar(ConstanteCategoria c) {
-		// TODO Auto-generated method stub
+		c.setEstatus('E');
+		daoConstanteCategoria.eliminar(c);
 
 	}
 
@@ -31,10 +32,10 @@ public class ServicioConstanteCategoria implements IServicioConstanteCategoria {
 	public void agregar(List<ConstanteCategoria> l) {
 		for (Iterator i= l.iterator(); i.hasNext();){
 	    	ConstanteCategoria id = (ConstanteCategoria) i.next();
-	    	int codConstanteCategoria = daoConstanteCategoria.listar(ConstanteCategoria.class).size()+1;
-	    	id.setCodigoConstanteCategoria(codConstanteCategoria);
-	    	System.out.println(id.getCodigoConstanteCategoria());
-	    	System.out.println(id.getConstante().getCodigoConstante());
+	    	if(id.getCodigoConstanteCategoria() == 0){
+	    		int codConstanteCategoria = daoConstanteCategoria.listar(ConstanteCategoria.class).size()+1;
+	    		id.setCodigoConstanteCategoria(codConstanteCategoria);
+	    	}
 		    daoConstanteCategoria.guardar(id);		
 	    }
 

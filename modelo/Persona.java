@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,7 +34,6 @@ public class Persona implements java.io.Serializable {
 	private String direccion;
 	private Date fechaEgreso;
 	private char estatus;
-	private PersonaJuridica personaJuridica;
 	private Set<DocumentoAcreedor> documentoAcreedorsForCedulaAtleta = new HashSet<DocumentoAcreedor>(
 			0);
 	private Set<CuentaPagar> cuentaPagars = new HashSet<CuentaPagar>(0);
@@ -57,7 +56,7 @@ public class Persona implements java.io.Serializable {
 			DatoBasico datoBasicoByCodigoTipoPersona,
 			String telefonoHabitacion, Date fechaIngreso,
 			String correoElectronico, String twitter, String direccion,
-			Date fechaEgreso, char estatus, PersonaJuridica personaJuridica,
+			Date fechaEgreso, char estatus,
 			Set<DocumentoAcreedor> documentoAcreedorsForCedulaAtleta,
 			Set<CuentaPagar> cuentaPagars,
 			Set<DocumentoAcreedor> documentoAcreedorsForCedulaRif,
@@ -72,7 +71,6 @@ public class Persona implements java.io.Serializable {
 		this.direccion = direccion;
 		this.fechaEgreso = fechaEgreso;
 		this.estatus = estatus;
-		this.personaJuridica = personaJuridica;
 		this.documentoAcreedorsForCedulaAtleta = documentoAcreedorsForCedulaAtleta;
 		this.cuentaPagars = cuentaPagars;
 		this.documentoAcreedorsForCedulaRif = documentoAcreedorsForCedulaRif;
@@ -174,15 +172,6 @@ public class Persona implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "persona")
-	public PersonaJuridica getPersonaJuridica() {
-		return this.personaJuridica;
-	}
-
-	public void setPersonaJuridica(PersonaJuridica personaJuridica) {
-		this.personaJuridica = personaJuridica;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "personaByCedulaAtleta")
