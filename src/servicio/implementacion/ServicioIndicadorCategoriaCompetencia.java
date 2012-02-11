@@ -68,6 +68,13 @@ public class ServicioIndicadorCategoriaCompetencia implements
 			Categoria c, Competencia comp, DatoBasico modalidad) {
 		return daoIndicadorCategoriaCompetencia.listarIndicadoresSencillosIndividuales(c, comp, modalidad);
 	}
+
+	@Override
+	public List<IndicadorCategoriaCompetencia> listarCompetenciaIndicador(
+			Indicador i) {
+		// TODO Auto-generated method stub
+		return daoIndicadorCategoriaCompetencia.listarCompetenciaIndicador(i);
+	}
 	
 	
 	

@@ -85,7 +85,16 @@ public class DaoIndicadorCategoriaCompetencia extends GenericDao {
 		c2.add(Restrictions.eq("datoBasicoByCodigoTipoIndicador",tipo));
 		List<IndicadorCategoriaCompetencia> lista = d.list();
 		return lista;
-
+	}
+	
+	public List<IndicadorCategoriaCompetencia> listarCompetenciaIndicador (Indicador i) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(IndicadorCategoriaCompetencia.class);
+		c.add(Restrictions.eq("estatus", 'A'));
+		c.add(Restrictions.eq("indicador", i));		
+		List<IndicadorCategoriaCompetencia> lista = c.list();
+		return lista;
 	}
 	
 

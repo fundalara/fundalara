@@ -11,9 +11,11 @@ import java.util.Stack;
 
 import javax.xml.soap.Text;
 
+import modelo.Competencia;
 import modelo.Constante;
 import modelo.DatoBasico;
 import modelo.Indicador;
+import modelo.IndicadorCategoriaCompetencia;
 import modelo.TipoDato;
 
 import org.jruby.RubyProcess.Sys;
@@ -36,6 +38,7 @@ import servicio.implementacion.ServicioConstante;
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioIndicador;
 import servicio.implementacion.ServicioTipoDato;
+import servicio.implementacion.ServicioIndicadorCategoriaCompetencia;
 
 /**
  * Clase que tiene como funciï¿½n controlar la interfaz de igual nombre y los
@@ -52,6 +55,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	ServicioDatoBasico servicioDatoBasico;
 	ServicioIndicador servicioIndicador;
 	ServicioConstante servicioConstante;
+	ServicioIndicadorCategoriaCompetencia servicioIndicadorCategoriaCompetencia;
 	List<DatoBasico> listTipoIndicador;
 	List<DatoBasico> listModalidadIndicador;
 	List<DatoBasico> listMedicionIndicador;
@@ -119,7 +123,6 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		cmbMedicion.setVisible(false);
 		cmbIndicador.setValue("--Seleccione--");
 		cmbIndicador.setReadonly(true);
-		cmbIndicador.setDisabled(true);
 		cmbConstante.setValue("--Seleccione--");
 		cmbConstante.setReadonly(true);
 		cmbConstante.setDisabled(true);
@@ -140,9 +143,9 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	}
 
 	public void inicializarBoton() {
-		btnGuardar.setDisabled(true);
-		btnEliminar.setDisabled(true);
-		btnCancelar.setDisabled(true);
+		// btnGuardar.setDisabled(true);
+		// btnEliminar.setDisabled(true);
+		// btnCancelar.setDisabled(true);
 		// btnBuscarIndicador.setDisabled(true);
 		btnSumar.setDisabled(true);
 		btnRestar.setDisabled(true);
@@ -246,9 +249,9 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 		pnlIndicador.setVisible(true);
 		cmbTipo.setDisabled(true);
-		btnGuardar.setDisabled(false);
-		btnEliminar.setDisabled(false);
-		btnCancelar.setDisabled(false);
+		// btnGuardar.setDisabled(false);
+		// btnEliminar.setDisabled(false);
+		// btnCancelar.setDisabled(false);
 	}
 
 	public void onChange$cmbTipo() {
@@ -279,7 +282,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				txtNombre.setReadonly(false);
 				txtAbreviatura.setReadonly(false);
 				btnBuscarIndicador.setDisabled(false);
-				cmbIndicador.setDisabled(false);
+				cmbIndicador.setReadonly(false);
 				cmbConstante.setDisabled(false);
 				btnSumar.setDisabled(false);
 				btnRestar.setDisabled(false);
@@ -564,10 +567,8 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			binder.loadAll();
 			winRegistroIndicador.detach();
 		} else {
-			int result = Messagebox
-					.show("Existen elementos en el formulario ï¿½Realmente desea salir?",
-							"Question", Messagebox.OK | Messagebox.CANCEL,
-							Messagebox.QUESTION);
+			int result = Messagebox.show("¿Desea salir?", "Question",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
 			switch (result) {
 			case Messagebox.OK:
 				onClick$btnCancelar();
@@ -616,11 +617,50 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 	}
 
+	public boolean buscarAbreviaturaIndicador() {
+		Boolean encontrado = false;
+		List<Indicador> lstIndicador = servicioIndicador.listarActivos();
+		List<Constante> lstConstante = servicioConstante.listarActivos();
+		for (Indicador indica : lstIndicador) {
+			if (indica.getAbreviatura().equals(indicador.getAbreviatura())) {
+				encontrado = true;
+			}
+		}
+		for (Constante cons : lstConstante) {
+			if (cons.getAbreviatura().equals(indicador.getAbreviatura())) {
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+
 	public void onClick$btnGuardar() throws InterruptedException {
 		if (modificando)
 			modificarIndicador();
 		else {
-			if (txtNombre.getValue().isEmpty()) {
+			if (cmbTipo.getText().equalsIgnoreCase("--Seleccione--")) {
+				throw new WrongValueException(cmbTipo,
+						"Debe seleccionar un tipo de indicador");
+			}
+			if (cmbModalidad.getText().equalsIgnoreCase("--Seleccione--")) {
+				throw new WrongValueException(cmbModalidad,
+						"Debe seleccionar una modalidad");
+			}
+			if (cmbTipo.getText().equals("COMPUESTO")) {
+				if (cmbMedicion.getText().equalsIgnoreCase("--Seleccione--")) {
+					throw new WrongValueException(cmbMedicion,
+							"Debe seleccionar una medicion");
+				} else if (txtNombre.getValue().isEmpty()) {
+					throw new WrongValueException(txtNombre,
+							"Debe ingresar un nombre");
+				} else if (txtAbreviatura.getValue().isEmpty()) {
+					throw new WrongValueException(txtAbreviatura,
+							"Debe ingresar una abreviatura");
+				} else if (agregarFormula || ultimaComa) {
+					throw new WrongValueException(txtFormula,
+							"Debe completar la formula");
+				}
+			} else if (txtNombre.getValue().isEmpty()) {
 				throw new WrongValueException(txtNombre,
 						"Debe ingresar un nombre");
 			} else if (txtAbreviatura.getValue().isEmpty()) {
@@ -629,6 +669,10 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			} else if (agregarFormula || ultimaComa) {
 				throw new WrongValueException(txtFormula,
 						"Debe completar la formula");
+			} else if (buscarAbreviaturaIndicador()) {
+				// Verificar que la abreviatura del indicador no esté registrada
+				throw new WrongValueException(txtAbreviatura,
+						"Debe ingresar otra abreviatura");
 			} else {
 				indicador
 						.setDatoBasicoByCodigoTipoIndicador((DatoBasico) cmbTipo
@@ -659,19 +703,54 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 	}
 
+	public Competencia buscarIndicadorCompetencia() {
+		// Boolean encontrado = false;
+		Competencia compe = null;
+		List<IndicadorCategoriaCompetencia> lstCompetencia = servicioIndicadorCategoriaCompetencia
+				.listarCompetenciaIndicador(indicador);
+
+		for (IndicadorCategoriaCompetencia indCatComp : lstCompetencia) {
+			String nombre = indCatComp.getCompetencia()
+					.getDatoBasicoByCodigoEstadoCompetencia().getNombre();
+			if (nombre.equals("REGISTRADA") || nombre.equals("APERTURADA")) {
+				// encontrado = true;
+				compe = indCatComp.getCompetencia();
+			}
+		}
+		// return encontrado;
+		return compe;
+	}
+
 	public void onClick$btnEliminar() throws InterruptedException {
-		indicador.setEstatus('E');
-		servicioIndicador.agregar(indicador);
-		Messagebox.show("Datos eliminados exitosamente", "Mensaje",
-				Messagebox.OK, Messagebox.EXCLAMATION);
-		onClick$btnCancelar();
-		binder.loadAll();
+		if (modificando) {
+			if (buscarIndicadorCompetencia() != null) {
+				Messagebox.show(
+						"No se puede eliminar el indicador, se encuentra asociado a la competencia: "
+								+ buscarIndicadorCompetencia().getNombre()
+								+ " ", "Mensaje", Messagebox.OK,
+						Messagebox.ERROR);
+			} else {
+
+//				System.out.println(buscarIndicadorCompetencia()
+//						.getDatoBasicoByCodigoEstadoCompetencia().getNombre());
+
+				indicador.setEstatus('E');
+				servicioIndicador.agregar(indicador);
+				Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+				onClick$btnCancelar();
+				binder.loadAll();
+			}
+		} else {
+			Messagebox.show("Seleccione un indicador", "Mensaje",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+		}
 	}
 
 	public void deshabilitarCatalogo() {
 		txtNombre.setReadonly(false);
 		txtAbreviatura.setReadonly(false);
-		cmbIndicador.setDisabled(false);
+		cmbIndicador.setReadonly(false);
 		cmbConstante.setDisabled(false);
 		btnSumar.setDisabled(false);
 		btnRestar.setDisabled(false);
@@ -739,14 +818,14 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			}
 			if (aux != 0) {
 				pilaString.push(aux);
-			}
-			else;
+			} else
+				;
 		}
 	}
 
 	/**
-	 * Busca el ï¿½ndice correspondiente al ï¿½tem seleccionado en un combo, para
-	 * relacionarlo con un objeto
+	 * Busca el ï¿½ndice correspondiente al ï¿½tem seleccionado en un combo,
+	 * para relacionarlo con un objeto
 	 * 
 	 * @param objeto
 	 *            objeto relacionado con el combo

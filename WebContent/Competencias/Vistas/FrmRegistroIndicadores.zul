@@ -1,12 +1,12 @@
 <?page title="REGISTRO DE INDICADORES" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root= "winRegistroIndicador"?>
 
 <zk>
 	<div align="center">
 		<window title="Registro de Indicadores" border="normal"
 			id="winRegistroIndicador" width="500px" height="auto" closable="true"
-			apply="controlador.competencia.CntrlFrmRegistroIndicadores">
+			apply="controlador.competencia.CntrlFrmRegistroIndicadores" style="text-align:left">
 			<div align="left">
 				<grid>
 					<columns>

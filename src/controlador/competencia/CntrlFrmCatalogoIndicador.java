@@ -1,4 +1,4 @@
-                package controlador.competencia;
+package controlador.competencia;
 
 import java.util.List;
 
@@ -8,10 +8,12 @@ import modelo.Indicador;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import servicio.implementacion.ServicioIndicador;
 
@@ -21,6 +23,7 @@ public class CntrlFrmCatalogoIndicador extends GenericForwardComposer {
 	List<Indicador> listIndicador;
 	Listbox lsbxIndicadores;
 	Component catalogo;
+	Textbox txtFiltro;
 
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
@@ -82,6 +85,14 @@ public class CntrlFrmCatalogoIndicador extends GenericForwardComposer {
 
 	public void setListIndicador(List<Indicador> listIndicador) {
 		this.listIndicador = listIndicador;
+	}
+	
+public void onChanging$txtFiltro(InputEvent event){
+		
+		String dato = event.getValue().toUpperCase();		
+		listIndicador = servicioIndicador.listarIndicadoresPorFiltro(dato);
+    	//ordenarCompetencia(competencias);		
+		binder.loadAll();
 	}
 
 }
