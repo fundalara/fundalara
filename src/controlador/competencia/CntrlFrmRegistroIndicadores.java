@@ -123,7 +123,6 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		cmbMedicion.setVisible(false);
 		cmbIndicador.setValue("--Seleccione--");
 		cmbIndicador.setReadonly(true);
-		cmbIndicador.setDisabled(true);
 		cmbConstante.setValue("--Seleccione--");
 		cmbConstante.setReadonly(true);
 		cmbConstante.setDisabled(true);
@@ -142,6 +141,13 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	}
 
 	public void inicializarBoton() {
+<<<<<<< HEAD
+		// btnGuardar.setDisabled(true);
+		// btnEliminar.setDisabled(true);
+		// btnCancelar.setDisabled(true);
+		// btnBuscarIndicador.setDisabled(true);
+=======
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 		btnSumar.setDisabled(true);
 		btnRestar.setDisabled(true);
 		btnMultiplicar.setDisabled(true);
@@ -244,6 +250,12 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 		pnlIndicador.setVisible(true);
 		cmbTipo.setDisabled(true);
+<<<<<<< HEAD
+		// btnGuardar.setDisabled(false);
+		// btnEliminar.setDisabled(false);
+		// btnCancelar.setDisabled(false);
+=======
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 	}
 
 	public void onChange$cmbTipo() {
@@ -274,7 +286,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				txtNombre.setReadonly(false);
 				txtAbreviatura.setReadonly(false);
 				btnBuscarIndicador.setDisabled(false);
-				cmbIndicador.setDisabled(false);
+				cmbIndicador.setReadonly(false);
 				cmbConstante.setDisabled(false);
 				btnSumar.setDisabled(false);
 				btnRestar.setDisabled(false);
@@ -559,7 +571,11 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			binder.loadAll();
 			winRegistroIndicador.detach();
 		} else {
+<<<<<<< HEAD
+			int result = Messagebox.show("¿Desea salir?", "Question",
+=======
 			int result = Messagebox.show("Â¿Desea salir?", "Question",
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
 			switch (result) {
 			case Messagebox.OK:
@@ -626,9 +642,13 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		return encontrado;
 	}
 
+<<<<<<< HEAD
+	public void onClick$btnGuardar() throws InterruptedException {
+=======
 	public void onClick$btnGuardar() throws InterruptedException {	
 		String nombre = txtNombre.getValue();
 		String abreviatura = txtAbreviatura.getValue();
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 		if (modificando)
 			modificarIndicador();
 		else {
@@ -644,18 +664,29 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				if (cmbMedicion.getText().equalsIgnoreCase("--Seleccione--")) {
 					throw new WrongValueException(cmbMedicion,
 							"Debe seleccionar una medicion");
+<<<<<<< HEAD
+				} else if (txtNombre.getValue().isEmpty()) {
+					throw new WrongValueException(txtNombre,
+							"Debe ingresar un nombre");
+				} else if (txtAbreviatura.getValue().isEmpty()) {
+=======
 				} else if (nombre.isEmpty() || nombre.trim().length() == 0) {
 					throw new WrongValueException(txtNombre,
 							"Debe ingresar un nombre");
 				} else if (abreviatura.isEmpty() || abreviatura.trim().length() == 0) {
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 					throw new WrongValueException(txtAbreviatura,
 							"Debe ingresar una abreviatura");
 				} else if (agregarFormula || ultimaComa) {
 					throw new WrongValueException(txtFormula,
 							"Debe completar la formula");
 				}
+<<<<<<< HEAD
+			} else if (txtNombre.getValue().isEmpty()) {
+=======
 			} else if (nombre.isEmpty() || nombre.trim().length() == 0) {
 				System.out.println(txtNombre.getValue().trim());
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 				throw new WrongValueException(txtNombre,
 						"Debe ingresar un nombre");
 			} else if (abreviatura.isEmpty() || abreviatura.trim().length() == 0) {
@@ -664,10 +695,15 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			} else if (agregarFormula || ultimaComa) {
 				throw new WrongValueException(txtFormula,
 						"Debe completar la formula");
+<<<<<<< HEAD
+			} else if (buscarAbreviaturaIndicador()) {
+				// Verificar que la abreviatura del indicador no esté registrada
+=======
 			}
 			System.out.println(buscarAbreviaturaIndicador());
 			if (buscarAbreviaturaIndicador()) {
 				// Verificar que la abreviatura del indicador no estï¿½ registrada
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 				throw new WrongValueException(txtAbreviatura,
 						"Debe ingresar otra abreviatura");
 			} else {
@@ -710,9 +746,17 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			String nombre = indCatComp.getCompetencia()
 					.getDatoBasicoByCodigoEstadoCompetencia().getNombre();
 			if (nombre.equals("REGISTRADA") || nombre.equals("APERTURADA")) {
+<<<<<<< HEAD
+				// encontrado = true;
 				compe = indCatComp.getCompetencia();
 			}
 		}
+		// return encontrado;
+=======
+				compe = indCatComp.getCompetencia();
+			}
+		}
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 		return compe;
 	}
 
@@ -725,6 +769,13 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 								+ " ", "Mensaje", Messagebox.OK,
 						Messagebox.ERROR);
 			} else {
+<<<<<<< HEAD
+
+//				System.out.println(buscarIndicadorCompetencia()
+//						.getDatoBasicoByCodigoEstadoCompetencia().getNombre());
+
+=======
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 				indicador.setEstatus('E');
 				servicioIndicador.agregar(indicador);
 				Messagebox.show("Datos eliminados exitosamente", "Mensaje",
@@ -733,14 +784,19 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 				binder.loadAll();
 			}
 		} else {
+<<<<<<< HEAD
+			Messagebox.show("Seleccione un indicador", "Mensaje",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+=======
 			throw new WrongValueException(btnBuscarIndicador, "Debe seleccionar un indicador");
+>>>>>>> 743ea5f487d462c9f09d970e7706f54a7b2a307a
 		}
 	}
 
 	public void deshabilitarCatalogo() {
 		txtNombre.setReadonly(false);
 		txtAbreviatura.setReadonly(false);
-		cmbIndicador.setDisabled(false);
+		cmbIndicador.setReadonly(false);
 		cmbConstante.setDisabled(false);
 		btnSumar.setDisabled(false);
 		btnRestar.setDisabled(false);
