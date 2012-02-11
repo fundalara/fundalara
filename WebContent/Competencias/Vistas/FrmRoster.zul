@@ -2,13 +2,10 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRoster"?>
 
-
-
-
 <zk>
 	<div align="center">
 	 <window id="frmRoster" apply="controlador.competencia.CntrlFrmRoster"
-		 title="REGISTRO DE RÓSTER" border="normal" closable="true" width="60%">
+		 title="REGISTRO DE RÓSTER" border="normal" closable="true" width="60%" style="text-align:left">
 		 
 		 <tabbox>
 	<tabs>

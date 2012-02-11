@@ -3,11 +3,11 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCrearCompetencia"?>
 
 <zk>
-
+<div align="center">
 
 		<window id="frmCrearCompetencia" title="Gestionar Competencia"
 			border="normal" closable="true" height="auto" width="70%"
-			apply="controlador.competencia.CntrlFrmCrearCompetencia">
+			apply="controlador.competencia.CntrlFrmCrearCompetencia" style="text-align:left">
 
 			<tabbox>
 				<tabs>
@@ -591,6 +591,6 @@
 			<div>
 			</div>
 		</window>
-
+</div>
 
 </zk>

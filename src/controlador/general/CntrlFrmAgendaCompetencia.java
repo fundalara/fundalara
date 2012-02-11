@@ -66,7 +66,7 @@ public class CntrlFrmAgendaCompetencia extends CntrlFrmAgendaGeneral {
 		// Creando componentes necesarios
 		hoy.setVisible(false);
 		cmbCompetencia = new Combobox();
-		cmbCompetencia.setCols(50);
+		cmbCompetencia.setCols(30);
 		cmbCompetencia.setText("--Seleccione--");
 		cmbCompetencia.setStyle("align:center");
 		cmbCompetencia.setReadonly(true);

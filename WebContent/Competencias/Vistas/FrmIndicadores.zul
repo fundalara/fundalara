@@ -6,9 +6,8 @@
 	<div align="center">
 		<window title="Seleccionar Indicadores" border="normal"
 			closable="true" width="690px" id="frmIndicador"
-			apply="controlador.competencia.CntrlFrmIndicador" style="left">
-			<panel border="normal">
-				<caption label="Datos de la Competencia"></caption>
+			apply="controlador.competencia.CntrlFrmIndicador" style="text-align:left">
+			<panel border="normal" title="Datos de la Competencia">				
 				<panelchildren>
 					<grid>
 						<columns>

@@ -69,7 +69,7 @@
 										width="59%">
 										<panel title="INDICADORES" >
 											<panelchildren>
-												<grid id="gridIndicadoresOfensivos">
+												<grid id="gridIndicadoresOfensivos" >
 													<columns>													  											   
 													</columns>
 													<rows>													 
@@ -78,7 +78,7 @@
 											</panelchildren>
 										</panel>
 									</div>
-									<div align="left" width="59%"
+									<div align="left" 
 										style="float:left;margin-left:2px">
 										<panel title="INDICADORES">
 											<panelchildren>
@@ -234,9 +234,9 @@
 											</panelchildren>
 										</panel>
 									</div>
-									<div align="left" width="59%"
-										style="float:left;margin-left:2px">
-										<panel title="INDICADORES">
+									<div align="left" 
+										style="float:left;margin-left:2px;margin-top:8px">
+										<panel >
 											<panelchildren>
 												<grid id="gridIndicadoresPitcheoReserva">
 													<columns>							
@@ -254,7 +254,7 @@
 				<div align="right">
 					<hbox>
 						<button image="/Recursos/Imagenes/guardar.ico"
-							id="btnGuardar" onClick="guardar()" label="Guardar" />
+							id="btnGuardar"  label="Guardar" />
 						<button image="/Recursos/Imagenes/cancelar.ico"
 							label="Cancelar" />
 						<button image="/Recursos/Imagenes/salir.png"

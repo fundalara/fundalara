@@ -11,7 +11,7 @@
 		<window id="frmClasificacion" title="Registro de Clasificación"
 			border="normal" height="" width="515px"
 			apply="controlador.competencia.CntrlFrmClasificacion"
-			closable="true">
+			closable="true" style="text-align:left">
 			<div align="left"> 
 			<panel  border="normal" title="Datos de la Clasificación">
 				<panelchildren style="margin-top:5px ">

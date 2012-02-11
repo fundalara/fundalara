@@ -6,9 +6,8 @@
 	<div align="center">
 		<window apply="controlador.competencia.CntrlFrmDivisa"
 			id="frmDivisa" title="Registro de Divisas" width="630px"
-			border="normal" closable="true" height="">
-			<panel border="normal">
-				<caption label="Datos de la Divisa"></caption>
+			border="normal" closable="true" height="" style="text-align:left">
+			<panel border="normal" title="Datos de la Divisa">				
 				<panelchildren>
 					<grid oddRowSclass="none">
 						<columns >

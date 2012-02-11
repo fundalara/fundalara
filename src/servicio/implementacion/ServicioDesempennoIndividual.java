@@ -5,6 +5,8 @@ import java.util.List;
 import dao.general.DaoDesempennoIndividual;
 
 import modelo.DesempennoIndividual;
+import modelo.IndicadorCategoriaCompetencia;
+import modelo.LineUp;
 import servicio.interfaz.IServicioDesempennoIndividual;
 
 public class ServicioDesempennoIndividual implements
@@ -29,7 +31,7 @@ public class ServicioDesempennoIndividual implements
 
 	@Override
 	public void agregar(DesempennoIndividual d) {
-		// TODO Auto-generated method stub
+		daoDesempennoIndividual.guardar(d);
 
 	}
 
@@ -43,6 +45,18 @@ public class ServicioDesempennoIndividual implements
 	public List<DesempennoIndividual> listarActivos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DesempennoIndividual obtenerDesempennoPorIndicador(
+			IndicadorCategoriaCompetencia icc, LineUp lineUp) {
+		
+		return daoDesempennoIndividual.obtenerDesempennoPorIndicador(icc, lineUp);
+	}
+
+	@Override
+	public List<DesempennoIndividual> obtenerDesempennoJugador(LineUp lineUp) {
+		return daoDesempennoIndividual.obtenerDesempennoJugador(lineUp);
 	}
 
 }

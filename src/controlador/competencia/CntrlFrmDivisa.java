@@ -25,8 +25,6 @@ import org.zkoss.zul.Window;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Image;
 
-
-
 import comun.FileLoader;
 
 import servicio.implementacion.ServicioDatoBasico;
@@ -138,12 +136,12 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 			}
 		});
 	}
-	
+
 	public void onClick$btnExaminar() {
 		FileLoader fl = new FileLoader();
 		divisa.setLogo(fl.cargarImagenEnBean(ImgLogo));
 	}
-	
+
 	// Ordena una lista de Tipo DatoBasico por nombre
 	public void ordenarDatoBasico(List<DatoBasico> datoLista) {
 
@@ -156,8 +154,6 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 			}
 		});
 	}
-	
-
 
 	// BOTONES GUARDAR,ELIMINAR,CANCELAR,SALIR................
 
@@ -170,11 +166,16 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 						if (!txtTelefono.getValue().isEmpty())
 							if (!txtCorreo.getValue().isEmpty()) {
 
-								divisa.setDatoBasico((DatoBasico) cmbParroquia.getSelectedItem().getValue());
-								divisa.setNombre(divisa.getNombre().toUpperCase());
-								divisa.setDireccion(divisa.getDireccion().toUpperCase());
-								divisa.setCorreoElectronico(divisa.getCorreoElectronico().toUpperCase());
-								divisa.setPersonaContacto(divisa.getPersonaContacto().toUpperCase());
+								divisa.setDatoBasico((DatoBasico) cmbParroquia
+										.getSelectedItem().getValue());
+								divisa.setNombre(divisa.getNombre()
+										.toUpperCase());
+								divisa.setDireccion(divisa.getDireccion()
+										.toUpperCase());
+								divisa.setCorreoElectronico(divisa
+										.getCorreoElectronico().toUpperCase());
+								divisa.setPersonaContacto(divisa
+										.getPersonaContacto().toUpperCase());
 								servicioDivisa.agregar(divisa);
 								Messagebox.show("Datos agregados exitosamente",
 										"Mensaje", Messagebox.OK,
@@ -225,10 +226,9 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 	}
 
 	public void onClick$btnSalir() throws InterruptedException {
-		if (Messagebox.show("¿Desea salir?", "Mensaje",
-				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
+		if (Messagebox.show("¿Desea salir?", "Mensaje", Messagebox.YES
+				+ Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
 			formulario.detach();
-
 	}
 
 }

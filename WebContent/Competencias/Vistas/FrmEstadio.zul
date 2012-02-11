@@ -5,13 +5,10 @@
 <div align="center">
 		<window apply="controlador.competencia.CntrlFrmEstadio" 
 				id="frmEstadio" title="Registro de Estadios" 
-				border="normal" width="370px" closable="true">
-			<panel>
+				border="normal" width="370px" closable="true" style="text-align:left">
+			<panel title="Datos de los estadios">
 				<panelchildren>
-					<grid oddRowSclass="none">
-					
-					
-				
+					<grid oddRowSclass="none">				
 						<rows>
 							<row align="left"  style="border:none">
 								<label value="Nombre"></label>
