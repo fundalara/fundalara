@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,11 +19,11 @@ public class TareaActividad implements java.io.Serializable {
 
 	private int codigoTareaActividad;
 	private DatoBasico datoBasicoByCodigoTarea;
+	private ComisionFamiliar comisionFamiliar;
 	private DatoBasico datoBasicoByEstadoTarea;
 	private Actividad actividad;
 	private PersonalActividad personalActividad;
 	private char estatus;
-	private boolean tareaEjecutada;
 
 	public TareaActividad() {
 	}
@@ -31,15 +31,26 @@ public class TareaActividad implements java.io.Serializable {
 	public TareaActividad(int codigoTareaActividad,
 			DatoBasico datoBasicoByCodigoTarea,
 			DatoBasico datoBasicoByEstadoTarea, Actividad actividad,
-			PersonalActividad personalActividad, char estatus,
-			boolean tareaEjecutada) {
+			char estatus) {
 		this.codigoTareaActividad = codigoTareaActividad;
 		this.datoBasicoByCodigoTarea = datoBasicoByCodigoTarea;
 		this.datoBasicoByEstadoTarea = datoBasicoByEstadoTarea;
 		this.actividad = actividad;
+		this.estatus = estatus;
+	}
+
+	public TareaActividad(int codigoTareaActividad,
+			DatoBasico datoBasicoByCodigoTarea,
+			ComisionFamiliar comisionFamiliar,
+			DatoBasico datoBasicoByEstadoTarea, Actividad actividad,
+			PersonalActividad personalActividad, char estatus) {
+		this.codigoTareaActividad = codigoTareaActividad;
+		this.datoBasicoByCodigoTarea = datoBasicoByCodigoTarea;
+		this.comisionFamiliar = comisionFamiliar;
+		this.datoBasicoByEstadoTarea = datoBasicoByEstadoTarea;
+		this.actividad = actividad;
 		this.personalActividad = personalActividad;
 		this.estatus = estatus;
-		this.tareaEjecutada = tareaEjecutada;
 	}
 
 	@Id
@@ -63,6 +74,16 @@ public class TareaActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_comision_familiar")
+	public ComisionFamiliar getComisionFamiliar() {
+		return this.comisionFamiliar;
+	}
+
+	public void setComisionFamiliar(ComisionFamiliar comisionFamiliar) {
+		this.comisionFamiliar = comisionFamiliar;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "estado_tarea", nullable = false)
 	public DatoBasico getDatoBasicoByEstadoTarea() {
 		return this.datoBasicoByEstadoTarea;
@@ -83,7 +104,7 @@ public class TareaActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_personal_actividad", nullable = false)
+	@JoinColumn(name = "codigo_personal_actividad")
 	public PersonalActividad getPersonalActividad() {
 		return this.personalActividad;
 	}
@@ -99,15 +120,6 @@ public class TareaActividad implements java.io.Serializable {
 
 	public void setEstatus(char estatus) {
 		this.estatus = estatus;
-	}
-
-	@Column(name = "tarea_ejecutada", nullable = false)
-	public boolean isTareaEjecutada() {
-		return this.tareaEjecutada;
-	}
-
-	public void setTareaEjecutada(boolean tareaEjecutada) {
-		this.tareaEjecutada = tareaEjecutada;
 	}
 
 }

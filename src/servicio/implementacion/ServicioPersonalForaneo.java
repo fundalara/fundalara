@@ -5,6 +5,8 @@ import java.util.List;
 import dao.general.DaoPersonalForaneo;
 import dao.general.DaoPersonalJuego;
 
+import modelo.Constante;
+import modelo.Estadio;
 import modelo.PersonalForaneo;
 import servicio.interfaz.IServicioPersonalForaneo;
 import modelo.DatoBasico;
@@ -23,13 +25,22 @@ public class ServicioPersonalForaneo implements IServicioPersonalForaneo {
 
 	@Override
 	public void eliminar(PersonalForaneo p) {
-		// TODO Auto-generated method stub
+		p.setEstatus('E');
+		daoPersonalForaneo.eliminar(p);
 
 	}
 
 	@Override
 	public void agregar(PersonalForaneo p) {
-		// TODO Auto-generated method stub
+		if (p.getCodigoPersonalForaneo() == 0){
+			int codPersonalForaneo = daoPersonalForaneo.listar(PersonalForaneo.class).size()+1;
+			p.setCodigoPersonalForaneo(codPersonalForaneo);
+			p.setEstatus('A');	
+			daoPersonalForaneo.guardar(p);
+			daoPersonalForaneo.getSession().close();
+		   
+		
+		}
 
 	}
 
@@ -42,7 +53,7 @@ public class ServicioPersonalForaneo implements IServicioPersonalForaneo {
 	@Override
 	public List<PersonalForaneo> listarActivos() {
 		// TODO Auto-generated method stub
-		return null;
+		return daoPersonalForaneo.listarActivos(PersonalForaneo.class);
 	}
 	
 	@Override
@@ -56,4 +67,7 @@ public class ServicioPersonalForaneo implements IServicioPersonalForaneo {
     return daoPersonalForaneo.consultarDatoBasico();
 	}
 
+	public List<PersonalForaneo> listarPersonalPorFiltro(String dato){
+		return daoPersonalForaneo.listarPersonalPorFiltro(dato);
+	}
 }

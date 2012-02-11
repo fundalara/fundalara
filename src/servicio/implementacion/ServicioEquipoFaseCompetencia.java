@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoEquipoFaseCompetencia;
 
+import modelo.Categoria;
 import modelo.EquipoFaseCompetencia;
 import modelo.FaseCompetencia;
 import servicio.interfaz.IServicioEquipoFaseCompetencia;
@@ -11,6 +12,18 @@ import servicio.interfaz.IServicioEquipoFaseCompetencia;
 public class ServicioEquipoFaseCompetencia implements
 		IServicioEquipoFaseCompetencia {
     DaoEquipoFaseCompetencia daoEquipoFaseCompetencia;
+    
+    
+    
+	public DaoEquipoFaseCompetencia getDaoEquipoFaseCompetencia() {
+		return daoEquipoFaseCompetencia;
+	}
+
+	public void setDaoEquipoFaseCompetencia(
+			DaoEquipoFaseCompetencia daoEquipoFaseCompetencia) {
+		this.daoEquipoFaseCompetencia = daoEquipoFaseCompetencia;
+	}
+
 	@Override
 	public void eliminar(List l) {
 		// TODO Auto-generated method stub
@@ -36,9 +49,11 @@ public class ServicioEquipoFaseCompetencia implements
 	}
 
 	@Override
-	public List<EquipoFaseCompetencia> buscarEquipoFase(FaseCompetencia fase) {
-		// TODO Auto-generated method stub
-		return daoEquipoFaseCompetencia.buscarEquipoFase(fase);
+	public List<EquipoFaseCompetencia> buscarEquipoPorFaseYCategoria(
+			FaseCompetencia fase, Categoria categoria) {
+	
+		return daoEquipoFaseCompetencia.buscarEquipoPorFaseYCategoria(fase, categoria);
 	}
 
+	
 }

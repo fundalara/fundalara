@@ -10,13 +10,13 @@
 			<panel border="normal">
 				<caption label="Datos de la Divisa"></caption>
 				<panelchildren>
-					<grid>
-						<columns>
-							<column width="40px" align="left"></column>
-							<column width="40px"></column>
-							<column width="60px"></column>
-							<column width="60px"></column>
-							<column width="50px"></column>
+					<grid oddRowSclass="none">
+						<columns >
+							<column width="25px" align="left"></column>
+							<column width="25px"></column>
+							<column width="25px"></column>
+							<column width="25px"></column>
+							
 						</columns>
 						<rows>
 							<row style="border-style:none">
@@ -54,6 +54,7 @@
 
 							<row style="border-style:none">
 								<label value="Teléfono"></label>
+								
 								<textbox
 									value="@{cntrl.divisa.telefono}" id="txtTelefono" cols="20"
 									maxlength="12">
@@ -65,19 +66,31 @@
 									cols="20">
 								</textbox>
 							</row>
-							<row style="border-style:none">
+							<row style="border:none;" height="80%" 
+								 valign="middle">
 								<label value="Logo"></label>
 								<hbox>
-									<textbox
-										value="@{cntrl.divisa.logo}" id="txtLogo" cols="20">
-									</textbox>
-
-									<button id="btnExaminar"
+								<div style="float:lefs" >
+								<groupbox
+										style="border-color:orange" mold="3d" width="140px">
+									<image 
+										 id="ImgLogo" width="80%">
+									</image>
+									
+								</groupbox>
+								</div>
+								<separator width="20px"></separator>
+								<div>
+								
+									<button style="margin-top:30px" id="btnExaminar"
 										label="Examinar">
 									</button>
+								</div>
 								</hbox>
-
-							</row>
+							</row>	
+								
+								
+								
 						</rows>
 					</grid>
 				</panelchildren>

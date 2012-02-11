@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,8 +21,8 @@ import javax.persistence.Table;
 public class PersonalActividadPlanificada implements java.io.Serializable {
 
 	private int codigoPersonalActividadPlan;
-	private PlanificacionActividad planificacionActividad;
 	private Personal personal;
+	private int codigoPlanificacionActividad;
 	private char estatus;
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
@@ -31,21 +31,19 @@ public class PersonalActividadPlanificada implements java.io.Serializable {
 	}
 
 	public PersonalActividadPlanificada(int codigoPersonalActividadPlan,
-			PlanificacionActividad planificacionActividad, Personal personal,
-			char estatus) {
+			Personal personal, int codigoPlanificacionActividad, char estatus) {
 		this.codigoPersonalActividadPlan = codigoPersonalActividadPlan;
-		this.planificacionActividad = planificacionActividad;
 		this.personal = personal;
+		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.estatus = estatus;
 	}
 
 	public PersonalActividadPlanificada(int codigoPersonalActividadPlan,
-			PlanificacionActividad planificacionActividad, Personal personal,
-			char estatus,
+			Personal personal, int codigoPlanificacionActividad, char estatus,
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.codigoPersonalActividadPlan = codigoPersonalActividadPlan;
-		this.planificacionActividad = planificacionActividad;
 		this.personal = personal;
+		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.estatus = estatus;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
@@ -61,17 +59,6 @@ public class PersonalActividadPlanificada implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_planificacion_actividad", nullable = false)
-	public PlanificacionActividad getPlanificacionActividad() {
-		return this.planificacionActividad;
-	}
-
-	public void setPlanificacionActividad(
-			PlanificacionActividad planificacionActividad) {
-		this.planificacionActividad = planificacionActividad;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cedula_rif", nullable = false)
 	public Personal getPersonal() {
 		return this.personal;
@@ -79,6 +66,15 @@ public class PersonalActividadPlanificada implements java.io.Serializable {
 
 	public void setPersonal(Personal personal) {
 		this.personal = personal;
+	}
+
+	@Column(name = "codigo_planificacion_actividad", nullable = false)
+	public int getCodigoPlanificacionActividad() {
+		return this.codigoPlanificacionActividad;
+	}
+
+	public void setCodigoPlanificacionActividad(int codigoPlanificacionActividad) {
+		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

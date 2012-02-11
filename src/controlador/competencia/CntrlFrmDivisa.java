@@ -1,11 +1,14 @@
 package controlador.competencia;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import modelo.DatoBasico;
 import modelo.Divisa;
 
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.WrongValueException;
@@ -20,6 +23,12 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Comboitem;
+import org.zkoss.zul.Image;
+
+
+
+import comun.FileLoader;
+
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioDivisa;
 
@@ -36,7 +45,7 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 	Button btnBuscar;
 	List<DatoBasico> parroquias;
 	Divisa divisa;
-
+	Image ImgLogo;
 	Combobox cmbParroquia;
 	Textbox txtNombre;
 	Textbox txtDireccion;
@@ -84,8 +93,11 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 	public void restaurar() {
 		divisa = new Divisa();
 		parroquias = servicioDatoBasico.listarParroquias();
+		ordenarDatoBasico(parroquias);
 		cmbParroquia.setText("-- Seleccione --");
 		divisaBuscada = false;
+		AImage img = null;
+		ImgLogo.setContent(img);
 	}
 
 	public int buscar(Divisa d) {
@@ -117,11 +129,35 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 				// se obtiene la divisa...
 				divisa = (Divisa) formulario.getVariable("divisa", false);
 				cmbParroquia.setSelectedIndex(buscar(divisa));
+				if (!(divisa.getLogo() == null)) {
+					AImage img = new AImage("", divisa.getLogo());
+					ImgLogo.setContent(img);
+				}
 				divisaBuscada = true; // se cargaron los datos...
 				binder.loadAll();
 			}
 		});
 	}
+	
+	public void onClick$btnExaminar() {
+		FileLoader fl = new FileLoader();
+		divisa.setLogo(fl.cargarImagenEnBean(ImgLogo));
+	}
+	
+	// Ordena una lista de Tipo DatoBasico por nombre
+	public void ordenarDatoBasico(List<DatoBasico> datoLista) {
+
+		Collections.sort(datoLista, new Comparator() {
+
+			public int compare(Object o1, Object o2) {
+				DatoBasico dato1 = (DatoBasico) o1;
+				DatoBasico dato2 = (DatoBasico) o2;
+				return dato1.getNombre().compareToIgnoreCase(dato2.getNombre());
+			}
+		});
+	}
+	
+
 
 	// BOTONES GUARDAR,ELIMINAR,CANCELAR,SALIR................
 
@@ -134,8 +170,11 @@ public class CntrlFrmDivisa extends GenericForwardComposer {
 						if (!txtTelefono.getValue().isEmpty())
 							if (!txtCorreo.getValue().isEmpty()) {
 
-								divisa.setDatoBasico((DatoBasico) cmbParroquia
-										.getSelectedItem().getValue());
+								divisa.setDatoBasico((DatoBasico) cmbParroquia.getSelectedItem().getValue());
+								divisa.setNombre(divisa.getNombre().toUpperCase());
+								divisa.setDireccion(divisa.getDireccion().toUpperCase());
+								divisa.setCorreoElectronico(divisa.getCorreoElectronico().toUpperCase());
+								divisa.setPersonaContacto(divisa.getPersonaContacto().toUpperCase());
 								servicioDivisa.agregar(divisa);
 								Messagebox.show("Datos agregados exitosamente",
 										"Mensaje", Messagebox.OK,

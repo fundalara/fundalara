@@ -11,9 +11,11 @@ import java.util.Stack;
 
 import javax.xml.soap.Text;
 
+import modelo.Competencia;
 import modelo.Constante;
 import modelo.DatoBasico;
 import modelo.Indicador;
+import modelo.IndicadorCategoriaCompetencia;
 import modelo.TipoDato;
 
 import org.jruby.RubyProcess.Sys;
@@ -36,6 +38,7 @@ import servicio.implementacion.ServicioConstante;
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioIndicador;
 import servicio.implementacion.ServicioTipoDato;
+import servicio.implementacion.ServicioIndicadorCategoriaCompetencia;
 
 /**
  * Clase que tiene como funci�n controlar la interfaz de igual nombre y los
@@ -52,6 +55,7 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	ServicioDatoBasico servicioDatoBasico;
 	ServicioIndicador servicioIndicador;
 	ServicioConstante servicioConstante;
+	ServicioIndicadorCategoriaCompetencia servicioIndicadorCategoriaCompetencia;
 	List<DatoBasico> listTipoIndicador;
 	List<DatoBasico> listModalidadIndicador;
 	List<DatoBasico> listMedicionIndicador;
@@ -129,21 +133,15 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		lblMedicion.setVisible(false);
 		txtAbreviatura.setConstraint("");
 		txtAbreviatura.setText("");
-		// txtAbreviatura.setConstraint("/[a-zA-Z0-9]+/ : No se permiten espacios en blanco ni vocales acentuadas");
 		txtAbreviatura.setReadonly(true);
 		txtNombre.setReadonly(true);
 		txtNombre.setConstraint("");
 		txtNombre.setText("");
-		// txtNombre.setConstraint("/[a-z A-Z 0-9 ������������]+/ : S�lo n�meros y letras");
 		txtFormula.setReadonly(true);
 		txtFormula.setValue("");
 	}
 
 	public void inicializarBoton() {
-		btnGuardar.setDisabled(true);
-		btnEliminar.setDisabled(true);
-		btnCancelar.setDisabled(true);
-		// btnBuscarIndicador.setDisabled(true);
 		btnSumar.setDisabled(true);
 		btnRestar.setDisabled(true);
 		btnMultiplicar.setDisabled(true);
@@ -246,9 +244,6 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 		pnlIndicador.setVisible(true);
 		cmbTipo.setDisabled(true);
-		btnGuardar.setDisabled(false);
-		btnEliminar.setDisabled(false);
-		btnCancelar.setDisabled(false);
 	}
 
 	public void onChange$cmbTipo() {
@@ -564,10 +559,8 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			binder.loadAll();
 			winRegistroIndicador.detach();
 		} else {
-			int result = Messagebox
-					.show("Existen elementos en el formulario �Realmente desea salir?",
-							"Question", Messagebox.OK | Messagebox.CANCEL,
-							Messagebox.QUESTION);
+			int result = Messagebox.show("¿Desea salir?", "Question",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
 			switch (result) {
 			case Messagebox.OK:
 				onClick$btnCancelar();
@@ -616,19 +609,67 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 	}
 
-	public void onClick$btnGuardar() throws InterruptedException {
+	public boolean buscarAbreviaturaIndicador() {
+		Boolean encontrado = false;
+		List<Indicador> lstIndicador = servicioIndicador.listarActivos();
+		List<Constante> lstConstante = servicioConstante.listarActivos();
+		for (Indicador indica : lstIndicador) {
+			if (indica.getAbreviatura().equals(indicador.getAbreviatura())) {
+				encontrado = true;
+			}
+		}
+		for (Constante cons : lstConstante) {
+			if (cons.getAbreviatura().equals(indicador.getAbreviatura())) {
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+
+	public void onClick$btnGuardar() throws InterruptedException {	
+		String nombre = txtNombre.getValue();
+		String abreviatura = txtAbreviatura.getValue();
 		if (modificando)
 			modificarIndicador();
 		else {
-			if (txtNombre.getValue().isEmpty()) {
+			if (cmbTipo.getText().equalsIgnoreCase("--Seleccione--")) {
+				throw new WrongValueException(cmbTipo,
+						"Debe seleccionar un tipo de indicador");
+			}
+			if (cmbModalidad.getText().equalsIgnoreCase("--Seleccione--")) {
+				throw new WrongValueException(cmbModalidad,
+						"Debe seleccionar una modalidad");
+			}
+			if (cmbTipo.getText().equals("COMPUESTO")) {
+				if (cmbMedicion.getText().equalsIgnoreCase("--Seleccione--")) {
+					throw new WrongValueException(cmbMedicion,
+							"Debe seleccionar una medicion");
+				} else if (nombre.isEmpty() || nombre.trim().length() == 0) {
+					throw new WrongValueException(txtNombre,
+							"Debe ingresar un nombre");
+				} else if (abreviatura.isEmpty() || abreviatura.trim().length() == 0) {
+					throw new WrongValueException(txtAbreviatura,
+							"Debe ingresar una abreviatura");
+				} else if (agregarFormula || ultimaComa) {
+					throw new WrongValueException(txtFormula,
+							"Debe completar la formula");
+				}
+			} else if (nombre.isEmpty() || nombre.trim().length() == 0) {
+				System.out.println(txtNombre.getValue().trim());
 				throw new WrongValueException(txtNombre,
 						"Debe ingresar un nombre");
-			} else if (txtAbreviatura.getValue().isEmpty()) {
+			} else if (abreviatura.isEmpty() || abreviatura.trim().length() == 0) {
 				throw new WrongValueException(txtAbreviatura,
 						"Debe ingresar una abreviatura");
 			} else if (agregarFormula || ultimaComa) {
 				throw new WrongValueException(txtFormula,
 						"Debe completar la formula");
+			}
+			System.out.println(buscarAbreviaturaIndicador());
+			if (buscarAbreviaturaIndicador()) {
+				// Verificar que la abreviatura del indicador no est� registrada
+				throw new WrongValueException(txtAbreviatura,
+						"Debe ingresar otra abreviatura");
 			} else {
 				indicador
 						.setDatoBasicoByCodigoTipoIndicador((DatoBasico) cmbTipo
@@ -659,13 +700,41 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 		}
 	}
 
+	public Competencia buscarIndicadorCompetencia() {
+		// Boolean encontrado = false;
+		Competencia compe = null;
+		List<IndicadorCategoriaCompetencia> lstCompetencia = servicioIndicadorCategoriaCompetencia
+				.listarCompetenciaIndicador(indicador);
+
+		for (IndicadorCategoriaCompetencia indCatComp : lstCompetencia) {
+			String nombre = indCatComp.getCompetencia()
+					.getDatoBasicoByCodigoEstadoCompetencia().getNombre();
+			if (nombre.equals("REGISTRADA") || nombre.equals("APERTURADA")) {
+				compe = indCatComp.getCompetencia();
+			}
+		}
+		return compe;
+	}
+
 	public void onClick$btnEliminar() throws InterruptedException {
-		indicador.setEstatus('E');
-		servicioIndicador.agregar(indicador);
-		Messagebox.show("Datos eliminados exitosamente", "Mensaje",
-				Messagebox.OK, Messagebox.EXCLAMATION);
-		onClick$btnCancelar();
-		binder.loadAll();
+		if (modificando) {
+			if (buscarIndicadorCompetencia() != null) {
+				Messagebox.show(
+						"No se puede eliminar el indicador, se encuentra asociado a la competencia: "
+								+ buscarIndicadorCompetencia().getNombre()
+								+ " ", "Mensaje", Messagebox.OK,
+						Messagebox.ERROR);
+			} else {
+				indicador.setEstatus('E');
+				servicioIndicador.agregar(indicador);
+				Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+						Messagebox.OK, Messagebox.EXCLAMATION);
+				onClick$btnCancelar();
+				binder.loadAll();
+			}
+		} else {
+			throw new WrongValueException(btnBuscarIndicador, "Debe seleccionar un indicador");
+		}
 	}
 
 	public void deshabilitarCatalogo() {
@@ -739,14 +808,14 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 			}
 			if (aux != 0) {
 				pilaString.push(aux);
-			}
-			else;
+			} else
+				;
 		}
 	}
 
 	/**
-	 * Busca el �ndice correspondiente al �tem seleccionado en un combo, para
-	 * relacionarlo con un objeto
+	 * Busca el �ndice correspondiente al �tem seleccionado en un combo,
+	 * para relacionarlo con un objeto
 	 * 
 	 * @param objeto
 	 *            objeto relacionado con el combo

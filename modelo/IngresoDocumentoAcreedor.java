@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,7 +20,6 @@ import javax.persistence.Table;
 public class IngresoDocumentoAcreedor implements java.io.Serializable {
 
 	private IngresoDocumentoAcreedorId id;
-	private DocumentoAcreedor documentoAcreedor;
 	private Ingreso ingreso;
 	private double montoAbonado;
 	private char estatus;
@@ -29,10 +28,8 @@ public class IngresoDocumentoAcreedor implements java.io.Serializable {
 	}
 
 	public IngresoDocumentoAcreedor(IngresoDocumentoAcreedorId id,
-			DocumentoAcreedor documentoAcreedor, Ingreso ingreso,
-			double montoAbonado, char estatus) {
+			Ingreso ingreso, double montoAbonado, char estatus) {
 		this.id = id;
-		this.documentoAcreedor = documentoAcreedor;
 		this.ingreso = ingreso;
 		this.montoAbonado = montoAbonado;
 		this.estatus = estatus;
@@ -48,16 +45,6 @@ public class IngresoDocumentoAcreedor implements java.io.Serializable {
 
 	public void setId(IngresoDocumentoAcreedorId id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_documento_acreedor", nullable = false, insertable = false, updatable = false)
-	public DocumentoAcreedor getDocumentoAcreedor() {
-		return this.documentoAcreedor;
-	}
-
-	public void setDocumentoAcreedor(DocumentoAcreedor documentoAcreedor) {
-		this.documentoAcreedor = documentoAcreedor;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -9,10 +9,12 @@ import modelo.PersonalForaneo;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import servicio.implementacion.ServicioPersonalForaneo;
 
@@ -21,6 +23,7 @@ public class CntrlFrmCatalogoPersonalForaneo extends GenericForwardComposer {
 	AnnotateDataBinder binder;
 	Component catalogo;
 	ServicioPersonalForaneo servicioPersonalForaneo;
+	Textbox txtFiltro;
 
 	PersonalForaneo personalForaneo;
 	DatoBasico datoBasico;
@@ -78,6 +81,14 @@ public class CntrlFrmCatalogoPersonalForaneo extends GenericForwardComposer {
 		if (lsbxUmpire.getItems().size() != 0) {
 			lsbxUmpire.setSelectedIndex(0);
 		}
+	}
+	
+	public void onChanging$txtFiltro(InputEvent event ){
+		
+		String dato = event.getValue().toUpperCase();
+
+		umpires = servicioPersonalForaneo.listarPersonalPorFiltro(dato);
+		  binder.loadAll();
 	}
 
 	public void onClick$btnAceptar() throws InterruptedException {

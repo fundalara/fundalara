@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +19,7 @@ import javax.persistence.Table;
 public class EscalaMedicion implements java.io.Serializable {
 
 	private int codigoEscala;
-	private DatoBasico datoBasico;
+	private int tipoEscala;
 	private String nombre;
 	private char estatus;
 	private String descripcion;
@@ -32,21 +30,20 @@ public class EscalaMedicion implements java.io.Serializable {
 	public EscalaMedicion() {
 	}
 
-	public EscalaMedicion(int codigoEscala, DatoBasico datoBasico,
-			String nombre, char estatus, String descripcion) {
+	public EscalaMedicion(int codigoEscala, int tipoEscala, String nombre,
+			char estatus, String descripcion) {
 		this.codigoEscala = codigoEscala;
-		this.datoBasico = datoBasico;
+		this.tipoEscala = tipoEscala;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.descripcion = descripcion;
 	}
 
-	public EscalaMedicion(int codigoEscala, DatoBasico datoBasico,
-			String nombre, char estatus, String descripcion,
-			Set<ValorEscala> valorEscalas,
+	public EscalaMedicion(int codigoEscala, int tipoEscala, String nombre,
+			char estatus, String descripcion, Set<ValorEscala> valorEscalas,
 			Set<IndicadorActividadEscala> indicadorActividadEscalas) {
 		this.codigoEscala = codigoEscala;
-		this.datoBasico = datoBasico;
+		this.tipoEscala = tipoEscala;
 		this.nombre = nombre;
 		this.estatus = estatus;
 		this.descripcion = descripcion;
@@ -64,14 +61,13 @@ public class EscalaMedicion implements java.io.Serializable {
 		this.codigoEscala = codigoEscala;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipo_escala", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "tipo_escala", nullable = false)
+	public int getTipoEscala() {
+		return this.tipoEscala;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setTipoEscala(int tipoEscala) {
+		this.tipoEscala = tipoEscala;
 	}
 
 	@Column(name = "nombre", nullable = false)

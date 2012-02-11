@@ -131,11 +131,13 @@ public class CntrlFrmPersonalForaneo extends GenericForwardComposer {
 					"El campo 'Nombre' es obligatorio");
 		else if (cmbPersonalForaneo.getValue() == "-- Seleccione --") {
 			throw new WrongValueException(cmbPersonalForaneo,
-					"Seleccione una 'Descripciï¿½n'");
+					"Seleccione una 'Descripcion'");
 		}
 
 		personalForaneo.setDatoBasico((DatoBasico) cmbPersonalForaneo
 				.getSelectedItem().getValue());
+		personalForaneo.setNombre(personalForaneo.getNombre().toUpperCase());
+		
 		servicioPersonalForaneo.agregar(personalForaneo);
 		Messagebox.show("Datos agregados exitosamente", "Mensaje",
 				Messagebox.OK, Messagebox.EXCLAMATION);
@@ -151,7 +153,7 @@ public class CntrlFrmPersonalForaneo extends GenericForwardComposer {
 		else
 			
 			if (Messagebox.show(
-					"ï¿½Realmente desea eliminar un Personal Foraneo?",
+					"¿Realmente desea eliminar un Personal Foraneo?",
 					"Mensaje", Messagebox.YES + Messagebox.NO,
 					Messagebox.QUESTION) == Messagebox.YES) {
 				servicioPersonalForaneo.eliminar(personalForaneo);
@@ -170,7 +172,7 @@ public class CntrlFrmPersonalForaneo extends GenericForwardComposer {
 
 	public void onClick$btnSalir () throws InterruptedException {
 		if (Messagebox.show(
-				"ï¿½Desea salir?",
+				"¿Desea salir?",
 				"Mensaje", Messagebox.YES + Messagebox.NO,
 				Messagebox.QUESTION) == Messagebox.YES)
 		        formulario.detach();

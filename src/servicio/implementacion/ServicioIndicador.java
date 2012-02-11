@@ -17,14 +17,12 @@ public class ServicioIndicador implements IServicioIndicador {
 	public void eliminar(Indicador i) {
 		// TODO Auto-generated method stub
 		daoIndicador.eliminar(i);
-
 	}
 
 	@Override
 	public void agregar(Indicador i) {
 		// TODO Auto-generated method stub
 		daoIndicador.guardar(i);
-
 	}
 
 	@Override
@@ -76,6 +74,10 @@ public class ServicioIndicador implements IServicioIndicador {
 		// TODO Auto-generated method stub
 		return daoIndicador.listarIndicadorColectivoPorModalidad(db);
 	}
-	
 
+	@Override
+	public List<Indicador> listarIndicadoresPorFiltro(String dato) {
+		// TODO Auto-generated method stub
+		return daoIndicador.listarIndicadoresPorFiltro(dato);
+	}
 }

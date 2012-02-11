@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +18,8 @@ import javax.persistence.Table;
 public class DetalleRequisicion implements java.io.Serializable {
 
 	private int codigoDetalleRequisicion;
-	private Material material;
 	private Requisicion requisicion;
+	private int codigoMaterial;
 	private int cantidadSolicitada;
 	private Integer cantidadEntregada;
 	private char estatus;
@@ -27,21 +27,22 @@ public class DetalleRequisicion implements java.io.Serializable {
 	public DetalleRequisicion() {
 	}
 
-	public DetalleRequisicion(int codigoDetalleRequisicion, Material material,
-			Requisicion requisicion, int cantidadSolicitada, char estatus) {
+	public DetalleRequisicion(int codigoDetalleRequisicion,
+			Requisicion requisicion, int codigoMaterial,
+			int cantidadSolicitada, char estatus) {
 		this.codigoDetalleRequisicion = codigoDetalleRequisicion;
-		this.material = material;
 		this.requisicion = requisicion;
+		this.codigoMaterial = codigoMaterial;
 		this.cantidadSolicitada = cantidadSolicitada;
 		this.estatus = estatus;
 	}
 
-	public DetalleRequisicion(int codigoDetalleRequisicion, Material material,
-			Requisicion requisicion, int cantidadSolicitada,
-			Integer cantidadEntregada, char estatus) {
+	public DetalleRequisicion(int codigoDetalleRequisicion,
+			Requisicion requisicion, int codigoMaterial,
+			int cantidadSolicitada, Integer cantidadEntregada, char estatus) {
 		this.codigoDetalleRequisicion = codigoDetalleRequisicion;
-		this.material = material;
 		this.requisicion = requisicion;
+		this.codigoMaterial = codigoMaterial;
 		this.cantidadSolicitada = cantidadSolicitada;
 		this.cantidadEntregada = cantidadEntregada;
 		this.estatus = estatus;
@@ -58,16 +59,6 @@ public class DetalleRequisicion implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_material", nullable = false)
-	public Material getMaterial() {
-		return this.material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_requisicion", nullable = false)
 	public Requisicion getRequisicion() {
 		return this.requisicion;
@@ -75,6 +66,15 @@ public class DetalleRequisicion implements java.io.Serializable {
 
 	public void setRequisicion(Requisicion requisicion) {
 		this.requisicion = requisicion;
+	}
+
+	@Column(name = "codigo_material", nullable = false)
+	public int getCodigoMaterial() {
+		return this.codigoMaterial;
+	}
+
+	public void setCodigoMaterial(int codigoMaterial) {
+		this.codigoMaterial = codigoMaterial;
 	}
 
 	@Column(name = "cantidad_solicitada", nullable = false)

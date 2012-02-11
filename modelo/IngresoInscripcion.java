@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,24 +21,19 @@ public class IngresoInscripcion implements java.io.Serializable {
 
 	private IngresoInscripcionId id;
 	private TipoIngreso tipoIngreso;
-	private DatoBasico datoBasico;
 	private int cantidad;
 	private int adelantos;
-	private double monto;
 	private char estatus;
 
 	public IngresoInscripcion() {
 	}
 
 	public IngresoInscripcion(IngresoInscripcionId id, TipoIngreso tipoIngreso,
-			DatoBasico datoBasico, int cantidad, int adelantos, double monto,
-			char estatus) {
+			int cantidad, int adelantos, char estatus) {
 		this.id = id;
 		this.tipoIngreso = tipoIngreso;
-		this.datoBasico = datoBasico;
 		this.cantidad = cantidad;
 		this.adelantos = adelantos;
-		this.monto = monto;
 		this.estatus = estatus;
 	}
 
@@ -64,16 +59,6 @@ public class IngresoInscripcion implements java.io.Serializable {
 		this.tipoIngreso = tipoIngreso;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_inscripcion", nullable = false, insertable = false, updatable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
 	@Column(name = "cantidad", nullable = false)
 	public int getCantidad() {
 		return this.cantidad;
@@ -90,15 +75,6 @@ public class IngresoInscripcion implements java.io.Serializable {
 
 	public void setAdelantos(int adelantos) {
 		this.adelantos = adelantos;
-	}
-
-	@Column(name = "monto", nullable = false, precision = 17, scale = 17)
-	public double getMonto() {
-		return this.monto;
-	}
-
-	public void setMonto(double monto) {
-		this.monto = monto;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

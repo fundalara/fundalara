@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,17 +35,9 @@ public class Material implements java.io.Serializable {
 	private char estatus;
 	private Set<MaterialActividad> materialActividads = new HashSet<MaterialActividad>(
 			0);
-	private Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials = new HashSet<DocumentoAcreedorMaterial>(
-			0);
 	private Set<RecepcionMaterial> recepcionMaterials = new HashSet<RecepcionMaterial>(
 			0);
 	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
-			0);
-	private Set<CuentaPagarMaterial> cuentaPagarMaterials = new HashSet<CuentaPagarMaterial>(
-			0);
-	private Set<DetalleRequisicion> detalleRequisicions = new HashSet<DetalleRequisicion>(
-			0);
-	private Set<CuentaPagarMaterial> cuentaPagarMaterials_1 = new HashSet<CuentaPagarMaterial>(
 			0);
 
 	public Material() {
@@ -72,12 +64,8 @@ public class Material implements java.io.Serializable {
 			Integer cantidadPresentacion, int cantidadDisponible,
 			boolean reutilizable, Integer stockMinimo, Integer stockMaximo,
 			char estatus, Set<MaterialActividad> materialActividads,
-			Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials,
 			Set<RecepcionMaterial> recepcionMaterials,
-			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
-			Set<CuentaPagarMaterial> cuentaPagarMaterials,
-			Set<DetalleRequisicion> detalleRequisicions,
-			Set<CuentaPagarMaterial> cuentaPagarMaterials_1) {
+			Set<MaterialActividadPlanificada> materialActividadPlanificadas) {
 		this.codigoMaterial = codigoMaterial;
 		this.datoBasicoByCodigoTipoMaterial = datoBasicoByCodigoTipoMaterial;
 		this.almacen = almacen;
@@ -92,12 +80,8 @@ public class Material implements java.io.Serializable {
 		this.stockMaximo = stockMaximo;
 		this.estatus = estatus;
 		this.materialActividads = materialActividads;
-		this.documentoAcreedorMaterials = documentoAcreedorMaterials;
 		this.recepcionMaterials = recepcionMaterials;
 		this.materialActividadPlanificadas = materialActividadPlanificadas;
-		this.cuentaPagarMaterials = cuentaPagarMaterials;
-		this.detalleRequisicions = detalleRequisicions;
-		this.cuentaPagarMaterials_1 = cuentaPagarMaterials_1;
 	}
 
 	@Id
@@ -233,16 +217,6 @@ public class Material implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<DocumentoAcreedorMaterial> getDocumentoAcreedorMaterials() {
-		return this.documentoAcreedorMaterials;
-	}
-
-	public void setDocumentoAcreedorMaterials(
-			Set<DocumentoAcreedorMaterial> documentoAcreedorMaterials) {
-		this.documentoAcreedorMaterials = documentoAcreedorMaterials;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
 	public Set<RecepcionMaterial> getRecepcionMaterials() {
 		return this.recepcionMaterials;
 	}
@@ -259,36 +233,6 @@ public class Material implements java.io.Serializable {
 	public void setMaterialActividadPlanificadas(
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas) {
 		this.materialActividadPlanificadas = materialActividadPlanificadas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<CuentaPagarMaterial> getCuentaPagarMaterials() {
-		return this.cuentaPagarMaterials;
-	}
-
-	public void setCuentaPagarMaterials(
-			Set<CuentaPagarMaterial> cuentaPagarMaterials) {
-		this.cuentaPagarMaterials = cuentaPagarMaterials;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<DetalleRequisicion> getDetalleRequisicions() {
-		return this.detalleRequisicions;
-	}
-
-	public void setDetalleRequisicions(
-			Set<DetalleRequisicion> detalleRequisicions) {
-		this.detalleRequisicions = detalleRequisicions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
-	public Set<CuentaPagarMaterial> getCuentaPagarMaterials_1() {
-		return this.cuentaPagarMaterials_1;
-	}
-
-	public void setCuentaPagarMaterials_1(
-			Set<CuentaPagarMaterial> cuentaPagarMaterials_1) {
-		this.cuentaPagarMaterials_1 = cuentaPagarMaterials_1;
 	}
 
 }

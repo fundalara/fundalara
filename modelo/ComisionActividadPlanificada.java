@@ -1,13 +1,10 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,17 +15,17 @@ import javax.persistence.Table;
 public class ComisionActividadPlanificada implements java.io.Serializable {
 
 	private int codigoComisionActividadPlan;
-	private DatoBasico datoBasico;
-	private PlanificacionActividad planificacionActividad;
+	private int codigoPlanificacionActividad;
+	private int codigoComision;
 
 	public ComisionActividadPlanificada() {
 	}
 
 	public ComisionActividadPlanificada(int codigoComisionActividadPlan,
-			DatoBasico datoBasico, PlanificacionActividad planificacionActividad) {
+			int codigoPlanificacionActividad, int codigoComision) {
 		this.codigoComisionActividadPlan = codigoComisionActividadPlan;
-		this.datoBasico = datoBasico;
-		this.planificacionActividad = planificacionActividad;
+		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
+		this.codigoComision = codigoComision;
 	}
 
 	@Id
@@ -41,25 +38,22 @@ public class ComisionActividadPlanificada implements java.io.Serializable {
 		this.codigoComisionActividadPlan = codigoComisionActividadPlan;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_comision", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "codigo_planificacion_actividad", nullable = false)
+	public int getCodigoPlanificacionActividad() {
+		return this.codigoPlanificacionActividad;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCodigoPlanificacionActividad(int codigoPlanificacionActividad) {
+		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_planificacion_actividad", nullable = false)
-	public PlanificacionActividad getPlanificacionActividad() {
-		return this.planificacionActividad;
+	@Column(name = "codigo_comision", nullable = false)
+	public int getCodigoComision() {
+		return this.codigoComision;
 	}
 
-	public void setPlanificacionActividad(
-			PlanificacionActividad planificacionActividad) {
-		this.planificacionActividad = planificacionActividad;
+	public void setCodigoComision(int codigoComision) {
+		this.codigoComision = codigoComision;
 	}
 
 }

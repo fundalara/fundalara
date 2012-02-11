@@ -161,7 +161,7 @@
 
 																<listhead>
 																	<listheader
-																		label="Equipo"  />
+																		label="Equipos"  />
 																</listhead>
 																<listitem
 																	self="@{each=equipo}" value="@{equipo}">
@@ -194,7 +194,7 @@
 																	 mold="paging">
 																	<listhead>
 																		<listheader
-																			label="Equipo"  width="50px" />
+																			label="Equipos Inscritos"  width="50px" />
 																		<listheader
 																			label="Delegado"  width="50px" />
 																	</listhead>

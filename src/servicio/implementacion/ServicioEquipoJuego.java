@@ -27,7 +27,16 @@ public class ServicioEquipoJuego implements IServicioEquipoJuego {
 
 	@Override
 	public void agregar(EquipoJuego e) {
-		// TODO Auto-generated method stub
+		if (e.getCodigoEquipoJuego() == 0){
+			int codigo = daoEquipoJuego.listar(EquipoJuego.class).size()+1;
+			e.setCodigoEquipoJuego(codigo);
+			e.setGanado(false);
+			e.setCarrera(0);
+			e.setError(0);
+			e.setHit(0);
+			e.setEstatus('A');			
+		}
+		daoEquipoJuego.guardar(e);
 
 	}
 

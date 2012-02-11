@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 
 	private int codigoSolicitud;
 	private Actividad actividad;
-	private DatoBasico datoBasico;
+	private int codigoPrioridad;
 	private String descripcionActividad;
 	private char estatus;
 	private Date fechaSolicitud;
@@ -31,11 +31,11 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 	}
 
 	public SolicitudMantenimiento(int codigoSolicitud, Actividad actividad,
-			DatoBasico datoBasico, String descripcionActividad, char estatus,
+			int codigoPrioridad, String descripcionActividad, char estatus,
 			Date fechaSolicitud) {
 		this.codigoSolicitud = codigoSolicitud;
 		this.actividad = actividad;
-		this.datoBasico = datoBasico;
+		this.codigoPrioridad = codigoPrioridad;
 		this.descripcionActividad = descripcionActividad;
 		this.estatus = estatus;
 		this.fechaSolicitud = fechaSolicitud;
@@ -61,14 +61,13 @@ public class SolicitudMantenimiento implements java.io.Serializable {
 		this.actividad = actividad;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_prioridad", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "codigo_prioridad", nullable = false)
+	public int getCodigoPrioridad() {
+		return this.codigoPrioridad;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCodigoPrioridad(int codigoPrioridad) {
+		this.codigoPrioridad = codigoPrioridad;
 	}
 
 	@Column(name = "descripcion_actividad", nullable = false)

@@ -1,6 +1,12 @@
 package dao.general;
 
+import java.util.List;
+
+import modelo.Categoria;
+import modelo.Competencia;
 import modelo.DatoBasico;
+import modelo.FaseCompetencia;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,6 +48,18 @@ public class DaoJuego extends GenericDao {
 		Criteria c = session.createCriteria(Juego.class);
 		c.add(Restrictions.eq("codigoJuego", codigo));
 		return (Juego) c.list().get(0);
+
+	}
+
+	public List<Juego> listarJuegosPorFaseCompetenciaYCategoria(
+			Competencia competencia, FaseCompetencia faseCompetencia,Categoria categoria) {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Juego.class);
+		c.add(Restrictions.eq("competencia", competencia));
+		c.add(Restrictions.eq("faseCompetencia", faseCompetencia));
+		return c.list();
 
 	}
 }

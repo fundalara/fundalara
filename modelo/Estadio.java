@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +19,7 @@ import javax.persistence.Table;
 public class Estadio implements java.io.Serializable {
 
 	private int codigoEstadio;
-	private DatoBasico datoBasico;
+	private int codigoParroquia;
 	private String nombre;
 	private String direccion;
 	private char estatus;
@@ -30,19 +28,19 @@ public class Estadio implements java.io.Serializable {
 	public Estadio() {
 	}
 
-	public Estadio(int codigoEstadio, DatoBasico datoBasico, String nombre,
+	public Estadio(int codigoEstadio, int codigoParroquia, String nombre,
 			String direccion, char estatus) {
 		this.codigoEstadio = codigoEstadio;
-		this.datoBasico = datoBasico;
+		this.codigoParroquia = codigoParroquia;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.estatus = estatus;
 	}
 
-	public Estadio(int codigoEstadio, DatoBasico datoBasico, String nombre,
+	public Estadio(int codigoEstadio, int codigoParroquia, String nombre,
 			String direccion, char estatus, Set<Juego> juegos) {
 		this.codigoEstadio = codigoEstadio;
-		this.datoBasico = datoBasico;
+		this.codigoParroquia = codigoParroquia;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.estatus = estatus;
@@ -59,14 +57,13 @@ public class Estadio implements java.io.Serializable {
 		this.codigoEstadio = codigoEstadio;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_parroquia", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "codigo_parroquia", nullable = false)
+	public int getCodigoParroquia() {
+		return this.codigoParroquia;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCodigoParroquia(int codigoParroquia) {
+		this.codigoParroquia = codigoParroquia;
 	}
 
 	@Column(name = "nombre", nullable = false)

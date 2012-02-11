@@ -71,4 +71,8 @@ public class ServicioDivisa implements IServicioDivisa {
 		return daoDivisa.listarDivisaForanea();
 		
 	}
+	
+	public List<Divisa> listarDivisasPorFiltro(String dato){
+		return daoDivisa.listarDivisasPorFiltro(dato);
+	}
 }

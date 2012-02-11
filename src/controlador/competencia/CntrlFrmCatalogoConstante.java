@@ -7,6 +7,7 @@ import modelo.ConstanteCategoria;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
@@ -23,10 +24,8 @@ public class CntrlFrmCatalogoConstante extends GenericForwardComposer {
 	ServicioConstante servicioConstante;
 	ServicioConstanteCategoria servicioConstanteCategoria;
 	List<Constante> constantes;
-	//List<Categoria> constanteCategoria;
 	Listbox lsbxConstantes;
 	Component catalogo;
-	//ConstanteCategoria constantesCategorias;
 	
 	
 	public void doAfterCompose(Component c) throws Exception {
@@ -68,13 +67,14 @@ public class CntrlFrmCatalogoConstante extends GenericForwardComposer {
 	}
    
 	public void onCtrlKey$txtFiltro(){
-		System.out.println("changing...");
+	
 	}
 	
-	public void onChanging$txtFiltro(){
+	
+	public void onChanging$txtFiltro(InputEvent event ){
 		
-		
-		//divisas = servicioDivisa.filtar(txtFiltro.getText()+"%");
+		String dato = event.getValue().toUpperCase();
+		constantes = servicioConstante.listarConstantesPorFiltro(dato);
 		binder.loadAll();
 	}
 	

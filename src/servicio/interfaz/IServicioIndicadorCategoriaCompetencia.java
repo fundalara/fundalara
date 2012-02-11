@@ -25,5 +25,7 @@ public interface IServicioIndicadorCategoriaCompetencia {
 
 	public abstract List<IndicadorCategoriaCompetencia> listarIndicadoresSencillosIndividuales(
 			Categoria c, Competencia comp, DatoBasico modalidad);
+	
+	public abstract List<IndicadorCategoriaCompetencia> listarCompetenciaIndicador (Indicador i);
 
 }

@@ -1,6 +1,6 @@
 <?page title="REGISTRO DE INDICADORES" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root= "winRegistroIndicador"?>
 
 <zk>
 	<div align="center">
@@ -97,7 +97,7 @@
 									<vbox width="50%">
 										<label value="Indicador "></label>
 										<combobox id="cmbIndicador"
-											disabled="true" cols="13" value="--Seleccione--"
+											 cols="13" value="--Seleccione--"
 											model="@{cntrl.listIndicador}">
 											<comboitem
 												self="@{each=Indicador}" label="@{Indicador.nombre}"
@@ -105,7 +105,7 @@
 										</combobox>
 										<label value="Constante "></label>
 										<combobox id="cmbConstante"
-											disabled="true" cols="13" value="--Seleccione--"
+											cols="13" value="--Seleccione--"
 											model="@{cntrl.listConstante}">
 											<comboitem
 												self="@{each=Constante}" label="@{Constante.nombre}"

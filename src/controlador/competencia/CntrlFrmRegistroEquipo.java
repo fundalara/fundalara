@@ -309,6 +309,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		CategoriaCompetencia c1 = (CategoriaCompetencia) li.getValue();
 		equiposforaneos = servicioEquipo.buscarEquiposForaneosPorCategoria(c1
 				.getCategoria().getCodigoCategoria());
+		System.out.println(servicioEquipo.buscarEquiposForaneosPorCategoria(c1
+				.getCategoria().getCodigoCategoria()).size());
 		binder.loadAll();
 		// equipocompetenciaforaneo = new ArrayList<EquipoCompetencia>();
 	}

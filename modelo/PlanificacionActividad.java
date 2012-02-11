@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 	private int codigoPlanificacionActividad;
 	private DatoBasico datoBasico;
 	private InstalacionUtilizada instalacionUtilizada;
+	private ComisionFamiliar comisionFamiliar;
 	private Personal personal;
 	private char estatus;
 	private boolean actividadPeriodico;
@@ -31,12 +32,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 	private String descripcionInstalacion;
 	private Set<MaterialActividadPlanificada> materialActividadPlanificadas = new HashSet<MaterialActividadPlanificada>(
 			0);
-	private Set<Actividad> actividads = new HashSet<Actividad>(0);
-	private Set<PersonalActividadPlanificada> personalActividadPlanificadas = new HashSet<PersonalActividadPlanificada>(
-			0);
 	private Set<Periodicidad> periodicidads = new HashSet<Periodicidad>(0);
-	private Set<ComisionActividadPlanificada> comisionActividadPlanificadas = new HashSet<ComisionActividadPlanificada>(
-			0);
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
 
@@ -56,18 +52,16 @@ public class PlanificacionActividad implements java.io.Serializable {
 
 	public PlanificacionActividad(int codigoPlanificacionActividad,
 			DatoBasico datoBasico, InstalacionUtilizada instalacionUtilizada,
-			Personal personal, char estatus, boolean actividadPeriodico,
-			boolean actividadPlantilla, String descripcion,
-			String descripcionInstalacion,
+			ComisionFamiliar comisionFamiliar, Personal personal, char estatus,
+			boolean actividadPeriodico, boolean actividadPlantilla,
+			String descripcion, String descripcionInstalacion,
 			Set<MaterialActividadPlanificada> materialActividadPlanificadas,
-			Set<Actividad> actividads,
-			Set<PersonalActividadPlanificada> personalActividadPlanificadas,
 			Set<Periodicidad> periodicidads,
-			Set<ComisionActividadPlanificada> comisionActividadPlanificadas,
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.codigoPlanificacionActividad = codigoPlanificacionActividad;
 		this.datoBasico = datoBasico;
 		this.instalacionUtilizada = instalacionUtilizada;
+		this.comisionFamiliar = comisionFamiliar;
 		this.personal = personal;
 		this.estatus = estatus;
 		this.actividadPeriodico = actividadPeriodico;
@@ -75,10 +69,7 @@ public class PlanificacionActividad implements java.io.Serializable {
 		this.descripcion = descripcion;
 		this.descripcionInstalacion = descripcionInstalacion;
 		this.materialActividadPlanificadas = materialActividadPlanificadas;
-		this.actividads = actividads;
-		this.personalActividadPlanificadas = personalActividadPlanificadas;
 		this.periodicidads = periodicidads;
-		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
 	}
 
@@ -111,6 +102,16 @@ public class PlanificacionActividad implements java.io.Serializable {
 	public void setInstalacionUtilizada(
 			InstalacionUtilizada instalacionUtilizada) {
 		this.instalacionUtilizada = instalacionUtilizada;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_comision_familiar")
+	public ComisionFamiliar getComisionFamiliar() {
+		return this.comisionFamiliar;
+	}
+
+	public void setComisionFamiliar(ComisionFamiliar comisionFamiliar) {
+		this.comisionFamiliar = comisionFamiliar;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -179,41 +180,12 @@ public class PlanificacionActividad implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
-	public Set<Actividad> getActividads() {
-		return this.actividads;
-	}
-
-	public void setActividads(Set<Actividad> actividads) {
-		this.actividads = actividads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
-	public Set<PersonalActividadPlanificada> getPersonalActividadPlanificadas() {
-		return this.personalActividadPlanificadas;
-	}
-
-	public void setPersonalActividadPlanificadas(
-			Set<PersonalActividadPlanificada> personalActividadPlanificadas) {
-		this.personalActividadPlanificadas = personalActividadPlanificadas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
 	public Set<Periodicidad> getPeriodicidads() {
 		return this.periodicidads;
 	}
 
 	public void setPeriodicidads(Set<Periodicidad> periodicidads) {
 		this.periodicidads = periodicidads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")
-	public Set<ComisionActividadPlanificada> getComisionActividadPlanificadas() {
-		return this.comisionActividadPlanificadas;
-	}
-
-	public void setComisionActividadPlanificadas(
-			Set<ComisionActividadPlanificada> comisionActividadPlanificadas) {
-		this.comisionActividadPlanificadas = comisionActividadPlanificadas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planificacionActividad")

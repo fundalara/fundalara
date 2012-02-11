@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,19 +20,19 @@ public class HorarioPlanTemporada implements java.io.Serializable {
 	private int codigoHorarioPlan;
 	private PlanTemporada planTemporada;
 	private Horario horario;
-	private Equipo equipo;
+	private int codigoEquipo;
 	private char estatus;
 
 	public HorarioPlanTemporada() {
 	}
 
 	public HorarioPlanTemporada(int codigoHorarioPlan,
-			PlanTemporada planTemporada, Horario horario, Equipo equipo,
+			PlanTemporada planTemporada, Horario horario, int codigoEquipo,
 			char estatus) {
 		this.codigoHorarioPlan = codigoHorarioPlan;
 		this.planTemporada = planTemporada;
 		this.horario = horario;
-		this.equipo = equipo;
+		this.codigoEquipo = codigoEquipo;
 		this.estatus = estatus;
 	}
 
@@ -66,14 +66,13 @@ public class HorarioPlanTemporada implements java.io.Serializable {
 		this.horario = horario;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_equipo", nullable = false)
-	public Equipo getEquipo() {
-		return this.equipo;
+	@Column(name = "codigo_equipo", nullable = false)
+	public int getCodigoEquipo() {
+		return this.codigoEquipo;
 	}
 
-	public void setEquipo(Equipo equipo) {
-		this.equipo = equipo;
+	public void setCodigoEquipo(int codigoEquipo) {
+		this.codigoEquipo = codigoEquipo;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +25,7 @@ public class DatoMedico implements java.io.Serializable {
 
 	private int codigoDatoMedico;
 	private Medico medico;
-	private Jugador jugador;
+	private String cedulaRif;
 	private Date fechaInforme;
 	private Date fechaReincorporacion;
 	private String observacion;
@@ -38,21 +38,21 @@ public class DatoMedico implements java.io.Serializable {
 	public DatoMedico() {
 	}
 
-	public DatoMedico(int codigoDatoMedico, Medico medico, Jugador jugador,
+	public DatoMedico(int codigoDatoMedico, Medico medico, String cedulaRif,
 			char estatus) {
 		this.codigoDatoMedico = codigoDatoMedico;
 		this.medico = medico;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
 		this.estatus = estatus;
 	}
 
-	public DatoMedico(int codigoDatoMedico, Medico medico, Jugador jugador,
+	public DatoMedico(int codigoDatoMedico, Medico medico, String cedulaRif,
 			Date fechaInforme, Date fechaReincorporacion, String observacion,
 			char estatus, Set<AfeccionJugador> afeccionJugadors,
 			Set<DocumentoMedico> documentoMedicos) {
 		this.codigoDatoMedico = codigoDatoMedico;
 		this.medico = medico;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
 		this.fechaInforme = fechaInforme;
 		this.fechaReincorporacion = fechaReincorporacion;
 		this.observacion = observacion;
@@ -81,14 +81,13 @@ public class DatoMedico implements java.io.Serializable {
 		this.medico = medico;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false)
-	public Jugador getJugador() {
-		return this.jugador;
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
 	}
 
 	@Temporal(TemporalType.DATE)

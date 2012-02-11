@@ -30,11 +30,10 @@ public class DaoFaseCompetencia extends GenericDao {
 	}
 	
 	public List<FaseCompetencia> listarFaseCompetencia(Competencia cp){
-		System.out.println(cp.getCodigoCompetencia());
+
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
-		Criteria c = session.createCriteria(FaseCompetencia.class);
-		
+		Criteria c = session.createCriteria(FaseCompetencia.class);		
 		c.add(Restrictions.eq("estatus",'A'));
 		c.add(Restrictions.eq("competencia",cp));
 		

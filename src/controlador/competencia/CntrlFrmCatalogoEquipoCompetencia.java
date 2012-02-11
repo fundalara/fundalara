@@ -11,6 +11,8 @@ import modelo.Competencia;
 import modelo.Divisa;
 import modelo.Equipo;
 import modelo.EquipoCompetencia;
+import modelo.EquipoFaseCompetencia;
+import modelo.FaseCompetencia;
 import modelo.JugadorForaneo;
 
 import org.zkoss.zk.ui.Component;
@@ -25,11 +27,14 @@ import org.zkoss.zul.Textbox;
 
 
 import servicio.implementacion.ServicioEquipoCompetencia;
+import servicio.implementacion.ServicioEquipoFaseCompetencia;
+import servicio.implementacion.ServicioFaseCompetencia;
 
 public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	//Servicios utilizados
 	ServicioEquipoCompetencia servicioEquipoCompetencia;
-	List<EquipoCompetencia> equipoCompetencia;
+	ServicioEquipoFaseCompetencia servicioEquipoFaseCompetencia;
+	List<EquipoFaseCompetencia> equipoCompetencia;
 	
 	//Atributos
 	AnnotateDataBinder binder;
@@ -40,20 +45,22 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	int id=0;
 	int cod=0;
 	Categoria categ;
-
+    FaseCompetencia fase;
 	
 	  //SETTERS Y GETTERS...
 	
-	public List<EquipoCompetencia> getEquipoCompetencia() {
-		return equipoCompetencia ;
-	}
-
-	public void setEquipoCompetencia(List<EquipoCompetencia> equipoCompetencia) {
-		this.equipoCompetencia = equipoCompetencia;
-	}
+	
 
 	public Equipo getEquipo() {
 		return equipo;
+	}
+
+	public List<EquipoFaseCompetencia> getEquipoCompetencia() {
+		return equipoCompetencia;
+	}
+
+	public void setEquipoCompetencia(List<EquipoFaseCompetencia> equipoCompetencia) {
+		this.equipoCompetencia = equipoCompetencia;
 	}
 
 	public void setEquipo(Equipo equipo) {
@@ -72,8 +79,8 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	public void onCreate$frmCatalogoEC(){
 		Competencia competencia = (Competencia) catalogo.getVariable("competencia", false);
 		categ = (Categoria) catalogo.getVariable("categoria",false);
-		//equipoCompetencia = ConvertirConjuntoALista(competencia.getEquipoCompetencias());
-		equipoCompetencia = servicioEquipoCompetencia.listarEquipoPorCategoria(categ);
+		fase = (FaseCompetencia) catalogo.getVariable("fase", false);
+		equipoCompetencia = servicioEquipoFaseCompetencia.buscarEquipoPorFaseYCategoria(fase, categ);
 		id = (Integer) catalogo.getVariable("id",false);
 		EquipoCompetencia aux = (EquipoCompetencia) catalogo.getVariable("equipoCompetencia",false);
 		if (aux.getCodigoEquipoCompetencia() != 0){
@@ -85,7 +92,7 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	
 	public void sacar(EquipoCompetencia aux){	
 		for (int i=0;i<equipoCompetencia.size();i++){
-			if (aux.getCodigoEquipoCompetencia() == equipoCompetencia.get(i).getCodigoEquipoCompetencia()){
+			if (aux.getCodigoEquipoCompetencia() == equipoCompetencia.get(i).getEquipoCompetencia().getCodigoEquipoCompetencia()){
                   equipoCompetencia.remove(i);
 			}
 		}
@@ -110,7 +117,7 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 		//Se comprueba que se haya seleccionado un elemento de la lista
 		if (lsbxEquipoCompetencia.getSelectedIndex() != -1) {
 			//se obtiene la divisa seleccionada
-			EquipoCompetencia ec = equipoCompetencia.get(lsbxEquipoCompetencia.getSelectedIndex());
+			EquipoCompetencia ec = equipoCompetencia.get(lsbxEquipoCompetencia.getSelectedIndex()).getEquipoCompetencia();
 			//se obtiene la referencia del formulario
 			Component formulario = (Component) catalogo.getVariable("formulario",false);
             //se le asigna el objeto divisa al formulario

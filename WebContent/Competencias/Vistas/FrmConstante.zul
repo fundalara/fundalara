@@ -17,7 +17,7 @@
 						<row spans="0,4" style="border:none" align="left">
 							<label value="Abreviatura"></label>
 							<textbox id="txtAbreviatura"
-									 value="@{cntrl.constante.abreviatura }" width="40%"></textbox>
+									 value="@{cntrl.constante.abreviatura }" width="60%"></textbox>
 							<label value="Nombre"></label>
 							<textbox id="txtNombre" 
 									 value="@{cntrl.constante.nombre }" width="80%"></textbox>
@@ -29,7 +29,7 @@
 		</panel>
 		<panel title="Selección de Categorías">
 			<panelchildren>
-				<grid>
+				<grid oddRowSclass="none">
 					<columns>
 						<column label="" width="35%" style="border-style:none" />
 						<column label="" width="10%" style="border-style:none" align="left" />
@@ -41,13 +41,14 @@
 									 checkmark="true" multiple="true" 
 									 model="@{cntrl.categorias }"
 									 mold="paging" pageSize="10"
-									 style="margin-top:5px" height="200px">
+									 style="margin-top:5px" height="200px"
+									 oddRowSclass="none">
 								<listhead>									
 									<listheader label="Categorías" sort="auto">
 									</listheader>
 								</listhead>
 								<listitem self="@{each=categoria}" value="@{categoria }">
-									<listcell label="@{categoria.nombre }"></listcell> 
+									<listcell label="@{categoria.nombre}"></listcell> 
 								</listitem>								
 							</listbox>  
 							<grid>
@@ -62,18 +63,19 @@
 							</grid>
 							<listbox id="lsbxCategoriasSeleccionadas" 
 									checkmark="true" multiple="true" 
-									model="@{cntrl.categoriasSeleccionadas }"
+									model="@{cntrl.categoriasSeleccionadas}"
 									mold="paging" pageSize="10"
-									style="margin-top:5px" height="200px">
+									style="margin-top:5px" height="200px"
+									oddRowSclass="none">
 								<listhead>
-									<listheader label="Categorías Seleccionadas" sort="auto" width="50%"></listheader>
-									<listheader label="Valores" sort="auto" width="30%"></listheader>
+									<listheader label="Categorías Seleccionadas" width="50%"></listheader>
+									<listheader label="Valores" width="30%"></listheader>
 								</listhead>
 								<listitem self="@{each=categoria }" value="@{categoria}">
-									<listcell label="@{categoria.categoria.nombre }" ></listcell>
+									<listcell label="@{categoria.categoria.nombre}" ></listcell>
 									<listcell>
-										<textbox id="txtValor" width="50%"
-												maxlength="2" value="@{categoria.valor }"></textbox>									
+										<intbox id="itbValor" 
+												maxlength="3" value="@{categoria.valor}"></intbox>
 									</listcell>
 								</listitem>	
 							</listbox>  

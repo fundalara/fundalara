@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,9 +19,9 @@ import javax.persistence.Table;
 public class Indicador implements java.io.Serializable {
 
 	private int codigoIndicador;
-	private DatoBasico datoBasicoByCodigoModalidad;
-	private DatoBasico datoBasicoByCodigoTipoIndicador;
-	private DatoBasico datoBasicoByCodigoMedicion;
+	private int codigoMedicion;
+	private int codigoModalidad;
+	private int codigoTipoIndicador;
 	private String nombre;
 	private String abreviatura;
 	private String formula;
@@ -34,30 +32,26 @@ public class Indicador implements java.io.Serializable {
 	public Indicador() {
 	}
 
-	public Indicador(int codigoIndicador,
-			DatoBasico datoBasicoByCodigoModalidad,
-			DatoBasico datoBasicoByCodigoTipoIndicador,
-			DatoBasico datoBasicoByCodigoMedicion, String nombre,
+	public Indicador(int codigoIndicador, int codigoMedicion,
+			int codigoModalidad, int codigoTipoIndicador, String nombre,
 			String abreviatura, char estatus) {
 		this.codigoIndicador = codigoIndicador;
-		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
-		this.datoBasicoByCodigoTipoIndicador = datoBasicoByCodigoTipoIndicador;
-		this.datoBasicoByCodigoMedicion = datoBasicoByCodigoMedicion;
+		this.codigoMedicion = codigoMedicion;
+		this.codigoModalidad = codigoModalidad;
+		this.codigoTipoIndicador = codigoTipoIndicador;
 		this.nombre = nombre;
 		this.abreviatura = abreviatura;
 		this.estatus = estatus;
 	}
 
-	public Indicador(int codigoIndicador,
-			DatoBasico datoBasicoByCodigoModalidad,
-			DatoBasico datoBasicoByCodigoTipoIndicador,
-			DatoBasico datoBasicoByCodigoMedicion, String nombre,
+	public Indicador(int codigoIndicador, int codigoMedicion,
+			int codigoModalidad, int codigoTipoIndicador, String nombre,
 			String abreviatura, String formula, char estatus,
 			Set<IndicadorCategoriaCompetencia> indicadorCategoriaCompetencias) {
 		this.codigoIndicador = codigoIndicador;
-		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
-		this.datoBasicoByCodigoTipoIndicador = datoBasicoByCodigoTipoIndicador;
-		this.datoBasicoByCodigoMedicion = datoBasicoByCodigoMedicion;
+		this.codigoMedicion = codigoMedicion;
+		this.codigoModalidad = codigoModalidad;
+		this.codigoTipoIndicador = codigoTipoIndicador;
 		this.nombre = nombre;
 		this.abreviatura = abreviatura;
 		this.formula = formula;
@@ -75,37 +69,31 @@ public class Indicador implements java.io.Serializable {
 		this.codigoIndicador = codigoIndicador;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_modalidad", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoModalidad() {
-		return this.datoBasicoByCodigoModalidad;
+	@Column(name = "codigo_medicion", nullable = false)
+	public int getCodigoMedicion() {
+		return this.codigoMedicion;
 	}
 
-	public void setDatoBasicoByCodigoModalidad(
-			DatoBasico datoBasicoByCodigoModalidad) {
-		this.datoBasicoByCodigoModalidad = datoBasicoByCodigoModalidad;
+	public void setCodigoMedicion(int codigoMedicion) {
+		this.codigoMedicion = codigoMedicion;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_indicador", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoTipoIndicador() {
-		return this.datoBasicoByCodigoTipoIndicador;
+	@Column(name = "codigo_modalidad", nullable = false)
+	public int getCodigoModalidad() {
+		return this.codigoModalidad;
 	}
 
-	public void setDatoBasicoByCodigoTipoIndicador(
-			DatoBasico datoBasicoByCodigoTipoIndicador) {
-		this.datoBasicoByCodigoTipoIndicador = datoBasicoByCodigoTipoIndicador;
+	public void setCodigoModalidad(int codigoModalidad) {
+		this.codigoModalidad = codigoModalidad;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_medicion", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoMedicion() {
-		return this.datoBasicoByCodigoMedicion;
+	@Column(name = "codigo_tipo_indicador", nullable = false)
+	public int getCodigoTipoIndicador() {
+		return this.codigoTipoIndicador;
 	}
 
-	public void setDatoBasicoByCodigoMedicion(
-			DatoBasico datoBasicoByCodigoMedicion) {
-		this.datoBasicoByCodigoMedicion = datoBasicoByCodigoMedicion;
+	public void setCodigoTipoIndicador(int codigoTipoIndicador) {
+		this.codigoTipoIndicador = codigoTipoIndicador;
 	}
 
 	@Column(name = "nombre", nullable = false)

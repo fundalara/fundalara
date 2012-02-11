@@ -809,5 +809,16 @@
 	<bean id="servicioInstalacionUtilizada" class="servicio.implementacion.ServicioInstalacionUtilizada">
 		<property name="daoInstalacionUtilizada" ref="daoInstalacionUtilizada"></property>
 	</bean>
+	
+	<bean id="daoEquipoFaseCompetencia" class="dao.general.DaoEquipoFaseCompetencia" />
+	<bean id="servicioEquipoFaseCompetencia" class="servicio.implementacion.ServicioEquipoFaseCompetencia">
+		<property name="daoEquipoFaseCompetencia" ref="daoEquipoFaseCompetencia"></property>
+	</bean>
+	
+	<bean id="daoCategoriaLiga" class="dao.general.DaoCategoriaLiga" />
+	<bean id="servicioCategoriaLiga" class="servicio.implementacion.ServicioCategoriaLiga">
+		<property name="daoCategoriaLiga" ref="daoCategoriaLiga"></property>
+	</bean>
+	
 
 </beans>

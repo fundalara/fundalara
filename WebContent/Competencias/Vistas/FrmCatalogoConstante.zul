@@ -12,8 +12,7 @@
 				
 					<div style="margin-top:5px">
 					<label value="Filtro"></label>
-					<textbox></textbox>
-					<button label="Buscar"></button>
+					<textbox id="txtFiltro"></textbox>
 					</div>
 					<listbox id="lsbxConstantes" mold="paging" width="100%"
 							 model="@{cntrl.constantes }" pageSize="10" 

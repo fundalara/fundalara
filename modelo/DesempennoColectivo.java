@@ -1,13 +1,11 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,39 +17,46 @@ import javax.persistence.Table;
 @Table(name = "desempenno_colectivo", schema = "public")
 public class DesempennoColectivo implements java.io.Serializable {
 
-	private DesempennoColectivoId id;
+	private int codigoDesempennoColectivo;
 	private IndicadorCategoriaCompetencia indicadorCategoriaCompetencia;
 	private EquipoJuego equipoJuego;
 	private float valor;
-	private int inning;
+	private Integer inning;
 
 	public DesempennoColectivo() {
 	}
 
-	public DesempennoColectivo(DesempennoColectivoId id,
+	public DesempennoColectivo(int codigoDesempennoColectivo,
 			IndicadorCategoriaCompetencia indicadorCategoriaCompetencia,
-			EquipoJuego equipoJuego, float valor, int inning) {
-		this.id = id;
+			EquipoJuego equipoJuego, float valor) {
+		this.codigoDesempennoColectivo = codigoDesempennoColectivo;
+		this.indicadorCategoriaCompetencia = indicadorCategoriaCompetencia;
+		this.equipoJuego = equipoJuego;
+		this.valor = valor;
+	}
+
+	public DesempennoColectivo(int codigoDesempennoColectivo,
+			IndicadorCategoriaCompetencia indicadorCategoriaCompetencia,
+			EquipoJuego equipoJuego, float valor, Integer inning) {
+		this.codigoDesempennoColectivo = codigoDesempennoColectivo;
 		this.indicadorCategoriaCompetencia = indicadorCategoriaCompetencia;
 		this.equipoJuego = equipoJuego;
 		this.valor = valor;
 		this.inning = inning;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codigoEquipoJuego", column = @Column(name = "codigo_equipo_juego", nullable = false)),
-			@AttributeOverride(name = "codigoIndicadorCategoriaCompetencia", column = @Column(name = "codigo_indicador_categoria_competencia", nullable = false)) })
-	public DesempennoColectivoId getId() {
-		return this.id;
+	@Id
+	@Column(name = "codigo_desempenno_colectivo", unique = true, nullable = false)
+	public int getCodigoDesempennoColectivo() {
+		return this.codigoDesempennoColectivo;
 	}
 
-	public void setId(DesempennoColectivoId id) {
-		this.id = id;
+	public void setCodigoDesempennoColectivo(int codigoDesempennoColectivo) {
+		this.codigoDesempennoColectivo = codigoDesempennoColectivo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_indicador_categoria_competencia", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_indicador_categoria_competencia", nullable = false)
 	public IndicadorCategoriaCompetencia getIndicadorCategoriaCompetencia() {
 		return this.indicadorCategoriaCompetencia;
 	}
@@ -62,7 +67,7 @@ public class DesempennoColectivo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_equipo_juego", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "codigo_equipo_juego", nullable = false)
 	public EquipoJuego getEquipoJuego() {
 		return this.equipoJuego;
 	}
@@ -80,12 +85,12 @@ public class DesempennoColectivo implements java.io.Serializable {
 		this.valor = valor;
 	}
 
-	@Column(name = "inning", nullable = false)
-	public int getInning() {
+	@Column(name = "inning")
+	public Integer getInning() {
 		return this.inning;
 	}
 
-	public void setInning(int inning) {
+	public void setInning(Integer inning) {
 		this.inning = inning;
 	}
 

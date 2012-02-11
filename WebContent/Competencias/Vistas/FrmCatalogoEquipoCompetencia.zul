@@ -27,10 +27,10 @@
 						
 						</listhead>
 
-						<listitem self="@{each=EquipoCompetencia}">
-							<listcell label="@{EquipoCompetencia.equipo.nombre}"></listcell>
-							<listcell label="@{EquipoCompetencia.equipo.categoria.nombre}"></listcell>
-							<listcell label="@{EquipoCompetencia.equipo.divisa.nombre}"></listcell>
+						<listitem self="@{each=equipoFaseCompetencia}">
+							<listcell label="@{equipoFaseCompetencia.equipoCompetencia.equipo.nombre}"></listcell>
+							<listcell label="@{equipoFaseCompetencia.equipoCompetencia.equipo.categoria.nombre}"></listcell>
+							<listcell label="@{equipoFaseCompetencia.equipoCompetencia.equipo.divisa.nombre}"></listcell>
 						
 						</listitem>
 

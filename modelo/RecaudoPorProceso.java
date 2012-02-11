@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,9 +19,9 @@ import javax.persistence.Table;
 public class RecaudoPorProceso implements java.io.Serializable {
 
 	private int codigoRecaudoPorProceso;
-	private DatoBasico datoBasicoByCodigoDocumento;
-	private DatoBasico datoBasicoByCodigoImportancia;
-	private DatoBasico datoBasicoByCodigoProceso;
+	private int codigoImportancia;
+	private int codigoProceso;
+	private int codigoDocumento;
 	private Integer cantidad;
 	private char estatus;
 	private Set<DocumentoEntregado> documentoEntregados = new HashSet<DocumentoEntregado>(
@@ -33,25 +31,23 @@ public class RecaudoPorProceso implements java.io.Serializable {
 	}
 
 	public RecaudoPorProceso(int codigoRecaudoPorProceso,
-			DatoBasico datoBasicoByCodigoDocumento,
-			DatoBasico datoBasicoByCodigoImportancia,
-			DatoBasico datoBasicoByCodigoProceso, char estatus) {
+			int codigoImportancia, int codigoProceso, int codigoDocumento,
+			char estatus) {
 		this.codigoRecaudoPorProceso = codigoRecaudoPorProceso;
-		this.datoBasicoByCodigoDocumento = datoBasicoByCodigoDocumento;
-		this.datoBasicoByCodigoImportancia = datoBasicoByCodigoImportancia;
-		this.datoBasicoByCodigoProceso = datoBasicoByCodigoProceso;
+		this.codigoImportancia = codigoImportancia;
+		this.codigoProceso = codigoProceso;
+		this.codigoDocumento = codigoDocumento;
 		this.estatus = estatus;
 	}
 
 	public RecaudoPorProceso(int codigoRecaudoPorProceso,
-			DatoBasico datoBasicoByCodigoDocumento,
-			DatoBasico datoBasicoByCodigoImportancia,
-			DatoBasico datoBasicoByCodigoProceso, Integer cantidad,
-			char estatus, Set<DocumentoEntregado> documentoEntregados) {
+			int codigoImportancia, int codigoProceso, int codigoDocumento,
+			Integer cantidad, char estatus,
+			Set<DocumentoEntregado> documentoEntregados) {
 		this.codigoRecaudoPorProceso = codigoRecaudoPorProceso;
-		this.datoBasicoByCodigoDocumento = datoBasicoByCodigoDocumento;
-		this.datoBasicoByCodigoImportancia = datoBasicoByCodigoImportancia;
-		this.datoBasicoByCodigoProceso = datoBasicoByCodigoProceso;
+		this.codigoImportancia = codigoImportancia;
+		this.codigoProceso = codigoProceso;
+		this.codigoDocumento = codigoDocumento;
 		this.cantidad = cantidad;
 		this.estatus = estatus;
 		this.documentoEntregados = documentoEntregados;
@@ -67,37 +63,31 @@ public class RecaudoPorProceso implements java.io.Serializable {
 		this.codigoRecaudoPorProceso = codigoRecaudoPorProceso;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_documento", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoDocumento() {
-		return this.datoBasicoByCodigoDocumento;
+	@Column(name = "codigo_importancia", nullable = false)
+	public int getCodigoImportancia() {
+		return this.codigoImportancia;
 	}
 
-	public void setDatoBasicoByCodigoDocumento(
-			DatoBasico datoBasicoByCodigoDocumento) {
-		this.datoBasicoByCodigoDocumento = datoBasicoByCodigoDocumento;
+	public void setCodigoImportancia(int codigoImportancia) {
+		this.codigoImportancia = codigoImportancia;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_importancia", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoImportancia() {
-		return this.datoBasicoByCodigoImportancia;
+	@Column(name = "codigo_proceso", nullable = false)
+	public int getCodigoProceso() {
+		return this.codigoProceso;
 	}
 
-	public void setDatoBasicoByCodigoImportancia(
-			DatoBasico datoBasicoByCodigoImportancia) {
-		this.datoBasicoByCodigoImportancia = datoBasicoByCodigoImportancia;
+	public void setCodigoProceso(int codigoProceso) {
+		this.codigoProceso = codigoProceso;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_proceso", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoProceso() {
-		return this.datoBasicoByCodigoProceso;
+	@Column(name = "codigo_documento", nullable = false)
+	public int getCodigoDocumento() {
+		return this.codigoDocumento;
 	}
 
-	public void setDatoBasicoByCodigoProceso(
-			DatoBasico datoBasicoByCodigoProceso) {
-		this.datoBasicoByCodigoProceso = datoBasicoByCodigoProceso;
+	public void setCodigoDocumento(int codigoDocumento) {
+		this.codigoDocumento = codigoDocumento;
 	}
 
 	@Column(name = "cantidad")

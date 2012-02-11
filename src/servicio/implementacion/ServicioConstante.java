@@ -91,5 +91,10 @@ public class ServicioConstante implements IServicioConstante {
 		// TODO Auto-generated method stub
 		return daoConstante.listarConstantesActivos();
 	}
+	
+	@Override
+	public List<Constante> listarConstantesPorFiltro(String dato){
+		return daoConstante.listarConstantesPorFiltro(dato);
+	}
 
 }

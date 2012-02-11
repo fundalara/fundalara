@@ -10,7 +10,7 @@
 				<panelchildren>
 					<div style="margin-top:5px">
 						<label value="Filtro"></label>
-						<textbox></textbox>
+						<textbox id="txtFiltro"></textbox>
 					</div>
 					<listbox id="lsbxUmpire" mold="paging" pageSize="10"
 						style="margin-top:5px" model="@{cntrl.umpires}" height="240px"  width="100%">

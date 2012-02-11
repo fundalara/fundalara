@@ -7,6 +7,7 @@ import servicio.interfaz.IServicioLiga;
 import dao.general.DaoLiga;
 
 import modelo.Divisa;
+import modelo.Estadio;
 import modelo.Liga;
 
 public class ServicioLiga implements IServicioLiga {
@@ -37,7 +38,9 @@ public class ServicioLiga implements IServicioLiga {
 			   l.setCodigoLiga(cod);
 			   l.setEstatus('A');
 			}
+		System.out.println("Hola2");
 			daoLiga.guardar(l);
+			System.out.println("Hola2");
 	}
 
 	/*@Override
@@ -62,4 +65,14 @@ public class ServicioLiga implements IServicioLiga {
 		return daoLiga.listarActivos(Liga.class);
 	}
 
+	public List<Liga> listarLigasPorFiltro(String dato){
+		return daoLiga.listarLigasPorFiltro(dato);
+	}
+
+	
+	@Override
+	public List<Liga> filtrar(String cad) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,9 +23,8 @@ public class LineUp implements java.io.Serializable {
 	private int codigoLineUp;
 	private RosterCompetencia rosterCompetencia;
 	private Juego juego;
-	private DatoBasico datoBasicoByCodigoPosicion;
-	private DatoBasico datoBasicoByCodigoTipoMencion;
-	private DatoBasico datoBasicoByCodigoEstadoLineUp;
+	private int codigoEstadoLineUp;
+	private Integer codigoPosicion;
 	private Integer ordenBate;
 	private Set<DesempennoIndividual> desempennoIndividuals = new HashSet<DesempennoIndividual>(
 			0);
@@ -34,24 +33,21 @@ public class LineUp implements java.io.Serializable {
 	}
 
 	public LineUp(int codigoLineUp, RosterCompetencia rosterCompetencia,
-			Juego juego, DatoBasico datoBasicoByCodigoEstadoLineUp) {
+			Juego juego, int codigoEstadoLineUp) {
 		this.codigoLineUp = codigoLineUp;
 		this.rosterCompetencia = rosterCompetencia;
 		this.juego = juego;
-		this.datoBasicoByCodigoEstadoLineUp = datoBasicoByCodigoEstadoLineUp;
+		this.codigoEstadoLineUp = codigoEstadoLineUp;
 	}
 
 	public LineUp(int codigoLineUp, RosterCompetencia rosterCompetencia,
-			Juego juego, DatoBasico datoBasicoByCodigoPosicion,
-			DatoBasico datoBasicoByCodigoTipoMencion,
-			DatoBasico datoBasicoByCodigoEstadoLineUp, Integer ordenBate,
-			Set<DesempennoIndividual> desempennoIndividuals) {
+			Juego juego, int codigoEstadoLineUp, Integer codigoPosicion,
+			Integer ordenBate, Set<DesempennoIndividual> desempennoIndividuals) {
 		this.codigoLineUp = codigoLineUp;
 		this.rosterCompetencia = rosterCompetencia;
 		this.juego = juego;
-		this.datoBasicoByCodigoPosicion = datoBasicoByCodigoPosicion;
-		this.datoBasicoByCodigoTipoMencion = datoBasicoByCodigoTipoMencion;
-		this.datoBasicoByCodigoEstadoLineUp = datoBasicoByCodigoEstadoLineUp;
+		this.codigoEstadoLineUp = codigoEstadoLineUp;
+		this.codigoPosicion = codigoPosicion;
 		this.ordenBate = ordenBate;
 		this.desempennoIndividuals = desempennoIndividuals;
 	}
@@ -86,37 +82,22 @@ public class LineUp implements java.io.Serializable {
 		this.juego = juego;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_posicion")
-	public DatoBasico getDatoBasicoByCodigoPosicion() {
-		return this.datoBasicoByCodigoPosicion;
+	@Column(name = "codigo_estado_line_up", nullable = false)
+	public int getCodigoEstadoLineUp() {
+		return this.codigoEstadoLineUp;
 	}
 
-	public void setDatoBasicoByCodigoPosicion(
-			DatoBasico datoBasicoByCodigoPosicion) {
-		this.datoBasicoByCodigoPosicion = datoBasicoByCodigoPosicion;
+	public void setCodigoEstadoLineUp(int codigoEstadoLineUp) {
+		this.codigoEstadoLineUp = codigoEstadoLineUp;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_mencion")
-	public DatoBasico getDatoBasicoByCodigoTipoMencion() {
-		return this.datoBasicoByCodigoTipoMencion;
+	@Column(name = "codigo_posicion")
+	public Integer getCodigoPosicion() {
+		return this.codigoPosicion;
 	}
 
-	public void setDatoBasicoByCodigoTipoMencion(
-			DatoBasico datoBasicoByCodigoTipoMencion) {
-		this.datoBasicoByCodigoTipoMencion = datoBasicoByCodigoTipoMencion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_estado_line_up", nullable = false)
-	public DatoBasico getDatoBasicoByCodigoEstadoLineUp() {
-		return this.datoBasicoByCodigoEstadoLineUp;
-	}
-
-	public void setDatoBasicoByCodigoEstadoLineUp(
-			DatoBasico datoBasicoByCodigoEstadoLineUp) {
-		this.datoBasicoByCodigoEstadoLineUp = datoBasicoByCodigoEstadoLineUp;
+	public void setCodigoPosicion(Integer codigoPosicion) {
+		this.codigoPosicion = codigoPosicion;
 	}
 
 	@Column(name = "orden_bate")

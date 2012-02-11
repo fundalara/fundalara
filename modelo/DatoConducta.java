@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,8 +22,8 @@ import javax.persistence.TemporalType;
 public class DatoConducta implements java.io.Serializable {
 
 	private int codigoDatoConducta;
-	private DatoBasico datoBasico;
-	private Jugador jugador;
+	private String cedulaRif;
+	private int codigoTipoSuspension;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private String observacion;
@@ -39,26 +37,26 @@ public class DatoConducta implements java.io.Serializable {
 	public DatoConducta() {
 	}
 
-	public DatoConducta(int codigoDatoConducta, DatoBasico datoBasico,
-			Jugador jugador, Date fechaInicio, int cantidad,
+	public DatoConducta(int codigoDatoConducta, String cedulaRif,
+			int codigoTipoSuspension, Date fechaInicio, int cantidad,
 			Date fechaOcurrencia, char estatus) {
 		this.codigoDatoConducta = codigoDatoConducta;
-		this.datoBasico = datoBasico;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
+		this.codigoTipoSuspension = codigoTipoSuspension;
 		this.fechaInicio = fechaInicio;
 		this.cantidad = cantidad;
 		this.fechaOcurrencia = fechaOcurrencia;
 		this.estatus = estatus;
 	}
 
-	public DatoConducta(int codigoDatoConducta, DatoBasico datoBasico,
-			Jugador jugador, Date fechaInicio, Date fechaFin,
+	public DatoConducta(int codigoDatoConducta, String cedulaRif,
+			int codigoTipoSuspension, Date fechaInicio, Date fechaFin,
 			String observacion, int cantidad, Date fechaOcurrencia,
 			char estatus, Set<DocumentoConducta> documentoConductas,
 			Set<MotivoSancion> motivoSancions) {
 		this.codigoDatoConducta = codigoDatoConducta;
-		this.datoBasico = datoBasico;
-		this.jugador = jugador;
+		this.cedulaRif = cedulaRif;
+		this.codigoTipoSuspension = codigoTipoSuspension;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.observacion = observacion;
@@ -79,24 +77,22 @@ public class DatoConducta implements java.io.Serializable {
 		this.codigoDatoConducta = codigoDatoConducta;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_tipo_suspension", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
+	@Column(name = "cedula_rif", nullable = false)
+	public String getCedulaRif() {
+		return this.cedulaRif;
 	}
 
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
+	public void setCedulaRif(String cedulaRif) {
+		this.cedulaRif = cedulaRif;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cedula_rif", nullable = false)
-	public Jugador getJugador() {
-		return this.jugador;
+	@Column(name = "codigo_tipo_suspension", nullable = false)
+	public int getCodigoTipoSuspension() {
+		return this.codigoTipoSuspension;
 	}
 
-	public void setJugador(Jugador jugador) {
-		this.jugador = jugador;
+	public void setCodigoTipoSuspension(int codigoTipoSuspension) {
+		this.codigoTipoSuspension = codigoTipoSuspension;
 	}
 
 	@Temporal(TemporalType.DATE)

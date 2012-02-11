@@ -1,5 +1,7 @@
 package controlador.competencia;
 
+import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,10 +9,13 @@ import java.util.List;
 import java.util.Set;
 
 import modelo.Categoria;
+import modelo.CategoriaLiga;
+import modelo.CategoriaLigaId;
 import modelo.Divisa;
 import modelo.Liga;
 
 import org.python.tests.ExceptionTest.Thrower;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 
 import org.zkoss.zk.ui.Component;
@@ -21,12 +26,16 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import comun.FileLoader;
+
 import servicio.implementacion.ServicioCategoria;
+import servicio.implementacion.ServicioCategoriaLiga;
 import servicio.implementacion.ServicioLiga;
 
 public class CntrlFrmLiga extends GenericForwardComposer {
@@ -36,17 +45,19 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 	ServicioLiga servicioLiga;
 	// Objeto Liga que recibe la Liga que se selecciona en el catalogo...
 	Liga liga;
-	List<Categoria> categoriaSeleccionada;
+	List<CategoriaLiga> categoriaSeleccionada;
 	List<Categoria> categorias;
 	ServicioCategoria servicioCategoria;
+	ServicioCategoriaLiga servicioCategoriaLiga;
 	Boolean ligaBuscada;
-
+	Image imgLogo;
 	// Vista...
 	Textbox txtNombre;
 	Textbox txtLocalidad;
 	Listbox lsbxCategorias;
 	Listbox lsbxCategoriaSeleccionada;
 	Button btnBuscar;
+	byte[] arr = { 0, 0, 0 };
 
 	public List<Categoria> getCategorias() {
 		return categorias;
@@ -56,12 +67,21 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		this.categorias = categorias;
 	}
 
-	public List<Categoria> getCategoriaSeleccionada() {
+	public List<CategoriaLiga> getCategoriaSeleccionada() {
 		return categoriaSeleccionada;
 	}
 
-	public void setCategoriaSeleccionada(List<Categoria> categoriaSeleccionada) {
+	public void setCategoriaSeleccionada(
+			List<CategoriaLiga> categoriaSeleccionada) {
 		this.categoriaSeleccionada = categoriaSeleccionada;
+	}
+
+	public Image getImgLogo() {
+		return imgLogo;
+	}
+
+	public void setImgLogo(Image imgLogo) {
+		this.imgLogo = imgLogo;
 	}
 
 	public Liga getLiga() {
@@ -77,13 +97,22 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		c.setVariable("cntrl", this, true);
 		formulario = c;
 		restaurar();
+
 		categorias = servicioCategoria.listar();
 	}
 
 	private void restaurar() {
 		liga = new Liga();
-		categoriaSeleccionada = new ArrayList<Categoria>();
+		categoriaSeleccionada = new ArrayList<CategoriaLiga>();
 		ligaBuscada = false;
+		AImage img = null;
+		imgLogo.setContent(img);
+
+	}
+
+	public void onClick$btnExaminar() {
+		FileLoader fl = new FileLoader();
+		liga.setLogo(fl.cargarImagenEnBean(imgLogo));
 	}
 
 	// Agregado Convierte un conjunto a una lista...
@@ -111,17 +140,22 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 			boolean sw = false;
 			Listitem li = (Listitem) i.next();
 			Categoria c1 = (Categoria) li.getValue();
+			CategoriaLiga cl = new CategoriaLiga();
+			cl.setCategoria(c1);
+			cl.setEstatus('A');
+			cl.setLiga(liga);
 			List seleccionDestino = destino.getItems();
 			for (Iterator j = seleccionDestino.iterator(); j.hasNext();) {
 				Listitem li2 = (Listitem) j.next();
-				Categoria c2 = (Categoria) li2.getValue();
-				if (c1.getNombre().equals(c2.getNombre())) {
+				CategoriaLiga cl2 = (CategoriaLiga) li2.getValue();
+				if (cl.getCategoria().getNombre()
+						.equalsIgnoreCase(cl2.getCategoria().getNombre())) {
 					sw = true;
 					break;
 				}
 			}
 			if (!sw) {
-				lista.add(c1);
+				lista.add(cl);
 			}
 		}
 	}
@@ -147,8 +181,11 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 			public void onEvent(Event arg0) throws Exception {
 				// se obtiene la divisa
 				liga = (Liga) formulario.getVariable("liga", false);
-				categoriaSeleccionada = ConvertirConjuntoALista(liga
-						.getCategoriaLigas());
+				categoriaSeleccionada = ConvertirConjuntoALista(liga.getCategoriaLigas());
+				if (!(liga.getLogo() == null)) {
+					AImage img = new AImage("", liga.getLogo());
+					imgLogo.setContent(img);
+				}
 				ligaBuscada = true; // se cargaron los datos...
 				binder.loadAll();
 			}
@@ -173,8 +210,16 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 		if (!txtNombre.getValue().isEmpty())
 			if (!txtLocalidad.getText().isEmpty())
 				if (lsbxCategoriaSeleccionada.getItems().size() > 0) {
-					liga.setCategoriaLigas(ConvertirListaAConjunto(categoriaSeleccionada));
+
 					servicioLiga.agregar(liga);
+					for (CategoriaLiga cl : categoriaSeleccionada) {
+						CategoriaLigaId id = new CategoriaLigaId(
+								liga.getCodigoLiga(), cl.getCategoria()
+										.getCodigoCategoria());
+						cl.setId(id);
+						servicioCategoriaLiga.agregar(cl);
+					}
+
 					Messagebox.show("Datos agregados exitosamente", "Mensaje",
 							Messagebox.OK, Messagebox.EXCLAMATION);
 					restaurar();
@@ -208,13 +253,16 @@ public class CntrlFrmLiga extends GenericForwardComposer {
 	}
 
 	public void onClick$btnCancelar() {
+
+		
 		restaurar();
 		binder.loadAll();
+
 	}
 
 	public void onClick$btnSalir() throws InterruptedException {
-		if (Messagebox.show("¿Desea salir?", "Mensaje",
-				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
+		if (Messagebox.show("¿Desea salir?", "Mensaje", Messagebox.YES
+				+ Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
 			formulario.detach();
 
 	}

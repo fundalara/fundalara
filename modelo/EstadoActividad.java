@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 28/01/2012 11:49:55 AM by Hibernate Tools 3.4.0.CR1
+// Generated 10/02/2012 11:18:51 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,18 +18,18 @@ import javax.persistence.Table;
 public class EstadoActividad implements java.io.Serializable {
 
 	private int codigoEstadoActividad;
-	private DatoBasico datoBasico;
 	private Actividad actividad;
+	private int codigoEstado;
 	private char estatus;
 
 	public EstadoActividad() {
 	}
 
-	public EstadoActividad(int codigoEstadoActividad, DatoBasico datoBasico,
-			Actividad actividad, char estatus) {
+	public EstadoActividad(int codigoEstadoActividad, Actividad actividad,
+			int codigoEstado, char estatus) {
 		this.codigoEstadoActividad = codigoEstadoActividad;
-		this.datoBasico = datoBasico;
 		this.actividad = actividad;
+		this.codigoEstado = codigoEstado;
 		this.estatus = estatus;
 	}
 
@@ -44,16 +44,6 @@ public class EstadoActividad implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_estado", nullable = false)
-	public DatoBasico getDatoBasico() {
-		return this.datoBasico;
-	}
-
-	public void setDatoBasico(DatoBasico datoBasico) {
-		this.datoBasico = datoBasico;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_actividad", nullable = false)
 	public Actividad getActividad() {
 		return this.actividad;
@@ -61,6 +51,15 @@ public class EstadoActividad implements java.io.Serializable {
 
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
+	}
+
+	@Column(name = "codigo_estado", nullable = false)
+	public int getCodigoEstado() {
+		return this.codigoEstado;
+	}
+
+	public void setCodigoEstado(int codigoEstado) {
+		this.codigoEstado = codigoEstado;
 	}
 
 	@Column(name = "estatus", nullable = false, length = 1)
