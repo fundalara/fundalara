@@ -2,6 +2,7 @@ package servicio.implementacion;
 
 import java.util.List;
 
+import dao.general.DaoCategoriaCompetencia;
 import dao.general.DaoIndicadorCategoriaCompetencia;
 
 import modelo.Categoria;
@@ -14,7 +15,7 @@ import servicio.interfaz.IServicioIndicadorCategoriaCompetencia;
 
 public class ServicioIndicadorCategoriaCompetencia implements
 		IServicioIndicadorCategoriaCompetencia {
-	
+
 	public DaoIndicadorCategoriaCompetencia getDaoIndicadorCategoriaCompetencia() {
 		return daoIndicadorCategoriaCompetencia;
 	}
@@ -27,20 +28,28 @@ public class ServicioIndicadorCategoriaCompetencia implements
 	DaoIndicadorCategoriaCompetencia daoIndicadorCategoriaCompetencia;
 
 	@Override
-	public void eliminar(IndicadorCategoriaCompetencia i) {
-		// TODO Auto-generated method stub
+	public void eliminar(IndicadorCategoriaCompetencia icc) {
+		icc.setEstatus('E');
+		daoIndicadorCategoriaCompetencia.eliminar(icc);
 
 	}
 
 	@Override
-	public void agregar(IndicadorCategoriaCompetencia i) {
-		daoIndicadorCategoriaCompetencia.guardar(i);
+	public void agregar(IndicadorCategoriaCompetencia icc) {
+
+		if (icc.getCodigoIndicadorCategoriaCompetencia() == 0) {
+			int codigo = daoIndicadorCategoriaCompetencia.listar(IndicadorCategoriaCompetencia.class).size() + 1;
+			icc.setCodigoIndicadorCategoriaCompetencia(codigo);
+			icc.setEstatus('A');
+		    
+		}
+		daoIndicadorCategoriaCompetencia.guardar(icc);
 
 	}
 
 	@Override
 	public List<IndicadorCategoriaCompetencia> listar() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -51,18 +60,21 @@ public class ServicioIndicadorCategoriaCompetencia implements
 	}
 
 	@Override
-	public List<IndicadorCategoriaCompetencia> listarIndicadoresIndividualesPorCategoria(Categoria c, Competencia comp, DatoBasico db) {
-		return daoIndicadorCategoriaCompetencia.listarIndicadoresIndividualesPorCategoria(c, comp,db);
-		
+	public List<IndicadorCategoriaCompetencia> listarIndicadoresIndividualesPorCategoria(
+			Categoria c, Competencia comp, DatoBasico db) {
+		return daoIndicadorCategoriaCompetencia
+				.listarIndicadoresIndividualesPorCategoria(c, comp, db);
+
 	}
 
 	@Override
 	public List<IndicadorCategoriaCompetencia> listarIndicadoresColectivosPorCategoria(
 			Categoria c, Competencia comp, DatoBasico db) {
-		
-		return daoIndicadorCategoriaCompetencia.listarIndicadoresColectivosPorCategoria(c, comp, db);
+
+		return daoIndicadorCategoriaCompetencia
+				.listarIndicadoresColectivosPorCategoria(c, comp, db);
 	}
-	 
+
 	@Override
 	public List<IndicadorCategoriaCompetencia> listarIndicadoresSencillosIndividuales(
 			Categoria c, Competencia comp, DatoBasico modalidad) {
@@ -76,7 +88,5 @@ public class ServicioIndicadorCategoriaCompetencia implements
 		return daoIndicadorCategoriaCompetencia.listarCompetenciaIndicador(i);
 	}
 	
-	
-	
-	
+
 }

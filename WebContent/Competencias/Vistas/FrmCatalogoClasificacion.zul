@@ -1,10 +1,15 @@
-<?page title="FrmCatalogoNuevaModalidad" contentType="text/html;charset=UTF-8"?>
+<?page title="FrmCatalogoClasificacion" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoModalidadCompetencia"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoClasificacion"?>
+
+<!--@author Merielen Gaspar -->
+<!--@author Diana Santiago -->
+<!--@version 2.0 01/02/2012-->
+
 <zk>
 
 	<div align="center">
-		<window id="frmCatalogoModalidadCompetencia" title="Modalidades Existentes"
+		<window id="frmCatalogoClasificacion" title="Clasificaciones Existentes"
 			apply="controlador.competencia.CntrlFrmCatalogoClasificacion"
 			border="normal" mode="modal" closable="true" width="690px"
 			height="350px">
@@ -13,7 +18,6 @@
 					<div style="margin-top:5px">
 						<label value="Filtro"></label>
 						<textbox id="txtFiltro" ></textbox>
-						<button label="Buscar"></button>
 					</div>
 					<listbox id="lsbxClasificacion" mold="paging" width="100%"
 						pageSize="10" style="margin-top:5px" model="@{cntrl.clasificacionCompetencias}"

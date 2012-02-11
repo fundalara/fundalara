@@ -1,6 +1,7 @@
 package controlador.competencia;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +20,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -38,90 +40,121 @@ import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioDivisa;
 import servicio.implementacion.ServicioClasificacionCompetencia;
 
+/**
+ * @author Merielen Gaspar
+ * @author Diana Santiago
+ * 
+ */
+
 public class CntrlFrmClasificacion extends GenericForwardComposer {
 
-	// ATRIBUTOS
-	Component formulario;
-	AnnotateDataBinder binder;
-	DatoBasico datoBasico;
+	/**
+	 * @version 2.0 01/02/2012 Clase CntrlFrmClasificacion para acceso/manejo de
+	 *          la interfaz (vista) de las clasificaciones de una competencia
+	 *          (FrmClasificacion.zul) Utiliza los Servicios
+	 *          ServicioClasificacionCompetencia, ServicioCondicionCompetencia,
+	 *          ServicioDatoBasico
+	 */
+
+	/** ATRIBUTOS */
 	ClasificacionCompetencia clasificacionCompetencia;
 	CondicionCompetencia condicionCompetencia;
 	CondicionCompetencia condi;
-
-	// SERVICIOS UTILIZADOS
-	ServicioDatoBasico servicioDatoBasico;
-	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
-	ServicioCondicionCompetencia servicioCondicionCompetencia;
-
+	AnnotateDataBinder binder;
+	DatoBasico datoBasico;
+	Component formulario;
 	List<ClasificacionCompetencia> clasificacionCompetencias;
-	List<DatoBasico> tipoCompetencias;
-	List<DatoBasico> condicionCompetencias;
 	List<CondicionCompetencia> condicionesSeleccionadas;
 	List<CondicionCompetencia> auxCondiciones;
+	List<DatoBasico> condicionCompetencias;
+	List<DatoBasico> tipoCompetencias;
+	Boolean clasificacionBuscada;
 	
 
-	Listbox lsbxCondiciones;
+	/** SERVICIOS UTILIZADOS */
+	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
+	ServicioCondicionCompetencia servicioCondicionCompetencia;
+	ServicioDatoBasico servicioDatoBasico;
+
+	/** VISTAS */
 	Listbox lsbxCondicionesSeleccionadas;
+	Listbox lsbxCondiciones;
+
 	Combobox cmbTipoCompetencia;
-	Textbox txtDescripcion;
+
 	Textbox txtClasificacion;
+	Textbox txtDescripcion;
+
 	Button btnEliminar;
 	Button btnAgregar;
 	Button btnQuitar;
+	Button btnBuscar;
 
-	String nombre;
 	String descripcion;
+	String nombre;
 
-	// ESTE METODO SE LLAMA AL CARGAR LA VENTANA
+	
+	/** ESTE METODO SE LLAMA AL CARGAR LA VENTANA */
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
-		// SE UTILIZA PARA HACER REFERENCIA A LOS OBJETOS DESDE LA VISTA (ej
-		// cntrl.algo). DEBE IR SIEMPRE AQUI
 		c.setVariable("cntrl", this, true);
-		// SE GUARDA LA REFERENCIA AL FORMULARIO ACTUAL
 		tipoCompetencias = servicioDatoBasico.listarTipoCompetencia();
 		condicionCompetencias = servicioDatoBasico.listarCondicion();
 		formulario = c;
 		restaurar();
 		condicionesSeleccionadas = new ArrayList<CondicionCompetencia>();
 		auxCondiciones = new ArrayList<CondicionCompetencia>();
-		inicializar();
+		apagar();
 	}
 
-	public void inicializar() {
+	/** ESTE METODO SE USA PARA DESHABILITAR LOS CAMPOS */
+	public void apagar() {
 		txtDescripcion.setDisabled(true);
 		txtClasificacion.setDisabled(true);
 		btnAgregar.setDisabled(true);
 		btnQuitar.setDisabled(true);
-		
+
 	}
 
+	/** ESTE METODO SE USA PARA HABILITAR LOS CAMPOS */
 	public void prender() {
 		txtDescripcion.setDisabled(false);
 		txtClasificacion.setDisabled(false);
 		btnAgregar.setDisabled(false);
 		btnQuitar.setDisabled(false);
-		
+
 	}
 
-	// CARGA EL COMBO DE CLASIFICACION
+	/**
+	 * ESTE METODO SE USA PARA HABILITAR LOS CAMPOS UNA VEZ SELECCIONADO EL TIPO
+	 * DE COMPETENCIA
+	 */
 	public void onChange$cmbTipoCompetencia() {
 		DatoBasico clasi = (DatoBasico) cmbTipoCompetencia.getSelectedItem()
 				.getValue();
-		clasificacionCompetencias = servicioClasificacionCompetencia
-				.listarClasificacion(clasi);
 		prender();
 		binder.loadAll();
 	}
 
-	// LIMPIA LA PANTALLA AL GUARDAR, ELIMINAR Y CANCELAR
+	/**
+	 * ESTE METODO SE USA PARA LIMPIAR LOS CAMPOS AL HACER CLICK EN EL BOTON
+	 * GUARDAR, ELIMINAR O CANCELAR
+	 */
 	public void restaurar() {
 		cmbTipoCompetencia.setText("-- Seleccione --");
 		clasificacionCompetencia = new ClasificacionCompetencia();
 		condicionesSeleccionadas = new ArrayList<CondicionCompetencia>();
+		clasificacionBuscada = false;
 	}
 
-	// MUEVE LAS CONDICIONES DE UNA LISTA A OTRA
+	/** ESTE METODO LLAMA AL METODO AGREGAR AL HACER CLICK EN EL BOTON AGREGAR */
+	public void onClick$btnAgregar() {
+		Agregar(lsbxCondiciones, lsbxCondicionesSeleccionadas,
+				condicionesSeleccionadas);
+		binder.loadAll();
+	}
+
+	/** ESTE METODO SE USA PARA MOVER LAS CONDICIONES DE UNA LISTA A OTRA */
 	public void Agregar(Listbox origen, Listbox destino, List lista) {
 
 		Set seleccionados = origen.getSelectedItems();
@@ -149,103 +182,60 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		}
 	}
 
+	/** ESTE METODO LLAMA AL METODO QUITAR AL HACER CLICK EN EL BOTON QUITAR */
+	public void onClick$btnQuitar() {
+		Quitar(lsbxCondicionesSeleccionadas, condicionesSeleccionadas);
+		binder.loadAll();
+
+	}
+
+	/** ESTE METODO SE USA PARA QUITAR LAS CONDICIONES DE UNA LISTA */
 	public void Quitar(Listbox origen, List lista) {
 
 		Set seleccionados = origen.getSelectedItems();
 		for (Iterator i = seleccionados.iterator(); i.hasNext();) {
 			Listitem li = (Listitem) i.next();
-			CondicionCompetencia cc = (CondicionCompetencia) li.getValue();	
-			if (cc.getCodigoCondicionCompetencia() !=0 ){
+			CondicionCompetencia cc = (CondicionCompetencia) li.getValue();
+			if (cc.getCodigoCondicionCompetencia() != 0) {
 				auxCondiciones.add(cc);
-			}			
+			}
 			lista.remove(cc);
 		}
 	}
 
-	
-	
-	// Llama al catalogo
+	/**
+	 * ESTE METODO SE USA PARA LLAMAR AL CATALAGO QUE MUESTRA LOS TIPOS DE
+	 * COMPETENCIA (FrmCatalogoClasificacion.zul)
+	 */
 	public void onClick$btnBuscar() {
-		// se crea el catalogo y se llama
 		Component catalogo = Executions
 				.createComponents(
 						"/Competencias/Vistas/FrmCatalogoClasificacion.zul",
 						null, null);
-		// asigna una referencia del formulario al catalogo.
 		catalogo.setVariable("formulario", formulario, false);
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
-			// Este metodo se llama cuando se envia la se√±al desde el catalogo
 			public void onEvent(Event arg0) throws Exception {
-				// se obtiene la clasificacion
 				condicionesSeleccionadas = new ArrayList<CondicionCompetencia>();
-				clasificacionCompetencia = (ClasificacionCompetencia) formulario.getVariable("clasificacion", false);
-				cmbTipoCompetencia.setSelectedIndex(buscarCombo(clasificacionCompetencia, tipoCompetencias, 1));
-				condicionesSeleccionadas = servicioCondicionCompetencia.listarCondicionSeleccionada(clasificacionCompetencia);		
+				clasificacionCompetencia = (ClasificacionCompetencia) formulario
+						.getVariable("clasificacion", false);
+				cmbTipoCompetencia.setSelectedIndex(buscarCombo(
+						clasificacionCompetencia, tipoCompetencias, 1));
+				condicionesSeleccionadas = servicioCondicionCompetencia
+						.listarCondicionSeleccionada(clasificacionCompetencia);
 				prender();
+				clasificacionBuscada = true;
 				binder.loadAll();
 			}
 		});
 
 	}
 
-	// <--- BOTONES --->
-
-	// GUARDAR LOS DATOS DE LA PANTALLA EN LAS RESPECTIVAS TABLAS
-	public void onClick$btnGuardar() throws InterruptedException {
-
-		clasificacionCompetencia.setDatoBasico((DatoBasico) cmbTipoCompetencia.getSelectedItem().getValue());
-		servicioClasificacionCompetencia.agregar(clasificacionCompetencia);
-		if (condicionesSeleccionadas.size() > 0) {
-			for (int i = 0; i < condicionesSeleccionadas.size(); i++) {
-			servicioCondicionCompetencia.agregar(condicionesSeleccionadas.get(i));
-			}
-			
-		}
-		for (int j = 0; j < auxCondiciones.size(); j++){
-			auxCondiciones.get(j).setEstatus('E');			
-			servicioCondicionCompetencia.agregar(auxCondiciones.get(j));
-		}		
-		Messagebox.show("Datos agregados exitosamente", "Mensaje",
-				Messagebox.OK, Messagebox.EXCLAMATION);
-		restaurar();
-		binder.loadAll();
-	}
-
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-
-	public void onClick$btnEliminar() throws InterruptedException {
-		if (Messagebox.show("¬øRealmente desea eliminar esta Clasificaci√≥n?",
-				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
-			
-			int codigo = clasificacionCompetencia.getCodigoClasificacionCompetencia();
-			for (int j = 0; j < condicionesSeleccionadas.size(); j++){
-				
-				if (codigo == condicionesSeleccionadas.get(j).getClasificacionCompetencia().getCodigoClasificacionCompetencia())
-					
-					servicioCondicionCompetencia.eliminar(condicionesSeleccionadas.get(j));
-			}	
-			servicioClasificacionCompetencia.eliminar(clasificacionCompetencia);
-			
-			
-			
-			restaurar();
-			binder.loadAll();
-			Messagebox.show("Datos eliminados exitosamente", "Mensaje",
-					Messagebox.OK, Messagebox.EXCLAMATION);
-		}
-	}
-
-	public void onClick$btnCancelar() {
-		restaurar();
-		binder.loadAll();
-	}
-
-	public void onClick$btnSalir() {
-		formulario.detach();
-
-	}
-
+	/**
+	 * ESTE METODO SE LLAMA AL HACER CLICK EN EL BOTON BUSCAR Y MUESTRA EN EL
+	 * COMBO DE LA PANTALLA PRINCIPAL EL TIPO DE COMPETENCIA SELECCIONADA EN EL
+	 * CATALOGO
+	 */
 	public int buscarCombo(ClasificacionCompetencia objeto,
 			List<DatoBasico> lista, Integer campo) {
 
@@ -262,19 +252,94 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		return x;
 	}
 
-	// PASA DE UNA LISTA A OTRA
-	public void onClick$btnAgregar() {
-		Agregar(lsbxCondiciones, lsbxCondicionesSeleccionadas,condicionesSeleccionadas);
+	/** BOTONES */
+
+	/**
+	 * ESTE METODO SE USA PARA GUARDAR LOS DATOS DE LA PANTALLA EN LAS
+	 * RESPECTIVAS TABLAS
+	 */
+	public void onClick$btnGuardar() throws InterruptedException {
+
+			if (cmbTipoCompetencia.getValue() != "-- Seleccione --")
+				if (!txtClasificacion.getValue().isEmpty())
+					if (!txtDescripcion.getValue().isEmpty()){
+		
+						clasificacionCompetencia.setDatoBasico((DatoBasico) cmbTipoCompetencia
+								.getSelectedItem().getValue());
+						servicioClasificacionCompetencia.agregar(clasificacionCompetencia);
+						if (condicionesSeleccionadas.size() > 0) {
+							for (int i = 0; i < condicionesSeleccionadas.size(); i++) {
+								servicioCondicionCompetencia.agregar(condicionesSeleccionadas
+										.get(i));
+							}
+
+						}
+						for (int j = 0; j < auxCondiciones.size(); j++) {
+							auxCondiciones.get(j).setEstatus('E');
+							servicioCondicionCompetencia.agregar(auxCondiciones.get(j));
+						}
+						Messagebox.show("Datos agregados exitosamente", "Mensaje",
+								Messagebox.OK, Messagebox.EXCLAMATION);
+						restaurar();
+						binder.loadAll();
+		
+		}  else
+			throw new WrongValueException(txtDescripcion,"El campo 'DescripciÛn' es obligatorio");
+		else
+		 throw new WrongValueException(txtClasificacion,"El campo 'ClasificaciÛn' es obligatorio");
+	else
+	 throw new WrongValueException(cmbTipoCompetencia, "Debe seleccionar un 'Tipo de Competencia'");
+
+	}
+
+	/**
+	 * ESTE METODO SE USA PARA ELIMINAR LOGICAMENTE LA CLASIFICACION
+	 * SELECCIONADA DE LAS RESPECTIVAS TABLAS ASI COMO SUS CONDICIONES ASOCIADAS
+	 */
+	public void onClick$btnEliminar() throws InterruptedException {
+		if (clasificacionBuscada == false)
+			throw new WrongValueException(btnBuscar,
+					" Debe seleccionar una 'ClasificaciÛn'");
+		
+		if (Messagebox.show("øRealmente desea eliminar esta ClasificaciÛn?",
+				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
+
+			int codigo = clasificacionCompetencia
+					.getCodigoClasificacionCompetencia();
+			for (int j = 0; j < condicionesSeleccionadas.size(); j++) {
+
+				if (codigo == condicionesSeleccionadas.get(j)
+						.getClasificacionCompetencia()
+						.getCodigoClasificacionCompetencia())
+
+					servicioCondicionCompetencia
+							.eliminar(condicionesSeleccionadas.get(j));
+			}
+			servicioClasificacionCompetencia.eliminar(clasificacionCompetencia);
+
+			restaurar();
+			binder.loadAll();
+			Messagebox.show("Datos eliminados exitosamente", "Mensaje",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+		}
+	}
+
+	/** ESTE METODO SE USA PARA LIMPIAR LOS CAMPOS */
+	public void onClick$btnCancelar() {
+		apagar();
+		restaurar();
 		binder.loadAll();
 	}
 
-	public void onClick$btnQuitar() {
-		Quitar(lsbxCondicionesSeleccionadas, condicionesSeleccionadas);
-		binder.loadAll();
+	/** ESTE METODO SE USA PARA SALIR DE LA PANTALLA ACTUAL */
+	public void onClick$btnSalir() throws InterruptedException {
+		if (Messagebox.show("                  øDesea salir?", "Mensaje",
+				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
+			formulario.detach();
 
 	}
 
-	// GETTERS AND SETTERS
+	/** GETTERS AND SETTERS */
 	public DatoBasico getDatoBasico() {
 		return datoBasico;
 	}
@@ -341,9 +406,5 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 	public void setAuxCondiciones(List<CondicionCompetencia> auxCondiciones) {
 		this.auxCondiciones = auxCondiciones;
 	}
-
-
-	
-	
 
 }
