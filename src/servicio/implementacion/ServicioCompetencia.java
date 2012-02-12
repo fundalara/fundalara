@@ -85,6 +85,11 @@ public class ServicioCompetencia implements IServicioCompetencia {
 	public List<Competencia> listarRegistradasAperturadas() {
 		return daoCompetencia.listarRegistradasAperturadas();
 	}
+	
+	@Override
+	public List<Competencia> listarAperturadasClausurada(){
+		return daoCompetencia.listarAperturadasClausurada();
+	}
 
 	@Override
 	public List<Competencia> listarPorfiltro(String dato) {

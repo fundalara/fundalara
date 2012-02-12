@@ -82,6 +82,31 @@ public class DaoCompetencia extends GenericDao {
 		return q.list();
 
 	}
+	
+	public List<Competencia> listarAperturadasClausurada() {
+
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+
+		Criteria c = session.createCriteria(DatoBasico.class);
+
+		c.add(Restrictions.eq("codigoDatoBasico", EstadoCompetencia.APERTURADA));
+		DatoBasico dba = (DatoBasico) c.list().get(0);
+		
+		c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("codigoDatoBasico", EstadoCompetencia.CLAUSURADA));
+		DatoBasico dbr = (DatoBasico) c.list().get(0);
+
+		Criteria q = session.createCriteria(Competencia.class);
+		Criterion cr1 = Restrictions.eq("datoBasicoByCodigoEstadoCompetencia",
+				dbr);
+		Criterion cr2 = Restrictions.eq("datoBasicoByCodigoEstadoCompetencia",
+				dba);
+		q.add(Restrictions.or(cr1, cr2));
+
+		return q.list();
+
+	}
 
 	public List<Competencia> listarCompetenciasPorFiltro(String dato) {
 		Session session = getSession();

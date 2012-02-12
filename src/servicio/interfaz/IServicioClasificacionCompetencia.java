@@ -15,5 +15,8 @@ public interface IServicioClasificacionCompetencia {
 		
 		public abstract  List<ClasificacionCompetencia> listarActivos ();
 			
+		public abstract List<ClasificacionCompetencia> listarClasificacionPorFiltro(String dato);
+		
 		public abstract  List<ClasificacionCompetencia> listarClasificacion (DatoBasico d);
+		
 }

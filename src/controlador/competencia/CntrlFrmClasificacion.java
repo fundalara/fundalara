@@ -49,14 +49,14 @@ import servicio.implementacion.ServicioClasificacionCompetencia;
 public class CntrlFrmClasificacion extends GenericForwardComposer {
 
 	/**
-	 * @version 2.0 01/02/2012 Clase CntrlFrmClasificacion para acceso/manejo de
+	 * @version 1.0 01/02/2012 Clase CntrlFrmClasificacion para acceso/manejo de
 	 *          la interfaz (vista) de las clasificaciones de una competencia
 	 *          (FrmClasificacion.zul) Utiliza los Servicios
 	 *          ServicioClasificacionCompetencia, ServicioCondicionCompetencia,
 	 *          ServicioDatoBasico
 	 */
 
-	/** ATRIBUTOS */
+	/** Atributos */
 	ClasificacionCompetencia clasificacionCompetencia;
 	CondicionCompetencia condicionCompetencia;
 	CondicionCompetencia condi;
@@ -71,12 +71,12 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 	Boolean clasificacionBuscada;
 	
 
-	/** SERVICIOS UTILIZADOS */
+	/** Servicios utilizados */
 	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
 	ServicioCondicionCompetencia servicioCondicionCompetencia;
 	ServicioDatoBasico servicioDatoBasico;
 
-	/** VISTAS */
+	/** Vistas */
 	Listbox lsbxCondicionesSeleccionadas;
 	Listbox lsbxCondiciones;
 
@@ -94,7 +94,6 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 	String nombre;
 
 	
-	/** ESTE METODO SE LLAMA AL CARGAR LA VENTANA */
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
@@ -107,7 +106,8 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		apagar();
 	}
 
-	/** ESTE METODO SE USA PARA DESHABILITAR LOS CAMPOS */
+	
+	/** Deshabilita los Campos en la pantalla actual */
 	public void apagar() {
 		txtDescripcion.setDisabled(true);
 		txtClasificacion.setDisabled(true);
@@ -116,7 +116,8 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 
 	}
 
-	/** ESTE METODO SE USA PARA HABILITAR LOS CAMPOS */
+	
+	/** Habilita los Campos en la pantalla actual*/
 	public void prender() {
 		txtDescripcion.setDisabled(false);
 		txtClasificacion.setDisabled(false);
@@ -125,10 +126,8 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 
 	}
 
-	/**
-	 * ESTE METODO SE USA PARA HABILITAR LOS CAMPOS UNA VEZ SELECCIONADO EL TIPO
-	 * DE COMPETENCIA
-	 */
+	
+	/** Habilita los campos una vez seleccionado el tipo de Competencia */
 	public void onChange$cmbTipoCompetencia() {
 		DatoBasico clasi = (DatoBasico) cmbTipoCompetencia.getSelectedItem()
 				.getValue();
@@ -136,10 +135,8 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
-	/**
-	 * ESTE METODO SE USA PARA LIMPIAR LOS CAMPOS AL HACER CLICK EN EL BOTON
-	 * GUARDAR, ELIMINAR O CANCELAR
-	 */
+	
+	/** Limpia los Campos al hacer Click en el bot贸n Guardar, Eliminar o Cancelar */
 	public void restaurar() {
 		cmbTipoCompetencia.setText("-- Seleccione --");
 		clasificacionCompetencia = new ClasificacionCompetencia();
@@ -147,14 +144,18 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		clasificacionBuscada = false;
 	}
 
-	/** ESTE METODO LLAMA AL METODO AGREGAR AL HACER CLICK EN EL BOTON AGREGAR */
+	
+	/** Llama al metodo Agregar al hacer Click en el bot贸n Agregar */
 	public void onClick$btnAgregar() {
 		Agregar(lsbxCondiciones, lsbxCondicionesSeleccionadas,
 				condicionesSeleccionadas);
 		binder.loadAll();
 	}
+	
 
-	/** ESTE METODO SE USA PARA MOVER LAS CONDICIONES DE UNA LISTA A OTRA */
+	/** Mueve las condiciones de una lista a otra
+	 *  @param Listbox origen, Listbox destino, List<CondicionCompetencia>
+	 */
 	public void Agregar(Listbox origen, Listbox destino, List lista) {
 
 		Set seleccionados = origen.getSelectedItems();
@@ -181,15 +182,19 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 			}
 		}
 	}
+	
 
-	/** ESTE METODO LLAMA AL METODO QUITAR AL HACER CLICK EN EL BOTON QUITAR */
+	/** Llama al metodo Quitar al hacer click en el bot贸n Quitar */
 	public void onClick$btnQuitar() {
 		Quitar(lsbxCondicionesSeleccionadas, condicionesSeleccionadas);
 		binder.loadAll();
 
 	}
+	
 
-	/** ESTE METODO SE USA PARA QUITAR LAS CONDICIONES DE UNA LISTA */
+	/** Remueve las condiciones de una lista
+	 * @param Listbox origen, List<CondicionCompetencia>
+	 */
 	public void Quitar(Listbox origen, List lista) {
 
 		Set seleccionados = origen.getSelectedItems();
@@ -203,10 +208,8 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		}
 	}
 
-	/**
-	 * ESTE METODO SE USA PARA LLAMAR AL CATALAGO QUE MUESTRA LOS TIPOS DE
-	 * COMPETENCIA (FrmCatalogoClasificacion.zul)
-	 */
+	
+	/** Llama al catalogo que muestra los tipos de Competencia (FrmCatalogoClasificacion.zul) */
 	public void onClick$btnBuscar() {
 		Component catalogo = Executions
 				.createComponents(
@@ -231,10 +234,11 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 
 	}
 
-	/**
-	 * ESTE METODO SE LLAMA AL HACER CLICK EN EL BOTON BUSCAR Y MUESTRA EN EL
-	 * COMBO DE LA PANTALLA PRINCIPAL EL TIPO DE COMPETENCIA SELECCIONADA EN EL
-	 * CATALOGO
+	
+	/** Se llama al hacer click en el bot贸n buscar y muestra en el combo de la pantalla principal el tipo 
+	 * de competencia seleccionada en el catalogo
+	 * @param ClasificacionCompetencia objeto,List<DatoBasico> lista, Integer campo
+	 * @return x numero entero (posicion donde se encuentra el objeto ClasificacionCompetencia seleccionado)
 	 */
 	public int buscarCombo(ClasificacionCompetencia objeto,
 			List<DatoBasico> lista, Integer campo) {
@@ -245,19 +249,17 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 			DatoBasico db = k.next();
 			j++;
 			if (db.getCodigoDatoBasico() == objeto.getDatoBasico()
-					.getCodigoDatoBasico()) {
+					.getCodigoDatoBasico()) { 
 				x = j;
 			}
 		}
 		return x;
 	}
+	
 
-	/** BOTONES */
+	/** Botones */
 
-	/**
-	 * ESTE METODO SE USA PARA GUARDAR LOS DATOS DE LA PANTALLA EN LAS
-	 * RESPECTIVAS TABLAS
-	 */
+	/** Guardar los datos de la pantalla en las respectivas tablas */
 	public void onClick$btnGuardar() throws InterruptedException {
 
 			if (cmbTipoCompetencia.getValue() != "-- Seleccione --")
@@ -284,24 +286,23 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 						binder.loadAll();
 		
 		}  else
-			throw new WrongValueException(txtDescripcion,"El campo 'Descripci髇' es obligatorio");
+			throw new WrongValueException(txtDescripcion,"El campo 'Descripci贸n' es obligatorio");
 		else
-		 throw new WrongValueException(txtClasificacion,"El campo 'Clasificaci髇' es obligatorio");
+		 throw new WrongValueException(txtClasificacion,"El campo 'Clasificaci贸n' es obligatorio");
 	else
 	 throw new WrongValueException(cmbTipoCompetencia, "Debe seleccionar un 'Tipo de Competencia'");
 
 	}
 
-	/**
-	 * ESTE METODO SE USA PARA ELIMINAR LOGICAMENTE LA CLASIFICACION
-	 * SELECCIONADA DE LAS RESPECTIVAS TABLAS ASI COMO SUS CONDICIONES ASOCIADAS
-	 */
+	
+	/** Elimina logicamente la clasificacion seleccionada de las respectivas tablas
+	 * asi como sus condiciones asociadas */
 	public void onClick$btnEliminar() throws InterruptedException {
 		if (clasificacionBuscada == false)
 			throw new WrongValueException(btnBuscar,
-					" Debe seleccionar una 'Clasificaci髇'");
+					" Debe seleccionar una 'Clasificaci贸n'");
 		
-		if (Messagebox.show("縍ealmente desea eliminar esta Clasificaci髇?",
+		if (Messagebox.show("驴Realmente desea eliminar esta Clasificaci贸n?",
 				"Mensaje", Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES) {
 
 			int codigo = clasificacionCompetencia
@@ -324,22 +325,22 @@ public class CntrlFrmClasificacion extends GenericForwardComposer {
 		}
 	}
 
-	/** ESTE METODO SE USA PARA LIMPIAR LOS CAMPOS */
+	/** Limpiar los campos */
 	public void onClick$btnCancelar() {
 		apagar();
 		restaurar();
 		binder.loadAll();
 	}
 
-	/** ESTE METODO SE USA PARA SALIR DE LA PANTALLA ACTUAL */
+	/** Salir de la pantalla actual */
 	public void onClick$btnSalir() throws InterruptedException {
-		if (Messagebox.show("                  緿esea salir?", "Mensaje",
+		if (Messagebox.show("                  驴Desea salir?", "Mensaje",
 				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
 			formulario.detach();
 
 	}
 
-	/** GETTERS AND SETTERS */
+	/** Getters and setters */
 	public DatoBasico getDatoBasico() {
 		return datoBasico;
 	}

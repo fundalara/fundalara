@@ -578,6 +578,16 @@
 															label="Desempeño Deportivo"
 															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorVACIO.zul")' />
 													</treerow>
+								
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Tabla de Posiciones"
+															onClick='enlace("Competencias/Reportes/FrmReporteTablaPosiciones.zul")' />
+													</treerow>
+								
 												</treeitem>
 											</treechildren>
 										</treeitem>

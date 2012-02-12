@@ -13,26 +13,32 @@ import org.hibernate.criterion.Restrictions;
 
 import dao.generico.GenericDao;
 
-/**
- * DAO para la clase CondicionCompetencia
- * 
+/** 
  * @author Merielen Gaspar
- * @version 2.0
+ * @author Diana Santiago
+ * @version 2.0 01/02/2012
  * 
  */
 
 public class DaoCondicionCompetencia extends GenericDao {
 
 	/**
-	 * Permite listar las condiciones de una clasificacion de una competencia
-	 * especifica, de acuerdo a su estatus
-	 * 
-	 * @param cc
-	 *            Variable que contiene las condiciones de la competencia
-	 * @return List<CondicionCompetencia> Lista de Condiciones
+	 * Clase DAO CondicionCompetencia para acceso/manejo de las Condiciones de Competencias.
+	 * Proporciona metodos para ser implementados en un ServicioCondicionCompetencia.
+	 *  
 	 */
-	public List<CondicionCompetencia> listarCondicionSeleccionada(
-			ClasificacionCompetencia cc) {
+
+	public List<CondicionCompetencia> listarCondicionSeleccionada(ClasificacionCompetencia cc) {
+
+		/**
+		 * Permite listar las condiciones seleccionadas para una clasificacion de una competencia
+		 * especifica, de acuerdo a su estatus.
+		 * 
+		 * @param cc  Variable que contiene las clasificaion de una competencia
+		 * @return List<CondicionCompetencia> Lista de Condiciones seleccionadas de una clasificacion para una competencia especifica.
+		 * 
+		 */
+		
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(CondicionCompetencia.class);
@@ -41,5 +47,8 @@ public class DaoCondicionCompetencia extends GenericDao {
 
 		return c.list();
 	}
-
 }
+
+
+
+
