@@ -2,6 +2,9 @@ package dao.general;
 
 import java.util.List;
 
+import modelo.ActividadEntrenamiento;
+import modelo.Categoria;
+import modelo.DatoBasico;
 import modelo.MaterialActividadPlanificada;
 import modelo.PlanificacionActividad;
 

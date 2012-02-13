@@ -5,6 +5,7 @@ import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.Estadio;
 import modelo.Juego;
+import modelo.LapsoDeportivo;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -143,6 +144,18 @@ public class DaoCompetencia extends GenericDao {
 		
 		System.out.println(lista.size());
 		return lista;
+	}
+	
+	public List<Competencia> buscarCompetencias(LapsoDeportivo lapso,
+			DatoBasico db, DatoBasico db1) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria where = getSession().createCriteria(Competencia.class);
+		where.add(Restrictions.eq("lapsoDeportivo", lapso));
+		where.add(Restrictions.not(Restrictions.eq("datoBasicoByCodigoEstadoCompetencia", db)));
+		where.add(Restrictions.not(Restrictions.eq("datoBasicoByCodigoEstadoCompetencia", db1)));
+		where.add(Restrictions.eq("estatus", 'A'));
+		return where.list();
 	}
 
 }

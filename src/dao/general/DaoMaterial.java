@@ -67,4 +67,13 @@ public class DaoMaterial extends GenericDao {
 		return lista.get(0);
 	}
 	
+	public Material buscarPorTipo(String mt) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(Material.class);
+		c.add(Restrictions.eq("descripcion", mt));
+		return (Material) c.uniqueResult();
+	}
+	
 }

@@ -102,6 +102,15 @@ public class DaoCategoria extends GenericDao {
 		tx.commit();
 		return sw;
 	}
+	
+	public Categoria BuscarCategoriaNombre (String nombre){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		
+		Criteria criteria = getSession().createCriteria(Categoria.class);
+		criteria.add(Restrictions.eq("nombre", nombre));
+		return (Categoria) criteria.uniqueResult();
+	}
 
 
 }

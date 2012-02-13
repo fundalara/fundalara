@@ -45,5 +45,13 @@ public class DaoPersonalCargo extends GenericDao {
 		return c.list();
 	}
 
-
+	public List<PersonalCargo> buscarPorCargo(DatoBasico db) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria c = getSession().createCriteria(PersonalCargo.class);
+		c.add(Restrictions.eq("datoBasico", db));
+		c.add(Restrictions.eq("estatus", "A"));
+		return c.list();
+	}
 }

@@ -23,6 +23,7 @@ import dao.generico.GenericDao;
  * @author Robert A.
  * @author German L.
  * @author Reinaldo L.
+ * @autor Taner M.
  * @autor Alix V.
  * @autor Merielen G
  * @autor Diana S.

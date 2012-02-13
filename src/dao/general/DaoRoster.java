@@ -9,6 +9,7 @@ import dao.generico.SessionManager;
 
 import modelo.Equipo;
 import modelo.Roster;
+import modelo.SesionEjecutada;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -91,4 +92,5 @@ public class DaoRoster extends GenericDao {
 		List <Roster> lista = c.list(); 
 		return lista;
 	}
+	
 }
