@@ -3,7 +3,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <div align="center">
 	<separator height="15px" />
-	<window closable="true" title="Datos Basicos Simples"
+	<window closable="true" title="Datos Básicos Simples"
 		border="normal" width="650px" height="" id="wndDatosBasicosSimples"
 		apply="controlador.general.CntrlDatosBasicos">
 		<grid>
@@ -56,10 +56,10 @@
 						</listbox>
 						<vbox height="50px">
 							<button id="btnAgregar"
-								image="../Recursos/Imagenes/aceptar.ico" />
+								image="/Recursos/Imagenes/agregar.ico" />
 							<separator height="5px" />
 							<button id="btnQuitar"
-								image="../Recursos/Imagenes/eliminar.ico" />
+								image="/Recursos/Imagenes/eliminar.ico" />
 						</vbox>
 					</hbox>
 				</row>
@@ -68,9 +68,9 @@
 		<separator />
 		<div align="right">
 			<button id="btnCancelar"
-				image="../Recursos/Imagenes/cancelar.ico" label="Cancelar"
+				image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
 				width="100px" />
-			<button id="btnSalir" image="../Recursos/Imagenes/salir.png"
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
 				label="Salir" width="100px" />
 		</div>
 	</window>
