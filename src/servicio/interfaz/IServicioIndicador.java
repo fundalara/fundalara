@@ -19,6 +19,8 @@ public interface IServicioIndicador {
 
 	public abstract List<Indicador> listarActivos();
 	
+	public abstract List<Indicador> listarActivosYSistema();
+	
 	public abstract List <Indicador> listarIndicadorIndividualPorModalidad (DatoBasico db);
 	
 	public abstract List <Indicador> listarIndicadorColectivoPorModalidad (DatoBasico db);

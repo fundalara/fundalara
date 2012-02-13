@@ -145,10 +145,8 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 		} else if (cmbCategoria.getText().equalsIgnoreCase("----Seleccione----")) { 
 			throw new WrongValueException(cmbCategoria, "Debe seleccionar una categoria");	
 		}else {
-//			showReportfromJrxml();
 			parameters.put("CodCompetencia", competencia.getCodigoCompetencia());
 			parameters.put("codCategoria", categoriaCompetencia.getCategoria().getCodigoCategoria());
-//			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
 			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
 			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
@@ -160,47 +158,10 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 			 Component visor = Executions.createComponents("/General/"
 						+ "frmVisorDocumento.zul", null, null);
 			visor.setVariable("archivo", amedia, false);
-
-		}
-		
-		
+		}		
 	}
-	public void showReportfromJrxml() throws JRException, IOException {
-		
-		parameters.put("CodCompetencia", competencia.getCodigoCompetencia());
-		parameters.put("codCategoria", categoriaCompetencia.getCategoria().getCodigoCategoria());
-		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
-		JasperPrint jaspPrint = JasperFillManager.fillReport(jasp, parameters,
-				con);
-		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		JRExporter exporter = new JRPdfExporter();
-		exporter.setParameters(parameters);
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jaspPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,
-				arrayOutputStream);
-		exporter.exportReport();
-		arrayOutputStream.close();
-		final AMedia amedia = new AMedia("tabladeposicionesnormal.jxrml", "jxrml",
-				"jxrml/application", arrayOutputStream.toByteArray());
-//		ifReporte.setContent(amedia);
-		//jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Competencias/tabladeposicionesnormal.jrxml");
-		
-		
-		File archivo = new File(jrxmlSrc);
-		AMedia amedias=null;
-		try {
-			 amedias = new AMedia(null,null,null,archivo,true);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		 Component visor = Executions.createComponents("/WebContent/General/frmVisorDocumento.zul", null, null);
-			visor.setVariable("archivo", amedias, false);			
-			visor.setVariable("orientacion", "horizontal",false );
-			
-		
-	}
-
+	
+	
 	public void onClick$btnCancelar(){
 		restaurar();
 		binder.loadAll();

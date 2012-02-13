@@ -41,7 +41,7 @@ import servicio.implementacion.ServicioTipoDato;
 import servicio.implementacion.ServicioIndicadorCategoriaCompetencia;
 
 /**
- * Clase que tiene como funci�n controlar la interfaz de igual nombre y los
+ * Clase que tiene como funcion controlar la interfaz de igual nombre y los
  * servicios relacionados con el registro de los indicadores.
  * 
  * @author Nohely P.
@@ -701,7 +701,6 @@ public class CntrlFrmRegistroIndicadores extends GenericForwardComposer {
 	}
 
 	public Competencia buscarIndicadorCompetencia() {
-		// Boolean encontrado = false;
 		Competencia compe = null;
 		List<IndicadorCategoriaCompetencia> lstCompetencia = servicioIndicadorCategoriaCompetencia
 				.listarCompetenciaIndicador(indicador);

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tabladeposiciones" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="13"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -52,7 +52,7 @@
 		<band height="173" splitType="Stretch">
 			<image scaleImage="FillFrame">
 				<reportElement x="6" y="29" width="562" height="144"/>
-				<imageExpression><![CDATA["C:\\Users\\Juan H\\Desktop\\WorkSpace\\fundalara10-02\\fundalara\\WebContent\\WEB-INF\\reportes\\Encabezado.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -234,7 +234,7 @@
 		<band height="42" splitType="Stretch">
 			<image scaleImage="FillFrame">
 				<reportElement x="1" y="0" width="567" height="42"/>
-				<imageExpression><![CDATA["C:\\Users\\Juan H\\Desktop\\WorkSpace\\fundalara10-02\\fundalara\\WebContent\\WEB-INF\\reportes\\PieDePagina.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

@@ -25,6 +25,13 @@ public class DaoIndicador extends GenericDao {
 				.add(Restrictions.eq("estatus", "A")).list();
 		return lista;
 	}
+	
+	public List listarActivosYSistema(Class o) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();		
+		List lista = session.createCriteria(o).add(Restrictions.or(Restrictions.eq("estatus", "A"), Restrictions.eq("estatus", "S"))).list();
+		return lista;
+	}
 
 	public List<Indicador> buscarPorDatoBasico(DatoBasico datoBasico) {
 		Session session = getSession();

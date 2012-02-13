@@ -77,7 +77,11 @@ public class ServicioIndicador implements IServicioIndicador {
 
 	@Override
 	public List<Indicador> listarIndicadoresPorFiltro(String dato) {
-		// TODO Auto-generated method stub
 		return daoIndicador.listarIndicadoresPorFiltro(dato);
+	}
+
+	@Override
+	public List<Indicador> listarActivosYSistema() {
+		return daoIndicador.listarActivosYSistema(Indicador.class);
 	}
 }
