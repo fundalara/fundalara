@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tabladeposiciones" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="33"/>
+	<parameter name="CodCompetencia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codCategoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select (select nombre from equipo where codigo_equipo=equipo_competencia.codigo_equipo) as NombreEquipo,(select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia ) as Jugados , (select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='G') as Ganados,(select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='P') as Perdidos, (select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='E') as Empatados,(select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='F') as ForFeit, (((select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='G')*1000)
++((select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='E')*500)
+-((select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='F')*500)) as Puntos, ((((select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='G')*1000)
++((select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='E')*500)
+-((select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia and ganado='F')*500))/(select count(*) from equipo_juego where equipo_competencia.codigo_equipo_competencia=equipo_juego.codigo_equipo_competencia )) as PuntosPorJuego from equipo_competencia inner join equipo on equipo_competencia.codigo_equipo=equipo.codigo_equipo  where codigo_competencia=$P{CodCompetencia} and equipo.codigo_categoria=$P{codCategoria} order by puntosporjuego desc]]>
+	</queryString>
+	<field name="nombreequipo" class="java.lang.String"/>
+	<field name="jugados" class="java.lang.Long"/>
+	<field name="ganados" class="java.lang.Long"/>
+	<field name="perdidos" class="java.lang.Long"/>
+	<field name="empatados" class="java.lang.Long"/>
+	<field name="forfeit" class="java.lang.Long"/>
+	<field name="puntos" class="java.lang.Long"/>
+	<field name="puntosporjuego" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="41" width="281" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="41" width="26" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="41" width="21" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="41" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="41" width="23" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="41" width="48" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Punto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="35" width="60" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puntos Por Juego]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="41" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pos.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="46" y="0" width="281" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreequipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="0" width="27" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jugados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="1" width="21" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ganados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="1" width="22" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{perdidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="23" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{empatados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="1" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{puntos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="1" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{puntosporjuego}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="1" width="22" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
