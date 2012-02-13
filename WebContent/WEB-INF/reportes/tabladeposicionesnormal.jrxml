@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tabladeposiciones" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="81"/>
+	<property name="ireport.y" value="13"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -49,7 +49,12 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="173" splitType="Stretch"/>
+		<band height="173" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="6" y="29" width="562" height="144"/>
+				<imageExpression><![CDATA["C:\\Users\\Juan H\\Desktop\\WorkSpace\\fundalara10-02\\fundalara\\WebContent\\WEB-INF\\reportes\\Encabezado.jpg"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="58" splitType="Stretch">
@@ -63,7 +68,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="50">
+		<band height="54">
 			<staticText>
 				<reportElement x="91" y="14" width="63" height="20"/>
 				<textElement/>
@@ -84,144 +89,141 @@
 				<textElement/>
 				<text><![CDATA[Prejunior]]></text>
 			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="5" y="0" width="22" height="20"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Pos.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="42" y="0" width="281" height="20"/>
+				<reportElement x="36" y="34" width="281" height="20"/>
 				<textElement>
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Equipo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="0" width="26" height="20"/>
+				<reportElement x="6" y="34" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="34" width="26" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JJ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="376" y="0" width="21" height="20"/>
+				<reportElement x="372" y="34" width="21" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JG]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="404" y="0" width="22" height="20"/>
+				<reportElement x="402" y="34" width="22" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="426" y="0" width="23" height="20"/>
+				<reportElement x="426" y="34" width="23" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="459" y="0" width="48" height="20"/>
+				<reportElement x="456" y="34" width="48" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Punto]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="5" y="38" width="22" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="42" y="38" width="143" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{nombreequipo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="323" y="38" width="46" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{jugados}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="381" y="38" width="21" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{ganados}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="402" y="38" width="32" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{perdidos}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="431" y="38" width="28" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{empatados}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="515" y="39" width="42" height="29"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{puntos}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="471" y="38" width="33" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{puntosporjuego}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="0" y="26" width="571" height="1"/>
-			</line>
-			<line>
-				<reportElement x="-1" y="78" width="574" height="1"/>
-			</line>
 			<staticText>
-				<reportElement x="511" y="0" width="60" height="26"/>
+				<reportElement x="508" y="28" width="60" height="26"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Puntos Por Juego]]></text>
 			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="12" width="22" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="12" width="275" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreequipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="12" width="36" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jugados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="12" width="21" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ganados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="12" width="32" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{perdidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="12" width="19" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{empatados}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="515" y="13" width="53" height="29"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{puntos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="12" width="48" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{puntosporjuego}]]></textFieldExpression>
+			</textField>
 			<line>
-				<reportElement x="0" y="0" width="573" height="1"/>
+				<reportElement x="0" y="0" width="571" height="1"/>
 			</line>
 			<line>
-				<reportElement x="0" y="0" width="1" height="78"/>
+				<reportElement x="-1" y="52" width="571" height="1"/>
 			</line>
 			<line>
-				<reportElement x="27" y="1" width="1" height="78"/>
+				<reportElement x="0" y="-1" width="573" height="1"/>
 			</line>
 			<line>
-				<reportElement x="125" y="1" width="1" height="78"/>
+				<reportElement x="0" y="0" width="1" height="52"/>
 			</line>
 			<line>
-				<reportElement x="369" y="0" width="1" height="78"/>
+				<reportElement x="27" y="0" width="1" height="53"/>
 			</line>
 			<line>
-				<reportElement x="401" y="1" width="1" height="78"/>
+				<reportElement x="369" y="0" width="1" height="52"/>
 			</line>
 			<line>
-				<reportElement x="425" y="0" width="1" height="78"/>
+				<reportElement x="401" y="0" width="1" height="53"/>
 			</line>
 			<line>
-				<reportElement x="449" y="0" width="1" height="78"/>
+				<reportElement x="425" y="1" width="1" height="51"/>
 			</line>
 			<line>
-				<reportElement x="507" y="0" width="1" height="78"/>
+				<reportElement x="454" y="1" width="1" height="51"/>
 			</line>
 			<line>
-				<reportElement x="570" y="0" width="1" height="78"/>
+				<reportElement x="507" y="1" width="1" height="52"/>
 			</line>
 			<line>
-				<reportElement x="322" y="1" width="1" height="78"/>
+				<reportElement x="570" y="0" width="1" height="53"/>
+			</line>
+			<line>
+				<reportElement x="322" y="0" width="1" height="53"/>
 			</line>
 		</band>
 	</detail>
@@ -229,7 +231,12 @@
 		<band height="65" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="88" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="1" y="0" width="567" height="42"/>
+				<imageExpression><![CDATA["C:\\Users\\Juan H\\Desktop\\WorkSpace\\fundalara10-02\\fundalara\\WebContent\\WEB-INF\\reportes\\PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

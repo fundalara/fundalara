@@ -50,6 +50,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -135,7 +136,6 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 	public CntrlFrmReporteTablaPosiciones() throws SQLException {
 		super();
 		con = ConeccionBD.getCon("postgres", "postgres", "123456");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
 //		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/anuario.pdf");
 
 	}
@@ -144,7 +144,25 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 			throw new WrongValueException(cmbCompetencia, "Debe seleccionar una competencia");
 		} else if (cmbCategoria.getText().equalsIgnoreCase("----Seleccione----")) { 
 			throw new WrongValueException(cmbCategoria, "Debe seleccionar una categoria");	
-		}else showReportfromJrxml();
+		}else {
+//			showReportfromJrxml();
+			parameters.put("CodCompetencia", competencia.getCodigoCompetencia());
+			parameters.put("codCategoria", categoriaCompetencia.getCategoria().getCodigoCategoria());
+//			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
+			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
+
+			byte[] archivo = JasperExportManager.exportReportToPdf(print);
+
+			final AMedia amedia = new AMedia("tabladeposicionesnormal.pdf", "pdf", "application/pdf", archivo);
+
+			 Component visor = Executions.createComponents("/General/"
+						+ "frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedia, false);
+
+		}
+		
 		
 	}
 	public void showReportfromJrxml() throws JRException, IOException {
@@ -166,7 +184,7 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 				"jxrml/application", arrayOutputStream.toByteArray());
 //		ifReporte.setContent(amedia);
 		//jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
+		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Competencias/tabladeposicionesnormal.jrxml");
 		
 		
 		File archivo = new File(jrxmlSrc);
@@ -176,8 +194,7 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		 Component visor = Executions.createComponents("/General/"
-					+ "frmVisorDocumento.zul", null, null);
+		 Component visor = Executions.createComponents("/WebContent/General/frmVisorDocumento.zul", null, null);
 			visor.setVariable("archivo", amedias, false);			
 			visor.setVariable("orientacion", "horizontal",false );
 			
