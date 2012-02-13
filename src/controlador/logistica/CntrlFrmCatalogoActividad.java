@@ -2,14 +2,7 @@ package controlador.logistica;
 
 import java.util.List;
 
-import javassist.expr.NewArray;
-
 import modelo.Actividad;
-import modelo.ActividadPlanificada;
-import modelo.DatoBasico;
-import modelo.Persona;
-import modelo.PersonalActividadPlanificada;
-import modelo.PlanificacionActividad;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,8 +14,6 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 
 import servicio.interfaz.IServicioActividad;
-import servicio.interfaz.IServicioActividadPlanificada;
-import servicio.interfaz.IServicioPlanificacionActividad;
 
 public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 
@@ -38,10 +29,8 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		frmCatActPla = comp;
-		beanFactory = new ClassPathXmlApplicationContext(
-				"ApplicationContext.xml");
-		servicioActividad = (IServicioActividad) beanFactory
-				.getBean("servicioActividad");
+		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+		servicioActividad = (IServicioActividad) beanFactory.getBean("servicioActividad");
 		listaActividad = servicioActividad.listarActivos();
 
 	}
@@ -53,10 +42,8 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 			// se obtiene la plantilla seleccionada
 			actividad = listaActividad.get(lboxActividad.getSelectedIndex());
 
-			Component frmPrestamoDevolucion = (Component) frmCatActPla
-					.getVariable("frmPrestamoDevolucion", false);
-			Integer numero = (Integer) frmCatActPla
-					.getVariable("numero", false);
+			Component frmPrestamoDevolucion = (Component) frmCatActPla.getVariable("frmPrestamoDevolucion", false);
+			Integer numero = (Integer) frmCatActPla.getVariable("numero", false);
 
 			// se le asigna el objeto plantilla al formulario
 			frmPrestamoDevolucion.setVariable("actividad", actividad, false);
@@ -64,12 +51,10 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 			// se le envia una señal al formulario indicado que el formulario se
 			// cerro y que los datos se han enviado
 			if (numero == 1) {
-				Events.sendEvent(new Event("onCatalogoActividadCerradoP",
-						frmPrestamoDevolucion));
+				Events.sendEvent(new Event("onCatalogoActividadCerradoP", frmPrestamoDevolucion));
 				System.out.println(1);
 			} else if (numero == 2) {
-				Events.sendEvent(new Event("onCatalogoActividadCerradoD",
-						frmPrestamoDevolucion));
+				Events.sendEvent(new Event("onCatalogoActividadCerradoD", frmPrestamoDevolucion));
 				System.out.println(2);
 			}
 
@@ -77,8 +62,7 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 			frmCatActPla.detach();
 
 		} else {
-			Messagebox.show("Seleccione una Actividad", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una Actividad", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 

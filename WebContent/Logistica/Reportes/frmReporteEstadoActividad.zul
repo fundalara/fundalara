@@ -1,0 +1,41 @@
+<?page title="Actividades por Estados de Ejecución" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Actividades por Estados de Ejecución"
+		border="normal" id="winReporteEstadoActividad"
+		apply="controlador.logistica.CntrlReporteEstadoActividad"
+		width="500px" maximizable="true" minimizable="true">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid height="100%" width="100%">
+					<columns>
+						<column></column>
+						<column></column>
+					</columns>
+					<rows>
+						<row></row>
+						<row>
+							<div>
+								<label value="Desde:"></label>
+								<datebox id="dboxFechaInicio"
+									format="dd/MM/yyyy" />
+							</div>
+							<div>
+								<label value="Hasta:"></label>
+								<datebox id="dboxFechaFin"
+									format="dd/MM/yyyy" />
+							</div>
+						</row>
+						<row align="right">
+							<iframe id="ifReport" visible="false"></iframe>							
+							<div align="right">
+								<button label="Generar Reporte"
+									id="btnImprimir" width="100px" height="30px"
+									image="/Recursos/Imagenes/reporte.ico" />
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

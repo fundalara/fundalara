@@ -9,12 +9,10 @@ import modelo.ComisionActividadPlanificada;
 import modelo.ComisionFamiliar;
 import modelo.DatoBasico;
 import modelo.EstadoActividad;
-import modelo.FamiliarJugador;
 import modelo.Material;
 import modelo.MaterialActividadPlanificada;
 import modelo.Persona;
 import modelo.PersonalActividad;
-import modelo.PersonalActividadPlanificada;
 import modelo.PlanificacionActividad;
 import modelo.ResultadoActividad;
 import modelo.ResultadoActividadId;
@@ -26,20 +24,14 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Progressmeter;
 import org.zkoss.zul.api.Combobox;
 import org.zkoss.zul.api.Listbox;
 import org.zkoss.zul.api.Panel;
 import org.zkoss.zul.api.Window;
-import org.zkoss.zul.Messagebox;
-
-import comun.TipoDatoBasico;
-import controlador.general.CntrlFrmAgendaLogistica;
 
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioComisionActividad;
@@ -47,17 +39,18 @@ import servicio.interfaz.IServicioComisionActividadPlanificada;
 import servicio.interfaz.IServicioComisionFamiliar;
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioEstadoActividad;
-import servicio.interfaz.IServicioFamiliarComisionEquipo;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
 import servicio.interfaz.IServicioPersonalActividad;
-import servicio.interfaz.IServicioPersonalActividadPlanificada;
 import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioResultadoActividad;
 import servicio.interfaz.IServicioTareaActividad;
 import servicio.interfaz.IServicioTareaActividadPlanificada;
 
-public class CntrlResultadosActividadComplementaria extends
-		GenericForwardComposer {
+import comun.TipoDatoBasico;
+
+import controlador.general.CntrlFrmAgendaLogistica;
+
+public class CntrlResultadosActividadComplementaria extends GenericForwardComposer {
 
 	Actividad actividad = new Actividad();
 	PlanificacionActividad planificacionActividad = new PlanificacionActividad();
@@ -102,8 +95,7 @@ public class CntrlResultadosActividadComplementaria extends
 	Component frmResultadosActividadComplementaria;
 	AnnotateDataBinder binder;
 
-	Button btnAgregarResponsable, btnAgregarPersonal, btnEjecutada, btnGuardar,
-			btnSalir, btnDescartarTarea;
+	Button btnAgregarResponsable, btnAgregarPersonal, btnEjecutada, btnGuardar, btnSalir, btnDescartarTarea;
 	Combobox cmbEstados;
 	Panel panel1, panel2;
 	Listbox lboxlistadocomision, lboxPersonalComision, lboxtareas;
@@ -115,51 +107,40 @@ public class CntrlResultadosActividadComplementaria extends
 		comp.setVariable("cntrl", this, false);
 
 		frmResultadosActividadComplementaria = comp;
-
-//		this.prueba();
-//		this.listadoCA = this.servicioComisionActividad.listar(actividad);
-//		this.tareasPlanificadas = servicioActividad.listar(actividad);
-//		materialesPlanificados = servicioMaterialActividadPlanificada
-//				.listarMateriales(actividad.getPlanificacionActividad());
-//		this.cargarEstados();
-//		cargarBarraProgreso();
 	}
-	
-	public void onCreate$ejecucionActividadComplementaria() {		
+
+	public void onCreate$ejecucionActividadComplementaria() {
 		this.prueba();
-		
+
 		System.out.println(actividad);
-		
+
 		this.listadoCA = this.servicioComisionActividad.listar(actividad);
 		this.tareasPlanificadas = servicioActividad.listar(actividad);
-		materialesPlanificados = servicioMaterialActividadPlanificada
-				.listarMateriales(actividad.getPlanificacionActividad());
+		materialesPlanificados = servicioMaterialActividadPlanificada.listarMateriales(actividad.getPlanificacionActividad());
 		this.cargarEstados();
 		cargarBarraProgreso();
-		
+
 		System.out.println(listadoCA);
-		
+
 		binder.loadAll();
 	}
 
 	public void cargarEstados() {
 		listadoEstados = servicioDatoBasico.buscar(TipoDatoBasico.ESTADOS);
 	}
-	
+
 	public void cargarBarraProgreso() {
-		int  inactivos = 0;
+		int inactivos = 0;
 		for (int i = 0; i < this.tareasPlanificadas.size(); i++) {
-			if (this.tareasPlanificadas.get(i).getDatoBasicoByEstadoTarea()
-					.getCodigoDatoBasico() == 415
-					|| this.tareasPlanificadas.get(i)
-							.getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 416) {
+			if (this.tareasPlanificadas.get(i).getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 415
+					|| this.tareasPlanificadas.get(i).getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 416) {
 				inactivos++;
 			}
 		}
 		int todas = this.tareasPlanificadas.size();
 		int total;
-		if (todas != 0) 
-			total = (inactivos * 100)/todas;
+		if (todas != 0)
+			total = (inactivos * 100) / todas;
 		else
 			total = 0;
 		this.barraProgreso.setValue(total);
@@ -167,65 +148,54 @@ public class CntrlResultadosActividadComplementaria extends
 
 	public void onClick$btnAgregarComision() {
 
-		Component catalogoComision = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoComisiones2.zul", null, null);
+		Component catalogoComision = Executions.createComponents("/Logistica/Vistas/frmCatalogoComisiones2.zul", null, null);
 
-		catalogoComision.setVariable("frmResultadosActividadComplementaria",
-				this.frmResultadosActividadComplementaria, false);
+		catalogoComision.setVariable("frmResultadosActividadComplementaria", this.frmResultadosActividadComplementaria, false);
 
-		this.frmResultadosActividadComplementaria.addEventListener(
-				"onCatalogoComisionCerrado2", new EventListener() {
+		this.frmResultadosActividadComplementaria.addEventListener("onCatalogoComisionCerrado2", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						DatoBasico Comision = new DatoBasico();
-						Comision = (DatoBasico) frmResultadosActividadComplementaria
-								.getVariable("comision", false);
+			public void onEvent(Event arg0) throws Exception {
+				DatoBasico Comision = new DatoBasico();
+				Comision = (DatoBasico) frmResultadosActividadComplementaria.getVariable("comision", false);
 
-						comisionA = new ComisionActividad();
-						comisionA.setDatoBasico(Comision);
-						int num = servicioComisionActividad.listar().size()+1;
-						comisionA.setCodigoComisionActividad(num);
-						comisionA.setActividad(actividad);
-						listadoCA.add(comisionA);
-						servicioComisionActividad.agregar(comisionA);
-						// agregarComisionAlListado();
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
+				comisionA = new ComisionActividad();
+				comisionA.setDatoBasico(Comision);
+				int num = servicioComisionActividad.listar().size() + 1;
+				comisionA.setCodigoComisionActividad(num);
+				comisionA.setActividad(actividad);
+				listadoCA.add(comisionA);
+				servicioComisionActividad.agregar(comisionA);
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
 
-				});
+		});
 	}
 
 	public void onClick$btnAgregarTarea() {
-		Component catalogoPersonal = Executions.createComponents(
-				"/Logistica/Vistas/frmListarTareas.zul", null, null);
+		Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmListarTareas.zul", null, null);
 
-		catalogoPersonal.setVariable("General",
-				this.frmResultadosActividadComplementaria, false);
+		catalogoPersonal.setVariable("General", this.frmResultadosActividadComplementaria, false);
 
-		this.frmResultadosActividadComplementaria.addEventListener(
-				"onCatalogoCerrado", new EventListener() {
+		this.frmResultadosActividadComplementaria.addEventListener("onCatalogoCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						DatoBasico tare = new DatoBasico();
-						tare = (DatoBasico) frmResultadosActividadComplementaria
-								.getVariable("tareaSeleccionada", false);
-						tareaActividad = new TareaActividad();
-						tareaActividad
-								.setCodigoTareaActividad(servicioTareaActividad
-										.listar().size() + 1);
-						tareaActividad.setDatoBasicoByCodigoTarea(tare);
-						tareaActividad.setActividad(actividad);
-						tareasPlanificadas.add(tareaActividad);
-						tareaActividad.setEstatus('A');
-						estadoTarea = servicioDatoBasico.buscarPorCodigo(414);
-						tareaActividad.setDatoBasicoByEstadoTarea(estadoTarea);
-						servicioTareaActividad.agregar(tareaActividad);			
-						binder.loadAll();
-						cargarBarraProgreso();
-						arg0.stopPropagation();
-					}
-				});
+			public void onEvent(Event arg0) throws Exception {
+				DatoBasico tare = new DatoBasico();
+				tare = (DatoBasico) frmResultadosActividadComplementaria.getVariable("tareaSeleccionada", false);
+				tareaActividad = new TareaActividad();
+				tareaActividad.setCodigoTareaActividad(servicioTareaActividad.listar().size() + 1);
+				tareaActividad.setDatoBasicoByCodigoTarea(tare);
+				tareaActividad.setActividad(actividad);
+				tareasPlanificadas.add(tareaActividad);
+				tareaActividad.setEstatus('A');
+				estadoTarea = servicioDatoBasico.buscarPorCodigo(414);
+				tareaActividad.setDatoBasicoByEstadoTarea(estadoTarea);
+				servicioTareaActividad.agregar(tareaActividad);
+				binder.loadAll();
+				cargarBarraProgreso();
+				arg0.stopPropagation();
+			}
+		});
 		this.binder.loadAll();
 	}
 
@@ -240,31 +210,25 @@ public class CntrlResultadosActividadComplementaria extends
 
 	public void onClick$btnAgregarResponsable() {
 
-		final Component catalogoResponsable = Executions
-				.createComponents(
-						"/Logistica/Vistas/frmCatalogoPersonalComision.zul",
-						null, null);
+		final Component catalogoResponsable = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonalComision.zul", null, null);
 
 		catalogoResponsable.setVariable("General", actividad, false);
 
-		catalogoResponsable.addEventListener("onCatalogoResponsableCerrado",
-				new EventListener() {
+		catalogoResponsable.addEventListener("onCatalogoResponsableCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						Persona perso = new Persona();
-						perso = (Persona) catalogoResponsable.getVariable(
-								"General", false);
-						personaComision = perso;
-						comisionFamiliar = servicioComisionFamiliar
-								.buscar(personaComision.getCedulaRif());
-						tareaActividad.setComisionFamiliar(comisionFamiliar);
-						tareaActividad.setPersonalActividad(null);
-						servicioTareaActividad.actualizar(tareaActividad);
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
+			public void onEvent(Event arg0) throws Exception {
+				Persona perso = new Persona();
+				perso = (Persona) catalogoResponsable.getVariable("General", false);
+				personaComision = perso;
+				comisionFamiliar = servicioComisionFamiliar.buscar(personaComision.getCedulaRif());
+				tareaActividad.setComisionFamiliar(comisionFamiliar);
+				tareaActividad.setPersonalActividad(null);
+				servicioTareaActividad.actualizar(tareaActividad);
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
 
-				});
+		});
 	}
 
 	public void agregarPersonal(Persona p) {
@@ -274,8 +238,7 @@ public class CntrlResultadosActividadComplementaria extends
 			pa = new PersonalActividad();
 			pa.setActividad(actividad);
 			pa.setEstatus('A');
-			pa.setCodigoPersonalActividad(servicioPersonalActividad.listar()
-					.size() + 1);
+			pa.setCodigoPersonalActividad(servicioPersonalActividad.listar().size() + 1);
 			pa.setPersonal(p.getPersonaNatural().getPersonal());
 			servicioPersonalActividad.agregar(pa);
 		} else {
@@ -285,72 +248,63 @@ public class CntrlResultadosActividadComplementaria extends
 	}
 
 	public void onClick$btnAgregarPersonal() {
-		Component catalogoPersonal = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoPersonal2.zul", null, null);
+		Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
 
-		catalogoPersonal.setVariable("frmPadre",
-				this.frmResultadosActividadComplementaria, false);
+		catalogoPersonal.setVariable("frmPadre", this.frmResultadosActividadComplementaria, false);
 		int num = 2;
 		catalogoPersonal.setVariable("numero", num, false);
 
-		this.frmResultadosActividadComplementaria.addEventListener(
-				"onCatalogoCerradoPersonal", new EventListener() {
+		int aux = 2;
+		catalogoPersonal.setVariable("aux", aux, false);
 
-					public void onEvent(Event arg0) throws Exception {
-						Persona persona = new Persona();
-						persona = (Persona) frmResultadosActividadComplementaria
-								.getVariable("persona", false);
-						agregarPersonal(persona);
-						tareaActividad.setPersonalActividad(personalA);
-						tareaActividad.setComisionFamiliar(null);
-						servicioTareaActividad.actualizar(tareaActividad);
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
-				});
+		this.frmResultadosActividadComplementaria.addEventListener("onCatalogoCerradoPersonal", new EventListener() {
+
+			public void onEvent(Event arg0) throws Exception {
+				Persona persona = new Persona();
+				persona = (Persona) frmResultadosActividadComplementaria.getVariable("persona", false);
+				agregarPersonal(persona);
+				tareaActividad.setPersonalActividad(personalA);
+				tareaActividad.setComisionFamiliar(null);
+				servicioTareaActividad.actualizar(tareaActividad);
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
+		});
 	}
 
 	public void onClick$btnAgregarMaterial() {
 
-		final Component catalogoMaterial = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
+		final Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
 
-		catalogoMaterial.setVariable("frmPlanificarActividad",
-				catalogoMaterial, false);
+		catalogoMaterial.setVariable("frmPlanificarActividad", catalogoMaterial, false);
 
-		catalogoMaterial.addEventListener("onCatalogoMaterialCerrado",
-				new EventListener() {
+		catalogoMaterial.addEventListener("onCatalogoMaterialCerrado", new EventListener() {
 
-					@Override
-					public void onEvent(Event arg0) throws Exception {
-						Material mat = new Material();
-						mat = (Material) catalogoMaterial.getVariable(
-								"material", false);
-						int cant = (Integer) catalogoMaterial.getVariable(
-								"cantidad", false);
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				Material mat = new Material();
+				mat = (Material) catalogoMaterial.getVariable("material", false);
+				int cant = (Integer) catalogoMaterial.getVariable("cantidad", false);
 
-						materialP.setCantidadRequerida(cant);
-						materialP
-								.setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada
-										.listar().size() + 1);
-						materialP.setEstatus('A');
-						materialP.setMaterial(mat);
-						materialP
-								.setPlanificacionActividad(planificacionActividad);
+				materialP.setCantidadRequerida(cant);
+				materialP.setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada.listar().size() + 1);
+				materialP.setEstatus('A');
+				materialP.setMaterial(mat);
+				materialP.setPlanificacionActividad(planificacionActividad);
 
-						servicioMaterialActividadPlanificada.agregar(materialP);
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
-				});
+				servicioMaterialActividadPlanificada.agregar(materialP);
+				materialesPlanificados.add(materialP);
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
+		});
+		this.binder.loadAll();
 
 	}
 
 	public void onClick$btnMostrarMaterialesAprobados() {
 
-		Component ListadoMaterialesAprobados = Executions.createComponents(
-				"/Logistica/Vistas/frmListadoMaterialesAprobados.zul", null,
-				null);
+		Component ListadoMaterialesAprobados = Executions.createComponents("/Logistica/Vistas/frmListadoMaterialesAprobados.zul", null, null);
 		ListadoMaterialesAprobados.setVariable("General", actividad, false);
 
 	}
@@ -359,10 +313,8 @@ public class CntrlResultadosActividadComplementaria extends
 		if (this.cmbEstados.getSelectedIndex() != -1) {
 			resultadoActividad = new ResultadoActividad();
 			resultadoActividadId = new ResultadoActividadId();
-			this.resultadoActividadId.setCodigoActividad(actividad
-					.getCodigoActividad());
-			this.resultadoActividadId.setCodigoResultado(estadoActividad
-					.getCodigoDatoBasico());
+			this.resultadoActividadId.setCodigoActividad(actividad.getCodigoActividad());
+			this.resultadoActividadId.setCodigoResultado(estadoActividad.getCodigoDatoBasico());
 			this.resultadoActividad.setEstatus('A');
 			this.resultadoActividad.setId(resultadoActividadId);
 			this.resultadoActividad.setDatoBasico(estadoActividad);
@@ -379,8 +331,7 @@ public class CntrlResultadosActividadComplementaria extends
 	public boolean buscarEnLista() {
 		boolean respuesta = false;
 		for (int i = 0; i < listadosEstados2.size(); i++) {
-			if (listadosEstados2.get(i).getId().getCodigoResultado() == resultadoActividadId
-					.getCodigoResultado()) {
+			if (listadosEstados2.get(i).getId().getCodigoResultado() == resultadoActividadId.getCodigoResultado()) {
 				respuesta = true;
 			}
 		}
@@ -389,8 +340,7 @@ public class CntrlResultadosActividadComplementaria extends
 
 	public void onSelect$lboxtareas() {
 
-		if (this.tareaActividad.getDatoBasicoByEstadoTarea()
-				.getCodigoDatoBasico() == 414) {
+		if (this.tareaActividad.getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 414) {
 			this.btnAgregarPersonal.setDisabled(false);
 			this.btnAgregarResponsable.setDisabled(false);
 			this.btnEjecutada.setDisabled(false);
@@ -413,16 +363,12 @@ public class CntrlResultadosActividadComplementaria extends
 	}
 
 	public void prueba() {
-//		this.planificacionActividad.setCodigoPlanificacionActividad(29);
-		
 		this.planificacionActividad = (PlanificacionActividad) frmResultadosActividadComplementaria.getVariable("planificacionActividad", false);
 		System.out.println(planificacionActividad.getCodigoPlanificacionActividad());
 		this.planificacionActividad.setCodigoPlanificacionActividad(planificacionActividad.getCodigoPlanificacionActividad());
-		
-		
+
 		this.actividad.setPlanificacionActividad(planificacionActividad);
-		this.actividad = this.servicioActividad.Buscar(planificacionActividad,
-				Actividad.class);
+		this.actividad = this.servicioActividad.Buscar(planificacionActividad, Actividad.class);
 	}
 
 	public Actividad getActividad() {
@@ -437,8 +383,7 @@ public class CntrlResultadosActividadComplementaria extends
 		return planificacionActividad;
 	}
 
-	public void setPlanificacionActividad(
-			PlanificacionActividad planificacionActividad) {
+	public void setPlanificacionActividad(PlanificacionActividad planificacionActividad) {
 		this.planificacionActividad = planificacionActividad;
 	}
 
@@ -470,8 +415,7 @@ public class CntrlResultadosActividadComplementaria extends
 		return frmResultadosActividadComplementaria;
 	}
 
-	public void setFrmResultadosActividadComplementaria(
-			Component frmResultadosActividadComplementaria) {
+	public void setFrmResultadosActividadComplementaria(Component frmResultadosActividadComplementaria) {
 		this.frmResultadosActividadComplementaria = frmResultadosActividadComplementaria;
 	}
 
@@ -511,8 +455,7 @@ public class CntrlResultadosActividadComplementaria extends
 		return materialesPlanificados;
 	}
 
-	public void setMaterialesPlanificados(
-			List<MaterialActividadPlanificada> materialesPlanificados) {
+	public void setMaterialesPlanificados(List<MaterialActividadPlanificada> materialesPlanificados) {
 		this.materialesPlanificados = materialesPlanificados;
 	}
 
@@ -523,14 +466,6 @@ public class CntrlResultadosActividadComplementaria extends
 	public void setListadoPersonalComision(List<Persona> listadoPersonalComision) {
 		this.listadoPersonalComision = listadoPersonalComision;
 	}
-
-	// public List<TareaActividadPlanificada> getListadoTAP() {
-	// return listadoTAP;
-	// }
-	//
-	// public void setListadoTAP(List<TareaActividadPlanificada> listadoTAP) {
-	// this.listadoTAP = listadoTAP;
-	// }
 
 	public Persona getPersonaComision() {
 		return personaComision;
@@ -560,8 +495,7 @@ public class CntrlResultadosActividadComplementaria extends
 		return listadoComisionesActividad;
 	}
 
-	public void setListadoComisionesActividad(
-			List<ComisionActividad> listadoComisionesActividad) {
+	public void setListadoComisionesActividad(List<ComisionActividad> listadoComisionesActividad) {
 		this.listadoComisionesActividad = listadoComisionesActividad;
 	}
 
@@ -621,8 +555,7 @@ public class CntrlResultadosActividadComplementaria extends
 		return resultadoActividadId;
 	}
 
-	public void setResultadoActividadId(
-			ResultadoActividadId resultadoActividadId) {
+	public void setResultadoActividadId(ResultadoActividadId resultadoActividadId) {
 		this.resultadoActividadId = resultadoActividadId;
 	}
 
@@ -664,18 +597,17 @@ public class CntrlResultadosActividadComplementaria extends
 		estadoActividadFinal.setActividad(actividad);
 		estadoActividadFinal.setDatoBasico(superEstadoActividadFinal);
 		estadoActividadFinal.setEstatus('A');
-		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad
-				.listar().size() + 1);
+		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
 		servicioEstadoActividad.agregar(estadoActividadFinal);
 		this.frmResultadosActividadComplementaria.detach();
 		alert("Actividad Terminada");
-		
+
 		SimpleCalendarEvent sce = (SimpleCalendarEvent) frmResultadosActividadComplementaria.getVariable("esc", false);
 		sce.setHeaderColor("#FDD017");
 		sce.setContentColor("#FDD017");
-		
-		CntrlFrmAgendaLogistica agenda = (CntrlFrmAgendaLogistica)frmResultadosActividadComplementaria.getVariable("agenda", false);
-		agenda.cargarUltimo(sce);
+
+		CntrlFrmAgendaLogistica agenda = (CntrlFrmAgendaLogistica) frmResultadosActividadComplementaria.getVariable("agenda", false);
+		agenda.recargarModelo(sce);
 	}
 
 	public void onClick$btnSuspender() {
@@ -691,8 +623,7 @@ public class CntrlResultadosActividadComplementaria extends
 		estadoActividadFinal.setActividad(actividad);
 		estadoActividadFinal.setDatoBasico(superEstadoActividadFinal);
 		estadoActividadFinal.setEstatus('A');
-		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad
-				.listar().size() + 1);
+		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
 		servicioEstadoActividad.agregar(estadoActividadFinal);
 		this.frmResultadosActividadComplementaria.detach();
 		alert("Actividad Suspendida");

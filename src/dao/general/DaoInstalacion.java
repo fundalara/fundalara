@@ -1,5 +1,16 @@
 package dao.general;
 
+import java.util.List;
+
+import modelo.ComisionFamiliar;
+import modelo.DatoBasico;
+import modelo.Instalacion;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
 import dao.generico.GenericDao;
 
 public class DaoInstalacion extends GenericDao {
@@ -20,4 +31,13 @@ public class DaoInstalacion extends GenericDao {
 	return cantidad;
 }
 
+	public List<Instalacion> buscar(DatoBasico tipo) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(Instalacion.class);
+		c.add(Restrictions.eq("datoBasico",tipo));
+		c.add(Restrictions.eq("estatus", "A"));
+		return c.list();
+	}
+	
 }

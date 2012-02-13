@@ -20,11 +20,9 @@
 					label="@{b.listadoPersonalComision.personaNatural.primerApellido}" />
 			</listitem>
 		</listbox>
-
 		<div align="right">
 			<button id="btnGuardarPersonalComision" label="Guardar"
 				image="/Recursos/Imagenes/guardar.ico" />
-
 			<button id="btnSalirPC" label="Salir"
 				image="/Recursos/Imagenes/salir.png" />
 		</div>

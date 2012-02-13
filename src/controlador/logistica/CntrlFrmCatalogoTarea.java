@@ -7,7 +7,6 @@ import modelo.DatoBasico;
 import modelo.TipoDato;
 
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -19,8 +18,8 @@ import org.zkoss.zul.Window;
 
 import servicio.interfaz.IServicioDatoBasico;
 
-public class CntrlFrmCatalogoTarea  extends GenericForwardComposer {
-	
+public class CntrlFrmCatalogoTarea extends GenericForwardComposer {
+
 	AnnotateDataBinder binder;
 	IServicioDatoBasico servicioDatoBasico;
 	List<DatoBasico> listaTarea = new ArrayList<DatoBasico>();
@@ -34,73 +33,71 @@ public class CntrlFrmCatalogoTarea  extends GenericForwardComposer {
 	Component frmPlanificarMantenimiento;
 	Listbox lboxTarea;
 	Window frmCatTarea;
-	
-	public void doAfterCompose(Component comp)throws Exception{
+
+	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		comp.setVariable("cntrl",this, true);
-		
+		comp.setVariable("cntrl", this, true);
+
 		catalogoTarea = comp;
-		
-		
-		}
-	
-	public void onCreate$frmCatTarea(){
+
+	}
+
+	public void onCreate$frmCatTarea() {
 		TipoDato td = new TipoDato();
 		td.setCodigoTipoDato(110);
 		todas = servicioDatoBasico.buscarPorTipoDato(td);
-		
-		List<DatoBasico> variable = (List<DatoBasico>) catalogoTarea.getVariable("tarea",true);
+
+		List<DatoBasico> variable = (List<DatoBasico>) catalogoTarea.getVariable("tarea", true);
 		auxListaTarea = variable;
-              
-		if (auxListaTarea != null ){
+
+		if (auxListaTarea != null) {
 			for (DatoBasico datoBasico : todas) {
-		    	if (!auxListaTarea.contains(datoBasico)){
-		    		listaTarea.add(datoBasico);
-			     }	
-		    }
-		}else{ 
-			listaTarea= todas;
-			
+				if (!auxListaTarea.contains(datoBasico)) {
+					listaTarea.add(datoBasico);
+				}
+			}
+		} else {
+			listaTarea = todas;
+
 		}
-	    binder.loadAll();	
+		binder.loadAll();
 	}
-	
-	public void onClick$btnGuardar() throws InterruptedException{
 
+	public void onClick$btnGuardar() throws InterruptedException {
 
-		//Se comprueba que se haya seleccionado un elemento de la lista
+		// Se comprueba que se haya seleccionado un elemento de la lista
 		if (lboxTarea.getSelectedIndex() != -1) {
-			
-			//se obtiene la referencia del formulario
-			Component frmPadre = (Component) catalogoTarea.getVariable("frmPadre",false);
-			
+
+			// se obtiene la referencia del formulario
+			Component frmPadre = (Component) catalogoTarea.getVariable("frmPadre", false);
+
 			DatoBasico aux = new DatoBasico();
 			for (int i = 0; i < listaTarea.size(); i++) {
 				if (lboxTarea.getItemAtIndex(i).isSelected()) {
-				      aux = (DatoBasico) lboxTarea.getItemAtIndex(i).getValue();
-				      listadoTarea.add(aux);
-				}		
-			}			
-			//se le asigna el objeto tarea al formulario
-			frmPadre.setVariable("tarea", listadoTarea,false);
-			
-			//se le envia una señal al formulario indicado que el formulario se cerro y que los datos se han enviado
-			Events.sendEvent(new Event("onCatalogoTareaCerrado",frmPadre));          
-				
-			//se cierra el catalogo	
+					aux = (DatoBasico) lboxTarea.getItemAtIndex(i).getValue();
+					listadoTarea.add(aux);
+				}
+			}
+			// se le asigna el objeto tarea al formulario
+			frmPadre.setVariable("tarea", listadoTarea, false);
+
+			// se le envia una señal al formulario indicado que el formulario se
+			// cerro y que los datos se han enviado
+			Events.sendEvent(new Event("onCatalogoTareaCerrado", frmPadre));
+
+			// se cierra el catalogo
 			catalogoTarea.detach();
 
 		} else {
-				Messagebox.show("Seleccione una tarea ", "Mensaje",	Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
 	}
-	
-	public void onClick$btnSalir(){
+
+	public void onClick$btnSalir() {
 		catalogoTarea.detach();
 	}
-
 
 	public List<DatoBasico> getListaTarea() {
 		return listaTarea;
@@ -117,5 +114,5 @@ public class CntrlFrmCatalogoTarea  extends GenericForwardComposer {
 	public void setTarea(DatoBasico tarea) {
 		this.tarea = tarea;
 	}
-	
+
 }

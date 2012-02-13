@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-<?page title="Manejo de Materiales" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmSolMantenimiento"?>
+<?page title="Solicitud de Mantenimientos" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Solicitud de Mantenimientos" border="normal"
-		width="100%"
+		width="690px"
 		apply="controlador.logistica.CntrlSolicitudesMantenimiento"
-		mode="modal" closable="true" id="frmSolMantenimiento">
+		mode="embedded" closable="true" id="frmSolMantenimiento">
 		<menubar>
 			<menuitem label="Filtrar por:" style="font-weight:bold"
 				disabled="true" />
@@ -22,38 +22,46 @@
 					pageSize="5" model="@{cntrl.solicitudesMantenimiento}"
 					selectedItem="@{cntrl.solicitudMantenimiento}" checkmark="true">
 					<listhead>
-						<listheader label="Fecha Solicitud" width="12%" />
-						<listheader label="Actividad" width="12%" />
-						<listheader label="Fecha Actividad" width="12%" />
-						<listheader label="Hora Actividad" width="13%" />
-						<listheader label="Tipo de Mantenimiento "
-							width="15%" />
-						<listheader label="Instalación " width="10%" />
-						<listheader label="Prioridad " width="10%" />
+						<listheader label="Fecha Solicitud" />
+						<listheader label="Actividad" />
+						<listheader label="Fecha Actividad" />
+						<listheader label="Hora Actividad" />
+						<listheader label="Instalación " />
+						<listheader label="Prioridad " />
 					</listhead>
 					<listitem self="@{each='sm'}" value="@{sm}">
-						<listcell label="@{sm.fechaSolicitud}" />
-						<listcell
-							label="@{sm.actividad.planificacionActividad.datoBasico.nombre}" />
-						<listcell label="@{sm.actividad.horaInicio }" />
-						<listcell label="@{sm.actividad.fechaInicio}" />
+						<listcell>
+							<datebox value="@{sm.fechaSolicitud}"
+								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
 						<listcell label="@{sm.descripcionActividad}" />
+						<listcell>
+							<datebox value="@{sm.actividad.fechaInicio}"
+								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{sm.actividad.horaInicio}"
+								format="hh:mm" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
 						<listcell
-							label="@{sm.actividad.planificacionActividad.instalacionUtilizada.instalacion.datoBasico.descripcion}">
+							label="@{sm.actividad.planificacionActividad.instalacionUtilizada.instalacion.datoBasico.nombre}">
 						</listcell>
 						<listcell label="@{sm.datoBasico.nombre}" />
-
-
 					</listitem>
 				</listbox>
 				<div align="right">
 					<button label="Aceptar"
 						image="/Recursos/Imagenes/aceptar.ico"
 						tooltiptext="Registar Solicitud" id="btnAceptar" />
+					<button label="Eliminar Solicitud"
+						image="/Recursos/Imagenes/eliminar.ico" id="btnEliminar">
+					</button>
 					<button label="Cancelar"
 						image="/Recursos/Imagenes/cancelar.ico" tooltiptext="Cancelar"
 						id="btnCancelar" />
-
 				</div>
 			</panelchildren>
 		</panel>

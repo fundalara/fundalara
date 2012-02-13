@@ -17,12 +17,14 @@
 			map.put("disparador", "entrenamiento");
 		} else if (event.getTarget().getId().equals("mnuAgendaCompetencia")) {
 			map.put("disparador", "competencia");
-		} else {
-			map.put("disparador", "logistica");
-		}
+		} else if (event.getTarget().getId().equals("mnuAgendaComplementaria")) {
+			map.put("disparador", "complementaria");
+		} else
+			map.put("disparador", "mantenimiento");
+
+		divMenu.setVisible(false);
 		Component comp = Executions.createComponents("/General/FrmAgenda.zul",
 				null, map);
-		divMenu.setVisible(false);
 		divCuerpo.appendChild(comp);
 	}
 ]]></zscript>
@@ -458,14 +460,35 @@
 								</treeitem>
 								<treeitem open="false">
 									<treerow>
-										<treecell label="Logistica" />
+										<treecell label="Logística" />
 									</treerow>
 									<treechildren>
 										<treeitem open="false">
 											<treerow>
 												<treecell
+													label="Generar Requisiciones"
+													onClick='enlace("Logistica/Vistas/frmGenerarRequisicion.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Mantenimientos Pendientes"
+													onClick='enlace("Logistica/Vistas/frmSolicitudesMantenimiento.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
 													label="Solicitudes de Mantenimiento"
-													onClick='enlace("Logistica/Vistas/frmSolicitudMantenimiento.zul")' />
+													onClick='enlace("Logistica/Vistas/frmSolicitudMantenimientoee.zul")' />
+											</treerow>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Préstamo/Devolución Materiales"
+													onClick='enlace("Logistica/Vistas/frmPrestamoDevolucion.zul")' />
 											</treerow>
 										</treeitem>
 										<treeitem open="false">
@@ -473,13 +496,6 @@
 												<treecell
 													label="Recepción de Materiales"
 													onClick='enlace("Logistica/Vistas/frmRecepcionMaterial.zul")' />
-											</treerow>
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Préstamo/Devolución de Materiales"
-													onClick='enlace("Logistica/Vistas/frmPrestamoDevolucion.zul")' />
 											</treerow>
 										</treeitem>
 									</treechildren>
@@ -547,8 +563,8 @@
 												</treeitem>
 											</treechildren>
 										</treeitem>
-										
-																				<treeitem open="false">
+
+										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Entrenamientos" />
@@ -578,7 +594,7 @@
 															label="Desempeño Deportivo"
 															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorVACIO.zul")' />
 													</treerow>
-								
+
 												</treeitem>
 												<treeitem
 													open="false">
@@ -587,44 +603,29 @@
 															label="Tabla de Posiciones"
 															onClick='enlace("Competencias/Reportes/FrmReporteTablaPosiciones.zul")' />
 													</treerow>
-								
+
 												</treeitem>
 											</treechildren>
 										</treeitem>
-										
-																				<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Actividades Complementarias" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label=" " />
-													</treerow>
-												</treeitem>
-												</treechildren>
-												</treeitem>
-												
-																						<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Actividades de Mantenimiento" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label=" " />
-													</treerow>
-												</treeitem>
-												</treechildren>
-												</treeitem>
 
-																						<treeitem open="false">
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Logísticos" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label=" " />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+
+
+										<treeitem open="false">
 											<treerow>
 												<treecell
 													label="Administrativos" />
@@ -637,8 +638,8 @@
 															label=" " />
 													</treerow>
 												</treeitem>
-												</treechildren>
-												</treeitem>
+											</treechildren>
+										</treeitem>
 
 									</treechildren>
 								</treeitem>
@@ -647,14 +648,12 @@
 										<treecell label="Estadísticos" />
 									</treerow>
 									<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label=" " />
-													</treerow>
-												</treeitem>
-												</treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell label=" " />
+											</treerow>
+										</treeitem>
+									</treechildren>
 								</treeitem>
 
 								<treeitem open="false">
@@ -662,15 +661,13 @@
 										<treecell label="Dinámicos" />
 									</treerow>
 									<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label=" " />
-													</treerow>
-												</treeitem>
-												</treechildren>
-									
+										<treeitem open="false">
+											<treerow>
+												<treecell label=" " />
+											</treerow>
+										</treeitem>
+									</treechildren>
+
 								</treeitem>
 							</treechildren>
 						</tree>

@@ -1,9 +1,9 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmListadoMaterialesAprobados" ?>
-<?page title="Listado de Materiales Aprobados" contentType="text/html;charset=UTF-8"?>
+<?page title="Lista de Materiales Aprobados" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window id="frmListadoMaterialesAprobados"
-		title="Listado de Materiales Aprobados" border="normal" mode="modal"
+		title="Lista de Materiales Aprobados" border="normal" mode="modal"
 		width="70%"
 		apply="controlador.logistica.CntrlListadoMaterialesAprobados">
 		<listbox id="lboxListadoMaterialesAprobados" mold="paging"
@@ -32,7 +32,9 @@
 			</listitem>
 		</listbox>
 		<div width="100%" align="right">
-			<button id="btnSalir" label="Salir" image="/Recursos/Imagenes/salir.png"></button>
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png">
+			</button>
 		</div>
 	</window>
 </zk>

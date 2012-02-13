@@ -5,7 +5,6 @@ import java.util.List;
 import modelo.Actividad;
 import modelo.MaterialActividad;
 
-import org.hibernate.id.insert.Binder;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
@@ -25,7 +24,7 @@ public class CntrlListadoMaterialesAprobados extends GenericForwardComposer {
 	List<MaterialActividad> listadoMaterialActividad;
 
 	AnnotateDataBinder binder;
-	
+
 	Window frmListadoMaterialesAprobados;
 
 	public void doAfterCompose(Component comp) throws Exception {
@@ -35,8 +34,7 @@ public class CntrlListadoMaterialesAprobados extends GenericForwardComposer {
 	}
 
 	public void onCreate$frmListadoMaterialesAprobados() {
-		this.actividad = (Actividad) ListadoMaterialesAprobados.getVariable(
-				"General", false);
+		this.actividad = (Actividad) ListadoMaterialesAprobados.getVariable("General", false);
 		this.cargar();
 		this.binder.loadAll();
 
@@ -45,18 +43,16 @@ public class CntrlListadoMaterialesAprobados extends GenericForwardComposer {
 	public void onClick$btnSalir() {
 		this.frmListadoMaterialesAprobados.detach();
 	}
-	
+
 	public void cargar() {
-		this.listadoMaterialActividad = servicioMaterialActividad
-				.ListarPorActividad(actividad);
+		this.listadoMaterialActividad = servicioMaterialActividad.ListarPorActividad(actividad);
 	}
 
 	public Component getListadoMaterialesAprobados() {
 		return ListadoMaterialesAprobados;
 	}
 
-	public void setListadoMaterialesAprobados(
-			Component listadoMaterialesAprobados) {
+	public void setListadoMaterialesAprobados(Component listadoMaterialesAprobados) {
 		ListadoMaterialesAprobados = listadoMaterialesAprobados;
 	}
 
@@ -80,8 +76,7 @@ public class CntrlListadoMaterialesAprobados extends GenericForwardComposer {
 		return listadoMaterialActividad;
 	}
 
-	public void setListadoMaterialActividad(
-			List<MaterialActividad> listadoMaterialActividad) {
+	public void setListadoMaterialActividad(List<MaterialActividad> listadoMaterialActividad) {
 		this.listadoMaterialActividad = listadoMaterialActividad;
 	}
 

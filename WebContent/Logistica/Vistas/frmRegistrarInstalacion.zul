@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><?page title="Maestro Instalación" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winRegistrarInstalacion"?>
 <zk>
 	<window id="winRegistrarInstalacion" title="Registro de Instalación"
 		border="normal" width="696px"
@@ -12,40 +12,44 @@
 						<row style="border:none">
 							<label value="Descripción" />
 							<textbox id="txtDescripcion" width="95%"
-								multiline="true" height="50px" constraint="no empty"
+								multiline="true" height="50px"
+								constraint="no empty: El campo 'Descripción' es obligatorio"
 								value="@{cntrl.instalacion.descripcion}" />
 							<label value="(*)" style="color:red" />
-							<space width="15%"/>			
+							<space width="15%" />
 							<div>
-								<label value="Tipo de instalación"/>
-								<combobox id="cmbTipoInstalacion" constraint="no empty"
-									selectedItem="@{cntrl.instalacion.datoBasico}"
-									model="@{cntrl.tiposInstalaciones}" >
-									<comboitem self="@{each=Instalacion}"
-										label="@{Instalacion.descripcion}" />
-								</combobox>							
+								<label value="Tipo de instalación" />
+								<combobox id="cmbTipoInstalacion"
+									constraint="no empty: El campo 'Tipo de instalación' es obligatorio"
+									selectedItem="@{cntrl.instalacion.datoBasico}" readonly="true"
+									model="@{cntrl.tiposInstalaciones}">
+									<comboitem
+										self="@{each=Instalacion}" label="@{Instalacion.descripcion}" />
+								</combobox>
 								<label value="(*)" style="color:red" />
 							</div>
 						</row>
 						<row style="border:none">
 							<label value="Capacidad" />
 							<spinner id="spCapacidad" width="90%"
-								constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.capacidad}" />
+								constraint="no empty, no negative, no zero: El campo 'Capacidad' es obligatorio"
+								value="@{cntrl.instalacion.capacidad}" />
 							<label value="(*)" style="color:red" />
-							<space width="15%"/>
-							<div>								
-								<label value="Tamaño en m²" />	
-								<space width="7%"/>									
+							<space width="15%" />
+							<div>
+								<label value="Tamaño en m²" />
+								<space width="7%" />
 								<doublebox id="dboxTamano" width="39%"
-									constraint="no empty, no negative, no zero" value="@{cntrl.instalacion.tamano}" />
+									constraint="no empty, no negative, no zero: El campo 'Tamaño' es obligatorio"
+									value="@{cntrl.instalacion.tamano}" />
 								<label value="(*)" style="color:red" />
-							</div>							
+							</div>
 						</row>
 						<row style="border:none">
 							<label value="Ubicada en: " />
-							<combobox id="cmbUbicacion" width="90%" 
-								selectedItem="@{cntrl.instalacion.ubicacion }"
-								model="@{cntrl.instalaciones }">								
+							<combobox id="cmbUbicacion" width="90%"
+								readonly="true" selectedItem="@{cntrl.instalacion.instalacion }"
+								model="@{cntrl.instalaciones }">
 								<comboitem self="@{each=ubicacion}"
 									label="@{ubicacion.descripcion}" />
 							</combobox>
@@ -60,7 +64,9 @@
 					<columns />
 					<rows>
 						<row>
-							<listbox id="lboxInstalaciones" mold="paging" pageSize="5" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
+							<listbox id="lboxInstalaciones"
+								mold="paging" pageSize="10"
+								onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
 								model="@{cntrl.instalaciones, load-after='btnRegistrar.onClick, btnModificar.onClick, btnEliminar.onClick, btnCancelar.onClick'}"
 								selectedItem="@{cntrl.instalacion }">
 								<listhead>
@@ -78,7 +84,8 @@
 										label="@{i.CodigoInstalacion}" id="celdaCodigo" />
 									<listcell label="@{i.descripcion}" />
 									<listcell label="@{i.capacidad}" />
-									<listcell label="@{i.ubicacion.descripcion}" />
+									<listcell
+										label="@{i.ubicacion.descripcion}" />
 								</listitem>
 							</listbox>
 						</row>
@@ -88,25 +95,25 @@
 		</panel>
 		<div align="right" width="100%">
 			<button id="btnImprimir" label="Imprimir" width="100px"
-			height="30px" image="../../Recursos/Imagenes/imprimir.ico">
+				height="30px" image="/Recursos/Imagenes/imprimir.ico">
 			</button>
 			<button id="btnRegistrar" label="Registrar" width="100px"
 				onClick="btnModificar.disabled=btnEliminar.disabled=true"
-				height="30px" image="../../Recursos/Imagenes/guardar.ico">
+				height="30px" image="/Recursos/Imagenes/guardar.ico">
 			</button>
 			<button id="btnModificar" label="Modificar" width="100px"
 				disabled="true"
 				onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
-				height="30px" image="../../Recursos/Imagenes/editar.ico" />
+				height="30px" image="/Recursos/Imagenes/editar.ico" />
 			<button id="btnCancelar" label="Cancelar" width="100px"
 				onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
-				height="30px" image="../../Recursos/Imagenes/cancelar.ico" />
+				height="30px" image="/Recursos/Imagenes/cancelar.ico" />
 			<button id="btnEliminar" label="Eliminar" width="100px"
 				disabled="true"
 				onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
-				height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
+				height="30px" image="/Recursos/Imagenes/eliminar.ico" />
 			<button id="btnSalir" label="Salir" width="100px"
-				height="30px" image="../../Recursos/Imagenes/salir.png"
+				height="30px" image="/Recursos/Imagenes/salir.png"
 				onClick="winRegistrarInstalacion.detach()" />
 		</div>
 	</window>

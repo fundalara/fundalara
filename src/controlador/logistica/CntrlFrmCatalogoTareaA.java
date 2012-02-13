@@ -3,7 +3,6 @@ package controlador.logistica;
 import java.util.List;
 
 import modelo.DatoBasico;
-import modelo.TipoDato;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,12 +15,8 @@ import org.zkoss.zul.Messagebox;
 
 import servicio.interfaz.IServicioDatoBasico;
 
+public class CntrlFrmCatalogoTareaA extends GenericForwardComposer {
 
-
-
-
-public class CntrlFrmCatalogoTareaA  extends GenericForwardComposer {
-	
 	IServicioDatoBasico servicioDatoBasico;
 	List<DatoBasico> listaTarea;
 	DatoBasico tarea;
@@ -30,51 +25,48 @@ public class CntrlFrmCatalogoTareaA  extends GenericForwardComposer {
 	Component catalogoTarea;
 	Component frmPlanificarMantenimiento;
 	Listbox lboxTarea;
-	
-	public void doAfterCompose(Component comp)throws Exception{
+
+	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		comp.setVariable("cntrl",this, true);
-		
+		comp.setVariable("cntrl", this, true);
+
 		catalogoTarea = comp;
-		
-		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");		
+
+		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		DatoBasico db = new DatoBasico();
 		db.setCodigoDatoBasico(224);
 		db.setEstatus('A');
-		listaTarea= servicioDatoBasico.buscarDatosPorRelacion(db);
-		
-		
-		}
-	
-	public void onClick$btnGuardar() throws InterruptedException{
+		listaTarea = servicioDatoBasico.buscarDatosPorRelacion(db);
 
+	}
 
-		//Se comprueba que se haya seleccionado un elemento de la lista
+	public void onClick$btnGuardar() throws InterruptedException {
+
+		// Se comprueba que se haya seleccionado un elemento de la lista
 		if (lboxTarea.getSelectedIndex() != -1) {
-			
-			//se obtiene la tarea seleccionada
+
+			// se obtiene la tarea seleccionada
 			tarea = listaTarea.get(lboxTarea.getSelectedIndex());
-		 
-			
-			//se obtiene la referencia del formulario
-			Component frmPlanificarActividad = (Component) catalogoTarea.getVariable("frmPlanificarActividad",false);
-            
-			//se le asigna el objeto tarea al formulario
-			frmPlanificarActividad.setVariable("tarea", tarea,false);
-			
-			//se le envia una señal al formulario indicado que el formulario se cerro y que los datos se han enviado
-			Events.sendEvent(new Event("onCatalogoTareaCerrado",frmPlanificarActividad));          
-				
-			//se cierra el catalogo	
+
+			// se obtiene la referencia del formulario
+			Component frmPlanificarActividad = (Component) catalogoTarea.getVariable("frmPlanificarActividad", false);
+
+			// se le asigna el objeto tarea al formulario
+			frmPlanificarActividad.setVariable("tarea", tarea, false);
+
+			// se le envia una señal al formulario indicado que el formulario se
+			// cerro y que los datos se han enviado
+			Events.sendEvent(new Event("onCatalogoTareaCerrado", frmPlanificarActividad));
+
+			// se cierra el catalogo
 			catalogoTarea.detach();
 
 		} else {
-				Messagebox.show("Seleccione una tarea ", "Mensaje",	Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
 	}
-
 
 	public List<DatoBasico> getListaTarea() {
 		return listaTarea;
@@ -91,5 +83,5 @@ public class CntrlFrmCatalogoTareaA  extends GenericForwardComposer {
 	public void setTarea(DatoBasico tarea) {
 		this.tarea = tarea;
 	}
-	
+
 }

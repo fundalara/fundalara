@@ -20,15 +20,11 @@
 					label="@{pm.getPersonalActividadPlanificada.getPersonal.getPersonaNatural.getPrimerApellido}" />
 			</listitem>
 		</listbox>
-
 		<div align="right">
 			<button id="btnGuardar" label="Guardar"
 				image="/Recursos/Imagenes/guardar.ico" />
-
 			<button id="btnSalir" label="Salir"
 				image="/Recursos/Imagenes/salir.png" />
 		</div>
-
-
 	</window>
 </zk>

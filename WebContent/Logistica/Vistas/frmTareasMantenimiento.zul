@@ -4,26 +4,21 @@
 <window id="tareasMantenimiento" title="Tareas Mantenimiento"
 	border="normal" mode="modal" width="930px" closable="true"
 	apply="controlador.logistica.CntrlCalogoTareas">
-
 	<grid>
-
 		<columns>
 			<column width="20%"></column>
 			<column width="30%"></column>
 			<column width="20%"></column>
 			<column width="30%"></column>
 		</columns>
-
 		<rows>
 			<row style="border:none">
 				<label style="font-weight: bold;" value="Descripción"></label>
 				<textbox disabled="true" value="Mantenimiento del Campo"
 					width=" 95%" style="color:black !important;">
 				</textbox>
-
 			</row>
 		</rows>
-
 	</grid>
 	<grid>
 		<columns>
@@ -79,14 +74,7 @@
 						image="/Recursos/Imagenes/cancelar.ico">
 					</button>
 				</div>
-
 			</row>
 		</rows>
 	</grid>
-
-	<zscript>
-<![CDATA[
-
-]]>
-</zscript>
 </window>

@@ -12,27 +12,27 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import servicio.interfaz.IServicioDatoBasico;
 
 public class CntrlCatalogoComisiones2 extends GenericForwardComposer {
-	
+
 	DatoBasico datoBasico = new DatoBasico();
-	
+
 	IServicioDatoBasico servicioDatoBasico;
-	
+
 	List<DatoBasico> listadoComisiones;
 	Component CatalogoComision;
 	Component frmResultadosActividadComplementaria;
-	
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, false);
-		
+
 		CatalogoComision = comp;
 		listadoComisiones = servicioDatoBasico.listarComisiones();
 	}
-	
-	public void onClick$btnAceptar(){
+
+	public void onClick$btnAceptar() {
 		Component frmResultadosActividadComplementaria = (Component) this.CatalogoComision.getVariable("frmResultadosActividadComplementaria", false);
 		frmResultadosActividadComplementaria.setVariable("comision", datoBasico, false);
-		Events.sendEvent(new Event("onCatalogoComisionCerrado2",frmResultadosActividadComplementaria));
+		Events.sendEvent(new Event("onCatalogoComisionCerrado2", frmResultadosActividadComplementaria));
 		this.CatalogoComision.detach();
 	}
 
@@ -64,12 +64,8 @@ public class CntrlCatalogoComisiones2 extends GenericForwardComposer {
 		return frmResultadosActividadComplementaria;
 	}
 
-	public void setFrmResultadosActividadComplementaria(
-			Component frmResultadosActividadComplementaria) {
+	public void setFrmResultadosActividadComplementaria(Component frmResultadosActividadComplementaria) {
 		this.frmResultadosActividadComplementaria = frmResultadosActividadComplementaria;
 	}
 
-	
-	
-	
 }

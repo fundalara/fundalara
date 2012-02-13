@@ -1,7 +1,6 @@
 package controlador.logistica;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import modelo.Actividad;
@@ -10,8 +9,7 @@ import modelo.ComisionActividadPlanificada;
 import modelo.ComisionFamiliar;
 import modelo.DatoBasico;
 import modelo.EstadoActividad;
-import modelo.Familiar;
-import modelo.FamiliarJugador;
+import modelo.Instalacion;
 import modelo.InstalacionUtilizada;
 import modelo.Material;
 import modelo.MaterialActividadPlanificada;
@@ -25,27 +23,20 @@ import modelo.TareaActividad;
 import modelo.TareaActividadPlanificada;
 import modelo.TipoDato;
 
-import org.python.tests.RespectJavaAccessibility.Pear;
 import org.zkoss.calendar.event.CalendarsEvent;
-import org.zkoss.calendar.impl.SimpleCalendarEvent;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Window;
-
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
-
-import controlador.general.CntrlFrmAgendaLogistica;
-import controlador.general.EventosCalendario;
+import org.zkoss.zul.Window;
 
 import servicio.implementacion.ServicioPlanificacionActividad;
 import servicio.interfaz.IServicioActividad;
@@ -54,48 +45,43 @@ import servicio.interfaz.IServicioComisionActividadPlanificada;
 import servicio.interfaz.IServicioComisionFamiliar;
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioEstadoActividad;
+import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioInstalacionUtilizada;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
 import servicio.interfaz.IServicioPersona;
+import servicio.interfaz.IServicioPersonal;
 import servicio.interfaz.IServicioPersonalActividad;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
-import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioTareaActividad;
 import servicio.interfaz.IServicioTareaActividadPlanificada;
-
-import servicio.interfaz.IServicioPersonal;
+import controlador.general.CntrlFrmAgendaLogistica;
 
 public class CntrlPlanificarActividad extends GenericForwardComposer {
 
 	private AnnotateDataBinder binder;
 	private Component frmPlanificarActividad;
-	private Component frmPersonal;
 
 	String descripcionActividad = new String();
 	String descripcionInstalacion = new String();
 	private Material materialActividad = new Material();
-	private DatoBasico tareaCatalogo;
 	private DatoBasico tipoActividad;
 	private DatoBasico tipoInstalacion;
 	private DatoBasico comision;
 	private TareaActividadPlanificada tareaActividad = new TareaActividadPlanificada();
 	private PersonaNatural personaNatural = new PersonaNatural();
-	private Personal personal = new Personal();
 	Persona responsable = new Persona();
 	private PersonalActividadPlanificada personalActividadPlanificada = new PersonalActividadPlanificada();
-	private InstalacionUtilizada instalacionUtilizada;
+	private Instalacion instalacion;
 
 	private List<DatoBasico> tiposActividades;
 	private List<TareaActividadPlanificada> tareasActividades = new ArrayList<TareaActividadPlanificada>();
 	private List<DatoBasico> listaTareas;
 	private List<Personal> listaPersonal;
-	private List<PersonaNatural> listaPersonas = new ArrayList<PersonaNatural>();
 	private List<MaterialActividadPlanificada> materialesActividades = new ArrayList<MaterialActividadPlanificada>();
 	private List<DatoBasico> tiposInstalaciones;
 	private List<InstalacionUtilizada> listaInstalacionUtilizada;
+	private List<Instalacion> listaInstalacion;
 	private List<DatoBasico> listaComisiones = new ArrayList<DatoBasico>();
-
-	private List<DatoBasico> listadoComisiones;
 
 	private IServicioDatoBasico servicioDatoBasico;
 	private IServicioPersonal servicioPersonal;
@@ -112,14 +98,13 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 	private IServicioTareaActividad servicioTareaActividad;
 	private IServicioEstadoActividad servicioEstadoActividad;
 	IServicioPersona servicioPersona;
+	private IServicioInstalacion servicioInstalacion;
 
 	private Listbox lboxMateriales;
-	private Listbox lboxPersonal;
 	private Listbox lboxTareasAgregadas;
 	private Listbox lboxComision;
 	private Listbox lboxTareas;
 	private Combobox cmbInstalacion;
-	private Combobox cmbTipo;
 	private Datebox fechaInicio;
 	private Datebox fechaFin;
 	private Timebox horaInicio;
@@ -191,101 +176,86 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 
 	public void onSelect$cmbTipoInstalacion() {
 		listaInstalacionUtilizada = new ArrayList<InstalacionUtilizada>();
-	
 		if (tipoInstalacion.getCodigoDatoBasico() != 158) {
-			cmbInstalacion.open();	
-			cmbInstalacion = new Combobox();
 			txtInstalacion.setVisible(false);
-			cmbInstalacion.setVisible(true);
 			txtDescripcion.setValue(null);
-			cmbInstalacion.focus();
+			cmbInstalacion.setVisible(true);
 			cmbInstalacion.open();
-			listaInstalacionUtilizada = new ArrayList<InstalacionUtilizada>();
-			listaInstalacionUtilizada = servicioInstalacionUtilizada.listarInstalacionDisponible(
-					tipoInstalacion,fechaInicio.getValue(), fechaFin.getValue(),
+			cmbInstalacion.focus();
+			listaInstalacion = new ArrayList<Instalacion>();
+			listaInstalacionUtilizada = servicioInstalacionUtilizada.listarInstalacionOcupada(fechaInicio.getValue(), fechaFin.getValue(),
 					horaInicio.getValue(), horaFin.getValue());
+			listaInstalacion = servicioInstalacion.listarInstalacionesDisponibles(tipoInstalacion, listaInstalacionUtilizada);
 			binder.loadAll();
 		} else {
-			cmbInstalacion.setVisible(false);
+			listaInstalacion = servicioInstalacion.buscar(tipoInstalacion);
 			txtInstalacion.setVisible(true);
 			txtInstalacion.focus();
+			binder.loadAll();
 		}
 
 	}
 
-	public void onClick$btnPeriodicidad(){
-	Executions.createComponents(
-				"/Logistica/Vistas/frmPeriodicidad.zul", null, null);
+	public void onClick$btnPeriodicidad() {
+		Executions.createComponents("/Logistica/Vistas/frmPeriodicidad.zul", null, null);
 	}
-	
+
 	public void onClick$btnResponsable() {
-		final Component catalogoPersonal = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
+		final Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
 		catalogoPersonal.setVariable("frmPadre", frmPlanificarActividad, false);
 		int numero = 1;
 		catalogoPersonal.setVariable("numero", numero, false);
-
-		frmPlanificarActividad.addEventListener("onCatalogoCerradoResponsable",
-				new EventListener() {
-					public void onEvent(Event arg0) throws Exception {
-						Persona persona = new Persona();
-						persona = (Persona) frmPlanificarActividad.getVariable(
-								"persona", false);
-						//Persona persona2 = servicioPersona.buscarPorCodigo(persona.getCedulaRif());
-						//responsable.setPersonaNatural(persona2.getPersonaNatural());
-						//responsable.setCedulaRif(persona2.getCedulaRif());
-                        responsable = new Persona();
-						responsable = persona;
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
-				});
+		int aux = 2;
+		catalogoPersonal.setVariable("aux", aux, false);
+		frmPlanificarActividad.addEventListener("onCatalogoCerradoResponsable", new EventListener() {
+			public void onEvent(Event arg0) throws Exception {
+				Persona persona = new Persona();
+				persona = (Persona) frmPlanificarActividad.getVariable("persona", false);
+				responsable = new Persona();
+				responsable = persona;
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
+		});
 	}
 
 	public void onClick$btnAgregarComision() {
 
-		final Component catalogoComision = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoComisiones.zul", null, null);
+		final Component catalogoComision = Executions.createComponents("/Logistica/Vistas/frmCatalogoComisiones.zul", null, null);
 
-		catalogoComision.setVariable("frmPadre", this.frmPlanificarActividad,
-				false);
+		catalogoComision.setVariable("frmPadre", this.frmPlanificarActividad, false);
 		catalogoComision.setVariable("comision", listaComisiones, false);
 
-		frmPlanificarActividad.addEventListener("onCatalogoComisionCerrado",
-				new EventListener() {
+		frmPlanificarActividad.addEventListener("onCatalogoComisionCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						System.out.println("estoy en el OnCatalogoCerrado");
-						List<DatoBasico> c = new ArrayList<DatoBasico>();
-						c = (List<DatoBasico>) frmPlanificarActividad
-								.getVariable("listaComision", false);
-						for (DatoBasico datoBasico : c) {
-							listaComisiones.add(datoBasico);
-						}
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
+			public void onEvent(Event arg0) throws Exception {
+				System.out.println("estoy en el OnCatalogoCerrado");
+				List<DatoBasico> c = new ArrayList<DatoBasico>();
+				c = (List<DatoBasico>) frmPlanificarActividad.getVariable("listaComision", false);
+				for (DatoBasico datoBasico : c) {
+					listaComisiones.add(datoBasico);
+				}
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
 
-				});
+		});
 	}
 
 	public void onClick$btnEliminarComision() throws InterruptedException {
 		if (lboxComision.getSelectedIndex() != -1) {
 
-			listaComisiones.remove((DatoBasico) lboxComision.getSelectedItem()
-					.getValue());
+			listaComisiones.remove((DatoBasico) lboxComision.getSelectedItem().getValue());
 			lboxComision.removeItemAt(lboxComision.getSelectedIndex());
 
 		} else {
-			Messagebox.show("Seleccione una comision ", "Mensaje",
-					Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una comision ", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
 		}
 	}
 
 	public void onClick$btnAgregarTarea() {
 
-		Component catalogoTarea = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoTarea.zul", null, null);
+		Component catalogoTarea = Executions.createComponents("/Logistica/Vistas/frmCatalogoTarea.zul", null, null);
 
 		catalogoTarea.setVariable("frmPadre", frmPlanificarActividad, false);
 		List<DatoBasico> aux = new ArrayList<DatoBasico>();
@@ -295,105 +265,95 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		System.out.println("aux.size: " + aux.size());
 		catalogoTarea.setVariable("tarea", aux, false);
 
-		frmPlanificarActividad.addEventListener("onCatalogoTareaCerrado",
-				new EventListener() {
+		frmPlanificarActividad.addEventListener("onCatalogoTareaCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
+			public void onEvent(Event arg0) throws Exception {
 
-						// TareaActividadPlanificada aux = new
-						// TareaActividadPlanificada();
+				// TareaActividadPlanificada aux = new
+				// TareaActividadPlanificada();
 
-						List<DatoBasico> tareas = new ArrayList<DatoBasico>();
-						tareas = (List<DatoBasico>) frmPlanificarActividad
-								.getVariable("tarea", false);
-						for (DatoBasico datoBasico : tareas) {
-							ClaseAux e = new ClaseAux();
-							e.tarea = datoBasico;
-							e.setResponsableA(null);
-							e.setTipoPersona(null);
-							listaPersonaResponsable.add(e);
-						}
+				List<DatoBasico> tareas = new ArrayList<DatoBasico>();
+				tareas = (List<DatoBasico>) frmPlanificarActividad.getVariable("tarea", false);
+				for (DatoBasico datoBasico : tareas) {
+					ClaseAux e = new ClaseAux();
+					e.tarea = datoBasico;
+					e.setResponsableA(null);
+					e.setTipoPersona(null);
+					listaPersonaResponsable.add(e);
+				}
 
-						binder.loadAll();
+				binder.loadAll();
 
-						arg0.stopPropagation();
-					}
-				});
+				arg0.stopPropagation();
+			}
+		});
 
 	}
 
 	public void onClick$btnEliminarTarea() throws InterruptedException {
 
 		if (lboxTareas.getSelectedIndex() != -1) {
-			listaPersonaResponsable.remove(lboxTareas.getSelectedItem()
-					.getValue());
+			listaPersonaResponsable.remove(lboxTareas.getSelectedItem().getValue());
 			lboxTareas.removeItemAt(lboxTareas.getSelectedIndex());
 
 		} else {
-			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.OK,
-					Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
 		}
 	}
 
 	public void onClick$btnAsignarPersonal() throws InterruptedException {
 		if (lboxTareas.getSelectedIndex() != -1) {
-			Component catalogoPersonal = Executions.createComponents(
-					"/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
-			catalogoPersonal.setVariable("frmPadre", frmPlanificarActividad,
-					false);
+			Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
+			catalogoPersonal.setVariable("frmPadre", frmPlanificarActividad, false);
 			int numero = 2;
 			catalogoPersonal.setVariable("numero", numero, false);
-			frmPlanificarActividad.addEventListener(
-					"onCatalogoCerradoPersonal", new EventListener() {
-						public void onEvent(Event arg0) throws Exception {
-							Persona persona = new Persona();
-							Personal personal = new Personal();
-							persona = (Persona) frmPlanificarActividad.getVariable("persona", false);
-							personal = servicioPersonal.buscarPorCodigo(persona.getPersonaNatural());
-							System.out.println("Asignar Personal:  " + personal);
-							personaResponsable.setTipoPersona("PERSONAL");
-							personaResponsable.setResponsableA(persona.getPersonaNatural());
 
-							binder.loadAll();
+			catalogoPersonal.setVariable("aux", numero, false);
+			frmPlanificarActividad.addEventListener("onCatalogoCerradoPersonal", new EventListener() {
+				public void onEvent(Event arg0) throws Exception {
+					Persona persona = new Persona();
+					Personal personal = new Personal();
+					persona = (Persona) frmPlanificarActividad.getVariable("persona", false);
+					personal = servicioPersonal.buscarPorCodigo(persona.getPersonaNatural());
+					System.out.println("Asignar Personal:  " + personal);
+					personaResponsable.setTipoPersona("PERSONAL");
+					personaResponsable.setResponsableA(persona.getPersonaNatural());
 
-							arg0.stopPropagation();
-						}
-					});
+					binder.loadAll();
+
+					arg0.stopPropagation();
+				}
+			});
 
 		} else {
-			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.OK,
-					Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
 		}
 	}
 
 	public void onClick$btnAsignarRepresentante() throws InterruptedException {
 		if (lboxComision.getSelectedIndex() != -1) {
 			if (lboxTareas.getSelectedIndex() != -1) {
-				Component catalogoRepresentante = Executions.createComponents(
-						"/Logistica/Vistas/frmCatalogoRepresentantes.zul",
-						null, null);
+				Component catalogoRepresentante = Executions.createComponents("/Logistica/Vistas/frmCatalogoRepresentantes.zul", null, null);
 
-				catalogoRepresentante.setVariable("frmPadre",frmPlanificarActividad, false);
+				catalogoRepresentante.setVariable("frmPadre", frmPlanificarActividad, false);
 				System.out.println(comision.getCodigoDatoBasico());
 				catalogoRepresentante.setVariable("comision", comision, false);
 				frmPlanificarActividad.addEventListener("onCatalogoRepresentanteCerrado", new EventListener() {
-							public void onEvent(Event arg0) throws Exception {
-								PersonaNatural personaNatural = new PersonaNatural();
-								personaNatural = (PersonaNatural) frmPlanificarActividad.getVariable("personaNatural", false);
-								personaResponsable.setResponsableA(personaNatural);
-								personaResponsable.setTipoPersona("REPRESENTANTE");
-								arg0.stopPropagation();
-								binder.loadAll();
+					public void onEvent(Event arg0) throws Exception {
+						PersonaNatural personaNatural = new PersonaNatural();
+						personaNatural = (PersonaNatural) frmPlanificarActividad.getVariable("personaNatural", false);
+						personaResponsable.setResponsableA(personaNatural);
+						personaResponsable.setTipoPersona("REPRESENTANTE");
+						arg0.stopPropagation();
+						binder.loadAll();
 
-							}
-						});
+					}
+				});
 			} else {
-				Messagebox.show("Seleccione una tarea ", "Mensaje",
-						Messagebox.OK, Messagebox.INFORMATION);
+				Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
 			}
 		} else {
-			Messagebox.show("Seleccione una comision", "Mensaje",
-					Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una comision", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
 		}
 
 	}
@@ -401,67 +361,56 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 	// botones
 	public void onClick$btnAgregarMateriales() {
 
-		Component catalogoMaterial = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
+		Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
 
-		catalogoMaterial.setVariable("frmPlanificarActividad",
-				frmPlanificarActividad, false);
+		catalogoMaterial.setVariable("frmPlanificarActividad", frmPlanificarActividad, false);
 
-		frmPlanificarActividad.addEventListener("onCatalogoMaterialCerrado",
-				new EventListener() {
+		frmPlanificarActividad.addEventListener("onCatalogoMaterialCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						materialActividad = new Material();
+			public void onEvent(Event arg0) throws Exception {
+				materialActividad = new Material();
 
-						materialActividad = (Material) frmPlanificarActividad
-								.getVariable("material", false);
-						int cantidad = (Integer) frmPlanificarActividad
-								.getVariable("cantidad", false);
+				materialActividad = (Material) frmPlanificarActividad.getVariable("material", false);
+				int cantidad = (Integer) frmPlanificarActividad.getVariable("cantidad", false);
 
-						MaterialActividadPlanificada aux = new MaterialActividadPlanificada();
+				MaterialActividadPlanificada aux = new MaterialActividadPlanificada();
 
-						aux.setCantidadRequerida(cantidad);
-						aux.setEstatus('A');
-						aux.setMaterial(materialActividad);
-						materialesActividades.add(aux);
-						binder.loadAll();
+				aux.setCantidadRequerida(cantidad);
+				aux.setEstatus('A');
+				aux.setMaterial(materialActividad);
+				materialesActividades.add(aux);
+				binder.loadAll();
 
-						arg0.stopPropagation();
-					}
-				});
+				arg0.stopPropagation();
+			}
+		});
 	}
 
 	public void onClick$btnEliminarMateriales() throws InterruptedException {
 
 		if (lboxMateriales.getSelectedIndex() != -1) {
-			materialesActividades
-					.remove((MaterialActividadPlanificada) lboxMateriales
-							.getSelectedItem().getValue());
+			materialesActividades.remove((MaterialActividadPlanificada) lboxMateriales.getSelectedItem().getValue());
 			binder.loadAll();
 		} else {
-			Messagebox.show("Seleccione una material", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una material", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
 	}
 
 	public void onClick$btnGuardar() throws InterruptedException {
-		
+
 		InstalacionUtilizada auxInstalacionUtilizada = new InstalacionUtilizada();
-		if (tipoInstalacion.getCodigoDatoBasico() != 158) {
-			auxInstalacionUtilizada.setCodigoInstalacionUtilizada(servicioInstalacionUtilizada.listar().size() + 1);
-			auxInstalacionUtilizada.setEstatus('A');
-			auxInstalacionUtilizada.setFechaFin(fechaFin.getValue());
-			auxInstalacionUtilizada.setFechaInicio(fechaInicio.getValue());
-			auxInstalacionUtilizada.setHoraFin(horaFin.getValue());
-			auxInstalacionUtilizada.setHoraInicio(horaInicio.getValue());
-			auxInstalacionUtilizada.setInstalacion(instalacionUtilizada.getInstalacion());
-			servicioInstalacionUtilizada.agregar(auxInstalacionUtilizada);
-		} else {
-			auxInstalacionUtilizada = null;
-		}
-        System.out.println("---------------------------------------------------------------------");
+
+		auxInstalacionUtilizada.setCodigoInstalacionUtilizada(servicioInstalacionUtilizada.listar().size() + 1);
+		auxInstalacionUtilizada.setEstatus('A');
+		auxInstalacionUtilizada.setFechaFin(fechaFin.getValue());
+		auxInstalacionUtilizada.setFechaInicio(fechaInicio.getValue());
+		auxInstalacionUtilizada.setHoraFin(horaFin.getValue());
+		auxInstalacionUtilizada.setHoraInicio(horaInicio.getValue());
+		auxInstalacionUtilizada.setInstalacion(instalacion);
+		servicioInstalacionUtilizada.agregar(auxInstalacionUtilizada);
+
 		PlanificacionActividad actividadPlanificada = new PlanificacionActividad();
 		actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.listar().size() + 1);
 		actividadPlanificada.setDatoBasico(tipoActividad);
@@ -474,9 +423,7 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		actividadPlanificada.setInstalacionUtilizada(auxInstalacionUtilizada);
 		actividadPlanificada.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
 		servicioPlanificacionActividad.agregar(actividadPlanificada);
-		
-		System.out.println("---------------------------------------------------------------------");
-		
+
 		Actividad actividad = new Actividad();
 		actividad.setCodigoActividad(servicioActividad.listar().size() + 1);
 		actividad.setEstatus('A');
@@ -489,16 +436,14 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		actividad.setDescripcionInstalacion(descripcionInstalacion);
 		actividad.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
 		servicioActividad.agregar(actividad);
-		
-		System.out.println("---------------------------------------------------------------------");
-		
+
 		EstadoActividad estadoActividad = new EstadoActividad();
 		estadoActividad.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
 		estadoActividad.setDatoBasico(servicioDatoBasico.buscarPorCodigo(251));
 		estadoActividad.setActividad(actividad);
 		estadoActividad.setEstatus('A');
 		servicioEstadoActividad.agregar(estadoActividad);
-		System.out.println("---------------------------------------------------------------------");
+
 		for (int j = 0; j < listaComisiones.size(); j++) {
 			ComisionActividadPlanificada comisionActividadPlanificada = new ComisionActividadPlanificada();
 			comisionActividadPlanificada.setCodigoComisionActividadPlan(servicioComisionActividadPlanificada.listar().size() + 1);
@@ -509,20 +454,17 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 			ComisionActividad comisionActividad = new ComisionActividad();
 			comisionActividad.setCodigoComisionActividad(servicioComisionActividad.listar().size() + 1);
 			comisionActividad.setActividad(actividad);
-			comisionActividad.setDatoBasico(tipoActividad);
+			comisionActividad.setDatoBasico(listaComisiones.get(j));
 			servicioComisionActividad.agregar(comisionActividad);
 		}
-		System.out.println("---------------------------------------------------------------------");
-		
-		
-		
+
 		for (int i = 0; i < listaPersonaResponsable.size(); i++) {
 			PersonalActividadPlanificada personalA = new PersonalActividadPlanificada();
 			ComisionFamiliar comisionF = new ComisionFamiliar();
-			
+
 			PersonalActividad personalAct = new PersonalActividad();
 			if (listaPersonaResponsable.get(i).getTipoPersona() == "PERSONAL") {
-				
+
 				Personal p = new Personal();
 				personalA.setCodigoPersonalActividadPlan(servicioPersonalActividadPlanificada.listar().size() + 1);
 				personalA.setPlanificacionActividad(actividadPlanificada);
@@ -536,18 +478,17 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 				personalAct.setActividad(actividad);
 				personalAct.setPersonal(p);
 				personalAct.setEstatus('A');
- 				servicioPersonalActividad.agregar(personalAct);
+				servicioPersonalActividad.agregar(personalAct);
 
- 				comisionF = null;
+				comisionF = null;
 			} else {
 				personalA = null;
 				comisionF = servicioComisionFamiliar.buscar(listaPersonaResponsable.get(i).getResponsableA().getCedulaRif());
-				personalAct= null;
+				personalAct = null;
 			}
 
-			System.out.println("En el ciclo---------------------------------------------------------------------");
 			TareaActividad ta = new TareaActividad();
-			
+
 			TareaActividadPlanificada tap = new TareaActividadPlanificada();
 			tap.setCodigoTareaActividadPlanificada(servicioTareaActividadPlanificada.listar().size() + 1);
 			tap.setDatoBasico(listaPersonaResponsable.get(i).getTarea());
@@ -559,8 +500,7 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 			System.out.println(tap.getDatoBasico());
 			System.out.println(tap.getPersonalActividadPlanificada());
 			servicioTareaActividadPlanificada.agregar(tap);
-			System.out.println("en el ciclo2----------------------------------------------------------------------");
-			
+
 			ta.setActividad(actividad);
 			ta.setCodigoTareaActividad(servicioTareaActividad.listar().size() + 1);
 			ta.setEstatus('A');
@@ -572,21 +512,19 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 
 		}
 		for (int j = 0; j < materialesActividades.size(); j++) {
-			materialesActividades.get(j).setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada.listar().size()+1);
+			materialesActividades.get(j).setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada.listar().size() + 1);
 			materialesActividades.get(j).setPlanificacionActividad(actividadPlanificada);
 			servicioMaterialActividadPlanificada.agregar(materialesActividades.get(j));
-		}		
-		
-		Messagebox.show("Datos agregados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);		
-		
+		}
+
+		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+
+		// para cargar el calendario
 		CntrlFrmAgendaLogistica agenda = (CntrlFrmAgendaLogistica) frmPlanificarActividad.getAttribute("calendario");
 		CalendarsEvent ce = (CalendarsEvent) frmPlanificarActividad.getAttribute("ce");
-		
-		agenda.cargar(ce,actividadPlanificada);
-		//agenda.cargarCalendario(servicioPlanificacionActividad.listarComplementarias());
-		
+		agenda.cargar(ce, actividadPlanificada);
 		frmPlanificarActividad.detach();
-		
+
 	}
 
 	public void onClick$btnSalir() {
@@ -637,11 +575,9 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		return listaInstalacionUtilizada;
 	}
 
-	public void setListaInstalacionUtilizada(
-			List<InstalacionUtilizada> listaInstalacionUtilizada) {
+	public void setListaInstalacionUtilizada(List<InstalacionUtilizada> listaInstalacionUtilizada) {
 		this.listaInstalacionUtilizada = listaInstalacionUtilizada;
 	}
-
 
 	public Persona getResponsable() {
 		return responsable;
@@ -679,8 +615,7 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		return tareasActividades;
 	}
 
-	public void setTareasActividades(
-			List<TareaActividadPlanificada> tareasActividades) {
+	public void setTareasActividades(List<TareaActividadPlanificada> tareasActividades) {
 		this.tareasActividades = tareasActividades;
 	}
 
@@ -732,21 +667,19 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		this.txtResponsable = txtResponsable;
 	}
 
-	public InstalacionUtilizada getInstalacionUtilizada() {
-		return instalacionUtilizada;
+	public Instalacion getInstalacion() {
+		return instalacion;
 	}
 
-	public void setInstalacionUtilizada(
-			InstalacionUtilizada instalacionUtilizada) {
-		this.instalacionUtilizada = instalacionUtilizada;
+	public void setInstalacion(Instalacion instalacion) {
+		this.instalacion = instalacion;
 	}
 
 	public List<MaterialActividadPlanificada> getMaterialesActividades() {
 		return materialesActividades;
 	}
 
-	public void setMaterialesActividades(
-			List<MaterialActividadPlanificada> materialesActividades) {
+	public void setMaterialesActividades(List<MaterialActividadPlanificada> materialesActividades) {
 		this.materialesActividades = materialesActividades;
 	}
 
@@ -778,8 +711,7 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		return personalActividadPlanificada;
 	}
 
-	public void setPersonalActividadPlanificada(
-			PersonalActividadPlanificada personalActividadPlanificada) {
+	public void setPersonalActividadPlanificada(PersonalActividadPlanificada personalActividadPlanificada) {
 		this.personalActividadPlanificada = personalActividadPlanificada;
 	}
 
@@ -811,8 +743,7 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 		return listaPersonaResponsable;
 	}
 
-	public void setListaPersonaResponsable(
-			List<ClaseAux> listaPersonaResponsable) {
+	public void setListaPersonaResponsable(List<ClaseAux> listaPersonaResponsable) {
 		this.listaPersonaResponsable = listaPersonaResponsable;
 	}
 
@@ -830,6 +761,14 @@ public class CntrlPlanificarActividad extends GenericForwardComposer {
 
 	public void setDescripcionInstalacion(String descripcionInstalacion) {
 		this.descripcionInstalacion = descripcionInstalacion;
+	}
+
+	public List<Instalacion> getListaInstalacion() {
+		return listaInstalacion;
+	}
+
+	public void setListaInstalacion(List<Instalacion> listaInstalacion) {
+		this.listaInstalacion = listaInstalacion;
 	}
 
 }
