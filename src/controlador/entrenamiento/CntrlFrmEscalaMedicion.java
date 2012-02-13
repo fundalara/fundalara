@@ -58,11 +58,11 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
-		cmbTipoEscala.setValue("--Seleccione--");
+		cmbTipoEscala.setValue("--SELECCIONE--");
 		listTipoEscala = new ArrayList<DatoBasico>();
 		listValoresEscala = new ArrayList<ValorEscala>();
 		listEscalaMedicion = new ArrayList<EscalaMedicion>();
-		TipoDato td = servicioTipoDato.buscarPorTipo("ESCALA MEDICION");
+		TipoDato td = servicioTipoDato.buscarPorTipo("TIPO ESCALA MEDICION");
 		listTipoEscala = servicioDatoBasico.buscarPorTipoDato(td);
 	}
 
@@ -171,7 +171,7 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 	}
 
 	public void onClick$btnAgregar() {
-		if (cmbTipoEscala.getValue().compareTo("--Seleccione--") == 0) {
+		if (cmbTipoEscala.getValue().compareTo("--SELECCIONE--") == 0) {
 			alert("Debe seleccionar un tipo de escala");
 		} else if (txtNombreEscala.getValue().isEmpty()) {
 			alert("Debes ingresar un nombre a la escala");
@@ -204,7 +204,7 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 	}
 
 	public void onClick$btnConsultar() {
-		if (cmbTipoEscala.getValue().compareTo("--Seleccione--") == 0) {
+		if (cmbTipoEscala.getValue().compareTo("--SELECCIONE--") == 0) {
 			alert("Debe seleccionar un tipo de escala");
 		} else {
 			execution.setAttribute("tipoEscala", cmbTipoEscala
@@ -219,7 +219,7 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 	}
 
 	public void onClick$btnCancelar() {
-		cmbTipoEscala.setValue("--Seleccione--");
+		cmbTipoEscala.setValue("--SELECCIONE--");
 		cmbTipoEscala.setDisabled(false);
 		valorEscala = new ValorEscala();
 		escalaMedicion = new EscalaMedicion();

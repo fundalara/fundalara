@@ -1,7 +1,8 @@
 package controlador.entrenamiento;
 
+import modelo.ActividadCalendario;
+import modelo.ActividadEjecutada;
 import modelo.ActividadEntrenamiento;
-import modelo.ActividadesEjecutadas;
 import modelo.AsistenciaJugador;
 import modelo.DesempennoJugador;
 import modelo.Equipo;
@@ -43,6 +44,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
+import servicio.implementacion.ServicioActividadCalendario;
 import servicio.implementacion.ServicioAsistenciaJugador;
 import servicio.implementacion.ServicioDesempennoJugador;
 import servicio.implementacion.ServicioLapsoDeportivo;
@@ -54,6 +56,8 @@ import servicio.implementacion.ServicioValorEscala;
 import controlador.entrenamiento.ListenerCheck;
 import controlador.entrenamiento.ModeloListBox;
 import controlador.entrenamiento.Render;
+import controlador.general.CntrlFrmAgendaEntrenamiento;
+import controlador.general.EventoSimpleCalendario;
 import dao.generico.GenericDao;
 
 import java.text.DateFormat;
@@ -77,6 +81,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 	Equipo equipo;
 	SesionEjecutada sesionEjecutada;
 	Roster roster;
+	LapsoDeportivo lapsoDeportivo;
 	ServicioRoster servicioRoster;
 	ServicioSesionEjecutada servicioSesionEjecutada;
 	ServicioLapsoDeportivo servicioLapsoDeportivo;
@@ -84,21 +89,22 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 	ServicioDesempennoJugador servicioDesempennoJugador;
 	ServicioPuntuacionJugador servicioPuntuacionJugador;
 	ServicioValorEscala servicioValorEscala;
+	ServicioActividadCalendario servicioActividadCalendario;
 	List<Combobox> combos;
 	ListenerCombo escuchadorCombo;
+	CntrlFrmAgendaEntrenamiento cntrlFrmAgendaEntrenamiento;
+	ActividadCalendario actividadCalendario;
+	EventoSimpleCalendario eventoSimpleCalendario;
 	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		Session session =new GenericDao().getSession();
-		Transaction tx =  session.beginTransaction();
-		equipo = (Equipo)session.load(Equipo.class, 11);
-		Date date,hI,hF;
-		DateFormat dateFormat = new SimpleDateFormat("dd");
-		date= new Date();
-		hF= new Date(date.getYear(), date.getMonth(), Integer.parseInt(dateFormat.format(date)), 12, 0);
-		hI= new Date(date.getYear(), date.getMonth(), Integer.parseInt(dateFormat.format(date)), 11, 0);
-		sesionEjecutada = servicioSesionEjecutada.buscarPorFechaHoraEquipo(equipo, date, hF, hI);
+		cntrlFrmAgendaEntrenamiento = (CntrlFrmAgendaEntrenamiento)execution.getAttribute("controlador");
+		actividadCalendario= (ActividadCalendario)execution.getAttribute("actividadCalendario");
+		eventoSimpleCalendario = (EventoSimpleCalendario)execution.getAttribute("evento");		
+		sesionEjecutada = servicioSesionEjecutada.buscarPorSesionEquipoFecha(actividadCalendario.getSesion(),actividadCalendario.getSesion().getEquipo() , actividadCalendario.getFechaInicio());
+		equipo= actividadCalendario.getSesion().getEquipo();
+		lapsoDeportivo = actividadCalendario.getSesion().getPlanEntrenamiento().getPlanTemporada().getLapsoDeportivo();
 		combos= new ArrayList<Combobox>();
 		escuchadorCombo = new ListenerCombo(lista);
 		cargarCabecera();
@@ -106,6 +112,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		cargarRostrer();
 		chcGeneral.addEventListener("onCheck",escuchador);
 		ocultarCabeceras();
+		
 	}
 	
 	
@@ -132,7 +139,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		Comboitem item;
 		Auxheader ah;
 		int id = 2;
-		for (ActividadesEjecutadas ejecutadas: sesionEjecutada.getActividadesEjecutadases()) {
+		for (ActividadEjecutada ejecutadas: sesionEjecutada.getActividadEjecutadas()) {
 			ActividadEntrenamiento ae=ejecutadas.getActividadEntrenamiento();
 			lh = new Listheader(ae.getNombre());
 				lh.setWidth(((ae.getDatoBasico().getNombre().length() * 10)) + "px");
@@ -197,7 +204,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		// TODO Auto-generated method stub
 		List registro;
 		List matriz = new ArrayList();
-		if(((LapsoDeportivo)servicioLapsoDeportivo.getDaoLapsoDeportivo().buscarUnCampo(LapsoDeportivo.class, "estatus", "A")).getDatoBasico().getNombre().compareTo("TEMPORADA REGULAR")==0)
+		if(lapsoDeportivo.getDatoBasico().getNombre().compareTo("TEMPORADA REGULAR")==0)
 			for (Roster roster : equipo.getRosters()) {
 				Jugador jugador = roster.getJugador();
 				registro = new ArrayList();
@@ -285,10 +292,10 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		Combobox comboActividad;
 		Roster roster;
 		RosterPlan rosterPlan;
-		ActividadesEjecutadas actividadesEjecutada = null;
+		ActividadEjecutada actividadesEjecutada = null;
 		DesempennoJugador desempennoJugador;
 		PuntuacionJugador puntuacionJugador;
-		if(((LapsoDeportivo)servicioLapsoDeportivo.getDaoLapsoDeportivo().buscarUnCampo(LapsoDeportivo.class, "estatus", "A")).getDatoBasico().getNombre().compareTo("TEMPORADA REGULAR")==0){
+		if(lapsoDeportivo.getDatoBasico().getNombre().compareTo("TEMPORADA REGULAR")==0){
 			for (int i = 0; i < lista.getItemCount(); i++) {
 				if(lista.getItemAtIndex(i).isDisabled())
 					continue;
@@ -313,11 +320,11 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 				servicioAsistenciaJugador.guardar(asistenciaJugador);
 				for (int j = 2; j < (lista.getItemAtIndex(i).getChildren().size()-3); j++) {
 					comboActividad =(Combobox) obtenerComponenteListcell(i, j);
-					actividadesEjecutada=(ActividadesEjecutadas)comboActividad.getItemAtIndex(0).getValue();
+					actividadesEjecutada=(ActividadEjecutada)comboActividad.getItemAtIndex(0).getValue();
 					desempennoJugador= new DesempennoJugador();
 					desempennoJugador.setCodigoDesempennoJugador(servicioDesempennoJugador.listar().size()+1);
 					desempennoJugador.setAsistenciaJugador(asistenciaJugador);
-					desempennoJugador.setActividadesEjecutadas(actividadesEjecutada);
+					desempennoJugador.setActividadEjecutada(actividadesEjecutada);
 					desempennoJugador.setEstatus('A');
 					servicioDesempennoJugador.guardar(desempennoJugador);
 					for(IndicadorActividadEscala indicadorActividadEscala : actividadesEjecutada.getActividadEntrenamiento().getIndicadorActividadEscalas()){
@@ -330,6 +337,14 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 				}
 			}
 		}
+		sesionEjecutada.setEstatus('C');
+		servicioSesionEjecutada.actualizar(sesionEjecutada);
+		actividadCalendario.setEstatus('F');		
+		servicioActividadCalendario.actualizar(actividadCalendario);
+//		eventoSimpleCalendario.setContentColor(cntrlFrmAgendaEntrenamiento.colorActividades('F'));
+		cntrlFrmAgendaEntrenamiento.reiniciarModelo();
+		
+		wDesempeno_Atleta.detach();
 	}
 	
 	public void inicializar() {
@@ -352,16 +367,15 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 	}
 
 	public void onClick$btnCancelar() {
-
-		limpiar1();
-		dtbox1.setValue(null);
-		dtbox2.setValue(null);
-
-		
-		int contador = lbActividades.getItemCount();
-		for (int A = 0; A < contador; A++) {
-			lbActividades.removeItemAt(0);
-		}
-		inicializar();
+//		limpiar1();
+//		dtbox1.setValue(null);
+//		dtbox2.setValue(null);
+//
+//		
+//		int contador = lbActividades.getItemCount();
+//		for (int A = 0; A < contador; A++) {
+//			lbActividades.removeItemAt(0);
+//		}
+//		inicializar();
 	}
 }

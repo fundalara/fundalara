@@ -1,6 +1,5 @@
 package controlador.entrenamiento;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import modelo.ActividadEntrenamiento;
@@ -21,6 +20,7 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -59,18 +59,13 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listActividad = new ArrayList<ActividadEntrenamiento>();
-		listCategoria = new ArrayList<Categoria>();
-		listEscala = new ArrayList<EscalaMedicion>();
-		listIndicador = new ArrayList<DatoBasico>();
-		listTipoEscala = new ArrayList<DatoBasico>();
-		listCategoria = servicioCategoria.listarActivos();
+		listCategoria = servicioCategoria.listar();
 		listEscala = servicioEscalaMedicion.listar();
 		listActividad = servicioActividadEntrenamiento.listar();
 		listIndicador = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato
 				.buscarPorTipo("INDICADOR ENTRENAMIENTO"));
 		listTipoEscala = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato
-				.buscarPorTipo("ESCALA MEDICION"));
+				.buscarPorTipo("TIPO ESCALA MEDICION"));
 		codigoI = (Integer) servicioIndicadorActividadEscala
 				.getDaoIndicadorActividadEscala().generarCodigo(
 						IndicadorActividadEscala.class);
@@ -140,7 +135,9 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 			txtValores.setValue("");
 			cmbActividad.setDisabled(!true);
 			limpiarCombos(cmbActividad);
-			cmbActividad.setValue("-Seleccione-");
+			cmbActividad.setValue("-SELECCIONE-");
+			cmbTipoEscala.setValue("-SELECCIONE-");
+			cmbEscala.setValue("-SELECCIONE-");
 			limpiarListbox(lboxIndicador);
 			ActividadEntrenamiento ae;
 			Categoria cat = (Categoria) cmbCategoria.getSelectedItem()
@@ -158,7 +155,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 				cmbActividad.setSelectedIndex(-1);
 			} else {
 				cmbCategoria.setSelectedIndex(-1);
-				cmbCategoria.setValue("-Seleccione-");
+				cmbCategoria.setValue("--SELECCIONE--");
 				throw new WrongValueException(cmbCategoria,
 						"No existen Actividades asociadas a esta Categoria");
 			}
@@ -170,7 +167,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 	}
 
 	public void inicializar() {
-		cmbIndicador.setValue("-Seleccione-");
+		cmbIndicador.setValue("--SELECCIONE--");
 	}
 
 	public void llenarListbox(String item1, String item2,
@@ -188,25 +185,26 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 		lboxIndicador.appendChild(nvoItem);
 	}
 
-	public void onClick$btnAgregar() {
+	public void onClick$btnAgregar() throws InterruptedException {
 		if (!editar) {
 			if (cmbCategoria.getSelectedItem() == null
-					&& cmbCategoria.getValue().equals("-Seleccione-")) {
+					&& cmbCategoria.getValue().equals("--SELECCIONE--")) {
 				throw new WrongValueException(cmbCategoria,
 						"Seleccione la Categoria a la que desea asociar el indicador");
 			} else {
 				if (cmbActividad.getSelectedItem() == null
-						&& cmbActividad.getValue().equals("-Seleccione-")) {
+						&& cmbActividad.getValue().equals("--SELECCIONE--")) {
 					throw new WrongValueException(cmbCategoria,
 							"Seleccione la Actividad a la que desea asociar el indicador");
 				} else {
 					if (cmbIndicador.getSelectedItem() == null
-							&& cmbIndicador.getValue().equals("-Seleccione-")) {
+							&& cmbIndicador.getValue().equals("--SELECCIONE--")) {
 						throw new WrongValueException(cmbCategoria,
 								"Seleccione el Indicador que desea Registrar");
 					} else {
 						if (cmbEscala.getSelectedItem() == null
-								&& cmbEscala.getValue().equals("-Seleccione-")) {
+								&& cmbEscala.getValue()
+										.equals("--SELECCIONE--")) {
 							throw new WrongValueException(cmbCategoria,
 									"Debe selecionar una Escala de MediciÃ³n");
 						} else {
@@ -245,7 +243,9 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 												.getValorEscalas(),
 										indicador
 												.getCodigoIndicadorActividadEscala());
-								alert("El indicador ha sido guardado con Exito!");
+								Messagebox.show("Guardado Exitosamente",
+										"OLIMPO - INFORMACION", Messagebox.OK,
+										Messagebox.INFORMATION);
 								binder.loadAll();
 								inicializar();
 							}
@@ -274,11 +274,16 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 						.getSelectedItem().getValue());
 				lboxIndicador.removeItemAt(index);
 				servicioIndicadorActividadEscala.actualizar(indicador);
+				listIndicadorAE = servicioIndicadorActividadEscala
+						.buscarporActividad((ActividadEntrenamiento) cmbActividad
+								.getSelectedItem().getValue());
 				llenarListbox(cmbIndicador.getSelectedItem().getLabel(),
 						cmbEscala.getSelectedItem().getLabel(), indicador
 								.getEscalaMedicion().getValorEscalas(),
 						indicador.getCodigoIndicadorActividadEscala());
-				alert("El Indicador se ha actualizado con exito!");
+				Messagebox.show("Actualizado Exitosamente",
+						"OLIMPO - INFORMACION", Messagebox.OK,
+						Messagebox.INFORMATION);
 				binder.loadAll();
 				inicializar();
 			}
@@ -287,11 +292,11 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 
 	public void onClick$btnCancelar() {
 		inicializar();
-		cmbCategoria.setValue("--Seleccione--");
-		cmbActividad.setValue("--Seleccione--");
-		cmbTipoEscala.setValue("--Seleccione--");
-		cmbIndicador.setValue("--Seleccione--");
-		cmbEscala.setValue("--Seleccione--");
+		cmbCategoria.setValue("--SELECCIONE--");
+		cmbActividad.setValue("--SELECCIONE--");
+		cmbTipoEscala.setValue("--SELECCIONE--");
+		cmbIndicador.setValue("--SELECCIONE--");
+		cmbEscala.setValue("--SELECCIONE--");
 		txtValores.setText("");
 		limpiarListbox(lboxIndicador);
 		cmbActividad.setDisabled(true);
@@ -312,7 +317,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 		if (cmbTipoEscala.getSelectedItem() != null) {
 			cmbEscala.setDisabled(!true);
 			limpiarCombos(cmbEscala);
-			cmbEscala.setValue("-Seleccione-");
+			cmbEscala.setValue("--SELECCIONE--");
 			EscalaMedicion escala;
 			DatoBasico tipo = (DatoBasico) cmbTipoEscala.getSelectedItem()
 					.getValue();
@@ -328,7 +333,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 				cmbEscala.setSelectedIndex(-1);
 			} else {
 				cmbCategoria.setSelectedIndex(-1);
-				cmbCategoria.setValue("-Seleccione-");
+				cmbCategoria.setValue("--SELECCIONE--");
 				throw new WrongValueException(cmbCategoria,
 						"No existen Escalas asociadas a este Tipo Escala");
 			}
@@ -342,19 +347,21 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 				.getSelectedItem().getValue();
 		listIndicadorAE = servicioIndicadorActividadEscala
 				.buscarporActividad(actividad);
-		if (listIndicadorAE.size()>0){
+		if (listIndicadorAE.size() > 0) {
 			for (IndicadorActividadEscala o : listIndicadorAE) {
-				llenarListbox(o.getDatoBasico().getNombre(), o.getEscalaMedicion()
-						.getNombre(), o.getEscalaMedicion().getValorEscalas(),
+				llenarListbox(o.getDatoBasico().getNombre(), o
+						.getEscalaMedicion().getNombre(), o.getEscalaMedicion()
+						.getValorEscalas(),
 						o.getCodigoIndicadorActividadEscala());
 			}
-		DatoBasico dato = servicioIndicadorActividadEscala.listar().get(0).getDatoBasico().getDatoBasico();
-		moverIndexCombo(cmbTipoEscala, dato.getNombre());
-		cmbTipoEscala.setDisabled(true);
-		EscalaMedicion escala = listIndicadorAE.get(0).getEscalaMedicion();
-		moverIndexCombo(cmbEscala, escala.getNombre());
-		cmbEscala.setDisabled(true);
-		onChange$cmbEscala();
+			DatoBasico dato = servicioIndicadorActividadEscala.listarActivos()
+					.get(0).getEscalaMedicion().getDatoBasico();
+			moverIndexCombo(cmbTipoEscala, dato.getNombre());
+			cmbTipoEscala.setDisabled(true);
+			EscalaMedicion escala = listIndicadorAE.get(0).getEscalaMedicion();
+			moverIndexCombo(cmbEscala, escala.getNombre());
+			cmbEscala.setDisabled(true);
+			onChange$cmbEscala();
 		}
 	}
 
@@ -363,13 +370,16 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 		Integer tam = lista.size();
 		for (int i = 0; i < tam; i++) {
 			DatoBasico indicador = lista.get(i);
-			for (int k = 0; k < listaI.size(); k++)
-				if (listaI.get(k).getDatoBasico().getNombre()
-						.equals(indicador.getNombre())) {
+			for (int k = 0; k < listaI.size(); k++) {
+				if ((listaI.get(k).getDatoBasico().getNombre().equals(indicador
+						.getNombre()))) {
+					System.out.println("entre");
+					System.out.println(indicador.getNombre());
 					lista.remove(indicador);
 					tam--;
 					i--;
 				}
+			}
 		}
 		return lista;
 	}
@@ -390,31 +400,48 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 		txtValores.setValue(s);
 		cmbIndicador.setDisabled(false);
 		cmbTipoEscala.setDisabled(true);
+		cargarIndicadores();
+	}
+
+	public void cargarIndicadores() {
 		String tipo = cmbTipoEscala.getSelectedItem().getLabel();
 		TipoDato td = servicioTipoDato.buscarPorTipo("INDICADOR ENTRENAMIENTO");
 		DatoBasico db = servicioDatoBasico.buscarPorString(tipo);
-		List<DatoBasico> listInd = (List<DatoBasico>) servicioDatoBasico.getDaoDatoBasico()
-				.listarDosCampos(DatoBasico.class, "tipoDato", td,
-						"datoBasico", db);
+		List<DatoBasico> listInd = (List<DatoBasico>) servicioDatoBasico
+				.getDaoDatoBasico().listarDosCampos(DatoBasico.class,
+						"tipoDato", td, "datoBasico", db);
 		listIndicador = filtroCmbIndicador(listInd, listIndicadorAE);
-		binder.loadComponent(cmbIndicador);
+		cmbIndicador.getItems().clear();
+		DatoBasico dato;
+		if (listIndicador.size() > 0) {
+			for (Object o : listIndicador) {
+				dato = (DatoBasico) o;
+				Comboitem combo = new Comboitem();
+				combo.setLabel(dato.getNombre());
+				combo.setValue(dato);
+				cmbIndicador.appendChild(combo);
+			}
+			cmbIndicador.setSelectedIndex(-1);
+		} else {
+			cmbIndicador.setSelectedIndex(-1);
+			cmbIndicador.setValue("--SELECCIONE--");
+			throw new WrongValueException(cmbIndicador,
+					"No existen Indicadores asociadas a esta Actividad");
+		}
 	}
 
-	public void onClick$btnSalir() {
-		wndIndicadorEvaluacion.detach();
-	}
-
-	public void onClick$btnQuitar() {
+	public void onClick$btnQuitar() throws InterruptedException {
 		int n = lboxIndicador.getSelectedIndex();
 		servicioIndicadorActividadEscala.eliminar(indicador);
 		lboxIndicador.removeItemAt(n);
-		alert("El Indicador se ha eliminado con exito!");
+		Messagebox.show("Eliminado Exitosamente", "OLIMPO - INFORMACION",
+				Messagebox.OK, Messagebox.INFORMATION);
 		index = 0;
 		txtValores.setValue("");
 		cmbEscala.setSelectedIndex(-1);
-		cmbEscala.setValue("-Seleccione-");
+		cmbEscala.setValue("--SELECCIONE--");
 		cmbIndicador.setSelectedIndex(-1);
-		cmbIndicador.setValue("-Seleccione-");
+		cmbIndicador.setValue("--SELECCIONE--");
 	}
 
 	public void moverIndexCombo(Combobox combo, String nombre) {
@@ -422,7 +449,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 			int ind;
 			int c = combo.getItems().size();
 			for (int i = 0; i < c; i++) {
-				if (nombre.equals(combo.getItemAtIndex(i).getLabel())) {
+				if (combo.getItemAtIndex(i).getLabel().equals(nombre)) {
 					ind = i;
 					combo.setSelectedIndex(ind);
 					break;
@@ -432,23 +459,52 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 	}
 
 	public void modificar() {
-		listIndicador = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato
-				.buscarPorTipo("INDICADOR ENTRENAMIENTO"));
-		binder.loadComponent(cmbIndicador);
 		if (lboxIndicador.getSelectedIndex() >= 0) {
 			editar = true;
 			Integer codigo = (Integer) lboxIndicador.getSelectedItem()
 					.getValue();
 			indicador = servicioIndicadorActividadEscala
 					.buscarporCodigo(codigo);
+			DatoBasico db = (DatoBasico) indicador.getDatoBasico();
+			for (int i = 0; i < listIndicadorAE.size(); i++) {
+				IndicadorActividadEscala ia = listIndicadorAE.get(i);
+				if (ia.getDatoBasico().getNombre().equals(db.getNombre())) {
+					listIndicadorAE.remove(i);
+				}
+			}
+			cargarIndicadores();
 			moverIndexCombo(cmbIndicador, indicador.getDatoBasico().getNombre());
-			moverIndexCombo(cmbEscala, indicador.getEscalaMedicion()
-					.getNombre());
-			onChange$cmbEscala();
 			indicador.setCodigoIndicadorActividadEscala(codigo);
 			index = lboxIndicador.getSelectedIndex();
 			cmbIndicador.focus();
-			cmbEscala.setDisabled(false);
 		}
+	}
+
+	public void salir() throws InterruptedException {
+		if (editar == true && cmbIndicador.getSelectedItem() != null) {
+			int result = Messagebox
+					.show("Existen cambios sin guardar en el formulario ¿Realmente desea salir?",
+							"Question", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION);
+			switch (result) {
+			case Messagebox.OK:
+				onClick$btnCancelar();
+				wndIndicadorEvaluacion.detach();
+				break;
+			case Messagebox.CANCEL:
+				break;
+			default:
+				break;
+			}
+		} else
+			wndIndicadorEvaluacion.detach();
+	}
+
+	public void onClick$btnSalir() throws InterruptedException {
+		salir();
+	}
+
+	public void onClose$wndIndicadorEvaluacion() throws InterruptedException {
+		salir();
 	}
 }

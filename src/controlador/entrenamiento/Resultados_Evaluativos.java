@@ -40,7 +40,7 @@ public class Resultados_Evaluativos extends GenericForwardComposer {
 	List<Equipo> listEquipo;
 	Auxheader ahEficiencia;
 	Listheader lhIndicador1;
-	Button btnCancelar, btnSalir;
+	Button btnCancelar, btnSalir, btnGuardar;
 	Listbox lista;
 	Listhead lhCabecera;
 	Checkbox chcGeneral;
@@ -87,21 +87,21 @@ public class Resultados_Evaluativos extends GenericForwardComposer {
 		
 		super.doAfterCompose(comp);
 		
-		cmbEquipo.setDisabled(true);
-		cmbEficiencia.setDisabled(true);
-		comp.setVariable("ctrl", this, true);
-		listActividad = servicioActividadEntrenamiento.listar();
-		listCategoria = servicioCategoria.listar();
-		List fila = new ArrayList();
-		fila.add(new Checkbox());
-		fila.add("1");
-		fila.add("Lorena Andres");
-		fila.add(new Combobox());
-		fila.add(new Combobox());
-		fila.add(new Combobox());
-		List matriz = new ArrayList();
-		matriz.add(fila);
-		lista.setModel(new ModeloListBox(matriz));
+//		cmbEquipo.setDisabled(true);
+//		cmbEficiencia.setDisabled(true);
+//		comp.setVariable("ctrl", this, true);
+//		listActividad = servicioActividadEntrenamiento.listar();
+//		listCategoria = servicioCategoria.listar();
+//		List fila = new ArrayList();
+//		fila.add(new Checkbox());
+//		fila.add("1");
+//		fila.add("Lorena Andres");
+//		fila.add(new Combobox());
+//		fila.add(new Combobox());
+//		fila.add(new Combobox());
+//		List matriz = new ArrayList();
+//		matriz.add(fila);
+//		lista.setModel(new ModeloListBox(matriz));
 	//	lista.setItemRenderer(new Render());
 		
 	}
@@ -190,6 +190,10 @@ public class Resultados_Evaluativos extends GenericForwardComposer {
 
 	public void onClick$btnSalir() {
 		winResEvaluativos.detach();
+	}
+	
+	public void onClick$btnGuardar() {
+		alert("Resultados de Entrenamiento registrados exitosamente");
 	}
 	
 	

@@ -50,6 +50,7 @@ public class CntrlFrmCatalogoEscalaMedicion extends GenericForwardComposer {
 			setMedicion((CntrlFrmEscalaMedicion) arg.get("ModuleMainController"));
 			getMedicion().setMedicion(this);
 		}
+//		binder.loadAll();
 	}
 	
 	public void onClick$btnCancelar(){

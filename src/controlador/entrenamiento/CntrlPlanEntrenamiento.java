@@ -26,7 +26,7 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Spinner;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -54,12 +54,12 @@ import java.util.List;
 public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	Window winSesionEntrenamiento;
 	Button btnSalir, btnAgregar1, btnQuitar1, btnAgregar2, btnQuitar2,
-			btnCancelar, btnGuardar, btnImprimir;
-	Combobox cmbFase, cmbActividad, cmbMaterial, cmbCategoria, cmbEtapa,
-			cmbEquipo, cmbDias, cmbLapsoDeportivo, cmbTipoMaterial;
+			btnCancelar, btnGuardar, btnImprimir, btnBuscar;
+	Combobox cmbFase, cmbActividad, cmbMaterial, cmbCategoria, cmbEquipo,
+			cmbDias, cmbLapsoDeportivo, cmbTipoMaterial;
 	Textbox txtHorario;
 	Intbox intTiempo;
-	Spinner spCantidad;
+	Intbox intCantidad;
 	Listbox lbxActividades, lbxMaterialPlanificado;
 	Datebox dtboxFechaInicio, dtboxFechaFin;
 	Label labEtapas;
@@ -99,7 +99,18 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	HorarioPlanTemporada horarioPlanTemporada;
 	AnnotateDataBinder binder;
 	boolean modificarActividad = false;
-	int pos = 0;
+	boolean modificarMaterial = false;
+	int posActividad = 0;
+	int posMaterial = 0;
+
+	public MaterialActividadPlanificada getMaterialActividadPlanificada() {
+		return materialActividadPlanificada;
+	}
+
+	public void setMaterialActividadPlanificada(
+			MaterialActividadPlanificada materialActividadPlanificada) {
+		this.materialActividadPlanificada = materialActividadPlanificada;
+	}
 
 	public List<MaterialActividadPlanificada> getListMaterialActividadPlanificada() {
 		return listMaterialActividadPlanificada;
@@ -243,14 +254,14 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	public void onChange$cmbLapsoDeportivo() {
 		LapsoDeportivo ld = (LapsoDeportivo) cmbLapsoDeportivo
 				.getSelectedItem().getValue();
-		if (ld.getDatoBasico().getNombre().compareTo("PLAN VACACIONAL") == 0) {
-			cmbEtapa.setVisible(false);
-			labEtapas.setVisible(false);
+		if (!ld.getPlanTemporadas().isEmpty()) {
 			cmbCategoria.setDisabled(false);
+			btnBuscar.setDisabled(false);
 		} else {
-			cmbEtapa.setVisible(true);
-			labEtapas.setVisible(true);
-			desactivarCmbCategoria();
+			cmbCategoria.setDisabled(true);
+			btnBuscar.setDisabled(true);
+			throw new WrongValueException(cmbLapsoDeportivo,
+					"Este lapso deportivo no tiene un plan de temporada asociado");
 		}
 		desactivarCmbEquipo();
 		desactivarDtboxFechaInicio();
@@ -260,6 +271,9 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		desactivarCmbFase();
 		desactivarCmbActividad();
 		desactivarintTiempo();
+		desactivarCmbTipoMaterial();
+		desactivarCmbMaterial();
+		desactivarIntCantidad();
 		listActividadPlanificadas.clear();
 		listMaterialActividadPlanificada.clear();
 		btnAgregar1.setDisabled(true);
@@ -269,28 +283,16 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		btnCancelar.setDisabled(false);
 	}
 
-	public void desactivarCmbEtapa() {
-		cmbEtapa.setValue("--Seleccione--");
-		cmbEtapa.setVisible(false);
-	}
-
-	public void onChange$cmbEtapa() {
-		desactivarCmbEquipo();
-		cmbCategoria.setDisabled(false);
-		cmbCategoria.setValue("--Seleccione--");
-		listActividadPlanificadas.clear();
-		listMaterialActividadPlanificada.clear();
-		desactivarCmbEquipo();
-		desactivarDtboxFechaInicio();
-		desactivarDtboxFechaFin();
-		desactivarCmbDias();
-		txtHorario.setValue("");
-		desactivarCmbFase();
-		desactivarCmbActividad();
-		desactivarintTiempo();
-		btnAgregar1.setDisabled(true);
-		btnQuitar1.setDisabled(true);
-		btnCancelar.setDisabled(false);
+	public void onClick$btnBuscar() {
+		Window window = new Window();
+		Object lapsoDeportivo = new Object();
+		lapsoDeportivo = cmbLapsoDeportivo.getSelectedItem().getValue();
+		execution.setAttribute("controlador", this);
+		execution.setAttribute("lapsoDeportivo", lapsoDeportivo);
+		window = (Window) execution.createComponents(
+				"Entrenamiento/Vistas/frmCatalogoPlanEntrenamiento.zul", null,
+				null);
+		window.doHighlighted();
 	}
 
 	public void desactivarCmbCategoria() {
@@ -309,7 +311,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		desactivarintTiempo();
 		desactivarCmbTipoMaterial();
 		desactivarCmbMaterial();
-		desactivarSpCantidad();
+		desactivarIntCantidad();
 		btnAgregar1.setDisabled(true);
 		btnQuitar1.setDisabled(true);
 		btnAgregar2.setDisabled(true);
@@ -319,7 +321,10 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		listMaterialActividadPlanificada.clear();
 		binder.loadComponent(lbxMaterialPlanificado);
 		Categoria ca = (Categoria) cmbCategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarPorCategoria(ca);
+		LapsoDeportivo lapsoDeportivo = (LapsoDeportivo) cmbLapsoDeportivo
+				.getSelectedItem().getValue();
+		listEquipo = servicioEquipo.buscarPorCategoriaTipoEquipo(
+				lapsoDeportivo.getDatoBasico(), ca);
 		LapsoDeportivo ld = (LapsoDeportivo) cmbLapsoDeportivo
 				.getSelectedItem().getValue();
 		if (ld.getDatoBasico().getNombre().equals("TEMPORADA REGULAR")) {
@@ -341,19 +346,25 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 
 	public void onChange$cmbEquipo() {
 		cmbDias.setValue("--Seleccione--");
+		desactivarDtboxFechaFin();
+		desactivarDtboxFechaInicio();
 		desactivarCmbFase();
 		desactivarCmbActividad();
 		desactivarintTiempo();
 		desactivarCmbTipoMaterial();
 		desactivarCmbMaterial();
-		desactivarSpCantidad();
+		desactivarIntCantidad();
 		btnAgregar1.setDisabled(true);
 		btnQuitar1.setDisabled(true);
 		btnAgregar2.setDisabled(true);
 		btnQuitar2.setDisabled(true);
 		listMaterialActividadPlanificada.clear();
 		listActividadPlanificadas.clear();
+		Categoria ca = (Categoria) cmbCategoria.getSelectedItem().getValue();
 		Equipo e = (Equipo) cmbEquipo.getSelectedItem().getValue();
+		if (e.getNombre().equals("TODOS")) {
+			e = servicioEquipo.buscarporCategoria(ca).get(0);
+		}
 		listHorarioPlanTemporadas.clear();
 		listHorarioPlanTemporadas = servicioHorarioPlanTemporada
 				.buscarPorEquipo(e);
@@ -378,19 +389,19 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				.getSelectedItem().getValue();
 		txtHorario.setValue(horarioPlanTemporada.getHorario().getHoraInicio()
 				+ " - " + horarioPlanTemporada.getHorario().getHoraFin());
+		desactivarCmbFase();
+		desactivarCmbTipoMaterial();
 		desactivarCmbActividad();
 		desactivarintTiempo();
 		desactivarCmbTipoMaterial();
 		desactivarCmbMaterial();
-		desactivarSpCantidad();
+		desactivarIntCantidad();
 		listMaterialActividadPlanificada.clear();
 		listActividadPlanificadas.clear();
-		cmbFase.setValue("--Seleccione--");
-		cmbFase.setDisabled(false);
-		btnAgregar1.setDisabled(false);
-		btnQuitar1.setDisabled(false);
-		btnAgregar2.setDisabled(false);
-		btnQuitar2.setDisabled(false);
+		btnAgregar1.setDisabled(true);
+		btnQuitar1.setDisabled(true);
+		btnAgregar2.setDisabled(true);
+		btnQuitar2.setDisabled(true);
 		cmbTipoMaterial.setValue("--Seleccione--");
 		cmbTipoMaterial.setDisabled(false);
 		btnGuardar.setDisabled(false);
@@ -416,6 +427,9 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			throw new WrongValueException(dtboxFechaInicio,
 					"La fecha de inicio no esta dentro del lapso deportivo seleccionado "
 							+ fechaInicio + " - " + fechaFin);
+		} else if (!validarFechaFinPorPlan()) {
+			throw new WrongValueException(dtboxFechaFin,
+					"La fecha de culminacion no es valida, porque ya existe un plan con esta fecha");
 		} else if (!validarFechaInicioPorPlan()) {
 			throw new WrongValueException(dtboxFechaInicio,
 					"La fecha de inicio no es valida, porque ya existe un plan con esta fecha");
@@ -427,6 +441,12 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 							+ horarioPlanTemporadas.getHorario()
 									.getDatoBasico().getNombre());
 		}
+		cmbFase.setValue("--Seleccione--");
+		cmbFase.setDisabled(false);
+		cmbTipoMaterial.setValue("--Seleccione--");
+		cmbTipoMaterial.setDisabled(false);
+		desactivarCmbActividad();
+		desactivarintTiempo();
 	}
 
 	public void desactivarDtboxFechaFin() {
@@ -448,9 +468,12 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			throw new WrongValueException(dtboxFechaFin,
 					"La fecha de culminacion no esta dentro del lapso deportivo seleccionado "
 							+ fechaInicio + " - " + fechaFin);
-		} else if (!validarFechaInicioPorPlan()) {
+		} else if (!validarFechaFinPorPlan()) {
 			throw new WrongValueException(dtboxFechaFin,
 					"La fecha de culminacion no es valida, porque ya existe un plan con esta fecha");
+		} else if (!validarFechaInicioPorPlan()) {
+			throw new WrongValueException(dtboxFechaInicio,
+					"La fecha de inicio no es valida, porque ya existe un plan con esta fecha");
 		} else if (!alMenosUnDia()) {
 			HorarioPlanTemporada horarioPlanTemporadas = (HorarioPlanTemporada) cmbDias
 					.getSelectedItem().getValue();
@@ -459,6 +482,12 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 							+ horarioPlanTemporadas.getHorario()
 									.getDatoBasico().getNombre());
 		}
+		cmbFase.setValue("--Seleccione--");
+		cmbFase.setDisabled(false);
+		cmbTipoMaterial.setValue("--Seleccione--");
+		cmbTipoMaterial.setDisabled(false);
+		desactivarCmbActividad();
+		desactivarintTiempo();
 	}
 
 	public boolean alMenosUnDia() {
@@ -523,19 +552,33 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 
 	public boolean validarFechasPorPlan(Datebox dtboxFecha) {
 		Equipo equipo = (Equipo) cmbEquipo.getSelectedItem().getValue();
+		HorarioPlanTemporada dia = (HorarioPlanTemporada) cmbDias
+				.getSelectedItem().getValue();
+		LapsoDeportivo lapsoDeportivo = (LapsoDeportivo) cmbLapsoDeportivo
+				.getSelectedItem().getValue();
 		if (equipo.getNombre().equals("TODOS")) {
-			List<Sesion> listSesions = servicioSesion.buscarPorEquipo(equipo);
-			for (Sesion sesion : listSesions) {
-				if (sesion.getPlanEntrenamiento().getFechaInicio()
-						.before(dtboxFecha.getValue())
-						&& sesion.getPlanEntrenamiento().getFechaFin()
-								.after(dtboxFecha.getValue())) {
-					return false;
+			Categoria ca = (Categoria) cmbCategoria.getSelectedItem()
+					.getValue();
+			LapsoDeportivo tipoLapso = (LapsoDeportivo) cmbLapsoDeportivo
+					.getSelectedItem().getValue();
+			for (Equipo e : servicioEquipo.buscarPorCategoriaTipoEquipo(
+					tipoLapso.getDatoBasico(), ca)) {
+				List<Sesion> listSesions = servicioSesion
+						.buscarPorEquipoDiaLapso(e, dia.getHorario()
+								.getDatoBasico(), lapsoDeportivo);
+				for (Sesion sesion : listSesions) {
+					if (sesion.getPlanEntrenamiento().getFechaInicio()
+							.before(dtboxFecha.getValue())
+							&& sesion.getPlanEntrenamiento().getFechaFin()
+									.after(dtboxFecha.getValue())) {
+						return false;
+					}
 				}
 			}
 			return true;
 		} else {
-			List<Sesion> listSesions = servicioSesion.buscarPorEquipo(equipo);
+			List<Sesion> listSesions = servicioSesion.buscarPorEquipoDiaLapso(
+					equipo, dia.getHorario().getDatoBasico(), lapsoDeportivo);
 			for (Sesion sesion : listSesions) {
 				if (sesion.getPlanEntrenamiento().getFechaInicio()
 						.before(dtboxFecha.getValue())
@@ -564,43 +607,13 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	public void onChange$cmbFase() {
 		desactivarintTiempo();
 		cmbActividad.setValue("--Seleccione--");
-		if (dtboxFechaFin.getValue().before(dtboxFechaInicio.getValue())) {
-			throw new WrongValueException(dtboxFechaInicio,
-					"La fecha de inicio es mayor a la fecha de fin");
-		} else if (!validarFechaInicioPorLapso()) {
-			LapsoDeportivo lapsoDeportivo = (LapsoDeportivo) cmbLapsoDeportivo
-					.getSelectedItem().getValue();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			String fechaInicio = sdf.format(lapsoDeportivo.getFechaInicio());
-			String fechaFin = sdf.format(lapsoDeportivo.getFechaFin());
-			throw new WrongValueException(dtboxFechaInicio,
-					"La fecha de inicio no esta dentro del lapso deportivo seleccionado "
-							+ fechaInicio + " - " + fechaFin);
-		} else if (!validarFechaFinPorLapso()) {
-			LapsoDeportivo lapsoDeportivo = (LapsoDeportivo) cmbLapsoDeportivo
-					.getSelectedItem().getValue();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			String fechaInicio = sdf.format(lapsoDeportivo.getFechaInicio());
-			String fechaFin = sdf.format(lapsoDeportivo.getFechaFin());
-			throw new WrongValueException(dtboxFechaInicio,
-					"La fecha de fin no esta dentro del lapso deportivo seleccionado "
-							+ fechaInicio + " - " + fechaFin);
-		} else if (!validarFechaInicioPorPlan()) {
-			throw new WrongValueException(dtboxFechaInicio,
-					"La fecha de inicio no es valida, porque ya existe un plan con esta fecha");
-		} else if (!validarFechaFinPorPlan()) {
-			throw new WrongValueException(dtboxFechaFin,
-					"La fecha de fin no es valida, porque ya existe un plan con esta fecha");
-		} else {
-			cmbActividad.setDisabled(false);
-			intTiempo.setDisabled(true);
-			DatoBasico f = (DatoBasico) cmbFase.getSelectedItem().getValue();
-			Categoria c = (Categoria) cmbCategoria.getSelectedItem().getValue();
-			listActividadEntrenamiento.clear();
-			listActividadEntrenamiento = servicioActividadEntrenamiento
-					.listarActividadesConIndicadores(c, f);
-			binder.loadComponent(cmbActividad);
-		}
+		cmbActividad.setDisabled(false);
+		DatoBasico f = (DatoBasico) cmbFase.getSelectedItem().getValue();
+		Categoria c = (Categoria) cmbCategoria.getSelectedItem().getValue();
+		listActividadEntrenamiento.clear();
+		listActividadEntrenamiento = servicioActividadEntrenamiento
+				.listarActividadesConIndicadores(c, f);
+		binder.loadComponent(cmbActividad);
 	}
 
 	public void desactivarCmbActividad() {
@@ -613,7 +626,6 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	public void onChange$cmbActividad() {
 		intTiempo.setDisabled(false);
 		btnAgregar1.setDisabled(false);
-		btnQuitar1.setDisabled(false);
 	}
 
 	public void desactivarintTiempo() {
@@ -622,7 +634,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		binder.loadComponent(intTiempo);
 	}
 
-	public void onClick$btnAgregar1() {
+	public void onClick$btnAgregar1() throws Exception {
 		if (cmbFase.getSelectedItem() == null) {
 			throw new WrongValueException(cmbFase,
 					"Seleccione una Fase de Entrenamiento");
@@ -651,15 +663,16 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				actividadPlanificada.setActividadEntrenamiento(ae);
 				actividadPlanificada.setEstatus('A');
 				actividadPlanificada.setId(actividadPlanificadaId);
-				if (modificarActividad){
-					listActividadPlanificadas.set(
-							pos,
+				if (modificarActividad) {
+					listActividadPlanificadas.set(posActividad,
 							actividadPlanificada);
 					modificarActividad = false;
-				}
-				else{
+				} else {
 					if (yaEstaActividadEntrenamiento(ae))
-						alert("Esa actividad ya se encuentra en la lista");
+						Messagebox.show(
+								"Esa actividad ya se encuentra en la lista",
+								"Olimpo - Informaci�n", Messagebox.OK,
+								Messagebox.INFORMATION);
 					else
 						listActividadPlanificadas.add(actividadPlanificada);
 				}
@@ -667,7 +680,11 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				cmbFase.setValue("--Seleccione--");
 				cmbActividad.setValue("--Seleccione--");
 				listActividadEntrenamiento.clear();
+				btnAgregar1.setDisabled(true);
+				btnQuitar1.setDisabled(true);
 				actividadPlanificada = new ActividadPlanificada();
+				desactivarCmbActividad();
+				desactivarintTiempo();
 				binder.loadAll();
 			} else {
 				throw new WrongValueException(intTiempo, "Solo hay "
@@ -680,7 +697,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 
 	public boolean yaEstaActividadEntrenamiento(ActividadEntrenamiento ae) {
 		for (ActividadPlanificada actividadPlanificada : listActividadPlanificadas) {
-			if (actividadPlanificada.getActividadEntrenamiento() == ae)
+			if (actividadPlanificada.getActividadEntrenamiento().getNombre()
+					.equals(ae.getNombre()))
 				return true;
 		}
 		return false;
@@ -696,12 +714,13 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 
 	public void onClick$btnQuitar1() {
 		if (lbxActividades.getSelectedItem() != null) {
-			listActividadPlanificadas
-					.remove(lbxActividades.getSelectedIndex());
+			listActividadPlanificadas.remove(lbxActividades.getSelectedIndex());
 			binder.loadComponent(lbxActividades);
 			cmbFase.setValue("--Seleccione--");
 			desactivarCmbActividad();
 			desactivarintTiempo();
+			btnAgregar1.setDisabled(true);
+			btnQuitar1.setDisabled(true);
 			modificarActividad = false;
 		} else {
 			throw new WrongValueException(lbxActividades,
@@ -709,15 +728,16 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		}
 	}
 
-	public void onSelect$lbxActividades() {
+	public void onSelect$lbxActividades() throws Exception {
 		if (lbxActividades.getSelectedItem() != null) {
 			ActividadPlanificada ap = (ActividadPlanificada) lbxActividades
 					.getSelectedItem().getValue();
-			pos = lbxActividades.getSelectedIndex();
+			posActividad = lbxActividades.getSelectedIndex();
 			intTiempo.setValue(ap.getTiempo());
 			for (int i = 0; i < listFase.size(); i++) {
-				if (ap.getActividadEntrenamiento().getDatoBasico().getNombre()
-						.equals(listFase.get(i).getNombre())) {
+				if (ap.getActividadEntrenamiento().getDatoBasico()
+						.getCodigoDatoBasico() == listFase.get(i)
+						.getCodigoDatoBasico()) {
 					cmbFase.setSelectedIndex(i);
 					break;
 				}
@@ -739,8 +759,13 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				modificarActividad = true;
 			}
 			intTiempo.setDisabled(false);
+			btnAgregar1.setDisabled(false);
+			btnQuitar1.setDisabled(false);
+			cmbActividad.setDisabled(false);
 		} else
-			alert("Seleccione un elemento de la lista");
+			Messagebox.show("Seleccione un elemento de la lista",
+					"Olimpo - Informaci�n", Messagebox.OK,
+					Messagebox.INFORMATION);
 	}
 
 	public void desactivarCmbTipoMaterial() {
@@ -751,7 +776,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	public void onChange$cmbTipoMaterial() {
 		listMaterial.clear();
 		cmbMaterial.setValue("--Seleccione--");
-		desactivarSpCantidad();
+		desactivarIntCantidad();
 		DatoBasico tipo = (DatoBasico) cmbTipoMaterial.getSelectedItem()
 				.getValue();
 		listMaterial = servicioMaterial.listarPorTipo(tipo);
@@ -767,13 +792,23 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	}
 
 	public void onChange$cmbMaterial() {
-		spCantidad.setDisabled(false);
+		intCantidad.setDisabled(false);
+		btnAgregar2.setDisabled(false);
 	}
 
-	public void desactivarSpCantidad() {
+	public void desactivarIntCantidad() {
 		materialActividadPlanificada = new MaterialActividadPlanificada();
-		binder.loadComponent(spCantidad);
-		spCantidad.setDisabled(true);
+		binder.loadComponent(intCantidad);
+		intCantidad.setDisabled(true);
+	}
+
+	public boolean yaEstaMaterialActividad(Material material) {
+		for (MaterialActividadPlanificada map : listMaterialActividadPlanificada) {
+			if (material.getDescripcion().equals(
+					map.getMaterial().getDescripcion()))
+				return true;
+		}
+		return false;
 	}
 
 	public void onClick$btnAgregar2() {
@@ -782,18 +817,33 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 					"Seleccione un tipo de material");
 		} else if (cmbMaterial.getSelectedItem() == null) {
 			throw new WrongValueException(cmbMaterial, "Seleccione un material");
-		} else if (spCantidad.getValue() <= 0) {
-			throw new WrongValueException(spCantidad,
-					"Seleccione una cantidad valida");
+		} else if (materialActividadPlanificada.getCantidadRequerida() <= 0) {
+			throw new WrongValueException(intCantidad,
+					"Seleccione una cantidad válida");
 		} else {
 			Material m = (Material) cmbMaterial.getSelectedItem().getValue();
 			materialActividadPlanificada.setMaterial(m);
-			listMaterialActividadPlanificada.add(materialActividadPlanificada);
-			binder.loadComponent(lbxMaterialPlanificado);
+			if (modificarMaterial) {
+				listMaterialActividadPlanificada.set(posMaterial,
+						materialActividadPlanificada);
+				modificarMaterial = !modificarMaterial;
+			} else {
+				if (yaEstaMaterialActividad(m))
+					throw new WrongValueException(cmbMaterial,
+							"Este material ya se encuentra en la lista");
+				else
+					listMaterialActividadPlanificada
+							.add(materialActividadPlanificada);
+			}
 			cmbTipoMaterial.setValue("--Seleccione--");
 			cmbMaterial.setValue("--Seleccione--");
 			desactivarCmbMaterial();
-			desactivarSpCantidad();
+			desactivarIntCantidad();
+			btnAgregar2.setDisabled(true);
+			btnQuitar2.setDisabled(true);
+			materialActividadPlanificada = new MaterialActividadPlanificada();
+			binder.loadComponent(lbxMaterialPlanificado);
+			binder.loadComponent(intCantidad);
 		}
 	}
 
@@ -801,6 +851,12 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		if (lbxMaterialPlanificado.getSelectedItem() != null) {
 			listMaterialActividadPlanificada.remove(lbxMaterialPlanificado
 					.getSelectedIndex());
+			cmbTipoMaterial.setValue("--Seleccione--");
+			desactivarCmbMaterial();
+			desactivarIntCantidad();
+			modificarMaterial = !modificarMaterial;
+			btnAgregar2.setDisabled(true);
+			btnQuitar2.setDisabled(true);
 			binder.loadComponent(lbxMaterialPlanificado);
 		} else {
 			throw new WrongValueException(lbxMaterialPlanificado,
@@ -808,13 +864,51 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		}
 	}
 
-	public void onClick$btnGuardar() {
+	public void onSelect$lbxMaterialPlanificado() throws Exception {
+		if (lbxMaterialPlanificado.getSelectedItem() != null) {
+			MaterialActividadPlanificada map = (MaterialActividadPlanificada) lbxMaterialPlanificado
+					.getSelectedItem().getValue();
+			posMaterial = lbxMaterialPlanificado.getSelectedIndex();
+			materialActividadPlanificada.setCantidadRequerida(map
+					.getCantidadRequerida());
+			binder.loadComponent(intCantidad);
+			for (int i = 0; i < listTipoMaterial.size(); i++) {
+				if (listTipoMaterial.get(i).getCodigoDatoBasico() == map
+						.getMaterial().getDatoBasicoByCodigoTipoMaterial()
+						.getCodigoDatoBasico()) {
+					cmbTipoMaterial.setSelectedIndex(i);
+					break;
+				}
+			}
+			cmbMaterial.getItems().clear();
+			listMaterial.clear();
+			DatoBasico tipo = (DatoBasico) cmbTipoMaterial.getSelectedItem()
+					.getValue();
+			listMaterial = servicioMaterial.listarPorTipo(tipo);
+			for (int i = 0; i < listMaterial.size(); i++) {
+				Comboitem comboitem = new Comboitem(listMaterial.get(i)
+						.getDescripcion());
+				comboitem.setValue(listMaterial.get(i));
+				comboitem.setParent(cmbMaterial);
+				if (map.getMaterial().getCodigoMaterial() == listMaterial
+						.get(i).getCodigoMaterial())
+					cmbMaterial.setSelectedIndex(i);
+			}
+			modificarMaterial = true;
+			intCantidad.setDisabled(false);
+			cmbMaterial.setDisabled(false);
+			btnAgregar2.setDisabled(false);
+			btnQuitar2.setDisabled(false);
+		} else
+			Messagebox.show("Seleccione un elemento de la lista",
+					"Olimpo - Informaci�n", Messagebox.OK,
+					Messagebox.INFORMATION);
+	}
+
+	public void onClick$btnGuardar() throws Exception {
 		if (cmbLapsoDeportivo.getSelectedItem() == null) {
 			throw new WrongValueException(cmbLapsoDeportivo,
 					"Seleccione un lapso deportivo");
-		} else if (cmbEtapa.isVisible() && cmbEtapa.getSelectedItem() == null) {
-			throw new WrongValueException(cmbEtapa,
-					"Seleccione una etapa deportiva");
 		} else if (cmbCategoria.getSelectedItem() == null) {
 			throw new WrongValueException(cmbCategoria,
 					"Seleccione una categoria");
@@ -865,7 +959,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 								.generarCodigo());
 				LapsoDeportivo ld = (LapsoDeportivo) cmbLapsoDeportivo
 						.getSelectedItem().getValue();
-				planEntrenamiento.setPlanTemporada(servicioPlanTemporada.buscarPorCategoriaLapDep(equipo.getCategoria(), ld));
+				planEntrenamiento.setPlanTemporada(servicioPlanTemporada
+						.buscarPorCategoriaLapDep(equipo.getCategoria(), ld));
 				planEntrenamiento.setEstatus('A');
 				servicioPlanEntrenamiento.guardar(planEntrenamiento);
 				if (equipo.getNombre().equals("TODOS")) {
@@ -876,9 +971,13 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 					guardarSesionActividadMaterial(equipo);
 				}
 				onClick$btnCancelar();
-				alert("Se a guardado correctamente");
+				Messagebox.show("Guardado correctamente",
+						"Olimpo - Informaci�n", Messagebox.OK,
+						Messagebox.INFORMATION);
 			} else {
-				alert("Agregue al menos una actividad");
+				Messagebox.show("Agregue al menos una actividad",
+						"Olimpo - Informaci�n", Messagebox.OK,
+						Messagebox.INFORMATION);
 			}
 		}
 	}
@@ -961,19 +1060,18 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			DatoBasico datoBasico = servicioDatoBasico
 					.buscarPorString("ACTIVIDADES DE ENTRENAMIENTO");
 			actividadCalendario.setDatoBasico(datoBasico);
-			actividadCalendario.setColor("#f13616");
 			servicioActividadCalendario.agregar(actividadCalendario);
 			fechasCalendario.setDate(fechasCalendario.getDate() + 7);
 		}
 	}
 
-	public void onClick$btnImprimir() {
-		alert("En Construccion");
+	public void onClick$btnImprimir() throws Exception {
+		Messagebox.show("En Construccion", "Olimpo - Informaci�n",
+				Messagebox.OK, Messagebox.INFORMATION);
 	}
 
 	public void onClick$btnCancelar() {
 		cmbLapsoDeportivo.setValue("--Seleccione--");
-		desactivarCmbEtapa();
 		desactivarCmbCategoria();
 		desactivarCmbEquipo();
 		desactivarDtboxFechaInicio();
@@ -983,16 +1081,21 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		desactivarCmbFase();
 		desactivarCmbActividad();
 		desactivarintTiempo();
+		desactivarCmbTipoMaterial();
+		desactivarCmbMaterial();
+		desactivarIntCantidad();
 		actividadPlanificada = new ActividadPlanificada();
+		materialActividadPlanificada = new MaterialActividadPlanificada();
+		listMaterialActividadPlanificada.clear();
 		listActividadPlanificadas.clear();
-		binder.loadComponent(intTiempo);
-		binder.loadComponent(lbxActividades);
+		binder.loadAll();
 		btnCancelar.setDisabled(true);
 		btnAgregar1.setDisabled(true);
 		btnAgregar2.setDisabled(true);
 		btnQuitar1.setDisabled(true);
 		btnQuitar2.setDisabled(true);
 		btnGuardar.setDisabled(true);
+		btnBuscar.setDisabled(true);
 	}
 
 	public void onClick$btnSalir() {

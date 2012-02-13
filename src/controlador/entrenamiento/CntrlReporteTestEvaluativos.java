@@ -47,21 +47,25 @@ public class CntrlReporteTestEvaluativos extends GenericForwardComposer {
 	}
 
 	public void onChange$cmbcategoria() {
+
 		listEquipo.clear();
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarPorCategoria(cc);
+		listEquipo = servicioEquipo.buscarporCategoria(cc);
 		// System.out.println(cc);
 		// System.out.println(listEquipo);
 		cmbequipo.setDisabled(false);
+
 		binder.loadComponent(cmbequipo);
 		cmbequipo.setValue("--Seleccione--");
+
 	}
 
 	public void onChange$cmbequipo() {
+
 		listRoster.clear();
 		// Jugador jj= (Jugador)cmbequipo.getSelectedItem().getValue();
 		Equipo rr = (Equipo) cmbequipo.getSelectedItem().getValue();
-		listRoster = servicioRoster.buscarPorEquipo(rr);
+		listRoster = servicioRoster.buscarEquipo(rr);
 		System.out.println(rr);
 
 		// System.out.println(cc);
@@ -69,7 +73,9 @@ public class CntrlReporteTestEvaluativos extends GenericForwardComposer {
 		cmbatleta.setDisabled(false);
 		catalogo.setDisabled(false);
 		binder.loadComponent(cmbatleta);
+
 		cmbatleta.setValue("--Seleccione--");
+
 	}
 
 	public List<Roster> getListRoster() {
@@ -123,23 +129,35 @@ public class CntrlReporteTestEvaluativos extends GenericForwardComposer {
 		if (date.before(dtbox1.getValue())) {
 			alert("La fecha final es menor que la fecha inicial");
 		} else {
+
 			cmbcategoria.setDisabled(false);
+
 		}
+
 	}
 
 	public void onClick$btnimprimir() {
+
 		{
 			if (cmbcategoria.getText().equals("--Seleccione--")) {
+
 				alert("Debe seleccionar una Categoria");
 				cmbcategoria.focus();
+
 			} else if (cmbequipo.getText().equals("--Seleccione--")) {
+
 				alert("Debe seleccionar un equipo");
 				cmbequipo.focus();
 			}
+
 			else if (cmbatleta.getText().equals("--Seleccione--")) {
+
 				alert("Debe seleccionar un jugador");
 				cmbatleta.focus();
 			}
+
 		}
+
 	}
+
 }

@@ -1,0 +1,53 @@
+<?page title="Reporte Cumplimiento de Entrenamiento"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<div align="center">
+	<separator height="15px" />
+	<window title="Cumplimiento de Entrenamiento" border="normal"
+		width="550px" height="" closable="true" id="win_cum_ent"
+		apply="controlador.entrenamiento.CntrlReporteCumplimientoEntrenamiento">
+		<grid>
+			<columns>
+				<column width="100px" align="left" />
+				<column width="125px" align="left" />
+				<column width="100px" align="left" />
+				<column width="125px" align="left" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label value="Fecha Inicio:" width="120px" />
+					<datebox id="dtboxi" width="150px" format="dd/MM/yyyy"/>
+
+					<label value="Fecha Final:" width="120px"/>
+					<datebox id="dtboxf" width="150px" format="dd/MM/yyyy"/>
+				</row>
+				<row height="30px">
+					<label value="Entrenador:" width="120px"/>
+					<combobox id="cmbEntrenador" value="--TODOS--"
+						width="150px" disabled="true">
+					</combobox>
+					<button id="btncat" label="Catálogo"
+						orient="horizontal" disabled="true"/>
+				</row>
+				<row height="30px">
+					<label value="Categoria:" width="120px" />
+					<combobox id="cmbCategoria" value="--Seleccione--"
+						width="150px" readonly="true" disabled="true">
+					</combobox>
+					<label value="Equipo:" width="120px"/>
+					<textbox id="txtEquipo" width="150px"
+						disabled="true"/>
+				</row>
+			</rows>
+		</grid>
+		<grid height="50px">
+			<rows>
+				<row align="right" height="">
+					<button id="btnimp"
+						image="../../Recursos/Imagenes/imprimir.ico" label="Imprimir"
+						width="95px"  />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>

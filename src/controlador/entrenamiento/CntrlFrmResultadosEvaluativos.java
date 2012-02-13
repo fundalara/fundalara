@@ -100,14 +100,14 @@ public class CntrlFrmResultadosEvaluativos extends GenericForwardComposer {
 		List matriz = new ArrayList();
 		matriz.add(fila);
 		lista.setModel(new ModeloListBox(matriz));
-		lista.setItemRenderer(new Render());
+		lista.setItemRenderer(new Render(new ArrayList<Combobox>()));
 		
 	}
 
 	public void onChange$cmbCategoria(){
 		cmbEquipo.setDisabled(false);
 		listEquipo = new ArrayList<Equipo>();
-		listEquipo = servicioEquipo.buscarPorCategoria((Categoria)cmbCategoria.getSelectedItem().getValue());
+		listEquipo = servicioEquipo.buscarporCategoria((Categoria)cmbCategoria.getSelectedItem().getValue());
 		binder.loadAll();
 	}
 	

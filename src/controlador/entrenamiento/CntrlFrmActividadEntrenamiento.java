@@ -8,11 +8,13 @@
 
 package controlador.entrenamiento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.ActividadEntrenamiento;
 import modelo.Categoria;
 import modelo.DatoBasico;
+
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -25,7 +27,7 @@ import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioTipoDato;
 
 public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
-	Button btnSalir, btnCancelar, btnAgregar, btnQuitar;
+	Button btnSalir, btnCancelar, btnAgregar, btnQuitar, btnGuardar;
 	Window winActividadEntrenamientoZul;
 	Textbox txtActividades;
 	Listbox lboxActividades;
@@ -37,13 +39,24 @@ public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
 	ServicioActividadEntrenamiento servicioActividadEntrenamiento;
 	List<Categoria> listCategoria;
 	List<DatoBasico> listFase;
+	List<ActividadEntrenamiento> listActividadEntrenamiento;
+	List<ActividadEntrenamiento> listActividadEntrenamientoEliminados;
 	AnnotateDataBinder binder;
 	boolean editar;
 	int index;
 
+	public List<ActividadEntrenamiento> getListActividadEntrenamiento() {
+		return listActividadEntrenamiento;
+	}
+
+	public void setListActividadEntrenamiento(
+			List<ActividadEntrenamiento> listActividadEntrenamiento) {
+		this.listActividadEntrenamiento = listActividadEntrenamiento;
+	}
+
 	public void cargarFases() {
 		listFase = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato
-				.buscarPorTipo("FASE"));
+				.buscarPorTipo("FASES DEL ENTRENAMIENTO"));
 	}
 
 	public DatoBasico buscarFase() {
@@ -82,11 +95,13 @@ public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		actividadEntrenamiento = new ActividadEntrenamiento();
-		listCategoria = servicioCategoria.getDaoCategoria().listarActivos(
-				Categoria.class);
+		inicializar();
+		listActividadEntrenamiento = new ArrayList<ActividadEntrenamiento>();
+		listActividadEntrenamientoEliminados = new ArrayList<ActividadEntrenamiento>();
+		listCategoria = servicioCategoria.listarActivos();
 		cargarFases();
-		editar = false;
+		// actividadEntrenamiento = new ActividadEntrenamiento();
+		// editar = false;
 	}
 
 	// Cierra la ventana al hacer click en el boton salir
@@ -94,68 +109,64 @@ public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
 		winActividadEntrenamientoZul.detach();
 	}
 
-	//
-	public void onCreate$winActividadEntrenamiento() {
-		inicializar();
-	}
-
 	// Actualiza las actividades mostradas en el LboxActividades
-	public void actualizarLboxActividades() {
+	public void actualizarListActividades() {
 		if (cmbCategoria.getSelectedItem() != null
 				&& cmbFase.getSelectedItem() != null) {
-			int cant = lboxActividades.getItemCount();
-			for (int i = 0; i < cant; i++) {
-				lboxActividades.removeItemAt(0); // Borra todas las actividades
-													// que esten en el
-													// lboxActividades
-			}
+			listActividadEntrenamiento.clear();
 			ActividadEntrenamiento act;
 			for (Object o : servicioActividadEntrenamiento.buscarTodo(
 					buscarCategoria(), buscarFase())) {
 				act = (ActividadEntrenamiento) o;
-				lboxActividades.appendItem(act.getNombre(),
-						"" + act.getCodigoActividadEntrenamiento());
+				listActividadEntrenamiento.add(act);
 			}
+			binder.loadAll();
 		}
 	}
 
-	public void onSelect$cmbCategoria() {
-		cmbFase.setDisabled(false);
-		btnCancelar.setDisabled(false);
-		actualizarLboxActividades();
+	public void onChange$cmbCategoria() {
+		if (cmbCategoria.getSelectedItem() != null
+				&& cmbFase.getSelectedItem() != null) {
+			actualizarListActividades();
+			binder.loadAll();
+		} else {
+			cmbFase.setDisabled(false);
+			btnCancelar.setDisabled(false);
+		}
 	}
 
-	public void onSelect$cmbFase() {
+	public void onChange$cmbFase() {
 		txtActividades.setDisabled(false);
-		actualizarLboxActividades();
+		actualizarListActividades();
+		binder.loadAll();
 	}
 
+	// Inicializa los componentes de la pantalla
 	public void inicializar() {
-		cmbCategoria.setValue("--Seleccione--");
-		cmbFase.setValue("--Seleccione--");
+		cmbCategoria.setValue("--SELECCIONE--");
+		cmbFase.setValue("--SELECCIONE--");
+		cmbFase.setDisabled(true);
 		txtActividades.setText("");
+		txtActividades.setDisabled(true);
 		btnQuitar.setVisible(false);
+		editar = false;
+		actividadEntrenamiento = new ActividadEntrenamiento();
+		btnGuardar.setDisabled(true);
 	}
 
 	public void onSelect$lboxActividades() {
-		if (lboxActividades.getSelectedItem()!= null){
-		btnQuitar.setVisible(true);
-		Listitem item = lboxActividades.getSelectedItem();
-		if (item.getIndex() >= 0) {
-			actividadEntrenamiento = servicioActividadEntrenamiento
-					.buscarClaveForegn(
-							buscarCategoria(),
-							buscarFase(),
-							Integer.parseInt(""
-									+ lboxActividades.getSelectedItem()
-											.getValue()));
-			binder.loadAll();
-			editar = true;
-		}
-		index = lboxActividades.getSelectedIndex();
-		}else{
-			throw new WrongValueException(lboxActividades,
-					"No existen items");
+		if (lboxActividades.getSelectedItem() != null) {
+			btnQuitar.setVisible(true);
+			Listitem item = lboxActividades.getSelectedItem();
+			index = item.getIndex();
+			if (item.getIndex() >= 0) {
+				actividadEntrenamiento = (ActividadEntrenamiento) lboxActividades
+						.getSelectedItem().getValue();
+				txtActividades.setValue(actividadEntrenamiento.getNombre());
+				editar = true;
+			}
+		} else {
+			throw new WrongValueException(lboxActividades, "No existen items");
 		}
 	}
 
@@ -171,29 +182,21 @@ public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
 						"Ingrese una Actividad Nueva");
 			} else {
 				int i = 0;
-				while (i < lboxActividades.getItemCount()) {
-					if (lboxActividades.getItemAtIndex(i).getLabel()
+				while (i < listActividadEntrenamiento.size()) {
+					if (listActividadEntrenamiento.get(i).getNombre()
 							.equals(txtActividades.getValue().toUpperCase())) {
 						throw new WrongValueException(lboxActividades,
 								"No puede agregar una actividad duplicada");
 					}
 					i++;
 				}
-				lboxActividades.appendItem(txtActividades.getValue()
-						.toUpperCase(), String
-						.valueOf((servicioActividadEntrenamiento.listar()
-								.size() + 1)));
-				txtActividades.setText("");
-				actividadEntrenamiento
-						.setCodigoActividadEntrenamiento(servicioActividadEntrenamiento
-								.listar().size() + 1);
-				actividadEntrenamiento.setCategoria(buscarCategoria());
-				actividadEntrenamiento.setDatoBasico(buscarFase());
 				actividadEntrenamiento.setNombre(actividadEntrenamiento
 						.getNombre().toUpperCase());
+				actividadEntrenamiento.setCategoria(buscarCategoria());
+				actividadEntrenamiento.setDatoBasico(buscarFase());
 				actividadEntrenamiento.setEstatus('A');
-				servicioActividadEntrenamiento.agregar(actividadEntrenamiento);
-				actividadEntrenamiento.setNombre("");
+				listActividadEntrenamiento.add(actividadEntrenamiento);
+				actividadEntrenamiento = new ActividadEntrenamiento();
 				binder.loadAll();
 			}
 		} else {
@@ -201,36 +204,61 @@ public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
 				throw new WrongValueException(txtActividades,
 						"Ingrese una Actividad Nueva");
 			} else {
+
+				actividadEntrenamiento.setNombre(actividadEntrenamiento
+						.getNombre().toUpperCase());
+				listActividadEntrenamiento.set(index, actividadEntrenamiento);
+				actividadEntrenamiento = new ActividadEntrenamiento();
 				editar = false;
-				servicioActividadEntrenamiento
-						.actualizar(actividadEntrenamiento);
-				lboxActividades.appendItem(
-						txtActividades.getValue().toUpperCase(),
-						""
-								+ actividadEntrenamiento
-										.getCodigoActividadEntrenamiento());
-				lboxActividades.removeItemAt(index);
 				cmbCategoria.setDisabled(false);
 				cmbFase.setDisabled(false);
-				txtActividades.setValue("");
+				binder.loadAll();
 			}
 		}
+		btnGuardar.setDisabled(false);
+	}
+
+	public void onClick$btnGuardar() throws InterruptedException {
+		int result = Messagebox.show("Desea guardar los cambios realizados?",
+				"Question", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION);
+		switch (result) {
+		case Messagebox.OK:
+			for (ActividadEntrenamiento ae : listActividadEntrenamiento) {
+				if (ae.getCodigoActividadEntrenamiento() == 0) {
+					ae.setCodigoActividadEntrenamiento(servicioActividadEntrenamiento
+							.generarCodigo());
+				}
+				servicioActividadEntrenamiento.agregar(ae);
+			}
+
+			for (ActividadEntrenamiento ae : listActividadEntrenamientoEliminados) {
+				ae.setEstatus('E');
+				servicioActividadEntrenamiento.actualizar(ae);
+			}
+			actividadEntrenamiento = new ActividadEntrenamiento();
+			alert("Cambios guardados con exito");
+			onClick$btnCancelar();
+			break;
+		case Messagebox.CANCEL:
+			actualizarListActividades();
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	public void onClick$btnQuitar() {
 		if (lboxActividades.getItems().size() != 0) {
-			actividadEntrenamiento = servicioActividadEntrenamiento
-					.buscarClaveForegn(
-							buscarCategoria(),
-							buscarFase(),
-							Integer.parseInt(""
-									+ lboxActividades.getSelectedItem()
-											.getValue()));
-			actividadEntrenamiento.setEstatus('E');
-			servicioActividadEntrenamiento.actualizar(actividadEntrenamiento);
-			lboxActividades.removeItemAt(lboxActividades.getSelectedItem()
-					.getIndex());
-			actividadEntrenamiento.setNombre("");
+			actividadEntrenamiento = (ActividadEntrenamiento) lboxActividades
+					.getSelectedItem().getValue();
+			// actividadEntrenamiento.setEstatus('E');
+			listActividadEntrenamientoEliminados.add(actividadEntrenamiento);
+			listActividadEntrenamiento.remove(lboxActividades
+					.getSelectedIndex());
+			editar = false;
+			actividadEntrenamiento = new ActividadEntrenamiento();
 			binder.loadAll();
 		}
 	}
@@ -241,8 +269,6 @@ public class CntrlFrmActividadEntrenamiento extends GenericForwardComposer {
 		for (int I = 0; I < numElementos; I++) {
 			lboxActividades.removeItemAt(0);
 		}
-		cmbFase.setDisabled(true);
-		txtActividades.setDisabled(true);
 	}
 
 }
