@@ -150,7 +150,7 @@ public class CntrlFrmReporteTablaPosiciones extends GenericForwardComposer {
 	public void showReportfromJrxml() throws JRException, IOException {
 		
 		parameters.put("CodCompetencia", competencia.getCodigoCompetencia());
-		parameters.put("CodCategoria", categoriaCompetencia.getCategoria().getCodigoCategoria());
+		parameters.put("codCategoria", categoriaCompetencia.getCategoria().getCodigoCategoria());
 		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
 		JasperPrint jaspPrint = JasperFillManager.fillReport(jasp, parameters,
 				con);

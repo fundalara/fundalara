@@ -23,7 +23,7 @@ public interface IServicioCompetencia {
 	
 	public abstract List<Competencia> listarRegistradasAperturadas();
 	
-	public List<Competencia> listarAperturadasClausurada();
+	public abstract List<Competencia> listarAperturadasClausurada();
 
 	public abstract List<Competencia> listarPorfiltro(String dato);
 
