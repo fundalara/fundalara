@@ -8,13 +8,9 @@ import modelo.Instalacion;
 import modelo.InstalacionUtilizada;
 import modelo.PlanificacionActividad;
 import modelo.SolicitudMantenimiento;
-//import modelo.SolicitudMantenimientoId;
-import modelo.Actividad;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-
-import comun.TipoDatoBasico;
 
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioDatoBasico;
@@ -22,11 +18,15 @@ import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioInstalacionUtilizada;
 import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioSolicitudMantenimiento;
+
+import comun.TipoDatoBasico;
+
 //import servicio.interfaz.IServicioSolicitudMantenimientoID;
 
 public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
-//	SolicitudMantenimientoId solicitudMantenimientoId = new SolicitudMantenimientoId();
+	// SolicitudMantenimientoId solicitudMantenimientoId = new
+	// SolicitudMantenimientoId();
 	SolicitudMantenimiento solicitudMantenimiento = new SolicitudMantenimiento();
 	Actividad actividad = new Actividad();
 	PlanificacionActividad planificacionActividad = new PlanificacionActividad();
@@ -39,7 +39,7 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 	List<DatoBasico> prioridades;
 	List<InstalacionUtilizada> instalaciones;
 
-//	IServicioSolicitudMantenimientoID servicioSolicitudMantenimientoID;
+	// IServicioSolicitudMantenimientoID servicioSolicitudMantenimientoID;
 	IServicioSolicitudMantenimiento servicioSolicitudMantenimiento;
 	IServicioActividad servicioActividad;
 	IServicioPlanificacionActividad servicioPlanificacionActividad;
@@ -57,25 +57,23 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
 	}
 
-
-//	public SolicitudMantenimientoId getSolicitudMantenimientoId() {
-//		return solicitudMantenimientoId;
-//	}
-//
-//	public void setSolicitudMantenimientoId(
-//			SolicitudMantenimientoId solicitudMantenimientoId) {
-//		this.solicitudMantenimientoId = solicitudMantenimientoId;
-//	}
+	// public SolicitudMantenimientoId getSolicitudMantenimientoId() {
+	// return solicitudMantenimientoId;
+	// }
+	//
+	// public void setSolicitudMantenimientoId(
+	// SolicitudMantenimientoId solicitudMantenimientoId) {
+	// this.solicitudMantenimientoId = solicitudMantenimientoId;
+	// }
 
 	public SolicitudMantenimiento getSolicitudMantenimiento() {
 		return solicitudMantenimiento;
 	}
 
-	public void setSolicitudMantenimiento(
-			SolicitudMantenimiento solicitudMantenimiento) {
+	public void setSolicitudMantenimiento(SolicitudMantenimiento solicitudMantenimiento) {
 		this.solicitudMantenimiento = solicitudMantenimiento;
 	}
-	
+
 	public Actividad getActividad() {
 		return actividad;
 	}
@@ -88,8 +86,7 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 		return planificacionActividad;
 	}
 
-	public void setPlanificacionActividad(
-			PlanificacionActividad planificacionActividad) {
+	public void setPlanificacionActividad(PlanificacionActividad planificacionActividad) {
 		this.planificacionActividad = planificacionActividad;
 	}
 
@@ -109,17 +106,13 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 		this.datoBasico2 = datoBasico2;
 	}
 
-	
-
 	public List<PlanificacionActividad> getActividades() {
 		return actividades;
 	}
 
-
 	public void setActividades(List<PlanificacionActividad> actividades) {
 		this.actividades = actividades;
 	}
-
 
 	public Instalacion getInstalacion() {
 		return instalacion;
@@ -129,26 +122,21 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 		this.instalacion = instalacion;
 	}
 
-	
 	public InstalacionUtilizada getInsta() {
 		return insta;
 	}
-
 
 	public void setInsta(InstalacionUtilizada insta) {
 		this.insta = insta;
 	}
 
-
 	public List<InstalacionUtilizada> getInstalaciones() {
 		return instalaciones;
 	}
 
-
 	public void setInstalaciones(List<InstalacionUtilizada> instalaciones) {
 		this.instalaciones = instalaciones;
 	}
-
 
 	public List<DatoBasico> getPrioridades() {
 		return prioridades;
@@ -160,18 +148,16 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
 	public void Guardar() {
 
-		int CODIGO = 1;
-
-		//this.actividad.setPlanificacionActividad(planificacionActividad);
+		// this.actividad.setPlanificacionActividad(planificacionActividad);
 		actividad = this.servicioActividad.Buscar(planificacionActividad, Actividad.class);
-		
-//		this.solicitudMantenimientoId.setCodigoSolicitud(CODIGO);
-//		this.solicitudMantenimientoId.setCodigoActividad(actividad.getCodigoActividad());
-//
-//		this.solicitudMantenimiento.setId(solicitudMantenimientoId);
-		
-		solicitudMantenimiento.setCodigoSolicitud(servicioSolicitudMantenimiento.listar().size()+1);
-		
+
+		// this.solicitudMantenimientoId.setCodigoSolicitud(CODIGO);
+		// this.solicitudMantenimientoId.setCodigoActividad(actividad.getCodigoActividad());
+		//
+		// this.solicitudMantenimiento.setId(solicitudMantenimientoId);
+
+		solicitudMantenimiento.setCodigoSolicitud(servicioSolicitudMantenimiento.listar().size() + 1);
+
 		this.solicitudMantenimiento.setEstatus('A');
 		this.solicitudMantenimiento.setDatoBasico(datoBasico);
 		this.solicitudMantenimiento.setActividad(actividad);
@@ -183,7 +169,7 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
 	public void Cancelar() {
 
-//		solicitudMantenimientoId = new SolicitudMantenimientoId();
+		// solicitudMantenimientoId = new SolicitudMantenimientoId();
 		solicitudMantenimiento = new SolicitudMantenimiento();
 		actividad = new Actividad();
 		planificacionActividad = new PlanificacionActividad();
@@ -202,29 +188,23 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
 		System.out.println(this.datoBasico.getNombre());
 
-		if (this.actividad.getFechaInicio() == null
-				|| this.actividad.getFechaCulminacion() == null) {
+		if (this.actividad.getFechaInicio() == null || this.actividad.getFechaCulminacion() == null) {
 			alert("Debe incluir las fechas");
 			return;
 
-		} else if (this.actividad.getFechaInicio().compareTo(
-				this.actividad.getFechaCulminacion()) > 0) {
+		} else if (this.actividad.getFechaInicio().compareTo(this.actividad.getFechaCulminacion()) > 0) {
 			alert("La fecha de Inicio debe ser menor a la de Culminacion");
 			return;
 
-		} else if (this.actividad.getHoraInicio() == null
-				|| this.actividad.getHoraFin() == null) {
+		} else if (this.actividad.getHoraInicio() == null || this.actividad.getHoraFin() == null) {
 			alert("Debe incluir las horas");
 			return;
 
-		} else if (this.actividad.getHoraInicio().getHours() > this.actividad.getHoraFin()
-				.getHours()) {
+		} else if (this.actividad.getHoraInicio().getHours() > this.actividad.getHoraFin().getHours()) {
 			alert("La hora de Inicio debe ser menor que la de Culminacion");
 			return;
-		} else if (this.actividad.getHoraInicio().getHours() == this.actividad.getHoraFin()
-				.getHours()) {
-			if (this.actividad.getHoraInicio().getMinutes() >= this.actividad.getHoraFin()
-					.getMinutes()) {
+		} else if (this.actividad.getHoraInicio().getHours() == this.actividad.getHoraFin().getHours()) {
+			if (this.actividad.getHoraInicio().getMinutes() >= this.actividad.getHoraFin().getMinutes()) {
 				alert("La hora de Inicio debe ser menor que la de Culminacion");
 				return;
 			} else if (this.insta.getInstalacion().getDescripcion() == null) {

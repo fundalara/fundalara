@@ -4,8 +4,8 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="ejecucionMantenimiento" ?>
 <zk>
 	<window id="ejecucionMantenimiento"
-		title="Control y Resultados de Mantenimiento"
-		border="normal" mode="modal" width="80%"
+		title="Control y Resultados de Mantenimiento" border="normal"
+		mode="modal" width="80%"
 		apply="controlador.logistica.CntrlResultadosMantenimiento">
 		<panel id="panel1" collapsible="true" width="100%"
 			title="Listado de Mantenimiento">
@@ -16,7 +16,6 @@
 					<label
 						value="@{cntrl.actividad.planificacionActividad.descripcion}">
 					</label>
-
 					<grid style="boder:none">
 						<columns>
 							<column width="17%"></column>
@@ -33,7 +32,6 @@
 									value="@{cntrl.actividad.fechaInicio}" width=" 50%"
 									style="color:black !important;">
 								</datebox>
-
 								<label style="font-weight: bold;"
 									value="Hora de Inicio">
 								</label>
@@ -90,8 +88,8 @@
 										<listheader label="Tarea"
 											width="30%">
 										</listheader>
-										<listheader
-											label="Responsable" width="50%">
+										<listheader label="Responsable"
+											width="50%">
 										</listheader>
 										<listheader
 											label="Estado de Ejecucion">
@@ -174,7 +172,9 @@
 									<button id="btnAgregarMaterial"
 										image="/Recursos/Imagenes/agregar.ico">
 									</button>
-									<button id="btnMostrarMaterialesAprobados" image="/Recursos/Imagenes/consultar.ico">
+									<button
+										id="btnMostrarMaterialesAprobados"
+										image="/Recursos/Imagenes/consultar.ico">
 									</button>
 								</vbox>
 							</hbox>
@@ -185,7 +185,8 @@
 		</panel>
 		<div width="100%" align="right">
 			<button id="btnGuardar"
-				image="/Recursos/Imagenes/aceptar.ico" label="Terminar Mantenimiento">
+				image="/Recursos/Imagenes/aceptar.ico"
+				label="Terminar Mantenimiento">
 			</button>
 			<button id="btnSuspender"
 				image="/Recursos/Imagenes/obligatorio.png"

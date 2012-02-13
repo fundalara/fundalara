@@ -3,14 +3,15 @@ package servicio.implementacion;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.general.DaoPersona;
-
-import modelo.Nomina;
 import modelo.Persona;
+import modelo.Personal;
+import modelo.PersonalCargo;
 import servicio.interfaz.IServicioPersona;
+import dao.general.DaoPersona;
 
 public class ServicioPersona implements IServicioPersona {
 	DaoPersona daoPersona;
+
 	public DaoPersona getDaoPersona() {
 		return daoPersona;
 	}
@@ -48,19 +49,18 @@ public class ServicioPersona implements IServicioPersona {
 	}
 
 	@Override
-	public Persona buscarPorCodigo (Persona d) {
-		// TODO Auto-generated method stub
+	public Persona buscarPorCodigo(Persona d) {
 		return null;
 	}
-	
+
 	public Persona buscarPorCedulaRif(String s) {
 		return daoPersona.buscarPorCedulaRif(s);
 	}
-	
+
 	public Persona buscarPorTipoPersona(String s, Integer i) {
 		return daoPersona.buscarPorTipoPersona(s, i);
 	}
-	
+
 	@Override
 	public List<Persona> listarPorTipos(String tipoPersona) {
 		return daoPersona.listarPorTipo(tipoPersona);
@@ -72,18 +72,31 @@ public class ServicioPersona implements IServicioPersona {
 	}
 
 	@Override
-	public List<Persona> listarTrabajadores() {
-		// TODO Auto-generated method stub
+	public List<Persona> listarTrabajadoresMantenimiento() {
 		List<Persona> a = new ArrayList<Persona>();
+
 		List<Persona> b = new ArrayList<Persona>();
+
+		List<PersonalCargo> c = daoPersona.listar(PersonalCargo.class);
 		b = daoPersona.listarActivos(Persona.class);
-		for (Persona persona : b) {
-			if (persona.getDatoBasicoByCodigoTipoPersona().getCodigoDatoBasico() == 169 || persona.getDatoBasicoByCodigoTipoPersona().getCodigoDatoBasico() ==168){
-				a.add(persona);
+
+		for (PersonalCargo personalCargo : c) {
+			if (personalCargo.getDatoBasico().getCodigoDatoBasico() == 168) {
+				a.add(buscarPorCedulaRif(personalCargo.getPersonal().getCedulaRif()));
 			}
 		}
-		
-		
+
 		return a;
+	}
+
+	@Override
+	public List<Persona> listarTrabajadores() {
+		List<Personal> a = daoPersona.listar(Personal.class);
+		List<Persona> b = new ArrayList<Persona>();
+		for (Personal personal : a) {
+			b.add(buscarPorCedulaRif(personal.getCedulaRif()));
+		}
+
+		return b;
 	}
 }

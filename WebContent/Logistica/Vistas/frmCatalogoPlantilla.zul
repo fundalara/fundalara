@@ -5,12 +5,12 @@
 <zk>
 	<window title="Plantillas de Mantenimiento" border="normal"
 		id="frmCatPlantilla" mode="modal" closable="true"
-		apply="controlador.logistica.CntrlFrmCatalogoPlantilla" width="50%" >
+		apply="controlador.logistica.CntrlFrmCatalogoPlantilla" width="50%">
 		<label value="Nombre"></label>
 		<textbox></textbox>
 		<listbox id="lboxPlantilla" mold="paging" pageSize="5"
-			model="@{cntrl.listaPlantilla}"
-			selectedItem="@{cntrl.plantilla}" checkmark="true" >
+			model="@{cntrl.listaPlantilla}" selectedItem="@{cntrl.plantilla}"
+			checkmark="true">
 			<listhead>
 				<listheader label="Descripcion" sort="auto" />
 			</listhead>
@@ -19,11 +19,10 @@
 			</listitem>
 		</listbox>
 		<div align="right">
-					<button id="btnGuardar" label="Seleccionar"
-						image="/Recursos/Imagenes/guardar.ico" />
-					<button id="btnSalir" label="Salir"
-						image="/Recursos/Imagenes/salir.png" />
-				</div>
-		
+			<button id="btnGuardar" label="Seleccionar"
+				image="/Recursos/Imagenes/guardar.ico" />
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" />
+		</div>
 	</window>
 </zk>

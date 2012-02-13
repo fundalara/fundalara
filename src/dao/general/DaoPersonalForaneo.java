@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -28,13 +29,31 @@ public class DaoPersonalForaneo extends GenericDao {
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(DatoBasico.class);
-		DatoBasico db = (DatoBasico) c.add(Restrictions.eq("nombre", "UMPIRE"))
-				.list().get(0);
+		DatoBasico db = (DatoBasico) c.add(Restrictions.eq("nombre", "UMPIRE")).uniqueResult();
+		
+		c = session.createCriteria(DatoBasico.class);
+		DatoBasico db2 = (DatoBasico) c.add(Restrictions.eq("nombre", "ANOTADOR")).uniqueResult();
+		
 		c = session.createCriteria(PersonalForaneo.class);
-		List<PersonalForaneo> pf = c.add(Restrictions.eq("datoBasico", db))
-				.list();
+		c.add(Restrictions.or(Restrictions.eq("datoBasico",db), Restrictions.eq("datoBasico",db2)));
+		c.add(Restrictions.eq("estatus",'A'));
+		
+		List<PersonalForaneo> pf = c.add(Restrictions.eq("datoBasico", db)).list();
 		return pf;
 
+	}
+	
+	public List<PersonalForaneo> listarAnotadores(){
+		
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		DatoBasico db = (DatoBasico) c.add(Restrictions.eq("nombre", "ANOTADOR")).uniqueResult();
+		c = session.createCriteria(PersonalForaneo.class);
+		c.add(Restrictions.eq("datoBasico", db));
+		c.add(Restrictions.eq("estatus", 'A'));
+		return c.list();
+		
 	}
 
 	public DatoBasico consultarDatoBasico() {

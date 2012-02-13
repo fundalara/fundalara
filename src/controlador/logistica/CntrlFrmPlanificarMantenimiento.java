@@ -1,11 +1,9 @@
 package controlador.logistica;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import modelo.Actividad;
-import modelo.ComisionFamiliar;
 import modelo.DatoBasico;
 import modelo.EstadoActividad;
 import modelo.Instalacion;
@@ -16,16 +14,12 @@ import modelo.Persona;
 import modelo.PersonaNatural;
 import modelo.Personal;
 import modelo.PersonalActividad;
-//import modelo.PersonalActividadId;
 import modelo.PersonalActividadPlanificada;
-//import modelo.PersonalActividadPlanificadaId;
 import modelo.PlanificacionActividad;
 import modelo.TareaActividad;
 import modelo.TareaActividadPlanificada;
-import modelo.TipoDato;
 
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -42,10 +36,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
-import controlador.logistica.CntrlPlanificarActividad.ClaseAux;
-
-import dao.generico.SessionManager;
-
 import servicio.implementacion.ServicioPlanificacionActividad;
 import servicio.implementacion.ServicioTareaActividadPlanificada;
 import servicio.interfaz.IServicioActividad;
@@ -53,14 +43,11 @@ import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioEstadoActividad;
 import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioInstalacionUtilizada;
-import servicio.interfaz.IServicioMaterial;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
 import servicio.interfaz.IServicioPersonal;
 import servicio.interfaz.IServicioPersonalActividad;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
-import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioTareaActividad;
-import servicio.interfaz.IServicioTareaActividadPlanificada;
 
 public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
@@ -71,7 +58,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	int i = 0;
 
 	// Variables
-	
+
 	int codigoPlantilla;
 	DatoBasico tipoPersonal;
 	DatoBasico tipoMantenimiento = new DatoBasico();
@@ -90,6 +77,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	Instalacion instalacion = new Instalacion();
 	DatoBasico tipoInstalacion = new DatoBasico();
 	InstalacionUtilizada instalacionUtilizada;
+	ClaseAux tareas;
 
 	IServicioDatoBasico servicioDatoBasico;
 	ServicioPlanificacionActividad servicioPlanificacionActividad;
@@ -112,7 +100,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	List<TareaActividadPlanificada> tareasActividades;
 	List<MaterialActividadPlanificada> materialesActividades;
 	List<InstalacionUtilizada> listaInstalacionUtilizada;
-	
+	List<ClaseAux> listaTareas;
 	// Componentes
 	Component frmPlanificarMantenimiento;
 	Textbox txtCodPlantilla;
@@ -133,7 +121,27 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	Timebox horaInicio;
 	Timebox horaFin;
 
-	public CntrlFrmPlanificarMantenimiento() {
+	public class ClaseAux {
+
+		DatoBasico tarea;
+		Personal responsableA;
+
+		public DatoBasico getTarea() {
+			return tarea;
+		}
+
+		public void setTarea(DatoBasico tarea) {
+			this.tarea = tarea;
+		}
+
+		public Personal getResponsableA() {
+			return responsableA;
+		}
+
+		public void setResponsableA(Personal responsableA) {
+			this.responsableA = responsableA;
+		}
+
 	}
 
 	public void doAfterCompose(Component comp) throws Exception {
@@ -144,7 +152,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		frmPlanificarMantenimiento = comp;
 		lboxTareas = (Listbox) winTareas.getFellow("lboxTareas");
 		lboxMateriales = (Listbox) winMateriales.getFellow("lboxMateriales");
-		
+
 		tiposMantenimientos = servicioDatoBasico.listarTipoMantenimiento();
 		tiposInstalaciones = servicioDatoBasico.listarTipoInstalacion();
 		cmbTipo.focus();
@@ -154,157 +162,157 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	// Metodos de los componentes
 	public void onSelect$cmbTipo() {
-		//cmbClase.open();
-		clasificacionMantenimientos = servicioDatoBasico
-				.buscarDatosPorRelacion(tipoMantenimiento);
+		// cmbClase.open();
+		clasificacionMantenimientos = servicioDatoBasico.buscarDatosPorRelacion(tipoMantenimiento);
 	}
 
 	public void onSelect$cmbClase() {
 		txtCodPlantilla.focus();
 	}
 
-	public void onSelect$cmbTipoInstalacion() {
-		cmbInstalacion.setDisabled(false);
-		//cmbInstalacion.open();
-		listaInstalacionUtilizada = servicioInstalacionUtilizada
-				.listarInstalacionDisponible(tipoInstalacion,
-						fechaInicio.getValue(), fechaFin.getValue(),
-						horaInicio.getValue(), horaFin.getValue());
+	public void onSelect$cmbTipoInstalacion() throws InterruptedException {
+
+		if (tipoInstalacion.getCodigoDatoBasico() != 158) {
+			cmbInstalacion.open();
+			listaInstalacionUtilizada = new ArrayList<InstalacionUtilizada>();
+			listaInstalacion = new ArrayList<Instalacion>();
+			listaInstalacionUtilizada = servicioInstalacionUtilizada.listarInstalacionOcupada(fechaInicio.getValue(), fechaFin.getValue(),
+					horaInicio.getValue(), horaFin.getValue());
+			listaInstalacion = servicioInstalacion.listarInstalacionesDisponibles(tipoInstalacion, listaInstalacionUtilizada);
+			binder.loadAll();
+
+		} else {
+			int show2 = Messagebox.show("Seleccione una instalacion interna", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			cmbTipoInstalacion.open();
+			cmbTipoInstalacion.focus();
+
+		}
+
 	}
 
 	public void onClick$btnPredisennada() {
 
 		// creamos la instancia del catalogo
-		Component catalogoPlantilla = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoPlantilla.zul", null, null);
+		Component catalogoPlantilla = Executions.createComponents("/Logistica/Vistas/frmCatalogoPlantilla.zul", null, null);
 
 		// asigna una referencia del formulario al catalogo.
-		catalogoPlantilla.setVariable("frmPlanificarMantenimiento",
-				frmPlanificarMantenimiento, false);
+		catalogoPlantilla.setVariable("frmPlanificarMantenimiento", frmPlanificarMantenimiento, false);
 
 		// Este metodo se llama cuando se envia la señal desde el catalogo
-		frmPlanificarMantenimiento.addEventListener("onCatalogoCerrado",
-				new EventListener() {
+		frmPlanificarMantenimiento.addEventListener("onCatalogoCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						plantilla = new PlanificacionActividad();
-						plantilla = (PlanificacionActividad) frmPlanificarMantenimiento.getVariable("plantilla", false);
-						tareasActividades = servicioTareaActividadPlanificada.listarTareas(plantilla);
-						materialesActividades = servicioMaterialActividadPlanificada.listarMateriales(plantilla);
-						panelS.setOpen(true);
-						txtCodPlantilla.setReadonly(true);
-						cmbTipoInstalacion.focus();
-						binder.loadAll();
+			public void onEvent(Event arg0) throws Exception {
+				plantilla = new PlanificacionActividad();
+				plantilla = (PlanificacionActividad) frmPlanificarMantenimiento.getVariable("plantilla", false);
+				tareasActividades = servicioTareaActividadPlanificada.listarTareas(plantilla);
+				listaTareas = new ArrayList<ClaseAux>();
+				ClaseAux aux = new ClaseAux();
+				for (int i = 0; i < tareasActividades.size(); i++) {
+					aux = new ClaseAux();
+					aux.setTarea(tareasActividades.get(i).getDatoBasico());
+					aux.setResponsableA(tareasActividades.get(i).getPersonalActividadPlanificada().getPersonal());
+					listaTareas.add(aux);
+				}
+				materialesActividades = servicioMaterialActividadPlanificada.listarMateriales(plantilla);
+				panelS.setOpen(true);
+				txtCodPlantilla.setReadonly(true);
+				cmbTipoInstalacion.focus();
+				binder.loadAll();
 
-					}
+			}
 
-				});
+		});
 
 	}
+
 	public void onClick$btnResponsable() {
-		final Component catalogoPersonal = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
+		final Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
 		catalogoPersonal.setVariable("frmPadre", frmPlanificarMantenimiento, false);
 		int numero = 1;
 		catalogoPersonal.setVariable("numero", numero, false);
 
-		frmPlanificarMantenimiento.addEventListener("onCatalogoCerradoResponsable",
-				new EventListener() {
-					public void onEvent(Event arg0) throws Exception {
-						Persona persona = new Persona();
-						persona = (Persona) frmPlanificarMantenimiento.getVariable(
-								"persona", false);
-                        responsable = new Persona();
-						responsable = persona;
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
-				});
+		catalogoPersonal.setVariable("aux", numero, false);
+		frmPlanificarMantenimiento.addEventListener("onCatalogoCerradoResponsable", new EventListener() {
+			public void onEvent(Event arg0) throws Exception {
+				Persona persona = new Persona();
+				persona = (Persona) frmPlanificarMantenimiento.getVariable("persona", false);
+				responsable = new Persona();
+				responsable = persona;
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
+		});
 	}
 
 	public void onClick$btnPeriodicidad() {
-		Component catalogoPeriodicidad = Executions.createComponents(
-				"/Logistica/Vistas/frmPeriodicidad.zul", null, null);
+		Component catalogoPeriodicidad = Executions.createComponents("/Logistica/Vistas/frmPeriodicidad.zul", null, null);
 	}
 
 	public void onClick$btnAsigPersonalxTarea() throws InterruptedException {
 
-		if (tareaActividad != null) {
+		if (tareas != null) {
 
-			Component catalogoPersonal = Executions.createComponents(
-					"/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
-           
-			int numero= 2;
+			Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
+
+			int numero = 2;
 			catalogoPersonal.setVariable("numero", numero, false);
-			catalogoPersonal.setVariable("frmPadre",frmPlanificarMantenimiento, false);
+			catalogoPersonal.setVariable("frmPadre", frmPlanificarMantenimiento, false);
+			int aux = 1;
+			catalogoPersonal.setVariable("aux", aux, false);
+			frmPlanificarMantenimiento.addEventListener("onCatalogoCerradoPersonal", new EventListener() {
 
-			frmPlanificarMantenimiento.addEventListener(
-					"onCatalogoCerradoPersonal", new EventListener() {
-
-						public void onEvent(Event arg0) throws Exception {
-						    persona = new Persona();
-							personal = new Personal();
-							System.out.println("hola estoy aqui en onCatalogoCarreado");
-						    persona = (Persona) frmPlanificarMantenimiento.getVariable("persona", false);
-						    personaActividadPlanificada = new PersonalActividadPlanificada();
-							personaActividadPlanificada = servicioPersonalActividadPlanificada.Buscar(persona);
-							tareaActividad.setPersonalActividadPlanificada(personaActividadPlanificada);
-							binder.loadAll();
-							arg0.stopPropagation();
-						}
-					});
+				public void onEvent(Event arg0) throws Exception {
+					persona = new Persona();
+					persona = (Persona) frmPlanificarMantenimiento.getVariable("persona", false);
+					tareas.setResponsableA(servicioPersonal.buscarPorCodigo(persona.getPersonaNatural()));
+					binder.loadAll();
+					arg0.stopPropagation();
+				}
+			});
 		} else {
 
-			int show2 = Messagebox.show(
-					"Seleccione una tarea para asignar el personal", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			int show2 = Messagebox.show("Seleccione una tarea para asignar el personal", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 		}
 	}
 
 	public void onClick$btnAgregarTareas() {
 
-		Component catalogoTarea = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoTarea.zul", null, null);
+		Component catalogoTarea = Executions.createComponents("/Logistica/Vistas/frmCatalogoTarea.zul", null, null);
 
 		catalogoTarea.setVariable("frmPadre", frmPlanificarMantenimiento, false);
 		List<DatoBasico> aux = new ArrayList<DatoBasico>();
-		for (TareaActividadPlanificada datoBasico : tareasActividades) {
-			aux.add(datoBasico.getDatoBasico());
+
+		for (ClaseAux datoBasico : listaTareas) {
+			aux.add(datoBasico.tarea);
 		}
-		
-		catalogoTarea.setVariable("tarea",aux , false);
-		frmPlanificarMantenimiento.addEventListener("onCatalogoTareaCerrado",
-				new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						List<DatoBasico> tareas = new ArrayList<DatoBasico>();
-						tareas = (List<DatoBasico>) frmPlanificarMantenimiento
-								.getVariable("tarea", false);
-						for (DatoBasico e : tareas) {
-							TareaActividadPlanificada aux = new TareaActividadPlanificada();
-							aux.setDatoBasico(e);
-							tareasActividades.add(aux);
-						}
+		catalogoTarea.setVariable("tarea", aux, false);
+		frmPlanificarMantenimiento.addEventListener("onCatalogoTareaCerrado", new EventListener() {
 
-						binder.loadAll();
+			public void onEvent(Event arg0) throws Exception {
+				List<DatoBasico> tareas = new ArrayList<DatoBasico>();
+				tareas = (List<DatoBasico>) frmPlanificarMantenimiento.getVariable("tarea", false);
+				for (DatoBasico e : tareas) {
+					ClaseAux aux = new ClaseAux();
+					aux.setTarea(e);
+					listaTareas.add(aux);
+				}
 
-						arg0.stopPropagation();
-					}
-				});
+				binder.loadAll();
 
-		
+				arg0.stopPropagation();
+			}
+		});
+
 	}
 
 	public void onClick$btnQuitarTareas() throws InterruptedException {
 
 		if (lboxTareas.getSelectedIndex() != -1) {
-
-			tareasActividades.remove((TareaActividadPlanificada) lboxTareas
-					.getSelectedItem().getValue());
+			listaTareas.remove((ClaseAux) lboxTareas.getSelectedItem().getValue());
 			binder.loadAll();
 		} else {
-			Messagebox.show("Seleccione una tarea para asignar el personal",
-					"Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea para asignar el personal", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
@@ -312,47 +320,39 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void onClick$btnAgregarMateriales() {
 
-		Component catalogoMaterial = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoMaterial.zul", null, null);
+		Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterial.zul", null, null);
 
-		catalogoMaterial.setVariable("frmPlanificarMantenimiento",
-				frmPlanificarMantenimiento, false);
+		catalogoMaterial.setVariable("frmPlanificarMantenimiento", frmPlanificarMantenimiento, false);
 
-		frmPlanificarMantenimiento.addEventListener(
-				"onCatalogoMaterialCerrado", new EventListener() {
+		frmPlanificarMantenimiento.addEventListener("onCatalogoMaterialCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						material = new Material();
-						material = (Material) frmPlanificarMantenimiento
-								.getVariable("material", false);
+			public void onEvent(Event arg0) throws Exception {
+				material = new Material();
+				material = (Material) frmPlanificarMantenimiento.getVariable("material", false);
 
-						int cantidad = (Integer) frmPlanificarMantenimiento
-								.getVariable("cantidad", false);
+				int cantidad = (Integer) frmPlanificarMantenimiento.getVariable("cantidad", false);
 
-						MaterialActividadPlanificada aux = new MaterialActividadPlanificada();
+				MaterialActividadPlanificada aux = new MaterialActividadPlanificada();
 
-						aux.setCantidadRequerida(cantidad);
-						aux.setEstatus('A');
-						aux.setMaterial(material);
-						aux.setPlanificacionActividad(plantilla);
-						materialesActividades.add(aux);
-						binder.loadAll();
+				aux.setCantidadRequerida(cantidad);
+				aux.setEstatus('A');
+				aux.setMaterial(material);
+				aux.setPlanificacionActividad(plantilla);
+				materialesActividades.add(aux);
+				binder.loadAll();
 
-						arg0.stopPropagation();
-					}
-				});
+				arg0.stopPropagation();
+			}
+		});
 	}
 
 	public void onClick$btnQuitarMateriales() throws InterruptedException {
 		if (lboxMateriales.getSelectedIndex() != -1) {
 			System.out.println("hola");
-			materialesActividades
-					.remove((MaterialActividadPlanificada) lboxMateriales
-							.getSelectedItem().getValue());
+			materialesActividades.remove((MaterialActividadPlanificada) lboxMateriales.getSelectedItem().getValue());
 			binder.loadAll();
 		} else {
-			Messagebox.show("Seleccione una material", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una material", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
@@ -360,94 +360,96 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void onClick$btnGuardar() throws InterruptedException {
 
+		InstalacionUtilizada auxInstalacionUtilizada = new InstalacionUtilizada();
+
+		auxInstalacionUtilizada.setCodigoInstalacionUtilizada(servicioInstalacionUtilizada.listar().size() + 1);
+		auxInstalacionUtilizada.setEstatus('A');
+		auxInstalacionUtilizada.setFechaFin(fechaFin.getValue());
+		auxInstalacionUtilizada.setFechaInicio(fechaInicio.getValue());
+		auxInstalacionUtilizada.setHoraFin(horaFin.getValue());
+		auxInstalacionUtilizada.setHoraInicio(horaInicio.getValue());
+		auxInstalacionUtilizada.setInstalacion(instalacion);
+		servicioInstalacionUtilizada.agregar(auxInstalacionUtilizada);
+
 		Actividad actividad = new Actividad();
-		
+
 		actividadPlanificada = new PlanificacionActividad();
-		actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.listar().size()+1);
+		actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.listar().size() + 1);
 		actividadPlanificada.setDatoBasico(claseMantenimiento);
-		actividadPlanificada.setInstalacionUtilizada(instalacionUtilizada);
+		actividadPlanificada.setInstalacionUtilizada(auxInstalacionUtilizada);
 		actividadPlanificada.setDescripcion(plantilla.getDescripcion());
 		actividadPlanificada.setEstatus('A');
-		actividadPlanificada.setPersonal(null);
+		actividadPlanificada.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
 		actividadPlanificada.setActividadPeriodico(false);
 		actividadPlanificada.setActividadPlantilla(false);
 		servicioPlanificacionActividad.agregar(actividadPlanificada);
-		
-		
-		actividad.setCodigoActividad(servicioActividad.listar().size()+1);
+
+		actividad.setCodigoActividad(servicioActividad.listar().size() + 1);
 		actividad.setEstatus('A');
 		actividad.setFechaCulminacion(fechaFin.getValue());
 		actividad.setFechaInicio(fechaInicio.getValue());
 		actividad.setHoraFin(horaFin.getValue());
 		actividad.setHoraInicio(horaInicio.getValue());
-		actividad.setPersonal(null);
-		actividad.setInstalacionUtilizada(instalacionUtilizada);
+		actividad.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
+		actividad.setInstalacionUtilizada(auxInstalacionUtilizada);
 		actividad.setPlanificacionActividad(actividadPlanificada);
 		servicioActividad.agregar(actividad);
-		
+
 		EstadoActividad estadoActividad = new EstadoActividad();
-	    estadoActividad.setCodigoEstadoActividad(servicioEstadoActividad.listar().size()+1);
+		estadoActividad.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
 		estadoActividad.setDatoBasico(servicioDatoBasico.buscarPorCodigo(251));
 		estadoActividad.setActividad(actividad);
 		estadoActividad.setEstatus('A');
 		servicioEstadoActividad.agregar(estadoActividad);
-	
-	
-		 PersonalActividadPlanificada personalA;
 
-		 for (int i = 0; i < tareasActividades.size(); i++) {
-			 
-			 personalA = new PersonalActividadPlanificada();
-			PersonalActividad personalAct = new PersonalActividad(); 		
-			
-				Personal p = new Personal();
-				personalA.setCodigoPersonalActividadPlan(servicioPersonalActividadPlanificada.listar().size() + 1);
-				personalA.setPlanificacionActividad(actividadPlanificada);
-				personalA.setEstatus('A');
-				p = servicioPersonal.buscarPorCodigo(tareasActividades.get(i).getPersonalActividadPlanificada().getPersonal());
-				personalA.setPersonal(p);
-				servicioPersonalActividadPlanificada.agregar(personalA);
+		PersonalActividadPlanificada personalA;
 
-				personalAct.setCodigoPersonalActividad(servicioPersonalActividad.listar().size() + 1);
+		for (int i = 0; i < listaTareas.size(); i++) {
 
-				personalAct.setActividad(actividad);
-				personalAct.setPersonal(p);
-				personalAct.setEstatus('A');
- 				servicioPersonalActividad.agregar(personalAct);
- 				
-			System.out.println("En el ciclo---------------------------------------------------------------------");
-			TareaActividad ta = new TareaActividad();
-			
+			personalA = new PersonalActividadPlanificada();
+			PersonalActividad personalAct = new PersonalActividad();
+
+			personalA.setCodigoPersonalActividadPlan(servicioPersonalActividadPlanificada.listar().size() + 1);
+			personalA.setPlanificacionActividad(actividadPlanificada);
+			personalA.setEstatus('A');
+			personalA.setPersonal(servicioPersonal.buscarPorCodigo(listaTareas.get(i).getResponsableA()));
+			servicioPersonalActividadPlanificada.agregar(personalA);
+
+			personalAct.setCodigoPersonalActividad(servicioPersonalActividad.listar().size() + 1);
+			personalAct.setActividad(actividad);
+			personalAct.setPersonal(servicioPersonal.buscarPorCodigo(listaTareas.get(i).getResponsableA()));
+			personalAct.setEstatus('A');
+			servicioPersonalActividad.agregar(personalAct);
+
 			TareaActividadPlanificada tap = new TareaActividadPlanificada();
+
 			tap.setCodigoTareaActividadPlanificada(servicioTareaActividadPlanificada.listar().size() + 1);
-			tap.setDatoBasico(tareasActividades.get(i).getDatoBasico());
+			tap.setDatoBasico(listaTareas.get(i).getTarea());
 			tap.setPersonalActividadPlanificada(personalA);
 			tap.setComisionFamiliar(null);
 			tap.setPlanificacionActividad(actividadPlanificada);
 			tap.setEstatus('A');
 			servicioTareaActividadPlanificada.agregar(tap);
-			System.out.println("en el ciclo2----------------------------------------------------------------------");
-			
+
+			TareaActividad ta = new TareaActividad();
+
 			ta.setActividad(actividad);
 			ta.setCodigoTareaActividad(servicioTareaActividad.listar().size() + 1);
 			ta.setEstatus('A');
 			ta.setDatoBasicoByEstadoTarea(servicioDatoBasico.buscarPorCodigo(414));
 			ta.setPersonalActividad(personalAct);
 			ta.setComisionFamiliar(null);
-			ta.setDatoBasicoByCodigoTarea(tareasActividades.get(i).getDatoBasico());
+			ta.setDatoBasicoByCodigoTarea(listaTareas.get(i).getTarea());
 			servicioTareaActividad.agregar(ta);
-	         
-	    
-	         
-	    }
+
+		}
 		for (int j = 0; j < materialesActividades.size(); j++) {
 			materialesActividades.get(j).setPlanificacionActividad(actividadPlanificada);
-		 servicioMaterialActividadPlanificada.agregar(materialesActividades.get(j));
+			servicioMaterialActividadPlanificada.agregar(materialesActividades.get(j));
 		}
-		Messagebox.show("Datos agregados exitosamente", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
 		frmPlanificarMantenimiento.detach();
-		}
-
+	}
 
 	public void onClick$btnSalir() {
 		frmPlanificarMantenimiento.detach();
@@ -475,8 +477,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		return instalacionUtilizada;
 	}
 
-	public void setInstalacionUtilizada(
-			InstalacionUtilizada instalacionUtilizada) {
+	public void setInstalacionUtilizada(InstalacionUtilizada instalacionUtilizada) {
 		this.instalacionUtilizada = instalacionUtilizada;
 	}
 
@@ -484,8 +485,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		return listaInstalacionUtilizada;
 	}
 
-	public void setListaInstalacionUtilizada(
-			List<InstalacionUtilizada> listaInstalacionUtilizada) {
+	public void setListaInstalacionUtilizada(List<InstalacionUtilizada> listaInstalacionUtilizada) {
 		this.listaInstalacionUtilizada = listaInstalacionUtilizada;
 	}
 
@@ -593,8 +593,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		return materialesActividades;
 	}
 
-	public void setMaterialesActividades(
-			List<MaterialActividadPlanificada> materialesActividades) {
+	public void setMaterialesActividades(List<MaterialActividadPlanificada> materialesActividades) {
 		this.materialesActividades = materialesActividades;
 	}
 
@@ -646,8 +645,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		this.frmPlanMantenimiento = frmPlanMantenimiento;
 	}
 
-	public void setClasificacionMantenimientos(
-			List<DatoBasico> clasificacionMantenimientos) {
+	public void setClasificacionMantenimientos(List<DatoBasico> clasificacionMantenimientos) {
 		this.clasificacionMantenimientos = clasificacionMantenimientos;
 	}
 
@@ -671,8 +669,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		return tareasActividades;
 	}
 
-	public void setTareasActividades(
-			List<TareaActividadPlanificada> tareasActividades) {
+	public void setTareasActividades(List<TareaActividadPlanificada> tareasActividades) {
 		this.tareasActividades = tareasActividades;
 	}
 
@@ -714,6 +711,22 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void setResponsable(Persona responsable) {
 		this.responsable = responsable;
+	}
+
+	public ClaseAux getTareas() {
+		return tareas;
+	}
+
+	public void setTareas(ClaseAux tareas) {
+		this.tareas = tareas;
+	}
+
+	public List<ClaseAux> getListaTareas() {
+		return listaTareas;
+	}
+
+	public void setListaTareas(List<ClaseAux> listaTareas) {
+		this.listaTareas = listaTareas;
 	}
 
 }

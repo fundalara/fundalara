@@ -3,10 +3,10 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmUmpire"?>
 
 <zk>
-	
+	<div align="center">
 		<window id="FrmUmpire" title="Personal Foraneo" border="normal"
 			width="450px" height="" closable="true"
-			apply="controlador.competencia.CntrlFrmPersonalForaneo">
+			apply="controlador.competencia.CntrlFrmPersonalForaneo" style="text-align:left">
 
 
 			<panel title="Datos Personal Foraneo">
@@ -76,5 +76,5 @@
 
 
 		</window>
-	
+	</div>
 </zk>

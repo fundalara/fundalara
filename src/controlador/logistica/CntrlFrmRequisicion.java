@@ -9,19 +9,15 @@ import modelo.DetalleRequisicion;
 import modelo.Instalacion;
 import modelo.Material;
 import modelo.MaterialActividad;
-import modelo.MaterialActividadPlanificada;
 import modelo.Persona;
 import modelo.PersonaNatural;
 import modelo.Personal;
 import modelo.PersonalActividadPlanificada;
 import modelo.PlanificacionActividad;
 import modelo.Requisicion;
-import modelo.SolicitudMantenimiento;
-import modelo.TareaActividad;
 import modelo.TareaActividadPlanificada;
 
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -38,22 +34,17 @@ import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import dao.generico.SessionManager;
-
 import servicio.implementacion.ServicioDatoBasico;
-import servicio.implementacion.ServicioPlanificacionActividad;
-import servicio.interfaz.IServicioActividad;
-import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioDetalleRequisicion;
-import servicio.interfaz.IServicioInstalacion;
-import servicio.interfaz.IServicioMaterial;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
 import servicio.interfaz.IServicioPersonal;
-import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioRequisicion;
-import servicio.interfaz.IServicioTareaActividad;
-import servicio.interfaz.IServicioTareaActividadPlanificada;
 
+/**
+ * @version , 11/02/2012 Clase controladora de los eventos de la vista de igual
+ *          nombre y manejo de los servicios de datos para el control de generar
+ *          una requision de materiales * @author Eduardo Quintero.
+ */
 public class CntrlFrmRequisicion extends GenericForwardComposer {
 
 	// Controlador
@@ -112,20 +103,24 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		formRequisicion = comp;
-		//		binder.loadAll();
+		// binder.loadAll();
 	}
 
-	public void onCreate$formRequisicion2() {
+	/**
+	 * es una llamada al evento del formulario y sirve para inicializar los
+	 * valores mediante la llegada de parametros de la pantalla de prestamo y
+	 * devolucion si es llamada de forma individual estos valores no seran
+	 * cargados de forma inicial, si no manualmente
+	 * 
+	 */
+	public void onCreate$formRequisicion() {
 		try {
 			materialesRequisados = new ArrayList<DetalleRequisicion>();
 			materialActividad = new MaterialActividad();
 			aux = new DetalleRequisicion();
-			materialActividad = (MaterialActividad) formRequisicion
-					.getVariable("material", false);
-			aux.setCantidadSolicitada(materialActividad.getMaterial()
-					.getCantidadDisponible());
-			aux.setCodigoDetalleRequisicion(servicioDetalleRequisicion.listar()
-					.size() + 1);
+			materialActividad = (MaterialActividad) formRequisicion.getVariable("material", false);
+			aux.setCantidadSolicitada(materialActividad.getCantidadEntregada());
+			aux.setCodigoDetalleRequisicion(servicioDetalleRequisicion.listar().size() + 1);
 			aux.setEstatus('A');
 			aux.setMaterial(materialActividad.getMaterial());
 			materialesRequisados.add(aux);
@@ -138,51 +133,74 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 
 	// Metodos de los componentes
 
+	/**
+	 * es una llamada al evento del boton btnAgregarMateriales y sirve para
+	 * agregar materiales de la lista los materiales para generar la requisicion
+	 * 
+	 * @return true
+	 * 
+	 */
 	public void onClick$btnAgregarMateriales() {
 
-		Component catalogoMaterial = Executions.createComponents(
-				"/Logistica/Vistas/frmCatalogoMaterialB.zul", null, null);
+		Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterialB.zul", null, null);
 		catalogoMaterial.setVariable("formRequisicion", formRequisicion, false);
-		formRequisicion.addEventListener("onCatalogoMaterialCerrado",
-				new EventListener() {
+		formRequisicion.addEventListener("onCatalogoMaterialCerrado", new EventListener() {
 
-					public void onEvent(Event arg0) throws Exception {
-						material = new Material();
-						material = (Material) formRequisicion.getVariable(
-								"material", false);
+			public void onEvent(Event arg0) throws Exception {
+				material = new Material();
+				material = (Material) formRequisicion.getVariable("material", false);
 
-						int cantidad = (Integer) formRequisicion.getVariable(
-								"cantidad", false);
+				int cantidad = (Integer) formRequisicion.getVariable("cantidad", false);
 
-						aux = new DetalleRequisicion();
-						aux.setCantidadSolicitada(cantidad);
-						aux.setEstatus('A');
-						aux.setMaterial(material);
-						// aux.setRequisicion(requisicion);
-						materialesRequisados.add(aux);
-						binder.loadAll();
-						arg0.stopPropagation();
-					}
-				});
+				aux = new DetalleRequisicion();
+				aux.setCantidadSolicitada(cantidad);
+				aux.setEstatus('A');
+				aux.setMaterial(material);
+				// aux.setRequisicion(requisicion);
+				materialesRequisados.add(aux);
+				binder.loadAll();
+				arg0.stopPropagation();
+			}
+		});
 	}
 
+	/**
+	 * es una llamada al evento del boton btnQuitarMateriales y sirve para
+	 * eliminar materiales de la lista los materiales para generar la
+	 * requisicion
+	 * 
+	 * @return true
+	 * 
+	 */
 	public void onClick$btnQuitarMateriales() throws InterruptedException {
 		if (lsbxGenerarR.getSelectedIndex() != -1) {
-			materialesRequisados.remove((DetalleRequisicion) lsbxGenerarR
-					.getSelectedItem().getValue());
+			materialesRequisados.remove((DetalleRequisicion) lsbxGenerarR.getSelectedItem().getValue());
 			binder.loadAll();
 		} else {
-			Messagebox.show("Seleccione una material", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una material", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
 	}
 
+	/**
+	 * es una llamada al boton salir para cerrar el formulario
+	 * 
+	 * @return true
+	 * 
+	 */
 	public void onClick$btnSalir() {
 		formRequisicion.detach();
 	}
 
+	/**
+	 * es una llamada al evento del boton btnGuardar y se encarga de registrar
+	 * la requisicion de los materiales agreados con sus respectivas cantidades
+	 * ademas de la hora de la requisicion
+	 * 
+	 * @return true
+	 * 
+	 */
 	public void onClick$btnGuardar() {
 		java.util.Date fecha = new Date();
 		Personal personal = new Personal();
@@ -194,8 +212,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		estadoRequisicion = servicioDatoBasico.buscarPorCodigo(408);
 
 		requisicion = new Requisicion();
-		requisicion
-				.setCodigoRequisicion(servicioRequisicion.listar().size() + 1);
+		requisicion.setCodigoRequisicion(servicioRequisicion.listar().size() + 1);
 		requisicion.setEstatus('A');
 		requisicion.setFechaEmision(fecha);
 		requisicion.setFechaEntrega(fecha);
@@ -204,8 +221,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		requisicion.setDatoBasico(estadoRequisicion);
 		servicioRequisicion.agregar(requisicion);
 		for (int i = 0; i < materialesRequisados.size(); i++) {
-			materialesRequisados.get(i).setCodigoDetalleRequisicion(
-					servicioDetalleRequisicion.listar().size() + 1);
+			materialesRequisados.get(i).setCodigoDetalleRequisicion(servicioDetalleRequisicion.listar().size() + 1);
 			materialesRequisados.get(i).setRequisicion(requisicion);
 			servicioDetalleRequisicion.agregar(materialesRequisados.get(i));
 
@@ -215,8 +231,10 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 
 	}
 
-	// Getters y setters de las variables
-
+	/**
+	 * seccion de getter y setters
+	 * 
+	 */
 	public Listbox getLboxMateriales() {
 		return lboxMateriales;
 	}
@@ -253,8 +271,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		return materialesRequisados;
 	}
 
-	public void setMaterialesRequisados(
-			List<DetalleRequisicion> materialesRequisados) {
+	public void setMaterialesRequisados(List<DetalleRequisicion> materialesRequisados) {
 		this.materialesRequisados = materialesRequisados;
 	}
 
@@ -390,8 +407,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		return personaActividadPlanificada;
 	}
 
-	public void setPersonaActividadPlanificada(
-			PersonalActividadPlanificada personaActividadPlanificada) {
+	public void setPersonaActividadPlanificada(PersonalActividadPlanificada personaActividadPlanificada) {
 		this.personaActividadPlanificada = personaActividadPlanificada;
 	}
 
@@ -415,8 +431,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		return servicioMaterialActividadPlanificada;
 	}
 
-	public void setServicioMaterialActividadPlanificada(
-			IServicioMaterialActividadPlanificada servicioMaterialActividadPlanificada) {
+	public void setServicioMaterialActividadPlanificada(IServicioMaterialActividadPlanificada servicioMaterialActividadPlanificada) {
 		this.servicioMaterialActividadPlanificada = servicioMaterialActividadPlanificada;
 	}
 
@@ -424,8 +439,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		return servicioDetalleRequisicion;
 	}
 
-	public void setServicioDetalleRequisicion(
-			IServicioDetalleRequisicion servicioDetalleRequisicion) {
+	public void setServicioDetalleRequisicion(IServicioDetalleRequisicion servicioDetalleRequisicion) {
 		this.servicioDetalleRequisicion = servicioDetalleRequisicion;
 	}
 

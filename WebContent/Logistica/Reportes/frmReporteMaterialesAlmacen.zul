@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><?page title="Materiales por Almacén" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Materiales por Almacén" id="winReporteMaterialesAlmacen"
+		border="normal" visible="false"
+		apply="controlador.logistica.CntrlReporteMaterialesAlmacen"
+		width="690px" maximizable="true" minimizable="true">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid height="100%" width="100%">
+					<columns>
+						<column />
+						<column />
+					</columns>
+					<rows>
+						<row align="right">							
+							<div align="right">
+								<button label="Generar Reporte"
+									id="btnImprimir" width="100px" height="30px"
+									image="/Recursos/Imagenes/reporte.ico" />
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

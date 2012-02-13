@@ -6,7 +6,7 @@
 	<div align="center">
 		<window title="Registro de Indicadores" border="normal"
 			id="winRegistroIndicador" width="500px" height="auto" closable="true"
-			apply="controlador.competencia.CntrlFrmRegistroIndicadores">
+			apply="controlador.competencia.CntrlFrmRegistroIndicadores" style="text-align:left">
 			<div align="left">
 				<grid>
 					<columns>

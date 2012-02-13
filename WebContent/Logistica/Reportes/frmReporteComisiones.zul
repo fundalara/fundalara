@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wnReporteComisiones"?>
+<?page title="Seguimiento de Representantes por Actividad" contentType="text/html;charset=UTF-8"?>
+<window title="Seguimiento de Representantes por Actividad"
+	border="normal" width="690px"
+	apply="controlador.logistica.CntrlFrmReporteComisiones"
+	id="wnReporteComisiones">
+	<panel>
+		<panelchildren>
+			<hbox>
+				<div>
+					<label value="Comisión:"></label>
+					<combobox id="cmbComision" constraint="no empty"
+						selectedItem="@{cntrl.comision}" model="@{cntrl.listaPrueba}">
+						<comboitem id="cmbE" self="@{each=b}"
+							label="@{b.nombre}" />
+					</combobox>
+					<space width="3px"></space>
+					<label value="Representante:"></label>
+					<combobox id="cmbPersona" selectedItem="@{cntrl.a}"
+						constraint="no empty" model="@{cntrl.listaFamiliar}">
+						<comboitem id="cmbP" self="@{each=p}"
+							label="@{p, converter='comun.converter.NameConverter'}" />
+					</combobox>
+					<space width="150px"></space>
+					<label value="Actividad:"></label>
+					<combobox id="cmbActividad" constraint="no empty"
+						selectedItem="@{cntrl.actividadSimple}"
+						model="@{cntrl.listaActividadPura}">
+						<comboitem id="cmbA" self="@{each=g}"
+							label="@{g.planificacionActividad.descripcion}" />
+					</combobox>
+					<label value="Desde:"></label>
+					<datebox id="fechaInicio" format="dd/MM/yyyy"
+						style="color:black !important;" constraint="no empty" />
+					<space width="3px"></space>
+					<label value="Hasta:"></label>
+					<datebox id="fechaFin" format="dd/MM/yyyy"
+						style="color:black !important;" constraint="no empty" />
+				</div>
+			</hbox>
+		</panelchildren>
+	</panel>
+	<panel title="Resultados ">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column width="20%"></column>
+				</columns>
+				<rows>
+					<row>
+						<listbox id="lboxComision"
+							model="@{cntrl.listaTareaActividad2}"
+							selectedItem="@{cntrl.tarea}" checkmark="false" height="50%">
+							<listhead>
+								<listheader label="Tareas" />
+								<listheader label="Estado" />
+								<listheader label="Jugador" />
+								<listheader label="Fecha Inicio" />
+								<listheader label="Hora Inicio" />
+								<listheader label="Fecha Fin" />
+								<listheader label="Hora Fin" />
+							</listhead>
+							<listitem self="@{each='ta'}"
+								value="@{ta}">
+								<listcell
+									label="@{ta.datoBasicoByCodigoTarea.nombre}" />
+								<listcell
+									label="@{ta.datoBasicoByEstadoTarea.nombre}" />
+								<listcell
+									label="@{ta.comisionFamiliar.familiarJugador.jugador.personaNatural, converter='comun.converter.NameConverter'}" />
+								<listcell>
+									<datebox
+										value="@{ta.actividad.fechaInicio}" format="dd/MM/yyyy"
+										readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+								<listcell height="20%">
+									<datebox
+										value="@{ta.actividad.horaInicio}" format="hh:mm"
+										readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+								<listcell>
+									<datebox
+										value="@{ta.actividad.fechaCulminacion}" format="dd/MM/yyyy"
+										readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+								<listcell height="20%">
+									<datebox
+										value="@{ta.actividad.horaFin}" format="hh:mm" readonly="true"
+										buttonVisible="false">
+									</datebox>
+								</listcell>
+							</listitem>
+						</listbox>
+					</row>
+					<row>
+						<div>
+							<label value="Total Tareas:"></label>
+							<intbox value="@{cntrl.total}"></intbox>
+							<space width="3px"></space>
+							<label value="Total Ejecutadas:"></label>
+							<intbox value="@{cntrl.total1}"></intbox>
+							<space width="3px"></space>
+							<label value="Total No Ejecutadas:"></label>
+							<intbox value="@{cntrl.total2}"></intbox>
+						</div>
+					</row>
+				</rows>
+			</grid>
+		</panelchildren>
+	</panel>
+	<div align="right">
+		<button id="btnExportar" label="Exportar"
+			image="/Recursos/Imagenes/exportar.jpg" />
+		<button id="btnSalir" label="Salir"
+			image="/Recursos/Imagenes/salir.png" />
+	</div>
+</window>

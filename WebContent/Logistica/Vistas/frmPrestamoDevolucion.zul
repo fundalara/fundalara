@@ -6,10 +6,9 @@
 	<window title="Manejo de Materiales" border="normal" width="690px"
 		id="frmPrestamoDevolucion" height="auto"
 		apply="controlador.logistica.CntrlPrestamoDevolucion">
-
 		<tabbox>
 			<tabs>
-				<tab label="Prestamo" />
+				<tab label="Préstamo" />
 				<tab label="Devolución" />
 			</tabs>
 			<tabpanels>
@@ -37,7 +36,7 @@
 							image="/Recursos/Imagenes/consultar.ico"
 							tooltiptext="Buscar una actividad en ejecucion" />
 					</div>
-					<panel title="Listado de Solicitudes"
+					<panel title="Listado de Materiales por Asignar"
 						collapsible="true">
 						<panelchildren>
 							<listbox id="lboxSolicitudMaterial"
@@ -69,13 +68,11 @@
 							</listbox>
 						</panelchildren>
 					</panel>
-
-
 					<panel collapsible="true"
-						title="Detalle del Prestamo" style="font-weight:bold;" open="true"
+						title="Detalle del Préstamo" style="font-weight:bold;" open="true"
 						id="panelDetalle">
 						<panelchildren>
-							<grid>
+							<grid style="border:none">
 								<columns>
 									<column width="10%" align="left"></column>
 									<column width="25%" align="left"></column>
@@ -83,7 +80,7 @@
 									<column width="25%" align="left"></column>
 								</columns>
 								<rows>
-									<row>
+									<row style="border:none">
 										<label
 											style="font-weight:bold;">
 											Material
@@ -98,12 +95,10 @@
 										<textbox id="txtTipoMaterial"
 											value="@{cntrl.solicitud.material.datoBasicoByCodigoTipoMaterial.nombre}"
 											width="90%" readonly="true" />
-
 									</row>
-									<row>
+									<row style="border:none">
 										<label
 											style="font-weight:bold;">
-
 											Cantidad en Inventario:
 										</label>
 										<textbox
@@ -112,7 +107,6 @@
 											readonly="true" width="90%" />
 										<label
 											style="font-weight:bold;">
-
 											Cantidad Necesaria:
 										</label>
 										<textbox
@@ -120,31 +114,29 @@
 											value="@{cntrl.solicitud.cantidadRequerida}" readonly="true"
 											width="90%" />
 									</row>
-									<row>
+									<row style="border:none">
 										<label
 											style="font-weight:bold;">
-											Disponibles para Asignar
+											Cantidad a Entregar
 										</label>
 										<spinner
 											id="txtDisponibleAsignar" value="@{cntrl.cantidadNecesitada}"
 											width="40%" constraint="no empty, no negative, no zero" />
 										<label style="font-weight:bold;"
 											visible="false" id="labelRequisicion">
-											Cantidad para requisicion:
+											Cantidad para Requisicion:
 										</label>
 										<spinner id="txtFaltante"
 											value="@{cntrl.cantidadFaltante}" width="40%"
 											constraint="no empty, no negative, no zero" visible="false" />
-
-
 									</row>
-									<row>
+									<row style="border:none">
 										<label></label>
 										<label></label>
 										<label></label>
 										<button id="btnRequisicion"
 											label="Generar Requisición"
-											image="/Recursos/Imagenes/agregar.ico" visible="true" />
+											image="/Recursos/Imagenes/agregar.ico" visible="false" />
 									</row>
 								</rows>
 							</grid>
@@ -153,9 +145,7 @@
 					<panel collapsible="true" title="Requisición"
 						width="100%" style="font-weight:bold;" open="true" visible="false"
 						id="panelRequisicion">
-
 						<panelchildren>
-
 							<grid width="100%" height="90px">
 								<columns>
 									<column width="10%" align="left">
@@ -183,7 +173,6 @@
 										<textbox width="300px"
 											height="50px" multiline="true">
 										</textbox>
-
 									</row>
 								</rows>
 							</grid>
@@ -208,7 +197,6 @@
 						</groupbox>
 					</div>
 				</tabpanel>
-
 				<tabpanel>
 					<menubar>
 						<menuitem label="Filtrar Por:"
@@ -232,7 +220,7 @@
 							image="/Recursos/Imagenes/consultar.ico"
 							tooltiptext="buscar Actividad donde se asignaron materiales" />
 					</div>
-					<panel title="Listado de Prestamos"
+					<panel title="Lista de Préstamos de Materiales"
 						collapsible="true">
 						<panelchildren>
 							<listbox id="lboxDevolucionMaterial"
@@ -244,15 +232,6 @@
 									<listheader width="15%">
 										Cantidad Entregada
 									</listheader>
-									<!-- 	<listheader width="15%"> -->
-									<!-- 	Actividad -->
-									<!-- 	</listheader> -->
-									<!-- 	<listheader width="15%"> -->
-									<!-- 	Fecha Devolucion -->
-									<!-- 	</listheader> -->
-									<!-- 	<listheader width="15%"> -->
-									<!-- 	Estatus -->
-									<!-- 	</listheader> -->
 								</listhead>
 								<listitem self="@{each='d'}"
 									value="@{d}">
@@ -260,11 +239,6 @@
 										label="@{d.material.descripcion}" />
 									<listcell
 										label="@{d.cantidadEntregada}" />
-									<!-- 	<listcell label="" /> -->
-									<!-- 	<listcell -->
-									<!-- 	label="@{d.fechaDevolucion}" /> -->
-									<!-- 	<listcell label="@{d.estatus}" -->
-									<!-- 	tooltiptext="Por Devolver" /> -->
 								</listitem>
 							</listbox>
 						</panelchildren>
@@ -272,7 +246,7 @@
 					<panel collapsible="true" title="Detalle Devolución"
 						width="100%" height="50%" style="font-weight:bold;" open="true">
 						<panelchildren>
-							<grid>
+							<grid style="border:none">
 								<columns>
 									<column width="10%" align="left"></column>
 									<column width="25%" align="left"></column>
@@ -280,7 +254,7 @@
 									<column width="25%" align="left"></column>
 								</columns>
 								<rows>
-									<row>
+									<row style="border:none">
 										<label
 											style="font-weight:bold;">
 											Material
@@ -296,25 +270,23 @@
 											value="@{cntrl.materialActividadD.material.datoBasicoByCodigoTipoMaterial.nombre}"
 											width="90%" readonly="true" />
 									</row>
-									<row>
+									<row style="border:none">
 										<label
 											style="font-weight:bold;">
 											Cantidad a Devolver:
 										</label>
 										<spinner id="txtDevolver"
 											value="@{cntrl.materialActividadD.cantidadDevuelta}"
-											width="40px" constraint="no empty, no negative, no zero" />
-
+											width="40px" constraint="no empty, no negative" />
 										<label
 											style="font-weight:bold;">
 											Articulos en mal estado:
 										</label>
 										<spinner id="txtMalEstado"
-											width="40px" constraint="no empty, no negative, no zero"
+											width="40px" constraint="no empty, no negative"
 											value="@{cntrl.cantidadMalEstado}" />
-
 									</row>
-									<row>
+									<row style="border:none">
 										<label
 											style="font-weight:bold;">
 											Observaciones:
@@ -338,11 +310,10 @@
 								image="/Recursos/Imagenes/cancelar.ico"
 								id="btnCancelarDevolucion" />
 							<button label="Salir"
-								image="/Recursos/Imagenes/atras.ico" id="btnSalirDevolucion" />
+								image="/Recursos/Imagenes/salir.png" id="btnSalirDevolucion" />
 						</groupbox>
 					</div>
 				</tabpanel>
-
 			</tabpanels>
 		</tabbox>
 	</window>

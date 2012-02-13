@@ -1,134 +1,137 @@
 <zk>
-<window title="Repetir Actividad" border="normal" mode="modal" id="winPeriodicidad"
-  closable="true" width="42%">
-  <panel title="Hora de la Actividad" visible="false">
- 	<panelchildren>
-		<grid>
-			<columns>
-				<column width="40%"></column>
-				<column width="60%"></column>
-			</columns>
-			<rows>
-				<row style="border:none">
-					<label value="Hora de Inicio"></label>
-					<combobox value="00:00pm"></combobox>
-				</row>
-				<row style="border:none">
-					<label value="Hora Final"></label>
-					<combobox value="00:00pm"></combobox>
-				</row>
-				<row style="border:none">
-					<label value="Duración"></label>
-					<div>
-						<spinner value="0"></spinner>
-						<label value="minutos"></label>
-					</div>	
-				</row>
-			</rows>
-		</grid>
-	</panelchildren>
-</panel>
-<panel title="Frecuencia">
-	<panelchildren>
-		<grid>
-			<columns>
-				<column width="40%"></column>
-				<column width="60%"></column>
-			</columns>
-			<rows>
-				<row style="border:none">
-						<vbox>
-						   <checkbox id="dia" label="Diariamente" onCheck='enlace("/Logistica/Vistas/Tiempo/frmDia.zul",1)'></checkbox>
-						   <checkbox id="sema" label="Semanal" onCheck='enlace("/Logistica/Vistas/Tiempo/frmSemana.zul",2)'></checkbox>
-						</vbox>
-						<vbox>
-						   <checkbox id="mes" label="Mensual" onCheck='enlace("/Logistica/Vistas/Tiempo/frmMes.zul",3)' ></checkbox>
-						   <checkbox id="anno" label="Anual" onCheck='enlace("/Logistica/Vistas/Tiempo/frmAnno.zul",4)' ></checkbox>
-						</vbox>
-			        		
-
-						
-				</row>
-				<row spans="2">
-				  <div>
-						<include id="cuerpo"></include>
-					</div>
-				</row>
-				<row style="border:none">
-				    <label value="Inicio:"></label>
-					<datebox></datebox>
-				</row>
-				
-				<row style="border:none">
-				    <label value="Finalizar después de:"></label>
-   					<hbox>
-	   					<spinner width="50px"></spinner>
-						<label value="Repeticiones"></label>	
-					</hbox>		
-				</row>
-				<row style="border:none">
-				  <label value="Finalizar el:"></label>
-				  <datebox></datebox>	
-				</row>						
-			</rows>
-		</grid>
-		<grid>
-				<columns><column></column></columns>
-				<rows>
-					<row>
-						<div align="right">
-							<button label="Guardar" image="/Recursos/Imagenes/guardar.ico" onClick="winPeriodicidad.detach()"></button>
-							<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"></button>
-						</div>	
-					</row>
-				</rows>
-			</grid>
-		
-	</panelchildren>
-</panel>
-
-<zscript>
+	<window title="Repetir Actividad" border="normal" mode="modal"
+		id="winPeriodicidad" closable="true" width="42%">
+		<panel title="Hora de la Actividad" visible="false">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40%"></column>
+						<column width="60%"></column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="Hora de Inicio"></label>
+							<combobox value="00:00pm"></combobox>
+						</row>
+						<row style="border:none">
+							<label value="Hora Final"></label>
+							<combobox value="00:00pm"></combobox>
+						</row>
+						<row style="border:none">
+							<label value="Duración"></label>
+							<div>
+								<spinner value="0"></spinner>
+								<label value="minutos"></label>
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel title="Frecuencia">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="40%"></column>
+						<column width="60%"></column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<vbox>
+								<checkbox id="dia" label="Diariamente"
+									onCheck='enlace("/Logistica/Vistas/Tiempo/frmDia.zul",1)'>
+								</checkbox>
+								<checkbox id="sema" label="Semanal"
+									onCheck='enlace("/Logistica/Vistas/Tiempo/frmSemana.zul",2)'>
+								</checkbox>
+							</vbox>
+							<vbox>
+								<checkbox id="mes" label="Mensual"
+									onCheck='enlace("/Logistica/Vistas/Tiempo/frmMes.zul",3)'>
+								</checkbox>
+								<checkbox id="anno" label="Anual"
+									onCheck='enlace("/Logistica/Vistas/Tiempo/frmAnno.zul",4)'>
+								</checkbox>
+							</vbox>
+						</row>
+						<row spans="2">
+							<div>
+								<include id="cuerpo"></include>
+							</div>
+						</row>
+						<row style="border:none">
+							<label value="Inicio:"></label>
+							<datebox format="dd/MM/yyyy"></datebox>
+						</row>
+						<row style="border:none">
+							<label value="Finalizar después de:"></label>
+							<hbox>
+								<spinner width="50px"></spinner>
+								<label value="Repeticiones"></label>
+							</hbox>
+						</row>
+						<row style="border:none">
+							<label value="Finalizar el:"></label>
+							<datebox format="dd/MM/yyyy"></datebox>
+						</row>
+					</rows>
+				</grid>
+				<grid>
+					<columns>
+						<column></column>
+					</columns>
+					<rows>
+						<row>
+							<div align="right">
+								<button label="Guardar"
+									image="/Recursos/Imagenes/guardar.ico"
+									onClick="winPeriodicidad.detach()">
+								</button>
+								<button label="Cancelar"
+									image="/Recursos/Imagenes/cancelar.ico">
+								</button>
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<zscript>
 
 	<![CDATA[
-		public void mostrarDiariamente(){		
-			sema.setChecked(false);
-			mes.setChecked(false);
-			anno.setChecked(false);
+	public void mostrarDiariamente() {
+		sema.setChecked(false);
+		mes.setChecked(false);
+		anno.setChecked(false);
+	}
+	public void mostrarSemanal() {
+		dia.setChecked(false);
+		mes.setChecked(false);
+		anno.setChecked(false);
+	}
+	public void mostrarMensual() {
+		dia.setChecked(false);
+		sema.setChecked(false);
+		anno.setChecked(false);
+	}
+	public void mostrarAnno() {
+		dia.setChecked(false);
+		sema.setChecked(false);
+		mes.setChecked(false);
+	}
+	public void enlace(String cad, int a) {
+		cuerpo.setSrc(cad);
+		if (a == 1) {
+			this.mostrarDiariamente();
+		} else if (a == 2) {
+			this.mostrarSemanal();
+		} else if (a == 3) {
+			this.mostrarMensual();
+		} else {
+			this.mostrarAnno();
 		}
-		
-		public void mostrarSemanal(){
-			dia.setChecked(false);
-			mes.setChecked(false);
-			anno.setChecked(false);
-		}
-		
-		public void mostrarMensual(){		
-			dia.setChecked(false);
-			sema.setChecked(false); 
-			anno.setChecked(false);
-		}
-		
-		public void mostrarAnno(){		
-			dia.setChecked(false);
-			sema.setChecked(false); 
-			mes.setChecked(false);
-		}
-		
-		public void enlace(String cad, int a) {
-			cuerpo.setSrc(cad);
-			if(a==1){
-				this.mostrarDiariamente();
-			}else if(a==2){
-				this.mostrarSemanal();
-			}else if(a==3){
-				this.mostrarMensual();
-			}else{
-				this.mostrarAnno();
-			}
-		}
-		
-	]]>
+	}
+]]>
 </zscript>
-
-</window>
+	</window>
 </zk>

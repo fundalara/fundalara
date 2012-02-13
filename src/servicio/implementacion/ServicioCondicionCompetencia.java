@@ -15,6 +15,7 @@ import servicio.interfaz.IServicioCondicionCompetencia;
 public class ServicioCondicionCompetencia implements IServicioCondicionCompetencia {
 
 	DaoCondicionCompetencia daoCondicionCompetencia;
+
 	
 	
 	
@@ -29,15 +30,22 @@ public class ServicioCondicionCompetencia implements IServicioCondicionCompetenc
 
 	@Override
 	public void eliminar(CondicionCompetencia cc) {
-		// TODO Auto-generated method stub
-		
+		cc.setEstatus('E');
+		daoCondicionCompetencia.eliminar(cc);
+			
 	}
-
+	
+	
 	@Override
-	public void agregar(CondicionCompetencia cc) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void agregar (CondicionCompetencia cc) {
+		if (cc.getCodigoCondicionCompetencia() == 0){
+			   int cod = daoCondicionCompetencia.listar(CondicionCompetencia.class).size()+1;
+			   cc.setCodigoCondicionCompetencia(cod);
+			   cc.setEstatus('A');
+			}
+			daoCondicionCompetencia.guardar(cc);	
+			
+		}
 
 	@Override
 	public List<CondicionCompetencia> listar() {
@@ -49,14 +57,16 @@ public class ServicioCondicionCompetencia implements IServicioCondicionCompetenc
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public List<CondicionCompetencia> listarCondicionSeleccionada(ClasificacionCompetencia i){
+		return daoCondicionCompetencia.listarCondicionSeleccionada(i);
+	}
 
 	public List<CondicionCompetencia> listarCondicion(DatoBasico cc) {
 	    return null;
 	}
-	
-	@Override
-	public List<CondicionCompetencia> listarCondicionSeleccionada(ClasificacionCompetencia cc) {
-		return daoCondicionCompetencia.listarCondicionSeleccionada(cc);
-	}
 
+	
+	
 }

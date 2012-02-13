@@ -85,6 +85,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	ServicioLineUp servicioLineUp;
 	ServicioJuego servicioJuego;
 	List<PersonalForaneo> umpires;
+	List<PersonalForaneo> anotadores;
 	List<DatoBasico> posiciones;
 	Combobox cmbUmpires;
 	Combobox cmbPosiciones;
@@ -92,42 +93,22 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	Grid resultados;
 	Boolean sw = true;
 
-	public List<PersonalForaneo> getUmpires() {
-		return umpires;
-	}
-
-	public void setUmpires(List<PersonalForaneo> umpires) {
-		this.umpires = umpires;
-	}
-
-	public List<DatoBasico> getPosiciones() {
-		return posiciones;
-	}
-
-	public void setPosiciones(List<DatoBasico> posiciones) {
-		this.posiciones = posiciones;
-	}
-
-	public List<PersonalForaneoJuego> getUmpiresJuego() {
-		return umpiresJuego;
-	}
-
-	public void setUmpiresJuego(List<PersonalForaneoJuego> umpiresJuego) {
-		this.umpiresJuego = umpiresJuego;
-	}
-
+	
 	public void restaurar() {
 		// cmbUmpires.setText("-- Seleccione --");
+		umpiresJuego = new ArrayList<PersonalForaneoJuego>();
+		anotadores = new ArrayList<PersonalForaneo>();
+		umpires = new ArrayList<PersonalForaneo>();
 		umpires = servicioPersonalForaneo.listarUmpires();
 		posiciones = servicioDatoBasico.listarPosiciones();
+		anotadores = servicioPersonalForaneo.listarAnotadores();
 	}
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
-		formulario = comp;
-		umpiresJuego = new ArrayList<PersonalForaneoJuego>();
+		formulario = comp;	
 		restaurar();
 
 	}
@@ -355,7 +336,7 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 				umpiresJuego.remove(lsbxUmpires.getSelectedIndex());
 				binder.loadAll();
 			} else
-				Messagebox.show("Debe seleccionar un elemento", "Mensaje",
+				Messagebox.show("¡Datos almacenados exitosamente", "Mensaje",
 						Messagebox.OK, Messagebox.EXCLAMATION);
 
 		}
@@ -400,5 +381,37 @@ public class CntrlFrmRegistroResultados extends GenericForwardComposer {
 	public void setInnings(List<Inning> innings) {
 		this.innings = innings;
 	}
+	public List<PersonalForaneo> getUmpires() {
+		return umpires;
+	}
+
+	public void setUmpires(List<PersonalForaneo> umpires) {
+		this.umpires = umpires;
+	}
+
+	public List<DatoBasico> getPosiciones() {
+		return posiciones;
+	}
+
+	public void setPosiciones(List<DatoBasico> posiciones) {
+		this.posiciones = posiciones;
+	}
+
+	public List<PersonalForaneoJuego> getUmpiresJuego() {
+		return umpiresJuego;
+	}
+
+	public void setUmpiresJuego(List<PersonalForaneoJuego> umpiresJuego) {
+		this.umpiresJuego = umpiresJuego;
+	}
+
+	public List<PersonalForaneo> getAnotadores() {
+		return anotadores;
+	}
+
+	public void setAnotadores(List<PersonalForaneo> anotadores) {
+		this.anotadores = anotadores;
+	}
+    
 
 }

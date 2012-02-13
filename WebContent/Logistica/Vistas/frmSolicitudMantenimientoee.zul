@@ -1,0 +1,68 @@
+<?page title="Solicitud de Mantenimiento" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmSolicitudMantenimientoee"?>
+<zk>
+	<window id="frmSolicitudMantenimientoee" width="690px"
+		apply="controlador.logistica.CntrlSolicitudMantenimiento2"
+		title="Solicitud de Mantenimiento" border="normal">
+		<label value="Actividad"></label>
+		<listbox id="ListMantenimiento"
+			model="@{cntrl.ListadoActividades}"
+			selectedItem="@{cntrl.ActividadSeleccionada}" checkmark="True">
+			<listhead>
+				<listheader label="Nombre" width="60%" />
+				<listheader label="Fecha de Inicio" width="20%" />
+				<listheader label="Hora de Incio" width="20%" />
+			</listhead>
+			<listitem self="@{each='a'}" value="@{a}">
+				<listcell
+					label="@{a.planificacionActividad.descripcion}">
+				</listcell>
+				<listcell>
+					<datebox value="@{a.fechaInicio}"
+						format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+					</datebox>
+				</listcell>
+				<listcell>
+					<datebox value="@{a.horaInicio}" format="hh:mm"
+						readonly="true" buttonVisible="false">
+					</datebox>
+				</listcell>
+			</listitem>
+		</listbox>
+		<panel title="Datos de la Solicitud" id="panel" open="false">
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="20%"></column>
+						<column width="30%"></column>
+						<column width="20%"></column>
+						<column width="30%"></column>
+					</columns>
+					<rows>
+						<row>
+							<label value="Prioridad"></label>
+							<combobox id="cmbPrioridad"
+								model="@{cntrl.ListaPrioridades}"
+								selectedItem="@{cntrl.PrioridadSeleccionada}">
+								<comboitem self="@{each='q'}"
+									value="@{q}" label="@{q.nombre}">
+								</comboitem>
+							</combobox>
+							<label value="Fecha de Solicitud"></label>
+							<datebox id="dtbFecha" format="dd/MM/yyyy"
+								value="@{cntrl.solicitudMantenimiento.fechaSolicitud}">
+							</datebox>
+						</row>
+					</rows>
+				</grid>
+				<div width="100%" align="right">
+					<button label="Solicitar Mantenimiento"
+						id="btnSolicitarMantenimiento">
+					</button>
+					<button label="Salir" id="btnSalir"></button>
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

@@ -4,7 +4,7 @@
 <div align="center">
 	<window id="frmLiga" apply="controlador.competencia.CntrlFrmLiga"
 		title="Registro de Ligas" border="normal" width="550px"
-		closable="true">
+		closable="true" style="text-align:left">
 
 		<panel>
 			<panelchildren>
@@ -63,9 +63,7 @@
 			</panelchildren>
 		</panel>
 		<!-- Falta -->
-		<panel>
-			<caption label="Categorias"></caption>
-
+		<panel title="Categorías">
 			<panelchildren>
 				<grid>
 					<columns>

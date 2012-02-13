@@ -3,10 +3,7 @@ package controlador.logistica;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.ComisionActividad;
-import modelo.ComisionEquipo;
 import modelo.DatoBasico;
-import modelo.Instalacion;
 import modelo.Material;
 import modelo.TipoDato;
 
@@ -20,10 +17,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
 
 import servicio.interfaz.IServicioDatoBasico;
-import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioMaterial;
 
 public class CntrlFrmCatalogoMaterialB extends GenericForwardComposer {
@@ -53,8 +48,7 @@ public class CntrlFrmCatalogoMaterialB extends GenericForwardComposer {
 		comp.setVariable("cntrl", this, true);
 		System.out.println("ao");
 		catalogoMaterial = comp;
-		beanFactory = new ClassPathXmlApplicationContext(
-				"ApplicationContext.xml");
+		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		TipoDato td = new TipoDato();
 		td.setCodigoTipoDato(106);
 		td.setEstatus('A');
@@ -62,8 +56,7 @@ public class CntrlFrmCatalogoMaterialB extends GenericForwardComposer {
 	}
 
 	public void onSelect$cmbTipo() {
-		clasificacionMaterial = servicioDatoBasico
-				.buscarDatosPorRelacion(tipoMaterial);
+		clasificacionMaterial = servicioDatoBasico.buscarDatosPorRelacion(tipoMaterial);
 	}
 
 	public void onSelect$cmbClase() {
@@ -80,8 +73,7 @@ public class CntrlFrmCatalogoMaterialB extends GenericForwardComposer {
 				material = listaMaterial.get(lboxMaterial.getSelectedIndex());
 
 				// se obtiene la referencia del formulario
-				Component formRequisicion = (Component) catalogoMaterial
-						.getVariable("formRequisicion", false);
+				Component formRequisicion = (Component) catalogoMaterial.getVariable("formRequisicion", false);
 				System.out.println("seteando variable");
 				// se le asigna el objeto tarea al formulario
 				formRequisicion.setVariable("material", material, false);
@@ -93,21 +85,18 @@ public class CntrlFrmCatalogoMaterialB extends GenericForwardComposer {
 				System.out.println("voy para el evento");
 				// se le envia una señal al formulario indicado que el
 				// formulario se cerro y que los datos se han enviado
-				Events.sendEvent(new Event("onCatalogoMaterialCerrado",
-						formRequisicion));
+				Events.sendEvent(new Event("onCatalogoMaterialCerrado", formRequisicion));
 
 				// se cierra el catalogo
 				catalogoMaterial.detach();
 
 			} else {
-				Messagebox.show("Seleccione una cantidad ", "Mensaje",
-						Messagebox.YES, Messagebox.INFORMATION);
+				Messagebox.show("Seleccione una cantidad ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 				txtCantidad.focus();
 
 			}
 		} else {
-			Messagebox.show("Seleccione un material ", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione un material ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 

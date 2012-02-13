@@ -16,7 +16,6 @@
 					<label
 						value="@{cntrl.actividad.planificacionActividad.descripcion}">
 					</label>
-
 					<grid style="boder:none">
 						<columns>
 							<column width="17%"></column>
@@ -33,7 +32,6 @@
 									value="@{cntrl.actividad.fechaInicio}" width=" 50%"
 									style="color:black !important;">
 								</datebox>
-
 								<label style="font-weight: bold;"
 									value="Hora de Inicio">
 								</label>
@@ -72,8 +70,8 @@
 									style="font-weight: bold;">
 								</label>
 								<textbox disabled="true"
-									value="@{cntrl.actividad.personal.personaNatural, converter='comun.converter.NameConverter'}" width="80%"
-									style="color:black !important;">
+									value="@{cntrl.actividad.personal.personaNatural, converter='comun.converter.NameConverter'}"
+									width="80%" style="color:black !important;">
 								</textbox>
 							</row>
 						</rows>
@@ -108,7 +106,6 @@
 										image="/Recursos/Imagenes/agregar.ico">
 									</button>
 								</vbox>
-
 							</hbox>
 						</panelchildren>
 					</panel>
@@ -124,8 +121,8 @@
 										<listheader label="Tarea"
 											width="30%">
 										</listheader>
-										<listheader
-											label="Responsable" width="50%">
+										<listheader label="Responsable"
+											width="50%">
 										</listheader>
 										<listheader
 											label="Estado de Ejecucion">
@@ -211,7 +208,9 @@
 									<button id="btnAgregarMaterial"
 										image="/Recursos/Imagenes/agregar.ico">
 									</button>
-									<button id="btnMostrarMaterialesAprobados" image="/Recursos/Imagenes/consultar.ico">
+									<button
+										id="btnMostrarMaterialesAprobados"
+										image="/Recursos/Imagenes/consultar.ico">
 									</button>
 								</vbox>
 							</hbox>
@@ -228,8 +227,8 @@
 				image="/Recursos/Imagenes/obligatorio.png"
 				label="Suspender Actividad">
 			</button>
-			<button id="btnSalir" image="/Recursos/Imagenes/salir.png" onClick="ejecucionActividadComplementaria.detach()"
-				label="Salir">
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
+				onClick="ejecucionActividadComplementaria.detach()" label="Salir">
 			</button>
 		</div>
 		<panel id="panel2" collapsible="true" open="false"

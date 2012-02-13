@@ -5,7 +5,6 @@
 	<window title="Solicitud de Mantenimiento" border="normal"
 		width="690px" id="SolicitudMantenimiento"
 		apply="controlador.logistica.CntrlSolicitudMantenimiento">
-
 		<grid height="80%" width="100%">
 			<columns>
 				<column></column>
@@ -20,7 +19,8 @@
 						selectedItem="@{cntrl.planificacionActividad}"
 						model="@{cntrl.actividades, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
 						<comboitem id="cmb2" self="@{each=a}"
-							label="@{a.descripcion}" value="@{a.codigoPlanificacionActividad}" />
+							label="@{a.descripcion}"
+							value="@{a.codigoPlanificacionActividad}" />
 					</combobox>
 					<checkbox id="checkperiodico" label=" Periódico"
 						checked="@{cntrl.planificacionActividad.actividadPeriodico, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
@@ -31,14 +31,13 @@
 				</row>
 				<row>
 					<label value="Fecha de Inicio:" width="90%"></label>
-					<datebox
+					<datebox format="dd/MM/yyyy"
 						value="@{cntrl.actividad.fechaInicio, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
 					<label value="Fecha de Culminacion:" width="90%">
 					</label>
-					<datebox
+					<datebox format="dd/MM/yyyy"
 						value="@{cntrl.actividad.fechaCulminacion, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
 				</row>
-
 				<row>
 					<label value="Hora de Inicio"></label>
 					<timebox
@@ -46,16 +45,14 @@
 					<label value="Hora de Culminacion"></label>
 					<timebox
 						value="@{cntrl.actividad.horaFin, load-after='btnAceptar.onClick, btnCancelar.onClick'}" />
-
 				</row>
 				<row>
-
 					<label value="Instalacion"></label>
-					<combobox id="cmb3"
-						selectedItem="@{cntrl.insta}"
+					<combobox id="cmb3" selectedItem="@{cntrl.insta}"
 						model="@{cntrl.instalaciones, load-after='btnAceptar.onClick, btnCancelar.onClick'}">
 						<comboitem id="cm4" self="@{each=insta}"
-							label="@{insta.instalacion.descripcion}" value="@{insta.codigoInstalacionUtilizada}" />
+							label="@{insta.instalacion.descripcion}"
+							value="@{insta.codigoInstalacionUtilizada}" />
 					</combobox>
 					<label value="Prioridad"></label>
 					<combobox id="cmb5"
@@ -65,10 +62,8 @@
 							label="@{p.nombre}" value="@{p.codigoDatoBasico}" />
 					</combobox>
 				</row>
-
 			</rows>
 		</grid>
-
 		<div align="right">
 			<button id="btnAceptar" label="Aceptar"
 				image="../../Recursos/Imagenes/aceptar.ico"
@@ -78,6 +73,5 @@
 			<button label="Salir"
 				image="../../Recursos/Imagenes/salir.png" tooltiptext="Salir" />
 		</div>
-
 	</window>
 </zk>

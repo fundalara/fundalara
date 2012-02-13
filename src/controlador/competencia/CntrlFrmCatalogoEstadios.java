@@ -32,6 +32,7 @@ public class CntrlFrmCatalogoEstadios extends GenericForwardComposer{
 	Component catalogo;
 	Textbox txtFiltro;
 
+	
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		//Se utiliza para hacer referencia a los objetos desde la vista (ej cntrl.algo). Debe ir siempre aqui
@@ -48,12 +49,6 @@ public class CntrlFrmCatalogoEstadios extends GenericForwardComposer{
 		}
 
 	}
-	
-	public void onCtrlKey$txtFiltro(){
-
-	}
-	
-	
 	
 		public void onChanging$txtFiltro(InputEvent event ){
 		

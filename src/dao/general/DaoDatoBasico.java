@@ -245,6 +245,7 @@ public class DaoDatoBasico extends GenericDao {
 	}
 
 	public List<DatoBasico> listarTipoCompetencia() {
+
 		/**
 		 * @autor Merielen Gaspar
          * @autor Diana Santiago
@@ -254,7 +255,7 @@ public class DaoDatoBasico extends GenericDao {
 		 * @return List<DatoBasico> Lista que contiene los tipos de Competencia.
 		 * 
 		 */
-
+		
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(TipoDato.class);
@@ -268,13 +269,14 @@ public class DaoDatoBasico extends GenericDao {
 	}
 
 	public List<DatoBasico> listarCondicion() {
+
 		/**
 		 * @autor Merielen Gaspar
          * @autor Diana Santiago
          * 
-		 * Metodo que permite listar las Condiciones según la clasificación de una Competencia específica, de acuerdo a su estatus.
+		 * Metodo que permite listar las Condiciones segun la clasificacion de una Competencia especifica, de acuerdo a su estatus.
 		 * 
-		 * @return List<DatoBasico> Lista que contiene las Condiciones según la clasificación de una Competencia específica.
+		 * @return List<DatoBasico> Lista que contiene las Condiciones segun la clasificacion de una Competencia especifica.
 		 * 
 		 */
 		

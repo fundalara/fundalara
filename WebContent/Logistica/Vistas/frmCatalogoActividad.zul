@@ -23,15 +23,11 @@
 					label="@{ap.planificacionActividad.descripcion}" />
 			</listitem>
 		</listbox>
-
 		<div align="right">
 			<button id="btnGuardar" label="Seleccionar"
 				image="/Recursos/Imagenes/guardar.ico" />
-
 			<button id="btnSalir" label="Salir"
 				image="/Recursos/Imagenes/salir.png" />
 		</div>
-
-
 	</window>
 </zk>

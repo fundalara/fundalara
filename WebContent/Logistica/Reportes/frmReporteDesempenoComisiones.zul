@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmReporteDesempenoComisiones"?>
+<?page title="Desempeño de Comisiones por Actividad" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Desempeño de Comisiones por Actividad"
+		border="normal" width="690px" maximizable="true" minimizable="true"
+		apply="controlador.logistica.CntrlReporteDesempenoComisiones"
+		id="frmReporteDesempenoComisiones">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid width="100%" height="100%">
+					<columns>
+						<column></column>
+						<column></column>
+						<column></column>
+					</columns>
+					<rows>
+						<row>
+							<div>
+								<label value="Desde:"></label>
+								<datebox id="fechaInicio"
+									constraint="no empty" />
+							</div>
+							<div>
+								<label value="Hasta:"></label>
+								<datebox id="fechaFin"
+									constraint="no empty" />
+							</div>
+							<button
+								image="/Recursos/Imagenes/consultar.ico" id="btnBuscar">
+							</button>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel title="Lista de Actividades" width="100%">
+			<panelchildren>
+				<listbox id="lboxActividades" mold="paging"
+					pageSize="10" checkmark="true" model="@{cntrl.listaActividades}"
+					selectedItem="@{cntrl.actividad}" width="100%" height="100%">
+					<listhead>
+						<listheader label="Descripción" width="20%" />
+						<listheader label="Instalación" width="20%" />
+						<listheader label="Fecha Inicio" width="15%" />
+						<listheader label="Hora Inicio" width="15%" />
+						<listheader label="Fecha Fin" width="15%" />
+						<listheader label="Hora Fin" width="15%" />
+					</listhead>
+					<listitem self="@{each='a'}" value="@{a}">
+						<listcell
+							label="@{a.planificacionActividad.descripcion}" />
+						<listcell
+							label="@{a.instalacionUtilizada.instalacion.descripcion }">
+						</listcell>
+						<listcell>
+							<datebox value="@{a.fechaInicio}"
+								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{a.horaInicio}"
+								format="hh:mm" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{a.fechaCulminacion}"
+								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{a.horaFin}" format="hh:mm"
+								readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<panel id="panelComisiones" collapsible="true"
+			title="Lista de Comisiones Participantes" visible="true">
+			<panelchildren>
+				<listbox id="lboxComisiones" mold="paging" pageSize="10"
+					checkmark="true" model="@{cntrl.actividad.comisionActividads}"
+					width="100%" height="100%">
+					<listitem self="@{each='c'}" value="@{c}">
+						<listcell label="@{c.datoBasico.nombre}" />
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button id="btnGenerar" label="Generar Reporte"
+				width="100px" height="30px"
+				image="/Recursos/Imagenes/reporte.ico">
+			</button>
+			<button id="btnSalir" label="Salir" width="100px"
+				height="30px" image="/Recursos/Imagenes/salir.png"
+				onClick="frmReporteDesempenoComisiones.detach()" />
+		</div>
+	</window>
+</zk>

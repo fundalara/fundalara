@@ -9,6 +9,7 @@ import modelo.Categoria;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.DesempennoIndividual;
+import modelo.DesempennoIndividualId;
 import modelo.EquipoCompetencia;
 import modelo.EquipoJuego;
 import modelo.IndicadorCategoriaCompetencia;
@@ -21,12 +22,14 @@ import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Rows;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDatoBasico;
+import servicio.implementacion.ServicioDesempennoIndividual;
 import servicio.implementacion.ServicioIndicadorCategoriaCompetencia;
 import servicio.implementacion.ServicioJuego;
 import servicio.implementacion.ServicioLineUp;
@@ -41,6 +44,7 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 	ServicioJuego servicioJuego;
 	ServicioIndicadorCategoriaCompetencia servicioIndicadorCategoriaCompetencia;
 	ServicioDatoBasico servicioDatoBasico;
+	ServicioDesempennoIndividual servicioDesempennoIndividual;
 	List<LineUp> lineups;
 	List<LineUp> lineupsReserva;
 	List<IndicadorCategoriaCompetencia> indicadoresIndividualesOfensivos;
@@ -74,6 +78,7 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 
 		Competencia competencia = equipoCompetencia.getCompetencia();
 		Categoria categoria = equipoCompetencia.getEquipo().getCategoria();
+
 		// indicadores ofensivos
 		DatoBasico modalidad = servicioDatoBasico.buscarPorString("OFENSIVO");
 		indicadoresIndividualesOfensivos = servicioIndicadorCategoriaCompetencia
@@ -115,31 +120,74 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 		Columns cols = grid.getColumns();
 		for (int i = 0; i < lista.size(); i++) {
 			Column c = new Column();
+			c.setWidth("50px");
 			c.setLabel(lista.get(i).getIndicador().getAbreviatura());
 			cols.appendChild(c);
+			grid.invalidate();
+
 		}
+
 		// Creando filas
 		Rows rows = grid.getRows();
 		for (int i = 0; i < n; i++) {
 			Row row = new Row();
 			row.setHeight("27px");
+			LineUp lineUp = lineups.get(i);
 			for (int j = 0; j < lista.size(); j++) {
+				IndicadorCategoriaCompetencia icc = lista.get(j);
+				DesempennoIndividual di = servicioDesempennoIndividual.obtenerDesempennoPorIndicador(icc, lineUp);
 				Spinner spinner = new Spinner(0);
 				spinner.setCols(2);
 				spinner.setConstraint("min 0");
+				if (di != null ){
+					int v = (int) di.getValor();
+					spinner.setValue(v);
+				}
 				row.appendChild(spinner);
+				grid.invalidate();
 			}
 			rows.appendChild(row);
 		}
 
-		grid.invalidate();
 	}
 
-	public void onClick$btnGuardar() {
-		Rows rows = gridIndicadoresOfensivos.getRows();
-		List<Row> filas = rows.getChildren();
-		
-	
+	public void guardar(Grid grid,List<IndicadorCategoriaCompetencia> indicadores) {
+
+		int n = grid.getColumns().getChildren().size();
+		Rows rows = grid.getRows();
+		for (int i = 0; i < rows.getChildren().size(); i++) {
+			Row row = (Row) rows.getChildren().get(i);
+			LineUp lineUp = lineups.get(i);
+			for (int j = 0; j < n; j++) {
+				Spinner spnr = (Spinner) row.getChildren().get(j);
+				IndicadorCategoriaCompetencia icc = indicadores.get(j);
+				DesempennoIndividual di;
+				di = servicioDesempennoIndividual.obtenerDesempennoPorIndicador(icc, lineUp);
+				if (di == null){
+					di = new DesempennoIndividual();
+					DesempennoIndividualId id = new DesempennoIndividualId(icc.getCodigoIndicadorCategoriaCompetencia(),lineUp.getCodigoLineUp());		
+					di.setId(id);
+					di.setValor(spnr.getValue());
+					di.setIndicadorCategoriaCompetencia(icc);
+					di.setLineUp(lineUp);
+				}else{
+					di.setValor(spnr.getValue());
+				}			
+				servicioDesempennoIndividual.agregar(di);
+			}
+		}
+
+	}
+
+	public void onClick$btnGuardar() throws InterruptedException {
+		guardar(gridIndicadoresOfensivos, indicadoresIndividualesOfensivos);
+		guardar(gridIndicadoresOfensivosReserva,indicadoresIndividualesOfensivos);
+		guardar(gridIndicadoresDefensivos,indicadoresIndividualesDefensivos);
+		guardar(gridIndicadoresDefensivosReserva,indicadoresIndividualesOfensivos);
+		guardar(gridIndicadoresPitcheo,indicadoresIndividualesPitcheo);
+		guardar(gridIndicadoresPitcheoReserva,indicadoresIndividualesPitcheo);
+		Messagebox.show("¡Datos almacenados exitosamente!", "Mensaje",Messagebox.OK, Messagebox.EXCLAMATION);
+
 	}
 
 	public List ConvertirConjuntoALista(Set conjunto) {

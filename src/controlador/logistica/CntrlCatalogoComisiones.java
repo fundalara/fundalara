@@ -15,64 +15,60 @@ import org.zkoss.zul.Listbox;
 import servicio.interfaz.IServicioDatoBasico;
 
 public class CntrlCatalogoComisiones extends GenericForwardComposer {
-	
+
 	AnnotateDataBinder binder;
-	
+
 	DatoBasico datoBasico = new DatoBasico();
 	DatoBasico aux = new DatoBasico();
 	IServicioDatoBasico servicioDatoBasico;
-	
+
 	List<DatoBasico> listadoComisiones = new ArrayList<DatoBasico>();
-	List<DatoBasico> listado= new ArrayList<DatoBasico>();
+	List<DatoBasico> listado = new ArrayList<DatoBasico>();
 	List<DatoBasico> auxListadoComisiones = new ArrayList<DatoBasico>();
-	
+
 	Component CatalogoComision;
 	Component frmPadre;
 	Listbox lboxListadoComisiones;
-	
-	
-	
-	
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, false);
-		
-		CatalogoComision = comp;		
+
+		CatalogoComision = comp;
 	}
-	
-	public void onCreate$catalogoComisiones(){
-				
-		auxListadoComisiones = (List<DatoBasico>) CatalogoComision.getVariable("comision",true);
-              
-		if (auxListadoComisiones!= null){
+
+	public void onCreate$catalogoComisiones() {
+
+		auxListadoComisiones = (List<DatoBasico>) CatalogoComision.getVariable("comision", true);
+
+		if (auxListadoComisiones != null) {
 			for (DatoBasico datoBasico : servicioDatoBasico.listarComisiones()) {
-		    	if (!auxListadoComisiones.contains(datoBasico)){
-		    		listadoComisiones.add(datoBasico);
-		    		
-			     }	
-		    }
-		}else{ 	
-			listadoComisiones = servicioDatoBasico.listarComisiones();			
+				if (!auxListadoComisiones.contains(datoBasico)) {
+					listadoComisiones.add(datoBasico);
+
+				}
+			}
+		} else {
+			listadoComisiones = servicioDatoBasico.listarComisiones();
 		}
-	    binder.loadAll();	
+		binder.loadAll();
 	}
-	
-	
-	public void onClick$btnAceptar(){
-		Component frmPadre = (Component) this.CatalogoComision.getVariable("frmPadre", false);  
+
+	public void onClick$btnAceptar() {
+		Component frmPadre = (Component) this.CatalogoComision.getVariable("frmPadre", false);
 		for (int i = 0; i < listadoComisiones.size(); i++) {
 			if (lboxListadoComisiones.getItemAtIndex(i).isSelected()) {
-			      aux = (DatoBasico) lboxListadoComisiones.getItemAtIndex(i).getValue();
-			      listado.add(aux);
+				aux = (DatoBasico) lboxListadoComisiones.getItemAtIndex(i).getValue();
+				listado.add(aux);
 
-			}		
+			}
 		}
 		frmPadre.setVariable("listaComision", listado, false);
-		Events.sendEvent(new Event("onCatalogoComisionCerrado",frmPadre));
+		Events.sendEvent(new Event("onCatalogoComisionCerrado", frmPadre));
 		this.CatalogoComision.detach();
 	}
-	
-	public void onClick$btnCancelar(){
+
+	public void onClick$btnCancelar() {
 		this.CatalogoComision.detach();
 	}
 
@@ -116,8 +112,4 @@ public class CntrlCatalogoComisiones extends GenericForwardComposer {
 		this.auxListadoComisiones = auxListadoComisiones;
 	}
 
-	
-	
-	
-	
 }

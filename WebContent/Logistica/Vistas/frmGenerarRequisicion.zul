@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="formRequisicion2"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="formRequisicion"?>
 <?page title="Generar Requisicion" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Requisición" border="normal" width="60%"
-		id="formRequisicion2" mode="modal" closable="true"
-		apply="controlador.logistica.CntrlFrmRequisicion" sizable="true" >
-
-		<panel title="Materiales Requisados" width="100%" >
+		id="formRequisicion" mode="modal" closable="true"
+		apply="controlador.logistica.CntrlFrmRequisicion" sizable="true">
+		<panel title="Materiales Requisados" width="100%">
 			<panelchildren>
 				<button label="Historial de Requisiciones"
 					visible="false" />
@@ -58,10 +57,9 @@
 									<button label="Guardar"
 										image="/Recursos/Imagenes/guardar.ico" id="btnGuardar" />
 									<button label="Salir"
-										image="/Recursos/Imagenes/salir.png" onClick="salir()" />
+										image="/Recursos/Imagenes/salir.png" />
 								</div>
 							</div>
-
 						</row>
 					</rows>
 				</grid>

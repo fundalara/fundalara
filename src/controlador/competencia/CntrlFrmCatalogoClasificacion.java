@@ -7,6 +7,7 @@ import modelo.ClasificacionCompetencia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Combobox;
@@ -32,23 +33,23 @@ public class CntrlFrmCatalogoClasificacion extends GenericForwardComposer {
 	 */
 	
 	
-	/** ATRIBUTOS */
+	/** Atributos */
 	List<ClasificacionCompetencia> clasificacionCompetencias;
 	AnnotateDataBinder binder;
 	Component catalogo;
 	
 	
-	/** SERVICIOS UTILIZADOS */
+	/** Servicios utilizados */
 	ServicioClasificacionCompetencia servicioClasificacionCompetencia;
 	
 	
-	/** VISTAS */
+	/** Vistas */
 	Combobox cmbTipoCompetencia;
 	Listbox lsbxClasificacion;
 	Textbox txtFiltro;
 
 
-	/** ESTE METODO SE LLAMA AL CARGAR LA VENTANA */
+	
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
@@ -61,7 +62,7 @@ public class CntrlFrmCatalogoClasificacion extends GenericForwardComposer {
 	}
 
 
-	/** ESTE METODO PARA ENVIAR EL TIPO DE COMPETENCIA SELECCIONADO A LA PANTALLA PRINCIPAL (FrmClasificacion.zul) */
+	/** Envia el tipo de competencia seleccionado a la pantalla princiapal (FrmClasificacion.zul) */
 	public void onClick$btnAceptar() throws Exception {
 		if (lsbxClasificacion.getSelectedIndex() != -1) {
 			ClasificacionCompetencia m = clasificacionCompetencias
@@ -72,31 +73,34 @@ public class CntrlFrmCatalogoClasificacion extends GenericForwardComposer {
 			Events.sendEvent(new Event("onCatalogoCerrado", formulario));
 			catalogo.detach();
 		} else {
-			Messagebox.show("Seleccione una Clasificación", "Mensaje",
+			Messagebox.show("Seleccione una ClasificaciÃ³n", "Mensaje",
 					Messagebox.YES, Messagebox.INFORMATION);
 		}
 	}
 
 
-	/** ESTE METODO SE USA PARA SALIR DE LA PANTALLA ACTUAL */
+	/** Salir de la pantalla actual */
 	public void onClick$btnSalir() throws InterruptedException {
-		if (Messagebox.show("                  ¿Desea salir?", "Mensaje",
+		if (Messagebox.show("                  Â¿Desea salir?", "Mensaje",
 				Messagebox.YES + Messagebox.NO, Messagebox.QUESTION) == Messagebox.YES)
 			catalogo.detach();
 
 	}
 
 
-//	public void onCtrlKey$txtFiltro() {
-//		System.out.println("changing...");
-//	}
-//
-//	public void onChanging$txtFiltro() {
-//		binder.loadAll();
-//	}
+	public void onCtrlKey$txtFiltro(){
+
+	}
+		public void onChanging$txtFiltro(InputEvent event ){
+		
+		String dato = event.getValue().toUpperCase();
+
+		clasificacionCompetencias = servicioClasificacionCompetencia.listarClasificacionPorFiltro(dato);
+		  binder.loadAll();
+	}
 	
 	
-	/** GETTERS AND SETTERS */
+	/** Getters and Setters */
 	public List<ClasificacionCompetencia> getClasificacionCompetencias() {
 		return clasificacionCompetencias;
 	}

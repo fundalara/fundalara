@@ -70,4 +70,9 @@ public class ServicioPersonalForaneo implements IServicioPersonalForaneo {
 	public List<PersonalForaneo> listarPersonalPorFiltro(String dato){
 		return daoPersonalForaneo.listarPersonalPorFiltro(dato);
 	}
+
+	@Override
+	public List<PersonalForaneo> listarAnotadores() {
+		return daoPersonalForaneo.listarAnotadores();
+	}
 }

@@ -14,16 +14,15 @@ import servicio.interfaz.IServicioDatoBasico;
 public class CntrlCalogoTareas extends GenericForwardComposer {
 
 	Component formulario;
-	
+
 	DatoBasico datoBasico = new DatoBasico();
-	
+
 	List<DatoBasico> listadoTareas;
 	List<DatoBasico> listadoTareasAgregadas;
-	
+
 	IServicioDatoBasico servicioDatoBasico;
-	
+
 	Button agregar, quitar;
-	
 
 	public void doAfterCompose(Component c) throws Exception {
 		super.doAfterCompose(c);
@@ -33,68 +32,58 @@ public class CntrlCalogoTareas extends GenericForwardComposer {
 		listadoTareas = this.listarTareas();
 	}
 
-
 	public Component getFormulario() {
 		return formulario;
 	}
-
 
 	public void setFormulario(Component formulario) {
 		this.formulario = formulario;
 	}
 
-
 	public DatoBasico getDatoBasico() {
 		return datoBasico;
 	}
-
 
 	public void setDatoBasico(DatoBasico datoBasico) {
 		this.datoBasico = datoBasico;
 	}
 
-
 	public List<DatoBasico> getListadoTareas() {
 		return listadoTareas;
 	}
 
-
 	public void setListadoTareas(List<DatoBasico> listadoTareas) {
 		this.listadoTareas = listadoTareas;
 	}
-	
-	
+
 	public List<DatoBasico> getListadoTareasAgregadas() {
 		return listadoTareasAgregadas;
 	}
-
 
 	public void setListadoTareasAgregadas(List<DatoBasico> listadoTareasAgregadas) {
 		this.listadoTareasAgregadas = listadoTareasAgregadas;
 	}
 
-
-	public List<DatoBasico> listarTareas(){
+	public List<DatoBasico> listarTareas() {
 		List<DatoBasico> b = new ArrayList<DatoBasico>();
 		List<DatoBasico> a = this.servicioDatoBasico.listar();
-		for(int i = 0; i < a.size();i++){
-			if(a.get(i).getTipoDato().getCodigoTipoDato() == 110){
+		for (int i = 0; i < a.size(); i++) {
+			if (a.get(i).getTipoDato().getCodigoTipoDato() == 110) {
 				b.add(a.get(i));
 			}
 		}
 		return b;
-		
+
 	}
-	
-	public void onSelect$lboxlistadotareas(){
+
+	public void onSelect$lboxlistadotareas() {
 		this.agregar.setDisabled(false);
 		this.quitar.setDisabled(false);
 
 	}
-	
-	public void onClick$agregar(){
-	   
+
+	public void onClick$agregar() {
+
 	}
-	
 
 }

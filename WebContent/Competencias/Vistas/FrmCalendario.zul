@@ -2,11 +2,10 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmCalendario" ?>
 <zk>
-
-
+	<div align="center">
 	<window title="Programar Juegos" id="FrmCalendario" border="normal"
 		width="670px" closable="true"
-		apply="controlador.competencia.CntrlFrmCalendario">
+		apply="controlador.competencia.CntrlFrmCalendario" style="text-align:left">
 
 		<panel title="Datos de la Competencia" border="normal">
 			<panelchildren>
@@ -209,5 +208,5 @@
 			</panelchildren>
 		</panel>
 	</window>
-
+</div>
 </zk>

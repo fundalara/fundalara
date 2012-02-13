@@ -2,9 +2,9 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmConstante" ?>
 <zk>
-
+<div align="center">
 	<window id="frmConstante" apply="controlador.competencia.CntrlFrmConstante" 
-			title="Registro de Constantes" border="normal" width="70%"  height="auto" closable="true">
+			title="Registro de Constantes" border="normal" width="70%"  height="auto" closable="true" style="text-align:left">
 		<panel title="Datos de Constantes">
 			<panelchildren>
 				<grid oddRowSclass="none" style="border:none">
@@ -102,7 +102,6 @@
 				</panelchildren>
 			</panel>
 		</div>
-
-
 	</window>
+	</div>
 </zk>

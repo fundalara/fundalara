@@ -8,26 +8,22 @@
 		apply="controlador.logistica.CntrlFrmCatalogoMaterialB" width="550px"
 		height="300px">
 		<grid>
-
 			<rows>
 				<row style="border:none">
 					<label value="Material"></label>
 					<hbox>
-
 						<combobox id="cmbTipo"
 							selectedItem="@{cntrl.tipoMaterial}"
 							model="@{cntrl.tiposMaterial}">
 							<comboitem id="cmbITipo" self="@{each=tm}"
 								label="@{tm.nombre}" />
 						</combobox>
-
 						<combobox id="cmbClase"
 							selectedItem="@{cntrl.claseMaterial}"
 							model="@{cntrl.clasificacionMaterial, load-after='cmbTipo.onSelect'}">
 							<comboitem id="cmbIClase" self="@{each=cm}"
 								label="@{cm.nombre}" />
 						</combobox>
-
 					</hbox>
 					<label value="Nombre"></label>
 					<textbox></textbox>
@@ -54,15 +50,10 @@
 					<intbox id="txtCantidad" value="0"></intbox>
 				</row>
 			</rows>
-
-
 		</grid>
-
-
 		<div align="right">
 			<button id="btnGuardar" label="Seleccionar"
 				image="/Recursos/Imagenes/guardar.ico" />
-
 			<button id="btnSalir" label="Salir"
 				image="/Recursos/Imagenes/salir.png" />
 		</div>

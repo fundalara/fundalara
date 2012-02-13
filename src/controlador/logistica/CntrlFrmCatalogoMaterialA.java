@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.DatoBasico;
-import modelo.Instalacion;
 import modelo.Material;
 import modelo.TipoDato;
 
@@ -18,10 +17,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
 
 import servicio.interfaz.IServicioDatoBasico;
-import servicio.interfaz.IServicioInstalacion;
 import servicio.interfaz.IServicioMaterial;
 
 public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
@@ -51,8 +48,7 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 		comp.setVariable("cntrl", this, true);
 
 		catalogoMaterial = comp;
-		beanFactory = new ClassPathXmlApplicationContext(
-				"ApplicationContext.xml");
+		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 
 		TipoDato td = new TipoDato();
 
@@ -62,8 +58,7 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 	}
 
 	public void onSelect$cmbTipo() {
-		clasificacionMaterial = servicioDatoBasico
-				.buscarDatosPorRelacion(tipoMaterial);
+		clasificacionMaterial = servicioDatoBasico.buscarDatosPorRelacion(tipoMaterial);
 	}
 
 	public void onSelect$cmbClase() {
@@ -80,8 +75,7 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 				material = listaMaterial.get(lboxMaterial.getSelectedIndex());
 
 				// se obtiene la referencia del formulario
-				Component frmPlanificarActividad = (Component) catalogoMaterial
-						.getVariable("frmPlanificarActividad", false);
+				Component frmPlanificarActividad = (Component) catalogoMaterial.getVariable("frmPlanificarActividad", false);
 
 				// se le asigna el objeto tarea al formulario
 				frmPlanificarActividad.setVariable("material", material, false);
@@ -92,21 +86,18 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 
 				// se le envia una señal al formulario indicado que el
 				// formulario se cerro y que los datos se han enviado
-				Events.sendEvent(new Event("onCatalogoMaterialCerrado",
-						frmPlanificarActividad));
+				Events.sendEvent(new Event("onCatalogoMaterialCerrado", frmPlanificarActividad));
 
 				// se cierra el catalogo
 				catalogoMaterial.detach();
 
 			} else {
-				Messagebox.show("Seleccione una cantidad ", "Mensaje",
-						Messagebox.YES, Messagebox.INFORMATION);
+				Messagebox.show("Seleccione una cantidad ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 				txtCantidad.focus();
 
 			}
 		} else {
-			Messagebox.show("Seleccione un material ", "Mensaje",
-					Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione un material ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 

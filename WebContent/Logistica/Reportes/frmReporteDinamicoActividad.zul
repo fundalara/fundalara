@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmReporteDinamicoActividad"?>
+<?page title="Consulta Dinámica de Actividades" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Consulta Dinámica de Actividades" border="normal"
+		width="690px" maximizable="true" minimizable="true"
+		apply="controlador.logistica.CntrlFrmReporteDinamicoActividad"
+		id="frmReporteDinamicoActividad">
+		<panel width="100%" height="100%">
+			<panelchildren>
+				<grid width="100%" height="100%">
+					<columns>
+						<column></column>
+						<column></column>
+					</columns>
+					<rows>
+						<row>
+							<label value="Tipo de Actividad"></label>
+							<div>
+								<combobox id="cmbListaTipoActividad"
+									width="70%" constraint="no empty" readonly="true"
+									selectedItem="@{cntrl.tipoActividad}"
+									model="@{cntrl.listaTipoActividad}">
+									<comboitem id="cmbTipoActividad"
+										self="@{each=tm}" label="@{tm.nombre}" />
+								</combobox>
+								<button
+									image="/Recursos/Imagenes/consultar.ico" id="btnBuscar">
+								</button>
+							</div>
+						</row>
+						<row>
+							<div>
+								<label value="Desde:"></label>
+								<datebox id="fechaInicio" format="dd/MM/yyyy"
+									constraint="no empty" />
+							</div>
+							<div>
+								<label value="Hasta:"></label>
+								<datebox id="fechaFin" format="dd/MM/yyyy"
+									constraint="no empty" />
+							</div>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel id="panelComplementaria" visible="false">
+			<panelchildren>
+				<grid>
+					<rows>
+						<row>
+							<checkbox id="checkComisionesAct"
+								label="Comisiones">
+							</checkbox>
+							<checkbox id="checkTareasAct"
+								label="Tareas">
+							</checkbox>
+							<checkbox id="checkMaterialesAct"
+								label="Materiales">
+							</checkbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel id="panelMantenimiento" visible="false">
+			<panelchildren>
+				<grid>
+					<rows>
+						<row>
+							<checkbox id="checkTareasMant"
+								label="Tareas">
+							</checkbox>
+							<checkbox id="checkMaterialesMant"
+								label="Materiales">
+							</checkbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel title="Lista de Actividades" width="100%">
+			<panelchildren>
+				<listbox id="lboxActividades" mold="paging"
+					pageSize="10" checkmark="true" model="@{cntrl.listaActividades}"
+					selectedItem="@{cntrl.actividad}" width="100%" height="100%">
+					<listhead>
+						<listheader label="Descripción" width="20%" />
+						<listheader label="Instalación" width="20%" />
+						<listheader label="Fecha Inicio" width="15%" />
+						<listheader label="Hora Inicio" width="15%" />
+						<listheader label="Fecha Fin" width="15%" />
+						<listheader label="Hora Fin" width="15%" />
+					</listhead>
+					<listitem self="@{each='a'}" value="@{a}">
+						<listcell
+							label="@{a.planificacionActividad.descripcion}" />
+						<listcell
+							label="@{a.instalacionUtilizada.instalacion.descripcion }">
+						</listcell>
+						<listcell>
+							<datebox value="@{a.fechaInicio}"
+								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{a.horaInicio}"
+								format="hh:mm" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{a.fechaCulminacion}"
+								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+						<listcell>
+							<datebox value="@{a.horaFin}" format="hh:mm"
+								readonly="true" buttonVisible="false">
+							</datebox>
+						</listcell>
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<panel id="panelComisiones" collapsible="true"
+			title="Lista de Comisiones Asociadas" visible="false">
+			<panelchildren>
+				<listbox id="lboxComisiones" mold="paging" pageSize="10"
+					checkmark="true"
+					model="@{cntrl.actividad.planificacionActividad.comisionActividadPlanificadas}"
+					width="100%" height="100%">
+					<listitem self="@{each='c'}" value="@{c}">
+						<listcell label="@{c.datoBasico.nombre}" />
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<panel id="panelTareas" collapsible="true"
+			title="Lista de Tareas Asociadas" visible="false">
+			<panelchildren>
+				<listbox id="lboxTareas" mold="paging" pageSize="10"
+					checkmark="true"
+					model="@{cntrl.actividad.planificacionActividad.tareaActividadPlanificadas}"
+					width="100%" height="100%">
+					<listitem self="@{each='t'}" value="@{t}">
+						<listcell label="@{t.datoBasico.nombre}" />
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<panel id="panelMateriales" collapsible="true"
+			title="Lista de Materiales Asociados" visible="false">
+			<panelchildren>
+				<listbox id="lboxMateriales" mold="paging" pageSize="10"
+					checkmark="true"
+					model="@{cntrl.actividad.planificacionActividad.materialActividadPlanificadas}"
+					width="100%" height="100%">
+					<listitem self="@{each='m'}" value="@{m}">
+						<listcell label="@{m.material.descripcion}" />
+						<listcell label="@{m.cantidadRequerida}" />
+					</listitem>
+				</listbox>
+			</panelchildren>
+		</panel>
+		<div align="right">
+			<button id="btnExportar" label="Exportar" width="100px"
+				height="30px" image="/Recursos/Imagenes/exportar.jpg">
+			</button>
+			<button id="btnSalir" label="Salir" width="100px"
+				height="30px" image="/Recursos/Imagenes/salir.png"
+				onClick="frmReporteDinamicoActividad.detach()" />
+		</div>
+	</window>
+</zk>

@@ -3,7 +3,9 @@ package dao.general;
 import java.util.List;
 
 import modelo.DatoBasico;
+import modelo.Personal;
 import modelo.PersonalActividadPlanificada;
+import modelo.PlanificacionActividad;
 
 
 import org.hibernate.Criteria;
@@ -41,6 +43,18 @@ public class DaoPersonalActividadPlanificada extends GenericDao {
 		
 		
 		return p;
+	}
+	
+	public PersonalActividadPlanificada buscarPersonalActividad(Personal personal, PlanificacionActividad planificacionActividad){
+		PersonalActividadPlanificada p = new PersonalActividadPlanificada();
+		List<PersonalActividadPlanificada> a = this.listar(PersonalActividadPlanificada.class);
+		for(int i = 0; i < a.size(); i++){
+			if(a.get(i).getPersonal().getCedulaRif().equals(personal.getCedulaRif()) && a.get(i).getPlanificacionActividad().equals(planificacionActividad)){
+				p = a.get(i);
+			}
+		}
+		
+		return p; 
 	}
 
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winRegistrarAlmacen"?>
 <?page title="Registro Almacen" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="Registrar Nuevo Almacén" border="normal"
@@ -17,14 +17,17 @@
 						<row>
 							<div>
 								<label value="Nombre: "></label>
-								<textbox width="15%" id="txtNombre" constraint="no empty"
+								<textbox width="15%" id="txtNombre"
+									constraint="no empty: El campo 'Nombre' es obligatorio"
 									value="@{cntrl.almacen.nombre}">
 								</textbox>
 								<label value="(*)" style="color:red" />
 								<space width="3%"></space>
 								<label value="Instalación: "></label>
-								<combobox width="15%" constraint="no empty" readonly="true"
-									id="cmbInstalacion" selectedItem="@{cntrl.almacen.instalacion}"
+								<combobox width="15%"
+									constraint="no empty: El campo 'Instalación' es obligatorio"
+									readonly="true" id="cmbInstalacion"
+									selectedItem="@{cntrl.almacen.instalacion}"
 									model="@{cntrl.instalaciones}">
 									<comboitem id="cmbInta"
 										self="@{each=insta}" label="@{insta.descripcion}"
@@ -37,7 +40,8 @@
 						<row>
 							<div>
 								<label value="Descripción: "></label>
-								<textbox multiline="true" height="40px" constraint="no empty"
+								<textbox multiline="true" height="40px"
+									constraint="no empty: El campo 'Descripción' es obligatorio"
 									width="300px" id="txtDescripcion"
 									value="@{cntrl.almacen.descripcion}">
 								</textbox>
@@ -49,9 +53,9 @@
 								<label
 									value="Capacidad del almacén: ">
 								</label>
-								<doublebox constraint="no empty, no negative, no zero"
-									id="dboxCapacidad"
-									value="@{cntrl.almacen.capacidad}" />
+								<doublebox
+									constraint="no empty, no negative, no zero: El campo 'Capacidad' es obligatorio"
+									id="dboxCapacidad" value="@{cntrl.almacen.capacidad}" />
 								<label value="m²"></label>
 								<label value="(*)" style="color:red" />
 								<space width="3%"></space>
@@ -61,9 +65,10 @@
 							<panel title="Almacenes Registrados"
 								collapsible="true" height="200px">
 								<panelchildren>
-									<listbox id="lboxAlmacenes" onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
+									<listbox id="lboxAlmacenes"
+										onSelect="btnRegistrar.disabled=true;btnModificar.disabled=btnEliminar.disabled=false"
 										model="@{cntrl.almacenes, load-after='btnRegistrar.onClick, btnEliminar.onClick, btnModificar.onClick'}"
-										selectedItem="@{cntrl.almacen}" mold="paging" pageSize="8">
+										selectedItem="@{cntrl.almacen}" mold="paging" pageSize="10">
 										<listhead>
 											<listheader
 												label="Nombre Almacén">
@@ -90,29 +95,30 @@
 						</row>
 						<row>
 							<div align="right" width="100%">
-								<button id="btnImprimir" label="Imprimir" width="100px"
-									height="30px" image="../../Recursos/Imagenes/imprimir.ico">
+								<button id="btnImprimir"
+									label="Imprimir" width="100px" height="30px"
+									image="/Recursos/Imagenes/imprimir.ico">
 								</button>
 								<button id="btnRegistrar"
 									label="Registrar" width="100px"
 									onClick="btnModificar.disabled=btnEliminar.disabled=true"
-									height="30px" image="../../Recursos/Imagenes/guardar.ico">
+									height="30px" image="/Recursos/Imagenes/guardar.ico">
 								</button>
 								<button id="btnModificar"
 									label="Modificar" width="100px" disabled="true"
 									onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
-									height="30px" image="../../Recursos/Imagenes/editar.ico" />
+									height="30px" image="/Recursos/Imagenes/editar.ico" />
 								<button id="btnCancelar"
 									label="Cancelar" width="100px"
 									onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
-									height="30px" image="../../Recursos/Imagenes/cancelar.ico" />
+									height="30px" image="/Recursos/Imagenes/cancelar.ico" />
 								<button id="btnEliminar"
 									label="Eliminar" width="100px" disabled="true"
 									onClick="btnRegistrar.disabled=false;btnModificar.disabled=btnEliminar.disabled=true"
-									height="30px" image="../../Recursos/Imagenes/eliminar.ico" />
+									height="30px" image="/Recursos/Imagenes/eliminar.ico" />
 								<button id="btnSalir" label="Salir"
 									width="100px" height="30px"
-									image="../../Recursos/Imagenes/salir.png"
+									image="/Recursos/Imagenes/salir.png"
 									onClick="winRegistrarAlmacen.detach()" />
 							</div>
 						</row>

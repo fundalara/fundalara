@@ -18,6 +18,8 @@ public interface IServicioPersonalForaneo {
 	
 	public abstract List<PersonalForaneo> listarUmpires();
 	
+	public abstract List<PersonalForaneo> listarAnotadores();
+	
     public abstract DatoBasico consultarDB();
     
     public List<PersonalForaneo> listarPersonalPorFiltro(String dato);
