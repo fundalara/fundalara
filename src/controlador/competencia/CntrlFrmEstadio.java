@@ -132,7 +132,9 @@ public class CntrlFrmEstadio extends GenericForwardComposer{
 		
 		
 		public void onClick$btnGuardar() throws InterruptedException {
-			if (txtNombre.getValue().isEmpty()) { 
+			 String nombre = txtNombre.getValue();
+			 String direccion = txtDireccion.getValue();
+			if (nombre.isEmpty() || nombre.trim().length() == 0) { 
 				throw new WrongValueException(txtNombre, "Debe escribir un nombre");
 			} else if (cmbEstados.getText().equalsIgnoreCase("-- Seleccione --")) { 
 				throw new WrongValueException(cmbEstados, "Debe seleccionar un estado");
@@ -141,7 +143,7 @@ public class CntrlFrmEstadio extends GenericForwardComposer{
 			} else if (cmbParroquias.getText().equalsIgnoreCase("-- Seleccione --")) { 
 				throw new WrongValueException(cmbParroquias, "Debe seleccionar una parroquia");
 			}
-			if (txtDireccion.getValue().isEmpty()) { 
+			if (direccion.isEmpty() || direccion.trim().length() == 0) { 
 				throw new WrongValueException(txtDireccion, "Debe escribir una direccion");
 			}else{
 						estadio.setDatoBasico((DatoBasico) cmbParroquias.getSelectedItem().getValue());
