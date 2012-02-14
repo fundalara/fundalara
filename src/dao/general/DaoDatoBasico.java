@@ -362,4 +362,16 @@ public class DaoDatoBasico extends GenericDao {
     
         
 	}
+	
+	public List<DatoBasico> buscarSinJugador(DatoBasico datoBasico) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(DatoBasico.class);
+		c.add(Restrictions.eq("datoBasico.codigoDatoBasico",
+				datoBasico.getCodigoDatoBasico()));
+		c.add(Restrictions.eq("estatus", "A")).add(Restrictions.sqlRestriction("nombre!='JUGADOR'"));
+		List<DatoBasico> lista = c.list();
+		tx.commit();
+		return lista;
+	}
 }

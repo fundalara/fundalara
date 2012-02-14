@@ -13,13 +13,11 @@ import modelo.EgresoCuentaPagar;
 
 public class DaoEgresoCuentaPagar extends GenericDao {
 	
-	public List<EgresoCuentaPagar> listarPorOrigen(CuentaPagar td) {
+	public List<EgresoCuentaPagar> listarPorCuentaPagar(CuentaPagar td) {
 		Session session = getSession();
 		Transaction tx =  session.beginTransaction();
 		Criteria c = getSession().createCriteria(EgresoCuentaPagar.class);
 		c.add(Restrictions.eq("cuentaPagar", td));
 		return c.list();
 	}
-
-
 }
