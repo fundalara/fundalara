@@ -7,6 +7,7 @@ import modelo.Categoria;
 import modelo.DatoBasico;
 import modelo.MaterialActividadPlanificada;
 import modelo.PlanificacionActividad;
+import modelo.Sesion;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -43,5 +44,15 @@ public class DaoMaterialActividadPlanificada extends GenericDao {
 				.add(Restrictions.eq("material", d.getMaterial())).list();
 		return dato.get(0);
 	}
+	
+	public List<MaterialActividadPlanificada> buscarPorSesion(Sesion sesion){		
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria where =  getSession().createCriteria(MaterialActividadPlanificada.class);
+		where.add(Restrictions.eq("sesion", sesion));
+		where.add(Restrictions.eq("estatus", "A"));
+		return where.list();
+	}
+
 
 }

@@ -64,4 +64,7 @@ public class ServicioActividadCalendario implements
 	public ActividadCalendario buscarSesionFecha(Date fecha, Sesion sesion) {
 		return daoActividadCalendario.buscarSesionFecha(fecha, sesion);
 	}
+	public List<ActividadCalendario> buscarSesionRangoFecha(Date fecha1, Date fecha2, Sesion sesion){		
+		return daoActividadCalendario.buscarSesionRangoFecha(fecha1, fecha2, sesion);
+	}
 }

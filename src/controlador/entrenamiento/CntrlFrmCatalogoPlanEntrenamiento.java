@@ -140,11 +140,16 @@ public class CntrlFrmCatalogoPlanEntrenamiento extends GenericForwardComposer {
 				.getValue();
 		asignarCmbCategoria(sesion);
 		asignarCmbEquipo(sesion);
+		asignarCmbDias(sesion);
+		asignarFechas(sesion);
+		asignarLbx(sesion);
+		controladorPlanEntrenamiento.sesion = sesion;
+		controladorPlanEntrenamiento.modificando = true;		
+		winCatalogoPlanEntrenamiento.detach();
 	}
 
 	public void asignarCmbCategoria(Sesion sesion) {
-		List<Categoria> listCat = (List<Categoria>) controladorPlanEntrenamiento.cmbCategoria
-				.getItems();
+		List<Categoria> listCat = controladorPlanEntrenamiento.listCategoria;
 		for (int i = 0; i < listCat.size(); i++) {
 			if (listCat.get(i).getCodigoCategoria() == sesion.getEquipo()
 					.getCategoria().getCodigoCategoria())
@@ -156,6 +161,7 @@ public class CntrlFrmCatalogoPlanEntrenamiento extends GenericForwardComposer {
 	public void asignarCmbEquipo(Sesion sesion) {
 		Categoria ca = (Categoria) controladorPlanEntrenamiento.cmbCategoria
 				.getSelectedItem().getValue();
+		controladorPlanEntrenamiento.cmbEquipo.getItems().clear();
 		List<Equipo> listEq = servicioEquipo.buscarPorCategoriaTipoEquipo(
 				sesion.getPlanEntrenamiento().getPlanTemporada()
 						.getLapsoDeportivo().getDatoBasico(), ca);
@@ -171,8 +177,7 @@ public class CntrlFrmCatalogoPlanEntrenamiento extends GenericForwardComposer {
 	}
 
 	public void asignarCmbDias(Sesion sesion) {
-		Categoria ca = (Categoria) controladorPlanEntrenamiento.cmbCategoria
-				.getSelectedItem().getValue();
+		controladorPlanEntrenamiento.cmbDias.getItems().clear();
 		Equipo e = (Equipo) controladorPlanEntrenamiento.cmbEquipo
 				.getSelectedItem().getValue();
 		List<HorarioPlanTemporada> listhoTemporadas = servicioHorarioPlanTemporada
@@ -181,6 +186,7 @@ public class CntrlFrmCatalogoPlanEntrenamiento extends GenericForwardComposer {
 			Comboitem comboitem = new Comboitem(listhoTemporadas.get(i)
 					.getHorario().getDatoBasico().getNombre());
 			comboitem.setValue(listhoTemporadas.get(i));
+			comboitem.setParent(controladorPlanEntrenamiento.cmbDias);
 			if (listhoTemporadas.get(i).getHorario().getDatoBasico()
 					.getCodigoDatoBasico() == sesion.getDatoBasico()
 					.getCodigoDatoBasico())
@@ -189,11 +195,26 @@ public class CntrlFrmCatalogoPlanEntrenamiento extends GenericForwardComposer {
 		controladorPlanEntrenamiento.cmbDias.setDisabled(true);
 	}
 	
+	public void asignarFechas(Sesion sesion){
+		controladorPlanEntrenamiento.planEntrenamiento = sesion.getPlanEntrenamiento();
+		controladorPlanEntrenamiento.binder.loadAll();
+		controladorPlanEntrenamiento.dtboxFechaFin.setDisabled(false);
+		controladorPlanEntrenamiento.dtboxFechaInicio.setDisabled(false);
+	}
+
 	public void asignarLbx(Sesion sesion){
 		List<ActividadPlanificada> listap = new ArrayList<ActividadPlanificada>(); 
 		listap = servicioActividadPlanificada.buscarPorSesion(sesion);
 		controladorPlanEntrenamiento.listActividadPlanificadas = listap;
 		List<MaterialActividadPlanificada> listmap = new ArrayList<MaterialActividadPlanificada>();
-		listmap = servicioMaterialActividadPlanificada.
+		listmap = servicioMaterialActividadPlanificada.buscarPorSesion(sesion);
+		controladorPlanEntrenamiento.listMaterialActividadPlanificada = listmap;
+		if (!listap.isEmpty() && !listmap.isEmpty() && sesion.getPlanEntrenamiento().getEstatus() != 'F')
+			controladorPlanEntrenamiento.btnFinalizar.setDisabled(false);
+		if (sesion.getPlanEntrenamiento().getEstatus() != 'F')
+			controladorPlanEntrenamiento.btnGuardar.setDisabled(false);	
+		controladorPlanEntrenamiento.cmbFase.setDisabled(false);
+		controladorPlanEntrenamiento.cmbTipoMaterial.setDisabled(false);
+		controladorPlanEntrenamiento.binder.loadAll();
 	}
 }
