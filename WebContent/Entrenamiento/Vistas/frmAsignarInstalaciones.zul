@@ -2,337 +2,50 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndAsignarInstalaciones"?>
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window closable="true" title="Asignación de Instalaciones - 07/02/2012"
-			apply="controlador.entrenamiento.CntrlAsignarInstalaciones"
-			 border="normal" width="580px" id="wndAsignarInstalaciones">
-			<grid>
-				<rows>
-					<row>
+	<window closable="true"		
+		apply="controlador.entrenamiento.CntrlFrmAsignarInstalacion"
+		border="normal" width="700px" id="wndAsignarInstalaciones">
+		<grid>
+			<auxhead height="25px">
+				<auxheader label="Bloque de Horario" align="center"
+					width="150px" />
+				<auxheader label="Categoría - Equipo" align="center"
+					width="300px" />
+				<auxheader label="Instalaciones" align="center"
+					width="250px" />
+			</auxhead>
 
-						<vbox>
-							<grid>
+			<columns>
+				<column label="" width="100px" align="center"/>
+				<column label="" width="350px" align="center" />
+				<column label="" width="100px" align="center" />
+				<column label="" width="50px" align="center" />
+			</columns>
+			<rows id="filas" />
 
-								<auxhead height="25px">
-									<auxheader label="Categorías" />
-									<auxheader label="Equipos" />
-									<auxheader label="Instalaciones" />
-								</auxhead>
+		</grid>
 
-								<columns>
-									<column label="" width="180px" />
-									<column label="" width="180px"
-										align="center" />
-									<column label="" width="180px"
-										align="center" />
-								</columns>
-								<rows>
-									<row>
-										<label value="PREJUNIOR"
-											width="100px" />
-										<textbox value="PREJUNIOR A"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL IZQUIERDO">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-
-										</combobox>
-									</row>
-									<row>
-										<label
-											value="2:00 pm - 3:30 pm">
-										</label>
-										<textbox value="PREJUNIOR B"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="PREJUNIOR C"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="PREJUNIOR D"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="PREJUNIOR E"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="PREJUNIOR F"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-										</combobox>
-									</row>
-									<row height="10px" spans="4"></row>
-									<row>
-										<label value="JUNIOR"
-											width="100px" />
-										<textbox value="JUNIOR A"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL IZQUIERDO">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-											<comboitem
-												label="LEFT FIELD">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label
-											value="3:35 pm - 5:00 pm">
-										</label>
-										<textbox value="JUNIOR B"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL IZQUIERDO">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-											<comboitem
-												label="RIGHT FIELD">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="JUNIOR C"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL IZQUIERDO">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-											<comboitem
-												label="CENTER FIELD">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="JUNIOR D"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL IZQUIERDO">
-											</comboitem>
-											<comboitem
-												label="TUNEL DERECHO">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="JUNIOR E"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-											<comboitem
-												label="TUNEL IZQUIERDO">
-											</comboitem>
-										</combobox>
-									</row>
-									<row>
-										<label></label>
-										<textbox value="JUNIOR F"
-											readonly="true">
-										</textbox>
-										<combobox
-											value="--SELECCIONE--">
-											<comboitem
-												label="CAMPO DE JUEGO">
-											</comboitem>
-											<comboitem
-												label="INFIELD">
-											</comboitem>
-										</combobox>
-									</row>
-								</rows>
-							</grid>
-						</vbox>
-					</row>
-				</rows>
-			</grid>
-			<separator />
-			<grid>
-				<columns>
-					<column width="220px" />
-					<column width="115px" align="right" />
-					<column width="115px" align="right" />
-					<column width="115px" align="right" />
-				</columns>
-				<rows>
-					<row height="15px">
-						<label />
-						<button image="/Recursos/Imagenes/guardar.ico"
-							label="Guardar" width="100px" id="btnGuardar" />
-						<button image="/Recursos/Imagenes/imprimir.ico"
-							label="Imprimir" width="100px" id="btnImprimir" />
-						<button image="/Recursos/Imagenes/cancelar.ico"
-							label="Cancelar" width="100px" id="btnCancelar" />
-						<button image="/Recursos/Imagenes/salir.png"
-							label="Salir" width="100px" id="btnSalir" />
-					</row>
-				</rows>
-			</grid>
-		</window>
+		<separator />
+		<grid>
+			<columns>
+				<column width="220px" />
+				<column width="115px" align="right" />
+				<column width="115px" align="right" />
+				<column width="115px" align="right" />
+			</columns>
+			<rows>
+				<row height="15px">
+					<label />
+					<button image="/Recursos/Imagenes/guardar.ico"
+						label="Guardar" width="100px" id="btnGuardar" />
+					<button image="/Recursos/Imagenes/imprimir.ico"
+						label="Imprimir" width="100px" id="btnImprimir" />
+					<button image="/Recursos/Imagenes/cancelar.ico"
+						label="Cancelar" width="100px" id="btnCancelar" />
+					<button image="/Recursos/Imagenes/salir.png"
+						label="Salir" width="100px" id="btnSalir" />
+				</row>
+			</rows>
+		</grid>
+	</window>
 </zk>

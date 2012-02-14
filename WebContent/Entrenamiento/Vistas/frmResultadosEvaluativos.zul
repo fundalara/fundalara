@@ -1,5 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winResEvaluativos"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 <window title="Test Evaluativo" border="normal" width="680px" height=""

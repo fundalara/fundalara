@@ -23,9 +23,7 @@
 									<label value="Tipo Lapso"
 										width="160px" />
 									<combobox id="cmbLapso"
-										model="@{ctrl.listlapso}" readonly="true" width="125px">
-										<comboitem self="@{each=lapso}"
-											label="@{lapso.nombre}" value="@{lapso}" />
+										readonly="true" width="125px">
 									</combobox>
 									<label value="Nombre" width="160px" />
 									<textbox id="txtNombre"
@@ -58,9 +56,12 @@
 				</rows>
 			</grid>
 			<separator />
+			<label id="lbNotificacion"/>
+			<separator />
 			<grid>
 				<columns>
-					<column width="140px" />
+					<column width="40px" />
+					<column width="110px" align="right" />
 					<column width="110px" align="right" />
 					<column width="110px" align="right" />
 					<column width="110px" align="right" />
@@ -68,6 +69,9 @@
 				<rows>
 					<row>
 						<label></label>
+						<button id="btnClausurar"
+							image="/Recursos/Imagenes/apertura.png" width="110px"
+							label="Clausurar" visible="false"/>
 						<button id="btnGuardar"
 							image="/Recursos/Imagenes/guardar.ico" width="110px"
 							label="Guardar" />

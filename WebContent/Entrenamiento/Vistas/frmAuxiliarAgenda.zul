@@ -1,0 +1,12 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndAuxiliarAgenda"?>
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>	
+	<window title="Registro de Resultados" id="wndAuxiliarAgenda" width="240px" apply="controlador.entrenamiento.CntrlAuxiliarAgenda" closable="true">
+		<combobox id="cmbActividad" width="220px" height="15px">
+		</combobox>
+		<div>
+			<include id="include"/>
+		</div>
+	</window>
+</zk>

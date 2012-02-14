@@ -1,7 +1,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wDesempeno_Atleta"?>
 <zk>
-<window title="Rendimiento de Atleta - EQUIPO A - PREINFANTIL" border="normal" width="950px" closable="true" id="wDesempeno_Atleta">
+<window title="Rendimiento de Atleta - EQUIPO A - PREINFANTIL" border="normal" width="980px" closable="true" id="wDesempeno_Atleta" apply="controlador.entrenamiento.Resultados_Evaluativos">
 		<grid>
 		<columns sizable="true">
 			<column align="left" />
@@ -25,7 +25,7 @@
 				</grid>
 			</row>
 			<row>    
-				<listbox id="lista" mold="paging" pageSize="10" width="930px" onSelect="chequear()" >
+				<listbox id="lista" mold="paging" pageSize="12" width="930px" onSelect="chequear()" >
 					<listhead>
 						<listheader align="center" width="150px">
 							<checkbox id="chcGeneral" label="N°" ></checkbox>
@@ -36,7 +36,7 @@
 							width="150px" />
 						<listheader label="BATEO" align="center"
 							width="115px" />
-						<listheader label="VELOCIDAD" align="center"
+						<listheader label="TROTE" align="center"
 							width="85px" />
 						<listheader label="LANZAMIENTO"
 							align="center" width="110px" />
@@ -71,7 +71,7 @@
 					</auxhead>
 					<listitem>
 						<listcell>
-							<checkbox onCheck="bloquear(0)"/>
+							<checkbox onCheck="bloquear(0)" checked="true"/>
 							<label value="5"/>
 						</listcell>						
 						<listcell label="JAVIER" />
@@ -104,7 +104,7 @@
 					</listitem>
 					<listitem>
 						<listcell>
-							<checkbox onCheck="bloquear(1)"/>
+							<checkbox onCheck="bloquear(1)" checked="true"/>
 							<label value="7"/>
 						</listcell>	
 						<listcell label="LUIS" />
@@ -137,7 +137,7 @@
 					</listitem>
 					<listitem>
 						<listcell>
-							<checkbox onCheck="bloquear(2)"/>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
 							<label value="9"/>
 						</listcell>	
 						<listcell label="JOSE" />
@@ -168,8 +168,304 @@
 							<textbox />
 						</listcell>
 					</listitem>
+					<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="13"/>
+						</listcell>	
+						<listcell label="JUAN" />
+						<listcell label="UZCATEGUI" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
 					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+					<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="52"/>
+						</listcell>	
+						<listcell label="EDWARD" />
+						<listcell label="GIMENEZ" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
 					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+					<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="18"/>
+						</listcell>	
+						<listcell label="MANUEL" />
+						<listcell label="PERDOMO" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+					<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="31"/>
+						</listcell>	
+						<listcell label="FERNANDO" />
+						<listcell label="VILLAREAL" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+					
+					<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="57"/>
+						</listcell>	
+						<listcell label="OSCAR " />
+						<listcell label="ESCOBAR" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+					<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="46"/>
+						</listcell>	
+						<listcell label="ANTONIO" />
+						<listcell label="PEREZ" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+						<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="33"/>
+						</listcell>	
+						<listcell label="SERGIO" />
+						<listcell label="PACHECO" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+						<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="23"/>
+						</listcell>	
+						<listcell label="DAVID " />
+						<listcell label="ARRIETA" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
+						<listitem>
+						<listcell>
+							<checkbox onCheck="bloquear(2)" checked="true"/>
+							<label value="10"/>
+						</listcell>	
+						<listcell label="BRANDON" />
+						<listcell label="MARTINEZ" />
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+						<listcell>
+							<combobox width="40px" value="4">
+								<comboitem label="3" />
+								<comboitem label="2" />
+								<comboitem label="1" />
+							</combobox>
+						</listcell>
+					
+						<listcell>
+							<textbox />
+						</listcell>
+					</listitem>
  				</listbox> 
 			</row>
 		</rows>
@@ -186,7 +482,7 @@
 			<row height="15px">
 				<label value="" />
 				<button image="Recursos/Imagenes/guardar.ico"
-					label="Guardar" width="100px" />
+					id ="btnGuardar" label="Guardar" width="100px" />
 				<button image="Recursos/Imagenes/imprimir.ico"
 					label="Imprimir" width="100px" />
 				<button image="Recursos/Imagenes/cancelar.ico"

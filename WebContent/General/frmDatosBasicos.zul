@@ -59,7 +59,7 @@
 								image="/Recursos/Imagenes/agregar.ico" />
 							<separator height="5px" />
 							<button id="btnQuitar"
-								image="/Recursos/Imagenes/eliminar.ico" />
+								image="/Recursos/Imagenes/quitar.ico" />
 						</vbox>
 					</hbox>
 				</row>

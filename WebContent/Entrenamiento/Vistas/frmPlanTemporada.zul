@@ -6,7 +6,7 @@
 		<separator height="15px" />
 		<window id="winTemporada"
 			apply="controlador.entrenamiento.CntrlPlanTemporada"
-			title="Planificacion de Temporada" border="normal" width="550px"
+			title="Planificación de Temporada" border="normal" width="550px"
 			closable="true">
 			<grid>
 				<rows>
@@ -34,7 +34,7 @@
 										width="100px" />
 								</row>
 								<row>
-									<label value="Categoria"
+									<label value="Categoría"
 										width="100px" />
 									<combobox id="cmbCategoria"
 										width="130px" value="--SELECCIONE--"
@@ -56,7 +56,7 @@
 						</grid>
 					</row>
 					<row>
-						<panel title="Asignacion de Horario"
+						<panel title="Asignación de Horario"
 							collapsible="true">
 							<panelchildren>
 								<hbox>
@@ -121,7 +121,7 @@
 						</panel>
 					</row>
 					<row>
-						<panel title="Asignacion de Personal Tecnico"
+						<panel title="Asignación de Personal Técnico"
 							collapsible="true">
 							<panelchildren>
 								<grid>
@@ -152,7 +152,7 @@
 																self="@{each=eq}" value="@{eq}" label="@{eq.nombre}" />
 														</combobox>
 														<label
-															value="Clasificacion:" width="30px" />
+															value="Clasificación:" width="30px" />
 														<label
 															id="lblClasificacion" width="100px" />
 													</row>
@@ -189,7 +189,7 @@
 															label="Tipo Personal" width="140px" align="Center"
 															sort="auto" />
 														<listheader
-															label="Tecnico" width="140px" align="Center" sort="auto" />
+															label="Técnico" width="140px" align="Center" sort="auto" />
 													</listhead>
 												</listbox>
 												<vbox

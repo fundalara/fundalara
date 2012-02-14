@@ -16,7 +16,7 @@
 							value="@{tEscala}" label="@{tEscala.nombre}" />
 					</combobox>
 					<label/>
-					<label value="Descripcion"/>
+					<label value="Descripción"/>
 					<label id="lbDescripcionTipo"/>
 				</row>
 				<row>

@@ -11,7 +11,8 @@
 <?page title="Calendario" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window border="none" mode="embedded" closable="true" width="695px"
-		height="600px" apply="controlador.entrenamiento.CntrlfrmInstalacionAgenda"
+		height="600px"
+		apply="controlador.entrenamiento.CntrlfrmInstalacionAgenda"
 		id="wndCalendario">
 		<caption id="titulo" label="Calendario">
 			<label sclass="labels" id="rangoCalendario"></label>
@@ -19,22 +20,32 @@
 		<borderlayout>
 			<north>
 				<div>
+					<div height="10px" style="padding:5px;"
+						align="right">
+						<hbox>
+							<div width="10px" height="10px"
+								style="background-color:#32CD32; border: 1px solid; margin-left: 10px">
+							</div>
+							<label value="Por registrar" />
+							<div width="10px" height="10px"
+								style="background-color:#FDD017; border: 1px solid; margin-left: 10px">
+							</div>
+							<label value="Registrada" />
+						</hbox>
+					</div>
 					<div class="float-left">
 						<hbox>
 							<divarrow type="arrow-left" />
 							<divarrow type="arrow-right" />
 							<div>
-								<button mold="os" label="Hoy" id="btnHoy" />
+								<button mold="os" label="Hoy"
+									id="btnHoy" />
 								<span id="FDOW"></span>
 								<separator orient="vertical" />
 							</div>
 						</hbox>
 					</div>
-					<div class="float-right">
-						<button
-							image="/Recursos/Imagenes/atras.ico" mold="os" id="btnAtras"
-							label="Atras" width="90px" />
-					</div>
+					<div class="float-right"></div>
 				</div>
 			</north>
 			<west border="none"></west>

@@ -18,7 +18,7 @@
 				</columns>
 				<rows>
 					<row height="30px">
-						<label value="Categoria" />
+						<label value="Categoría" />
 						<combobox id="cmbCategoria" width="120px"
 							model="@{ctrl.listCategoria}" readonly="true">
 							<comboitem self="@{each=categoria}"
@@ -47,10 +47,7 @@
 
 						<label value="Indicador" />
 						<combobox id="cmbIndicador" width="120px"
-							readonly="true" autocomplete="true"
-							model="@{ctrl.listIndicador}">
-							<comboitem self="@{each=datoBasico}"
-								label="@{datoBasico.nombre}" value="@{datoBasico}" />
+							readonly="true" autocomplete="true">
 						</combobox>
 						<label value="Valores" />
 						<textbox id="txtValores" readonly="true" />

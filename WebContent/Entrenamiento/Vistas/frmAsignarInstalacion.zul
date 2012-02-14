@@ -1,62 +1,113 @@
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winAsignarInstalacionZul"?>
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="Auto Generated index.zul"?>
 <zk>
-	<window title="Asignar Instalacion" border="normal" width="465px"
-		height="260px" closable="true"
-		apply="controlador.entrenamiento.CntrlFrmAsignarInstalacion"
-		id="winAsignarInstalacionZul">
-		<grid>				
-		<columns>			
-			<column label="" align="center" width="160px" />
-			<column label="" align="center" width="200px"/>
-		</columns>
-		<rows>
-			<row>		
-				<label value="Instalaciones Disponibles"/>
-				<label value="Instalaciones Utilizada"/>
-			</row>
-		</rows>
-	</grid>	
-		<hbox>			
-			<listbox id="left" height="200px" width="200px"
-				onDrop="move(event.dragged)" droppable="true" oddRowSclass="non-odd"
-				fixedLayout="true" model="@{ctrl.listInstalacion}">						
-				<listitem draggable="true" droppable="true"
-					onDrop="move(event.dragged)" self="@{each=instalacion}"
-					value="@{instalacion}">
-					<listcell
-						src="/img/Centigrade-Widget-Icons/Briefcase-16x16.png"
-						label="@{instalacion.descripcion}" />
-				</listitem>
-			</listbox>
-			<separator />
-			<listbox id="right" height="200px" width="200px"
-				oddRowSclass="non-odd" fixedLayout="true"
-				onDrop="move(event.dragged)" droppable="true" multiple="true"
-				model="@{ctrl.listInstalacionUtilizada}">
-				<listitem draggable="true" droppable="true"
-					onDrop="move(event.dragged)" self="@{each=instalacionUtilizada}"
-					value="@{instalacionUtilizada}">
-					<listcell
-						src="/img/Centigrade-Widget-Icons/Briefcase-16x16.png"
-						label="@{instalacionUtilizada.instalacion.descripcion}" />
-				</listitem>
-			</listbox>
-		</hbox>
-		<zscript><![CDATA[
-	void move(Component dragged) {
-		if (self instanceof Listitem) {
-			if (dragged.getParent().getId().equals("right")) {
+	<window title="Asignar Instalacion" border="normal" width="560px"
+		closable="true"
+		apply="controlador.entrenamiento.CntrlAsignarInstalacion"
+		id="wndAsignarInstalacion">
+		<grid>
+			<columns>
+				<column width="110px" align="left" />
+				<column width="125px" align="center" />
+				<column width="115px" align="left" />
+				<column width="140px" align="center" />
+				<column width="80px" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label value="Categoria" />					<
+					<combobox id="cmbCategoria" width="130px"
+						model="@{ctrl.listCategoria}" readonly="true">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria.codigoCategoria}" />
+					</combobox>
+					<label value="Fecha" />					
+					<combobox id="cmbFecha" width="60px"
+						model="@{ctrl.listCategoria}" readonly="true">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria.codigoCategoria}" />
+					</combobox>
+					<label value="Hora Inicio" />					
+					<combobox id="cmbHoraIni" width="40px" readonly="true">						
+					</combobox>
+					<label value="Hora Fin" />					
+					<combobox id="cmbHoraFin" width="40px" readonly="true">						
+					</combobox>
+				</row>
+				<row height="30px">
+					<label value="Instalacion" width="120px" />
+					<combobox id="cmbinstalacion" value="--Seleccione--"
+						width="120px" disabled="true">
+						<comboitem label="Jaula de Bateo" />
+						<comboitem label="LeftField" />
+						<comboitem label="InField" />
+						<comboitem label="CenterField" />
+						<comboitem label="RightField" />
+					</combobox>
+					<label value="Equipo" width="100px" height="25" />
+					<combobox id="cmbequipo" value="--Seleccione--"
+						width="70px" disabled="true">
+						<comboitem label="A" />
+						<comboitem label="B" />
+						<comboitem label="C" />
+						<comboitem label="D" />
+						<comboitem label="E" />
+						<comboitem label="F" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<separator />
+		<hbox>
 
-				//self.parent.insertBefore(dragged, self.getNextSibling());
-			} else {
-				//self.parent.insertBefore(dragged, self.getNextSibling());
-			}
-		} else {
-			self.appendChild(dragged);
-		}
-	}
-]]></zscript>
+			<listbox height="110px" id="lbxAsignarInstalacion"
+				width="492px">
+				<listhead>
+					<listheader label="Fecha" sort="auto" width="110px" />
+					<listheader label="Hora Inicio" sort="auto" width="110px" />
+					<listheader label="Hora Fin" sort="auto" width="110px" />
+					<listheader label="Instalacion" sort="auto"
+						width="110px" />
+					<listheader label="Categoria" sort="auto"
+						width="120px" />
+					<listheader label="Equipo" sort="auto"
+						width="110px" />
+				</listhead>
+			</listbox>
+			<vbox>
+				<button id="btnagregar"
+					image="../../Recursos/Imagenes/agregar.ico" disabled="" />
+				<separator height="5px" />
+				<button id="btnquitar"
+					image="../../Recursos/Imagenes/quitar.ico" disabled="" />
+			</vbox>
+		</hbox>
+		<separator />
+		<separator />
+		<grid height="50px">
+			<columns>
+				<column width="150px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+				<column width="105px" align="center" />
+			</columns>
+			<rows>
+				<row height="">
+					<label value="" />
+					<button id="btnguardar"
+						image="../../Recursos/Imagenes/guardar.ico" label="Guardar"
+						width="95px" />
+					<button id="btnimprimir"
+						image="../../Recursos/Imagenes/imprimir.ico " label="Imprimir"
+						width="95px" />
+					<button id="btncancelar"
+						image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"
+						width="100px" />
+					<button id="btnsalir"
+						image="../../Recursos/Imagenes/salir.png" label="Salir"
+						width="95px" />
+				</row>
+			</rows>
+		</grid>
 	</window>
 </zk>

@@ -1,0 +1,55 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winCatalogoPlanEntrenamiento"?>
+<zk>
+	<window closable="true" id="winCatalogoPlanEntrenamiento"
+		apply="controlador.entrenamiento.CntrlFrmCatalogoPlanEntrenamiento"
+		title="Catalogo Plan de Entrenamiento" border="normal"
+		width="700px">
+		<grid>
+			<rows>
+				<row>
+					<label value="Categoria" />
+					<combobox id="cmbCategoria" value="--Seleccione--"
+						model="@{ctrl.listCategoria}" readonly="true">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria}" />
+					</combobox>
+					<label value="Equipo" />
+					<combobox id="cmbEquipo" value="--Seleccione--"
+						model="@{ctrl.listEquipo}" readonly="true" disabled="true">
+						<comboitem self="@{each=equipo}"
+							label="@{equipo.nombre}" value="@{equipo}" />
+					</combobox>
+				</row>
+				<row spans="4">
+					<listbox id="lbxPlanEntrenamiento"
+						model="@{ctrl.listSesion}" mold="paging" pageSize="10">
+						<listhead>
+							<listheader label="Equipo" width="150px"/>
+							<listheader
+								label="Inicio Plan Entrenamiento" width="200px"/>
+							<listheader label="Fin Plan Entrenamiento" width="200px"/>
+							<listheader label="Día" width="150px"/>
+						</listhead>
+						<listitem self="@{each=sesion}"
+							value="@{sesion}">
+							<listcell label="@{sesion.equipo.nombre}" />
+							<listcell
+								label="@{sesion.planEntrenamiento.fechaInicio}" />
+							<listcell
+								label="@{sesion.planEntrenamiento.fechaFin}" />
+							<listcell
+								label="@{sesion.datoBasico.nombre}" />
+						</listitem>
+					</listbox>
+				</row>
+				<row>
+					<space/>
+					<space/>
+					<button id="btnAceptar" label="Aceptar" disabled="true" image="/Recursos/Imagenes/aceptar.ico"/>
+					<button id="btnCancelar" label="Cancelar" image="/Recursos/Imagenes/cancelar.ico"/>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

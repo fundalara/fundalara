@@ -32,18 +32,12 @@
 													self="@{each=lapsoDeportivo}"
 													label="@{lapsoDeportivo.nombre}" value="@{lapsoDeportivo}" />
 											</combobox>
-											<label id="labEtapas"
-												value="Etapas de Temporada" visible="false" />
-											<combobox id="cmbEtapa"
-												value="--Seleccione--" model="@{ctrl.listEtapa}"
-												readonly="true" visible="false">
-												<comboitem
-													self="@{each=etapa}" label="@{etapa.nombre}"
-													value="@{etapa}" />
-											</combobox>
+											<button id="btnBuscar"
+												image="Recursos/Imagenes/consultar.ico" disabled="true" />
+											<space /><!-- Solo para mejorar la visualizacion del form -->
 										</row>
 										<row>
-											<label value="Categoria" />
+											<label value="Categoría" />
 											<combobox id="cmbCategoria"
 												value="--Seleccione--" model="@{ctrl.listCategoria}"
 												readonly="true" disabled="true">
@@ -79,11 +73,11 @@
 											<label value="Fecha Inicio" />
 											<datebox
 												id="dtboxFechaInicio" width="130px" disabled="true"
-												value="@{ctrl.planEntrenamiento.fechaInicio}" />
+												value="@{ctrl.planEntrenamiento.fechaInicio}" readonly="true" />
 											<label value="Fecha Fin" />
 											<datebox id="dtboxFechaFin"
 												width="130px" disabled="true"
-												value="@{ctrl.planEntrenamiento.fechaFin}" />
+												value="@{ctrl.planEntrenamiento.fechaFin}" readonly="true" />
 										</row>
 									</rows>
 								</grid>
@@ -92,7 +86,7 @@
 					</row>
 					<row>
 						<panel
-							title="Asignacion de Actividades de Entrenamiento"
+							title="Asignación de Actividades de Entrenamiento"
 							collapsible="true">
 							<panelchildren>
 								<grid>
@@ -136,8 +130,9 @@
 														<label
 															value="Tiempo" />
 														<intbox
-															id="intTiempo" value="@{ctrl.actividadPlanificada.tiempo}"
-															width="130px" disabled="true" />
+															id="intTiempo"
+															value="@{ctrl.actividadPlanificada.tiempo}" width="130px"
+															disabled="true" />
 														<label
 															value="minutos" />
 														<space /><!-- Esto es para mejorar estilo -->
@@ -181,7 +176,7 @@
 					</row>
 					<row>
 						<panel
-							title="Asignacion de Materiales de Entrenamiento"
+							title="Asignación de Materiales de Entrenamiento"
 							collapsible="true">
 							<panelchildren>
 								<grid>
@@ -212,22 +207,19 @@
 														<label
 															value="Material" />
 														<combobox
-															id="cmbMaterial" value="--Seleccione--" readonly="true"/>
-<!-- 															model="@{ctrl.listMaterial}" readonly="true" -->
-<!-- 															disabled="true"> -->
-<!-- 															<comboitem -->
-<!-- 																self="@{each=material}" label="@{material.descripcion}" -->
-<!-- 																value="@{material}" /> -->
-<!-- 														</combobox> -->
-
+															id="cmbMaterial" value="--Seleccione--" readonly="true"
+															model="@{ctrl.listMaterial}" disabled="true">
+															<comboitem
+																self="@{each=material}" label="@{material.descripcion}"
+																value="@{material}" />
+														</combobox>
 													</row>
 													<row>
 														<label
 															value="Cantidad" />
-														<spinner
-															id="spCantidad" disabled="true" />
-<!-- 															value="@{materialActividadPlanificada.cantidadRequerida}" -->
-															
+														<intbox
+															id="intCantidad" disabled="true"
+															value="@{ctrl.materialActividadPlanificada.cantidadRequerida}" />
 														<space /><!-- Esto es para mejorar estilo -->
 														<space /><!-- Esto es para mejorar estilo -->
 													</row>
@@ -236,21 +228,21 @@
 										</row>
 										<row>
 											<listbox
-												id="lbxMaterialPlanificado">
-<!-- 												model="@{ctrl.listMaterialActividadPlanificada}"> -->
+												id="lbxMaterialPlanificado"
+												model="@{ctrl.listMaterialActividadPlanificada}">
 												<listhead>
 													<listheader
-														label="Material" align="center" />
+														label="Material" align="center" width="50%"/>
 													<listheader
-														label="Cantidad" align="center" />
+														label="Cantidad" align="center" width="50%"/>
 												</listhead>
-												<listitem>
-<!-- 													self="@{each=materialActividadPlanificada}" -->
-<!-- 													value="@{materialActividadPlanificada}"> -->
-<!-- 													<listcell -->
-<!-- 														label="@{materialActividadPlanificada.material.descripcion}" /> -->
-<!-- 													<listcell -->
-<!-- 														label="@{materialActividadPlanificada.cantidadRequerida}" /> -->
+												<listitem
+													self="@{each=materialActividadPlanificada}"
+													value="@{materialActividadPlanificada}">
+													<listcell
+														label="@{materialActividadPlanificada.material.descripcion}" />
+													<listcell
+														label="@{materialActividadPlanificada.cantidadRequerida}" />
 												</listitem>
 											</listbox>
 											<vbox>

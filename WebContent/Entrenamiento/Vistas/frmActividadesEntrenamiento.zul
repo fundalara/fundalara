@@ -40,13 +40,20 @@
 			<separator />
 			<hbox width="450px">
 				<listbox id="lboxActividades" mold="paging"
-					pageSize="10" height="300px" width="360px">
+					pageSize="10" height="300px" width="360px"
+					model="@{ctrl.listActividadEntrenamiento}">
 					<listhead>
 						<listheader label="Actividades" sort="none"
 							height="" />
 						<listheader label="Id" visible="false" />
 					</listhead>
+					<listitem self="@{each=actividadEntrenamiento}"
+						value="@{actividadEntrenamiento}">
+						<listcell
+							label="@{actividadEntrenamiento.nombre}" />
+					</listitem>
 				</listbox>
+
 				<vbox>
 					<button image="/Recursos/Imagenes/agregar.ico"
 						id="btnAgregar" />
@@ -65,6 +72,8 @@
 				<rows>
 					<row>
 						<label value="" />
+						<button image="/Recursos/Imagenes/guardar.ico"
+							id="btnGuardar" label="Guardar" width="100px" />
 						<button image="/Recursos/Imagenes/cancelar.ico"
 							label="Cancelar" width="100px" id="btnCancelar" />
 						<button image="/Recursos/Imagenes/salir.png"
