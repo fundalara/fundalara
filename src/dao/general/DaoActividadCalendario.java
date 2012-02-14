@@ -39,5 +39,14 @@ public class DaoActividadCalendario extends GenericDao {
 		where.add(Restrictions.eq("sesion", sesion));
 		return (ActividadCalendario)where.uniqueResult();
 	}
+	public List<ActividadCalendario> buscarSesionRangoFecha(Date fecha1, Date fecha2, Sesion sesion){		
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria where =  getSession().createCriteria(ActividadCalendario.class);
+		where.add(Restrictions.between("fechaInicio", fecha1, fecha2));
+		where.add(Restrictions.eq("sesion", sesion));
+		where.add(Restrictions.eq("estatus", 'P'));
+		return where.list();
+	}
 
 }

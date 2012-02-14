@@ -54,7 +54,7 @@ import java.util.List;
 public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	Window winSesionEntrenamiento;
 	Button btnSalir, btnAgregar1, btnQuitar1, btnAgregar2, btnQuitar2,
-			btnCancelar, btnGuardar, btnImprimir, btnBuscar;
+			btnCancelar, btnGuardar, btnImprimir, btnBuscar, btnFinalizar;
 	Combobox cmbFase, cmbActividad, cmbMaterial, cmbCategoria, cmbEquipo,
 			cmbDias, cmbLapsoDeportivo, cmbTipoMaterial;
 	Textbox txtHorario;
@@ -65,7 +65,6 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	Label labEtapas;
 	ActividadPlanificadaId actividadPlanificadaId;
 	List<DatoBasico> listFase;
-	List<DatoBasico> listEtapa;
 	List<DatoBasico> listTipoMaterial;
 	List<LapsoDeportivo> listLapsoDeportivo;
 	List<ActividadEntrenamiento> listActividadEntrenamiento;
@@ -93,6 +92,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	ServicioIndicadorActividadEscala servicioIndicadorActividadEscala;
 
 	PlanEntrenamiento planEntrenamiento;
+	Sesion sesion;
 	ActividadPlanificada actividadPlanificada;
 	ActividadCalendario actividadCalendario;
 	MaterialActividadPlanificada materialActividadPlanificada;
@@ -100,6 +100,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	AnnotateDataBinder binder;
 	boolean modificarActividad = false;
 	boolean modificarMaterial = false;
+	boolean modificando = false;
 	int posActividad = 0;
 	int posMaterial = 0;
 
@@ -188,14 +189,6 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		this.listCategoria = listCategoria;
 	}
 
-	public List<DatoBasico> getListEtapa() {
-		return listEtapa;
-	}
-
-	public void setListEtapa(List<DatoBasico> listEtapa) {
-		this.listEtapa = listEtapa;
-	}
-
 	public List<LapsoDeportivo> getListLapsoDeportivo() {
 		return listLapsoDeportivo;
 	}
@@ -224,18 +217,19 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
+		sesion = new Sesion();
 		listLapsoDeportivo = new ArrayList<LapsoDeportivo>();
 		listHorarioPlanTemporadas = new ArrayList<HorarioPlanTemporada>();
 		listEquipo = new ArrayList<Equipo>();
 		listCategoria = new ArrayList<Categoria>();
 		listActividadEntrenamiento = new ArrayList<ActividadEntrenamiento>();
 		listFase = new ArrayList<DatoBasico>();
-		listEtapa = new ArrayList<DatoBasico>();
 		listMaterial = new ArrayList<Material>();
 		listMaterialActividadPlanificada = new ArrayList<MaterialActividadPlanificada>();
 		listActividadPlanificadas = new ArrayList<ActividadPlanificada>();
 		listTipoMaterial = new ArrayList<DatoBasico>();
 		actividadCalendario = new ActividadCalendario();
+		sesion = new Sesion();
 		planEntrenamiento = new PlanEntrenamiento();
 		actividadPlanificada = new ActividadPlanificada();
 		materialActividadPlanificada = new MaterialActividadPlanificada();
@@ -244,11 +238,10 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				.buscarPorString("MATERIALES DEPORTIVOS");
 		listTipoMaterial = servicioDatoBasico.buscarPadre(db);
 		listLapsoDeportivo = servicioLapsoDeportivo.listarActivos();
-		TipoDato tFase = servicioTipoDato.buscarPorTipo("FASE");
+		TipoDato tFase = servicioTipoDato
+				.buscarPorTipo("FASES DEL ENTRENAMIENTO");
 		listFase = servicioDatoBasico.buscarPorTipoDato(tFase);
 		listCategoria = servicioCategoria.listarActivos();
-		TipoDato tEtapa = servicioTipoDato.buscarPorTipo("ETAPA TEMPORADA");
-		listEtapa = servicioDatoBasico.buscarPorTipoDato(tEtapa);
 	}
 
 	public void onChange$cmbLapsoDeportivo() {
@@ -281,6 +274,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		btnAgregar2.setDisabled(true);
 		btnQuitar2.setDisabled(true);
 		btnCancelar.setDisabled(false);
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 	}
 
 	public void onClick$btnBuscar() {
@@ -335,6 +330,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		cmbEquipo.setValue("--Seleccione--");
 		cmbEquipo.setDisabled(false);
 		binder.loadComponent(cmbEquipo);
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 	}
 
 	public void desactivarCmbEquipo() {
@@ -370,6 +367,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				.buscarPorEquipo(e);
 		cmbDias.setDisabled(false);
 		binder.loadAll();
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 	}
 
 	public void desactivarCmbDias() {
@@ -405,6 +404,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		cmbTipoMaterial.setValue("--Seleccione--");
 		cmbTipoMaterial.setDisabled(false);
 		btnGuardar.setDisabled(false);
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 		binder.loadAll();
 	}
 
@@ -445,6 +446,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		cmbFase.setDisabled(false);
 		cmbTipoMaterial.setValue("--Seleccione--");
 		cmbTipoMaterial.setDisabled(false);
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 		desactivarCmbActividad();
 		desactivarintTiempo();
 	}
@@ -486,6 +489,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		cmbFase.setDisabled(false);
 		cmbTipoMaterial.setValue("--Seleccione--");
 		cmbTipoMaterial.setDisabled(false);
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 		desactivarCmbActividad();
 		desactivarintTiempo();
 	}
@@ -613,6 +618,8 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		listActividadEntrenamiento.clear();
 		listActividadEntrenamiento = servicioActividadEntrenamiento
 				.listarActividadesConIndicadores(c, f);
+		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 		binder.loadComponent(cmbActividad);
 	}
 
@@ -685,7 +692,13 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				actividadPlanificada = new ActividadPlanificada();
 				desactivarCmbActividad();
 				desactivarintTiempo();
+				btnGuardar.setDisabled(false);
 				binder.loadAll();
+				if (!listMaterialActividadPlanificada.isEmpty()
+						&& !listActividadPlanificadas.isEmpty()
+						&& planEntrenamiento.getEstatus() != 'F') {
+					btnFinalizar.setDisabled(false);
+				}
 			} else {
 				throw new WrongValueException(intTiempo, "Solo hay "
 						+ (tiempoMax - tiempoTotalActividades())
@@ -722,6 +735,11 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			btnAgregar1.setDisabled(true);
 			btnQuitar1.setDisabled(true);
 			modificarActividad = false;
+			if (listActividadPlanificadas.size() == 0
+					&& listMaterialActividadPlanificada.size() == 0) {
+				btnGuardar.setDisabled(true);
+				btnFinalizar.setDisabled(true);
+			}
 		} else {
 			throw new WrongValueException(lbxActividades,
 					"Debe seleccionar un elemento de la lista");
@@ -734,17 +752,16 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 					.getSelectedItem().getValue();
 			posActividad = lbxActividades.getSelectedIndex();
 			intTiempo.setValue(ap.getTiempo());
+			Categoria c = (Categoria) cmbCategoria.getSelectedItem().getValue();
 			for (int i = 0; i < listFase.size(); i++) {
-				if (ap.getActividadEntrenamiento().getDatoBasico()
-						.getCodigoDatoBasico() == listFase.get(i)
+				if (listFase.get(i).getCodigoDatoBasico() == ap
+						.getActividadEntrenamiento().getDatoBasico()
 						.getCodigoDatoBasico()) {
 					cmbFase.setSelectedIndex(i);
 					break;
 				}
 			}
-			cmbActividad.getItems().clear();
 			DatoBasico f = (DatoBasico) cmbFase.getSelectedItem().getValue();
-			Categoria c = (Categoria) cmbCategoria.getSelectedItem().getValue();
 			listActividadEntrenamiento.clear();
 			listActividadEntrenamiento = servicioActividadEntrenamiento
 					.listarActividadesConIndicadores(c, f);
@@ -779,7 +796,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		desactivarIntCantidad();
 		DatoBasico tipo = (DatoBasico) cmbTipoMaterial.getSelectedItem()
 				.getValue();
-		listMaterial = servicioMaterial.listarPorTipo(tipo);
+		listMaterial = servicioMaterial.listarMaterialPorTipo(tipo);
 		binder.loadComponent(cmbMaterial);
 		cmbMaterial.setDisabled(false);
 	}
@@ -841,9 +858,15 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			desactivarIntCantidad();
 			btnAgregar2.setDisabled(true);
 			btnQuitar2.setDisabled(true);
+			btnGuardar.setDisabled(false);
 			materialActividadPlanificada = new MaterialActividadPlanificada();
 			binder.loadComponent(lbxMaterialPlanificado);
 			binder.loadComponent(intCantidad);
+			if (!listMaterialActividadPlanificada.isEmpty()
+					&& !listActividadPlanificadas.isEmpty()
+					&& planEntrenamiento.getEstatus() != 'F') {
+				btnFinalizar.setDisabled(false);
+			}
 		}
 	}
 
@@ -858,6 +881,11 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			btnAgregar2.setDisabled(true);
 			btnQuitar2.setDisabled(true);
 			binder.loadComponent(lbxMaterialPlanificado);
+			if (listActividadPlanificadas.size() == 0
+					&& listMaterialActividadPlanificada.size() == 0) {
+				btnGuardar.setDisabled(true);
+				btnFinalizar.setDisabled(true);
+			}
 		} else {
 			throw new WrongValueException(lbxMaterialPlanificado,
 					"Debe seleccionar un elemento de la lista");
@@ -884,7 +912,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 			listMaterial.clear();
 			DatoBasico tipo = (DatoBasico) cmbTipoMaterial.getSelectedItem()
 					.getValue();
-			listMaterial = servicioMaterial.listarPorTipo(tipo);
+			listMaterial = servicioMaterial.listarMaterialPorTipo(tipo);
 			for (int i = 0; i < listMaterial.size(); i++) {
 				Comboitem comboitem = new Comboitem(listMaterial.get(i)
 						.getDescripcion());
@@ -906,6 +934,48 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 	}
 
 	public void onClick$btnGuardar() throws Exception {
+		if (guardar()) {
+			Messagebox.show("Guardado correctamente", "Olimpo - Información",
+					Messagebox.OK, Messagebox.INFORMATION);
+			onClick$btnCancelar();
+		} else
+			Messagebox.show("Agregue al menos una actividad",
+					"Olimpo - Información", Messagebox.OK,
+					Messagebox.INFORMATION);
+	}
+
+	public void onClick$btnFinalizar() throws Exception {
+		if (guardar()) {
+			planEntrenamiento.setEstatus('F');
+			planEntrenamiento.setFechaInicio(dtboxFechaInicio.getValue());
+			planEntrenamiento.setFechaInicio(dtboxFechaFin.getValue());
+			alert(dtboxFechaInicio.getValue() + " " + dtboxFechaFin.getValue());
+			servicioPlanEntrenamiento.actualizar(planEntrenamiento);
+			List<ActividadCalendario> actividadCalendarios = servicioActividadCalendario
+					.buscarSesionRangoFecha(planEntrenamiento.getFechaInicio(),
+							planEntrenamiento.getFechaFin(), sesion);
+			for (ActividadCalendario actividadCalendario : actividadCalendarios) {
+				actividadCalendario.setEstatus('A');
+				servicioActividadCalendario.actualizar(actividadCalendario);
+			}
+			int result = Messagebox
+					.show("Guardado correctamente. ¿Desea imprimir el plan de entrenamiento?",
+							"Olimpo - Información", Messagebox.YES
+									| Messagebox.NO, Messagebox.INFORMATION);
+			switch (result) {
+			case Messagebox.YES:
+				onClick$btnCancelar();
+				break;
+			default:
+				break;
+			}
+		} else
+			Messagebox.show("Agregue al menos una actividad",
+					"Olimpo - Información", Messagebox.OK,
+					Messagebox.INFORMATION);
+	}
+
+	public boolean guardar() throws Exception {
 		if (cmbLapsoDeportivo.getSelectedItem() == null) {
 			throw new WrongValueException(cmbLapsoDeportivo,
 					"Seleccione un lapso deportivo");
@@ -954,37 +1024,43 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		} else {
 			Equipo equipo = (Equipo) cmbEquipo.getSelectedItem().getValue();
 			if (!listActividadPlanificadas.isEmpty()) {
-				planEntrenamiento
-						.setCodigoPlanEntrenamiento(servicioPlanEntrenamiento
-								.generarCodigo());
+				if (!modificando)
+					planEntrenamiento
+							.setCodigoPlanEntrenamiento(servicioPlanEntrenamiento
+									.generarCodigo());
 				LapsoDeportivo ld = (LapsoDeportivo) cmbLapsoDeportivo
 						.getSelectedItem().getValue();
-				planEntrenamiento.setPlanTemporada(servicioPlanTemporada
-						.buscarPorCategoriaLapDep(equipo.getCategoria(), ld));
+				Categoria cat = (Categoria) cmbCategoria.getSelectedItem()
+						.getValue();
+				if (equipo.getNombre().equals("TODOS"))
+					planEntrenamiento.setPlanTemporada(servicioPlanTemporada
+							.buscarPorCategoriaLapDep(cat, ld));
+				else
+					planEntrenamiento
+							.setPlanTemporada(servicioPlanTemporada
+									.buscarPorCategoriaLapDep(
+											equipo.getCategoria(), ld));
 				planEntrenamiento.setEstatus('A');
 				servicioPlanEntrenamiento.guardar(planEntrenamiento);
 				if (equipo.getNombre().equals("TODOS")) {
+					int totalEquipo = listEquipo.size();
+					listEquipo.remove(totalEquipo - 1);
 					for (Equipo e : listEquipo) {
 						guardarSesionActividadMaterial(e);
 					}
 				} else {
 					guardarSesionActividadMaterial(equipo);
 				}
-				onClick$btnCancelar();
-				Messagebox.show("Guardado correctamente",
-						"Olimpo - Informaciï¿½n", Messagebox.OK,
-						Messagebox.INFORMATION);
+				return true;
 			} else {
-				Messagebox.show("Agregue al menos una actividad",
-						"Olimpo - Informaciï¿½n", Messagebox.OK,
-						Messagebox.INFORMATION);
+				return false;
 			}
 		}
 	}
 
 	public void guardarSesionActividadMaterial(Equipo equipo) {
-		Sesion sesion = new Sesion();
-		sesion.setCodigoSesion(servicioSesion.generarCodigo());
+		if (!modificando)
+			sesion.setCodigoSesion(servicioSesion.generarCodigo());
 		HorarioPlanTemporada horarioPlanTemporada = (HorarioPlanTemporada) cmbDias
 				.getSelectedItem().getValue();
 		sesion.setDatoBasico(horarioPlanTemporada.getHorario().getDatoBasico());
@@ -1034,22 +1110,27 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 				.getNombre().equals("SABADO")) {
 			numeroDia = 6;
 		}
-		while (fechasCalendario.before(planEntrenamiento.getFechaFin())
+		while (fechasCalendario.after(planEntrenamiento.getFechaFin())
 				|| fechasCalendario.equals(planEntrenamiento.getFechaFin())) {
 			if (fechasCalendario.getDay() == numeroDia)
 				break;
 			else
 				fechasCalendario.setDate(fechasCalendario.getDate() + 1);
 		}
-		while (fechasCalendario.before(planEntrenamiento.getFechaFin())
+		while (fechasCalendario.after(planEntrenamiento.getFechaFin())
 				|| fechasCalendario.equals(planEntrenamiento.getFechaFin())) {
-			actividadCalendario
-					.setCodigoActividadCalendario(servicioActividadCalendario
-							.generarCodigo());
+			if (servicioActividadCalendario.buscarSesionFecha(fechasCalendario,
+					sesion) == null)
+				actividadCalendario
+						.setCodigoActividadCalendario(servicioActividadCalendario
+								.generarCodigo());
+			else
+				actividadCalendario = servicioActividadCalendario
+						.buscarSesionFecha(fechasCalendario, sesion);
 			actividadCalendario.setSesion(sesion);
 			actividadCalendario.setDescripcion("Entrenamiento "
 					+ equipo.getNombre());
-			actividadCalendario.setEstatus('A');
+			actividadCalendario.setEstatus('P');
 			actividadCalendario.setFechaInicio(fechasCalendario);
 			actividadCalendario.setFechaCulminacion(fechasCalendario);
 			HorarioPlanTemporada hpt = (HorarioPlanTemporada) cmbDias
@@ -1089,12 +1170,15 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		listMaterialActividadPlanificada.clear();
 		listActividadPlanificadas.clear();
 		binder.loadAll();
+		sesion = new Sesion();
+		planEntrenamiento = new PlanEntrenamiento();
 		btnCancelar.setDisabled(true);
 		btnAgregar1.setDisabled(true);
 		btnAgregar2.setDisabled(true);
 		btnQuitar1.setDisabled(true);
 		btnQuitar2.setDisabled(true);
 		btnGuardar.setDisabled(true);
+		btnFinalizar.setDisabled(true);
 		btnBuscar.setDisabled(true);
 	}
 
