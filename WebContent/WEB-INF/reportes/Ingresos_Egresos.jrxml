@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ingresos_Egresos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="18"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Ingresos">
+		<parameter name="Inicio" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{Inicio}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Fin" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{Fin}]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[Select CASE WHEN C.descripcion in ('MENSUALIDAD','CUOTA POR INSCRIPCION','CUOTA POR REINSCRIPCION','UNIFORME') THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.aplica_representante=true and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and  $P{Fin} GROUP BY tipoing UNION ALL
+Select CASE WHEN C.descripcion in ('MENSUALIDAD','CUOTA POR INSCRIPCION','CUOTA POR REINSCRIPCION','UNIFORME') THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.descripcion='PUBLICIDAD' and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and $P{Fin} GROUP BY tipoing UNION ALL
+Select CASE WHEN C.descripcion in ('MENSUALIDAD','CUOTA POR INSCRIPCION','CUOTA POR REINSCRIPCION','UNIFORME') THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.descripcion='DONACION' and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and  $P{Fin} GROUP BY tipoing UNION ALL
+Select CASE WHEN C.descripcion in ('MENSUALIDAD','CUOTA POR INSCRIPCION','CUOTA POR REINSCRIPCION','UNIFORME') THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.descripcion='INGRESO EXTRAORDINARIO' and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and $P{Fin} GROUP BY tipoing;]]>
+		</queryString>
+		<field name="tipoing" class="java.lang.String"/>
+		<field name="ingreso" class="java.lang.Double"/>
+		<field name="resultadoing" class="java.lang.Double"/>
+	</subDataset>
+	<subDataset name="Egresos">
+		<parameter name="Inicio" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{Inicio}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Fin" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{Fin}]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[Select CASE WHEN G.nombre in ('NOMINA','BONOS Y VIATICOS','LIQUIDACION EMPLEADO') THEN 'PAGO PERSONAL' ELSE G.nombre END AS tipoegreso, SUM(E.monto_abonado) as egreso, CASE WHEN SUM(E.monto_abonado) is null THEN 0 ELSE SUM(E.monto_abonado) END AS resultadoeg from egreso_cuenta_pagar E, cuenta_pagar F, dato_basico G, egreso H where E.codigo_cuenta_pagar=F.codigo_cuenta_pagar and F.codigo_tipo_egreso=G.codigo_dato_basico and G.nombre in ('NOMINA','BONOS Y VIATICOS','LIQUIDACION EMPLEADO') and H.codigo_egreso=E.codigo_egreso and H.fecha_pago BETWEEN '01/11/2011' and '15/02/2012' GROUP BY tipoegreso UNION ALL
+Select CASE WHEN G.nombre in ('NOMINA','BONOS Y VIATICOS','LIQUIDACION EMPLEADO') THEN 'PAGO PERSONAL' ELSE G.nombre END AS tipoegreso, SUM(E.monto_abonado) as egreso, CASE WHEN SUM(E.monto_abonado) is null THEN 0 ELSE SUM(E.monto_abonado) END AS resultadoeg from egreso_cuenta_pagar E, cuenta_pagar F, dato_basico G, egreso H where E.codigo_cuenta_pagar=F.codigo_cuenta_pagar and F.codigo_tipo_egreso=G.codigo_dato_basico and G.nombre='SERVICIO' and H.codigo_egreso=E.codigo_egreso and H.fecha_pago BETWEEN '01/11/2011'and '15/02/2012' GROUP BY tipoegreso UNION ALL
+Select CASE WHEN G.nombre in ('NOMINA','BONOS Y VIATICOS','LIQUIDACION EMPLEADO') THEN 'PAGO PERSONAL' ELSE G.nombre END AS tipoegreso, SUM(E.monto_abonado) as egreso, CASE WHEN SUM(E.monto_abonado) is null THEN 0 ELSE SUM(E.monto_abonado) END AS resultadoeg from egreso_cuenta_pagar E, cuenta_pagar F, dato_basico G, egreso H where E.codigo_cuenta_pagar=F.codigo_cuenta_pagar and F.codigo_tipo_egreso=G.codigo_dato_basico and G.nombre='ADQUISICION' and H.codigo_egreso=E.codigo_egreso and H.fecha_pago BETWEEN '01/11/2011' and '15/02/2012' GROUP BY tipoegreso;]]>
+		</queryString>
+		<field name="tipoegreso" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="egreso" class="java.lang.Double"/>
+		<field name="resultadoeg" class="java.lang.Double"/>
+		<group name="tipoegreso">
+			<groupExpression><![CDATA[$F{tipoegreso}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="New Dataset 1">
+		<parameter name="Inicio" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{Inicio}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Fin" class="java.util.Date">
+			<defaultValueExpression><![CDATA[$P{Fin}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[Select SUM(B.monto_abonado) as ingreso, F.egreso
+from ingreso A, ingreso_documento_acreedor B,
+(select SUM(C.monto_abonado) as egreso from egreso_cuenta_pagar C, egreso D
+where C.codigo_egreso=D.codigo_egreso
+and D.fecha_pago between '01/11/2011' and '15/02/2012'
+)F
+where A.codigo_ingreso=B.codigo_ingreso
+and A.fecha_pago between '01/11/2011' and '15/02/2012'
+group by F.egreso;]]>
+		</queryString>
+		<field name="ingreso" class="java.lang.Double"/>
+		<field name="egreso" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="Inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[$P{Inicio}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Fin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[$P{Fin}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select CASE WHEN C.descripcion in (select descripcion from tipo_ingreso where aplica_representante=true) THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.aplica_representante=true and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and $P{Fin} GROUP BY tipoing UNION ALL
+Select CASE WHEN C.descripcion in (select descripcion from tipo_ingreso where aplica_representante=true) THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.descripcion='DONACION' and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and $P{Fin} GROUP BY tipoing UNION ALL
+Select CASE WHEN C.descripcion in (select descripcion from tipo_ingreso where aplica_representante=true) THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.descripcion='PUBLICIDAD' and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and $P{Fin} GROUP BY tipoing UNION ALL
+Select CASE WHEN C.descripcion in (select descripcion from tipo_ingreso where aplica_representante=true) THEN 'PAGO REPRESENTANTE' ELSE C.descripcion END AS tipoing, SUM(A.monto_abonado) as ingreso, CASE WHEN SUM(A.monto_abonado) is null THEN 0 ELSE SUM(A.monto_abonado) END AS resultadoing from ingreso_documento_acreedor A, documento_acreedor B, tipo_ingreso C, ingreso D where A.codigo_documento_acreedor=B.codigo_documento_acreedor and B.codigo_tipo_ingreso=C.codigo_tipo_ingreso and C.descripcion='INGRESO EXTRAORDINARIO' and D.codigo_ingreso=A.codigo_ingreso and D.fecha_pago BETWEEN $P{Inicio} and $P{Fin} GROUP BY tipoing;]]>
+	</queryString>
+	<field name="tipoing" class="java.lang.String"/>
+	<field name="ingreso" class="java.lang.Double"/>
+	<field name="resultadoing" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="217">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="478" y="163" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="429" y="163" width="50" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha: ]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="478" y="183" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="429" y="183" width="50" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="15" width="530" height="137"/>
+				<imageExpression><![CDATA["Encabezado.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement x="109" y="37" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[DESDE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="37" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[HASTA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="17" width="230" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE INGRESOS Y EGRESOS]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="189" y="37" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Inicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="349" y="37" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="111">
+			<image>
+				<reportElement x="3" y="11" width="552" height="74"/>
+				<imageExpression><![CDATA["PieDePagina.jpg"]]></imageExpression>
+			</image>
+			<textField evaluationTime="Report">
+				<reportElement x="478" y="85" width="62" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="85" width="95" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="276" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" isPrintRepeatedValues="false" x="0" y="10" width="555" height="128"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Ingresos">
+						<datasetParameter name="Inicio">
+							<datasetParameterExpression><![CDATA[$P{Inicio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Fin">
+							<datasetParameterExpression><![CDATA[$P{Fin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="273">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="273" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<text><![CDATA[CONCEPTO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="36" rowSpan="1">
+							<textField>
+								<reportElement x="14" y="0" width="259" height="36"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tipoing}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="281">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="104" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<text><![CDATA[INGRESOS]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="136" y="0" width="123" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<text><![CDATA[EGRESOS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="36" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="17" y="0" width="154" height="36"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{resultadoing}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 6" style="table 6" x="0" y="219" width="555" height="53"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1">
+						<datasetParameter name="Inicio">
+							<datasetParameterExpression><![CDATA[$P{Inicio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Fin">
+							<datasetParameterExpression><![CDATA[$P{Fin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="273">
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="272" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[GANANCIA O PÉRDIDA]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="table 6_TD" height="36" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="272" height="36"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="281">
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="279" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ingreso} - $F{egreso}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 6_TD" height="36" rowSpan="1">
+							<textField>
+								<reportElement x="169" y="0" width="86" height="36"/>
+								<textElement verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{egreso}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="17" y="0" width="77" height="36"/>
+								<textElement verticalAlignment="Middle">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 4" style="table 4" x="0" y="150" width="555" height="70"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Egresos">
+						<datasetParameter name="Inicio">
+							<datasetParameterExpression><![CDATA[$P{Inicio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Fin">
+							<datasetParameterExpression><![CDATA[$P{Fin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="273">
+						<jr:detailCell style="table 4_TD" height="36" rowSpan="1">
+							<textField>
+								<reportElement x="134" y="8" width="90" height="20"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tipoegreso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="281">
+						<jr:detailCell style="table 4_TD" height="36" rowSpan="1">
+							<textField>
+								<reportElement x="169" y="8" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{resultadoeg}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

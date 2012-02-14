@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cuentas Por Pagar" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechvendes" class="java.util.Date">
+		<defaultValueExpression><![CDATA[$P{fechvendes}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechvenchas" class="java.util.Date">
+		<defaultValueExpression><![CDATA[$P{fechvenchas}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select A.codigo_cuenta_pagar, E.cedula_rif, B.razon_social, G.nombre as descripcion, to_char(A.fecha_vencimiento, 'dd/mm/yyyy')as fecha_vencimiento,
+A.monto_total, ( (current_date) - A.fecha_vencimiento) as DiasVencidos, CASE WHEN ( (current_date) - A.fecha_vencimiento) <= 0 THEN 0 ELSE ( (current_date) - A.fecha_vencimiento) END AS vencidos
+from  persona E, cuenta_pagar A, dato_basico G, persona_juridica B
+where A.estado= 'P' and
+A.estatus='A' and
+A.codigo_tipo_egreso=G.codigo_dato_basico and
+B.cedula_rif=E.cedula_rif and
+A.cedula_rif=E.cedula_rif and
+A.fecha_vencimiento BETWEEN $P{fechvendes} and  $P{fechvenchas}
+order by DiasVencidos desc,B.cedula_rif ,A.monto_total]]>
+	</queryString>
+	<field name="codigo_cuenta_pagar" class="java.lang.Integer"/>
+	<field name="cedula_rif" class="java.lang.String"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="fecha_vencimiento" class="java.lang.String"/>
+	<field name="monto_total" class="java.lang.Double"/>
+	<field name="diasvencidos" class="java.lang.Integer"/>
+	<field name="vencidos" class="java.lang.Integer"/>
+	<variable name="total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_total}]]></variableExpression>
+	</variable>
+	<group name="CuentasPorPagar">
+		<groupExpression><![CDATA[$F{cedula_rif}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField>
+					<reportElement x="375" y="2" width="55" height="14"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{monto_total}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="216" y="2" width="136" height="14"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="114" y="2" width="64" height="14"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cedula_rif}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="13" y="0" width="73" height="16"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="460" y="2" width="100" height="20"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{vencidos}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<image>
+				<reportElement x="3" y="0" width="567" height="140"/>
+				<imageExpression><![CDATA["Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="466" y="92" width="41" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="509" y="92" width="58" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="504" y="113" width="63" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="466" y="113" width="38" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="197" y="0" width="193" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Control de Pagos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="23" width="61" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HASTA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="23" width="70" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESDE:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="222" y="23" width="77" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechvendes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="360" y="23" width="90" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechvenchas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="2" width="73" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="2" width="83" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cédula ó Rif]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="3" width="136" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre ó Razón Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="2" width="42" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="17" width="570" height="2" forecolor="#FFCC99"/>
+			</line>
+			<staticText>
+				<reportElement x="450" y="1" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dias Vencidos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="93" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="507" y="74" width="62" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="74" width="95" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="571" height="74"/>
+				<imageExpression><![CDATA["PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="377" y="3" width="43" height="16"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="3" width="78" height="16"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Deuda:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="567" height="1" forecolor="#000000"/>
+			</line>
+			<staticText>
+				<reportElement x="424" y="4" width="17" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bs.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

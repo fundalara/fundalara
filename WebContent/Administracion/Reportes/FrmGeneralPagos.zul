@@ -1,0 +1,53 @@
+<?page title="Cuentas por Pagar" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='winRCuentasPagar'?>
+<zk>
+	<window id="winRCuentasPagar"
+		title="Estado General de Cuentas por Pagar" border="normal"
+		width="690px" apply="controlador.administracion.CntrlRCuentasPagar"
+		closable="true">
+		<panel width="100%">
+			<caption label="Filtros"></caption>
+			<panelchildren>
+				<groupbox style="border-color:orange" id="gbxDatos"
+					visible="true">
+					<grid oddRowSclass="none" style="border: none">
+						<columns>
+							<column width="17%" align="center" />
+							<column width="30%" align="left" />
+							<column width="17%" align="center" />
+							<column width="30%" align="left" />
+						</columns>
+						<rows>
+							<row style="border: none">
+								<space></space>
+							</row>
+							<row style="border: none" id="rwFecha">
+								<label value="Desde" />
+								<datebox id="dtFVenDesde"
+									format="dd/MM/yyyy" />
+								<label value="Hasta" />
+								<datebox id="dtFVenHasta"
+									format="dd/MM/yyyy" />
+							</row>
+							<row style="border: none" id="rwSpace">
+								<space></space>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<iframe id="ifReport" visible="false"></iframe>
+				<div align="right">
+					<button image="/Recursos/Imagenes/reporte.png"
+						id="btnImprimir" onClick="" tooltiptext="/Generar"
+						label="Generar" />
+					<button image="/Recursos/Imagenes/cancelar.ico"
+						id="btnCancelar" onClick="" tooltiptext="Cancelar"
+						label="Cancelar" />
+					<button image="/Recursos/Imagenes/atras.ico"
+						id="btnSalir" onClick="" tooltiptext="Salir" label="Salir" />
+				</div>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>
