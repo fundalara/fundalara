@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoLapsoDeportivo;
 
+import modelo.DatoBasico;
 import modelo.DesempennoJugador;
 import modelo.LapsoDeportivo;
 import servicio.interfaz.IServicioLapsoDeportivo;
@@ -34,6 +35,14 @@ public class ServicioLapsoDeportivo implements IServicioLapsoDeportivo {
 		// TODO Auto-generated method stub
 		return daoLapsoDeportivo.listar(LapsoDeportivo.class);
 	}
+	@Override
+	public LapsoDeportivo buscarDosCampos(DatoBasico d){
+		try{
+			return (LapsoDeportivo) daoLapsoDeportivo.buscarDosCampos(LapsoDeportivo.class, "estatus", 'A', "datoBasico", d);
+		} catch (Exception e){
+			return null;
+		}
+	}
 
 	@Override
 	public List<LapsoDeportivo> listarActivos() {
@@ -48,4 +57,10 @@ public class ServicioLapsoDeportivo implements IServicioLapsoDeportivo {
 		this.daoLapsoDeportivo = daoLapsoDeportivo;
 	}
 
+	@Override
+	public LapsoDeportivo buscarporTipoLapso(DatoBasico db) {
+		return daoLapsoDeportivo.buscarPorTipoLapso(db);
+	}
+
+	
 }

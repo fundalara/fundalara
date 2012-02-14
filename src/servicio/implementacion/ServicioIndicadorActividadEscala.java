@@ -8,12 +8,16 @@ import modelo.ActividadEntrenamiento;
 import modelo.IndicadorActividadEscala;
 import servicio.interfaz.IServicioIndicadorActividadEscala;
 
-public class ServicioIndicadorActividadEscala implements IServicioIndicadorActividadEscala {
+public class ServicioIndicadorActividadEscala implements
+		IServicioIndicadorActividadEscala {
 
 	DaoIndicadorActividadEscala daoIndicadorActividadEscala;
+
 	@Override
 	public void guardar(IndicadorActividadEscala iae) {
 		// TODO Auto-generated method stub
+		iae.setCodigoIndicadorActividadEscala(daoIndicadorActividadEscala
+				.generarCodigo(IndicadorActividadEscala.class));
 		daoIndicadorActividadEscala.guardar(iae);
 	}
 
@@ -26,13 +30,20 @@ public class ServicioIndicadorActividadEscala implements IServicioIndicadorActiv
 	@Override
 	public void eliminar(IndicadorActividadEscala iae) {
 		// TODO Auto-generated method stub
+		iae.setEstatus('E');
 		daoIndicadorActividadEscala.eliminar(iae);
 	}
 
 	@Override
 	public List<IndicadorActividadEscala> listar() {
 		// TODO Auto-generated method stub
-		return daoIndicadorActividadEscala.listarActivos(IndicadorActividadEscala.class);
+		return daoIndicadorActividadEscala
+				.listar(IndicadorActividadEscala.class);
+	}
+
+	public List<IndicadorActividadEscala> listarActivos() {
+		return daoIndicadorActividadEscala
+				.listarActivos(IndicadorActividadEscala.class);
 	}
 
 	public DaoIndicadorActividadEscala getDaoIndicadorActividadEscala() {
@@ -43,16 +54,25 @@ public class ServicioIndicadorActividadEscala implements IServicioIndicadorActiv
 			DaoIndicadorActividadEscala daoIndicadorActividadEscala) {
 		this.daoIndicadorActividadEscala = daoIndicadorActividadEscala;
 	}
-	
+
+	@Override
+	public List<IndicadorActividadEscala> buscarporObjeto(Integer cod,
+			String campo) {
+		// TODO Auto-generated method stub
+		return daoIndicadorActividadEscala.buscarPorObjeto(cod, campo);
+	}
+
+	@Override
+	public IndicadorActividadEscala buscarporCodigo(Integer codigo) {
+		// TODO Auto-generated method stub
+		return daoIndicadorActividadEscala.buscarPorCodigo(codigo);
+	}
+
+	@Override
 	public List<IndicadorActividadEscala> buscarporActividad(
 			ActividadEntrenamiento ae) {
 		// TODO Auto-generated method stub
 		return daoIndicadorActividadEscala.buscarPorActividad(ae);
-	}
-
-	public IndicadorActividadEscala buscarporCodigo(Integer codigo) {
-		// TODO Auto-generated method stub
-		return daoIndicadorActividadEscala.buscarPorCodigo(codigo);
 	}
 
 }

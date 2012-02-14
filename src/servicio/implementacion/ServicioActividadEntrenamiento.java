@@ -21,11 +21,13 @@ public class ServicioActividadEntrenamiento implements
 	}
 
 	public void agregar(ActividadEntrenamiento a) {
+		a.setNombre(a.getNombre().toUpperCase());
 		daoActividadEntrenamiento.guardar(a);
 
 	}
 
 	public void actualizar(ActividadEntrenamiento a) {
+		a.setNombre(a.getNombre().toUpperCase());
 		daoActividadEntrenamiento.actualizar(a);
 	}
 
@@ -39,14 +41,14 @@ public class ServicioActividadEntrenamiento implements
 	}
 
 	public List<ActividadEntrenamiento> listar() {
-		return daoActividadEntrenamiento.listarActivos(ActividadEntrenamiento.class);
+		List<ActividadEntrenamiento> a = daoActividadEntrenamiento
+				.listar(ActividadEntrenamiento.class);
+		return a;
 	}
 
 	@Override
 	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,
-
 			Integer idActividad) {
-
 		// TODO Auto-generated method stub
 		return daoActividadEntrenamiento.buscarClaveForegn(c, f, idActividad);
 	}
@@ -93,12 +95,8 @@ public class ServicioActividadEntrenamiento implements
 		}
 		return listActividades;
 	}
-
-	@Override
-	public ActividadEntrenamiento buscarClaveForegn(Categoria c, DatoBasico f,
-			int idActividad) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public int generarCodigo(){
+		return daoActividadEntrenamiento.generarCodigo(ActividadEntrenamiento.class);
 	}
-
 }

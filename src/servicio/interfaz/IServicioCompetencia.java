@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.Juego;
+import modelo.LapsoDeportivo;
 
 
 public interface IServicioCompetencia {
@@ -33,5 +34,7 @@ public interface IServicioCompetencia {
 
 	public abstract void aperturarClausurarcompetencia(Competencia c, DatoBasico datob); 
 	
+	public abstract List<Competencia> buscarCompetencias(LapsoDeportivo lapso,
+			DatoBasico db, DatoBasico db1);
 
 }

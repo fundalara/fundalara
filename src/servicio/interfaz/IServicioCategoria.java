@@ -29,4 +29,5 @@ public interface IServicioCategoria {
 	
 	public boolean buscarPorCodigo (Categoria categoria);
 
+	public abstract List<Categoria> buscarPorCategoria(Categoria c); 
 }

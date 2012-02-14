@@ -1,15 +1,22 @@
 package servicio.implementacion;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Transaction;
 
 import dao.general.DaoPlanEntrenamiento;
 
 import modelo.PlanEntrenamiento;
+import modelo.PlanTemporada;
 import servicio.interfaz.IServicioPlanEntrenamiento;
 
 public class ServicioPlanEntrenamiento implements IServicioPlanEntrenamiento {
-	
+
 	DaoPlanEntrenamiento daoPlanEntrenamiento;
+
 	@Override
 	public void guardar(PlanEntrenamiento pe) {
 		daoPlanEntrenamiento.guardar(pe);
@@ -37,12 +44,25 @@ public class ServicioPlanEntrenamiento implements IServicioPlanEntrenamiento {
 		return daoPlanEntrenamiento;
 	}
 
-	public void setDaoPlanEntrenamiento(DaoPlanEntrenamiento daoPlanEntrenamiento) {
+	public void setDaoPlanEntrenamiento(
+			DaoPlanEntrenamiento daoPlanEntrenamiento) {
 		this.daoPlanEntrenamiento = daoPlanEntrenamiento;
 	}
-	
-	public int generarCodigo(){
+
+	public List<PlanEntrenamiento> listarActivos() {
+		return daoPlanEntrenamiento.listarUnCampo(PlanEntrenamiento.class,
+				"estatus", 'A');
+	}
+
+	public int generarCodigo() {
 		return daoPlanEntrenamiento.generarCodigo(PlanEntrenamiento.class);
 	}
+
+	@Override
+	public List<PlanEntrenamiento> buscarporPlanTemporada(PlanTemporada pt) {
+
+		return daoPlanEntrenamiento.buscarporPlanTemporada(pt);
+	}
+
 
 }

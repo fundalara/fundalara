@@ -11,6 +11,16 @@ public class EventosCalendario {
 		model.add(ce);
 	}
 	
+	public void limpiarEventos(){
+		int cant  = model.size();
+		for (int i = 0; i < cant; i++) {
+			model.remove(0);
+		}		
+	}
+	
+	public void actualizarEvento (SimpleCalendarEvent ce){
+		model.update(ce);
+	}
 	public SimpleCalendarModel getModel() {
 		return model;
 	}

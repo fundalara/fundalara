@@ -4,7 +4,11 @@ import java.util.List;
 
 import dao.general.DaoSesion;
 
+import modelo.ActividadCalendario;
+import modelo.DatoBasico;
 import modelo.Equipo;
+import modelo.LapsoDeportivo;
+import modelo.PlanEntrenamiento;
 import modelo.Sesion;
 import servicio.interfaz.IServicioSesion;
 
@@ -40,13 +44,31 @@ public class ServicioSesion implements IServicioSesion {
 		return daoSesion.listar(Sesion.class);
 	}
 
+	@Override
 	public List<Sesion> buscarPorEquipo(Equipo e) {
 		// TODO Auto-generated method stub		
 		return daoSesion.buscarPorEquipo(e);
 	}
 	
+	public Sesion buscarPorCodigo(Integer codigo){
+		return (Sesion) daoSesion.buscarUnCampo(Sesion.class, "codigoSesion", codigo);
+	}
+	
 	public int generarCodigo(){
 		return daoSesion.generarCodigo(Sesion.class);
 	}
+	
+	public List<Sesion> buscarPorEquipoDiaLapso(Equipo equipo, DatoBasico dia, LapsoDeportivo lapsoDeportivo) {
+		List<Sesion> sesions = daoSesion.buscarPorEquipoDia(equipo, dia);
+		for (int i = 0; i < sesions.size(); i++) {
+			if (sesions.get(i).getPlanEntrenamiento().getPlanTemporada().getLapsoDeportivo().getCodigoLapsoDeportivo() != lapsoDeportivo.getCodigoLapsoDeportivo())
+				sesions.remove(i);
+		}
+		return sesions; 
+	}
 
+	@Override
+	public List<Sesion> buscarporPlanEntrenamiento(PlanEntrenamiento pe) {
+		return daoSesion.buscarPorPlanEntrenamiento(pe);
+	}
 }

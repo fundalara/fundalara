@@ -2,6 +2,7 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.LapsoDeportivo;;
 
 public interface IServicioLapsoDeportivo {
@@ -15,4 +16,8 @@ public interface IServicioLapsoDeportivo {
 	public abstract List<LapsoDeportivo> listar(); 
 	
 	public abstract List<LapsoDeportivo> listarActivos();
+	
+	public abstract LapsoDeportivo buscarDosCampos(DatoBasico d); 
+	
+	public abstract LapsoDeportivo buscarporTipoLapso(DatoBasico db);
 }

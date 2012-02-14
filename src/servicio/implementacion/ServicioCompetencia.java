@@ -10,6 +10,7 @@ import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.Divisa;
 import modelo.Juego;
+import modelo.LapsoDeportivo;
 
 public class ServicioCompetencia implements IServicioCompetencia {
 
@@ -94,5 +95,12 @@ public class ServicioCompetencia implements IServicioCompetencia {
 	@Override
 	public List<Competencia> listarPorfiltro(String dato) {
 		return daoCompetencia.listarCompetenciasPorFiltro(dato);
+	}
+	
+	@Override
+	public List<Competencia> buscarCompetencias(LapsoDeportivo lapso,
+			DatoBasico db, DatoBasico db1) {
+		// TODO Auto-generated method stub
+		return daoCompetencia.buscarCompetencias(lapso, db, db1);
 	}
 }

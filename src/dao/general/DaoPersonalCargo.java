@@ -1,6 +1,7 @@
 package dao.general;
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.Personal;
 import modelo.PersonalCargo;
 import dao.generico.GenericDao;
