@@ -4,6 +4,18 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="174"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="codEquipo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codCategoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codCompetencia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codModalidad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select E.cedula_rif,
 concat(J.primer_nombre,' ',J.primer_apellido) as completo,
@@ -25,10 +37,10 @@ and G.codigo_indicador =H.codigo_indicador
 and E.cedula_rif=J.cedula_rif
 and E.codigo_equipo=K.codigo_equipo
 and K.codigo_categoria=L.codigo_categoria
-and K.codigo_equipo=9
-and L.codigo_categoria=5
-and C.codigo_competencia=1
-and H.codigo_modalidad=283]]>
+and K.codigo_equipo=$P{codEquipo}
+and L.codigo_categoria=$P{codCategoria}
+and C.codigo_competencia=$P{codCompetencia}
+and H.codigo_modalidad=$P{codModalidad}]]>
 	</queryString>
 	<field name="cedula_rif" class="java.lang.String"/>
 	<field name="completo" class="java.lang.String"/>
