@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.Categoria;
 import modelo.CategoriaCompetencia;
+import modelo.Competencia;
 import modelo.IndicadorCategoriaCompetencia;
 
 
@@ -14,7 +15,7 @@ public interface IServicioCategoriaCompetencia {
 
 	public abstract void agregar(IndicadorCategoriaCompetencia icc);
 
-	//public abstract void actualizar(Categoria cc);
+	public abstract void actualizar(List<CategoriaCompetencia> lista, Competencia comp);
 
 	//public abstract Categoria buscarPorCodigo(Categoria cc);
 

@@ -3,11 +3,11 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCrearCompetencia"?>
 
 <zk>
-<div align="center">
+
 
 		<window id="frmCrearCompetencia" title="Gestionar Competencia"
 			border="normal" closable="true" height="auto" width="70%"
-			apply="controlador.competencia.CntrlFrmCrearCompetencia" style="text-align:left">
+			apply="controlador.competencia.CntrlFrmCrearCompetencia">
 
 			<tabbox>
 				<tabs>
@@ -189,7 +189,7 @@
 												<spinner
 													id="spnNroJugadores"
 													value="@{cntrl.competencia.cantidadJugador}" cols="5"
-													constraint="no empty,min 9 max 25" />
+													constraint="no empty,min 9 max 20" />
 
 
 												<label
@@ -197,7 +197,7 @@
 												</label>
 												<spinner
 													id="spnNroFases" value="@{cntrl.competencia.cantidadFase}"
-													cols="5" constraint="no empty,min 1 max 25" />
+													cols="5" constraint="no empty,min 1 max 20" />
 
 
 											</row>
@@ -235,7 +235,7 @@
 												width="30%" align="center">
 											</listheader>
 											<listheader
-												label="N° Equipos" align="center" width="35%">
+												label="N° Equipos que Ingresan" align="center" width="35%">
 											</listheader>
 											<listheader
 												label="N° Equipos que Clasifican" align="center"
@@ -408,7 +408,8 @@
 
 								<listbox id="lsbxCategorias"
 									checkmark="true" multiple="true"
-									model="@{cntrl.categoriaCompetencias}" oddRowSclass="none">
+									oddRowSclass="none" 
+									>
 									<listhead>
 										<listheader label="Categoria"
 											width="40%">
@@ -421,26 +422,12 @@
 										</listheader>
 									</listhead>
 
-									<listitem
-										self="@{each=categoriaCompetencia}"
-										value="@{categoriaCompetencia}">
-										<listcell
-											label="@{categoriaCompetencia.categoria.nombre}">
-										</listcell>
-										<listcell>
-											<timebox id="spnHora" 
-												value="@{categoriaCompetencia.duracionHora}" />
-										</listcell>
-										<!-- <spinner id="spnHora" value="@{categoriaCompetencia.duracionHora}" cols="5" constraint="no empty,min 0 max 25"></spinner> -->
-										<listcell>
-											<spinner id="spnIning"
-												value="@{categoriaCompetencia.duracionInning}" cols="5"
-												constraint="no empty,min 1 max 9">
-											</spinner>
-										</listcell>
+									<listitem  >
+					
 									</listitem>
 
 								</listbox>
+																
 							</panelchildren>
 						</panel>
 
@@ -504,7 +491,7 @@
 											</row>
 
 											<!-- FILA 4 -->
-											<row
+							<!--				<row
 												style="border-style:none" align="left">
 												<label
 													value="Adjuntar Documento ">
@@ -520,7 +507,7 @@
 														id="btnExaminar" label="Examinar">
 													</button>
 												</hbox>
-											</row>
+											</row>  -->
 										</rows>
 									</grid>
 
@@ -591,6 +578,6 @@
 			<div>
 			</div>
 		</window>
-</div>
+
 
 </zk>

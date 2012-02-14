@@ -10,6 +10,7 @@ import dao.general.DaoFaseCompetencia;
 import modelo.CategoriaCompetencia;
 import modelo.CategoriaCompetenciaId;
 import modelo.Competencia;
+import modelo.EquipoFaseCompetencia;
 import modelo.FaseCompetencia;
 
 public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
@@ -34,19 +35,26 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 	public void agregar(List<FaseCompetencia> lista, int comp) {
 		// TODO Auto-generated method stub
 
+	
 		for (Iterator i = lista.iterator(); i.hasNext();) {
-			FaseCompetencia id = (FaseCompetencia) i.next();
+			FaseCompetencia fc = (FaseCompetencia) i.next();
 
-			id.getCompetencia().setCodigoCompetencia(comp);
-			id.setEstatus('A');
+
+			if (fc.getCodigoFaseCompetencia() == 0) {
+				int cod = daoFaseCompetencia.listar(FaseCompetencia.class).size() + 1;
+				fc.setCodigoFaseCompetencia(cod);
+			}
+			
+			fc.getCompetencia().setCodigoCompetencia(comp);
+			fc.setEstatus('A');
 
 			// FaseCompetenciaId faseID= new FaseCompetenciaId();
 			// faseID.setCodigoCompetencia(comp);
 
-			id.getId().setCodigoCompetencia(comp);
+			//id.getId().setCodigoCompetencia(comp);
 			// id.setId(faseID);
 
-			daoFaseCompetencia.guardar(id);
+			daoFaseCompetencia.guardar(fc);
 		}
 
 	}
@@ -61,7 +69,7 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 			FaseCompetencia fc = (FaseCompetencia) i.next();
 
 			fc.getCompetencia().setCodigoCompetencia(cod_comp);
-			fc.getId().setCodigoCompetencia(cod_comp);
+		//	fc.getId().setCodigoCompetencia(cod_comp);
 			fc.setEstatus('A');
 			
 			daoFaseCompetencia.actualizar(fc);
@@ -106,5 +114,11 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 	@Override
 	public List<FaseCompetencia> listarPorCompetencia(int codigo) {
 		return daoFaseCompetencia.listarPorCompetencia(codigo);
+	}
+
+	@Override
+	public List<EquipoFaseCompetencia> listarPorCompetencia(Competencia comp) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -135,9 +135,9 @@ public class DaoCompetencia extends GenericDao {
 		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Query query = session.createSQLQuery(
-				"select *from competencia,clasificacion_competencia,dato_basico  where competencia.nombre like '" +dato+  "%' and competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico and competencia.codigo_estado_competencia = '" +estadoComp+  "'   " +
-						"or clasificacion_competencia.nombre like '" +dato+  "%' and competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico  and competencia.codigo_estado_competencia = '" +estadoComp+  "'  "+
-		"or dato_basico.nombre like '" +dato+  "%' and competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico and competencia.codigo_estado_competencia = '" +estadoComp+  "' ").addEntity(Competencia.class); 
+				"select *from competencia,clasificacion_competencia,dato_basico  where competencia.nombre like '" +dato+  "%' and competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico and competencia.codigo_estado_competencia = '" +estadoComp+  "' and competencia.estatus='A'  " +
+						"or clasificacion_competencia.nombre like '" +dato+  "%' and competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico  and competencia.codigo_estado_competencia = '" +estadoComp+  "' and competencia.estatus='A'  "+
+		"or dato_basico.nombre like '" +dato+  "%' and competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico and competencia.codigo_estado_competencia = '" +estadoComp+  "' and competencia.estatus='A' ").addEntity(Competencia.class); 
 
 		
 		List<Competencia> lista = query.list();
@@ -158,4 +158,22 @@ public class DaoCompetencia extends GenericDao {
 		return where.list();
 	}
 
+	
+	public List<Competencia> buscarCompetenciaPorNombre(String nombre_comp, LapsoDeportivo lapso) {
+//		System.out.println(nombre_comp);
+//		System.out.println(lapso.getNombre());
+		
+		int lapso2 = lapso.getCodigoLapsoDeportivo();
+		
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"select *from competencia where nombre = '" +nombre_comp+  "' and codigo_lapso_deportivo = '" +lapso2+  "' and estatus = 'A' ").addEntity(Competencia.class); 
+		
+		List<Competencia> lista = query.list();
+		
+		System.out.println(lista.size());
+		return lista;	
+		
+	}
 }

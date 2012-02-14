@@ -27,7 +27,7 @@
 											</label>
 										
 											<textbox id="txtNombre"
-												value="@{cntrl.competencia.nombre}" width="98%">
+														 width="98%">
 											</textbox>
 
 							
@@ -60,13 +60,13 @@
 											<label value="Temporada " />
 									
 											<textbox
-												value="@{cntrl.competencia.lapsoDeportivo.nombre}"
+											
 												id="txtTemporada" width="80%">
 										</textbox>
 									
 										<label value="Clasificacion"></label>
 										<textbox
-											value="@{cntrl.competencia.clasificacionCompetencia.nombre}"
+											
 											id="txtClasificacion" width="95%">
 										</textbox>
 									</row>
@@ -81,7 +81,7 @@
 									
 										<label
 											value="Jugadores por Roster" />
-										<textbox id="txtJugRoster" value="@{cntrl.competencia.cantidadJugador}" width="40%"></textbox>
+										<textbox id="txtJugRoster" width="40%"></textbox>
 									</row>
 									
 									<row 

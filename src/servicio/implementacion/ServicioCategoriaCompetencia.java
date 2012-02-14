@@ -95,6 +95,7 @@ public class ServicioCategoriaCompetencia implements
 			categID.setCodigoCompetencia(comp);
 			
 			id.setId(categID);
+			id.setEstatus('A');
 			
 			daoCategoriaCompetencia.guardar(id);		
 	    }

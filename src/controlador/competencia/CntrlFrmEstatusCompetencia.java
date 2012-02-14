@@ -188,11 +188,15 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 	    
 	    competencia.setCodigoCompetencia(compt.getCodigoCompetencia());
 	    competencia.setNombre(compt.getNombre());
+	    txtNombre.setText(competencia.getNombre());
 	    competencia.setFechaInicio(compt.getFechaInicio());
+	    txtTemporada.setText(competencia.getLapsoDeportivo().getNombre());
 	    competencia.setFechaFin(compt.getFechaFin());
 	    competencia.setClasificacionCompetencia(compt.getClasificacionCompetencia());
+	    txtClasificacion.setText(competencia.getClasificacionCompetencia().getNombre());
 	    competencia.setLapsoDeportivo(compt.getLapsoDeportivo());
 	    competencia.setCantidadJugador(compt.getCantidadJugador());
+	    txtJugRoster.setText(String.valueOf(competencia.getCantidadJugador()));
 	    competencia.setDatoBasicoByCodigoEstadoCompetencia(compt.getDatoBasicoByCodigoEstadoCompetencia());
 	    
 		txtfechaInicio.setText(fechaInicio);
