@@ -19,4 +19,6 @@ public abstract void eliminar(DocumentoAcreedor c);
 	
 	public abstract  DocumentoAcreedor  buscarPorCodigo (DocumentoAcreedor  d);
 
+	public abstract Object buscarPorTipoIngreso(String tipo);
+
 }

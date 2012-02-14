@@ -58,5 +58,11 @@ public class ServicioCuentaPagarMaterial implements
 		return daoCuentaPagarMaterial.listarMaterialesCP(nf);
 	}
 
+	
+	@Override
+	public List<CuentaPagarMaterial> buscarMaterialesPorCuentaPagar(CuentaPagar cp) {
+		return daoCuentaPagarMaterial.buscarMaterialesPorCuentaPagar(cp);
+	}
+
 
 }

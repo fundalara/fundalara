@@ -53,8 +53,11 @@ public class ServicioEgresoCuentaPagar implements IServicioEgresoCuentaPagar {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public List<EgresoCuentaPagar> listarPorOrigen(CuentaPagar td) {
-		return daoEgresoCuentaPagar.listarPorOrigen(td);
-	}
+	
 
+
+	@Override
+	public List<EgresoCuentaPagar> listarPorCuentaPagar(CuentaPagar td) {
+		return daoEgresoCuentaPagar.listarPorCuentaPagar(td);
+	}
 }

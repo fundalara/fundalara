@@ -51,5 +51,9 @@ public class ServicioAfeccionPersonal implements IServicioAfeccionPersonal {
 		return null;
 	}
 	
+	@Override
+	public List<AfeccionPersonal> listarPorCedula(String d) {
+		return daoAfeccionPersonal.listarPorCedula(d);
+	}
 
 }

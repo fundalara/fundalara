@@ -8,6 +8,7 @@ import dao.general.DaoCuentaPagar;
 import modelo.CuentaPagar;
 import modelo.DatoBasico;
 import modelo.Divisa;
+import modelo.Persona;
 
 
 public class ServicioCuentaPagar implements IServicioCuentaPagar {
@@ -61,18 +62,50 @@ public class ServicioCuentaPagar implements IServicioCuentaPagar {
 		return  daoCuentaPagar.listarCuentaPorPagar(dato);
 	}
 
-	public CuentaPagar buscarOrigen(String cp) {
-		return daoCuentaPagar.buscarOrigen(cp);
+	@Override
+	public CuentaPagar buscarNumeroDocumento(String cp) {
+		return daoCuentaPagar.buscarNumeroDocumento(cp);
 	}
 
 	public List<CuentaPagar> listarCuentaPorPagarFiltro(DatoBasico d, String s){
 		return daoCuentaPagar.listarCuentaPorPagarFiltro(d, s);
 	}
 	
+	public List<CuentaPagar> buscarPendientesPorRif(Persona persona) {
+		return daoCuentaPagar.buscarPendientesPorRif(persona);
+	}
+
+	public List<CuentaPagar> buscarPendienteporTipoPersona(String nombre) {
+		return daoCuentaPagar.buscarPendienteporPersona(nombre);
+	}
+	public List<CuentaPagar> BuscarPorPersona(Persona persona) {
+		return daoCuentaPagar.BuscarPorPersona(persona);
+	}
 	
 	public List<CuentaPagar> listarCuentaPorPagarPorFecha(DatoBasico dato, String inicio, String fin, String filtro) throws ParseException{
 		return daoCuentaPagar.listarCuentaPorPagarPorFecha(dato,inicio,fin,filtro);
 	}
 	
+	public List<CuentaPagar> listarCuentaPorPagarPorFechaPersona(String inicio,
+			String fin, String paramEstado, Persona persona) throws ParseException {
+		return daoCuentaPagar.listarCuentaPorPagarPorFechaPersona(inicio, fin, paramEstado, persona);
+	}
+
+	public List<CuentaPagar> listarCuentaPorPagarFiltroPersona(
+			String paramEstado, Persona persona) {
+		return daoCuentaPagar.listarCuentaPorPagarFiltroPersona(paramEstado, persona);
+	}
+	
+	public List<CuentaPagar> listarPorFecha( String inicio, String fin,Persona persona) throws ParseException{
+		return daoCuentaPagar.listarPorFecha(inicio,fin,persona);
+	}
+	@Override
+	public List<CuentaPagar> listarCuentaPorPagarPorFecha( String inicio, String fin, String filtro,Persona persona) throws ParseException{
+		return daoCuentaPagar.listarCuentaPorPagarPorFechaPersona(inicio, fin, filtro, persona);
+	}
+	@Override
+	public List<CuentaPagar> listarCuentaPorPagarFiltro( String s,Persona persona){
+		return daoCuentaPagar.listarCuentaPorPagarFiltroPersona(s, persona);
+	}	
 
 }

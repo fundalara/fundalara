@@ -13,4 +13,6 @@ public interface IServicioTallaPorIndumentaria {
 	public abstract void actualizar(TallaPorIndumentaria c);
 
 	public abstract List<TallaPorIndumentaria> listar();
+
+	public abstract List<TallaPorIndumentaria> listarActivosOrdenados();
 }
