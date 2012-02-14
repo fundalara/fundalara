@@ -317,7 +317,7 @@
 		<rows>
 			<row height="15px">
 				<label />
-				<button image="/Recursos/Imagenes/apertura.png"
+				<button image="/Recursos/Imagenes/mantenimiento.png"
 					label="Mantenimiento" width="100px" id="btnMantenimiento" />
 				<button image="/Recursos/Imagenes/guardar.ico"
 					label="Guardar" width="100px" id="btnGuardar" />

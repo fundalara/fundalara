@@ -425,6 +425,8 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 				Listcell lv1 = (Listcell) lboxActividades.getItemAtIndex(i).getChildren().get(1);
 				if (lv.getLabel().equals("EJECUTADA")){
 				Integer num =servicioActividadesEjecutadas.listar().size()+1;
+				System.out.println(num);
+				actividadEjecutada = new ActividadEjecutada();
 				actividadEjecutada.setActividadEntrenamiento((ActividadEntrenamiento) lboxActividades.getItemAtIndex(i).getValue());
 				actividadEjecutada.setSesionEjecutada(sesionEjecutada);
 				actividadEjecutada.setCodigoActividadEjecutada(num);
@@ -434,8 +436,10 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 				servicioActividadesEjecutadas.guardar(actividadEjecutada);
 				}
 			}
-			
-			Integer codigo =servicioInstalacionEjecutada.listarInstalacionEjecutada().size()+1;
+			Integer codigo = 1;
+			if(!(servicioInstalacionEjecutada.listarInstalacionEjecutada()==null)) 
+				codigo =servicioInstalacionEjecutada.listarInstalacionEjecutada().size()+1;
+		
 			instalacionEjecutada.setCodigoInstalacionEjecutada(codigo);
 			if (!(cmbObsInstalacion.getValue().equals("--SELECCIONE--")))
 				instalacionEjecutada.setDatoBasico((DatoBasico)cmbObsInstalacion.getSelectedItem().getValue());
