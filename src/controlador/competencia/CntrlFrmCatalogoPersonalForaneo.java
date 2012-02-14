@@ -1,12 +1,26 @@
 package controlador.competencia;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.DatoBasico;
 import modelo.Liga;
 import modelo.PersonalForaneo;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.InputEvent;
@@ -16,6 +30,8 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import comun.ConeccionBD;
+
 import servicio.implementacion.ServicioPersonalForaneo;
 
 public class CntrlFrmCatalogoPersonalForaneo extends GenericForwardComposer {
@@ -24,6 +40,10 @@ public class CntrlFrmCatalogoPersonalForaneo extends GenericForwardComposer {
 	Component catalogo;
 	ServicioPersonalForaneo servicioPersonalForaneo;
 	Textbox txtFiltro;
+	
+	private Connection con;
+	private String jrxmlSrc;
+	private Map parameters = new HashMap();
 
 	PersonalForaneo personalForaneo;
 	DatoBasico datoBasico;
@@ -111,4 +131,25 @@ public class CntrlFrmCatalogoPersonalForaneo extends GenericForwardComposer {
 	public void onClick$btnSalir() {
 		catalogo.detach();
 	}
+	
+	
+	public void onClick$btnGenerar()throws JRException, IOException, InterruptedException, SQLException {
+		    
+			con = ConeccionBD.getCon("postgres", "postgres", "123456");
+			parameters.put("codigoPersonalForaneo", 1);
+//			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
+			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/personalForaneo.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
+
+			byte[] archivo = JasperExportManager.exportReportToPdf(print);
+
+			final AMedia amedia = new AMedia("personalForaneo.pdf", "pdf", "application/pdf", archivo);
+
+			Component visor = Executions.createComponents("/General/"
+					+ "frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedia, false);
+
+		}
+		
 }

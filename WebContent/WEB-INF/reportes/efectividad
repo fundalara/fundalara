@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="174"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="codEquipo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -18,7 +18,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select E.cedula_rif,
-J.primer_nombre ||' '|| J.primer_apellido as completo,
+concat(J.primer_nombre,' ',J.primer_apellido) as completo,
 K.nombre as equipo,
 L.nombre as categoria,
 H.abreviatura as indicador,

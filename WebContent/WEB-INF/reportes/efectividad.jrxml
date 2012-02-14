@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="codEquipo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codCategoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codCompetencia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codModalidad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select r.cedula_rif, (pn.primer_nombre ||' '|| pn.primer_apellido) as nombreCompleto,((di.valor*cc.duracion_inning)/(select sum(valor) from desempenno_individual as diss where diss.codigo_line_up=di.codigo_line_up and diss.codigo_indicador_categoria_competencia=18 ))as efectividad,c.nombre as competencia,cat.nombre as categoriaNombre,eq.nombre as equipoNombre from indicador as i inner join indicador_categoria_competencia as icc on icc.codigo_indicador=i.codigo_indicador inner join desempenno_individual as di on icc.codigo_indicador_categoria_competencia=di.codigo_indicador_categoria_competencia inner join line_up as li on li.codigo_line_up=di.codigo_line_up inner join roster_competencia as rc on rc.codigo_roster_competencia=li.codigo_roster_competencia inner join roster as r on r.codigo_roster=rc.codigo_roster inner join categoria_competencia as cc on rc.codigo_competencia=cc.codigo_competencia inner join competencia as c on c.codigo_competencia=cc.codigo_competencia inner join persona_natural as pn on r.cedula_rif=pn.cedula_rif inner join categoria as cat on cat.codigo_categoria=cc.codigo_categoria inner join equipo as eq on eq.codigo_equipo=r.codigo_equipo  where i.codigo_indicador=25 and cc.codigo_categoria=5 and  rc.codigo_competencia=1 group by r.cedula_rif,di.valor,li.codigo_line_up,cc.duracion_inning,i.abreviatura,di.codigo_line_up,c.nombre,pn.primer_nombre,pn.primer_apellido,cat.nombre,eq.nombre]]>
+	</queryString>
+	<field name="cedula_rif" class="java.lang.String"/>
+	<field name="nombrecompleto" class="java.lang.String"/>
+	<field name="efectividad" class="java.lang.Double"/>
+	<field name="competencia" class="java.lang.String"/>
+	<field name="categorianombre" class="java.lang.String"/>
+	<field name="equiponombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="293" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="199" width="752" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Efectividad en Picheo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="269" width="64" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="269" width="46" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Equipo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="603" y="155" width="49" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="652" y="155" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="752" height="155"/>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="603" y="175" width="49" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="652" y="175" width="94" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="267" width="184" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categorianombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="267" width="171" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equiponombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="247" width="411" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="59" y="247" width="82" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Competencia:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band/>
+	</detail>
+	<lastPageFooter>
+		<band height="97">
+			<textField>
+				<reportElement x="631" y="77" width="72" height="19"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="703" y="77" width="49" height="19"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="746" height="77"/>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="228" splitType="Stretch">
+			<elementGroup/>
+			<bar3DChart>
+				<chart>
+					<reportElement x="12" y="6" width="740" height="222"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[" "]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombrecompleto}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{efectividad}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>

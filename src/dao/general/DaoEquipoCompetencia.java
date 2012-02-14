@@ -3,6 +3,7 @@ package dao.general;
 import java.util.List;
 
 import modelo.Categoria;
+import modelo.CategoriaCompetencia;
 import modelo.Competencia;
 import modelo.EquipoCompetencia;
 
@@ -46,6 +47,18 @@ public List<EquipoCompetencia> buscarEquipoporCompetencia(Competencia c) {
 		Criteria c1 = c.createCriteria("equipo");
 		c1.add(Restrictions.eq("categoria", codigo));	
 		List <EquipoCompetencia> lista = c.list(); 
+		return lista;
+	}
+	
+	public List<EquipoCompetencia> listarEquipoPorCompetenciaCategoria(Competencia c, CategoriaCompetencia cat) {
+		Session session = this.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria cc = session.createCriteria(EquipoCompetencia.class);
+		cc.add(Restrictions.eq("competencia", c));
+		Criteria cc2 = cc.createCriteria("equipo");
+		cc2.add(Restrictions.eq("categoria", cat.getCategoria()));
+		cc.add(Restrictions.eq("estatus", 'A'));
+		List<EquipoCompetencia> lista = cc.list();
 		return lista;
 	}
 

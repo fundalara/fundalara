@@ -599,7 +599,7 @@
 													<treerow>
 														<treecell
 															label="Desempeño Deportivo"
-															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorVACIO.zul")' />
+															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugador.zul")' />
 													</treerow>
 
 												</treeitem>
