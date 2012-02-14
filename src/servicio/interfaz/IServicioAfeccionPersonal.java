@@ -20,6 +20,8 @@ public interface IServicioAfeccionPersonal {
 		
 		public abstract  AfeccionPersonal buscarPorCodigo (AfeccionPersonal d);
 
+		public abstract  List<AfeccionPersonal> listarPorCedula(String d);
+
 }
 
 

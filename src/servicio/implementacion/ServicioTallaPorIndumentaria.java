@@ -49,7 +49,10 @@ public class ServicioTallaPorIndumentaria implements
 	}
 	
 	
-	
+	@Override
+	public List<TallaPorIndumentaria> listarActivosOrdenados(){
+		return daoTallaPorIndumentaria.listarActivosOrdenados();
+	}
 
 
 }

@@ -2,6 +2,7 @@ package servicio.implementacion;
 
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.DocumentoConducta;
 import modelo.IngresoInscripcion;
 import modelo.PersonalEquipo;
@@ -40,7 +41,7 @@ public class ServicioIngresoInscripcion implements IServicioIngresoInscripcion {
 		return  daoIngresoInscripcion.listar(IngresoInscripcion.class);
 	}
 	
-	public List<IngresoInscripcion> listarIngresoInscripcion(String tipoInscripcion){
+	public List<IngresoInscripcion> listarIngresoInscripcion(DatoBasico tipoInscripcion){
 		return daoIngresoInscripcion.listarTipoInscrpcion(tipoInscripcion);
 	}
 

@@ -1,0 +1,155 @@
+<?page title="Facturas Por Proveedor" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="Factura" ?>
+<zk>
+	<window id="Factura" title="Facturas por Proveedor" border="normal"
+		apply="controlador.administracion.CntrlRCuentaPagarPorProveedor"
+		width="690px">
+
+		<panel title="Datos Básicos" collapsible="true" open="true">
+			<panelchildren>
+				<grid oddRowSclass="none" style="border:none">
+					<columns>
+						<column label="" width="15%" align="left">
+						</column>
+						<column label="" width="35%" align="left">
+						</column>
+						<column label="" width="15%" align="left">
+						</column>
+						<column label="" width="35%" align="left">
+						</column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label value="RIF"></label>
+							<hbox align="center">
+								<textbox id="txtRif2" readonly="true"
+									value="@{cntrlfactura.persona.cedulaRif}">
+								</textbox>
+
+								<space></space>
+								<button id="btnBuscarProveedor"
+									image="/Recursos/Imagenes/consultar.ico">
+								</button>
+							</hbox>
+						</row>
+						<row style="border:none" spans="1,3">
+							<label value="Razón Social"></label>
+							<textbox width="75%" id="txtRazon"
+								readonly="true"
+								value="@{cntrlfactura.persona.personaJuridica.razonSocial}">
+							</textbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+
+
+		<panel id="Facturas" title="Facturas Asociadas"
+			collapsible="true" open="false">
+			<panelchildren>
+				<groupbox>
+					<caption label="Filtrado"></caption>
+					<grid>
+						<rows>
+							<row style="border:none;">
+
+								<label value="Estado Factura"></label>
+								<radiogroup id="radio" name="radio">
+									<radio id="rP" label="Pendientes"></radio>
+									<radio id="rC" label="Canceladas"></radio>
+								</radiogroup>
+							</row>
+							<row style="border:none;">
+								<label>Fecha Inicio</label>
+
+
+								<datebox id="dtInicio" width="140px"
+									format="dd/MM/yyyy">
+								</datebox>
+
+								<hbox>
+									<space width="20px"></space>
+
+									<label>Fecha Final</label>
+								</hbox>
+								<datebox id="dtFin" width="140px"
+									format="dd/MM/yyyy">
+								</datebox>
+							</row>
+
+
+
+						</rows>
+					</grid>
+
+					<div align="right">
+						<button id="btnFiltrar"
+							image="/Recursos/Imagenes/consultar.ico">
+						</button>
+					</div>
+
+				</groupbox>
+				<listbox id="lbxFacturas" mold="paging" pageSize="5"
+					model="@{cntrlfactura.facturas}">
+					<listhead>
+						<listheader width="30px">
+							<checkbox id="chFactura"></checkbox>
+						</listheader>
+						<listheader label="Factura" width="140px">
+						</listheader>
+						<listheader label="Emisión" align="Center"
+							width="100px">
+						</listheader>
+						<listheader label="Vencimiento" align="Center"
+							width="100px">
+						</listheader>
+						<listheader align="center" label="Monto"
+							width="100px">
+						</listheader>
+						<listheader align="center" label="Actual"
+							width="100px">
+						</listheader>
+
+						<listheader align="center" label="Estado"
+							width="100px">
+						</listheader>
+					</listhead>
+					<listitem self="@{each='factura'}">
+						<listcell>
+							<checkbox id="uno"></checkbox>
+						</listcell>
+						<listcell label="@{factura.numeroDocumento }" />
+						<listcell
+							label="@{factura.fechaEmision, converter='comun.converter.DateConverter' }" />
+						<listcell
+							label="@{factura.fechaVencimiento, converter='comun.converter.DateConverter' }" />
+						<listcell label="@{factura.montoTotal }" />
+						<listcell label="@{factura.saldo}" />
+						<listcell
+							label="@{factura, converter='controlador.administracion.converter.EstadoConverter'}" />
+					</listitem>
+				</listbox>
+				<label value="Monto Pendiente a Pagar:    "></label>
+				<doublebox id="dboxMonto"></doublebox>
+
+			</panelchildren>
+
+		</panel>
+		<div>
+
+		</div>
+		<div align="right">
+			<button id="btnExportar"
+				image="/Recursos/Imagenes/exportar.jpg" onClick="" label="Exportar" height="35px"/>
+			<button image="/Recursos/Imagenes/cancelar.ico"
+				id="btnCancelar" label="Cancelar" width="100px" height="35px" />
+			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+				tooltiptext="Salir" label="Salir" width="100px" height="35px">
+
+			</button>
+		</div>
+		<separator></separator>
+	</window>
+</zk>

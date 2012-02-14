@@ -1,5 +1,6 @@
 package servicio.implementacion;
 
+import java.util.Date;
 import java.util.List;
 
 import dao.general.DaoDocumentoAcreedor;
@@ -68,14 +69,20 @@ public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
 		return daoDocumentoAcreedor.buscarAdelantosPorRifAtleta(td);
 	}
 	
-	
-	public DocumentoAcreedor buscarPorCedulaAtleta(Persona td) {
-		return daoDocumentoAcreedor.buscarPorCedulaAtleta(td);
-	}
 
 	public List<DocumentoAcreedor> buscarAdelantosPorRif(Persona td) {
 		return daoDocumentoAcreedor.buscarAdelantosPorRif(td);
 	}
 
+	@Override
+	public Object buscarPorTipoIngreso(String tipo) {
+		return daoDocumentoAcreedor.buscarPorTipoIngreso(tipo);
+	}
+
+	public List<DocumentoAcreedor> buscarFiltrado(String tipoIngreso,
+			String estado, Date fechaIni, Date fechaFin) {
+		return daoDocumentoAcreedor.buscarFiltrado(tipoIngreso, estado,
+				fechaIni, fechaFin);
+	}
 
 }

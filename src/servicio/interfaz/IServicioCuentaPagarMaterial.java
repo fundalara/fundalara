@@ -19,4 +19,6 @@ public interface IServicioCuentaPagarMaterial {
 	
 	public abstract  CuentaPagarMaterial buscarPorCodigo (CuentaPagarMaterial d);
 
+	public abstract List<CuentaPagarMaterial> buscarMaterialesPorCuentaPagar(CuentaPagar cp);
+
 }

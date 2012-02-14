@@ -171,4 +171,8 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	public List<DatoBasico> listarPersonalForaneo(DatoBasico datoBasico) {
 		return daoDatoBasico.listarPersonalForaneo(datoBasico);
 	}
+	
+	public List<DatoBasico> buscarSinJugador(DatoBasico datoBasico) {
+		return daoDatoBasico.buscarSinJugador(datoBasico);
+	}
 }

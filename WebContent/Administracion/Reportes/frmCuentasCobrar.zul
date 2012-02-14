@@ -1,0 +1,102 @@
+<?page title="Listado Detallado Cuentas por Cobrar" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<zk>
+<window title="Listado Detallado Cuentas por Cobrar" border="normal"
+apply="controlador.administracion.CntrlRDCuentasCobrar"
+ width="690px" closable="true" id="winReportesCuentasPagar">
+<panel collapsible="true" title="Filtros"
+		open="true" style="border:orange">
+			<panelchildren>
+				<grid id="gridFiltros" oddRowSclass="none">
+					<columns>
+						<column label="" width="180px"></column>
+						<column label="" width="140px"></column>
+						<column label="" width="150px"></column>
+						<column label="" width="170px"></column>
+					</columns>
+					<rows>
+						<row style="border:none">
+							<label>Fecha Inicio</label>
+							<datebox id="dtbInicio" width="140px"
+											 format="dd/MM/yyyy">
+							</datebox>
+							<hbox>
+							<space width="20px"></space>
+								<label>Fecha Final</label>
+							</hbox>
+							<datebox id="dtbFin" width="140px" format="dd/MM/yyyy">
+							</datebox>
+						</row>
+						<row style="border:none">
+						<label>Tipo Ingreso</label>
+						<combobox id="cmbTipoIngreso" width="140px" constraint="no empty"
+							model="@{cntrl.lstTipoIngresos}" readonly="true"
+							value="--Seleccione--">
+							<comboitem self="@{each='lstTipoIngresos' }" 
+									label="@{lstTipoIngresos.descripcion}" value="@{lstTipoIngresos}"
+									context="@{lstTipoIngresos.codigo_tipo}">
+							</comboitem>
+						</combobox>
+						<hbox>
+								<space width="20px"></space>
+								<label>Estado</label>
+						</hbox>	
+						<hbox>
+						<combobox id="cmbEstado" width="140px" constraint="no empty"
+								readonly="true" value="--Seleccione--">
+ 							<comboitem label="Cancelado" value="C"></comboitem>
+							<comboitem label="Eliminado" value="E"></comboitem>
+							<comboitem label="Pendiente" value="P"></comboitem>
+							</combobox>
+							<space width="20px"></space>
+							<button id="btnBuscarFact" width="10px"
+									image="/Recursos/Imagenes/consultar.ico"
+									tooltiptext="Validar Factura" />
+						</hbox>
+						</row>
+						
+					</rows>
+				</grid>
+				<space></space>
+			</panelchildren>
+	</panel>
+	<panel collapsible="true" title="Resultados"
+		open="true" style="border:orange">
+			<panelchildren>
+				<listbox height="200px" id="lbxReporte" width="680px" 
+				mold="paging" pageSize="6"  model="@{cntrl.lstDocAcrredor}">
+					<listhead  >
+						<listheader label="Código Documento" width="90px" sort="auto"></listheader>
+						<listheader label="Concepto" width="170px" ></listheader>
+						<listheader label="Nombre o Razón Social"  width="190px" sort="auto"></listheader>
+						<listheader label="Monto Total" width="90px" sort="auto"></listheader>
+						<listheader label="Fecha Vencimiento" width="110px" sort="auto"></listheader>
+						
+					</listhead>
+					<listitem self="@{each='lstDocAcrredor'}">
+						<listcell label="@{lstDocAcrredor.codigoDocumentoAcreedor}" />
+						<listcell label="@{lstDocAcrredor.concepto}" />
+						<listcell label="@{lstDocAcrredor.personaByCedulaRif, converter='comun.converter.NameConverter' }" />
+						<listcell label="@{lstDocAcrredor.monto}" />
+						<listcell label="@{lstDocAcrredor.fechaVencimiento, converter='comun.converter.DateConverter'}" />
+						
+					</listitem>
+					
+				</listbox>
+			<space></space>
+			</panelchildren>
+	</panel>
+	<div align="right">
+						<button id="btnExportar"
+							image="/Recursos/Imagenes/exportar.jpg" onClick="" label="Exportar" />
+						<button image="/Recursos/Imagenes/cancelar.ico"
+							id="btnCancelar" label="Cancelar" />
+						<button image="/Recursos/Imagenes/salir.png"
+							id="btnSalir" tooltiptext="Salir" label="Salir">
+
+						</button>
+	</div>
+
+</window>
+</zk>

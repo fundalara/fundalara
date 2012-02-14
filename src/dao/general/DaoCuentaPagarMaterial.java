@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import dao.generico.GenericDao;
+import modelo.CuentaPagar;
 import modelo.CuentaPagarMaterial;
 
 public class DaoCuentaPagarMaterial extends GenericDao {
@@ -20,5 +21,14 @@ public class DaoCuentaPagarMaterial extends GenericDao {
 		return (List<CuentaPagarMaterial>) c.list();
 	}
 
-
+	public List<CuentaPagarMaterial> buscarMaterialesPorCuentaPagar(CuentaPagar cp) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(CuentaPagarMaterial.class);
+		c.add(Restrictions.eq("cuentaPagar", cp))
+				.add(Restrictions.eq("estatus", 'A')).list();
+		return (List<CuentaPagarMaterial>) c.list();
+	}
 }
+
+
