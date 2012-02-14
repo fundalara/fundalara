@@ -1,5 +1,14 @@
 package controlador.entrenamiento;
 
+/**
+ * Controlador del Catalogo de Escala de Medicion, para seleccionar
+ * los valores correspondientes a escalas registradas en el sistema
+ * Olimpo.
+ * @version 1.0, 15/02/12
+ * @author Leyner Castillo
+ * @email leyner.castillo@gmail.com
+ */
+
 import java.util.List;
 
 import modelo.DatoBasico;
