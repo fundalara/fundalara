@@ -7,8 +7,11 @@
 <zk>
 	<device-config>
 		<device-type>ajax</device-type>
-		<timeout-uri>/timeout.zul</timeout-uri><!-- An empty URL can cause the browser to reload the same URL -->
+		<timeout-uri></timeout-uri><!-- An empty URL can cause the browser to reload the same URL -->
 	</device-config>
+	<desktop-config>
+		<desktop-timeout>-3600</desktop-timeout> <!-- in seconds, negative value means NEVER timeout -->
+	</desktop-config>
 	<desktop-config>
 		<theme-provider-class>zkthemer.ThemeProvider</theme-provider-class>
 	</desktop-config>
