@@ -36,7 +36,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Iframe;
-import comun.ConnectionBD;
+import comun.ConeccionBD;
 import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioRoster;
@@ -87,7 +87,7 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 
 		listEquipo.clear();
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarporCategoria(cc);
+		listEquipo = servicioEquipo.buscarPorCategoria(cc);
 		// System.out.println(cc);
 		// System.out.println(listEquipo);
 		cmbequipo.setDisabled(false);
@@ -169,7 +169,7 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	public void onClick$btnimprimir() throws SQLException, JRException, IOException {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
 		Equipo c = (Equipo) cmbequipo.getSelectedItem().getValue();
-		con = ConnectionBD.getCon("postgres", "postgres","123456");
+		con = ConeccionBD.getCon("postgres", "postgres","123456");
 		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/reportPrueba.jrxml");
 		parameters.put("fecha_inicio",dtbox1.getText());
 		parameters.put("fecha_fin",dtbox2.getText() );

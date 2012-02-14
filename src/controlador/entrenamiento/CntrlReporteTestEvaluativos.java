@@ -50,7 +50,7 @@ public class CntrlReporteTestEvaluativos extends GenericForwardComposer {
 
 		listEquipo.clear();
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarporCategoria(cc);
+		listEquipo = servicioEquipo.buscarPorCategoria(cc);
 		// System.out.println(cc);
 		// System.out.println(listEquipo);
 		cmbequipo.setDisabled(false);
@@ -65,7 +65,7 @@ public class CntrlReporteTestEvaluativos extends GenericForwardComposer {
 		listRoster.clear();
 		// Jugador jj= (Jugador)cmbequipo.getSelectedItem().getValue();
 		Equipo rr = (Equipo) cmbequipo.getSelectedItem().getValue();
-		listRoster = servicioRoster.buscarEquipo(rr);
+		listRoster = servicioRoster.buscarPorEquipo(rr);
 		System.out.println(rr);
 
 		// System.out.println(cc);

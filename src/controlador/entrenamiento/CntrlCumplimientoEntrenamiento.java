@@ -285,8 +285,8 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 		
 		cmbEquipo.setValue(equipo.getNombre());
 		listPersonalEquipo = servicioPersonalEquipo.buscarPersonal(equipo,dtboxFecha.getValue());
-		personalCargoA = servicioPersonalCargo.buscarTipoPersonal((Personal)listPersonalEquipo.get(0).getPersonal());
-    	personalCargoB = servicioPersonalCargo.buscarTipoPersonal((Personal)listPersonalEquipo.get(1).getPersonal());
+		personalCargoA = servicioPersonalCargo.buscarCargoActual((Personal)listPersonalEquipo.get(0).getPersonal());
+		personalCargoB = servicioPersonalCargo.buscarCargoActual((Personal)listPersonalEquipo.get(1).getPersonal());
 	if (personalCargoA.getDatoBasico().equals(166)){
 		txtManager.setValue(personalCargoA.getPersonal().getPersonaNatural().getPrimerNombre() +" " + personalCargoA.getPersonal().getPersonaNatural().getPrimerApellido());
 		txtMonitor.setValue(personalCargoB.getPersonal().getPersonaNatural().getPrimerNombre() +" " + personalCargoB.getPersonal().getPersonaNatural().getPrimerApellido());

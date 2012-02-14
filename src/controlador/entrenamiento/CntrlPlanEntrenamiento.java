@@ -363,7 +363,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		Categoria ca = (Categoria) cmbCategoria.getSelectedItem().getValue();
 		Equipo e = (Equipo) cmbEquipo.getSelectedItem().getValue();
 		if (e.getNombre().equals("TODOS")) {
-			e = servicioEquipo.buscarporCategoria(ca).get(0);
+			e = servicioEquipo.buscarPorCategoria(ca).get(0);
 		}
 		listHorarioPlanTemporadas.clear();
 		listHorarioPlanTemporadas = servicioHorarioPlanTemporada

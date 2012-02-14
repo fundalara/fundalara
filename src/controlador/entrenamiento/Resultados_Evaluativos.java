@@ -109,7 +109,7 @@ public class Resultados_Evaluativos extends GenericForwardComposer {
 	public void onSelect$cmbCategoria(){
 		cmbEquipo.setDisabled(false);
 		listEquipo = new ArrayList<Equipo>();
-		listEquipo = servicioEquipo.buscarporCategoria((Categoria)cmbCategoria.getSelectedItem().getValue());
+		listEquipo = servicioEquipo.buscarPorCategoria((Categoria)cmbCategoria.getSelectedItem().getValue());
 		binder.loadAll();
 	}
 	

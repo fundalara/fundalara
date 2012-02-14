@@ -43,12 +43,25 @@ public class ServicioPlanTemporada implements IServicioPlanTemporada {
 		this.daoPlanTemporada = daoPlanTemporada;
 	}
 
+	@Override
 	public PlanTemporada buscarPorCategoriaLapDep(Categoria ct,
 			LapsoDeportivo ld) {
 		return daoPlanTemporada.buscarPorCategoriaLapsoDeportivo(ct, ld);
 	}
-	
+
+	@Override
 	public int generarCodigo() {
 		return daoPlanTemporada.generarCodigo(PlanTemporada.class);
+	}
+
+	@Override
+	public List<PlanTemporada> listarActivos() {
+		return (List<PlanTemporada>) daoPlanTemporada.listarUnCampo(
+				PlanTemporada.class, "estatus", 'A');
+	}
+	
+	@Override
+	public List<PlanTemporada> buscarPorLapsoDeportivo(LapsoDeportivo ld) {
+		return daoPlanTemporada.buscarPorLapsoDeportivo(ld);
 	}
 }

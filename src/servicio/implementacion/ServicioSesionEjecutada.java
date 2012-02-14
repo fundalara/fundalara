@@ -5,8 +5,8 @@ import java.util.List;
 
 import dao.general.DaoSesionEjecutada;
 
-import modelo.DatoBasico;
 import modelo.Equipo;
+import modelo.Sesion;
 import modelo.SesionEjecutada;
 import servicio.interfaz.IServicioSesionEjecutada;
 
@@ -44,10 +44,26 @@ public class ServicioSesionEjecutada implements IServicioSesionEjecutada{
 	public void setDaoSesionEjecutada(DaoSesionEjecutada daoSesionEjecutada) {
 		this.daoSesionEjecutada = daoSesionEjecutada;
 	}
+
+	public SesionEjecutada buscarPorSesionEquipoFecha(Sesion sesion,Equipo equipo,
+			Date fecha) {
+		// TODO Auto-generated method stub
+		return this.daoSesionEjecutada.buscarPorSesionEquipoFecha(sesion,equipo,fecha);
+	}
 	
+	public List<SesionEjecutada> listarActivos(){
+		return daoSesionEjecutada.listarActivos(SesionEjecutada.class);
+	}
+
+	@Override
+	public SesionEjecutada buscarSesionFecha(Sesion sesion, Date fecha) {
+		return daoSesionEjecutada.buscarSesionFecha(sesion, fecha);
+	}
+
+	@Override
 	public SesionEjecutada buscarPorFechaHoraEquipo(Equipo equipo, Date fecha,
 			Date horaFin, Date horaInicio) {
 		// TODO Auto-generated method stub
-		return this.daoSesionEjecutada.buscarPorFechaHoraEquipo(equipo,fecha,horaFin,horaInicio);
+		return null;
 	}
 }

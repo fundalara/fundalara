@@ -286,7 +286,7 @@ public class CntrlFrmAsignarInstalacion extends GenericForwardComposer {
 				instalacionUtilizada.setInstalacion(instalacion);
 				instalacionUtilizada.setSesion(listActividadCalendario.get(i)
 						.getSesion());
-				servicioInstalacionUtilizada.guardar(instalacionUtilizada);
+				servicioInstalacionUtilizada.agregar(instalacionUtilizada);
 				ActividadCalendario actividadCalendario = new ActividadCalendario();
 				actividadCalendario = listActividadCalendario.get(i);
 				actividadCalendario.setEstatus('I');

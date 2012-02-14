@@ -4,7 +4,7 @@ import java.util.List;
 
 import dao.general.DaoActividadesEjecutadas;
 
-import modelo.ActividadesEjecutadas;
+import modelo.ActividadEjecutada;
 import servicio.interfaz.IServicioActividadesEjecutadas;
 
 public class ServicioActividadesEjecutadas implements
@@ -22,23 +22,23 @@ public class ServicioActividadesEjecutadas implements
 	}
 
 	@Override
-	public void guardar(ActividadesEjecutadas ae) {
+	public void guardar(ActividadEjecutada ae) {
 		daoActividadesEjecutadas.guardar(ae);
 	}
 
 	@Override
-	public void actualizar(ActividadesEjecutadas ae) {
+	public void actualizar(ActividadEjecutada ae) {
 		daoActividadesEjecutadas.actualizar(ae);
 	}
 
 	@Override
-	public void eliminar(ActividadesEjecutadas ae) {
+	public void eliminar(ActividadEjecutada ae) {
 		daoActividadesEjecutadas.eliminar(ae);
 	}
 
 	@Override
-	public List<ActividadesEjecutadas> listar() {
-		return daoActividadesEjecutadas.listar(ActividadesEjecutadas.class);
+	public List<ActividadEjecutada> listar() {
+		return daoActividadesEjecutadas.listar(ActividadEjecutada.class);
 	}
 
 }
