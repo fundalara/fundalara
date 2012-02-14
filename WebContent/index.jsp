@@ -352,7 +352,35 @@
 												<div class="bannergroup_text">
 													<img src="Recursos/Imagenes/noticias.png"><br><br>
 																<img src="Recursos/Imagenes/iconos.png"><br><br>
-																			<img src="Recursos/Imagenes/redes.png">
+<!-- 																			<img src="Recursos/Imagenes/redes.png"> -->
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 5,
+  interval: 30000,
+  width: 200,
+  height: 300,
+  theme: {
+    shell: {
+      background: '#d69545',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#472d47',
+      links: '#c77c20'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: true,
+    behavior: 'default'
+  }
+}).render().setUser('fundabeisbol').start();
+</script>
 													<div class="art-blockcontent-body"></div>
 												</div>
 												<div class="cleared"></div>
