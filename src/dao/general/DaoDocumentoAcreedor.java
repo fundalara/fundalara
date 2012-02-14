@@ -60,20 +60,7 @@ public class DaoDocumentoAcreedor extends GenericDao {
 		return c.list();
 	}
 	
-	public DocumentoAcreedor buscarPorCedulaAtleta(Persona td) {
-		Session session = getSession();
-		Transaction tx =  session.beginTransaction();
-		
-		Criteria c = getSession().createCriteria(DocumentoAcreedor.class);
-		c.add(Restrictions.eq("personaByCedulaAtleta", td));
-		c.add(Restrictions.eq("estatus", "A"));
-		if (c.list().size()==0){
-			return null;
-		} else {
-			return (DocumentoAcreedor) c.list().get(0);
-		}
-		
-	}
+	
 	
 	public List <DocumentoAcreedor> buscarAdelantosPorRif(Persona td) {
 		Session session = getSession();
@@ -83,5 +70,35 @@ public class DaoDocumentoAcreedor extends GenericDao {
 		c.add(Restrictions.eq("personaByCedulaRif", td)).add(Restrictions.eq("estado", 'P'));
 		c.add(Restrictions.eq("estatus", "A"));
 		return c.list();
+	}
+	
+	
+	public List<DocumentoAcreedor> buscarPorTipoIngreso(String tipoIngreso){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria c = getSession().createCriteria(DocumentoAcreedor.class);
+		c.createCriteria("tipoIngreso").add(Restrictions.eq("descripcion", tipoIngreso));
+		c.add(Restrictions.eq("estatus", "A"));
+		if (c.list().size()==0){
+			return null;
+		} else {
+			return c.list();
+		}
+
+	}
+	
+	public List<DocumentoAcreedor> buscarFiltrado(String tipoIngreso, String estado, Date fechaIni, Date fechaFin){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria c = getSession().createCriteria(DocumentoAcreedor.class);
+		c.createCriteria("tipoIngreso").add(Restrictions.eq("descripcion", tipoIngreso));
+		c.add(Restrictions.eq("estatus", "A"));
+		c.add(Restrictions.eq("estado",estado));
+		c.add(Restrictions.between("fechaEmision", new Date(fechaIni.getTime()), new Date(fechaFin.getTime())));
+		if (c.list().size()==0){
+			return null;
+		} else {
+			return c.list();
+		}
 	}
 }
