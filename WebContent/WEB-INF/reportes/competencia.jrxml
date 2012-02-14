@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="competencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="250"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFA500">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE9BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFA500">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE9BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DScompetencia">
+		<queryString language="SQL">
+			<![CDATA[select
+
+
+       competencia.nombre as nombre,
+       competencia.fecha_inicio as fechainicio,
+        competencia.fecha_fin as fechafin,
+       competencia.cantidad_fase as cantfases,
+       clasificacion_competencia.nombre as  clasificacion,
+dato_basico.nombre as tipo
+
+
+from
+competencia,
+clasificacion_competencia,
+dato_basico
+
+
+
+
+
+where
+competencia.estatus='A' and
+competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico
+
+ORDER BY
+competencia.cantidad_fase]]>
+		</queryString>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="fechainicio" class="java.sql.Date"/>
+		<field name="fechafin" class="java.sql.Date"/>
+		<field name="cantfases" class="java.lang.Integer"/>
+		<field name="clasificacion" class="java.lang.String"/>
+		<field name="tipo" class="java.lang.String"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[select
+
+
+       competencia.nombre as nombre,
+       competencia.fecha_inicio as fechainicio,
+        competencia.fecha_fin as fechafin,
+       competencia.cantidad_fase as cantfases,
+       clasificacion_competencia.nombre as  clasificacion,
+dato_basico.nombre as tipo
+
+
+from
+competencia,
+clasificacion_competencia,
+dato_basico
+
+
+
+
+
+where
+competencia.estatus='A' and
+competencia.codigo_clasificacion_competencia = clasificacion_competencia.codigo_clasificacion_competencia and clasificacion_competencia.tipo_competencia = dato_basico.codigo_dato_basico
+
+ORDER BY
+competencia.cantidad_fase]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="fechainicio" class="java.sql.Date"/>
+	<field name="fechafin" class="java.sql.Date"/>
+	<field name="cantfases" class="java.lang.Integer"/>
+	<field name="clasificacion" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="223" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="125"/>
+				<imageExpression><![CDATA["C:\\Users\\LABSI\\workspaceL\\fundalara\\WebContent\\WEB-INF\\reportes\\Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="139" y="167" width="340" height="24"/>
+				<textElement>
+					<font size="16" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[COMPETENCIAS    EXISTENTES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<lastPageFooter>
+		<band height="98">
+			<image>
+				<reportElement x="12" y="25" width="526" height="62"/>
+				<imageExpression><![CDATA["PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="286">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="555" height="195"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DScompetencia">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="53">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="53" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TIPO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="53" height="14"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="83" height="20"/>
+								<textElement textAlignment="Center">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[CLASIFICACION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="14"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{clasificacion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="180">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="71" height="16"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[NOMBRE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="180" height="14"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="79">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[FECHA INICIO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="79" height="14"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fechainicio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="71">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="71" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[FECHA FIN]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="71" height="14"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fechafin}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="53">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="53" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[FASES]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="14" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="53" height="14"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cantfases}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

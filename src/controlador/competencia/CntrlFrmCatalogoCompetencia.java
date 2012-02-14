@@ -1,8 +1,16 @@
 package controlador.competencia;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.Categoria;
 import modelo.CategoriaCompetencia;
@@ -10,10 +18,23 @@ import modelo.ClasificacionCompetencia;
 import modelo.Competencia;
 import modelo.Divisa;
 import modelo.PersonaNatural;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 import servicio.implementacion.ServicioCompetencia;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.InputEvent;
@@ -26,6 +47,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Textbox;
 
+import comun.ConeccionBD;
 import comun.EstadoCompetencia;
 
 import servicio.implementacion.ServicioCategoriaCompetencia;
@@ -56,6 +78,9 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
 	Combobox cmbEstadoCompetencia;
 	
 	int estadoComp;
+	private Connection con;
+	private String jrxmlSrc;
+	private Map parameters = new HashMap();
 	
 
 	public void onCreate$FrmCatalogoC(){
@@ -77,6 +102,8 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
 	    determinarTitulo(estado_comp);
 	    binder.loadAll();
 	}
+	
+	
 	
 	public void determinarTitulo(int estatus) {
 		Window w = (Window) catalogo;
@@ -186,5 +213,67 @@ public class CntrlFrmCatalogoCompetencia extends GenericForwardComposer {
     	ordenarCompetencia(competencias);		
 		binder.loadAll();
 	}
+	
+	
+
+	
+	public void onClick$btnImprimir()throws JRException, IOException, InterruptedException, SQLException{
+		
+			con = ConeccionBD.getCon("postgres", "postgres", "123456");
+			parameters.put("CodCompetencia", 1);
+			parameters.put("codCategoria", 2);
+//			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
+			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/competencia.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
+
+			byte[] archivo = JasperExportManager.exportReportToPdf(print);
+
+			final AMedia amedia = new AMedia("competencia.pdf", "pdf", "application/pdf", archivo);
+
+			 Component visor = Executions.createComponents("/General/"
+						+ "frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedia, false);
+
+		}
+		
+		
+
+	public void showReportfromJrxml() throws JRException, IOException {
+		
+		parameters.put("CodCompetencia", 1);
+		parameters.put("codCategoria", 2);
+		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
+		JasperPrint jaspPrint = JasperFillManager.fillReport(jasp, parameters,
+				con);
+		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+		JRExporter exporter = new JRPdfExporter();
+		exporter.setParameters(parameters);
+		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jaspPrint);
+		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,
+				arrayOutputStream);
+		exporter.exportReport();
+		arrayOutputStream.close();
+		final AMedia amedia = new AMedia("competencia.jxrml", "jxrml",
+				"jxrml/application", arrayOutputStream.toByteArray());
+//		ifReporte.setContent(amedia);
+		//jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("");
+		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Competencias/competencia.jrxml");
+		
+		
+		File archivo = new File(jrxmlSrc);
+		AMedia amedias=null;
+		try {
+			 amedias = new AMedia(null,null,null,archivo,true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		 Component visor = Executions.createComponents("/WebContent/General/frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedias, false);			
+			visor.setVariable("orientacion", "horizontal",false );
+			
+		
+	}
+
 	
 }

@@ -22,7 +22,7 @@ and ec.codigo_competencia = $P{competencia}]]>
 		<band height="110" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="572" height="97"/>
-				<imageExpression><![CDATA["Encabezado.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -88,7 +88,7 @@ and ec.codigo_competencia = $P{competencia}]]>
 		<band height="80" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="570" height="74"/>
-				<imageExpression><![CDATA["D:\\repositorio\\PieDePagina.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

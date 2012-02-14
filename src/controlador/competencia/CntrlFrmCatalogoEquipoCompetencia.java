@@ -162,6 +162,7 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 		Competencia competencia = (Competencia) catalogo.getVariable(
 				"competencia", false);
 
+		System.out.println(competencia.getCodigoCompetencia());
 		parameters.put("competencia", competencia.getCodigoCompetencia());
 		// jrxmlSrc =
 		// Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
