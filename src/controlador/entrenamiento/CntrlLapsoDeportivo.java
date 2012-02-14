@@ -1,5 +1,16 @@
 package controlador.entrenamiento;
 
+/**
+ * Controlador de la pantalla de Lapso Deportivo para el registro 
+ * y clausura de los lapsos deportivos configurados para los planes
+ * de temporadas y de entrenamientos.
+ * @version 1.0, 15/02/12
+ * @author Naily Melendez, Oscar Gutierrez, Liliana Amaro
+ * @email nailymelendezulrrich@gmail.com
+ * @email elesclip@gmail.com
+ * @email liliana.amaro16@gmail.com
+ */
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +39,6 @@ import servicio.implementacion.ServicioPlanTemporada;
 import servicio.implementacion.ServicioSesion;
 import servicio.implementacion.ServicioSesionEjecutada;
 import servicio.implementacion.ServicioTipoDato;
-import modelo.ActividadCalendario;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.LapsoDeportivo;
