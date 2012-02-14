@@ -70,6 +70,12 @@ public class ServicioCategoria implements IServicioCategoria {
 	public boolean buscarPorCodigo(Categoria categoria) {
 		return daoCategoria.buscarPorCodigo(categoria);
 	}
+
+	@Override
+	public List<Categoria> buscarPorCategoria(Categoria c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	

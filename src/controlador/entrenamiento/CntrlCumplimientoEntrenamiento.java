@@ -5,6 +5,7 @@ package controlador.entrenamiento;
  * el registro de los entrenamientos ejecutados
  * @version 1.0, 15/02/12
  * @author Taner Morón
+ * @email tmrod7@gmail.com
  */
 
 import java.util.ArrayList;
@@ -225,9 +226,7 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 		actividadCalendario = (ActividadCalendario)execution.getAttribute("actividadCalendario");
 		controladorAgendaEntrenamiento = new CntrlFrmAgendaEntrenamiento();
 		controladorAgendaEntrenamiento = (CntrlFrmAgendaEntrenamiento) execution.getAttribute("controlador");
-		
-		eventoSimpleCalendario = (EventoSimpleCalendario) execution.getAttribute("evento");				
-		
+		eventoSimpleCalendario = (EventoSimpleCalendario) execution.getAttribute("evento");
 		rdbtnSi.setChecked(true);
 		rdbtnNo.setChecked(false);
 		sesion = (Sesion) actividadCalendario.getSesion();
@@ -273,16 +272,11 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 				cmbObsEntrenamiento.setValue(sesionEjecutada.getDatoBasico().getNombre());
 			}
 			txtObsEntrenamiento.setText(sesionEjecutada.getObservacionSesion());
-		}
-		
-		
-		
-		
+		}	
 	}
 		
 	public void cargarDatosEquipo() throws InterruptedException {
 		habilitarCampos();
-		
 		cmbEquipo.setValue(equipo.getNombre());
 		listPersonalEquipo = servicioPersonalEquipo.buscarPersonal(equipo,dtboxFecha.getValue());
 		personalCargoA = servicioPersonalCargo.buscarCargoActual((Personal)listPersonalEquipo.get(0).getPersonal());
@@ -347,7 +341,6 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 	}	
 
 	public void onClick$btnAgregar() {
-		
 		if (btnAgregar.getPopup().equals(" ")) {
 			if (cmbActividad.getValue().equals("--SELECCIONE--")) {
 				throw new WrongValueException(cmbActividad,
@@ -425,6 +418,8 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 				Listcell lv1 = (Listcell) lboxActividades.getItemAtIndex(i).getChildren().get(1);
 				if (lv.getLabel().equals("EJECUTADA")){
 				Integer num =servicioActividadesEjecutadas.listar().size()+1;
+				System.out.println(num);
+				actividadEjecutada = new ActividadEjecutada();
 				actividadEjecutada.setActividadEntrenamiento((ActividadEntrenamiento) lboxActividades.getItemAtIndex(i).getValue());
 				actividadEjecutada.setSesionEjecutada(sesionEjecutada);
 				actividadEjecutada.setCodigoActividadEjecutada(num);
@@ -434,8 +429,9 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 				servicioActividadesEjecutadas.guardar(actividadEjecutada);
 				}
 			}
-			
-			Integer codigo =servicioInstalacionEjecutada.listarInstalacionEjecutada().size()+1;
+			Integer codigo = 1;
+			if(!(servicioInstalacionEjecutada.listarInstalacionEjecutada()==null)) 
+				codigo =servicioInstalacionEjecutada.listarInstalacionEjecutada().size()+1;
 			instalacionEjecutada.setCodigoInstalacionEjecutada(codigo);
 			if (!(cmbObsInstalacion.getValue().equals("--SELECCIONE--")))
 				instalacionEjecutada.setDatoBasico((DatoBasico)cmbObsInstalacion.getSelectedItem().getValue());

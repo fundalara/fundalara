@@ -820,5 +820,39 @@
 		<property name="daoCategoriaLiga" ref="daoCategoriaLiga"></property>
 	</bean>
 	
+	<bean id="daoPuntuacionJugador" class="dao.general.DaoPuntuacionJugador">
+	</bean>
+	
+	<bean id="servicioPuntuacionJugador" class="servicio.implementacion.ServicioPuntuacionJugador">
+		<property name="daoPuntuacionJugador" ref="daoPuntuacionJugador"></property>
+	</bean>
+	
+	<bean id="daoPersonalSuplente" class="dao.general.DaoPersonalSuplente">
+	</bean>
+	
+	<bean id="servicioPersonalSuplente" class="servicio.implementacion.ServicioPersonalSuplente">
+		<property name="daoPersonalSuplente" ref="daoPersonalSuplente"></property>
+	</bean>
+	
+	<bean id="daoDesempennoJugador" class="dao.general.DaoDesempennoJugador"></bean>
+	<bean id="servicioDesempennoJugador" class="servicio.implementacion.ServicioDesempennoJugador">
+		<property name="daoDesempennoJugador" ref="daoDesempennoJugador"></property>
+	</bean>
+
+	<bean id="daoTestEvaluativo" class="dao.general.DaoTestEvaluativo"></bean>
+	<bean id="servicioTestEvaluativo" class="servicio.implementacion.ServicioTestEvaluativo">
+		<property name="daoTestEvaluativo" ref="daoTestEvaluativo"></property>
+	</bean>
+
+	<bean id="daoHorarioPlanTemporada" class="dao.general.DaoHorarioPlanTemporada" />	
+	<bean id="servicioHorarioPlanTemporada" class="servicio.implementacion.ServicioHorarioPlanTemporada">
+		<property name="daoHorarioPlanTemporada" ref="daoHorarioPlanTemporada" />
+	</bean>
+	
+	<bean id="daoInstalacionEjecutada" class="dao.general.DaoInstalacionEjecutada" />	
+	<bean id="servicioInstalacionEjecutada" class="servicio.implementacion.ServicioInstalacionEjecutada">
+		<property name="daoInstalacionEjecutada" ref="daoInstalacionEjecutada" />
+	</bean>
+	
 
 </beans>

@@ -1,5 +1,13 @@
 package controlador.entrenamiento;
 
+/**
+ * Controlador de Indicador de Evaluacion, para el registro y actualizacion
+ *  de los valores correspondientes a los indicadores de evaluacion que son asociados
+ *  a las categorias y las actividades de Entrenamiento
+ * @version 1.0, 15/02/12
+ * @author Naily Melendez
+ * @email nailymelendezulrrich@gmail.com
+ */
 import java.util.List;
 import java.util.Set;
 import modelo.ActividadEntrenamiento;
@@ -157,7 +165,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 				cmbCategoria.setSelectedIndex(-1);
 				cmbCategoria.setValue("--SELECCIONE--");
 				throw new WrongValueException(cmbCategoria,
-						"No existen Actividades asociadas a esta Categoria");
+						"No existen Actividades asociadas a esta Categoría");
 			}
 		}
 	}
@@ -190,7 +198,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 			if (cmbCategoria.getSelectedItem() == null
 					&& cmbCategoria.getValue().equals("--SELECCIONE--")) {
 				throw new WrongValueException(cmbCategoria,
-						"Seleccione la Categoria a la que desea asociar el indicador");
+						"Seleccione la Categoría a la que desea asociar el indicador");
 			} else {
 				if (cmbActividad.getSelectedItem() == null
 						&& cmbActividad.getValue().equals("--SELECCIONE--")) {
@@ -206,7 +214,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 								&& cmbEscala.getValue()
 										.equals("--SELECCIONE--")) {
 							throw new WrongValueException(cmbCategoria,
-									"Debe selecionar una Escala de MediciÃ³n");
+									"Debe selecionar una Escala de Medición");
 						} else {
 							int i = 0;
 							boolean repetido = false;
@@ -244,7 +252,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 										indicador
 												.getCodigoIndicadorActividadEscala());
 								Messagebox.show("Guardado Exitosamente",
-										"OLIMPO - INFORMACION", Messagebox.OK,
+										"Olimpo - Información", Messagebox.OK,
 										Messagebox.INFORMATION);
 								binder.loadAll();
 								inicializar();
@@ -282,7 +290,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 								.getEscalaMedicion().getValorEscalas(),
 						indicador.getCodigoIndicadorActividadEscala());
 				Messagebox.show("Actualizado Exitosamente",
-						"OLIMPO - INFORMACION", Messagebox.OK,
+						"Olimpo - Información", Messagebox.OK,
 						Messagebox.INFORMATION);
 				binder.loadAll();
 				inicializar();
@@ -434,7 +442,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 		int n = lboxIndicador.getSelectedIndex();
 		servicioIndicadorActividadEscala.eliminar(indicador);
 		lboxIndicador.removeItemAt(n);
-		Messagebox.show("Eliminado Exitosamente", "OLIMPO - INFORMACION",
+		Messagebox.show("Eliminado Exitosamente", "Olimpo - Información",
 				Messagebox.OK, Messagebox.INFORMATION);
 		index = 0;
 		txtValores.setValue("");
