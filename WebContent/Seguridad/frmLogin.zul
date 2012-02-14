@@ -1,0 +1,41 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="wndLogin" border="none" width="210px" height=""
+		closable="true">
+		<div align="center">
+			<panel title="ACCESO DE USUARIOS" collapsible="true"
+				open="false" width="210px">
+				<panelchildren>
+					<hbox align="center" width="190px">
+						<grid width="190px">
+							<columns>
+								<column label="" />
+<!-- 								<column label="" /> -->
+							</columns>
+							<rows>
+								<row>
+									<label value="Usuario" />
+								</row>
+								<row>
+									<textbox id="txtUsuario"
+										width="170px" />
+								</row>
+								<row>
+									<label value="Contraseña" />
+								</row>
+								<row>
+									<textbox type="password"
+										id="txtContrasena" width="170px" />
+								</row>
+								<row align="center">
+									<button id="btnIngresar"
+										width="110px" label="INGRESAR" />
+								</row>
+							</rows>
+						</grid>
+					</hbox>
+				</panelchildren>
+			</panel>
+		</div>
+	</window>
+</zk>

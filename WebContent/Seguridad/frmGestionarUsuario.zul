@@ -1,0 +1,254 @@
+<?page title="Gestion de Usuarios"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"
+root="winGestionUsuario" ?>
+
+<zk>
+	<window title="Gestión de Usuario" id="winGestionUsuario"
+		border="normal" width="695px" closable="true">
+		<groupbox style="border-color:orange">
+			<caption style="font-weight: bold" label="Usuario" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="90%" />
+					<column width="10%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="21%" />
+								<column width="32%" />
+								<column />
+								<column width="32%" />
+							</columns>
+							<rows>
+								<row spans="1,3" style="border:none">
+									<label value="Cédula" />
+									<div>
+										<textbox id="txtCedula"
+											maxlength="50" width="37.8%" constraint="no empty"
+											readonly="true"  />
+										<button id="btnBuscar"
+											image="../../Recursos/Imagenes/consultar.ico">
+										</button>
+									</div>
+								</row>
+								<row style="border:none">
+									<label value="Nombres" />
+
+									<textbox id="txtNombre"
+										maxlength="50" width="95%" constraint="no empty"
+										readonly="true"  />
+
+
+									<label value="Apellidos" />
+									<textbox id="txtApellido"
+										maxlength="40" width="95%" readonly="true"  />
+								</row>
+
+								<row style="border:none">
+									<label value="Ocupación"
+										width="95%" />
+									<textbox id="txtFechaNac"
+										readonly="true" width="95%" />
+								</row>
+							</rows>
+						</grid>
+						<grid style="border:none" oddRowSclass="none">
+							<rows>
+								<row style="border:none" height="80%"
+									align="center" valign="middle">
+									<groupbox mold="3d">
+										<image
+											src="../../Recursos/Imagenes/noFoto.jpg" height="100px"
+											width="80px" />
+									</groupbox>
+								</row>
+							</rows>
+
+						</grid>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<hbox width="100%">
+		<hbox width="20%">
+		<panel title="Grupos">
+					<panelchildren>
+
+						<listbox width="300px">
+							<listhead>
+								<listheader label="Nombre" width="15%"></listheader>
+
+
+
+							</listhead>
+							<listitem>
+								<listcell></listcell>
+							</listitem>
+							
+							<listitem>
+								<listcell></listcell>
+							</listitem>
+
+							<listitem>
+								<listcell></listcell>
+							</listitem>
+
+						</listbox>
+
+					</panelchildren>
+
+
+				</panel>
+			</hbox>
+			<hbox width="10%"><!--Botones -->
+				<div style="margin-top:5px">
+					<panel>
+						<panelchildren>
+							<grid>
+								<columns>
+									<column align="center" width="100%"
+										height="100%">
+									</column>
+								</columns>
+								<rows>
+									<row>
+										<button
+											image="/Recursos/Imagenes/rightarrow_g.png">
+										</button>
+									</row>
+									<row>
+										<button
+											image="/Recursos/Imagenes/leftarrow_g.png">
+										</button>
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+
+				</div>
+			</hbox><!--Fin Botones  -->
+						<hbox width="40%">
+				<panel title="Grupos Asignados">
+					<panelchildren>
+						<listbox width="300px">
+							<listhead>
+								<listheader width="30%">Nombre</listheader>
+							</listhead>
+							<listitem>
+								<listcell></listcell>
+							</listitem>
+
+
+						</listbox>
+
+					</panelchildren>
+				</panel>
+
+			</hbox><!-- grupos asociados -->
+			
+			</hbox>
+
+		<groupbox style="border-color:orange">
+			<caption style="font-weight: bold" label="Datos de Acceso" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="90%" />
+					<column width="10%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<grid style="border:none"
+							oddRowSclass="none">
+							<columns>
+								<column width="21%" />
+								<column width="32%" />
+								<column width="21%" />
+								<column width="32%" />
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Nombre de Acceso" />
+									<textbox maxlength="40" width="95%" />
+								</row>
+								<row style="border:none">
+									<label value="Contraseña" />
+									<textbox maxlength="40" width="95%" />
+
+
+
+									<label value="Confirme Contraseña" />
+									<textbox maxlength="40" width="95%" />
+								</row>
+
+							
+							</rows>
+						</grid>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox visible="false" style="border-color:orange">
+			<caption style="font-weight: bold" label="Datos de Acceso" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="90%" />
+					<column width="10%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns>
+								<column width="21%" />
+								<column width="32%" />
+								<column width="21%" />
+								<column width="32%" />
+							</columns>
+							<rows>
+								<row>
+									<label value="Nombre de Acceso" />
+									<textbox maxlength="40" width="95%"/>
+									
+									<label value="Contraseña Anterior" />
+									<textbox maxlength="40" width="95%"/>
+								</row>
+								<row style="border:none">
+									<label value="Nueva Contraseña" />
+									<textbox maxlength="40" width="95%"/>
+
+
+
+									<label value="Confirme Contraseña" />
+									<textbox maxlength="40" width="95%"/>
+								</row>
+							</rows>
+						</grid>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<div align="right">
+				<button id="btnGuardar" label="Guardar"
+				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" visible="true">
+			</button>
+			<button id="btnEliminar" label="Eliminar"
+				image="../../Recursos/Imagenes/eliminar.ico" orient="horizontal"
+				width="100px" visible="true">
+			</button>
+			<button label="Cancelar" id="btnCancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<button label="Salir" id="btnSalir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px">
+			</button>
+		</div>
+	</window>
+</zk>

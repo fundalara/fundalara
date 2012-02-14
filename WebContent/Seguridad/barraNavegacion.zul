@@ -1,0 +1,17 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winBarraNavegacion"?>
+<zk>
+	<window id="winBarraNavegacion" border="none" width="950px"
+		apply="seguridad.CntrlBarraNavegacion">
+		<div align="right">
+			<separator height="10px" width="15px" />
+			<label id="lblNombreUsuario"
+				style="color:#1e2e8f;font-weight:bold;text-decoration:underline;" />
+			<html>
+				<![CDATA[ <a
+				href="/Fundalara/j_spring_security_logout">Salir</a> ]]>
+			</html>
+		</div>
+	</window>
+</zk>
