@@ -285,7 +285,7 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		execution.setAttribute("controlador", this);
 		execution.setAttribute("lapsoDeportivo", lapsoDeportivo);
 		window = (Window) execution.createComponents(
-				"Entrenamiento/Vistas/frmCatalogoPlanEntrenamiento.zul", null,
+				"/Entrenamiento/Vistas/frmCatalogoPlanEntrenamiento.zul", null,
 				null);
 		window.doHighlighted();
 	}
@@ -357,10 +357,11 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		btnQuitar2.setDisabled(true);
 		listMaterialActividadPlanificada.clear();
 		listActividadPlanificadas.clear();
+		LapsoDeportivo ld = (LapsoDeportivo)cmbLapsoDeportivo.getSelectedItem().getValue();
 		Categoria ca = (Categoria) cmbCategoria.getSelectedItem().getValue();
 		Equipo e = (Equipo) cmbEquipo.getSelectedItem().getValue();
 		if (e.getNombre().equals("TODOS")) {
-			e = servicioEquipo.buscarPorCategoria(ca).get(0);
+			e = servicioEquipo.buscarPorCategoriaTipoEquipo(ld.getDatoBasico(), ca).get(0);
 		}
 		listHorarioPlanTemporadas.clear();
 		listHorarioPlanTemporadas = servicioHorarioPlanTemporada
@@ -618,8 +619,6 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		listActividadEntrenamiento.clear();
 		listActividadEntrenamiento = servicioActividadEntrenamiento
 				.listarActividadesConIndicadores(c, f);
-		btnGuardar.setDisabled(true);
-		btnFinalizar.setDisabled(true);
 		binder.loadComponent(cmbActividad);
 	}
 
@@ -1070,14 +1069,16 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 		servicioSesion.guardar(sesion);
 		for (ActividadPlanificada ap : listActividadPlanificadas) {
 			ActividadPlanificadaId apId = ap.getId();
-			apId.setCodigoSesion(sesion.getCodigoSesion());
+			if (apId.getCodigoSesion() == 0)
+				apId.setCodigoSesion(sesion.getCodigoSesion());
 			ap.setSesion(sesion);
 			ap.setEstatus('A');
 			ap.setId(apId);
 			servicioActividadPlanificada.guardar(ap);
 		}
 		for (MaterialActividadPlanificada map : listMaterialActividadPlanificada) {
-			map.setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada
+			if (map.getCodigoMaterialActividadPlanificada() == 0)
+				map.setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada
 					.generarCodigo());
 			map.setSesion(sesion);
 			map.setEstatus('A');

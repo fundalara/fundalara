@@ -271,6 +271,8 @@
 				<rows>
 					<row height="">
 						<label value="" />
+						<button image="Recursos/Imagenes/aceptar.ico"
+							id="btnFinalizar" label="Finalizar" width="100px" disabled="true" />
 						<button image="Recursos/Imagenes/guardar.ico"
 							id="btnGuardar" label="Guardar" width="100px" disabled="true" />
 						<button image="/Recursos/Imagenes/imprimir.ico"
