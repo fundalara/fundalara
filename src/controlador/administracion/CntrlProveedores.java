@@ -10,11 +10,14 @@ import modelo.ProveedorBanco;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.*;
+
+import comun.MensajeMostrar;
 
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioPersona;
@@ -37,15 +40,15 @@ public class CntrlProveedores extends GenericForwardComposer {
 			codigosDeArea = new ArrayList<DatoBasico>();
 	DatoBasico estado, municipio, parroquia, codigoDeArea, banco, tipoDeCuenta;
 	AnnotateDataBinder binder;
-	// Intbox txtTelefono, txtFax;
 	Textbox txtTitularCuenta, txtCuenta, txtDireccion, txtRazonSocial,
 			txtCorreoElectronico, txtTwitter, txtRif, txtTelefono, txtFax;
 	Combobox cmbEstado, cmbParroquia, cmbMunicipio, cmbFax, cmbTelefono,
 			cmbBanco, cmbTipoCuenta;
 	Listbox lbxCuentas;
-	Button btnBuscar, btnEliminar, btnAgregar, btnQuitar, btnEditar,
-			btnModificar, btnRegistrar, btnSalir;
+	Button btnBuscar, btnEliminar, btnAgregar, btnQuitar, btnModificar,
+			btnRegistrar, btnSalir;
 	Component formulario;
+	MensajeMostrar mensaje = new MensajeMostrar();
 	DatoBasico tipoPersona;
 
 	// ------------------------------------------------------------------------------------------------------
@@ -55,21 +58,11 @@ public class CntrlProveedores extends GenericForwardComposer {
 		formulario = comp;
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
-		cambiar("frmProveedores", "PROVEEDOR DE MATERIALES");
 		bancos = servicioDatoBasico.listarPorTipoDato("ENTIDAD BANCARIA");
 		estados = servicioDatoBasico.listarPorTipoDato("ESTADO");
 		tiposDeCuentas = servicioDatoBasico
 				.listarPorTipoDato("CUENTA BANCARIA");
 		codigosDeArea = servicioDatoBasico.listarPorTipoDato("CODIGO AREA");
-	}
-
-	// ------------------------------------------------------------------------------------------------------
-	public void cambiar(String idCambiar, String dato) {
-		if (formulario.getId().equals(idCambiar)) {
-			tipoPersona = servicioDatoBasico.buscarPorString(dato);
-			formulario.setId("frmPersonas");
-			formulario.setAttribute("padre", dato);
-		}
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -126,9 +119,8 @@ public class CntrlProveedores extends GenericForwardComposer {
 					+ txtFax.getText().toString();
 		}
 
-		String rif = "J-" + txtRif.getValue();
-		persona.setCedulaRif(rif);
-		persona.setDatoBasicoByCodigoTipoPersona(tipoPersona);
+		persona.setDatoBasicoByCodigoTipoPersona(servicioDatoBasico
+				.buscarPorString("PROVEEDOR DE MATERIALES"));
 		persona.setTelefonoHabitacion(telefono);
 		persona.setDatoBasicoByCodigoParroquia(servicioDatoBasico
 				.buscarPorCodigo(Integer.parseInt(cmbParroquia.getContext())));
@@ -146,13 +138,17 @@ public class CntrlProveedores extends GenericForwardComposer {
 	public void onClick$btnBuscar() {
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
-		Component catalogo = Executions.createComponents(
+
+		Map params = new HashMap();
+		params.put("padre", "PROVEEDOR DE MATERIALES");
+		Executions.createComponents(
 				"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
-				formulario, null);
-		formulario.addEventListener("onCierre", new EventListener() {
+				null, params);
+		formulario.addEventListener("onCierreJuridico", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				persona = (Persona) formulario.getVariable("persona", false);
+				//binder.loadAll();
 				cargarDatos();
 			}
 		});
@@ -162,23 +158,26 @@ public class CntrlProveedores extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void cargarDatos() {
 		personaJuridica = persona.getPersonaJuridica();
-		txtRif.setValue(personaJuridica.getCedulaRif().substring(2));
-		parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
-				.getDatoBasicoByCodigoParroquia().getDatoBasico()
-				.getCodigoDatoBasico());
-		municipios = servicioDatoBasico.listarPorPadre("MUNICIPIO", persona
-				.getDatoBasicoByCodigoParroquia().getDatoBasico()
-				.getDatoBasico().getCodigoDatoBasico());
+		txtRif.setValue(persona.getCedulaRif().substring(2));
 		cmbParroquia.setDisabled(false);
-		cmbParroquia.setContext(String.valueOf(persona
-				.getDatoBasicoByCodigoParroquia().getCodigoDatoBasico()));
-		cmbParroquia.setValue(persona.getDatoBasicoByCodigoParroquia()
-				.getNombre());
 		cmbMunicipio.setDisabled(false);
-		cmbMunicipio.setValue(persona.getDatoBasicoByCodigoParroquia()
-				.getDatoBasico().getNombre());
-		cmbEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
-				.getDatoBasico().getDatoBasico().getNombre());
+		if (persona.getDatoBasicoByCodigoParroquia() != null) {
+			parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
+					.getDatoBasicoByCodigoParroquia().getDatoBasico()
+					.getCodigoDatoBasico());
+			municipios = servicioDatoBasico.listarPorPadre("MUNICIPIO", persona
+					.getDatoBasicoByCodigoParroquia().getDatoBasico()
+					.getDatoBasico().getCodigoDatoBasico());
+			cmbParroquia.setContext(String.valueOf(persona
+					.getDatoBasicoByCodigoParroquia().getCodigoDatoBasico()));
+			cmbParroquia.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getNombre());
+
+			cmbMunicipio.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getDatoBasico().getNombre());
+			cmbEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getDatoBasico().getDatoBasico().getNombre());
+		}
 		if (personaJuridica.getFax() != null) {
 			cmbFax.setValue(personaJuridica.getFax().substring(0, 4));
 			txtFax.setValue(personaJuridica.getFax().substring(5));
@@ -206,73 +205,111 @@ public class CntrlProveedores extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnRegistrar() {
-		if (!validar()) {
-			return;
+		if (txtRif.getValue().trim() == "") {
+			throw new WrongValueException(txtRif, "Ingrese el RIF");
+		} else if (txtRazonSocial.getValue().trim() == "") {
+			throw new WrongValueException(txtRazonSocial,
+					"Ingrese una Razón Social");
+		} else {
+			try {
+				Messagebox.show(mensaje.GUARDAR, mensaje.TITULO + "Importante",
+						Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									Persona auxPersona = servicioPersona
+											.buscarPorCedulaRif("J-"
+													+ txtRif.getValue());
+									if (auxPersona != null) {
+										Messagebox.show(
+												mensaje.REGISTRO_EXISTENTE,
+												mensaje.TITULO + "Importante",
+												Messagebox.OK,
+												Messagebox.INFORMATION);
+									}
+									String rif = "J-" + txtRif.getValue();
+									persona.setCedulaRif(rif);
+									actualizarPersona();
+									for (int i = 0; i < cuentasBancarias.size(); i++) {
+										cuentasBancarias.get(i).setEstatus('A');
+										cuentasBancarias.get(i)
+												.setPersonaJuridica(
+														personaJuridica);
+										servicioProveedorBanco
+												.agregar(cuentasBancarias
+														.get(i));
+									}
+									clear();
+									try {
+										Messagebox.show(
+												mensaje.REGISTRO_EXITOSO,
+												mensaje.TITULO + "Información",
+												Messagebox.OK,
+												Messagebox.INFORMATION);
+									} catch (Exception e) {
+										// --------
+									}
+								}
+							}
+						});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		Persona auxPersona = servicioPersona.buscarPorCedulaRif("J-"
-				+ txtRif.getValue());
-		if (auxPersona != null) {
-			alert("Registro ya existente");
-			return;
-		}
-		actualizarPersona();
-		for (int i = 0; i < cuentasBancarias.size(); i++) {
-			cuentasBancarias.get(i).setEstatus('A');
-			cuentasBancarias.get(i).setPersonaJuridica(personaJuridica);
-			servicioProveedorBanco.agregar(cuentasBancarias.get(i));
-		}
-		clear();
-		alert("Guardado");
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnModificar() {
 		try {
-			Integer qs = Messagebox.show("Presione Ok si desea Eliminar: "
-					+ personaJuridica.getRazonSocial(), "Importante",
-					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
-			if (qs.equals(1)) {
-				actualizarPersona();
-				List<ProveedorBanco> auxCuentasBancarias = servicioProveedorBanco
-						.listarPorProveedor("J-" + txtRif.getValue());
-				for (int i = 0; i < auxCuentasBancarias.size(); i++) {
-					auxCuentasBancarias.get(i).setEstatus('E');
-					servicioProveedorBanco.actualizar(auxCuentasBancarias
-							.get(i));
-				}
+			if (persona != null) {
+				Messagebox.show(mensaje.MODIFICAR, mensaje.TITULO
+						+ "Importante", Messagebox.OK | Messagebox.CANCEL,
+						Messagebox.QUESTION, new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									actualizarPersona();
+									List<ProveedorBanco> auxCuentasBancarias = servicioProveedorBanco
+											.listarPorProveedor("J-"
+													+ txtRif.getValue());
+									for (int i = 0; i < auxCuentasBancarias
+											.size(); i++) {
+										auxCuentasBancarias.get(i).setEstatus(
+												'E');
+										servicioProveedorBanco
+												.actualizar(auxCuentasBancarias
+														.get(i));
+									}
 
-				for (int i = 0; i < cuentasBancarias.size(); i++) {
-					cuentasBancarias.get(i).setEstatus('A');
-					cuentasBancarias.get(i).setPersonaJuridica(personaJuridica);
-					servicioProveedorBanco.actualizar(cuentasBancarias.get(i));
-				}
-				clear();
-				Messagebox.show("Registro Modificado Exitosamente",
-						"Información", Messagebox.OK, Messagebox.INFORMATION);
+									for (int i = 0; i < cuentasBancarias.size(); i++) {
+										cuentasBancarias.get(i).setEstatus('A');
+										cuentasBancarias.get(i)
+												.setPersonaJuridica(
+														personaJuridica);
+										servicioProveedorBanco
+												.actualizar(cuentasBancarias
+														.get(i));
+									}
+									clear();
+									binder.loadAll();
+									Messagebox.show(
+											mensaje.MODIFICACION_EXITOSA,
+											mensaje.TITULO + "Información",
+											Messagebox.OK,
+											Messagebox.INFORMATION);
+								}
+							}
+						});
+			} else {
+				throw new WrongValueException(btnBuscar,
+						mensaje.PERSONA_NO_UBICADA);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-
-	// ------------------------------------------------------------------------------------------------------
-	public boolean validar() {
-		if (txtRif.getValue().trim() == "") {
-			alert("Ingrese un rif");
-			txtRif.setFocus(true);
-			return false;
-		}
-		if (txtRazonSocial.getValue().trim() == "") {
-			alert("Ingrese una razon social");
-			return false;
-		}
-		String telefono = cmbTelefono.getValue()
-				+ txtTelefono.getValue().toString();
-		if (telefono.length() != 11) {
-			alert("Ingrese un numero de telefono valido");
-			return false;
-		}
-		return true;
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -318,7 +355,6 @@ public class CntrlProveedores extends GenericForwardComposer {
 				cmbTipoCuenta.setSelectedIndex(i);
 			}
 		}
-		btnEditar.setDisabled(false);
 		btnQuitar.setDisabled(false);
 		btnAgregar.setDisabled(true);
 	}
@@ -326,23 +362,40 @@ public class CntrlProveedores extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnEliminar() {
 		try {
-			Integer qs = Messagebox.show("Presione Ok si desea Eliminar: "
-					+ personaJuridica.getRazonSocial(), "Importante",
-					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
-			if (qs.equals(1)) {
-				persona.setEstatus('E');
-				personaJuridica.setEstatus('E');
-				servicioPersona.actualizar(persona);
-				servicioPersonaJuridica.actualizar(personaJuridica);
-				cuentasBancarias = servicioProveedorBanco
-						.listarPorProveedor(persona.getCedulaRif());
-				for (int i = 0; i < cuentasBancarias.size(); i++) {
-					cuentasBancarias.get(i).setEstatus('E');
-					servicioProveedorBanco.actualizar(cuentasBancarias.get(i));
-				}
-				clear();
-				Messagebox.show("Registro Eliminado Exitosamente",
-						"Información", Messagebox.OK, Messagebox.INFORMATION);
+			if (persona != null) {
+				Messagebox.show(mensaje.ELIMINAR_PERSONA, mensaje.TITULO
+						+ "Importante", Messagebox.OK | Messagebox.CANCEL,
+						Messagebox.QUESTION, new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									persona.setEstatus('E');
+									personaJuridica.setEstatus('E');
+									servicioPersona.actualizar(persona);
+									servicioPersonaJuridica
+											.actualizar(personaJuridica);
+									cuentasBancarias = servicioProveedorBanco
+											.listarPorProveedor(persona
+													.getCedulaRif());
+									for (int i = 0; i < cuentasBancarias.size(); i++) {
+										cuentasBancarias.get(i).setEstatus('E');
+										servicioProveedorBanco
+												.actualizar(cuentasBancarias
+														.get(i));
+									}
+									clear();
+									Messagebox.show(
+											mensaje.ELIMINACION_EXITOSA,
+											mensaje.TITULO + "Información",
+											Messagebox.OK,
+											Messagebox.INFORMATION);
+								}
+							}
+						});
+			} else {
+				throw new WrongValueException(btnBuscar,
+						mensaje.PERSONA_NO_UBICADA);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -355,86 +408,55 @@ public class CntrlProveedores extends GenericForwardComposer {
 	}
 
 	// ------------------------------------------------------------------------------------------------------
-	public void onClick$btnEditar() {
-		try {
-			if (cmbBanco.getSelectedIndex() == -1) {
-				Messagebox.show("Debe seleccionar un Banco", "Importante",
-						Messagebox.OK, Messagebox.EXCLAMATION);
-				cmbBanco.setFocus(true);
-			} else if (cmbTipoCuenta.getSelectedIndex() == -1) {
-				Messagebox.show("Debe seleccionar un Tipo de Cuenta",
-						"Importante", Messagebox.OK, Messagebox.EXCLAMATION);
-				cmbTipoCuenta.setFocus(true);
-			} else if (txtCuenta.getText().trim() == "") {
-				Messagebox.show("Debe indicar un Número de Cuenta",
-						"Importante", Messagebox.OK, Messagebox.EXCLAMATION);
-				txtCuenta.setFocus(true);
-			} else if (txtTitularCuenta.getText().trim() == "") {
-				Messagebox.show("Debe indicar el Titular de la Cuenta",
-						"Importante", Messagebox.OK, Messagebox.EXCLAMATION);
-				txtTitularCuenta.setFocus(true);
-			} else {
-				ProveedorBanco auxCuentaBancaria = cuentasBancarias
-						.get(lbxCuentas.getSelectedIndex());
-				auxCuentaBancaria.setTitular(txtTitularCuenta.getValue());
-				auxCuentaBancaria
-						.setDatoBasicoByCodigoBanco((DatoBasico) cmbBanco
-								.getSelectedItem().getValue());
-				auxCuentaBancaria.setCodigoCuentaBanco(txtCuenta.getValue()
-						.toString());
-				auxCuentaBancaria
-						.setDatoBasicoByCodigoTipoCuenta((DatoBasico) cmbTipoCuenta
-								.getSelectedItem().getValue());
-				cuentasBancarias.set(lbxCuentas.getSelectedIndex(),
-						auxCuentaBancaria);
-				btnAgregar.setDisabled(false);
-				btnEditar.setDisabled(true);
-				btnQuitar.setDisabled(true);
-				cmbBanco.setValue("-Seleccione-");
-				cmbTipoCuenta.setValue("-Seleccione-");
-				txtTitularCuenta.setValue(null);
-				txtCuenta.setValue(null);
-				binder.loadComponent(lbxCuentas);
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregar() {
+		ProveedorBanco cuentaBancaria = new ProveedorBanco();
 		try {
 			if (cmbBanco.getSelectedIndex() == -1) {
-				Messagebox.show("Debe seleccionar un Banco", "Importante",
-						Messagebox.OK, Messagebox.EXCLAMATION);
-				cmbBanco.setFocus(true);
+				throw new WrongValueException(cmbBanco,
+						"Debe seleccionar un Banco");
 			} else if (cmbTipoCuenta.getSelectedIndex() == -1) {
-				Messagebox.show("Debe seleccionar un Tipo de Cuenta",
-						"Importante", Messagebox.OK, Messagebox.EXCLAMATION);
-				cmbTipoCuenta.setFocus(true);
+				throw new WrongValueException(cmbTipoCuenta,
+						"Debe seleccionar un Tipo de Cuenta");
 			} else if (txtCuenta.getText().trim() == "") {
-				Messagebox.show("Debe indicar un Número de Cuenta",
-						"Importante", Messagebox.OK, Messagebox.EXCLAMATION);
-				txtCuenta.setFocus(true);
+				throw new WrongValueException(txtCuenta,
+						"Debe indicar un Número de Cuenta");
 			} else if (txtTitularCuenta.getText().trim() == "") {
-				Messagebox.show("Debe indicar el Titular de la Cuenta",
-						"Importante", Messagebox.OK, Messagebox.EXCLAMATION);
-				txtTitularCuenta.setFocus(true);
+				throw new WrongValueException(txtTitularCuenta,
+						"Debe indicar el Titular de la Cuenta");
 			} else {
 
 				for (int i = 0; i < cuentasBancarias.size(); i++) {
 					if (cuentasBancarias.get(i).getCodigoCuentaBanco()
 							.equals(txtCuenta.getValue())) {
-						alert("Numero de cuenta ya existente");
+						ProveedorBanco auxCuentaBancaria = cuentasBancarias
+								.get(lbxCuentas.getSelectedIndex());
+						auxCuentaBancaria.setTitular(txtTitularCuenta
+								.getValue().toUpperCase());
+						auxCuentaBancaria
+								.setDatoBasicoByCodigoBanco((DatoBasico) cmbBanco
+										.getSelectedItem().getValue());
+						auxCuentaBancaria.setCodigoCuentaBanco(txtCuenta
+								.getValue().toString());
+						auxCuentaBancaria
+								.setDatoBasicoByCodigoTipoCuenta((DatoBasico) cmbTipoCuenta
+										.getSelectedItem().getValue());
+						cuentasBancarias.set(lbxCuentas.getSelectedIndex(),
+								auxCuentaBancaria);
+						btnAgregar.setDisabled(false);
+						btnQuitar.setDisabled(true);
+						cmbBanco.setValue("-Seleccione-");
+						cmbTipoCuenta.setValue("-Seleccione-");
+						txtTitularCuenta.setValue(null);
+						txtCuenta.setValue(null);
+						binder.loadComponent(lbxCuentas);
 						return;
 					}
 				}
-				ProveedorBanco cuentaBancaria = new ProveedorBanco();
 				cuentaBancaria.setDatoBasicoByCodigoBanco((DatoBasico) cmbBanco
 						.getSelectedItem().getValue());
 				cuentaBancaria.setCodigoCuentaBanco(txtCuenta.getValue()
 						.toString());
-				cuentaBancaria.setTitular(txtTitularCuenta.getValue());
+				cuentaBancaria.setTitular(txtTitularCuenta.getValue().toUpperCase());
 				cuentaBancaria
 						.setDatoBasicoByCodigoTipoCuenta((DatoBasico) cmbTipoCuenta
 								.getSelectedItem().getValue());
@@ -445,7 +467,7 @@ public class CntrlProveedores extends GenericForwardComposer {
 				txtCuenta.setValue(null);
 				binder.loadComponent(lbxCuentas);
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -454,7 +476,6 @@ public class CntrlProveedores extends GenericForwardComposer {
 	public void onClick$btnQuitar() {
 		cuentasBancarias.remove(lbxCuentas.getSelectedIndex());
 		btnAgregar.setDisabled(false);
-		btnEditar.setDisabled(true);
 		btnQuitar.setDisabled(true);
 		cmbBanco.setValue("-Seleccione-");
 		cmbTipoCuenta.setValue("-Seleccione-");

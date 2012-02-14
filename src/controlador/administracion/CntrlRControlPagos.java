@@ -4,11 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import modelo.DocumentoAcreedor;
-import modelo.FamiliarJugador;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -21,30 +22,32 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Iframe;
+import org.zkoss.zul.Window;
 
 import comun.ConeccionBD;
 
-public class CntrlMorosidadGeneral extends GenericForwardComposer {
-	Component component;
-	Datebox dtbFechaVenDesde, dtbFechaVenHasta, dtbFechaEmiHasta, dtbFechaEmiDesde;
-	Button btnCancelar, btnImprimir;
+public class CntrlRControlPagos extends GenericForwardComposer {
+	Datebox dtbFechaIni, dtbfechaFin;
+	Button btnImprimir, btnCancelar;
+	Window winEstadoFinanciero;
+	Component componente;
 	Iframe ifReport;
-	Map parameters = new HashMap();
-	private Connection con;
 	private String jrxmlSrc;
+	private Connection con;
+	private Map parameters = new HashMap();
 	
-	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		// TODO Auto-generated method stub
 		super.doAfterCompose(comp);
-		component = comp;
+		componente = comp;
+		
 	}
 	
-	// ---------------------------------------------------------------------------------------------------
 	public void showReportfromJrxml() throws JRException, IOException{
 		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
 		JasperPrint jaspPrint = JasperFillManager.fillReport(jasp, parameters, con);
@@ -55,20 +58,16 @@ public class CntrlMorosidadGeneral extends GenericForwardComposer {
 		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,arrayOutputStream);
 		exporter.exportReport();
 		arrayOutputStream.close();
-		final AMedia amedia = new AMedia("controlMorosidad.pdf","pdf","pdf/application", arrayOutputStream.toByteArray());
+		final AMedia amedia = new AMedia("Listado de Pagos.pdf","pdf","application/pdf", arrayOutputStream.toByteArray());
 		ifReport.setContent(amedia);
 	}
-	// ---------------------------------------------------------------------------------------------------
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
-		con = ConeccionBD.getCon("sol","postgres","123456");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteGeneralMorosidad.jrxml");
-		parameters.put("fechemides_1",dtbFechaEmiDesde.getText());
-		parameters.put("fechemihas_1",dtbFechaEmiHasta.getText() );
-		parameters.put("fechvendes_1", dtbFechaVenDesde.getText());
-		parameters.put("fechvenchas_1", dtbFechaVenHasta.getText());
+	
+	public void onClick$btnImprimir() throws WrongValueException, ParseException, JRException, IOException, SQLException{
+		con = ConeccionBD.getCon("postgres","postgres","123456");
+		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/Control de Pagos.jrxml");
+		parameters.put("fechvendes", dtbFechaIni.getText());
+		parameters.put("fechvenchas", dtbfechaFin.getText());
 		showReportfromJrxml();
 	}
-	
-		
 
 }

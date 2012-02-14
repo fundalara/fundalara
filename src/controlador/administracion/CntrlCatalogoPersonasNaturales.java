@@ -1,7 +1,12 @@
 package controlador.administracion;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.CuentaPagar;
 import modelo.DatoBasico;
@@ -9,13 +14,20 @@ import modelo.Persona;
 import modelo.PersonaJuridica;
 import modelo.PersonaNatural;
 import modelo.TipoDato;
+import net.sf.jasperreports.engine.JRException;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.*;
+
+import comun.ConeccionBD;
+
+import controlador.general.ManejadorJasper;
 
 import servicio.implementacion.ServicioCuentaPagar;
 import servicio.implementacion.ServicioDatoBasico;
@@ -39,79 +51,128 @@ public class CntrlCatalogoPersonasNaturales extends GenericForwardComposer {
 	List<Persona> personas = new ArrayList<Persona>();
 	// List<Persona> listaPersonas = new ArrayList<Persona>();
 	List<PersonaNatural> listaPersonas = new ArrayList<PersonaNatural>();
-	AnnotateDataBinder binder;
+	AnnotateDataBinder binderCatNat;
 	Textbox txtFiltroCI, txtFiltroPNombre, txtFiltroPApellido;
 	Listbox lbxPersonas;
-	Button btnSalir, btnAceptar;
+	Button btnSalir, btnAceptar,btnImprimir;
 	Combobox cbProveedor;
 	Component catalogo;
 	Component formulario;
 	DatoBasico tipoPersona;
-
+	String padre="";
 	// ------------------------------------------------------------------------------------------------------
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		catalogo = comp;
-		String padre = "";
-		padre = (String) comp.getParent().getAttribute("padre");
+		padre = (String) arg.get("padre");
+		formulario = (Component) arg.get("formulario");
+		
 		txtFiltroCI.setText("");
 		txtFiltroPApellido.setText("");
 		txtFiltroPNombre.setText("");
 		
-		if (padre == "PERSONAL ADHONOREN") {
+		if (padre.equals("PERSONAL AD HONOREM")) {
 			tipoPersona = servicioDatoBasico
-					.buscarPorString("PERSONAL ADHONOREN");
+					.buscarPorString("PERSONAL AD HONOREM");
 			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
-		if (padre == "REPRESENTANTE") {
-			tipoPersona = servicioDatoBasico.buscarPorString("REPRESENTANTE");
+		if (padre.equals("FAMILIAR")) {
+			tipoPersona = servicioDatoBasico.buscarPorString("FAMILIAR");
 			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
-		if (padre == "JUGADOR") {
+		if (padre.equals("JUGADOR")) {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("JUGADOR");
 			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
-		if (padre == "PERSONAL REMUNERADO") {
+		if (padre.equals("PERSONAL REMUNERADO")) {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("PERSONAL REMUNERADO");
 			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
-		if (padre == "BENEFACTOR NATURAL") {
+		if (padre.equals("BENEFACTOR NATURAL")) {
 			tipoPersona = servicioDatoBasico.buscarPorString("BENEFACTOR NATURAL");
 			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		
-		if (padre == "PERSONAS") {
+		if (padre.equals("PERSONAS")) {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("JUGADOR");
 			listaPersonas = new ArrayList<PersonaNatural>();
 			listaPersonas = servicioPersonaNatural.filtarPersonasDistintas(tipoPersona, txtFiltroCI.getText().toString(), 
 				txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
-			//listaPersonas = servicioPersona
 		}
-		binder.loadComponent(lbxPersonas);
+		
+		if (padre.equals("PERSONAL")) {
+			listaPersonas = new ArrayList<PersonaNatural>();
+			listaPersonas = servicioPersonaNatural.filtarPersonal(servicioDatoBasico
+					.buscarPorString("PERSONAL REMUNERADO"), servicioDatoBasico
+					.buscarPorString("PERSONAL AD HONOREM"), txtFiltroCI.getText().toString(), 
+				txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
+		}
+	
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnSalir() {
 		catalogo.detach();
 	}
+	
+	
+	// ------------------------------------------------------------------------------------------------------
+	public void onClick$btnImprimir() throws SQLException, JRException, IOException{
+		Map parametros1 = new HashMap();
+		Connection con = ConeccionBD.getCon("postgres","postgres","123456");
+		String jrxmlSrc=" ";
+		String nombre=" ";
+		System.out.println(padre);
+		
+		if (padre.equals("PERSONAL AD HONOREM")) {
+			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReportePersonal Ad Honorem.jrxml");
+			nombre="Listado de Personal Ad Honorem";
+		}
+		if (padre.equals("FAMILIAR")) {
+			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteFamiliares.jrxml");
+			nombre="Listado de Familiares";
+		}
+		if (padre.equals("JUGADOR")) {
+			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteJugadores.jrxml");
+			nombre="Listado de Jugadores";
+		}
+		if (padre==("PERSONAL REMUNERADO")) {
+			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReportePersonalRemunerado.jrxml");
+			nombre="Listado de Personal Remunerado";
+		}
+		if (padre==("BENEFACTOR NATURAL")) {
+			System.out.println("benefactor natural");
+			jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteBenefactorNatural.jrxml");
+			nombre="Listado de Benefactores Naturales";
+		}
+		
 
+		System.out.println(parametros1);
+		System.out.println(nombre);
+		System.out.println(jrxmlSrc);
+		AMedia report = ManejadorJasper.showReportfromJrxml(jrxmlSrc, parametros1, con, nombre);
+			
+	}
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAceptar() {
-		Window formularioProv = (Window) catalogo.getVariable("formulario",
-				false);
+		
 		if (lbxPersonas.getSelectedIndex() != -1) {
 			Persona pj = listaPersonas.get(lbxPersonas.getSelectedIndex())
 					.getPersona();
-			Component formularioPadre = catalogo.getParent();
+			Component formularioPadre = catalogo.getPreviousSibling();
+
+			if (formulario != null){
+				formularioPadre = formulario;
+			}
 			formularioPadre.setVariable("persona", pj, false);
 			Events.sendEvent(new Event("onCierreNatural", formularioPadre));
 

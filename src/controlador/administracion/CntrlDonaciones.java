@@ -1,29 +1,25 @@
 package controlador.administracion;
 
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import modelo.CuentaPagarMaterial;
-import modelo.CuentaPagarMaterialId;
 import modelo.DatoBasico;
 import modelo.DocumentoAcreedor;
 import modelo.DocumentoAcreedorMaterial;
 import modelo.DocumentoAcreedorMaterialId;
-import modelo.FamiliarJugador;
 import modelo.Ingreso;
 import modelo.IngresoDocumentoAcreedor;
 import modelo.IngresoDocumentoAcreedorId;
 import modelo.IngresoFormaPago;
 import modelo.IngresoFormaPagoId;
-import modelo.Jugador;
 import modelo.Material;
 import modelo.Persona;
 import modelo.TipoIngreso;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -69,7 +65,7 @@ public class CntrlDonaciones extends GenericForwardComposer {
 	Button btnCatalogoProv, btnAgregar1, btnQuitar1, btnAgregarMaterial,
 			btnAgregar, btnQuitar, btnAceptar;
 	Combobox cmbDonador, cmbFormaPago, cmbEntidadBancaria, cmbTipoTarjeta,
-			cmbMateriales;
+			cmbMateriales, cmbTipoMaterial, cmbCodigoMaterial;
 	Textbox txtCedulaRif, txtNombre, txtNroDocumento;
 	Doublebox dboxMontoC, dboxMontoT;
 	Datebox dtIngreso;
@@ -78,8 +74,8 @@ public class CntrlDonaciones extends GenericForwardComposer {
 	Row row1, row2;
 	Panel panelDM, panelDMt;
 	Window pantMaterial;
-	List<DatoBasico> formaPago, banco, tipoDocumento,
-			tipoTarjeta = new ArrayList<DatoBasico>();
+	List<DatoBasico> formaPago, banco, tipoDocumento, tipoTarjeta,
+			tipoMaterial = new ArrayList<DatoBasico>();
 	List<IngresoFormaPago> listaIngresoFormaPago = new ArrayList<IngresoFormaPago>();
 	List<Material> listaMateriales;
 	List<DocumentoAcreedorMaterial> listaDocumentoAcreedorMaterial = new ArrayList<DocumentoAcreedorMaterial>();
@@ -89,13 +85,19 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		formulario = comp;
-		formulario.setId("frmPersonas");
 		formaPago = servicioDatoBasico.listarPorTipoDato("FORMA DE PAGO");
 		banco = servicioDatoBasico.listarPorTipoDato("ENTIDAD BANCARIA");
 		tipoTarjeta = servicioDatoBasico.listarPorTipoDato("TARJETA CREDITO");
 		tipoDocumento = servicioDatoBasico.listarPorTipoDato("DOCUMENTO");
-		listaMateriales = servicioMaterial.listarActivos();
+		tipoMaterial = servicioDatoBasico.listarPorTipoDato("TIPO MATERIAL");
 		dboxMontoT.setValue(0);
+	}
+
+	// ------------------------------------------------------------------------------------------------------
+	public void onChange$cmbTipoMaterial() {
+		listaMateriales = servicioMaterial.listarPorTipoMaterial(tipoMaterial
+				.get(cmbTipoMaterial.getSelectedIndex()));
+		binder.loadComponent(cmbCodigoMaterial);
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -115,6 +117,7 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		}
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregar1() {
 		IngresoFormaPago ingresoFormaPago = new IngresoFormaPago();
 
@@ -155,6 +158,7 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		binder.loadComponent(lbxCuentas);
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void TotalFormaPago() {
 		double subTotalFP = 0;
 		for (int ep = 0; ep < listaIngresoFormaPago.size(); ep++) {
@@ -164,6 +168,7 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		subTotalFP = 0;
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnQuitar1() {
 		if (lbxCuentas.getItemCount() == 0) {
 			alert("No hay formas de pago agregadas.");
@@ -197,18 +202,17 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		}
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnCatalogoProv() {
 		if (cmbDonador.getSelectedIndex() != -1) {
-			System.out.println("----" + cmbDonador.getSelectedItem().getLabel()
-					+ "----");
-
 			if (cmbDonador.getSelectedItem().getLabel().equals("NATURAL")) {
-
-				formulario.setAttribute("padre", "PERSONAS");
-				Component catalogo = Executions
+				Map params = new HashMap();
+				params.put("padre", "PERSONAS");
+				params.put("formulario",formulario);
+				Executions
 						.createComponents(
 								"/Administracion/Vistas/frmCatalogoPersonasNaturales.zul",
-								formulario, null);
+								null, params);
 				formulario.addEventListener("onCierreNatural",
 						new EventListener() {
 							@Override
@@ -242,11 +246,13 @@ public class CntrlDonaciones extends GenericForwardComposer {
 			}
 
 			if (cmbDonador.getSelectedItem().getLabel().equals("JURIDICO")) {
-				formulario.setAttribute("padre", "PERSONAS");
-				Component catalogo = Executions
+				Map params = new HashMap();
+				params.put("padre", "PERSONAS");
+				params.put("formulario",formulario);
+				Executions
 						.createComponents(
 								"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
-								formulario, null);
+								null, params);
 				formulario.addEventListener("onCierreJuridico",
 						new EventListener() {
 							@Override
@@ -271,6 +277,7 @@ public class CntrlDonaciones extends GenericForwardComposer {
 
 	}
 
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregar() {
 
 		DocumentoAcreedorMaterial documentoAcreedorMaterial = new DocumentoAcreedorMaterial();
@@ -335,14 +342,15 @@ public class CntrlDonaciones extends GenericForwardComposer {
 
 		// Tabla DocumentoAcreedorMaterial
 		for (int i = 0; i < listaDocumentoAcreedorMaterial.size(); i++) {
-			
-			listaDocumentoAcreedorMaterial.get(i).setDocumentoAcreedor(documentoAcreedor);
+
+			listaDocumentoAcreedorMaterial.get(i).setDocumentoAcreedor(
+					documentoAcreedor);
 			listaDocumentoAcreedorMaterial.get(i).setId(
 					new DocumentoAcreedorMaterialId(
 							listaDocumentoAcreedorMaterial.get(i).getMaterial()
-									.getCodigoMaterial(),documentoAcreedor
+									.getCodigoMaterial(), documentoAcreedor
 									.getCodigoDocumentoAcreedor()));
-			
+
 			servicioDocumentoAcreedorMaterial
 					.agregar(listaDocumentoAcreedorMaterial.get(i));
 
@@ -356,9 +364,11 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		servicioIngreso.agregar(ingreso);
 		// Tabla
 		// IngresoDocumentoAcreedor---------------------------------------------------------------------------------------------
-		ingresoDocumentoAcreedor.setId(new IngresoDocumentoAcreedorId(ingreso.getCodigoIngreso(), documentoAcreedor.getCodigoDocumentoAcreedor()));
-//		ingresoDocumentoAcreedor.setId(new IngresoDocumentoAcreedorId(ingreso
-//				.getNumeroDocumento(),documentoAcreedor.getCodigoDocumentoAcreedor()));
+		ingresoDocumentoAcreedor.setId(new IngresoDocumentoAcreedorId(ingreso
+				.getCodigoIngreso(), documentoAcreedor
+				.getCodigoDocumentoAcreedor()));
+		// ingresoDocumentoAcreedor.setId(new IngresoDocumentoAcreedorId(ingreso
+		// .getNumeroDocumento(),documentoAcreedor.getCodigoDocumentoAcreedor()));
 		ingresoDocumentoAcreedor.setEstatus('A');
 		ingresoDocumentoAcreedor.setMontoAbonado(dboxMontoT.getValue());
 		servicioIngresoDocumentoAcreedor.agregar(ingresoDocumentoAcreedor);
@@ -366,32 +376,33 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		// IngresoFormaPago---------------------------------------------------------------------------------------------
 		for (int i = 0; i < listaIngresoFormaPago.size(); i++) {
 			listaIngresoFormaPago.get(i).setIngreso(ingreso);
-			listaIngresoFormaPago.get(i).setId(new IngresoFormaPagoId(servicioIngresoFormaPago.listar().size() + 1,
-					ingreso.getCodigoIngreso()));
-			
+			listaIngresoFormaPago.get(i).setId(
+					new IngresoFormaPagoId(servicioIngresoFormaPago.listar()
+							.size() + 1, ingreso.getCodigoIngreso()));
+
 			servicioIngresoFormaPago.agregar(listaIngresoFormaPago.get(i));
 		}
-		
-		try{
-		Messagebox.show("Guardado Exitosamente", "Información", Messagebox.OK, Messagebox.INFORMATION);
-		}
-		catch (Exception e) {
+
+		try {
+			Messagebox.show("Guardado Exitosamente", "Información",
+					Messagebox.OK, Messagebox.INFORMATION);
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		LimpiarFormulario();
 		binder.loadAll();
 
 	}
-	
-	public void onClick$btnCancelar(){
+
+	// ------------------------------------------------------------------------------------------------------
+	public void onClick$btnCancelar() {
 		LimpiarFormulario();
 	}
-	
-	public void LimpiarFormulario(){
+
+	// ------------------------------------------------------------------------------------------------------
+	public void LimpiarFormulario() {
 		txtCedulaRif.setText("");
 		txtNombre.setText("");
-		
-		
 		dboxMontoT.setValue(null);
 		dtIngreso.setText("");
 		persona = new Persona();
@@ -403,38 +414,32 @@ public class CntrlDonaciones extends GenericForwardComposer {
 		cmbTipoTarjeta.setValue("--Seleccione--");
 		ingreso = new Ingreso();
 		ingresoFormaPago = new IngresoFormaPago();
-		
-		
 		listaDocumentoAcreedorMaterial = new ArrayList<DocumentoAcreedorMaterial>();
-		
 		listaIngresoFormaPago = new ArrayList<IngresoFormaPago>();
 		panelDM.setOpen(false);
 		panelDMt.setOpen(false);
 		binder.loadAll();
 	}
-	// ------------------------------------------------------------------------------------------------------	
-	public void onClick$btnAgregarMaterial(){
-		
-		Window catalogo = (Window) Executions
-				.createComponents(
-						"/Logistica/Vistas/frmRegistrarMaterial.zul",
-						null, null);
+
+	// ------------------------------------------------------------------------------------------------------
+	public void onClick$btnAgregarMaterial() {
+		Window catalogo = (Window) Executions.createComponents(
+				"/Logistica/Vistas/frmRegistrarMaterial.zul", null, null);
 		catalogo.setVariable("formulario", formulario, false);
-		formulario.addEventListener("onCierre",
-				new EventListener() {
-					@Override
-					public void onEvent(Event arg0) throws Exception {
-						System.out.println("Entro en el evento. Retorna a pantalla Donaciones");
-						listaMateriales = servicioMaterial.listarActivos();
-						binder.loadComponent(cmbMateriales);
-					}
-				});
+		formulario.addEventListener("onCierre", new EventListener() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				listaMateriales = servicioMaterial.listarActivos();
+				binder.loadComponent(cmbMateriales);
+			}
+		});
 		try {
 			catalogo.doModal();
 		} catch (Exception e) {
 			// --------------
 		}
 	}
+
 	// ------------------------------------------------------------------------------------------------------
 	public IngresoDocumentoAcreedorId getAcreedorId() {
 		return acreedorId;
@@ -651,5 +656,15 @@ public class CntrlDonaciones extends GenericForwardComposer {
 	public void setListaIngresoFormaPago(
 			List<IngresoFormaPago> listaIngresoFormaPago) {
 		this.listaIngresoFormaPago = listaIngresoFormaPago;
+	}
+
+	// ------------------------------------------------------------------------------------------------------
+
+	public List<DatoBasico> getTipoMaterial() {
+		return tipoMaterial;
+	}
+
+	public void setTipoMaterial(List<DatoBasico> tipoMaterial) {
+		this.tipoMaterial = tipoMaterial;
 	}
 }

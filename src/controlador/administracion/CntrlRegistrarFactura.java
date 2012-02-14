@@ -2,8 +2,10 @@ package controlador.administracion;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -22,6 +24,7 @@ import modelo.TipoDato;
 import org.hibernate.cfg.AnnotationBinder;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -64,7 +67,7 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 	DatoBasico datoBasico;
 	TipoDato tipoDato;
 
-	Component formulario, formularioProv;
+	Component formulario;
 
 	ServicioCuentaPagar servicioCuentaPagar;
 	ServicioCuentaPagarMaterial servicioCuentaPagarMaterial;
@@ -74,11 +77,8 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 	ServicioPersona servicioPersona;
 	ServicioPersonaJuridica servicioPersonaJuridica;
 
-	Button btnBuscar, btnSalir, btnSalir2, btnConsultarFactura,
-			btnBuscar3, btnNuevoArticulo, btnAgregar,
-			btnAgregar2, btnQuitar, btnQuitar2, btnBuscar4, btnBuscar6,
-			btnCancelar, btnRegistrar, btnCancelar2, btnEditar, btnBuscarFact;
-//	btnNuevoProveedor,
+	Button btnBuscar, btnSalir,btnNuevoArticulo, btnAgregar,
+			btnQuitar, btnBuscar6,btnCancelar;
 	
 	Textbox txtProveedor, txtNroFactura, txtNombreProveedor, txtRazonSocial,
 			txtCodigoProveedor, txtCodigoMaterial, txtNombreMaterial,
@@ -88,7 +88,7 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 	Spinner spMaterial;
 
 	Datebox dtFactura, dtFechaVencimiento;
-	Combobox cmbCodigoMaterial;
+	Combobox cmbCodigoMaterial,cmbTipoMaterial;
 
 	Doublebox dbMontoaCancelar, dboxMontoIva, dboxMontoTotal, dboxIva,
 			dboxSubTotalMat, dboxValorIva, dboxPrecioMaterial;
@@ -108,7 +108,7 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 	List<Persona> personas = new ArrayList<Persona>();
 	List<PersonaJuridica> proveedores = new ArrayList<PersonaJuridica>();
 	List<DatoBasico> formaPago, formaPago2, banco, banco2, tipoDocumento,
-			tipoTarjeta, tipoTarjeta2 = new ArrayList<DatoBasico>();
+			tipoTarjeta, tipoTarjeta2, tipoMaterial = new ArrayList<DatoBasico>();
 	List<Egreso> listaEgresos;
 	Listitem columnas;
 
@@ -127,7 +127,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrlfactura", this, true);
 		formulario = comp;
-		formularioProv = comp;
 		mat = new Material();
 		cuentaPagar = new CuentaPagar();
 		datoBasico = new DatoBasico();
@@ -138,67 +137,63 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		banco = servicioDatoBasico.listarPorTipoDato("ENTIDAD BANCARIA");
 		tipoTarjeta = servicioDatoBasico.listarPorTipoDato("TARJETA CREDITO");
 		tipoDocumento = servicioDatoBasico.listarPorTipoDato("DOCUMENTO");
-		listaMateriales = servicioMaterial.listarActivos();
+		tipoMaterial = servicioDatoBasico.listarPorTipoDato("TIPO MATERIAL");
+		
+		
 		limpiarFormulario();
 	}
 
 	/* Consulta Si la Factura ya esta Registrada */
 	// ---------------------------------------------------------------------------------------------------
-	public void onClick$btnBuscarFact() {
-		if (txtNroFactura.getText().trim() == "") {
-			alert("Escriba un número de Factura");
-		} else {
-			try {
-				CP = servicioCuentaPagar.buscarOrigen(this.txtNroFactura
-						.getValue());
-				if (CP == null) {
-
-					Integer qs = Messagebox
-							.show("Esta Factura no se encuentra registrada, ¿Desea registrarla ahora?",
-									"Importante", Messagebox.OK
-											| Messagebox.CANCEL,
-									Messagebox.QUESTION);
-					if (qs.equals(1)) {
-						ActivarRegistrarFacturas();
-					}
-
-				} else {
-					Messagebox.show("Esta factura ya se encuentra registrada",
-							"Información", Messagebox.OK,
-							Messagebox.EXCLAMATION);
-					txtNroFactura.setText("");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	public void onBlur$txtNroFactura(){
+			CP = servicioCuentaPagar.buscarNumeroDocumento(this.txtNroFactura
+					.getValue());
+			if (CP == null) {
+					ActivarRegistrarFacturas();
+			} else 
+				throw new WrongValueException(txtNroFactura, "Esta factura se encuentra registrada");
+		
 	}
 
 	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnRegistrar() {
+		if(this.txtProveedor.getValue() == ""){
+			throw new WrongValueException(btnBuscar, "Debe Seleccionar un Proveedor");
+		}else if (this.txtNroFactura.getValue() == ""){
+			throw new WrongValueException(txtNroFactura, "Debe Escribir el Numero de Factura");
+		}else if (this.dtFactura.getValue() == null){
+			throw new WrongValueException(dtFactura, "Debe Seleccionar una Fecha de Emision");
+		}else if (this.dtFactura.getValue() == null){
+			throw new WrongValueException(dtFechaVencimiento, "Debe Seleccionar una Fecha de Vencimiento");
+		}
+		else{
+		
+		
 		try {
 			tipoDato = new TipoDato();
+			
 			datoBasico = servicioDatoBasico.buscarPorString("FACTURA");
+			cuentaPagar.setCodigoCuentaPagar(servicioCuentaPagar.listar().size() + 1);
+			cuentaPagar.setNumeroDocumento(txtNroFactura.getValue());
 			cuentaPagar.setDatoBasicoByCodigoTipoDocumento(datoBasico);
 			cuentaPagar.setDatoBasicoByCodigoTipoEgreso(servicioDatoBasico
 					.buscarPorString("ADQUISICION"));
-
 			cuentaPagar.setPersona(servicioPersona.buscarPorCedulaRif(persona
 					.getCedulaRif().toString()));
-
 			cuentaPagar.setMontoTotal(dboxMontoTotal.getValue());
 			cuentaPagar.setSubtotal(dboxSubTotalMat.getValue());
 			cuentaPagar.setConcepto("FACTURA POR PAGAR");
+			cuentaPagar.setSaldo(dboxMontoTotal.getValue());
 			cuentaPagar.setEstado('P');
 			cuentaPagar.setEstatus('A');
 
 			servicioCuentaPagar.agregar(cuentaPagar);
 
 			for (int i = 0; i < materiales.size(); i++) {
-				materiales.get(i).setId(
-						new CuentaPagarMaterialId(materiales.get(i)
-								.getMaterial().getCodigoMaterial(), cuentaPagar
-								.getOrigen()));
+				materiales.get(i).setId(new CuentaPagarMaterialId(
+						materiales.get(i).getMaterial().getCodigoMaterial(),
+						cuentaPagar.getCodigoCuentaPagar()));
+						
 				servicioCuentaPagarMaterial.agregar(materiales.get(i));
 
 			}
@@ -208,7 +203,8 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 			Messagebox.show("Factura Guardada", "Información", Messagebox.OK,
 					Messagebox.INFORMATION);
 		} catch (Exception e) {
-			e.printStackTrace();
+			// -------
+		}
 		}
 	}
 
@@ -232,6 +228,12 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 	}
 
 	// ---------------------------------------------------------------------------------------------------
+	public void onChange$cmbTipoMaterial(){
+		listaMateriales = servicioMaterial.listarPorTipoMaterial(tipoMaterial.get(cmbTipoMaterial.getSelectedIndex()));
+		binder.loadComponent(cmbCodigoMaterial);
+	}
+	
+	
 	public void onClick$btnAgregar() {
 		CuentaPagarMaterial material = new CuentaPagarMaterial();
 		if (lbxListaMateriales.getItemCount() == 0) {
@@ -248,8 +250,14 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 						.getItemAtIndex(i).getChildren().get(0);
 				if (this.cmbCodigoMaterial.getSelectedItem().getLabel()
 						.equals(celda1.getLabel())) {
-
-					alert("Este concepto ya ha sido incluido.");
+					materiales.get(i).setMaterial((Material) cmbCodigoMaterial.getSelectedItem()
+							.getValue());
+					materiales.get(i).setPrecioUnitario(dboxPrecioMaterial.getValue());
+					materiales.get(i).setCantidad(spMaterial.getValue());
+					materiales.get(i).setEstatus('A');
+					binder.loadComponent(lbxListaMateriales);
+					SubTotal();
+					limpiarFM();
 					return;
 				}
 				i++;
@@ -268,7 +276,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		binder.loadComponent(lbxListaMateriales);
 		SubTotal();
 		limpiarFM();
-		validarBotonesRegistrar();
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -276,7 +283,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		cmbCodigoMaterial.setValue("--Seleccione--");
 		dboxPrecioMaterial.setText("");
 		spMaterial.setText("");
-
 	}
 
 	// ---------------------------------------------------------------------------------------------------
@@ -301,8 +307,7 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 					binder.loadComponent(lbxListaMateriales);
 					SubTotal();
 					binder.loadComponent(lbxListaMateriales);
-					validarBotonesRegistrar();
-					btnAgregar.setDisabled(false);
+//					btnAgregar.setDisabled(false);
 					btnQuitar.setDisabled(true);
 				}
 			}
@@ -311,17 +316,17 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 
 	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnBuscar() {
-		formulario.setId("frmPersonas");
-		formulario.setAttribute("padre", "PROVEEDOR DE MATERIALES");
+		Map params = new HashMap();
+		params.put("padre", "PROVEEDOR DE MATERIALES");
+		params.put("formulario", formulario);
 		Component catalogo = Executions.createComponents(
 				"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
-				formulario, null);
-		formulario.addEventListener("onCierre", new EventListener() {
+				null, params);
+		formulario.addEventListener("onCierreJuridico", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				persona = (Persona) formulario.getVariable("persona", false);
-
-				txtProveedor.setValue(persona.getCedulaRif());
+				materiales = new ArrayList<CuentaPagarMaterial>();
 				binder.loadAll();
 			}
 		});
@@ -333,21 +338,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 //		Component catalogo = Executions.createComponents(
 //				"/Administracion/Vistas/frmProveedorMateriales.zul", formulario, null);
 //	}
-
-	// ---------------------------------------------------------------------------------------------------
-	public void onClick$btnEditar() {
-		auxCuentaPagarMaterial.setMaterial((Material) cmbCodigoMaterial
-				.getSelectedItem().getValue());
-
-		auxCuentaPagarMaterial.setPrecioUnitario(dboxPrecioMaterial.getValue());
-		auxCuentaPagarMaterial.setCantidad(spMaterial.getValue());
-
-		binder.loadComponent(lbxListaMateriales);
-		limpiarFM();
-		SubTotal();
-		validarBotonesRegistrar();
-
-	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onSelect$lbxListaMateriales() {
@@ -361,7 +351,7 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 				cmbCodigoMaterial.setSelectedIndex(i);
 			}
 		}
-		validarBotonesRegistrar();
+		btnQuitar.setDisabled(false);
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -377,7 +367,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 	public void limpiarFormulario() {
 		/* -------------- Formulario Registar Facturas ------------- */
 		txtNroFactura.setText("");
-		txtNroFactura.setDisabled(false);
 		txtProveedor.setText("");
 		txtRazonSocial.setText("");
 		dtFactura.setText("");
@@ -392,12 +381,9 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		dboxPrecioMaterial.setDisabled(true);
 		spMaterial.setText("");
 		spMaterial.setDisabled(true);
-		btnBuscarFact.setDisabled(false);
-		btnBuscar.setDisabled(true);
 //		btnNuevoProveedor.setDisabled(true);
 		btnAgregar.setDisabled(true);
 		btnQuitar.setDisabled(true);
-		btnEditar.setDisabled(true);
 		dboxSubTotalMat.setText("");
 		dboxSubTotalMat.setDisabled(true);
 
@@ -406,7 +392,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		dboxMontoIva.setDisabled(true);
 		dboxMontoTotal.setText("");
 		dboxMontoTotal.setDisabled(true);
-		btnRegistrar.setDisabled(true);
 
 		cuentaPagar = new CuentaPagar();
 		material = new CuentaPagarMaterial();
@@ -414,99 +399,23 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 
 		personaJuridica = new PersonaJuridica();
 	}
-
-	// ---------------------------------------------------------------------------------------------------
-	public void validarBotonesRegistrar() {
-		if ((txtNroFactura.getText().trim() != "")
-				&& (txtProveedor.getText().trim() != "")
-
-				&& (dtFactura.getText().trim() != "")
-				&& (dtFechaVencimiento.getText().trim() != "")
-				&& (lbxListaMateriales.getItemCount() != 0)) {
-
-			btnRegistrar.setDisabled(false);
-		} else {
-			btnRegistrar.setDisabled(true);
-		}
-
-		if (lbxListaMateriales.getItemCount() == 0) {
-
-			btnQuitar.setDisabled(true);
-			btnEditar.setDisabled(true);
-
-		} else {
-			btnAgregar.setDisabled(true);
-			btnQuitar.setDisabled(false);
-			btnEditar.setDisabled(false);
-		}
-	}
-
-	// ---------------------------------------------------------------------------------------------------
-	public Textbox getTxtProveedor() {
-		return txtProveedor;
-	}
-
-	public void onFocus$txtNroFactura() {
-		validarBotonesRegistrar();
-	}
-
-	public void onFocus$txtProveedor() {
-		validarBotonesRegistrar();
-	}
-
-	public void onFocus$dtFactura() {
-		validarBotonesRegistrar();
-	}
-
-	public void onFocus$dtFechaVencimiento() {
-		validarBotonesRegistrar();
-	}
-
 	// ---------------------------------------------------------------------------------------------------
 	public void ActivarRegistrarFacturas() {
-		txtNroFactura.setDisabled(true);
-		btnBuscarFact.setDisabled(true);
-		btnBuscar.setDisabled(false);
 		dtFactura.setDisabled(false);
 		dtFechaVencimiento.setDisabled(false);
 		cmbCodigoMaterial.setDisabled(false);
 		btnNuevoArticulo.setDisabled(false);
 		dboxPrecioMaterial.setDisabled(false);
-
+		btnAgregar.setDisabled(false);
 		spMaterial.setDisabled(false);
-		btnBuscar.setDisabled(false);
-//		btnNuevoProveedor.setDisabled(false);
-
 	}
 
 	// ---------------------------------------------------------------------------------------------------
-	public void onClick$btnCancelar2() {
+	public void onClick$btnCancelar() {
 		limpiarListaMateriales();
 		limpiarFormulario();
 	}
-
-	// ---------------------------------------------------------------------------------------------------
-	public void ValidarMateriales() {
-		if ((cmbCodigoMaterial.getValue() != "--Seleccione--")
-				&& (dboxPrecioMaterial.getText().trim() != "")
-				&& (spMaterial.getText().trim() != "")) {
-			btnAgregar.setDisabled(false);
-		} else {
-			btnAgregar.setDisabled(true);
-		}
-	}
-
-	// ---------------------------------------------------------------------------------------------------
-	public void onFocus$ibPrecioMaterial() {
-		lbxListaMateriales.setSelectedIndex(-1);
-		ValidarMateriales();
-	}
-
-	public void onFocus$spMaterial() {
-		lbxListaMateriales.setSelectedIndex(-1);
-		ValidarMateriales();
-	}
-
+	
 	// ---------------------------------------------------------------------------------------------------
 	public ServicioCuentaPagar getServicioCuentaPagar() {
 		return servicioCuentaPagar;
@@ -603,14 +512,6 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 
 	public void setLbxListaMateriales(Listbox lbxListaMateriales) {
 		this.lbxListaMateriales = lbxListaMateriales;
-	}
-
-	public void onClick$btnSalir() {
-		Factura.onClose();
-	}
-
-	public void onClick$btnSalir2() {
-		Factura.onClose();
 	}
 
 	public Textbox getTxtCodigoMaterial() {
@@ -891,4 +792,12 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 		this.tipoTarjeta = tipoTarjeta;
 	}
 	// ---------------------------------------------------------------------------------------------------
+
+	public List<DatoBasico> getTipoMaterial() {
+		return tipoMaterial;
+	}
+
+	public void setTipoMaterial(List<DatoBasico> tipoMaterial) {
+		this.tipoMaterial = tipoMaterial;
+	}
 }

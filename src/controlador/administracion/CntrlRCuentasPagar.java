@@ -48,26 +48,10 @@ public class CntrlRCuentasPagar extends GenericForwardComposer {
 
 	DatoBasico datoBasico = new DatoBasico();
 	Window winRCuentasPagar;
-	Combobox cmbDescripcion;
-	Datebox dtFEmiDesde,dtFEmiHasta,dtFVenDesde,dtFVenHasta;
-	Button btnGenerar, btnImprimir, btnSalir;
-	Iframe ifReporte;
+	Datebox dtFVenDesde,dtFVenHasta;
+	Button btnImprimir, btnSalir;
 	Component componente;
-	ServicioDatoBasico servicioDatoBasico;
-	ServicioFamiliarJugador servicioFamiliarJugador;
-
-	Persona persona;
-	FamiliarJugador familiarJugador;
-	Component formulario1,formulario2;
-	Textbox txtCedulaDesde, txtCedulaHasta;
-	Listbox lbxJudadores;
-	AnnotateDataBinder binder;
-	//ServicioDatoBasico servicioDatoBasico;// = new ServicioDatoBasico();
-	
-	List<DatoBasico> tipoEgreso = new ArrayList<DatoBasico>();
-	List<FamiliarJugador> listFamiliarJugador = new ArrayList<FamiliarJugador>();
-	
-	private Date fecha;
+	Iframe ifReport;
 	private Connection con;
 	private String jrxmlSrc;
 	private Map parameters = new HashMap();
@@ -78,52 +62,13 @@ public class CntrlRCuentasPagar extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		componente = comp;
-		formulario1 = comp;
-		formulario2 = comp;
-		fecha = new Date();
-		tipoEgreso = servicioDatoBasico.listarPorTipoDato("TIPO EGRESO");
-		dtFEmiDesde.setValue(fecha);
-		dtFVenDesde.setValue(fecha);
 	}
 
-	public void onClick$btnBuscar1() {
-		
-		persona = new Persona();
-		Component catalogo1 = Executions.createComponents(
-				"/Administracion/Reportes/FrmCatalogo.zul", null, null);
-
-		catalogo1.setVariable("formulario", formulario1, false);
-		formulario1.addEventListener("onCatalogoCerrado", new EventListener() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {
-				persona = (Persona) formulario1.getVariable("persona", false);
-				txtCedulaDesde.setText(persona.getCedulaRif());
-			}
-		});
-		
-	}
-	
-	public void onClick$btnBuscar2() {
-		
-		persona = new Persona();
-		Component catalogo2 = Executions.createComponents(
-				"/Administracion/Reportes/FrmCatalogo.zul", null, null);
-
-		catalogo2.setVariable("formulario", formulario2, false);
-		formulario2.addEventListener("onCatalogoCerrado", new EventListener() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {
-				persona = (Persona) formulario2.getVariable("persona", false);
-				txtCedulaHasta.setText(persona.getCedulaRif());
-			}
-		});
-		
-	}
 	
 	public CntrlRCuentasPagar() throws SQLException {
 		super();
-		con = ConeccionBD.getCon("postgres","postgres","12345");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/Cuentas Por Pagar.jrxml");
+		con = ConeccionBD.getCon("postgres","postgres","123456");
+		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteGeneralCpagar.jrxml");
 
 	}
 	
@@ -137,60 +82,27 @@ public class CntrlRCuentasPagar extends GenericForwardComposer {
 		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,arrayOutputStream);
 		exporter.exportReport();
 		arrayOutputStream.close();
-		final AMedia amedia = new AMedia("reporteEstadistico.pdf","pdf","pdf/application", arrayOutputStream.toByteArray());
-		ifReporte.setContent(amedia);
-		System.out.println("Entrando");
+		final AMedia amedia = new AMedia("Cuentas por Pagar.pdf","pdf","application/pdf", arrayOutputStream.toByteArray());
+		ifReport.setContent(amedia);
+		
 	}
 
 	
 	
 	
 	
-	public void onClick$btnGenerar() throws JRException, IOException {
-		String var="";
-		if (dtFEmiDesde.getText().equals("")) {
-			dtFEmiDesde.setText("01/01/2000");
-		}
-		if (dtFVenDesde.getText().equals("")) {
-			dtFVenDesde.setText("01/01/2000");
-		}
-		if (dtFEmiHasta.getText().equals("")) {
-			dtFEmiHasta.setText("01/01/2020");
-		}
-		if (dtFVenHasta.getText().equals("")) {
-			dtFVenHasta.setText("01/01/2020");
-		}
-		if (txtCedulaDesde.getText().equals("")){
-			txtCedulaDesde.setText("J-123456789");
-		}
-		if (txtCedulaHasta.getText().equals("")){
-			txtCedulaHasta.setText("J-307071583");
-		}
-		if (cmbDescripcion.getSelectedIndex() == -1){
-			var = "ADQUISICION";
-		} else {
-			var = cmbDescripcion.getSelectedItem().getLabel();
-		}
-		parameters.put("fechemides", dtFEmiDesde.getText());
-		parameters.put("fechemihas", dtFEmiHasta.getText());
-		parameters.put("fechvendes", dtFVenDesde.getText());
-		parameters.put("fechvenchas", dtFVenHasta.getText());
-		parameters.put("cedrifdes", txtCedulaDesde.getText());
-		parameters.put("cedrifhas", txtCedulaHasta.getText());
-		parameters.put("nomb", var);
+	public void onClick$btnImprimir() throws JRException, IOException {
+		parameters.put("fechemides_1", dtFVenDesde.getText());
+		parameters.put("fechemihas_1", dtFVenHasta.getText());
 		showReportfromJrxml();
 		
 		
 	}
 	
 	public void onClick$btnCancelar(){
-		dtFEmiDesde.setText("");
-		dtFEmiHasta.setText("");
 		dtFVenDesde.setText("");
 		dtFVenHasta.setText("");
-		cmbDescripcion.setValue("");
-		txtCedulaDesde.setText("");
-		txtCedulaHasta.setText("");
+		
 	}
 	
 	public void onClick$btnSalir(){
@@ -199,12 +111,5 @@ public class CntrlRCuentasPagar extends GenericForwardComposer {
 	}
 
 
-	public List<DatoBasico> getTipoEgreso() {
-		return tipoEgreso;
-	}
-
-	public void setTipoEgreso(List<DatoBasico> tipoEgreso) {
-		this.tipoEgreso = tipoEgreso;
-	}
-
+	
 }

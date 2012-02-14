@@ -4,6 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,18 +25,23 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Iframe;
+import org.zkoss.zul.Window;
 
 import comun.ConeccionBD;
+import comun.Validacion;
+import controlador.general.ManejadorJasper;
 
-public class CntrlMorosidadGeneral extends GenericForwardComposer {
+public class CntrlRMorosidadGeneral extends GenericForwardComposer {
 	Component component;
-	Datebox dtbFechaVenDesde, dtbFechaVenHasta, dtbFechaEmiHasta, dtbFechaEmiDesde;
-	Button btnCancelar, btnImprimir;
+	Datebox dtbFechaVenDesde, dtbFechaVenHasta;
+	Button btnCancelar, btnImprimir,btnSalir;
 	Iframe ifReport;
+	Window frmRMorosidadGeneral;
 	Map parameters = new HashMap();
 	private Connection con;
 	private String jrxmlSrc;
@@ -45,28 +54,32 @@ public class CntrlMorosidadGeneral extends GenericForwardComposer {
 	}
 	
 	// ---------------------------------------------------------------------------------------------------
-	public void showReportfromJrxml() throws JRException, IOException{
-		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
-		JasperPrint jaspPrint = JasperFillManager.fillReport(jasp, parameters, con);
-		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		JRExporter exporter = new JRPdfExporter();
-		exporter.setParameters(parameters);
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT ,jaspPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,arrayOutputStream);
-		exporter.exportReport();
-		arrayOutputStream.close();
-		final AMedia amedia = new AMedia("controlMorosidad.pdf","pdf","pdf/application", arrayOutputStream.toByteArray());
-		ifReport.setContent(amedia);
+	public void onClick$btnSalir(){
+		frmRMorosidadGeneral.detach();
 	}
 	// ---------------------------------------------------------------------------------------------------
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
-		con = ConeccionBD.getCon("sol","postgres","123456");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteGeneralMorosidad.jrxml");
-		parameters.put("fechemides_1",dtbFechaEmiDesde.getText());
-		parameters.put("fechemihas_1",dtbFechaEmiHasta.getText() );
-		parameters.put("fechvendes_1", dtbFechaVenDesde.getText());
-		parameters.put("fechvenchas_1", dtbFechaVenHasta.getText());
-		showReportfromJrxml();
+	public void onClick$btnImprimir() throws WrongValueException,
+	ParseException, JRException, IOException, SQLException {
+		con = ConeccionBD.getCon("postgres","postgres","123456");
+		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteControlMorosidad.jrxml");
+		if (Validacion.validarFecha(dtbFechaVenDesde, dtbFechaVenHasta)){
+			DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			Date startDate = (Date) format.parse(dtbFechaVenDesde.getText());
+			Date endDate = (Date) format.parse(dtbFechaVenHasta.getText());
+			parameters.put("fechavendes", startDate);
+			parameters.put("fechavenhas", endDate);
+			ManejadorJasper.showReportfromJrxml(jrxmlSrc, parameters, con, "Control de Morosidad");
+			
+			
+		}
+			
+		
+	}
+	
+	public void onClick$btnCancelar(){
+		dtbFechaVenDesde.setText("");
+		dtbFechaVenHasta.setText("");
+		
 	}
 	
 		

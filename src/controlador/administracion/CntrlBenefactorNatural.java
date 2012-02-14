@@ -2,17 +2,18 @@ package controlador.administracion;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.CuentaPagarMaterial;
 import modelo.DatoBasico;
-import modelo.Movimiento;
 import modelo.Persona;
-import modelo.PersonaJuridica;
 import modelo.PersonaNatural;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -22,6 +23,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import comun.Mensaje;
+import comun.MensajeMostrar;
 
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioPersona;
@@ -53,8 +56,6 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		formulario = comp;
-		formulario.setId("frmPersonas");
-		formulario.setAttribute("padre", "BENEFACTOR NATURAL");
 		persona = new Persona();
 		personaNatural = new PersonaNatural();
 		estados = servicioDatoBasico.listarPorTipoDato("ESTADO");
@@ -64,6 +65,7 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 		generos = servicioDatoBasico.listarPorTipoDato("GENERO");
 		CuentaPagarMaterial a = new CuentaPagarMaterial();
 		clear();
+		
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -115,16 +117,18 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void actualizarPersona() {
 		String telefono = null;
-		if (cmbTelefono.getSelectedItem() != null){
-		telefono = cmbTelefono.getValue().toString() + "-"+ txtTelefono.getValue().toString();
+		if (cmbTelefono.getSelectedItem() != null) {
+			telefono = cmbTelefono.getValue().toString() + "-"
+					+ txtTelefono.getValue().toString();
 		}
 		String celular = null;
-		if (cmbCelular.getSelectedItem() != null){
-			celular = cmbCelular.getValue().toString() + "-"+ txtCelular.getValue().toString();
+		if (cmbCelular.getSelectedItem() != null) {
+			celular = cmbCelular.getValue().toString() + "-"
+					+ txtCelular.getValue().toString();
 		}
 		
-		persona.setCedulaRif(cmbCedula.getValue() + txtCedula.getValue());
-		persona.setDatoBasicoByCodigoTipoPersona(servicioDatoBasico.buscarPorString("BENEFACTOR NATURAL"));
+		persona.setDatoBasicoByCodigoTipoPersona(servicioDatoBasico
+				.buscarPorString("BENEFACTOR NATURAL"));
 		persona.setTelefonoHabitacion(telefono);
 		persona.setDatoBasicoByCodigoParroquia(servicioDatoBasico
 				.buscarPorCodigo(Integer.parseInt(cmbParroquia.getContext())));
@@ -142,49 +146,75 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnRegistrar() {
-		if ((txtCedula.getText().trim() != "") && (txtCedula.getText().length()>=6) && (cmbCedula.getSelectedIndex() != -1)){
+		if ((txtCedula.getText().trim() != "")
+				&& (txtCedula.getText().length() >= 6)
+				&& (cmbCedula.getSelectedIndex() != -1)) {
 			Persona auxPersona = servicioPersona.buscarPorCedulaRif(cmbCedula
 					.getValue() + txtCedula.getValue());
 			try {
-			if (auxPersona != null) {
-				Messagebox.show("Registro Existente. Favor verifique datos.", "Información", Messagebox.OK, Messagebox.INFORMATION);
-				return;
-			}
-				Integer qs = Messagebox.show("¿Desea guardar los cambios?",
-						"Importante", Messagebox.OK | Messagebox.CANCEL,
-						Messagebox.QUESTION);
-				if (qs.equals(1)) {
-					actualizarPersona();
-					clear();
-					binder.loadAll();
-					alert("Guardado");
+				if (auxPersona != null) {
+					Messagebox.show(MensajeMostrar.GUARDAR,
+							MensajeMostrar.TITULO + "Importante",
+							Messagebox.OK, Messagebox.INFORMATION);
+					return;
 				}
+				Messagebox.show(MensajeMostrar.GUARDAR.toString(),
+						MensajeMostrar.TITULO + "Importante", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									persona.setCedulaRif(cmbCedula.getValue() + txtCedula.getValue());
+									actualizarPersona();
+									clear();
+									binder.loadAll();
+									Mensaje.mostrarMensaje(
+											MensajeMostrar.REGISTRO_EXITOSO,
+											MensajeMostrar.TITULO
+													+ "Información",
+											Messagebox.INFORMATION);
+								}
+							}
+						});
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnModificar() {
 		try {
-			if (persona != null){
-			Integer qs = Messagebox.show("¿Desea guardar los cambios?",
-					"Importante", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION);
-			if (qs.equals(1)) {
-				actualizarPersona();
-				clear();
-				binder.loadAll();
-				alert("Modificado");
-			}
+			if (persona != null) {
+				Messagebox.show(MensajeMostrar.GUARDAR,
+						MensajeMostrar.TITULO + "Importante", Messagebox.OK
+								| Messagebox.CANCEL, Messagebox.QUESTION,
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									actualizarPersona();
+									clear();
+									binder.loadAll();
+									Messagebox.show(
+											MensajeMostrar.MODIFICACION_EXITOSA,
+													MensajeMostrar.TITULO
+													+ "Información",
+											Messagebox.OK,
+											Messagebox.INFORMATION);
+								}
+							}
+						});
 			} else {
-				Messagebox.show("Debe ubicar al benefactor por medio del Catálogo", "Información", Messagebox.OK, Messagebox.INFORMATION);
-				btnBuscar.setFocus(true);
+				throw new WrongValueException(btnBuscar,
+						MensajeMostrar.PERSONA_NO_UBICADA);
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			// ------------
 		}
 	}
 
@@ -192,10 +222,12 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 	public void onClick$btnBuscar() {
 		persona = new Persona();
 		personaNatural = new PersonaNatural();
-		
-		Component catalogo = Executions.createComponents(
+		Map params = new HashMap();
+		params.put("padre", "BENEFACTOR NATURAL");
+		Executions.createComponents(
 				"/Administracion/Vistas/frmCatalogoPersonasNaturales.zul",
-				formulario, null);
+				null, params);
+
 		formulario.addEventListener("onCierreNatural", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
@@ -210,10 +242,10 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 		personaNatural = persona.getPersonaNatural();
 		cmbCedula.setValue(personaNatural.getCedulaRif().substring(0, 2));
 		txtCedula.setValue(personaNatural.getCedulaRif().substring(2));
-		
+
 		cmbParroquia.setDisabled(false);
 		cmbMunicipio.setDisabled(false);
-		if (persona.getDatoBasicoByCodigoParroquia() != null){
+		if (persona.getDatoBasicoByCodigoParroquia() != null) {
 			parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
 					.getDatoBasicoByCodigoParroquia().getDatoBasico()
 					.getCodigoDatoBasico());
@@ -229,12 +261,12 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 			cmbEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
 					.getDatoBasico().getDatoBasico().getNombre());
 		}
-		if (personaNatural.getDatoBasico() != null){
+		if (personaNatural.getDatoBasico() != null) {
 			cmbGenero.setContext(String.valueOf(personaNatural.getDatoBasico()
 					.getCodigoDatoBasico()));
 			cmbGenero.setValue(personaNatural.getDatoBasico().getNombre());
 		}
-		
+
 		if (persona.getTelefonoHabitacion() != null) {
 			cmbTelefono.setValue(persona.getTelefonoHabitacion()
 					.substring(0, 4));
@@ -270,28 +302,43 @@ public class CntrlBenefactorNatural extends GenericForwardComposer {
 		btnModificar.setDisabled(true);
 		btnEliminar.setDisabled(true);
 		btnRegistrar.setDisabled(false);
-
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnEliminar() {
 		try {
-			Integer qs = Messagebox.show("¿Desea guardar los cambios?",
-					"Importante", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION);
-			if (qs.equals(1)) {
-				persona.setEstatus('E');
-				personaNatural.setEstatus('E');
-				servicioPersona.actualizar(persona);
-				servicioPersonaNatural.actualizar(personaNatural);
-				clear();
-				binder.loadAll();
-				alert("Eliminado");
+			if (persona != null) {
+				Messagebox.show(MensajeMostrar.GUARDAR,
+						MensajeMostrar.TITULO + "Importante",
+						Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									persona.setEstatus('E');
+									personaNatural.setEstatus('E');
+									servicioPersona.actualizar(persona);
+									servicioPersonaNatural
+											.actualizar(personaNatural);
+									clear();
+									binder.loadAll();
+									Messagebox.show(
+											MensajeMostrar.ELIMINACION_EXITOSA,
+													MensajeMostrar.TITULO
+													+ "Información",
+											Messagebox.OK,
+											Messagebox.INFORMATION);
+									
+								}
+							}
+						});
+			} else {
+				throw new WrongValueException(btnBuscar,MensajeMostrar.PERSONA_NO_UBICADA);
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			// ----------
 		}
-
 	}
 
 	// ------------------------------------------------------------------------------------------------------

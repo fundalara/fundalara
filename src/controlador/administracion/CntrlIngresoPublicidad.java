@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*import modelo.EstadoVenezuela;
  import modelo.Municipio;
@@ -18,6 +20,7 @@ import modelo.IngresoDocumentoAcreedor;
 import modelo.IngresoDocumentoAcreedorId;
 import modelo.IngresoFormaPago;
 import modelo.IngresoFormaPagoId;
+import modelo.Jugador;
 import modelo.Persona;
 import modelo.PersonaJuridica;
 import modelo.TipoDato;
@@ -61,11 +64,12 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 	PersonaJuridica personaJuridica = new PersonaJuridica();
 	DocumentoAcreedor documentoacreedor,
 			documentoAcreedor = new DocumentoAcreedor();
+	DocumentoAcreedor auxDA1;
 	TipoDato tipodato = new TipoDato();
 	DatoBasico datobasico = new DatoBasico();
 	IngresoDocumentoAcreedor ingresodocumentoacreedor;
 	Ingreso ingreso = new Ingreso();
-	IngresoFormaPago ingresoformapago = new IngresoFormaPago();
+	IngresoFormaPago ingresoFormaPago = new IngresoFormaPago();
 
 	/* Instancias de los servicios a utilizar */
 	ServicioPersona servicioPersona;
@@ -87,7 +91,7 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 
 	/* Instancias de los elementos a utilizar */
 	Combobox cmbFormaPago, cmbEntidadBancaria, cmbTipoTarjeta, cmbCed,
-			cmbTelefono, cmbFax;
+			cmbTelefono, cmbFax,cmbPersona;
 	Datebox dtboxDesde, dtboxHasta, dtIngreso;
 	Doublebox dboxMontoP, dboxBsfPagar, dboxMontoC, dboxSubTotal, dboxMontoT,
 			dboxMontoRest;
@@ -95,11 +99,11 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 	Grid gridPAdelantados, gridPRealizar, gridMetodosP, gridDatosPago2;
 	Groupbox grboxPagosPendientes, grboxPagosRealizar, grboxDetallepago,
 			grboxDiferentesMetPago;
-	Textbox txtRif, txtRazonS, txtTlf, txtFax, txtNroDocumento, NroRecibo;
-	Button btnBuscarRif, btnPAdelantados, btnCalcular, btnAgregar, btnEditar,
+	Textbox txtCedulaRif, txtNombre, txtTlf, txtFax, txtNroDocumento, NroRecibo,txtParro,txtMunicipio,txtEstado,txtDireccion;
+	Button btnCatalogo, btnPAdelantados, btnCalcular, btnAgregar, btnEditar,
 			btnQuitar, btnGuardar, btnCancelar, btnSalir, btnPagar, btnQuitar1;
 	Listbox lboxPagosRealizar, lboxPPendientes, lboxPAdelantados, lbxCuentas;
-	Component formulario, FrmIngresoPublicidad;
+	Component formulario, frmIngresoPublicidad;
 	Row row1, row2;
 	Panel panel1, panel2;
 
@@ -114,7 +118,7 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		formulario = comp;
-
+		formulario.setId("frmPersonas");
 		formaPago = servicioDatoBasico.listarPorTipoDato("FORMA DE PAGO");
 		banco = servicioDatoBasico.listarPorTipoDato("ENTIDAD BANCARIA");
 		tipoTarjeta = servicioDatoBasico.listarPorTipoDato("TARJETA CREDITO");
@@ -122,64 +126,140 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 		NroRecibo.setValue("F" + (servicioIngreso.listar().size() + 1));
 	}
 
-	// --------------------------------------------------------------------------------------------------
-	public void onClick$btnBuscarRif() {
-		Component catalogo = Executions.createComponents(
-				"/Administracion/Vistas/FrmCatalogoIngresoPublicidad.zul",
-				null, null);
-		catalogo.setVariable("formulario", formulario, false);
+	//--------------------------------------------------------------------------------------------------
+	public void documentoAcreedor(Persona persona){
+		/*txtDireccion.setValue(persona.getDireccion().toString());
+		if (persona.getDatoBasicoByCodigoParroquia() == null) {
 
-		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {
-				personaJuridica = (PersonaJuridica) formulario.getVariable(
-						"personaJuridica", false);
-				cmbCed.setValue(personaJuridica.getCedulaRif().substring(0, 2));
-				txtRif.setText(personaJuridica.getCedulaRif().substring(2,
-						personaJuridica.getCedulaRif().length()));
-				txtRazonS.setText(personaJuridica.getRazonSocial().toString());
-				if (personaJuridica.getFax() == null) {
-					txtFax.setText("");
-					cmbFax.setValue("-");
-				} else {
-					cmbTelefono.setValue(personaJuridica.getFax().substring(0,
-							5));
-					txtFax.setText(personaJuridica.getFax().substring(5,
-							personaJuridica.getFax().length()));
-				}
-				if (personaJuridica.getPersona().getTelefonoHabitacion() == null) {
-					txtTlf.setText("");
-					cmbTelefono.setValue("-");
-				} else {
-					cmbFax.setValue(personaJuridica.getPersona()
-							.getTelefonoHabitacion().substring(0, 5));
-					txtTlf.setText(personaJuridica
-							.getPersona()
-							.getTelefonoHabitacion()
-							.substring(
-									5,
-									personaJuridica.getPersona()
-											.getTelefonoHabitacion().length()));
-				}
+		} else {
+			txtParro.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getNombre().toString());
+			txtEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getDatoBasico().getDatoBasico().getNombre());
+			txtMunicipio.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getDatoBasico().getNombre());
+		}*/
+		System.out.println("YUJU");
+		listadocumentoacre = servicioDocumentoAcreedor.buscarPendientesPorRif(persona);
+		panel1.setOpen(true);
+		DocumentoAcreedor columna;
+		double suma = 0;
+		for (int i = 0; i < listadocumentoacre.size(); i++) {
+			columna = listadocumentoacre.get(i);
+			suma = suma + columna.getMonto();
+		}
+		dboxMontoP.setValue(suma);
 
-				listadocumentoacre = servicioDocumentoAcreedor
-						.buscarPendientesPorRif(personaJuridica.getPersona());
-				panel1.setOpen(true);
-
-				// Calculando el monto pendiente a pagar
-				DocumentoAcreedor columna;
-				double suma = 0;
-				for (int i = 0; i < listadocumentoacre.size(); i++) {
-					columna = listadocumentoacre.get(i);
-					suma = suma + columna.getMonto();
-				}
-				dboxMontoP.setValue(suma);
-
-				binder.loadAll();
-			}
-		});
+		binder.loadAll();
 	}
+	
+	//--------------------------------------------------------------------------------------------------
+	public void onClick$btnCatalogo() {
+		if (cmbPersona.getSelectedIndex() != -1) {
+			System.out.println("----" + cmbPersona.getSelectedItem().getLabel()
+					+ "----");
 
+			if (cmbPersona.getSelectedItem().getLabel().equals("NATURAL")) {
+				Map params = new HashMap();
+				params.put("padre", "PERSONAS");
+				Executions
+						.createComponents(
+								"/Administracion/Vistas/frmCatalogoPersonasNaturales.zul",
+								null, params);
+				formulario.addEventListener("onCierreNatural",
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0) throws Exception {
+								persona = (Persona) formulario.getVariable(
+										"persona", false);
+								txtCedulaRif.setText(persona.getCedulaRif());
+								String segundoN = "", segundoA = "";
+
+								if (persona.getPersonaNatural()
+										.getSegundoNombre() != null)
+									segundoN = persona.getPersonaNatural()
+											.getSegundoNombre();
+
+								if (persona.getPersonaNatural()
+										.getSegundoNombre() != null)
+									segundoA = persona.getPersonaNatural()
+											.getSegundoNombre();
+
+								txtNombre.setText(persona.getPersonaNatural()
+										.getPrimerNombre()
+										+ " "
+										+ segundoN
+										+ " "
+										+ persona.getPersonaNatural()
+												.getPrimerApellido()
+										+ " "
+										+ segundoA);
+								documentoAcreedor(persona);
+								
+							}
+							
+							
+							
+						});
+				
+			
+			}
+
+			if (cmbPersona.getSelectedItem().getLabel().equals("JURIDICO")) {
+				Map params = new HashMap();
+				params.put("padre", "PERSONAS");
+				
+				Component catalogo = Executions
+						.createComponents(
+								"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
+								null, params);
+				formulario.addEventListener("onCierreJuridico",
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0) throws Exception {
+								persona = (Persona) formulario.getVariable(
+										"persona", false);
+								txtCedulaRif.setText(persona.getCedulaRif());
+								txtNombre.setText(persona.getPersonaJuridica()
+										.getRazonSocial());
+								documentoAcreedor(persona);
+							}
+						});
+			}
+		} else {
+			try {
+				Messagebox.show("Debe seleccionar el tipo de Persona",
+						"Información", Messagebox.OK, Messagebox.INFORMATION);
+				cmbPersona.setFocus(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+			documentoAcreedor(persona);
+
+	}
+	// --------------------------------------------------------------------------------------------------
+	public void LimpiarFormulario(){
+		txtCedulaRif.setText("");
+		txtNombre.setText("");
+	
+		dboxBsfPagar.setValue(null);
+		dboxMontoP.setValue(null);
+		dboxMontoT.setValue(null);
+		dtIngreso.setText("");
+		persona = new Persona();
+		ingreso = new Ingreso();
+		ingresoFormaPago = new IngresoFormaPago();
+		listadocumentoacre = new ArrayList<DocumentoAcreedor>();
+		listaPagos = new ArrayList<DocumentoAcreedor>();
+		listaIngresoFormaPago = new ArrayList<IngresoFormaPago>();
+		cmbPersona.setValue("--Seleccione--");
+		panel1.setOpen(false);
+		panel2.setOpen(false);
+		binder.loadAll();
+		
+	}
 	// --------------------------------------------------------------------------------------------------
 	public void onClick$btnCalcular() {
 		for (int i = 0; i < spCantidadC.getValue(); i++) {
@@ -202,7 +282,7 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 			da.setFechaVencimiento(fecha);
 			da.setMonto(200);
 			da.setConcepto("Cuota Septiembre");
-			da.setEstado('V');
+			da.setEstado('V'); //
 			da.setEstatus('A');
 			// da.setDatoBasico(servicioDatoBasico.buscarPorNombre("PUBLICIDAD"));
 
@@ -212,26 +292,54 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 		binder.loadComponent(lboxPAdelantados);
 	}
 
+	
 	// --------------------------------------------------------------------------------------------------
 	public void onClick$btnPagar() {
 		// Pasando los documentos pendientes para Pagar
-		for (int i = 0; i < lboxPPendientes.getItemCount(); i++) {
-			Listcell celda = (Listcell) lboxPPendientes.getItemAtIndex(i)
-					.getChildren().get(0);
-			Checkbox ch = (Checkbox) celda.getChildren().get(0);
-			if (ch.isChecked()) {
-				listaPagos.add(listadocumentoacre.get(i));
+		if (lboxPagosRealizar.getItemCount() == 0) {
+			for (int i = 0; i < lboxPPendientes.getItemCount(); i++) {
+				Listcell celda = (Listcell) lboxPPendientes.getItemAtIndex(i)
+						.getChildren().get(0);
+				Checkbox ch = (Checkbox) celda.getChildren().get(0);
+				if (ch.isChecked()) {
+					listaPagos.add(listadocumentoacre.get(i));
+				}
+			}
+		}else {
+			// Pasando los documentos adelantados para Pagar
+			for (int i = 0; i < listadocumentoacre.size(); i++) {
+				Listcell celda1 = (Listcell) lboxPPendientes.getItemAtIndex(i)
+						.getChildren().get(0);
+				Checkbox ch1 = (Checkbox) celda1.getChildren().get(0);
+				if (ch1.isChecked()) {
+					auxDA1 = (DocumentoAcreedor) listadocumentoacre.get(i);
+					int z = 0;
+					int b = listaPagos.size();
+					boolean encontrado = false;
+
+					while ((z < b) && (encontrado == false)) {
+						if (auxDA1.getCodigoDocumentoAcreedor() == listaPagos
+								.get(z).getCodigoDocumentoAcreedor()) {
+							alert("El compromiso " + auxDA1.getConcepto()
+									+ " ya esta incluido");
+							ch1.setChecked(false);
+							encontrado = true;
+						}
+						z++;
+					}
+					if (encontrado == false) {
+						listaPagos.add(listadocumentoacre.get(i));
+						ch1.setChecked(false);
+					}
+				}
+
+
 			}
 		}
-		// Pasando los documentos adelantados para Pagar
-		for (int i = 0; i < lboxPAdelantados.getItemCount(); i++) {
-			Listcell celda1 = (Listcell) lboxPAdelantados.getItemAtIndex(i)
-					.getChildren().get(0);
-			Checkbox ch1 = (Checkbox) celda1.getChildren().get(0);
-			if (ch1.isChecked()) {
-				listaPagos.add(listadocumentoacre.get(i));
-			}
-		}
+		agregarPagosRealizar();
+	}
+	//---------------------------------------------------------------------------------------------------
+	public void agregarPagosRealizar(){
 		// Calculando el total de BsF a pagar
 		DocumentoAcreedor columna;
 		double suma = 0;
@@ -243,13 +351,14 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 
 		panel2.setOpen(true);
 		binder.loadComponent(lboxPagosRealizar);
-	}
 
+	}
+	
 	// --------------------------------------------------------------------------------------------------
 
 	public void onClick$btnPAdelantados() {
 		//if (flag == false) {
-			String razonSocial = txtRazonS.getValue().toString();			
+			String razonSocial = txtNombre.getValue().toString();			
 			personaJuridica = servicioPersonaJuridica.buscarByRazonSocial(razonSocial);
 	
 			
@@ -258,22 +367,6 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 			listadocumentoacre = servicioDocumentoAcreedor.buscarAdelantosPorRif(personaJuridica.getPersona());
 			
 			binder.loadComponent(lboxPPendientes);
-			//flag = true;
-		/*} else if (flag == true) {
-			auxjugador = (FamiliarJugador) lisAtletaAsociado.getSelectedItem()
-					.getValue();
-
-			System.out.println(auxjugador.getJugador().getPersonaNatural()
-					.getPersona().getCedulaRif());
-
-			listadocumentoacre = servicioDocumentoAcreedor
-					.buscarPendientesPorRifAtleta(auxjugador.getJugador()
-							.getPersonaNatural().getPersona());
-
-			binder.loadComponent(lboxPPendientes);
-			flag = false;
-
-		}*/
 	}
 
 	// --------------------------------------------------------------------------------------------------
@@ -376,11 +469,6 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 				dboxBsfPagar.setValue(montoTotal);
 
 				listaPagos.remove(lboxPagosRealizar.getSelectedIndex());
-
-				/*
-				 * btnPagar.setDisabled(false); btnQuitar1.setDisabled(true);
-				 */
-
 				binder.loadComponent(lboxPagosRealizar);
 			}
 		}
@@ -389,38 +477,6 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 
-	/*
-	 * public void onClick$btnEditar() { // NO FUNCIONA
-	 * 
-	 * IngresoFormaPago auxIngresoFormaPago = listaIngresoFormaPago
-	 * .get(lbxCuentas.getSelectedIndex());
-	 * 
-	 * auxIngresoFormaPago .setDatoBasicoByCodigoFormaPago((DatoBasico)
-	 * cmbFormaPago .getSelectedItem().getValue());
-	 * auxIngresoFormaPago.setMonto(dboxMontoC.getValue());
-	 * 
-	 * if ((var.equals("CHEQUE")) || (var.equals("TRANSFERENCIA")) ||
-	 * (var.equals("DEPOSITO")) || (var.equals("TARJETA DE DEBITO"))) {
-	 * auxIngresoFormaPago .setDatoBasicoByCodigoBanco((DatoBasico)
-	 * cmbEntidadBancaria .getSelectedItem().getValue());
-	 * auxIngresoFormaPago.setNumeroDocumentoPago(txtNroDocumento .getValue());
-	 * } else if (var.equals("TARJETA DE CREDITO")) { auxIngresoFormaPago
-	 * .setDatoBasicoByCodigoBanco((DatoBasico) cmbEntidadBancaria
-	 * .getSelectedItem().getValue());
-	 * auxIngresoFormaPago.setNumeroDocumentoPago(txtNroDocumento .getValue());
-	 * auxIngresoFormaPago .setDatoBasicoByCodigoTarjeta((DatoBasico)
-	 * cmbTipoTarjeta .getSelectedItem().getValue()); }
-	 * 
-	 * montoTotal = montoTotal - montoEditar; montoTotal = montoTotal +
-	 * auxIngresoFormaPago.getMonto();
-	 * 
-	 * limpiarFP(); binder.loadComponent(lbxCuentas);
-	 * btnEditar.setDisabled(true); btnQuitar.setDisabled(true);
-	 * 
-	 * }
-	 */
-
-	// ------------------------------------------------------------------------------------------------------
 
 	public void onSelect$lbxCuentas() {
 		IngresoFormaPago auxFormaPago = (IngresoFormaPago) lbxCuentas
@@ -497,13 +553,9 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 				for (int i = 0; i < listaPagos.size(); i++) {
 					listaPagos.get(i).setEstado('C');
 					documentoAcreedor = listaPagos.get(i);
-
+					documentoAcreedor.setSaldo(listaPagos.get(i).getMonto());
+					
 					ingreso = new Ingreso();
-					/*
-					 * int cantidad = 0; cantidad =
-					 * servicioIngreso.listar().size() + 1;
-					 * ingreso.setNumeroDocumento("" + cantidad);
-					 */
 					ingreso.setCodigoIngreso(servicioIngreso.listar().size()+1);
 					ingreso.setNumeroDocumento(NroRecibo.getText().toString());
 					ingreso.setDatoBasico(servicioDatoBasico
@@ -511,35 +563,38 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 					ingreso.setEstatus('A');
 					ingreso.setFechaPago(dtIngreso.getValue());
 					servicioIngreso.agregar(ingreso);
-
+				
+					System.out.println("------- Antes---------");
 					ingresodocumentoacreedor = new IngresoDocumentoAcreedor();
-					ingresodocumentoacreedor
-							.setDocumentoAcreedor(documentoAcreedor);
-
-					ingresodocumentoacreedor
-							.setId(new IngresoDocumentoAcreedorId(ingreso.getCodigoIngreso(), documentoAcreedor
-									.getCodigoDocumentoAcreedor())); //
-					
+					ingresodocumentoacreedor.setDocumentoAcreedor(documentoAcreedor);
 					ingresodocumentoacreedor.setIngreso(ingreso);
+					ingresodocumentoacreedor
+							.setId(new IngresoDocumentoAcreedorId(listaPagos.get(i)
+									.getCodigoDocumentoAcreedor(),ingreso
+									.getCodigoIngreso()));
+					
 					ingresodocumentoacreedor.setEstatus('A');
+					
 					ingresodocumentoacreedor.setMontoAbonado(listaPagos.get(i)
 							.getMonto()); //
-					documentoAcreedor.setSaldo(listaPagos.get(i).getMonto());
+					
 
 					servicioIngresoDocumentoAcreedor
 							.agregar(ingresodocumentoacreedor);
-
+					System.out.println("------- Despues ---------");
 					servicioDocumentoAcreedor.actualizar(listaPagos.get(i));
 
 					// i++;
 				}
 
 				for (int j = 0; j < listaIngresoFormaPago.size(); j++) {
-					listaIngresoFormaPago.get(j).setId(new IngresoFormaPagoId(servicioIngresoFormaPago.listar().size()+1, listaIngresoFormaPago.get(j).getIngreso().getCodigoIngreso()));
-				
+					listaIngresoFormaPago.get(j).setIngreso(ingreso);
 					listaIngresoFormaPago.get(j).setEstatus('A');
-					servicioIngresoFormaPago.agregar(listaIngresoFormaPago
-							.get(j));
+					listaIngresoFormaPago.get(j).setId(
+							new IngresoFormaPagoId(servicioIngresoFormaPago.listar()
+									.size() + 1, ingreso.getCodigoIngreso()));
+					
+					servicioIngresoFormaPago.agregar(listaIngresoFormaPago.get(j));
 				}
 
 				;
@@ -553,53 +608,13 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 
 	// --------------------------------------------------------------------------------------------------
 	public void onClick$btnCancelar() {
-
-		persona = new Persona();
-		personaJuridica = new PersonaJuridica();
-		documentoacreedor = new DocumentoAcreedor();
-		tipodato = new TipoDato();
-		datobasico = new DatoBasico();
-		ingresodocumentoacreedor = new IngresoDocumentoAcreedor();
-		ingreso = new Ingreso();
-		ingresoformapago = new IngresoFormaPago();
-
-		cmbCed.setSelectedIndex(-1);
-		cmbCed.setValue("-");
-		txtRif.setText("");
-		txtRazonS.setText("");
-		txtTlf.setText("");
-		txtFax.setText("");
-		listadocumentoacre = new ArrayList<DocumentoAcreedor>();
-		dboxMontoP.setValue(0);
-		spCantidadC.setValue(0);
-		listapagosadelantados = new ArrayList<DocumentoAcreedor>();
-		listaPagos = new ArrayList<DocumentoAcreedor>();
-		dboxBsfPagar.setValue(0);
-
-		// limpiando la forma de pago
-		cmbFormaPago.setSelectedIndex(-1);
-		cmbFormaPago.setValue("-");
-		formaPago = new ArrayList<DatoBasico>();
-		dboxMontoC.setValue(0);
-		txtNroDocumento.setText("");
-		cmbEntidadBancaria.setSelectedIndex(-1);
-		cmbEntidadBancaria.setValue("-");
-		cmbTipoTarjeta.setSelectedIndex(-1);
-		cmbTipoTarjeta.setValue("-");
-		listaIngresoFormaPago = new ArrayList<IngresoFormaPago>();
-		btnAgregar.setDisabled(true);
-		btnEditar.setDisabled(true);
-		btnQuitar.setDisabled(true);
-		dboxMontoT.setValue(0);
-
-		// limpiarFP();
-
+		LimpiarFormulario();
 		binder.loadAll();
 	}
 
 	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnSalir() {
-		FrmIngresoPublicidad.detach();
+		frmIngresoPublicidad.detach();
 	}
 
 	// --------------------------------------------------------------------------------------------------
@@ -608,7 +623,7 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 		cmbFormaPago.setValue("--Seleccione--");
 		cmbTipoTarjeta.setValue("--Seleccione--");
 		cmbEntidadBancaria.setValue("--Seleccione--");
-		dboxMontoC.setValue(null);
+		dboxMontoC.setValue(0);
 		txtNroDocumento.setValue(null);
 		row1.setVisible(false);
 		row2.setVisible(false);
@@ -617,10 +632,8 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 
 	// --------------------------------------------------------------------------------------------------
 	public void ValidarBotones() {
-		if ((txtRif.getText().trim() != "")
-				&& (txtRazonS.getText().trim() != "")
-				&& (txtTlf.getText().trim() != "")
-				&& (txtFax.getText().trim() != "")
+		if ((txtCedulaRif.getText().trim() != "")
+				&& (txtNombre.getText().trim() != "")
 				&& (lboxPPendientes.getItemCount() != 0)
 				&& (dboxMontoP.getValue() != 0)
 				&& (lboxPagosRealizar.getItemCount() != 0)
@@ -653,7 +666,7 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 			}
 		} else {
 			if ((cmbFormaPago.getValue() != "--Seleccione--")
-					&& (dboxMontoC.getText().trim() != "")
+					&& (dboxMontoC.getValue() != 0)
 					&& (txtNroDocumento.getText().trim() != "")
 					&& (cmbEntidadBancaria.getValue() != "--Seleccione--")) {
 				btnAgregar.setDisabled(false);
@@ -831,12 +844,12 @@ public class CntrlIngresoPublicidad extends GenericForwardComposer {
 		this.ingreso = ingreso;
 	}
 
-	public IngresoFormaPago getIngresoformapago() {
-		return ingresoformapago;
+	public IngresoFormaPago getIngresoFormaPago() {
+		return ingresoFormaPago;
 	}
 
-	public void setIngresoformapago(IngresoFormaPago ingresoformapago) {
-		this.ingresoformapago = ingresoformapago;
+	public void setIngresoFormaPago(IngresoFormaPago ingresoFormaPago) {
+		this.ingresoFormaPago = ingresoFormaPago;
 	}
 
 	public List<IngresoFormaPago> getListaIngresoFormaPago() {
