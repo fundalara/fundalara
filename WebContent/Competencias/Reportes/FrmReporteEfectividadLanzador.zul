@@ -3,7 +3,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmReporteEfectividad"?>
 <zk>
 <div align="center" >
-	<window title="Configuración de Reporte del Desempeño del Jugador" id="frmReporteEfectividad" style="align-text:right"
+	<window title="Reporte de Efectividad de Lanzador" id="frmReporteEfectividad" style="align-text:right"
 		border="normal" width="600px" apply="controlador.competencia.CntrlFrmReporteEfectividadLanzador"   closable="true">
 
 	
