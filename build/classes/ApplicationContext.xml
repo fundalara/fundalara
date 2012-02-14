@@ -18,14 +18,7 @@
 	<bean id="servicioComisionActividadPlanificada" class="servicio.implementacion.ServicioComisionActividadPlanificada">
 		<property name="daoComisionActividadPlanificada" ref="daoComisionActividadPlanificada"></property>
 	</bean>
-	
-	<bean id="daoIngresoInscripcion" class="dao.general.DaoIngresoInscripcion">
-	</bean>
 
-	<bean id="servicioIngresoInscripcion" class="servicio.implementacion.ServicioIngresoInscripcion">
-		<property name="daoIngresoInscripcion" ref="daoIngresoInscripcion"></property>
-	</bean>
-	
 	<bean id="daoCuentaPagar" class="dao.general.DaoCuentaPagar">
 	</bean>
 
@@ -210,6 +203,13 @@
 	<bean id="servicioDocumentoIndumentaria" class="servicio.implementacion.ServicioDocumentoIndumentaria">
 		<property name="daoDocumentoIndumentaria" ref="daoDocumentoIndumentaria"></property>
 	</bean>
+
+	<!-- <bean id="daoTipoPagoRepresentante" class="dao.general.DaoTipoPagoRepresentante"> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="servicioTipoPagoRepresentante" class="servicio.implementacion.ServicioTipoPagoRepresentante"> -->
+	<!-- <property name="daoTipoPagoRepresentante" ref="daoTipoPagoRepresentante"></property> -->
+	<!-- </bean> -->
 
 	<bean id="daoUsuario" class="dao.general.DaoUsuario">
 	</bean>
