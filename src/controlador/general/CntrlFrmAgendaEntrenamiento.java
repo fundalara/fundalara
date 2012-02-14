@@ -95,17 +95,17 @@ public class CntrlFrmAgendaEntrenamiento extends CntrlFrmAgendaGeneral {
 			Messagebox.show("El entrenamiento posee registrado todos sus resultados", "Olimpo - Información", Messagebox.OK, Messagebox.INFORMATION);
 		else if(ac.getEstatus()=='S'){
 //			execution.setAttribute("actividad",ac);
-			win = (Window)execution.createComponents("Entrenamiento/Vistas/frmCumplimientoEntrenamiento.zul", null, null);
+			win = (Window)execution.createComponents("/Entrenamiento/Vistas/frmCumplimientoEntrenamiento.zul", null, null);
 			win.doHighlighted();
 			win.setPosition("center");
 		}
 		else if (ac.getEstatus()=='C'){
-			win = (Window)execution.createComponents("Entrenamiento/Vistas/frmDesempennoJugador.zul", null, null);
+			win = (Window)execution.createComponents("/Entrenamiento/Vistas/frmDesempennoJugador.zul", null, null);
 			win.doHighlighted();
 			win.setPosition("center");
 		}
 		else if (ac.getEstatus()=='I'){			
-			win = (Window)execution.createComponents("Entrenamiento/Vistas/frmCumplimientoEntrenamiento.zul", null, null);
+			win = (Window)execution.createComponents("/Entrenamiento/Vistas/frmCumplimientoEntrenamiento.zul", null, null);
 			win.doHighlighted();
 			win.setPosition("center");
 		}
