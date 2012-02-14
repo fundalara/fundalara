@@ -38,17 +38,14 @@ import comun.ConeccionBD;
 public class CntrlRCuentasCobrar extends GenericForwardComposer {
 
 	Window winRCuentascobrar;
-	Textbox txtCedDesde,txtCedHasta;
-	Datebox dtEmiDesde,dtEmiHasta,dtVenDesde,dtVenHasta;
-	Button btnGenerar, btnCancelar, btnSalir;
+	Datebox dtEmiDesde,dtEmiHasta;
+	Button btnImprimir, btnCancelar;
 	Iframe ifReporte;
-	Combobox cmbDescripcion;
 	private String jrxmlSrc;
 	private Connection con;
 	private Map parameters = new HashMap();
 	private Component componente;
-	private Date fecha;
-
+	
 	
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -56,16 +53,10 @@ public class CntrlRCuentasCobrar extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		componente = comp;
-		fecha = new Date();
-		dtEmiDesde.setValue(fecha);
-		dtVenDesde.setValue(fecha);
+		
 	}
 
-	public CntrlRCuentasCobrar() throws SQLException {
-		super();
-		con = ConeccionBD.getCon("fundalara","postgres","123456");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/Cuentas Por Pagar.jrxml");
-	}
+		
 	
 	public void showReportfromJrxml() throws JRException, IOException{
 		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
@@ -77,7 +68,7 @@ public class CntrlRCuentasCobrar extends GenericForwardComposer {
 		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,arrayOutputStream);
 		exporter.exportReport();
 		arrayOutputStream.close();
-		final AMedia amedia = new AMedia("reporteEstadistico.pdf","pdf","pdf/application", arrayOutputStream.toByteArray());
+		final AMedia amedia = new AMedia("Cuentas por Cobrar.pdf","pdf","application/pdf", arrayOutputStream.toByteArray());
 		ifReporte.setContent(amedia);
 	}
 	
@@ -85,9 +76,12 @@ public class CntrlRCuentasCobrar extends GenericForwardComposer {
 		
 	}
 	
-	public void onClick$btnSalir(){
-		winRCuentascobrar.detach();
-		
+	public void onClick$btnImprimir() throws SQLException, JRException, IOException{
+		con = ConeccionBD.getCon("postgres","postgres","123456");
+		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteGeneralCcobrar.jrxml");
+		parameters.put("fechemides_1", dtEmiDesde.getText());
+		parameters.put("fechemihas_1", dtEmiHasta.getText());
+		showReportfromJrxml();
 	}
 
 

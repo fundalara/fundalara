@@ -1,13 +1,13 @@
 <?page title="Actualizar Cargo" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmCargoEmpleado' name='binderA'?>
 <zk>
-	<window title="Actualizar Cargos " border="normal" apply=""
+	<window title="Actualizar Cargos " border="normal" style="text-align:left"
+		apply="controlador.administracion.CntrlActualizarCargoEmpleado"
 		closable="true" id="frmCargoEmpleado" width="690px">
 
 		<groupbox style="border-color:orange;" closable="false">
-			<caption>Datos del Empleado</caption>
-
+			<caption label="Datos del Empleado"></caption>
 			<grid style="border:none;" oddRowSclass="none"
 				width="100%">
 				<columns>
@@ -17,6 +17,18 @@
 					<column label="" width="200px" />
 				</columns>
 				<rows style="border:none;">
+					<row style="border:none;">
+						<label value="Tipo Personal"></label>
+						<combobox width="170px" id="cmbPersona"
+							value="--Seleccione--" readonly="true">
+							<comboitem label="PERSONAL REMUNERADO"
+								value="PERSONAL REMUNERADO">
+							</comboitem>
+							<comboitem label="PERSONAL AD HONOREM"
+								value="PERSONAL AD HONOREM">
+							</comboitem>
+						</combobox>
+					</row>
 					<row style="border:none">
 						<label value="Cédula" />
 						<hbox align="center">
@@ -32,7 +44,9 @@
 					</row>
 					<row style="border:none" spans="1,3">
 						<label value="Nombre" />
-						<textbox readonly="true" width="81.5%"></textbox>
+						<textbox readonly="true" width="75%"
+							id="txtNombreEmpleado">
+						</textbox>
 					</row>
 
 					<row style="border:none">
@@ -42,7 +56,9 @@
 						</textbox>
 						<label value="Fecha de Finalización" />
 						<hbox>
-							<datebox id="dbxFechaFin"></datebox>
+							<datebox id="dbxFechaFinalizacion"
+								format="dd/MM/yyyy">
+							</datebox>
 							<label value="(*)" style="color:red">
 							</label>
 						</hbox>
@@ -50,15 +66,17 @@
 					<row style="border:none">
 						<label value=" Nuevo Cargo" />
 						<hbox>
-							<combobox width="170px" id="cmbCargo"></combobox>
+							<combobox width="170px" id="cmbCargo"
+								value="--Seleccione--" readonly="true">
+							</combobox>
 
 							<label value="(*)" style="color:red" />
 						</hbox>
 						<label value="Fecha de Inicio" />
 						<hbox>
-							<datebox id="dbxFechaInicio"></datebox>
-							<label value="(*)" style="color:red">
-							</label>
+							<datebox id="dbxFechaInicio"
+								format="dd/MM/yyyy">
+							</datebox>
 						</hbox>
 					</row>
 				</rows>
@@ -66,33 +84,45 @@
 		</groupbox>
 		<groupbox style="border-color:orange;" closable="false">
 			<caption label="Historial de Cargos"></caption>
-			<listbox mold="paging" pageSize="5" height="100px"
-				style="border:none;" oddRowSclass="none" width="100%">
+			<listbox mold="paging" pageSize="5" style="border:none;"
+				oddRowSclass="none" width="620px" height="100px"
+				id="gridPersonalCargo" model="@{cntrl.personalCargos}">
 				<listhead>
-					<listheader label="Cargo" width="100px" />
-					<listheader label="Fecha de Inicio" width="100px" />
-					<listheader label="Fecha de  Finalización"
-						width="100px" />
+					<listheader label="Cargo" width="280px"
+						align="center" />
+					<listheader label="Fecha de Inicio" width="170px"
+						align="center" />
+					<listheader label="Fecha de Finalización"
+						width="170px" align="center" />
 				</listhead>
-				<listitem>
-					<listcell />
-					<listcell />
-					<listcell />
+				<listitem self="@{each='personalCargoAux'}">
+					<listcell
+						label="@{personalCargoAux.datoBasico.nombre}">
+					</listcell>
+					<listcell
+						label="@{personalCargoAux.fechaInicio, converter='comun.converter.DateConverter' }">
+					</listcell>
+					<listcell
+						label="@{personalCargoAux.fechaFin, converter='comun.converter.DateConverter'}">
+					</listcell>
 				</listitem>
 			</listbox>
 		</groupbox>
 		<label value="(*) Campo Obligarorio" style="color:red"></label>
 		<separator></separator>
 		<div align="right">
-
 			<button image="/Recursos/Imagenes/guardar.ico" width="100px"
-				onClick="" label="Guardar" id="btnGuardar" />
-			<button image="/Recursos/Imagenes/editar.ico"
-				label="Modificar" width="100px" onClick="" id="btnModificar" />
+				onClick="" label="Guardar" id="btnGuardar" height="35px" />
 			<button image="/Recursos/Imagenes/cancelar.ico"
-				width="100px" onClick="" label="Cancelar" id="btnCancelar" />
+				width="100px" onClick="" label="Cancelar" id="btnCancelar"
+				height="35px" />
 			<button image="/Recursos/Imagenes/salir.png" width="100px"
-				onClick="" label="Salir" id="btnSalir">
+				onClick="" label="Salir" id="btnSalir" height="35px">
+				<attribute name="onClick">
+	{
+		frmCargoEmpleado.detach();
+	}
+</attribute>
 			</button>
 		</div>
 	</window>

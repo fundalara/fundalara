@@ -1,24 +1,19 @@
-<?page title="Actualizar Indumentaria"?>
+<?page title="Uniformes"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmActualizarIndumentaria' name='binder' ?>
 
-
-<window id="frmActualizarIndumentaria"
+<window id="frmActualizarIndumentaria" closable="true"
 	apply="controlador.administracion.CntrlActualizarIndumentaria"
-	title="Actualizar Indumentaria" border="normal" width="690px">
+	title="Uniformes" border="normal" width="690px">
 
 	<groupbox style="border-color:orange;">
-		<separator></separator>
-		<grid fixedLayout="true" oddRowSclass="none"
-			style="border:none;">
+		<grid oddRowSclass="none" style="border:none;">
 			<columns>
-				<column width="3%" />
-				<column width="17%" />
+				<column width="20%" />
 				<column width="80%" />
 			</columns>
 			<rows>
 				<row style="border:none;">
-					<space></space>
 					<label value="Tipo de Uniforme"></label>
 					<hbox>
 						<combobox id="cmbTipoUniforme"
@@ -32,7 +27,6 @@
 					</hbox>
 				</row>
 				<row align="left" style="border:none;">
-					<space></space>
 					<label value="Nombre" />
 					<hbox>
 						<combobox id="cmbTipoIndumentaria"
@@ -57,11 +51,9 @@
 					</hbox>
 				</row>
 				<row align="left" style="border:none;">
-					<space></space>
 					<label value="Valor" />
 					<doublebox id="dbxMonto" width="90px"></doublebox>
 				</row>
-
 			</rows>
 		</grid>
 		<hbox>
@@ -70,47 +62,46 @@
 				model="@{cntrl.tallasPorIndumentaria}" width="600px" mold="paging"
 				pageSize="10" oddRowSclass="none">
 				<listhead>
-					<listheader label="Tipo de Uniforme" width="40%"
+					<listheader label="Tipo de Uniforme" width="190px"
 						align="left" />
 					<listheader label="Indumentaria" align="center"
-						width="20%" />
+						width="190px" />
 					<listheader label="Talla" align="center"
-						width="15%" />
-					<listheader label="Precio" align="center"
-						width="15%" />
-				</listhead>
+						width="110px" />
 
+					<listheader label="Precio" align="center"
+						width="110px" />
+				</listhead>
 				<listitem self="@{each='tallaPorIndumentaria'}"
 					value="@{tallaPorIndumentaria}">
 					<listcell
 						label="@{tallaPorIndumentaria.datoBasicoByCodigoTipoUniforme.nombre}" />
 					<listcell
-						label="@{tallaPorIndumentaria.datoBasicoByCodigoTalla.nombre }" />
-					<listcell
 						label="@{tallaPorIndumentaria.datoBasicoByCodigoTalla.datoBasico.nombre}" />
+					<listcell
+						label="@{tallaPorIndumentaria.datoBasicoByCodigoTalla.nombre }" />
+
 					<listcell label="@{tallaPorIndumentaria.precio}" />
 				</listitem>
-
 			</listbox>
 			<vbox>
 				<button image="/Recursos/Imagenes/agregar.ico"
 					id="btnAgregar">
-				</button>
-				<button image="/Recursos/Imagenes/ed.ico"
-					id="btnEditar">
 				</button>
 				<button image="/Recursos/Imagenes/quitar.ico"
 					id="btnQuitar">
 				</button>
 			</vbox>
 		</hbox>
-		<separator></separator>
 	</groupbox>
 	<separator></separator>
 	<label value="(*) Campo Obligatorio" style="color:red" />
 	<div align="right">
 		<button id="btnRegistrar" image="/Recursos/Imagenes/guardar.ico"
 			label="Guardar" width="100px" height="35px" />
+		<button image="/Recursos/Imagenes/reporte.png"
+			orient="horizontal" id="btnImprimir" label="Generar" height="35px"
+			width="100px" />
 		<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico"
 			label="Cancelar" width="100px" height="35px" />
 		<button image="/Recursos/Imagenes/salir.png" id="btnSalir"

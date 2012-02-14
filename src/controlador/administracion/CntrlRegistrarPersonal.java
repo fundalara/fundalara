@@ -1,13 +1,19 @@
 package controlador.administracion;
 
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.AfeccionPersonal;
-import modelo.AfeccionPersonalId;
+//import modelo.AfeccionPersonalId;
 import modelo.ConceptoNomina;
 import modelo.DatoAcademicoPersonal;
 import modelo.DatoBasico;
@@ -20,6 +26,7 @@ import modelo.PersonalContrato;
 import modelo.PersonalTipoNomina;
 import modelo.TipoDato;
 
+import org.zkoss.zul.Image;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -28,11 +35,17 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
+
+import comun.FileLoader;
+
+import bsh.ParseException;
 
 import servicio.implementacion.ServicioAfeccionPersonal;
 import servicio.implementacion.ServicioConceptoNomina;
@@ -59,7 +72,6 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	PersonalTipoNomina personalTipoNomina = new PersonalTipoNomina();
 	DatoAcademicoPersonal datoAcademicoPersonal = new DatoAcademicoPersonal();
 	AfeccionPersonal afeccionPersonal;
-	AfeccionPersonalId afeccionPersonalId = new AfeccionPersonalId();
 	PersonalConceptoNomina personalConceptoNomina = new PersonalConceptoNomina();
 	ConceptoNomina conceptoNomina = new ConceptoNomina();
 	PersonalCargo personalCargo = new PersonalCargo();
@@ -89,7 +101,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	List<DatoBasico> GrupoSanguineo = new ArrayList<DatoBasico>();
 	List<DatoBasico> FactorSanguineo = new ArrayList<DatoBasico>();
 	List<DatoBasico> tipoEmpleados = new ArrayList<DatoBasico>();
-	List<DatoBasico> tipoNominas = new ArrayList<DatoBasico>();
+	List<DatoBasico> horario = new ArrayList<DatoBasico>();
 	List<DatoBasico> cargos = new ArrayList<DatoBasico>();
 	List<DatoBasico> codAreas = new ArrayList<DatoBasico>();
 	List<DatoBasico> codCels = new ArrayList<DatoBasico>();
@@ -103,19 +115,20 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	/* Instancias de los combos a Utilizar */
 	Combobox cmbCed, cmbGenero, cmbEdoCivil, cmbCodArea, cmbCodOper, cmbEdo,
 			cmbMunicipio, cmbParroquia, cmbGrupSanguineo, cmbFactor,
-			cmbAlergia, cmbCargo, cmbTipoNomina, cmbHoraTrab, cmbTipoEmpleado,
-			cmbAsignacion, cmbDeduccion;
+			cmbAlergia, cmbCargo, cmbHoraTrab, cmbHorario, cmbAsignacion,
+			cmbDeduccion;
 
 	/* Instancias de los datebox a Utilizar */
 
-	Datebox dtFechaNac, dtFechaEgreso, dtFechaCargo, dtFechaIngresoEsc, dtFechaEgresoEsc;
+	Datebox dtFechaNac, dtFechaEgreso, dtFechaCargo, dtFechaIngresoEsc,
+			dtFechaEgresoEsc;
 
 	/* Instancias de los botones a Utilizar */
 
 	Button btnGuardar, btnModificar, btnCancelar, btnSalir, btnNvaAlergia,
 			btnEliminar, btnNvoCargo, btnNvoTipoNomina, btnNvoHoraTrab,
 			btnNvoTipoEmpleado, btnHistorial, btnAgregarAlerg, btnQuitarAlerg,
-			btnQuitarDatAcad, btnAgregarDatAcad, btnBuscarCed;
+			btnQuitarDatAcad, btnAgregarDatAcad, btnBuscarCed, btnFoto;
 
 	/* Instancias de los texbox a Utilizar */
 
@@ -131,10 +144,13 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	Textbox txtDir;
 	Textbox txtInstituto;
 	Textbox txtTituloObt;
+	Textbox txtObsAlergias;
 
 	/* Instancias de los Spinner a Utilizar */
 
 	Spinner spNroHijos;
+
+	Image imgPersonal;
 
 	/* Instancias de los Grid a Utilizar */
 	Listbox gridAlergia;
@@ -144,6 +160,8 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 	AnnotateDataBinder binder;
 	Component formulario, formularioRegPers;
+
+	byte[] foto;
 
 	/* Desarrollo de los Metodos y Funciones del Controlador */
 	// ------------------------------------------------------------------------------------------------------
@@ -161,12 +179,11 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		this.llenarCmbAlergia();
 		this.llenarCmbGrupoSanguineo();
 		this.llenarCmbFactorSanguineo();
-		this.llenarCmbTipoEmpleado();
-		this.llenarCmbTipoNomina();
+		this.llenarcmbHorario();
+		// this.llenarCmbTipoNomina();
 		this.llenarCmbCargo();
 		this.llenarCmbCodArea();
 		this.llenarCmbCodCel();
-		// llenarCmbTipoCed();
 		limpiarFormulario();
 	}
 
@@ -193,7 +210,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void llenarCmbCodArea() {
 		cmbCodArea.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("CODIGO_AREA");
+		tipoDato = servicioTipoDato.buscarTipo("CODIGO AREA");
 		codAreas = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 		if (codAreas.equals(null)) {
 			alert("No se encontro");
@@ -212,7 +229,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void llenarCmbCodCel() {
 		cmbCodOper.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("CODIGO_CELULAR");
+		tipoDato = servicioTipoDato.buscarTipo("CODIGO CELULAR");
 		codCels = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 
 		if (codCels.equals(null)) {
@@ -272,7 +289,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void llenarCmbEstadoVenezuela() {
 		cmbEdo.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("ESTADO_VENEZUELA");
+		tipoDato = servicioTipoDato.buscarTipo("ESTADO");
 		estados = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 
 		if (estados.equals(null)) {
@@ -355,7 +372,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void llenarCmbGrupoSanguineo() {
 		cmbGrupSanguineo.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("GRUPO_SANGUINEO");
+		tipoDato = servicioTipoDato.buscarTipo("GRUPO SANGUINEO");
 		GrupoSanguineo = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 
 		if (GrupoSanguineo.equals(null)) {
@@ -376,7 +393,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void llenarCmbFactorSanguineo() {
 		cmbFactor.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("FACTOR_SANGUINEO");
+		tipoDato = servicioTipoDato.buscarTipo("FACTOR SANGUINEO");
 		FactorSanguineo = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 
 		if (FactorSanguineo.equals(null)) {
@@ -394,41 +411,21 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	}
 
 	// ------------------------------------------------------------------------------------------------------
-	public void llenarCmbTipoEmpleado() {
-		cmbTipoEmpleado.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("MODALIDAD DE CONTRATO");
-		tipoEmpleados = servicioDatoBasico.buscarPorTipoDato(tipoDato);
+	public void llenarcmbHorario() {
+		cmbHorario.getItems().clear();
+		tipoDato = servicioTipoDato.buscarTipo("HORARIO DE TRABAJO");
+		horario = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 
-		if (tipoEmpleados.equals(null)) {
+		if (horario.equals(null)) {
 			alert("No se encontro");
 		} else {
-			for (int i = 0; i < tipoEmpleados.size(); i++) {
+			for (int i = 0; i < horario.size(); i++) {
 				Comboitem item = new Comboitem();
 
-				item.setLabel(tipoEmpleados.get(i).getNombre().toString());
-				item.setValue(tipoEmpleados.get(i).getCodigoDatoBasico());
+				item.setLabel(horario.get(i).getNombre().toString());
+				item.setValue(horario.get(i).getCodigoDatoBasico());
 
-				cmbTipoEmpleado.appendChild(item);
-			}
-		}
-	}
-
-	// ------------------------------------------------------------------------------------------------------
-	public void llenarCmbTipoNomina() {
-		cmbTipoNomina.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("TIPO NOMINA");
-		tipoNominas = servicioDatoBasico.buscarPorTipoDato(tipoDato);
-
-		if (tipoNominas.equals(null)) {
-			alert("No se encontro");
-		} else {
-			for (int i = 0; i < tipoNominas.size(); i++) {
-				Comboitem item = new Comboitem();
-
-				item.setLabel(tipoNominas.get(i).getNombre().toString());
-				item.setValue(tipoNominas.get(i).getCodigoDatoBasico());
-
-				cmbTipoNomina.appendChild(item);
+				cmbHorario.appendChild(item);
 			}
 		}
 	}
@@ -455,10 +452,13 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregarAlerg() {
+
 		if (gridAlergia.getItemCount() == 0) {
 			colAlergias = new Listitem();
 			colAlergias.appendChild(new Listcell(this.cmbAlergia
 					.getSelectedItem().getLabel()));
+			colAlergias.appendChild(new Listcell(this.txtObsAlergias.getValue()
+					.toString()));
 			gridAlergia.appendChild(colAlergias);
 		} else {
 
@@ -466,6 +466,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 			do {
 				colAlergias = gridAlergia.getItemAtIndex(i);
 				Listcell celda0 = (Listcell) colAlergias.getChildren().get(0);
+				Listcell celda1 = (Listcell) colAlergias.getChildren().get(1);
 				if (this.cmbAlergia.getSelectedItem().getLabel()
 						.equals(celda0.getLabel())) {
 
@@ -478,8 +479,13 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 			colAlergias = new Listitem();
 			colAlergias.appendChild(new Listcell(this.cmbAlergia
 					.getSelectedItem().getLabel()));
+			colAlergias.appendChild(new Listcell(this.txtObsAlergias.getValue()
+					.toString().toUpperCase()));
 			gridAlergia.appendChild(colAlergias);
 		}
+
+		cmbAlergia.setValue("--Seleccione--");
+		txtObsAlergias.setValue(null);
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -497,12 +503,13 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregarDatAcad() {
+
 		if (gridDatoAcademicos.getItemCount() == 0) {
 			colDatAcad = new Listitem();
 			colDatAcad.appendChild(new Listcell(this.txtInstituto.getValue()
-					.toString()));
+					.toString().toUpperCase()));
 			colDatAcad.appendChild(new Listcell(this.txtTituloObt.getValue()
-					.toString()));
+					.toString().toUpperCase()));
 			colDatAcad.appendChild(new Listcell(this.dtFechaEgreso.getValue()
 					.toString()));
 			gridDatoAcademicos.appendChild(colDatAcad);
@@ -513,10 +520,10 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 				Listcell celda0 = (Listcell) colDatAcad.getChildren().get(0);
 				Listcell celda1 = (Listcell) colDatAcad.getChildren().get(1);
 				Listcell celda2 = (Listcell) colDatAcad.getChildren().get(2);
-				if (this.txtInstituto.getValue().toString()
+				if (this.txtInstituto.getValue().toString().toUpperCase()
 						.equals(celda0.getLabel())
 						&& this.txtTituloObt.getValue().toString()
-								.equals(celda1.getLabel())
+								.toUpperCase().equals(celda1.getLabel())
 						&& this.dtFechaEgreso.getValue().toString()
 								.equals(celda2.getLabel())) {
 
@@ -528,9 +535,9 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 			colDatAcad = new Listitem();
 			colDatAcad.appendChild(new Listcell(this.txtInstituto.getValue()
-					.toString()));
+					.toString().toUpperCase()));
 			colDatAcad.appendChild(new Listcell(this.txtTituloObt.getValue()
-					.toString()));
+					.toString().toUpperCase()));
 			colDatAcad.appendChild(new Listcell(this.dtFechaEgreso.getValue()
 					.toString()));
 			gridDatoAcademicos.appendChild(colDatAcad);
@@ -556,6 +563,14 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	}
 
 	// ------------------------------------------------------------------------------------------------------
+
+	public void onClick$btnFoto() {
+		FileLoader fl = new FileLoader();
+		foto = fl.cargarImagenEnBean(imgPersonal);
+		System.out.print(foto);
+	}
+
+	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnGuardar() {
 		Integer n = 0;
 		String cedula = cmbCed.getValue().toString()
@@ -565,134 +580,157 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		String celular = cmbCodOper.getValue().toString()
 				+ txtTelfCel.getValue().toString();
 
+		persona = new Persona();
 		persona.setCedulaRif(cedula);
 		persona.setFechaIngreso(dtFechaIngresoEsc.getValue());
-		persona.setDireccion(txtDir.getValue());
+		persona.setDireccion(txtDir.getValue().toUpperCase());
 		persona.setTelefonoHabitacion(telefono);
-		persona.setCorreoElectronico(txtCorreo.getValue());
-		persona.setTwitter(txtTwitter.getValue());
-		// persona.setFacebook(txtFace.getValue());
+		persona.setCorreoElectronico(txtCorreo.getValue().toUpperCase());
+		persona.setTwitter(txtTwitter.getValue().toUpperCase());
 		datoBasico = servicioDatoBasico.buscarPorString(cmbParroquia
 				.getSelectedItem().getLabel());
 		persona.setDatoBasicoByCodigoParroquia(datoBasico);
-		datoBasico = servicioDatoBasico.buscarPorCodigo(12);
+		datoBasico = servicioDatoBasico.buscarPorString("PERSONAL REMUNERADO");
 		persona.setDatoBasicoByCodigoTipoPersona(datoBasico);
+		persona.setEstatus('A');
+		servicioPersona.agregar(persona);
 
+		personaNatural = new PersonaNatural();
 		personaNatural.setPersona(persona);
 		personaNatural.setCelular(celular);
-		personaNatural.setPrimerNombre(txtPrimNombre.getValue());
-		personaNatural.setSegundoNombre(txtSegNombre.getValue());
-		personaNatural.setPrimerApellido(txtPrimApellido.getValue());
-		personaNatural.setSegundoApellido(txtSegApellido.getValue());
+		personaNatural.setPrimerNombre(txtPrimNombre.getValue().toUpperCase());
+		personaNatural.setSegundoNombre(txtSegNombre.getValue().toUpperCase());
+		personaNatural.setPrimerApellido(txtPrimApellido.getValue()
+				.toUpperCase());
+		personaNatural.setSegundoApellido(txtSegApellido.getValue()
+				.toUpperCase());
 
-		if (cmbGenero.getValue().equals("Masculino")) {
+		if (cmbGenero.getValue().equals("MASCULINO")) {
 			personaNatural.setDatoBasico(servicioDatoBasico
 					.buscarPorString("MASCULINO"));
-		} else if (cmbGenero.getValue().equals("Masculino")) {
+		} else if (cmbGenero.getValue().equals("FEMENINO")) {
 			personaNatural.setDatoBasico(servicioDatoBasico
 					.buscarPorString("FEMENINO"));
 		}
 		personaNatural.setFechaNacimiento(dtFechaNac.getValue());
+		if (foto != null) {
+			personaNatural.setFoto(foto);
+			System.out.print("entro");
+		}
+		personaNatural.setEstatus('A');
+		personaNatural.setFoto(null);
+		servicioPersonaNatural.agregar(personaNatural);
 
+		personal = new Personal();
 		personal.setPersonaNatural(personaNatural);
 		personal.setCantidadHijos(spNroHijos.getValue());
 		personal.setEstatus('A');
 		personal.setDatoBasico(servicioDatoBasico.buscarPorString(cmbEdoCivil
 				.getSelectedItem().getLabel()));
 
-		String tipoSangre = cmbGrupSanguineo.getValue() + cmbFactor.getValue();
+		String tipoSangre = cmbGrupSanguineo.getValue() + "-"
+				+ cmbFactor.getValue();
 		personal.setTipoSangre(tipoSangre);
+		servicioPersonal.agregar(personal);
 
+		personalCargo = new PersonalCargo();
 		personalCargos = servicioPersonalCargo.listarActivos();
 		n = personalCargos.size();
 		n++;
 		personalCargo.setCodigoPersonalCargo(n);
-		datoBasico = servicioDatoBasico.buscarPorString(cmbTipoEmpleado
+		datoBasico = servicioDatoBasico.buscarPorString(cmbCargo
 				.getSelectedItem().getLabel());
 		personalCargo.setDatoBasico(datoBasico);
 		personalCargo.setPersonal(personal);
-		if (cmbTipoEmpleado.getSelectedItem().getLabel().equals("Contratado")) {
-			personalCargo.setFechaFin(dtFechaEgresoEsc.getValue());
-		}
+		personalCargo.setFechaFin(dtFechaEgresoEsc.getValue());
 		personalCargo.setFechaInicio(dtFechaCargo.getValue());
 		personalCargo.setEstatus('A');
+		servicioPersonalCargo.agregar(personalCargo);
 
+		personalContrato = new PersonalContrato();
 		personalContratos = servicioPersonalContrato.listar();
 		n = personalContratos.size();
 		n++;
 		personalContrato.setCodigoPersonalContrato(n);
-		datoBasico = servicioDatoBasico.buscarPorString(cmbTipoEmpleado
-				.getSelectedItem().getLabel());
-		personalContrato.setDatoBasicoByCodigoModalidad(datoBasico);
+		personalContrato.setFechaInicio(dtFechaIngresoEsc.getValue());
 		personalContrato.setPersonal(personal);
-//		personalContrato.setFechaInicio(dtFechaContrato.getValue());
-		if (cmbTipoEmpleado.getSelectedItem().getLabel().equals("Contratado")) {
-			personalContrato.setFechaFin(dtFechaEgresoEsc.getValue());
-		}
-
-		personalTipoNominas = servicioPersonalTipoNomina.listarActivos();
-		n = personalTipoNominas.size();
-		n++;
-		personalTipoNomina.setCodigoPersonalTipoNomina(n);
-		datoBasico = servicioDatoBasico.buscarPorString(cmbTipoNomina
-				.getSelectedItem().getLabel());
-		personalTipoNomina.setDatoBasico(datoBasico);
-		personalTipoNomina.setPersonal(personal);
-		//personalTipoNomina.setFechaInicio(dtFechaTipoNomina.getValue());
-		if (cmbTipoEmpleado.getSelectedItem().getLabel().equals("Contratado")) {
-			personalTipoNomina.setFechaFin(dtFechaEgresoEsc.getValue());
-		}
-		personalTipoNomina.setEstatus('A');
-
-		servicioPersona.agregar(persona);
-		servicioPersonaNatural.agregar(personaNatural);
-		servicioPersonal.agregar(personal);
-		servicioPersonalCargo.agregar(personalCargo);
+		personalContrato.setFechaFin(dtFechaEgresoEsc.getValue());
+		personalContrato.setDatoBasicoByCodigoModalidad(servicioDatoBasico
+				.buscarPorString("TIEMPO COMPLETO")); // OJO CUAL ES LA
+														// MODALIDAD DEL
+														// CONTRATO?
+		personalContrato.setDatoBasicoByCodigoHorario(servicioDatoBasico
+				.buscarPorString(cmbHorario.getText().toString()));
+		personalContrato.setEstatus('A');
 		servicioPersonalContrato.agregar(personalContrato);
-		servicioPersonalTipoNomina.agregar(personalTipoNomina);
+
 		tipoDato = servicioTipoDato.buscarTipo("AFECCION");
 		alergias = servicioDatoBasico.buscarPorTipoDato(tipoDato);
 
+		afeccionPersonal = new AfeccionPersonal();
 		binder.loadComponent(gridAlergia);
 		for (int i = 0; i < gridAlergia.getItemCount(); i++) {
 
-			colDatAcad = gridAlergia.getItemAtIndex(i);
-			datoBasico = servicioDatoBasico.buscarPorString(colDatAcad
-					.getLabel());
-			for (int j = 0; j < alergias.size(); j++) {
-				if (alergias.get(j).getNombre().toString()
-						.equals(colDatAcad.getLabel().toString())) {
-					afeccionPersonalId = new AfeccionPersonalId();
-					afeccionPersonalId.setCedulaRif(txtCed.getValue());
-					afeccionPersonalId.setCodigoTipoAfeccion(alergias.get(j)
-							.getCodigoDatoBasico());
-				}
-			}
+			System.out.print("esta entrando al for");
 
-			afeccionPersonal = new AfeccionPersonal();
-			afeccionPersonal.setId(afeccionPersonalId);
-			System.out.println(afeccionPersonal.getId().getCedulaRif());
-			System.out
-					.println(afeccionPersonal.getId().getCodigoTipoAfeccion());
-			// afeccionPersonal.setDatoBasico(datoBasico);
-			System.out.println(afeccionPersonal.getDatoBasico()
-					.getCodigoDatoBasico());
+			colAlergias = gridAlergia.getItemAtIndex(i);
+			Listcell celda1 = (Listcell) colAlergias.getChildren().get(0);
+			Listcell celda2 = (Listcell) colAlergias.getChildren().get(1);
+
+			afeccionPersonal.setCodigoAfeccionPersonal(servicioAfeccionPersonal
+					.listar().size() + 1);
 			afeccionPersonal.setPersonal(personal);
-			System.out.println(afeccionPersonal.getPersonal().getCedulaRif());
+			afeccionPersonal.setDatoBasico(servicioDatoBasico
+					.buscarPorString(celda1.getLabel().toString()));
+			afeccionPersonal.setObservacion(celda2.getLabel().toString());
 			afeccionPersonal.setEstatus('A');
-			System.out.println(afeccionPersonal.getEstatus());
-
 			servicioAfeccionPersonal.agregar(afeccionPersonal);
+		}
+
+		/*
+		 * datoAcademicosP = servicioDatoAcademicoPersonal.listarActivos(); n =
+		 * datoAcademicosP.size(); n++;
+		 */
+		binder.loadComponent(gridDatoAcademicos);
+		for (int i = 0; i < gridDatoAcademicos.getItemCount(); i++) {
+
+			colDatAcad = gridDatoAcademicos.getItemAtIndex(i);
+			Listcell celda1 = (Listcell) colDatAcad.getChildren().get(0);
+			Listcell celda2 = (Listcell) colDatAcad.getChildren().get(1);
+			Listcell celda3 = (Listcell) colDatAcad.getChildren().get(2);
+
+			Date fecha = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			fecha.parse("" + fecha.getDate() + "/" + (fecha.getMonth() + 1)
+					+ "/" + (fecha.getYear() + 1900));
+			System.out.println(fecha.toString());
+			datoAcademicoPersonal
+					.setCodigoDatoAcademico(servicioDatoAcademicoPersonal
+							.listar().size() + 1);
+			datoAcademicoPersonal.setPersonal(personal);
+			datoAcademicoPersonal.setEstatus('A');
+
+			datoAcademicoPersonal.setInstituto(celda1.getLabel().toString()
+					.toUpperCase());
+			datoAcademicoPersonal.setTitulo(celda2.getLabel().toString()
+					.toUpperCase());
+			datoAcademicoPersonal.setFechaEgreso(fecha);
+
+			servicioDatoAcademicoPersonal.agregar(datoAcademicoPersonal);
 
 		}
-		persona = new Persona();
-		personal = new Personal();
-		personaNatural = new PersonaNatural();
-		personalCargo = new PersonalCargo();
-		personalContrato = new PersonalContrato();
-		personalTipoNomina = new PersonalTipoNomina();
-		afeccionPersonal = new AfeccionPersonal();
 
+		/*
+		 * persona = new Persona(); personaNatural = new PersonaNatural();
+		 * 
+		 * personal = new Personal();
+		 * 
+		 * personalCargo = new PersonalCargo(); personalContrato = new
+		 * PersonalContrato(); personalTipoNomina = new PersonalTipoNomina();
+		 * afeccionPersonal = new AfeccionPersonal(); datoAcademicoPersonal =
+		 * new DatoAcademicoPersonal();
+		 */
+		limpiarFormulario();
 		alert("Guardado");
 
 	}
@@ -720,8 +758,6 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		dtFechaNac.setText("");
 		dtFechaEgreso.setText("");
 		dtFechaCargo.setText("");
-	//	dtFechaTipoNomina.setText("");
-	//	dtFechaContrato.setText("");
 		dtFechaIngresoEsc.setText("");
 		dtFechaEgresoEsc.setText("");
 
@@ -770,14 +806,11 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		cmbCargo.setText("");
 		cmbCargo.setSelectedIndex(-1);
 		cmbCargo.setValue("--Seleccione--");
-		cmbTipoNomina.setText("");
-		cmbTipoNomina.setSelectedIndex(-1);
-		cmbTipoNomina.setValue("--Seleccione--");
-		cmbTipoEmpleado.setText("");
-		cmbTipoEmpleado.setSelectedIndex(-1);
-		cmbTipoEmpleado.setValue("--Seleccione--");
+		cmbHorario.setText("");
+		cmbHorario.setSelectedIndex(-1);
+		cmbHorario.setValue("--Seleccione--");
 
-		spNroHijos.setText("");
+		spNroHijos.setValue(0);
 
 		parroquias = new ArrayList<DatoBasico>();
 		edosCivil = new ArrayList<DatoBasico>();
@@ -788,7 +821,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		GrupoSanguineo = new ArrayList<DatoBasico>();
 		FactorSanguineo = new ArrayList<DatoBasico>();
 		tipoEmpleados = new ArrayList<DatoBasico>();
-		tipoNominas = new ArrayList<DatoBasico>();
+		horario = new ArrayList<DatoBasico>();
 		cargos = new ArrayList<DatoBasico>();
 		codAreas = new ArrayList<DatoBasico>();
 		codCels = new ArrayList<DatoBasico>();
@@ -802,124 +835,481 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnBuscarCed() {
-		
-		formulario.setAttribute("padre", "PERSONAL REMUNERADO");
-		Component catalogo = Executions.createComponents(
+
+		Map params = new HashMap();
+		params.put("padre", "PERSONAL REMUNERADO");
+		Executions.createComponents(
 				"/Administracion/Vistas/frmCatalogoPersonasNaturales.zul",
-				formulario, null);
+				null, params);
 		formulario.addEventListener("onCierreNatural", new EventListener() {
-					@Override
-					public void onEvent(Event arg0) throws Exception {
-						persona = (Persona) formulario.getVariable("persona", false);
-						
-						cmbCed.setValue(persona.getCedulaRif().substring(0, 2));
-						txtCed.setValue(persona.getCedulaRif().substring(2,persona.getCedulaRif().length()));
-						String segundoN = "", segundoA = "";
-						
-						if (persona.getPersonaNatural().getSegundoNombre() != null)
-							segundoN = persona.getPersonaNatural().getSegundoNombre();
-						
-						if (persona.getPersonaNatural().getSegundoNombre() != null)
-							segundoA = persona.getPersonaNatural().getSegundoApellido();
-						
-						txtPrimNombre.setText(persona.getPersonaNatural().getPrimerNombre());
-						txtSegNombre.setText(segundoN);
-						txtPrimApellido.setText(persona.getPersonaNatural().getPrimerApellido());
-						txtSegApellido.setText(segundoA);
-						
-						dtFechaNac.setValue(persona.getPersonaNatural().getFechaNacimiento());
-						cmbGenero.setText(persona.getPersonaNatural().getDatoBasico().getNombre());
-						cmbEdoCivil.setText(persona.getPersonaNatural().getPersonal().getDatoBasico().getNombre());
-						spNroHijos.setValue(persona.getPersonaNatural().getPersonal().getCantidadHijos());
-						
-						cmbCodArea.setText(persona.getTelefonoHabitacion().substring(0, 4));
-						txtTelfHab.setText(persona.getTelefonoHabitacion().substring(5, persona.getTelefonoHabitacion().length()));
-						
-						cmbCodOper.setValue(persona.getPersonaNatural().getCelular().substring(0, 4));
-						txtTelfCel.setText(persona.getPersonaNatural().getCelular().substring(5, persona.getPersonaNatural().getCelular().length()));
-						
-						txtCorreo.setText(persona.getCorreoElectronico());
-						txtTwitter.setText(persona.getTwitter());
-						
-						if (persona.getDatoBasicoByCodigoParroquia() == null) {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
 
-						} else {
-							
-							cmbEdo.setText(persona.getDatoBasicoByCodigoParroquia()
-									.getDatoBasico().getDatoBasico().getNombre());
-							cmbMunicipio.setText(persona.getDatoBasicoByCodigoParroquia()
-									.getDatoBasico().getNombre());
-							cmbParroquia.setText(persona.getDatoBasicoByCodigoParroquia()
-									.getNombre().toString());
-						}
-						txtDir.setText(persona.getDireccion());
-						
-						String cadena;
-						cadena=persona.getPersonaNatural().getPersonal().getTipoSangre().toString();					
-						cmbGrupSanguineo.setText(cadena.substring(0, cadena.indexOf("-")));
-						cmbFactor.setText(cadena.substring(cadena.indexOf("-")+1, cadena.length()));
-						
-//						afeccionPersonales = new ArrayList<AfeccionPersonal>();
-//						afeccionPersonales = servicioAfeccionPersonal.listarPorCedula(persona.getCedulaRif());
-//						System.out.println(afeccionPersonales.get(0).getDatoBasico().getNombre());
-//						System.out.println(afeccionPersonales.get(1).getDatoBasico().getNombre());
-//						for (int i = 0; i < afeccionPersonales.size(); i++) {
-//							
-//							colAlergias = new Listitem();
-//							colAlergias.appendChild(new Listcell(afeccionPersonales.get(i).getDatoBasico().getNombre()));
-//							gridAlergia.appendChild(colAlergias);	
-//						}
-						
-						datoAcademicosP = new ArrayList<DatoAcademicoPersonal>();
-						datoAcademicosP = servicioDatoAcademicoPersonal.listarPorCedula(persona.getCedulaRif());
-						for (int i = 0; i < datoAcademicosP.size(); i++) {
-							
-							colDatAcad = new Listitem();
-							colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i).getInstituto().toString()));
-							colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i).getTitulo().toString()));
-							colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i).getFechaEgreso().toString()));
-							gridDatoAcademicos.appendChild(colDatAcad);	
-						}
-						
-						personalCargo=servicioPersonalCargo.buscarCargoActual(persona.getPersonaNatural().getPersonal());
-						dtFechaCargo.setValue(personalCargo.getFechaInicio());
-						cmbCargo.setText(personalCargo.getDatoBasico().getNombre());
-						
-						personalContrato=servicioPersonalContrato.buscarPorCedulaRif(persona.getCedulaRif());
-						cmbTipoEmpleado.setText(personalContrato.getDatoBasicoByCodigoModalidad().getNombre());
-//						personalContratos=servicioPersonalContrato.listarActivos();
-//						for (int i = 0; i < personalContratos.size(); i++) {
-//							if(personalContratos.get(i).getPersonal().equals(persona.getPersonaNatural().getPersonal())){
-//								cmbTipoEmpleado.setText(personalContratos.get(i).getDatoBasicoByCodigoModalidad().getDatoBasico().getNombre());	
-//							}	
-//						}
-						
-						personalTipoNomina=servicioPersonalTipoNomina.buscarPorCedulaRif(persona.getCedulaRif());
-						cmbTipoNomina.setText(personalTipoNomina.getDatoBasico().getNombre());
-//						personalTipoNominas=servicioPersonalTipoNomina.listarActivos();
-//						for (int i = 0; i < personalTipoNominas.size(); i++) {
-//							if(personalTipoNominas.get(i).getPersonal().equals(persona.getPersonaNatural().getPersonal())){
-//								cmbTipoNomina.setText(personalTipoNominas.get(i).getDatoBasico().getNombre());
-//							}	
-//						}
-						
-						dtFechaIngresoEsc.setValue(persona.getFechaIngreso());
-						dtFechaEgresoEsc.setValue(persona.getFechaEgreso());
-						
-						binder.loadAll();
+				persona = (Persona) formulario.getVariable("persona", false);
+
+				cmbCed.setValue(persona.getCedulaRif().substring(0, 2));
+				txtCed.setValue(persona.getCedulaRif().substring(2,
+						persona.getCedulaRif().length()));
+				String segundoN = "", segundoA = "";
+
+				if (persona.getPersonaNatural().getSegundoNombre() != null)
+					segundoN = persona.getPersonaNatural().getSegundoNombre();
+
+				if (persona.getPersonaNatural().getSegundoNombre() != null)
+					segundoA = persona.getPersonaNatural().getSegundoApellido();
+
+				txtPrimNombre.setText(persona.getPersonaNatural()
+						.getPrimerNombre());
+				txtSegNombre.setText(segundoN);
+				txtPrimApellido.setText(persona.getPersonaNatural()
+						.getPrimerApellido());
+				txtSegApellido.setText(segundoA);
+
+				dtFechaNac.setValue(persona.getPersonaNatural()
+						.getFechaNacimiento());
+				cmbGenero.setText(persona.getPersonaNatural().getDatoBasico()
+						.getNombre());
+				cmbEdoCivil.setText(persona.getPersonaNatural().getPersonal()
+						.getDatoBasico().getNombre());
+				spNroHijos.setValue(persona.getPersonaNatural().getPersonal()
+						.getCantidadHijos());
+				foto = persona.getPersonaNatural().getFoto();
+				if (foto != null) {
+					try {
+						AImage aImage = new AImage("foto.jpg", foto);
+						imgPersonal.setContent(aImage);
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
-				});
+				}
+
+				if (persona.getTelefonoHabitacion() == null) {
+					cmbCodArea.setValue("-");
+					txtTelfHab.setValue(null);
+				} else {
+					cmbCodArea.setText(persona.getTelefonoHabitacion()
+							.substring(0, 4));
+					txtTelfHab.setText(persona.getTelefonoHabitacion()
+							.substring(5,
+									persona.getTelefonoHabitacion().length()));
+				}
+
+				if (persona.getPersonaNatural().getCelular() == null) {
+					cmbCodOper.setValue("-");
+					txtTelfCel.setValue(null);
+				} else {
+					cmbCodOper.setValue(persona.getPersonaNatural()
+							.getCelular().substring(0, 4));
+					txtTelfCel.setText(persona
+							.getPersonaNatural()
+							.getCelular()
+							.substring(
+									5,
+									persona.getPersonaNatural().getCelular()
+											.length()));
+				}
+
+				if (persona.getCorreoElectronico() == null) {
+					txtCorreo.setValue(null);
+				} else {
+					txtCorreo.setText(persona.getCorreoElectronico());
+				}
+
+				if (persona.getTwitter() == null) {
+					txtTwitter.setValue(null);
+				} else {
+					txtTwitter.setText(persona.getTwitter());
+				}
+
+				if (persona.getDatoBasicoByCodigoParroquia() != null) {
+
+					cmbEdo.setText(persona.getDatoBasicoByCodigoParroquia()
+							.getDatoBasico().getDatoBasico().getNombre());
+					cmbMunicipio.setText(persona
+							.getDatoBasicoByCodigoParroquia().getDatoBasico()
+							.getNombre());
+					cmbParroquia.setText(persona
+							.getDatoBasicoByCodigoParroquia().getNombre()
+							.toString());
+				}
+				txtDir.setText(persona.getDireccion());
+
+				String cadena;
+				cadena = persona.getPersonaNatural().getPersonal()
+						.getTipoSangre().toString();
+				if (cadena == null) {
+					cmbGrupSanguineo.setValue("--Seleccione--");
+					cmbFactor.setValue("--Seleccione--");
+				} else {
+					cmbGrupSanguineo.setText(cadena.substring(0,
+							cadena.indexOf("-")));
+					cmbFactor.setText(cadena.substring(cadena.indexOf("-") + 1,
+							cadena.length()));
+				}
+
+				afeccionPersonales = new ArrayList<AfeccionPersonal>();
+				afeccionPersonales = servicioAfeccionPersonal
+						.listarPorCedula(persona.getCedulaRif());
+
+				for (int i = 0; i < afeccionPersonales.size(); i++) {
+
+					colAlergias = new Listitem();
+					colAlergias.appendChild(new Listcell(afeccionPersonales
+							.get(i).getDatoBasico().getNombre().toString()));
+					colAlergias.appendChild(new Listcell(afeccionPersonales
+							.get(i).getObservacion().toString()));
+					gridAlergia.appendChild(colAlergias);
+				}
+
+				datoAcademicosP = new ArrayList<DatoAcademicoPersonal>();
+				datoAcademicosP = servicioDatoAcademicoPersonal
+						.listarPorCedula(persona.getCedulaRif());
+
+				for (int i = 0; i < datoAcademicosP.size(); i++) {
+
+					colDatAcad = new Listitem();
+					colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i)
+							.getInstituto().toString()));
+					colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i)
+							.getTitulo().toString()));
+					colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i)
+							.getFechaEgreso().toString()));
+					gridDatoAcademicos.appendChild(colDatAcad);
+				}
+
+				personalCargo = servicioPersonalCargo.buscarCargoActual(persona
+						.getPersonaNatural().getPersonal());
+				dtFechaCargo.setValue(personalCargo.getFechaInicio());
+				cmbCargo.setText(personalCargo.getDatoBasico().getNombre());
+
+				personalContrato = servicioPersonalContrato
+						.buscarPorCedulaRif(persona.getCedulaRif());
+				cmbHorario.setText(personalContrato
+						.getDatoBasicoByCodigoHorario().getNombre());
+
+				dtFechaIngresoEsc.setValue(persona.getFechaIngreso());
+				dtFechaEgresoEsc.setValue(persona.getFechaEgreso());
+
+				binder.loadAll();
+
+				// Inhabilitar();
+				txtTelfHab.setDisabled(false);
+				txtTelfCel.setDisabled(false);
+				txtCorreo.setDisabled(false);
+				txtTwitter.setDisabled(false);
+				txtDir.setDisabled(false);
+				txtInstituto.setDisabled(false);
+				txtTituloObt.setDisabled(false);
+
+				dtFechaEgreso.setDisabled(false);
+				dtFechaCargo.setDisabled(false);
+
+				cmbAlergia.setDisabled(false);
+
+				cmbEdoCivil.setDisabled(false);
+				cmbCodArea.setDisabled(false);
+				cmbCodOper.setDisabled(false);
+				cmbEdo.setDisabled(false);
+				cmbMunicipio.setDisabled(false);
+				cmbParroquia.setDisabled(false);
+				cmbAlergia.setDisabled(false);
+				cmbCargo.setDisabled(false);
+				cmbHorario.setDisabled(false);
+
+				spNroHijos.setDisabled(false);
+
+				btnGuardar.setDisabled(true);
+				btnModificar.setDisabled(false);
+				btnCancelar.setDisabled(false);
+				btnSalir.setDisabled(false);
+				btnNvaAlergia.setDisabled(false);
+				btnEliminar.setDisabled(false);
+				btnAgregarAlerg.setDisabled(false);
+				btnAgregarDatAcad.setDisabled(false);
+
+			}
+		});
 	}
 
-	/* Get y Set de Cada Uno de Los Objetos Declarados */
 	// ------------------------------------------------------------------------------------------------------
-	public AfeccionPersonalId getAfeccionPersonalId() {
-		return afeccionPersonalId;
+	public void Inhabilitar() {
+
+		txtCed.setDisabled(true);
+		txtPrimNombre.setDisabled(true);
+		txtSegNombre.setDisabled(true);
+		txtPrimApellido.setDisabled(true);
+		txtSegApellido.setDisabled(true);
+		txtTelfHab.setDisabled(true);
+		txtTelfCel.setDisabled(true);
+		txtCorreo.setDisabled(true);
+		txtTwitter.setDisabled(true);
+		txtDir.setDisabled(true);
+		txtInstituto.setDisabled(true);
+		txtTituloObt.setDisabled(true);
+
+		dtFechaNac.setDisabled(true);
+		dtFechaEgreso.setDisabled(true);
+		dtFechaCargo.setDisabled(true);
+		dtFechaIngresoEsc.setDisabled(true);
+		dtFechaEgresoEsc.setDisabled(true);
+
+		gridAlergia.setDisabled(true);
+		gridDatoAcademicos.setDisabled(true);
+
+		cmbCed.setDisabled(true);
+		cmbGenero.setDisabled(true);
+		cmbEdoCivil.setDisabled(true);
+		cmbCodArea.setDisabled(true);
+		cmbCodOper.setDisabled(true);
+		/*
+		 * cmbEdo.setDisabled(true); cmbMunicipio.setDisabled(true);
+		 * cmbParroquia.setDisabled(true);
+		 */
+		cmbGrupSanguineo.setDisabled(true);
+		cmbFactor.setDisabled(true);
+		cmbAlergia.setDisabled(true);
+		cmbCargo.setDisabled(true);
+		cmbHorario.setDisabled(true);
+
+		spNroHijos.setDisabled(true);
+
+		btnGuardar.setDisabled(true);
+		btnModificar.setDisabled(true);
+		btnCancelar.setDisabled(true);
+		btnSalir.setDisabled(true);
+		btnNvaAlergia.setDisabled(true);
+		btnEliminar.setDisabled(true);
+		// btnNvoTipoEmpleado.setDisabled(true);
+		btnAgregarAlerg.setDisabled(true);
+		btnQuitarAlerg.setDisabled(true);
+		btnQuitarDatAcad.setDisabled(true);
+		btnAgregarDatAcad.setDisabled(true);
+		btnBuscarCed.setDisabled(true);
+
 	}
 
-	public void setAfeccionPersonalId(AfeccionPersonalId afeccionPersonalId) {
-		this.afeccionPersonalId = afeccionPersonalId;
+	// ------------------------------------------------------------------------------------------------------
+	public void onClick$btnModificar() {
+
+		Integer n = 0;
+		String cedula = cmbCed.getValue().toString()
+				+ txtCed.getValue().toString();
+		String telefono = cmbCodArea.getValue().toString()
+				+ txtTelfHab.getValue().toString();
+		String celular = cmbCodOper.getValue().toString()
+				+ txtTelfCel.getValue().toString();
+
+		persona = new Persona();
+		persona.setCedulaRif(cedula);
+		persona.setFechaIngreso(dtFechaIngresoEsc.getValue());
+		persona.setDireccion(txtDir.getValue().toUpperCase());
+		persona.setTelefonoHabitacion(telefono);
+		persona.setCorreoElectronico(txtCorreo.getValue().toUpperCase());
+		persona.setTwitter(txtTwitter.getValue().toUpperCase());
+		datoBasico = servicioDatoBasico.buscarPorString(cmbParroquia.getText());
+		persona.setDatoBasicoByCodigoParroquia(datoBasico);
+		datoBasico = servicioDatoBasico.buscarPorString("PERSONAL REMUNERADO");
+		persona.setDatoBasicoByCodigoTipoPersona(datoBasico);
+		persona.setEstatus('A');
+		servicioPersona.actualizar(persona);
+
+		personaNatural = new PersonaNatural();
+		personaNatural.setPersona(persona);
+		personaNatural.setCelular(celular);
+		personaNatural.setPrimerNombre(txtPrimNombre.getValue().toUpperCase());
+		personaNatural.setSegundoNombre(txtSegNombre.getValue().toUpperCase());
+		personaNatural.setPrimerApellido(txtPrimApellido.getValue()
+				.toUpperCase());
+		personaNatural.setSegundoApellido(txtSegApellido.getValue()
+				.toUpperCase());
+
+		if (cmbGenero.getValue().equals("MASCULINO")) {
+			personaNatural.setDatoBasico(servicioDatoBasico
+					.buscarPorString("MASCULINO"));
+		} else if (cmbGenero.getValue().equals("FEMENINO")) {
+			personaNatural.setDatoBasico(servicioDatoBasico
+					.buscarPorString("FEMENINO"));
+		}
+		personaNatural.setFechaNacimiento(dtFechaNac.getValue());
+		if (foto != null) {
+			personaNatural.setFoto(foto);
+			System.out.print("entro");
+		}
+		personaNatural.setEstatus('A');
+		personaNatural.setFoto(null);
+		servicioPersonaNatural.agregar(personaNatural);
+
+		personal = new Personal();
+		personal.setPersonaNatural(personaNatural);
+		personal.setCantidadHijos(spNroHijos.getValue());
+		personal.setEstatus('A');
+		personal.setDatoBasico(servicioDatoBasico.buscarPorString(cmbEdoCivil
+				.getSelectedItem().getLabel()));
+
+		String tipoSangre = cmbGrupSanguineo.getValue() + "-"
+				+ cmbFactor.getValue();
+		personal.setTipoSangre(tipoSangre);
+		servicioPersonal.agregar(personal);
+
+		personalCargo = new PersonalCargo();
+		personalCargos = servicioPersonalCargo.listarActivos();
+		n = personalCargos.size();
+		n++;
+		personalCargo.setCodigoPersonalCargo(n);
+		datoBasico = servicioDatoBasico.buscarPorString(cmbCargo
+				.getSelectedItem().getLabel());
+		personalCargo.setDatoBasico(datoBasico);
+		personalCargo.setPersonal(personal);
+		personalCargo.setFechaFin(dtFechaEgresoEsc.getValue());
+		personalCargo.setFechaInicio(dtFechaCargo.getValue());
+		personalCargo.setEstatus('A');
+		servicioPersonalCargo.agregar(personalCargo);
+
+		personalContrato = new PersonalContrato();
+		personalContratos = servicioPersonalContrato.listar();
+		n = personalContratos.size();
+		n++;
+		personalContrato.setCodigoPersonalContrato(n);
+		personalContrato.setFechaInicio(dtFechaIngresoEsc.getValue());
+		personalContrato.setPersonal(personal);
+		personalContrato.setFechaFin(dtFechaEgresoEsc.getValue());
+		personalContrato.setDatoBasicoByCodigoModalidad(servicioDatoBasico
+				.buscarPorString("TIEMPO COMPLETO")); // OJO CUAL ES LA
+														// MODALIDAD DEL
+														// CONTRATO?
+		personalContrato.setDatoBasicoByCodigoHorario(servicioDatoBasico
+				.buscarPorString(cmbHorario.getText().toString()));
+		personalContrato.setEstatus('A');
+		servicioPersonalContrato.agregar(personalContrato);
+
+		tipoDato = servicioTipoDato.buscarTipo("AFECCION");
+		alergias = servicioDatoBasico.buscarPorTipoDato(tipoDato);
+
+		afeccionPersonal = new AfeccionPersonal();
+		binder.loadComponent(gridAlergia);
+		for (int i = 0; i < gridAlergia.getItemCount(); i++) {
+
+			System.out.print("esta entrando al for");
+
+			colAlergias = gridAlergia.getItemAtIndex(i);
+			Listcell celda1 = (Listcell) colAlergias.getChildren().get(0);
+			Listcell celda2 = (Listcell) colAlergias.getChildren().get(1);
+
+			afeccionPersonal.setCodigoAfeccionPersonal(servicioAfeccionPersonal
+					.listar().size() + 1);
+			afeccionPersonal.setPersonal(personal);
+			afeccionPersonal.setDatoBasico(servicioDatoBasico
+					.buscarPorString(celda1.getLabel().toString()));
+			afeccionPersonal.setObservacion(celda2.getLabel().toString());
+			afeccionPersonal.setEstatus('A');
+			servicioAfeccionPersonal.agregar(afeccionPersonal);
+		}
+
+		/*
+		 * datoAcademicosP = servicioDatoAcademicoPersonal.listarActivos(); n =
+		 * datoAcademicosP.size(); n++;
+		 */
+		binder.loadComponent(gridDatoAcademicos);
+		for (int i = 0; i < gridDatoAcademicos.getItemCount(); i++) {
+
+			colDatAcad = gridDatoAcademicos.getItemAtIndex(i);
+			Listcell celda1 = (Listcell) colDatAcad.getChildren().get(0);
+			Listcell celda2 = (Listcell) colDatAcad.getChildren().get(1);
+			Listcell celda3 = (Listcell) colDatAcad.getChildren().get(2);
+
+			Date fecha = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			fecha.parse("" + fecha.getDate() + "/" + (fecha.getMonth() + 1)
+					+ "/" + (fecha.getYear() + 1900));
+			System.out.println(fecha.toString());
+			datoAcademicoPersonal
+					.setCodigoDatoAcademico(servicioDatoAcademicoPersonal
+							.listar().size() + 1);
+			datoAcademicoPersonal.setPersonal(personal);
+			datoAcademicoPersonal.setEstatus('A');
+
+			datoAcademicoPersonal.setInstituto(celda1.getLabel().toString()
+					.toUpperCase());
+			datoAcademicoPersonal.setTitulo(celda2.getLabel().toString()
+					.toUpperCase());
+			datoAcademicoPersonal.setFechaEgreso(fecha);
+
+			servicioDatoAcademicoPersonal.agregar(datoAcademicoPersonal);
+
+		}
+		
+		limpiarFormulario();
+		alert("Registro modificado exitosamente");
+
 	}
+
+	/*
+	 * *
+	 * ------------------------------------------------------------------------
+	 * ------------------------------ // public void onClick$btnEliminar() { //
+	 * try { // Integer qs = Messagebox.show("¿Desea eliminar los datos?", //
+	 * "Importante", Messagebox.OK | Messagebox.CANCEL, // Messagebox.QUESTION);
+	 * // if (qs.equals(1)) { // //
+	 * System.out.println("Persona"+persona.getCedulaRif()); //
+	 * persona.setEstatus('E'); // servicioPersona.actualizar(persona); // //
+	 * personaNatural=new PersonaNatural(); //
+	 * personaNatural=servicioPersonaNatural
+	 * .buscarPersonaNatural(persona.getCedulaRif()); //
+	 * System.out.println("Persona Natural"+personaNatural.getCedulaRif()); //
+	 * if(personaNatural.getCedulaRif().equals(persona)){ //
+	 * personaNatural.setEstatus('E'); //
+	 * servicioPersonaNatural.actualizar(personaNatural); // } // //
+	 * personal=new Personal(); //
+	 * personal=servicioPersonal.buscarPorCedulaRif(persona.getCedulaRif()); //
+	 * System.out.println("Personal"+personal.getCedulaRif()); //
+	 * if(personal.getCedulaRif().equals(persona)){ // personal.setEstatus('E');
+	 * // servicioPersonal.actualizar(personal); // } // // personalCargo=new
+	 * PersonalCargo(); //
+	 * personalCargo=servicioPersonalCargo.buscarPorCedulaRif
+	 * (persona.getCedulaRif()); //
+	 * System.out.println("Personal Cargo"+personalCargo
+	 * .getPersonal().getCedulaRif()); //
+	 * if(personalCargo.getPersonal().getCedulaRif().equals(persona)){ //
+	 * personalCargo.setEstatus('E'); //
+	 * servicioPersonalCargo.actualizar(personalCargo); // } // //
+	 * personalContrato=new PersonalContrato(); //
+	 * personalContrato=servicioPersonalContrato
+	 * .buscarPorCedulaRif(persona.getCedulaRif()); //
+	 * System.out.println("Personal Contrato"
+	 * +personalContrato.getPersonal().getCedulaRif()); //
+	 * if(personalContrato.getPersonal().getCedulaRif().equals(persona)){ //
+	 * personalContrato.setEstatus('E'); //
+	 * servicioPersonalContrato.actualizar(personalContrato); // } // //
+	 * personalTipoNomina=new PersonalTipoNomina(); //
+	 * personalTipoNomina=servicioPersonalTipoNomina
+	 * .buscarPorCedulaRif(persona.getCedulaRif()); //
+	 * if(personalTipoNomina.getPersonal().getCedulaRif().equals(persona)){ //
+	 * personalTipoNomina.setEstatus('E'); //
+	 * servicioPersonalTipoNomina.actualizar(personalTipoNomina); // } // // //
+	 * afeccionPersonales
+	 * =servicioAfeccionPersonal.listarPorCedula(persona.getCedulaRif()); // for
+	 * (int i = 0; i < afeccionPersonales.size(); i++) { //
+	 * afeccionPersonales.get(i).setEstatus('E'); //
+	 * servicioAfeccionPersonal.eliminar(afeccionPersonales.get(i)); // // } //
+	 * datoAcademicosP
+	 * =servicioDatoAcademicoPersonal.listarPorCedula(persona.getCedulaRif());
+	 * // for (int i = 0; i < datoAcademicosP.size(); i++) { //
+	 * datoAcademicosP.get(i).setEstatus('E'); //
+	 * servicioDatoAcademicoPersonal.eliminar(datoAcademicosP.get(i)); // // }
+	 * // limpiarFormulario(); // binder.loadAll(); // alert("Eliminado"); // }
+	 * // } catch (InterruptedException e) { // e.printStackTrace(); // } // //
+	 * }
+	 * 
+	 * /* Get y Set de Cada Uno de Los Objetos Declarados
+	 */
+	// ------------------------------------------------------------------------------------------------------
+	/*
+	 * public AfeccionPersonalId getAfeccionPersonalId() { return
+	 * afeccionPersonalId; }
+	 * 
+	 * public void setAfeccionPersonalId(AfeccionPersonalId afeccionPersonalId)
+	 * { this.afeccionPersonalId = afeccionPersonalId; }
+	 */
 
 	public List<DatoBasico> getAlergias() {
 		return alergias;
@@ -1083,8 +1473,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	public void setMunicipios(List<DatoBasico> municipios) {
 		this.municipios = municipios;
 	}
-	// ------------------------------------------------------------------------------------------------------
-	
+
 	public AnnotateDataBinder getBinder() {
 		return binder;
 	}
@@ -1100,6 +1489,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	public void setFormulario(Component formulario) {
 		this.formulario = formulario;
 	}
+
 	public Button getBtnBuscarCed() {
 		return btnBuscarCed;
 	}

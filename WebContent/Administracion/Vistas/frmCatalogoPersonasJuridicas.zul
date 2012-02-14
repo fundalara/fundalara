@@ -1,8 +1,8 @@
 <?page title="Catalogo Personas Jurídicas" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPersonas"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoJuridica" name='binderCat'?>
 <zk>
-	<window id="frmCatalogoJuridica"
+	<window id="frmCatalogoJuridica" closable="true"
 		title="Catálogo de Personas Jurídicas"
 		apply="controlador.administracion.CntrlCatalogoPersonasJuridicas"
 		border="normal" width="500px" left="500px" top="100px" mode="modal">
@@ -31,17 +31,19 @@
 			</auxhead>
 			<listitem self="@{each='personaJuridica'}">
 				<listcell label="@{personaJuridica.cedulaRif }" />
-				<listcell
-					label="@{personaJuridica.razonSocial }" />
+				<listcell label="@{personaJuridica.razonSocial }" />
 			</listitem>
 		</listbox>
 
 		<separator />
 		<div align="right" width="480px">
 			<button image="/Recursos/Imagenes/aceptar.ico"
-				id="btnAceptar" tooltiptext="Seleccionar PersonaJuridica" label="Seleccionar"
-				width="100px" height="35px">
+				id="btnAceptar" tooltiptext="Seleccionar PersonaJuridica"
+				label="Seleccionar" width="100px" height="35px">
 			</button>
+			<button image="/Recursos/Imagenes/reporte.png"
+				orient="horizontal" id="btnImprimir" label="Generar" height="35px"
+				width="100px" />
 			<button image="/Recursos/Imagenes/salir.png"
 				tooltiptext="Salir del Catálogo" label="Salir" width="100px"
 				height="35px" id="btnSalir">

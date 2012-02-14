@@ -1,16 +1,11 @@
 <?page title="Benefactor Jurídico" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmBenefactorJuridico'?>
 <zk>
-	<window apply="controlador.administracion.CntrlPersonaJuridica"
-		id="frmBenefactorJuridico" title="Benefactor" border="normal"
+	<window apply="controlador.administracion.CntrlPersonaJuridica" closable="true"
+		id="frmBenefactorJuridico" title="Benefactor Jurídico" border="normal"
 		width="690px">
-		<zscript><![CDATA[
-	public void convertir() {
-		System.out.println("----");
-		//return "XXXXXX";
-	}
-]]></zscript>
+		
 		<panel title="Datos del Benefactor" collapsible="true"
 			open="true">
 			<panelchildren>
@@ -29,7 +24,6 @@
 								<hbox align="center">
 									<label value="J-" />
 									<textbox id="txtRif"></textbox>
-
 									<label value="(*)"
 										style="color:red" />
 									<button id="btnBuscar"
@@ -78,8 +72,6 @@
 									<textbox width="120px"
 										id="txtTelefono">
 									</textbox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 								<label value="Numero de Fax" />
 								<hbox>
@@ -133,8 +125,6 @@
 											context="@{estado.codigoDatoBasico}" value="@{estado}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 								<label value="Municipio" />
 								<hbox>
@@ -147,8 +137,7 @@
 											value="@{municipio}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
+								
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
@@ -163,8 +152,6 @@
 											context="@{parroquia.codigoDatoBasico}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
@@ -174,8 +161,6 @@
 										value="@{cntrl.persona.direccion}" maxlength="200"
 										height="40px" width="505px" multiline="true"
 										style='text-transform:uppercase;' />
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 						</rows>
@@ -202,7 +187,7 @@
 				tooltiptext="Salir" label="Salir" width="100px" height="35px">
 				<attribute name="onClick">
 	{
-		frmPersonas.onClose();
+		frmBenefactorJuridico.detach();
 	}
 </attribute>
 			</button>

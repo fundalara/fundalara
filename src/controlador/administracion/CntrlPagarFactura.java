@@ -2,8 +2,10 @@ package controlador.administracion;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -14,11 +16,14 @@ import modelo.CuentaPagar;
 import modelo.CuentaPagarMaterial;
 import modelo.CuentaPagarMaterialId;
 import modelo.DatoBasico;
+import modelo.DocumentoAcreedor;
 import modelo.Egreso;
 import modelo.EgresoCuentaPagar;
 import modelo.EgresoCuentaPagarId;
 import modelo.EgresoFormaPago;
 import modelo.EgresoFormaPagoId;
+import modelo.IngresoDocumentoAcreedor;
+import modelo.IngresoDocumentoAcreedorId;
 import modelo.Material;
 import modelo.Movimiento;
 import modelo.Persona;
@@ -36,6 +41,7 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Doublebox;
@@ -69,19 +75,19 @@ import servicio.implementacion.ServicioTipoDato;
 public class CntrlPagarFactura extends GenericForwardComposer {
 	Material mat;
 	PersonaJuridica personaJuridica;
-	CuentaPagar CP, cuentaPagarFact;
+	CuentaPagar CP, cuentaPagarFact, factura, auxFact;
 	CuentaPagarMaterial material2, auxCuentaPagarMaterial;
 	CuentaPagarMaterialId cuentaPagarMaterialId;
 	Persona persona;
 	Egreso egreso;
 	EgresoCuentaPagar egresoCuentaPagar;
-
+	EgresoCuentaPagarId egresocuentaPagarId;
 	EgresoFormaPago egresoFormaPago, auxEgresoFormaPago;
 
 	DatoBasico datoBasico;
 	TipoDato tipoDato;
 
-	Component formulario, formularioProv;
+	Component formulario;
 
 	ServicioCuentaPagar servicioCuentaPagar;
 	ServicioCuentaPagarMaterial servicioCuentaPagarMaterial;
@@ -94,14 +100,12 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 	ServicioPersonaJuridica servicioPersonaJuridica;
 	ServicioEgresoFormaPago servicioEgresoFormaPago;
 
-	Button btnBuscar, btnSalir, btnConsultarFactura, btnBuscar3, btnAgregar2,
-			btnAgregar3, btnQuitar2, btnQuitar3, btnBuscar4,
-			btnBuscar6, btnCancelar, btnPagar, btnAnular, btnEditar2,
-			btnCancelar3;
+	Button btnBuscar, btnSalir, btnAgregar3, btnQuitar3, btnPagar, btnAnular,
+			btnEditar2, btnCancelar, btnBuscarProveedor;
 
 	Textbox txtNombreProveedor, txtCodigoProveedor, txtCodigoMaterial,
-			txtNombreMaterial, txtSubTotal, txtCodigoProveedor2,
-			txtMonto, txtNroDocumento, txtRif2, txtNroRecibo;
+			txtNombreMaterial, txtSubTotal, txtRazon, txtMonto,
+			txtNroDocumento, txtRif2, txtNroRecibo;
 
 	Intbox ibSubTotal, ibIva, ibTotal;
 
@@ -110,7 +114,8 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			cmbTipoTarjeta, cmbNacionalidad;
 
 	Row row1, row2;
-	Doublebox dbMontoaCancelar, dboxMonto, dboxSubTotal, dboxIva;
+	Doublebox dbMontoaCancelar, dboxMonto, dboxSubTotal, dboxIva,
+			dboxMontoAbono, dboxMontoP, dboxMontoCancelar;
 	Grid gridDatosFactura, gridFormaPago, gridDiferentesFormasPago;
 
 	Tab tabPagar;
@@ -118,10 +123,11 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 
 	Groupbox gropboxListaMateriales;
 
-	Listbox lbxDetalles, lbxListaPagos, lbxCuentas;
+	Listbox lbxDetalles, lbxListaPagos, lbxCuentas, lbxFacturas;
 	Listheader lhSubtotal;
 	List<DatoBasico> datoBasicos, datoBasico2;
 	List<CuentaPagarMaterial> materiales2 = new ArrayList<CuentaPagarMaterial>();
+	List<CuentaPagar> facturas = new ArrayList<CuentaPagar>();
 	List<Material> listaMateriales;
 	List<Persona> personas = new ArrayList<Persona>();
 	List<PersonaJuridica> proveedores = new ArrayList<PersonaJuridica>();
@@ -129,11 +135,12 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			tipoTarjeta, tipoTarjeta2 = new ArrayList<DatoBasico>();
 	List<Egreso> listaEgresos;
 	List<EgresoCuentaPagar> listaEgresoCP = new ArrayList<EgresoCuentaPagar>();
+	List<CuentaPagar> listaFacturas = new ArrayList<CuentaPagar>();
 	List<EgresoCuentaPagar> listaEgresoCuentaPagar = new ArrayList<EgresoCuentaPagar>();
 	List<EgresoFormaPago> listaEgresoFormaPago = new ArrayList<EgresoFormaPago>();
 	Listitem columnas;
 
-	AnnotateDataBinder binder;
+	AnnotateDataBinder binderCompras;
 	Window Factura;
 	double valorIva = 12;
 	Boolean flag = false;
@@ -147,7 +154,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrlfactura", this, true);
 		formulario = comp;
-		formularioProv = comp;
+
 		mat = new Material();
 		cuentaPagarFact = new CuentaPagar();
 		egreso = new Egreso();
@@ -164,14 +171,98 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 	}
 
 	// ---------------------------------------------------------------------------------------------------
+	public void onClick$btnBuscarProveedor() {
+		Map params = new HashMap();
+		params.put("padre", "PROVEEDOR DE MATERIALES");
+		params.put("formulario", formulario);
+		Executions.createComponents(
+				"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
+				null, params);
+		formulario.addEventListener("onCierreJuridico", new EventListener() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				persona = (Persona) formulario.getVariable("persona", false);
+				facturas = servicioCuentaPagar.buscarPendientesPorRif(persona);
+				ActivarPagarFacturas();
+				double acum = 0;
+				for (int i = 0; i < facturas.size(); i++) {
+					acum = acum + facturas.get(i).getSaldo();
+				}
+				binderCompras.loadComponent(lbxFacturas);
+				dboxMontoP.setValue(acum);
+				binderCompras.loadAll();
+			}
+		});
+	}
+
+	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnPagar() {
+		Egreso egreso = new Egreso();
+		double monto1 = 0, monto2 = 0;
+
+		monto1 = dboxMontoCancelar.getValue();
+		for (int i = 0; i < listaEgresoFormaPago.size(); i++) {
+			monto2 = monto2 + listaEgresoFormaPago.get(i).getMonto();
+		}
+		if (monto1 != monto2) {
+			alert("Los montos no coinciden");
+			return;
+		}
 		tipoDato = new TipoDato();
 		datoBasico = servicioDatoBasico.buscarPorString("FACTURA");
 		egreso.setCodigoEgreso(servicioEgreso.listar().size() + 1);
 		egreso.setEstatus('A');
-
+		egreso.setFechaPago(dtFactura2.getValue());
+		egreso.setNumeroDocumento(txtNroRecibo.getValue());
 		servicioEgreso.agregar(egreso);
 
+		for (int i = 0; i < facturas.size(); i++) {
+			System.out.println(facturas.size());
+			Listcell celda = (Listcell) lbxFacturas.getItemAtIndex(i)
+					.getChildren().get(0);
+			Checkbox check = (Checkbox) celda.getChildren().get(0);
+			System.out.println("--------");
+			if (check.isChecked()) {
+				System.out.println(check.isChecked());
+
+				EgresoCuentaPagar ECP = new EgresoCuentaPagar();
+				System.out.println(facturas.get(i).getCodigoCuentaPagar());
+				ECP.setId(new EgresoCuentaPagarId(egreso.getCodigoEgreso(),
+						facturas.get(i).getCodigoCuentaPagar()));
+				ECP.setEgreso(egreso);
+				ECP.setCuentaPagar(facturas.get(i));
+				ECP.setEstatus('A');
+
+				Listcell celdamonto = (Listcell) lbxFacturas.getItemAtIndex(i)
+						.getChildren().get(6);
+				Doublebox ch = (Doublebox) celdamonto.getChildren().get(0);
+
+				if (ch.getValue() != null) {
+					System.out.println(ch.getValue());
+					ECP.setMontoAbonado(ch.getValue());
+					double resta = facturas.get(i).getSaldo()
+							- ECP.getMontoAbonado();
+					facturas.get(i).setSaldo(resta);
+					System.out.println(resta);
+
+					if (facturas.get(i).getSaldo() == 0) {
+						System.out.println("C");
+						facturas.get(i).setEstado('C');
+
+					} else {
+						System.out.println("P");
+					}
+				} else {
+					ECP.setMontoAbonado(0);
+
+				}
+				servicioCuentaPagar.actualizar(facturas.get(i));
+
+				servicioEgresoCuentaPagar.agregar(ECP);
+				System.out.println("guardando documento");
+			}
+
+		}
 		for (int i = 0; i < listaEgresoFormaPago.size(); i++) {
 			listaEgresoFormaPago.get(i).setEgreso(egreso);
 			listaEgresoFormaPago.get(i).setEstatus('A');
@@ -181,52 +272,78 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			servicioEgresoFormaPago.agregar(listaEgresoFormaPago.get(i));
 		}
 
-		egresoCuentaPagar.setEstatus('A');
-		egresoCuentaPagar.setId(new EgresoCuentaPagarId(cuentaPagarFact
-				.getOrigen(), egreso.getCodigoEgreso()));
-		egresoCuentaPagar.setMontoAbonado(dboxSubTotal.getValue());
-		egresoCuentaPagar.setCuentaPagar(cuentaPagarFact);
-		servicioEgresoCuentaPagar.agregar(egresoCuentaPagar);
-		double aux = 0;
-		listaEgresoCuentaPagar = servicioEgresoCuentaPagar
-				.listarPorOrigen(cuentaPagarFact);
-		for (int z = 0; z < listaEgresoCuentaPagar.size(); z++) {
-			aux = aux + listaEgresoCuentaPagar.get(z).getMontoAbonado();
+		/*
+		 * double aux = 0; listaEgresoCuentaPagar = servicioEgresoCuentaPagar
+		 * .listarPorCuentaPagar(cuentaPagarFact); for (int z = 0; z <
+		 * listaEgresoCuentaPagar.size(); z++) { aux = aux +
+		 * listaEgresoCuentaPagar.get(z).getMontoAbonado(); }
+		 * 
+		 * if (cuentaPagarFact.getMontoTotal() == aux) {
+		 * cuentaPagarFact.setEstado('C');
+		 * cuentaPagarFact.setConcepto("FACTURA CANCELADA"); } else {
+		 * cuentaPagarFact.setEstado('P'); }
+		 * servicioCuentaPagar.actualizar(cuentaPagarFact);
+		 */
+		/*
+		 * egreso = new Egreso(); int ii = 0; while (ii < materiales2.size()) {
+		 * materiales2.remove(0); ii++; } ;
+		 */
+		binderCompras.loadAll();
+
+		try {
+			Messagebox.show("Guardado Exitosamente", "Información",
+					Messagebox.OK, Messagebox.INFORMATION);
+		} catch (Exception e) {
 		}
-
-		if (cuentaPagarFact.getMontoTotal() == aux)
-
-		{
-			cuentaPagarFact.setEstado('C');
-			cuentaPagarFact.setConcepto("FACTURA CANCELADA");
-		} else {
-			cuentaPagarFact.setEstado('P');
-		}
-		servicioCuentaPagar.actualizar(cuentaPagarFact);
-
-		egreso = new Egreso();
-		int ii = 0;
-		while (ii < materiales2.size()) {
-			materiales2.remove(0);
-			ii++;
-		}
-		;
-		binder.loadAll();
-
-		alert("Guardado");
 		limpiarFormularioPagar();
 		limpiarListaFacturas();
+		limpiarListaDetalle();
 		limpiarListaEgresoFormaPago();
 	}
+
+	public void sumaAPagar() {
+		double suma = 0;
+		for (int i = 0; i < lbxFacturas.getItemCount(); i++) {
+			Listcell celda = (Listcell) lbxFacturas.getItemAtIndex(i)
+					.getChildren().get(0);
+			Checkbox ch = (Checkbox) celda.getChildren().get(0);
+			double montoPagar = facturas.get(i).getSaldo();
+			if (ch.isChecked()) {
+				System.out.println(i + " check");
+				Listcell columna = (Listcell) lbxFacturas.getItemAtIndex(i)
+						.getChildren().get(6);
+				Doublebox check = (Doublebox) columna.getChildren().get(0);
+
+				suma = suma + check.getValue();
+				System.out.println(suma + "prueba");
+
+			}
+		}
+		dboxMontoCancelar.setValue(suma);
+		binderCompras.loadComponent(dboxMontoCancelar);
+	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnAnular() {
-		cuentaPagarFact.setEstado('E');
-		cuentaPagarFact.setConcepto("FACTURA ANULADA");
-		cuentaPagarFact.setEstatus('E');
-		servicioCuentaPagar.actualizar(cuentaPagarFact);
-		alert("Factura Anulada");
+
+		for (int i = 0; i < facturas.size(); i++) {
+			System.out.println(facturas.size());
+			Listcell celda = (Listcell) lbxFacturas.getItemAtIndex(i)
+					.getChildren().get(0);
+			Checkbox check = (Checkbox) celda.getChildren().get(0);
+
+			if (check.isChecked()) {
+				facturas.get(i).setEstado('E');
+				facturas.get(i).setConcepto("FACTURA ANULADA");
+				facturas.get(i).setEstatus('E');
+				servicioCuentaPagar.actualizar(facturas.get(i));
+
+			}
+
+		}
 
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregar3() {
 		EgresoFormaPago egresoFormaPago = new EgresoFormaPago();
@@ -256,11 +373,12 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 
 		listaEgresoFormaPago.add(egresoFormaPago);
 
-		binder.loadComponent(lbxCuentas);
+		binderCompras.loadComponent(lbxCuentas);
 		TotalFormaPago();
 		limpiarFP();
-		
+
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void TotalFormaPago() {
 		for (int ep = 0; ep < listaEgresoFormaPago.size(); ep++) {
@@ -270,6 +388,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		}
 		subTotalEP = 0;
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void onSelect$cmbFormaPago() {
 		String var = cmbFormaPago.getSelectedItem().getLabel().toString();
@@ -287,22 +406,30 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			row2.setVisible(false);
 		}
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void DetalleFacturaPagar() {
 		materiales2 = servicioCuentaPagarMaterial
-				.listarMaterialesCP(cuentaPagarFact.getOrigen());
+				.buscarMaterialesPorCuentaPagar(cuentaPagarFact);
 
 		double acumulador = 0;
 		listaEgresoCP = servicioEgresoCuentaPagar
-				.listarPorOrigen(cuentaPagarFact);
+				.listarPorCuentaPagar(cuentaPagarFact);
 		for (int k = 0; k < listaEgresoCP.size(); k++) {
 			acumulador = acumulador + listaEgresoCP.get(k).getMontoAbonado();
 		}
-		//dbMonto.setValue(cuentaPagarFact.getMontoTotal() - acumulador);
-		binder.loadAll();
+		// dbMonto.setValue(cuentaPagarFact.getMontoTotal() - acumulador);
+		binderCompras.loadAll();
 
 	}
-	
+
+	public void onChange$dboxMontoAbono() {
+
+		binderCompras.loadComponent(dboxMontoCancelar);
+		sumaAPagar();
+		binderCompras.loadComponent(dboxMontoCancelar);
+	}
+
 	// -------------------------------------------------------------------------------------------------------
 	public void onClick$btnEditar2() {
 		if (auxEgresoFormaPago.getDatoBasicoByCodigoFormaPago().getNombre()
@@ -337,12 +464,59 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 					.setDatoBasicoByCodigoBanco((DatoBasico) cmbEntidadBancaria
 							.getSelectedItem().getValue());
 		}
-		binder.loadComponent(lbxCuentas);
+		binderCompras.loadComponent(lbxCuentas);
 		TotalFormaPago();
 		limpiarFP();
 		validarBotonesPagar();
 	}
+
+	// ---------------------------------------------------------------------------------------------------
+
+	public void onSelect$lbxFacturas() {
+		Listcell celda1 = (Listcell) lbxFacturas.getSelectedItem()
+				.getChildren().get(0);
+		Checkbox ch1 = (Checkbox) celda1.getChildren().get(0);
+
+		if (ch1.isChecked()) {
+			System.out.println("aaaaa");
+			ch1.setChecked(false);
+
+			Listcell celda6 = (Listcell) lbxFacturas.getSelectedItem()
+					.getChildren().get(6);
+			Doublebox mont = (Doublebox) celda6.getChildren().get(0);
+			mont.setReadonly(true);
+			mont.setValue(null);
+			System.out.println(ch1.isChecked());
+
+		} else {
+			ch1.setChecked(true);
+			System.out.println("bbbb");
+			auxFact = (CuentaPagar) facturas
+					.get(lbxFacturas.getSelectedIndex());
+			Listcell celda6 = (Listcell) lbxFacturas.getSelectedItem()
+					.getChildren().get(6);
+			Doublebox mont = (Doublebox) celda6.getChildren().get(0);
+			mont.setReadonly(false);
+			mont.setValue(auxFact.getSaldo());
+
+			System.out.println(mont.getValue());
+			materiales2 = servicioCuentaPagarMaterial
+					.buscarMaterialesPorCuentaPagar(auxFact);
+			System.out.println(ch1.isChecked());
+
+		}
+		sumaAPagar();
+		binderCompras.loadComponent(dboxMontoCancelar);
+		binderCompras.loadComponent(lbxDetalles);
+		binderCompras.loadComponent(dboxMontoAbono);
+
+	}
+
 	// ------------------------------------------------------------------------------------------------------
+
+	public CuentaPagar getAuxFact() {
+		return auxFact;
+	}
 
 	public void onSelect$lbxCuentas() {
 		formaPago2 = servicioDatoBasico.listarPorTipoDato("FORMA DE PAGO");
@@ -420,6 +594,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		validarBotonesPagar();
 
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void limpiarFP() {
 		cmbTipoTarjeta.setValue("--Seleccione--");
@@ -431,6 +606,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		row1.setVisible(false);
 		row2.setVisible(false);
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public Listbox getLbxCuentas() {
 		return lbxCuentas;
@@ -439,13 +615,22 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 	public void setLbxCuentas(Listbox lbxCuentas) {
 		this.lbxCuentas = lbxCuentas;
 	}
+
 	// ---------------------------------------------------------------------------------------------------
-	public void limpiarListaFacturas() {
+	public void limpiarListaDetalle() {
 		int ind = lbxDetalles.getItemCount();
 		for (int i = 0; i < ind; i++) {
 			lbxDetalles.removeItemAt(0);
 		}
 	}
+
+	public void limpiarListaFacturas() {
+		int ind = lbxFacturas.getItemCount();
+		for (int i = 0; i < ind; i++) {
+			lbxFacturas.removeItemAt(0);
+		}
+	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void limpiarListaEgresoFormaPago() {
 		int ind = lbxCuentas.getItemCount();
@@ -453,6 +638,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			lbxCuentas.removeItemAt(0);
 		}
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void validarBotonesPagar() {
 		if (lbxCuentas.getItemCount() == 0) {
@@ -464,19 +650,20 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			btnEditar2.setDisabled(false);
 		}
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void limpiarFormularioPagar() {
 		dtFactura2.setText("");
 		dtFactura2.setDisabled(true);
 		txtRif2.setText("");
-		txtRif2.setDisabled(true);
-		txtCodigoProveedor2.setText("");
-		txtCodigoProveedor2.setDisabled(true);
+		txtRazon.setText("");
 		cmbFormaPago.setDisabled(true);
 		cmbFormaPago.setSelectedIndex(-1);
 		cmbFormaPago.setValue("--Seleccione--");
 		dboxMonto.setText("");
-		dboxMonto.setDisabled(true);
+		dboxMontoAbono.setText("");
+		dboxMontoP.setText("");
+		dboxMontoCancelar.setText("");
 		txtNroDocumento.setText("");
 		txtNroDocumento.setDisabled(true);
 		cmbEntidadBancaria.setSelectedIndex(-1);
@@ -503,8 +690,11 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		listaEgresoCP = new ArrayList<EgresoCuentaPagar>();
 		listaEgresoCuentaPagar = new ArrayList<EgresoCuentaPagar>();
 		listaEgresoFormaPago = new ArrayList<EgresoFormaPago>();
+		facturas = new ArrayList<CuentaPagar>();
+		materiales2 = new ArrayList<CuentaPagarMaterial>();
 
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void ActivarPagarFacturas() {
 		dtFactura2.setDisabled(false);
@@ -518,6 +708,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		btnAnular.setDisabled(false);
 
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void ValidarFormaPago() {
 		String var = cmbFormaPago.getSelectedItem().getLabel().toString();
@@ -551,6 +742,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 			}
 		}
 	}
+
 	// ---------------------------------------------------------------------------------------------------
 	public void onClick$lbxCuentas() {
 
@@ -723,14 +915,6 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		this.servicioCuentaPagarMaterial = servicioCuentaPagarMaterial;
 	}
 
-	public void onClick$btnSalir() {
-		Factura.onClose();
-	}
-
-	public void onClick$btnSalir2() {
-		Factura.onClose();
-	}
-
 	public ServicioEgreso getServicioEgreso() {
 		return servicioEgreso;
 	}
@@ -748,9 +932,10 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 		this.servicioEgresoCuentaPagar = servicioEgresoCuentaPagar;
 	}
 
-	public void onClick$btnCancelar3() {
+	public void onClick$btnCancelar() {
 		limpiarFormularioPagar();
 		limpiarListaFacturas();
+		limpiarListaDetalle();
 		limpiarListaEgresoFormaPago();
 
 	}
@@ -770,9 +955,9 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 	public void onClick$btnQuitar3() {
 		listaEgresoFormaPago.remove(lbxCuentas.getSelectedIndex());
 		limpiarFP();
-		binder.loadComponent(lbxCuentas);
+		binderCompras.loadComponent(lbxCuentas);
 		TotalFormaPago();
-		binder.loadComponent(lbxCuentas);
+		binderCompras.loadComponent(lbxCuentas);
 
 	}
 
@@ -1001,6 +1186,7 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 	public void setEgreso(Egreso egreso) {
 		this.egreso = egreso;
 	}
+
 	public CuentaPagarMaterial getMaterial2() {
 		return material2;
 	}
@@ -1024,5 +1210,46 @@ public class CntrlPagarFactura extends GenericForwardComposer {
 	public void setCuentaPagarFact(CuentaPagar cuentaPagarFact) {
 		this.cuentaPagarFact = cuentaPagarFact;
 	}
+
+	public List<CuentaPagar> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<CuentaPagar> facturas) {
+		this.facturas = facturas;
+	}
+
+	public void setFactura(CuentaPagar factura) {
+		this.factura = factura;
+	}
+
+	public void setAuxFact(CuentaPagar auxFact) {
+		this.auxFact = auxFact;
+	}
+
+	public Doublebox getTxtMontoAbono() {
+		return dboxMontoAbono;
+	}
+
+	public void setTxtMontoAbono(Doublebox txtMontoAbono) {
+		this.dboxMontoAbono = txtMontoAbono;
+	}
+
+	public Listbox getLbxFacturas() {
+		return lbxFacturas;
+	}
+
+	public void setLbxFacturas(Listbox lbxFacturas) {
+		this.lbxFacturas = lbxFacturas;
+	}
+
+	public EgresoCuentaPagarId getEgresocuentaPagarId() {
+		return egresocuentaPagarId;
+	}
+
+	public void setEgresocuentaPagarId(EgresoCuentaPagarId egresocuentaPagarId) {
+		this.egresocuentaPagarId = egresocuentaPagarId;
+	}
+
 	// ---------------------------------------------------------------------------------------------------
 }

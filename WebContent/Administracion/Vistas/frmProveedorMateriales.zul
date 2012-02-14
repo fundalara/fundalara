@@ -1,11 +1,11 @@
-<?page title="Proveedores" contentType="text/html;charset=UTF-8"?>
+<?page title="Proveedores de Materiales" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmProveedores' ?>
+
 <zk>
 	<window apply="controlador.administracion.CntrlProveedores"
-		id="frmProveedores" title="Proveedores" border="normal"
-		width="690px">
-
+		closable="true" id="frmProveedores" title="Proveedores de Materiales"
+		border="normal" width="690px">
 		<panel title="Datos del Proveedor" collapsible="true"
 			open="true">
 			<panelchildren>
@@ -22,7 +22,7 @@
 							<row align="left" style="border:none;">
 								<label value="R.I.F" />
 								<hbox align="center">
-								    <label value="J-"/>
+									<label value="J-" />
 									<textbox id="txtRif"></textbox>
 
 									<label value="(*)"
@@ -32,12 +32,13 @@
 										tooltiptext="Listado de Proveedores" />
 								</hbox>
 							</row>
-							
+
 							<row spans="1,3" style="border:none;">
 								<label value="Razón Social" />
 								<hbox align="center">
-									<textbox width="350px" style='text-transform:uppercase;' 
-										id="txtRazonSocial" constraint="no empty"
+									<textbox width="350px"
+										style='text-transform:uppercase;' id="txtRazonSocial"
+										constraint="no empty"
 										value="@{cntrl.personaJuridica.razonSocial}" />
 									<label value="(*)"
 										style="color:red" />
@@ -72,8 +73,6 @@
 									<textbox width="120px"
 										id="txtTelefono">
 									</textbox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 								<label value="Numero de Fax" />
 								<hbox>
@@ -93,13 +92,13 @@
 							<row style="border:none;">
 								<label value="Correo Electrónico" />
 								<textbox width="210px"
-									id="txtCorreoElectronico" style='text-transform:uppercase;' 
+									id="txtCorreoElectronico" style='text-transform:uppercase;'
 									value="@{cntrl.persona.correoElectronico}" />
 								<label value="Twitter" id="txtTwitter" />
-								<textbox width="185px" style='text-transform:uppercase;'
+								<textbox width="185px"
+									style='text-transform:uppercase;'
 									value="@{cntrl.persona.twitter}" />
 							</row>
-
 						</rows>
 					</grid>
 				</groupbox>
@@ -126,8 +125,6 @@
 											context="@{estado.codigoDatoBasico}" value="@{estado}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 								<label value="Municipio" />
 								<hbox>
@@ -140,8 +137,6 @@
 											value="@{municipio}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
@@ -156,24 +151,20 @@
 											context="@{parroquia.codigoDatoBasico}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
 								<label value="Dirección" />
 								<hbox align="center">
-									<textbox id="txtDireccion" style='text-transform:uppercase;'
+									<textbox id="txtDireccion"
+										style='text-transform:uppercase;'
 										value="@{cntrl.persona.direccion}" maxlength="200"
 										height="40px" width="505px" multiline="true" />
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 						</rows>
 					</grid>
 				</groupbox>
-				<separator></separator>
 			</panelchildren>
 		</panel>
 		<panel title="Datos Bancarios" collapsible="true"
@@ -195,8 +186,6 @@
 									<comboitem self="@{each='banco'}"
 										label="@{banco.nombre}" value="@{banco}" />
 								</combobox>
-
-
 							</row>
 							<row style="border:none;">
 								<label value="Tipo Cuenta" />
@@ -215,8 +204,8 @@
 							</row>
 							<row style="border:none;">
 								<label value="Titular" />
-								<textbox width="96%" style='text-transform:uppercase;'
-									id="txtTitularCuenta" />
+								<textbox width="96%"
+									style='text-transform:uppercase;' id="txtTitularCuenta" />
 							</row>
 							<row style="border:none;">
 								<separator></separator>
@@ -224,17 +213,19 @@
 							<row spans="4" style="border:none;">
 								<hbox>
 									<listbox id="lbxCuentas"
-										model="@{cntrl.cuentasBancarias}" width="100%" >
+										model="@{cntrl.cuentasBancarias}" width="100%">
 										<listhead>
-											<listheader label="Banco" width="100px" ></listheader>
-											<listheader
-												label="Tipo Cuenta" width="100px" >
+											<listheader label="Banco"
+												width="100px">
 											</listheader>
 											<listheader
-												label="Nro. de Cuenta" width="200px" >
+												label="Tipo Cuenta" width="100px">
 											</listheader>
 											<listheader
-												label="Titular de la Cuenta" width="200px" >
+												label="Nro. de Cuenta" width="200px">
+											</listheader>
+											<listheader
+												label="Titular de la Cuenta" width="200px">
 											</listheader>
 										</listhead>
 										<listitem
@@ -248,16 +239,12 @@
 											<listcell
 												label="@{cuentaBancaria.titular}" />
 										</listitem>
-
 									</listbox>
 									<separator></separator>
 									<vbox>
 										<button
-											image="/Recursos/Imagenes/agregar.ico"
-											tooltiptext="Agregar" id="btnAgregar"  />
-										<button
-											image="/Recursos/Imagenes/editar.ico"
-											tooltiptext="Editar" id="btnEditar" disabled="true"/>
+											image="/Recursos/Imagenes/agregar.ico" tooltiptext="Agregar"
+											id="btnAgregar" />
 										<button
 											image="/Recursos/Imagenes/quitar.ico" disabled="true"
 											tooltiptext="Eliminar" id="btnQuitar" />
@@ -268,9 +255,7 @@
 					</grid>
 				</groupbox>
 			</panelchildren>
-			
 		</panel>
-
 		<label value="(*) Campo Obligatorio" style="color:red" />
 		<div align="right">
 			<button image="/Recursos/Imagenes/guardar.ico"
@@ -286,9 +271,11 @@
 				id="btnCancelar" tooltiptext="Cancelar" label="Cancelar"
 				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
-				tooltiptext="Salir" label="Salir" width="100px" height="35px" >
+				tooltiptext="Salir" label="Salir" width="100px" height="35px">
 				<attribute name="onClick">
-	frmProveedores.detach();
+	{
+		frmProveedores.detach();
+	}
 </attribute>
 			</button>
 		</div>

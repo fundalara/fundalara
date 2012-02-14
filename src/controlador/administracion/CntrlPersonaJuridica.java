@@ -9,11 +9,14 @@ import modelo.Personal;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.*;
+
+import comun.MensajeMostrar;
 
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioPersona;
@@ -32,12 +35,15 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 			codigosDeArea = new ArrayList<DatoBasico>();
 	DatoBasico estado, municipio, parroquia, codigoDeArea, tipoPersona;
 	AnnotateDataBinder binder;
-	Window frmPersonas, frmProveedorServicios, frmBenefactorJuridico, frmClientes;
+	Window frmPersonas, frmProveedorServicios, frmBenefactorJuridico,
+			frmClientes;
 	Textbox txtTelefono, txtFax, txtDireccion, txtRazonSocial,
 			txtCorreoElectronico, txtTwitter, txtRif;
 	Combobox cmbEstado, cmbParroquia, cmbMunicipio, cmbFax, cmbTelefono;
 	Button btnBuscar, btnEliminar, btnModificar, btnRegistrar, btnSalir;
 	Component formulario;
+	MensajeMostrar mensaje = new MensajeMostrar();
+	Map params = new HashMap();
 	String formularioPadre = "";
 
 	// ------------------------------------------------------------------------------------------------------
@@ -48,22 +54,24 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 		cambiar("frmClientes", "CLIENTE");
 		cambiar("frmBenefactorJuridico", "BENEFACTOR JURIDICO");
 		cambiar("frmProveedorServicios", "PROVEEDOR DE SERVICIO");
-		
+
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
 		estados = servicioDatoBasico.listarPorTipoDato("ESTADO");
 		codigosDeArea = servicioDatoBasico.listarPorTipoDato("CODIGO AREA");
 
+		params.put("formulario", formulario);
 	}
+
 	// ------------------------------------------------------------------------------------------------------
 	public void cambiar(String idCambiar, String dato) {
 		if (formulario.getId().equals(idCambiar)) {
 			tipoPersona = servicioDatoBasico.buscarPorString(dato);
-			formulario.setId("frmPersonas");
-			formulario.setAttribute("padre", dato);
-			formularioPadre = dato;
+			params.put("padre", dato);
+
 		}
 	}
+
 	// ------------------------------------------------------------------------------------------------------
 	public void onSelect$cmbEstado() {
 		try {
@@ -108,16 +116,15 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void actualizarPersona() {
 		String telefono = null;
-		if (cmbTelefono.getSelectedItem() != null){
-		telefono = cmbTelefono.getValue().toString() + "-"+ txtTelefono.getValue().toString();
+		if (cmbTelefono.getSelectedItem() != null) {
+			telefono = cmbTelefono.getValue().toString() + "-"
+					+ txtTelefono.getValue().toString();
 		}
 		String fax = null;
-		if (cmbFax.getSelectedItem() != null){
-			fax = cmbFax.getValue().toString() + "-"+ txtFax.getValue().toString();
+		if (cmbFax.getSelectedItem() != null) {
+			fax = cmbFax.getValue().toString() + "-"
+					+ txtFax.getValue().toString();
 		}
-		
-		String rif = "J-" + txtRif.getValue();
-		persona.setCedulaRif(rif);
 
 		persona.setDatoBasicoByCodigoTipoPersona(tipoPersona);
 		persona.setTelefonoHabitacion(telefono);
@@ -138,11 +145,12 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	public void onClick$btnBuscar() {
 		persona = new Persona();
 		personaJuridica = new PersonaJuridica();
+
 		Component catalogo = Executions.createComponents(
 				"/Administracion/Vistas/frmCatalogoPersonasJuridicas.zul",
-				formulario, null);
-		System.out.println("Buscando");
-		formulario.addEventListener("onCierre", new EventListener() {
+				null, params);
+
+		formulario.addEventListener("onCierreJuridico", new EventListener() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				persona = (Persona) formulario.getVariable("persona", false);
@@ -154,15 +162,32 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnRegistrar() {
 		try {
-		Persona auxPersona = servicioPersona.buscarPorCedulaRif("J-"
-				+ txtRif.getValue());
-		if (auxPersona != null) {
-			Messagebox.show("Registro Existente. Favor verifique datos.", "Información", Messagebox.OK, Messagebox.INFORMATION);
-			return;
-		}
-		actualizarPersona();
-		clear();
-		alert("Guardado");
+			Persona auxPersona = servicioPersona.buscarPorCedulaRif("J-"
+					+ txtRif.getValue());
+			if (auxPersona != null) {
+				Messagebox.show(mensaje.REGISTRO_EXISTENTE, mensaje.TITULO
+						+ "Información", Messagebox.OK, Messagebox.INFORMATION);
+				return;
+			}
+			Messagebox.show(mensaje.GUARDAR, mensaje.TITULO + "Importante",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+					new EventListener() {
+						@Override
+						public void onEvent(Event arg0)
+								throws InterruptedException {
+							if (arg0.getName().toString() == "onOK") {
+
+								String rif = "J-" + txtRif.getValue();
+								persona.setCedulaRif(rif);
+								actualizarPersona();
+								clear();
+								Messagebox.show(mensaje.REGISTRO_EXITOSO,
+										mensaje.TITULO + "Información",
+										Messagebox.OK, Messagebox.INFORMATION);
+							}
+						}
+					});
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -172,22 +197,24 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	public void cargarDatos() {
 		txtRif.setValue(persona.getCedulaRif().substring(2));
 		personaJuridica = persona.getPersonaJuridica();
-		parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
-				.getDatoBasicoByCodigoParroquia().getDatoBasico()
-				.getCodigoDatoBasico());
-		municipios = servicioDatoBasico.listarPorPadre("MUNICIPIO", persona
-				.getDatoBasicoByCodigoParroquia().getDatoBasico()
-				.getDatoBasico().getCodigoDatoBasico());
 		cmbParroquia.setDisabled(false);
-		cmbParroquia.setContext(String.valueOf(persona
-				.getDatoBasicoByCodigoParroquia().getCodigoDatoBasico()));
-		cmbParroquia.setValue(persona.getDatoBasicoByCodigoParroquia()
-				.getNombre());
 		cmbMunicipio.setDisabled(false);
-		cmbMunicipio.setValue(persona.getDatoBasicoByCodigoParroquia()
-				.getDatoBasico().getNombre());
-		cmbEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
-				.getDatoBasico().getDatoBasico().getNombre());
+		if (persona.getDatoBasicoByCodigoParroquia() != null) {
+			parroquias = servicioDatoBasico.listarPorPadre("PARROQUIA", persona
+					.getDatoBasicoByCodigoParroquia().getDatoBasico()
+					.getCodigoDatoBasico());
+			municipios = servicioDatoBasico.listarPorPadre("MUNICIPIO", persona
+					.getDatoBasicoByCodigoParroquia().getDatoBasico()
+					.getDatoBasico().getCodigoDatoBasico());
+			cmbParroquia.setContext(String.valueOf(persona
+					.getDatoBasicoByCodigoParroquia().getCodigoDatoBasico()));
+			cmbParroquia.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getNombre());
+			cmbMunicipio.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getDatoBasico().getNombre());
+			cmbEstado.setValue(persona.getDatoBasicoByCodigoParroquia()
+					.getDatoBasico().getDatoBasico().getNombre());
+		}
 		if (personaJuridica.getFax() != null) {
 			cmbFax.setValue(personaJuridica.getFax().substring(0, 4));
 			txtFax.setValue(personaJuridica.getFax().substring(5));
@@ -195,14 +222,15 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 			cmbFax.setValue("");
 			txtFax.setText("");
 		}
-		if (persona.getTelefonoHabitacion() != null){
-		cmbTelefono.setValue(persona.getTelefonoHabitacion().substring(0, 4));
-		txtTelefono.setValue(persona.getTelefonoHabitacion().substring(5));
+		if (persona.getTelefonoHabitacion() != null) {
+			cmbTelefono.setValue(persona.getTelefonoHabitacion()
+					.substring(0, 4));
+			txtTelefono.setValue(persona.getTelefonoHabitacion().substring(5));
 		} else {
 			cmbTelefono.setValue("");
 			txtTelefono.setText("");
 		}
-		
+
 		btnRegistrar.setDisabled(true);
 		btnEliminar.setDisabled(false);
 		btnModificar.setDisabled(false);
@@ -212,13 +240,28 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnModificar() {
 		try {
-			Integer qs = Messagebox.show("Presione Ok si desea Modificar: " + personaJuridica.getRazonSocial(),
-					"Importante", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION);
-			if (qs.equals(1)) {
-				actualizarPersona();
-				clear();
-				Messagebox.show("Registro Modificado Exitosamente", "Información", Messagebox.OK, Messagebox.INFORMATION);
+			if (persona != null) {
+				Messagebox.show(mensaje.MODIFICAR, mensaje.TITULO
+						+ "Importante", Messagebox.OK | Messagebox.CANCEL,
+						Messagebox.QUESTION, new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									actualizarPersona();
+									clear();
+									binder.loadAll();
+									Messagebox.show(
+											mensaje.MODIFICACION_EXITOSA,
+											mensaje.TITULO + "Información",
+											Messagebox.OK,
+											Messagebox.INFORMATION);
+								}
+							}
+						});
+			} else {
+				throw new WrongValueException(btnBuscar,
+						mensaje.PERSONA_NO_UBICADA);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -248,16 +291,31 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnEliminar() {
 		try {
-			Integer qs = Messagebox.show("Presione Ok si desea Eliminar: " + personaJuridica.getRazonSocial(),
-					"Importante", Messagebox.OK | Messagebox.CANCEL,
-					Messagebox.QUESTION);
-			if (qs.equals(1)) {
-				persona.setEstatus('E');
-				personaJuridica.setEstatus('E');
-				servicioPersona.actualizar(persona);
-				servicioPersonaJuridica.actualizar(personaJuridica);
-				clear();
-				Messagebox.show("Registro Eliminado Exitosamente", "Información", Messagebox.OK, Messagebox.INFORMATION);
+			if (persona != null) {
+				Messagebox.show(mensaje.ELIMINAR_PERSONA, mensaje.TITULO
+						+ "Importante", Messagebox.OK | Messagebox.CANCEL,
+						Messagebox.QUESTION, new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									persona.setEstatus('E');
+									personaJuridica.setEstatus('E');
+									servicioPersona.actualizar(persona);
+									servicioPersonaJuridica
+											.actualizar(personaJuridica);
+									clear();
+									binder.loadAll();
+									Messagebox.show(
+											mensaje.ELIMINACION_EXITOSA,
+											mensaje.TITULO + "Información",
+											Messagebox.OK,
+											Messagebox.INFORMATION);
+								}
+							}
+						});
+			} else {
+				throw new WrongValueException(btnBuscar, mensaje.PERSONA_NO_UBICADA);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -269,19 +327,7 @@ public class CntrlPersonaJuridica extends GenericForwardComposer {
 	public void onClick$btnCancelar() {
 		clear();
 	}
-	
-//	public void onClick$btnSalir(){
-//		System.out.println(formularioPadre);
-//		if (formularioPadre == "BENEFACTOR"){
-//			frmBenefactorJuridico.detach();
-//		}
-//		if (formularioPadre == "CLIENTE"){
-//			frmClientes.detach();
-//		}
-//		if (formularioPadre == "PROVEEDOR SERVICIO"){
-//			
-//		}
-//	}
+
 	// ------------------------------------------------------------------------------------------------------
 	public Persona getPersona() {
 		return persona;

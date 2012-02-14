@@ -1,26 +1,35 @@
 <?page title="Benefactores" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="frmBenefactor" title="Benefactor" border="normal"
+	<window id="frmBenefactor" title="Benefactor" border="normal" closable="true"
 		width="690px">
 		<zscript><![CDATA[
+	Window windowJuridico, windowNatural;
+	
 	public void mostrar() {
 		if (cmbBenefactor.getSelectedItem().getValue().equals("2")) {
-			Window window = (Window) Executions.createComponents(
-					"/administracion/vistas/frmBenefactorJuridico.zul", null, null);
-			frmBenefactor.onClose();
+			if (windowNatural != null) {
+				windowNatural.detach();
+			}
+			windowJuridico = (Window) Executions.createComponents(
+					"/administracion/vistas/frmBenefactorJuridico.zul", null,
+					null);
 		}
 		if (cmbBenefactor.getSelectedItem().getValue().equals("1")) {
-			Window window = (Window) Executions.createComponents(
-					"/administracion/vistas/frmBenefactorNatural.zul", null, null);
-			frmBenefactor.onClose();
+			if (windowJuridico != null) {
+				windowJuridico.detach();
+			}
+			windowNatural = (Window) Executions.createComponents(
+					"/administracion/vistas/frmBenefactorNatural.zul", null,
+					null);
 
 		}
 	}
 ]]></zscript>
 
-		<combobox onSelect="mostrar()" id="cmbBenefactor">
-			<comboitem label="Natural" value="1"></comboitem>
-			<comboitem label="Juridico" value="2"></comboitem>
+		<combobox onSelect="mostrar()" id="cmbBenefactor" width="200px" value="--Seleccione--"
+			readonly="true">
+			<comboitem label="NATURAL" value="1"></comboitem>
+			<comboitem label="JURIDICO" value="2"></comboitem>
 		</combobox>
 	</window>
 </zk>

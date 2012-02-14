@@ -78,7 +78,7 @@ public class CntrlIngresoExtraordinario extends GenericForwardComposer {
 			documentoAcreedor.setCodigoDocumentoAcreedor(servicioDocumentoAcreedor.listar().size()+1);
 			//System.out.println(servicioTipoIngreso.buscarPorNombre("INGRESO EXTRAORDINARIO").getDescripcion());
 			
-			documentoAcreedor.setTipoIngreso(servicioTipoIngreso.buscarPorNombre("INGRESO EXTRAORDINARIO"));
+			documentoAcreedor.setTipoIngreso(servicioTipoIngreso.buscarPorNombre("OTRO"));
 			documentoAcreedor.setSaldo(0);
 			servicioDocumentoAcreedor.agregar(documentoAcreedor);
 			//llenar dato en la tabla ingreso
@@ -94,7 +94,7 @@ public class CntrlIngresoExtraordinario extends GenericForwardComposer {
 			ingresoDocumentoAcreedor.setIngreso(ingreso);
 			ingresoDocumentoAcreedor.setMontoAbonado(dbxMonto.getValue());
 			ingresoDocumentoAcreedor.setDocumentoAcreedor(documentoAcreedor);
-			ingresoDocumentoAcreedor.setId(new IngresoDocumentoAcreedorId(ingreso.getCodigoIngreso(), documentoAcreedor.getCodigoDocumentoAcreedor()));
+			ingresoDocumentoAcreedor.setId(new IngresoDocumentoAcreedorId( documentoAcreedor.getCodigoDocumentoAcreedor(),ingreso.getCodigoIngreso()));
 			servicioIngresoDocumentoAcreedor.agregar(ingresoDocumentoAcreedor);
 			alert("Guardado con Exito");
 			clear();

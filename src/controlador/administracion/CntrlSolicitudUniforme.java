@@ -1,11 +1,10 @@
 package controlador.administracion;
 
 import org.hibernate.cfg.AnnotationBinder;
-import org.hibernate.hql.ast.tree.Case2Node;
-import org.python.antlr.PythonParser.list_for_return;
+import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -16,7 +15,6 @@ import java.util.*;
 
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.implementacion.ServicioDocumentoAcreedor;
-import servicio.implementacion.ServicioDocumentoAcreedorMaterial;
 import servicio.implementacion.ServicioDocumentoIndumentaria;
 import servicio.implementacion.ServicioFamiliar;
 import servicio.implementacion.ServicioFamiliarJugador;
@@ -39,7 +37,7 @@ import modelo.TallaPorIndumentaria;
 
 public class CntrlSolicitudUniforme extends GenericForwardComposer {
 
-	AnnotateDataBinder binder;
+	AnnotateDataBinder binderUniforme;
 	ServicioPersona servicioPersona = new ServicioPersona();
 	ServicioPersonaNatural servicioPersonaNatural = new ServicioPersonaNatural();
 	ServicioFamiliarJugador servicioFamiliarJugador;
@@ -58,7 +56,7 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 	FamiliarJugador familiarJugador;
 	DatoBasico uniforme, talla, tipoDeUniforme;
 	Doublebox dbxPrecio, dbxMontoTotal;
-	Combobox cmbCedula, cmbTipoUniforme, cmbUniforme, cmbTalla;
+	Combobox cmbTipoUniforme, cmbUniforme, cmbTalla;
 	Textbox txtCedula;
 	Button btnBuscar, btnAgregar, btnQuitar, btnAceptar, btnCancelar, btnSalir;
 	Textbox txtNombre, txtTotal;
@@ -66,7 +64,7 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 	Spinner sprCantidad;
 	Listbox lbxJugadores, lbxPedidos;
 	Component formulario;
-
+	Panel panelS;
 	ServicioDatoBasico servicioDatoBasico;
 	List<DocumentoIndumentaria> indumentarias = new ArrayList<DocumentoIndumentaria>();
 	List<FamiliarJugador> listFamiliarJugador = new ArrayList<FamiliarJugador>();
@@ -79,6 +77,7 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 
 	int num;
 
+	// ---------------------------------------------------------------------------------------------------
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
@@ -90,12 +89,11 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 		tiposDeUniformes = servicioDatoBasico
 				.listarPorTipoDato("TIPO UNIFORME");
 		uniformes = servicioDatoBasico.listarPorTipoDato("INDUMENTARIA");
-
 		formulario = comp;
-		formulario.setId("frmPersonas");
-		formulario.setAttribute("padre", "REPRESENTANTE");
+		sprCantidad.setDisabled(true);
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onChange$cmbTipoUniforme() {
 		cmbUniforme.setValue("--Seleccione--");
 		cmbUniforme.setDisabled(false);
@@ -103,37 +101,51 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 		cmbTalla.setValue("--Seleccione--");
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void clearAll() {
+		txtCedula.setValue(null);
+		txtNombre.setValue(null);
+		panelS.setOpen(false);
+		indumentarias = new ArrayList<DocumentoIndumentaria>();
+		listFamiliarJugador = new ArrayList<FamiliarJugador>();
 		clear();
-
+		binderUniforme.loadAll();
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void clear() {
-		indumentarias = new ArrayList<DocumentoIndumentaria>();
 		cmbTipoUniforme.setSelectedIndex(-1);
 		cmbTalla.setSelectedIndex(-1);
 		cmbTalla.setDisabled(true);
+		cmbUniforme.setDisabled(true);
 		cmbUniforme.setSelectedIndex(-1);
 		sprCantidad.setValue(null);
-		binder.loadComponent(lbxPedidos);
+		sprCantidad.setDisabled(true);
+		dbxPrecio.setValue(null);
+		cmbTipoUniforme.setValue("--Seleccione--");
+		cmbTalla.setValue("--Seleccione--");
+		cmbTipoUniforme.setValue("--Seleccione--");
+		binderUniforme.loadComponent(lbxPedidos);
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onSelect$lbxJugadores() {
-		System.out.println("asdasd");
 		atleta = new Persona();
 		atleta = listFamiliarJugador.get(lbxJugadores.getSelectedIndex())
 				.getJugador().getPersonaNatural().getPersona();
-		System.out.println(atleta.getCedulaRif());
 		clear();
+		panelS.setOpen(true);
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onChange$cmbUniforme() {
 		cmbTalla.setDisabled(false);
 		tallas = servicioDatoBasico.listarPorPadre("TALLA INDUMENTARIA",
 				Integer.parseInt(cmbUniforme.getSelectedItem().getContext()));
-		binder.loadComponent(cmbTalla);
+		binderUniforme.loadComponent(cmbTalla);
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onChange$cmbTalla() {
 		cmbTalla.setContext(cmbTalla.getSelectedItem().getContext());
 		tallaPorIndumentaria = new TallaPorIndumentaria();
@@ -142,25 +154,44 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 						.getSelectedItem().getContext()), Integer
 						.parseInt(cmbTalla.getSelectedItem().getContext()));
 		dbxPrecio.setValue(tallaPorIndumentaria.getPrecio());
+		sprCantidad.setDisabled(false);
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregar() {
 		jugador = new Jugador();
 		indumentaria = new DocumentoIndumentaria();
-		indumentaria.setMonto(dbxPrecio.getValue());
-		indumentaria.setTallaPorIndumentaria(tallaPorIndumentaria);
-		indumentaria.setCantidad(sprCantidad.getValue());
-		indumentaria.setEstatus('A');
-		indumentarias.add(indumentaria);
-		double monto = 0;
-		for (DocumentoIndumentaria doc : indumentarias) {
-			monto = monto + (doc.getMonto() * doc.getCantidad());
+		if (cmbTipoUniforme.getValue() == null
+				|| cmbTipoUniforme.getValue() == "--Seleccione--") {
+			throw new WrongValueException(cmbTipoUniforme,
+					"Seleccione un Tipo de Uniforme");
+		} else if (cmbUniforme.getValue() == null
+				|| cmbUniforme.getValue() == "--Seleccione--") {
+			throw new WrongValueException(cmbUniforme, "Seleccione un Uniforme");
+		} else if (cmbTalla.getValue() == null
+				|| cmbTalla.getValue() == "--Seleccione--") {
+			throw new WrongValueException(cmbTalla, "Seleccione una Talla");
+		} else if (sprCantidad.getValue() == null
+				|| sprCantidad.getValue() <= 0) {
+			throw new WrongValueException(cmbTalla, "Indique una cantidad");
+		} else {
+			indumentaria.setMonto(dbxPrecio.getValue());
+			indumentaria.setTallaPorIndumentaria(tallaPorIndumentaria);
+			indumentaria.setCantidad(sprCantidad.getValue());
+			indumentaria.setEstatus('A');
+			indumentarias.add(indumentaria);
+			double monto = 0;
+			for (DocumentoIndumentaria doc : indumentarias) {
+				monto = monto + (doc.getMonto() * doc.getCantidad());
+			}
+			dbxMontoTotal.setValue(monto);
+			clear();
+			binderUniforme.loadComponent(lbxPedidos);
 		}
-		dbxMontoTotal.setValue(monto);
-		binder.loadComponent(lbxPedidos);
 
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnQuitar() {
 		indumentarias.remove(lbxPedidos.getSelectedIndex());
 		double monto = 0;
@@ -168,123 +199,128 @@ public class CntrlSolicitudUniforme extends GenericForwardComposer {
 			monto = monto + (doc.getMonto() * doc.getCantidad());
 		}
 		dbxMontoTotal.setValue(monto);
-		binder.loadComponent(lbxPedidos);
-
+		binderUniforme.loadComponent(lbxPedidos);
 	}
 
+	// ---------------------------------------------------------------------------------------------------
 	public void onClick$btnAceptar() {
-		System.out.println("321");
-		documento = new DocumentoAcreedor();
+		if (indumentarias.size() != 0) {
+			try {
+				Messagebox.show("¿Desea guardar los cambios?", "Importante",
+						Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+						new EventListener() {
+							@Override
+							public void onEvent(Event arg0)
+									throws InterruptedException {
+								if (arg0.getName().toString() == "onOK") {
+									documento = new DocumentoAcreedor();
+									documento.setPersonaByCedulaRif(persona);
+									documento.setTipoIngreso(servicioTipoIngreso
+											.buscarPorNombre("UNIFORME"));
+									documento
+											.setConcepto("SOLICITUD DE UNIFORME");
+									documento.setMonto(dbxMontoTotal.getValue());
+									documento.setSaldo(dbxMontoTotal.getValue());
+									documento.setFechaEmision(new Date());
+									documento.setFechaVencimiento(new Date());
+									if (lbxJugadores.getSelectedIndex() != -1){
+										documento.setPersonaByCedulaAtleta(atleta);
+									}
+									
+									documento.setEstado('P');
+									documento.setEstatus('A');
+									documento
+											.setCodigoDocumentoAcreedor(servicioDocumentoAcreedor
+													.listar().size() + 1);
+									servicioDocumentoAcreedor
+											.agregar(documento);
 
-		documento.setPersonaByCedulaRif(persona);
-		documento.setTipoIngreso(servicioTipoIngreso
-				.buscarPorNombre("ADQUISICION"));
-		documento.setConcepto("PEDIDO DE MATERIALES");
-		documento.setMonto(dbxMontoTotal.getValue());
-		documento.setSaldo(dbxMontoTotal.getValue());
-		documento.setFechaEmision(new Date());
-		documento.setFechaVencimiento(new Date());
-		documento.setPersonaByCedulaAtleta(atleta);
-		documento.setEstado('P');
-		documento.setEstatus('A');
-		System.out.println(persona.getCedulaRif());
-		System.out.println(atleta.getCedulaRif());
-		documento.setCodigoDocumentoAcreedor(servicioDocumentoAcreedor.listar()
-				.size() + 1);
-		servicioDocumentoAcreedor.agregar(documento);
-		alert("Registrado Satisfactoriamente");
-
-		System.out.println("321");
-		for (DocumentoIndumentaria doc : indumentarias) {
-			doc.setDocumentoAcreedor(documento);
-			doc.setId(new DocumentoIndumentariaId(documento
-					.getCodigoDocumentoAcreedor(), doc
-					.getTallaPorIndumentaria().getCodigoTallaIndumentaria()));
-			servicioDocumentoIndumentaria.agregar(doc);
-		}
-	}
-
-	public void onClick$btnBuscar() {
-		if (txtCedula.getText().trim().equals("")) {
-
-			Component catalogo = Executions
-					.createComponents(
-							"/Administracion/Vistas/frmCatalogoPersonaNatural.zul",
-							formulario, null);
-
-			catalogo.setVariable("formulario", formulario, false);
-			formulario.addEventListener("onCatalogoCerrado",
-					new EventListener() {
-						@Override
-						public void onEvent(Event arg0) throws Exception {
-							persona = (Persona) formulario.getVariable(
-									"persona", false);
-							String cadNacionalidad = persona.getCedulaRif()
-									.substring(0, 2);
-							String cadCedula = persona.getCedulaRif()
-									.substring(2);
-							cmbCedula.setValue(cadNacionalidad);
-							txtCedula.setText(cadCedula);
-							String segundoN = "";
-							String segundoA = "";
-							if (persona.getPersonaNatural().getSegundoNombre() == "")
-								segundoN = "";
-							if (persona.getPersonaNatural()
-									.getSegundoApellido() == "")
-								segundoA = "";
-
-							txtNombre.setValue(persona.getPersonaNatural()
-									.getPrimerNombre()
-									+ " "
-									+ segundoN
-									+ " "
-									+ persona.getPersonaNatural()
-											.getPrimerApellido()
-									+ " "
-									+ segundoA);
-							familiar = persona.getPersonaNatural()
-									.getFamiliar();
-							listFamiliarJugador = servicioFamiliarJugador
-									.listarPorRepresentante(familiar);
-							if (listFamiliarJugador.isEmpty())
-								lbxJugadores.setDisabled(true);
-							else
-								lbxJugadores.setDisabled(false);
-							// listUniformes =
-							// servicioUniformes.buscarPorTipoDato(servicioTipoDato.buscarTipo("TIPO DE UNIFORME"));
-							binder.loadComponent(lbxJugadores);
-						}
-					});
-
+									for (DocumentoIndumentaria doc : indumentarias) {
+										doc.setDocumentoAcreedor(documento);
+										doc.setId(new DocumentoIndumentariaId(
+												documento
+														.getCodigoDocumentoAcreedor(),
+												doc.getTallaPorIndumentaria()
+														.getCodigoTallaIndumentaria()));
+										servicioDocumentoIndumentaria
+												.agregar(doc);
+									}
+									clearAll();
+									binderUniforme.loadAll();
+									try {
+										Messagebox
+												.show("Solicitud guardada exitosamente",
+														"Información",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		} else {
-			persona = servicioPersona.buscarPorCedulaRif(this.cmbCedula
-					.getSelectedItem().getValue().toString()
-					+ this.txtCedula.getText().toString());
-			if (persona == null) {
-				alert("Representante no encontrado. Favor verifique.");
-				return;
-			} else {
-				txtNombre.setValue(persona.getPersonaNatural()
-						.getPrimerNombre()
-						+ " "
-						+ persona.getPersonaNatural().getSegundoNombre()
-						+ " "
-						+ persona.getPersonaNatural().getPrimerApellido()
-						+ " "
-						+ persona.getPersonaNatural().getSegundoApellido()
-						+ " ");
-				familiar = servicioFamiliar
-						.buscarPorCedulaFamiliar(this.cmbCedula
-								.getSelectedItem().getValue().toString()
-								+ this.txtCedula.getText().toString());
-				listFamiliarJugador = servicioFamiliarJugador
-						.listarPorRepresentante(familiar);
-				binder.loadComponent(lbxJugadores);
+			try {
+				Messagebox
+						.show("No ha proporcionado datos suficientes para realizar la solicitud",
+								"Importante", Messagebox.OK,
+								Messagebox.EXCLAMATION);
+				cmbTipoUniforme.setFocus(true);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 
 	}
 
+	// ---------------------------------------------------------------------------------------------------
+	public void onClick$btnBuscar() {
+		Map params = new HashMap();
+		params.put("padre", "FAMILIAR");
+		params.put("formulario", formulario);
+		Executions.createComponents(
+				"/Administracion/Vistas/FrmCatalogoPersonasNaturales.zul",
+				null, params);
+		formulario.addEventListener("onCierreNatural", new EventListener() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				persona = (Persona) formulario.getVariable("persona", false);
+
+				System.out.println(persona.getCedulaRif());
+
+				txtCedula.setText(persona.getCedulaRif());
+				String segundoN = "";
+				String segundoA = "";
+
+				if (persona.getPersonaNatural().getSegundoNombre() == "")
+					segundoN = "";
+				if (persona.getPersonaNatural().getSegundoApellido() == "")
+					segundoA = "";
+
+				txtNombre.setValue(persona.getPersonaNatural()
+						.getPrimerNombre()
+						+ " "
+						+ segundoN
+						+ " "
+						+ persona.getPersonaNatural().getPrimerApellido()
+						+ " "
+						+ segundoA);
+				familiar = persona.getPersonaNatural().getFamiliar();
+				listFamiliarJugador = servicioFamiliarJugador
+						.listarPorRepresentante(familiar);
+				if (listFamiliarJugador.isEmpty())
+					lbxJugadores.setDisabled(true);
+				else
+					lbxJugadores.setDisabled(false);
+				binderUniforme.loadAll();
+			}
+		});
+	}
+
+	// ---------------------------------------------------------------------------------------------------
 	public ServicioPersona getServicioPersona() {
 		return servicioPersona;
 	}

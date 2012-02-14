@@ -176,20 +176,32 @@
 					</columns>
 					<rows>
 						<row style="border:none">
-							<label value="Material"></label>
-							<hbox align="center">
-								<combobox id="cmbMateriales"
-									width="150px" readonly="true" style='text-transform:uppercase;'
-									model="@{cntrl.listaMateriales}" value="--Seleccione--">
-									<comboitem self="@{each='material'}"
-										label="@{material.descripcion}" value="@{material}">
+							<label value="Tipo Material"></label>
+						
+							<combobox id="cmbTipoMaterial"
+									width="180px" model="@{cntrl.tipoMaterial}"
+									readonly="true" value="--Seleccione--">
+									<comboitem self="@{each='tipoMaterial'}"
+										label="@{tipoMaterial.nombre}" value="@{tipoMaterial}">
+									</comboitem>
+								</combobox>
+									
+								<label value="Material"></label>
+								<hbox align="center">
+								<combobox id="cmbCodigoMaterial"
+									width="180px" model="@{cntrl.listaMateriales}"
+									readonly="true" value="--Seleccione--">
+									<comboitem self="@{each='mat'}"
+										label="@{mat.descripcion}" value="@{mat}">
 									</comboitem>
 								</combobox>
 								<space></space>
-								<button label="" id="btnAgregarMaterial"
-									image="/Recursos/Imagenes/agregar.ico"
+								<button id="btnAgregarMaterial"
+									image="/Recursos/Imagenes/basket_add.png" onClick="" label=""
 									tooltiptext="Nuevo Artículo" />
 							</hbox>
+						</row>
+						<row style="border:none;">
 							<label value="Cantidad"></label>
 							<spinner id="psrCantidad"
 								constraint="no negative">
