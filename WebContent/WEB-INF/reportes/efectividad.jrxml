@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="183"/>
+	<property name="ireport.y" value="205"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="codEquipo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -13,11 +13,8 @@
 	<parameter name="codCompetencia" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="codModalidad" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
 	<queryString>
-		<![CDATA[select r.cedula_rif, (pn.primer_nombre ||' '|| pn.primer_apellido) as nombreCompleto,((di.valor*cc.duracion_inning)/(select sum(valor) from desempenno_individual as diss where diss.codigo_line_up=di.codigo_line_up and diss.codigo_indicador_categoria_competencia=18 ))as efectividad,c.nombre as competencia,cat.nombre as categoriaNombre,eq.nombre as equipoNombre from indicador as i inner join indicador_categoria_competencia as icc on icc.codigo_indicador=i.codigo_indicador inner join desempenno_individual as di on icc.codigo_indicador_categoria_competencia=di.codigo_indicador_categoria_competencia inner join line_up as li on li.codigo_line_up=di.codigo_line_up inner join roster_competencia as rc on rc.codigo_roster_competencia=li.codigo_roster_competencia inner join roster as r on r.codigo_roster=rc.codigo_roster inner join categoria_competencia as cc on rc.codigo_competencia=cc.codigo_competencia inner join competencia as c on c.codigo_competencia=cc.codigo_competencia inner join persona_natural as pn on r.cedula_rif=pn.cedula_rif inner join categoria as cat on cat.codigo_categoria=cc.codigo_categoria inner join equipo as eq on eq.codigo_equipo=r.codigo_equipo  where i.codigo_indicador=25 and cc.codigo_categoria=5 and  rc.codigo_competencia=1 group by r.cedula_rif,di.valor,li.codigo_line_up,cc.duracion_inning,i.abreviatura,di.codigo_line_up,c.nombre,pn.primer_nombre,pn.primer_apellido,cat.nombre,eq.nombre]]>
+		<![CDATA[select r.cedula_rif, (pn.primer_nombre ||' '|| pn.primer_apellido) as nombreCompleto,((di.valor*cc.duracion_inning)/(select sum(valor) from desempenno_individual as diss where diss.codigo_line_up=di.codigo_line_up and diss.codigo_indicador_categoria_competencia=18 ))as efectividad,c.nombre as competencia,cat.nombre as categoriaNombre,eq.nombre as equipoNombre from indicador as i inner join indicador_categoria_competencia as icc on icc.codigo_indicador=i.codigo_indicador inner join desempenno_individual as di on icc.codigo_indicador_categoria_competencia=di.codigo_indicador_categoria_competencia inner join line_up as li on li.codigo_line_up=di.codigo_line_up inner join roster_competencia as rc on rc.codigo_roster_competencia=li.codigo_roster_competencia inner join roster as r on r.codigo_roster=rc.codigo_roster inner join categoria_competencia as cc on rc.codigo_competencia=cc.codigo_competencia inner join competencia as c on c.codigo_competencia=cc.codigo_competencia inner join persona_natural as pn on r.cedula_rif=pn.cedula_rif inner join categoria as cat on cat.codigo_categoria=cc.codigo_categoria inner join equipo as eq on eq.codigo_equipo=r.codigo_equipo  where i.codigo_indicador=25 and cc.codigo_categoria=$P{codCategoria} and  rc.codigo_competencia=$P{codCompetencia} and eq.codigo_equipo=$P{codEquipo} group by r.cedula_rif,di.valor,li.codigo_line_up,cc.duracion_inning,i.abreviatura,di.codigo_line_up,c.nombre,pn.primer_nombre,pn.primer_apellido,cat.nombre,eq.nombre]]>
 	</queryString>
 	<field name="cedula_rif" class="java.lang.String"/>
 	<field name="nombrecompleto" class="java.lang.String"/>
@@ -35,7 +32,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Efectividad en Picheo]]></text>
+				<text><![CDATA[Efectividad de Lanzadores]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="77" y="269" width="64" height="20"/>
@@ -127,8 +124,10 @@
 			</staticText>
 			<staticText>
 				<reportElement x="379" y="313" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[efectividad]]></text>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Efectividad]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -137,19 +136,19 @@
 			<textField>
 				<reportElement x="145" y="0" width="209" height="20"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombrecompleto}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="30" y="0" width="100" height="20"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cedula_rif}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="379" y="0" width="100" height="20"/>
+				<reportElement x="379" y="1" width="21" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{efectividad}]]></textFieldExpression>
 			</textField>
@@ -180,9 +179,12 @@
 	<summary>
 		<band height="228" splitType="Stretch">
 			<elementGroup/>
+			<elementGroup>
+				<elementGroup/>
+			</elementGroup>
 			<bar3DChart>
 				<chart>
-					<reportElement x="12" y="6" width="740" height="222"/>
+					<reportElement x="12" y="8" width="734" height="220"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -190,6 +192,11 @@
 				<categoryDataset>
 					<categorySeries>
 						<seriesExpression><![CDATA[" "]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{cedula_rif}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{efectividad}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{cedula_rif}]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{nombrecompleto}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{efectividad}]]></valueExpression>
 					</categorySeries>

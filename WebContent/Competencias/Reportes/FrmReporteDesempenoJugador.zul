@@ -5,10 +5,6 @@
 <div align="center" >
 	<window title="Configuración de Reporte del Desempeño del Jugador" id="frmReporteDesempennoJugador" style="align-text:right"
 		border="normal" width="600px" apply="controlador.competencia.CntrlFrmReporteDesempennoJugador"   closable="true">
-
-
-	
-		
 			<div align="left">
 				<panel title="Datos de La Competencia">
 					<panelchildren>

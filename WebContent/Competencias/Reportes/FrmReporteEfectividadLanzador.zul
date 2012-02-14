@@ -1,0 +1,77 @@
+<?page title="frmReporteDesempenoJugador" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmReporteEfectividad"?>
+<zk>
+<div align="center" >
+	<window title="Configuración de Reporte del Desempeño del Jugador" id="frmReporteEfectividad" style="align-text:right"
+		border="normal" width="600px" apply="controlador.competencia.CntrlFrmReporteEfectividadLanzador"   closable="true">
+
+	
+			<div align="left">
+				<panel title="Datos de La Competencia">
+					<panelchildren>
+						<separator height="5px"></separator>
+						<grid style="border:none" oddRowSclass="none">
+							<columns>
+								<column label="" width="20%" />
+								<column label="" width="80%" />
+								
+							</columns>
+							<rows>
+								<row style="border:none">
+									<label value="Competencia"></label>
+									<combobox id="cmbCompetencia"
+										cols="60" readonly="true" model="@{cntrl.competencias}">
+										<comboitem
+											self="@{each=competencia}" label="@{competencia.nombre}"
+											value="@{competencia}" />
+									</combobox>
+
+								</row>
+								<row style="border:none">
+									<label value="Categoria"></label>
+									<combobox id="cmbCategoria"
+										cols="25" readonly="true"
+										model="@{cntrl.categoriasCompetencia}">
+										<comboitem
+											self="@{each=categoriasCompetencia}"
+											label="@{categoriasCompetencia.categoria.nombre}"
+											value="@{categoriasCompetencia}" />
+									</combobox>
+								</row>
+								<row style="border:none">
+									<label value="Equipo"></label>
+									<combobox id="cmbEquipo"
+										cols="25" readonly="true"
+										model="@{cntrl.equipos}">
+										<comboitem
+											self="@{each=equipoCompetencia}"
+											label="@{equipoCompetencia.equipo.nombre}"
+											value="@{equipoCompetencia}" />
+									</combobox>
+								</row>									
+							</rows>
+						</grid>
+					</panelchildren>
+				</panel>
+			</div>
+			<div>
+			
+			<!-- BOTONES -->
+			<panel>
+				<panelchildren style="margin-top:20px ">
+					<div align="right">
+						<button id="btnGenerar"	 image="/Recursos/Imagenes/reporte.ico" label="Generar">
+						</button>
+						<button id="btnCancelar" image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+						</button>
+						<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir">
+						</button>
+					</div>
+				</panelchildren>
+			</panel>
+		</div>
+			
+</window>
+</div>
+</zk>

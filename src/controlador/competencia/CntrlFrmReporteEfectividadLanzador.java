@@ -83,7 +83,7 @@ import comun.EstadoCompetencia;
 import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioCompetencia;
 
-public class CntrlFrmReporteDesempennoJugador extends GenericForwardComposer {
+public class CntrlFrmReporteEfectividadLanzador extends GenericForwardComposer {
 
 	Component formulario;
 	AnnotateDataBinder binder;
@@ -115,22 +115,18 @@ public class CntrlFrmReporteDesempennoJugador extends GenericForwardComposer {
 		super.doAfterCompose(c);
 		c.setVariable("cntrl", this, true);
 		formulario = c;
-		restaurar();
-		System.out.println("llego aqui ");
+		restaurar();		
 		competencias = servicioCompetencia.listarAperturadasClausurada();
 
 	}
 
 	public void restaurar() {
 		competencia = new Competencia();
-		System.out.println(servicioCompetencia.listarAperturadasClausurada()
-				.size());
-
 		categoriasCompetencia = new ArrayList<CategoriaCompetencia>();
 		cmbCompetencia.setText("----Seleccione----");
 		cmbCategoria.setText("----Seleccione----");
 		cmbEquipo.setText("----Seleccione----");
-		cmbModalidad.setText("----Seleccione----");
+
 
 	}
 
@@ -150,8 +146,6 @@ public class CntrlFrmReporteDesempennoJugador extends GenericForwardComposer {
 		equipos = servicioEquipoCompetencia
 				.listarEquipoPorCompetenciaCategoria(competencia,
 						categoriaCompetencia);
-		modalidades = servicioDatoBasico
-				.listarPorTipoDato("MODALIDAD INDICADOR");
 
 		binder.loadAll();
 	}
@@ -162,29 +156,21 @@ public class CntrlFrmReporteDesempennoJugador extends GenericForwardComposer {
 
 	}
 
-	public void onSelect$cmbModalidad() {
-		modalidad = (DatoBasico) cmbModalidad.getSelectedItem().getValue();
-
-	}
-
 	public void onClick$btnGenerar() throws JRException, IOException,
 			InterruptedException, SQLException {
 		if (cmbCompetencia.getText().equalsIgnoreCase("----Seleccione----")) {
 			throw new WrongValueException(cmbCompetencia,
 					"Debe seleccionar una competencia");
 		}
-		if (cmbCategoria.getText().equalsIgnoreCase("----Seleccione----")) {
+		if (cmbCategoria.getText()
+				.equalsIgnoreCase("----Seleccione----")) {
 			throw new WrongValueException(cmbCategoria,
 					"Debe seleccionar una categoria");
 		}
 		if (cmbEquipo.getText().equalsIgnoreCase("----Seleccione----")) {
-			throw new WrongValueException(cmbCategoria,
-					"Debe seleccionar una categoria");
-		}
-		if (cmbModalidad.getText().equalsIgnoreCase("----Seleccione----")) {
-			throw new WrongValueException(cmbCategoria,
-					"Debe seleccionar una categoria");
-		} 
+			throw new WrongValueException(cmbEquipo,
+					"Debe seleccionar una Equipo");
+		} else {
 			con = ConeccionBD.getCon("postgres", "postgres", "123456");
 			parameters.put("codEquipo", equipoCompetencia.getEquipo()
 					.getCodigoEquipo());
@@ -192,9 +178,9 @@ public class CntrlFrmReporteDesempennoJugador extends GenericForwardComposer {
 					.getCodigoCategoria());
 			parameters
 					.put("codCompetencia", competencia.getCodigoCompetencia());
-			parameters.put("codModalidad", modalidad.getCodigoDatoBasico());
+
 			String rutaReporte = Sessions.getCurrent().getWebApp()
-					.getRealPath("/WEB-INF/reportes/desempenoporequipo.jrxml");
+					.getRealPath("/WEB-INF/reportes/efectividad.jrxml");
 			JasperReport report = JasperCompileManager
 					.compileReport(rutaReporte);
 			JasperPrint print = JasperFillManager.fillReport(report,
@@ -202,13 +188,13 @@ public class CntrlFrmReporteDesempennoJugador extends GenericForwardComposer {
 
 			byte[] archivo = JasperExportManager.exportReportToPdf(print);
 
-			final AMedia amedia = new AMedia("desempenoporequipo.pdf", "pdf",
+			final AMedia amedia = new AMedia("efectividad.pdf", "pdf",
 					"application/pdf", archivo);
 
 			Component visor = Executions.createComponents("/General/"
 					+ "frmVisorDocumento.zul", null, null);
 			visor.setVariable("archivo", amedia, false);
-		
+		}
 	}
 
 	public void onClick$btnCancelar() {

@@ -657,11 +657,25 @@
 									<treechildren>
 										<treeitem open="false">
 											<treerow>
-												<treecell label=" " />
+												<treecell
+													label="Competencias" />
 											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Efectividad de Lanzamiento"
+															onClick='enlace("Competencias/Reportes/FrmReporteEfectividadLanzador.zul")' />
+													</treerow>
+
+												</treeitem>
+												
+											</treechildren>
 										</treeitem>
 									</treechildren>
 								</treeitem>
+
 
 								<treeitem open="false">
 									<treerow>
