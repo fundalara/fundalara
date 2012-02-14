@@ -1,10 +1,10 @@
 <?page title="Clientes" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmClientes' ?>
 <zk>
 	<window apply="controlador.administracion.CntrlPersonaJuridica"
-		id="frmClientes" title="Clientes" border="normal" width="690px">
-		
+		closable="true" id="frmClientes" title="Clientes" border="normal"
+		width="690px">
 		<panel title="Datos del Cliente" collapsible="true"
 			open="true">
 			<panelchildren>
@@ -37,7 +37,8 @@
 								<hbox align="center">
 									<textbox width="350px"
 										id="txtRazonSocial" constraint="no empty"
-										value="@{cntrl.personaJuridica.razonSocial}" style='text-transform:uppercase;' />
+										value="@{cntrl.personaJuridica.razonSocial}"
+										style='text-transform:uppercase;' />
 									<label value="(*)"
 										style="color:red" />
 								</hbox>
@@ -71,8 +72,6 @@
 									<textbox width="120px"
 										id="txtTelefono">
 									</textbox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 								<label value="Numero de Fax" />
 								<hbox>
@@ -93,10 +92,12 @@
 								<label value="Correo Electrónico" />
 								<textbox width="210px"
 									id="txtCorreoElectronico"
-									value="@{cntrl.persona.correoElectronico}" style='text-transform:uppercase;' />
+									value="@{cntrl.persona.correoElectronico}"
+									style='text-transform:uppercase;' />
 								<label value="Twitter" id="txtTwitter" />
 								<textbox width="185px"
-									value="@{cntrl.persona.twitter}" style='text-transform:uppercase;' />
+									value="@{cntrl.persona.twitter}"
+									style='text-transform:uppercase;' />
 							</row>
 
 						</rows>
@@ -125,8 +126,6 @@
 											context="@{estado.codigoDatoBasico}" value="@{estado}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 								<label value="Municipio" />
 								<hbox>
@@ -139,8 +138,6 @@
 											value="@{municipio}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
@@ -155,8 +152,6 @@
 											context="@{parroquia.codigoDatoBasico}">
 										</comboitem>
 									</combobox>
-									<label value="(*)"
-										style="color:red" />
 								</hbox>
 							</row>
 							<row spans="1,3" style="border:none;">
@@ -164,9 +159,8 @@
 								<hbox align="center">
 									<textbox id="txtDireccion"
 										value="@{cntrl.persona.direccion}" maxlength="200"
-										height="40px" width="505px" multiline="true" style='text-transform:uppercase;' />
-									<label value="(*)"
-										style="color:red" />
+										height="40px" width="505px" multiline="true"
+										style='text-transform:uppercase;' />
 								</hbox>
 							</row>
 						</rows>
@@ -192,7 +186,7 @@
 				tooltiptext="Salir" label="Salir" width="100px">
 				<attribute name="onClick">
 	{
-		frmPersonas.onClose();
+		frmClientes.onClose();
 	}
 </attribute>
 			</button>

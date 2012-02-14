@@ -1,19 +1,18 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="Catalogo de Facturas" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="CatFacturas"?>
 <zk>
 	<window id="CatFacturas" title="Catálogo de Facturas por Pagar"
 		apply="controlador.administracion.CntrlCatalogoFacturas"
-		border="normal" width="600px" left="500px" top="100px" mode="modal">
-		<listbox id="lbxFacturasPagar" width="600px"
+		border="normal" width="690px" left="500px" top="100px" mode="modal">
+		<listbox id="lbxFacturasPagar" width="670px"
 			model="@{cntrl.facturas}" mold="paging" pageSize="5">
 			<listhead>
-				<listheader label="Nro. Factura" width="100px" />
+				<listheader label="Factura" width="50px" />
 				<listheader label="Monto" width="75px" />
 				<listheader label="Fecha" width="90px" />
 				<listheader label="Rif" width="120px" />
 				<listheader label="Proveedor" width="200px" />
-
 			</listhead>
 			<auxhead width="100%">
 				<auxheader colspan="1">

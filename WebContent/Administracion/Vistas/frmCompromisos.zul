@@ -1,10 +1,10 @@
 <?page title="Generar Compromisos" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmCompromisos' ?>
 <zk>
-	<window title="Compromisos" border="normal" closable="true"
-		apply="controlador.administracion.CntrlCompromiso" width="690px"
-		mode="embedded">
+	<window title="Generar Compromisos" border="normal" closable="true"
+		id="frmCompromisos" apply="controlador.administracion.CntrlCompromiso"
+		width="690px" mode="embedded" style="text-align:left">
 		<grid oddRowSclass="none" style="border: none">
 			<columns>
 				<column width="20%" />
@@ -16,28 +16,86 @@
 				<row spans="1,3" style="border: none">
 					<space></space>
 					<radiogroup>
-						<radio label="Persona" value="PERSONA"
-							id="rgPersona">
-						</radio>
-						<radio label="Equipo" value="EQUIPO"
-							id="rgEquipo">
-						</radio>
-						<radio label="Categoria" value="CATEGORIA"
-							id="rgCategoria">
-						</radio>
+						<hbox align="left">
+							<hbox>
+								<radio label="" value="PERSONA"
+									id="rgPersona">
+								</radio>
+								<label value="Persona" width="120px"
+									style="text-align:left">
+								</label>
+							</hbox>
+							<space width="10px"></space>
+							<hbox>
+								<radio label="" value="EQUIPO"
+									id="rgEquipo">
+								</radio>
+								<label value="Equipo" width="120px"
+									style="text-align:left">
+								</label>
+							</hbox>
+							<space width="10px"></space>
+							<hbox>
+								<radio label="" value="CATEGORIA"
+									id="rgCategoria">
+								</radio>
+								<label value="Categoria" width="120px"
+									style="text-align:left">
+								</label>
+							</hbox>
+						</hbox>
 					</radiogroup>
 				</row>
-				<row spans="1,3" style="border: none" visible="false"
-					id="rwPersona">
+				<row spans="1,3" style="border: none" id="rwTipoEquipo"
+					visible="false">
+					<label value="Lapso Deportivo"></label>
+					<combobox id="cmbLapso" readonly="true"
+						value="--Seleccione--" width="180px">
+						<comboitem label="TEMPORADA REGULAR"
+							value="TEMPORADA REGULAR">
+						</comboitem>
+						<comboitem label="PLAN VACACIONAL"
+							value="PLAN VACACIONAL">
+						</comboitem>
+					</combobox>
+				</row>
+				<row spans="1,3" style="border: none" id="rwTipoRoster"
+					visible="false">
 					<space></space>
 					<radiogroup>
-						<radio label="Persona Natural" value="NATURAL"
-							id="rgNatural">
-						</radio>
-						<radio label="Persona Jurídica" value="JURIDICA"
-							id="rgJuridico">
-						</radio>
+						<hbox>
+							<hbox align="center" width="150px">
+								<radio label="" value="GENERAL"
+									id="rdRoster">
+								</radio>
+								<label value="Roster General"
+									width="150px">
+								</label>
+							</hbox>
+							<space width="10px"></space>
+							<hbox align="center" width="200px">
+								<radio label="" value="COMPETENCIA"
+									id="rdCompetencia">
+								</radio>
+								<label value="Roster de Competencia"
+									width="180px">
+								</label>
+							</hbox>
+						</hbox>
 					</radiogroup>
+				</row>
+				<row style="border: none" spans="1,3" id="rwPersona"
+					visible="false">
+					<label value="Tipo Persona"></label>
+					<combobox id="cmbPersonaNJ" readonly="true"
+						value="--Seleccione--" width="180px">
+						<comboitem label="PERSONA NATURAL"
+							value="NATURAL">
+						</comboitem>
+						<comboitem label="PERSONA JURIDICA"
+							value="JURIDICA">
+						</comboitem>
+					</combobox>
 				</row>
 				<row style="border: none" spans="1,3" id="rwTipoPersona"
 					visible="false">
@@ -50,20 +108,57 @@
 						</comboitem>
 					</combobox>
 				</row>
-				<row style="border: none" id="rwEquipoCat"
+				<row style="border: none" id="rwCedula" spans="1,3"
 					visible="false">
-					<label value="Equipo" id="lblEquipoCat"></label>
-					<combobox id="cmbEquipoCat" width="180px" visible="true"
-						value="--Seleccione--" readonly="true">
+					<label value="Cedula/RIF" id="lblCedula"></label>
+					<hbox align="center">
+						<textbox readonly="true" width="150px"
+							id="txtCedula">
+						</textbox>
+						<button image="/Recursos/Imagenes/consultar.ico"
+							id="btnCatalogo">
+						</button>
+					</hbox>
+				</row>
+				<row style="border: none" id="rwNombre" spans="1,3"
+					visible="false">
+					<label value="Nombre/Razon Social" id="lblNombre">
+					</label>
+					<textbox readonly="true" width="75%"
+						id="txtNombre">
+					</textbox>
+				</row>
+				<row style="border: none" id="rwEquipo"
+					visible="false">
+					<label value="Equipo" id="lblEquipo"></label>
+					<combobox id="cmbEquipo" width="180px"
+						visible="true" value="--Seleccione--" readonly="true"
+						model="@{cntrl.equipos}">
+						<comboitem self="@{each='equipo'}"
+							label="@{equipo.nombre}" value="@{equipo}">
+						</comboitem>
 					</combobox>
 				</row>
-				
+				<row style="border: none" id="rwCategoria"
+					visible="false">
+					<label value="Categoria" id="lblCategoria"></label>
+					<combobox id="cmbCategoria" width="180px"
+						visible="true" value="--Seleccione--" readonly="true"
+						model="@{cntrl.categorias}">
+						<comboitem self="@{each='categoria'}"
+							label="@{categoria.nombre}" value="@{categoria}">
+						</comboitem>
+					</combobox>
+				</row>
+
+
 			</rows>
 		</grid>
 		<groupbox style="border:none" id="gbxPersonas" width="670px"
 			visible="false">
 			<hbox>
-				<listbox id="lbxPersonas" mold="paging" pageSize="5" width="620px">
+				<listbox id="lbxPersonas" mold="paging" pageSize="5"
+					model="@{cntrl.listaPersonas }" width="620px">
 					<listhead>
 						<listheader label="Cédula/RIF" align="center"
 							width="25%">
@@ -73,96 +168,100 @@
 						</listheader>
 					</listhead>
 
-					<listitem>
-						<listcell></listcell>
-						<listcell></listcell>
+					<listitem self="@{each='persona' }">
+						<listcell label="@{persona.cedulaRif }" />
+						<listcell
+							label="@{persona, converter='comun.converter.NameConverter' }" />
 					</listitem>
 				</listbox>
-				<button image="/Recursos/Imagenes/agregar.ico"
-					id="btnAgregarPersona">
-				</button>
-				<button image="/Recursos/Imagenes/agregar.ico"
-					id="btnQuitarPersona">
-				</button>
+				<vbox>
+					<button image="/Recursos/Imagenes/agregar.ico"
+						id="btnAgregarPersona">
+					</button>
+					<button image="/Recursos/Imagenes/quitar.ico"
+						id="btnQuitarPersona">
+					</button>
+				</vbox>
 			</hbox>
 		</groupbox>
-		<groupbox style="border-color:orange;"
-			id="gbxJugadoresAsociados" visible="false">
-			<caption label="Representantes/Jugadores Asociados"></caption>
-			<listbox id="lbxJugadoresAsociados" mold="paging"
-				pageSize="5">
-				<listhead>
-					<listheader label="Cédula" align="center"
-						width="13%">
-					</listheader>
-					<listheader label="Jugador" align="center"
-						width="42%">
-					</listheader>
-					<listheader label="Equipo" align="center"
-						width="15%">
-					</listheader>
-					<listheader label="Categoria" align="center"
-						width="25%">
-					</listheader>
-				</listhead>
 
-				<listitem>
-					<listcell></listcell>
-					<listcell></listcell>
-					<listcell></listcell>
-					<listcell></listcell>
-				</listitem>
-
-			</listbox>
-		</groupbox>
-
-		<groupbox style="border-color:orange;"
+		<groupbox style="border-color:orange;" closable="false"
 			id="gbxRepresentantesEquipos" visible="false">
-			<caption label="Jugadores Asociados"></caption>
-			<listbox id="lbxRepresentantesEquipos" mold="paging"
-				pageSize="5">
-				<listhead>
-					<listheader label="Representante" align="center"
-						width="50%">
-					</listheader>
-					<listheader label="Jugador" align="center"
-						width="50%">
-					</listheader>
-				</listhead>
+			<caption label="Equipos seleccionados"></caption>
+			<hbox>
+				<listbox id="lbxEquipos" mold="paging" pageSize="5"
+					width="620px" model="@{cntrl.listaEquipos}">
+					<listhead>
+						<listheader label="Equipo" align="center"
+							width="40%">
+						</listheader>
+						<listheader label="Categoria" align="center"
+							width="40%">
+						</listheader>
+						<listheader label="Jugadores" align="center"
+							width="20%">
+						</listheader>
+					</listhead>
 
-				<listitem>
-					<listcell></listcell>
-					<listcell></listcell>
-				</listitem>
+					<listitem self="@{each='equipo'}"
+						value="@{equipo}">
+						<listcell label="@{equipo.nombre}"></listcell>
+						<listcell label="@{equipo.categoria.nombre}"></listcell>
+						<listcell label="@{equipo, converter='controlador.administracion.converter.JugadoresPorCategoriaConverter' }"></listcell>
+					</listitem>
 
-			</listbox>
+				</listbox>
+				<vbox>
+					<button image="/Recursos/Imagenes/agregar.ico"
+						id="btnAgregarEquipo">
+					</button>
+					<button image="/Recursos/Imagenes/quitar.ico"
+						id="btnQuitarEquipo">
+					</button>
+				</vbox>
+			</hbox>
 		</groupbox>
-		<groupbox style="border-color:orange;"
+		<groupbox style="border-color:orange;" closable="false"
 			id="gbxRepresentantesCategoria" visible="false">
-			<caption label="Representantes/Jugadores Asociados"></caption>
-			<listbox id="lbxRepresentantesCategoria" mold="paging"
-				pageSize="5">
-				<listhead>
-					<listheader label="Representante" align="center"
-						width="35%">
-					</listheader>
-					<listheader label="Jugador" align="center"
-						width="35%">
-					</listheader>
-					<listheader label="Equipo" align="center"
-						width="30%">
-					</listheader>
-				</listhead>
+			<caption label="Categorias seleccionadas"></caption>
+			<hbox>
+				<listbox id="lbxCategorias" mold="paging" width="620px"
+					pageSize="5" model="@{cntrl.listaCategorias}">
+					<listhead>
+						<listheader label="Categoria" align="center"
+							width="40%">
+						</listheader>
+						<listheader label="Equipos" align="center"
+							width="30%">
+						</listheader>
+						<listheader label="Jugadores" align="center"
+							width="30%">
+						</listheader>
+					</listhead>
 
-				<listitem>
-					<listcell></listcell>
-					<listcell></listcell>
-					<listcell></listcell>
-				</listitem>
-			</listbox>
+					<listitem self="@{each='categoria'}"
+						value="@{categoria}">
+						<listcell label="@{categoria.nombre}"></listcell>
+						<listcell
+							label="@{categoria, converter='controlador.administracion.converter.EquiposPorCategoriaConverter'}">
+						</listcell>
+						<listcell
+							label="@{categoria, converter='controlador.administracion.converter.JugadoresPorCategoriaConverter'}">
+						</listcell>
+					</listitem>
+				</listbox>
+				<vbox>
+					<button image="/Recursos/Imagenes/agregar.ico"
+						id="btnAgregarCategoria">
+					</button>
+					<button image="/Recursos/Imagenes/quitar.ico"
+						id="btnQuitarCategoria">
+					</button>
+				</vbox>
+			</hbox>
 		</groupbox>
 		<panel collapsible="true" title="Detalles del Compromiso"
-			open="true" style="border:orange" id="pnCompromisos"
+			open="false" style="border:orange" id="pnCompromisos"
 			visible="false">
 			<panelchildren>
 				<grid oddRowSclass="none" style="border: none"
@@ -185,10 +284,26 @@
 								</radio>
 							</radiogroup>
 						</row>
-						<row style="border: none" spans="1,3">
+						<row id="rwCuentasPagar" style="border: none"
+							spans="1,3" visible="false">
 							<label value="Compromiso" />
 							<combobox value="--Seleccione--"
-								width="200px" readonly="true" id="cmbCompromiso">
+								width="200px" readonly="true" id="cmbTipoEgreso"
+								model="@{cntrl.tipoEgresos}">
+								<comboitem self="@{each='egreso'}"
+									label="@{egreso.nombre}" value="@{egreso}">
+								</comboitem>
+							</combobox>
+						</row>
+						<row id="rwCuentasCobrar" style="border: none"
+							spans="1,3">
+							<label value="Compromiso" />
+							<combobox value="--Seleccione--"
+								model="@{cntrl.tipoIngresos}" width="200px" readonly="true"
+								id="cmbTipoIngreso">
+								<comboitem self="@{each='ingreso' }"
+									label="@{ingreso.descripcion}" value="@{ingreso}">
+								</comboitem>
 							</combobox>
 						</row>
 						<row style="border: none" spans="1,3">
@@ -196,39 +311,96 @@
 							<textbox width="75%" id="txtConcepto"
 								style='text-transform:uppercase;' />
 						</row>
+
+						<row style="border: none" spans="1,3"
+							id="rwPeriodicidad">
+							<label value="Periodicidad"></label>
+							<combobox model="@{cntrl.periodicidades}"
+								id="cmbPeriodicidad">
+								<comboitem self="@{each='periodicidad'}"
+									value="@{periodicidad}" label="@{periodicidad.nombre}">
+								</comboitem>
+							</combobox>
+						</row>
+						<row style="border: none" spans="1,3">
+							<label value="Nro. Cuotas"></label>
+							<spinner width="100px" id="spCantidad"></spinner>
+						</row>
+						<row style="border: none" spans="1,3"
+							id="rwDocumento" visible="false">
+							<label value="Tipo de Documento"></label>
+							<combobox model="@{cntrl.tipoDocumentos}"
+								id="cmbTipoDocumento">
+								<comboitem self="@{each='documento'}"
+									value="@{documento}" label="@{documento.nombre}">
+								</comboitem>
+							</combobox>
+							<label id="lblDocumento" visible="false"
+								value="Nro. Documento">
+							</label>
+							<textbox id="txtDocumento"
+								visible="false">
+							</textbox>
+
+						</row>
+						<row style="border: none" visible="false"
+							id="rwSubTotal">
+							<label value="Sub-Total" />
+							<hbox align="center">
+
+								<doublebox width="100px"
+									id="dbxSubTotal" />
+								<label value="BsF."></label>
+							</hbox>
+
+						</row>
 						<row style="border: none">
 							<label value="Monto" />
 							<hbox align="center">
+
 								<doublebox width="100px" id="dbxMonto" />
 								<label value="BsF."></label>
 							</hbox>
-							<label value="Cantidad"></label>
-							<spinner width="100px" id="spCantidad"></spinner>
 						</row>
 						<row style="border: none">
 							<label value="Emisión" />
-							<datebox width="100px" id="dateEmision" />
-							<label value="Vencimiento" />
-							<datebox width="100px" id="dateVencimiento" />
+							<datebox width="100px" id="dateEmision"
+								format="dd/MM/yyyy" />
+							<label value="Vencimiento"
+								id="lblVencimiento" />
+							<datebox width="100px" id="dateVencimiento"
+								format="dd/MM/yyyy" />
+
 						</row>
 					</rows>
 				</grid>
-				<hbox id="hbCompromisos" visible="false">
+				<hbox id="hbCompromisosCobrar" visible="false">
 					<space width="5px"></space>
 					<listbox height="110px" id="lbxCompromisosCobrar"
-						width="600px" mold="paging" pageSize="5" oddRowSclass="none">
+						width="600px" mold="paging" pageSize="5" oddRowSclass="none"
+						model="@{cntrl.compromisosCobrar}">
 						<listhead>
-							<listheader label="Compromiso" width="100px"
+							<listheader label="Concepto" width="30%"
 								align="left" />
-							<listheader label="Concepto" align="center"
-								width="200px" />
+							<listheader label="Descripcion"
+								align="center" width="30%" />
 							<listheader label="Monto" align="center"
-								width="100px" />
-							<listheader label="Emisión" align="center"
-								width="100px" />
+								width="20%" />
 							<listheader label="Vencimiento"
-								align="center" width="100px" />
+								align="center" width="20%" />
 						</listhead>
+						<listitem self="@{each='compromiso'}"
+							value="@{compromiso}">
+							<listcell
+								label="@{compromiso.tipoIngreso.descripcion}">
+							</listcell>
+							<listcell label="@{compromiso.concepto}"></listcell>
+							<listcell label="@{compromiso.monto}"></listcell>
+							<listcell
+								label="@{compromiso.fechaVencimiento, converter='comun.converter.DateConverter'}">
+							</listcell>
+
+						</listitem>
 					</listbox>
 					<space></space>
 					<vbox>
@@ -237,6 +409,46 @@
 						</button>
 						<button image="/Recursos/Imagenes/quitar.ico"
 							id="btnQuitarCobro">
+						</button>
+					</vbox>
+				</hbox>
+				<hbox id="hbCompromisosPagar" visible="false">
+					<space width="5px"></space>
+					<listbox height="110px" id="lbxCompromisosPagar"
+						width="600px" mold="paging" pageSize="5" oddRowSclass="none"
+						model="@{cntrl.compromisosPagar}">
+						<listhead>
+							<listheader label="Concepto" width="25%"
+								align="left" />
+							<listheader label="Descripcion"
+								align="center" width="35%" />
+							<listheader label="Monto" align="center"
+								width="20%" />
+							<listheader label="Vencimiento"
+								align="center" width="20%" />
+						</listhead>
+						<listitem self="@{each='compromiso'}"
+							value="@{compromiso}">
+							<listcell
+								label="@{compromiso.datoBasicoByCodigoTipoEgreso.nombre}">
+							</listcell>
+							<listcell label="@{compromiso.concepto}"></listcell>
+							<listcell
+								label="@{compromiso.montoTotal}">
+							</listcell>
+							<listcell
+								label="@{compromiso.fechaVencimiento, converter='comun.converter.DateConverter'}">
+							</listcell>
+
+						</listitem>
+					</listbox>
+					<space></space>
+					<vbox>
+						<button image="/Recursos/Imagenes/agregar.ico"
+							id="btnAgregarPago">
+						</button>
+						<button image="/Recursos/Imagenes/quitar.ico"
+							id="btnQuitarPago">
 						</button>
 					</vbox>
 				</hbox>
@@ -251,7 +463,13 @@
 				image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
 				width="100px" height="35px" />
 			<button label="Salir" image="/Recursos/Imagenes/salir.png"
-				id="btnSalir" orient="horizontal" width="100px" height="35px" />
+				id="btnSalir" orient="horizontal" width="100px" height="35px">
+				<attribute name="onClick">
+	{
+		frmCompromisos.detach();
+	}
+</attribute>
+			</button>
 		</div>
 		<separator></separator>
 	</window>

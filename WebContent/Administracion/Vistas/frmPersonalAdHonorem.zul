@@ -1,9 +1,8 @@
 <?page title="Personal Ad Honorem" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmPersonalAdHonorem' ?>
 <zk>
-	<!-- <div align="center"> -->
-	<window apply="controlador.administracion.CntrlPersonalAdHonorem"
+	<window apply="controlador.administracion.CntrlPersonalAdHonorem" closable="true"
 		id="frmPersonalAdHonorem" title="Personal Ad Honorem" border="normal"
 		width="690px">
 
@@ -37,7 +36,7 @@
 						<label value="Primer Nombre" />
 						<hbox>
 							<textbox id='txtPrimerNombre'
-								value="@{cntrl.personaNatural.primerNombre}"
+								value="@{cntrl.persona.personaNatural.primerNombre}"
 								style='text-transform:uppercase;'>
 							</textbox>
 							<label value="(*)" style="color:red">
@@ -46,7 +45,7 @@
 						<label value="Segundo Nombre" />
 						<textbox id='txtSegundoNombre'
 							style='text-transform:uppercase;'
-							value="@{cntrl.personaNatural.segundoNombre}">
+							value="@{cntrl.persona.personaNatural.segundoNombre}">
 						</textbox>
 					</row>
 					<row style="border:none">
@@ -54,7 +53,7 @@
 						<hbox>
 							<textbox id='txtPrimerApellido'
 								style='text-transform:uppercase;'
-								value="@{cntrl.personaNatural.primerApellido}">
+								value="@{cntrl.persona.personaNatural.primerApellido}">
 							</textbox>
 							<label value="(*)" style="color:red">
 							</label>
@@ -62,7 +61,7 @@
 						<label value="Segundo Apellido" />
 						<textbox id='txtSegundoApellido'
 							style='text-transform:uppercase;'
-							value="@{cntrl.personaNatural.segundoApellido}">
+							value="@{cntrl.persona.personaNatural.segundoApellido}">
 						</textbox>
 
 					</row>
@@ -79,7 +78,7 @@
 						<label value="Género" />
 						<hbox>
 							<combobox id='cmbGenero' value=" "
-								model="@{cntrl.generos }" width="20px" readonly="true">
+								model="@{cntrl.generos }" readonly="true">
 								<comboitem label="@{genero.nombre }"
 									self="@{each='genero' }" value="@{genero }"
 									context="{@genero.codigoDatoBasico }">
@@ -167,7 +166,6 @@
 									value="@{estado }">
 								</comboitem>
 							</combobox>
-							<label value="(*)" style="color:red" />
 						</hbox>
 						<label value="Municipio" />
 						<hbox>
@@ -179,7 +177,6 @@
 									context="@{municipio.codigoDatoBasico}" value="@{municipio}">
 								</comboitem>
 							</combobox>
-							<label value="(*)" style="color:red" />
 						</hbox>
 					</row>
 					<row spans="1,3" style="border:none;">
@@ -193,16 +190,15 @@
 									context="@{parroquia.codigoDatoBasico}">
 								</comboitem>
 							</combobox>
-							<label value="(*)" style="color:red" />
 						</hbox>
 					</row>
 					<row spans="1,3" style="border:none;">
 						<label value="Dirección" />
 						<hbox align="center">
-							<textbox id="txtDireccion" style='text-transform:uppercase;'
+							<textbox id="txtDireccion"
+								style='text-transform:uppercase;'
 								value="@{cntrl.persona.direccion}" maxlength="200" height="40px"
 								width="505px" multiline="true" />
-							<label value="(*)" style="color:red" />
 						</hbox>
 					</row>
 				</rows>
@@ -230,12 +226,12 @@
 						</hbox>
 						<label value="Cargo"></label>
 						<div>
-							<combobox id="cmbCargo" width="100px"
-								height="20px">
-								<comboitem label="Presidente"></comboitem>
-								<comboitem label="Vicepresidente"></comboitem>
-								<comboitem label="Secretaria"></comboitem>
-								<comboitem label="Colaborador"></comboitem>
+							<combobox id="cmbCargo" disabled="true"
+								model="@{cntrl.cargos }" readonly="true">
+								<comboitem self="@{each='cargo' }"
+									label="@{cargo.nombre }" value="@{cargo }"
+									context="{@cargo.codigoDatoBasico }">
+								</comboitem>
 							</combobox>
 							<space />
 						</div>
@@ -243,7 +239,6 @@
 				</rows>
 			</grid>
 		</groupbox>
-
 		<separator></separator>
 		<div align="left">
 			<label value="(*) Campo Obligarorio" style="color:red">
@@ -262,7 +257,9 @@
 			<button image="/Recursos/Imagenes/salir.png" onClick=""
 				id="btnSalir" label="Salir" width="100px">
 				<attribute name="onClick">
-	frmPersonalAdHonorem.onClose();
+	{
+		frmPersonalAdHonorem.onClose();
+	}
 </attribute>
 			</button>
 		</div>

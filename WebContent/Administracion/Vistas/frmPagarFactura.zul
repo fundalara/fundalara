@@ -1,10 +1,23 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="Pagar Factur" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPagarFactura" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmPagarFactura' name='binderCompras'?>
 <zk>
-	<window id="frmPagarFactura" title="Pagar Compras" border="normal"
+	<window id="frmPagarFactura" title="Pagar Compras" border="normal" closable="true"
 		apply="controlador.administracion.CntrlPagarFactura" width="690px">
+<zscript><![CDATA[ ]]></zscript>
+		<zscript><![CDATA[
+	//@IMPORT
+	import org.zkoss.Version;
+]]></zscript>
 
+		<zscript><![CDATA[
+	//@DECLARATION
+	void setOn() {
+		uno.setChecked(true);
+	}
+	
+	
+]]></zscript>
 		<panel title="Datos Básicos" collapsible="true" open="true">
 			<panelchildren>
 				<grid oddRowSclass="none" style="border:none">
@@ -20,10 +33,10 @@
 					</columns>
 					<rows>
 						<row style="border:none">
-							<label value="Rif"></label>
-							<hbox>
+							<label value="RIF"></label>
+							<hbox align="center">
 								<textbox id="txtRif2" readonly="true"
-									value="@{cntrlfactura.cuentaPagarFact.persona.personaJuridica.cedulaRif}">
+									value="@{cntrlfactura.persona.cedulaRif}">
 								</textbox>
 
 								<space></space>
@@ -34,40 +47,78 @@
 						</row>
 						<row style="border:none" spans="1,3">
 							<label value="Razón Social"></label>
-							<textbox width="75%"
-								id="txtCodigoProveedor2" readonly="true"
-								value="@{cntrlfactura.cuentaPagarFact.persona.personaJuridica.razonSocial}">
+							<textbox width="75%" id="txtRazon"
+								readonly="true"
+								value="@{cntrlfactura.persona.personaJuridica.razonSocial}">
 							</textbox>
 						</row>
 					</rows>
 				</grid>
 			</panelchildren>
 		</panel>
-		<groupbox width="310" style="border:orange">
-			<caption label="Detalles de Factura"></caption>
-			<listbox id="lbxFacturas" mold="paging" pageSize="5">
+		<groupbox style="border-color:orange;">
+			<caption label="Facturas Asociadas"></caption>
+			<listbox id="lbxFacturas" mold="paging" pageSize="5"
+				model="@{cntrlfactura.facturas}" width="670px">
 				<listhead>
-					<listheader label="Factura" width="50%">
+					<listheader width="30px">
+						<checkbox id="chFactura"
+						onClick="setOn()"></checkbox>
+					</listheader>
+					<listheader label="Factura" width="140px">
 					</listheader>
 					<listheader label="Emisión" align="Center"
-						width="25%">
+						width="100px">
+					</listheader>
+					<listheader label="Vencimiento" align="Center"
+						width="100px">
 					</listheader>
 					<listheader align="center" label="Monto"
-						width="25%">
+						width="100px">
 					</listheader>
 					<listheader align="center" label="Actual"
-						width="25%">
+						width="100px">
+					</listheader>
+					<listheader align="center" label="A Cancelar"
+						width="100px">
 					</listheader>
 				</listhead>
-				<!-- 				<listitem self="@{each='material2'}"> -->
-				<!-- 					<listcell label="@{material2.material.descripcion}" /> -->
-				<!-- 					<listcell label="@{material2.cantidad}" /> -->
-				<!-- 					<listcell label="@{material2.precioUnitario}" /> -->
-				<!-- 					<listcell /> -->
-				<!-- 				</listitem> -->
+				<listitem self="@{each='factura'}">
+					<listcell>
+						<checkbox id="uno"></checkbox>
+					</listcell>
+					<listcell label="@{factura.numeroDocumento}" />
+					<listcell
+						label="@{factura.fechaEmision, converter='comun.converter.DateConverter' }" />
+					<listcell
+						label="@{factura.fechaVencimiento, converter='comun.converter.DateConverter' }" />
+					<listcell label="@{factura.montoTotal}" />
+					<listcell label="@{factura.saldo}" />
+					<listcell>
+						<doublebox id="dboxMontoAbono" readonly="true"
+							style="border:none"  >
+						</doublebox>
+					</listcell>
+				</listitem>
 			</listbox>
+			<div align="right">
+					<hbox align="center">
+						<label value="Pendiente"></label>
+						<space width="5px"></space>
+						<doublebox id="dboxMontoP" readonly="true" />
+						<label value="Bs"></label>
+						<space width="10px"></space>
+						<label value="Cancelar"></label>
+						<space width="5px"></space>
+						<doublebox id="dboxMontoCancelar"
+							readonly="true" />
+						<label value="Bs"></label>
+						<space width="25px"></space>
+					</hbox>
+				</div>
+				<separator></separator>
 		</groupbox>
-		<groupbox width="310" style="border:orange">
+		<groupbox style="border-color:orange;">
 			<caption label="Detalles de Factura"></caption>
 			<listbox id="lbxDetalles"
 				model="@{cntrlfactura.materiales2}" mold="paging" pageSize="5">
@@ -103,14 +154,24 @@
 							<column label="" width="35%"></column>
 						</columns>
 						<rows>
+						<row style="border:none">
+								<label value="Fecha del Pago"></label>
+								<datebox id="dtFactura2"
+									format="dd/MM/yyyy" value="@{cntrlfactura.egreso.fechaPago}">
+								</datebox>
+								<label value="Nro. Recibo"></label>
+								<textbox id="txtNroRecibo" width="180px"
+									value="@{cntrlfactura.egreso.numeroDocumento}">
+								</textbox>
+							</row>
 
 							<row align="left" style="border:none">
 								<label value="Forma de Pago" />
 								<combobox id="cmbFormaPago"
-									model="@{cntrlfactura.formaPago}" width="180px">
+									model="@{cntrlfactura.formaPago}" width="180px" readonly="true">
 									<comboitem self="@{each=formaPago}"
 										value="@{formaPago}" label="@{formaPago.nombre}"
-										context="@{formaPago.codigoDatoBasico}">
+										context="@{formaPago.codigoDatoBasico}" >
 									</comboitem>
 								</combobox>
 								<label value="Monto Cancelado" />
@@ -127,7 +188,7 @@
 								</textbox>
 								<label value="Entidad Bancaria" />
 								<combobox model="@{cntrlfactura.banco}"
-									id="cmbEntidadBancaria" value="--Seleccione--" width="180px">
+									id="cmbEntidadBancaria" value="--Seleccione--" width="180px" readonly="true">
 									<comboitem self="@{each=banco}"
 										value="@{banco}" label="@{banco.nombre}">
 									</comboitem>
@@ -138,23 +199,14 @@
 								<label value="Tipo de Tarjeta" />
 								<combobox
 									model="@{cntrlfactura.tipoTarjeta}" id="cmbTipoTarjeta"
-									width="180px" value="--Seleccione--">
+									width="180px" value="--Seleccione--" readonly="true">
 									<comboitem
 										self="@{each=tipoTarjeta}" value="@{tipoTarjeta}"
 										label="@{tipoTarjeta.nombre}">
 									</comboitem>
 								</combobox>
 							</row>
-							<row style="border:none">
-								<label value="Fecha del Pago"></label>
-								<datebox id="dtFactura2"
-									format="dd/MM/yyyy" value="@{cntrlfactura.egreso.fechaPago}">
-								</datebox>
-								<label value="Nro. Recibo"></label>
-								<textbox id="txtNroRecibo" width="180px"
-									value="@{cntrlfactura.egreso.numeroDocumento}">
-								</textbox>
-							</row>
+							
 						</rows>
 					</grid>
 				</div>
@@ -226,10 +278,14 @@
 				image="/Recursos/Imagenes/eliminar.ico" onClick="" label="Anular"
 				width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/cancelar.ico"
-				id="btnCancelar3" label="Cancelar" width="100px" height="35px" />
+				id="btnCancelar" label="Cancelar" width="100px" height="35px" />
 			<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
 				tooltiptext="Salir" label="Salir" width="100px" height="35px">
-
+				<attribute name="onClick">
+	{
+		frmPagarFactura.detach();
+	}
+</attribute>
 			</button>
 		</div>
 		<separator></separator>

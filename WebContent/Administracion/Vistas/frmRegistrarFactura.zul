@@ -1,4 +1,4 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="Registrar Compra" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <zk>
@@ -22,7 +22,7 @@
 					<row style="border:none" spans="1,3">
 						<label value="RIF"></label>
 						<hbox align="center">
-							<textbox id="txtProveedor" width="150px"
+							<textbox id="txtProveedor" value="@{cntrlfactura.persona.cedulaRif}" width="150px"
 								readonly="true" />
 							<label value="(*)" style="color:red" />
 							<button id="btnBuscar"
@@ -44,13 +44,9 @@
 						<label value="Nro. Factura"></label>
 						<hbox align="center">
 							<textbox id="txtNroFactura" width="150px"
-								value="@{cntrlfactura.cuentaPagar.origen}">
+								>
 							</textbox>
 							<label value="(*)" style="color:red" />
-							<space width="5px"></space>
-							<button id="btnBuscarFact"
-								image="/Recursos/Imagenes/consultar.ico"
-								tooltiptext="Validar/Buscar Factura" />
 						</hbox>
 					</row>
 					<row style="border:none" spans="1,3">
@@ -90,8 +86,18 @@
 					</columns>
 					<rows>
 						<row style="border:none">
-							<label value="Material"></label>
-							<hbox align="center">
+							<label value="Tipo Material"></label>
+						
+							<combobox id="cmbTipoMaterial"
+									width="180px" model="@{cntrlfactura.tipoMaterial}"
+									readonly="true" value="--Seleccione--">
+									<comboitem self="@{each='tipoMaterial'}"
+										label="@{tipoMaterial.nombre}" value="@{tipoMaterial}">
+									</comboitem>
+								</combobox>
+									
+								<label value="Material"></label>
+								<hbox align="center">
 								<combobox id="cmbCodigoMaterial"
 									width="180px" model="@{cntrlfactura.listaMateriales}"
 									readonly="true" value="--Seleccione--">
@@ -160,9 +166,6 @@
 									<button id="btnAgregar"
 										image="/Recursos/Imagenes/agregar.ico" onClick="" label=""
 										tooltiptext="Agregar a la Lista" />
-									<button id="btnEditar"
-										image="/Recursos/Imagenes/cancelar.ico" onClick="" label=""
-										tooltiptext="Editar" />
 									<button id="btnQuitar"
 										image="/Recursos/Imagenes/quitar.ico" onClick="" label=""
 										tooltiptext="Quitar de la Lista" />
@@ -224,10 +227,10 @@
 			<button id="btnRegistrar"
 				image="/Recursos/Imagenes/guardar.ico" label="Registrar"
 				width="100px" height="35px" />
-			<button id="btnCancelar2"
+			<button id="btnCancelar"
 				image="/Recursos/Imagenes/cancelar.ico" label="Cancelar"
 				width="100px" height="35px" />
-			<button id="btnSalir2" image="/Recursos/Imagenes/salir.png"
+			<button id="btnSalir" image="/Recursos/Imagenes/salir.png"
 				onClick="" tooltiptext="Salir" label="Salir" width="100px"
 				height="35px">
 				<attribute name="onClick">

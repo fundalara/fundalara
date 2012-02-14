@@ -1,11 +1,10 @@
 <?page title="Proveedor de Servicios" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmProveedorServicios' ?>
 <zk>
 	<window apply="controlador.administracion.CntrlPersonaJuridica"
-		id="frmProveedorServicios" title="Proveedores de Servicios"
+		id="frmProveedorServicios" title="Proveedores de Servicios" closable="true"
 		border="normal" width="690px">
-
 		<panel title="Datos del Proveedor de Servicios"
 			collapsible="true" open="true">
 			<panelchildren>
@@ -100,7 +99,6 @@
 									style='text-transform:uppercase;'
 									value="@{cntrl.persona.twitter}" />
 							</row>
-
 						</rows>
 					</grid>
 				</groupbox>
@@ -175,7 +173,6 @@
 						</rows>
 					</grid>
 				</groupbox>
-				<separator></separator>
 			</panelchildren>
 		</panel>
 		<div align="right">
@@ -195,7 +192,7 @@
 				tooltiptext="Salir" label="Salir" width="100px" height="35px">
 				<attribute name="onClick">
 	{
-		frmPersonas.onClose();
+		frmProveedorServicios.detach();
 	}
 </attribute>
 			</button>

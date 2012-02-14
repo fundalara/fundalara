@@ -1,24 +1,33 @@
 <?page title="Proveedores" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window id="frmProveedor" title="Proveedores" border="normal"
-		width="690px">
+		closable="true" width="690px">
 		<zscript><![CDATA[
+	Window windowMateriales, windowServicios;
 	public void mostrar() {
 		if (cmbProveedor.getSelectedItem().getValue().equals("1")) {
-			Window window = (Window) Executions.createComponents(
-					"/administracion/vistas/FrmProveedorMateriales.zul", null, null);
-			frmProveedor.onClose();
+			if (windowServicios != null) {
+				windowServicios.detach();
+			}
+			windowMateriales = (Window) Executions.createComponents(
+					"/administracion/vistas/FrmProveedorMateriales.zul", null,
+					null);
 		}
 		if (cmbProveedor.getSelectedItem().getValue().equals("2")) {
-			Window window = (Window) Executions.createComponents(
-					"/administracion/vistas/frmProveedorServicios.zul", null, null);
-			frmProveedor.onClose();
+			if (windowMateriales != null) {
+				windowMateriales.detach();
+			}
+			windowServicios = (Window) Executions.createComponents(
+					"/administracion/vistas/frmProveedorServicios.zul", null,
+					null);
+
 		}
 	}
 ]]></zscript>
-		<combobox onSelect="mostrar()" id="cmbProveedor">
-			<comboitem label="Proveedor de Materiales" value="1"></comboitem>
-			<comboitem label="Proveedor de Servicios" value="2"></comboitem>
+		<combobox onSelect="mostrar()" id="cmbProveedor" width="200px"
+			value="--Seleccione--" readonly="true">
+			<comboitem label="PROVEEDOR DE MATERIALES" value="1"></comboitem>
+			<comboitem label="PROVEEDOR DE SERVICIOS" value="2"></comboitem>
 		</combobox>
 	</window>
 </zk>

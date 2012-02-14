@@ -1,21 +1,25 @@
 <?page title="Catalogo de Personas Naturales" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPersonas"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoNaturales" name='binderCatNat'?>
 <zk>
-	<window id="frmCatalogoNaturales"
+	<window id="frmCatalogoNaturales" closable="true"
 		title="Catálogo de Personas Naturales"
 		apply="controlador.administracion.CntrlCatalogoPersonasNaturales"
-		border="normal" width="600px" left="500px" top="100px" mode="modal">
+		border="normal" width="700px" left="500px" top="100px" mode="modal">
 
-		<listbox mold="paging" pageSize="10" width="580px"
+		<listbox mold="paging" pageSize="10" width="680px"
 			height="350px" oddRowSclass="none" id="lbxPersonas"
 			model="@{cntrl.listaPersonas}">
 			<listhead>
 				<listheader label="Cédula" width="20%" align="center" />
-				<listheader label="Primer Nombre" align="left" width="20%" />
-				<listheader label="Segundo Nombre" align="left" width="20%" />
-				<listheader label="Primer Apellido" align="left" width="20%" />
-				<listheader label="Segundo Apellido" align="left" width="20%" />
+				<listheader label="Primer Nombre" align="left"
+					width="20%" />
+				<listheader label="Segundo Nombre" align="left"
+					width="20%" />
+				<listheader label="Primer Apellido" align="left"
+					width="20%" />
+				<listheader label="Segundo Apellido" align="left"
+					width="20%" />
 			</listhead>
 			<auxhead>
 				<auxheader colspan="1">
@@ -31,7 +35,7 @@
 						style='text-transform:uppercase;' />
 				</auxheader>
 				<auxheader colspan="1">
-					
+
 				</auxheader>
 				<auxheader colspan="1">
 					<image src="Recursos/Imagenes/filtro.png"
@@ -40,28 +44,31 @@
 						style='text-transform:uppercase;' />
 				</auxheader>
 				<auxheader colspan="1">
-					
+
 				</auxheader>
 			</auxhead>
 			<listitem self="@{each='personaNatural'}">
 				<listcell label="@{personaNatural.cedulaRif }" />
-				<listcell
-					label="@{personaNatural.primerNombre }" style='text-transform:uppercase;'/>
-					<listcell
-					label="@{personaNatural.segundoNombre }" style='text-transform:uppercase;'/>
-					<listcell
-					label="@{personaNatural.primerApellido }" style='text-transform:uppercase;'/>
-					<listcell
-					label="@{personaNatural.segundoApellido }" style='text-transform:uppercase;'/>
+				<listcell label="@{personaNatural.primerNombre }"
+					style='text-transform:uppercase;' />
+				<listcell label="@{personaNatural.segundoNombre }"
+					style='text-transform:uppercase;' />
+				<listcell label="@{personaNatural.primerApellido }"
+					style='text-transform:uppercase;' />
+				<listcell label="@{personaNatural.segundoApellido }"
+					style='text-transform:uppercase;' />
 			</listitem>
 		</listbox>
 
 		<separator />
-		<div align="right" width="580px">
+		<div align="right" width="680px">
 			<button image="/Recursos/Imagenes/aceptar.ico"
-				id="btnAceptar" tooltiptext="Seleccionar Persona" label="Seleccionar"
-				width="100px" height="35px">
+				id="btnAceptar" tooltiptext="Seleccionar Persona"
+				label="Seleccionar" width="100px" height="35px">
 			</button>
+			<button image="/Recursos/Imagenes/reporte.png"
+				orient="horizontal" id="btnImprimir" label="Generar" height="35px"
+				width="100px" />
 			<button image="/Recursos/Imagenes/salir.png"
 				tooltiptext="Salir del Catálogo" label="Salir" width="100px"
 				height="35px" id="btnSalir">
