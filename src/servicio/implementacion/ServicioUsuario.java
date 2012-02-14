@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoUsuario;
 
+import modelo.Grupo;
 import modelo.Usuario;
 import servicio.interfaz.IServicioUsuario;
 
@@ -20,27 +21,36 @@ public class ServicioUsuario implements IServicioUsuario {
 
 	@Override
 	public void guardar(Usuario u) {
-		// TODO Auto-generated method stub
 		daoUsuario.guardar(u);
-
 	}
 
 	@Override
 	public void actualizar(Usuario u) {
-		// TODO Auto-generated method stub
-daoUsuario.actualizar(u);
+		daoUsuario.actualizar(u);
 	}
 
 	@Override
 	public void eliminar(Usuario u) {
-		// TODO Auto-generated method stub
-daoUsuario.eliminar(u);
+		daoUsuario.eliminar(u);
 	}
 
 	@Override
 	public List<Usuario> listar() {
-		// TODO Auto-generated method stub
-		return daoUsuario.listar( DaoUsuario.class);
+		return daoUsuario.listar(DaoUsuario.class);
 	}
 
+	@Override
+	public Usuario buscarPorNombre(String nombre) {
+		return daoUsuario.buscarPorNombre(nombre);
+	}
+
+	@Override
+	public List<Usuario> listarActivos() {
+		return daoUsuario.listarActivos(Usuario.class);
+	}
+
+	@Override
+	public List<Usuario> buscarUsuariosSinAsignar(Grupo grupo) {
+		return daoUsuario.buscarUsuariosSinAsignar(grupo);
+	}
 }

@@ -1,0 +1,33 @@
+<?page id="testZul" title="Acceso de usuario"?>
+<window id="loginwin" title="Acceso de Usuario" border="normal"
+	width="350px">
+<!-- 	<separator height="px" /> -->
+	<groupbox>
+		<h:form id="f" name="f" action="j_spring_security_check"
+			method="POST" xmlns:h="http://www.w3.org/1999/xhtml">
+			<grid>
+				<rows>
+					<row align="center" spans="2">
+						<label visible="false" value="Usuario y/o contraseña invalidos!"
+							style="color:red;font-weight:bold;" />
+					</row>
+					<row>
+						<label value="Usuario" width="100px" />
+						<textbox id="u" name="j_username" />
+					</row>
+					<row>
+						<label value="Contraseña" width="100px" />
+						<textbox id="p" type="password"
+							name="j_password" />
+					</row>
+					<row spans="2" align="center">
+						<hbox align="center">
+							<h:input type="submit" value="Ingresar" />
+							<h:input type="reset" value="Cancelar" />
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+		</h:form>
+	</groupbox>
+</window>
