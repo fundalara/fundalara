@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 11/02/2012 01:49:19 AM by Hibernate Tools 3.4.0.CR1
+// Generated 13/02/2012 08:44:08 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -52,7 +52,6 @@ public class Jugador implements java.io.Serializable {
 			0);
 	private Set<DatoSocial> datoSocials = new HashSet<DatoSocial>(0);
 	private Set<Roster> rosters = new HashSet<Roster>(0);
-	private JugadorPlan jugadorPlan;
 	private Set<DatoDeportivo> datoDeportivos = new HashSet<DatoDeportivo>(0);
 
 	public Jugador() {
@@ -74,7 +73,7 @@ public class Jugador implements java.io.Serializable {
 			Set<DatoConducta> datoConductas, Set<DatoAcademico> datoAcademicos,
 			Set<DocumentoPersonal> documentoPersonals,
 			Set<DatoSocial> datoSocials, Set<Roster> rosters,
-			JugadorPlan jugadorPlan, Set<DatoDeportivo> datoDeportivos) {
+			Set<DatoDeportivo> datoDeportivos) {
 		this.datoBasicoByCodigoPais = datoBasicoByCodigoPais;
 		this.datoBasicoByCodigoParroquiaNacimiento = datoBasicoByCodigoParroquiaNacimiento;
 		this.personaNatural = personaNatural;
@@ -95,7 +94,6 @@ public class Jugador implements java.io.Serializable {
 		this.documentoPersonals = documentoPersonals;
 		this.datoSocials = datoSocials;
 		this.rosters = rosters;
-		this.jugadorPlan = jugadorPlan;
 		this.datoDeportivos = datoDeportivos;
 	}
 
@@ -294,15 +292,6 @@ public class Jugador implements java.io.Serializable {
 
 	public void setRosters(Set<Roster> rosters) {
 		this.rosters = rosters;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "jugador")
-	public JugadorPlan getJugadorPlan() {
-		return this.jugadorPlan;
-	}
-
-	public void setJugadorPlan(JugadorPlan jugadorPlan) {
-		this.jugadorPlan = jugadorPlan;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jugador")
