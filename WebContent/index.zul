@@ -43,7 +43,6 @@
 						<tab label="Agenda" />
 						<tab label="Reportes" />
 						<tab label="Configuraciones" />
-
 					</tabs>
 					<tabpanels width="260px">
 						<tabpanel>
@@ -85,7 +84,7 @@
 													<treeitem>
 														<treerow>
 															<treecell
-																label="Actividades "
+																label="Actividades"
 																onClick='enlace("/Entrenamiento/Vistas/frmActividadesEntrenamiento.zul")' />
 														</treerow>
 													</treeitem>
