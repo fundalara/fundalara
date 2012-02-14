@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="183"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="codEquipo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -29,7 +29,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="293" splitType="Stretch">
+		<band height="333" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="199" width="752" height="40"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -111,10 +111,49 @@
 				</textElement>
 				<text><![CDATA[Competencia:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="30" y="313" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="313" width="213" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="313" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[efectividad]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
-		<band/>
+		<band height="21">
+			<textField>
+				<reportElement x="145" y="0" width="209" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombrecompleto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedula_rif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{efectividad}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<lastPageFooter>
 		<band height="97">
