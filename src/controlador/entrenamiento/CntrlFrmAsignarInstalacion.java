@@ -1,45 +1,38 @@
 package controlador.entrenamiento;
 
+/**
+ * Controlador de la Pantalla Asignar Instalaciones para el registro
+ * y asignación de las instalaciones para los entrenamientos en el componente
+ * agenda por categoría y por equipo.
+ * 
+ * @version 1.0, 15/02/12
+ * @author Laura Colmenarez
+ * @email 
+ */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
-import org.hibernate.mapping.Array;
-import org.jruby.ext.posix.FreeBSDHeapFileStat.time_t;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Column;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Window;
-import org.zkoss.zul.impl.LabelElement;
 
-import javax.xml.bind.Binder;
-import javax.xml.crypto.Data;
-
-import java.sql.Time;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import modelo.ActividadCalendario;
 import modelo.DatoBasico;
-import modelo.Equipo;
-import modelo.EscalaMedicion;
 import modelo.Instalacion;
 import modelo.InstalacionUtilizada;
-import modelo.ValorEscala;
-
-import dao.generico.GenericDao;
 
 import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioDatoBasico;
@@ -48,8 +41,6 @@ import servicio.implementacion.ServicioInstalacion;
 import servicio.implementacion.ServicioActividadCalendario;
 import servicio.implementacion.ServicioInstalacionUtilizada;
 import servicio.implementacion.ServicioSesion;
-
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 
 import controlador.general.EventoSimpleCalendario;
 
@@ -119,7 +110,7 @@ public class CntrlFrmAsignarInstalacion extends GenericForwardComposer {
 		eventoSimpleCalendario = (EventoSimpleCalendario) execution.getAttribute("evento");				
 		ActividadCalendario actividadCalendario = new ActividadCalendario();
 		actividadCalendario = listActividadCalendario.get(0);
-		wndAsignarInstalaciones.setTitle("AsignaciÃ³n de instalaciones"+" - "+sdf.format(actividadCalendario.getFechaInicio()));
+		wndAsignarInstalaciones.setTitle("Asignación de instalaciones"+" - "+sdf.format(actividadCalendario.getFechaInicio()));
 		limpiarGrid();
 		crearGrid();
 	}
@@ -196,8 +187,6 @@ public class CntrlFrmAsignarInstalacion extends GenericForwardComposer {
 					btnCancelar.setVisible(false);
 				}
 			}
-			
-
 		} else {
 			for (ActividadCalendario ac : listActividadCalendario) {
 				Row fila = new Row();
@@ -263,7 +252,7 @@ public class CntrlFrmAsignarInstalacion extends GenericForwardComposer {
 			if (combo.getText().equals("--Seleccione--")) {
 				guardar = !guardar;
 				throw new WrongValueException(combo,
-						"Seleccione una instalaciÃ³n");
+						"Seleccione una instalación");
 			}
 		}
 		if (guardar) {
@@ -293,7 +282,7 @@ public class CntrlFrmAsignarInstalacion extends GenericForwardComposer {
 				servicioActividadCalendario.actualizar(actividadCalendario);
 			}
 			Messagebox.show("Se ha guardado exitosamente",
-					"Olimpo - Informaciï¿½n", Messagebox.OK,
+					"Olimpo - Información", Messagebox.OK,
 					Messagebox.INFORMATION);
 			eventoSimpleCalendario
 					.setContentColor(controladorInstalacionAgenda.color[1]);
@@ -362,5 +351,4 @@ public class CntrlFrmAsignarInstalacion extends GenericForwardComposer {
 	public void onClick$btnSalir() {
 		wndAsignarInstalaciones.detach();
 	}
-
 }

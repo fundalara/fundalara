@@ -1,5 +1,14 @@
 package controlador.entrenamiento;
 
+/**
+ * Controlador de Escala de Medicion, para el registro y actualizacion
+ *  de los valores correspondientes a las escalas de medicion manejadas 
+ * por el sistema Olimpo.
+ * @version 1.0, 15/02/12
+ * @author Leyner Castillo
+ * @email leyner.castillo@gmail.com
+ */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -176,11 +185,11 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 		} else if (txtNombreEscala.getValue().isEmpty()) {
 			alert("Debes ingresar un nombre a la escala");
 		} else if (txtDescripcionEscala.getValue().isEmpty()) {
-			alert("Debes ingresar una descripcion a la escala");
+			alert("Debes ingresar una descripción a la escala");
 		} else if (txtValorEscala.getValue().isEmpty()) {
 			alert("Debes ingresar un valor a la escala");
 		} else if (txtDescripcionValor.getValue().isEmpty()) {
-			alert("Debes ingresar una descripcion al valor de la escala");
+			alert("Debes ingresar una descripción al valor de la escala");
 		} else {
 			if (!txtNombreEscala.isReadonly()) {
 				txtNombreEscala.setReadonly(true);
@@ -234,7 +243,7 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 
 	public void onClick$btnSalir() throws InterruptedException{
 		if (valorEscala != null || escalaMedicion != null) {
-			int result = Messagebox.show("Existen elementos en el formulario Â¿Realmente desea salir?","Question", Messagebox.OK | Messagebox.CANCEL,	Messagebox.QUESTION);
+			int result = Messagebox.show("Existen elementos en el formulario ¿Realmente desea salir?","Question", Messagebox.OK | Messagebox.CANCEL,	Messagebox.QUESTION);
 			switch (result) {
 			case Messagebox.OK:				
 				escalaMedicion = new EscalaMedicion();
@@ -256,7 +265,7 @@ public class CntrlFrmEscalaMedicion extends GenericForwardComposer {
 			int i = lboxValoresEscala.getSelectedIndex();
 			if (lboxValoresEscala.getItemCount() == 1) {
 				int result = Messagebox
-						.show("Si elimina este elemento, tambien eliminara esta escala de medicion Â¿Esta seguro?",
+						.show("Si elimina este elemento, tambien eliminara esta escala de medicion ¿Esta seguro?",
 								"Question", Messagebox.OK | Messagebox.CANCEL,
 								Messagebox.QUESTION);
 				switch (result) {
