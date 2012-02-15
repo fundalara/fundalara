@@ -144,7 +144,9 @@ public class CntrlFrmCatalogoPlanEntrenamiento extends GenericForwardComposer {
 		asignarFechas(sesion);
 		asignarLbx(sesion);
 		controladorPlanEntrenamiento.sesion = sesion;
-		controladorPlanEntrenamiento.modificando = true;		
+		controladorPlanEntrenamiento.modificando = true;
+		if (sesion.getPlanEntrenamiento().getEstatus() == 'F')
+			controladorPlanEntrenamiento.btnImprimir.setDisabled(false);
 		winCatalogoPlanEntrenamiento.detach();
 	}
 

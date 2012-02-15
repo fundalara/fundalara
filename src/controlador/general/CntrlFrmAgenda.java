@@ -77,7 +77,7 @@ public class CntrlFrmAgenda extends GenericForwardComposer {
 	}
 	
 	public void onClose$frmAgenda(){
-		Div divMenu = (Div) formulario.getPage().getDesktop().getPage("frmMenu").getFellow("divMenu");
+		Div divMenu = (Div)formulario.getPage().getDesktop().getPage("frmMenu").getFellow("divMenu");
 		divMenu.setVisible(true);
 	}
 	

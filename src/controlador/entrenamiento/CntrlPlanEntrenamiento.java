@@ -963,11 +963,12 @@ public class CntrlPlanEntrenamiento extends GenericForwardComposer {
 									| Messagebox.NO, Messagebox.INFORMATION);
 			switch (result) {
 			case Messagebox.YES:
-				onClick$btnCancelar();
+				
 				break;
 			default:
 				break;
 			}
+			onClick$btnCancelar();
 		} else
 			Messagebox.show("Agregue al menos una actividad",
 					"Olimpo - Información", Messagebox.OK,

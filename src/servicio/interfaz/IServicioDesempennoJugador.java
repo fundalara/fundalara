@@ -2,15 +2,15 @@ package servicio.interfaz;
 
 import java.util.List;
 
-import modelo.DesempeoJugador;;
+import modelo.DesempennoJugador;
 
 public interface IServicioDesempennoJugador {
 
-	public abstract void guardar(DesempeoJugador ae);
+	public abstract void guardar(DesempennoJugador ae);
 	
-	public abstract void actualizar(DesempeoJugador ae);
+	public abstract void actualizar(DesempennoJugador ae);
 	
-	public abstract void eliminar(DesempeoJugador ae);
+	public abstract void eliminar(DesempennoJugador ae);
 	
-	public abstract List<DesempeoJugador> listar(); 
+	public abstract List<DesempennoJugador> listar(); 
 }
