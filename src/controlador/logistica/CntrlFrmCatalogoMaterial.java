@@ -1,22 +1,27 @@
 package controlador.logistica;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import modelo.DatoBasico;
 import modelo.Material;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioMaterial;
+
+import comun.MensajeMostrar;
 
 public class CntrlFrmCatalogoMaterial extends GenericForwardComposer {
 
@@ -31,39 +36,53 @@ public class CntrlFrmCatalogoMaterial extends GenericForwardComposer {
 	DatoBasico tipoMaterial;
 	List<Material> listaMaterial;
 
-	BeanFactory beanFactory;
 	Component catalogoMaterial;
 	Component frmPlanificarMantenimiento;
 	Listbox lboxMaterial;
 	Intbox txtCantidad;
+	Textbox txtNombre;
 
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 
 		catalogoMaterial = comp;
-		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-		servicioMaterial = (IServicioMaterial) beanFactory.getBean("servicioMaterial");
-		servicioDatoBasico = (IServicioDatoBasico) beanFactory.getBean("servicioDatoBasico");
 		DatoBasico db = new DatoBasico();
 		db.setCodigoDatoBasico(261);
-
 		db.setEstatus('A');
-		;
 		clasificacionMaterial = servicioDatoBasico.buscarDatosPorRelacion(db);
 
 	}
 
+	/**
+	 * El metodo: onSelect$cmbClase() se ejecuta cuando se selecciona un item en
+	 * el ComboBox cmbClase, en el se carga todas los materiales de esa
+	 * clasificacion
+	 * 
+	 */
 	public void onSelect$cmbClase() {
 		listaMaterial = servicioMaterial.listarMaterialPorTipo(claseMaterial);
 	}
 
+	/**
+	 * El metodo: onClick$btnGuardar() se ejecuta cuando se selecciona un
+	 * material con su respectiva cantidad, retorna el material al formulario
+	 * que lo ha llamado
+	 */
 	public void onClick$btnGuardar() throws InterruptedException {
 
 		// Se comprueba que se haya seleccionado un elemento de la lista
 		if ((lboxMaterial.getSelectedIndex() != -1)) {
 
-			if ((txtCantidad.getValue() != 0)) {
+			if ((txtCantidad.getValue() != 0 || !txtCantidad.getText().isEmpty())) {
 				// se obtiene la tarea seleccionada
 				material = listaMaterial.get(lboxMaterial.getSelectedIndex());
 
@@ -85,15 +104,23 @@ public class CntrlFrmCatalogoMaterial extends GenericForwardComposer {
 				catalogoMaterial.detach();
 
 			} else {
-				Messagebox.show("Seleccione una cantidad ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+				Messagebox.show("Seleccione una cantidad ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 				txtCantidad.focus();
 
 			}
 		} else {
-			Messagebox.show("Seleccione un material ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			throw new WrongValueException(txtCantidad, "Escriba la cantidad del material");
 
 		}
 
+	}
+
+	/**
+	 * El metodo: onClick$btnSalir() se ejecuta cuando se le da click al boton
+	 * salir, cierra el formulario
+	 */
+	public void onClick$btnSalir() {
+		catalogoMaterial.detach();
 	}
 
 	public DatoBasico getClaseMaterial() {
@@ -136,4 +163,18 @@ public class CntrlFrmCatalogoMaterial extends GenericForwardComposer {
 		this.lboxMaterial = lboxMaterial;
 	}
 
+	public void onChanging$txtDescripcion(Event event) throws InterruptedException {
+		lboxMaterial.setModel(new BindingListModelList(this.filtrarMateriales(txtNombre.getText()), false));
+	}
+
+	public List<Material> filtrarMateriales(String descripcion) {
+		List<Material> materialesFiltrados = new ArrayList<Material>();
+		for (Iterator<Material> i = listaMaterial.iterator(); i.hasNext();) {
+			Material tmp = i.next();
+			if (tmp.getDescripcion().toLowerCase().indexOf(descripcion.trim().toLowerCase()) >= 0) {
+				materialesFiltrados.add(tmp);
+			}
+		}
+		return materialesFiltrados;
+	}
 }

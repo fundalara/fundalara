@@ -29,4 +29,6 @@ public interface IServicioActividad {
 
 	public abstract List<Actividad> listarComplementarias(Date fechaInicio, Date fechaFin);
 
+	public abstract List<Actividad> listarComplementarias();
+
 }

@@ -2,10 +2,12 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmPlanMantenimiento" ?>
 <?page title="Planificacion de mantenimiento" contentType="text/html;charset=UTF-8"?>
-<window title="Plantilla de Mantenimiento" border="normal"
-	mode="embedded" width="600px" id="frmPlanMantenimiento"
+
+<window title="Plantilla de Mantenimiento" border="normal" mode="embedded"
+	width="690px"  id="frmPlanMantenimiento"
 	apply="controlador.logistica.CntrlFrmPlantillaMantenimiento"
 	closable="false">
+
 	<grid height="30%" style="boder:none">
 		<columns>
 			<column />
@@ -15,37 +17,56 @@
 		</columns>
 		<rows style="border:none">
 			<row style="border:none">
-				<label value="Tipo" />
-				<combobox id="cmbTipo"
+				<label value="Tipo"   />
+				<hbox>
+				<combobox id="cmbTipo" 
 					model="@{cntrl.tiposMantenimientos}" readonly="true">
-					<comboitem id="cmbITipos" self="@{each=tm}"
-						value="@{tm}" label="@{tm.nombre}" />
+					<comboitem id="cmbITipos" self="@{each=tm}" value="@{tm}"
+						label="@{tm.nombre}" />	
 				</combobox>
-				<label value="Descripción" />
-				<combobox id="cmbClase"
-					model="@{cntrl.clasificacionMantenimientos}" width="90%"
-					readonly="true">
-					<comboitem id="cmbIClase" self="@{each='cm'}"
-						label="@{cm.nombre}" value="@{cm}" />
-				</combobox>
+				 <label value="(*)" style="color:red" />
+				</hbox>
+				<label  value="Descripción" />
+				<hbox>
+				   <combobox id="cmbClase" 
+				     model="@{cntrl.clasificacionMantenimientos}"
+					 width="90%"
+					 readonly="true">
+					<comboitem id="cmbIClase" self="@{each='cm'}" 
+						label="@{cm.nombre}" value="@{cm}"/>
+				</combobox> 
+				  <label value="(*)" style="color:red" />
+				</hbox>
+				
 			</row>
 			<row style="border:none">
-				<label value="Agregar una Plantilla"></label>
-				<button id="btnNuevo"
+			     <label value="Agregar una Plantilla"></label>
+				<button id="btnNuevo" 
 					image="/Recursos/Imagenes/agregar.ico"
 					tooltiptext="Crear una Nueva plantilla" />
+				
 				<label value="Prediseñada" id="nombrePlantilla" />
-				<textbox id="txtCodPlantilla"
-					value="@{cntrl.plantilla.descripcion}" width="95%" />
+				 <hbox>
+				  <textbox id="txtCodPlantilla"  style='text-transform:uppercase;'
+					value="@{cntrl.plantilla.descripcion}" width="95%" /> 
+				 <label value="(*)" style="color:red" />
+				 </hbox>
+				
 				<button id="btnPredisennada"
 					image="/Recursos/Imagenes/consultar.ico"
 					tooltiptext="Buscar una plantilla" />
+
+
+
 			</row>
+
 		</rows>
 	</grid>
+
 	<panel collapsible="true" title="Planificación Específica"
 		open="false" width="100%" id="panelS">
 		<panelchildren>
+
 			<grid>
 				<columns>
 					<column width="95%" />
@@ -54,9 +75,8 @@
 				<rows>
 					<row id="fila2" visible="true">
 						<window title="Lista de Tareas"
-							id="winTareas">
-							<listbox id="lboxTareas" mold="paging"
-								tooltiptext="Para visualizar mas tareas hacer clic en las flechas del pie de la lista"
+							id="winTareas" >
+							<listbox id="lboxTareas" mold="paging" tooltiptext="Para visualizar mas tareas hacer clic en las flechas del pie de la lista"
 								checkmark="true" pageSize="5" model="@{cntrl.listaTareas}"
 								selectedItem="@{cntrl.tareas}">
 								<listhead>
@@ -66,40 +86,47 @@
 										width="50%" />
 									<listheader label="Personal"
 										width="15%" />
-									<listheader width="15%" />
+									<listheader width="15%" />	
+
 								</listhead>
 								<listitem self="@{each='t'}"
 									value="@{t}">
-									<listcell label="@{t.tarea.nombre}" />
+									<listcell
+										label="@{t.tarea.nombre}" />
 									<listcell
 										label="@{t.tarea.Descripcion}" />
 									<listcell
 										label="@{t.responsableA.getPersonaNatural.getPrimerNombre}" />
 									<listcell
 										label="@{t.responsableA.getPersonaNatural.getPrimerApellido}" />
+										
 								</listitem>
+
 							</listbox>
 						</window>
 						<div align="center">
 							<vbox>
-								<button id="btnAsigPersonalxTarea"
+								<button id="btnAsigPersonalxTarea" 
 									image="/Recursos/Imagenes/agreg.jpg"
 									tooltiptext="Asignar un personal" />
-								<button id="btnAgregarTareas"
+								<button id="btnAgregarTareas" 		
 									image="/Recursos/Imagenes/agregar.ico"
 									tooltiptext="Agregar una tarea" />
-								<button id="btnQuitarTareas"
+								<button id="btnQuitarTareas" 	
 									image="/Recursos/Imagenes/quitar.ico"
 									tooltiptext="Eliminar una tarea" />
+
 							</vbox>
 						</div>
+
 					</row>
-					<row>
+					<row >
 						<window title="Lista de Materiales"
-							id="winMateriales">
-							<listbox
-								tooltiptext="Para visualizar mas tareas hacer clic en las flechas del pie de la lista"
+							id="winMateriales" >
+
+							<listbox  tooltiptext="Para visualizar mas tareas hacer clic en las flechas del pie de la lista"
 								id="lboxMateriales" mold="paging" pageSize="5"
+								selectedItem="@{cntrl.material}"
 								model="@{cntrl.materialesActividades}" checkmark="true">
 								<listhead>
 									<listheader label="Material"
@@ -117,6 +144,7 @@
 										label="@{m.material.descripcion}" />
 									<listcell
 										label="@{m.cantidadRequerida}" />
+
 								</listitem>
 							</listbox>
 						</window>
@@ -128,11 +156,17 @@
 								tooltiptext="Quitar un material"
 								image="/Recursos/Imagenes/quitar.ico" />
 						</div>
+
+
 					</row>
+
 				</rows>
 			</grid>
+
 		</panelchildren>
 	</panel>
+
+
 	<grid>
 		<columns>
 			<column width="100%" />
@@ -142,16 +176,27 @@
 				<div align="right">
 					<button id="btnGuardar" label="Guardar"
 						image="/Recursos/Imagenes/guardar.ico" />
+
 					<button id="btnModificar" label="Modificar"
 						image="/Recursos/Imagenes/editar.ico" />
+
 					<!-- 					<button id="imprimir" label="Imprimir" -->
 					<!-- 						image="/Recursos/Imagenes/imprimir.ico" /> -->
+
 					<button id="btnCancelar" label="Cancelar"
 						image="/Recursos/Imagenes/cancelar.ico" />
+
 					<button id="btnSalir" label="Salir"
 						image="/Recursos/Imagenes/salir.png" />
+
 				</div>
+
 			</row>
 		</rows>
 	</grid>
+
+
+
+
+
 </window>

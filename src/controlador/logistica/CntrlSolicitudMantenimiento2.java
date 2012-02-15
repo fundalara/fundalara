@@ -9,20 +9,28 @@ import modelo.DatoBasico;
 import modelo.SolicitudMantenimiento;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zul.api.Datebox;
-import org.zkoss.zul.api.Panel;
-import org.zkoss.zul.api.Window;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Panel;
+import org.zkoss.zul.Window;
 
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioSolicitudMantenimiento;
 
+import comun.MensajeMostrar;
 import comun.TipoDatoBasico;
 
 public class CntrlSolicitudMantenimiento2 extends GenericForwardComposer {
 
+	/**
+	 * Una clase que procesa las solicitudes de mantenimiento por actividad ,
+	 * realizando una solicitud que luego sera procesada a futuro
+	 */
 	Component Formulario;
 	Window frmSolicitudMantenimiento;
 	AnnotateDataBinder binder;
@@ -36,8 +44,18 @@ public class CntrlSolicitudMantenimiento2 extends GenericForwardComposer {
 	IServicioDatoBasico servicioDatoBasico;
 	SolicitudMantenimiento solicitudMantenimiento = new SolicitudMantenimiento();
 	IServicioSolicitudMantenimiento servicioSolicitudMantenimiento;
+	Combobox cmbPrioridad;
 
 	Datebox dtbFecha;
+
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -55,6 +73,12 @@ public class CntrlSolicitudMantenimiento2 extends GenericForwardComposer {
 		return Formulario;
 	}
 
+	/**
+	 * este proceso onSelect$ListMantenimiento() es el encargado de abrir el
+	 * panel para llenar los datos referentes a la solicitud de acuerdo a la
+	 * actividad seleccionada
+	 */
+
 	public void onSelect$ListMantenimiento() {
 		this.panel.setOpen(true);
 		ListaPrioridades = servicioDatoBasico.buscar(TipoDatoBasico.PRIORIDADES);
@@ -62,27 +86,38 @@ public class CntrlSolicitudMantenimiento2 extends GenericForwardComposer {
 
 	}
 
-	public void onClick$btnSolicitarMantenimiento() {
+	/**
+	 * Este proceso onClick$btnSolicitarMantenimiento() se encarga de guardar la
+	 * solicitud
+	 * 
+	 * @throws InterruptedException
+	 */
 
-		if (this.dtbFecha.getValue().compareTo(ActividadSeleccionada.getFechaInicio()) <= -1) {
-			this.solicitudMantenimiento.setCodigoSolicitud(servicioSolicitudMantenimiento.listar().size() + 1);
-			this.solicitudMantenimiento.setActividad(ActividadSeleccionada);
-			this.solicitudMantenimiento.setDatoBasico(PrioridadSeleccionada);
-			this.solicitudMantenimiento.setDescripcionActividad(ActividadSeleccionada.getPlanificacionActividad().getDescripcion());
-			this.solicitudMantenimiento.setEstatus('A');
+	public void onClick$btnSolicitarMantenimiento() throws InterruptedException {
 
-			servicioSolicitudMantenimiento.agregar(solicitudMantenimiento);
-
-			alert("Solicitud Realizada con Exito");
-			// this.frmSolicitudMantenimiento.detach();
+		if (cmbPrioridad.getSelectedIndex() != 0) {
+			if (dtbFecha.getValue() != null) {
+				if (this.dtbFecha.getValue().compareTo(ActividadSeleccionada.getFechaInicio()) <= -1) {
+					this.solicitudMantenimiento.setCodigoSolicitud(servicioSolicitudMantenimiento.listar().size() + 1);
+					this.solicitudMantenimiento.setActividad(ActividadSeleccionada);
+					this.solicitudMantenimiento.setDatoBasico(PrioridadSeleccionada);
+					this.solicitudMantenimiento.setDescripcionActividad(ActividadSeleccionada.getPlanificacionActividad().getDescripcion());
+					this.solicitudMantenimiento.setEstatus('A');
+					servicioSolicitudMantenimiento.agregar(solicitudMantenimiento);
+					Messagebox.show("Solicitud Realizada con Exito", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
+				} else {
+					throw new WrongValueException(cmbPrioridad, "La Fecha debe es menor a la de inicio");
+				}
+			} else {
+				throw new WrongValueException(cmbPrioridad, "Seleccione una fecha");
+			}
 		} else {
-			alert("La Fecha debe ser menor a la de inicio");
+			throw new WrongValueException(cmbPrioridad, "Seleccione una prioridad");
 		}
-
 	}
 
 	public void onClick$btnSalir() {
-		this.frmSolicitudMantenimiento.detach();
+		this.Formulario.detach();
 	}
 
 	public void setFormulario(Component formulario) {

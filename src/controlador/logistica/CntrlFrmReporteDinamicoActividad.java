@@ -1,5 +1,8 @@
 package controlador.logistica;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRTextExporter;
 import net.sf.jasperreports.engine.export.JRTextExporterParameter;
-import net.sf.jasperreports.view.JasperViewer;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
@@ -24,11 +26,14 @@ import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Window;
 
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioDatoBasico;
+
+import comun.TipoDatoBasico;
 
 /**
  * Clase controladora de los eventos de la vista de igual nombre y manejo de los
@@ -63,8 +68,8 @@ public class CntrlFrmReporteDinamicoActividad extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, false);
 		frmReporte = (Window) comp;
-		complementaria = (DatoBasico) servicioDatoBasico.buscarPorCodigo(307);
-		mantenimiento = (DatoBasico) servicioDatoBasico.buscarPorCodigo(500);
+		complementaria = (DatoBasico) servicioDatoBasico.buscarPorCodigo(TipoDatoBasico.ACTIVIDADES_COMPLEMENTARIAS.getCodigo());
+		mantenimiento = (DatoBasico) servicioDatoBasico.buscarPorCodigo(TipoDatoBasico.ACTIVIDADES_MANTENIMIENTO.getCodigo());
 		listaTipoActividad.add(complementaria);
 		listaTipoActividad.add(mantenimiento);
 		listaActividades = new ArrayList<Actividad>();
@@ -79,7 +84,7 @@ public class CntrlFrmReporteDinamicoActividad extends GenericForwardComposer {
 		cmbListaTipoActividad.getValue();
 		fechaInicio.getValue();
 		fechaFin.getValue();
-		if (tipoActividad.getCodigoDatoBasico() == 500) {
+		if (tipoActividad.getCodigoDatoBasico() == TipoDatoBasico.ACTIVIDADES_MANTENIMIENTO.getCodigo()) {
 			listaActividades = servicioActividad.listarMantenimientos(fechaInicio.getValue(), fechaFin.getValue());
 			panelMateriales.setVisible(checkMaterialesMant.isChecked());
 			panelTareas.setVisible(checkTareasMant.isChecked());
@@ -98,7 +103,7 @@ public class CntrlFrmReporteDinamicoActividad extends GenericForwardComposer {
 	 * 
 	 */
 	public void onSelect$cmbListaTipoActividad() {
-		if (tipoActividad.getCodigoDatoBasico() == 500) {
+		if (tipoActividad.getCodigoDatoBasico() == TipoDatoBasico.ACTIVIDADES_MANTENIMIENTO.getCodigo()) {
 			((Panel) frmReporte.getFellow("panelMantenimiento")).setVisible(true);
 			((Panel) frmReporte.getFellow("panelComplementaria")).setVisible(false);
 		} else {
@@ -115,32 +120,43 @@ public class CntrlFrmReporteDinamicoActividad extends GenericForwardComposer {
 	 * Exporta una lista de actividades complementarias o de mantenimientos en
 	 * un archivo txt listando sus comisiones, tareas y materiales
 	 * 
+	 * @throws IOException
+	 * 
 	 */
-	public void onClick$btnExportar() throws JRException {
+	public void onClick$btnExportar() throws JRException, IOException {
 
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listaActividades);
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/reporteDinamico.jrxml");
+		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/reportes/reporteDinamico.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, ds);
 
 		JRExporter exporter = new JRTextExporter();
 
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/reporteDinamico.txt");
+		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/reportes/reporteDinamico.txt");
 
 		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
 		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
 
 		exporter.setParameter(JRTextExporterParameter.CHARACTER_WIDTH, 12f);// text
-																			// exporter
+		// exporter
 		exporter.setParameter(JRTextExporterParameter.CHARACTER_HEIGHT, 12f);// text
-																				// exporter
+		// exporter
 
 		exporter.exportReport();
 
-		// Para visualizar el reporte con el visor de JasperReport
-		JasperViewer.viewReport(print, false);
+		File archivo = new File(rutaExportar);
+		FileInputStream fis = new FileInputStream(archivo);
+
+		byte fileContent[] = new byte[(int) archivo.length()];
+
+		fis.read(fileContent);
+
+		String strFileContent = new String(fileContent);
+
+		Filedownload.save(strFileContent.getBytes(), "text/plain", "actividades.txt");
+
 	}
 
 	public Actividad getActividad() {

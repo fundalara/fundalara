@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteMantenimientos" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.9090909090909093"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<subDataset name="dataset1"/>
+	<parameter name="FechaInicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FechaFin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA" class="java.lang.String"/>
+	<parameter name="HORA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select i.descripcion as instalacion, plan.descripcion as mantenimiento, a.fecha_inicio as fecha, d.nombre as tipoActividad,
+tipoacti.nombreactividad as nombreactividad, estado.codigo_estado as EstadoActividad
+from actividad a, planificacion_actividad plan, instalacion_utilizada iu, instalacion i, dato_basico as d,
+estado_actividad estado, dato_basico db,
+(select dato_basico.nombre as nombreactividad, dato_basico.codigo_dato_basico as codigo
+from dato_basico where dato_basico.codigo_tipo_dato = 108) tipoacti
+where
+a.codigo_planificacion_actividad=plan.codigo_planificacion_actividad
+and a.codigo_instalacion_utilizada=iu.codigo_instalacion_utilizada
+and iu.codigo_instalacion=i.codigo_instalacion
+and plan.actividad_plantilla= FALSE
+and a.estatus='A'
+and plan.estatus='A'
+and i.estatus='A'
+and d.estatus='A'
+and estado.estatus='A'
+and plan.codigo_tipo_actividad=d.codigo_dato_basico
+and d.parent_codigo_dato_basico!=307
+And estado.codigo_actividad=a.codigo_actividad
+and estado.codigo_estado=db.codigo_dato_basico
+and d.parent_codigo_dato_basico= tipoacti.codigo
+and a.fecha_inicio between $P{FechaInicio} and $P{FechaFin}
+and a.fecha_culminacion between $P{FechaInicio} and $P{FechaFin}
+and iu.estatus='A';]]>
+	</queryString>
+	<field name="instalacion" class="java.lang.String"/>
+	<field name="mantenimiento" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="tipoactividad" class="java.lang.String"/>
+	<field name="nombreactividad" class="java.lang.String"/>
+	<field name="estadoactividad" class="java.lang.Integer"/>
+	<group name="Instalacion">
+		<groupExpression><![CDATA[$F{instalacion}]]></groupExpression>
+		<groupHeader>
+			<band height="61">
+				<rectangle>
+					<reportElement x="38" y="11" width="470" height="20" backcolor="#FFCC99"/>
+				</rectangle>
+				<textField>
+					<reportElement x="48" y="11" width="261" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{instalacion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="38" width="145" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mantenimiento Realizado]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="214" y="38" width="160" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha de Mantenimiento]]></text>
+				</staticText>
+				<line>
+					<reportElement x="2" y="58" width="570" height="1"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineColor="#FF9933"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="395" y="38" width="153" height="20"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo de Mantenimiento]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<staticText>
+					<reportElement x="287" y="5" width="229" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total de Mantenimientos Realizados:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="523" y="5" width="49" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Instalacion_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="338" splitType="Stretch">
+			<textField>
+				<reportElement x="192" y="248" width="262" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoactividad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="248" width="125" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Actividad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="278" width="144" height="23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Rango de Uso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="186" width="508" height="40"/>
+				<textElement>
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mantenimientos Realizados por Instalación]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="572" height="144"/>
+				<imageExpression><![CDATA["Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="452" y="123" width="43" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="144" width="45" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="497" y="124" width="75" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="497" y="144" width="75" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HORA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="133" y="307" width="59" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="192" y="307" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaInicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="307" width="45" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="366" y="307" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="214" height="36"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mantenimiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="231" y="3" width="135" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="39" width="571" height="2"/>
+			</line>
+			<textField>
+				<reportElement x="405" y="3" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreactividad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="452" y="57" width="80" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="532" y="57" width="40" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="572" height="57"/>
+				<imageExpression><![CDATA["PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

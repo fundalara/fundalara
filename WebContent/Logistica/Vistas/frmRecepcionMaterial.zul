@@ -2,118 +2,127 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 <?page title="Recepcion de Compra/Donación" contentType="text/html;charset=UTF-8"?>
+
 <zk>
 	<window title="Recepcion de Materiales" border="normal" width="65%"
-		apply="controlador.logistica.CntrlRecepcionMaterial" id="wnRecepcion"
-		mode="embedded">
-		<panel title="Nota de entrega" width="100%">
-			<panelchildren>
-				<separator />
-				<grid>
-					<columns>
-						<column width="20%" />
-					</columns>
-					<rows>
-						<row style="border:none">
-							<label value="Fecha de Recepción" />
-							<datebox id="fechaRecepcion"
-								constraint="no empty" format="dd/MM/yyyy" />
-						</row>
-					</rows>
-				</grid>
-			</panelchildren>
-		</panel>
-		<separator />
-		<panel title="Ingreso Almacen" id="IngresoAlmacen">
-			<panelchildren>
-				<grid>
-					<columns>
-						<column />
-						<column />
-						<column />
-						<column />
-						<column />
-						<column />
-					</columns>
-					<rows>
-						<row style="border: none">
-							<label value="Tipo  de Material" />
-							<combobox id="cmbTD" width="80px"
-								constraint="no empty" selectedItem="@{cntrl.tipoDatoBasico}"
-								model="@{cntrl.tipoMateriales }">
-								<comboitem id="cmbTipoD"
-									self="@{each=td}" label="@{td.nombre}" value="@{td.nombre}">
-								</comboitem>
-							</combobox>
-							<label value="Clasificación del Material" />
-							<combobox id="cmbCM" width="80px"
-								constraint="no empty"
-								selectedItem="@{cntrl.clasificacionMaterial}"
-								model="@{cntrl.claseMateriales,load-after='cmbTD.onSelect'}">
-								<comboitem id="cmbDatoBasico"
-									self="@{each=cm}" label="@{cm.nombre}" value="@{cm.nombre}">
-								</comboitem>
-							</combobox>
-							<label value="Descripción del Material" />
-							<combobox id="cmbDM" width="80px"
-								constraint="no empty" selectedItem="@{cntrl.tipoMaterial}"
-								model="@{cntrl.Materiales,load-after='cmbCM.onSelect'}">
-								<comboitem id="cmbDatoBasicoDescripcion"
-									self="@{each=dm}" label="@{dm.descripcion}"
-									value="@{dm.descripcion}">
-								</comboitem>
-							</combobox>
-						</row>
-						<row style="border: none">
-							<label value="Cantidad de Material" />
-							<spinner id="spCantidad"
-								constraint="no negative, no empty" cols="6" />
-							<label />
-							<label />
-							<label />
-							<label />
-						</row>
-					</rows>
-				</grid>
-				<div>
-					<space />
-				</div>
-				<toolbar align="end">
-					<toolbarbutton
-						image="/Recursos/Imagenes/agregar.ico" id="btnAgregar" />
-					<toolbarbutton image="/Recursos/Imagenes/quitar.ico"
-						id="btnQuitar" />
-				</toolbar>
-				<panel title="Materiales Registrados"
-					collapsible="false">
-					<panelchildren>
-						<listbox id="lboxRecepcionMateriales"
-							mold="paging" pageSize="5"
-							model="@{cntrl.materialesPrevios,load-after='btnAgregar.onClick,btnQuitar.onClick'}">
-							<listhead>
-								<listheader>Descripcion</listheader>
-								<listheader width="20%">
-									Cantidad
-								</listheader>
-							</listhead>
-							<listitem self="@{each='m'}" value="@{m}">
-								<listcell label="@{m.observaciones}" />
-								<listcell label="@{m.cantidadRecibida}" />
-							</listitem>
-						</listbox>
-					</panelchildren>
-				</panel>
-			</panelchildren>
-		</panel>
-		<separator />
-		<div align="right" width="100%" height="100%">
-			<button label="Guardar"
-				image="/Recursos/Imagenes/guardar.ico" id="btnGuardar" />
-			<space width="1%" />
-			<button label="Cancelar"
-				image="/Recursos/Imagenes/cancelar.ico" id="btnCancelar" />
-			<space width="1%" />
-			<button label="Salir" image="/Recursos/Imagenes/salir.png" />
-		</div>
+		apply="controlador.logistica.CntrlRecepcionMaterial" id="wnRecepcion" mode="embedded" >
+
+
+
+
+	<panel title="Nota de entrega" width="100%">
+		<panelchildren>
+			<separator />
+			<grid>
+				<columns>
+					<column width="20%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<label value="Fecha de Recepción" />
+						<datebox id="fechaRecepcion"  />
+					</row>
+
+				</rows>
+
+			</grid>
+		</panelchildren>
+	</panel>
+
+	<separator />
+
+	<panel title="Ingreso Almacen" id="IngresoAlmacen">
+		<panelchildren>
+			<grid>
+				<columns>
+					<column />
+					<column />
+					<column />
+					<column />
+					<column />
+					<column />
+				</columns>
+				<rows>
+					<row style="border: none">
+						<label value="Tipo  de Material" />
+						
+						<combobox id="cmbTD" width="80px" 
+									selectedItem="@{cntrl.tipoDatoBasico}"  model="@{cntrl.tipoMateriales,load-after='btnAgregar.onClick' }">
+							<comboitem id="cmbTipoD" self="@{each=td}" label="@{td.nombre}" value="@{td.nombre}"></comboitem> 
+						</combobox>
+						
+						<label value="Clasificación del Material" /> 
+						<combobox id="cmbCM" width="80px" 
+									selectedItem="@{cntrl.clasificacionMaterial}"  model="@{cntrl.claseMateriales,load-after='cmbTD.onSelect,btnAgregar.onClick'}">
+						<comboitem id="cmbDatoBasico" self="@{each=cm}" label="@{cm.nombre}" value="@{cm.nombre}"></comboitem>
+						</combobox>
+						<label value="Descripción del Material" />
+						<combobox id="cmbDM" width="80px"
+									selectedItem="@{cntrl.tipoMaterial}" model="@{cntrl.Materiales,load-after='cmbCM.onSelect,btnAgregar.onClick'}">
+						<comboitem id="cmbDatoBasicoDescripcion" self="@{each=dm}" label="@{dm.descripcion}" value="@{dm.descripcion}"></comboitem>
+						</combobox>
+					</row>
+
+
+					<row style="border: none">
+						<label value="Cantidad de Material" />
+						<spinner id="spCantidad" constraint="no negative, no empty" cols="6"/>
+						<label />
+						<label />
+						<label />
+						<label />
+					</row>
+				</rows>
+			</grid>
+
+			<div>
+				<space />
+			</div>
+
+			<toolbar align="end">
+				<toolbarbutton image="/Recursos/Imagenes/agregar.ico" id="btnAgregar"
+					 />
+				
+				<toolbarbutton image="/Recursos/Imagenes/quitar.ico" id="btnQuitar"/>
+			</toolbar>
+
+			<panel title="Materiales Registrados" collapsible="false">
+								<panelchildren>
+									<listbox id="lboxRecepcionMateriales" mold="paging" pageSize="5" model="@{cntrl.materialesPrevios,load-after='btnAgregar.onClick,btnQuitar.onClick'}"
+										>
+										<listhead>
+											<listheader> Descripción</listheader>
+											<listheader width="20%"> Cantidad</listheader>
+											
+										</listhead>
+										<listitem self="@{each='m'}" value="@{m}">
+											<listcell label="@{m.observaciones}" />
+											<listcell label="@{m.cantidadRecibida}" />
+											
+										</listitem>
+									</listbox>
+								</panelchildren>
+							</panel>
+
+		</panelchildren>
+	</panel>
+
+
+	<separator />
+
+	<div align="right" width="100%" height="100%">
+		<button label="Guardar" image="/Recursos/Imagenes/guardar.ico" id="btnGuardar"  />
+
+		<space width="1%" />
+		<button label="Cancelar" image="/Recursos/Imagenes/cancelar.ico" id="btnCancelar" />
+
+		<space width="1%" />
+		<button label="Salir" image="/Recursos/Imagenes/salir.png" id="btnSalir" />
+
+	</div>
+
+
+
+
 	</window>
 </zk>

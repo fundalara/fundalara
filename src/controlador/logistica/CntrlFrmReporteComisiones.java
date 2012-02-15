@@ -1,6 +1,9 @@
 package controlador.logistica;
 
 import java.awt.Button;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +25,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRTextExporter;
 import net.sf.jasperreports.engine.export.JRTextExporterParameter;
-import net.sf.jasperreports.view.JasperViewer;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,6 +34,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Filedownload;
 
 import servicio.implementacion.ServicioActividad;
 import servicio.implementacion.ServicioActividadPlanificada;
@@ -203,27 +206,27 @@ public class CntrlFrmReporteComisiones extends GenericForwardComposer {
 		total = listaTareaActividad2.size();
 		if (listaTareaActividad2.size() > 0) {
 			for (int m = 0; m < listaTareaActividad2.size(); m++) {
-				if (listaTareaActividad2.get(m).getDatoBasicoByEstadoTarea().getNombre() == "EJECUTADA")
+				if (listaTareaActividad2.get(m).getDatoBasicoByEstadoTarea().getNombre().equals("EJECUTADA"))
 					total1++;
-				else
+				else if ((listaTareaActividad2.get(m).getDatoBasicoByEstadoTarea().getNombre().equals("NO EJECUTADA")))
 					total2++;
 			}
 		}
 		binder.loadAll();
 	}
 
-	public void onClick$btnExportar() throws JRException {
+	public void onClick$btnExportar() throws JRException, IOException {
 
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(listaTareaActividad2);
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/reporteComisiones.jrxml");
+		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/reportes/reporteComisiones.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 
 		JasperPrint print = JasperFillManager.fillReport(report, null, ds);
 
 		JRExporter exporter = new JRTextExporter();
 
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/reporteComisiones.txt");
+		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/reportes/reporteComisiones.txt");
 
 		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
 		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
@@ -231,12 +234,23 @@ public class CntrlFrmReporteComisiones extends GenericForwardComposer {
 		exporter.setParameter(JRTextExporterParameter.CHARACTER_WIDTH, 12f);// text
 																			// exporter
 		exporter.setParameter(JRTextExporterParameter.CHARACTER_HEIGHT, 12f);// text
-																				// exporter
+		// exporter
 
 		exporter.exportReport();
 
+		File archivo = new File(rutaExportar);
+		FileInputStream fis = new FileInputStream(archivo);
+
+		byte fileContent[] = new byte[(int) archivo.length()];
+
+		fis.read(fileContent);
+
+		String strFileContent = new String(fileContent);
+
+		Filedownload.save(strFileContent.getBytes(), "text/plain", "Comision.txt");
+
 		// Para visualizar el reporte con el visor de JasperReport
-		JasperViewer.viewReport(print, false);
+		// JasperViewer.viewReport(print, false);
 	}
 
 	public List<TareaActividadPlanificada> getTareasAC() {

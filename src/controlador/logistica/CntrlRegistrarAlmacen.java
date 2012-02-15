@@ -33,6 +33,8 @@ import org.zkoss.zul.Textbox;
 import servicio.implementacion.ServicioInstalacion;
 import servicio.interfaz.IServicioAlmacen;
 
+import comun.MensajeMostrar;
+
 /**
  * Clase controladora de los eventos de la vista de igual nombre y manejo de los
  * servicios de datos para el registro de nuevos almacenes
@@ -93,11 +95,9 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 		validar();
 		almacen.setCodigoAlmacen(servicioAlmacen.listar().size() + 1);
 		almacen.setEstatus('A');
-		System.out.println("antes de agregar: " + almacen.getNombre());
 		servicioAlmacen.agregar(almacen);
-		System.out.println("despues de agregar");
 		almacenes.add(almacen);
-		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(MensajeMostrar.REGISTRO_EXITOSO, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 		this.onClick$btnCancelar();
 
 	}
@@ -112,21 +112,22 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 
 	public void onClick$btnModificar() throws InterruptedException {
 		servicioAlmacen.actualizar(almacen);
-		Messagebox.show("Datos modificados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(MensajeMostrar.MODIFICACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 		this.onClick$btnCancelar();
 	}
 
 	public void onClick$btnEliminar() throws InterruptedException {
 
-		Messagebox.show("¿Realmente desea eliminar este almacén?", "Importante", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
-				new EventListener() {
+		Messagebox.show("¿Realmente desea eliminar este almacén?", MensajeMostrar.TITULO + "Importante", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new EventListener() {
 					@Override
 					public void onEvent(Event arg0) throws InterruptedException {
 						if (arg0.getName().toString() == "onOK") {
 							almacen.setEstatus('E');
 							servicioAlmacen.actualizar(almacen);
 							almacenes.remove(almacen);
-							Messagebox.show("Datos eliminados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+							Messagebox.show(MensajeMostrar.ELIMINACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK,
+									Messagebox.INFORMATION);
 							onClick$btnCancelar();
 						}
 					}

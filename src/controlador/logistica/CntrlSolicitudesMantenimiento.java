@@ -15,7 +15,15 @@ import org.zkoss.zul.api.Listbox;
 
 import servicio.implementacion.ServicioSolicitudMantenimiento;
 
+import comun.MensajeMostrar;
+
 public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
+
+	/**
+	 * Esta clase se encarga de mostrar las solicitudes pendientes de
+	 * mantenimientos para luego procesarlos
+	 * 
+	 */
 
 	private AnnotateDataBinder binder;
 	private Listbox lboxSolicitudMantenimiento;
@@ -25,19 +33,18 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 	private Component formPlanificarMantenimiento;
 	private Component frmSolMantenimiento;
 
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, false);
-		solicitudesMantenimiento = servicioSolicitudMantenimiento.listarActivos();
-	}
-
-	public void onSelect$lboxSolicitudMantenimiento() {
-		// alert("Pantalla de planificacion del mantenimiento"
-		// + solicitudMantenimiento.getDescripcionActividad());
-		// binder.loadAll();
-	}
-
-	public void Cancelar() {
 		solicitudesMantenimiento = servicioSolicitudMantenimiento.listarActivos();
 	}
 
@@ -45,10 +52,16 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 		this.frmSolMantenimiento.detach();
 	}
 
+	/**
+	 * Este proceso onClick$btnEliminar() se encarga de eliminar una solicitud
+	 * que ya fue procesada
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void onClick$btnEliminar() throws InterruptedException {
 
-		Messagebox.show("¿Realmente desea eliminar esta solicitud?", "Importante", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
-				new EventListener() {
+		Messagebox.show("¿Realmente desea eliminar esta solicitud?", MensajeMostrar.TITULO + "Importante", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new EventListener() {
 					@Override
 					public void onEvent(Event arg0) throws InterruptedException {
 						if (arg0.getName().toString() == "onOK") {
@@ -62,34 +75,16 @@ public class CntrlSolicitudesMantenimiento extends GenericForwardComposer {
 				});
 	}
 
+	/**
+	 * este proceso onClick$btnAceptar() se encarga de llamar al planificar
+	 * mantenimiento
+	 * 
+	 */
 	public void onClick$btnAceptar() {
 
 		formPlanificarMantenimiento = Executions.createComponents("/Logistica/Vistas/frmPlanificarMantenimiento.zul", null, null);
-		// formPlanificarMantenimiento.setVariable("frmSolMantenimiento",
-		// frmSolMantenimiento, false);
-		// System.out.println(solicitudMantenimiento.getFechaSolicitud());
-		// formPlanificarMantenimiento.setVariable("fechaFinal",
-		// solicitudMantenimiento.getFechaSolicitud(), false);
-		//
-		// frmSolMantenimiento.addEventListener(
-		// "onPlanificarMantenimientoCerrado", new EventListener() {
-		// public void onEvent(Event arg0) throws Exception {
-		// Integer i = (Integer) frmSolMantenimiento.getVariable(
-		// "booleano", false);
-		// if (i == 1) {
-		// solicitudMantenimiento.setEstatus('E');
-		// servicioSolicitudMantenimiento
-		// .actualizar(solicitudMantenimiento);
-		// }
-		// Cancelar();
-		// binder.loadAll();
-		// arg0.stopPropagation();
-		// }
-		// });
 
 	}
-
-	// alert("debe salirse");
 
 	public List<SolicitudMantenimiento> getSolicitudesMantenimiento() {
 		return solicitudesMantenimiento;

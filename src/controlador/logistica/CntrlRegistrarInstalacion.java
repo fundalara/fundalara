@@ -34,6 +34,7 @@ import org.zkoss.zul.Textbox;
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioInstalacion;
 
+import comun.MensajeMostrar;
 import comun.TipoDatoBasico;
 
 /**
@@ -99,7 +100,7 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 		servicioInstalacion.agregar(instalacion);
 
 		this.onClick$btnCancelar();
-		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(MensajeMostrar.REGISTRO_EXITOSO, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 	}
 
 	public void onClick$btnCancelar() {
@@ -110,20 +111,21 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 	public void onClick$btnModificar() throws InterruptedException {
 		servicioInstalacion.actualizar(instalacion);
 		onClick$btnCancelar();
-		Messagebox.show("Datos modificados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(MensajeMostrar.MODIFICACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 	}
 
 	public void onClick$btnEliminar() throws InterruptedException {
 
-		Messagebox.show("¿Realmente desea eliminar esta instalación?", "Importante", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
-				new EventListener() {
+		Messagebox.show("¿Realmente desea eliminar esta instalación?", MensajeMostrar.TITULO + "Importante", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new EventListener() {
 					@Override
 					public void onEvent(Event arg0) throws InterruptedException {
 						if (arg0.getName().toString() == "onOK") {
 							instalacion.setEstatus('E');
 							servicioInstalacion.actualizar(instalacion);
 							onClick$btnCancelar();
-							Messagebox.show("Datos eliminados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+							Messagebox.show(MensajeMostrar.ELIMINACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK,
+									Messagebox.INFORMATION);
 						}
 					}
 				});

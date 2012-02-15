@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?page title="Avance de Actividades" contentType="text/html;charset=UTF-8"?>
+	<window title="Reporte Mantenimientos Según Instalación" apply="controlador.logistica.CntrlFrmReporteMatenimientoInstalacion" 
+		border="normal" width="600px" maximizable="true" minimizable="true">
+		<panel width="100%" height="100%">
+			<panelchildren>
+			<grid>
+				<columns>
+					<column></column>
+					<column></column>
+				</columns>
+				<rows>
+				<row>
+					<label value="Estado Mantenimiento:"></label>
+					<combobox width="80%" id="cmbEstadoMantenimiento" 
+							selectedItem="@{cntrl.datoBasico}" model="@{cntrl.listaDatoBasico}">
+						<comboitem id="cmbP"   self="@{each=p}" 
+								   label="@{p.nombre}"/>
+					</combobox>
+				</row>
+				<row>
+					<div>
+						<label value="Fecha Desde:"></label>
+						<datebox id="fechaInicio" />
+					</div>
+					<div>
+						<label value="Hasta:"></label>
+						<datebox id="fechaFin" />
+					</div>
+				</row>
+				<row>
+					<label value="Instalación:"></label>
+					<combobox width="80%" id="cmbInstalacion" 
+							selectedItem="@{cntrl.datoBasico2}" model="@{cntrl.listaDatoBasico2}">
+						<comboitem id="cmbA"   self="@{each=a}" 
+								   label="@{a.nombre}"/>
+					</combobox>
+				</row>
+				</rows>
+			</grid>
+			</panelchildren>
+		</panel>
+		<panel>
+			<panelchildren>
+						<div>
+							<listbox id="lboxInstalacion" 
+							model="@{cntrl.listaMantenimiento}" selectedItem="@{cntrl.mantenimiento}"
+							checkmark="false" height="100%">
+							<listhead>
+							 	<listheader label="Descripción" height="20%"/>
+							 	<listheader label="SubInstalación"/>
+							 	<listheader label="Responsable"/>
+							 	<listheader label="Fecha Inicio"/>
+								<listheader label="Inicio"/>
+								<listheader label="Fecha Fin"/>
+								<listheader label="Culminación"/>
+							</listhead>
+							<listitem self="@{each='ta'}" value="@{ta}">
+								<listcell label="@{ta.planificacionActividad.descripcion}" height="20%"></listcell>
+								<listcell label="@{ta.instalacionUtilizada.instalacion.descripcion}"></listcell>
+								<listcell label="@{ta.personal.personaNatural, converter='comun.converter.NameConverter'}"/>
+								<listcell>
+									<datebox value="@{ta.fechaInicio}"
+						  			format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+								<listcell>
+									<datebox value="@{ta.horaInicio}"
+										format="hh:mm" readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+								<listcell>
+									<datebox value="@{ta.fechaCulminacion}"
+						  			format="dd/MM/yyyy" readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+								<listcell>
+									<datebox value="@{ta.horaFin}"
+										format="hh:mm" readonly="true" buttonVisible="false">
+									</datebox>
+								</listcell>
+							</listitem>
+							</listbox>
+							<label value="Total de Actividades:"></label>
+							<intbox value="@{cntrl.a}"></intbox>
+						</div>
+						<div>
+						<grid>
+							<columns>
+								<column></column>
+							</columns>
+							<rows>
+								<row>
+									<div>
+									<listbox id="lboxMateriales" 
+									model="@{cntrl.listaMaterialActividad}" selectedItem="@{cntrl.materialActividad}" 
+									checkmark="false" height="100%">
+									<listhead>
+										<listheader label="Materiales" width="40%"></listheader>
+										<listheader label="Cant. Entregada" width="30%"></listheader>
+									</listhead>
+									<listitem self="@{each='m'}" value="@{m}">
+										<listcell label="@{m.material.descripcion}"></listcell>
+										<listcell label="@{m.cantidadEntregada}"></listcell>
+									</listitem>		
+									</listbox>
+									<label value="Total de Materiales Utilizados:"></label>
+									<intbox value="@{cntrl.c}"></intbox>
+									</div>
+								</row>
+								<row>
+									<div>
+									<listbox id="lboxTareas" 
+									model="@{cntrl.listaTareaActividad}" selectedItem="@{cntrl.tareaActividad}" 
+									checkmark="false" height="100%">
+									<listhead>
+										<listheader label="Tareas"></listheader>
+									</listhead>
+									<listitem self="@{each='m'}" value="@{m}">
+										<listcell label="@{m.datoBasicoByCodigoTarea.nombre}"></listcell>
+									</listitem>		
+									</listbox>
+									<label value="Total de Tareas:"></label>
+									<intbox value="@{cntrl.b}"></intbox>
+									</div>
+								</row>
+							</rows>
+						</grid>
+						</div>
+
+				<div align="right">
+					<button id="btnExportar" label="Exportar"
+						image="/Recursos/Imagenes/guardar.ico" />
+		
+					<button id="btnSalir" label="Salir"
+						image="/Recursos/Imagenes/salir.png" />
+				</div>
+			</panelchildren>
+		</panel>
+	</window>

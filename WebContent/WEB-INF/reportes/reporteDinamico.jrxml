@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteDinamico" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Reinaldo López\\Documents\\repositorio\\fundalara\\WebContent\\WEB-INF\\Reportes\\Logistica\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="instalacionUtilizada.instalacion.descripcion" class="java.lang.String"/>
+	<field name="fechaInicio" class="java.lang.String"/>
+	<field name="fechaCulminacion" class="java.lang.String"/>
+	<field name="horaInicio" class="java.lang.String"/>
+	<field name="horaFin" class="java.lang.String"/>
+	<field name="planificacionActividad.descripcion" class="java.lang.String"/>
+	<field name="tareas" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="comisiones" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="materiales" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="31">
+			<staticText>
+				<reportElement x="0" y="0" width="220" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Descripcion de la Actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha de Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha de Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Hora de Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="549" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Hora de Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="677" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Instalacion]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="74" splitType="Stretch">
+			<subreport>
+				<reportElement x="349" y="20" width="262" height="46"/>
+				<dataSourceExpression><![CDATA[$F{tareas}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reporteDinamico_subreport4.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="18" y="0" width="220" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{planificacionActividad.descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaCulminacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{horaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="549" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{horaFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="649" y="0" width="331" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{instalacionUtilizada.instalacion.descripcion}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="18" y="20" width="320" height="46"/>
+				<dataSourceExpression><![CDATA[$F{comisiones}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reporteDinamico_subreport5.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="626" y="20" width="342" height="46"/>
+				<dataSourceExpression><![CDATA[$F{materiales}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reporteDinamico_subreport6.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="92" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

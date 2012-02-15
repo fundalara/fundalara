@@ -55,8 +55,7 @@
 							selectedItem="@{cntrl.tarea}" checkmark="false" height="50%">
 							<listhead>
 								<listheader label="Tareas" />
-								<listheader label="Estado" />
-								<listheader label="Jugador" />
+								<listheader label="Estado" />								
 								<listheader label="Fecha Inicio" />
 								<listheader label="Hora Inicio" />
 								<listheader label="Fecha Fin" />
@@ -67,9 +66,7 @@
 								<listcell
 									label="@{ta.datoBasicoByCodigoTarea.nombre}" />
 								<listcell
-									label="@{ta.datoBasicoByEstadoTarea.nombre}" />
-								<listcell
-									label="@{ta.comisionFamiliar.familiarJugador.jugador.personaNatural, converter='comun.converter.NameConverter'}" />
+									label="@{ta.datoBasicoByEstadoTarea.nombre}" />								
 								<listcell>
 									<datebox
 										value="@{ta.actividad.fechaInicio}" format="dd/MM/yyyy"

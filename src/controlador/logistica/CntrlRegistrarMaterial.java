@@ -36,6 +36,7 @@ import servicio.interfaz.IServicioAlmacen;
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioMaterial;
 
+import comun.MensajeMostrar;
 import comun.TipoDatoBasico;
 
 /**
@@ -147,14 +148,13 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 
 		material.setCodigoMaterial(servicioMaterial.listar().size() + 1);
 		material.setDescripcion(txtDescripcion.getValue().toUpperCase());
-		System.out.println(material.getDescripcion());
 		material.setCantidadDisponible(material.getCantidadExistencia());
 		material.setEstatus('A');
 
 		servicioMaterial.agregar(material);
 
 		this.onClick$btnCancelar();
-		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(MensajeMostrar.REGISTRO_EXITOSO, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 
 	}
 
@@ -178,20 +178,21 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 		material.setDescripcion(txtDescripcion.getValue().toUpperCase());
 		servicioMaterial.actualizar(material);
 		this.onClick$btnCancelar();
-		Messagebox.show("Datos modificados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(MensajeMostrar.MODIFICACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 	}
 
 	public void onClick$btnEliminar() throws InterruptedException {
 
-		Messagebox.show("¿Realmente desea eliminar este material?", "Importante", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
-				new EventListener() {
+		Messagebox.show("¿Desea eliminar este material?", MensajeMostrar.TITULO + "Importante", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION, new EventListener() {
 					@Override
 					public void onEvent(Event arg0) throws InterruptedException {
 						if (arg0.getName().toString() == "onOK") {
 
 							material.setEstatus('E');
 							servicioMaterial.actualizar(material);
-							Messagebox.show("Datos eliminados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+							Messagebox.show(MensajeMostrar.ELIMINACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK,
+									Messagebox.INFORMATION);
 							onClick$btnCancelar();
 						}
 					}

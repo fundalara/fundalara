@@ -1,5 +1,7 @@
 package controlador.logistica;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import modelo.DatoBasico;
@@ -11,12 +13,16 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.api.Window;
 
 import servicio.interfaz.IServicioPersona;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
+
+import comun.MensajeMostrar;
 
 public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 
@@ -33,7 +39,29 @@ public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 	int numero = 0;
 	int tipo = 0;
 	Window frmCatPersonal;
+	Textbox txtNombre;
+	Textbox txtApellido;
 
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
+	public void doAfterCompose(Component comp) throws Exception {
+		super.doAfterCompose(comp);
+		comp.setVariable("cntrl", this, true);
+		catalogoPersonal = comp;
+		listaPersona = servicioPersona.listarTrabajadores();
+	}
+
+	/**
+	 * El metodo onCreate$frmCatPersonal() se ejecuta cuando se esta creando el
+	 * formulario, el llena la lista del personal dependiendo si son
+	 * trabajadores de mantenimiento o todos.
+	 */
 	public void onCreate$frmCatPersonal() {
 
 		int aux = (Integer) catalogoPersonal.getVariable("aux", false);
@@ -46,12 +74,11 @@ public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-		comp.setVariable("cntrl", this, true);
-		catalogoPersonal = comp;
-		listaPersona = servicioPersona.listarTrabajadores();
-	}
+	/**
+	 * El metodo: onClick$btnGuardar() se ejecuta cuando se selecciona un
+	 * material con su respectiva cantidad, retorna el material al formulario
+	 * que lo ha llamado
+	 */
 
 	public void onClick$btnGuardar() throws InterruptedException {
 
@@ -61,7 +88,6 @@ public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 			// se obtiene la plantilla seleccionada
 			persona = listaPersona.get(lboxPersonal.getSelectedIndex());
 
-			System.out.println("persona del selectItem: " + persona.getCedulaRif());
 			// se obtiene la referencia del formulario
 
 			frmPadre = (Component) catalogoPersonal.getVariable("frmPadre", false);
@@ -72,7 +98,6 @@ public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 			numero = (Integer) catalogoPersonal.getVariable("numero", true);
 			// se le envia una señal al formulario indicado que el formulario se
 			// cerro y que los datos se han enviado
-			System.out.println(numero);
 			if (numero == 1) {
 				Events.sendEvent(new Event("onCatalogoCerradoResponsable", frmPadre));
 			} else {
@@ -82,7 +107,7 @@ public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 			catalogoPersonal.detach();
 
 		} else {
-			Messagebox.show("Seleccione una plantilla ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una plantilla ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
@@ -106,6 +131,36 @@ public class CntrlFrmCatalogoPersonal extends GenericForwardComposer {
 
 	public void onClick$btnSalir() {
 		this.frmCatPersonal.detach();
+	}
+
+	public void onChanging$txtNombre(Event event) throws InterruptedException {
+		lboxPersonal.setModel(new BindingListModelList(this.filtrar2(txtNombre.getText()), false));
+	}
+
+	public void onChanging$txtApellido(Event event) throws InterruptedException {
+		lboxPersonal.setModel(new BindingListModelList(this.filtrar3(txtApellido.getText()), false));
+	}
+
+	public List<Persona> filtrar2(String descripcion) {
+		List<Persona> filtrados = new ArrayList<Persona>();
+		for (Iterator<Persona> i = listaPersona.iterator(); i.hasNext();) {
+			Persona tmp = i.next();
+			if (tmp.getPersonaNatural().getPrimerNombre().toLowerCase().indexOf(descripcion.trim().toLowerCase()) >= 0) {
+				filtrados.add(tmp);
+			}
+		}
+		return filtrados;
+	}
+
+	public List<Persona> filtrar3(String descripcion) {
+		List<Persona> filtrados = new ArrayList<Persona>();
+		for (Iterator<Persona> i = listaPersona.iterator(); i.hasNext();) {
+			Persona tmp = i.next();
+			if (tmp.getPersonaNatural().getPrimerApellido().toLowerCase().indexOf(descripcion.trim().toLowerCase()) >= 0) {
+				filtrados.add(tmp);
+			}
+		}
+		return filtrados;
 	}
 
 }

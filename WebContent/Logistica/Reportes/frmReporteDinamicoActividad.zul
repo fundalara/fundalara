@@ -13,6 +13,8 @@
 					<columns>
 						<column></column>
 						<column></column>
+						<column></column>
+						<column></column>
 					</columns>
 					<rows>
 						<row>
@@ -25,22 +27,25 @@
 									<comboitem id="cmbTipoActividad"
 										self="@{each=tm}" label="@{tm.nombre}" />
 								</combobox>
-								<button
-									image="/Recursos/Imagenes/consultar.ico" id="btnBuscar">
-								</button>
 							</div>
+							<div></div>
+							<div width="100px"></div>
 						</row>
 						<row>
 							<div>
 								<label value="Desde:"></label>
-								<datebox id="fechaInicio" format="dd/MM/yyyy"
-									constraint="no empty" />
+								<datebox id="fechaInicio"
+									format="dd/MM/yyyy" constraint="no empty" />
 							</div>
 							<div>
 								<label value="Hasta:"></label>
-								<datebox id="fechaFin" format="dd/MM/yyyy"
-									constraint="no empty" />
+								<datebox id="fechaFin"
+									format="dd/MM/yyyy" constraint="no empty" />
 							</div>
+							<button
+								image="/Recursos/Imagenes/consultar.ico" id="btnBuscar">
+							</button>
+							<div width="100px"></div>
 						</row>
 					</rows>
 				</grid>
@@ -89,9 +94,9 @@
 					<listhead>
 						<listheader label="Descripción" width="20%" />
 						<listheader label="Instalación" width="20%" />
-						<listheader label="Fecha Inicio" width="15%" />
+						<listheader label="Fecha" width="15%" />
 						<listheader label="Hora Inicio" width="15%" />
-						<listheader label="Fecha Fin" width="15%" />
+<!-- 						<listheader label="Fecha Fin" width="15%" /> -->
 						<listheader label="Hora Fin" width="15%" />
 					</listhead>
 					<listitem self="@{each='a'}" value="@{a}">
@@ -110,11 +115,11 @@
 								format="hh:mm" readonly="true" buttonVisible="false">
 							</datebox>
 						</listcell>
-						<listcell>
-							<datebox value="@{a.fechaCulminacion}"
-								format="dd/MM/yyyy" readonly="true" buttonVisible="false">
-							</datebox>
-						</listcell>
+<!-- 						<listcell> -->
+<!-- 							<datebox value="@{a.fechaCulminacion}" -->
+<!-- 								format="dd/MM/yyyy" readonly="true" buttonVisible="false"> -->
+<!-- 							</datebox> -->
+<!-- 						</listcell> -->
 						<listcell>
 							<datebox value="@{a.horaFin}" format="hh:mm"
 								readonly="true" buttonVisible="false">

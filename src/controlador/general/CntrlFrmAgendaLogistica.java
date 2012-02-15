@@ -2,8 +2,6 @@ package controlador.general;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import modelo.Actividad;
 import modelo.DatoBasico;
@@ -20,7 +18,10 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
+import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioPlanificacionActividad;
+
+import comun.MensajeMostrar;
 
 /**
  * Clase controladora de los eventos de la agenda para la planificación y
@@ -40,6 +41,7 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 	private Timebox frmPlanificar$horaInicio;
 	private Timebox frmPlanificar$horaFin;
 	private IServicioPlanificacionActividad servicioPlanificacionActividad;
+	private IServicioActividad servicioActividad;
 
 	@Override
 	public void doAfterCompose(Component component) throws Exception {
@@ -55,13 +57,15 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 		opcionMenu = (String) frmAgenda.getAttribute("opcion");
 
 		if (opcionMenu.equals("ActividadComplementaria")) {
-			cargarCalendario(servicioPlanificacionActividad.listarComplementarias());
+			cargarCalendario();
 			calendars.setTooltiptext("Haga click sobre una fecha para planificar una actividad");
-			Messagebox.show("Haga click sobre una fecha para planificar una actividad", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Haga click sobre una fecha para planificar una actividad", MensajeMostrar.TITULO + "Información", Messagebox.OK,
+					Messagebox.INFORMATION);
 		} else {
-			cargarCalendario(servicioPlanificacionActividad.listarMantenimientos());
+			cargarCalendario();
 			calendars.setTooltiptext("Haga click sobre una fecha para planificar un mantenimiento");
-			Messagebox.show("Haga click sobre una fecha para planificar un mantenimiento", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Haga click sobre una fecha para planificar un mantenimiento", MensajeMostrar.TITULO + "Información", Messagebox.OK,
+					Messagebox.INFORMATION);
 		}
 	}
 
@@ -72,23 +76,21 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 	 * @param eventos
 	 *            Lista de Actividades Complementarias o de Mantenimiento
 	 */
-	public void cargarCalendario(List<PlanificacionActividad> eventos) {
+	public void cargarCalendario() {
 
 		SimpleCalendarEvent evento;
 		ec = new EventosCalendario();
 
-		System.out.println("cargandooo calendario:" + eventos.size());
-
-		for (PlanificacionActividad evt : eventos) {
-			Set<Actividad> actividades = evt.getActividads();
-			for (Actividad actividad : actividades) {
-				Date fi = new Date(actividad.getFechaInicio().getTime() + actividad.getHoraInicio().getTime());
-				Date ff = new Date(actividad.getFechaCulminacion().getTime() + actividad.getHoraFin().getTime());
-				String color = obtenerColor(actividad);
-				evento = crearEvento(fi, ff, evt.getDescripcion(), color, evt);
-				ec.cargarEvento(evento);
-			}
+		for (Actividad actividad : servicioActividad.listarComplementarias()) {
+			System.out.println(actividad.getPlanificacionActividad().getDescripcion());
+			Date fi = new Date(actividad.getFechaInicio().getTime() + actividad.getHoraInicio().getTime() - 18000000);
+			Date ff = new Date(actividad.getFechaCulminacion().getTime() + actividad.getHoraFin().getTime() - 18000000);
+			String color = obtenerColor(actividad);
+			evento = crearEvento(fi, ff, actividad.getPlanificacionActividad().getDescripcion(), color, actividad.getPlanificacionActividad());
+			// ec.cargarEvento(evento);
+			ec.getModel().update(evento);
 		}
+
 		calendars.setModel(ec.getModel());
 
 	}
@@ -116,16 +118,16 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 		if (estado.getNombre() != null) {
 			if (estado.getNombre().equals("SUSPENDIDA")) {
 				// System.out.println("suspendida");
-				return color[0];
+				return "#F13616";
 			} else if (estado.getNombre().equals("TERMINADA")) {
 				// System.out.println("completada con resultados ya registrados");
-				return color[2];
+				return "#FDD017";
 			} else if (actividad.getFechaInicio().after(new Date())) {
 				// System.out.println("programada por realizarse");
-				return color[1];
+				return "#32CD32";
 			} else {
 				// System.out.println("culminada sin registrar resultados");
-				return color[3];
+				return "FF7700";
 			}
 		} else {
 			return null;
@@ -133,10 +135,19 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 	}
 
 	public void onEventCreate$calendars(ForwardEvent event) throws InterruptedException {
-		if (opcionMenu.equals("ActividadComplementaria")) {
-			planificar(event, "Logistica/Vistas/frmPlanificarActividad.zul");
+
+		CalendarsEvent ce = (CalendarsEvent) event.getOrigin();
+
+		if (ce.getBeginDate().after(new Date())) {
+
+			if (opcionMenu.equals("ActividadComplementaria")) {
+				planificar(event, "Logistica/Vistas/frmPlanificarActividad.zul");
+			} else {
+				planificar(event, "Logistica/Vistas/frmPlanificarMantenimiento.zul");
+			}
 		} else {
-			planificar(event, "Logistica/Vistas/frmPlanificarMantenimiento.zul");
+			Messagebox.show("La planificación no es permitida en fechas anteriores a la actual", MensajeMostrar.TITULO + "Información",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 	}
 
@@ -237,7 +248,7 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 	 * 
 	 */
 	public void cargar(CalendarsEvent ce, PlanificacionActividad pa) {
-		SimpleCalendarEvent evento = crearEvento(ce.getBeginDate(), ce.getEndDate(), pa.getDescripcion(), color[1], pa);
+		SimpleCalendarEvent evento = crearEvento(ce.getBeginDate(), ce.getEndDate(), pa.getDescripcion(), "#32CD32", pa);
 		ec.cargarEvento(evento);
 
 		calendars.setModel(ec.getModel());

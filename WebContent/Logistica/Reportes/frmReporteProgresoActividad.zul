@@ -11,6 +11,7 @@
 				<columns>
 					<column></column>
 					<column></column>
+					<column></column>
 				</columns>
 				<rows>
 					<row>
@@ -21,6 +22,7 @@
 							<comboitem id="cmbP" self="@{each=p}"
 								label="@{p}" />
 						</combobox>
+						<div width="100px"></div>
 					</row>
 					<row>
 						<div>
@@ -31,6 +33,7 @@
 							<label value="Hasta:"></label>
 							<datebox id="fechaFin" format="dd/MM/yyyy" />
 						</div>
+						<div width="100px"></div>
 					</row>
 				</rows>
 			</grid>
@@ -39,7 +42,7 @@
 	<panel title="Lista de Actividades" width="100%" id="panelOculto"
 		visible="true">
 		<panelchildren>
-			<listbox id="lboxActividades"
+			<listbox id="lboxActividades" mold="paging" pageSize="10"
 				model="@{cntrl.listaActividades}" selectedItem="@{cntrl.actividad}"
 				checkmark="true" height="50%">
 				<listhead>
@@ -64,7 +67,7 @@
 			</listbox>
 			<div align="right">
 				<button image="/Recursos/Imagenes/reporte.ico"
-					label="Generar Reporte" id="btnExportar">
+					label="Generar" id="btnExportar">
 				</button>
 				<button label="Salir"
 					image="/Recursos/Imagenes/salir.png">

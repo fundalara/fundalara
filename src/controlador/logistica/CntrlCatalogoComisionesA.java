@@ -34,7 +34,6 @@ public class CntrlCatalogoComisionesA extends GenericForwardComposer {
 
 	public void onClick$btnAceptar() {
 		Component frmPlanificarActividad = (Component) this.CatalogoComision.getVariable("frmPlanificarActividad", false);
-		System.out.println(comision.getNombre());
 		frmPlanificarActividad.setVariable("comision", comision, false);
 
 		Events.sendEvent(new Event("onCatalogoComisionCerrado", frmPlanificarActividad));
