@@ -323,7 +323,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 				for (int j = 2; j < (lista.getItemAtIndex(i).getChildren().size()-3); j++) {
 					comboActividad =(Combobox) obtenerComponenteListcell(i, j);
 					actividadesEjecutada=(ActividadEjecutada)comboActividad.getItemAtIndex(0).getValue();
-					desempennoJugador= new DesempennoJugador();
+					desempennoJugador = new DesempennoJugador();
 					desempennoJugador.setCodigoDesempennoJugador(servicioDesempennoJugador.listar().size()+1);
 					desempennoJugador.setAsistenciaJugador(asistenciaJugador);
 					desempennoJugador.setActividadEjecutada(actividadesEjecutada);
