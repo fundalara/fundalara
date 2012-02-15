@@ -139,7 +139,7 @@ public class CntrlReportePromedioActividad extends GenericForwardComposer {
 		final AMedia amedia = new AMedia("PromedioActividad.pdf", "pdf",
 				"application/pdf", archivo);
 
-		Component visor = Executions.createComponents("General/"
+		Component visor = Executions.createComponents("/General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
 
