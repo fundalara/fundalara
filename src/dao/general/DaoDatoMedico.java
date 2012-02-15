@@ -1,7 +1,13 @@
 package dao.general;
 
+import modelo.DatoMedico;
+import modelo.Jugador;
+
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import dao.generico.GenericDao;
 
@@ -11,7 +17,7 @@ import dao.generico.GenericDao;
  * 
  * @author Robert A
  * @author German L
- * @version 0.1 28/12/2011
+ * @version 0.2 02/01/2012
  * 
  */
 public class DaoDatoMedico extends GenericDao {
@@ -32,6 +38,19 @@ public class DaoDatoMedico extends GenericDao {
 		tx.commit();
 
 		return id;
+	}
+	
+	public DatoMedico buscarDatoMedico(Jugador jugador){
+		Session sesion = getSession();
+		org.hibernate.Transaction tx = sesion.beginTransaction();
+		Criteria c = sesion.createCriteria(DatoMedico.class)
+				.addOrder( Order.asc("codigoDatoMedico") )
+				.add(Restrictions.eq("estatus",'A'))
+				.add(Restrictions.eq("jugador",jugador))
+				.setMaxResults(1);
+		DatoMedico datoMedico = (DatoMedico) c.uniqueResult();
+		tx.commit();
+		return datoMedico;
 	}
 
 }
