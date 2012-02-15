@@ -85,8 +85,7 @@ public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
 
 	public void crearCompromisos(Persona representante, Persona atleta,
 			DatoBasico tipoLapso, DatoBasico tipoInscripcion) {
-		conceptos = servicioIngresoInscripcion.listarPorTipoInscripcion(tipoInscripcion
-				.getCodigoDatoBasico());
+		conceptos = servicioIngresoInscripcion.listarIngresoInscripcion(tipoInscripcion);
 		LapsoDeportivo lapsoDeportivo = servicioLapsoDeportivo.buscarDosCampos(tipoLapso);
 		Date lapso = lapsoDeportivo.getFechaInicio();
 		Date actual = new Date();

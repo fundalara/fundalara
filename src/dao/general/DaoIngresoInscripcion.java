@@ -15,7 +15,7 @@ import dao.generico.GenericDao;
 
 public class DaoIngresoInscripcion extends GenericDao {
 	
-	public List<IngresoInscripcion> listarTipoInscrpcion(DatoBasico d) {
+	public List<IngresoInscripcion> listarTipoInscripcion(DatoBasico d) {
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Criteria c = getSession().createCriteria(IngresoInscripcion.class);
