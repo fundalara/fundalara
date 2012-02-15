@@ -24,7 +24,7 @@
 										width="100px" />
 									<combobox
 										model="@{ctrl.listLapsoDeportivos}" width="130px"
-										id="cmbTemporada" value="--SELECCIONE--">
+										id="cmbTemporada" value="--SELECCIONE--" readonly="true">
 										<comboitem
 											self="@{each=temporada}" value="@{temporada}"
 											label="@{temporada.nombre}" />
@@ -38,7 +38,7 @@
 										width="100px" />
 									<combobox id="cmbCategoria"
 										width="130px" value="--SELECCIONE--"
-										model="@{ctrl.listCategorias}" disabled="true">
+										model="@{ctrl.listCategorias}" disabled="true" readonly="true">
 										<comboitem
 											self="@{each=categoria}" label="@{categoria.nombre}"
 											value="@{categoria}" />
@@ -47,7 +47,7 @@
 										id="lblEquipoPV" width="30px" visible="false" />
 									<combobox
 										model="@{ctrl.listEquiposPV}" width="110px" id="cmbEquipoPV"
-										disabled="true" value="--SELECCIONE--" visible="false">
+										disabled="true" value="--SELECCIONE--" visible="false" readonly="true">
 										<comboitem self="@{each=eq}"
 											value="@{eq}" label="@{eq.nombre}" />
 									</combobox>
@@ -75,7 +75,7 @@
 													width="100px" />
 												<combobox width="130px"
 													value="--SELECCIONE--" model="@{ctrl.listDiasSemana}"
-													id="cmbdia" disabled="true">
+													id="cmbdia" disabled="true" readonly="true">
 													<comboitem
 														self="@{each=dia}" value="@{dia}" label="@{dia.nombre}" />
 												</combobox>
@@ -147,7 +147,7 @@
 															value="Equipo" width="100px" height="25" />
 														<combobox
 															model="@{ctrl.listEquipos}" width="110px" id="cmbEquipo"
-															disabled="true" value="--SELECCIONE--">
+															disabled="true" value="--SELECCIONE--" readonly="true">
 															<comboitem
 																self="@{each=eq}" value="@{eq}" label="@{eq.nombre}" />
 														</combobox>
@@ -161,7 +161,7 @@
 															value="Tipo de Personal" width="100px" />
 														<combobox
 															value="--SELECCIONE--" width="110px" id="cmbTipoPersonal"
-															disabled="true" model="@{ctrl.listTipoPersonal}">
+															disabled="true" model="@{ctrl.listTipoPersonal}" readonly="true">
 															<comboitem
 																self="@{each=tP}" value="@{tP}" label="@{tP.nombre}" />
 														</combobox>
@@ -169,7 +169,7 @@
 															value="Nombre" width="100px" />
 														<combobox
 															value="--SELECCIONE--" width="110px" id="cmbNombre"
-															disabled="true" model="@{ctrl.listPersonals}">
+															disabled="true" model="@{ctrl.listPersonals}" readonly="true">
 															<comboitem
 																self="@{each=p}" value="@{p.personal}"
 																label="@{p.personal.personaNatural.primerNombre}" />
