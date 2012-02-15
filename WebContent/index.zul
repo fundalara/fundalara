@@ -924,12 +924,92 @@
 										<treechildren>
 											<treeitem open="false">
 												<treerow>
-													<treecell label=" " />
+													<treecell
+														label="Jugadores" />
 												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Entrenamientos" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Competencias" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="" />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Operacionales" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Consulta de Actividades"
+																onClick='enlace("../Logistica/Reportes/frmReporteDinamicoActividad.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Seguimiento Representantes"
+																onClick='enlace("../Logistica/Reportes/frmReporteComisiones.zul")' />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Administrativos" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
 											</treeitem>
 										</treechildren>
-
 									</treeitem>
+
 								</treechildren>
 							</tree>
 						</tabpanel>
