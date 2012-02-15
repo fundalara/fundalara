@@ -3,59 +3,70 @@
 <?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatMaterial"?>
 <?page title="Lista de Materiales" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Lista de Materiales" id="frmCatMaterial"
-		border="normal" mode="modal" closable="true"
-		apply="controlador.logistica.CntrlFrmCatalogoMaterialA" width="550px"
-		height="300px">
-		<grid>
-			<rows>
-				<row style="border:none">
-					<label value="Material"></label>
-					<hbox>
-						<combobox id="cmbTipo"
-							selectedItem="@{cntrl.tipoMaterial}"
-							model="@{cntrl.tiposMaterial}">
-							<comboitem id="cmbITipo" self="@{each=tm}"
-								label="@{tm.nombre}" />
-						</combobox>
-						<combobox id="cmbClase"
-							selectedItem="@{cntrl.claseMaterial}"
-							model="@{cntrl.clasificacionMaterial, load-after='cmbTipo.onSelect'}">
-							<comboitem id="cmbIClase" self="@{each=cm}"
-								label="@{cm.nombre}" />
-						</combobox>
-					</hbox>
-					<label value="Nombre"></label>
-					<textbox></textbox>
-				</row>
-				<row spans="4" style="border:none">
-					<listbox id="lboxMaterial" mold="paging"
-						pageSize="5"
-						model="@{cntrl.listaMaterial,load-after='cmbClase.onSelect'}"
-						selectedItem="@{cntrl.material}" checkmark="true"
-						height="150px">
-						<listhead>
-							<listheader label="Nombre" />
-							<listheader label="Descripcion" />
-						</listhead>
-						<listitem self="@{each='pm'}" value="@{pm}">
-							<listcell label="@{pm.descripcion}" />
-						</listitem>
-					</listbox>
-				</row>
-				<row style="border:none">
-					<label></label>
-					<label></label>
-					<label value="Cantidad"></label>
-					<intbox id="txtCantidad" value="0"></intbox>
-				</row>
-			</rows>
+	<window title="Lista de Materiales" id="frmCatMaterial" border="normal" mode="modal"  
+	closable="true"  apply="controlador.logistica.CntrlFrmCatalogoMaterialA" width="70%" >
+		<grid >
+
+		<rows>
+			<row style="border:none">
+				<label value="Material"></label>
+				<hbox>
+				
+				<combobox id="cmbTipo"  readonly="true"
+					selectedItem="@{cntrl.tipoMaterial}"
+					model="@{cntrl.tiposMaterial}">
+					<comboitem id="cmbITipo" self="@{each=tm}"
+						label="@{tm.nombre}" />
+				</combobox>
+				
+				<combobox id="cmbClase" readonly="true"
+					selectedItem="@{cntrl.claseMaterial}"
+					model="@{cntrl.clasificacionMaterial, load-after='cmbTipo.onSelect'}">
+					<comboitem id="cmbIClase" self="@{each=cm}"
+						label="@{cm.nombre}" />
+				</combobox>
+				
+				</hbox>
+				<label value="Nombre"></label>
+				<textbox id="txtNombre" onChanging="filtrar(event)" style='text-transform:uppercase;'></textbox>
+			</row>
+			<row spans="4" style="border:none">
+				<listbox id="lboxMaterial" mold="paging" pageSize="5"
+					model="@{cntrl.listaMaterial,load-after='cmbClase.onSelect'}"
+					selectedItem="@{cntrl.material}" checkmark="true" >
+					<listhead>
+						<listheader label="Nombre" />
+						<listheader label="Descripcion" />
+					</listhead>
+					<listitem self="@{each='pm'}" value="@{pm}">
+						<listcell label="@{pm.descripcion}" />
+					</listitem>
+				</listbox>
+			</row>
+			<row style="border:none">
+				<label></label>
+				<label></label>
+				<label value="Cantidad"></label>
+				<intbox id="txtCantidad" value="0" ></intbox>
+			</row>
+		</rows>
+
+
 		</grid>
+		
+		
 		<div align="right">
-			<button id="btnGuardar" label="Seleccionar"
-				image="/Recursos/Imagenes/guardar.ico" />
-			<button id="btnSalir" label="Salir"
-				image="/Recursos/Imagenes/salir.png" />
+					<button id="btnGuardar" label="Seleccionar"
+						image="/Recursos/Imagenes/aceptar.ico" />
+						
+					<button id="btnSalir" label="Salir"
+						image="/Recursos/Imagenes/salir.png" />
 		</div>
 	</window>
+	<zscript><![CDATA[
+	public void filtrar(Event event) {
+		((Textbox) event.getTarget())
+				.setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+	}
+]]></zscript>
 </zk>

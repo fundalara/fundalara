@@ -72,7 +72,7 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 	IServicioPersonal servicioPersonal;
 	IServicioRequisicion servicioRequisicion;
 	DetalleRequisicion aux;
-
+	char cierraONo;
 	Requisicion requisicion;
 	List<DetalleRequisicion> materialesRequisados;
 
@@ -124,9 +124,11 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 			aux.setEstatus('A');
 			aux.setMaterial(materialActividad.getMaterial());
 			materialesRequisados.add(aux);
+			cierraONo = materialActividad.getEstatus();
 			binder.loadAll();
 		} catch (Exception e) {
 			// TODO: handle exception
+			cierraONo = 'n';
 		}
 
 	}
@@ -204,12 +206,13 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 	public void onClick$btnGuardar() {
 		java.util.Date fecha = new Date();
 		Personal personal = new Personal();
-		// personal.getPersonaNatural().getPrimerNombre();
+		// usuario de seguridad funcional
+
 		personal.setCedulaRif("V-5435567");
 		personal = servicioPersonal.buscarPorCodigo(personal);
 
 		estadoRequisicion = new DatoBasico();
-		estadoRequisicion = servicioDatoBasico.buscarPorCodigo(408);
+		estadoRequisicion = servicioDatoBasico.buscarPorCodigo(463);
 
 		requisicion = new Requisicion();
 		requisicion.setCodigoRequisicion(servicioRequisicion.listar().size() + 1);
@@ -226,9 +229,19 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 			servicioDetalleRequisicion.agregar(materialesRequisados.get(i));
 
 		}
-		alert("Se ha guardado con exito");
-		formRequisicion.detach();
+		alert("Se ha registrado la requisicion con exito");
+		material = new Material();
+		requisicion = new Requisicion();
+		aux = new DetalleRequisicion();
+		materialesRequisados = new ArrayList<DetalleRequisicion>();
+		binder.loadAll();
+		if (cierraONo == 'x') {
+			formRequisicion.detach();
 
+		} else {
+			System.out.println("no se cierre");
+
+		}
 	}
 
 	/**

@@ -1,10 +1,10 @@
 <?page title="Reporte Desempeño Equipo"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndReporteDesempennoEquipo"?>
 <div align="center">
 	<separator height="15px" />
-	<window id="win" title="Desempeño por Equipo" border="normal"
-		width="600px" closable="true"
+	<window id="wndReporteDesempennoEquipo" title="Desempeño por Equipo"
+		border="normal" width="600px" closable="true"
 		apply="controlador.entrenamiento.CntrlReporteDesempenoEquipo">
 		<grid>
 			<columns>
@@ -16,38 +16,43 @@
 			<rows>
 				<row height="30px">
 					<label value="Fecha Inicio:" width="120px" />
-					<datebox id="dtbox1" width="150px" format="dd/MM/yyyy" />
-					<label value="Fecha Final:" width="120px"/>
-					<datebox id="dtbox2" width="150px" format="dd/MM/yyyy" />
+					<datebox id="dtbox1" width="150px"
+						format="dd/MM/yyyy" />
+					<label value="Fecha Final:" width="120px" />
+					<datebox id="dtbox2" width="150px"
+						format="dd/MM/yyyy" />
 				</row>
 				<row height="30px">
-					<label value="Categoria:" width="120px" />
-					<combobox id="cmbcategoria" value="--Seleccione--" disabled="true"
-								model="@{ctrl.listCategoria}" readonly="true" width="150px">
-							<comboitem self="@{each=categoria}"
-								label="@{categoria.nombre}"
-								value="@{categoria}" />
+					<label value="Categoría" width="120px" />
+					<combobox id="cmbcategoria" value="--Seleccione--"
+						disabled="true" model="@{ctrl.listCategoria}" readonly="true"
+						width="150px">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria}" />
 					</combobox>
-					<label value="Equipo:" width="120px" />
+					<label value="Equipo" width="120px" />
 					<combobox id="cmbequipo" value="--Seleccione--"
-					  disabled="true"
-						model="@{ctrl.listEquipo}" readonly="true" width="150px">
-							<comboitem self="@{each=equipo}"
-								label="@{equipo.nombre}"
-								value="@{equipo}" />
+						disabled="true" model="@{ctrl.listEquipo}" readonly="true"
+						width="150px">
+						<comboitem self="@{each=equipo}"
+							label="@{equipo.nombre}" value="@{equipo}" />
 					</combobox>
 				</row>
-				
+
 			</rows>
-		
+
 		</grid>
-			<iframe id= "ifReport"/>
-		<grid height="50px">
+		<iframe id="ifReport" height="10px" visible="false" />
+		<grid>
 			<rows>
-				<row align="right" height="">
-					<button id="btnimprimir"
-						image="../Recursos/Imagenes/imprimir.ico" label="Generar"
-						width="95px" disabled="false" />
+			<row align="right" height="">
+				<hbox>
+					<button id="btnImprimir"
+						image="/Recursos/Imagenes/reporte.ico" label="Generar"
+						width="100px" disabled="true" />
+					<button id="btnSalir"
+						image="/Recursos/Imagenes/salir.png" label="Salir" width="100px" />
+				</hbox>
 				</row>
 			</rows>
 		</grid>

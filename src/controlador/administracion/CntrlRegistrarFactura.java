@@ -229,7 +229,7 @@ public class CntrlRegistrarFactura extends GenericForwardComposer {
 
 	// ---------------------------------------------------------------------------------------------------
 	public void onChange$cmbTipoMaterial(){
-		listaMateriales = servicioMaterial.listarPorTipoMaterial(tipoMaterial.get(cmbTipoMaterial.getSelectedIndex()));
+		listaMateriales = servicioMaterial.listarMaterialPorTipo(tipoMaterial.get(cmbTipoMaterial.getSelectedIndex()));
 		binder.loadComponent(cmbCodigoMaterial);
 	}
 	

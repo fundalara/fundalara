@@ -20,12 +20,15 @@ import modelo.TareaActividad;
 import modelo.TareaActividadPlanificada;
 
 import org.springframework.beans.factory.BeanFactory;
+import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
@@ -36,8 +39,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
-import servicio.implementacion.ServicioPlanificacionActividad;
-import servicio.implementacion.ServicioTareaActividadPlanificada;
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioEstadoActividad;
@@ -47,7 +48,13 @@ import servicio.interfaz.IServicioMaterialActividadPlanificada;
 import servicio.interfaz.IServicioPersonal;
 import servicio.interfaz.IServicioPersonalActividad;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
+import servicio.interfaz.IServicioPlanificacionActividad;
 import servicio.interfaz.IServicioTareaActividad;
+import servicio.interfaz.IServicioTareaActividadPlanificada;
+
+import comun.MensajeMostrar;
+
+import controlador.general.CntrlFrmAgendaLogistica;
 
 public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
@@ -78,10 +85,11 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	DatoBasico tipoInstalacion = new DatoBasico();
 	InstalacionUtilizada instalacionUtilizada;
 	ClaseAux tareas;
+	String responsable2;
 
 	IServicioDatoBasico servicioDatoBasico;
-	ServicioPlanificacionActividad servicioPlanificacionActividad;
-	ServicioTareaActividadPlanificada servicioTareaActividadPlanificada;
+	IServicioPlanificacionActividad servicioPlanificacionActividad;
+	IServicioTareaActividadPlanificada servicioTareaActividadPlanificada;
 	IServicioMaterialActividadPlanificada servicioMaterialActividadPlanificada;
 	IServicioPersonalActividadPlanificada servicioPersonalActividadPlanificada;
 	IServicioInstalacionUtilizada servicioInstalacionUtilizada;
@@ -104,6 +112,7 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	// Componentes
 	Component frmPlanificarMantenimiento;
 	Textbox txtCodPlantilla;
+	Textbox txtResponsable;
 	Listbox lboxTareas;
 	Listbox lboxMateriales;
 	Combobox cmbClase;
@@ -120,6 +129,21 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 	Datebox fechaFin;
 	Timebox horaInicio;
 	Timebox horaFin;
+	Button btnGuardar;
+	Button btnAgregarTarea;
+	Button btnQuitarTareas;
+	Button btnAgregarMateriales;
+	Button btnQuitarMateriales;
+
+	/**
+	 * La clase auxiliar ClaseAux se utiliza para guardar previamente las tareas
+	 * y responsable seleccionada por el usuario
+	 * 
+	 * @param tarea
+	 *            .
+	 * @param responsable
+	 *            .
+	 */
 
 	public class ClaseAux {
 
@@ -144,6 +168,15 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	}
 
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 
@@ -155,40 +188,80 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 		tiposMantenimientos = servicioDatoBasico.listarTipoMantenimiento();
 		tiposInstalaciones = servicioDatoBasico.listarTipoInstalacion();
-		cmbTipo.focus();
-		panelS.setCollapsible(false);
+		blanquear();
+		blanquear();
 
 	}
 
-	// Metodos de los componentes
-	public void onSelect$cmbTipo() {
-		// cmbClase.open();
+	/**
+	 * El metodo: onChange$cmbTipo() se ejecuta cuando se selecciona un item en
+	 * el ComboBox cmbTipo, se filtran en el comboClase los mantenimientos de
+	 * ese tipo
+	 */
+
+	public void onChange$cmbTipo() {
+		cmbClase.setDisabled(false);
+		cmbClase.open();
+		tipoMantenimiento = (DatoBasico) cmbTipo.getSelectedItem().getValue();
 		clasificacionMantenimientos = servicioDatoBasico.buscarDatosPorRelacion(tipoMantenimiento);
+		binder.loadComponent(cmbClase);
 	}
 
-	public void onSelect$cmbClase() {
+	/**
+	 * El metodo: onChange$cmbClase() se ejecuta cuando se selecciona un item en
+	 * el ComboBox cmbClase, le coloca el focus al txtCodPlantilla y guarda en
+	 * una variable el codigo escogido de datoBasico
+	 */
+	public void onChange$cmbClase() {
+		txtCodPlantilla.focus();
+		DatoBasico a = (DatoBasico) cmbClase.getSelectedItem().getValue();
+		cmbClase.setContext(String.valueOf(a.getCodigoDatoBasico()));
 		txtCodPlantilla.focus();
 	}
 
-	public void onSelect$cmbTipoInstalacion() throws InterruptedException {
+	/**
+	 * El metodo: onChange$cmbTipoInstalacion() se ejecuta cuando se selecciona
+	 * un item en el ComboBox cmbTipoInstalacion,primero para que se ejecute es
+	 * te metodo, se deba validar si ya fueron seleccionadas el rango de fecha
+	 * luego el busca las instalaciones ocupada y resta con las instalaciones
+	 * que se encuentren en la instalacion.
+	 * 
+	 */
+	public void onChange$cmbTipoInstalacion() throws InterruptedException {
 
-		if (tipoInstalacion.getCodigoDatoBasico() != 158) {
-			cmbInstalacion.open();
-			listaInstalacionUtilizada = new ArrayList<InstalacionUtilizada>();
-			listaInstalacion = new ArrayList<Instalacion>();
-			listaInstalacionUtilizada = servicioInstalacionUtilizada.listarInstalacionOcupada(fechaInicio.getValue(), fechaFin.getValue(),
-					horaInicio.getValue(), horaFin.getValue());
-			listaInstalacion = servicioInstalacion.listarInstalacionesDisponibles(tipoInstalacion, listaInstalacionUtilizada);
-			binder.loadAll();
+		if (validarFecha()) {
+			if (tipoInstalacion.getCodigoDatoBasico() != 158) {
+				cmbInstalacion.open();
+				listaInstalacionUtilizada = new ArrayList<InstalacionUtilizada>();
+				listaInstalacion = new ArrayList<Instalacion>();
+				listaInstalacionUtilizada = servicioInstalacionUtilizada.listarInstalacionOcupada(fechaInicio.getValue(), fechaFin.getValue(),
+						horaInicio.getValue(), horaFin.getValue());
+				listaInstalacion = servicioInstalacion.listarInstalacionesDisponibles(tipoInstalacion, listaInstalacionUtilizada);
+				cmbInstalacion.setDisabled(false);
+				binder.loadAll();
 
-		} else {
-			int show2 = Messagebox.show("Seleccione una instalacion interna", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
-			cmbTipoInstalacion.open();
-			cmbTipoInstalacion.focus();
+			} else {
+				int show2 = Messagebox.show("Seleccione una instalacion interna", MensajeMostrar.TITULO + "Información", Messagebox.YES,
+						Messagebox.INFORMATION);
+				cmbTipoInstalacion.open();
+				cmbTipoInstalacion.focus();
 
+			}
 		}
-
 	}
+
+	public void onClick$cmbClase() {
+		if (cmbTipo.getValue() == "--SELECCIONE--" || cmbTipo.getValue().isEmpty()) {
+			throw new WrongValueException(cmbTipo, "Seleccione un tipo de actividad");
+		}
+	}
+
+	/**
+	 * El metodo: onClick$btnPredisennada() se ejecuta cuando se le da click al
+	 * boton predisennada, activa un catalago llamado frmCatalogoPlantilla y
+	 * retorna la plantilla seleccionada, luego se carga los combobox tipo y
+	 * clase, nombre las tareas y materiales.
+	 */
 
 	public void onClick$btnPredisennada() {
 
@@ -214,16 +287,31 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 					listaTareas.add(aux);
 				}
 				materialesActividades = servicioMaterialActividadPlanificada.listarMateriales(plantilla);
+				panelS.setCollapsible(true);
 				panelS.setOpen(true);
+				txtCodPlantilla.setValue(plantilla.getDescripcion());
 				txtCodPlantilla.setReadonly(true);
-				cmbTipoInstalacion.focus();
 				binder.loadAll();
+				txtResponsable.focus();
+
+				if (tareasActividades.size() != 0) {
+					btnQuitarTareas.setDisabled(false);
+				}
+
+				if (materialesActividades.size() != 0) {
+					btnQuitarMateriales.setDisabled(false);
+				}
 
 			}
 
 		});
 
 	}
+
+	/**
+	 * El metodo: onClick$btnResponsable() se ejecuta cuando se le da click al
+	 * boton asignar responsable, asigna el responsable de la actividad
+	 */
 
 	public void onClick$btnResponsable() {
 		final Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
@@ -238,16 +326,26 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 				persona = (Persona) frmPlanificarMantenimiento.getVariable("persona", false);
 				responsable = new Persona();
 				responsable = persona;
+				responsable2 = responsable.getPersonaNatural().getPrimerNombre();
+				if (responsable.getPersonaNatural().getSegundoNombre() != null) {
+					responsable2 = responsable2 + " " + responsable.getPersonaNatural().getSegundoNombre();
+				}
+				responsable2 = responsable2 + " " + responsable.getPersonaNatural().getPrimerApellido();
+				if (responsable.getPersonaNatural().getSegundoApellido() != null) {
+					responsable2 = responsable2 + " " + responsable.getPersonaNatural().getSegundoApellido();
+				}
+
 				binder.loadAll();
 				arg0.stopPropagation();
 			}
 		});
 	}
 
-	public void onClick$btnPeriodicidad() {
-		Component catalogoPeriodicidad = Executions.createComponents("/Logistica/Vistas/frmPeriodicidad.zul", null, null);
-	}
-
+	/**
+	 * El metodo: onClick$btnAsignarPersonalxTarea() se ejecuta cuando se le da
+	 * click al boton asignar Personal, agrega el personal a la tarea
+	 * seleccionada.
+	 */
 	public void onClick$btnAsigPersonalxTarea() throws InterruptedException {
 
 		if (tareas != null) {
@@ -271,9 +369,16 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 			});
 		} else {
 
-			int show2 = Messagebox.show("Seleccione una tarea para asignar el personal", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			int show2 = Messagebox.show("Seleccione una tarea para asignar el personal", MensajeMostrar.TITULO + "Información", Messagebox.YES,
+					Messagebox.INFORMATION);
 		}
 	}
+
+	/**
+	 * El metodo: onClick$btnAgregarTareas() se ejecuta cuando se le da click al
+	 * boton agegarTareas, llama al catalogo tarea, para agregar una nueva tarea
+	 * a la lista de tareas seleccionada.
+	 */
 
 	public void onClick$btnAgregarTareas() {
 
@@ -286,6 +391,10 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 			aux.add(datoBasico.tarea);
 		}
 
+		// tipo 1= mantenimiento , 2= todas
+
+		int tipo = 1;
+		catalogoTarea.setVariable("tipoTarea", tipo, false);
 		catalogoTarea.setVariable("tarea", aux, false);
 		frmPlanificarMantenimiento.addEventListener("onCatalogoTareaCerrado", new EventListener() {
 
@@ -299,25 +408,43 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 				}
 
 				binder.loadAll();
-
+				btnQuitarTareas.setDisabled(false);
 				arg0.stopPropagation();
 			}
 		});
 
 	}
 
+	/**
+	 * El metodo: onClick$btnQuitarTareas() se ejecuta cuando se le da click al
+	 * boton eliminar Tareas, elimima la tarea seleccionada de la lista de
+	 * tareas.
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void onClick$btnQuitarTareas() throws InterruptedException {
 
 		if (lboxTareas.getSelectedIndex() != -1) {
 			listaTareas.remove((ClaseAux) lboxTareas.getSelectedItem().getValue());
 			binder.loadAll();
 		} else {
-			Messagebox.show("Seleccione una tarea para asignar el personal", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea para asignar el personal", MensajeMostrar.TITULO + "Información", Messagebox.YES,
+					Messagebox.INFORMATION);
 
+		}
+		if (listaTareas.size() == 0) {
+			btnQuitarTareas.setDisabled(true);
 		}
 
 	}
 
+	/**
+	 * El metodo: onClick$btnAgregarMateriales() se ejecuta cuando se le da
+	 * click al boton agregar materiales, llama al catalogo material, para
+	 * agregar un nuevo material a la lista de materiales seleccionados,
+	 * validando que no este repetido en la lista y si es asi le asigna la nueva
+	 * cantidad.
+	 */
 	public void onClick$btnAgregarMateriales() {
 
 		Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterial.zul", null, null);
@@ -327,132 +454,329 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 		frmPlanificarMantenimiento.addEventListener("onCatalogoMaterialCerrado", new EventListener() {
 
 			public void onEvent(Event arg0) throws Exception {
+				boolean encontre = false;
 				material = new Material();
 				material = (Material) frmPlanificarMantenimiento.getVariable("material", false);
 
 				int cantidad = (Integer) frmPlanificarMantenimiento.getVariable("cantidad", false);
 
-				MaterialActividadPlanificada aux = new MaterialActividadPlanificada();
+				for (int i = 0; i < materialesActividades.size(); i++) {
+					if (materialesActividades.get(i).getMaterial().getDescripcion().equals(material.getDescripcion())) {
+						materialesActividades.get(i).setCantidadRequerida(cantidad);
+						encontre = true;
+					}
+				}
+				if (!encontre) {
+					MaterialActividadPlanificada aux = new MaterialActividadPlanificada();
+					aux.setCantidadRequerida(cantidad);
+					aux.setEstatus('A');
+					aux.setMaterial(material);
+					aux.setPlanificacionActividad(plantilla);
+					materialesActividades.add(aux);
+				}
 
-				aux.setCantidadRequerida(cantidad);
-				aux.setEstatus('A');
-				aux.setMaterial(material);
-				aux.setPlanificacionActividad(plantilla);
-				materialesActividades.add(aux);
 				binder.loadAll();
-
+				btnQuitarMateriales.setDisabled(false);
 				arg0.stopPropagation();
 			}
 		});
 	}
 
+	/**
+	 * El metodo: onClick$btnQuitarMateriales() se ejecuta cuando se le da click
+	 * al boton eliminar materiales, elimima el material seleccionado de la
+	 * lista de materiales.
+	 */
 	public void onClick$btnQuitarMateriales() throws InterruptedException {
 		if (lboxMateriales.getSelectedIndex() != -1) {
-			System.out.println("hola");
+
 			materialesActividades.remove((MaterialActividadPlanificada) lboxMateriales.getSelectedItem().getValue());
 			binder.loadAll();
 		} else {
-			Messagebox.show("Seleccione una material", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una material", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
+		}
+		if (materialesActividades.size() == 0) {
+			btnQuitarMateriales.setDisabled(true);
 		}
 
 	}
 
+	/**
+	 * El metodo: onClick$btnGuardar() se ejecuta cuando se le da click al boton
+	 * guardar, guarda la actividad de mantenimiento planificado con sus tareas,
+	 * materiales, descripcion y tipo.
+	 */
 	public void onClick$btnGuardar() throws InterruptedException {
 
-		InstalacionUtilizada auxInstalacionUtilizada = new InstalacionUtilizada();
+		if (validar()) {
+			Messagebox.show(MensajeMostrar.GUARDAR, MensajeMostrar.TITULO.toString() + "Importante", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION, new EventListener() {
+						@Override
+						public void onEvent(Event arg0) throws InterruptedException {
+							if (arg0.getName().toString() == "onOK") {
 
-		auxInstalacionUtilizada.setCodigoInstalacionUtilizada(servicioInstalacionUtilizada.listar().size() + 1);
-		auxInstalacionUtilizada.setEstatus('A');
-		auxInstalacionUtilizada.setFechaFin(fechaFin.getValue());
-		auxInstalacionUtilizada.setFechaInicio(fechaInicio.getValue());
-		auxInstalacionUtilizada.setHoraFin(horaFin.getValue());
-		auxInstalacionUtilizada.setHoraInicio(horaInicio.getValue());
-		auxInstalacionUtilizada.setInstalacion(instalacion);
-		servicioInstalacionUtilizada.agregar(auxInstalacionUtilizada);
+								InstalacionUtilizada auxInstalacionUtilizada = new InstalacionUtilizada();
+								auxInstalacionUtilizada.setCodigoInstalacionUtilizada(servicioInstalacionUtilizada.listar().size() + 1);
+								auxInstalacionUtilizada.setEstatus('A');
+								auxInstalacionUtilizada.setFechaFin(fechaFin.getValue());
+								auxInstalacionUtilizada.setFechaInicio(fechaInicio.getValue());
+								auxInstalacionUtilizada.setHoraFin(horaFin.getValue());
+								auxInstalacionUtilizada.setHoraInicio(horaInicio.getValue());
+								auxInstalacionUtilizada.setInstalacion(instalacion);
+								servicioInstalacionUtilizada.agregar(auxInstalacionUtilizada);
 
-		Actividad actividad = new Actividad();
+								actividadPlanificada = new PlanificacionActividad();
 
-		actividadPlanificada = new PlanificacionActividad();
-		actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.listar().size() + 1);
-		actividadPlanificada.setDatoBasico(claseMantenimiento);
-		actividadPlanificada.setInstalacionUtilizada(auxInstalacionUtilizada);
-		actividadPlanificada.setDescripcion(plantilla.getDescripcion());
-		actividadPlanificada.setEstatus('A');
-		actividadPlanificada.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
-		actividadPlanificada.setActividadPeriodico(false);
-		actividadPlanificada.setActividadPlantilla(false);
-		servicioPlanificacionActividad.agregar(actividadPlanificada);
+								actividadPlanificada.setCodigoPlanificacionActividad(servicioPlanificacionActividad.listar().size() + 1);
+								actividadPlanificada.setDatoBasico(servicioDatoBasico.buscarPorCodigo(Integer.parseInt(cmbClase.getContext())));
+								actividadPlanificada.setInstalacionUtilizada(auxInstalacionUtilizada);
+								actividadPlanificada.setDescripcion(plantilla.getDescripcion());
+								actividadPlanificada.setEstatus('A');
+								actividadPlanificada.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
+								actividadPlanificada.setActividadPeriodico(false);
+								actividadPlanificada.setActividadPlantilla(false);
+								servicioPlanificacionActividad.agregar(actividadPlanificada);
 
-		actividad.setCodigoActividad(servicioActividad.listar().size() + 1);
-		actividad.setEstatus('A');
-		actividad.setFechaCulminacion(fechaFin.getValue());
-		actividad.setFechaInicio(fechaInicio.getValue());
-		actividad.setHoraFin(horaFin.getValue());
-		actividad.setHoraInicio(horaInicio.getValue());
-		actividad.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
-		actividad.setInstalacionUtilizada(auxInstalacionUtilizada);
-		actividad.setPlanificacionActividad(actividadPlanificada);
-		servicioActividad.agregar(actividad);
+								Actividad actividad = new Actividad();
 
-		EstadoActividad estadoActividad = new EstadoActividad();
-		estadoActividad.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
-		estadoActividad.setDatoBasico(servicioDatoBasico.buscarPorCodigo(251));
-		estadoActividad.setActividad(actividad);
-		estadoActividad.setEstatus('A');
-		servicioEstadoActividad.agregar(estadoActividad);
+								actividad.setCodigoActividad(servicioActividad.listar().size() + 1);
+								actividad.setEstatus('A');
+								actividad.setFechaCulminacion(fechaFin.getValue());
+								actividad.setFechaInicio(fechaInicio.getValue());
+								actividad.setHoraFin(horaFin.getValue());
+								actividad.setHoraInicio(horaInicio.getValue());
+								actividad.setPersonal(servicioPersonal.buscarPorCodigo(responsable.getPersonaNatural()));
+								actividad.setInstalacionUtilizada(auxInstalacionUtilizada);
+								actividad.setPlanificacionActividad(actividadPlanificada);
+								servicioActividad.agregar(actividad);
 
-		PersonalActividadPlanificada personalA;
+								EstadoActividad estadoActividad = new EstadoActividad();
+								estadoActividad.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
+								estadoActividad.setDatoBasico(servicioDatoBasico.buscarPorCodigo(251));
+								estadoActividad.setActividad(actividad);
+								estadoActividad.setEstatus('A');
+								servicioEstadoActividad.agregar(estadoActividad);
 
-		for (int i = 0; i < listaTareas.size(); i++) {
+								PersonalActividadPlanificada personalA;
 
-			personalA = new PersonalActividadPlanificada();
-			PersonalActividad personalAct = new PersonalActividad();
+								for (int i = 0; i < listaTareas.size(); i++) {
 
-			personalA.setCodigoPersonalActividadPlan(servicioPersonalActividadPlanificada.listar().size() + 1);
-			personalA.setPlanificacionActividad(actividadPlanificada);
-			personalA.setEstatus('A');
-			personalA.setPersonal(servicioPersonal.buscarPorCodigo(listaTareas.get(i).getResponsableA()));
-			servicioPersonalActividadPlanificada.agregar(personalA);
+									personalA = new PersonalActividadPlanificada();
+									PersonalActividad personalAct = new PersonalActividad();
 
-			personalAct.setCodigoPersonalActividad(servicioPersonalActividad.listar().size() + 1);
-			personalAct.setActividad(actividad);
-			personalAct.setPersonal(servicioPersonal.buscarPorCodigo(listaTareas.get(i).getResponsableA()));
-			personalAct.setEstatus('A');
-			servicioPersonalActividad.agregar(personalAct);
+									personalA.setCodigoPersonalActividadPlan(servicioPersonalActividadPlanificada.listar().size() + 1);
+									personalA.setPlanificacionActividad(actividadPlanificada);
+									personalA.setEstatus('A');
+									personalA.setPersonal(servicioPersonal.buscarPorCodigo(listaTareas.get(i).getResponsableA()));
+									servicioPersonalActividadPlanificada.agregar(personalA);
 
-			TareaActividadPlanificada tap = new TareaActividadPlanificada();
+									personalAct.setCodigoPersonalActividad(servicioPersonalActividad.listar().size() + 1);
+									personalAct.setActividad(actividad);
+									personalAct.setPersonal(servicioPersonal.buscarPorCodigo(listaTareas.get(i).getResponsableA()));
+									personalAct.setEstatus('A');
+									servicioPersonalActividad.agregar(personalAct);
 
-			tap.setCodigoTareaActividadPlanificada(servicioTareaActividadPlanificada.listar().size() + 1);
-			tap.setDatoBasico(listaTareas.get(i).getTarea());
-			tap.setPersonalActividadPlanificada(personalA);
-			tap.setComisionFamiliar(null);
-			tap.setPlanificacionActividad(actividadPlanificada);
-			tap.setEstatus('A');
-			servicioTareaActividadPlanificada.agregar(tap);
+									TareaActividadPlanificada tap = new TareaActividadPlanificada();
 
-			TareaActividad ta = new TareaActividad();
+									tap.setCodigoTareaActividadPlanificada(servicioTareaActividadPlanificada.listar().size() + 1);
+									tap.setDatoBasico(listaTareas.get(i).getTarea());
+									tap.setPersonalActividadPlanificada(personalA);
+									tap.setComisionFamiliar(null);
+									tap.setPlanificacionActividad(actividadPlanificada);
+									tap.setEstatus('A');
+									servicioTareaActividadPlanificada.agregar(tap);
 
-			ta.setActividad(actividad);
-			ta.setCodigoTareaActividad(servicioTareaActividad.listar().size() + 1);
-			ta.setEstatus('A');
-			ta.setDatoBasicoByEstadoTarea(servicioDatoBasico.buscarPorCodigo(414));
-			ta.setPersonalActividad(personalAct);
-			ta.setComisionFamiliar(null);
-			ta.setDatoBasicoByCodigoTarea(listaTareas.get(i).getTarea());
-			servicioTareaActividad.agregar(ta);
+									TareaActividad ta = new TareaActividad();
 
+									ta.setActividad(actividad);
+									ta.setCodigoTareaActividad(servicioTareaActividad.listar().size() + 1);
+									ta.setEstatus('A');
+									ta.setDatoBasicoByEstadoTarea(servicioDatoBasico.buscarPorCodigo(414));
+									ta.setPersonalActividad(personalAct);
+									ta.setComisionFamiliar(null);
+									ta.setDatoBasicoByCodigoTarea(listaTareas.get(i).getTarea());
+									servicioTareaActividad.agregar(ta);
+
+								}
+
+								for (int j = 0; j < materialesActividades.size(); j++) {
+									MaterialActividadPlanificada map = new MaterialActividadPlanificada();
+									map.setCodigoMaterialActividadPlanificada(servicioMaterialActividadPlanificada.listar().size() + 1);
+									map.setCantidadRequerida(materialesActividades.get(j).getCantidadRequerida());
+									map.setEstatus('A');
+									map.setMaterial(materialesActividades.get(j).getMaterial());
+									map.setPlanificacionActividad(actividadPlanificada);
+									servicioMaterialActividadPlanificada.agregar(map);
+								}
+								Messagebox.show(MensajeMostrar.REGISTRO_EXITOSO, MensajeMostrar.TITULO + "Información", Messagebox.OK,
+										Messagebox.INFORMATION);
+
+								// para cargar el calendario
+								CntrlFrmAgendaLogistica agenda = (CntrlFrmAgendaLogistica) frmPlanificarMantenimiento.getAttribute("calendario");
+								CalendarsEvent ce = (CalendarsEvent) frmPlanificarMantenimiento.getAttribute("ce");
+								agenda.cargar(ce, actividadPlanificada);
+
+								onClick$btnCancelar();
+
+							}
+
+						}
+					});
 		}
-		for (int j = 0; j < materialesActividades.size(); j++) {
-			materialesActividades.get(j).setPlanificacionActividad(actividadPlanificada);
-			servicioMaterialActividadPlanificada.agregar(materialesActividades.get(j));
-		}
-		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+	}
+
+	/**
+	 * El metodo: onClick$btnCancelar() se ejecuta cuando se le da click al
+	 * boton cancelar, blanquea los campos y prepara el formulario para agregar
+	 * una nueva o buscar una plantilla
+	 */
+	public void onClick$btnCancelar() {
+		blanquear();
+
+	}
+
+	/**
+	 * El metodo: onClick$btnSalir() se ejecuta cuando se le da click al boton
+	 * salir, cierra el formulario
+	 */
+	public void onClick$btnSalir() {
 		frmPlanificarMantenimiento.detach();
 	}
 
-	public void onClick$btnSalir() {
-		frmPlanificarMantenimiento.detach();
+	/**
+	 * El metodo: blanquear(), limpia todos los campos.
+	 */
+	public void blanquear() {
+		cmbTipo.setValue("--SELECCIONE--");
+		cmbInstalacion.setValue("--SELECCIONE--");
+		cmbClase.setValue("--SELECCIONE--");
+		cmbTipoInstalacion.setValue("--SELECCIONE--");
+		cmbInstalacion.setDisabled(true);
+		btnQuitarMateriales.setDisabled(true);
+		btnQuitarTareas.setDisabled(true);
+		responsable = new Persona();
+		listaTareas = new ArrayList<ClaseAux>();
+		materialesActividades = new ArrayList<MaterialActividadPlanificada>();
+		plantilla = new PlanificacionActividad();
+		txtResponsable.setValue("");
+		txtCodPlantilla.setValue("");
+		cmbTipo.focus();
+		panelS.setOpen(false);
+		panelS.setCollapsible(false);
+		responsable2 = new String();
+
+	}
+
+	/**
+	 * El metodo: validarFecha se ejecuta cuando selecciona una instalacion,
+	 * verifica si los campos de las fechas estan vacias, si es asi envia una
+	 * senal al usuario donde la falta llenar.
+	 * 
+	 * @return boolean validar
+	 * @throws InterruptedException
+	 */
+
+	public boolean validarFecha() throws InterruptedException {
+		boolean validar = false;
+		cmbTipoInstalacion.setValue("--SELECCIONE--");
+		if (fechaInicio.getValue() == null) {
+			throw new WrongValueException(fechaInicio, "Seleccione una fecha de inicio");
+		} else {
+			if (horaInicio.getValue() == null) {
+				throw new WrongValueException(horaInicio, "Seleccione una hora de inicio");
+			} else {
+				if (fechaFin.getValue() == null || fechaFin.getValue().before(fechaInicio.getValue())) {
+					throw new WrongValueException(fechaFin, "Seleccione una fecha de fin igual o mayor a la fecha de inicio");
+				} else {
+					if (horaFin.getValue() == null) {
+						throw new WrongValueException(horaFin, "Seleccione una hora de fin");
+					} else {
+						validar = true;
+					}
+				}
+			}
+		}
+
+		return validar;
+	}
+
+	/**
+	 * El metodo: validar se ejecuta cuando se le da click al boton guardar y
+	 * modificar, verifica si los campos estan vacios y si es asi, envia senal
+	 * al usuario donde la falta llenar.
+	 * 
+	 * @return boolean valido
+	 * @throws InterruptedException
+	 */
+	public boolean validar() throws InterruptedException {
+		boolean valido = false;
+		int tareas = 0;
+
+		if (cmbTipo.getValue() == "--SELECCIONE--") {
+			throw new WrongValueException(cmbTipo, "Seleccione un tipo de mantenimiento");
+		} else {
+			if (cmbClase.getValue() == "--SELECCIONE--") {
+				throw new WrongValueException(cmbTipo, "Seleccione una descripcion de mantenimiento");
+			} else {
+				if (txtCodPlantilla.getValue().isEmpty()) {
+					throw new WrongValueException(cmbTipo, "Seleccione una plantilla");
+				} else {
+					if (txtResponsable.getValue().isEmpty()) {
+						throw new WrongValueException(txtResponsable, "Seleccione un responsable");
+					} else {
+						if (fechaInicio.getValue() == null) {
+							throw new WrongValueException(fechaInicio, "Seleccione una fecha de inicio");
+						} else {
+							if (horaInicio.getValue() == null) {
+								throw new WrongValueException(horaInicio, "Seleccione una hora de inicio");
+							} else {
+								if (fechaFin.getValue() == null || fechaFin.getValue().before(fechaInicio.getValue())) {
+									throw new WrongValueException(fechaFin, "Seleccione una fecha de fin igual o mayor a la fecha de inicio");
+								} else {
+									if (horaFin.getValue() == null) {
+										throw new WrongValueException(horaInicio, "Seleccione una hora de fin");
+									} else {
+										if (cmbTipoInstalacion.getValue() == "--SELECCIONE--" || cmbTipoInstalacion.getValue().isEmpty()) {
+											throw new WrongValueException(cmbTipoInstalacion, "Seleccione un tipo de instalacion");
+										} else {
+											if (cmbInstalacion.getValue() == "--SELECCIONE--" || cmbInstalacion.getValue().isEmpty()) {
+												throw new WrongValueException(cmbInstalacion, "Seleccione una instalacion disponible");
+											} else {
+												for (ClaseAux i : listaTareas) {
+													if (i.responsableA == null) {
+														tareas++;
+													}
+												}
+
+												if (tareas != 0) {
+
+													Messagebox.show(tareas + " Tarea(s) falta por asignar personal", MensajeMostrar.TITULO
+															+ "Información", Messagebox.OK, Messagebox.INFORMATION);
+												} else {
+													valido = true;
+												}
+											}
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return valido;
 	}
 
 	// Getters y setters de las variables
@@ -727,6 +1051,30 @@ public class CntrlFrmPlanificarMantenimiento extends GenericForwardComposer {
 
 	public void setListaTareas(List<ClaseAux> listaTareas) {
 		this.listaTareas = listaTareas;
+	}
+
+	public Combobox getCmbClase() {
+		return cmbClase;
+	}
+
+	public void setCmbClase(Combobox cmbClase) {
+		this.cmbClase = cmbClase;
+	}
+
+	public Combobox getCmbTipo() {
+		return cmbTipo;
+	}
+
+	public void setCmbTipo(Combobox cmbTipo) {
+		this.cmbTipo = cmbTipo;
+	}
+
+	public String getResponsable2() {
+		return responsable2;
+	}
+
+	public void setResponsable2(String responsable2) {
+		this.responsable2 = responsable2;
 	}
 
 }

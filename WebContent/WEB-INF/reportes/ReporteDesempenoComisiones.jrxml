@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteDesempeñoCom" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="226"/>
+	<parameter name="CodigoActividad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA" class="java.lang.String"/>
+	<parameter name="HORA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select t.estado_tarea as codigoestadoTarea, cf.codigo_comision as codigo, plan.descripcion as actividad, d.descripcion as tipoActividad,
+i.descripcion as instalacion, a.fecha_inicio as fecha, a.hora_inicio as hora, pn.primer_nombre||' '||pn.primer_apellido as ResponsableAct,
+db.nombre as comision, dt.nombre as tarea, pf.primer_nombre||' '||pf.primer_apellido as ResponsableTarea, eb.nombre estadoTarea
+from actividad a, planificacion_actividad plan,dato_basico d, persona_natural pn,
+dato_basico db, tarea_actividad t, dato_basico dt,
+comision_familiar cf, familiar_jugador f, persona_natural pf,
+instalacion_utilizada iu, instalacion i, dato_basico eb
+where
+a.codigo_planificacion_actividad=plan.codigo_planificacion_actividad
+and plan.codigo_tipo_actividad!=500
+and plan.codigo_tipo_actividad=d.codigo_dato_basico
+and pn.cedula_rif=a.cedula_rif
+and a.codigo_actividad=$P{CodigoActividad}
+and t.codigo_actividad=a.codigo_actividad
+and t.codigo_tarea=dt.codigo_dato_basico
+and t.codigo_comision_familiar=cf.codigo_comision_familiar
+and cf.codigo_comision=db.codigo_dato_basico
+and f.codigo_familiar_jugador=cf.codigo_familiar_jugador
+and f.cedula_familiar=pf.cedula_rif
+and a.codigo_instalacion_utilizada=iu.codigo_instalacion_utilizada
+and iu.codigo_instalacion=i.codigo_instalacion
+and t.estado_tarea=eb.codigo_dato_basico
+and a.estatus='A'
+and plan.estatus='A'
+and pn.estatus='A'
+and t.estatus='A'
+and d.estatus='A'
+and db.estatus='A'
+and dt.estatus='A'
+and cf.estatus='A'
+and f.estatus='A'
+and pf.estatus='A'
+and iu.estatus='A'
+and i.estatus='A'
+and eb.estatus='A'
+
+order by  db. nombre, dt.nombre;]]>
+	</queryString>
+	<field name="codigoestadotarea" class="java.lang.Integer"/>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="actividad" class="java.lang.String"/>
+	<field name="tipoactividad" class="java.lang.String"/>
+	<field name="instalacion" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="hora" class="java.sql.Time"/>
+	<field name="responsableact" class="java.lang.String"/>
+	<field name="comision" class="java.lang.String"/>
+	<field name="tarea" class="java.lang.String"/>
+	<field name="responsabletarea" class="java.lang.String"/>
+	<field name="estadotarea" class="java.lang.String"/>
+	<variable name="codigo_SUM" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{codigo}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="estadoTarea">
+		<variableExpression><![CDATA[($V{estadoTarea_COUNT}*100)/($V{Codigo_COUNT})]]></variableExpression>
+	</variable>
+	<variable name="codigoestadotarea_SUM" class="java.lang.Integer" resetType="Group" resetGroup="estadoTarea" calculation="Sum">
+		<variableExpression><![CDATA[$F{codigoestadotarea}]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.Integer">
+		<variableExpression><![CDATA[new Double( $V{estadoTarea_COUNT}.doubleValue()*100 / $V{Codigo_COUNT}.doubleValue() )]]></variableExpression>
+	</variable>
+	<variable name="codigoestadotarea_SUM_1" class="java.lang.Integer" resetType="Group" resetGroup="estadoTarea" calculation="Sum">
+		<variableExpression><![CDATA[$F{codigoestadotarea}]]></variableExpression>
+	</variable>
+	<variable name="codigoTarea_Count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{codigoestadotarea}]]></variableExpression>
+	</variable>
+	<group name="DesempeñoComisiones">
+		<groupExpression><![CDATA[$F{comision}]]></groupExpression>
+		<groupHeader>
+			<band height="53">
+				<rectangle>
+					<reportElement x="0" y="0" width="458" height="20" forecolor="#000000" backcolor="#FFCC99"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="0" width="319" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{comision}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="54" y="33" width="100" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tarea]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="219" y="33" width="100" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Estado de la Tarea]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="334" y="33" width="133" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Responsable de la Tarea]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14"/>
+		</groupFooter>
+	</group>
+	<group name="Codigo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+	</group>
+	<group name="estadoTarea">
+		<groupExpression><![CDATA[$F{codigoestadotarea}]]></groupExpression>
+		<groupHeader>
+			<band height="17"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="61">
+				<rectangle radius="10">
+					<reportElement x="0" y="0" width="234" height="52" forecolor="#FFCC99"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Solid"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="9" y="12" width="219" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PORCENTAJE DE TAREAS " + $F{estadotarea} + ":"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Auto" pattern="#,##0.00 %">
+					<reportElement x="54" y="32" width="100" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new Double( $V{estadoTarea_COUNT}.doubleValue()*0.10 / $V{Codigo_COUNT}.doubleValue()*10 )]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="343" splitType="Stretch">
+			<textField>
+				<reportElement x="193" y="131" width="265" height="32"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{actividad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="190" width="311" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoactividad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="36" y="190" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Actividad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="228" width="124" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Ejecución:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="173" y="228" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="228" width="47" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[hora:]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="366" y="228" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="36" y="269" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Instalación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="173" y="269" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{instalacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="308" width="200" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{responsableact}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="308" width="173" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsable de la Actividad:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="572" height="104"/>
+				<imageExpression><![CDATA["Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="439" y="84" width="45" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="104" width="45" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="486" y="84" width="86" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="104" width="88" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HORA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="174" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tarea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estadotarea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="0" width="228" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{responsabletarea}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="458" y="63" width="62" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="63" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="572" height="63"/>
+				<imageExpression><![CDATA["PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="390" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="30" y="96" width="474" height="274"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{estadotarea}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{comision}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{estadoTarea_COUNT}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{estadotarea}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{comision}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{estadoTarea_COUNT}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{estadotarea}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{comision}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{estadoTarea_COUNT}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{estadotarea}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{comision}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{estadoTarea_COUNT}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+			<staticText>
+				<reportElement x="62" y="25" width="449" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gráfico Comparativo del Desempeño por Comisiones para la Actividad]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="55" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{actividad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

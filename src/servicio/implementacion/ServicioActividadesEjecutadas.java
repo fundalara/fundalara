@@ -5,6 +5,7 @@ import java.util.List;
 import dao.general.DaoActividadesEjecutadas;
 
 import modelo.ActividadEjecutada;
+import modelo.SesionEjecutada;
 import servicio.interfaz.IServicioActividadesEjecutadas;
 
 public class ServicioActividadesEjecutadas implements
@@ -39,6 +40,11 @@ public class ServicioActividadesEjecutadas implements
 	@Override
 	public List<ActividadEjecutada> listar() {
 		return daoActividadesEjecutadas.listar(ActividadEjecutada.class);
+	}
+
+	public List<ActividadEjecutada> buscarPorSesionEjecutada(SesionEjecutada sesionEjecutada) {
+		// TODO Auto-generated method stub
+		return daoActividadesEjecutadas.buscarPorSesionEjecutada(sesionEjecutada);
 	}
 
 }

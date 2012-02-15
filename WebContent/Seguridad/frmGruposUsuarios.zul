@@ -1,0 +1,79 @@
+<?page title="Grupos Funcionales"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmGruposUsuarios' name='binderHijo'?>
+
+<window id="frmGruposUsuarios" title="Grupos Funcionales"
+	border="normal" mode="modal" closable="true"
+	apply="controlador.administracion.CntrlGestionarGruposUsuarios"
+	width="690px">
+	<separator></separator>
+	<hbox>
+	<separator width="160px"></separator>
+	<label value="Grupo"></label>
+	<separator width="20px" ></separator>
+	<textbox width="200px" value="@{cntrl.grupo.nombre }" readonly="true"></textbox>
+	</hbox>
+	<separator></separator>
+	<hbox align="center">
+		<vbox>
+			<label value="  Usuarios sin Asignar"></label>
+			<listbox height="200px" id="lbxUsuarios" width="315px"
+				model="@{cntrl.listaUsuarios }" mold="paging" pageSize="10"
+				oddRowSclass="none">
+
+				<listhead value="Usuarios Existentes">
+					<listheader label="Nick" align="center" width="25%" />
+					<listheader label="Empleado" width="75%" />
+				</listhead>
+
+				<listitem self="@{each='usuario' }">
+					<listcell label="@{usuario.nick }" />
+					<listcell
+						label="@{usuario.personal.personaNatural, converter='comun.converter.NameConverter' }" />
+				</listitem>
+			</listbox>
+		</vbox>
+		<vbox>
+			<button id="btnAgregarUsuario"
+				tooltiptext="Agregar a la lista"
+				image="/Recursos/Imagenes/agregar.ico" label="" />
+			<button id="btnQuitarUsuario"
+				tooltiptext="Quitar de la lista"
+				image="/Recursos/Imagenes/quitar.ico" label="" />
+		</vbox>
+		<vbox>
+			<label value="  Usuarios Asignados"></label>
+			<listbox height="200px" id="lbxUsuariosAgregados"
+				model="@{cntrl.listaUsuariosAsociados }" width="315px" mold="paging"
+				pageSize="10" oddRowSclass="none">
+				<listhead value="Usuarios Existentes">
+					<listheader label="Nick" align="center" width="25%" />
+					<listheader label="Empleado" width="75%" />
+				</listhead>
+
+				<listitem self="@{each='grupoUsuario' }">
+					<listcell label="@{grupoUsuario.usuario.nick }" />
+					<listcell
+						label="@{grupoUsuario.usuario.personal.personaNatural, converter='comun.converter.NameConverter' }" />
+				</listitem>
+			</listbox>
+		</vbox>
+	</hbox>
+
+	<separator></separator>
+
+	<div align="right">
+		<button id="btnRegistrar" image="/Recursos/Imagenes/guardar.ico"
+			label="Asignar" width="100px" height="35px" />
+		<button image="/Recursos/Imagenes/salir.png" id="btnSalir"
+			tooltiptext="Salir del Actualizar Concepto de Nómina" label="Salir"
+			width="100px" height="35px">
+			<attribute name="onClick">
+	{
+		frmGruposUsuarios.detach();
+	}
+</attribute>
+		</button>
+	</div>
+</window>
+

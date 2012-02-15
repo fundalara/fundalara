@@ -28,7 +28,7 @@
 						<row align="right">		
 						<iframe id="ifReport" visible="false"></iframe>					
 							<div align="right">
-								<button label="Generar Reporte"
+								<button label="Generar"
 									id="btnImprimir" width="100px" height="30px"
 									image="/Recursos/Imagenes/reporte.ico" />
 							</div>

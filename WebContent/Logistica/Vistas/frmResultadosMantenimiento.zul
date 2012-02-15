@@ -5,7 +5,7 @@
 <zk>
 	<window id="ejecucionMantenimiento"
 		title="Control y Resultados de Mantenimiento" border="normal"
-		mode="modal" width="80%"
+		mode="modal" width="80%" closable="true"
 		apply="controlador.logistica.CntrlResultadosMantenimiento">
 		<panel id="panel1" collapsible="true" width="100%"
 			title="Listado de Mantenimiento">
@@ -143,10 +143,10 @@
 										<listheader label="Nombre"
 											width="25%">
 										</listheader>
-										<listheader label="Descripcion"
+										<listheader label="Descripción"
 											width="40%">
 										</listheader>
-										<listheader label="Almacen"
+										<listheader label="Almacén"
 											width="25%">
 										</listheader>
 										<listheader label="Cant.">

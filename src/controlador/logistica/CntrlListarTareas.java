@@ -14,6 +14,8 @@ import org.zkoss.zul.Messagebox;
 
 import servicio.interfaz.IServicioDatoBasico;
 
+import comun.MensajeMostrar;
+
 public class CntrlListarTareas extends GenericForwardComposer {
 
 	List<DatoBasico> listaTareas;
@@ -30,8 +32,6 @@ public class CntrlListarTareas extends GenericForwardComposer {
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-
-		System.out.println("en el doAfterCompose del listar");
 
 		comp.setVariable("cntrl", this, true);
 
@@ -78,7 +78,7 @@ public class CntrlListarTareas extends GenericForwardComposer {
 			frmTarea.detach();
 
 		} else {
-			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea ", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 
 		}
 	}
@@ -89,20 +89,6 @@ public class CntrlListarTareas extends GenericForwardComposer {
 
 	public void setListaTareas(List<DatoBasico> listaTareas) {
 		this.listaTareas = listaTareas;
-		// binder.loadComponent(lboxTarea);
-
-		// ---------
-
-		// for(DatoBasico tarea: listaTareas){
-		// //lboxTarea.appendItem(tarea.getNombre(),
-		// ""+tarea.getCodigoDatoBasico());
-		// System.out.println(tarea.getNombre());
-		// System.out.println(tarea.getDescripcion());
-		// Listitem item = new Listitem();
-		// item.appendChild(new Listcell(tarea.getNombre()));
-		// item.appendChild(new Listcell(tarea.getDescripcion()));
-		// lboxTarea.appendChild(item);
-		// }
 
 	}
 

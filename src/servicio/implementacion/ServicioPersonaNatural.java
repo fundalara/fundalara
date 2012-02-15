@@ -60,17 +60,21 @@ public class ServicioPersonaNatural implements IServicoPersonaNatural {
 	}
 
 	
-	public List<PersonaNatural> filtarPersonas(DatoBasico db, String ci, String pn, String pa) {
+	public List<PersonaNatural> filtrarPersonas(DatoBasico db, String ci, String pn, String pa) {
 		return daoPersonaNatural.filtrarPersonas(db, ci, pn, pa);
 	}
 
-	public List<PersonaNatural> filtarPersonasDistintas(DatoBasico db, String ci, String pn, String pa) {
+	public List<PersonaNatural> filtrarPersonasDistintas(DatoBasico db, String ci, String pn, String pa) {
 		return daoPersonaNatural.filtrarPersonasDistintas(db, ci, pn, pa);
 	}
 
 	@Override
 	public PersonaNatural buscarPorCodigo(Persona d) {
 		return this.daoPersonaNatural.buscar(d.getCedulaRif());
+	}
+	
+	public List<PersonaNatural> filtrarPersonal(DatoBasico dB, DatoBasico dB2, String ci, String pn, String pa) {
+		return daoPersonaNatural.filtrarPersonal(dB, dB2, ci, pn, pa);
 	}
 	
 }

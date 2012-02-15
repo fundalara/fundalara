@@ -17,6 +17,8 @@ import org.zkoss.zul.Messagebox;
 import servicio.interfaz.IServicioPersona;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
 
+import comun.MensajeMostrar;
+
 public class CntrlFrmCatalogoPersonalA extends GenericForwardComposer {
 
 	Component catalogoPersonal;
@@ -28,14 +30,6 @@ public class CntrlFrmCatalogoPersonalA extends GenericForwardComposer {
 	List<Persona> listaPersona;
 	Persona persona = new Persona();
 	Listbox lboxPersonal;
-
-	public void onCreate$frmCatPersonal() {
-		// DatoBasico tipoPersonal = (DatoBasico)
-		// frmPlanificarMantenimiento.getVariable("tipoPersonal",false);
-		// listaPersonal=
-		// servicioPersonalActividadPlanificada.listarPersonalMant(tipoPersonal);
-		// System.out.print(tipoPersonal.getDescripcion());
-	}
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -62,19 +56,15 @@ public class CntrlFrmCatalogoPersonalA extends GenericForwardComposer {
 			// se le asigna el objeto plantilla al formulario
 			frmPlanificarActividad.setVariable("persona", persona, false);
 
-			System.out.println(persona.getPersonaNatural().getPrimerNombre());
-
 			// se le envia una señal al formulario indicado que el formulario se
 			// cerro y que los datos se han enviado
 			Events.sendEvent(new Event("onCatalogoPersonalA", frmPlanificarActividad));
-
-			System.out.println("ya la envie senal");
 
 			// se cierra el catalogo
 			catalogoPersonal.detach();
 
 		} else {
-			Messagebox.show("Seleccione una plantilla ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una plantilla ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 

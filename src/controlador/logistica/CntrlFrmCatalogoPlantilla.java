@@ -16,6 +16,8 @@ import org.zkoss.zul.Window;
 
 import servicio.interfaz.IServicioPlanificacionActividad;
 
+import comun.MensajeMostrar;
+
 public class CntrlFrmCatalogoPlantilla extends GenericForwardComposer {
 
 	Component catalogoPlantilla;
@@ -29,6 +31,14 @@ public class CntrlFrmCatalogoPlantilla extends GenericForwardComposer {
 	Listbox lboxPlantilla;
 	DatoBasico tipo = new DatoBasico();
 
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
@@ -37,6 +47,10 @@ public class CntrlFrmCatalogoPlantilla extends GenericForwardComposer {
 		listaPlantilla = servicioPlanificacionActividad.listarPlantilla();
 	}
 
+	/**
+	 * El metodo: onClick$btnGuardar() se ejecuta cuando se selecciona una
+	 * plantilla retorna la plantilla al formulario que lo ha llamado
+	 */
 	public void onClick$btnGuardar() throws InterruptedException {
 
 		// Se comprueba que se haya seleccionado un elemento de la lista
@@ -59,10 +73,18 @@ public class CntrlFrmCatalogoPlantilla extends GenericForwardComposer {
 			catalogoPlantilla.detach();
 
 		} else {
-			Messagebox.show("Seleccione una plantilla ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una plantilla ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
+	}
+
+	/**
+	 * El metodo: onClick$btnSalir() se ejecuta cuando se le da click al boton
+	 * salir, cierra el formulario
+	 */
+	public void onClick$btnSalir() {
+		catalogoPlantilla.detach();
 	}
 
 	public CntrlFrmPlanificarMantenimiento getCntrl() {

@@ -1,0 +1,60 @@
+<?page title="Reporte Plan Entrenamiento"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndReportePlanEntrenamiento"?>
+<div align="center">
+	<separator height="15px" />
+	<window id="wndReportePlanEntrenamiento" title="Plan de Entrenamiento" border="normal"
+		width="300px" closable="true"
+		apply="controlador.entrenamiento.CntrlReportePlanEntrenamiento">
+		<grid>
+			<columns>
+				<column width="125px" align="left" />
+				<column width="100px" align="center" />
+			</columns>
+			<rows>
+				<row height="30px" align="center">
+					<label value="Lapso Deportivo" />
+					<combobox id="cmblapsodeportivo" width="150px"
+						model="@{ctrl.listLapsoDeportivo}" readonly="true"
+						value="--SELECCIONE--">
+						<comboitem self="@{each=lapsoDeportivo}"
+							label="@{lapsoDeportivo.nombre}" value="@{lapsoDeportivo}" />
+					</combobox>
+				</row>
+				<row height="30px">
+					<label value="Categoría" width="120px" />
+					<combobox id="cmbcategoria" value="--SELECCIONE--"
+						disabled="true" model="@{ctrl.listCategoria}" readonly="true"
+						width="150px">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria}" />
+					</combobox>
+					
+				</row>
+				<row>
+				<label value="Equipo" width="120px" />
+					<combobox id="cmbequipo" value="--SELECCIONE--"
+						disabled="true" model="@{ctrl.listEquipo}" readonly="true"
+						width="150px">
+						<comboitem self="@{each=equipo}"
+							label="@{equipo.nombre}" value="@{equipo}" />
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+		<iframe visible="false" id="ifReport" height="10px"/>
+		<grid >
+			<rows>
+				<row align="right" height="">
+				<hbox>
+					<button id="btnImprimir"
+						image="/Recursos/Imagenes/reporte.ico" label="Generar"
+						width="100px" disabled="true" />
+					<button id="btnSalir"
+						image="/Recursos/Imagenes/salir.png" label="Salir" width="100px" />
+				</hbox>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>

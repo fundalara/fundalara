@@ -3,7 +3,8 @@ package dao.general;
 import dao.generico.GenericDao;
 
 /**
- * Clase de acceso y manejo de los datos relacionados a los documentos entregados
+ * Clase de acceso y manejo de los datos relacionados a los documentos
+ * entregados
  * 
  * @author Robert A
  * @author German L
@@ -11,6 +12,6 @@ import dao.generico.GenericDao;
  * 
  */
 public class DaoDocumentoEntregado extends GenericDao {
-	public static String SECUENCIA ="documentos_entregados_codigo_documento_seq";
+	public static String SECUENCIA = "documentos_entregados_codigo_documento_seq";
 
 }

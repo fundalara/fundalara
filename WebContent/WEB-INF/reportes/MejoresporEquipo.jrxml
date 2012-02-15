@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="117"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFA500">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE9BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DS_jugadorporequipo">
+		<parameter name="codigoequipo" class="java.lang.Integer"/>
+		<parameter name="limite" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[select E.cedula_rif,
+J.primer_nombre ||' '|| J.primer_apellido as nombre_completo,
+K.nombre as equipo,
+L.nombre as categoria,
+AVG(CAST(A.puntuacion AS DECIMAL)) as promedio_indicador
+from puntuacion_jugador A,
+indicador_actividad_escala B,
+escala_medicion C,
+asistencia_jugador D,
+roster E,
+desempenno_jugador F,
+dato_basico G,
+actividad_entrenamiento H,
+actividad_ejecutada I,
+persona_natural J,
+equipo K,
+categoria L,
+sesion_ejecutada M
+where A.estatus='A'
+and F.codigo_desempenno_jugador=A.codigo_desempenno_jugador
+and A.codigo_indicador_actividad_escala =B.codigo_indicador_actividad_escala
+and B.codigo_escala = C.codigo_escala
+and C.tipo_escala = '156'
+and F.codigo_asistencia=D.codigo_asistencia
+and D.codigo_roster=E.codigo_roster
+and B.indicador = G.codigo_dato_basico
+and F.codigo_actividad_ejecutada = I.codigo_actividad_ejecutada
+and I.codigo_actividad_entrenamiento = H.codigo_actividad_entrenamiento
+and E.cedula_rif=J.cedula_rif
+and E.codigo_equipo=K.codigo_equipo
+and K.codigo_categoria=L.codigo_categoria
+and D.codigo_sesion_ejecutada= M.codigo_sesion_ejecutada
+and F.estatus='A'
+and A.estatus='A'
+and K.codigo_equipo = $P{codigoequipo}
+group by E.cedula_rif, nombre_completo, equipo,categoria
+order by (promedio_indicador)  desc
+limit $P{limite}]]>
+		</queryString>
+		<field name="cedula_rif" class="java.lang.String"/>
+		<field name="nombre_completo" class="java.lang.String"/>
+		<field name="equipo" class="java.lang.String"/>
+		<field name="categoria" class="java.lang.String"/>
+		<field name="promedio_indicador" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="categoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
+	</parameter>
+	<parameter name="limite" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select E.cedula_rif,
+J.primer_nombre ||' '|| J.primer_apellido as nombre_completo,
+K.nombre as equipo,
+L.nombre as categoria,
+AVG(CAST(A.puntuacion AS DECIMAL)) as promedio_indicador
+from puntuacion_jugador A,
+indicador_actividad_escala B,
+escala_medicion C,
+asistencia_jugador D,
+roster E,
+desempenno_jugador F,
+dato_basico G,
+actividad_entrenamiento H,
+actividad_ejecutada I,
+persona_natural J,
+equipo K,
+categoria L,
+sesion_ejecutada M
+where A.estatus='A'
+and F.codigo_desempenno_jugador=A.codigo_desempenno_jugador
+and A.codigo_indicador_actividad_escala =B.codigo_indicador_actividad_escala
+and B.codigo_escala = C.codigo_escala
+and C.tipo_escala = '156'
+and F.codigo_asistencia=D.codigo_asistencia
+and D.codigo_roster=E.codigo_roster
+and B.indicador = G.codigo_dato_basico
+and F.codigo_actividad_ejecutada = I.codigo_actividad_ejecutada
+and I.codigo_actividad_entrenamiento = H.codigo_actividad_entrenamiento
+and E.cedula_rif=J.cedula_rif
+and E.codigo_equipo=K.codigo_equipo
+and K.codigo_categoria=L.codigo_categoria
+and D.codigo_sesion_ejecutada= M.codigo_sesion_ejecutada
+and F.estatus='A'
+and A.estatus='A'
+group by E.cedula_rif, nombre_completo, equipo,categoria
+order by (promedio_indicador)  desc
+limit $P{limite}]]>
+	</queryString>
+	<field name="cedula_rif" class="java.lang.String"/>
+	<field name="nombre_completo" class="java.lang.String"/>
+	<field name="equipo" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="promedio_indicador" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="233" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="155" width="555" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desempeño de jugadores por equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="114" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="452" y="114" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="453" y="134" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="402" y="134" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="195" width="548" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Los más destacados]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="0" width="526" height="123"/>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<lastPageFooter>
+		<band height="136">
+			<image>
+				<reportElement x="16" y="14" width="536" height="85"/>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="247" y="113" width="72" height="19"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="319" y="113" width="99" height="19"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="123">
+			<crosstab>
+				<reportElement x="108" y="0" width="344" height="49"/>
+				<crosstabHeaderCell>
+					<cellContents backcolor="#FFE9BF" mode="Opaque">
+						<rectangle>
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="279" height="22" backcolor="#FFE9BF"/>
+						</rectangle>
+						<line>
+							<reportElement style="Crosstab Data Text" x="97" y="0" width="1" height="22"/>
+						</line>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="97" y="0" width="181" height="22"/>
+							<textElement verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Jugadores]]></text>
+						</staticText>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="97" height="22"/>
+							<textElement verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Equipo]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="equipo" width="97">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{equipo}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="97" height="18"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$V{equipo}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="nombre_completo" width="182">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{nombre_completo}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="182" height="18"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$V{nombre_completo}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="equipo1" height="22">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{equipo}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#FFE9BF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="62" height="22"/>
+								<textElement verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Promedio]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="promedio_indicadorMeasure" class="java.math.BigDecimal" calculation="Sum">
+					<measureExpression><![CDATA[$F{promedio_indicador}]]></measureExpression>
+				</measure>
+				<crosstabCell width="62" height="18">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="62" height="18"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$V{promedio_indicadorMeasure}.floatValue()]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="equipo">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" forecolor="#FFFFFF"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$V{promedio_indicadorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="equipo1">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$V{promedio_indicadorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="equipo" columnTotalGroup="equipo1">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" forecolor="#FFFFFF"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$V{promedio_indicadorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="nombre_completo">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$V{promedio_indicadorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="nombre_completo" columnTotalGroup="equipo1">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$V{promedio_indicadorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

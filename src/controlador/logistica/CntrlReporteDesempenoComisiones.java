@@ -12,31 +12,34 @@ import java.util.Map;
 
 import modelo.Actividad;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Messagebox;
 
 import servicio.interfaz.IServicioActividad;
 
 import comun.ConeccionBD;
+import comun.MensajeMostrar;
 
 /**
  * Clase controladora de los eventos de la vista de igual nombre y manejo de los
  * servicios de datos para el filtro dinámico de actividades
  * 
  * @author Reinaldo L.
+ * @author Irmary M.
  * 
  * */
 public class CntrlReporteDesempenoComisiones extends GenericForwardComposer {
@@ -46,16 +49,10 @@ public class CntrlReporteDesempenoComisiones extends GenericForwardComposer {
 	private List<Actividad> listaActividades;
 	private IServicioActividad servicioActividad;
 
-	// private DatoBasico tipoActividad;
-	// private DatoBasico complementaria;
-	// private DatoBasico mantenimiento;
-	// private List<DatoBasico> listaTipoActividad = new
-	// ArrayList<DatoBasico>();
-	// private IServicioDatoBasico servicioDatoBasico;
-
 	// pantalla
 	private Datebox fechaInicio;
 	private Datebox fechaFin;
+	private Listbox lboxActividades;
 
 	private Connection con;
 	private Map<String, Object> parameters = new HashMap<String, Object>();
@@ -73,32 +70,31 @@ public class CntrlReporteDesempenoComisiones extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
-	public void onClick$btnGenerar() throws JRException, SQLException, WrongValueException, ParseException {
+	public void onClick$btnGenerar() throws JRException, SQLException, WrongValueException, ParseException, InterruptedException {
 
-		con = ConeccionBD.getCon("postgres", "postgres", "admin");
+		if (lboxActividades.getSelectedIndex() != -1) {
+			con = ConeccionBD.getCon();
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		Date fecha = new Date();
-		parameters.put("FECHA", formato.format(fecha));
-		formato.applyPattern("hh:mm");
-		parameters.put("HORA", formato.format(fecha));
-		parameters.put("CodigoActividad", actividad.getCodigoActividad());
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			Date fecha = new Date();
+			parameters.put("FECHA", formato.format(fecha));
+			formato.applyPattern("hh:mm");
+			parameters.put("HORA", formato.format(fecha));
+			parameters.put("CodigoActividad", actividad.getCodigoActividad());
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteDesempenoComisiones.jrxml");
-		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
-		JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
+			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteDesempenoComisiones.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
 
-		// Exporta el informe a PDF
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteDesempenoComisiones.pdf");
-		JRExporter exporter = new JRPdfExporter();
+			byte[] archivo = JasperExportManager.exportReportToPdf(print);
 
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
+			final AMedia amedia = new AMedia("reporteDesempeñoComision.pdf", "pdf", "application/pdf", archivo);
 
-		exporter.exportReport();
-
-		// Para visualizar el pdf con el visor de Jasper
-		JasperViewer.viewReport(print, false);
+			Component visor = Executions.createComponents("General/" + "frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedia, false);
+		} else {
+			Messagebox.show("Seleccione una actividad", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
+		}
 	}
 
 	public Actividad getActividad() {
@@ -116,37 +112,5 @@ public class CntrlReporteDesempenoComisiones extends GenericForwardComposer {
 	public void setListaActividades(List<Actividad> listaActividades) {
 		this.listaActividades = listaActividades;
 	}
-
-	// public DatoBasico getTipoActividad() {
-	// return tipoActividad;
-	// }
-	//
-	// public void setTipoActividad(DatoBasico tipoActividad) {
-	// this.tipoActividad = tipoActividad;
-	// }
-	//
-	// public DatoBasico getComplementaria() {
-	// return complementaria;
-	// }
-	//
-	// public void setComplementaria(DatoBasico complementaria) {
-	// this.complementaria = complementaria;
-	// }
-	//
-	// public DatoBasico getMantenimiento() {
-	// return mantenimiento;
-	// }
-	//
-	// public void setMantenimiento(DatoBasico mantenimiento) {
-	// this.mantenimiento = mantenimiento;
-	// }
-	//
-	// public List<DatoBasico> getListaTipoActividad() {
-	// return listaTipoActividad;
-	// }
-	//
-	// public void setListaTipoActividad(List<DatoBasico> listaTipoActividad) {
-	// this.listaTipoActividad = listaTipoActividad;
-	// }
 
 }

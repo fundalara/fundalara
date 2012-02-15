@@ -1,7 +1,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wDesempeno_Atleta"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="desempenoJugador"?>
 <zk>
-<window title="Rendimiento del Jugador - EQUIPO A - PREINFANTIL" border="normal" width="950px" closable="true" id="wDesempeno_Atleta" apply="controlador.entrenamiento.CntrlFrmDesempennoJugador">
+<window border="normal" width="950px" closable="true" id="desempenoJugador" apply="controlador.entrenamiento.CntrlFrmDesempennoJugador">
 		<grid>
 		<columns sizable="true">
 			<column align="left" />

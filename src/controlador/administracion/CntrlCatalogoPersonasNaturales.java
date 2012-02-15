@@ -75,29 +75,29 @@ public class CntrlCatalogoPersonasNaturales extends GenericForwardComposer {
 		if (padre.equals("PERSONAL AD HONOREM")) {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("PERSONAL AD HONOREM");
-			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
+			listaPersonas = servicioPersonaNatural.filtrarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		if (padre.equals("FAMILIAR")) {
 			tipoPersona = servicioDatoBasico.buscarPorString("FAMILIAR");
-			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
+			listaPersonas = servicioPersonaNatural.filtrarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		if (padre.equals("JUGADOR")) {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("JUGADOR");
-			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
+			listaPersonas = servicioPersonaNatural.filtrarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		if (padre.equals("PERSONAL REMUNERADO")) {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("PERSONAL REMUNERADO");
-			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
+			listaPersonas = servicioPersonaNatural.filtrarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		if (padre.equals("BENEFACTOR NATURAL")) {
 			tipoPersona = servicioDatoBasico.buscarPorString("BENEFACTOR NATURAL");
-			listaPersonas = servicioPersonaNatural.filtarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
+			listaPersonas = servicioPersonaNatural.filtrarPersonas(tipoPersona, txtFiltroCI.getText().toString(), 
 					txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		
@@ -105,13 +105,13 @@ public class CntrlCatalogoPersonasNaturales extends GenericForwardComposer {
 			tipoPersona = servicioDatoBasico
 					.buscarPorString("JUGADOR");
 			listaPersonas = new ArrayList<PersonaNatural>();
-			listaPersonas = servicioPersonaNatural.filtarPersonasDistintas(tipoPersona, txtFiltroCI.getText().toString(), 
+			listaPersonas = servicioPersonaNatural.filtrarPersonasDistintas(tipoPersona, txtFiltroCI.getText().toString(), 
 				txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());
 		}
 		
 		if (padre.equals("PERSONAL")) {
 			listaPersonas = new ArrayList<PersonaNatural>();
-			listaPersonas = servicioPersonaNatural.filtarPersonal(servicioDatoBasico
+			listaPersonas = servicioPersonaNatural.filtrarPersonal(servicioDatoBasico
 					.buscarPorString("PERSONAL REMUNERADO"), servicioDatoBasico
 					.buscarPorString("PERSONAL AD HONOREM"), txtFiltroCI.getText().toString(), 
 				txtFiltroPNombre.getText().toString(), txtFiltroPApellido.getText().toString());

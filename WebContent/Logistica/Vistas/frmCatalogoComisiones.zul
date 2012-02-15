@@ -6,26 +6,33 @@
 		mode="modal" apply="controlador.logistica.CntrlCatalogoComisiones"
 		width="80%">
 		<label value="Nombre"></label>
-		<textbox></textbox>
+		<textbox id="txtNombre" style='text-transform:uppercase;'
+			onChanging="filtrar(event)" />
 		<listbox id="lboxListadoComisiones" mold="paging" pageSize="10"
-			model="@{cntrl.listadoComisiones}" selectedItem="@{cntrl.datoBasico}"
-			checkmark="true" multiple="true">
+			model="@{cntrl.listadoComisiones}" checkmark="true"
+			multiple="true">
 			<listhead>
 				<listheader label="Nombre de la Comision"></listheader>
 				<listheader label="Descripcion de la Comision"></listheader>
 			</listhead>
 			<listitem self="@{each='r'}" value="@{r}">
-				<listcell label="@{r.listadoComisiones.nombre}"></listcell>
-				<listcell label="@{r.listadoComisiones.descripcion}"></listcell>
+				<listcell label="@{r.nombre}"></listcell>
+				<listcell label="@{r.descripcion}"></listcell>
 			</listitem>
 		</listbox>
 		<div width="100%" align="right">
-			<button id="btnAceptar" label="Aceptar"
+			<button id="btnAceptar" label="Seleccionar"
 				image="/Recursos/Imagenes/aceptar.ico">
 			</button>
-			<button id="btnCancelar" label="Cancelar"
-				image="/Recursos/Imagenes/cancelar.ico">
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png">
 			</button>
 		</div>
 	</window>
+	<zscript><![CDATA[
+	public void filtrar(Event event) {
+		((Textbox) event.getTarget())
+				.setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+	}
+]]></zscript>
 </zk>

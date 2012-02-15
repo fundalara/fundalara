@@ -33,6 +33,8 @@ public class ListenerCheck implements EventListener{
 			for (Object o: lista.getItems()) {
 				item = (Listitem)o;
 				cell =(Listcell)item.getChildren().get(0);
+				if (cell.getChildren().size()==0)
+					continue;
 				chc =(Checkbox)cell.getChildren().get(0);
 				chc.setChecked(c);
 				item.setDisabled(!c);

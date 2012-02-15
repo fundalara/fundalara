@@ -124,7 +124,7 @@
 											width="40%" constraint="no empty, no negative, no zero" />
 										<label style="font-weight:bold;"
 											visible="false" id="labelRequisicion">
-											Cantidad para Requisicion:
+											Cantidad para Requisición:
 										</label>
 										<spinner id="txtFaltante"
 											value="@{cntrl.cantidadFaltante}" width="40%"
@@ -193,7 +193,7 @@
 								image="/Recursos/Imagenes/cancelar.ico"
 								id="btnCancelarSolicitud" />
 							<button label="Salir"
-								image="/Recursos/Imagenes/atras.ico" id="btnSalirSolicitud" />
+								image="/Recursos/Imagenes/salir.png" id="btnSalirSolicitud" />
 						</groupbox>
 					</div>
 				</tabpanel>
@@ -310,7 +310,7 @@
 								image="/Recursos/Imagenes/cancelar.ico"
 								id="btnCancelarDevolucion" />
 							<button label="Salir"
-								image="/Recursos/Imagenes/salir.png" id="btnSalirDevolucion" />
+								image="/Recursos/Imagenes/salir.png" id="btnSalir" />
 						</groupbox>
 					</div>
 				</tabpanel>

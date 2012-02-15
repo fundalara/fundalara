@@ -10,27 +10,30 @@ import java.util.Map;
 import modelo.Actividad;
 import modelo.DatoBasico;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.api.Listbox;
 
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.interfaz.IServicioActividad;
 
 import comun.ConeccionBD;
+import comun.MensajeMostrar;
+import comun.TipoDatoBasico;
 
 public class CntrlFrmReporteProgresoActividad extends GenericForwardComposer {
 
@@ -53,17 +56,16 @@ public class CntrlFrmReporteProgresoActividad extends GenericForwardComposer {
 	private Combobox cmbTipoActividad;
 	private Datebox fechaInicio;
 	private Datebox fechaFin;
+	private Listbox lboxActividades;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, false);
 		frmReporte = (Window) comp;
-		complementaria = (DatoBasico) servicioDatoBasico.buscarPorCodigo(307);
-		mantenimiento = (DatoBasico) servicioDatoBasico.buscarPorCodigo(500);
+		complementaria = (DatoBasico) servicioDatoBasico.buscarPorCodigo(TipoDatoBasico.ACTIVIDADES_COMPLEMENTARIAS.getCodigo());
+		mantenimiento = (DatoBasico) servicioDatoBasico.buscarPorCodigo(TipoDatoBasico.ACTIVIDADES_MANTENIMIENTO.getCodigo());
 		listaString.add(complementaria.getNombre());
 		listaString.add(mantenimiento.getNombre());
-
-		System.out.println("do after again");
 
 	}
 
@@ -85,34 +87,26 @@ public class CntrlFrmReporteProgresoActividad extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
-	public void onClick$btnExportar() throws JRException, SQLException {
+	public void onClick$btnExportar() throws JRException, SQLException, InterruptedException {
 
-		con = ConeccionBD.getCon("postgres", "postgres", "admin");
+		if (lboxActividades.getSelectedIndex() != -1) {
+			con = ConeccionBD.getCon();
 
-		// String rutaSubReporte =
-		// Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/RepoprteProgresoActividad2.jrxml");
-		// JasperReport subReport =
-		// JasperCompileManager.compileReport(rutaSubReporte);
-		// parameters.put("CodigoActividad", actividad.getCodigoActividad());
-		// JasperPrint printSub = JasperFillManager.fillReport(subReport,
-		// parameters , con);
+			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/reportes/ReporteProgresoActividad.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+			parameters.put("CodigoActividad", actividad.getCodigoActividad());
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/ReporteProgresoActividad.jrxml");
-		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
-		parameters.put("CodigoActividad", actividad.getCodigoActividad());
-		JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
+			byte[] archivo = JasperExportManager.exportReportToPdf(print);// Generar
+			// Pdf
+			final AMedia amedia = new AMedia("reporteProgresoActividad.pdf", "pdf", "application/pdf", archivo);
 
-		JRExporter exporter = new JRPdfExporter();
+			Component visor = Executions.createComponents("General/" + "frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedia, false);
+		} else {
 
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("WEB-INF/Reportes/Logistica/ReporteProgresoActividad.pdf");
-
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
-
-		exporter.exportReport();
-
-		// Para visualizar el reporte con el visor de JasperReport
-		JasperViewer.viewReport(print, false);
+			Messagebox.show("Seleccione una actividad", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
+		}
 	}
 
 	public Actividad getActividad() {

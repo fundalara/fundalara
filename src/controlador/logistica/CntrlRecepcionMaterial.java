@@ -14,6 +14,7 @@ import modelo.TipoDato;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Combobox;
@@ -27,6 +28,7 @@ import servicio.interfaz.IServicioNotaEntrega;
 import servicio.interfaz.IServicioRecepcionMaterial;
 import servicio.interfaz.IServicioTipoDato;
 
+import comun.MensajeMostrar;
 import comun.TipoDatoBasico;
 
 public class CntrlRecepcionMaterial extends GenericForwardComposer {
@@ -37,6 +39,7 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 	TipoDato tipoDato = new TipoDato();
 	DatoBasico tipoDatoBasico = new DatoBasico();
 	Material tipoMaterial = new Material();
+
 	NotaEntrega notaE = new NotaEntrega();
 	DatoBasico clasificacionMaterial = new DatoBasico();
 
@@ -55,10 +58,39 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 	IServicioMaterial mt;
 	IServicioNotaEntrega nt;
 	private Window wnRecepcion;
+	private IServicioDatoBasico servicioDatoBasico;
 
 	org.zkoss.zul.Spinner spCantidad;
 	Combobox cmbTipoDato;
+	Combobox cmbTD;
+	Combobox cmbCM;
+	Combobox cmbDM;
 	Datebox fechaRecepcion;
+
+	public void doAfterCompose(Component comp) throws Exception {
+		super.doAfterCompose(comp);
+
+		comp.setVariable("cntrl", this, true);
+		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+
+		rm = (IServicioRecepcionMaterial) beanFactory.getBean("servicioRecepcionMaterial");
+		recepcionMateriales = rm.listarMateriales();
+
+		tp = (IServicioTipoDato) beanFactory.getBean("servicioTipoDato");
+		tipoDatos = tp.listarTipoDatos();
+
+		cm = (IServicioDatoBasico) beanFactory.getBean("servicioDatoBasico");
+
+		mt = (IServicioMaterial) beanFactory.getBean("servicioMaterial");
+
+		nt = (IServicioNotaEntrega) beanFactory.getBean("servicioNotaEntrega");
+		notaEntregas = nt.listar();
+
+	}
+
+	public DatoBasico getClasificacionMaterial() {
+		return clasificacionMaterial;
+	}
 
 	public org.zkoss.zul.Spinner getSpCantidad() {
 		return spCantidad;
@@ -74,33 +106,6 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 
 	public void setFechaRecepcion(Datebox fechaRecepcion) {
 		this.fechaRecepcion = fechaRecepcion;
-	}
-
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-
-		comp.setVariable("cntrl", this, true);
-		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-
-		rm = (IServicioRecepcionMaterial) beanFactory.getBean("servicioRecepcionMaterial");
-		recepcionMateriales = rm.listarMateriales();
-
-		tp = (IServicioTipoDato) beanFactory.getBean("servicioTipoDato");
-		tipoDatos = tp.listarTipoDatos();
-
-		cm = (IServicioDatoBasico) beanFactory.getBean("servicioDatoBasico");
-		// claseMateriales = cm.listarDatoBasico();
-
-		mt = (IServicioMaterial) beanFactory.getBean("servicioMaterial");
-		// Materiales = mt.listarActivos();
-
-		nt = (IServicioNotaEntrega) beanFactory.getBean("servicioNotaEntrega");
-		notaEntregas = nt.listar();
-
-	}
-
-	public DatoBasico getClasificacionMaterial() {
-		return clasificacionMaterial;
 	}
 
 	public void setClasificacionMaterial(DatoBasico clasificacionMaterial) {
@@ -141,8 +146,7 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 	}
 
 	public List<DatoBasico> getClaseMateriales() {
-		// claseMateriales =
-		// cm.buscar(TipoDatoBasico.CLASIFICACIONES_MATERIALES);
+
 		return claseMateriales;
 	}
 
@@ -189,48 +193,6 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 		return tipoDatos;
 	}
 
-	public void setTipoDatos(List<TipoDato> tipoDatos) {
-		this.tipoDatos = tipoDatos;
-	}
-
-	public void onSelect$cmbTD() {
-		// System.out.println(tipoDatoBasico.getNombre());
-		claseMateriales = cm.buscarDatosPorRelacion(tipoDatoBasico);
-
-	}
-
-	public void onSelect$cmbCM() {
-		// alert(String.valueOf(tipoMaterial.getCodigoMaterial())) ;
-
-		Materiales = mt.buscarDatosPorRelacion(clasificacionMaterial);
-		// alert(String.valueOf(Materiales.size()));
-		// for (int i= 0;i < Materiales.size();i++ ){
-		//
-		// alert(String.valueOf(Materiales.get(i).getDescripcion())) ;
-		//
-		// }
-		//
-	}
-
-	public void onClick$btnAgregar() {
-
-		recepcionMaterial = new RecepcionMaterial();
-		RecepcionMaterialId rmid = new RecepcionMaterialId();
-		rmid.setCodigoMaterial(tipoMaterial.getCodigoMaterial());
-		// rmid.setCodigoNotaEntrega(12);
-		recepcionMaterial.setEstatus('A');
-
-		recepcionMaterial.setId(rmid);
-		recepcionMaterial.setObservaciones(((Combobox) wnRecepcion.getVariable("cmbDM", false)).getText());
-		recepcionMaterial.setCantidadRecibida(((org.zkoss.zul.Spinner) wnRecepcion.getVariable("spCantidad", false)).getValue());
-		recepcionMaterial.setMaterial(tipoMaterial);
-		materialesPrevios.add(recepcionMaterial);
-		// rm.agregar(recepcionMaterial);
-
-		this.onClick$btnCancelar();
-
-	}
-
 	public List<RecepcionMaterial> getMaterialesPrevios() {
 		return materialesPrevios;
 	}
@@ -239,66 +201,95 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 		this.materialesPrevios = materialesPrevios;
 	}
 
-	public void onClick$btnGuardar() throws InterruptedException {
-
-		validar();
-
-		notaE = new NotaEntrega();
-		notaE.setCodigoNotaEntrega(nt.devolverUltimo() + 1);
-		notaE.setCuentaPagar(null);
-		notaE.setDocumentoAcreedor(null);
-		notaE.setEstatus('A');
-		notaE.setFechaRecepcion(((Datebox) wnRecepcion.getVariable("fechaRecepcion", false)).getValue());
-		nt.agregar(notaE);
-		notaE.setCodigoNotaEntrega(nt.devolverUltimo());
-
-		// System.out.println(this.materialesPrevios.size());
-		// for (int i = 0; i < materialesPrevios.size(); i++) {
-		// System.out.println(i);
-		// materialesPrevios.get(i).setNotaEntrega(notaE);
-		// materialesPrevios.get(i).getId()
-		// .setCodigoNotaEntrega(notaE.getCodigoNotaEntrega());
-		// alert(String.valueOf(materialesPrevios.get(i).getNotaEntrega()
-		// .getCodigoNotaEntrega()));
-		// //
-		// alert(String.valueOf(materialesPrevios.get(i).getMaterial().getCodigoMaterial()));
-		// //
-		// alert(String.valueOf(materialesPrevios.get(i).getId().getCodigoNotaEntrega()));
-		// //
-		// alert(String.valueOf(materialesPrevios.get(i).getId().getCodigoMaterial()));
-		// //
-		// alert(String.valueOf(materialesPrevios.get(i).getObservaciones()));
-		// //
-		// alert(String.valueOf(materialesPrevios.get(i).getCantidadRecibida()));
-		// // alert(String.valueOf(materialesPrevios.get(i).getEstatus()));
-		// rm.agregar(materialesPrevios.get(i));
-		// }
-		if (materialesPrevios.size() == 1) {
-			RecepcionMaterial rem = materialesPrevios.get(0);
-			rem.setNotaEntrega(notaE);
-			rem.getId().setCodigoNotaEntrega(notaE.getCodigoNotaEntrega());
-			rm.agregar(rem);
-			rm.actualizar(rem);
-
-		} else {
-			for (Iterator<RecepcionMaterial> iterator = materialesPrevios.iterator(); iterator.hasNext();) {
-
-				// rem = new RecepcionMaterial();
-				RecepcionMaterial rem = (RecepcionMaterial) iterator.next();
-				rem.setNotaEntrega(notaE);
-				rem.getId().setCodigoNotaEntrega(notaE.getCodigoNotaEntrega());
-
-				rm.agregar(rem);
-
-			}
-
-		}
-		this.materialesPrevios.clear();
-		this.onClick$btnCancelar();
-
-		Messagebox.show("Datos agregados exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+	public void setTipoDatos(List<TipoDato> tipoDatos) {
+		this.tipoDatos = tipoDatos;
 	}
 
+	public void onSelect$cmbTD() {
+
+		claseMateriales = cm.buscarDatosPorRelacion(tipoDatoBasico);
+
+	}
+
+	public void onSelect$cmbCM() {
+
+		Materiales = mt.buscarDatosPorRelacion(clasificacionMaterial);
+
+	}
+
+	/**
+	 * Este metodo se ejecuta al darle click al boton agregar el material
+	 * agregado es cargado a un listbox
+	 * 
+	 */
+
+	public void onClick$btnAgregar() throws InterruptedException {
+		if (validar()) {
+			recepcionMaterial = new RecepcionMaterial();
+			RecepcionMaterialId rmid = new RecepcionMaterialId();
+			rmid.setCodigoMaterial(tipoMaterial.getCodigoMaterial());
+
+			recepcionMaterial.setEstatus('A');
+
+			recepcionMaterial.setId(rmid);
+
+			recepcionMaterial.setObservaciones(((Combobox) wnRecepcion.getVariable("cmbDM", false)).getText());
+			recepcionMaterial.setCantidadRecibida(((org.zkoss.zul.Spinner) wnRecepcion.getVariable("spCantidad", false)).getValue());
+			recepcionMaterial.setMaterial(tipoMaterial);
+
+			materialesPrevios.add(recepcionMaterial);
+		}
+
+	}
+
+	/**
+	 * Este metodo es llamado cuando se intentan guardar todos los materiales
+	 * previamente cargados al listbox
+	 * 
+	 */
+
+	public void onClick$btnGuardar() throws InterruptedException {
+
+		if (validar1()) {
+			notaE = new NotaEntrega();
+			notaE.setCodigoNotaEntrega(nt.devolverUltimo() + 1);
+			notaE.setCuentaPagar(null);
+			notaE.setDocumentoAcreedor(null);
+			notaE.setEstatus('A');
+			notaE.setFechaRecepcion(((Datebox) wnRecepcion.getVariable("fechaRecepcion", false)).getValue());
+			nt.agregar(notaE);
+			notaE.setCodigoNotaEntrega(nt.devolverUltimo());
+
+			if (materialesPrevios.size() == 1) {
+				RecepcionMaterial rem = materialesPrevios.get(0);
+				rem.setNotaEntrega(notaE);
+				rem.getId().setCodigoNotaEntrega(notaE.getCodigoNotaEntrega());
+				rm.agregar(rem);
+				rm.actualizar(rem);
+
+			} else {
+				for (Iterator<RecepcionMaterial> iterator = materialesPrevios.iterator(); iterator.hasNext();) {
+
+					RecepcionMaterial rem = (RecepcionMaterial) iterator.next();
+					rem.setNotaEntrega(notaE);
+					rem.getId().setCodigoNotaEntrega(notaE.getCodigoNotaEntrega());
+
+					rm.agregar(rem);
+
+				}
+
+			}
+			this.materialesPrevios.clear();
+			this.onClick$btnCancelar();
+
+			Messagebox.show("Datos agregados exitosamente", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.EXCLAMATION);
+		}
+	}
+
+	/**
+	 * Este metodo retorna el codigo del material seleccionado en la lista de
+	 * materiales
+	 */
 	public int onSelect$lboxRecepcionMateriales() throws InterruptedException {
 
 		int codigo = recepcionMaterial.getId().getCodigoMaterial();
@@ -307,24 +298,32 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 
 	}
 
+	/**
+	 * Este Metodo es ejeutado cuando se intenta quitar un material de la lista
+	 * 
+	 */
 	public void onClick$btnQuitar() throws InterruptedException {
 
 		int c = onSelect$lboxRecepcionMateriales();
-		// System.out.println(c);
+
 		for (int i = 0; i < materialesPrevios.size(); i++)
 
 		{
-			// System.out.println(materialesPrevios.size());
+
 			if (materialesPrevios.get(i).getId().getCodigoMaterial() == c) {
 
 				materialesPrevios.remove(i);
-				// System.out.println(materialesPrevios.size());
+
 			}
 
 		}
 
 	}
 
+	/**
+	 * Cuando se ejecuta el boton cancelar y se encarga de limpiar todos los
+	 * campos que esten llenos en ese momento
+	 */
 	public void onClick$btnCancelar() {
 
 		claseMateriales = new ArrayList<DatoBasico>();
@@ -336,10 +335,54 @@ public class CntrlRecepcionMaterial extends GenericForwardComposer {
 
 	}
 
-	public void validar() {
-		spCantidad.getValue();
-		fechaRecepcion.getValue();
+	public void onClick$btnSalir() {
+		this.wnRecepcion.detach();
+	}
+
+	public boolean validar() throws InterruptedException {
+
+		boolean valido = false;
+
+		if (fechaRecepcion.getValue() == null) {
+			throw new WrongValueException(fechaRecepcion, "Seleccione Una Fecha");
+		} else {
+			if (cmbTD.getValue().isEmpty()) {
+				throw new WrongValueException(cmbTD, "Seleccione Un Tipo");
+			} else {
+				if (cmbCM.getValue().isEmpty()) {
+					throw new WrongValueException(cmbCM, "Seleccione Una Clasificación");
+				} else {
+					if (cmbDM.getValue().isEmpty()) {
+						throw new WrongValueException(cmbDM, "Seleccione Una Descripcion del Material");
+					} else {
+						if (spCantidad.getValue() <= 0 || spCantidad.getValue() == null) {
+							throw new WrongValueException(spCantidad, "Solo se Aceptan Valores Positivos");
+						}
+					}
+
+				}
+
+			}
+
+			valido = true;
+		}
+		return valido;
 
 	}
 
+	public boolean validar1() throws InterruptedException {
+		boolean valido = false;
+
+		if (materialesPrevios.isEmpty()) {
+			Messagebox.show("Debe Agregar Materiales a la Lista", MensajeMostrar.TITULO + "Importante", Messagebox.OK, Messagebox.INFORMATION);
+		} else {
+			if (fechaRecepcion.getValue() == null) {
+				Messagebox.show("Debe Agregar Materiales a la Lista", MensajeMostrar.TITULO + "Importante", Messagebox.OK, Messagebox.INFORMATION);
+			}
+			valido = true;
+		}
+
+		return valido;
+
+	}
 }

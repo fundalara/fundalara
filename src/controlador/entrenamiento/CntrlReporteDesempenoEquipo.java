@@ -22,12 +22,14 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
@@ -36,6 +38,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Iframe;
+import org.zkoss.zul.Window;
+
 import comun.ConeccionBD;
 import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
@@ -44,7 +48,7 @@ import servicio.implementacion.ServicioRoster;
 public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	Datebox dtbox1, dtbox2;
 	Combobox cmbcategoria, cmbequipo;
-	Button btnimprimir;
+	Button btnImprimir, btnSalir;
 	ServicioCategoria servicioCategoria;
 	ServicioEquipo servicioEquipo;
 	ServicioRoster servicioRoster;
@@ -57,6 +61,7 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	private Connection con;
 	private String jrxmlSrc;
 	Iframe ifReport;
+	Window wndReporteDesempennoEquipo;
 	
 	
 	
@@ -68,43 +73,25 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 		listRoster = new ArrayList<Roster>();
 	}
 	
-	
-	public void showReportfromJrxml() throws JRException, IOException{
-		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);
-		JasperPrint jaspPrint = JasperFillManager.fillReport(jasp, parameters, con);
-		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		JRExporter exporter = new JRPdfExporter();
-		exporter.setParameters(parameters);
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT ,jaspPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,arrayOutputStream);
-		exporter.exportReport();
-		arrayOutputStream.close();
-		final AMedia amedia = new AMedia("DesempenoEquipo.pdf","pdf","pdf/application", arrayOutputStream.toByteArray());
-		ifReport.setContent(amedia);
-	}
 
 	public void onChange$cmbcategoria() {
 
 		listEquipo.clear();
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
 		listEquipo = servicioEquipo.buscarPorCategoria(cc);
-		// System.out.println(cc);
-		// System.out.println(listEquipo);
 		cmbequipo.setDisabled(false);
 
 		binder.loadComponent(cmbequipo);
 		cmbequipo.setValue("--Seleccione--");
 
 	}
+	
+	
 
-//	public void onChange$cmbequipo() {
-//
-//		listRoster.clear();
-//		// Jugador jj= (Jugador)cmbequipo.getSelectedItem().getValue();
-//		Equipo rr = (Equipo) cmbequipo.getSelectedItem().getValue();
-//		listRoster = servicioRoster.buscarEquipo(rr);
-//
-//	}
+	public void onChange$cmbequipo() {
+		btnImprimir.setDisabled(false);
+		
+	}
 
 	public List<Roster> getListRoster() {
 		return listRoster;
@@ -166,37 +153,37 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	}
 	
 		
-	public void onClick$btnimprimir() throws SQLException, JRException, IOException {
+	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
 		Equipo c = (Equipo) cmbequipo.getSelectedItem().getValue();
 		con = ConeccionBD.getCon("postgres", "postgres","123456");
-		jrxmlSrc = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/reportPrueba.jrxml");
 		parameters.put("fecha_inicio",dtbox1.getText());
 		parameters.put("fecha_fin",dtbox2.getText() );
 		parameters.put("categoria", cc.getCodigoCategoria());
 		parameters.put("equipo",c.getCodigoEquipo());
-		showReportfromJrxml();
+		String rutaReporte = Sessions
+				.getCurrent()
+				.getWebApp()
+				.getRealPath(
+						"/WEB-INF/reportes/DesempenoJugadoresEquipo.jrxml");
+		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+		JasperPrint print = JasperFillManager.fillReport(report, parameters,
+				con);
+
+		byte[] archivo = JasperExportManager.exportReportToPdf(print);
+
+		final AMedia amedia = new AMedia("DesempeñoEquipos.pdf", "pdf",
+				"application/pdf", archivo);
+
+		Component visor = Executions.createComponents("General/"
+				+ "frmVisorDocumento.zul", null, null);
+		visor.setVariable("archivo", amedia, false);
 		
 	}
 
-
-	
-//		{
-//			if (cmbcategoria.getText().equals("--Seleccione--")) {
-//
-//				alert("Debe seleccionar una Categoria");
-//				cmbcategoria.focus();
-//
-//			} else if (cmbequipo.getText().equals("--Seleccione--")) {
-//
-//				alert("Debe seleccionar un equipo");
-//				cmbequipo.focus();
-//			}
-//
-//
-//		}
-
-	
+	public void onClick$btnSalir() {
+		wndReporteDesempennoEquipo.detach();
+	}
 
 }
 

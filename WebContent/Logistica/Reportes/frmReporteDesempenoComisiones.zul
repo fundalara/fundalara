@@ -91,7 +91,7 @@
 			</panelchildren>
 		</panel>
 		<div align="right">
-			<button id="btnGenerar" label="Generar Reporte"
+			<button id="btnGenerar" label="Generar"
 				width="100px" height="30px"
 				image="/Recursos/Imagenes/reporte.ico">
 			</button>
