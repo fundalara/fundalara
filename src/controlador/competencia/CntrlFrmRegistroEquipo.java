@@ -11,6 +11,8 @@ import modelo.Competencia;
 import modelo.Divisa;
 import modelo.Equipo;
 import modelo.EquipoCompetencia;
+import modelo.EquipoFaseCompetencia;
+import modelo.FaseCompetencia;
 import modelo.Indicador;
 import modelo.PersonaNatural;
 
@@ -48,6 +50,8 @@ import servicio.implementacion.ServicioCategoriaCompetencia;
 import servicio.implementacion.ServicioDivisa;
 import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioEquipoCompetencia;
+import servicio.implementacion.ServicioEquipoFaseCompetencia;
+import servicio.implementacion.ServicioFaseCompetencia;
 import servicio.implementacion.ServicioIndicador;
 import servicio.implementacion.ServicioPersona;
 import servicio.implementacion.ServicioPersonaNatural;
@@ -87,6 +91,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 	ServicioPersonaNatural servicioPersonaNatural;
 	ServicioPersona servicioPersona;
 	ServicioPersonaNatural servicioPersonaNaturalForaneo;	
+	ServicioEquipoFaseCompetencia servicioEquipoFaseCompetencia;
+	ServicioFaseCompetencia servicioFaseCompetencia;
 	Combobox cmbCategorias;
 	Combobox cmbCategoriasForaneas;
 	Listbox lsbxDivisa;
@@ -224,11 +230,8 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 			// Este metodo se llama cuando se envia la señal desde el catalogo
 			public void onEvent(Event arg0) throws Exception {
 				// se obtiene la competencia
-				competencia = (Competencia) formulario.getVariable(
-						"competencia", false);
-				categorias = servicioCategoriaCompetencia
-						.listarCategoriaPorCompetencia(competencia
-								.getCodigoCompetencia());
+				competencia = (Competencia) formulario.getVariable("competencia", false);
+				categorias = servicioCategoriaCompetencia.listarCategoriaPorCompetencia(competencia.getCodigoCompetencia());
 				divisas = servicioDivisa.listarDivisaForanea();
 				if (equipocompetencia.size() == 0) {
 					CargarEquipos();
@@ -258,19 +261,15 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 		// asigna una referencia del formulario al catalogo.
 		catalogos.setVariable("formulario", formulario, false);
 		catalogos.setVariable("lista", equipocompetencia, false);
-		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
+		formulario.addEventListener("onCatalogoCerrado2", new EventListener() {
 			@Override
 			// Este metodo se llama cuando se envia la señal desde el catalogo
 			public void onEvent(Event arg0) throws Exception {//
 				// se obtiene la competencia
 				int interruption = -1;
 				if (equipocompetencia.size() > 0) {
-					personaNatural = (PersonaNatural) formulario.getVariable(
-							"personaNatural", false);//
-
-					equipocompetencia.get(posicion).setPersonaNatural(
-							personaNatural);
-
+					personaNatural = (PersonaNatural) formulario.getVariable("personaNatural", false);//
+					equipocompetencia.get(posicion).setPersonaNatural(personaNatural);
 					personaNatural = new PersonaNatural();
 					btnBuscarDelegado.setDisabled(true);
 				}
@@ -365,7 +364,17 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 									.actualizar(equipocompetenciaAuxiliar);
 						}
 					} else {
-						servicioEquipoCompetencia.agregar(equipocompetencia);
+						//servicioEquipoCompetencia.agregar(equipocompetencia);
+						for (Iterator i = equipocompetencia.iterator(); i.hasNext();) {
+							EquipoCompetencia ec = (EquipoCompetencia) i.next();
+							servicioEquipoCompetencia.agregar(ec);	
+							FaseCompetencia fc = servicioFaseCompetencia.buscarFaseCompetencia(competencia,1);
+							EquipoFaseCompetencia efc = new EquipoFaseCompetencia();
+							efc.setEquipoCompetencia(ec);
+							efc.setFaseCompetencia(fc);
+							servicioEquipoFaseCompetencia.agregar(efc);
+							
+						}
 					}
 					estado = 1;
 				}
@@ -381,8 +390,10 @@ public class CntrlFrmRegistroEquipo extends GenericForwardComposer {
 							estado = estado + 1;
 						}
 					} else {
-						servicioEquipoCompetencia
-								.agregar(equipocompetenciaforaneo);
+						for (EquipoCompetencia ec:equipocompetenciaforaneo){
+							servicioEquipoCompetencia.agregar(ec);
+						}
+							
 					}
 					estado = estado + 1;
 				}

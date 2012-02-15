@@ -6,7 +6,6 @@ import java.util.List;
 import dao.general.DaoEquipoCompetencia;
 
 import modelo.Categoria;
-import modelo.CategoriaCompetencia;
 import modelo.Competencia;
 import modelo.ConstanteCategoria;
 import modelo.EquipoCompetencia;
@@ -52,15 +51,12 @@ public class ServicioEquipoCompetencia implements IServicioEquipoCompetencia {
 	}
 
 	@Override
-	public void agregar(List<EquipoCompetencia> l) {
-		// TODO Auto-generated method stub
-		for (Iterator i = l.iterator(); i.hasNext();) {
-			EquipoCompetencia id = (EquipoCompetencia) i.next();
-			int codEquipoCompetencia = daoEquipoCompetencia.listar(
-					EquipoCompetencia.class).size() + 1;
-			id.setCodigoEquipoCompetencia(codEquipoCompetencia);//
-			daoEquipoCompetencia.guardar(id);
-		}
+	public void agregar(EquipoCompetencia ec) {
+        if (ec.getCodigoEquipoCompetencia() == 0){
+        	int codigo = daoEquipoCompetencia.listar(EquipoCompetencia.class).size() + 1;
+        	ec.setCodigoEquipoCompetencia(codigo);
+        }
+        daoEquipoCompetencia.guardar(ec);
 
 	}
 
@@ -84,14 +80,6 @@ public class ServicioEquipoCompetencia implements IServicioEquipoCompetencia {
 	public List<EquipoCompetencia> listarEquipoPorCategoria(Categoria codigo){
 		return daoEquipoCompetencia.listarEquipoPorCategoria(EquipoCompetencia.class, codigo);
 	}
-
-	@Override
-	public List<EquipoCompetencia> listarEquipoPorCompetenciaCategoria(
-			Competencia c, CategoriaCompetencia cat) {
-		// TODO Auto-generated method stub
-		return daoEquipoCompetencia.listarEquipoPorCompetenciaCategoria(c, cat);
-	}
-	
 
 
 }

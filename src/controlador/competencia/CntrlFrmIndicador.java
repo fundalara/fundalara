@@ -160,8 +160,8 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 	public void onClick$btnSalir() throws InterruptedException {
 		if (indicador != null) {
 			int result = Messagebox
-					.show("Existen elementos en el formulario Â¿Realmente desea salir?",
-							"Question", Messagebox.OK | Messagebox.CANCEL,
+					.show("Existen elementos en el formulario ¿Realmente desea salir?",
+							"Olimpo - Confirmar Operación", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION);
 			switch (result) {
 			case Messagebox.OK:
@@ -221,7 +221,7 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 		}
 		
 			
-		Messagebox.show("Datos agregados exitosamente", "Mensaje",
+		Messagebox.show("Datos agregados exitosamente", "Olimpo - Operación Exitosa",
 				Messagebox.OK, Messagebox.EXCLAMATION);
 		limpiar();
 		binder.loadAll();
@@ -246,7 +246,19 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 				Categoria cat = (Categoria) cmbSeleccionarCategoria.getSelectedItem().getValue();
 			    DatoBasico db = (DatoBasico) cmbSeleccionarModalidad.getSelectedItem().getValue();
 				indicadoresSeleccionados = servicioIndicadorCategoriaCompetencia.listarIndicadoresIndividualesPorCategoria(cat, competencia,db);
-			    btnMoverDerecha.setDisabled(false);
+			    if (indicadoresSeleccionados.size() == 0){
+			    	List<Indicador> temp = servicioIndicador.listarIndicadorPorModalidadyTipo(db,"INDIVIDUAL");
+			    	for (Indicador i: temp){
+			    		IndicadorCategoriaCompetencia icc = new IndicadorCategoriaCompetencia();
+			    		icc.setCategoria(cat);
+			    		icc.setCompetencia(competencia);
+			    		icc.setEstatus('A');
+			    		icc.setIndicador(i);
+			    		indicadoresSeleccionados.add(icc);
+			    	}
+			    }
+				
+				btnMoverDerecha.setDisabled(false);
 			    btnMoverIzquierda.setDisabled(false);
 			}
 		}
@@ -262,6 +274,18 @@ public class CntrlFrmIndicador extends GenericForwardComposer {
 				Categoria cat = (Categoria) cmbSeleccionarCategoriaColectivo.getSelectedItem().getValue();
 			    DatoBasico db = (DatoBasico) cmbSeleccionarModalidadColectivo.getSelectedItem().getValue();
 				indicadoresSeleccionadosColectivos = servicioIndicadorCategoriaCompetencia.listarIndicadoresColectivosPorCategoria(cat, competencia,db);
+				 if (indicadoresSeleccionadosColectivos.size() == 0){
+				    	List<Indicador> temp = servicioIndicador.listarIndicadorPorModalidadyTipo(db,"COLECTIVO");
+				    	for (Indicador i: temp){
+				    		IndicadorCategoriaCompetencia icc = new IndicadorCategoriaCompetencia();
+				    		icc.setCategoria(cat);
+				    		icc.setCompetencia(competencia);
+				    		icc.setEstatus('A');
+				    		icc.setIndicador(i);
+				    		indicadoresSeleccionadosColectivos.add(icc);
+				    	}
+				    }
+				 
 				btnMoverDerechaColectivo.setDisabled(false);
 			    btnMoverIzquierdaColectivo.setDisabled(false);
 			}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoPersonalForaneoJuego;
 
+import modelo.Juego;
 import modelo.PersonalForaneo;
 import modelo.PersonalForaneoJuego;
 import servicio.interfaz.IServicioPersonalForaneoJuego;
@@ -30,8 +31,7 @@ public class ServicioPersonalForaneoJuego implements
 
 	@Override
 	public void agregar(PersonalForaneoJuego p) {
-		// TODO Auto-generated method stub
-
+		 daoPersonalForaneoJuego.guardar(p);
 	}
 
 	@Override
@@ -44,6 +44,10 @@ public class ServicioPersonalForaneoJuego implements
 	public List<PersonalForaneoJuego> listarActivos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public List<PersonalForaneoJuego> listarUmpireJuego (Juego j){
+		return daoPersonalForaneoJuego.listarUmpireJuego(j);
 	}
 	
 	

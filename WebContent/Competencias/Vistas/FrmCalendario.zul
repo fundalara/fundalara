@@ -153,7 +153,7 @@
 
 				<caption label="Juegos Programados "></caption>
 				<panelchildren>
-					<listbox id="lsbxEnfrentamientos" multiple="true"
+					<listbox id="lsbxEnfrentamientos" multiple="true" 
 						model="@{cntrl.juegos}" style="margin-top:5px" height="100px"
 						mold="paging">
 						<listhead>
@@ -188,7 +188,6 @@
 			<button id="btnTablaPosiciones"
 				label="Tabla de Posiciones ">
 			</button>
-			<button id="btnVerCalendario" label="Ver Calendario "></button>
 		</div>
 		<!-- BOTONES -->
 		<panel>

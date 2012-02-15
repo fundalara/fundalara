@@ -26,8 +26,12 @@ public interface IServicioFaseCompetencia {
 	public abstract List<FaseCompetencia> listarPorCompetencia(int codigo);
 
 	public abstract void actualizar(List<FaseCompetencia> lista1, Competencia comp);
-
+	
+	public FaseCompetencia buscarFaseCompetencia(Competencia c, int numero);
+	
 	public abstract List<EquipoFaseCompetencia> listarPorCompetencia(Competencia comp);
+
+	public abstract void actualizar1(FaseCompetencia faseCompetencia);
 	
 	
 }

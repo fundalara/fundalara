@@ -84,4 +84,8 @@ public class ServicioIndicador implements IServicioIndicador {
 	public List<Indicador> listarActivosYSistema() {
 		return daoIndicador.listarActivosYSistema(Indicador.class);
 	}
+	
+	public List <Indicador> listarIndicadorPorModalidadyTipo (DatoBasico modalidad, String m){
+		return daoIndicador.listarIndicadorPorModalidadyTipo(modalidad, m);
+	}
 }

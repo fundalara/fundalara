@@ -87,6 +87,11 @@ public class ServicioIndicadorCategoriaCompetencia implements
 		// TODO Auto-generated method stub
 		return daoIndicadorCategoriaCompetencia.listarCompetenciaIndicador(i);
 	}
+
+	public IndicadorCategoriaCompetencia obtenerIndicadorCarrera() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

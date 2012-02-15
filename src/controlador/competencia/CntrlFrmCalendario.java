@@ -26,6 +26,7 @@ import modelo.Juego;
 //import modelo.TipoCompetencia;
 
 import org.zkoss.calendar.impl.SimpleDateFormatter;
+import org.zkoss.zhtml.Tbody;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.WrongValueException;
@@ -64,7 +65,6 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 
 	Component formulario;
 	AnnotateDataBinder binder;
-
 	FaseCompetencia fase;
 	Competencia competencia;
 	Estadio estadio;
@@ -92,6 +92,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 
 	Set<EquipoCompetencia> equipoCompetencia;
 
+	Textbox txtNombreCompetencia;
 	Textbox txtHomeClub;
 	Textbox txtVisitante;
 	Timebox tmbxHoraInicio;
@@ -145,7 +146,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 
 		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmCatalogoCompetencia.zul", null, null);
 		catalogo.setVariable("formulario", formulario, false);
-		catalogo.setVariable("estado_comp", EstadoCompetencia.REGISTRADA, false);
+		catalogo.setVariable("estado_comp", EstadoCompetencia.REGISTRADA +EstadoCompetencia.APERTURADA, false);
 
 		formulario.addEventListener("onCatalogoCerrado", new EventListener() {
 			@Override
@@ -192,9 +193,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	// LLAMA AL CATALOGO DE EQUIPOS
 	public void onClick$btnBuscarEquipo() {
 		// se crea el catalogo y se llama
-		Component catalogo = Executions.createComponents(
-				"/Competencias/Vistas/FrmCatalogoEquipoCompetencia.zul", null,
-				null);
+		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmCatalogoEquipoCompetencia.zul", null,null);
 		// asigna una referencia del formulario al catalogo.
 		catalogo.setVariable("competencia", competencia, false);
 		catalogo.setVariable("formulario", formulario, false);
@@ -303,8 +302,7 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 	public boolean buscarJuego(Juego j) {
 
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
-		List<EquipoJuego> equipos1 = ConvertirConjuntoALista(j
-				.getEquipoJuegos());
+		List<EquipoJuego> equipos1 = ConvertirConjuntoALista(j.getEquipoJuegos());
 		for (Juego j2 : juegos) {
 			List<EquipoJuego> equipos2 = ConvertirConjuntoALista(j2.getEquipoJuegos());
 			if (j.getFecha() == j2.getFecha() && j.getHoraInicio() == j2.getHoraInicio()
@@ -360,7 +358,6 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 
 	public void onClick$btnGuardar() throws InterruptedException {
 		if (juegos.size() > 0) {
-
 			for (Juego j : juegos) {
 				 servicioJuego.agregar(j);
 				 List<EquipoJuego> equipos = ConvertirConjuntoALista(j.getEquipoJuegos());
@@ -379,11 +376,14 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 
 	public void onSelect$lsbxEnfrentamientos() {
 		juego = (Juego) lsbxEnfrentamientos.getSelectedItem().getValue();
-		List<EquipoJuego> equipos = ConvertirConjuntoALista(juego.getEquipoJuegos());
-		equipoCompetencia1 = equipos.get(0).getEquipoCompetencia();
-		equipoCompetencia2 = equipos.get(1).getEquipoCompetencia();
-
-		binder.loadAll();
+			List<EquipoJuego> equipos = ConvertirConjuntoALista(juego.getEquipoJuegos());
+			equipoCompetencia1 = equipos.get(0).getEquipoCompetencia();
+			equipoCompetencia2 = equipos.get(1).getEquipoCompetencia();
+            dtbxFecha.setValue(juego.getFecha());
+            tmbxHoraInicio.setValue(juego.getHoraInicio());
+            
+            
+			//binder.loadAll();
 	}
 
 	public void onClick$btnCancelar() {
@@ -391,10 +391,24 @@ public class CntrlFrmCalendario extends GenericForwardComposer {
 		binder.loadAll();
 	}
 
-	public void onClick$btnTablaPosiciones() {
-		Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmTablaPosiciones.zul", null, null);
-		binder.loadAll();
-	}
+	public void onClick$btnTablaPosiciones() throws InterruptedException{
+		if (txtNombreCompetencia.getValue().isEmpty()) { 
+			throw new WrongValueException(txtNombreCompetencia, "Debe Selecionar una competencia");
+		} else if (cmbCategoria.getSelectedItem()==null) { 
+			throw new WrongValueException(cmbCategoria, "Debe seleccionar una Categoria");
+		} else if (cmbFases.getSelectedItem()==null) { 
+			throw new WrongValueException(cmbFases, "Debe seleccionar una Fase");
+			}else{
+				Component catalogo = Executions.createComponents("/Competencias/Vistas/FrmTablaPosiciones.zul", null, null);
+				catalogo.setVariable("competencia",competencia,false);
+				CategoriaCompetencia categoria = (CategoriaCompetencia) cmbCategoria.getSelectedItem().getValue();
+				catalogo.setVariable("categoria",categoria,false);
+				FaseCompetencia fase= (FaseCompetencia) cmbFases.getSelectedItem().getValue();
+				catalogo.setVariable("fase", fase, false);
+				restaurar();
+				binder.loadAll();
+				}
+			}
 
 	public void onClick$btnSalir() throws InterruptedException {
 

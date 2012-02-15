@@ -55,6 +55,7 @@ public class DaoCompetencia extends GenericDao {
 
 		c = session.createCriteria(Competencia.class);
 		c.add(Restrictions.eq("datoBasicoByCodigoEstadoCompetencia", db));
+		c.add(Restrictions.eq("estatus", 'A'));
 		return c.list();
 
 	}
@@ -160,8 +161,6 @@ public class DaoCompetencia extends GenericDao {
 
 	
 	public List<Competencia> buscarCompetenciaPorNombre(String nombre_comp, LapsoDeportivo lapso) {
-//		System.out.println(nombre_comp);
-//		System.out.println(lapso.getNombre());
 		
 		int lapso2 = lapso.getCodigoLapsoDeportivo();
 		

@@ -103,4 +103,9 @@ public class ServicioCompetencia implements IServicioCompetencia {
 		// TODO Auto-generated method stub
 		return daoCompetencia.buscarCompetencias(lapso, db, db1);
 	}
+	
+	@Override
+	public List<Competencia> buscarCompetenciaPorNombre(String nombre_comp, LapsoDeportivo lapso) {
+		return daoCompetencia.buscarCompetenciaPorNombre(nombre_comp, lapso);
+	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import dao.general.DaoDesempennoColectivo;
 
 import modelo.DesempennoColectivo;
+import modelo.EquipoJuego;
+import modelo.IndicadorCategoriaCompetencia;
 import servicio.interfaz.IServicioDesempennoColectivo;
 
 public class ServicioDesempennoColectivo implements
@@ -29,7 +31,11 @@ public class ServicioDesempennoColectivo implements
 
 	@Override
 	public void agregar(DesempennoColectivo d) {
-		// TODO Auto-generated method stub
+		if (d.getCodigoDesempennoColectivo() == 0){
+			int codigo = daoDesempennoColectivo.listar(DesempennoColectivo.class).size()+1;
+			d.setCodigoDesempennoColectivo(codigo);
+		}
+		daoDesempennoColectivo.guardar(d);
 
 	}
 
@@ -43,6 +49,12 @@ public class ServicioDesempennoColectivo implements
 	public List<DesempennoColectivo> listarActivos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DesempennoColectivo buscarCarrerasPorEquipo(EquipoJuego ej,
+			IndicadorCategoriaCompetencia icc, int inning) {		
+		return daoDesempennoColectivo.buscarCarrerasPorEquipo(ej, icc, inning);
 	}
 
 }

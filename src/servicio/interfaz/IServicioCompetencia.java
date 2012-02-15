@@ -36,5 +36,6 @@ public interface IServicioCompetencia {
 	
 	public abstract List<Competencia> buscarCompetencias(LapsoDeportivo lapso,
 			DatoBasico db, DatoBasico db1);
+	public abstract List<Competencia> buscarCompetenciaPorNombre(String nombre_comp, LapsoDeportivo lapso);
 
 }

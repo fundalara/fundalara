@@ -87,6 +87,19 @@ public class DaoIndicador extends GenericDao {
 		System.out.println(lista.size());
 		return lista;
 	}
+	
+	public List <Indicador> listarIndicadorPorModalidadyTipo (DatoBasico modalidad, String m){
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(DatoBasico.class);
+		criteria.add(Restrictions.eq("nombre",m));
+		DatoBasico medicion = (DatoBasico) criteria.list().get(0);
+		criteria = session.createCriteria(Indicador.class);
+		criteria.add(Restrictions.eq("datoBasicoByCodigoModalidad", modalidad));
+		criteria.add(Restrictions.eq("datoBasicoByCodigoMedicion", medicion));
+		criteria.add(Restrictions.eq("estatus", 'S'));
+		return criteria.list();				
+	}
 
 	
 	

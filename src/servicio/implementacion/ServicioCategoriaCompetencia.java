@@ -105,16 +105,32 @@ public class ServicioCategoriaCompetencia implements
 	}
 	
 	@Override
-	public void actualizar(List<CategoriaCompetencia> lista, Competencia comp) {
+	public void actualizar(List<CategoriaCompetencia> lista1, List<CategoriaCompetencia> lista2, String tipoOrg) {
 		// TODO Auto-generated method stub
 
-		
-		for (Iterator i= lista.iterator(); i.hasNext();){
-			CategoriaCompetencia id = (CategoriaCompetencia) i.next();
-			
-			daoCategoriaCompetencia.actualizar(id);			
-		}
-		
+		if (tipoOrg == "C") {
+			for (Iterator i= lista1.iterator(); i.hasNext();){
+			CategoriaCompetencia catg = (CategoriaCompetencia) i.next();
 
+				for (Iterator i2= lista2.iterator(); i2.hasNext();){
+				CategoriaCompetencia catg2 = (CategoriaCompetencia) i2.next();
+			
+					if (catg.getCategoria().getCodigoCategoria() == catg2.getCategoria().getCodigoCategoria()){
+					
+						catg.setDuracionHora(catg2.getDuracionHora());
+						catg.setDuracionInning(catg2.getDuracionInning());
+					
+						daoCategoriaCompetencia.actualizar(catg);				
+					}		
+				}
+			}
+		
+		}else{	
+			for (Iterator l= lista2.iterator(); l.hasNext();){
+				CategoriaCompetencia id = (CategoriaCompetencia) l.next();
+			
+				daoCategoriaCompetencia.actualizar(id);			
+			}	
+		}
 	}
 }

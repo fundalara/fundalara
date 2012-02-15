@@ -2,7 +2,6 @@
 <zk>
 	<window apply="controlador.general.CntrlIndex">
 		<zscript><![CDATA[
-
 	public void enlace(String cad) {
 		//cuerpo.setSrc(cad);
 		if (divCuerpo.getLastChild() != null)
@@ -30,82 +29,6 @@
 		divCuerpo.appendChild(comp);
 	}
 ]]></zscript>
-<<<<<<< HEAD
-	<style>
-		.z-tab-accordion, .z-tab-accordion-seld{ width:260px; }
-	</style>
-
-	<div style="display:inline">
-		<div id="divMenu" style="float:left">
-			<tabbox mold="accordion">
-				<tabs>
-					<tab label="Registros" tooltip="nombre" />
-					<tab label="Funcionalidades Deportivas" />
-					<tab label="Funcionalidades Operativas" />
-					<tab label="Agenda" />
-					<tab label="Reportes" />
-					<tab label="Configuraciones" />
-
-				</tabs>
-				<tabpanels width="260px">
-					<tabpanel>
-						<tree>
-							<treechildren>
-								<treeitem open="false">
-									<treerow>
-										<treecell
-											label="Simples/Unitarios"
-											onClick='enlace("General/frmDatosBasicos.zul")' />
-									</treerow>
-								</treeitem>
-								<treeitem open="false">
-									<treerow>
-										<treecell
-											label="Compuestos/Asociativos" />
-									</treerow>
-									<treechildren>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Entrenamientos" />
-											</treerow>
-											<treechildren>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Categorías"
-															onClick='enlace("Jugador/Vistas/frmConfigurarCategoria.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Equipos"
-															onClick='enlace("Jugador/Vistas/frmConfigurarEquipo.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Actividades "
-															onClick='enlace("Entrenamiento/Vistas/frmActividadesEntrenamiento.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Escalas de Medición"
-															onClick='enlace("Entrenamiento/Vistas/frmEscalaMedicion.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Indicadores de Evaluación"
-															onClick='enlace("Entrenamiento/Vistas/frmIndicadorEvaluacion.zul")' />
-													</treerow>
-												</treeitem>
-=======
 		<style>
 			.z-tab-accordion, .z-tab-accordion-seld{ width:260px; }
 		</style>
@@ -347,7 +270,6 @@
 											</treeitem>
 										</treechildren>
 									</treeitem>
->>>>>>> 4adb01aab2a30e104287f155f04496a4bd2d7680
 
 
 								</treechildren>
@@ -827,190 +749,6 @@
 												</treechildren>
 											</treeitem>
 
-<<<<<<< HEAD
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Administrativos" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label=" " />
-													</treerow>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-
-									</treechildren>
-								</treeitem>
-								<treeitem open="false">
-									<treerow>
-										<treecell label="Estadísticos" />
-									</treerow>
-									<treechildren>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Competencias" />
-											</treerow>
-											<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Efectividad de Lanzamiento"
-															onClick='enlace("Competencias/Reportes/FrmReporteEfectividadLanzador.zul")' />
-													</treerow>
-
-												</treeitem>
-												
-											</treechildren>
-										</treeitem>
-									</treechildren>
-								</treeitem>
-
-
-								<treeitem open="false">
-									<treerow>
-										<treecell label="Dinámicos" />
-									</treerow>
-									<treechildren>
-										<treeitem open="false">
-											<treerow>
-												<treecell label=" " />
-											</treerow>
-										</treeitem>
-									</treechildren>
-
-								</treeitem>
-							</treechildren>
-						</tree>
-					</tabpanel>
-					<tabpanel>
-						<tree>
-							<treechildren>
-								<treeitem open="false">
-									<treerow>
-										<treecell label="Sistema" />
-									</treerow>
-									<treechildren>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Respaldo y Recuperacion" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Información Histórica" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Trazas de Auditoria" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Actualizar Concepto de Nómina"
-													onClick='enlace("Administracion/Vistas/FrmActualizarConcepto.zul")' />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Seguridad" />
-											</treerow>
-											<treechildren>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Control de Usuarios" />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Perfiles de Usuarios" />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Funciones del Sistema" />
-													</treerow>
-												</treeitem>
-												<treeitem>
-													<treerow>
-														<treecell
-															label="Seguridad Funcional" />
-													</treerow>
-												</treeitem>
-											</treechildren>
-										</treeitem>
-
-									</treechildren>
-								</treeitem>
-								<treeitem open="false">
-									<treerow>
-										<treecell label="Web" />
-									</treerow>
-									<treechildren>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Eventos" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Estadisticas" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Encuestas" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Enlaces" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Noticias Recientes" />
-											</treerow>
-										</treeitem>
-										<treeitem>
-											<treerow>
-												<treecell
-													label="Redes Sociales" />
-											</treerow>
-										</treeitem>
-									</treechildren>
-								</treeitem>
-							</treechildren>
-						</tree>
-					</tabpanel>
-
-
-				</tabpanels>
-			</tabbox>
-		</div>
-		<div id="divCuerpo" style="display:inline">
-
-=======
 										</treechildren>
 									</treeitem>
 									<treeitem open="false">
@@ -1064,7 +802,6 @@
 			</div>
 			<div id="divCuerpo" style="display:inline">
 			</div>
->>>>>>> 4adb01aab2a30e104287f155f04496a4bd2d7680
 		</div>
 	</window>
 </zk>

@@ -15,7 +15,7 @@ public interface IServicioCategoriaCompetencia {
 
 	public abstract void agregar(IndicadorCategoriaCompetencia icc);
 
-	public abstract void actualizar(List<CategoriaCompetencia> lista, Competencia comp);
+	public abstract void actualizar(List<CategoriaCompetencia> lista1, List<CategoriaCompetencia> lista2, String tipoOrg);
 
 	//public abstract Categoria buscarPorCodigo(Categoria cc);
 

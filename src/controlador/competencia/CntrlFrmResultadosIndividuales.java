@@ -19,9 +19,11 @@ import modelo.LineUp;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zul.Auxhead;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
@@ -84,43 +86,47 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 		indicadoresIndividualesOfensivos = servicioIndicadorCategoriaCompetencia
 				.listarIndicadoresSencillosIndividuales(categoria, competencia,
 						modalidad);
-		cargarIndicadores(gridIndicadoresOfensivos,
-				indicadoresIndividualesOfensivos, 9);
-		cargarIndicadores(gridIndicadoresOfensivosReserva,
-				indicadoresIndividualesOfensivos, lineupsReserva.size());
+	
 
 		// indicadores defensivos
 		modalidad = servicioDatoBasico.buscarPorString("DEFENSIVO");
 		indicadoresIndividualesDefensivos = servicioIndicadorCategoriaCompetencia
 				.listarIndicadoresSencillosIndividuales(categoria, competencia,
 						modalidad);
-		cargarIndicadores(gridIndicadoresDefensivos,
-				indicadoresIndividualesDefensivos, 9);
-		cargarIndicadores(gridIndicadoresDefensivosReserva,
-				indicadoresIndividualesDefensivos, lineupsReserva.size());
-		binder.loadAll();
+		
 
 		// indicadores de pitcheo
 		modalidad = servicioDatoBasico.buscarPorString("PITCHEO");
 		indicadoresIndividualesPitcheo = servicioIndicadorCategoriaCompetencia
 				.listarIndicadoresSencillosIndividuales(categoria, competencia,
-						modalidad);
+						modalidad);		
+		
+		cargarIndicadores(gridIndicadoresDefensivos,
+				indicadoresIndividualesDefensivos, 9);
+		cargarIndicadores(gridIndicadoresDefensivosReserva,
+				indicadoresIndividualesDefensivos, lineupsReserva.size());
+		cargarIndicadores(gridIndicadoresOfensivos,
+				indicadoresIndividualesOfensivos, 9);
+		cargarIndicadores(gridIndicadoresOfensivosReserva,
+				indicadoresIndividualesOfensivos, lineupsReserva.size());
 		cargarIndicadores(gridIndicadoresPitcheo,
 				indicadoresIndividualesPitcheo, 9);
 		cargarIndicadores(gridIndicadoresPitcheoReserva,
 				indicadoresIndividualesPitcheo, lineupsReserva.size());
+
 		binder.loadAll();
 
 	}
 
 	public void cargarIndicadores(Grid grid,
 			List<IndicadorCategoriaCompetencia> lista, int n) {
-
+       
+		
 		// Creando columnas
 		Columns cols = grid.getColumns();
 		for (int i = 0; i < lista.size(); i++) {
 			Column c = new Column();
-			c.setWidth("50px");
+			c.setWidth("100px");
 			c.setLabel(lista.get(i).getIndicador().getAbreviatura());
 			cols.appendChild(c);
 			grid.invalidate();
@@ -131,24 +137,55 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 		Rows rows = grid.getRows();
 		for (int i = 0; i < n; i++) {
 			Row row = new Row();
-			row.setHeight("27px");
 			LineUp lineUp = lineups.get(i);
+
+			Label numero = new Label(String.valueOf(lineUp.getRosterCompetencia().getRoster().getJugador().getNumero()));
+			Label ob = new Label(String.valueOf(lineUp.getOrdenBate()));
+			Label nombre = new Label(lineUp.getRosterCompetencia().getRoster().getJugador().getPersonaNatural().getPrimerNombre());
+			Label apellido = new Label(lineUp.getRosterCompetencia().getRoster().getJugador().getPersonaNatural().getPrimerApellido());
+			Label pos = new Label(lineUp.getDatoBasicoByCodigoPosicion().getNombre());
+	
+			grid.invalidate();
+			row.appendChild(ob);
+			grid.invalidate();
+			row.appendChild(numero);
+			grid.invalidate();
+			row.appendChild(nombre);
+			grid.invalidate();
+			row.appendChild(apellido);
+			grid.invalidate();
+			row.appendChild(pos);
+			grid.invalidate();
+			
+			List<DesempennoIndividual> dis = servicioDesempennoIndividual.obtenerDesempennoJugador(lineUp);
 			for (int j = 0; j < lista.size(); j++) {
 				IndicadorCategoriaCompetencia icc = lista.get(j);
-				DesempennoIndividual di = servicioDesempennoIndividual.obtenerDesempennoPorIndicador(icc, lineUp);
+				
 				Spinner spinner = new Spinner(0);
-				spinner.setCols(2);
+				spinner.setCols(4);
 				spinner.setConstraint("min 0");
-				if (di != null ){
-					int v = (int) di.getValor();
+				int k = buscar(dis, icc);
+				if (k != -1){
+					int v = (int) dis.get(k).getValor();
 					spinner.setValue(v);
 				}
 				row.appendChild(spinner);
 				grid.invalidate();
 			}
 			rows.appendChild(row);
+//			grid.invalidate();
 		}
 
+	}
+	
+	
+	public int buscar(List<DesempennoIndividual> lista,IndicadorCategoriaCompetencia icc){
+		for (int i=0;i<lista.size();i++){
+			if (lista.get(i).getIndicadorCategoriaCompetencia().getCodigoIndicadorCategoriaCompetencia() == icc.getCodigoIndicadorCategoriaCompetencia())
+				return i;					
+		}
+		return -1;
+		
 	}
 
 	public void guardar(Grid grid,List<IndicadorCategoriaCompetencia> indicadores) {
@@ -158,12 +195,13 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 		for (int i = 0; i < rows.getChildren().size(); i++) {
 			Row row = (Row) rows.getChildren().get(i);
 			LineUp lineUp = lineups.get(i);
-			for (int j = 0; j < n; j++) {
+			List<DesempennoIndividual> dis = servicioDesempennoIndividual.obtenerDesempennoJugador(lineUp);
+			for (int j = 5; j < n; j++) {
 				Spinner spnr = (Spinner) row.getChildren().get(j);
-				IndicadorCategoriaCompetencia icc = indicadores.get(j);
+				IndicadorCategoriaCompetencia icc = indicadores.get(j-5);
 				DesempennoIndividual di;
-				di = servicioDesempennoIndividual.obtenerDesempennoPorIndicador(icc, lineUp);
-				if (di == null){
+				int k = buscar(dis, icc);
+				if (k == -1){
 					di = new DesempennoIndividual();
 					DesempennoIndividualId id = new DesempennoIndividualId(icc.getCodigoIndicadorCategoriaCompetencia(),lineUp.getCodigoLineUp());		
 					di.setId(id);
@@ -171,6 +209,7 @@ public class CntrlFrmResultadosIndividuales extends GenericForwardComposer {
 					di.setIndicadorCategoriaCompetencia(icc);
 					di.setLineUp(lineUp);
 				}else{
+					di = dis.get(k);
 					di.setValor(spnr.getValue());
 				}			
 				servicioDesempennoIndividual.agregar(di);

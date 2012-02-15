@@ -87,7 +87,7 @@ public class CntrlFrmCatalogoPersonaNatural extends GenericForwardComposer {
 			formulario.setVariable("personaNatural", d, false);
 			// se le envia una señal al formulario indicado que el formulario
 			// se cerro y que los datos se han enviado
-			Events.sendEvent(new Event("onCatalogoCerrado", formulario));
+			Events.sendEvent(new Event("onCatalogoCerrado2", formulario));
 			// se cierra el catalogo
 			catalogo.detach();
 

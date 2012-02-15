@@ -33,20 +33,20 @@
 							</textbox>
 						</row>
 						<row style="border-style:none">
-						
+
 							<label value="Fecha Inicio" />
-				
+
 							<datebox cols="10" readonly="true"
 								style="text-color:black"
 								value="@{cntrl.juego.competencia.fechaInicio}">
 							</datebox>
-						
+
 							<label value="Fecha Fin" />
 							<datebox cols="10" readonly="true"
 								style="text-color:black"
 								value="@{cntrl.juego.competencia.fechaFin}">
 							</datebox>
-						
+
 						</row>
 					</rows>
 				</grid>
@@ -66,17 +66,17 @@
 								cols="10">
 							</datebox>
 							<hbox>
-							<label value="Hora Fin" />							
+								<label value="Hora Inicio" />
+								<timebox readonly="true"
+									style="text-color:black" cols="8"
+									value="@{cntrl.juego.horaInicio}">
+								</timebox>
+								<label value="Hora Fin" />
+							</hbox>
 							<timebox id="tbxHoraF"
 								style="text-color:black" cols="8">
 							</timebox>
-							<label value="Hora Inicio" />
-							</hbox>
-							<timebox readonly="true"
-								style="text-color:black" cols="8"
-								value="@{cntrl.juego.horaInicio}">
-							</timebox>
-							
+
 						</row>
 						<row style="border-style:none">
 							<label value="Campo" />
@@ -91,8 +91,15 @@
 								<button label="+" id="btnAgregarI"></button>
 								<button label="-" id="btnQuitarI"></button>
 							</div>
+							<hbox>
+								<label style="margin-top:2px;"
+									value="Fase ">
+								</label>
+								<textbox id="txtFase"
+									style="margin-left:31px" cols="6">
+								</textbox>
+							</hbox>
 
-							
 						</row>
 						<row style="border-style:none">
 							<label value="Anotador"></label>
@@ -137,8 +144,8 @@
 				<hbox>
 					<div>
 						<listbox id="lsbxUmpires"
-							model="@{cntrl.umpiresJuego}" width="500px" height="80px" mold="paging"
-							pageSize="10" style="margin-top:5px">
+							model="@{cntrl.umpiresJuego}" width="500px" height="80px"
+							mold="paging" pageSize="10" style="margin-top:5px">
 							<listhead>
 								<listheader label="Posicion"
 									align="center">
@@ -169,8 +176,7 @@
 						</hbox>
 						<hbox>
 							<button id="btnQuitar"
-								image="/Recursos/Imagenes/quitar.ico"
-								label="">
+								image="/Recursos/Imagenes/quitar.ico" label="">
 							</button>
 						</hbox>
 
@@ -184,7 +190,7 @@
 		<!-- probando con estaticos  -->
 		<panel title="Resultados">
 			<panelchildren>
-				<grid id="resultados" width="740px">
+				<grid id="gridResultados" width="740px">
 					<columns id="titulo">
 						<column width="150px" label="Equipos"></column>
 						<column id="columnCarreras" width="55px"
@@ -222,18 +228,24 @@
 
 			</panelchildren>
 		</panel>
-
-
-
+		<panel title="Observaciones">
+			<panelchildren>
+				<textbox value="@{cntrl.juego.observaciones}" rows="3"
+					width="750px">
+				</textbox>
+			</panelchildren>
+		</panel>
 		<panel>
 			<panelchildren>
-				<div align="right">
-					<button image="/Recursos/Imagenes/guardar.ico"
-						label="Guardar" onClick="guardar()" />
-					<button image="/Recursos/Imagenes/cancelar.ico"
-						label="Cancelar" />
-					<button image="/Recursos/Imagenes/salir.png"
-						label="Salir" />
+				<div align="right" style="margin-top:10px">
+				    <button id="btnGuardar"
+						image="/Recursos/Imagenes/guardar.ico" label="Guardar" />
+					<button id="btnPreliminar"
+						image="/Recursos/Imagenes/guardar.ico" label="Preliminar" />					
+					<button id="btnCancelar"
+						image="/Recursos/Imagenes/cancelar.ico" label="Cancelar" />
+					<button id="btnSalir"
+						image="/Recursos/Imagenes/salir.png" label="Salir" />
 				</div>
 			</panelchildren>
 		</panel>

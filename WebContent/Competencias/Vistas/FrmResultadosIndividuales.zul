@@ -4,7 +4,8 @@
 <zk>
 	<window id="FrmResultadosIndividuales"
 		title="Resultados Individuales" border="normal" width="780px"
-		mode="modal" closable="true" apply="controlador.competencia.CntrlFrmResultadosIndividuales">
+		mode="modal" closable="true"
+		apply="controlador.competencia.CntrlFrmResultadosIndividuales">
 		<panel border="normal" title="RESULTADOS  INDIVIDUALES">
 			<panelchildren>
 
@@ -18,72 +19,62 @@
 						<tabpanel>
 							<panel><!-- Indicadores Ofensivos -->
 								<panelchildren>
-									<div width="40%"
-										style="float:left">
-										<panel title="LINE-UP">
+									<div
+										style="float:left;margin-left:2px" width="auto">
+										<panel>
 											<panelchildren>
-												<grid id="gridLineUpOfensivos" model="@{cntrl.lineups}">
+												<grid
+													id="gridIndicadoresOfensivos" width="750px">
+													<auxhead>
+														<auxheader
+															label="Line-Up" colspan="5">
+														</auxheader>
+														<auxheader
+															label="Indicadores" colspan="100">
+														</auxheader>
+													</auxhead>
 													<columns>
-														<column	label="OB" width="8%" />
-														<column label="N" width="8%"  />
-														<column	label="NOMBRE" width="35%" />
-														<column	label="APELLIDO" width="35%" />
-														<column	label="POS" width="10%" />
+														<column
+															label="OB" width="80px" />
+														<column
+															label="N" width="70px" />
+														<column
+															label="NOMBRE" />
+														<column
+															label="APELLIDO" />
+														<column
+															label="POS" width="70px" />
 													</columns>
-													<rows >
-														<row self="@{each=lineup}" height="27px">
-														<label value="@{lineup.ordenBate}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
-														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
-														</row>
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-										<panel title="RESERVA" >
-											<panelchildren>
-												<grid id="gridReservaOfensivos" model="@{cntrl.lineupsReserva}" >
-													<columns>
-														<column label="N" width="8%" />
-														<column	label="OB" width="8%" />
-														<column	label="NOMBRE" align="35%" />
-														<column label="APELLIDO" width="35%" />
-														<column label="POS" width="10%" />
-													</columns>
-													<rows>
-													    <row self="@{each=lineup}">
-														<label value="@{lineup.ordenBate}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
-														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
-														</row>
-													</rows>
+													<rows></rows>
 												</grid>
 											</panelchildren>
 										</panel>
 									</div>
-									<div style="float:left;margin-left:2px"
-										width="59%">
-										<panel title="INDICADORES" >
-											<panelchildren>
-												<grid id="gridIndicadoresOfensivos" >
-													<columns>													  											   
-													</columns>
-													<rows>													 
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-									</div>
-									<div align="left" 
+									<div align="left"
 										style="float:left;margin-left:2px">
 										<panel title="INDICADORES">
 											<panelchildren>
-												<grid id="gridIndicadoresOfensivosReserva">
-													<columns>							
+												<auxhead>
+													<auxheader
+														label="Line-Up" colspan="5">
+													</auxheader>
+													<auxheader
+														label="Indicadores" colspan="100">
+													</auxheader>
+												</auxhead>
+												<grid
+													id="gridIndicadoresOfensivosReserva" width="750px">
+													<columns>
+														<column
+															label="OB" width="80px" />
+														<column
+															label="N" width="70px" />
+														<column
+															label="NOMBRE" />
+														<column
+															label="APELLIDO" />
+														<column
+															label="POS" width="70px" />
 													</columns>
 													<rows></rows>
 												</grid>
@@ -92,76 +83,66 @@
 									</div>
 								</panelchildren>
 							</panel>
-					</tabpanel><!-- Fin indicadores ofensivos -->
-					<tabpanel> 
-					  <panel>   <!--  indicadores defensivos -->
-							<panelchildren>
-									<div width="40%"
-										style="float:left">
-										<panel title="LINE-UP">
+						</tabpanel><!-- Fin indicadores ofensivos -->
+						<tabpanel>
+							<panel><!--  indicadores defensivos -->
+								<panelchildren>
+									<div
+										style="float:left;margin-left:2px" width="auto">
+										<panel title="INDICADORES">
 											<panelchildren>
-												<grid id="gridLineUpDefensivos" model="@{cntrl.lineups}">
+												<grid
+													id="gridIndicadoresDefensivos" width="750px">
+													<auxhead>
+														<auxheader
+															label="Line-Up" colspan="5">
+														</auxheader>
+														<auxheader
+															label="Indicadores" colspan="100">
+														</auxheader>
+													</auxhead>
 													<columns>
-														<column	label="OB" width="8%" />
-														<column label="N" width="8%"  />
-														<column	label="NOMBRE" width="35%" />
-														<column	label="APELLIDO" width="35%" />
-														<column	label="POS" width="10%" />
+														<column
+															label="OB" width="80px" />
+														<column
+															label="N" width="70px" />
+														<column
+															label="NOMBRE" />
+														<column
+															label="APELLIDO" />
+														<column
+															label="POS" width="70px" />
 													</columns>
-													<rows >
-														<row self="@{each=lineup}" height="27px">
-														<label value="@{lineup.ordenBate}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
-														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
-														</row>
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-										<panel title="RESERVA" >
-											<panelchildren>
-												<grid id="gridReservaDefensivos" model="@{cntrl.lineupsReserva}" >
-													<columns>
-														<column label="N" width="8%" />
-														<column	label="OB" width="8%" />
-														<column	label="NOMBRE" align="35%" />
-														<column label="APELLIDO" width="35%" />
-														<column label="POS" width="10%" />
-													</columns>
-													<rows>
-													    <row self="@{each=lineup}">
-														<label value="@{lineup.ordenBate}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
-														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
-														</row>
-													</rows>
+													<rows></rows>
 												</grid>
 											</panelchildren>
 										</panel>
 									</div>
-									<div style="float:left;margin-left:2px"
-										width="59%">
-										<panel title="INDICADORES" >
-											<panelchildren>
-												<grid id="gridIndicadoresDefensivos">
-													<columns>													  											   
-													</columns>
-													<rows>													 
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-									</div>
-									<div align="left" width="59%"
+									<div align="left"
 										style="float:left;margin-left:2px">
 										<panel title="INDICADORES">
 											<panelchildren>
-												<grid id="gridIndicadoresDefensivosReserva">
-													<columns>							
+												<grid
+													id="gridIndicadoresDefensivosReserva" width="750px">
+													<auxhead>
+														<auxheader
+															label="Line-Up" colspan="5">
+														</auxheader>
+														<auxheader
+															label="Indicadores" colspan="100">
+														</auxheader>
+													</auxhead>
+													<columns>
+														<column
+															label="OB" width="80px" />
+														<column
+															label="N" width="70px" />
+														<column
+															label="NOMBRE" />
+														<column
+															label="APELLIDO" />
+														<column
+															label="POS" width="70px" />
 													</columns>
 													<rows></rows>
 												</grid>
@@ -170,76 +151,67 @@
 									</div>
 								</panelchildren>
 							</panel>
-					  </tabpanel> <!-- Fin indicadores defensivos -->
-					  <tabpanel> 
-					  <panel>   <!--  indicadores pitcheo -->
-							<panelchildren>
-									<div width="40%"
-										style="float:left">
-										<panel title="LINE-UP">
+						</tabpanel><!-- Fin indicadores defensivos -->
+						<tabpanel>
+							<panel><!--  indicadores pitcheo -->
+								<panelchildren>
+
+									<div
+										style="float:left;margin-left:2px" width="750px">
+										<panel title="INDICADORES">
 											<panelchildren>
-												<grid id="gridLineUpPitcheo" model="@{cntrl.lineups}">
+												<grid
+													id="gridIndicadoresPitcheo">
+													<auxhead>
+														<auxheader
+															label="Line-Up" colspan="5">
+														</auxheader>
+														<auxheader
+															label="Indicadores" colspan="100">
+														</auxheader>
+													</auxhead>
 													<columns>
-														<column	label="OB" width="8%" />
-														<column label="N" width="8%"  />
-														<column	label="NOMBRE" width="35%" />
-														<column	label="APELLIDO" width="35%" />
-														<column	label="POS" width="10%" />
+														<column
+															label="OB" width="80px" />
+														<column
+															label="N" width="70px" />
+														<column
+															label="NOMBRE" />
+														<column
+															label="APELLIDO" />
+														<column
+															label="POS" width="70px" />
 													</columns>
-													<rows >
-														<row self="@{each=lineup}" height="27px">
-														<label value="@{lineup.ordenBate}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
-														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
-														</row>
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-										<panel title="RESERVA" >
-											<panelchildren>
-												<grid id="gridReservaPitcheo" model="@{cntrl.lineupsReserva}" >
-													<columns>
-														<column label="N" width="8%" />
-														<column	label="OB" width="8%" />
-														<column	label="NOMBRE" align="35%" />
-														<column label="APELLIDO" width="35%" />
-														<column label="POS" width="10%" />
-													</columns>
-													<rows>
-													    <row self="@{each=lineup}">
-														<label value="@{lineup.ordenBate}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.numero}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></label>
-														<label value="@{lineup.rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></label>
-														<label value="@{lineup.datoBasicoByCodigoPosicion.nombre}"></label>
-														</row>
-													</rows>
+													<rows></rows>
 												</grid>
 											</panelchildren>
 										</panel>
 									</div>
-									<div style="float:left;margin-left:2px"
-										width="59%">
-										<panel title="INDICADORES" >
-											<panelchildren>
-												<grid id="gridIndicadoresPitcheo">
-													<columns>													  											   
-													</columns>
-													<rows>													 
-													</rows>
-												</grid>
-											</panelchildren>
-										</panel>
-									</div>
-									<div align="left" 
+									<div align="left"
 										style="float:left;margin-left:2px;margin-top:8px">
-										<panel >
+										<panel>
 											<panelchildren>
-												<grid id="gridIndicadoresPitcheoReserva">
-													<columns>							
+												<grid
+													id="gridIndicadoresPitcheoReserva" width="750px">
+													<auxhead>
+														<auxheader
+															label="Line-Up" colspan="5">
+														</auxheader>
+														<auxheader
+															label="Indicadores" colspan="100">
+														</auxheader>
+													</auxhead>
+													<columns>
+														<column
+															label="OB" width="80px" />
+														<column
+															label="N" width="70px" />
+														<column
+															label="NOMBRE" />
+														<column
+															label="APELLIDO" />
+														<column
+															label="POS" width="70px" />
 													</columns>
 													<rows></rows>
 												</grid>
@@ -248,13 +220,13 @@
 									</div>
 								</panelchildren>
 							</panel>
-					  </tabpanel> <!-- Fin indicadores defensivos -->
+						</tabpanel><!-- Fin indicadores defensivos -->
 					</tabpanels>
 				</tabbox>
 				<div align="right">
 					<hbox>
 						<button image="/Recursos/Imagenes/guardar.ico"
-							id="btnGuardar"  label="Guardar" />
+							id="btnGuardar" label="Guardar" />
 						<button image="/Recursos/Imagenes/cancelar.ico"
 							label="Cancelar" />
 						<button image="/Recursos/Imagenes/salir.png"

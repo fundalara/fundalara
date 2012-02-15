@@ -121,4 +121,22 @@ public class ServicioFaseCompetencia implements IServicioFaseCompetencia {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public FaseCompetencia buscarFaseCompetencia(Competencia c, int numero){
+		return daoFaseCompetencia.buscarFaseCompetencia(c, numero);
+	}
+	
+	
+
+	public FaseCompetencia buscarFaseSiguiente(FaseCompetencia faseCompetencia) {
+		// TODO Auto-generated method stub
+		return daoFaseCompetencia.buscarFaseSiguiente(faseCompetencia);
+	}
+	
+	@Override
+	public void actualizar1(FaseCompetencia faseCompetencia) {
+		daoFaseCompetencia.actualizar(faseCompetencia);
+		
+	}
+
 }

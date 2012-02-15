@@ -26,4 +26,6 @@ public interface IServicioIndicador {
 	public abstract List <Indicador> listarIndicadorColectivoPorModalidad (DatoBasico db);
 	
 	public abstract List <Indicador> listarIndicadoresPorFiltro (String dato);
+	
+	public List <Indicador> listarIndicadorPorModalidadyTipo (DatoBasico modalidad, String m);
 }

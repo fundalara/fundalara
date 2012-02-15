@@ -2,76 +2,88 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="FrmTablaPosiciones"?>
 <zk>
-	<div align="center">
-		<window id="FrmTablaPosiciones" title="TABLA DE POSICIONES"
-			border="normal" width="500px" height="auto" closable="true"
-			mode="modal" apply="controlador.competencia.CntrlFrmTablaPosiciones">
-			<panel border="normal" title="Datos de la Competencia">
-				<panelchildren>
-					<grid>
-						<rows>
-							<row style="border-style:none" spans="0,4"
-								align="left">
-								<label value=" Nombre"></label>
-								<textbox id="txtCompetencia" cols="35"
-									value="@{cntrl.competencia.nombre}" readonly="true">
-								</textbox>
-							</row>
-							<row style="border-style:none">
-								<label value="Categoria"></label>
-								<div>
-									<textbox id="txtCategoria" cols="20"
-										value="@{cntrl.categoria.categoria.nombre}" readonly="true">
-									</textbox>
-									<label value="Fase" style="margin-top:5px;margin-left:30px"></label>
-									<textbox cols="5"></textbox>
-								</div>
-							</row>
-						</rows>
-					</grid>
-				</panelchildren>
-			</panel>
-			<panel>
-				<panelchildren>
 
-					<listbox id="lstTabla" checkmark="true"
-						multiple="true">
-						<listhead>
-							<listheader width="3%" />
-							<listheader label="Equipo" width="20%" />
-							<listheader label="JJ" width="5%" />
-							<listheader label="JG" width="5%" />
-							<listheader label="JE" width="5%" />
-							<listheader label="JP" width="5%" />
-							<listheader label="Puntaje" width="15%" />
-						</listhead>
-					</listbox>
+ <div align="center">
+<window id="FrmTablaPosiciones" title="TABLA DE POSICIONES" apply="controlador.competencia.CntrlFrmTablaPosiciones" border="normal" width="700px"
+		height="auto" closable="true" mode="modal">
+<!-- DATOS COMPETENCIA -->
+		<panel border="normal">
+			<caption label="Datos de la Competencia"></caption>
+			<panelchildren>
+				<grid>
+					<columns>
+						<column width="25%" align="left"></column>
+						<column width="25%"></column>
+						<column width="25%"></column>
+						<column width="25%"></column>
+					</columns>
+					<rows>
+						<row style="border-style:none" spans="0,4" align="left">
+							<label value=" Nombre Competencia" width="30px"></label>
+							<textbox id="txtCompetencia" value="@{cntrl.competencia.nombre}" width="90%" readonly="true" ></textbox>
+						</row>
+						<row style="border-style:none" align="left">
+							<label value="Fecha Inicio" ></label>
+							<datebox id="dtInicio" value="@{cntrl.competencia.fechaInicio}" width="80%" disabled="true" ></datebox>
+							<label value="Fecha Fin"></label>
+							<datebox id="dtFin" value="@{cntrl.competencia.fechaFin }" disabled="true" width="80%"></datebox>
+						</row>
+						<row style="border-style:none">
+							<label value="Categoria"></label>
+							<textbox id="txtCategoria" value="@{cntrl.categoria.categoria.nombre}" width="90%" readonly="true" ></textbox>
+							<hbox>
+								<label value="Fase:"></label>
+								<textbox id="txtDesde"  width="60px" readonly="true"></textbox>
+							</hbox> 
+							<hbox>
+								<label value="de:"></label>
+								<textbox id="txtHasta" width="60px" readonly="true"></textbox>
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		
+		<separator height="15px"></separator>
+		
+<hbox width="100%"><!-- General -->		
 
-				</panelchildren>
+       <panel>
+	     <panelchildren>
 
-			</panel>
+	      <listbox id="lstTabla" checkmark="true" multiple="true">
+	      <listhead>
+		    	<listheader label="Posicion"  width="10%"/>
+		     	<listheader label="Equipo"  width="20%"/>
+		      	<listheader label="JJ" align="center" width="5%"/>
+		      	<listheader label="JG" align="center" width="5%"/>
+		      	<listheader label="JE" align="center" width="5%"/>
+		      	<listheader label="JP" align="center" width="5%"/>
+		     	<listheader id="lthPuntos" align="center" label="Puntos" width="15%"/>
+		     	<listheader label="Promedio por juego" align="center" width="15%"/>
+	     </listhead>
+   </listbox>
+  	
+	</panelchildren>
+	
+</panel>
+
+</hbox><!-- Findel general -->		
+
+<separator height="15px"></separator>
+	<panel> <!-- Botones -->
+		<panelchildren>
+		    <div align="right">
+				<button id="btnSiguiente" image="../../Recursos/Imagenes/agregar.ico"></button>				
+				<button id="btnCancelar" image="../../Recursos/Imagenes/cancelar.ico" label="Cancelar"></button>
+				<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir" ></button>
+				
+			</div>
+		</panelchildren>
+	</panel>
 
 
-
-			<separator height="15px"></separator>
-			<panel><!-- Botones -->
-				<panelchildren>
-					<div align="right">
-						<button image="/Recursos/Imagenes/agregar.ico"
-							label="Siguiente Ronda">
-						</button>
-						<button image="/Recursos/Imagenes/cancelar.ico"
-							label="Cancelar">
-						</button>
-						<button image="/Recursos/Imagenes/salir.png"
-							label="Salir">
-						</button>
-
-					</div>
-				</panelchildren>
-			</panel>
-
-
-		</window>
-	</div>
+</window>
+</div>
 </zk>

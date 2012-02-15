@@ -4,6 +4,8 @@ import java.util.List;
 
 import dao.general.DaoEquipoJuego;
 
+import modelo.Competencia;
+import modelo.EquipoCompetencia;
 import modelo.EquipoJuego;
 import servicio.interfaz.IServicioEquipoJuego;
 
@@ -30,7 +32,7 @@ public class ServicioEquipoJuego implements IServicioEquipoJuego {
 		if (e.getCodigoEquipoJuego() == 0){
 			int codigo = daoEquipoJuego.listar(EquipoJuego.class).size()+1;
 			e.setCodigoEquipoJuego(codigo);
-			e.setGanado(false);
+			e.setGanado('A');
 			e.setCarrera(0);
 			e.setError(0);
 			e.setHit(0);
@@ -48,6 +50,12 @@ public class ServicioEquipoJuego implements IServicioEquipoJuego {
 
 	@Override
 	public List<EquipoJuego> listarActivos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<EquipoJuego> buscarJuegoporCompetencia(Competencia competencia,
+			EquipoCompetencia equipoCompetencia) {
 		// TODO Auto-generated method stub
 		return null;
 	}

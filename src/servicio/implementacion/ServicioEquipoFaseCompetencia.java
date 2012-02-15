@@ -38,7 +38,11 @@ public class ServicioEquipoFaseCompetencia implements
 
 	@Override
 	public void agregar(EquipoFaseCompetencia l) {
-		// TODO Auto-generated method stub
+		if (l.getCodigoEquipoFaseCompetencia() == 0){
+			int codigo = daoEquipoFaseCompetencia.listar(EquipoFaseCompetencia.class).size()+1;
+			l.setCodigoEquipoFaseCompetencia(codigo);
+			l.setEstatus('A');
+		}
 		daoEquipoFaseCompetencia.guardar(l);
 	}
 
