@@ -3,37 +3,14 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winBuscarjugador"?>
 
 <zk>
-	<window id="winBuscarjugador" title="Buscar Jugador" border="normal" width="500px" mode="modal"
-		closable="true" apply="controlador.jugador.CntrlBuscarJugador">
+	<window id="winBuscarjugador" title="Catálogo" border="normal"
+		width="500px" mode="modal" closable="true"
+		apply="controlador.jugador.CntrlBuscarJugador">
 
-		<grid style="border:none">
-			<rows>
-				<row style="border:none">
-					<label value="Categoría" />
-					<combobox id="cmbCategoria" value="--Seleccione--" selectedItem="@{controller.categoria}"
-						width="90%" model="@{winBuscarjugador$composer.categorias}">
-						<comboitem self="@{each='categoria'}"
-								label="@{categoria.nombre}" value="@{categoria.codigoCategoria}" />
-					</combobox>
-					<label value="Equipo" />
-					<hbox>
-						<combobox value="--Seleccione--" width="90%" id="cmbEquipo" selectedItem="@{controller.equipo}"
-						 model="@{winBuscarjugador$composer.equipos, load-after='cmbCategoria.onChange'}">
-							<comboitem self="@{each='equipo'}" label="@{equipo.datoBasico.nombre}" value="@{equipo.codigoEquipo}"/>
-						</combobox>
-						
-					</hbox>
-				</row>
-			</rows>
-		</grid>
 		<separator></separator>
-		<listbox id="listEquipo"  mold="paging" pageSize="5"  model="@{controller.jugadores, load-after='cmbEquipo.onChange'}" 
-					    selectedItem="@{winBuscarjugador$composer.Jugador}">
-			<auxhead sclass="category-center">
-				<auxheader label="Listado Equipo" colspan="4"
-					align="center">
-				</auxheader>
-			</auxhead>
+		<listbox id="listEquipo" mold="paging" pageSize="10"
+			model="@{controller.jugadores}"
+			selectedItem="@{winBuscarjugador$composer.Jugador}">
 			<listhead>
 				<listheader width="20%" label="Cédula" />
 				<listheader width="32%" label="Nombre" />
@@ -44,43 +21,86 @@
 				<auxheader colspan="1">
 					<image src="Recursos/Imagenes/filtro.png"
 						width="15px" />
-					<textbox id="filter2" width="70%" />
+					<textbox id="filter2" width="70%"
+						style='text-transform:uppercase;' />
 				</auxheader>
 				<auxheader colspan="1">
 					<image src="Recursos/Imagenes/filtro.png"
 						width="15px" />
-					<textbox id="filter3" width="70%" />
+					<textbox id="filter3" width="70%"
+						style='text-transform:uppercase;' />
 				</auxheader>
 				<auxheader colspan="1">
 					<image src="Recursos/Imagenes/filtro.png"
 						width="15px" />
-					<textbox id="filter4" width="70%" />
+					<textbox id="filter4" width="70%"
+						style='text-transform:uppercase;' />
 				</auxheader>
 				<auxheader colspan="1">
 					<image src="Recursos/Imagenes/filtro.png"
 						width="15px" />
-					<textbox id="filter1" width="50%" />
+					<textbox id="filter1" width="50%"
+						style='text-transform:uppercase;' />
 				</auxheader>
 			</auxhead>
 
 			<listitem self="@{each='jugador'}" value="@{jugador}">
-				 <listcell label="@{jugador.cedulaRif}" />
-				<listcell label="@{jugador.personaNatural.primerNombre}" />
-				<listcell label="@{jugador.personaNatural.primerApellido}"/>
-				<listcell label="@{jugador.numero}" /> 
+				<listcell label="@{jugador.cedulaRif}" />
+				<listcell
+					label="@{jugador.personaNatural.primerNombre}" />
+				<listcell
+					label="@{jugador.personaNatural.primerApellido}" />
+				<listcell label="@{jugador.numero}" />
 			</listitem>
 		</listbox>
+
+
+		<!-- listbox Jugador Plan -->
+		<listbox id="listJugadorPlan" mold="paging" pageSize="10"
+			model="@{controller.jugadoresPlan}"
+			selectedItem="@{winBuscarjugador$composer.jugadorPlan}"
+			visible="false">
+			<listhead>
+				<listheader width="20%" label="Cédula" />
+				<listheader width="40%" label="Nombre" />
+				<listheader width="40%" label="Apellido" />
+			</listhead>
+			<auxhead width="100%">
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filtroCedula" width="70%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filtroNombre" width="70%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+				<auxheader colspan="1">
+					<image src="Recursos/Imagenes/filtro.png"
+						width="15px" />
+					<textbox id="filtroApellido" width="70%"
+						style='text-transform:uppercase;' />
+				</auxheader>
+			</auxhead>
+
+			<listitem self="@{each='jugadorPlan'}"
+				value="@{jugadorPlan}">
+				<listcell label="@{jugadorPlan.cedulaRif}" />
+				<listcell label="@{jugadorPlan.nombre}" />
+				<listcell label="@{jugadorPlan.apellido}" />
+			</listitem>
+		</listbox>
+
 		<separator></separator>
 		<div align="right">
-		<button id="btnSeleccionar" label="Seleccionar"
-					image="/Recursos/Imagenes/glowing_cursor.png">
-				</button>
-			<button label="Salir" image="Recursos/Imagenes/salir.png">
-				<attribute name="onClick"><![CDATA[
-					winBuscarjugador.detach();
-				]]></attribute>
+			<button id="btnSeleccionar" label="Seleccionar"
+				image="/Recursos/Imagenes/glowing_cursor.png">
 			</button>
+			<button label="Salir" id="btnSalir"
+				image="Recursos/Imagenes/salir.png" />
 		</div>
-
 	</window>
 </zk>

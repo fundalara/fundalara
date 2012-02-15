@@ -9,7 +9,7 @@ import modelo.DatoBasico;
  * 
  * @author Robert A
  * @author German L
- * @version 0.1 22/12/2011
+ * @version 0.1.2 04/02/2012
  * 
  */
 public class Persona {
@@ -18,11 +18,12 @@ public class Persona {
 	private Telefono telefonoHabitacion;
 	private Telefono telefonoCelular;
 	private DatoBasico parroquiaResi;
+	private DatoBasico tipoPersona;
 	private String correoElectronico;
-	private String facebook;
 	private String twitter;
 	private String direccion;
 	private Date fechaNacimiento;
+	private Date fechaIngreso;
 	private DatoBasico genero;
 	private String primerNombre;
 	private String segundoNombre;
@@ -35,10 +36,11 @@ public class Persona {
 		telefonoHabitacion = new Telefono();
 		telefonoCelular = new Telefono();
 		genero = new DatoBasico();
+		tipoPersona= new DatoBasico();
 	}
 
 	public String getNacionalidad() {
-		return nacionalidad;
+		return nacionalidad==null?nacionalidad:nacionalidad.toUpperCase();
 	}
 
 	public void setNacionalidad(String nacionalidad) {
@@ -78,23 +80,16 @@ public class Persona {
 	}
 
 	public String getCorreoElectronico() {
-		return correoElectronico;
+		return correoElectronico==null?correoElectronico:correoElectronico.toUpperCase();
 	}
 
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
 
-	public String getFacebook() {
-		return facebook;
-	}
-
-	public void setFacebook(String facebook) {
-		this.facebook = facebook;
-	}
-
+	
 	public String getTwitter() {
-		return twitter;
+		return twitter==null?twitter:twitter.toUpperCase();
 	}
 
 	public void setTwitter(String twitter) {
@@ -102,7 +97,7 @@ public class Persona {
 	}
 
 	public String getDireccion() {
-		return direccion;
+		return direccion==null?direccion:direccion.toUpperCase();
 	}
 
 	public void setDireccion(String direccion) {
@@ -118,7 +113,7 @@ public class Persona {
 	}
 
 	public String getPrimerNombre() {
-		return primerNombre;
+		return primerNombre==null?primerNombre:primerNombre.toUpperCase();
 	}
 
 	public void setPrimerNombre(String primerNombre) {
@@ -126,7 +121,7 @@ public class Persona {
 	}
 
 	public String getSegundoNombre() {
-		return segundoNombre;
+		return segundoNombre==null?segundoNombre:segundoNombre.toUpperCase();
 	}
 
 	public void setSegundoNombre(String segundoNombre) {
@@ -134,7 +129,7 @@ public class Persona {
 	}
 
 	public String getPrimerApellido() {
-		return primerApellido;
+		return primerApellido==null?primerApellido:primerApellido.toUpperCase();
 	}
 
 	public void setPrimerApellido(String primerApellido) {
@@ -142,7 +137,7 @@ public class Persona {
 	}
 
 	public String getSegundoApellido() {
-		return segundoApellido;
+		return segundoApellido==null?segundoApellido:segundoApellido.toUpperCase();
 	}
 
 	public void setSegundoApellido(String segundoApellido) {
@@ -173,4 +168,33 @@ public class Persona {
 		this.estatus = estatus;
 	}
 
+	
+	public String getNombres(){
+		return getPrimerNombre().toUpperCase() + " " 
+				+ (getSegundoNombre() == null ? "" :  getSegundoNombre().toUpperCase());
+	}
+
+	public String getApellidos(){
+		return getPrimerApellido().toUpperCase() + " " 
+				+ (getSegundoApellido() == null ? "" :  getSegundoApellido().toUpperCase());
+	}
+
+	public DatoBasico getTipoPersona() {
+		return tipoPersona;
+	}
+
+	public void setTipoPersona(DatoBasico tipoPersona) {
+		this.tipoPersona = tipoPersona;
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+	
+	
+	
 }

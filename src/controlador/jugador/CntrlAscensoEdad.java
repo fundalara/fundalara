@@ -1,6 +1,5 @@
 package controlador.jugador;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,15 +10,15 @@ import modelo.Equipo;
 import modelo.Jugador;
 import modelo.Roster;
 
-import org.python.antlr.PythonParser.return_stmt_return;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
-import comun.Util;
+import comun.Mensaje;
 
 import servicio.implementacion.ServicioAscenso;
 import servicio.implementacion.ServicioCategoria;
@@ -59,9 +58,9 @@ public class CntrlAscensoEdad extends GenericForwardComposer {
 	private Combobox cmbEquipoAsc;
 	private Combobox cmbCategoriaAsc;
 	private Window winAscensoEdad;
-	
-	//lista
-	List<Jugador> listaJug;
+
+	// lista
+	private List<Jugador> listaJug;
 
 	@Override
 	// Coloca visible el modelo para el databinder
@@ -121,11 +120,10 @@ public class CntrlAscensoEdad extends GenericForwardComposer {
 	}
 
 	// Para llenar los combos
-	
 	public List<Categoria> getCategorias() {
 		return servicioCategoria.listar();
 	}
-	
+
 	public List<Categoria> getCatAscenso() {
 		return servicioCategoria.listar();
 	}
@@ -135,23 +133,62 @@ public class CntrlAscensoEdad extends GenericForwardComposer {
 	}
 
 	public List<Jugador> getJugadores() {
-		listaJug= servicioRoster.buscarJugadores(equipo, "", "", "", "");
-       return listaJug;
+		listaJug = servicioRoster.listarJugadores(equipo);
+		return listaJug;
 	}
 
-	// Eventos	
-	
+	// Eventos
 	public void onSelect$cmbCategoria() {
 		cmbEquipo.setDisabled(false);
 	}
-	
+
 	public void onSelect$cmbEquipo() {
 		cmbEquipoAsc.setDisabled(false);
-		cmbCategoriaAsc.setDisabled(false);		
+		cmbCategoriaAsc.setDisabled(false);
 	}
 
-	public void onClick$btnGuardar() {
-	
+	/*public void onClick$btnAscender() {
+		try {
+			Messagebox.show("¿Está seguro de ascender al(los) jugador(es)?",
+					"Ascendo por Edad", Messagebox.OK | Messagebox.IGNORE
+							| Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								alert("Ascenso realizado exitosamente!");
+								limpiar();
+							} else if (evt.getName().equals("onIgnore")) {
+								Messagebox.show("Ignorar", "Advertencia",
+										Messagebox.OK, Messagebox.EXCLAMATION);
+							} else {
+								alert("Ascenso Cancelado!");
+							}
+						}
+					});
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+*/	
+	public void onClick$btnAscender() {
+		try {
+			Messagebox.show("¿Está seguro de realizar el ascenso?",
+					"Ascendo por Edad", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onYes")) {
+								Mensaje.mostrarMensaje("Ascenso realizado exitosamente!",
+										Mensaje.EXITO, Messagebox.INFORMATION);
+								limpiar();
+							}
+						}
+					});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void onClick$btnCancelar() {
@@ -161,18 +198,17 @@ public class CntrlAscensoEdad extends GenericForwardComposer {
 	public void onClick$btnSalir() {
 		winAscensoEdad.detach();
 	}
-	
-	//Métodos propios del controlador
-	
-	public void limpiar(){
+
+	// Métodos propios del controlador
+	public void limpiar() {
 		cmbEquipo.setValue(null);
 		cmbCategoria.setValue(null);
 		cmbEquipo.setDisabled(true);
 		cmbEquipoAsc.setValue(null);
-		cmbCategoriaAsc.setValue(null);	
-		equipo=new Equipo();
-		categoria=new Categoria();
+		cmbCategoriaAsc.setValue(null);
+		equipo = new Equipo();
+		categoria = new Categoria();
 		binder.loadAll();
-	}	
+	}
 
 }
