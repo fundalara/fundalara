@@ -4,8 +4,9 @@
 <div align="center">
 	<separator height="15px" />
 	<window id="wndReporteDesempennoEquipo" title="Desempeño por Equipo"
-		border="normal" width="600px" closable="true"
-		apply="controlador.entrenamiento.CntrlReporteDesempenoEquipo">
+		border="normal" width="600px" closable="true">
+<!-- 		apply="controlador.entrenamiento.CntrlReportesDinamicosEntrenamientos"> -->
+		
 		<grid>
 			<columns>
 				<column width="100px" align="left" />
@@ -15,23 +16,23 @@
 			</columns>
 			<rows>
 				<row height="30px">
-					<label value="Fecha Inicio" width="120px" />
+					<label value="Fecha Inicio:" width="120px" />
 					<datebox id="dtbox1" width="150px"
 						format="dd/MM/yyyy" />
-					<label value="Fecha Final" width="120px" />
+					<label value="Fecha Final:" width="120px" />
 					<datebox id="dtbox2" width="150px"
 						format="dd/MM/yyyy" />
 				</row>
 				<row height="30px">
 					<label value="Categoría" width="120px" />
-					<combobox id="cmbcategoria" value="--SELECCIONE--"
+					<combobox id="cmbcategoria" value="--Seleccione--"
 						disabled="true" model="@{ctrl.listCategoria}" readonly="true"
 						width="150px">
 						<comboitem self="@{each=categoria}"
 							label="@{categoria.nombre}" value="@{categoria}" />
 					</combobox>
 					<label value="Equipo" width="120px" />
-					<combobox id="cmbequipo" value="--SELECCIONE--"
+					<combobox id="cmbequipo" value="--Seleccione--"
 						disabled="true" model="@{ctrl.listEquipo}" readonly="true"
 						width="150px">
 						<comboitem self="@{each=equipo}"

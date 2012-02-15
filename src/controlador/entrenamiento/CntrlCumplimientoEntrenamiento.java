@@ -478,10 +478,6 @@ public class CntrlCumplimientoEntrenamiento extends GenericForwardComposer{
 			servicioActividadCalendario.actualizar(actividadCalendario);
 			}
 		}
-//		eventoSimpleCalendario.setContentColor(controladorAgendaEntrenamiento.colorActividades(actividadCalendario.getEstatus()));
-//		eventoSimpleCalendario.setHeaderColor(controladorAgendaEntrenamiento.getColor(2));
-//		controladorAgendaEntrenamiento
-//		.actualizarEvento(eventoSimpleCalendario);
 		controladorAgendaEntrenamiento.reiniciarModelo();
 		Messagebox.show("Cumplimiento Registrado Exitosamente!", "Olimpo - Información", Messagebox.OK, Messagebox.INFORMATION);
 		wndCumplimientoEntrenamiento.detach();
