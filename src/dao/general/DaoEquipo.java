@@ -187,4 +187,16 @@ public class DaoEquipo extends GenericDao {
 		return this.buscarEquiposDisponibles(categoria, "TEMPORADA REGULAR");
 	}
 
+	public List<Equipo> listarPorTipo(Integer i) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Equipo.class);
+		c.add(Restrictions
+				.eq("datoBasicoByCodigoTipoLapso.codigoDatoBasico", i)).add(
+				Restrictions.eq("estatus", 'A'));
+		List<Equipo> lista = c.list();
+		return lista;
+
+	}
+
 }

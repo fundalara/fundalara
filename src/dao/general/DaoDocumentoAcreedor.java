@@ -8,6 +8,7 @@ import java.util.List;
 import dao.generico.GenericDao;
 import modelo.DatoBasico;
 import modelo.DocumentoAcreedor;
+import modelo.IngresoInscripcion;
 import modelo.Persona;
 
 import org.hibernate.Criteria;
@@ -101,4 +102,7 @@ public class DaoDocumentoAcreedor extends GenericDao {
 			return c.list();
 		}
 	}
+	
+
+
 }

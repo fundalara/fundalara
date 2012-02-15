@@ -139,5 +139,23 @@ public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
 		}
 
 	}
+	
+	public Object buscarPorTipoIngreso(String tipo) {
+		return daoDocumentoAcreedor.buscarPorTipoIngreso(tipo);
+	}
 
+	public List<DocumentoAcreedor> buscarFiltrado(String tipoIngreso,
+			String estado, Date fechaIni, Date fechaFin) {
+		return daoDocumentoAcreedor.buscarFiltrado(tipoIngreso, estado,
+				fechaIni, fechaFin);
+	}
+
+	public List<DocumentoAcreedor> buscarAdelantosPorRifAtleta(Persona td) {
+		return daoDocumentoAcreedor.buscarAdelantosPorRifAtleta(td);
+	}
+	
+
+	public List<DocumentoAcreedor> buscarAdelantosPorRif(Persona td) {
+		return daoDocumentoAcreedor.buscarAdelantosPorRif(td);
+	}
 }

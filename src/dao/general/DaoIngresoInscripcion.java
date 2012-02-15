@@ -27,6 +27,8 @@ public class DaoIngresoInscripcion extends GenericDao {
 		return (List<IngresoInscripcion>) c.list();
 	}
 
+	
+
 }
 
 
