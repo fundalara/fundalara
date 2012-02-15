@@ -20,6 +20,8 @@ public class ServicioInstitucion implements IServicioInstitucion {
 		this.daoInstitucion = daoInstitucion;
 	}
 
+	
+	
 	@Override
 	public void eliminar(Institucion c) {
 		 daoInstitucion.eliminar(c);
@@ -39,15 +41,26 @@ public class ServicioInstitucion implements IServicioInstitucion {
 	public List<Institucion> listar() {
 		return  daoInstitucion.listar( Institucion.class);
 	}
+
 	
-	@Override
-    public Institucion buscar (String id){
+    public Institucion buscar (int id){
     	return daoInstitucion.buscar(id);
     }
 	
 	@Override
 	public List<Institucion> buscarInstitucionTipo(DatoBasico datoBasico) {
 		return daoInstitucion.buscarInstitucionTipo(datoBasico);
+	}
+	
+	
+	public Institucion buscarpornombre (String nombre){
+    	return daoInstitucion.buscarpornombre(nombre);
+    }
+
+	@Override
+	public Institucion buscar(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

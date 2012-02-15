@@ -29,28 +29,8 @@ public class ServicioEquipo implements IServicioEquipo {
 		this.daoEquipo = daoEquipo;
 	}
 
-	@Override
-	public void eliminar(Equipo c) {
-		daoEquipo.eliminar(c);
 
-	}
 
-	@Override
-	public void agregar(Equipo c) {
-		daoEquipo.guardar(c);
-
-	}
-
-	@Override
-	public void actualizar(Equipo c) {
-		daoEquipo.actualizar(c);
-
-	}
-
-	@Override
-	public List<Equipo> listar() {
-		return daoEquipo.listar( Equipo.class);
-	}
 	
 	public List<Equipo> listarEquipoPorCategoria(int codigo) {
 		return daoEquipo.listarEquipoPorCategoria(Equipo.class, codigo);
@@ -60,17 +40,13 @@ public class ServicioEquipo implements IServicioEquipo {
 		return daoEquipo.listarEquipoForaneos();
 	}
 	
-	public List<Equipo> buscarPorCategoria(Categoria categoria){
-		return daoEquipo.buscarEquiposPorCategoria(categoria);
-	}
+	
 	
 	public List<Equipo> buscarEquiposForaneosPorCategoria(int categoria){
 		return daoEquipo.buscarEquiposForaneosPorCategoria(categoria);
 	}
 	
-	public boolean buscarPorCodigo (Equipo equipo) {
-		return daoEquipo.buscarPorCodigo(equipo);
-	}
+
 	
 	public List<Equipo> buscarPorCategoriaTipoEquipo(DatoBasico tipoLapso, Categoria categoria){
 		return daoEquipo.listarDosCamposActivos(Equipo.class, "datoBasicoByCodigoTipoLapso", tipoLapso, "categoria", categoria);
@@ -79,4 +55,68 @@ public class ServicioEquipo implements IServicioEquipo {
 		return daoEquipo.listarActivos(Equipo.class);
 	}
 
+	
+	/////
+	
+	
+	@Override
+	public void eliminar(Equipo c) {
+		c.setEstatus('E');
+		daoEquipo.eliminar(c);
+	}
+
+	@Override
+	public void agregar(Equipo c) {
+		daoEquipo.guardar(c);
+	}
+
+	@Override
+	public void actualizar(Equipo c) {
+		daoEquipo.actualizar(c);
+	}
+
+	@Override
+	public List<Equipo> listar() {
+		return daoEquipo.listar(Equipo.class);
+	}
+
+	@Override
+	public List<Equipo> buscarPorCategoria(Categoria categoria) {
+		return daoEquipo.buscarEquiposPorCategoria(categoria);
+	}
+
+	@Override
+	public boolean buscarPorCodigo(Equipo equipo) {
+		return daoEquipo.buscarPorCodigo(equipo);
+	}
+
+	@Override
+	public List<Equipo> buscarPorCategoria(Categoria categoria,
+			String lapsoDeportivo) {
+		return daoEquipo.buscarEquiposPorCategoria(categoria, lapsoDeportivo);
+	}
+
+	@Override
+	public List<Equipo> buscarPorCategoria(Categoria categoria,
+			String lapsoDeportivo, String nombreDivisa) {
+		return daoEquipo.buscarEquiposPorCategoria(categoria, lapsoDeportivo,
+				nombreDivisa);
+	}
+
+	public List<Equipo> buscarEquiposDisponibles(Categoria categoria,
+			String lapsoDeportivo, String nombreDivisa) {
+		return daoEquipo.buscarEquiposDisponibles(categoria, lapsoDeportivo,
+				nombreDivisa);
+	}
+
+	public List<Equipo> buscarEquiposDisponibles(Categoria categoria) {
+		return daoEquipo.buscarEquiposDisponibles(categoria);
+	}
+
+	public List<Equipo> buscarEquiposDisponibles(Categoria categoria,
+			String lapsoDeportivo) {
+		return daoEquipo.buscarEquiposDisponibles(categoria, lapsoDeportivo);
+	}
+
+	
 }

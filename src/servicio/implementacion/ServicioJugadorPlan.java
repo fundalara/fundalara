@@ -7,10 +7,19 @@ import dao.general.DaoJugadorPlan;
 import modelo.JugadorPlan;
 import servicio.interfaz.IServicioJugadorPlan;
 
+/**
+ * Clase para brindar los servicios para manejar los datos relacionados con los
+ * jugadores del plan vacacional
+ * 
+ * @author Robert A
+ * @author German L
+ * @version 0.1 29/12/2011
+ * 
+ */
 public class ServicioJugadorPlan implements IServicioJugadorPlan {
 
 	DaoJugadorPlan daoJugadorPlan;
-	
+
 	public DaoJugadorPlan getDaoJugadorPlan() {
 		return daoJugadorPlan;
 	}
@@ -22,24 +31,26 @@ public class ServicioJugadorPlan implements IServicioJugadorPlan {
 	@Override
 	public void eliminar(JugadorPlan a) {
 		daoJugadorPlan.eliminar(a);
-
 	}
 
 	@Override
 	public void agregar(JugadorPlan a) {
 		daoJugadorPlan.guardar(a);
-
 	}
 
 	@Override
 	public void actualizar(JugadorPlan a) {
 		daoJugadorPlan.actualizar(a);
-
 	}
 
 	@Override
 	public List<JugadorPlan> listar() {
 		return daoJugadorPlan.listar(JugadorPlan.class);
+	}
+
+	public List<JugadorPlan> buscarJugadores(String cedula, String nombre,
+			String apellido) {
+		return daoJugadorPlan.buscarJugadores(cedula, nombre, apellido);
 	}
 
 }

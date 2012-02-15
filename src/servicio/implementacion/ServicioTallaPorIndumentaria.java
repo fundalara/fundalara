@@ -6,6 +6,7 @@ import servicio.interfaz.IServicioTallaPorIndumentaria;
 
 import dao.general.DaoTallaPorIndumentaria;
 
+import modelo.DatoBasico;
 import modelo.TallaPorIndumentaria;
 
 public class ServicioTallaPorIndumentaria implements
@@ -43,16 +44,18 @@ public class ServicioTallaPorIndumentaria implements
 	public List<TallaPorIndumentaria> listar() {
 		return daoTallaPorIndumentaria.listar( TallaPorIndumentaria.class);
 	}
+	
+	@Override
+	public TallaPorIndumentaria buscarPorDatoBasico(DatoBasico datoBasico) {
+		return daoTallaPorIndumentaria.buscarPorDatoBasico(datoBasico);
+	}
 
 	public TallaPorIndumentaria buscarPorTalla(int parseInt, int parseInt2) {
 		return daoTallaPorIndumentaria.buscarPorTalla(parseInt,parseInt2);
 	}
 	
-	
 	@Override
 	public List<TallaPorIndumentaria> listarActivosOrdenados(){
 		return daoTallaPorIndumentaria.listarActivosOrdenados();
 	}
-
-
 }

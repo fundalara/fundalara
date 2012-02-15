@@ -104,4 +104,5 @@ public class ServicioHorarioPlanTemporada implements
 	public List<HorarioPlanTemporada> listarPorPlanTemporadaEquipo(PlanTemporada planTemporada, Equipo equipo){
 		return daoHorarioPlanTemporada.listarDosCamposActivos(HorarioPlanTemporada.class, "planTemporada", planTemporada, "equipo", equipo);
 	}
+	
 }
