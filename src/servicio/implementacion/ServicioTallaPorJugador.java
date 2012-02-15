@@ -34,29 +34,38 @@ public class ServicioTallaPorJugador implements IServicioTallaPorJugador {
 	@Override
 	public void eliminar(TallaPorJugador c) {
 		daoTallaPorJugador.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(TallaPorJugador c) {
 		daoTallaPorJugador.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(TallaPorJugador c) {
 		daoTallaPorJugador.actualizar(c);
-
 	}
 
 	@Override
 	public List<TallaPorJugador> listar() {
-		return daoTallaPorJugador.listar( TallaPorJugador.class);
+		return daoTallaPorJugador.listar(TallaPorJugador.class);
 	}
 
 	@Override
-	public void agregar(Jugador jugador, DatoBasico... tallas) {
-		daoTallaPorJugador.guardar(jugador, tallas);
+	public void agregar(Jugador jugador, DatoBasico tipoIndumentaria,DatoBasico... tallas) {
+		daoTallaPorJugador.guardar(jugador, tipoIndumentaria,tallas);
+	}
+	
+	public void actualizar(Jugador jugador, DatoBasico tipoIndumentaria,DatoBasico... tallas) {
+		daoTallaPorJugador.actualizar(jugador, tipoIndumentaria,tallas);
+
+	}
+	
+	@Override
+	public List<DatoBasico> buscarTallasPorTipo(Jugador jugador,
+			DatoBasico tipoIndumentaria) {
+		return daoTallaPorJugador. buscarTallasPorTipo( jugador,
+				 tipoIndumentaria) ;
 	}
 
 }

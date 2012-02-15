@@ -7,35 +7,13 @@ import dao.general.DaoComisionFamiliar;
 import modelo.ComisionActividad;
 import modelo.ComisionFamiliar;
 import modelo.DatoBasico;
+import modelo.Familiar;
 import servicio.interfaz.IServicioComisionFamiliar;
 
 public class ServicioComisionFamiliar implements IServicioComisionFamiliar {
 
 	DaoComisionFamiliar daoComisionFamiliar;
-	@Override
-	public void eliminar(ComisionFamiliar cf) {
-		daoComisionFamiliar.eliminar(cf);
-
-	}
-
-	@Override
-	public void agregar(ComisionFamiliar cf) {
-		daoComisionFamiliar.guardar(cf);
-
-	}
-
-	@Override
-	public void actualizar(ComisionFamiliar cf) {
-		daoComisionFamiliar.actualizar(cf);
-
-	}
-
-	@Override
-	public List<ComisionFamiliar> listar() {
-		// TODO Auto-generated method stub
-		return daoComisionFamiliar.listar(ComisionFamiliar.class);
-	}
-
+	
 	@Override
 	public List<ComisionFamiliar> listarRepresentantesPorComision(
 			DatoBasico comision) {
@@ -61,6 +39,40 @@ public class ServicioComisionFamiliar implements IServicioComisionFamiliar {
 			ComisionActividad comisionActividad) {
 		// TODO Auto-generated method stub
 		return this.daoComisionFamiliar.listarPorComision(comisionActividad);
+	}
+	
+	
+	///
+	
+	
+	@Override
+	public void eliminar(ComisionFamiliar c) {
+		daoComisionFamiliar.eliminar(c);
+	}
+
+	@Override
+	public void agregar(ComisionFamiliar c) {
+		daoComisionFamiliar.guardar(c);
+	}
+
+	@Override
+	public void actualizar(ComisionFamiliar c) {
+		daoComisionFamiliar.actualizar(c);
+	}
+
+	@Override
+	public List<ComisionFamiliar> listar() {
+		return daoComisionFamiliar.listar(ComisionFamiliar.class);
+	}
+	
+	
+	public void agregar(List<ComisionFamiliar> comisiones) {
+		daoComisionFamiliar.guardar(comisiones);
+	}
+	
+	
+	public List<DatoBasico> buscarComisiones(Familiar familiar) {
+		return daoComisionFamiliar.buscarComisiones(familiar);
 	}
 
 }

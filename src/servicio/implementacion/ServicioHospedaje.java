@@ -6,6 +6,8 @@ import servicio.interfaz.IServicioHospedaje;
 
 import dao.general.DaoHospedaje;
 
+import modelo.Competencia;
+import modelo.FamiliarJugador;
 import modelo.Hospedaje;
 import modelo.Representante;//NUEVO
 
@@ -28,6 +30,7 @@ public class ServicioHospedaje implements IServicioHospedaje {
 		this.daoHospedaje = daoHospedaje;
 	}
 
+	
 	@Override
 	public void eliminar(Hospedaje c) {
 		daoHospedaje.eliminar(c);
@@ -35,24 +38,39 @@ public class ServicioHospedaje implements IServicioHospedaje {
 
 	@Override
 	public void agregar(Hospedaje c) {
+		c.setCodigoHospedaje(daoHospedaje.generarCodigo(c.getClass()));
 		daoHospedaje.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(Hospedaje c) {
 		daoHospedaje.actualizar(c);
-
 	}
 
 	@Override
 	public List<Hospedaje> listar() {
 		return daoHospedaje.listar(Hospedaje.class);
 	}
-	
-	@Override
-	public Representante buscar (String id) {
-		return daoHospedaje.buscar(id);
+
+	public List<Hospedaje> listarrepre(FamiliarJugador familiarJugador) {
+		return daoHospedaje.listarrepre(familiarJugador);
 	}
 
+
+	public boolean verificar(Competencia competencia,
+			FamiliarJugador familiarJugador) {
+		return daoHospedaje.verificar(competencia, familiarJugador);
+	}
+
+
+	public Hospedaje activar(Competencia competencia,
+			FamiliarJugador familiarJugador) {
+		return daoHospedaje.activar(competencia, familiarJugador);
+	}
+
+	@Override
+	public Representante buscar(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

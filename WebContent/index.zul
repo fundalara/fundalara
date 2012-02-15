@@ -21,7 +21,7 @@
 			map.put("disparador", "entrenamiento");
 		} else if (event.getTarget().getId().equals("mnuAgendaCompetencia")) {
 			map.put("disparador", "competencia");
-		} else if (event.getTarget().getId().equals("mnuAgendaComplementaria")) {
+		} else if (event.getTarget().getId().equals("mnuActividadesComplementarias")) {
 			map.put("disparador", "complementaria");
 		} else
 			map.put("disparador", "mantenimiento");

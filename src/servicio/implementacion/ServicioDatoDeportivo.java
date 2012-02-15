@@ -19,28 +19,24 @@ public class ServicioDatoDeportivo implements IServicioDatoDeportivo {
 		this.daoDatoDeportivo = daoDatoDeportivo;
 	}
 
+	
 	@Override
 	public void eliminar(DatoDeportivo c) {
 		daoDatoDeportivo.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(DatoDeportivo c) {
 		daoDatoDeportivo.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(DatoDeportivo c) {
 		daoDatoDeportivo.actualizar(c);
-
 	}
 
 	@Override
 	public List<DatoDeportivo> listar() {
 		return daoDatoDeportivo.listar( DatoDeportivo.class);
-	}	
-	
-	
+	}
 }

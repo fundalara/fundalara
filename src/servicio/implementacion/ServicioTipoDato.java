@@ -64,4 +64,5 @@ public class ServicioTipoDato implements IServicioTipoDato {
 	public List<TipoDato> listarTipoDatos() {
 		return daoTipoDato.listarTipoDatos();
 	}
+
 }

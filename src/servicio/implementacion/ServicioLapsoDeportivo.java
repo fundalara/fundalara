@@ -11,7 +11,25 @@ import servicio.interfaz.IServicioLapsoDeportivo;
 
 public class ServicioLapsoDeportivo implements IServicioLapsoDeportivo {
 
-	DaoLapsoDeportivo daoLapsoDeportivo;
+	
+
+	@Override
+	public LapsoDeportivo buscarporTipoLapso(DatoBasico db) {
+		return daoLapsoDeportivo.buscarPorTipoLapso(db);
+	}
+
+
+	
+	DaoLapsoDeportivo daoLapsoDeportivo = new DaoLapsoDeportivo();
+	
+	public DaoLapsoDeportivo getDaoLapsoDeportivo() {
+		return daoLapsoDeportivo;
+	}
+
+	public void setDaoLapsoDeportivo(DaoLapsoDeportivo daoLapsoDeportivo) {
+		this.daoLapsoDeportivo = daoLapsoDeportivo;
+	}
+	
 	@Override
 	public void guardar(LapsoDeportivo ae) {
 		// TODO Auto-generated method stub
@@ -46,21 +64,12 @@ public class ServicioLapsoDeportivo implements IServicioLapsoDeportivo {
 
 	@Override
 	public List<LapsoDeportivo> listarActivos() {
-		return daoLapsoDeportivo.listarActivos();
+		return daoLapsoDeportivo.listarActivos(LapsoDeportivo.class);
+	}
+
+
+	public List<LapsoDeportivo> buscarPorTipoLapso(DatoBasico db) {
+		return daoLapsoDeportivo.buscarPorTipoLapso2(db);
 	}	
-	 
-	public DaoLapsoDeportivo getDaoLapsoDeportivo() {
-		return daoLapsoDeportivo;
-	}
-
-	public void setDaoLapsoDeportivo(DaoLapsoDeportivo daoLapsoDeportivo) {
-		this.daoLapsoDeportivo = daoLapsoDeportivo;
-	}
-
-	@Override
-	public LapsoDeportivo buscarporTipoLapso(DatoBasico db) {
-		return daoLapsoDeportivo.buscarPorTipoLapso(db);
-	}
-
 	
 }

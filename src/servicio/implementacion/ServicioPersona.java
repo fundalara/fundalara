@@ -99,4 +99,9 @@ public class ServicioPersona implements IServicioPersona {
 
 		return b;
 	}
+	
+	
+	public boolean  existePersona(String cedula) {
+		return daoPersona.existePersona(cedula);
+	}
 }

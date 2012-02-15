@@ -14,12 +14,14 @@ import modelo.PlanificacionActividad;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
@@ -72,6 +74,7 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	Button btnGuardarDevolucion;
 	Component formRequisicion;
 	Window formRequisicionW;
+	Listbox lboxSolicitudMaterial;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -121,7 +124,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 * @return materialACtividad.
 	 */
 	public void onSelect$lboxDevolucionMaterial() {
-		materialActividadD.setCantidadDevuelta(materialActividadD.getCantidadEntregada());
+		materialActividadD.setCantidadDevuelta(materialActividadD
+				.getCantidadEntregada());
 		binder.loadAll();
 	}
 
@@ -215,7 +219,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 			txtDisponibleAsignar.focus();
 		}
 	}
-
+	
+	
 	/**
 	 * es una llamada al evento del boton btnCancelarSolititud, y funciona para
 	 * limpiar y crear una nueva instancias de las variables mostradas en la
@@ -259,18 +264,25 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$btnGuardarDevolucion() throws InterruptedException {
 
-		if (materialActividadD.getCantidadDevuelta() <= materialActividadD.getCantidadEntregada()) {
+		if (materialActividadD.getCantidadDevuelta() <= materialActividadD
+				.getCantidadEntregada()) {
 			if (cantidadMalEstado <= materialActividadD.getCantidadEntregada()) {
-				if (cantidadMalEstado + materialActividadD.getCantidadDevuelta() <= materialActividadD.getCantidadEntregada()) {
+				if (cantidadMalEstado
+						+ materialActividadD.getCantidadDevuelta() <= materialActividadD
+						.getCantidadEntregada()) {
 					Date fechaDevolucion = new Date();
 					materialActividadD.setEstatus('E');
 					materialActividadD.setFechaDevolucion(fechaDevolucion);
 					materialActividadD.getMaterial().setCantidadDisponible(
-							materialActividadD.getMaterial().getCantidadDisponible() + materialActividadD.getCantidadDevuelta());
-					materialActividadD.getMaterial().setCantidadDeteriorada(cantidadMalEstado);
+							materialActividadD.getMaterial()
+									.getCantidadDisponible()
+									+ materialActividadD.getCantidadDevuelta());
+					materialActividadD.getMaterial().setCantidadDeteriorada(
+							cantidadMalEstado);
 					servicioMaterialActividad.agregar(materialActividadD);
 					// this.onClick$btnCancelarDevolucion();
-					Messagebox.show("Devolucion realizada exitosamente", "Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
+					Messagebox.show("Devolucion realizada exitosamente",
+							"Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
 					this.onClick$menuTodasP();
 					this.onClick$menuTodasD();
 					materialActividadPlanificada = new MaterialActividadPlanificada();
@@ -287,19 +299,24 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 					materialActividadD = new MaterialActividad();
 					binder.loadAll();
 				} else {
-					Messagebox.show("La cantidad devuelta mas la cantidad en mal estado supera la cantidad prestada, por favor verifique", "Mensaje",
-							Messagebox.OK, Messagebox.EXCLAMATION);
+					Messagebox
+							.show("La cantidad devuelta mas la cantidad en mal estado supera la cantidad prestada, por favor verifique",
+									"Mensaje", Messagebox.OK,
+									Messagebox.EXCLAMATION);
 
 				}
 
 			} else {
 
-				Messagebox.show("La cantidad en mal estado supera la cantidad prestada, por favor verifique", "Mensaje", Messagebox.OK,
-						Messagebox.EXCLAMATION);
+				Messagebox
+						.show("La cantidad en mal estado supera la cantidad prestada, por favor verifique",
+								"Mensaje", Messagebox.OK,
+								Messagebox.EXCLAMATION);
 			}
 		} else {
-			Messagebox.show("La cantidad entregada supera la cantidad prestada, por favor verifique", "Mensaje", Messagebox.OK,
-					Messagebox.EXCLAMATION);
+			Messagebox
+					.show("La cantidad entregada supera la cantidad prestada, por favor verifique",
+							"Mensaje", Messagebox.OK, Messagebox.EXCLAMATION);
 		}
 
 	}
@@ -344,7 +361,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$btnRequisicion() throws InterruptedException {
 
-		formRequisicionW = (Window) Executions.createComponents("/Logistica/Vistas/frmGenerarRequisicion.zul", null, null);
+		formRequisicionW = (Window) Executions.createComponents(
+				"/Logistica/Vistas/frmGenerarRequisicion.zul", null, null);
 		formRequisicionW.setMode("modal");
 		formRequisicion = (Component) formRequisicionW;
 
@@ -353,25 +371,28 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		materialActividad = new MaterialActividad();
 		Actividad actividad = new Actividad();
 
-		actividad = servicioActividad.buscarActividad(solicitud.getPlanificacionActividad());
+		actividad = servicioActividad.buscarActividad(solicitud
+				.getPlanificacionActividad());
 		materialActividad.setActividad(actividad);
 		materialActividad.setMaterial(solicitud.getMaterial());
 		materialActividad.setEstatus('A');
 		materialActividad.setCantidadEntregada(txtFaltante.getValue());
 		// materialActividad.getMaterial().setCantidadDisponible(
 		// cantidadDisponible - cantidadNecesitada);
-		materialActividad.setCodigoMaterialActividad(servicioMaterialActividad.listar().size() + 1);
+		materialActividad.setCodigoMaterialActividad(servicioMaterialActividad
+				.listar().size() + 1);
 		materialActividad.setEstatus('x');
 
 		formRequisicion.setVariable("material", materialActividad, false);
 
-		formRequisicion.addEventListener("onRequisicionCerrado", new EventListener() {
+		formRequisicion.addEventListener("onRequisicionCerrado",
+				new EventListener() {
 
-			public void onEvent(Event arg0) throws Exception {
-				binder.loadAll();
-				arg0.stopPropagation();
-			}
-		});
+					public void onEvent(Event arg0) throws Exception {
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
 
 	}
 
@@ -384,23 +405,27 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$btnPlanificacionActividad() {
 		// creamos la instancia del catalogo
-		Component catalogoPlanificarActividad = Executions.createComponents("/Logistica/Vistas/frmCatalogoActividad.zul", null, null);
+		Component catalogoPlanificarActividad = Executions.createComponents(
+				"/Logistica/Vistas/frmCatalogoActividad.zul", null, null);
 
 		// asigna una referencia del formulario al catalogo.
-		catalogoPlanificarActividad.setVariable("frmPrestamoDevolucion", frmPrestamoDevolucion, false);
+		catalogoPlanificarActividad.setVariable("frmPrestamoDevolucion",
+				frmPrestamoDevolucion, false);
 		catalogoPlanificarActividad.setVariable("numero", 1, false);
 
 		// Este metodo se llama cuando se envia la señal desde el catalogo
-		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerradoP", new EventListener() {
+		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerradoP",
+				new EventListener() {
 
-			public void onEvent(Event arg0) throws Exception {
-				actividad = new Actividad();
-				actividad = (Actividad) frmPrestamoDevolucion.getVariable("actividad", false);
-				onClick$menuTodasP();
-				binder.loadAll();
-				arg0.stopPropagation();
-			}
-		});
+					public void onEvent(Event arg0) throws Exception {
+						actividad = new Actividad();
+						actividad = (Actividad) frmPrestamoDevolucion
+								.getVariable("actividad", false);
+						onClick$menuTodasP();
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
+				});
 	}
 
 	/**
@@ -411,7 +436,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$menuTodasP() {
 		try {
-			solicitudes = servicioMaterialActividadPlanificada.listarPorPrestar(actividad.getPlanificacionActividad());
+			solicitudes = servicioMaterialActividadPlanificada
+					.listarPorPrestar(actividad.getPlanificacionActividad());
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -427,7 +453,9 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$menuCP() {
 
 		try {
-			solicitudes = servicioMaterialActividadPlanificada.listarPorPrestarCompetencia(actividad.getPlanificacionActividad());
+			solicitudes = servicioMaterialActividadPlanificada
+					.listarPorPrestarCompetencia(actividad
+							.getPlanificacionActividad());
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -443,7 +471,9 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$menuEP() {
 
 		try {
-			solicitudes = servicioMaterialActividadPlanificada.listarPorPrestarEntrenamiento(actividad.getPlanificacionActividad());
+			solicitudes = servicioMaterialActividadPlanificada
+					.listarPorPrestarEntrenamiento(actividad
+							.getPlanificacionActividad());
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -460,7 +490,9 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$menuEVP() {
 
 		try {
-			solicitudes = servicioMaterialActividadPlanificada.listarPorPrestarEvento(actividad.getPlanificacionActividad());
+			solicitudes = servicioMaterialActividadPlanificada
+					.listarPorPrestarEvento(actividad
+							.getPlanificacionActividad());
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -476,7 +508,9 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$menuMP() {
 
 		try {
-			solicitudes = servicioMaterialActividadPlanificada.listarPorPrestarMantenimiento(actividad.getPlanificacionActividad());
+			solicitudes = servicioMaterialActividadPlanificada
+					.listarPorPrestarMantenimiento(actividad
+							.getPlanificacionActividad());
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -493,27 +527,32 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$btnDevolucion() {
 
 		// creamos la instancia del catalogo
-		Component catalogoPlanificarActividad = Executions.createComponents("/Logistica/Vistas/frmCatalogoActividad.zul", null, null);
+		Component catalogoPlanificarActividad = Executions.createComponents(
+				"/Logistica/Vistas/frmCatalogoActividad.zul", null, null);
 
 		// asigna una referencia del formulario al catalogo.
-		catalogoPlanificarActividad.setVariable("frmPrestamoDevolucion", frmPrestamoDevolucion, false);
+		catalogoPlanificarActividad.setVariable("frmPrestamoDevolucion",
+				frmPrestamoDevolucion, false);
 		catalogoPlanificarActividad.setVariable("numero", 2, false);
 
 		// Este metodo se llama cuando se envia la señal desde el catalogo
-		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerradoD", new EventListener() {
-			public void onEvent(Event arg0) throws Exception {
-				actividadD = new Actividad();
-				actividadD = (Actividad) frmPrestamoDevolucion.getVariable("actividad", false);
+		frmPrestamoDevolucion.addEventListener("onCatalogoActividadCerradoD",
+				new EventListener() {
+					public void onEvent(Event arg0) throws Exception {
+						actividadD = new Actividad();
+						actividadD = (Actividad) frmPrestamoDevolucion
+								.getVariable("actividad", false);
 
-				txtActividadDevolucion.setValue(actividadD.getPlanificacionActividad().getDescripcion());
-				// alert(actividadD.getPlanificacionActividad()
-				// .getDescripcion());
-				onClick$menuTodasD();
-				binder.loadAll();
-				arg0.stopPropagation();
-			}
+						txtActividadDevolucion.setValue(actividadD
+								.getPlanificacionActividad().getDescripcion());
+						// alert(actividadD.getPlanificacionActividad()
+						// .getDescripcion());
+						onClick$menuTodasD();
+						binder.loadAll();
+						arg0.stopPropagation();
+					}
 
-		});
+				});
 	}
 
 	/**
@@ -524,7 +563,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$menuTodasD() {
 		try {
-			materialesActividadesPorDevolver = servicioMaterialActividad.listarPorDevolver(actividadD);
+			materialesActividadesPorDevolver = servicioMaterialActividad
+					.listarPorDevolver(actividadD);
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -539,7 +579,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$menuCD() {
 		try {
-			materialesActividadesPorDevolver = servicioMaterialActividad.listarPorDevolverCompetencia(actividadD);
+			materialesActividadesPorDevolver = servicioMaterialActividad
+					.listarPorDevolverCompetencia(actividadD);
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -555,7 +596,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$menuED() {
 
 		try {
-			materialesActividadesPorDevolver = servicioMaterialActividad.listarPorDevolverEntrenamiento(actividadD);
+			materialesActividadesPorDevolver = servicioMaterialActividad
+					.listarPorDevolverEntrenamiento(actividadD);
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -571,7 +613,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$menuEVD() {
 		try {
-			materialesActividadesPorDevolver = servicioMaterialActividad.listarPorDevolverEvento(actividadD);
+			materialesActividadesPorDevolver = servicioMaterialActividad
+					.listarPorDevolverEvento(actividadD);
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
@@ -587,11 +630,16 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	public void onClick$menuMD() {
 
 		try {
-			materialesActividadesPorDevolver = servicioMaterialActividad.listarPorDevolverMantenimiento(actividadD);
+			materialesActividadesPorDevolver = servicioMaterialActividad
+					.listarPorDevolverMantenimiento(actividadD);
 			binder.loadAll();
 		} catch (Exception e) {
 			binder.loadAll();
 		}
+	}
+
+	public void onClick$btnSalirSolicitud() {
+		this.frmPrestamoDevolucion.detach();
 	}
 
 	/**
@@ -602,7 +650,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		return planificacionActividad;
 	}
 
-	public void setPlanificacionActividad(PlanificacionActividad planificacionActividad) {
+	public void setPlanificacionActividad(
+			PlanificacionActividad planificacionActividad) {
 		this.planificacionActividad = planificacionActividad;
 	}
 
@@ -626,7 +675,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		return frmCatalogoPlanificacionActividad;
 	}
 
-	public void setFrmCatalogoPlanificacionActividad(Window frmCatalogoPlanificacionActividad) {
+	public void setFrmCatalogoPlanificacionActividad(
+			Window frmCatalogoPlanificacionActividad) {
 		this.frmCatalogoPlanificacionActividad = frmCatalogoPlanificacionActividad;
 	}
 
@@ -676,7 +726,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		return servicioMaterialActividad;
 	}
 
-	public void setServicioMaterialActividad(IServicioMaterialActividad servicioMaterialActividad) {
+	public void setServicioMaterialActividad(
+			IServicioMaterialActividad servicioMaterialActividad) {
 		this.servicioMaterialActividad = servicioMaterialActividad;
 	}
 
@@ -684,7 +735,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		return materialesActividadesPorDevolver;
 	}
 
-	public void setMaterialesActividadesPorDevolver(List<MaterialActividad> materialesActividadesPorDevolver) {
+	public void setMaterialesActividadesPorDevolver(
+			List<MaterialActividad> materialesActividadesPorDevolver) {
 		this.materialesActividadesPorDevolver = materialesActividadesPorDevolver;
 	}
 
@@ -692,7 +744,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		return materialActividadPlanificada;
 	}
 
-	public void setMaterialActividadPlanificada(MaterialActividadPlanificada materialActividadPlanificada) {
+	public void setMaterialActividadPlanificada(
+			MaterialActividadPlanificada materialActividadPlanificada) {
 		this.materialActividadPlanificada = materialActividadPlanificada;
 		// materialActividadPlanificada.getCantidadRequerida();
 	}
@@ -701,7 +754,8 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		return servicioMaterialActividadPlanificada;
 	}
 
-	public void setServicioMaterialActividadPlanificada(IServicioMaterialActividadPlanificada servicioMaterialActividadPlanificada) {
+	public void setServicioMaterialActividadPlanificada(
+			IServicioMaterialActividadPlanificada servicioMaterialActividadPlanificada) {
 		this.servicioMaterialActividadPlanificada = servicioMaterialActividadPlanificada;
 	}
 
