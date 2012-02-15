@@ -7,7 +7,7 @@ import modelo.DatoBasico;
  * 
  * @author Robert A
  * @author German L
- * @version 0.1 22/12/2011
+ * @version 0.1.2 04/02/2012
  * 
  */
 
@@ -130,8 +130,17 @@ public class Jugador extends Persona {
 	}
 
 	public String getCedulaCompleta() {
-		return getNacionalidad().toUpperCase() + "-" + getCedula()
-				+ (secuencia == null ? "" : "-" + secuencia);
+		return getNacionalidad()==null?"":getNacionalidad().toUpperCase() + "-" + getCedula()
+				+ (((secuencia == null)|| (secuencia.equals("0"))) ? "" : "-" + secuencia);
+	}
+	
+	public void setCedulaCompleta(String cedulaCompleta) {
+		String datosCedula[] = cedulaCompleta.split("-");
+		this.setNacionalidad(datosCedula[0]);
+		this.setCedula(datosCedula[1]);
+		if (datosCedula.length == 3) {
+			this.setSecuencia(datosCedula[2]);
+		}
 	}
 
 }
