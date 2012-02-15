@@ -1,0 +1,60 @@
+<?page title="RosterWeb" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winRosterWeb" ?>
+<zk>
+	<window id="winRosterWeb" title="" 
+		border="none" closable="true"
+		apply="controlador.web.CntrlRosterWeb" width="695px">
+		<grid oddRowSclass="none" style="border:none;">
+			<columns style="border:none">
+				<column width="12%" />
+				<column width="38%" />
+				<column width="12%" />
+				<column width="38%" />
+			</columns>
+			<rows>
+				<row style="border:none">
+					<label value="Categoría" />
+					<combobox id="cmbCategoria" readonly="true"
+						width="80%" value="--Seleccione--"
+						selectedItem="@{controller.categoria}"
+						model="@{winRosterWeb$composer.categorias}">
+						<comboitem self="@{each='categoria'}"
+							label="@{categoria.nombre}" value="@{categoria.codigoCategoria}" />
+					</combobox>
+					<label value="Equipo" />
+					<combobox id="cmbEquipo" readonly="true" width="80%"
+						value="--Seleccione--" selectedItem="@{controller.equipo}"
+						model="@{winRosterWeb$composer.equipos, load-after='cmbCategoria.onSelect'}">
+						<comboitem self="@{each='equipo'}"
+							label="@{equipo.datoBasico.nombre}"
+							value="@{equipo}" />
+					</combobox>
+				</row>
+
+			</rows>
+		</grid>
+		<listbox id="listJugadores" mold="paging" pageSize="20"
+			model="@{winRosterWeb$composer.jugadores}"
+			selectedItem="@{winRosterWeb$composer.jugador, load-after='cmbEquipo.onChange'}">
+			<listhead>
+				<listheader label="N°" width="5%" />
+				<listheader label="Nombre" width="18%" />
+				<listheader label="Apellido" width="18%" />
+				<listheader label="Lanza" width="15%" />
+				<listheader label="Batea" width="15%" />
+				<listheader label="Peso" width="10%" />
+				<listheader label="Altura" width="10%" />
+			</listhead>
+			<listitem self="@{each='jugador'}" value="@{jugador}">
+				<listcell label="@{jugador.numero}" />
+				<listcell label="@{jugador.personaNatural.primerNombre}" />
+				<listcell label="@{jugador.personaNatural.primerApellido}" />
+				<listcell label="@{jugador.brazoLanzar}" />
+				<listcell label="@{jugador.posicionBateo}" />
+				<listcell label="@{jugador.peso}" />
+				<listcell label="@{jugador.altura}" />
+			</listitem>
+		</listbox>
+	</window>
+</zk>
