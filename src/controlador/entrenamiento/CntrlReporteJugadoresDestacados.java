@@ -38,6 +38,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Iframe;
+import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import comun.ConeccionBD;
@@ -45,15 +47,14 @@ import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioRoster;
 
-public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
-	Datebox dtbox1, dtbox2;
-	Combobox cmbcategoria, cmbequipo;
+public class CntrlReporteJugadoresDestacados extends GenericForwardComposer {
+
+	Combobox cmbcategoria;
+	Intbox jugadores;
+
 	Button btnImprimir, btnSalir;
+	Window wndReporteJugadoresDestacados;
 	ServicioCategoria servicioCategoria;
-	ServicioEquipo servicioEquipo;
-	ServicioRoster servicioRoster;
-	List<Roster> listRoster;
-	List<Equipo> listEquipo;
 	List<Categoria> listCategoria;
 	AnnotateDataBinder binder;
 	Categoria categoria = new Categoria();
@@ -61,52 +62,23 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	private Connection con;
 	private String jrxmlSrc;
 	Iframe ifReport;
-	Window wndReporteDesempennoEquipo;
-	
-	
-	
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
 		listCategoria = servicioCategoria.listar();
-		listEquipo = new ArrayList<Equipo>();
-		listRoster = new ArrayList<Roster>();
+
 	}
-	
 
 	public void onChange$cmbcategoria() {
 
-		listEquipo.clear();
-		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarPorCategoria(cc);
-		cmbequipo.setDisabled(false);
-
-		binder.loadComponent(cmbequipo);
-		cmbequipo.setValue("--Seleccione--");
+		jugadores.setDisabled(false);
 
 	}
-	
-	
 
-	public void onChange$cmbequipo() {
+	public void onChange$jugadores() {
 		btnImprimir.setDisabled(false);
-		
-	}
 
-	public List<Roster> getListRoster() {
-		return listRoster;
-	}
-
-	public void setListRoster(List<Roster> listRoster) {
-		this.listRoster = listRoster;
-	}
-
-	public List<Equipo> getListEquipo() {
-		return listEquipo;
-	}
-
-	public void setListEquipo(List<Equipo> listEquipo) {
-		this.listEquipo = listEquipo;
 	}
 
 	public Categoria getCategoria() {
@@ -140,50 +112,33 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 		this.listCategoria = listCategoria;
 	}
 
-	public void onChange$dtbox2() {
-		Date date = dtbox2.getValue();
-		if (date.before(dtbox1.getValue())) {
-			alert("La fecha final es menor que la fecha inicial");
-		} else {
-
-			cmbcategoria.setDisabled(false);
-
-		}
-
-	}
-	
-		
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
+	public void onClick$btnImprimir() throws SQLException, JRException,
+			IOException {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		Equipo c = (Equipo) cmbequipo.getSelectedItem().getValue();
-		con = ConeccionBD.getCon("postgres", "postgres","123456");
-		parameters.put("fecha_inicio",dtbox1.getText());
-		parameters.put("fecha_fin",dtbox2.getText() );
+		con = ConeccionBD.getCon("postgres", "postgres", "123456");
+		// jrxmlSrc =
+		// Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/MejoresporEquipo.jrxml");
 		parameters.put("categoria", cc.getCodigoCategoria());
-		parameters.put("equipo",c.getCodigoEquipo());
-		String rutaReporte = Sessions
-				.getCurrent()
-				.getWebApp()
-				.getRealPath(
-						"/WEB-INF/reportes/DesempenoJugadoresEquipo.jrxml");
+		parameters.put("limite", jugadores.getValue());
+		String rutaReporte = Sessions.getCurrent().getWebApp()
+				.getRealPath("/WEB-INF/reportes/MejoresporEquipo.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters,
 				con);
 
 		byte[] archivo = JasperExportManager.exportReportToPdf(print);
 
-		final AMedia amedia = new AMedia("DesempeñoEquipos.pdf", "pdf",
+		final AMedia amedia = new AMedia("JugadoresDestacados.pdf", "pdf",
 				"application/pdf", archivo);
 
 		Component visor = Executions.createComponents("General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
-		
-	}
 
-	public void onClick$btnSalir() {
-		wndReporteDesempennoEquipo.detach();
+	}
+	
+	public void onClick$btnSalir(){
+		wndReporteJugadoresDestacados.detach();
 	}
 
 }
-

@@ -1,0 +1,49 @@
+<?page title="Reporte Jugadores Destacados"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndReporteJugadoresDestacados"?>
+<div align="center">
+	<separator height="15px" />
+	<window id="wndReporteJugadoresDestacados"
+		title="Jugadores más Destacados" border="normal" width="350px"
+		closable="true"
+		apply="controlador.entrenamiento.CntrlReporteJugadoresDestacados">
+		<grid>
+			<columns>
+				<column width="200px" align="left" />
+				<column width="150px" align="center" />
+			</columns>
+			<rows>
+				<row height="30px" align="center">
+					<label value="Categoría" width="120px" />
+					<combobox id="cmbcategoria" value="--SELECCIONE--"
+						model="@{ctrl.listCategoria}" readonly="true" width="150px">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria}" />
+					</combobox>
+				</row>
+				<row height="30px" align="left">
+					<label value="Cantidad de Jugadores" width="120px" />
+					<intbox id="jugadores" disabled="true"
+						width="150px" />
+
+				</row>
+
+			</rows>
+
+		</grid>
+		<iframe id="ifReport" height="10px" visible="false" />
+		<grid >
+			<rows>
+				<row align="right" height="">
+					<hbox>
+						<button id="btnImprimir"
+							image="/Recursos/Imagenes/reporte.ico" label="Generar"
+							width="100px" disabled="true" />
+						<button id="btnSalir"
+							image="/Recursos/Imagenes/salir.png" label="Salir" width="100px" />
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>
