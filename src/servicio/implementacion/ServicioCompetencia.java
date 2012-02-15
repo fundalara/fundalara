@@ -103,4 +103,6 @@ public class ServicioCompetencia implements IServicioCompetencia {
 		// TODO Auto-generated method stub
 		return daoCompetencia.buscarCompetencias(lapso, db, db1);
 	}
+	
+
 }
