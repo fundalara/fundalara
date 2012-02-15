@@ -45,15 +45,11 @@ import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioRoster;
 
-public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
+public class CntrlReportePromedioActividad extends GenericForwardComposer {
 	Datebox dtbox1, dtbox2;
-	Combobox cmbcategoria, cmbequipo;
+	Combobox cmbcategoria;
 	Button btnImprimir, btnSalir;
 	ServicioCategoria servicioCategoria;
-	ServicioEquipo servicioEquipo;
-	ServicioRoster servicioRoster;
-	List<Roster> listRoster;
-	List<Equipo> listEquipo;
 	List<Categoria> listCategoria;
 	AnnotateDataBinder binder;
 	Categoria categoria = new Categoria();
@@ -61,52 +57,17 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	private Connection con;
 	private String jrxmlSrc;
 	Iframe ifReport;
-	Window wndReporteDesempennoEquipo;
-	
-	
-	
+	Window wndReportePromedioActividad;
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
 		listCategoria = servicioCategoria.listar();
-		listEquipo = new ArrayList<Equipo>();
-		listRoster = new ArrayList<Roster>();
 	}
-	
 
 	public void onChange$cmbcategoria() {
-
-		listEquipo.clear();
-		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		listEquipo = servicioEquipo.buscarPorCategoria(cc);
-		cmbequipo.setDisabled(false);
-
-		binder.loadComponent(cmbequipo);
-		cmbequipo.setValue("--Seleccione--");
-
-	}
-	
-	
-
-	public void onChange$cmbequipo() {
 		btnImprimir.setDisabled(false);
-		
-	}
 
-	public List<Roster> getListRoster() {
-		return listRoster;
-	}
-
-	public void setListRoster(List<Roster> listRoster) {
-		this.listRoster = listRoster;
-	}
-
-	public List<Equipo> getListEquipo() {
-		return listEquipo;
-	}
-
-	public void setListEquipo(List<Equipo> listEquipo) {
-		this.listEquipo = listEquipo;
 	}
 
 	public Categoria getCategoria() {
@@ -151,39 +112,41 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 		}
 
 	}
-	
-		
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
+
+	public void onChange$dtbox1() {
+		dtbox2.setDisabled(false);
+
+	}
+
+	public void onClick$btnImprimir() throws SQLException, JRException,
+			IOException {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
-		Equipo c = (Equipo) cmbequipo.getSelectedItem().getValue();
-		con = ConeccionBD.getCon("postgres", "postgres","123456");
-		parameters.put("fecha_inicio",dtbox1.getText());
-		parameters.put("fecha_fin",dtbox2.getText() );
+		con = ConeccionBD.getCon("postgres", "postgres", "123456");
+		parameters.put("fecha_inicio", dtbox1.getText());
+		parameters.put("fecha_fin", dtbox2.getText());
 		parameters.put("categoria", cc.getCodigoCategoria());
-		parameters.put("equipo",c.getCodigoEquipo());
 		String rutaReporte = Sessions
 				.getCurrent()
 				.getWebApp()
 				.getRealPath(
-						"/WEB-INF/reportes/DesempenoJugadoresEquipo.jrxml");
+						"/WEB-INF/reportes/reportPromedioporActividad.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters,
 				con);
 
 		byte[] archivo = JasperExportManager.exportReportToPdf(print);
 
-		final AMedia amedia = new AMedia("DesempeñoEquipos.pdf", "pdf",
+		final AMedia amedia = new AMedia("PromedioActividad.pdf", "pdf",
 				"application/pdf", archivo);
 
 		Component visor = Executions.createComponents("General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
-		
-	}
 
-	public void onClick$btnSalir() {
-		wndReporteDesempennoEquipo.detach();
+	}
+	
+	public void onClick$btnSalir(){
+		wndReportePromedioActividad.detach();
 	}
 
 }
-

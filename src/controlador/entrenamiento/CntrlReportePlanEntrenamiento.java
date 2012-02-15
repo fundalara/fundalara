@@ -14,6 +14,7 @@ import modelo.ActividadEntrenamiento;
 import modelo.Categoria;
 import modelo.Equipo;
 import modelo.Jugador;
+import modelo.LapsoDeportivo;
 import modelo.Personal;
 import modelo.PersonalCargo;
 import modelo.PersonalEquipo;
@@ -43,36 +44,42 @@ import org.zkoss.zul.Window;
 import comun.ConeccionBD;
 import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
+import servicio.implementacion.ServicioLapsoDeportivo;
 import servicio.implementacion.ServicioRoster;
 
-public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
-	Datebox dtbox1, dtbox2;
-	Combobox cmbcategoria, cmbequipo;
+public class CntrlReportePlanEntrenamiento extends GenericForwardComposer {
+	Combobox cmbcategoria, cmbequipo, cmblapsodeportivo;
 	Button btnImprimir, btnSalir;
 	ServicioCategoria servicioCategoria;
 	ServicioEquipo servicioEquipo;
-	ServicioRoster servicioRoster;
-	List<Roster> listRoster;
+	ServicioLapsoDeportivo servicioLapsoDeportivo;
 	List<Equipo> listEquipo;
 	List<Categoria> listCategoria;
+	List<LapsoDeportivo> listLapsoDeportivo;
 	AnnotateDataBinder binder;
 	Categoria categoria = new Categoria();
 	Map parameters = new HashMap();
 	private Connection con;
 	private String jrxmlSrc;
 	Iframe ifReport;
-	Window wndReporteDesempennoEquipo;
-	
-	
-	
+	Window wndReportePlanEntrenamiento;
+
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
 		listCategoria = servicioCategoria.listar();
 		listEquipo = new ArrayList<Equipo>();
-		listRoster = new ArrayList<Roster>();
+		listLapsoDeportivo = new ArrayList<LapsoDeportivo>();
+		listLapsoDeportivo = servicioLapsoDeportivo.listarActivos();
 	}
-	
+
+	public List<LapsoDeportivo> getListLapsoDeportivo() {
+		return listLapsoDeportivo;
+	}
+
+	public void setListLapsoDeportivo(List<LapsoDeportivo> listLapsoDeportivo) {
+		this.listLapsoDeportivo = listLapsoDeportivo;
+	}
 
 	public void onChange$cmbcategoria() {
 
@@ -80,25 +87,14 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
 		listEquipo = servicioEquipo.buscarPorCategoria(cc);
 		cmbequipo.setDisabled(false);
-
 		binder.loadComponent(cmbequipo);
-		cmbequipo.setValue("--Seleccione--");
+		cmbequipo.setValue("--SELECCIONE--");
 
 	}
-	
-	
 
 	public void onChange$cmbequipo() {
 		btnImprimir.setDisabled(false);
-		
-	}
 
-	public List<Roster> getListRoster() {
-		return listRoster;
-	}
-
-	public void setListRoster(List<Roster> listRoster) {
-		this.listRoster = listRoster;
 	}
 
 	public List<Equipo> getListEquipo() {
@@ -140,50 +136,42 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 		this.listCategoria = listCategoria;
 	}
 
-	public void onChange$dtbox2() {
-		Date date = dtbox2.getValue();
-		if (date.before(dtbox1.getValue())) {
-			alert("La fecha final es menor que la fecha inicial");
-		} else {
-
-			cmbcategoria.setDisabled(false);
-
-		}
-
+	public void onChange$cmblapsodeportivo() {
+		cmbcategoria.setDisabled(false);
 	}
-	
-		
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
+
+	public void onClick$btnImprimir() throws SQLException, JRException,
+			IOException {
+		LapsoDeportivo dep = (LapsoDeportivo) cmblapsodeportivo
+				.getSelectedItem().getValue();
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
 		Equipo c = (Equipo) cmbequipo.getSelectedItem().getValue();
-		con = ConeccionBD.getCon("postgres", "postgres","123456");
-		parameters.put("fecha_inicio",dtbox1.getText());
-		parameters.put("fecha_fin",dtbox2.getText() );
+		con = ConeccionBD.getCon("postgres", "postgres", "123456");
+		parameters.put("lapso", dep.getCodigoLapsoDeportivo());
 		parameters.put("categoria", cc.getCodigoCategoria());
-		parameters.put("equipo",c.getCodigoEquipo());
+		parameters.put("equipo", c.getCodigoEquipo());
 		String rutaReporte = Sessions
 				.getCurrent()
 				.getWebApp()
 				.getRealPath(
-						"/WEB-INF/reportes/DesempenoJugadoresEquipo.jrxml");
+						"/WEB-INF/reportes/plan_entrenamiento_llamadoreporte.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters,
 				con);
 
 		byte[] archivo = JasperExportManager.exportReportToPdf(print);
 
-		final AMedia amedia = new AMedia("DesempeñoEquipos.pdf", "pdf",
+		final AMedia amedia = new AMedia("PlanEntrenamiento.pdf", "pdf",
 				"application/pdf", archivo);
 
 		Component visor = Executions.createComponents("General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
-		
-	}
 
-	public void onClick$btnSalir() {
-		wndReporteDesempennoEquipo.detach();
+	}
+	
+	public void onClick$btnSalir(){
+		wndReportePlanEntrenamiento.detach();
 	}
 
 }
-
