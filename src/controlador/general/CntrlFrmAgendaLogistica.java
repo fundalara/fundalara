@@ -141,9 +141,9 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 		if (ce.getBeginDate().after(new Date())) {
 
 			if (opcionMenu.equals("ActividadComplementaria")) {
-				planificar(event, "Logistica/Vistas/frmPlanificarActividad.zul");
+				planificar(event, "../Logistica/Vistas/frmPlanificarActividad.zul");
 			} else {
-				planificar(event, "Logistica/Vistas/frmPlanificarMantenimiento.zul");
+				planificar(event, "../Logistica/Vistas/frmPlanificarMantenimiento.zul");
 			}
 		} else {
 			Messagebox.show("La planificación no es permitida en fechas anteriores a la actual", MensajeMostrar.TITULO + "Información",
@@ -154,9 +154,9 @@ public class CntrlFrmAgendaLogistica extends CntrlFrmAgendaGeneral {
 	public void onEventEdit$calendars(CalendarsEvent e) {
 		System.out.println("editando las actividades");
 		if (opcionMenu.equals("ActividadComplementaria")) {
-			registrarResultados(e, "Logistica/Vistas/frmResultadosActividadComplementaria.zul");
+			registrarResultados(e, "../Logistica/Vistas/frmResultadosActividadComplementaria.zul");
 		} else {
-			registrarResultados(e, "Logistica/Vistas/frmResultadosMantenimiento.zul");
+			registrarResultados(e, "../Logistica/Vistas/frmResultadosMantenimiento.zul");
 		}
 	}
 

@@ -14,11 +14,16 @@
 	<parameter name="HORA" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select i.descripcion as instalacion, plan.descripcion as mantenimiento, a.fecha_inicio as fecha, d.nombre as tipoActividad,
-tipoacti.nombreactividad as nombreactividad, estado.codigo_estado as EstadoActividad
+tipoacti.nombreactividad as nombreactividad
 from actividad a, planificacion_actividad plan, instalacion_utilizada iu, instalacion i, dato_basico as d,
-estado_actividad estado, dato_basico db,
-(select dato_basico.nombre as nombreactividad, dato_basico.codigo_dato_basico as codigo
-from dato_basico where dato_basico.codigo_tipo_dato = 108) tipoacti
+estado_actividad estado, dato_basico db, (select dato_basico.nombre as nombreactividad, dato_basico.codigo_dato_basico as codigo from dato_basico where dato_basico.codigo_tipo_dato = 108)tipoacti,
+(select dato_basico.nombre as nombreterminada, dato_basico.codigo_dato_basico as codigoterminada
+
+from dato_basico
+
+where 	dato_basico.codigo_dato_basico = 254)terminada, estado_actividad
+
+
 where
 a.codigo_planificacion_actividad=plan.codigo_planificacion_actividad
 and a.codigo_instalacion_utilizada=iu.codigo_instalacion_utilizada
@@ -28,22 +33,24 @@ and a.estatus='A'
 and plan.estatus='A'
 and i.estatus='A'
 and d.estatus='A'
-and estado.estatus='A'
 and plan.codigo_tipo_actividad=d.codigo_dato_basico
 and d.parent_codigo_dato_basico!=307
-And estado.codigo_actividad=a.codigo_actividad
+and estado.codigo_actividad=a.codigo_actividad
 and estado.codigo_estado=db.codigo_dato_basico
 and d.parent_codigo_dato_basico= tipoacti.codigo
+and estado.codigo_actividad=a.codigo_actividad
+and estado.estatus='A'
+and iu.estatus='A'
 and a.fecha_inicio between $P{FechaInicio} and $P{FechaFin}
 and a.fecha_culminacion between $P{FechaInicio} and $P{FechaFin}
-and iu.estatus='A';]]>
+and estado_actividad.codigo_actividad=a.codigo_actividad
+and terminada.codigoterminada=estado_actividad.codigo_estado]]>
 	</queryString>
 	<field name="instalacion" class="java.lang.String"/>
 	<field name="mantenimiento" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Date"/>
 	<field name="tipoactividad" class="java.lang.String"/>
 	<field name="nombreactividad" class="java.lang.String"/>
-	<field name="estadoactividad" class="java.lang.Integer"/>
 	<group name="Instalacion">
 		<groupExpression><![CDATA[$F{instalacion}]]></groupExpression>
 		<groupHeader>

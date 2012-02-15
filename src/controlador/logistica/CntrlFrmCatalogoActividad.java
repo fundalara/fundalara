@@ -1,8 +1,11 @@
 package controlador.logistica;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import modelo.Actividad;
+import modelo.DatoBasico;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,8 +13,10 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zkplus.databind.BindingListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import servicio.interfaz.IServicioActividad;
 
@@ -24,13 +29,12 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 	List<Actividad> listaActividad;
 	Actividad actividad = new Actividad();
 	Listbox lboxActividad;
+	Textbox txtNombre;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		frmCatActPla = comp;
-		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-		servicioActividad = (IServicioActividad) beanFactory.getBean("servicioActividad");
 		listaActividad = servicioActividad.listarActivos();
 
 	}
@@ -47,6 +51,7 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 			actividad = listaActividad.get(lboxActividad.getSelectedIndex());
 
 			Component frmPrestamoDevolucion = (Component) frmCatActPla.getVariable("frmPrestamoDevolucion", false);
+			
 			Integer numero = (Integer) frmCatActPla.getVariable("numero", false);
 
 			// se le asigna el objeto plantilla al formulario
@@ -125,5 +130,18 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 	public void setLboxActividad(Listbox lboxActividad) {
 		this.lboxActividad = lboxActividad;
 	}
+	public void onChanging$txtNombre(Event event) throws InterruptedException {
+		lboxActividad.setModel(new BindingListModelList(this.filtrar2(txtNombre.getText()), false));
+	}
 
+	public List<Actividad> filtrar2(String descripcion) {
+		List<Actividad> filtrados = new ArrayList<Actividad>();
+		for (Iterator<Actividad> i = listaActividad.iterator(); i.hasNext();) {
+			Actividad tmp = i.next();
+			if (tmp.getPlanificacionActividad().getDescripcion().toLowerCase().indexOf(descripcion.trim().toLowerCase()) >= 0) {
+				filtrados.add(tmp);
+			}
+		}
+		return filtrados;
+	}
 }
