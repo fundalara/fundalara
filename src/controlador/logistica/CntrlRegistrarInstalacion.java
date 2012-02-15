@@ -9,17 +9,16 @@ import java.util.Map;
 import modelo.DatoBasico;
 import modelo.Instalacion;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -97,6 +96,7 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 		validar();
 		instalacion.setCodigoInstalacion(servicioInstalacion.listar().size() + 1);
 		instalacion.setEstatus('A');
+		instalacion.setDescripcion(txtDescripcion.getValue().toUpperCase());
 		servicioInstalacion.agregar(instalacion);
 
 		this.onClick$btnCancelar();
@@ -109,6 +109,7 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 	}
 
 	public void onClick$btnModificar() throws InterruptedException {
+		instalacion.setDescripcion(txtDescripcion.getValue().toUpperCase());
 		servicioInstalacion.actualizar(instalacion);
 		onClick$btnCancelar();
 		Messagebox.show(MensajeMostrar.MODIFICACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
@@ -142,28 +143,21 @@ public class CntrlRegistrarInstalacion extends GenericForwardComposer {
 
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(instalaciones);
 
-		Map parameters = new HashMap();
+		Map<String, Object> parameters = new HashMap<String, Object>();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		Date fecha = new Date();
 		parameters.put("FECHA", formato.format(fecha));
 		formato.applyPattern("hh:mm");
 		parameters.put("HORA", formato.format(fecha));
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteListadoInstalaciones.jrxml");
+		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteListadoInstalaciones.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
 
-		// Exporta el informe a PDF
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteListadoInstalaciones.pdf");
-		JRExporter exporter = new JRPdfExporter();
-
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
-
-		exporter.exportReport();
-
-		// Para visualizar el pdf con el visor de Jasper
-		JasperViewer.viewReport(print, false);
+		byte[] archivo = JasperExportManager.exportReportToPdf(print);
+		final AMedia amedia = new AMedia("ReporteListadoInstalaciones.pdf", "pdf", "application/pdf", archivo);
+		Component visor = Executions.createComponents("../General/" + "frmVisorDocumento.zul", null, null);
+		visor.setVariable("archivo", amedia, false);
 	}
 
 }
