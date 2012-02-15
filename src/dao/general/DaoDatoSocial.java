@@ -3,8 +3,6 @@ package dao.general;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.AfeccionJugador;
-import modelo.DatoMedico;
 import modelo.DatoSocial;
 import modelo.Jugador;
 
@@ -114,4 +112,23 @@ public class DaoDatoSocial extends GenericDao {
 		}
 		return posicion;
 	}
+	
+	/**
+	 * Busca los datos sociales pertinentes a un jugador
+	 * 
+	 * @param jugador
+	 *            Jugador al cual se desea obtener sus datos sociales
+	 * @return Lista con los datos sociales del jugador, en caso de no
+	 *         existir se retorna null
+	 */	
+	public List<DatoSocial> buscarPorJugador(Jugador jugador) {
+		Session sesion = getSession();
+		Transaction tx = sesion.beginTransaction();
+		Criteria c = sesion.createCriteria(DatoSocial.class)
+		.add(Restrictions.eq("estatus",'A'))
+		.add(Restrictions.eq("jugador", jugador));
+		 List<DatoSocial> lista =c.list();
+		return lista;
+	}
+	
 }
