@@ -1,0 +1,173 @@
+<?page title="Actualizar Lesion"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+<div align="left">
+	<window title="" id="winActualizarLesion" border="none"
+		width="660px" apply="controlador.jugador.CntrlActualizarLesion">
+		<groupbox style="border-color:orange" closable="false">
+			<caption label="Datos de Informe Médico" />
+			<grid style="border:none;" oddRowSclass="none"
+				width="100%">
+				<columns>
+					<column width="22%" />
+					<column width="28%" />
+					<column width="22%" />
+					<column width="28%" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Médico" />
+						<div>
+							<textbox value="@{controller.medico.nombre}"
+								width="70%" readonly="true" id="txtMedico" />
+							<button id="btnCatalogoMedico"
+								image="../../Recursos/Imagenes/consultar.ico"
+								orient="horizontal" />
+						</div>
+						<label value="Número Colegio" />
+						<textbox value="@{controller.medico.matricula}"
+							width="60%" id="txtNroColegio" readonly="true" />
+					</row>
+					<row style="border:none">
+						<label value="Fecha Informe" />
+						<div>
+							<datebox id="dtboxFechaInf"
+								constraint="no future" format="dd/MM/yyyy"
+								value="@{controller.datoMedico.fechaInforme}"
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<label value="(*)" style="color:red" />
+						</div>
+						<label value="Fecha Reincorporación" />
+						<div style="border:none">
+							<datebox id="dtboxFechaReinc"
+								constraint="no future" format="dd/MM/yyyy"
+								value="@{controller.datoMedico.fechaReincorporacion}"
+								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+							<label value="(*)" style="color:red" />
+						</div>
+					</row>
+					<row style="border:none;" spans="4">
+						<groupbox style="border-color:orange"
+							closable="false">
+							<caption label="Detalle Lesiones" />
+							<grid style="border:none;"
+								oddRowSclass="none">
+								<columns>
+									<column width="22%" />
+									<column width="28%" />
+									<column width="22%" />
+									<column width="28%" />
+								</columns>
+								<rows>
+									<row style="border:none;">
+										<div>
+											<label value="Lesión" />
+											<combobox readonly="true"
+												value="--Seleccione--" width="60%" id="cmbLesiones"
+												selectedItem="@{controller.lesion}"
+												model="@{winActualizarLesion$composer.lesiones}">
+												<comboitem
+													self="@{each='les'}" label="@{les.nombre}"
+													value="@{les.codigoDatoBasico}" />
+											</combobox>
+										</div>
+									</row>
+									<row style="border:none;"
+										spans="4">
+
+										<grid style="border:none;">
+											<columns>
+												<column width="95%" />
+												<column />
+											</columns>
+											<rows>
+												<row
+													style="border:none;">
+													<listbox
+														mold="paging" pageSize="2" id="listLesiones"
+														model="@{controller.lesionesJugador}">
+														<listhead>
+															<listheader
+																label="Lesión" />
+														</listhead>
+														<listitem
+															self="@{each='lesion'}" value="@{lesion}">
+															<listcell
+																label="@{lesion.nombre}" />
+														</listitem>
+													</listbox>
+													<vbox>
+														<button
+															id="btnAgregarLesion"
+															image="../../Recursos/Imagenes/agregar.ico" />
+														<button
+															id="btnEditarLesion"
+															image="../../Recursos/Imagenes/editar.ico" />
+														<button
+															id="btnQuitarLesion"
+															image="../../Recursos/Imagenes/quitar.ico" />
+													</vbox>
+												</row>
+											</rows>
+										</grid>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+					</row>
+					<row spans="1,4" style="border:none;">
+						<label value="Observaciones" />
+						<div>
+							<textbox maxlength="200" height="40px"
+								width="95%" multiline="true" id="txtObervaciones"
+								value="@{controller.datoMedico.observacion}" />
+						</div>
+					</row>
+
+					<row style="border:none;" spans="4">
+						<groupbox style="border-color:orange"
+							closable="false">
+							<caption label="Documentos" />
+							<listbox id="listDocMedicos" mold="paging"
+								pageSize="2"
+								model="@{winActualizarLesion$composer.recaudosMedicos}"
+								selectedItem="@{controller.docEntMed}">
+								<listhead>
+									<listheader width="30%"
+										label="Nombre" />
+									<listheader width="15%"
+										label="Solicitado" />
+									<listheader width="15%"
+										label="Entregado" />
+									<listheader width="20%"
+										label="Importancia" />
+									<listheader width="20%"
+										label="Documento" />
+								</listhead>
+								<listitem self="@{each='docMed'}"
+									value="docMed">
+									<listcell visible="false"
+										label="@{docMed.recaudoPorProceso.codigoRecaudoPorProceso}" />
+									<listcell
+										label="@{docMed.recaudoPorProceso.datoBasicoByCodigoDocumento.nombre}" />
+									<listcell
+										label="@{docMed.recaudoPorProceso.cantidad}" />
+									<listcell>
+										<spinner width="60%"
+											value="@{docMed.cantidad}" />
+									</listcell>
+									<listcell
+										label="@{docMed.recaudoPorProceso.datoBasicoByCodigoImportancia.nombre}" />
+									<listcell label="Subir"
+										onClick="winActualizarLesion$composer.subirDocumento(self,self.getParent().getParent())">
+									</listcell>
+								</listitem>
+							</listbox>
+						</groupbox>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</div>

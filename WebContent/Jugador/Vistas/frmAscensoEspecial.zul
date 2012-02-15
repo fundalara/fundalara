@@ -26,24 +26,11 @@ root="winAscensoEspecial"?>
 								<row spans="1,3" style="border:none">
 									<label value="Cédula" />
 									<div>
-										<combobox id="cmbNacionalidad"
-											width="4%" readonly="true" disabled="true">
-											<comboitem label="V"
-												value="V" />
-											<comboitem label="E"
-												value="E" />
-											<comboitem label="R"
-												value="R" />
-										</combobox>
 										<textbox id="txtCedula"
-											constraint="no negative" width="25%" maxlength="8"
-											readonly="true" />
-										<label value="-"
-											id="lblSeparador" visible="false" />
-										<intbox id="txtCedulaSecuencia" width="5%" readonly="true"
-											visible="false" maxlength="2"/>
-										<button id="btnCatalogoJugador" focus="true"
-											tooltiptext="Consultar Jugador"
+											constraint="no negative" width="25%" maxlength="15"
+											readonly="true" value="@{jugador.personaNatural.cedulaRif}" />
+										<button id="btnCatalogoJugador"
+											focus="true" tooltiptext="Consultar Jugador"
 											image="../../Recursos/Imagenes/consultar.ico" />
 									</div>
 								</row>
@@ -60,21 +47,19 @@ root="winAscensoEspecial"?>
 								<row style="border:none">
 									<label value="Fecha Nacimiento"
 										width="95%" />
-									<datebox id="dtboxFechaNac"
-										constraint="no future" format="dd/MM/yyyy"
-										style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
-										readonly="true" width="85%" value="@{jugador.personaNatural.fechaNacimiento}" />
+									<textbox id="txtFechaNac"
+										readonly="true" width="85%" />
 									<label value="Categoría"
 										width="95%" />
 									<textbox id="txtCategoria"
 										maxlength="25" width="95%" readonly="true"
-										value="@{controller.roster.equipo.categoria.nombre}"/>
+										value="@{controller.roster.equipo.categoria.nombre}" />
 								</row>
 								<row style="border:none">
 									<label value="Equipo" width="95%" />
 									<textbox id="txtEquipo"
 										maxlength="30" width="95%" readonly="true"
-										value="@{controller.roster.equipo.nombre}"/>
+										value="@{controller.roster.equipo.nombre}" />
 									<label value="Número" width="95%" />
 									<intbox id="txtNumero" width="15%"
 										readonly="true" maxlength="2" value="@{jugador.numero}" />
@@ -88,9 +73,9 @@ root="winAscensoEspecial"?>
 									align="center" valign="middle">
 									<groupbox mold="3d"
 										closable="false">
-										<image
-										  	src="../../Recursos/Imagenes/jug.png" height="80px"
-											width="80px" />
+										<image id="imgJugador"
+											src="../../Recursos/Imagenes/noFoto.jpg" height="80px"
+											width="95px" />
 									</groupbox>
 								</row>
 							</rows>
@@ -142,7 +127,7 @@ root="winAscensoEspecial"?>
 								<label value="Número" />
 							</div>
 							<bandbox id="bboxNumero" maxlength="2"
-								width="40%" readonly="true" constraint="no empty"
+								width="35%" readonly="true"
 								style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;"
 								value="@{controller.jugador.numero}">
 								<bandpopup>
@@ -150,56 +135,9 @@ root="winAscensoEspecial"?>
 										collapsible="true" open="false" width="180px" id="pnl1"
 										onClick="pnl2.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
 										<panelchildren>
-											<listbox width="180px"
+											<listbox id="list00"
+												width="180px"
 												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-												<listitem>
-													<listcell label="00"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="01"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="02"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="03"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="04"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="05"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="06"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="07"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="08"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="09"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="10"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="11"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="12"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="13"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="14"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="15"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="16"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="17"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="18"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="19"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
 											</listbox>
 										</panelchildren>
 									</panel>
@@ -208,56 +146,9 @@ root="winAscensoEspecial"?>
 										collapsible="true" open="false" width="180px" id="pnl2"
 										onClick="pnl1.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
 										<panelchildren>
-											<listbox width="180px"
+											<listbox id="list20"
+												width="180px"
 												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-												<listitem>
-													<listcell label="20"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="21"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="22"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="23"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="24"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="25"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="26"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="27"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="28"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="29"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="30"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="31"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="32"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="33"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="34"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="35"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="36"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="37"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="38"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="39"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
 											</listbox>
 										</panelchildren>
 									</panel>
@@ -266,56 +157,9 @@ root="winAscensoEspecial"?>
 										collapsible="true" open="false" width="180px" id="pnl3"
 										onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
 										<panelchildren>
-											<listbox width="180px"
+											<listbox id="list40"
+												width="180px"
 												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-												<listitem>
-													<listcell label="40"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="41"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="42"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="43"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="44"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="45"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="46"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="47"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="48"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="49"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="50"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="51"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="52"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="53"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="54"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="55"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="56"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="57"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="58"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="59"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
 											</listbox>
 										</panelchildren>
 									</panel>
@@ -324,56 +168,9 @@ root="winAscensoEspecial"?>
 										collapsible="true" open="false" width="180px" id="pnl4"
 										onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl3.setOpen(false);pnl5.setOpen(false);">
 										<panelchildren>
-											<listbox width="180px"
+											<listbox id="list60"
+												width="180px"
 												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-												<listitem>
-													<listcell label="60"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="61"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="62"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="63"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="64"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="65"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="66"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="67"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="68"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="69"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="70"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="71"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="72"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="73"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="74"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="75"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="76"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="77"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="78"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="79"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
 											</listbox>
 										</panelchildren>
 									</panel>
@@ -382,56 +179,9 @@ root="winAscensoEspecial"?>
 										collapsible="true" open="false" width="180px" id="pnl5"
 										onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);">
 										<panelchildren>
-											<listbox width="180px"
+											<listbox id="list80"
+												width="180px"
 												onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-												<listitem>
-													<listcell label="80"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="81"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="82"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="83"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="84"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="85"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="86"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="87"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="88"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="89"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="90"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="91"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="92"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="93"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="94"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
-												<listitem>
-													<listcell label="95"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="96"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="97"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="98"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-													<listcell label="99"
-														onClick="bboxNumero.setValue(self.getLabel());" />
-												</listitem>
 											</listbox>
 										</panelchildren>
 									</panel>
@@ -445,11 +195,11 @@ root="winAscensoEspecial"?>
 		<space height="10px" />
 		<panel title="Documentos">
 			<panelchildren>
-				<listbox id="listDoc" mold="paging" pageSize="3"
+				<listbox id="listDoc" mold="paging" pageSize="5"
 					model="@{winAscensoEspecial$composer.recaudosAscenso}"
 					selectedItem="@{controller.docEntAscenso}">
 					<listhead>
-						<listheader width="37%" label="Nombre" />
+						<listheader width="37%" label="Nombre"/>
 						<listheader width="15%" label="Solicitado" />
 						<listheader width="13%" label="Entregado" />
 						<listheader width="11%" label="Documento" />
@@ -459,11 +209,11 @@ root="winAscensoEspecial"?>
 							label="@{docAsc.recaudoPorProceso.codigoRecaudoPorProceso}" />
 						<listcell
 							label="@{docAsc.recaudoPorProceso.datoBasicoByCodigoDocumento.nombre}" />
-						<listcell 
+						<listcell
 							label="@{docAsc.recaudoPorProceso.cantidad}" />
 						<listcell>
 							<spinner id="spCantidad" width="45%"
-								value="@{docAsc.cantidad}" />
+								value="@{docAsc.cantidad}" constraint="min 0 max 5" />
 						</listcell>
 						<listcell label="Subir"
 							onClick="winAscensoEspecial$composer.subirDocumento(self,self.getParent().getParent())">
@@ -473,133 +223,35 @@ root="winAscensoEspecial"?>
 			</panelchildren>
 		</panel>
 		<space height="10px" />
-
-		<panel title="Especificaciones Técnicas">
-			<panelchildren>
-				<listbox id="listResultado">
-					<listhead>
-						<listheader label="" sort="auto" />
-						<listheader label="" sort="auto" />
-					</listhead>
-					<listitem>
-						<listcell label="" />
-						<listcell label="" />
-					</listitem>
-					<listitem>
-						<listcell label="" />
-						<listcell label="" />
-					</listitem>
-				</listbox>
-
-				<!-- 				<groupbox style="border-color:orange" -->
-				<!-- 					closable="false"> -->
-				<!-- 					<caption label="Ofensiva" /> -->
-				<!-- 					<grid> -->
-				<!-- 						<columns> -->
-				<!-- 							<column label="Al día de hoy" width="40%" -->
-				<!-- 								align="center" /> -->
-				<!-- 							<column label="VB" width="10%" -->
-				<!-- 								align="center" tooltip="VB" /> -->
-				<!-- 							<column label="HC" width="10%" -->
-				<!-- 								align="center" tooltip="HC" /> -->
-				<!-- 							<column label="2B" width="10%" -->
-				<!-- 								align="center" tooltip="doB" /> -->
-				<!-- 							<column label="3B" width="10%" -->
-				<!-- 								align="center" tooltip="triB" /> -->
-				<!-- 							<column label="HR" width="10%" -->
-				<!-- 								align="center" tooltip="HR" /> -->
-				<!-- 							<column label="AVG" width="10%" -->
-				<!-- 								align="center" tooltip="AVG" /> -->
-				<!-- 						</columns> -->
-				<!-- 						<rows> -->
-				<!-- 							<row> -->
-				<!-- 								<label value="25/11/2011" /> -->
-				<!-- 								<label value="75" /> -->
-				<!-- 								<label value="20" /> -->
-				<!-- 								<label value="10" /> -->
-				<!-- 								<label value="7" /> -->
-				<!-- 								<label value="13" /> -->
-				<!-- 								<label value=".240" /> -->
-				<!-- 							</row> -->
-				<!-- 						</rows> -->
-				<!-- 					</grid> -->
-				<!-- 				</groupbox> -->
-
-				<!-- 				<groupbox style="border-color:orange" -->
-				<!-- 					closable="false"> -->
-				<!-- 					<caption label="Defensiva" /> -->
-				<!-- 					<grid> -->
-				<!-- 						<columns> -->
-				<!-- 							<column label="Al día de hoy" width="40%" -->
-				<!-- 								align="center" /> -->
-				<!-- 							<column label="LE" width="12%" -->
-				<!-- 								align="center" tooltip="LE" /> -->
-				<!-- 							<column label="E" width="12%" align="center" -->
-				<!-- 								tooltip="E" /> -->
-				<!-- 							<column label="ASIS" width="12%" -->
-				<!-- 								align="center" tooltip="ASIS" /> -->
-				<!-- 							<column label="DP" width="12%" -->
-				<!-- 								align="center" tooltip="DP" /> -->
-				<!-- 							<column label="PFIL" width="12%" -->
-				<!-- 								align="center" tooltip="PFIL" /> -->
-				<!-- 						</columns> -->
-				<!-- 						<rows> -->
-				<!-- 							<row> -->
-				<!-- 								<label value="25/11/2011" /> -->
-				<!-- 								<label value="25" /> -->
-				<!-- 								<label value="16" /> -->
-				<!-- 								<label value="27" /> -->
-				<!-- 								<label value="17" /> -->
-				<!-- 								<label value="66%" /> -->
-				<!-- 							</row> -->
-				<!-- 						</rows> -->
-				<!-- 					</grid> -->
-				<!-- 				</groupbox> -->
-
-				<!-- 				<groupbox style="border-color:orange" -->
-				<!-- 					closable="false"> -->
-				<!-- 					<caption label="Pitcheo" /> -->
-				<!-- 					<grid> -->
-				<!-- 						<columns> -->
-				<!-- 							<column label="Al día de hoy" width="40%" -->
-				<!-- 								align="center" /> -->
-				<!-- 							<column label="JG" width="8%" align="center" -->
-				<!-- 								tooltip="JG" /> -->
-				<!-- 							<column label="JP" width="8%" align="center" -->
-				<!-- 								tooltip="JP" /> -->
-				<!-- 							<column label="JS" width="8%" align="center" -->
-				<!-- 								tooltip="JS" /> -->
-				<!-- 							<column label="K" width="8%" align="center" -->
-				<!-- 								tooltip="KK" /> -->
-				<!-- 							<column label="BB" width="8%" align="center" -->
-				<!-- 								tooltip="BxB" /> -->
-				<!-- 							<column label="EFE" width="8%" -->
-				<!-- 								align="center" tooltip="EFE" /> -->
-				<!-- 							<column label="WHIP" width="12%" -->
-				<!-- 								align="center" tooltip="WHIP" /> -->
-				<!-- 						</columns> -->
-				<!-- 						<rows> -->
-				<!-- 							<row> -->
-				<!-- 								<label value="25/11/2011" /> -->
-				<!-- 								<label value="15" /> -->
-				<!-- 								<label value="13" /> -->
-				<!-- 								<label value="7" /> -->
-				<!-- 								<label value="24" /> -->
-				<!-- 								<label value="12" /> -->
-				<!-- 								<label value=".280 " /> -->
-				<!-- 								<label value="5" /> -->
-				<!-- 							</row> -->
-				<!-- 						</rows> -->
-				<!-- 					</grid> -->
-				<!-- 				</groupbox> -->
+		
+	<panel title="Especificaciones Técnicas Acumuladas">
+		 <panelchildren>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Ofensiva" />
+					<listbox id="listOfensiva"/>					
+				</groupbox>
+				
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Defensiva" />
+					<listbox id="listDefensiva"/>
+				</groupbox>
+				
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption label="Pitcheo" />
+					<listbox id="listPitcheo"/>
+				</groupbox>			
 			</panelchildren>
 		</panel>
+	
 		<space height="10px" />
 
 		<div align="right">
 			<button id="btnGuardar" label="Guardar"
 				image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
-				width="100px" />
+				width="100px" disabled="true"/>
 			<button id="btnCancelar" label="Cancelar"
 				image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
 				width="100px" />

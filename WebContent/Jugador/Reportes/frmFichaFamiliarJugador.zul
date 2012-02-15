@@ -1,0 +1,111 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"   root="winFicha" ?>
+<?page title="Ficha Familiar de Jugador" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+<div align="center">
+	<window id="winFicha" title="Ficha Familiar" border="normal"
+		closable="true" width="600px" style="text-align:left"
+		apply="controlador.jugador.CntrlFichaFamiliarJugador">
+		<panel width="100%">
+			<panelchildren>
+				<groupbox style="border-color:orange">
+					<caption label="Perfil del Jugador" />
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="90%" />
+							<column width="10%" />
+						</columns>
+						<rows>
+							<row style="border:none">
+								<grid style="Border:none;"
+									oddRowSclass="none">
+									<columns>
+										<column width="22%" />
+										<column width="28%" />
+										<column width="22%" />
+										<column width="28%" />
+									</columns>
+									<rows>
+										<row spans="1,3"
+											style="border:none">
+
+											<label value="Cédula" />
+											<div>
+												<textbox id="txtCedula"
+													width="28%" readonly="true"
+													style='text-transform:uppercase;' />
+												<button
+													id="btnCatalogoJugador" focus="true"
+													tooltiptext="Consultar Jugador"
+													image="../../Recursos/Imagenes/consultar.ico" />
+											</div>
+										</row>
+										<row style="border:none">
+											<label
+												value="Primer Nombre" />
+											<textbox
+												id="txtPrimerNombre" style='text-transform:uppercase;'
+												maxlength="40" width="95%" readonly="true" />
+											<label
+												value="Segundo Nombre" />
+											<textbox
+												id="txtSegundoNombre" style='text-transform:uppercase;'
+												maxlength="40" width="95%" readonly="true" />
+										</row>
+										<row style="border:none">
+											<label
+												value="Primer Apellido" />
+											<textbox
+												id="txtPrimerApellido" style='text-transform:uppercase;'
+												maxlength="40" width="95%" readonly="true" />
+											<label
+												value="Segundo Apellido" />
+											<textbox
+												id="txtSegundoApellido" style='text-transform:uppercase;'
+												maxlength="40" width="95%" readonly="true" />
+										</row>
+										<row style="border:none">
+											<label
+												value="Fecha Ingreso" />
+											<textbox
+												id="txtFechaIngreso" style='text-transform:uppercase;'
+												maxlength="25" width="95%" readonly="true" />
+										</row>
+									</rows>
+								</grid>
+								<grid style="border:none;"
+									oddRowSclass="none">
+									<rows>
+										<row height="80%" align="center"
+											style="border:none">
+											<groupbox mold="3d">
+												<image id="imgJugador"
+													src="../../Recursos/Imagenes/noFoto.jpg" height="90px"
+													width="80px" />
+											</groupbox>
+										</row>
+									</rows>
+								</grid>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+
+		<div align="right">
+			<button id="btnImprimir" label="Generar"
+				image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnCancelar" label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnSalir" label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+		</div>
+	</window>
+	
+	</div>
+</zk>

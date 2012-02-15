@@ -1,19 +1,32 @@
 <?page title="Reingresar Jugador"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="winReingresoJugador"?>
-<zk>
-<zscript><![CDATA[
-	//@IMPORT
-	import controlador.jugador.converter.*;
-]]></zscript>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="winReingresarJugador" ?>
 
+<zk>
 	<div align="left">
-		<window border="none" width="670px" height="1000px"
-			id="winReingresoJugador"
+		<window border="none" width="670px" height="970px"
+			id="winReingresarJugador"
 			apply="controlador.jugador.CntrlReingresarJugador">
-	
-			<groupbox id="grboxPerfilJugador" style="border-color:orange"
-				closable="false">
+			<separator />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="20%" />
+					<column width="80%" />
+				</columns>
+				<rows>
+					<row style="border:none;">
+						<label value="Tipo Reingreso" />
+						<radiogroup id="radGroupTipo">
+							<radio id="radioReinscripcion"
+								label="Reinscripción" value="reinscripcion" checked="true" />
+							<radio id="radioReincorporacion"
+								label="Reincorporación" value="reincorporacion" />
+						</radiogroup>
+					</row>
+				</rows>
+			</grid>
+			<groupbox id="grboxPerfilJugador"
+				style="border-color:orange" closable="false">
 				<caption label="Jugador" />
 				<grid style="border:none;" oddRowSclass="none">
 					<columns>
@@ -23,7 +36,7 @@
 					<rows>
 						<row style="border:none;">
 							<grid style="border:none;"
-								oddRowSclass="none" id="gridPerfil" >
+								oddRowSclass="none">
 								<columns>
 									<column width="22%" />
 									<column width="28%" />
@@ -31,87 +44,55 @@
 									<column width="28%" />
 								</columns>
 								<rows>
-									<row style="border:none;" spans="1,3">
+									<row style="border:none;"
+										spans="1,1,2">
 										<label value="Cédula" />
-										<div>
-											<combobox
-												id="cmbNacionalidad" readonly="true" value="-" width="4%"
-												focus="true" constraint="no empty"
-												selectedItem="@{controller.jugadorBean.nacionalidad}">
-												<comboitem label="V"
-													value="V" />
-												<comboitem label="E"
-													value="E" />
-												<comboitem label="R"
-													value="R" />
-											</combobox>
-											<intbox id="txtCedula"
-												value="@{controller.jugadorBean.cedula}" 
-												maxlength="8"  width="20%" />
-											<label value="-"
-												id="lblSeparador" visible="false" />
-											<intbox
-												id="txtCedulaSecuencia" constraint="no negative" width="5%"
-												readonly="true" visible="false"
-												value="@{controller.jugadorBean.secuencia}" />
-											<label value="(*)"
-												style="color:red" />
-											<button id="btnCatalogoJugador"
-												image="../../Recursos/Imagenes/consultar.ico" />
-										</div>
+										<textbox id="txtCedula" readonly="true"
+											width="80%" value="@{controller.jugadorBean.cedulaCompleta}" />
+										<button id="btnCatalogoJugador"
+											image="../../Recursos/Imagenes/consultar.ico" />
 									</row>
 									<row style="border:none;">
 										<label value="Primer Nombre" />
-										<div>
-											<textbox id="txtPrimerNombre"
-												maxlength="40" width="80%" readonly="true"
+											<textbox readonly="true"
+												style='text-transform:uppercase;' id="txtPrimerNombre"
+												maxlength="20" width="80%"
 												value="@{controller.jugadorBean.primerNombre}" />
-											<label value="(*)"
-												style="color:red" />
-										</div>
 										<label value="Segundo Nombre" />
-										<textbox maxlength="40"
-											id="txtSegundoNombre" width="80%" readonly="true"
+										<textbox readonly="true"
+											style='text-transform:uppercase;' maxlength="20"
+											id="txtSegundoNombre" width="80%"
 											value="@{controller.jugadorBean.segundoNombre}" />
 									</row>
 									<row style="border:none;">
 										<label value="Primer Apellido"
 											width="95%" />
-										<div>
-											<textbox maxlength="40"
-												width="80%" id="txtPrimerApellido" readonly="true"
+											<textbox readonly="true"
+												style='text-transform:uppercase;' maxlength="20" width="80%"
+												id="txtPrimerApellido"
 												value="@{controller.jugadorBean.primerApellido}" />
-											<label value="(*)"
-												style="color:red" />
-										</div>
 										<label value="Segundo Apellido"
 											width="95%" />
-										<textbox maxlength="40"
-											id="txtSegundoApellido" width="80%" readonly="true"
+										<textbox  readonly="true"
+											style='text-transform:uppercase;' maxlength="20"
+											id="txtSegundoApellido" width="80%"
 											value="@{controller.jugadorBean.segundoApellido}" />
 									</row>
-									<row style="border:none;" spans="1,3">
+									<row style="border:none;"
+										spans="1,3">
 										<label value="Género" />
-										<div>
-											<combobox id="cmbGenero"
-											constraint="no empty"
-												selectedItem="@{controller.jugadorBean.genero}"
-												readonly="true" value="--Seleccione--" width="25%"
-													model="@{winReingresoJugador$composer.generos}">
-															<comboitem
-														self="@{each='genero'}" label="@{genero.nombre}" />
-																			</combobox>
-											<label value="(*)"
-												style="color:red" />
-										</div>
+											<textbox readonly="true"
+											style='text-transform:uppercase;' 
+											id="txtGenero" width="28%"
+											value="@{controller.jugadorBean.genero.nombre}" />
 									</row>
 								</rows>
 							</grid>
 							<grid style="border:none;"
 								oddRowSclass="none">
 								<rows>
-									<row style="border:none;" height="80%"
-										align="center" valign="middle">
+									<row style="border:none;"
+										height="80%" align="center" valign="middle">
 										<groupbox
 											style="border-color:orange" mold="3d">
 											<image id="imgJugador"
@@ -119,8 +100,8 @@
 												width="80px" />
 										</groupbox>
 									</row>
-									<row style="border:none;" height="20%"
-										align="center">
+									<row style="border:none;"
+										height="20%" align="center">
 										<button id="btnFoto"
 											image="../../Recursos/Imagenes/foto.png">
 										</button>
@@ -132,9 +113,7 @@
 				</grid>
 			</groupbox>
 			<separator height="10px" />
-			
-			
-			
+
 			<tabbox id="tbboxPasosRegistro">
 				<tabs>
 					<tab label="Paso 01 de 02 - Registro Jugador"
@@ -148,7 +127,7 @@
 							<panelchildren>
 								<!-- Inicio tbboxDetalleBasico -->
 								<tabbox id="tbboxDetalleBasico"
-									height="680px">
+									height="620px">
 									<tabs id="tabs" width="90px">
 										<tab id="tabJugPersonales"
 											label="Personales" />
@@ -191,9 +170,7 @@
 																		<div>
 																			<datebox
 																				value="@{controller.jugadorBean.fechaNacimiento}"
-																				disabled="true"
-																				id="dtboxFechaNac" 
-																				format="dd/MM/yyyy"
+																				id="dtboxFechaNac" format="dd/MM/yyyy" disabled="true"
 																				style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
 																			<label
 																				value="(*)" style="color:red" />
@@ -202,7 +179,7 @@
 																			value="Edad" />
 																		<div>
 																			<intbox
-																				id="txtEdad" disabled="true" width="25px"
+																				id="txtEdad" disabled="false" width="25px"
 																				readonly="true" />
 																			<space />
 																			<label
@@ -216,10 +193,9 @@
 																		<div>
 																			<combobox
 																				value="--Seleccione--" id="cmbPaisNac"
-																				disabled="true"
 																				readonly="true" width="70%"
 																				selectedItem="@{controller.jugadorBean.paisNac}"
-																				model="@{winReingresoJugador$composer.paises}">
+																				model="@{winReingresarJugador$composer.paises}">
 																				<comboitem
 																					self="@{each='pais'}" label="@{pais.nombre}" />
 																			</combobox>
@@ -233,7 +209,7 @@
 																				id="cmbEstadoNac" value="--Seleccione--" width="70%"
 																				readonly="true" disabled="true"
 																				selectedItem="@{controller.estadoVenezuela}"
-																				model="@{winReingresoJugador$composer.estadosVenezuela}">
+																				model="@{winReingresarJugador$composer.estadosVenezuela}">
 																				<comboitem
 																					self="@{each='estadoV'}" label="@{estadoV.nombre}" />
 																			</combobox>
@@ -250,7 +226,7 @@
 																				id="cmbMunicipioNac" readonly="true"
 																				selectedItem="@{controller.municipioNac}"
 																				value="--Seleccione--" width="70%" disabled="true"
-																				model="@{winReingresoJugador$composer.municipiosEstados, load-after='cmbEstadoNac.onChange'}">
+																				model="@{winReingresarJugador$composer.municipiosEstados, load-after='cmbEstadoNac.onChange'}">
 																				<comboitem
 																					self="@{each='municipioN'}"
 																					label="@{municipioN.nombre}" />
@@ -264,8 +240,8 @@
 																			<combobox
 																				id="cmbParroquiaNac" readonly="true"
 																				selectedItem="@{controller.jugadorBean.parroquiaNac}"
-																				value="--Seleccione--" width="70%" disabled="true"
-																				model="@{winReingresoJugador$composer.parroquiasMunicipio, load-after='cmbMunicipioNac.onChange'}">
+																				disabled="true" value="--Seleccione--" width="70%"
+																				model="@{winReingresarJugador$composer.parroquiasMunicipio, load-after='cmbMunicipioNac.onChange'}">
 																				<comboitem
 																					self="@{each='parroquiaN'}"
 																					label="@{parroquiaN.nombre}" />
@@ -306,7 +282,7 @@
 																				readonly="true" id="cmbEstadoResi"
 																				value="--Seleccione--" width="70%"
 																				selectedItem="@{controller.estadoVenezuelaResi}"
-																				model="@{winReingresoJugador$composer.estadosVenezuela}">
+																				model="@{winReingresarJugador$composer.estadosVenezuela}">
 																				<comboitem
 																					self="@{each='estado'}" label="@{estado.nombre}"
 																					value="@{estado.codigoEstado}" />
@@ -321,7 +297,7 @@
 																				id="cmbMunicipioResi" readonly="true"
 																				selectedItem="@{controller.municipioResi}"
 																				value="--Seleccione--" width="70%"
-																				model="@{winReingresoJugador$composer.municipiosEstadosResi, load-after='cmbEstadoResi.onChange'}">
+																				model="@{winReingresarJugador$composer.municipiosEstadosResi, load-after='cmbEstadoResi.onChange'}">
 																				<comboitem
 																					self="@{each='municipio'}"
 																					label="@{municipio.nombre}" />
@@ -339,7 +315,7 @@
 																				id="cmbParroquiaResi" readonly="true"
 																				value="--Seleccione--" width="27%"
 																				selectedItem="@{controller.jugadorBean.parroquiaResi}"
-																				model="@{winReingresoJugador$composer.parroquiasMunicipioResi, load-after='cmbMunicipioResi.onChange'}">
+																				model="@{winReingresarJugador$composer.parroquiasMunicipioResi, load-after='cmbMunicipioResi.onChange'}">
 																				<comboitem
 																					self="@{each='parroquia'}"
 																					label="@{parroquia.nombre}" />
@@ -354,6 +330,7 @@
 																			value="Dirección Habitación" />
 																		<div>
 																			<textbox
+																				id="txtDireccion" style='text-transform:uppercase;'
 																				maxlength="200" height="40px" width="90%"
 																				multiline="true"
 																				value="@{controller.jugadorBean.direccion}" />
@@ -394,15 +371,15 @@
 																				readonly="true" id="cmbCodArea"
 																				value="--Seleccione--" width="30%"
 																				selectedItem="@{controller.jugadorBean.telefonoHabitacion.codigo}"
-																				model="@{winReingresoJugador$composer.codigosArea}">
+																				model="@{winReingresarJugador$composer.codigosArea}">
 																				<comboitem
 																					self="@{each='codAJug'}" label="@{codAJug.nombre}" />
 																			</combobox>
 																			<textbox
-																				id="txtTelefonoHabitacion"
-																				maxlength="7"
+																				style='text-transform:uppercase;'
+																				id="txtTelefonoHabitacion" maxlength="7"
 																				value="@{controller.jugadorBean.telefonoHabitacion.numero}"
-																				 width="50%" />
+																				width="50%" />
 																		</div>
 																		<label
 																			value="Teléfono Celular" />
@@ -411,16 +388,16 @@
 																				readonly="true" id="cmbCodCelular"
 																				value="--Seleccione--" width="30%"
 																				selectedItem="@{controller.jugadorBean.telefonoCelular.codigo}"
-																				model="@{winReingresoJugador$composer.codigosCelular}">
+																				model="@{winReingresarJugador$composer.codigosCelular}">
 																				<comboitem
 																					self="@{each='codCJug'}" label="@{codCJug.nombre}"
 																					value="@{codCJug.codigoDatoBasico}" />
 																			</combobox>
 																			<textbox
-																				id="txtTelefonoCelular"
-																				maxlength="7"
+																				style='text-transform:uppercase;'
+																				id="txtTelefonoCelular" maxlength="7"
 																				value="@{controller.jugadorBean.telefonoCelular.numero}"
-																				 width="50%" />
+																				width="50%" />
 																		</div>
 																	</row>
 																	<row
@@ -428,7 +405,8 @@
 																		<label
 																			value="Correo Electrónico" />
 																		<textbox
-																			id="txtCorreo" width="90%"
+																			style='text-transform:uppercase;' id="txtCorreo"
+																			width="90%"
 																			value="@{controller.jugadorBean.correoElectronico}" />
 																		<label
 																			value="Twitter" />
@@ -436,7 +414,8 @@
 																			<label
 																				value="@" />
 																			<textbox
-																				id="txtTwitter" width="80%"
+																				style='text-transform:uppercase;' id="txtTwitter"
+																				width="80%"
 																				value="@{controller.jugadorBean.twitter}" />
 																		</div>
 																	</row>
@@ -452,19 +431,21 @@
 													label="Documentos" />
 												<listbox
 													id="listDocPersonales" mold="paging" pageSize="2"
-													model="@{winReingresoJugador$composer.recaudosPersonales}"
+													model="@{winReingresarJugador$composer.recaudosPersonales}"
 													selectedItem="@{controller.docEntPersonal}">
 													<listhead>
 														<listheader
-															width="30%" label="Nombre" />
+															width="29%" label="Nombre" />
 														<listheader
-															width="15%" label="Solicitado" />
+															width="13%" label="Solicitado" />
 														<listheader
-															width="15%" label=" Entregado" />
+															width="13%" label="Entregado" />
 														<listheader
 															width="20%" label="Importancia" />
 														<listheader
 															width="20%" label="Documento" />
+														<listheader
+															width="5%" label="" />
 													</listhead>
 													<listitem
 														self="@{each='docPer'}" value="docPer">
@@ -477,13 +458,18 @@
 															label="@{docPer.recaudoPorProceso.cantidad}" />
 														<listcell>
 															<spinner
-																width="60%" value="@{docPer.cantidad}" />
+																id="spCantidad" width="60%" value="@{docPer.cantidad}"
+																constraint="min 0 max 10" />
 														</listcell>
 														<listcell
 															label="@{docPer.recaudoPorProceso.datoBasicoByCodigoImportancia.nombre}" />
 														<listcell
-															label="Subir"
-															onClick="winReingresoJugador$composer.subirDocumento(self,self.getParent().getParent())">
+															label="@{docPer.documento, converter='controlador.jugador.converter.LabelConverter'}"
+															onClick="winReingresarJugador$composer.subirDocumento(self,self.getParent().getParent())">
+														</listcell>
+														<listcell
+															label="Ver"
+															onClick="winReingresarJugador$composer.mostrarDocumento(self,self.getParent().getParent())">
 														</listcell>
 													</listitem>
 												</listbox>
@@ -491,48 +477,57 @@
 										</tabpanel><!-- Fin tabJugPersonales -->
 
 										<tabpanel><!-- Inicio tabJugMedicos -->
-											<grid style="border:none;"
-												oddRowSclass="none">
-												<columns>
-													<column width="15%" />
-													<column width="15%" />
-													<column width="15%" />
-													<column />
-												</columns>
-												<rows>
-													<row
-														style="border:none;">
-
-														<label
-															value="Grupo Sanguíneo" />
-														<div>
-															<combobox
-																id="cmbGrupoSanguineo" width="20%" readonly="true"
-																value="--"
-																selectedItem="@{controller.jugadorBean.tipoSangre.grupoSanguineo}"
-																model="@{winReingresoJugador$composer.gruposSanguineos}">
-																<comboitem
-																	self="@{each='grupoSang'}" label="@{grupoSang.nombre}" />
-															</combobox>
+											<groupbox
+												id="grboxTipoSangre" style="border-color:orange"
+												closable="false">
+												<caption
+													label="Tipo Sangre" />
+												<grid
+													style="border:none;" oddRowSclass="none">
+													<columns>
+														<column
+															width="15%" />
+														<column
+															width="15%" />
+														<column
+															width="15%" />
+														<column />
+													</columns>
+													<rows>
+														<row
+															style="border:none;">
 															<label
-																value="(*)" style="color:red" />
-														</div>
-														<label
-															value="Factor RH" />
-														<div>
-															<combobox
-																id="cmbFactorRH" width="5%" readonly="true" value="--"
-																model="@{winReingresoJugador$composer.factoresRH}"
-																selectedItem="@{controller.jugadorBean.tipoSangre.factorRH}">
-																<comboitem
-																	self="@{each='factorRH'}" label="@{factorRH.nombre}" />
-															</combobox>
+																value="Grupo Sanguíneo" />
+															<div>
+																<combobox
+																	id="cmbGrupoSanguineo" width="30%" readonly="true"
+																	value="--"
+																	selectedItem="@{controller.jugadorBean.tipoSangre.grupoSanguineo}"
+																	model="@{winReingresarJugador$composer.gruposSanguineos}">
+																	<comboitem
+																		self="@{each='grupoSang'}"
+																		label="@{grupoSang.nombre}" />
+																</combobox>
+																<label
+																	value="(*)" style="color:red" />
+															</div>
 															<label
-																value="(*)" style="color:red" />
-														</div>
-													</row>
-												</rows>
-											</grid>
+																value="Factor RH" />
+															<div>
+																<combobox
+																	id="cmbFactorRH" width="10%" readonly="true" value="--"
+																	model="@{winReingresarJugador$composer.factoresRH}"
+																	selectedItem="@{controller.jugadorBean.tipoSangre.factorRH}">
+																	<comboitem
+																		self="@{each='factorRH'}" label="@{factorRH.nombre}" />
+																</combobox>
+																<label
+																	value="(*)" style="color:red" />
+															</div>
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
 											<groupbox
 												style="border-color:orange" closable="false">
 												<caption
@@ -555,8 +550,11 @@
 																value="Médico" />
 															<div>
 																<textbox
-																	value="@{controller.medico.nombre}" width="70%"
+																	style='text-transform:uppercase;' width="60%"
 																	readonly="true" id="txtMedico" />
+																<label
+																	value="(*)" style="color:red" />
+
 																<button
 																	id="btnCatalogoMedico"
 																	image="../../Recursos/Imagenes/consultar.ico"
@@ -564,20 +562,29 @@
 															</div>
 															<label
 																value="Número Colegio" />
-															<textbox
-																value="@{controller.medico.matricula}" width="60%"
-																id="txtNroColegio" readonly="true" />
+															<div>
+																<textbox
+																	style='text-transform:uppercase;'
+																	value="@{controller.medico.matricula}" width="50%"
+																	id="txtNroColegio" readonly="true" />
+																<label
+																	value="(*)" style="color:red" />
+															</div>
 															<space />
 														</row>
 														<row
 															style="border:none;" spans="1,3">
 															<label
 																value="Fecha" />
-															<datebox
-																id="dtboxFechaRev" constraint="no future"
-																format="dd/MM/yyyy"
-																value="@{controller.datoMedico.fechaInforme}"
-																style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+															<div>
+																<datebox
+																	id="dtboxFechaRev" constraint="no future"
+																	format="dd/MM/yyyy"
+																	value="@{controller.datoMedico.fechaInforme}"
+																	style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
+																<label
+																	value="(*)" style="color:red" />
+															</div>
 														</row>
 														<row
 															style="border:none;" spans="4">
@@ -603,11 +610,10 @@
 																			<combobox
 																				readonly="true" value="--Seleccione--" width="60%"
 																				id="cmbAfecciones"
-																					selectedItem="@{controller.afeccion}"
-																				model="@{winReingresoJugador$composer.afecciones}">
+																				selectedItem="@{controller.afeccion}"
+																				model="@{winReingresarJugador$composer.afecciones}">
 																				<comboitem
-																					self="@{each='afecc'}"
-																					label="@{afecc.nombre}"
+																					self="@{each='afecc'}" label="@{afecc.nombre}"
 																					value="@{afecc.codigoDatoBasico}" />
 																			</combobox>
 																		</row>
@@ -658,8 +664,9 @@
 															<label
 																value="Observaciones" />
 															<textbox
-																maxlength="200" height="40px" width="95%"
-																multiline="true" id="txtObervaciones"
+																style='text-transform:uppercase;' maxlength="200"
+																height="40px" width="95%" multiline="true"
+																id="txtObervaciones"
 																value="@{controller.datoMedico.observacion}" />
 														</row>
 													</rows>
@@ -671,19 +678,21 @@
 													label="Documentos" />
 												<listbox
 													id="listDocMedicos" mold="paging" pageSize="2"
-													model="@{winReingresoJugador$composer.recaudosMedicos}"
+													model="@{winReingresarJugador$composer.recaudosMedicos}"
 													selectedItem="@{controller.docEntMed}">
 													<listhead>
 														<listheader
-															width="30%" label="Nombre" />
+															width="29%" label="Nombre" />
 														<listheader
-															width="15%" label="Solicitado" />
+															width="13%" label="Solicitado" />
 														<listheader
-															width="15%" label=" Entregado" />
+															width="13%" label="Entregado" />
 														<listheader
 															width="20%" label="Importancia" />
 														<listheader
 															width="20%" label="Documento" />
+														<listheader
+															width="5%" label="" />
 													</listhead>
 													<listitem
 														self="@{each='docMed'}" value="docMed">
@@ -696,13 +705,18 @@
 															label="@{docMed.recaudoPorProceso.cantidad}" />
 														<listcell>
 															<spinner
-																width="60%" value="@{docMed.cantidad}" />
+																id="spCantidadMed" width="60%"
+																value="@{docMed.cantidad}" constraint="min 0 max 10" />
 														</listcell>
 														<listcell
 															label="@{docMed.recaudoPorProceso.datoBasicoByCodigoImportancia.nombre}" />
 														<listcell
-															label="Subir"
-															onClick="winReingresoJugador$composer.subirDocumento(self,self.getParent().getParent())">
+															label="@{docMed.documento, converter='controlador.jugador.converter.LabelConverter'}"
+															onClick="winReingresarJugador$composer.subirDocumento(self,self.getParent().getParent())">
+														</listcell>
+														<listcell
+															label="Ver"
+															onClick="winReingresarJugador$composer.mostrarDocumento(self,self.getParent().getParent())">
 														</listcell>
 													</listitem>
 												</listbox>
@@ -731,39 +745,54 @@
 															style="border:none;" spans="1,3">
 															<label
 																value="Institución" />
-															<combobox
-																id="cmbInstitucionEducativa" width="90%"
-																model="@{winReingresoJugador$composer.institucionesEducativas}"
-														 		selectedItem="@{controller.datoAcademico.institucion}"
-																readonly="true" value="--Seleccione--">
-																<comboitem 
-																	self="@{each='institucionE'}"
-																	label="@{institucionE.nombre}" />
-															</combobox>
+															<div>
+																<combobox
+																	id="cmbInstitucionEducativa" width="90%"
+																	constraint="no empty"
+																	model="@{winReingresarJugador$composer.institucionesEducativas}"
+																	selectedItem="@{controller.datoAcademico.institucion}"
+																	readonly="true" value="--Seleccione--">
+																	<comboitem
+																		self="@{each='institucionE'}"
+																		label="@{institucionE.nombre}" />
+																</combobox>
+																<label
+																	value="(*)" style="color:red" />
+															</div>
 														</row>
 														<row
 															style="border:none;">
 															<label
 																value="Año escolar" />
-															<combobox
-																id="cmbAnnioEscolar" readonly="true"
-																model="@{winReingresoJugador$composer.annoEsc}"
-																selectedItem="@{controller.datoAcademico.datoBasicoByCodigoAnnoEscolar}"
-																value="--Seleccione--" width="80%">
-																<comboitem
-																	self="@{each='anno_escolar'}"
-																	label="@{anno_escolar.nombre}" />
-															</combobox>
+															<div>
+																<combobox
+																	id="cmbAnnioEscolar" readonly="true"
+																	model="@{winReingresarJugador$composer.annoEsc}"
+																	constraint="no empty"
+																	selectedItem="@{controller.datoAcademico.datoBasicoByCodigoAnnoEscolar}"
+																	value="--Seleccione--" width="75%">
+																	<comboitem
+																		self="@{each='anno_escolar'}"
+																		label="@{anno_escolar.nombre}" />
+																</combobox>
+																<label
+																	value="(*)" style="color:red" />
+															</div>
 															<label
 																value="Curso" />
-															<combobox
-																id="cmbCurso"
-																model="@{winReingresoJugador$composer.cursos}"
-																selectedItem="@{controller.datoAcademico.datoBasicoByCodigoCurso}"
-																readonly="true" value="--Seleccione--">
-																<comboitem
-																	self="@{each='curso'}" label="@{curso.nombre}" />
-															</combobox>
+															<div>
+																<combobox
+																	id="cmbCurso"
+																	model="@{winReingresarJugador$composer.cursos}"
+																	constraint="no empty"
+																	selectedItem="@{controller.datoAcademico.datoBasicoByCodigoCurso}"
+																	readonly="true" value="--Seleccione--">
+																	<comboitem
+																		self="@{each='curso'}" label="@{curso.nombre}" />
+																</combobox>
+																<label
+																	value="(*)" style="color:red" />
+															</div>
 														</row>
 													</rows>
 												</grid>
@@ -774,19 +803,21 @@
 													label="Documentos" />
 												<listbox
 													id="listDocAcademicos" mold="paging" pageSize="2"
-													model="@{winReingresoJugador$composer.recaudosAcademicos}"
+													model="@{winReingresarJugador$composer.recaudosAcademicos}"
 													selectedItem="@{controller.docEntAcad}">
 													<listhead>
 														<listheader
-															width="30%" label="Nombre" />
+															width="29%" label="Nombre" />
 														<listheader
-															width="15%" label="Solicitado" />
+															width="13%" label="Solicitado" />
 														<listheader
-															width="15%" label=" Entregado" />
+															width="13%" label="Entregado" />
 														<listheader
 															width="20%" label="Importancia" />
 														<listheader
 															width="20%" label="Documento" />
+														<listheader
+															width="5%" label="" />
 													</listhead>
 													<listitem
 														self="@{each='docAcad'}" value="docAcad">
@@ -799,13 +830,18 @@
 															label="@{docAcad.recaudoPorProceso.cantidad}" />
 														<listcell>
 															<spinner
-																width="60%" value="@{docAcad.cantidad}" />
+																id="spCantidadAcad" width="60%"
+																value="@{docAcad.cantidad}" constraint="min 0 max 10" />
 														</listcell>
 														<listcell
 															label="@{docAcad.recaudoPorProceso.datoBasicoByCodigoImportancia.nombre}" />
 														<listcell
-															label="Subir"
-															onClick="winReingresoJugador$composer.subirDocumento(self,self.getParent().getParent())">
+															label="@{docAcad.documento, converter='controlador.jugador.converter.LabelConverter'}"
+															onClick="winReingresarJugador$composer.subirDocumento(self,self.getParent().getParent())">
+														</listcell>
+														<listcell
+															label="Ver"
+															onClick="winReingresarJugador$composer.mostrarDocumento(self,self.getParent().getParent())">
 														</listcell>
 													</listitem>
 												</listbox>
@@ -836,7 +872,7 @@
 																value="Institución" />
 															<combobox
 																id="cmbInstitucionRecreativa" width="90%"
-																model="@{winReingresoJugador$composer.institucionesRecreativas}"
+																model="@{winReingresarJugador$composer.institucionesRecreativas}"
 																selectedItem="@{controller.datoSocial.institucion}"
 																readonly="true" value="--Seleccione--">
 																<comboitem
@@ -851,8 +887,8 @@
 																value="Actividad" />
 															<combobox
 																id="cmbActividad" readonly="true" value="--Seleccione--"
-																model="@{winReingresoJugador$composer.actividadSoc}"
-																	selectedItem="@{controller.datoSocial.datoBasico}"
+																model="@{winReingresarJugador$composer.actividadSoc}"
+																selectedItem="@{controller.datoSocial.datoBasico}"
 																width="80%">
 																<comboitem
 																	self="@{each='actividad_social'}"
@@ -862,8 +898,9 @@
 															<label
 																value="Fecha inicio" />
 															<datebox
-															value="@{controller.datoSocial.fechaInicio}"
-																id="dtboxFechaInicioActividad" format="dd/MM/yyyy"
+																value="@{controller.datoSocial.fechaInicio}"
+																constraint="no future" id="dtboxFechaInicioActividad"
+																format="dd/MM/yyyy"
 																style="font-family: Tahoma, Arial, Helvetica, Sans-Serif;font-style: normal;font-style: normal;font-weight: normal;font-size: 13px;" />
 														</row>
 														<row
@@ -871,8 +908,9 @@
 															<label
 																value="Horas" />
 															<div>
-																<spinner 
-																	width="10%" id="spHorasSemanales" value="@{controller.datoSocial.horasDedicadas}" />
+																<spinner
+																	width="10%" id="spHorasSemanales"
+																	value="@{controller.datoSocial.horasDedicadas}" />
 																<space />
 																<label
 																	value="Semanales" />
@@ -912,16 +950,13 @@
 																<listcell
 																	label="@{actividadSocial.horasDedicadas}" />
 																<listcell
-																	label="@{actividadSocial.fechaInicio, converter='DateConverter'}" />
+																	label="@{actividadSocial.fechaInicio, converter='controlador.jugador.converter.DateConverter'}" />
 															</listitem>
 														</listbox>
 														<vbox>
 															<button
 																id="btnAgregarActividad"
 																image="../../Recursos/Imagenes/agregar.ico" />
-															<button
-																id="btnModificarActividad"
-																image="../../Recursos/Imagenes/editar.ico" />
 															<button
 																id="btnEliminarActividad"
 																image="../../Recursos/Imagenes/quitar.ico" />
@@ -957,7 +992,7 @@
 																<combobox
 																	id="cmbCategoria" value="--Seleccione--" width="65%"
 																	readonly="true" selectedItem="@{controller.categoria}"
-																	model="@{winReingresoJugador$composer.categorias}">
+																	model="@{winReingresarJugador$composer.categorias, load-after='dtboxFechaNac.onChange'}">
 																	<comboitem
 																		self="@{each='categoria'}" label="@{categoria.nombre}"
 																		value="@{categoria.codigoCategoria}" />
@@ -971,9 +1006,11 @@
 																<combobox
 																	id="cmbEquipo" readonly="true" value="--Seleccione--"
 																	width="65%" selectedItem="@{controller.equipo}"
-																	model="@{winReingresoJugador$composer.equipos, load-after='cmbCategoria.onChange'}">
+																	constraint="no empty"
+																	model="@{winReingresarJugador$composer.equipos, load-after='cmbCategoria.onChange,dtboxFechaNac.onChange'}">
 																	<comboitem
-																		self="@{each='equipo'}" label="@{equipo.nombre}" />
+																		self="@{each='equipo'}" label="@{equipo.nombre}"
+																		value="@{equipo.codigoEquipo}" />
 																</combobox>
 																<label
 																	value="(*)" style="color:red" />
@@ -999,76 +1036,8 @@
 																			onClick="pnl2.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
 																			<panelchildren>
 																				<listbox
-																					width="180px"
+																					id="list00" width="180px"
 																					onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-																					<listitem>
-																						<listcell
-																							label="00"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="01"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="02"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="03"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="04"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="05"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="06"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="07"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="08"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="09"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="10"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="11"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="12"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="13"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="14"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="15"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="16"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="17"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="18"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="19"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
 																				</listbox>
 																			</panelchildren>
 																		</panel>
@@ -1079,76 +1048,8 @@
 																			onClick="pnl1.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
 																			<panelchildren>
 																				<listbox
-																					width="180px"
+																					id="list20" width="180px"
 																					onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-																					<listitem>
-																						<listcell
-																							label="20"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="21"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="22"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="23"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="24"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="25"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="26"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="27"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="28"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="29"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="30"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="31"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="32"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="33"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="34"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="35"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="36"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="37"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="38"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="39"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
 																				</listbox>
 																			</panelchildren>
 																		</panel>
@@ -1159,76 +1060,8 @@
 																			onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl4.setOpen(false);pnl5.setOpen(false);">
 																			<panelchildren>
 																				<listbox
-																					width="180px"
+																					id="list40" width="180px"
 																					onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-																					<listitem>
-																						<listcell
-																							label="40"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="41"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="42"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="43"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="44"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="45"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="46"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="47"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="48"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="49"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="50"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="51"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="52"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="53"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="54"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="55"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="56"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="57"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="58"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="59"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
 																				</listbox>
 																			</panelchildren>
 																		</panel>
@@ -1239,76 +1072,8 @@
 																			onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl3.setOpen(false);pnl5.setOpen(false);">
 																			<panelchildren>
 																				<listbox
-																					width="180px"
+																					id="list60" width="180px"
 																					onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-																					<listitem>
-																						<listcell
-																							label="60"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="61"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="62"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="63"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="64"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="65"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="66"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="67"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="68"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="69"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="70"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="71"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="72"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="73"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="74"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="75"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="76"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="77"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="78"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="79"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
 																				</listbox>
 																			</panelchildren>
 																		</panel>
@@ -1319,76 +1084,8 @@
 																			onClick="pnl1.setOpen(false);pnl2.setOpen(false);pnl3.setOpen(false);pnl4.setOpen(false);">
 																			<panelchildren>
 																				<listbox
-																					width="180px"
+																					id="list80" width="180px"
 																					onSelect="self.setSelectedIndex(-1);bboxNumero.close();">
-																					<listitem>
-																						<listcell
-																							label="80"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="81"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="82"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="83"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="84"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="85"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="86"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="87"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="88"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="89"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="90"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="91"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="92"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="93"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="94"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
-																					<listitem>
-																						<listcell
-																							label="95"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="96"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="97"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="98"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																						<listcell
-																							label="99"
-																							onClick="bboxNumero.setValue(self.getLabel());" />
-																					</listitem>
 																				</listbox>
 																			</panelchildren>
 																		</panel>
@@ -1425,7 +1122,7 @@
 															<div>
 																<decimalbox
 																	value="@{controller.jugadorBean.peso}" id="txtPeso"
-																	constraint="no negative" />
+																	format="###.##" constraint="no negative" />
 																<label
 																	value="Kg." />
 																<label
@@ -1436,7 +1133,7 @@
 															<div>
 																<decimalbox
 																	value="@{controller.jugadorBean.altura}" id="txtAltura"
-																	constraint="no negative" />
+																	format="#.##" constraint="no negative" />
 																<label
 																	value="mts." />
 																<label
@@ -1451,7 +1148,7 @@
 																id="cmbBrazoLanzar" readonly="true"
 																value="--Seleccione--" width="65%"
 																selectedItem="@{controller.jugadorBean.brazoLanzar}"
-																model="@{winReingresoJugador$composer.valoresBrazoLanzamiento}">
+																model="@{winReingresarJugador$composer.valoresBrazoLanzamiento}">
 																<comboitem
 																	self="@{each='lanzamiento'}"
 																	label="@{lanzamiento.nombre}" />
@@ -1462,7 +1159,7 @@
 																id="cmbPosicionBateo" readonly="true"
 																value="--Seleccione--" width="65%"
 																selectedItem="@{controller.jugadorBean.posicionBateo}"
-																model="@{winReingresoJugador$composer.valoresPosicionBateo}">
+																model="@{winReingresarJugador$composer.valoresPosicionBateo}">
 																<comboitem
 																	self="@{each='bateo'}" label="@{bateo.nombre}" />
 															</combobox>
@@ -1495,7 +1192,7 @@
 																<combobox
 																	id="cmbTallaCamisa" readonly="true"
 																	value="--Seleccione--" width="65%"
-																	model="@{winReingresoJugador$composer.tallasCamisa}"
+																	model="@{winReingresarJugador$composer.tallasCamisa}"
 																	selectedItem="@{controller.jugadorBean.tallaCamisa}">
 																	<comboitem
 																		self="@{each='tallaCamisa'}"
@@ -1510,7 +1207,7 @@
 																<combobox
 																	id="cmbTallaPantalon" readonly="true"
 																	value="--Seleccione--" width="65%"
-																	model="@{winReingresoJugador$composer.tallasPantalon}"
+																	model="@{winReingresarJugador$composer.tallasPantalon}"
 																	selectedItem="@{controller.jugadorBean.tallaPantalon}">
 																	<comboitem
 																		self="@{each='tallaPantalon'}"
@@ -1528,7 +1225,7 @@
 																<combobox
 																	id="cmbTallaCalzado" readonly="true"
 																	value="--Seleccione--" width="26%"
-																	model="@{winReingresoJugador$composer.tallasCalzado}"
+																	model="@{winReingresarJugador$composer.tallasCalzado}"
 																	selectedItem="@{controller.jugadorBean.tallaCalzado}">
 																	<comboitem
 																		self="@{each='tallaCalzado'}"
@@ -1551,7 +1248,7 @@
 					<tabpanel>
 						<panel title="Familiares">
 							<panelchildren>
-								<tabbox height="380px">
+								<tabbox height="520px">
 									<tabs width="90px">
 										<tab id="tabFamBasicos"
 											label="Básicos" />
@@ -1597,17 +1294,15 @@
 																		<div>
 																			<combobox
 																				id="cmbNacionalidadFamiliar" readonly="true"
-																				value="-" width="10%"
-																				selectedItem="@{controller.familiarBean.nacionalidad}">
+																				value="-" width="10%" constraint="no empty">
 																				<comboitem
-																					label="V" />
+																					label="V" value="V" />
 																				<comboitem
-																					label="E" />
+																					label="E" value="E" />
 																			</combobox>
 																			<intbox
 																				id="txtCedulaFamiliar" constraint="no negative"
-																				width="50%"
-																				value="@{controller.familiarBean.cedula}" />
+																				width="50%" maxlength="8" />
 																			<label
 																				value="(*)" style="color:red" />
 																		</div>
@@ -1621,8 +1316,8 @@
 																			value="Primer Nombre" />
 																		<div>
 																			<textbox
-																				width="80%" id="txtPrimerNombreFamiliar"
-																				value="@{controller.familiarBean.primerNombre}">
+																				style='text-transform:uppercase;' width="80%"
+																				id="txtPrimerNombreFamiliar" maxlength="20">
 																			</textbox>
 																			<label
 																				value="(*)" style="color:red" />
@@ -1630,8 +1325,8 @@
 																		<label
 																			value="Segundo Nombre" />
 																		<textbox
-																			width="80%" id="txtSegundoNombreFamiliar"
-																			value="@{controller.familiarBean.segundoNombre}">
+																			style='text-transform:uppercase;' width="80%"
+																			id="txtSegundoNombreFamiliar" maxlength="20">
 																		</textbox>
 																	</row>
 																	<row
@@ -1640,8 +1335,8 @@
 																			value="Primer Apellido" />
 																		<div>
 																			<textbox
-																				width="80%" id="txtPrimerApellidoFamiliar"
-																				value="@{controller.familiarBean.primerApellido}">
+																				style='text-transform:uppercase;' width="80%"
+																				id="txtPrimerApellidoFamiliar" maxlength="20">
 																			</textbox>
 																			<label
 																				value="(*)" style="color:red" />
@@ -1649,8 +1344,8 @@
 																		<label
 																			value="Segundo Apellido" />
 																		<textbox
-																			width="80%" id="txtSegundoApellidoFamiliar"
-																			value="@{controller.familiarBean.segundoApellido}">
+																			style='text-transform:uppercase;' width="80%"
+																			id="txtSegundoApellidoFamiliar" maxlength="20">
 																		</textbox>
 																	</row>
 																	<row
@@ -1659,14 +1354,13 @@
 																			value="Parentesco" />
 																		<div>
 																			<combobox
-																				id="cmbParentesco"
-																				model="@{winReingresoJugador$composer.parentescos}"
-																				readonly="true" value="--Seleccione--" width="65%"
-																				selectedItem="@{controller.familiarBean.parentesco}">
+																				id="cmbParentesco" constraint="no empty"
+																				model="@{winReingresarJugador$composer.parentescos}"
+																				readonly="true" value="--Seleccione--"
+																				width="65%">
 																				<comboitem
 																					self="@{each='parentesco'}"
-																					label="@{parentesco.nombre}"
-																					value="@{parentesco.codigoDatoBasico}" />
+																					label="@{parentesco.nombre}" value="@{parentesco}" />
 																			</combobox>
 																			<label
 																				value="(*)" style="color:red" />
@@ -1676,13 +1370,12 @@
 																		<div>
 																			<combobox
 																				id="cmbProfesion"
-																				model="@{winReingresoJugador$composer.profesiones}"
-																				readonly="true" value="--Seleccione--" width="65%"
-																				selectedItem="@{controller.familiarBean.profesion}">
+																				model="@{winReingresarJugador$composer.profesiones}"
+																				readonly="true" value="--Seleccione--"
+																				width="65%">
 																				<comboitem
 																					self="@{each='profesion'}"
-																					label="@{profesion.nombre}"
-																					value="@{profesion.codigoDatoBasico}" />
+																					label="@{profesion.nombre}" value="@{profesion}" />
 																			</combobox>
 																		</div>
 																	</row>
@@ -1698,7 +1391,7 @@
 																			style="border-color:orange" mold="3d">
 																			<image
 																				id="imgFamiliar"
-																			src="../../Recursos/Imagenes/noFoto.jpg"
+																				src="../../Recursos/Imagenes/noFoto.jpg"
 																				height="80px" width="80px" />
 																		</groupbox>
 																	</row>
@@ -1706,7 +1399,7 @@
 																		style="border:none;" height="20%" align="center">
 																		<button
 																			id="btnFotoFamiliar"
-																				image="../../Recursos/Imagenes/foto.png">
+																			image="../../Recursos/Imagenes/foto.png">
 																		</button>
 																	</row>
 																</rows>
@@ -1744,7 +1437,7 @@
 																	id="cmbEstadoFamiliar" readonly="true"
 																	value="--Seleccione--" width="65%"
 																	selectedItem="@{controller.estadoVenezuelaFamiliar}"
-																	model="@{winReingresoJugador$composer.estadosVenezuela}">
+																	model="@{winReingresarJugador$composer.estadosVenezuela}">
 																	<comboitem
 																		self="@{each='estadoFamiliar'}"
 																		label="@{estadoFamiliar.nombre}" />
@@ -1759,7 +1452,7 @@
 																	id="cmbMunicipioFamiliar" readonly="true"
 																	selectedItem="@{controller.municipioFamiliar}"
 																	value="--Seleccione--" width="65%"
-																	model="@{winReingresoJugador$composer.municipiosEstadosFam, load-after='cmbEstadoFamiliar.onChange'}">
+																	model="@{winReingresarJugador$composer.municipiosEstadosFam, load-after='cmbEstadoFamiliar.onChange'}">
 																	<comboitem
 																		self="@{each='municipioFam'}"
 																		label="@{municipioFam.nombre}" />
@@ -1774,13 +1467,13 @@
 																value="Parroquia" />
 															<div>
 																<combobox
-																	id="cmbParroquiaFamiliar" readonly="true"
-																	value="--Seleccione--" width="65%"
-																	model="@{winReingresoJugador$composer.parroquiasMunicipioFam, load-after='cmbMunicipioFamiliar.onChange'}"
-																	selectedItem="@{controller.familiarBean.parroquiaResi}">
+																	id="cmbParroquiaFamiliar" readonly="true" width="65%"
+																	selectedItem="@{controller.parroquiaResiFamiliar}"
+																	model="@{winReingresarJugador$composer.parroquiasMunicipioFam, load-after='cmbMunicipioFamiliar.onChange'}">
 																	<comboitem
 																		self="@{each='parroquiaFam'}"
-																		label="@{parroquiaFam.nombre}" />
+																		label="@{parroquiaFam.nombre}"
+																		 />
 																</combobox>
 																<label
 																	value="(*)" style="color:red" />
@@ -1792,9 +1485,9 @@
 																value="Dirección Habitación" />
 															<div>
 																<textbox
-																	maxlength="180" height="40px" width="90%"
-																	multiline="true" id="txtDireccionHabFamiliar"
-																	value="@{controller.familiarBean.direccion}" />
+																	style='text-transform:uppercase;' maxlength="180"
+																	height="40px" width="90%" multiline="true"
+																	id="txtDireccionHabFamiliar" />
 																<label
 																	value="(*)" style="color:red" />
 															</div>
@@ -1827,17 +1520,15 @@
 																<combobox
 																	readonly="true" id="cmbCodAreaFamiliar" value="--"
 																	width="25%"
-																	model="@{winReingresoJugador$composer.codigosArea}"
-																	selectedItem="@{controller.familiarBean.telefonoHabitacion.codigo}">
+																	model="@{winReingresarJugador$composer.codigosArea}">
 																	<comboitem
 																		self="@{each='codAFamiliar'}"
 																		label="@{codAFamiliar.nombre}"
-																		value="@{codAFamiliar.codigoDatoBasico}" />
+																		value="@{codAFamiliar}" />
 																</combobox>
 																<textbox
-																	id="txtTelefonoHabFamiliar" width="40%"
-																	maxlength="7"
-																	value="@{controller.familiarBean.telefonoHabitacion.numero}" />
+																	style='text-transform:uppercase;'
+																	id="txtTelefonoHabFamiliar" width="40%" maxlength="7" />
 																<label
 																	value="(*)" style="color:red" />
 															</div>
@@ -1847,17 +1538,15 @@
 																<combobox
 																	readonly="true" id="cmbCodCelularFamiliar" value="--"
 																	width="25%"
-																	model="@{winReingresoJugador$composer.codigosCelular}"
-																	selectedItem="@{controller.familiarBean.telefonoCelular.codigo}">
+																	model="@{winReingresarJugador$composer.codigosCelular}">
 																	<comboitem
 																		self="@{each='codCFamiliar'}"
 																		label="@{codCFamiliar.nombre}"
-																		value="@{codCFamiliar.codigoDatoBasico}" />
+																		value="@{codCFamiliar}" />
 																</combobox>
 																<textbox
-																	id="txtTelefonoCelFamiliar" width="40%"
-																	maxlength="7"
-																	value="@{controller.familiarBean.telefonoCelular.numero}" />
+																	style='text-transform:uppercase;'
+																	id="txtTelefonoCelFamiliar" width="40%" maxlength="7" />
 																<label
 																	value="(*)" style="color:red" />
 															</div>
@@ -1867,18 +1556,19 @@
 															<label
 																value="Correo Electrónico" />
 															<textbox
-																width="88%" id="txtCorreoFamiliar"
-																value="@{controller.familiarBean.correoElectronico}" />
+																style='text-transform:uppercase;' width="88%"
+																id="txtCorreoFamiliar" />
 															<label
 																value="Twitter" />
 															<hbox>
 																<label
 																	value="@" />
 																<textbox
-																	value="@{controller.familiarBean.twitter}" width="80%"
+																	style='text-transform:uppercase;' width="80%"
 																	id="txtTwitterFamiliar" />
 															</hbox>
-														</row>													</rows>
+														</row>
+													</rows>
 												</grid>
 											</groupbox>
 										</tabpanel><!-- Fin tabFamUbicacion -->
@@ -1903,7 +1593,7 @@
 																value="Comisión" />
 															<combobox
 																id="cmbComisiones"
-																model="@{winReingresoJugador$composer.comisiones}"
+																model="@{winReingresarJugador$composer.comisiones}"
 																selectedItem="@{controller.comision}" readonly="true"
 																value="--Seleccione--">
 																<comboitem
@@ -1996,6 +1686,7 @@
 												label="@{familiarJug.parentesco.nombre}" />
 											<listcell>
 												<checkbox
+													onCheck="controller.verificarRepresentante(self,self.getParent().getParent())"
 													checked="@{familiarJug.representante}" />
 											</listcell>
 										</listitem>
@@ -2029,12 +1720,8 @@
 					image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"
 					width="100px" />
 
-				<button id="btnGuardar" label="Guardar"
-					image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
-					width="100px" />
-
 				<button id="btnInscribir" label="Inscribir"
-					image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
+					image="../../Recursos/Imagenes/inscribir.gif" orient="horizontal"
 					width="100px" visible="false" />
 
 				<button id="btnCancelar" label="Cancelar"
@@ -2045,10 +1732,6 @@
 					image="../../Recursos/Imagenes/salir.png" orient="horizontal"
 					width="100px" />
 			</div>
-			
-			
-			
-			
-				</window>
+		</window>
 	</div>
 </zk>
