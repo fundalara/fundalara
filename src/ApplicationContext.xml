@@ -13,6 +13,12 @@
 	<!-- <property name="daoConceptoNomina" ref="daoConceptoNomina"></property> -->
 	<!-- </bean> -->
 	
+	<bean id="daoTipoIngreso" class="dao.general.DaoTipoIngreso">
+	</bean>
+
+	<bean id="servicioTipoIngreso" class="servicio.implementacion.ServicioTipoIngreso">
+		<property name="daoTipoIngreso" ref="daoTipoIngreso"></property>
+	</bean>
 	<bean id="daoGrupo" class="dao.general.DaoGrupo">
 	</bean>
 	<bean id="servicioGrupo" class="servicio.implementacion.ServicioGrupo">
