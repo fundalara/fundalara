@@ -64,14 +64,17 @@ public class CntrlFrmAgendaEntrenamiento extends CntrlFrmAgendaGeneral {
 	public void cargarEntrenamientos() {
 		EventosCalendario eventosCalendario = new EventosCalendario();
 		for (ActividadCalendario ac : servicioActividadCalendario.listar()) {
-			Date fi = new Date(ac.getFechaInicio().getYear(),ac.getFechaInicio().getMonth(),ac.getFechaInicio().getDate(), ac.getHoraInicio().getHours(),ac.getHoraInicio().getMinutes());
-			Date ff = new Date(ac.getFechaCulminacion().getYear(),ac.getFechaCulminacion().getMonth(),ac.getFechaCulminacion().getDate(), ac.getHoraFin().getHours(),ac.getHoraFin().getMinutes());
-			String contenido = new String(ac.getDescripcion());
-			String colorFondo = new String(colorActividades(ac.getEstatus()));
-			Object valor = new Object();
-			valor = ac;
-			SimpleCalendarEvent simpleCalendarEvent = crearEvento(fi, ff, contenido, colorFondo, valor);
-			eventosCalendario.cargarEvento(simpleCalendarEvent);
+			if (ac.getEstatus()!='P'){
+				Date fi = new Date(ac.getFechaInicio().getYear(),ac.getFechaInicio().getMonth(),ac.getFechaInicio().getDate(), ac.getHoraInicio().getHours(),ac.getHoraInicio().getMinutes());
+				Date ff = new Date(ac.getFechaCulminacion().getYear(),ac.getFechaCulminacion().getMonth(),ac.getFechaCulminacion().getDate(), ac.getHoraFin().getHours(),ac.getHoraFin().getMinutes());
+				String contenido = new String(ac.getDescripcion());
+				String colorFondo = new String(colorActividades(ac.getEstatus()));
+				Object valor = new Object();
+				valor = ac;
+				SimpleCalendarEvent simpleCalendarEvent = crearEvento(fi, ff, contenido, colorFondo, valor);
+				eventosCalendario.cargarEvento(simpleCalendarEvent);	
+			}
+			
 		}
 		calendars.setModel(eventosCalendario.getModel());
 	}
