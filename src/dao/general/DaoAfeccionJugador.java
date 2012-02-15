@@ -10,7 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import modelo.AfeccionJugador;
 import modelo.DatoMedico;
-
+import modelo.Jugador;
 
 import dao.generico.GenericDao;
 
@@ -20,7 +20,7 @@ import dao.generico.GenericDao;
  * 
  * @author Robert A
  * @author German L
- * @version 0.1.2 10/01/2011
+ * @version 0.2 01/01/2012
  * 
  */
 public class DaoAfeccionJugador extends GenericDao {
@@ -47,7 +47,6 @@ public class DaoAfeccionJugador extends GenericDao {
 	 */
 	public void actualizar(List<AfeccionJugador> afeccionesJug,
 			DatoMedico datoMedico) {
-		int codigoDatoMedico = datoMedico.getCodigoDatoMedico();
 		int p = 0;
 		Session sesion = getSession();
 		Transaction tx = sesion.beginTransaction();
@@ -55,7 +54,7 @@ public class DaoAfeccionJugador extends GenericDao {
 		 afecciones.addAll(afeccionesJug);
 		Criteria c = sesion.createCriteria(AfeccionJugador.class)
 				.createCriteria("datoMedico")
-				.add(Restrictions.eq("codigoDatoMedico", codigoDatoMedico));
+				.add(Restrictions.eq("jugador", datoMedico.getJugador()))	;
 		List<AfeccionJugador> afeccionesAlmacenadas = (List<AfeccionJugador>) c.list();
 		for (AfeccionJugador afeccionAlmacenada : afeccionesAlmacenadas) {
 			p = buscarAfeccionPorCodigo(afecciones, afeccionAlmacenada
@@ -106,6 +105,22 @@ public class DaoAfeccionJugador extends GenericDao {
 			i++;
 		}
 		return posicion;
+	}
+	
+	/**
+	 * Obtiene las afecciones asociadas a un jugador
+	 * @param jugador
+	 * 			Dato de Jugador a buscar 
+	 * @return Lista de afecciones por jugador
+	 * */
+	public List<AfeccionJugador> buscarPorJugador(Jugador jugador) {
+		Session sesion = getSession();
+		Transaction tx = sesion.beginTransaction();
+		Criteria c = sesion.createCriteria(AfeccionJugador.class)
+		.add(Restrictions.eq("estatus", 'A'))
+		.createCriteria("datoMedico")
+		.add(Restrictions.eq("jugador", jugador));
+		return c.list();
 	}
 
 }
