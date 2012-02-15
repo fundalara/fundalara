@@ -1,13 +1,15 @@
 package modelo;
 
-// Generated 14/02/2012 08:24:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 04-feb-2012 16:31:02 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -15,6 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "anuario", schema = "public")
+@SequenceGenerator(name = "anuario_seq", sequenceName = "anuario_codigo_anuario_seq_1")
 public class Anuario implements java.io.Serializable {
 
 	private int codigoAnuario;
@@ -37,6 +40,7 @@ public class Anuario implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_anuario", unique = true, nullable = false)
+	@GeneratedValue(generator = "anuario_seq")
 	public int getCodigoAnuario() {
 		return this.codigoAnuario;
 	}
