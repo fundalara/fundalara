@@ -68,7 +68,7 @@ public class CntrlReporteDesempenoEquipo extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listCategoria = servicioCategoria.listarActivos();
 		listEquipo = new ArrayList<Equipo>();
 		listRoster = new ArrayList<Roster>();
 	}

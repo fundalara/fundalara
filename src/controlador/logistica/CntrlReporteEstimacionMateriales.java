@@ -73,7 +73,7 @@ public class CntrlReporteEstimacionMateriales extends GenericForwardComposer {
 
 				final AMedia amedia = new AMedia("reporteEstimacionMateriales.pdf", "pdf", "application/pdf", archivo);
 
-				Component visor = Executions.createComponents("General/" + "frmVisorDocumento.zul", null, null);
+				Component visor = Executions.createComponents("../General/" + "frmVisorDocumento.zul", null, null);
 				visor.setVariable("archivo", amedia, false);
 			}
 

@@ -68,7 +68,7 @@ public class CntrlReporteEstadoActividad extends GenericForwardComposer {
 
 			final AMedia amedia = new AMedia("EstadoActividad.pdf", "pdf", "application/pdf", archivo);
 
-			Component visor = Executions.createComponents("General/" + "frmVisorDocumento.zul", null, null);
+			Component visor = Executions.createComponents("../General/" + "frmVisorDocumento.zul", null, null);
 			visor.setVariable("archivo", amedia, false);
 		} else
 			Messagebox.show("La fecha de fin debe ser posterior a la fecha de inicio", "Olimpo-Importante", Messagebox.OK, Messagebox.EXCLAMATION);
