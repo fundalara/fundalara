@@ -4,8 +4,8 @@
 <div align="center">
 	<separator height="15px" />
 	<window id="wndReporteDesempennoEquipo" title="Desempeño por Equipo"
-		border="normal" width="600px" closable="true">
-<!-- 		apply="controlador.entrenamiento.CntrlReportesDinamicosEntrenamientos"> -->
+		border="normal" width="600px" closable="true"
+		apply="controlador.entrenamiento.CntrlReportesDinamicosEntrenamientos">
 		
 		<grid>
 			<columns>
@@ -15,11 +15,25 @@
 				<column width="125px" align="left" />
 			</columns>
 			<rows>
+			<row>
+				<combobox id="cmbClases" value="--SELECCIONE--"  readonly="true"
+						width="150px">
+					<comboitem value = "1" label="ACTIVIDAD DE ENTRENAMIENTO" />
+					<comboitem value = "2" label="INDICADOR DE EVALUACION" />
+					<comboitem value = "4" label="SESIONES DE ENTRENAMIENTO " />
+					<comboitem value = "3" label="ESCALA DE MEDICION" />
+					<comboitem value = "5" label="INSTALACIONES ASIGNADAS ENTRENAMIENTO" />
+				</combobox>	
+				
+				<combobox id="cmbEstatus" value="--SELECCIONE--"  readonly="true"
+						width="150px">
+				</combobox>	
+			</row>
 				<row height="30px">
-					<label value="Fecha Inicio:" width="120px" />
+					<label value="Fecha Inicio" width="120px" />
 					<datebox id="dtbox1" width="150px"
 						format="dd/MM/yyyy" />
-					<label value="Fecha Final:" width="120px" />
+					<label value="Fecha Final" width="120px" />
 					<datebox id="dtbox2" width="150px"
 						format="dd/MM/yyyy" />
 				</row>
@@ -39,10 +53,25 @@
 							label="@{equipo.nombre}" value="@{equipo}" />
 					</combobox>
 				</row>
+				
+				<row spans="5">
+					<hbox>
+						<listbox multiple="true" mold="paging"
+							pageSize="10" width="580px" height="300px" id="lboxDatos">
+							<listhead>
+								<listheader label="Nombre" width="200px"
+									align="center" />
+								<listheader label="Descripción"
+									width="380px" align="center" />
+							</listhead>							
+						</listbox>
+					</hbox>
+				</row>
 
 			</rows>
 
 		</grid>
+		
 		<iframe id="ifReport" height="10px" visible="false" />
 		<grid>
 			<rows>

@@ -809,7 +809,7 @@
 											<treerow>
 												<treecell
 													label="Control de Asistencias"
-													onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
+													onClick='enlace("/Entrenamiento/Reportes/frmReportesDinamicosEntrenamientos.zul")' />
 											</treerow>
 
 										</treeitem>
