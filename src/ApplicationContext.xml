@@ -12,6 +12,12 @@
 	<!-- <property name="daoConceptoNomina" ref="daoConceptoNomina"></property> -->
 	<!-- </bean> -->
 	
+	<bean id="daoIngresoInscripcion" class="dao.general.DaoIngresoInscripcion">
+	</bean>
+
+	<bean id="servicioIngresoInscripcion" class="servicio.implementacion.ServicioIngresoInscripcion">
+		<property name="daoIngresoInscripcion" ref="daoIngresoInscripcion"></property>
+	</bean>
 	<bean id="daoComisionActividadPlanificada" class="dao.general.DaoComisionActividadPlanificada">
 	</bean>
 
@@ -204,12 +210,6 @@
 		<property name="daoDocumentoIndumentaria" ref="daoDocumentoIndumentaria"></property>
 	</bean>
 
-	<!-- <bean id="daoTipoPagoRepresentante" class="dao.general.DaoTipoPagoRepresentante"> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="servicioTipoPagoRepresentante" class="servicio.implementacion.ServicioTipoPagoRepresentante"> -->
-	<!-- <property name="daoTipoPagoRepresentante" ref="daoTipoPagoRepresentante"></property> -->
-	<!-- </bean> -->
 
 	<bean id="daoUsuario" class="dao.general.DaoUsuario">
 	</bean>
