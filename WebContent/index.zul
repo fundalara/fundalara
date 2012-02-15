@@ -21,7 +21,7 @@
 			map.put("disparador", "entrenamiento");
 		} else if (event.getTarget().getId().equals("mnuAgendaCompetencia")) {
 			map.put("disparador", "competencia");
-		} else if (event.getTarget().getId().equals("mnuAgendaComplementaria")) {
+		} else if (event.getTarget().getId().equals("mnuActividadesComplementarias")) {
 			map.put("disparador", "complementaria");
 		} else
 			map.put("disparador", "mantenimiento");
@@ -660,7 +660,7 @@
 														<treerow>
 															<treecell
 																label="Plan de Temporada" visible="${sec:isAnyGranted('307')}"
-																onClick='enlace("/Entrenamiento/Reportes/frmReportePlanEntrenamiento.zul")' />
+																onClick='enlace("/Entrenamiento/Reportes/frmReportePlanTemporada.zul")' />
 														</treerow>
 													</treeitem>
 
@@ -815,7 +815,7 @@
 											<treerow>
 												<treecell
 													label="Control de Asistencias" visible="${sec:isAnyGranted('312')}"
-													onClick='enlace("/Entrenamiento/Reportes/frmReportesDinamicosEntrenamientos.zul")' />
+													onClick='enlace("/Entrenamiento/Reportes/frmReporteControlAsistencias.zul")' />
 											</treerow>
 
 										</treeitem>

@@ -37,7 +37,7 @@ import servicio.implementacion.ServicioTipoDato;
 
 public class CntrlPersonalAdHonorem extends GenericForwardComposer {
 	Persona persona;
-	Personal personal;
+	Personal personal = new Personal();
 	PersonaNatural personaNatural;
 	PersonalCargo personalCargo = new PersonalCargo();
 	ServicioTipoDato servicioTipoDato;
@@ -218,6 +218,7 @@ public class CntrlPersonalAdHonorem extends GenericForwardComposer {
 		persona.setFechaIngreso(dtbFechaIngreso.getValue());
 		servicioPersona.agregar(persona);
 		
+		personaNatural.setPersona(persona);
 		personaNatural.setPrimerNombre(txtPrimerNombre.getValue().toString());
 		personaNatural.setSegundoNombre(txtSegundoNombre.getValue().toString());
 		personaNatural.setPrimerApellido(txtPrimerApellido.getValue()
@@ -230,7 +231,7 @@ public class CntrlPersonalAdHonorem extends GenericForwardComposer {
 				.getValue());
 		personaNatural.setCelular(celular);
 		personaNatural.setEstatus('A');
-		personaNatural.setPersona(persona);
+		
 		servicioPersonaNatural.agregar(personaNatural);
 	}
 
@@ -256,6 +257,7 @@ public class CntrlPersonalAdHonorem extends GenericForwardComposer {
 
 				persona = (Persona) formulario.getVariable("persona", false);
 				personaNatural = persona.getPersonaNatural();
+				
 				cmbCedula.setValue(persona.getPersonaNatural().getCedulaRif()
 						.substring(0, 2));
 				txtCedula.setText(persona.getPersonaNatural().getCedulaRif()
@@ -372,15 +374,15 @@ public class CntrlPersonalAdHonorem extends GenericForwardComposer {
 									if (arg0.getName().toString() == "onOK") {
 										persona = new Persona();
 										personaNatural = new PersonaNatural();
-										personal = new Personal();
+										
 										String cedula = cmbCedula.getValue()
 												+ txtCedula.getValue();
 										persona.setCedulaRif(cedula);
 										actualizarPersona();
+										personal = new Personal();
 										personal.setPersonaNatural(personaNatural);
 										personal.setCantidadHijos(2);
 										personal.setEstatus('A');
-										personal.setCedulaRif(persona.getCedulaRif());
 										personal.setDatoBasico(servicioDatoBasico.buscarPorString("SOLTERO"));
 										
 										servicioPersonal.agregar(personal);

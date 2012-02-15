@@ -82,7 +82,7 @@ public class CntrlFrmCatalogoMaterial extends GenericForwardComposer {
 		// Se comprueba que se haya seleccionado un elemento de la lista
 		if ((lboxMaterial.getSelectedIndex() != -1)) {
 
-			if ((txtCantidad.getValue() != 0 || !txtCantidad.getText().isEmpty())) {
+			if ((txtCantidad.getValue() != 0 && !txtCantidad.getText().isEmpty())) {
 				// se obtiene la tarea seleccionada
 				material = listaMaterial.get(lboxMaterial.getSelectedIndex());
 

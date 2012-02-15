@@ -6,6 +6,7 @@ import java.util.List;
 import modelo.Material;
 import modelo.MaterialActividadPlanificada;
 import modelo.PlanificacionActividad;
+import modelo.Sesion;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
 import dao.general.DaoMaterialActividadPlanificada;
 
@@ -116,7 +117,15 @@ public class ServicioMaterialActividadPlanificada implements IServicioMaterialAc
 				b = a.get(i);
 			}
 		}
-
 		return b;
 	}
+	
+	public int generarCodigo(){
+		return daoMaterialActividadPlanificada.generarCodigo(MaterialActividadPlanificada.class);
+	}
+	
+	public List<MaterialActividadPlanificada> buscarPorSesion(Sesion sesion){
+		return daoMaterialActividadPlanificada.buscarPorSesion(sesion);
+	}
+	
 }

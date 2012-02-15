@@ -108,19 +108,43 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 		llenarCombo(estatusActividadesCalendario);
 	}
 	
-	
-	public void onChange$cmbEstatus(){
+	public void onChange$dtbox2(){
+		Date date = dtbox2.getValue();
+		if (date.before(dtbox1.getValue())) {
+			alert("La fecha final es menor que la fecha inicial");
+		} 
+		else{
+		System.out.println("aaa1"+cmbClases.getSelectedItem().getValue());
 		if (cmbClases.getSelectedItem().getValue()=="4"){
+			System.out.println("aaa2");
 			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedItem().getValue()];
-			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
-			lboxDatos.getItems().clear();
+			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), 'A');
+			System.out.println(listActividadCalendario.size()+"aaaaaaaaaaaaaaa");	
+			
+			//lboxDatos.getItems().clear();
+			for (int i = 0; i < listActividadCalendario.size(); i++) {
+				llenarListbox(lboxDatos, listActividadCalendario.get(i).getDescripcion(), listActividadCalendario.get(i).getFechaInicio()+"", listActividadCalendario.get(i).getCodigoActividadCalendario());		
+			}
+		}
+		}
+	}
+	public void onChange$cmbEstatus(){
+		System.out.println("aaa1"+cmbClases.getSelectedItem().getValue());
+		if (cmbClases.getSelectedItem().getValue()=="4"){
+			System.out.println("aaa2");
+			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), 'A');
+			System.out.println(listActividadCalendario.size()+"aaaaaaaaaaaaaaa");	
+			
+			//lboxDatos.getItems().clear();
 			for (int i = 0; i < listActividadCalendario.size(); i++) {
 				llenarListbox(lboxDatos, listActividadCalendario.get(i).getDescripcion(), listActividadCalendario.get(i).getFechaInicio()+"", listActividadCalendario.get(i).getCodigoActividadCalendario());		
 			}
 		}
 		
 		if (cmbClases.getSelectedItem().getValue()=="5"){
-			Character pos = estatusI[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			System.out.println("aaa3");
+			Character  pos = estatusI[(Integer)cmbEstatus.getSelectedItem().getValue()];
 			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
 			lboxDatos.getItems().clear();
 			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
@@ -129,6 +153,7 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 		}
 		
 		if (cmbClases.getSelectedItem().getValue()=="1"){
+			System.out.println("aaa5");
 			Character pos = estatusRC[(Integer)cmbEstatus.getSelectedItem().getValue()];
 			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
 			lboxDatos.getItems().clear();
@@ -219,18 +244,7 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 		this.listCategoria = listCategoria;
 	}
 
-	public void onChange$dtbox2() {
-		Date date = dtbox2.getValue();
-		if (date.before(dtbox1.getValue())) {
-			alert("La fecha final es menor que la fecha inicial");
-		} else {
 
-			cmbcategoria.setDisabled(false);
-
-		}
-
-	}
-	
 		
 	public void onClick$btnImprimir() throws SQLException, JRException, IOException {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
