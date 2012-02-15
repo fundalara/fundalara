@@ -4,7 +4,7 @@
 
 <window id="frmGruposUsuarios" title="Grupos Funcionales"
 	border="normal" mode="modal" closable="true"
-	apply="controlador.administracion.CntrlGestionarGruposUsuarios"
+	apply="seguridad.CntrlGestionarGruposUsuarios"
 	width="690px">
 	<separator></separator>
 	<hbox>

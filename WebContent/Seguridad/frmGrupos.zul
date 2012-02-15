@@ -3,7 +3,7 @@
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='frmGrupos' name='binder'?>
 
 <window id="frmGrupos" title="Grupos Funcionales" border="normal"
-	closable="true" apply="controlador.administracion.CntrlGestionarGrupos"
+	closable="true" apply="seguridad.CntrlGestionarGrupos"
 	width="690px">
 	<grid style="border:none" oddRowSclass="none">
 		<columns>
