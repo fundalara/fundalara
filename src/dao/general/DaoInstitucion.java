@@ -11,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import dao.generico.GenericDao;
-import dao.generico.SessionManager;
 
 /**
  * Clase de acceso y manejo de los datos relacionados a las instituciones
@@ -30,7 +29,7 @@ public class DaoInstitucion extends GenericDao {
 	 *            código de la institucion
 	 * @return Institucion asociada al id o null en caso de no existir
 	 */
-	public Institucion buscar(String id) {
+	public Institucion buscar(int id) {
 		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(Institucion.class);
@@ -42,7 +41,7 @@ public class DaoInstitucion extends GenericDao {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Busca todas las instituciones de un tipo dado
 	 * 
@@ -63,5 +62,18 @@ public class DaoInstitucion extends GenericDao {
 		tx.commit();
 		return lista;
 	}
-
+	
+	public Institucion buscarpornombre(String nombre) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Institucion.class);
+		c.add(Restrictions.eq("nombre", nombre));
+		List list = c.list();
+		if (list.size() > 0) {
+			return (Institucion) list.get(0);
+		} else {
+			return null;
+		}
+	}
+	
 }

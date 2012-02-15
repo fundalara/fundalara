@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import dao.generico.GenericDao;
 
 public class DaoPersona extends GenericDao {
+	
 	public Persona buscarPorTipoPersona(String s, Integer i) {
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
@@ -23,6 +24,7 @@ public class DaoPersona extends GenericDao {
 		else
 			return (Persona) c.list().get(0);
 	}
+	
 	public Persona buscarPorCedulaRif(String s) {
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
@@ -45,4 +47,15 @@ public class DaoPersona extends GenericDao {
 		
 		return lista;
 	}
+	
+	public boolean existePersona(String cedula){
+		boolean flag=false;
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(Persona.class);
+		c.add(Restrictions.eq("cedulaRif", cedula));
+		flag= c.uniqueResult()==null?false:true;
+		return flag;
+	}
+	
 }
