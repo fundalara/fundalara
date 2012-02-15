@@ -42,5 +42,14 @@ public class DaoPersonalEquipo extends GenericDao {
 		c.add(Restrictions.eq("estatus", "A"));
 		return c.list();
 	}
+	
+public List<PersonalEquipo> listarPersonal(Integer codigo){
+		
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(PersonalEquipo.class);
+		List lista = c.add(Restrictions.eq("equipo.codigoEquipo",codigo)).list();
+		return lista;
+	}
 
 }

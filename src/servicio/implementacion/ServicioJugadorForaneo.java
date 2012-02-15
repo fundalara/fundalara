@@ -4,7 +4,10 @@ import java.util.List;
 
 import dao.general.DaoJugadorForaneo;
 
+import modelo.Divisa;
+import modelo.Equipo;
 import modelo.JugadorForaneo;
+
 import servicio.interfaz.IServicioJugadorForaneo;
 
 public class ServicioJugadorForaneo implements IServicioJugadorForaneo {
@@ -29,10 +32,17 @@ public class ServicioJugadorForaneo implements IServicioJugadorForaneo {
 	@Override
 	public void agregar(JugadorForaneo j) {
 		// TODO Auto-generated method stub
-		 j.setEstatus('A');
-			
-			
+		if (j.getCodigoJugadorForaneo() == 0){
+			   int cod = daoJugadorForaneo.listar(JugadorForaneo.class).size()+1;
+			   j.setCodigoJugadorForaneo(cod);
+			   j.setEstatus('A');
+			}
+		
+			j.setCodigoJugadorForaneo(daoJugadorForaneo.listar(JugadorForaneo.class).size()+1);
 			daoJugadorForaneo.guardar(j);
+	
+			
+		
 	}
 
 	@Override
@@ -46,5 +56,16 @@ public class ServicioJugadorForaneo implements IServicioJugadorForaneo {
 		// TODO Auto-generated method stub
 		return daoJugadorForaneo.listarActivos();
 	}
-
+	
+	@Override
+	public List<JugadorForaneo> buscarJugadorForaneo(String ced) {
+		return daoJugadorForaneo.buscarJugadorForaneo(ced);
+	}
+	
+	public List<JugadorForaneo> listarJugadorForaneoPorCategoria(int codigo) {
+		return daoJugadorForaneo.listarJugadorForaneoPorCategoria(JugadorForaneo.class, codigo);
+	}
+	public List<JugadorForaneo> listarJugadorForaneoPorFiltro(String dato){
+		return daoJugadorForaneo.listarJugadorForaneoPorFiltro(dato);
+	}
 }

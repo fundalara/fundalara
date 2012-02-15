@@ -1,0 +1,59 @@
+<?page title="Catalogo Jugador Refuerzo" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoJF"?>
+<zk>
+
+	<window id="frmCatalogoJF" title="Refuerzos Existentes"
+		apply="controlador.competencia.CntrlFrmCatalogoJugadorForaneo"
+			border="normal" mode="modal" closable="true" width="690px"
+			height="350px">
+
+	
+
+		<div align="center">
+			
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox id="txtFiltro" ></textbox>
+						<button label="Buscar"></button>
+					</div>
+
+					<listbox id="lsbxJugadorForaneo" mold="paging" width="100%"
+						pageSize="10" style="margin-top:5px" model="@{cntrl.JugadorForaneo}"
+						height="240px" >
+						<listhead>
+							<listheader label="Cedula" align="center" width="auto"></listheader>
+							<listheader label="Nombre" align="center" width="auto"></listheader>
+							<listheader label="Equipo" align="center"  width="auto"></listheader>
+							<listheader label="Categoria" align="center"  width="auto"></listheader>
+							<listheader label="Divisa" align="center"  width="auto"></listheader>
+							
+						</listhead>
+
+						<listitem self="@{each=jugadorForaneo}">
+							<listcell label="@{jugadorForaneo.cedula}"></listcell>
+							<listcell label="@{jugadorForaneo.nombre}"></listcell>
+							<listcell label="@{jugadorForaneo.equipoCompetencia.equipo.nombre}"></listcell>
+							<listcell label="@{jugadorForaneo.equipoCompetencia.equipo.categoria.nombre}"></listcell>
+							<listcell label="@{jugadorForaneo.equipoCompetencia.equipo.divisa.nombre}"></listcell>
+							
+						</listitem>
+
+
+					</listbox>
+					<div align="right">
+						<button id="btnAceptar"   image="/Recursos/Imagenes/aceptar.ico"
+							label="Aceptar">
+						</button>
+				
+						<button id="btnSalir"
+							image="../../Recursos/Imagenes/salir.png" label="Salir"
+							 />
+					</div>
+				
+			
+		</div>
+
+	
+	</window>
+</zk>

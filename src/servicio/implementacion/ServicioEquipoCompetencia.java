@@ -6,6 +6,7 @@ import java.util.List;
 import dao.general.DaoEquipoCompetencia;
 
 import modelo.Categoria;
+import modelo.CategoriaCompetencia;
 import modelo.Competencia;
 import modelo.ConstanteCategoria;
 import modelo.EquipoCompetencia;
@@ -81,5 +82,14 @@ public class ServicioEquipoCompetencia implements IServicioEquipoCompetencia {
 		return daoEquipoCompetencia.listarEquipoPorCategoria(EquipoCompetencia.class, codigo);
 	}
 
+	@Override
+	public List<EquipoCompetencia> listarEquipos(int codigo) {
+		// TODO Auto-generated method stub
+		return daoEquipoCompetencia.listarEquipoxcompetencia(codigo);
+	}
+	
+	public List<EquipoCompetencia> listarEquipoPorCompetenciaCategoria(Competencia c, CategoriaCompetencia cat) {
+		return daoEquipoCompetencia.listarEquipoPorCompetenciaCategoria(c, cat);
+	}
 
 }

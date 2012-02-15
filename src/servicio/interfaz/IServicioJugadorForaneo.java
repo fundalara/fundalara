@@ -2,7 +2,9 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.Equipo;
 import modelo.JugadorForaneo;
+
 
 public interface IServicioJugadorForaneo {
 	
@@ -13,5 +15,10 @@ public interface IServicioJugadorForaneo {
 	public abstract  List<JugadorForaneo> listar ();
 	
 	public abstract List<JugadorForaneo> listarActivos();
-
+	
+	public abstract List<JugadorForaneo> buscarJugadorForaneo(String ced);
+	
+	public abstract List<JugadorForaneo> listarJugadorForaneoPorCategoria(int codigo);
+	
+	public List<JugadorForaneo> listarJugadorForaneoPorFiltro(String dato);
 }

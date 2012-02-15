@@ -36,7 +36,7 @@
 
 					</listbox>
 					<div align="right">
-						<button id="btnGenerar" image="/Recursos/Imagenes/generar.png" label="Generar" />
+						<button id="btnGenerar" image="/Recursos/Imagenes/imprimir.ico" label="Imprimir" />
 						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" />
 						<button id="btnSalir" image="/Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
 					</div>

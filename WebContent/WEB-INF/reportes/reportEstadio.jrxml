@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportConstante" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Estadio">
+		<queryString language="SQL">
+			<![CDATA[select es.nombre as estadios, a.nombre as nombre_parroquia ,(select nombre from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico ) as municipio,(select nombre from dato_basico as c where c.codigo_dato_basico= (select parent_codigo_dato_basico from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico )) as Estado, es.direccion from dato_basico  as a inner join estadio as es on es.codigo_parroquia=a.codigo_dato_basico where es.estatus='A']]>
+		</queryString>
+		<field name="estadios" class="java.lang.String"/>
+		<field name="estado" class="java.lang.String"/>
+		<field name="municipio" class="java.lang.String"/>
+		<field name="nombre_parroquia" class="java.lang.String"/>
+		<field name="direccion" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="estadio">
+		<queryString language="SQL">
+			<![CDATA[select es.nombre as estadios, a.nombre as nombre_parroquia ,(select nombre from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico ) as municipio,(select nombre from dato_basico as c where c.codigo_dato_basico= (select parent_codigo_dato_basico from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico )) as Estado, es.direccion from dato_basico  as a inner join estadio as es on es.codigo_parroquia=a.codigo_dato_basico where es.estatus='A']]>
+		</queryString>
+		<field name="estadios" class="java.lang.String"/>
+		<field name="estado" class="java.lang.String"/>
+		<field name="municipio" class="java.lang.String"/>
+		<field name="nombre_parroquia" class="java.lang.String"/>
+		<field name="direccion" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="New Dataset 1rterer">
+		<queryString language="SQL">
+			<![CDATA[select es.nombre as estadios, a.nombre as nombre_parroquia ,(select nombre from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico ) as municipio,(select nombre from dato_basico as c where c.codigo_dato_basico= (select parent_codigo_dato_basico from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico )) as Estado, es.direccion from dato_basico  as a inner join estadio as es on es.codigo_parroquia=a.codigo_dato_basico where es.estatus='A']]>
+		</queryString>
+		<field name="estadios" class="java.lang.String"/>
+		<field name="nombre_parroquia" class="java.lang.String"/>
+		<field name="municipio" class="java.lang.String"/>
+		<field name="estado" class="java.lang.String"/>
+		<field name="direccion" class="java.lang.String"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[select es.nombre as estadios, a.nombre as nombre_parroquia ,(select nombre from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico ) as municipio,(select nombre from dato_basico as c where c.codigo_dato_basico= (select parent_codigo_dato_basico from dato_basico as b where b.codigo_dato_basico=a.parent_codigo_dato_basico )) as Estado, es.direccion from dato_basico  as a inner join estadio as es on es.codigo_parroquia=a.codigo_dato_basico where es.estatus='A']]>
+	</queryString>
+	<field name="estadios" class="java.lang.String"/>
+	<field name="nombre_parroquia" class="java.lang.String"/>
+	<field name="municipio" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="159" splitType="Stretch">
+			<staticText>
+				<reportElement x="442" y="119" width="40" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="139" width="33" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="482" y="119" width="72" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="475" y="139" width="56" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="3" y="0" width="555" height="137"/>
+				<imageExpression><![CDATA["C:\\repositorio\\fundalara\\WebContent\\WEB-INF\\classes\\Encabezado.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="228" y="0" width="100" height="34"/>
+				<textElement>
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estadios]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="2" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="3" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="97" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="552" height="74"/>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="447" y="74" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="507" y="74" width="40" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="89" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="3" y="0" width="552" height="79"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="estadio">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="138">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nombre]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="138" height="40"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{estadios}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Estado]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="40"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Municipio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="40"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Parroquia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="40"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre_parroquia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="118">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Dirección]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="118" height="40"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

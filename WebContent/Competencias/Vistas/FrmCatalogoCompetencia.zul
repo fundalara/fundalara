@@ -75,26 +75,16 @@
 						
 					</listbox>
 					<div align="right">
-						<button id="btnImprimir"	 image="/Recursos/Imagenes/reporte.ico" label="Imprimir">
+						<button id="btnImprimir"	 image="/Recursos/Imagenes/imprimir.ico" label="Imprimir">
 						</button>
 						<button id="btnAceptar"
 							image="/Recursos/Imagenes/aceptar.ico" label="Aceptar" width="90px">
 						</button>
 						
 						<button id="btnSalir"
-							image="/Recursos/Imagenes/salir.png" label="Salir" width="90px"
-							onClick="">
+							image="/Recursos/Imagenes/salir.png" label="Salir" width="90px">
 						</button>
 					</div>
-
-
-
-			<zscript><![CDATA[
-	public void Salir() {
-		FrmCatalogoCompetencia.onClose();
-	}
-]]></zscript>
-
 
 		</window>
 	</div>

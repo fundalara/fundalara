@@ -3,6 +3,33 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ligas">
+		<queryString language="SQL">
+			<![CDATA[select liga.nombre as nombre, liga.localidad as localidad from liga where liga.estatus='A']]>
+		</queryString>
+		<field name="nombre" class="java.lang.String"/>
+		<field name="localidad" class="java.lang.String"/>
+	</subDataset>
 	<queryString>
 		<![CDATA[select liga.nombre as nombre, liga.localidad as localidad from liga where liga.estatus='A']]>
 	</queryString>
@@ -12,9 +39,37 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="93" splitType="Stretch">
+		<band height="168" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="123" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="455" y="143" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="123" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="143" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="688" height="93"/>
+				<reportElement x="0" y="-1" width="556" height="144"/>
 				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -22,58 +77,89 @@
 	<pageHeader>
 		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement x="209" y="0" width="128" height="33"/>
+				<reportElement x="233" y="0" width="81" height="33"/>
 				<textElement>
-					<font size="18" isBold="true"/>
+					<font fontName="Arial" size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[LIGAS]]></text>
+				<text><![CDATA[Ligas]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="27" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="137" height="20"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[NOMBRE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="137" y="0" width="100" height="20"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[LOCALIDAD]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="31" splitType="Stretch">
-			<textField>
-				<reportElement x="3" y="0" width="134" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="137" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{localidad}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="10" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="78" splitType="Stretch">
+		<band height="98" splitType="Stretch">
 			<image>
 				<reportElement x="3" y="0" width="552" height="74"/>
 				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement x="436" y="74" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="516" y="74" width="40" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="64" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="38" y="14" width="180" height="50"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ligas">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="306">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="6" y="0" width="290" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nombre]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="26" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="6" y="4" width="290" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="168">
+						<jr:tableHeader style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="6" y="0" width="149" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Localidad]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="26" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="6" y="4" width="149" height="20"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{localidad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
 	</summary>
 </jasperReport>

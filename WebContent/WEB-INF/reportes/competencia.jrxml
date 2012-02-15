@@ -2,11 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="competencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-<<<<<<< HEAD
-	<property name="ireport.y" value="86"/>
-=======
-	<property name="ireport.y" value="0"/>
->>>>>>> 14fd6d11f47dde0fa75f04d5a55358497035e8b8
+	<property name="ireport.y" value="214"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -121,38 +117,34 @@ competencia.cantidad_fase]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="159" splitType="Stretch">
+		<band height="169" splitType="Stretch">
 			<image>
-<<<<<<< HEAD
-				<reportElement x="0" y="0" width="555" height="114"/>
-=======
 				<reportElement x="0" y="0" width="555" height="125"/>
->>>>>>> 14fd6d11f47dde0fa75f04d5a55358497035e8b8
 				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="469" y="116" width="86" height="20"/>
+				<reportElement x="455" y="125" width="100" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField pattern="h.mm a">
-				<reportElement x="469" y="136" width="86" height="20"/>
+				<reportElement x="455" y="145" width="100" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="416" y="116" width="53" height="20"/>
+				<reportElement x="391" y="125" width="100" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="416" y="136" width="39" height="20"/>
+				<reportElement x="391" y="145" width="100" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -161,9 +153,9 @@ competencia.cantidad_fase]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="45">
+		<band height="42">
 			<staticText>
-				<reportElement x="206" y="0" width="184" height="30"/>
+				<reportElement x="187" y="1" width="180" height="37"/>
 				<textElement>
 					<font fontName="Arial" size="24" isBold="true" isItalic="false" isUnderline="false"/>
 				</textElement>
@@ -172,25 +164,25 @@ competencia.cantidad_fase]]>
 		</band>
 	</pageHeader>
 	<lastPageFooter>
-		<band height="108">
+		<band height="131">
+			<image>
+				<reportElement x="12" y="25" width="526" height="62"/>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
+			</image>
 			<textField>
-				<reportElement x="435" y="88" width="80" height="20"/>
+				<reportElement x="435" y="87" width="80" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="515" y="88" width="40" height="20"/>
+				<reportElement x="515" y="87" width="40" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="3" y="0" width="552" height="74"/>
-				<imageExpression><![CDATA["D:\\repositorio\\fundalara\\WebContent\\WEB-INF\\classes\\PieDePagina.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</lastPageFooter>
 	<summary>
@@ -201,19 +193,19 @@ competencia.cantidad_fase]]>
 					<datasetRun subDataset="DScompetencia">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="72">
-						<jr:columnHeader style="table 1_CH" height="39" rowSpan="1">
+					<jr:column width="76">
+						<jr:columnHeader style="table 1_CH" height="28" rowSpan="1">
 							<staticText>
-								<reportElement x="10" y="0" width="62" height="37"/>
+								<reportElement x="0" y="1" width="67" height="26"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Tipo]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="35" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
 							<textField>
-								<reportElement x="10" y="0" width="62" height="35"/>
+								<reportElement x="5" y="0" width="67" height="41"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
@@ -221,39 +213,39 @@ competencia.cantidad_fase]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="94">
-						<jr:columnHeader style="table 1_CH" height="39" rowSpan="1">
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="28" rowSpan="1">
 							<staticText>
-								<reportElement x="5" y="0" width="80" height="37"/>
+								<reportElement x="0" y="0" width="90" height="27"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Clasificación]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="35" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
 							<textField>
-								<reportElement x="5" y="0" width="80" height="35"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
+								<reportElement x="7" y="0" width="77" height="41"/>
+								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{clasificacion}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="176">
-						<jr:columnHeader style="table 1_CH" height="39" rowSpan="1">
+					<jr:column width="180">
+						<jr:columnHeader style="table 1_CH" height="28" rowSpan="1">
 							<staticText>
-								<reportElement x="5" y="0" width="169" height="37"/>
+								<reportElement x="0" y="0" width="180" height="27"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Nombre]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="35" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
 							<textField>
-								<reportElement x="5" y="0" width="169" height="35"/>
+								<reportElement x="10" y="0" width="170" height="41"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
@@ -261,19 +253,19 @@ competencia.cantidad_fase]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="81">
-						<jr:columnHeader style="table 1_CH" height="39" rowSpan="1">
+					<jr:column width="79">
+						<jr:columnHeader style="table 1_CH" height="28" rowSpan="1">
 							<staticText>
-								<reportElement x="4" y="0" width="75" height="37"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
+								<reportElement x="3" y="0" width="76" height="27"/>
+								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Fecha Inicio]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="35" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="4" y="0" width="75" height="35"/>
+								<reportElement x="3" y="0" width="76" height="41"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
@@ -281,19 +273,19 @@ competencia.cantidad_fase]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="74">
-						<jr:columnHeader style="table 1_CH" height="39" rowSpan="1">
+					<jr:column width="71">
+						<jr:columnHeader style="table 1_CH" height="28" rowSpan="1">
 							<staticText>
-								<reportElement x="3" y="1" width="71" height="37"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
+								<reportElement x="4" y="0" width="67" height="27"/>
+								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Fecha Fin]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="35" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="3" y="0" width="71" height="35"/>
+								<reportElement x="4" y="0" width="67" height="41"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>
@@ -301,19 +293,19 @@ competencia.cantidad_fase]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="55">
-						<jr:columnHeader style="table 1_CH" height="39" rowSpan="1">
+					<jr:column width="53">
+						<jr:columnHeader style="table 1_CH" height="28" rowSpan="1">
 							<staticText>
-								<reportElement x="2" y="0" width="53" height="37"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
+								<reportElement x="0" y="0" width="53" height="27"/>
+								<textElement verticalAlignment="Middle">
 									<font fontName="Arial" size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Fases]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="35" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="43" rowSpan="1">
 							<textField>
-								<reportElement x="2" y="0" width="53" height="35"/>
+								<reportElement x="0" y="0" width="53" height="41"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="12"/>
 								</textElement>

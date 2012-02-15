@@ -11,11 +11,12 @@
 
 					<div style="margin-top:5px">
 						<label value="Filtro"></label>
-						<textbox id="txtFiltro"></textbox>						
+						<textbox id="txtFiltro"></textbox>
 					</div>
 					<listbox id="lsbxIndicadores" mold="paging"
-						pageSize="10" style="margin-top:5px" width="100%" model="@{cntrl.listIndicador}" >
-												
+						pageSize="10" style="margin-top:5px" width="100%"
+						model="@{cntrl.listIndicador}">
+
 						<listhead>
 							<listheader label="Nombre" width="16%"
 								align="center" />
@@ -35,19 +36,24 @@
 							<listcell label="@{indicador.nombre}" />
 							<listcell label="@{indicador.abreviatura}" />
 							<listcell label="@{indicador.formula}" />
-							<listcell label="@{indicador.datoBasicoByCodigoTipoIndicador.nombre}"/>
-							<listcell label="@{indicador.datoBasicoByCodigoModalidad.nombre}"/>							
-							<listcell label="@{indicador.datoBasicoByCodigoMedicion.nombre}"/>
+							<listcell
+								label="@{indicador.datoBasicoByCodigoTipoIndicador.nombre}" />
+							<listcell
+								label="@{indicador.datoBasicoByCodigoModalidad.nombre}" />
+							<listcell
+								label="@{indicador.datoBasicoByCodigoMedicion.nombre}" />
 						</listitem>
 
 					</listbox>
 
 					<div align="right">
-						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
-							label="Aceptar">
+						<button id="btnImprimir"
+							image="/Recursos/Imagenes/imprimir.ico" label="Imprimir" />
+						<button id="btnAceptar"
+							image="/Recursos/Imagenes/aceptar.ico" label="Aceptar">
 						</button>
 						<button id="btnSalir"
-							image="/Recursos/Imagenes/salir.png" label="Salir"	/>
+							image="/Recursos/Imagenes/salir.png" label="Salir" />
 					</div>
 				</panelchildren>
 

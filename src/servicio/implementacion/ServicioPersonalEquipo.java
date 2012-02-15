@@ -76,5 +76,11 @@ public class ServicioPersonalEquipo implements IServicioPersonalEquipo {
 	public PersonalEquipo burcarPorPersonal(Personal personal){
 		return (PersonalEquipo) daoPersonalEquipo.buscarUnCampo(PersonalEquipo.class, "personal", personal);
 	}
+
+	@Override
+	public List<PersonalEquipo> listarxequipo(int codigo) {
+		// TODO Auto-generated method stub
+		return daoPersonalEquipo.listarPersonal(codigo);
+	}
 	
 }

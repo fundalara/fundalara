@@ -73,6 +73,12 @@ public class ServicioPersonalCargo implements IServicioPersonalCargo {
 		return daoPersonalCargo.buscarHistorial(personal);
 	}
 
+	@Override
+	public List<PersonalCargo> listarporCargo(Integer codigo) {
+		// TODO Auto-generated method stub
+		return daoPersonalCargo.listarPersonal(codigo);
+	}
+
 
 	
 }

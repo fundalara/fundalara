@@ -74,4 +74,10 @@ public class ServicioRoster implements IServicioRoster {
 		return daoRoster.listarUnCampoActivos(Roster.class, "equipo", equipo);		
 	}
 
+	@Override
+	public List<Roster> listarxDivisaxCategoria(int codigocat, int codigoeq) {
+		// TODO Auto-generated method stub
+		return daoRoster.listarJugadoresDivisa(codigocat, codigoeq);
+	}
+
 }

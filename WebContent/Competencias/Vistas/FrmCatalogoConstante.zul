@@ -31,7 +31,7 @@
 					<div align="right">
 						<panel>
 							<panelchildren>
-								<button	id="btnGenerar" image="/Recursos/Imagenes/generar.ico" label="Generar">
+								<button	id="btnGenerar" image="/Recursos/Imagenes/imprimir.ico" label="Imprimir">
 								</button>
 								<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
 										label="Aceptar">

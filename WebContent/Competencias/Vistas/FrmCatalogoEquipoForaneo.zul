@@ -1,0 +1,56 @@
+<?page title="Registro De Jugador Foraneo" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatalogoEf"?>
+<zk>
+
+	<div align="center">
+		<window id="frmCatalogoEf" title="Equipos Foraneos Existentes"
+			apply="controlador.competencia.CntrlFrmCatalogoEquipoForaneo"
+		   border="normal" mode="modal" closable="true" width="690px"
+			height="350px">
+			<panel width="100%" border="normal">
+				<panelchildren>
+					<div style="margin-top:5px">
+						<label value="Filtro"></label>
+						<textbox id="txtFiltro" ></textbox>
+						<button label="Buscar"></button>
+					</div>
+					<listbox  id="lsbxEquipos" mold="paging" width="100%"
+						pageSize="10" style="margin-top:5px" model="@{cntrl.equipos}"
+						height="240px"  >
+						<listhead>
+							<listheader label="Nombre" align="center" width="10%"></listheader>
+							<listheader label="Categoria" align="center" width="auto"></listheader>
+							<listheader label="Divisa" align="center"  width="auto"></listheader>
+							
+							
+						
+						</listhead>
+
+						<listitem self="@{each=equipo}">
+							<listcell label="@{equipo.nombre}"></listcell>
+							<listcell label="@{equipo.categoria.nombre}"></listcell>
+							<listcell label="@{equipo.divisa.nombre}"></listcell>
+						
+						</listitem>
+
+					</listbox>
+					<div align="right">
+						<button id="btnAceptar" image="../../Recursos/Imagenes/aceptar.ico" label="Aceptar" />
+						<button id="btnSalir" image="../../Recursos/Imagenes/salir.png" label="Salir"	onClick="" />	
+					</div>
+				</panelchildren>
+			</panel>
+
+
+			<zscript><![CDATA[
+	public void Salir() {
+		FrmCatalogoEquipoForaneo.onClose();
+	}
+]]></zscript>
+	
+
+
+		</window>
+	</div>
+</zk>

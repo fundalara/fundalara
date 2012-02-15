@@ -2,6 +2,7 @@ package controlador.competencia;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,6 +37,8 @@ import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import comun.ConeccionBD;
 
 import servicio.implementacion.ServicioEquipoCompetencia;
 import servicio.implementacion.ServicioEquipoFaseCompetencia;
@@ -88,7 +91,7 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	public void setLsbxEquipoCompetencia(Listbox lsbxEquipoCompetencia) {
 		this.lsbxEquipoCompetencia = lsbxEquipoCompetencia;
 	}
-
+	
 	public void onCreate$frmCatalogoEC() {
 		Competencia competencia = (Competencia) catalogo.getVariable(
 				"competencia", false);
@@ -158,14 +161,13 @@ public class CntrlFrmCatalogoEquipoCompetencia extends GenericForwardComposer {
 	}
 
 	public void onClick$btnGenerar() throws JRException, IOException,
-			InterruptedException {
+			InterruptedException, SQLException {
+		con = ConeccionBD.getCon("postgres", "postgres", "123456");
 		Competencia competencia = (Competencia) catalogo.getVariable(
 				"competencia", false);
 
 		System.out.println(competencia.getCodigoCompetencia());
 		parameters.put("competencia", competencia.getCodigoCompetencia());
-		// jrxmlSrc =
-		// Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/tabladeposicionesnormal.jrxml");
 		String rutaReporte = Sessions.getCurrent().getWebApp()
 				.getRealPath("/WEB-INF/reportes/equiposCompetencia.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);

@@ -2,10 +2,13 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmRoster"?>
 
+
+
+
 <zk>
-	<div align="center">
+	<div align="left">
 	 <window id="frmRoster" apply="controlador.competencia.CntrlFrmRoster"
-		 title="REGISTRO DE RÓSTER" border="normal" closable="true" width="60%" style="text-align:left">
+		 title="Registro de Róster" border="normal" closable="true" width="630px">
 		 
 		 <tabbox>
 	<tabs>
@@ -13,39 +16,73 @@
 		<tab label="Gestion de Refuerzos " />
 	</tabs>
 	<tabpanels>
-		<tabpanel><!-- Roster Jesus -->
+	<tabpanel><!-- Roster Jesus -->
 		<div id="Roster" align="left">
 				
-				<panel border="normal" title="Datos de la Competencia">
+				<panel border="normal" title="Datos de la Competencia" >
 					<panelchildren>
 						<grid>
 							<columns>
-								<column width="40px" align="left"></column>
-								<column width="40px"></column>
-								<column width="60px"></column>
-								<column width="60px"></column>
-								<column width="50px"></column>
-								<column width="60px"></column>
+								<column width="17%"></column>
+								<column width="80%"></column>
+								
 							</columns>
 							<rows>
-								<row>
+								<row style="border-style:none">
 									<label value="Nombre"></label>
-									<hbox>
-										<textbox readonly="true" cols="11" id="txtIdCompetencia" value="@{cntrl.competencia.nombre}"></textbox>
+									
+										<textbox tooltiptext="Nombre de la competencia seleccionada" readonly="true" width="98%"  id="txtNombreCompetencia" value="@{cntrl.competencia.nombre}"></textbox>
 										<button id="btnBuscar"
-											image="../../Recursos/Imagenes/consultar.ico">
+											image="../../Recursos/Imagenes/consultar.ico" tooltiptext="Buscar una competencia no aperturada">
 										</button>
-									</hbox>
-									<label value="Fecha Inicio"></label>
-									<textbox readonly="true" cols="10" id="txtfinicio" value="@{cntrl.competencia.fechaInicio}"></textbox>
-									<label value="Fecha Fin"></label>
-									<textbox readonly="true" cols="10" id="txtffin" value="@{cntrl.competencia.fechaFin}"></textbox>
-
+									
+				
 								</row>
 
-								<row></row>
-							</rows>
+								</rows>
+							
 						</grid>
+					</panelchildren>
+				</panel>
+				
+				<panel style="border-style:none">
+					<panelchildren>
+						<grid>
+							<columns>
+					<column label="" width="12%"/>
+					<column label="" width="25%"/>
+					
+						<column label="" width="12%"/>
+					<column label="" width="25%"/>
+							</columns>
+					<rows>
+						<row style="border-style:none">
+										<label value="Tipo"></label>
+									<textbox tooltiptext="Tipo de la competencia seleccionada" readonly="true" width="90%" id="txtTipo" value="@{cntrl.competencia.clasificacionCompetencia.datoBasico.nombre}"></textbox>
+									
+									<label value="Clasificación"></label>
+									<textbox tooltiptext="Modalidad de clasificacion de la competencia seleccionada" readonly="true" width="90%" id="txtModalidad" value="@{cntrl.competencia.clasificacionCompetencia.nombre}"></textbox>
+									
+							
+							
+						</row>
+						<row style="border-style:none">
+						
+						
+									<label value="Fecha Inicio"></label>
+								<textbox readonly="true" cols="10" id="txtfinicio" value="@{cntrl.competencia.fechaInicio}" tooltiptext="Fecha de Inicio de la competencia seleccionada" width="90%"></textbox>
+								
+								<label value="Fecha Fin"></label>
+								<textbox readonly="true" cols="10" id="txtffin" value="@{cntrl.competencia.fechaFin}" tooltiptext="Fecha de Fin de la competencia seleccionada" width="90%"></textbox>
+						
+						
+						
+						
+						</row>
+					</rows>
+				</grid>
+					
+					
 					</panelchildren>
 				</panel>
 				</div>
@@ -53,314 +90,370 @@
 					<panelchildren>
 						<grid>
 							<columns>
-								<column label=""></column>
-								<column label=""></column>
-								<column label=""></column>
+								<column label="" width="12%"/>
+								<column label="" width="25%"/>
+								<column label="" width="12%"/>
+								<column label="" width="25%"/>
+								
 							</columns>
 							<rows>
-								<row>
-									<label value="Categoria"></label>
-									
+								<row style="border-style:none">
+								<div align="left">
+								<label value="Categoria"></label>
+								</div>
+									<div align="left">
 									<combobox 
-									model="@{cntrl.categorias}" value="--Seleccione--" id="cmbCategoria" readonly="true">
+									model="@{cntrl.categorias}" value="--Seleccione--" id="cmbCategoria" readonly="true" width="80%" tooltiptext="Categorias que participan en la competencia seleccionada">
 									<comboitem
 									self="@{each=categoriaCompetencia}"
-									label="@{categoriaCompetencia.categoria.nombre }" value="@{categoriaCompetencia.categoria}">
+									label="@{categoriaCompetencia.categoria.nombre }" value="@{categoriaCompetencia.categoria}" tooltiptext="Equipos que participan en la competencia seleccionada" width="90%">
 									</comboitem>
 									</combobox>
-									<label value="Equipo"></label>
+									</div>
 								
+									<div align="left">	
+									<label value="Equipo"></label>
+									</div>
+									<div align="left">
 								<combobox id="cmbEquipo" 
-									model="@{cntrl.equipos}" readonly="true" cols="18"  value="--Seleccione--">
-									<comboitem self="@{each=equipo}"
-										value="@{equipo}" label="@{equipo.nombre}">
+								
+									model="@{cntrl.equipos}" readonly="true"  value="--Seleccione--" width="80%" tooltiptext="Equipos que participan en la competencia seleccionada">
+									<comboitem self="@{each=equipoCompetencia}"
+										value="@{equipoCompetencia}" label="@{equipoCompetencia.equipo.nombre}">
 									</comboitem>
 								</combobox>
-								
-								
+								</div>
 								</row>
 								<row>
-									<label value="Manager"></label>
-									<bandbox cols="12"></bandbox>
+								<div align="left">
+								<label value="Manager"></label>
+								</div>
+									<div align="left">
+										<combobox id="cmbManager" 
+									 readonly="true"  value="--Seleccione--" width="80%" tooltiptext="Managers relacionados con el equipo seleccionado"> <!--model="@{cntrl.personalxEquipo}"  self="@{each=personalEquipo}" value="@{personalEquipo}" label="@{personalEquipo.personal.personaNatural.primerNombre}"-->
+									
+								</combobox>
+								</div>
+								
+									<div align="left">
 									<label value="Delegado"></label>
-									<bandbox cols="12"></bandbox>
-								</row>
-							</rows>
-						</grid>
-					</panelchildren>
-				</panel>
-				
-				<panel border="normal" title="Jugadores">
-					<panelchildren>
-
-						<listbox id="lsbxJugadores" mold="paging"
-						pageSize="10" style="margin-top:5px" width="100%" model="@{cntrl.jugadoresxRoster}" >
-							<listhead>
-								<listheader label="#" width="10%"
-									align="center">
-								</listheader>
-								<listheader label="Nombre"
-									width="30%">
-								</listheader>
-								<listheader label="Edad"
-									align="center">
-								</listheader>
-								<listheader label="Alojamiento"
-									align="center" width="80px" sort="">
-								</listheader>
-								<listheader label="Inscrito (4/20)"
-									align="center">
-								</listheader>
-
-							</listhead>
-							<listitem self="@{each=roster}">
-								<listcell label="@{roster.jugador.cedulaRif}"></listcell>
-																
-							</listitem>
-
-						</listbox>
-						<div align="right">
-							<button 
-							    id="btnAgregarOtroJugador"
-								label=" Agregar otro jugador "
-								image="/Recursos/Imagenes/agregar.ico" 
-								onClick="btnAgregarOtroJugador()">
-							</button>
-						</div>
-					</panelchildren>
-				</panel>
-				
-						
-		
-		
-		
-		
-		</tabpanel>
-		<tabpanel> <!-- Refuerzos Lisbeth -->
-		<panel collapsible="true" title="Datos Básicos"  >
-					<panelchildren>
-						<grid>
-							<columns>
-								<column label=""  width="50px"></column>
-								<column label="" width="50px"></column>
-								<column label="" width="30px"></column>
-								<column label=""  width="30px"></column>
-								<column label=""  width="30px"></column>
-								<column label=""  width="30px"></column>
-							</columns>
-							<rows>
-							
-							       <row style="border-style:none">
-									
-									<label value="Cedula" ></label>
-								    
-							
-									<textbox id="txtCedula"
-										value="@{cntrl.jugadorForaneo.cedula}"
-										
-										cols="20">
-									</textbox>
-									
-									
-									
-									<label   value="Nombre"></label>
-									<textbox id="txtNombre"
-										value="@{cntrl.jugadorForaneo.nombre}"
-										constraint="no empty:El campo 'nombre' es obligatorio"
-										cols="20" >
-									</textbox>
-								</row>
-							
-							
-							      <row style="border-style:none">
-							      
-							       
-								     <label value="Equipo"></label>
+									</div>
+									<div align="left">
+										<textbox readonly="true" width="90%"  id="txtDelegado" value="" tooltiptext="Delegado que esta asociado al equipo"></textbox> <!--model="@{cntrl.personalxEquipo}"  self="@{each=personalEquipo}" value="@{personalEquipo}" label="@{personalEquipo.personal.personaNatural.primerNombre}" value="@{cntrl.equipoCompetencia.personaNatural.primerNombre}"-->
+									</div>
 								
-									<hbox>
-									<textbox id="txtEquipo"   
-									 readonly="true" cols="18"
-                                       constraint="no empty:El campo 'EQUIPO' es obligatorio"
-									 value= "@{cntrl.equipoCompetencia.equipo.nombre}" >
-									</textbox>
-									<button 
-									  id="btnBuscarEquipo"
-									 image="../../Recursos/Imagenes/consultar.ico"
-								     >
-									</button>
-								  </hbox>
-									<label value="Categoria"></label>
-									<textbox id="txtCategoria"  cols="18"  readonly="true"
-								        constraint="no empty:El campo 'CATEGORIA' es obligatorio"
-									 value="@{cntrl.equipoCompetencia.equipo.categoria.nombre}">
-										
-										</textbox>
-									
-									
-									<label value="Divisa"></label>
-									<textbox id="txtDivisa" cols="18"  readonly="true"
-									   constraint="no empty:El campo 'DIVISA' es obligatorio"
-										 value="@{cntrl.equipoCompetencia.equipo.divisa.nombre}"></textbox>
-									</row>
-							
-							
-							   
-							
-				
+								</row>
 								
 							</rows>
 						</grid>
+					</panelchildren>
+				</panel>
+				<hbox>
+				<hbox>
+				<panel border="normal" title="Roster de Equipo">
+					<panelchildren>
 						
-					<panel >
-							<panelchildren>	
-								<grid>
-									<columns>
-										<column width="45%"></column>
-										<column width="12%"
-											align="Center">
-										</column>
-										<column width="45%"></column>
-									</columns>
-									<rows >
-										<row style="border:none" >
-											<panel title="Jugadores Refuerzos Existentes"><panelchildren>
-										<!-- cambiar variable en controlador -->	<listbox
-									  id="lsbxJugadors" 
-									 checkmark="true" multiple="true" 
-									model="@{cntrl.jugadors}"
-									 mold="paging" pageSize="10"
-									 style="margin-top:5px" height="200px" width="">
-												<listhead>
-											
-													<listheader label="Cedula"
-														sort="auto" width="10%">
-													</listheader>
-													<listheader
-														label="Nombre" sort="auto" width="10%"/>
-														
-													<listheader
-														label="Equipo" sort="auto" width="10%"/>
-														<listheader
-														label="Categoria" sort="auto" width="10%"/>
-														<listheader
-														label="Divisa" sort="auto" width="10%"/>
-												</listhead>
-												<listitem self="@{each=jugador}" value="@{jugador }">
-									                <listcell label="@{jugador.cedula }"></listcell> 
-								               
-								                   
-													
-									                <listcell label="@{jugador.nombre }"></listcell> 
-								                  
-								                       <listcell 
-									             label="@{jugador.equipoCompetencia.equipo.nombre}">
-									             </listcell>
-                                                <listcell 
-									             label="@{jugador.equipoCompetencia.equipo.categoria.nombre}">
-									             </listcell>
-									             <listcell 
-									             label="@{jugador.equipoCompetencia.equipo.divisa.nombre}">
-									             </listcell>
-									             </listitem>
-											</listbox>
-                                            </panelchildren></panel>
-											<grid>
-								<rows>
-									<row style="border:none"
-										align="center">
-										<button id="btnAgregar"
-											image="/Recursos/Imagenes/rightarrow_g.png" style="center" />
-									</row>
-									<row style="border:none"
-										align="center">
-										<button onClick=""
-											id="btnQuitar" image="/Recursos/Imagenes/leftarrow_g.png"
-											style="center" />
-									</row>
-								</rows>
-
-							</grid>
-                                             <panel title="Jugadores Refuerzos Seleccionados"><panelchildren>
-											<listbox 
-												id="lsbxJugadoresSeleccionados"    
-                                                     model="@{cntrl.jugadoresSeleccionados}" multiple="true"
-								                   checkmark="true" mold="paging" pageSize="10"
-								                   style="margin-top:5px" height="200px">
-												<listhead>
-													<listheader label="Cedula"
-														sort="auto" width="10%">
-														
-													</listheader>
-													<listheader
-														label="Nombre" sort="auto" width="10%"/>
-													<listheader
-														label="Equipo" sort="auto" width="10%"/>
-														<listheader
-														label="Categoria" sort="auto" width="10%"/>
-														<listheader
-														label="Divisa" sort="auto" width="10%"/>	
-												</listhead>
-                                               <listitem self="@{each=jugador}" value="@{jugador}">
-
-									             <listcell 
-									             label="@{jugador.cedula}">
-									             </listcell>
-                                                <listcell 
-									             label="@{jugador.nombre}">
-									             </listcell>
-                                                     <listcell 
-									             label="@{jugador.equipoCompetencia.equipo.nombre}">
-									             </listcell>
-                                                <listcell 
-									             label="@{jugador.equipoCompetencia.equipo.categoria.nombre}">
-									             </listcell>
-									             <listcell 
-									             label="@{jugador.equipoCompetencia.equipo.divisa.nombre}">
-									             </listcell>
-								</listitem>
-											</listbox>
-											</panelchildren></panel>
-										</row>
-									</rows>
-								</grid>
-
-							</panelchildren>
-						</panel>
+						<listbox id="lsbxJugadores" mold="paging" width="auto"
+						pageSize="10" style="margin-top:10px" model="@{cntrl.rosterCompetenciaNuevas}"
+						height="200px"  checkmark="true" multiple="true">
+						<listhead>
+						<listheader label="#"></listheader>
+						<listheader label="Nombre"></listheader>
+						<listheader label="Apellido"></listheader>
 						
+						
+							
+						</listhead>
+
+						<listitem self="@{each=rosterCompetencia}" value="@{rosterCompetencia}">
+							<listcell label="@{rosterCompetencia.roster.jugador.numero}"></listcell>
+							<listcell label="@{rosterCompetencia.roster.jugador.personaNatural.primerNombre}"></listcell>
+							<listcell label="@{rosterCompetencia.roster.jugador.personaNatural.primerApellido}"></listcell>
+							
+							
+							
+						</listitem>
+
+
+					</listbox>
 						
 					</panelchildren>
-
+					
+					
 				</panel>
+		</hbox>
+		
+		
+		<hbox height="10px" width="30px"><!--Botones -->
+		<div style="margin-top:100px">
+			
+		
+		<panel>
+			<panelchildren>
+				<button image="/Recursos/Imagenes/agregar.ico" id="btnAgregarRoster" tooltiptext="Agregar Jugadores de otros equipos al roster"></button>
+				<button image="/Recursos/Imagenes/quitar.ico" id="btnQuitarRoster" tooltiptext="Quitar Jugadores de otros equipos al roster"></button>
+				
+			
+			
+			</panelchildren>
 		
 		
 		
+		</panel>
+		</div>
+		</hbox>
+		</hbox>
 		
-		</tabpanel>
-	</tabpanels>
-</tabbox>
-		 
-		 
-		 
-							
-
-
-				<div align="right">
-					<button image="../../Recursos/Imagenes/guardar.ico"
+		<div align="right">
+					<button tooltiptext="Guardar Roster para la Competencia" id="btnGuardarRoster" image="../../Recursos/Imagenes/guardar.ico"
 						label="Guardar">
 					</button>
-					<button image="../../Recursos/Imagenes/cancelar.ico"
+					<button id="btnCancelarRoster" tooltiptext="Cancelar Acciones Anteriores" image="../../Recursos/Imagenes/cancelar.ico"
 						label="Cancelar">
 					</button>
-					<button image="../../Recursos/Imagenes/salir.png"
+					<button id="btnSalirRoster" tooltiptext="Salir del Registro de Roster" image="../../Recursos/Imagenes/salir.png"
 						label="Salir">
 					</button>
 				</div>
-				
+		
+		
+		
+		
+		
+		</tabpanel>
+	
+		<tabpanel><!-- Refuerzos Lisbeth -->
+						<div id="Refuerzo" align="left">
+							<panel collapsible="true"
+								title="Datos Básicos">
+								<panelchildren>
+									<grid>
+										<columns>
+										<column></column>
+										<column></column>
+										<column></column>
+										<column></column>
+										<column></column>
+										<column></column>
+										</columns>
+
+										<rows>
+											<row
+												style="border-style:none">
+
+
+												<label value="Equipo" tooltiptext="Equipo al que pertenece el Jugador Refuerzo"></label>
+
+												<hbox>
+													<textbox tooltiptext="Equipo al que pertenece el Jugador Refuerzo"
+														id="txtEquipo" style="margin-top:5px" readonly="true" cols="18"
+														constraint="no empty:El campo 'EQUIPO' es obligatorio"
+														value="@{cntrl.equipoForaneo.nombre}">
+													</textbox>
+													<button tooltiptext="Equipo al que pertenece el Jugador Refuerzo "
+														id="btnBuscarEquipo" style="margin-left:5px"
+														image="/Recursos/Imagenes/consultar.ico">
+													</button>
+												</hbox>
+												<label
+													value="Categoria" tooltiptext="Categoria a la que pertenece el Jugador Refuerzo">
+												</label>
+												<textbox style="margin-left:5px" tooltiptext="Categoria a la que pertenece el Jugador Refuerzo"
+													id="txtCategoria" cols="18" readonly="true" 
+													constraint="no empty:El campo 'CATEGORIA' es obligatorio"
+													value="@{cntrl.equipoForaneo.categoria.nombre}">
+
+												</textbox>
+
+												<hbox>
+													<label
+														value="Divisa" tooltiptext="Divisa  a la que pertenece el Jugador Refuerzo">
+													</label>
+													<textbox style="margin-left:5px" tooltiptext="Divisa  a la que pertenece el Jugador Refuerzo"
+														id="txtDivisa" cols="18" readonly="true"
+														constraint="no empty:El campo 'DIVISA' es obligatorio"
+														value="@{cntrl.equipoForaneo.divisa.nombre}">
+													</textbox>
+												</hbox>
+											</row>
 
 
 
-			
-</window>
+											<row
+												style="border-style:none">
+
+												<label value="Cedula" tooltiptext="Cedula del Jugador Refuerzo"></label>
+												<div>
+												<div>
+													<combobox tooltiptext="Nacionalidad/Rif del Jugador Refuerzo"  style="margin-top:5px" id="cmbNacionalidad" readonly="true" value="" cols="1"
+														focus="true">
+														<comboitem
+															label="V-" value="V-" />
+														<comboitem
+															label="E-" value="E-" />
+														<comboitem
+															label="R-" value="R-" />
+													</combobox>
+													
+													<textbox   style="margin-top:5px" tooltiptext="Cedula del Jugador Refuerzo"
+														id="txtCedula" cols="10" 
+														maxlength="12" 
+									                    value="@{cntrl.jugadorForaneo.cedula}" >
+													</textbox>
+
+													<button  tooltiptext="Jugadores Refuerzo Existentes"
+														id="btnBuscarJForaneo"
+														image="/Recursos/Imagenes/consultar.ico">
+
+													</button>
+													</div>
+												</div>
+
+
+												<label value="Nombre" tooltiptext="Nombre del Jugador Refuerzo"></label>
+												<textbox id="txtNombre" style="margin-left:7px" tooltiptext="Nombre del Jugador Refuerzo"
+													value="@{cntrl.jugadorForaneo.nombre}"
+													
+													cols="18">
+												</textbox>
+
+
+
+
+											</row>
+
+
+										</rows>
+									</grid>
+
+
+
+									<hbox><!-- General -->
+
+
+										<hbox><!-- Lista -->
+											<panel
+												title="Jugadores Refuerzos Seleccionados" >
+												<panelchildren>
+
+													<grid>
+
+														<rows>
+
+															<row
+																style="border:none">
+																<!-- cambiar variable en controlador -->
+																<listbox
+																	id="lsbxJugadors" checkmark="true" multiple="true"
+																	model="@{cntrl.jugadors}" mold="paging" pageSize="10"
+																	style="margin-top:5px" height="200px" >
+																	<listhead>
+
+																		<listheader
+																			label="Cedula"  width="20%">
+																		</listheader>
+																		<listheader
+																			label="Nombre" width="25%" />
+
+																		<listheader
+																			label="Equipo"  width="20%" />
+																		<listheader
+																			label="Categoria"  width="20%" />
+																		<listheader
+																			label="Divisa" width="15%" />
+																	</listhead>
+																	<listitem 
+																		self="@{each=jugadorForaneo}"
+																		value="@{jugadorForaneo}">
+																		<listcell 
+																			label="@{jugadorForaneo.cedula }">
+																		</listcell>
+
+
+
+																		<listcell 
+																			label="@{jugadorForaneo.nombre }">
+																		</listcell>
+
+																		<listcell 
+																			label="@{jugadorForaneo.equipo.nombre}">
+																		</listcell>
+																		<listcell 
+																			label="@{jugadorForaneo.equipo.categoria.nombre}">
+																		</listcell>
+																		<listcell 
+																			label="@{jugadorForaneo.equipo.divisa.nombre}">
+																		</listcell>
+																	</listitem>
+																</listbox>
+
+
+															</row>
+														</rows>
+													</grid>
+												</panelchildren>
+											</panel>
+										</hbox><!--fin lista -->
+
+
+
+										<hbox height="10px"
+											width="30px"><!--Botones -->
+											<div
+												style="margin-top:100px">
+												<panel>
+													<panelchildren>
+														<grid>
+															<columns>
+																<column>
+
+																</column>
+															</columns>
+															<rows>
+																<row>
+																	<button tooltiptext="Agregar Jugador Refuerzo al Roster De la Competencia"
+																		id="btnAgregarForaneo"
+																		image="/Recursos/Imagenes/agregar.ico">
+																	</button>
+																</row>
+																<row>
+																	<button  tooltiptext="Quitar Jugador Refuerzo del Roster De la Competencia"
+																		id="btnQuitarForaneo"
+																		image="/Recursos/Imagenes/quitar.ico">
+																	</button>
+																</row>
+															</rows>
+														</grid>
+													</panelchildren>
+												</panel>
+
+											</div>
+										</hbox><!--Fin Botones  -->
+
+									</hbox><!--Fin General -->
+
+
+
+
+								</panelchildren>
+
+							</panel>
+
+						</div>
+						<div align="right">
+							
+							
+							<button id="btnCancelarForaneo" tooltiptext="Cancelar Acciones Anteriores"
+								image="/Recursos/Imagenes/cancelar.ico" label="Cancelar">
+							</button>
+							
+						</div>
+
+
+					</tabpanel>
+						</tabpanels>
+</tabbox>
+		 </window>
 		</div>
 	
 </zk>

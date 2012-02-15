@@ -11,6 +11,12 @@ public interface IServicioRosterCompetencia {
 
 	public abstract List<RosterCompetencia> listar();
 
+public abstract void actualizar(RosterCompetencia c);
+	
+	public abstract List<RosterCompetencia> listarCompetenciasExistentes(int codcomp,int codequipo);
+
 	public abstract List<RosterCompetencia> listarActivos();
+
+	public abstract List<RosterCompetencia> listarJexistentes(int codcomp);
 
 }

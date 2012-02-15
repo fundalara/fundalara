@@ -28,4 +28,6 @@ public interface IServicioPersonalEquipo {
 	public abstract List<PersonalEquipo> buscarPorPlanTemporada(PlanTemporada plan);
 	
 	public abstract PersonalEquipo burcarPorPersonal(Personal personal);
+	
+	public abstract List<PersonalEquipo> listarxequipo(int codigo);
 }

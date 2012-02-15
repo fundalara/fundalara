@@ -18,6 +18,8 @@ public interface IServicioPersonalCargo {
 	public abstract List<PersonalCargo> listarActivos();
 	
 	public abstract PersonalCargo buscarPorCodigo (PersonalCargo d);
+	
+	public abstract  List<PersonalCargo> listarporCargo (Integer codigo);
 
 
 }

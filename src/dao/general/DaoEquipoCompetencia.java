@@ -61,5 +61,14 @@ public List<EquipoCompetencia> buscarEquipoporCompetencia(Competencia c) {
 		List<EquipoCompetencia> lista = cc.list();
 		return lista;
 	}
+	
+	public List<EquipoCompetencia> listarEquipoxcompetencia(int codigo){
+		//Permite buscar todas las divisas con estatus = 'A'
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(EquipoCompetencia.class);
+		List lista = c.add(Restrictions.eq("competencia.codigoCompetencia",codigo)).list();
+		return lista;
+	}
 
 }

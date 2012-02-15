@@ -5,6 +5,7 @@ import java.util.List;
 import dao.general.DaoRosterCompetencia;
 
 import modelo.Constante;
+import modelo.JugadorForaneo;
 import modelo.RosterCompetencia;
 import servicio.interfaz.IServicioConstante;
 import servicio.interfaz.IServicioRosterCompetencia;
@@ -30,17 +31,47 @@ public class ServicioRosterCompetencia implements IServicioRosterCompetencia {
 	@Override
 	public void agregar(RosterCompetencia c) {
 		// TODO Auto-generated method stub
-
+	/*	if (c.getCodigoRosterCompetencia() == 0){
+			   int cod = daoRosterCompetencia.listar(JugadorForaneo.class).size()+1;
+			   c.setCodigoRosterCompetencia(cod);
+			   c.setEstatus('A');
+			}*/
+		
+//			c.setCodigoRosterCompetencia(c.getCodigoRosterCompetencia() + 1);
+			c.setEstatus('A');
+			daoRosterCompetencia.guardar(c);
+	
 	}
 
 	@Override
-	public List<RosterCompetencia> listar() {
+	public List<RosterCompetencia> listarCompetenciasExistentes(int codcomp,int codequipo) {
 		// TODO Auto-generated method stub
-		return null;
+		return daoRosterCompetencia.listarRexistentes(codcomp, codequipo);
 	}
 
 	@Override
 	public List<RosterCompetencia> listarActivos() {
+		// TODO Auto-generated method stub
+		return daoRosterCompetencia.listarActivos();
+	}
+
+	@Override
+	public List<RosterCompetencia> listarJexistentes(int codcomp) {
+		// TODO Auto-generated method stub
+		return daoRosterCompetencia.listarJexistentes(codcomp);
+	}
+
+	@Override
+	public void actualizar(RosterCompetencia c) {
+		// TODO Auto-generated method stub
+		c.setEstatus('A');
+		System.out.println("ASIGNO EL STATUS");
+		daoRosterCompetencia.actualizar(c);
+		
+	}
+
+	@Override
+	public List<RosterCompetencia> listar() {
 		// TODO Auto-generated method stub
 		return null;
 	}

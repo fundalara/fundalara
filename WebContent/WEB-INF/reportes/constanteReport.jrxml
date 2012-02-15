@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="constanteReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="70"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -79,10 +79,10 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="157" splitType="Stretch">
+		<band height="147" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="555" height="144"/>
-				<imageExpression><![CDATA["C:\\Users\\Vanessa\\workspace\\fundalara\\WebContent\\WEB-INF\\reportes\\Encabezado.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="436" y="98" width="119" height="20"/>
@@ -115,9 +115,9 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="51" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement x="182" y="12" width="166" height="39"/>
+				<reportElement x="210" y="0" width="141" height="31"/>
 				<textElement>
 					<font fontName="Arial" size="24" isBold="true"/>
 				</textElement>
@@ -126,33 +126,29 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="4" splitType="Stretch">
-			<line>
-				<reportElement x="182" y="0" width="100" height="1"/>
-			</line>
-		</band>
+		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="5" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="88" splitType="Stretch">
+		<band height="97" splitType="Stretch">
 			<image>
 				<reportElement x="12" y="0" width="529" height="88"/>
-				<imageExpression><![CDATA["C:\\Users\\Vanessa\\workspace\\fundalara\\WebContent\\WEB-INF\\reportes\\PieDePagina.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="436" y="68" width="80" height="20"/>
+				<reportElement x="436" y="74" width="80" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="516" y="68" width="48" height="20"/>
+				<reportElement x="516" y="74" width="48" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -163,7 +159,7 @@
 	<summary>
 		<band height="71" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 2" style="table 2" x="85" y="0" width="320" height="70"/>
+				<reportElement key="table 2" style="table 2" x="106" y="0" width="320" height="70"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="DB_constante">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -178,7 +174,7 @@
 								<text><![CDATA[Abreviatura]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 2_TD" height="40" rowSpan="1">
+						<jr:detailCell style="table 2_TD" height="24" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="152" height="20"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -196,7 +192,7 @@
 								<text><![CDATA[Nombre]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 2_TD" height="40" rowSpan="1">
+						<jr:detailCell style="table 2_TD" height="24" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="198" height="20"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>

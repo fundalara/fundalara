@@ -29,4 +29,39 @@ public class DaoEquipoJuego extends GenericDao {
 		return cc.list();
 			
 	}
+	
+public List<EquipoJuego> listarActivos(int codcomp, int codequipo){
+		
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(EquipoJuego.class);
+			Criteria c2 = c.createCriteria("equipoCompetencia");
+			c2.add(Restrictions.eq("competencia.codigoCompetencia", codcomp));
+			c2.add(Restrictions.eq("equipo.codigoEquipo", codequipo));
+		
+			List<EquipoJuego> lista= c.list();
+		
+		 
+		
+		return lista;
+	}
+	
+	public List<EquipoJuego> listarJuegosContrarios(int codjuego){
+		
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = getSession().createCriteria(EquipoJuego.class);
+		c.add(Restrictions.eq("homeClub", false));
+		c.add(Restrictions.eq("juego.codigoJuego", codjuego));
+//		
+			List<EquipoJuego> lista= c.list();
+		
+		 
+		
+		return lista;
+	}
+	
+	
+	
+	
 }

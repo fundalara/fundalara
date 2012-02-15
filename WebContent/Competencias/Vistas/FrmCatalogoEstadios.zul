@@ -38,6 +38,7 @@
 
 					<!--BOTONES -->
 					<div align="right">
+					 <button id="btnImprimir" image="/Recursos/Imagenes/imprimir.ico" label="Imprimir" />
 						<button id="btnAceptar" image="/Recursos/Imagenes/aceptar.ico"
 							label="Aceptar">
 						</button>

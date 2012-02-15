@@ -145,4 +145,18 @@ public class DaoRoster extends GenericDao {
 		return lista;
 	}
 	
+	public List<Roster> listarJugadoresDivisa(int codigocat, int codigoeq){
+		Session session = getSession(); 
+		Transaction tx =  session.beginTransaction();
+		Criteria c = session.createCriteria(Roster.class);
+				
+			Criteria c2 = c.createCriteria("equipo");
+			c2.add(Restrictions.not(Restrictions.eq("codigoEquipo", codigoeq)));
+			c2.add(Restrictions.eq("divisa.codigoDivisa", 1));
+			c2.add(Restrictions.eq("categoria.codigoCategoria", codigocat));
+			List <Roster> lista = c.list(); 
+		return lista;
+	}
+	
+	
 }

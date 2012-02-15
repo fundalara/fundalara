@@ -22,7 +22,7 @@ import modelo.ClasificacionCompetencia;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.FaseCompetencia;
-import modelo.FaseCompetenciaId;
+//import modelo.FaseCompetenciaId;
 import modelo.LapsoDeportivo;
 import modelo.Liga;
 import modelo.TipoDato;
@@ -101,7 +101,7 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 	Categoria categoria;
 	Liga liga, ligaAux;
 	FaseCompetencia faseCompetencia;
-	FaseCompetenciaId faseID;
+//	FaseCompetenciaId faseID;
 	CategoriaCompetencia categoriaCompetencia, ligaCategCompetencia;
 	CategoriaCompetenciaId categCompID;
 
@@ -138,7 +138,7 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		tipo = new TipoDato();
 		dato = new DatoBasico();
 		faseCompetencia = new FaseCompetencia();
-		faseID = new FaseCompetenciaId();
+//		faseID = new FaseCompetenciaId();
 		tiposCompetencias = servicioDatoBasico.listarTipoDato("TIPO COMPETENCIA");
 		ordenarDatoBasico(tiposCompetencias);
 		lapsoDeportivos = servicioLapsoDeportivo.listarActivos();
@@ -155,7 +155,7 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		competencia.setCantidadJugador(9);
 		txtmontoInscripcion.setText("");
 
-		faseID.setNumeroFase(1);
+//		faseID.setNumeroFase(1);
 //		faseCompetencia.setId(faseID);
 		faseCompetencia.setNumeroFase(1);
 		faseCompetencia.setEquipoIngresan(2);
@@ -354,7 +354,7 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 
 		for (int i = 1; i <= cantfase; i++) {
 			faseCompetencia = new FaseCompetencia();
-			FaseCompetenciaId faseID = new FaseCompetenciaId();
+//			FaseCompetenciaId faseID = new FaseCompetenciaId();
 //			faseID.setNumeroFase(i);
 //			faseCompetencia.setId(faseID);
 			faseCompetencia.setNumeroFase(i);
@@ -1238,7 +1238,7 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		tipo = new TipoDato();
 		dato = new DatoBasico();
 		faseCompetencia = new FaseCompetencia();
-		faseID = new FaseCompetenciaId();
+//		faseID = new FaseCompetenciaId();
 
 //		System.out.println(lsbxCategorias.getSelectedItems().size());
 		lsbxCategorias.getItems().clear();
@@ -1270,7 +1270,7 @@ public class CntrlFrmCrearCompetencia extends GenericForwardComposer {
 		competencia.setCantidadJugador(9);		
 		
 		faseCompetencias.removeAll(faseCompetencias);
-		faseID.setNumeroFase(1);
+//		faseID.setNumeroFase(1);
 //		faseCompetencia.set.set.setId(faseID);
 		faseCompetencia.setNumeroFase(1);
 		faseCompetencia.setEquipoIngresan(2);
