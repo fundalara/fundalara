@@ -626,9 +626,26 @@
 														open="false">
 														<treerow>
 															<treecell
-																label=" " visible="${sec:isAnyGranted('92')}"/>
+																label="Anuario" visible="${sec:isAnyGranted('92')}"
+																onClick='enlace("Jugador/Reportes/frmConsultarAnuario.zul")' 
+																/>
+																
 														</treerow>
 													</treeitem>
+													
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Expediente" visible="${sec:isAnyGranted('93')}"
+																onClick='enlace("Jugador/Reportes/frmExpedienteJugador.zul")'
+																/>
+																
+														</treerow>
+													</treeitem>
+													
+													
+													
 												</treechildren>
 											</treeitem>
 
