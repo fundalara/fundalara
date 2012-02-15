@@ -74,7 +74,7 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 	List<Categoria> listCategoria;
 	List<ActividadCalendario> listActividadCalendario;
 	List<InstalacionUtilizada> listInstalacionUtilizada;
-	
+	List<ActividadEntrenamiento> listActividadEntrenamiento;
 	AnnotateDataBinder binder;
 	Categoria categoria = new Categoria();
 	Map parameters = new HashMap();
@@ -91,6 +91,7 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 	Character[] estatusI = { 'A', 'Z'};
 	
 	public void llenarCombo(String[]  valores){
+		cmbEstatus.getItems().clear();
 		for (int i = 0; i < valores.length; i++) {
 			Comboitem item = new Comboitem();
 			item.setLabel(valores[i]);
@@ -105,60 +106,83 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 		listCategoria = servicioCategoria.getDaoCategoria().listarActivos();
 		listEquipo = new ArrayList<Equipo>();
 		listRoster = new ArrayList<Roster>();
-		llenarCombo(estatusActividadesCalendario);
+		//llenarCombo(estatusActividadesCalendario);
 	}
 	
+	
+	public void compararItem (){
+		if (cmbClases.getSelectedIndex()==0){
+			llenarCombo(estatusRegistrosCompuestos);
+		}else if (cmbClases.getSelectedIndex()==1){
+			llenarCombo(estatusRegistrosCompuestos);
+		}else if (cmbClases.getSelectedIndex()==2){
+			llenarCombo(estatusActividadesCalendario);
+		}else if (cmbClases.getSelectedIndex()==3){
+			llenarCombo(estatusRegistrosCompuestos);
+		}else if (cmbClases.getSelectedIndex()==4){
+			llenarCombo(estatusRegistrosCompuestos);
+		}
+	}
 	public void onChange$dtbox2(){
 		Date date = dtbox2.getValue();
 		if (date.before(dtbox1.getValue())) {
 			alert("La fecha final es menor que la fecha inicial");
 		} 
 		else{
-		System.out.println("aaa1"+cmbClases.getSelectedItem().getValue());
-		if (cmbClases.getSelectedItem().getValue()=="4"){
-			System.out.println("aaa2");
-			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedItem().getValue()];
-			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), 'A');
-			System.out.println(listActividadCalendario.size()+"aaaaaaaaaaaaaaa");	
-			
-			//lboxDatos.getItems().clear();
+		if (cmbClases.getSelectedIndex()==3){
+			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedIndex()];
+			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);		
+			lboxDatos.getItems().clear();
 			for (int i = 0; i < listActividadCalendario.size(); i++) {
 				llenarListbox(lboxDatos, listActividadCalendario.get(i).getDescripcion(), listActividadCalendario.get(i).getFechaInicio()+"", listActividadCalendario.get(i).getCodigoActividadCalendario());		
+			}
+		}
+		if (cmbClases.getSelectedIndex()==4){
+			Character  pos = estatusI[(Integer)cmbEstatus.getSelectedIndex()];
+			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			lboxDatos.getItems().clear();
+			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
+				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
 			}
 		}
 		}
 	}
+	public void onSelect$cmbClases(){
+		compararItem();
+	}
+	
+	public void onChange$cmbClases(){
+		compararItem();
+	}
+	
 	public void onChange$cmbEstatus(){
-		System.out.println("aaa1"+cmbClases.getSelectedItem().getValue());
-		if (cmbClases.getSelectedItem().getValue()=="4"){
+		if (cmbClases.getSelectedIndex()==2){
 			System.out.println("aaa2");
-			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedItem().getValue()];
-			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), 'A');
-			System.out.println(listActividadCalendario.size()+"aaaaaaaaaaaaaaa");	
-			
-			//lboxDatos.getItems().clear();
+			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedIndex()];
+			System.out.println(pos);
+			listActividadCalendario = (List<ActividadCalendario>)servicioActividadCalendario.getDaoActividadCalendario().listarUnCampo(ActividadCalendario.class, "estatus", pos);
+			System.out.println(listActividadCalendario.size()+"aaaaaaaaaaaaaaa");		
+			lboxDatos.getItems().clear();
 			for (int i = 0; i < listActividadCalendario.size(); i++) {
 				llenarListbox(lboxDatos, listActividadCalendario.get(i).getDescripcion(), listActividadCalendario.get(i).getFechaInicio()+"", listActividadCalendario.get(i).getCodigoActividadCalendario());		
 			}
 		}
 		
-		if (cmbClases.getSelectedItem().getValue()=="5"){
-			System.out.println("aaa3");
-			Character  pos = estatusI[(Integer)cmbEstatus.getSelectedItem().getValue()];
-			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+		if (cmbClases.getSelectedIndex()==4){
+			Character  pos = estatusI[(Integer)cmbEstatus.getSelectedIndex()];
+			listInstalacionUtilizada =  (List<InstalacionUtilizada>)servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarUnCampo(InstalacionUtilizada.class, "estatus", pos);
 			lboxDatos.getItems().clear();
 			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
 				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
 			}
 		}
 		
-		if (cmbClases.getSelectedItem().getValue()=="1"){
-			System.out.println("aaa5");
+		if (cmbClases.getSelectedIndex()==0){
 			Character pos = estatusRC[(Integer)cmbEstatus.getSelectedItem().getValue()];
-			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			listActividadEntrenamiento = servicioActividadEntrenamiento.listar(); 
 			lboxDatos.getItems().clear();
-			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
-				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
+			for (int i = 0; i < listActividadEntrenamiento.size(); i++) {
+				llenarListbox(lboxDatos, listActividadEntrenamiento.get(i).getNombre(), listActividadEntrenamiento.get(i).getDatoBasico().getNombre(),listActividadEntrenamiento.get(i).getCodigoActividadEntrenamiento());		
 			}
 		}
 		

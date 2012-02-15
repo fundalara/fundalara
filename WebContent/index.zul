@@ -786,6 +786,14 @@
 											</treerow>
 
 										</treeitem>
+<!-- 										<treeitem open="false"> -->
+<!-- 											<treerow> -->
+<!-- 												<treecell -->
+<!-- 													label="Dinamicos" visible="${sec:isAnyGranted('311')}" -->
+<!-- 													onClick='enlace("/Entrenamiento/Reportes/frmReportesDinamicosEntrenamientos.zul")' /> -->
+<!-- 											</treerow> -->
+
+<!-- 										</treeitem> -->
 										<treeitem open="false">
 											<treerow>
 												<treecell
@@ -798,7 +806,7 @@
 											<treerow>
 												<treecell
 													label="Control de Asistencias" visible="${sec:isAnyGranted('312')}"
-													onClick='enlace("/Entrenamiento/Reportes/frmReporteControlAsistencias.zul")' />
+													onClick='enlace("/Entrenamiento/Reportes/frmReportesControlAsistencias.zul")' />
 											</treerow>
 
 										</treeitem>

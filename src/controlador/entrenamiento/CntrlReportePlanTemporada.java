@@ -144,7 +144,7 @@ public class CntrlReportePlanTemporada extends GenericForwardComposer {
 		Categoria cc = (Categoria) cmbcategoria.getSelectedItem().getValue();
 		Equipo c = (Equipo) cmbequipo.getSelectedItem().getValue();
 		con = ConeccionBD.getCon("postgres", "postgres", "123456");
-		parameters.put("lapso", dep.getCodigoLapsoDeportivo());
+		parameters.put("LapsoD", dep.getCodigoLapsoDeportivo());
 		parameters.put("categoria", cc.getCodigoCategoria());
 		parameters.put("equipo", c.getCodigoEquipo());
 		String rutaReporte = Sessions

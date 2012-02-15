@@ -67,7 +67,7 @@ public class CntrlFrmIndicadorEvaluacion extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listCategoria = servicioCategoria.listarActivos();
 		listEscala = servicioEscalaMedicion.listar();
 		listActividad = servicioActividadEntrenamiento.listar();
 		listIndicador = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato

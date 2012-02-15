@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="317"/>
+	<property name="ireport.y" value="225"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<style name="table">
 		<box>
@@ -44,6 +44,26 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="DS_Asignacion_Actividades">
 		<parameter name="Sesion" class="java.lang.Integer"/>
 		<queryString>
@@ -61,6 +81,18 @@ and A.codigo_sesion = $P{Sesion}]]>
 		<field name="nombre_actividad" class="java.lang.String"/>
 		<field name="tiempo" class="java.lang.Integer"/>
 	</subDataset>
+	<subDataset name="DS_materiales">
+		<parameter name="plan" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[select C.descripcion, B.cantidad_requerida
+from sesion A, material_actividad_planificada B, material C
+where B.codigo_material=C.codigo_material
+and A.codigo_sesion=B.codigo_sesion
+and A.codigo_plan_entrenamiento=$P{plan}]]>
+		</queryString>
+		<field name="descripcion" class="java.lang.String"/>
+		<field name="cantidad_requerida" class="java.lang.Integer"/>
+	</subDataset>
 	<parameter name="categoria" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -69,9 +101,12 @@ and A.codigo_sesion = $P{Sesion}]]>
 	</parameter>
 	<parameter name="lapso" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[select  E.nombre as dia_semana, F.hora_inicio || '-' || F.hora_fin as horario, H.nombre as nombre_categoria,G.nombre as nombre_equipo,
-D.codigo_sesion, to_char(A.fecha_inicio, 'dd/mm/yyyy') as fecha_inicio,
-to_char(A.fecha_fin, 'dd/mm/yyyy') as fecha_fin, C.nombre as lapso
+		<![CDATA[select D.codigo_sesion, C.nombre as lapso, A.codigo_plan_entrenamiento, H.nombre as nombre_categoria,
+G.nombre as nombre_equipo,
+to_char(A.fecha_inicio, 'dd/mm/yyyy') as fecha_inicio,
+to_char(A.fecha_fin, 'dd/mm/yyyy') as fecha_fin,
+E.nombre as dia_semana,
+F.hora_inicio || '-' || F.hora_fin as horario
 from plan_entrenamiento A,
 plan_temporada B,
 lapso_deportivo C,
@@ -88,18 +123,20 @@ and D.dia_semana = E.codigo_dato_basico
 and D.dia_semana = F.dia
 and D.codigo_equipo = G.codigo_equipo
 and G.codigo_categoria = H.codigo_categoria
-and C.codigo_lapso_deportivo = $P{lapso}
-and G.codigo_equipo = $P{equipo}
-and H.codigo_categoria = $P{categoria}]]>
+and D.codigo_equipo=$P{equipo}
+and H.codigo_categoria=$P{categoria}
+and C.codigo_lapso_deportivo=$P{lapso}
+order by nombre_categoria, nombre_equipo]]>
 	</queryString>
-	<field name="dia_semana" class="java.lang.String"/>
-	<field name="horario" class="java.lang.String"/>
+	<field name="codigo_sesion" class="java.lang.Integer"/>
+	<field name="lapso" class="java.lang.String"/>
+	<field name="codigo_plan_entrenamiento" class="java.lang.Integer"/>
 	<field name="nombre_categoria" class="java.lang.String"/>
 	<field name="nombre_equipo" class="java.lang.String"/>
-	<field name="codigo_sesion" class="java.lang.Integer"/>
 	<field name="fecha_inicio" class="java.lang.String"/>
 	<field name="fecha_fin" class="java.lang.String"/>
-	<field name="lapso" class="java.lang.String"/>
+	<field name="dia_semana" class="java.lang.String"/>
+	<field name="horario" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -127,7 +164,7 @@ and H.codigo_categoria = $P{categoria}]]>
 				<text><![CDATA[Fecha Fin:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="178" y="220" width="129" height="20"/>
+				<reportElement x="98" y="219" width="129" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
@@ -166,7 +203,7 @@ and H.codigo_categoria = $P{categoria}]]>
 				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="310" y="220" width="179" height="20"/>
+				<reportElement x="230" y="219" width="215" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -318,6 +355,64 @@ and H.codigo_categoria = $P{categoria}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="98" y="461" width="381" height="50"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DS_materiales">
+						<datasetParameter name="plan">
+							<datasetParameterExpression><![CDATA[$F{codigo_plan_entrenamiento}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="380">
+						<jr:tableHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="380" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Asignación Materiales de Entrenamiento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="256">
+							<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="256" height="30"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="14" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Material]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="256" height="20"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="124">
+							<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="124" height="30"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="14" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Cantidad]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="124" height="20"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{cantidad_requerida}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
 		</band>
 	</title>
 	<lastPageFooter>
