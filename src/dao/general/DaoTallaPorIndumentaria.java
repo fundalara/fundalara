@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import modelo.DatoBasico;
 import modelo.Persona;
 import modelo.TallaPorIndumentaria;
 import dao.generico.GenericDao;
@@ -35,4 +36,25 @@ public class DaoTallaPorIndumentaria extends GenericDao {
 
 		return (List<TallaPorIndumentaria>) c.list();
 	}
+	
+	/**
+	 * Obtiene una talla por indumentaria dado un datoBasico
+	 * 
+	 * @param datoBasico
+	 *            datoBasico que representa un talla
+	 * @return TallaPorIndumentaria de uniforme de entrenamiento
+	 * 
+	 */
+	public TallaPorIndumentaria buscarPorDatoBasico(DatoBasico datoBasico) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(TallaPorIndumentaria.class);
+		c.add(Restrictions.eq("datoBasicoByCodigoTalla.codigoDatoBasico", datoBasico.getCodigoDatoBasico()));
+		c.add(Restrictions.eq("datoBasicoByCodigoTipoUniforme.codigoDatoBasico", 52));
+		c.add(Restrictions.eq("estatus", "A"));
+		TallaPorIndumentaria result = (TallaPorIndumentaria) c.uniqueResult();
+		tx.commit();
+		return result;
+	}
+	
 }
