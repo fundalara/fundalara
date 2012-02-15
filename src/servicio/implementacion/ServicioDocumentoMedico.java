@@ -30,22 +30,20 @@ public class ServicioDocumentoMedico implements IServicioDocumentoMedico {
 		this.daoDocumentoMedico = daoDocumentoMedico;
 	}
 
+	
 	@Override
 	public void eliminar(DocumentoMedico c) {
 		daoDocumentoMedico.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(DocumentoMedico c) {
 		daoDocumentoMedico.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(DocumentoMedico c) {
 		daoDocumentoMedico.actualizar(c);
-
 	}
 
 	@Override
@@ -57,7 +55,14 @@ public class ServicioDocumentoMedico implements IServicioDocumentoMedico {
 	public void guardar(List<DocumentoEntregado> documentos,
 			DatoMedico datoMedico) {
 		daoDocumentoMedico.guardar(documentos, datoMedico);
-		
+	}
+	
+	public void actualizar(List<DocumentoEntregado> documentos) {
+		daoDocumentoMedico.actualizar(documentos);
+	}
+	
+	public List<DocumentoEntregado>  buscarDocumentos(DatoMedico datoMedico){
+		return daoDocumentoMedico.buscarDocumentos(datoMedico);
 	}
 
 }

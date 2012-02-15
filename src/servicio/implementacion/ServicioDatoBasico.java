@@ -16,32 +16,7 @@ import modelo.TipoDato;
 public class ServicioDatoBasico implements IServicioDatoBasico {
 	DaoDatoBasico daoDatoBasico;
 	
-	@Override
-	public void eliminar(DatoBasico d) {
-		
-	}
 
-	@Override
-	public void agregar(DatoBasico d) {
-		daoDatoBasico.guardar(d);
-
-	}
-
-	@Override
-	public void actualizar(DatoBasico d) {
-		daoDatoBasico.actualizar(d);
-	}
-
-	@Override
-	public List<DatoBasico> listar() {
-		return daoDatoBasico.listar(DatoBasico.class);
-	}
-
-	@Override
-	public List<DatoBasico> buscarPorTipoDato(TipoDato td) {
-		// TODO Auto-generated method stub
-		return daoDatoBasico.buscarPorTipoDato(td);
-	}
 
 	public DaoDatoBasico getDaoDatoBasico() {
 		return daoDatoBasico;
@@ -51,11 +26,7 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		this.daoDatoBasico = daoDatoBasico;
 	}
 
-	@Override
-	public DatoBasico buscarPorCodigo(Integer i) {
-		// TODO Auto-generated method stub
-		return daoDatoBasico.buscarPorCodigo(i);
-	}	
+	
 
 
 	public List<DatoBasico> listarPorTipoDato(String s){
@@ -97,25 +68,13 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 		return daoDatoBasico.listarParroquiasPorMunicipios(db);		
 	}
 
-	@Override
-	public List<DatoBasico> buscar(TipoDatoBasico tipoDato) {
-		return daoDatoBasico.buscar(tipoDato);
-	}
-
-	@Override
-	public List<DatoBasico> buscarDatosPorRelacion(DatoBasico datoBasico) {
-		return daoDatoBasico.buscarPorRelacion(datoBasico);
-	}
+	
 	
 	public DatoBasico buscarPorString(String s){
 		return daoDatoBasico.buscarPorString(s);
 	}
 
-	
-	@Override
-	public DatoBasico buscarTipo(TipoDatoBasico tipoDato, String nombre) {
-		return daoDatoBasico.buscarTipo(tipoDato, nombre);
-	}
+
 	
 	@Override 
 	public List<DatoBasico> listarOrganizacionCompetencia() {
@@ -174,5 +133,57 @@ public class ServicioDatoBasico implements IServicioDatoBasico {
 	
 	public List<DatoBasico> buscarSinJugador(DatoBasico datoBasico) {
 		return daoDatoBasico.buscarSinJugador(datoBasico);
+	}
+	
+	@Override
+	public void eliminar(DatoBasico d) {
+		daoDatoBasico.eliminar(d);
+	}
+
+	@Override
+	public void agregar(DatoBasico d) {
+		daoDatoBasico.guardar(d);
+	}
+
+	@Override
+	public void actualizar(DatoBasico d) {
+		daoDatoBasico.actualizar(d);
+	}
+
+	@Override
+	public List<DatoBasico> listar() {
+		return daoDatoBasico.listar(DatoBasico.class);
+	}
+
+	@Override
+	public List<DatoBasico> buscarPorTipoDato(TipoDato td) {
+		// TODO Auto-generated method stub
+		return daoDatoBasico.buscarPorTipoDato(td);
+	}
+
+	@Override
+	public DatoBasico buscarPorCodigo(Integer i) {
+		return daoDatoBasico.buscarPorCodigo(i);
+	}
+
+	@Override
+	public List<DatoBasico> buscar(TipoDatoBasico tipoDato) {
+		return daoDatoBasico.buscar(tipoDato);
+	}
+
+	@Override
+	public List<DatoBasico> buscarDatosPorRelacion(DatoBasico datoBasico) {
+		return daoDatoBasico.buscarPorRelacion(datoBasico);
+	}
+	
+	@Override
+	public DatoBasico buscarTipo(TipoDatoBasico tipoDato, String nombre) {
+		return daoDatoBasico.buscarTipo(tipoDato, nombre);
+	}
+	
+
+	public DatoBasico buscarDatosPorRelacion(DatoBasico datoBasico,
+			String nombre) {
+		return daoDatoBasico.buscarPorRelacion(datoBasico, nombre);
 	}
 }

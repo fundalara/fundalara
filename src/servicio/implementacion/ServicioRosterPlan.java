@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoRosterPlan;
 
+import modelo.JugadorPlan;
 import modelo.RosterPlan;
 import servicio.interfaz.IServicioRosterPlan;
 
@@ -43,4 +44,12 @@ public class ServicioRosterPlan implements IServicioRosterPlan {
 		return daoRosterPlan.listar(RosterPlan.class);
 	}
 
+	public RosterPlan buscar(JugadorPlan jugadorPlan){
+		return daoRosterPlan.buscarRoster(jugadorPlan);
+	}
+
+	public void retirar(JugadorPlan jugador) {
+		daoRosterPlan.retirarJugador(jugador);
+	}
+	
 }

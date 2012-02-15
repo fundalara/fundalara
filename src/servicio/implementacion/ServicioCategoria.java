@@ -27,28 +27,7 @@ public class ServicioCategoria implements IServicioCategoria {
 		this.daoCategoria = daoCategoria;
 	}
 
-	@Override
-	public void eliminar(Categoria c) {
-		daoCategoria.eliminar(c);
-
-	}
-
-	@Override
-	public void agregar(Categoria c) {
-		daoCategoria.guardar(c);
-
-	}
-
-	@Override
-	public void actualizar(Categoria c) {
-		daoCategoria.actualizar(c);
-
-	}
-
-	@Override
-	public List<Categoria> listar() {
-		return daoCategoria.listar( Categoria.class);
-	}
+	
 	
 	@Override
 	public List<Categoria> listarActivos() {
@@ -56,6 +35,37 @@ public class ServicioCategoria implements IServicioCategoria {
 		return daoCategoria.listarActivos();
 	}
 
+	
+
+	@Override
+	public List<Categoria> buscarPorCategoria(Categoria c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//
+	
+	
+	@Override
+	public void eliminar(Categoria c) {
+		daoCategoria.eliminar(c);
+	}
+
+	@Override
+	public void agregar(Categoria c) {
+		daoCategoria.guardar(c);
+	}
+
+	@Override
+	public void actualizar(Categoria c) {
+		daoCategoria.actualizar(c);
+	}
+
+	@Override
+	public List<Categoria> listar() {
+		return daoCategoria.listar(Categoria.class);
+	}
+	
 	@Override
 	public Categoria buscarPorEdad(int edad) {
 		return daoCategoria.buscarPorEdad(edad);
@@ -70,14 +80,16 @@ public class ServicioCategoria implements IServicioCategoria {
 	public boolean buscarPorCodigo(Categoria categoria) {
 		return daoCategoria.buscarPorCodigo(categoria);
 	}
-
-	@Override
-	public List<Categoria> buscarPorCategoria(Categoria c) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	public List<Categoria> buscarCategoriasPorEdad(int edad) {
+		return daoCategoria.buscarCategoriasPorEdad(edad);
 	}
 	
 
+	public List<Categoria> buscarCategoriasAscenso(int edad){
+		return daoCategoria.buscarCategoriasAscenso(edad);
+	}
 	
 	
 }

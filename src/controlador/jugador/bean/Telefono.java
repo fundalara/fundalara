@@ -3,7 +3,7 @@ package controlador.jugador.bean;
 import modelo.DatoBasico;
 
 /**
- * Clase bean para representar  el teléfono
+ * Clase bean para representar el teléfono
  * 
  * @author Robert A
  * @author German L
@@ -16,6 +16,12 @@ public class Telefono {
 
 	public Telefono() {
 		codigo = new DatoBasico();
+	}
+
+	public Telefono(DatoBasico codigo, String numero) {
+		this();
+		this.numero = numero;
+		this.codigo = codigo;
 	}
 
 	public DatoBasico getCodigo() {
@@ -35,7 +41,7 @@ public class Telefono {
 	}
 
 	public String getTelefonoCompleto() {
-		if (codigo.getNombre() == null || numero == null) {
+		if (codigo==null?true:codigo.getNombre() == null?true:false || numero == null) {
 			return null;
 		} else {
 			return codigo.getNombre() + "-" + numero;

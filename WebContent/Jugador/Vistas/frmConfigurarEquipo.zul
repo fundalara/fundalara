@@ -1,66 +1,107 @@
-<?page title="Equipo"?>
+<?page title="Equipos" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 
 <zk>
-	<window id="winConfigurarEquipo" title="Equipo" border="normal"
-		width="52%" closable="true"
+<div   align="center">
+	<window id="winConfigurarEquipo" title="Equipos" border="normal"
+		width="696px" closable="true" style="text-align:left"
 		apply="controlador.jugador.CntrlConfigurarEquipo">
-		<grid style="border:none;" oddRowSclass="none">
+		<panel title="">
+			<panelchildren>
+				<groupbox style="border-color:orange"
+					closable="false">
+					<caption style="font-weight:bold"
+						label="Datos de Equipo" />
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="16%" />
+							<column width="40%" />
+							<column width="10%" />
+							<column />
+						</columns>
+						<rows>
+							<row style="border:none;">
+								<label value="Divisa" />
+								<combobox id="cmbDivisa"
+									value="--Seleccione--" readonly="true" width="80%"
+									model="@{controller.divisas}">
+
+									<comboitem self="@{each='divisa'}"
+										label="@{divisa.nombre}" />
+								</combobox>
+								<label id="lbTipoLapso" value="Lapso" />
+								<combobox id="cmbTipoLapso"
+									value="--Seleccione--" width="80%" readonly="true"
+									model="@{controller.tipoLapsos}">
+									<comboitem
+										self="@{each='tipolapso'}" focus="true"
+										label="@{tipolapso.nombre}" />
+								</combobox>
+							</row>
+							<row style="border:none;">
+								<label value="Categoría" />
+								<combobox id="cmbCategoria"
+									value="--Seleccione--" width="80%" readonly="true"
+									model="@{controller.categorias}">
+									<comboitem
+										self="@{each='categoria'}" label="@{categoria.nombre}" />
+								</combobox>
+								<label id="lbTipo"
+									value="Clasificación" />
+								<combobox id="cmbTipo" value="--"
+									width="20%" readonly="true" model="@{controller.tipo}">
+									<comboitem self="@{each='tipos'}"
+										focus="true" label="@{tipos.nombre}" />
+								</combobox>
+							</row>
+							<row spans="1,3" style="border:none;">
+								<label value="Nombre" />
+								<textbox id="txtNombre" width="72%"
+									focus="true" style='text-transform:uppercase;' />
+							</row>
+						</rows>
+					</grid>
+
+					<grid style="border:none;" oddRowSclass="none">
+						<columns>
+							<column width="23%" />
+							<column width="23%" />
+							<column width="23%" />
+							<column />
+						</columns>
+						<rows>
+							<row style="border:none">
+								<label value="Mínimo de Jugadores" />
+								<spinner id="spMinJugadores" width="26%"
+									maxlength="2" constraint="no negative" readonly="true" />
+								<label value="Máximo de Jugadores" />
+								<spinner id="spMaxJugadores" width="20%"
+									maxlength="2" constraint="no negative" readonly="true" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</panelchildren>
+		</panel>
+		<grid style="border:none;">
 			<columns>
-				<column width="16%" />
-				<column width="40%" />
-				<column width="10%" />
+				<column width="98%" />
 				<column />
 			</columns>
 			<rows>
 				<row style="border:none;">
-					<label value="Divisa" />
-					<combobox id="cmbDivisa" value="--Seleccione--"
-						selectedItem="@{controller.divisa}" width="80%" focus="true"
-						model="@{winConfigurarEquipo$composer.divisas}">
-						<comboitem self="@{each='divisa'}"
-							label="@{divisa.nombre}" />
-					</combobox>
-				</row>
-				<row style="border:none;">
-					<label value="Categoría" />
-					<combobox id="cmbCategoria" value="--Seleccione--"
-						selectedItem="@{controller.categoria}" width="80%" focus="true"
-						model="@{winConfigurarEquipo$composer.categorias}">
-						<comboitem self="@{each='categoria'}"
-							label="@{categoria.nombre}" />
-					</combobox>
-					<label value="Tipo" />
-					<combobox id="cmbTipo" value="--" width="20%"
-						selectedItem="@{controller.clasificacion}"
-						model="@{winConfigurarEquipo$composer.tipos, load-after='cmbCategoria.onChange'}">
-						<comboitem self="@{each='tiposv'}"
-							label="@{tiposv.nombre}" />
-					</combobox>
-				</row>
-				<row spans="1,3" style="border:none;">
-					<label value="Nombre" />
-					<textbox id="txtNombre" width="72%" />
-					<!--  <textbox id="txtNombre" width="72%"  value="@{controller.equipo.nombre}"/> -->
-				</row>
-			</rows>
-		</grid>
-		<grid style="border:none;">
-			<columns>
-				<column width="90%" />
-				<column width="10%" />
-			</columns>
-			<rows>
-				<row style="border:none;">
 					<listbox id="listEquipo" mold="paging" pageSize="5"
-						model="@{controller.equipos}"
-						selectedItem="@{winConfigurarEquipo$composer.equipo}">
+						model="@{controller.equipos}">
 						<listhead>
-							<listheader label="Nombre" />
-							<listheader label="Categoría" />
-							<listheader label="Tipo" width="15%" />
-							<listheader label="Divisa" width="15%" />
+							<listheader label="Nombre" width="25%" />
+							<listheader label="Categoría" width="25%" />
+							<listheader label="Tipo" width="5%" />
+							<listheader label="Lapso" width="7%" />
+							<listheader label="Divisa" width="11%" />
+							<listheader label="Mínimo" width="9%" />
+							<listheader label="Máximo" width="9%" />
+							<listheader label="Estado" width="10%" />
 						</listhead>
 						<listitem self="@{each='equipo'}"
 							value="@{equipo}">
@@ -68,38 +109,41 @@
 							<listcell
 								label="@{equipo.categoria.nombre}" />
 							<listcell
-								label="@{equipo.datoBasico.nombre}" />
+								label="@{equipo.datoBasicoByCodigoClasificacion.nombre}" />
+							<listcell
+								label="@{equipo.datoBasicoByCodigoTipoLapso.nombre}" />
 							<listcell label="@{equipo.divisa.nombre}" />
+							<listcell label="@{equipo.minimoJugador}" />
+							<listcell label="@{equipo.maximoJugador}" />
+							<listcell label="@{equipo.estatus}" />
 						</listitem>
 
 					</listbox>
 					<div>
 						<button id="btnAgregar"
-							image="../../Recursos/Imagenes/agregar.ico" />
+							image="/Recursos/Imagenes/agregar.ico" />
 						<separator height="5px" />
-						<button id="btnEditar"
-							image="../../Recursos/Imagenes/editar.ico" />
+						<button id="btnModificar"
+							image="/Recursos/Imagenes/editar.ico" />
 						<separator height="5px" />
 						<button id="btnQuitar"
-							image="../../Recursos/Imagenes/quitar.ico" />
+							image="/Recursos/Imagenes/quitar.ico" />
 					</div>
 				</row>
-
 			</rows>
 		</grid>
 
 		<div align="right">
-
+			<button id="btnImprimir" label="Generar"
+				image="/Recursos/Imagenes/reporte.ico" orient="horizontal"
+				width="100px" />
 			<button id="btnCancelar" label="Cancelar"
 				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
 				width="100px" />
 			<button id="btnSalir" label="Salir"
 				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
-				width="100px">
-				<attribute name="onClick"><![CDATA[
-	winConfigurarEquipo.detach();
-]]></attribute>
-			</button>
+				width="100px" />
 		</div>
 	</window>
+	</div>
 </zk>

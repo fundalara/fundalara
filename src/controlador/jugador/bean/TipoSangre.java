@@ -18,6 +18,13 @@ public class TipoSangre {
 		grupoSanguineo = new DatoBasico();
 		factorRH = new DatoBasico();
 	}
+	
+	public TipoSangre(DatoBasico grupoSanguineo, DatoBasico factorRH){
+		this();
+		this.grupoSanguineo = grupoSanguineo;
+		this.factorRH = factorRH;
+		
+	}
 
 	public DatoBasico getGrupoSanguineo() {
 		return grupoSanguineo;

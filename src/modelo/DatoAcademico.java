@@ -1,6 +1,6 @@
 package modelo;
 
-// Generated 14/02/2012 08:24:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 28-ene-2012 22:13:44 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -8,10 +8,12 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "dato_academico", schema = "public")
+@SequenceGenerator(name = "datoAcademico_seq", sequenceName = "dato_academico_codigo_academico_seq_1")
 public class DatoAcademico implements java.io.Serializable {
 
 	private int codigoAcademico;
@@ -66,6 +69,7 @@ public class DatoAcademico implements java.io.Serializable {
 
 	@Id
 	@Column(name = "codigo_academico", unique = true, nullable = false)
+	@GeneratedValue(generator = "datoAcademico_seq")
 	public int getCodigoAcademico() {
 		return this.codigoAcademico;
 	}

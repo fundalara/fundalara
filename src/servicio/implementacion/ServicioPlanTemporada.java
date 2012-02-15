@@ -11,6 +11,38 @@ import servicio.interfaz.IServicioPlanTemporada;
 
 public class ServicioPlanTemporada implements IServicioPlanTemporada {
     DaoPlanTemporada daoPlanTemporada;
+
+
+	public DaoPlanTemporada getDaoPlanTemporada() {
+		return daoPlanTemporada;
+	}
+
+	public void setDaoPlanTemporada(DaoPlanTemporada daoPlanTemporada) {
+		this.daoPlanTemporada = daoPlanTemporada;
+	}
+
+
+
+	@Override
+	public int generarCodigo() {
+		return daoPlanTemporada.generarCodigo(PlanTemporada.class);
+	}
+
+	@Override
+	public List<PlanTemporada> listarActivos() {
+		return (List<PlanTemporada>) daoPlanTemporada.listarUnCampo(
+				PlanTemporada.class, "estatus", 'A');
+	}
+	
+	@Override
+	public List<PlanTemporada> buscarPorLapsoDeportivo(LapsoDeportivo ld) {
+		return daoPlanTemporada.buscarPorLapsoDeportivo(ld);
+	}
+	
+	
+	///
+	
+	
 	@Override
 	public void guardar(PlanTemporada pt) {
 		// TODO Auto-generated method stub
@@ -34,34 +66,11 @@ public class ServicioPlanTemporada implements IServicioPlanTemporada {
 		// TODO Auto-generated method stub
 		return daoPlanTemporada.listar(PlanTemporada.class);
 	}
-
-	public DaoPlanTemporada getDaoPlanTemporada() {
-		return daoPlanTemporada;
-	}
-
-	public void setDaoPlanTemporada(DaoPlanTemporada daoPlanTemporada) {
-		this.daoPlanTemporada = daoPlanTemporada;
-	}
-
+	
 	@Override
-	public PlanTemporada buscarPorCategoriaLapDep(Categoria ct,
-			LapsoDeportivo ld) {
+	public PlanTemporada buscarPorCategoriaLapDep(Categoria ct,LapsoDeportivo ld) {
 		return daoPlanTemporada.buscarPorCategoriaLapsoDeportivo(ct, ld);
 	}
 
-	@Override
-	public int generarCodigo() {
-		return daoPlanTemporada.generarCodigo(PlanTemporada.class);
-	}
 
-	@Override
-	public List<PlanTemporada> listarActivos() {
-		return (List<PlanTemporada>) daoPlanTemporada.listarUnCampo(
-				PlanTemporada.class, "estatus", 'A');
-	}
-	
-	@Override
-	public List<PlanTemporada> buscarPorLapsoDeportivo(LapsoDeportivo ld) {
-		return daoPlanTemporada.buscarPorLapsoDeportivo(ld);
-	}
 }

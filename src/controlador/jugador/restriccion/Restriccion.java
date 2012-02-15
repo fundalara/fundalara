@@ -12,15 +12,21 @@ import comun.Util;
  */
 
 public enum Restriccion {
-	EMAIL("/.+@.+\\.[a-z]+/",
-			"Ingrese un correo electrónico válido, Ej: correo@servidor.com"), HORAS_SEMANAL_SOCIAL(
-			"min 1 max 30", "Ingrese una cantidad de horas válidas (01-30)"), CEDULA(
-			"no negative,no empty", "Ingrese una cédula válida"), TELEFONO(
-			"/[0-9]{7}/", "Ingrese un número válido, Ej: 2660011"), TEXTO_SIMPLE(
-			"/^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$/", "Ingrese un texto válido"), FECHA_NACIMIENTO(
-			"between " + Util.getFecha(Edad.EDAD_MAXIMA, '1') + " and "
-					+ Util.getFecha(Edad.EDAD_MINIMA, '2'),
-			"Ingrese una fecha válida");
+	EMAIL("/.+@.+\\.[a-zA-Z]+/",
+			"Ingrese un correo electrónico válido, Ej: correo@servidor.com"),
+			HORAS_SEMANAL_SOCIAL("min 1 max 30", "Ingrese una cantidad de horas válidas (01-30)"), 
+			CEDULA("no negative,no empty", "Ingrese una cédula válida"),
+			CEDULA_COMPLETA("/[V,E,R]{1}[-]{1}[0-9]{8}/", ""),
+			TELEFONO("/[0-9]{7}/", "Ingrese un número válido, Ej: 2660011"),
+			TELEFONO_COMPLETO("/[0-9]{4}-[0-9]{7}/", "Ingrese un número válido, Ej: 2660011"),
+			TEXTO_SIMPLE("/^[a-zA-Z áéíóúAÉÍÓÚÑñ]+$/", "Ingrese un texto válido"),
+			FECHA_NACIMIENTO("between " + Util.getFecha(Edad.EDAD_MAXIMA, Util.LIMITE_INFERIOR) + " and "
+					+ Util.getFecha(Edad.EDAD_MINIMA, Util.LIMITE_SUPERIOR),"Ingrese una fecha válida"),
+			CANTIDAD_EQUIPO("min 1 max 6",""),
+			EDAD_INFERIOR("min 3 max 16",""),
+			EDAD_SUPERIOR("min 5 max 17",""),
+			MIN_JUGADORES("min 12 max 19",""),
+			MAX_JUGADORES("min 13 max 20","");
 
 	private String constraint;
 	private String mensaje;

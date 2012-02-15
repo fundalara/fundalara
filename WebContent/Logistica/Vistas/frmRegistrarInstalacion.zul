@@ -12,6 +12,7 @@
 						<row style="border:none">
 							<label value="Descripción" />
 							<textbox id="txtDescripcion" width="95%"
+								style='text-transform:uppercase;'
 								multiline="true" height="50px"
 								constraint="no empty: El campo 'Descripción' es obligatorio"
 								value="@{cntrl.instalacion.descripcion}" />
@@ -85,7 +86,7 @@
 									<listcell label="@{i.descripcion}" />
 									<listcell label="@{i.capacidad}" />
 									<listcell
-										label="@{i.ubicacion.descripcion}" />
+										label="@{i.instalacion.descripcion}" />
 								</listitem>
 							</listbox>
 						</row>

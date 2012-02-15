@@ -11,7 +11,7 @@ import modelo.Categoria;
 import modelo.Competencia;
 import modelo.DatoBasico;
 import modelo.FaseCompetencia;
-import modelo.FaseCompetenciaId;
+//import modelo.FaseCompetenciaId;
 import modelo.Liga;
 
 import org.zkoss.zk.ui.Component;
@@ -44,7 +44,7 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 	DatoBasico datoBasico;
 	Component catalogo;
 
-	FaseCompetenciaId faseCompetenciaId;
+//	FaseCompetenciaId faseCompetenciaId;
 	FaseCompetencia faseCompetencia;
 
 	List listaFases;
@@ -66,13 +66,13 @@ public class CntrlFrmEstatusCompetencia extends GenericForwardComposer {
 		this.competencia = competencia;
 	}
 
-	public FaseCompetenciaId getFaseCompetenciaId() {
-		return faseCompetenciaId;
-	}
+//	public FaseCompetenciaId getFaseCompetenciaId() {
+//		return faseCompetenciaId;
+//	}
 
-	public void setFaseCompetenciaId(FaseCompetenciaId faseCompetenciaId) {
-		this.faseCompetenciaId = faseCompetenciaId;
-	}
+//	public void setFaseCompetenciaId(FaseCompetenciaId faseCompetenciaId) {
+//		this.faseCompetenciaId = faseCompetenciaId;
+//	}
 
 	public FaseCompetencia getFaseCompetencia() {
 		return faseCompetencia;

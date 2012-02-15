@@ -1,0 +1,123 @@
+<?page title="Cambiar Cédula Jugador" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winCambiarCedula" ?>
+
+<zk>
+	<div align="center">
+		<window id="winCambiarCedula" title="Cambiar Cédula"
+			border="normal" closable="true" width="600px" style="text-align:left"
+			apply="controlador.jugador.CntrlCambiarCedula">
+			<groupbox style="border-color:orange" closable="false">
+				<caption style="font-weight: bold" label="Jugador" />
+				<grid style="border:none;" oddRowSclass="none">
+					<columns>
+						<column width="90%" />
+						<column width="10%" />
+					</columns>
+					<rows>
+						<row style="border:none">
+							<grid style="border:none;"
+								oddRowSclass="none">
+								<columns>
+									<column width="21%" />
+									<column width="32%" />
+									<column />
+									<column width="32%" />
+								</columns>
+								<rows>
+									<row spans="1,3"
+										style="border:none">
+										<label value="Cédula" />
+										<div>
+											<textbox id="txtCedula"
+												constraint="no negative" width="25%" maxlength="15"
+												readonly="true" value="@{jugador.personaNatural.cedulaRif}" />
+											<button
+												id="btnCatalogoJugador" focus="true"
+												tooltiptext="Consultar Jugador"
+												image="../../Recursos/Imagenes/consultar.ico" />
+										</div>
+									</row>
+									<row style="border:none">
+										<label value="Nombre" />
+										<textbox id="txtNombre"
+											maxlength="40" width="95%" readonly="true"
+											value="@{jugador.personaNatural.primerNombre}" />
+										<label value="Apellido" />
+										<textbox id="txtApellido"
+											maxlength="40" width="95%" readonly="true"
+											value="@{jugador.personaNatural.primerApellido}" />
+									</row>
+									<row style="border:none">
+										<label value="Fecha Nacimiento"
+											width="95%" />
+										<textbox id="txtFechaNac"
+											readonly="true" width="85%" />
+										<label value="Categoría"
+											width="95%" />
+										<textbox id="txtCategoria"
+											maxlength="25" width="95%" readonly="true" />
+									</row>
+									<row style="border:none">
+										<label value="Equipo"
+											width="95%" />
+										<textbox id="txtEquipo"
+											maxlength="30" width="95%" readonly="true" />
+										<label value="Número"
+											width="95%" />
+										<intbox id="txtNumero"
+											width="15%" readonly="true" maxlength="2"
+											value="@{jugador.numero}" />
+									</row>
+								</rows>
+							</grid>
+
+							<grid style="border:none"
+								oddRowSclass="none">
+								<rows>
+									<row style="border:none"
+										height="80%" align="center" valign="middle">
+										<groupbox mold="3d"
+											closable="false">
+											<image id="imgJugador"
+												src="../../Recursos/Imagenes/noFoto.jpg" height="80px"
+												width="95px" />
+										</groupbox>
+									</row>
+								</rows>
+							</grid>
+
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<space />
+			<groupbox style="border-color:orange" closable="false">
+				<div>
+					<label value="Nueva Cédula" />
+					<combobox id="cmbNacionalidad" readonly="true"
+						value="-" width="4%" constraint="no empty" disabled="true">
+						<comboitem label="V" value="V" />
+						<comboitem label="E" value="E" />
+					</combobox>
+					<intbox id="txtNuevaCedula" constraint="no negative"
+						width="15%" maxlength="8" disabled="true" />
+				</div>
+				<space />
+			</groupbox>
+			<space height="10px" />
+
+			<div align="right">
+				<button id="btnGuardar" label="Guardar"
+					image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
+					width="100px" />
+				<button id="btnCancelar" label="Cancelar"
+					image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
+					width="100px" />
+				<button id="btnSalir" label="Salir"
+					image="/Recursos/Imagenes/salir.png" orient="horizontal"
+					width="100px" />
+			</div>
+		</window>
+	</div>
+</zk>

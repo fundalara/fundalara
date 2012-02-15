@@ -4,7 +4,7 @@
 root="winGestionUsuario" ?>
 
 <zk>
-	<window title="Gestión de Usuario" id="winGestionUsuario"
+	<window title="Gestión de Usuario" id="winGestionUsuario" apply="seguridad.CntrlGestionarUsuario"
 		border="normal" width="695px" closable="true">
 		<groupbox style="border-color:orange">
 			<caption style="font-weight: bold" label="Usuario" />
@@ -28,7 +28,7 @@ root="winGestionUsuario" ?>
 									<label value="Cédula" />
 									<div>
 										<textbox id="txtCedula"
-											maxlength="50" width="37.8%" constraint="no empty"
+											maxlength="50" width="37.8%"
 											readonly="true"  />
 										<button id="btnBuscar"
 											image="../../Recursos/Imagenes/consultar.ico">
@@ -39,7 +39,7 @@ root="winGestionUsuario" ?>
 									<label value="Nombres" />
 
 									<textbox id="txtNombre"
-										maxlength="50" width="95%" constraint="no empty"
+										maxlength="50" width="95%"
 										readonly="true"  />
 
 
@@ -51,7 +51,7 @@ root="winGestionUsuario" ?>
 								<row style="border:none">
 									<label value="Ocupación"
 										width="95%" />
-									<textbox id="txtFechaNac"
+									<textbox id="txtOcupacion"
 										readonly="true" width="95%" />
 								</row>
 							</rows>
@@ -61,7 +61,7 @@ root="winGestionUsuario" ?>
 								<row style="border:none" height="80%"
 									align="center" valign="middle">
 									<groupbox mold="3d">
-										<image
+										<image id="imgUsuario"
 											src="../../Recursos/Imagenes/noFoto.jpg" height="100px"
 											width="80px" />
 									</groupbox>
@@ -78,30 +78,18 @@ root="winGestionUsuario" ?>
 		<panel title="Grupos">
 					<panelchildren>
 
-						<listbox width="300px">
+						<listbox id="listGrupos" width="300px" model="@{controller.listaGrupos}">
 							<listhead>
-								<listheader label="Nombre" width="15%"></listheader>
-
-
+								<listheader label="Nombre" ></listheader>
 
 							</listhead>
-							<listitem>
-								<listcell></listcell>
+						<listitem self="@{each='grupos'}">
+						<listcell label="@{grupos.nombre}" />
 							</listitem>
 							
-							<listitem>
-								<listcell></listcell>
-							</listitem>
-
-							<listitem>
-								<listcell></listcell>
-							</listitem>
-
 						</listbox>
 
 					</panelchildren>
-
-
 				</panel>
 			</hbox>
 			<hbox width="10%"><!--Botones -->
@@ -116,12 +104,12 @@ root="winGestionUsuario" ?>
 								</columns>
 								<rows>
 									<row>
-										<button
+										<button id="btnAgregar"
 											image="/Recursos/Imagenes/rightarrow_g.png">
 										</button>
 									</row>
 									<row>
-										<button
+										<button id="btnQuitar"
 											image="/Recursos/Imagenes/leftarrow_g.png">
 										</button>
 									</row>
@@ -135,12 +123,12 @@ root="winGestionUsuario" ?>
 						<hbox width="40%">
 				<panel title="Grupos Asignados">
 					<panelchildren>
-						<listbox width="300px">
+						<listbox id="listGruposAsignados" width="300px" model="@{controller.listaGruposAsignados}">
 							<listhead>
-								<listheader width="30%">Nombre</listheader>
+								<listheader>Nombre</listheader>
 							</listhead>
-							<listitem>
-								<listcell></listcell>
+								<listitem self="@{each='grupos'}">
+								<listcell label="@{grupos.nombre}" />
 							</listitem>
 
 
@@ -172,17 +160,21 @@ root="winGestionUsuario" ?>
 							</columns>
 							<rows>
 								<row style="border:none">
+								
 									<label value="Nombre de Acceso" />
-									<textbox maxlength="40" width="95%" />
+									
+									<textbox id="txtNombreUsuario" maxlength="40" width="95%" />
+									<button id="btnBuscarUsuario"
+											image="../../Recursos/Imagenes/consultar.ico">
+									</button>
+								
 								</row>
 								<row style="border:none">
 									<label value="Contraseña" />
-									<textbox maxlength="40" width="95%" />
-
-
+									<textbox id="txtContra" maxlength="40" type="password" width="95%" />
 
 									<label value="Confirme Contraseña" />
-									<textbox maxlength="40" width="95%" />
+									<textbox id="txtConfirmContra" maxlength="40" type="password" width="95%" />
 								</row>
 
 							

@@ -36,7 +36,14 @@ public class DaoCategoria extends GenericDao {
 		return lista;
 	}
 	
-	
+	public Categoria BuscarCategoriaNombre (String nombre){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		
+		Criteria criteria = getSession().createCriteria(Categoria.class);
+		criteria.add(Restrictions.eq("nombre", nombre));
+		return (Categoria) criteria.uniqueResult();
+	}
 	
 	/**
 	 * Determina la categoria a la cual pertenece la edad suministrada
@@ -55,7 +62,16 @@ public class DaoCategoria extends GenericDao {
 				.add(Restrictions.eq("estatus", 'A'));
 		return (Categoria) c.uniqueResult();
 	}
-	
+
+	public List<Categoria> buscarCategoriasPorEdad(int edad) {
+		Session session = this.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Categoria.class)
+				.add(Restrictions.le("edadInferior", edad))
+				.add(Restrictions.eq("estatus", 'A'));
+		return c.list();
+	}
+
 	/**
 	 * Busca las categorias superiores a la que le corresponde a un jugador
 	 * 
@@ -67,50 +83,69 @@ public class DaoCategoria extends GenericDao {
 		Session session = this.getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(Categoria.class)
-				.add(Restrictions.gt("edadInferior", edad))
-				.add(Restrictions.gt("edadSuperior", edad))
+				.add(Restrictions.ge("edadSuperior", edad))
 				.add(Restrictions.eq("estatus", 'A'));
-		return c.list();
+		List<Categoria> listCategoria = c.list();
+		if (listCategoria.size() > 1) {
+			listCategoria = listCategoria.subList(0, 2);
+		}
+		return listCategoria;
 	}
-	
+
 	/**
-	 * Agregados para ConfigurarCategoria
+	 * Busca todas las categorias disponibles al momento
+	 * @param o Clase usada para consultas
+	 * @return lista de las categorias disponibles al momentos 
 	 */
 	public List listar(Class o) {
-		Session session = getSession();
-		Transaction tx =  session.beginTransaction();
-		List lista = session.createCriteria(o).add(Restrictions.eq("estatus", 'A')).list();
+		//Session session = getSession();
+		Session session = SessionManager.getSession();
+		Transaction tx = session.beginTransaction();
+		List lista = session.createCriteria(o).list();
 		return lista;
 	}
-	
+
 	public boolean buscarPorCodigo(Categoria categoria) {
-		//Categoria categoria;
+		// Categoria categoria;
 		boolean sw;
-		Session session = getSession();
+		Session session = SessionManager.getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
-		Query query = session.createSQLQuery(
-				"select * from equipo,categoria where categoria.estatus='A' and equipo.estatus='A'and equipo.codigo_categoria=categoria.codigo_categoria and equipo.codigo_categoria='"
-						+ categoria.getCodigoCategoria() + "'").addEntity(Categoria.class);
-		
+		Query query = session
+				.createSQLQuery(
+						"select * from equipo,categoria where categoria.estatus='A' and equipo.estatus='A'and equipo.codigo_categoria=categoria.codigo_categoria and equipo.codigo_categoria='"
+								+ categoria.getCodigoCategoria() + "'")
+				.addEntity(Categoria.class);
+
 		List<Object> lista = query.list();
-	
-		if (lista.size()!=0) {
-			sw=false;
+
+		if (lista.size() != 0) {
+			sw = false;
 		} else {
-			sw=true;
+			sw = true;
 		}
 		tx.commit();
 		return sw;
 	}
 	
-	public Categoria BuscarCategoriaNombre (String nombre){
-		Session session = getSession();
-		Transaction tx =  session.beginTransaction();
-		
-		Criteria criteria = getSession().createCriteria(Categoria.class);
-		criteria.add(Restrictions.eq("nombre", nombre));
-		return (Categoria) criteria.uniqueResult();
+	/**
+	 * Busca las categorias superiores a la que le corresponden a un jugador
+	 * para el ascenso
+	 * @param edad
+	 *            del jugador
+	 * @return Lista de categorias superiores sino null
+	 */
+	public List<Categoria> buscarCategoriasAscenso(int edad) {
+		Session session = this.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Categoria.class)
+ 				.add(Restrictions.gt("edadInferior", edad))
+				.add(Restrictions.gt("edadSuperior", edad))
+				.add(Restrictions.eq("estatus", 'A'));
+		List<Categoria> listCategoria = c.list();
+		if (listCategoria.size() > 1) {
+			listCategoria = listCategoria.subList(0, 2);
+		}
+		return listCategoria;
 	}
-
 
 }

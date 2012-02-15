@@ -32,27 +32,25 @@ public class ServicioRecaudoPorProceso implements IServicioRecaudoPorProceso {
 		this.daoRecaudoPorProceso = daoRecaudoPorProceso;
 	}
 
+	
 	@Override
 	public void eliminar(RecaudoPorProceso c) {
 		daoRecaudoPorProceso.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(RecaudoPorProceso c) {
 		daoRecaudoPorProceso.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(RecaudoPorProceso c) {
 		daoRecaudoPorProceso.actualizar(c);
-
 	}
 
 	@Override
 	public List<RecaudoPorProceso> listar() {
-		return daoRecaudoPorProceso.listar( RecaudoPorProceso.class);
+		return daoRecaudoPorProceso.listar(RecaudoPorProceso.class);
 	}
 
 	@Override
@@ -61,5 +59,4 @@ public class ServicioRecaudoPorProceso implements IServicioRecaudoPorProceso {
 		return daoRecaudoPorProceso.buscarPorProceso(proceso, tipoDocumento,
 				nombre);
 	}
-
 }

@@ -1,16 +1,18 @@
 package modelo;
 
-// Generated 14/02/2012 08:24:27 PM by Hibernate Tools 3.4.0.CR1
+// Generated 28-ene-2012 22:13:44 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "comision_familiar", schema = "public")
+@SequenceGenerator(name = "comisionFamiliar_seq", sequenceName = "comision_familiar_codigo_comision_familiar_seq_1_2")
 public class ComisionFamiliar implements java.io.Serializable {
 
 	private int codigoComisionFamiliar;
@@ -26,9 +29,6 @@ public class ComisionFamiliar implements java.io.Serializable {
 	private char estatus;
 	private Set<TareaActividadPlanificada> tareaActividadPlanificadas = new HashSet<TareaActividadPlanificada>(
 			0);
-	private Set<PlanificacionActividad> planificacionActividads = new HashSet<PlanificacionActividad>(
-			0);
-	private Set<TareaActividad> tareaActividads = new HashSet<TareaActividad>(0);
 
 	public ComisionFamiliar() {
 	}
@@ -43,20 +43,17 @@ public class ComisionFamiliar implements java.io.Serializable {
 
 	public ComisionFamiliar(int codigoComisionFamiliar, DatoBasico datoBasico,
 			FamiliarJugador familiarJugador, char estatus,
-			Set<TareaActividadPlanificada> tareaActividadPlanificadas,
-			Set<PlanificacionActividad> planificacionActividads,
-			Set<TareaActividad> tareaActividads) {
+			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.codigoComisionFamiliar = codigoComisionFamiliar;
 		this.datoBasico = datoBasico;
 		this.familiarJugador = familiarJugador;
 		this.estatus = estatus;
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
-		this.planificacionActividads = planificacionActividads;
-		this.tareaActividads = tareaActividads;
 	}
 
 	@Id
 	@Column(name = "codigo_comision_familiar", unique = true, nullable = false)
+	@GeneratedValue(generator = "comisionFamiliar_seq")
 	public int getCodigoComisionFamiliar() {
 		return this.codigoComisionFamiliar;
 	}
@@ -102,25 +99,6 @@ public class ComisionFamiliar implements java.io.Serializable {
 	public void setTareaActividadPlanificadas(
 			Set<TareaActividadPlanificada> tareaActividadPlanificadas) {
 		this.tareaActividadPlanificadas = tareaActividadPlanificadas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
-	public Set<PlanificacionActividad> getPlanificacionActividads() {
-		return this.planificacionActividads;
-	}
-
-	public void setPlanificacionActividads(
-			Set<PlanificacionActividad> planificacionActividads) {
-		this.planificacionActividads = planificacionActividads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "comisionFamiliar")
-	public Set<TareaActividad> getTareaActividads() {
-		return this.tareaActividads;
-	}
-
-	public void setTareaActividads(Set<TareaActividad> tareaActividads) {
-		this.tareaActividads = tareaActividads;
 	}
 
 }

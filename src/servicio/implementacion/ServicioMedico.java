@@ -23,22 +23,22 @@ public class ServicioMedico implements IServicioMedico {
 		this.daoMedico = daoMedico;
 	}
 
+
+
+	
 	@Override
 	public void eliminar(Medico c) {
 		daoMedico.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(Medico c) {
 		daoMedico.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(Medico c) {
 		daoMedico.actualizar(c);
-
 	}
 
 	@Override
@@ -50,10 +50,9 @@ public class ServicioMedico implements IServicioMedico {
 	public Medico buscar(String id) {
 		return daoMedico.buscar(id);
 	}
-
-	@Override
-	public boolean buscarelimi(Medico medico){
-		return daoMedico.verificareli(medico);
+	
+	
+	public List<Medico> filtrar(String filtro1,String filtro2,String filtro3,String filtro4){
+		return daoMedico.cargarLista(filtro1, filtro2, filtro3,filtro4);
 	}
-
 }

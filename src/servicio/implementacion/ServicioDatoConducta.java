@@ -7,6 +7,7 @@ import servicio.interfaz.IServicioDatoConducta;
 import dao.general.DaoDatoConducta;
 
 import modelo.DatoConducta;
+import modelo.Jugador;
 
 public class ServicioDatoConducta implements IServicioDatoConducta {
 	
@@ -19,7 +20,7 @@ public class ServicioDatoConducta implements IServicioDatoConducta {
 	public void setDaoDatoConducta(DaoDatoConducta daoDatoConducta) {
 		this.daoDatoConducta = daoDatoConducta;
 	}
-
+	
 	@Override
 	public void eliminar(DatoConducta c) {
 		daoDatoConducta.eliminar(c);
@@ -28,18 +29,20 @@ public class ServicioDatoConducta implements IServicioDatoConducta {
 	@Override
 	public void agregar(DatoConducta c) {
 		daoDatoConducta.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(DatoConducta c) {
 		daoDatoConducta.actualizar(c);
-
 	}
 
 	@Override
 	public List<DatoConducta> listar() {
 		return daoDatoConducta.listar( DatoConducta.class);
+	}
+	
+	public List<DatoConducta> buscarPorJugador(Jugador jugador){
+		return daoDatoConducta.buscarPorJugador(jugador);
 	}
 
 }

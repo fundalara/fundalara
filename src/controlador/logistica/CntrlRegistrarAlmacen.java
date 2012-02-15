@@ -9,17 +9,16 @@ import java.util.Map;
 import modelo.Almacen;
 import modelo.Instalacion;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -95,6 +94,8 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 		validar();
 		almacen.setCodigoAlmacen(servicioAlmacen.listar().size() + 1);
 		almacen.setEstatus('A');
+		almacen.setNombre(txtNombre.getValue().toUpperCase());
+		almacen.setDescripcion(txtDescripcion.getValue().toUpperCase());
 		servicioAlmacen.agregar(almacen);
 		almacenes.add(almacen);
 		Messagebox.show(MensajeMostrar.REGISTRO_EXITOSO, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
@@ -108,9 +109,12 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 		binder.loadComponent(txtDescripcion);
 		binder.loadComponent(dboxCapacidad);
 		cmbInstalacion.setValue("-Seleccione-");
+		binder.loadAll();
 	}
 
 	public void onClick$btnModificar() throws InterruptedException {
+		almacen.setNombre(txtNombre.getValue().toUpperCase());
+		almacen.setDescripcion(txtDescripcion.getValue().toUpperCase());
 		servicioAlmacen.actualizar(almacen);
 		Messagebox.show(MensajeMostrar.MODIFICACION_EXITOSA, MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
 		this.onClick$btnCancelar();
@@ -145,28 +149,21 @@ public class CntrlRegistrarAlmacen extends GenericForwardComposer {
 
 		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(almacenes);
 
-		Map parameters = new HashMap();
+		Map<String, Object> parameters = new HashMap<String, Object>();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		Date fecha = new Date();
 		parameters.put("FECHA", formato.format(fecha));
 		formato.applyPattern("hh:mm");
 		parameters.put("HORA", formato.format(fecha));
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteListadoAlmacenes.jrxml");
+		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteListadoAlmacenes.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
 
-		// Exporta el informe a PDF
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteListadoAlmacenes.pdf");
-		JRExporter exporter = new JRPdfExporter();
-
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
-
-		exporter.exportReport();
-
-		// Para visualizar el pdf con el visor de Jasper
-		JasperViewer.viewReport(print, false);
+		byte[] archivo = JasperExportManager.exportReportToPdf(print);
+		final AMedia amedia = new AMedia("ReporteListadoAlmacenes.pdf", "pdf", "application/pdf", archivo);
+		Component visor = Executions.createComponents("../General/" + "frmVisorDocumento.zul", null, null);
+		visor.setVariable("archivo", amedia, false);
 
 	}
 

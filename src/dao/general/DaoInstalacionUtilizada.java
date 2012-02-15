@@ -3,6 +3,7 @@ package dao.general;
 import java.util.Date;
 import java.util.List;
 
+import modelo.ActividadCalendario;
 import modelo.DatoBasico;
 import modelo.Instalacion;
 import modelo.InstalacionUtilizada;
@@ -88,6 +89,15 @@ public InstalacionUtilizada buscarporInstalacionFecha(Instalacion it,Date fc) {
 	c.add(Restrictions.eq("instalacion", it));
 	c.add(Restrictions.eq("estatus", "A"));
 	return (InstalacionUtilizada) c.uniqueResult();
+}
+
+public List<InstalacionUtilizada> listarDinamico(Date fecha1, Date fecha2, Character estatus){		
+	Session session = getSession();
+	Transaction tx =  session.beginTransaction();
+	Criteria where =  getSession().createCriteria(InstalacionUtilizada.class);
+	where.add(Restrictions.between("fechaInicio", fecha1, fecha2));
+	where.add(Restrictions.eq("estatus", estatus));
+	return where.list();
 }
 	
 }
