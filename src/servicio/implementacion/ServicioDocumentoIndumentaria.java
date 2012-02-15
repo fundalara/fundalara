@@ -22,27 +22,7 @@ public class ServicioDocumentoIndumentaria implements
 		this.daoDocumentoIndumentaria = daoDocumentoIndumentaria;
 	}
 
-	@Override
-	public void eliminar(DocumentoIndumentaria c) {
-		daoDocumentoIndumentaria.eliminar(c);
 
-	}
-
-	@Override
-	public void agregar(DocumentoIndumentaria c) {
-		daoDocumentoIndumentaria.guardar(c);
-
-	}
-
-	@Override
-	public void actualizar(DocumentoIndumentaria c) {
-		daoDocumentoIndumentaria.actualizar(c);
-	}
-
-	@Override
-	public List<DocumentoIndumentaria> listar() {
-		return daoDocumentoIndumentaria.listar(DocumentoIndumentaria.class);
-	}
 
 	@Override
 	public List<DocumentoIndumentaria> listarActivos() {
@@ -53,6 +33,27 @@ public class ServicioDocumentoIndumentaria implements
 	public DocumentoIndumentaria buscarPorCodigo (DocumentoIndumentaria d) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	@Override
+	public void eliminar(DocumentoIndumentaria c) {
+		daoDocumentoIndumentaria.eliminar(c);
+	}
+
+	@Override
+	public void agregar(DocumentoIndumentaria c) {
+		daoDocumentoIndumentaria.guardar(c);
+	}
+
+	@Override
+	public void actualizar(DocumentoIndumentaria c) {
+		daoDocumentoIndumentaria.actualizar(c);
+	}
+
+	@Override
+	public List listar() {
+		return daoDocumentoIndumentaria.listar( DocumentoIndumentaria.class);
 	}
 
 }

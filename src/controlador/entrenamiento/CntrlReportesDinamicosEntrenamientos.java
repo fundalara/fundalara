@@ -10,9 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modelo.ActividadCalendario;
 import modelo.ActividadEntrenamiento;
 import modelo.Categoria;
+import modelo.DatoBasico;
 import modelo.Equipo;
+import modelo.InstalacionUtilizada;
 import modelo.Jugador;
 import modelo.Personal;
 import modelo.PersonalCargo;
@@ -38,23 +41,40 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Iframe;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Window;
 
 import comun.ConeccionBD;
+import servicio.implementacion.ServicioActividadCalendario;
+import servicio.implementacion.ServicioActividadEntrenamiento;
 import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
+import servicio.implementacion.ServicioEscalaMedicion;
+import servicio.implementacion.ServicioIndicadorActividadEscala;
+import servicio.implementacion.ServicioInstalacionUtilizada;
 import servicio.implementacion.ServicioRoster;
 
 public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer {
 	Datebox dtbox1, dtbox2;
-	Combobox cmbcategoria, cmbequipo;
+	Combobox cmbcategoria, cmbequipo, cmbEstatus, cmbClases;
+	Listbox lboxDatos;
 	Button btnImprimir, btnSalir;
 	ServicioCategoria servicioCategoria;
 	ServicioEquipo servicioEquipo;
 	ServicioRoster servicioRoster;
+	ServicioActividadCalendario servicioActividadCalendario;
+	ServicioInstalacionUtilizada servicioInstalacionUtilizada;
+	ServicioActividadEntrenamiento servicioActividadEntrenamiento;
+	ServicioIndicadorActividadEscala servicioIndicadorActividadEscala;
+	ServicioEscalaMedicion servicioEscalaMedicion;
 	List<Roster> listRoster;
 	List<Equipo> listEquipo;
 	List<Categoria> listCategoria;
+	List<ActividadCalendario> listActividadCalendario;
+	List<InstalacionUtilizada> listInstalacionUtilizada;
+	
 	AnnotateDataBinder binder;
 	Categoria categoria = new Categoria();
 	Map parameters = new HashMap();
@@ -63,17 +83,76 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 	Iframe ifReport;
 	Window wndReporteDesempennoEquipo;
 	
+	String[] estatusActividadesCalendario = { "PEDIENTES (INACTIVAS)", "PLANIFICADAS SIN INSTALACION", "PLANIFICADAS CON INSTALACION", "REGISTRADO EL ENTRENAMIENTO", "REGISTRADO EL RENDIMIENTO", "SUSPENDIDAS" };
+	Character[] estatusAC = { 'P', 'A', 'I', 'C', 'F', 'S' };
+	String[] estatusRegistrosCompuestos = { "REGISTRADA", "ELIMINADA"};
+	Character[] estatusRC = { 'A', 'Z'};
+	String[] estatusInstalaciones = { "PLANIFICADAS", "ASIGNADAS"};
+	Character[] estatusI = { 'A', 'Z'};
 	
+	public void llenarCombo(String[]  valores){
+		for (int i = 0; i < valores.length; i++) {
+			Comboitem item = new Comboitem();
+			item.setLabel(valores[i]);
+			item.setValue(i);
+			cmbEstatus.appendChild(item);
+		}
+	}
 	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listCategoria = servicioCategoria.getDaoCategoria().listarActivos();
 		listEquipo = new ArrayList<Equipo>();
 		listRoster = new ArrayList<Roster>();
+		llenarCombo(estatusActividadesCalendario);
 	}
 	
-
+	
+	public void onChange$cmbEstatus(){
+		if (cmbClases.getSelectedItem().getValue()=="4"){
+			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			lboxDatos.getItems().clear();
+			for (int i = 0; i < listActividadCalendario.size(); i++) {
+				llenarListbox(lboxDatos, listActividadCalendario.get(i).getDescripcion(), listActividadCalendario.get(i).getFechaInicio()+"", listActividadCalendario.get(i).getCodigoActividadCalendario());		
+			}
+		}
+		
+		if (cmbClases.getSelectedItem().getValue()=="5"){
+			Character pos = estatusI[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			lboxDatos.getItems().clear();
+			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
+				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
+			}
+		}
+		
+		if (cmbClases.getSelectedItem().getValue()=="1"){
+			Character pos = estatusRC[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			lboxDatos.getItems().clear();
+			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
+				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
+			}
+		}
+		
+		
+		
+		
+	
+	}
+	
+	public void llenarListbox(Listbox list, String txtA, String txtB, Integer db) {
+		Listitem nvoItem = new Listitem();
+		nvoItem.appendChild(new Listcell(txtA));
+		nvoItem.appendChild(new Listcell(txtB));
+		nvoItem.setValue(db);
+		nvoItem.setHeight("25px");
+		list.appendChild(nvoItem);	
+	}
+	
+	
 	public void onChange$cmbcategoria() {
 
 		listEquipo.clear();

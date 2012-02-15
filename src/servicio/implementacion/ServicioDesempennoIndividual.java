@@ -4,9 +4,11 @@ import java.util.List;
 
 import dao.general.DaoDesempennoIndividual;
 
+import modelo.DatoBasico;
 import modelo.DesempennoIndividual;
 import modelo.IndicadorCategoriaCompetencia;
 import modelo.LineUp;
+import modelo.Roster;
 import servicio.interfaz.IServicioDesempennoIndividual;
 
 public class ServicioDesempennoIndividual implements
@@ -59,4 +61,11 @@ public class ServicioDesempennoIndividual implements
 		return daoDesempennoIndividual.obtenerDesempennoJugador(lineUp);
 	}
 
+	
+	@Override
+	public List<Object> calcularDesempenno(DatoBasico datoBasico,Roster r){
+		return daoDesempennoIndividual.calcularDesempenno(datoBasico, r);
+	}
+	
+	
 }

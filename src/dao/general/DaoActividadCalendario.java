@@ -48,5 +48,14 @@ public class DaoActividadCalendario extends GenericDao {
 		where.add(Restrictions.eq("estatus", 'P'));
 		return where.list();
 	}
+	
+	public List<ActividadCalendario> listarDinamico(Date fecha1, Date fecha2, Character estatus){		
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria where =  getSession().createCriteria(ActividadCalendario.class);
+		where.add(Restrictions.between("fechaInicio", fecha1, fecha2));
+		where.add(Restrictions.eq("estatus", estatus));
+		return where.list();
+	}
 
 }

@@ -98,7 +98,7 @@ public class DaoCategoria extends GenericDao {
 	 * @return lista de las categorias disponibles al momentos 
 	 */
 	public List listar(Class o) {
-		// Session session = getSession();
+		//Session session = getSession();
 		Session session = SessionManager.getSession();
 		Transaction tx = session.beginTransaction();
 		List lista = session.createCriteria(o).list();

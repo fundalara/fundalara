@@ -67,7 +67,7 @@ public class CntrlReportePlanEntrenamiento extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listCategoria = servicioCategoria.listarActivos();
 		listEquipo = new ArrayList<Equipo>();
 		listLapsoDeportivo = new ArrayList<LapsoDeportivo>();
 		listLapsoDeportivo = servicioLapsoDeportivo.listarActivos();
@@ -164,7 +164,7 @@ public class CntrlReportePlanEntrenamiento extends GenericForwardComposer {
 		final AMedia amedia = new AMedia("PlanEntrenamiento.pdf", "pdf",
 				"application/pdf", archivo);
 
-		Component visor = Executions.createComponents("General/"
+		Component visor = Executions.createComponents("/General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
 

@@ -6,6 +6,7 @@ import servicio.interfaz.IServicioMotivoSancion;
 
 import dao.general.DaoMotivoSancion;
 
+import modelo.Jugador;
 import modelo.MotivoSancion;
 
 public class ServicioMotivoSancion implements IServicioMotivoSancion {
@@ -42,5 +43,11 @@ public class ServicioMotivoSancion implements IServicioMotivoSancion {
 	public List<MotivoSancion> listar() {
 		return daoMotivoSancion.listar( MotivoSancion.class);
 	}
+	
+	
+	public List<MotivoSancion> buscarPorJugador(Jugador jugador){
+		return daoMotivoSancion.buscarPorJugador(jugador);
+	}
+
 
 }

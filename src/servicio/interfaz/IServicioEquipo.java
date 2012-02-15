@@ -24,5 +24,10 @@ public interface IServicioEquipo {
     public abstract List<Equipo> buscarEquiposForaneosPorCategoria(int categoria);
 	
 	public abstract boolean buscarPorCodigo (Equipo equipo);
+
+	List<Equipo> buscarPorCategoria(Categoria categoria, String lapsoDeportivo);
+
+	List<Equipo> buscarPorCategoria(Categoria categoria, String lapsoDeportivo,
+			String nombreDivisa);
 	
 }

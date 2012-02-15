@@ -62,7 +62,7 @@ public class CntrlReportePromedioActividad extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listCategoria = servicioCategoria.listarActivos();
 	}
 
 	public void onChange$cmbcategoria() {
@@ -139,7 +139,7 @@ public class CntrlReportePromedioActividad extends GenericForwardComposer {
 		final AMedia amedia = new AMedia("PromedioActividad.pdf", "pdf",
 				"application/pdf", archivo);
 
-		Component visor = Executions.createComponents("General/"
+		Component visor = Executions.createComponents("/General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
 

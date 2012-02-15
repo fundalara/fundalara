@@ -30,22 +30,20 @@ public class ServicioDocumentoPersonal implements IServicioDocumentoPersonal {
 		this.daoDocumentoPersonal = daoDocumentoPersonal;
 	}
 
+
 	@Override
 	public void eliminar(DocumentoPersonal a) {
 		daoDocumentoPersonal.eliminar(a);
-		
 	}
 
 	@Override
 	public void agregar(DocumentoPersonal a) {
 		daoDocumentoPersonal.guardar(a);
-		
 	}
 
 	@Override
 	public void actualizar(DocumentoPersonal a) {
 		daoDocumentoPersonal.actualizar(a);
-		
 	}
 
 	@Override
@@ -56,7 +54,13 @@ public class ServicioDocumentoPersonal implements IServicioDocumentoPersonal {
 	@Override
 	public void guardar(List<DocumentoEntregado> documentos, Jugador jugador) {
 		daoDocumentoPersonal.guardar(documentos, jugador);
-		
 	}
-
+	
+	public void actualizar(List<DocumentoEntregado> documentos) {
+		daoDocumentoPersonal.actualizar(documentos);
+	}
+	
+	public List<DocumentoEntregado> buscarDocumentos(Jugador jugador){
+		return daoDocumentoPersonal.buscarDocumentos(jugador);
+	}
 }

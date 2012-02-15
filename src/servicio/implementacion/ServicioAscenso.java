@@ -27,23 +27,20 @@ public class ServicioAscenso implements IServicioAscenso {
 	public void setDaoAscenso(DaoAscenso daoAscenso) {
 		this.daoAscenso = daoAscenso;
 	}
-
+	
 	@Override
 	public void eliminar(Ascenso c) {
 		daoAscenso.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(Ascenso c) {
 		daoAscenso.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(Ascenso c) {
 		daoAscenso.actualizar(c);
-
 	}
 
 	@Override
@@ -55,5 +52,4 @@ public class ServicioAscenso implements IServicioAscenso {
 	public void actualizarAscenso(Roster r) {
 		daoAscenso.actualizar(r);
 	}
-
 }

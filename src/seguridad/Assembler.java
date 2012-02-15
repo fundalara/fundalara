@@ -29,8 +29,10 @@ public class Assembler {
 		boolean accountNonLocked = enabled;
 		Collection<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 		for (GrupoUsuario grupoUsuario : usuario.getGrupoUsuarios()) {
+			System.out.println(usuario.getGrupoUsuarios().size()+"----------------------");
 			for (RolGrupo rolGrupo : grupoUsuario.getGrupo().getRolGrupos()) {
 				Rol auxRol = rolGrupo.getRol();
+				if (rolGrupo.getEstatus().equals("A")){
 				if (rolGrupo.getRol().getNombre().equals("ROLE_USER")) {
 					roles.add(new GrantedAuthorityImpl(rolGrupo.getRol()
 							.getNombre()));
@@ -72,7 +74,7 @@ public class Assembler {
 						//
 					}
 				}
-
+				}
 			}
 		}
 

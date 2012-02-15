@@ -66,7 +66,7 @@ public class CntrlReporteJugadoresDestacados extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
-		listCategoria = servicioCategoria.listar();
+		listCategoria = servicioCategoria.listarActivos();
 
 	}
 
@@ -131,7 +131,7 @@ public class CntrlReporteJugadoresDestacados extends GenericForwardComposer {
 		final AMedia amedia = new AMedia("JugadoresDestacados.pdf", "pdf",
 				"application/pdf", archivo);
 
-		Component visor = Executions.createComponents("General/"
+		Component visor = Executions.createComponents("/General/"
 				+ "frmVisorDocumento.zul", null, null);
 		visor.setVariable("archivo", amedia, false);
 
