@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,9 @@ public class CntrlCatalogoPersonasJuridicas extends GenericForwardComposer {
 	List<Persona> personas = new ArrayList<Persona>();
 	// List<Persona> listaPersonas = new ArrayList<Persona>();
 	List<PersonaJuridica> listaPersonas = new ArrayList<PersonaJuridica>();
+	
+
+	List<PersonaJuridica> auxPersonas = new ArrayList<PersonaJuridica>();
 	AnnotateDataBinder binderCat;
 
 	Listbox lbxPersonas;
@@ -160,6 +164,30 @@ public class CntrlCatalogoPersonasJuridicas extends GenericForwardComposer {
 			AMedia report = ManejadorJasper.showReportfromJrxml(jrxmlSrc, parametros1, con, nombre);
 				
 		}
+		public void onChanging$txtFiltroCI(Event event){
+			listaPersonas = new ArrayList<PersonaJuridica>();
+			for (Iterator<PersonaJuridica> i = auxPersonas.iterator(); i.hasNext();) {
+				PersonaJuridica tmp = i.next();
+				if (tmp.getCedulaRif().toLowerCase().indexOf(txtFiltroCI.getText().trim().toLowerCase()) >= 0) {
+					listaPersonas.add(tmp);
+				}
+			}
+			binderCat.loadComponent(lbxPersonas);
+		}
+
+		public void onChanging$txtFiltroRazon(Event event){
+			listaPersonas = new ArrayList<PersonaJuridica>();
+			for (Iterator<PersonaJuridica> i = auxPersonas.iterator(); i.hasNext();) {
+				PersonaJuridica tmp = i.next();
+				if (tmp.getRazonSocial().toLowerCase().indexOf(txtFiltroRazon.getText().trim().toLowerCase()) >= 0) {
+					listaPersonas.add(tmp);
+				}
+			}
+			binderCat.loadComponent(lbxPersonas);
+			
+		}
+
+
 
 	// ------------------------------------------------------------------------------------------------------
 	/*public void onBlur$txtFiltroCI() {
