@@ -649,31 +649,14 @@
 														label="Entrenamientos" />
 												</treerow>
 												<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Plan de Temporada"
-															onClick='enlace("/Entrenamiento/Reportes/frmReportePlanEntrenamiento.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Plan de Entrenamiento"
-															onClick='enlace("/Entrenamiento/Reportes/frmReportePlanEntrenamiento.zul")' />
-													</treerow>
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Desempeño de Jugadores"
-															onClick='enlace("/Entrenamiento/Reportes/frmReporteDesempenoEquipo.zul")' />
-													</treerow>
-												</treeitem>
-											</treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
 											</treeitem>
 
 
@@ -788,36 +771,14 @@
 														label="Entrenamientos" />
 												</treerow>
 												<treechildren>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Promedio por Acitividad"
-															onClick='enlace("/Entrenamiento/Reportes/frmReportePromedioActividad.zul")' />
-													</treerow>
-
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Jugadores Destacados"
-															onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
-													</treerow>
-
-												</treeitem>
-												<treeitem
-													open="false">
-													<treerow>
-														<treecell
-															label="Control de Asistencia"
-															onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
-													</treerow>
-
-												</treeitem>
-
-
-											</treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
 											</treeitem>
 
 
@@ -944,7 +905,7 @@
 													<treeitem>
 														<treerow>
 															<treecell
-																label="Control de Grupos" onClick='enlace("/Seguridad/frmGrupos.zul")' />
+																label="Perfiles de Usuarios" />
 														</treerow>
 													</treeitem>
 													<treeitem>

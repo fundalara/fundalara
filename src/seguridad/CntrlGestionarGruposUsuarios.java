@@ -1,18 +1,13 @@
-package controlador.administracion;
+package seguridad;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zkplus.databind.AnnotateDataBinderInit;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -21,14 +16,10 @@ import comun.MensajeMostrar;
 import modelo.Grupo;
 import modelo.GrupoUsuario;
 import modelo.GrupoUsuarioId;
-import modelo.Rol;
 import modelo.RolGrupo;
-import modelo.RolGrupoId;
 import modelo.Usuario;
 import servicio.implementacion.ServicioGrupo;
 import servicio.implementacion.ServicioGrupoUsuario;
-import servicio.implementacion.ServicioRol;
-import servicio.implementacion.ServicioRolGrupo;
 import servicio.implementacion.ServicioUsuario;
 
 public class CntrlGestionarGruposUsuarios extends GenericForwardComposer {
