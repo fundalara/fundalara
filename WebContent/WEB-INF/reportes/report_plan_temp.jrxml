@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="134"/>
+	<subDataset name="Table Dataset 1"/>
+	<parameter name="LapsoD" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="categoria" class="java.lang.Integer"/>
+	<parameter name="equipo" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select  to_char(C.hora_inicio, 'hh12:mi:ss') as hora_inicio, to_char(C.hora_fin, 'hh12:mi:ss') as hora_fin, D.nombre dia_semana, E.nombre as lapso, F.nombre as categoria, G.nombre as equipo,
+H.nombre_manager, I.nombre_monitor
+from plan_temporada A, horario_plan_temporada B, horario C, dato_basico D, lapso_deportivo E, categoria F, equipo G,
+(
+select X.codigo_equipo, X.codigo_plan_temporada,
+Z.primer_nombre||' '|| Z.primer_apellido as nombre_manager
+from personal_equipo X,
+personaL_cargo Y,
+persona_natural Z
+where X.cedula_rif=Y.cedula_rif
+and X.cedula_rif=Z.cedula_rif
+and Y.codigo_cargo=166
+order by codigo_equipo
+) H,
+(
+select X.codigo_equipo, X.codigo_plan_temporada,
+Z.primer_nombre||' '|| Z.primer_apellido as nombre_monitor
+from personal_equipo X,
+personaL_cargo Y,
+persona_natural Z
+where X.cedula_rif=Y.cedula_rif
+and X.cedula_rif=Z.cedula_rif
+and Y.codigo_cargo=167
+) I
+where A.codigo_plan_temporada=B.codigo_plan_temporada
+and B.codigo_horario=C.codigo_horario
+and C.dia=D.codigo_dato_basico
+and A.codigo_lapso_deportivo=E.codigo_lapso_deportivo
+and A.codigo_categoria=F.codigo_categoria
+and B.codigo_equipo=G.codigo_equipo
+and B.codigo_equipo=H.codigo_equipo
+and A.codigo_plan_temporada=H.codigo_plan_temporada
+and B.codigo_equipo=I.codigo_equipo
+and A.codigo_plan_temporada=I.codigo_plan_temporada
+and A.estatus='A'
+and A.codigo_lapso_deportivo=$P{LapsoD}
+and F.codigo_categoria=$P{categoria}
+and G.codigo_equipo=$P{equipo}]]>
+	</queryString>
+	<field name="hora_inicio" class="java.lang.String"/>
+	<field name="hora_fin" class="java.lang.String"/>
+	<field name="dia_semana" class="java.lang.String"/>
+	<field name="lapso" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="equipo" class="java.lang.String"/>
+	<field name="nombre_manager" class="java.lang.String"/>
+	<field name="nombre_monitor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="303" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="162" width="572" height="37"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    Plan De Temporada]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="555" height="122"/>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="171" y="206" width="105" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lapso Deportivo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="270" width="58" height="16"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manager:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="241" width="58" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="241" width="45" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Equipo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="153" y="270" width="132" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombre_manager}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="414" y="122" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="142" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="276" y="206" width="171" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lapso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="241" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="241" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{equipo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="458" y="122" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="458" y="142" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="387" y="271" width="132" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombre_monitor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="336" y="271" width="48" height="16"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitor:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="206" y="0" width="121" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="0" width="174" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora de Culminación]]></text>
+			</staticText>
+			<line>
+				<reportElement x="8" y="22" width="555" height="1" forecolor="#FF9900"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="64" y="0" width="101" height="21" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Día]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="64" y="2" width="101" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dia_semana}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="206" y="2" width="121" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hora_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="2" width="174" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hora_fin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="55" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="99" splitType="Stretch">
+			<image>
+				<reportElement x="18" y="0" width="540" height="74"/>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

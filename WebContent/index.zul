@@ -643,7 +643,7 @@
 														<treerow>
 															<treecell
 																label="Plan de Temporada" visible="${sec:isAnyGranted('307')}"
-																onClick='enlace("/Entrenamiento/Reportes/frmReportePlanEntrenamiento.zul")' />
+																onClick='enlace("/Entrenamiento/Reportes/frmReportePlanTemporada.zul")' />
 														</treerow>
 													</treeitem>
 
@@ -798,7 +798,7 @@
 											<treerow>
 												<treecell
 													label="Control de Asistencias" visible="${sec:isAnyGranted('312')}"
-													onClick='enlace("/Entrenamiento/Reportes/frmReportesDinamicosEntrenamientos.zul")' />
+													onClick='enlace("/Entrenamiento/Reportes/frmReporteControlAsistencias.zul")' />
 											</treerow>
 
 										</treeitem>

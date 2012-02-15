@@ -1,0 +1,48 @@
+<?page title="Control de Asistencias"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
+<div align="center">
+	<separator height="15px" />
+	<window id="win" title="Control de Asistencias " border="normal"
+		width="600px" closable="true"
+		apply="controlador.entrenamiento.CntrlReporteControlAsistencias">
+		<grid>
+			<columns>
+				<column width="100px" align="left" />
+				<column width="125px" align="left" />
+				<column width="100px" align="left" />
+				<column width="125px" align="left" />
+			</columns>
+			<rows>
+				<row height="30px">
+					<label value="Fecha Inicio" width="120px" />
+					<datebox id="dtbox1" width="150px" format="dd/MM/yyyy" />
+					<label value="Fecha Final" width="120px"/>
+					<datebox id="dtbox2" width="150px" format="dd/MM/yyyy" />
+				</row>
+				<row height="30px">
+					<label value="Categoria:" width="120px" />
+					<combobox id="cmbcategoria" value="--Seleccione--" disabled="true"
+								model="@{ctrl.listCategoria}" readonly="true" width="150px">
+							<comboitem self="@{each=categoria}"
+								label="@{categoria.nombre}"
+								value="@{categoria}" />
+					</combobox>
+				
+				</row>
+				
+			</rows>
+		
+		</grid>
+			<iframe id= "ifReport" height="10px"/>
+		<grid height="50px">
+			<rows>
+				<row align="right" height="">
+					<button id="btnimprimir"
+						image="../Recursos/Imagenes/imprimir.ico" label="Generar"
+						width="95px" disabled="true" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>
