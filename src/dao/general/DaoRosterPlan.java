@@ -1,10 +1,14 @@
 package dao.general;
 
+import java.util.List;
+
+import modelo.Equipo;
 import modelo.JugadorPlan;
 import modelo.RosterPlan;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import dao.generico.GenericDao;
@@ -50,6 +54,16 @@ public class DaoRosterPlan extends GenericDao {
 		r.setEstatus('E');
 		session.update(r);
 		tx.commit();
+	}
+	
+	public List<RosterPlan> listarPorEquipo(Equipo e) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(RosterPlan.class);
+		c.add(Restrictions.eq("equipo", e))
+				.add(Restrictions.eq("estatus", 'A'));
+		List<RosterPlan> lista = c.list();
+		return lista;
 	}
 	
 	

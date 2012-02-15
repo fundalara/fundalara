@@ -120,13 +120,13 @@
 
 					</listbox>
 					<div>
-						<button id="btnAgregar"
+						<button id="btnAgregar" visible="${sec:isAnyGranted('157')}"
 							image="/Recursos/Imagenes/agregar.ico" />
 						<separator height="5px" />
-						<button id="btnModificar"
+						<button id="btnModificar" visible="${sec:isAnyGranted('158')}"
 							image="/Recursos/Imagenes/editar.ico" />
 						<separator height="5px" />
-						<button id="btnQuitar"
+						<button id="btnQuitar" visible="${sec:isAnyGranted('159')}"
 							image="/Recursos/Imagenes/quitar.ico" />
 					</div>
 				</row>

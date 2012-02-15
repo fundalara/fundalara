@@ -475,7 +475,7 @@ public class CntrlPlanTemporada extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("ctrl", this, true);
 		listLapsoDeportivos = servicioLapsoDeportivo.listar();
-		listCategorias = servicioCategoria.listar();
+		listCategorias = servicioCategoria.listarActivos();
 		listDiasSemana = servicioDatoBasico.buscarPorTipoDato(servicioTipoDato
 				.buscarPorTipo("DIA SEMANA"));
 		listTipoPersonal = servicioDatoBasico.getDaoDatoBasico()

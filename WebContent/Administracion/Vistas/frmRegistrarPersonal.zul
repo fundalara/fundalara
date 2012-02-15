@@ -1,9 +1,9 @@
 <?page title="VistaRegistrarPersonal" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
-<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root='RegPers' name='binderP'?>
 
 <zk>
-	<window closable="true" id="RegPers" title="Ingreso de Personal"
+	<window id="RegPers" title="Ingreso de Personal" closable="true"
 		apply="controlador.administracion.CntrlRegistrarPersonal"
 		border="normal" width="690px">
 		<groupbox style="border-color:orange;" closable="false">
@@ -37,7 +37,8 @@
 											</comboitem>
 										</combobox>
 										<textbox width="95px"
-											id="txtCed" style='text-transform:uppercase;' constraint="no negative,no zero">
+											id="txtCed" style='text-transform:uppercase;'
+											constraint="no negative,no zero">
 										</textbox>
 										<label value="(*)"
 											style="color:red">
@@ -115,7 +116,7 @@
 									<label value="Nro Hijos" />
 									<hbox>
 										<spinner width="30px"
-											id="spNroHijos" constraint="no negative" >
+											id="spNroHijos" constraint="no negative">
 										</spinner>
 										<label value="(*)"
 											style="color:red">
@@ -222,7 +223,8 @@
 											<hbox align="center">
 												<textbox maxlength="200"
 													id="txtDir" height="40px" width="510px" multiline="true"
-													style='text-transform:uppercase;' constraint="no negative,no zero">
+													style='text-transform:uppercase;'
+													constraint="no negative,no zero">
 												</textbox>
 												<label value="(*)"
 													style="color:red" />
@@ -333,9 +335,14 @@
 											<label value="Afección"></label>
 											<hbox style="border:none;"
 												align="center">
-												<combobox
-													id="cmbAlergia" readonly="true">
-
+												
+												<combobox id="Alergia"
+													readonly="true" model="@{cntrl.alergias}">
+													<comboitem
+														self="@{each=alergia}" value="@{alergia}"
+														label="@{alergia.nombre}"
+														context="@{alergia.codigoDatoBasico}">
+													</comboitem>
 												</combobox>
 												<button label=""
 													tooltiptext="Incluir Nueva Alergia" onClick=""
@@ -354,9 +361,9 @@
 								</grid>
 								<separator></separator>
 								<hbox width="300px">
-									<listbox id="gridAlergia"
-										oddRowSclass="none" mold="paging" pageSize="3"
-										width="610px">
+									<listbox id="lbxAlergia"
+										oddRowSclass="none" mold="paging" pageSize="3" width="610px"
+										model="@{cntrl.afeccionPersonales }">
 										<listhead>
 											<listheader
 												label="Afecciones" width="40%" align="center" sort="auto" />
@@ -365,6 +372,16 @@
 												width="60%">
 											</listheader>
 										</listhead>
+										<listitem
+											self="@{each=afeccionPersonal}"
+											value="@{afeccionPersonal }">
+											<listcell
+												label="@{afeccionPersonal.datoBasico.nombre}">
+											</listcell>
+											<listcell
+												label="@{afeccionPersonal.observacion }">
+											</listcell>
+										</listitem>
 									</listbox>
 
 									<separator></separator>
@@ -447,7 +464,8 @@
 											style="border:none;">
 											<hbox>
 												<listbox mold="paging"
-													pageSize="3" width="590px" id="gridDatoAcademicos">
+													pageSize="3" width="590px" id="gridDatoAcademicos"
+													model="@{cntrl.datoAcademicosP}">
 													<listhead>
 														<listheader
 															label="Instituto" width="100px" sort="auto" />
@@ -456,7 +474,19 @@
 														<listheader
 															label="Fecha Egreso" sort="auto" width="95px" />
 													</listhead>
-
+													<listitem
+														self="@{each='datoAcademicoPersonal'}"
+														value="@{datoAcademicoPersonal}">
+														<listcell
+															label="@{datoAcademicoPersonal.instituto}">
+														</listcell>
+														<listcell
+															label="@{datoAcademicoPersonal.titulo}">
+														</listcell>
+														<listcell
+															label="@{datoAcademicoPersonal.fechaEgreso, converter='comun.converter.DateConverter'}">
+														</listcell>
+													</listitem>
 												</listbox>
 
 												<vbox>
@@ -499,7 +529,7 @@
 											<label value="Cargo"></label>
 											<hbox>
 												<combobox width="110px"
-													height="20px" id="cmbCargo">
+													height="20px" id="cmbCargo" readonly="true">
 												</combobox>
 												<label value="(*)"
 													style="color:red">
@@ -523,7 +553,7 @@
 											</label>
 											<hbox>
 												<combobox
-													id="cmbHorario" width="110px" height="20px">
+													id="cmbHorario" width="110px" height="20px" readonly="true">
 												</combobox>
 												<label value="(*)"
 													style="color:red">
@@ -648,9 +678,7 @@
 				width="100px" onClick="" label="Cancelar" id="btnCancelar" />
 			<button image="/Recursos/Imagenes/salir.png" width="100px"
 				onClick="" label="Salir" id="btnSalir">
-				<attribute name="onClick">
-	RegPers.onClose();
-</attribute>
+				
 			</button>
 		</div>
 

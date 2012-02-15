@@ -50,4 +50,7 @@ public class ServicioRepresentanteJugadorPlan implements
 		return daoRepresentanteJugadorPlan.buscarRepresentanteJugador(jugadorPlan);
 	}
 
+	public RepresentanteJugadorPlan buscarRepresentante(JugadorPlan atleta) {
+		return daoRepresentanteJugadorPlan.buscarRepresentante(atleta);
+	}
 }

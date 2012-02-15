@@ -4,7 +4,7 @@
 <div align="center">
 	<separator height="15px" />
 	<window id="wndReporteDesempennoEquipo" title="Desempeño por Equipo"
-		border="normal" width="600px" closable="true"
+		border="normal" width="800px" closable="true"
 		apply="controlador.entrenamiento.CntrlReportesDinamicosEntrenamientos">
 		
 		<grid>

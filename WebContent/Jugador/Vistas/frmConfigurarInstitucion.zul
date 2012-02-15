@@ -1,5 +1,7 @@
 ﻿<?page title="Institución" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?xel-method prefix="sec" name="isAnyGranted"
+  class="org.zkoss.spring.security.SecurityUtil" signature="java.lang.Boolean isAnyGranted(java.lang.String)"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
 
 <zk>
@@ -101,13 +103,13 @@
 							</listitem>
 						</listbox>
 						<div>
-							<button id="btnGuardar" disabled="false"
+							<button id="btnGuardar" disabled="false" visible="${sec:isAnyGranted('160')}"
 								image="../../Recursos/Imagenes/agregar.ico" />
 							<separator height="5px" />
-							<button id="btnModificar" disabled="true"
+							<button id="btnModificar" disabled="true" visible="${sec:isAnyGranted('161')}"
 								image="../../Recursos/Imagenes/editar.ico" />
 							<separator height="5px" />
-							<button id="btnEliminar" disabled="true"
+							<button id="btnEliminar" disabled="true" visible="${sec:isAnyGranted('162')}"
 								image="../../Recursos/Imagenes/quitar.ico" />
 						</div>
 					</row>

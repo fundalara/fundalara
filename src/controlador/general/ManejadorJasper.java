@@ -43,7 +43,7 @@ public class ManejadorJasper {
 			e.printStackTrace();
 		}
 
-		Component visor = Executions.createComponents("General/"
+		Component visor = Executions.createComponents("/General/"
 				+"frmVisorDocumento.zul", null, null);
 
 		JasperReport jasp = JasperCompileManager.compileReport(jrxmlSrc);

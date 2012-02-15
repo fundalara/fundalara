@@ -1,5 +1,7 @@
 <?page title="Actualizar Familiar"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?xel-method prefix="sec" name="isAnyGranted"
+  class="org.zkoss.spring.security.SecurityUtil" signature="java.lang.Boolean isAnyGranted(java.lang.String)"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winActualizarFamiliar" ?>
 
 <zk>
@@ -570,9 +572,9 @@
 
 		<space></space>
 		<div align="right">
-			<button id="btnGuardar" label="Guardar"
+			<button id="btnGuardar" label="Guardar" visible="${sec:isAnyGranted('148')}"
 				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
-				width="100px" visible="true">
+				width="100px">
 			</button>
 			<button label="Cancelar" id="btnCancelar"
 				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"

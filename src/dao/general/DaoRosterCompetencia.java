@@ -2,13 +2,17 @@ package dao.general;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import modelo.Divisa;
 import modelo.RosterCompetencia;
 
+=======
+>>>>>>> fdc8650d5d9f9268111948fd9cd27434d46dd314
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+<<<<<<< HEAD
 import org.zkoss.zhtml.Li;
 
 import dao.generico.GenericDao;
@@ -47,5 +51,23 @@ public class DaoRosterCompetencia extends GenericDao {
 		
 		
 		}
+=======
+
+import modelo.Equipo;
+import modelo.RosterCompetencia;
+import dao.generico.GenericDao;
+
+public class DaoRosterCompetencia extends GenericDao {
+
+	public List<RosterCompetencia> listarPorEquipo(Equipo e) {
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(RosterCompetencia.class);
+		c.add(Restrictions.eq("equipo", e))
+				.add(Restrictions.eq("estatus", 'A'));
+		List<RosterCompetencia> lista = c.list();
+		return lista;
+	}
+>>>>>>> fdc8650d5d9f9268111948fd9cd27434d46dd314
 }
 

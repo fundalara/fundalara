@@ -7,6 +7,7 @@ import modelo.RepresentanteJugadorPlan;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import dao.generico.GenericDao;
@@ -30,5 +31,16 @@ public class DaoRepresentanteJugadorPlan extends GenericDao {
 		List<RepresentanteJugadorPlan> lista = c.list();
 		return lista;
 	}
+
+	public RepresentanteJugadorPlan buscarRepresentante(JugadorPlan atleta) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = getSession()
+				.createCriteria(RepresentanteJugadorPlan.class);
+		c.add(Restrictions.eq("jugadorPlan", atleta));
+		c.add(Restrictions.eq("estatus", 'A'));
+		return (RepresentanteJugadorPlan) c.uniqueResult();
+	}
+	
 	
 }

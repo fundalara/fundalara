@@ -6,29 +6,27 @@
 		title="Catálogo de Personas Jurídicas"
 		apply="controlador.administracion.CntrlCatalogoPersonasJuridicas"
 		border="normal" width="500px" left="500px" top="100px" mode="modal">
-
-		<listbox mold="paging" pageSize="10" width="480px"
+		<hbox width="500px">
+			<hbox>
+				<image src="Recursos/Imagenes/filtro.png" width="15px" />
+				<textbox id="txtFiltroCI" width=""
+					style='text-transform:uppercase;' onChanging="filtrar(event)" />
+			</hbox>
+			<hbox width="80%">
+				<image src="Recursos/Imagenes/filtro.png" width="15px" />
+				<textbox id="txtFiltroRazon" width="250px"
+					style='text-transform:uppercase;' onChanging="filtrar(event)" />
+			</hbox>
+		</hbox>
+		<listbox mold="paging" pageSize="10" width="500px"
 			height="350px" oddRowSclass="none" id="lbxPersonas"
 			model="@{cntrl.listaPersonas}">
 			<listhead>
-				<listheader label="Cédula" width="20%" align="center" />
+				<listheader label="RIF" align="center" width="120px" />
 				<listheader label="Razón Social" align="left"
-					width="80%" />
+					width="320px" />
 			</listhead>
-			<auxhead>
-				<auxheader colspan="1">
-					<image src="Recursos/Imagenes/filtro.png"
-						width="15px" />
-					<textbox id="txtFiltroCI" width="70%"
-						style='text-transform:uppercase;' />
-				</auxheader>
-				<auxheader colspan="1">
-					<image src="Recursos/Imagenes/filtro.png"
-						width="15px" />
-					<textbox id="txtFiltroRazon" width="90%"
-						style='text-transform:uppercase;' />
-				</auxheader>
-			</auxhead>
+
 			<listitem self="@{each='personaJuridica'}">
 				<listcell label="@{personaJuridica.cedulaRif }" />
 				<listcell label="@{personaJuridica.razonSocial }" />
@@ -51,4 +49,10 @@
 		</div>
 		<separator />
 	</window>
+	<zscript><![CDATA[
+	public void filtrar(Event event) {
+		((Textbox) event.getTarget())
+				.setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+	}
+]]></zscript>
 </zk>

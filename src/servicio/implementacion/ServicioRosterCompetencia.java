@@ -5,7 +5,11 @@ import java.util.List;
 import dao.general.DaoRosterCompetencia;
 
 import modelo.Constante;
+<<<<<<< HEAD
 import modelo.JugadorForaneo;
+=======
+import modelo.Equipo;
+>>>>>>> fdc8650d5d9f9268111948fd9cd27434d46dd314
 import modelo.RosterCompetencia;
 import servicio.interfaz.IServicioConstante;
 import servicio.interfaz.IServicioRosterCompetencia;
@@ -76,4 +80,8 @@ public class ServicioRosterCompetencia implements IServicioRosterCompetencia {
 		return null;
 	}
 
+	public List<RosterCompetencia> listarPorEquipo(Equipo e){
+		return daoRosterCompetencia.listarPorEquipo(e);
+		
+	}
 }

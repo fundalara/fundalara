@@ -1,5 +1,7 @@
 <?page title="Categoria" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?xel-method prefix="sec" name="isAnyGranted"
+  class="org.zkoss.spring.security.SecurityUtil" signature="java.lang.Boolean isAnyGranted(java.lang.String)"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
 
 <zk>
@@ -95,11 +97,11 @@
 						</listitem>
 					</listbox>
 					<vbox>
-						<button id="btnAgregar"
+						<button id="btnAgregar" visible="${sec:isAnyGranted('154')}"
 							image="/Recursos/Imagenes/agregar.ico" />
-						<button id="btnModificar"
+						<button id="btnModificar" visible="${sec:isAnyGranted('155')}"
 							image="/Recursos/Imagenes/editar.ico" />
-						<button id="btnQuitar"
+						<button id="btnQuitar" visible="${sec:isAnyGranted('156')}"
 							image="/Recursos/Imagenes/quitar.ico" />
 					</vbox>
 				</row>

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class CntrlCatalogoPersonasNaturales extends GenericForwardComposer {
 	List<Persona> personas = new ArrayList<Persona>();
 	// List<Persona> listaPersonas = new ArrayList<Persona>();
 	List<PersonaNatural> listaPersonas = new ArrayList<PersonaNatural>();
+	List<PersonaNatural> auxPersonas = new ArrayList<PersonaNatural>();
 	AnnotateDataBinder binderCatNat;
 	Textbox txtFiltroCI, txtFiltroPNombre, txtFiltroPApellido;
 	Listbox lbxPersonas;
@@ -118,6 +120,40 @@ public class CntrlCatalogoPersonasNaturales extends GenericForwardComposer {
 		}
 	
 	}
+	
+	public void onChanging$txtFiltroCI(Event event){
+		listaPersonas = new ArrayList<PersonaNatural>();
+		for (Iterator<PersonaNatural> i = auxPersonas.iterator(); i.hasNext();) {
+			PersonaNatural tmp = i.next();
+			if (tmp.getCedulaRif().toLowerCase().indexOf(txtFiltroCI.getText().trim().toLowerCase()) >= 0) {
+				listaPersonas.add(tmp);
+			}
+		}
+		binderCatNat.loadComponent(lbxPersonas);
+	}
+
+	public void onChanging$txtFiltroPNombre(Event event){
+		listaPersonas = new ArrayList<PersonaNatural>();
+		for (Iterator<PersonaNatural> i = auxPersonas.iterator(); i.hasNext();) {
+			PersonaNatural tmp = i.next();
+			if (tmp.getPrimerNombre().toLowerCase().indexOf(txtFiltroPNombre.getText().trim().toLowerCase()) >= 0) {
+				listaPersonas.add(tmp);
+			}
+		}
+		binderCatNat.loadComponent(lbxPersonas);
+	}
+	
+	public void onChanging$txtFiltroPApellido(Event event){
+		listaPersonas = new ArrayList<PersonaNatural>();
+		for (Iterator<PersonaNatural> i = auxPersonas.iterator(); i.hasNext();) {
+			PersonaNatural tmp = i.next();
+			if (tmp.getPrimerApellido().toLowerCase().indexOf(txtFiltroPApellido.getText().trim().toLowerCase()) >= 0) {
+				listaPersonas.add(tmp);
+			}
+		}
+		binderCatNat.loadComponent(lbxPersonas);
+	}
+
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnSalir() {

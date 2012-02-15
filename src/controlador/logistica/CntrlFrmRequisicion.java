@@ -34,6 +34,8 @@ import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import comun.MensajeMostrar;
+
 import servicio.implementacion.ServicioDatoBasico;
 import servicio.interfaz.IServicioDetalleRequisicion;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
@@ -144,8 +146,8 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 	 */
 	public void onClick$btnAgregarMateriales() {
 
-		Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterialB.zul", null, null);
-		catalogoMaterial.setVariable("formRequisicion", formRequisicion, false);
+		Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
+		catalogoMaterial.setVariable("frmPlanificarMantenimiento", formRequisicion, false);
 		formRequisicion.addEventListener("onCatalogoMaterialCerrado", new EventListener() {
 
 			public void onEvent(Event arg0) throws Exception {
@@ -201,13 +203,15 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 	 * ademas de la hora de la requisicion
 	 * 
 	 * @return true
+	 * @throws InterruptedException 
 	 * 
 	 */
-	public void onClick$btnGuardar() {
+	public void onClick$btnGuardar() throws InterruptedException {
 		java.util.Date fecha = new Date();
 		Personal personal = new Personal();
 		// usuario de seguridad funcional
 
+	if (lboxMateriales.getSelectedIndex()!=0){
 		personal.setCedulaRif("V-5435567");
 		personal = servicioPersonal.buscarPorCodigo(personal);
 
@@ -241,8 +245,12 @@ public class CntrlFrmRequisicion extends GenericForwardComposer {
 		} else {
 			System.out.println("no se cierre");
 
-		}
-	}
+}
+
+    	}else{
+    		Messagebox.show("Agregar un material ", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
+    	}
+}
 
 	/**
 	 * seccion de getter y setters

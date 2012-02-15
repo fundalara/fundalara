@@ -10,7 +10,9 @@
 		<div width="100%">
 			<label value="Buscar" width="10%" />
 			<label value="Nombre" width="15%"></label>
-			<textbox width="30%"></textbox>
+			<textbox id="txtNombre" style='text-transform:uppercase;'
+			onChanging="filtrar(event)" width="30%"/>
+
 		</div>
 		<listbox id="lboxActividad" mold="paging" pageSize="5"
 			model="@{cntrl.listaActividad}" selectedItem="@{cntrl.actividad}"
@@ -25,9 +27,15 @@
 		</listbox>
 		<div align="right">
 			<button id="btnGuardar" label="Seleccionar"
-				image="/Recursos/Imagenes/guardar.ico" />
+				image="/Recursos/Imagenes/aceptar.ico" />
 			<button id="btnSalir" label="Salir"
 				image="/Recursos/Imagenes/salir.png" />
 		</div>
 	</window>
+		<zscript><![CDATA[
+	public void filtrar(Event event) {
+		((Textbox) event.getTarget())
+				.setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+	}
+]]></zscript>
 </zk>

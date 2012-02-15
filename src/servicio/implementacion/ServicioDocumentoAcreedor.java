@@ -85,8 +85,7 @@ public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
 
 	public void crearCompromisos(Persona representante, Persona atleta,
 			DatoBasico tipoLapso, DatoBasico tipoInscripcion) {
-		conceptos = servicioIngresoInscripcion.listarPorTipoInscripcion(tipoInscripcion
-				.getCodigoDatoBasico());
+		conceptos = servicioIngresoInscripcion.listarIngresoInscripcion(tipoInscripcion);
 		LapsoDeportivo lapsoDeportivo = servicioLapsoDeportivo.buscarDosCampos(tipoLapso);
 		Date lapso = lapsoDeportivo.getFechaInicio();
 		Date actual = new Date();
@@ -139,5 +138,23 @@ public class ServicioDocumentoAcreedor implements IServicioDocumentoAcreedor {
 		}
 
 	}
+	
+	public Object buscarPorTipoIngreso(String tipo) {
+		return daoDocumentoAcreedor.buscarPorTipoIngreso(tipo);
+	}
 
+	public List<DocumentoAcreedor> buscarFiltrado(String tipoIngreso,
+			String estado, Date fechaIni, Date fechaFin) {
+		return daoDocumentoAcreedor.buscarFiltrado(tipoIngreso, estado,
+				fechaIni, fechaFin);
+	}
+
+	public List<DocumentoAcreedor> buscarAdelantosPorRifAtleta(Persona td) {
+		return daoDocumentoAcreedor.buscarAdelantosPorRifAtleta(td);
+	}
+	
+
+	public List<DocumentoAcreedor> buscarAdelantosPorRif(Persona td) {
+		return daoDocumentoAcreedor.buscarAdelantosPorRif(td);
+	}
 }
