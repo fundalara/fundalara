@@ -10,19 +10,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Messagebox;
 
 import comun.ConeccionBD;
 
@@ -31,6 +31,7 @@ import comun.ConeccionBD;
  * fechas generar el reporte de estados de las actividades
  * 
  * @author Reinaldo L.
+ * @author Irmary M.
  * 
  * */
 public class CntrlReporteEstadoActividad extends GenericForwardComposer {
@@ -46,32 +47,31 @@ public class CntrlReporteEstadoActividad extends GenericForwardComposer {
 
 	}
 
-	public void onClick$btnImprimir() throws SQLException, JRException, IOException, ParseException {
-		con = ConeccionBD.getCon("postgres", "postgres", "admin");
+	public void onClick$btnImprimir() throws SQLException, JRException, IOException, ParseException, InterruptedException {
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		Date fecha = new Date();
-		parameters.put("FECHA", formato.format(fecha));
-		parameters.put("FechaInicio", formato.parse(formato.format(dboxFechaInicio.getValue())));
-		parameters.put("FechaFin", formato.parse(formato.format(dboxFechaFin.getValue())));
-		formato.applyPattern("hh:mm");
-		parameters.put("HORA", formato.format(fecha));
+		if (dboxFechaFin.getValue().after(dboxFechaInicio.getValue())) {
+			con = ConeccionBD.getCon();
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteEstadistico.jrxml");
-		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
-		JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			Date fecha = new Date();
+			parameters.put("FECHA", formato.format(fecha));
+			parameters.put("FechaInicio", formato.parse(formato.format(dboxFechaInicio.getValue())));
+			parameters.put("FechaFin", formato.parse(formato.format(dboxFechaFin.getValue())));
+			formato.applyPattern("hh:mm");
+			parameters.put("HORA", formato.format(fecha));
 
-		// Exporta el informe a PDF
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteEstadistico.pdf");
-		JRExporter exporter = new JRPdfExporter();
+			String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteEstadistico.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(rutaReporte);
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, con);
 
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
+			byte[] archivo = JasperExportManager.exportReportToPdf(print);
 
-		exporter.exportReport();
+			final AMedia amedia = new AMedia("EstadoActividad.pdf", "pdf", "application/pdf", archivo);
 
-		// Para visualizar el pdf con el visor de Jasper
-		JasperViewer.viewReport(print, false);
+			Component visor = Executions.createComponents("General/" + "frmVisorDocumento.zul", null, null);
+			visor.setVariable("archivo", amedia, false);
+		} else
+			Messagebox.show("La fecha de fin debe ser posterior a la fecha de inicio", "Olimpo-Importante", Messagebox.OK, Messagebox.EXCLAMATION);
 	}
 
 }

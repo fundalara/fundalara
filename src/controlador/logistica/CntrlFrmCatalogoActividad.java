@@ -35,6 +35,10 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 
 	}
 
+	public void onClick$btnSalir() {
+		frmCatActPla.detach();
+	}
+
 	public void onClick$btnGuardar() throws InterruptedException {
 		// Se comprueba que se haya seleccionado un elemento de la lista
 		if (lboxActividad.getSelectedIndex() != -1) {
@@ -52,10 +56,8 @@ public class CntrlFrmCatalogoActividad extends GenericForwardComposer {
 			// cerro y que los datos se han enviado
 			if (numero == 1) {
 				Events.sendEvent(new Event("onCatalogoActividadCerradoP", frmPrestamoDevolucion));
-				System.out.println(1);
 			} else if (numero == 2) {
 				Events.sendEvent(new Event("onCatalogoActividadCerradoD", frmPrestamoDevolucion));
-				System.out.println(2);
 			}
 
 			// se cierra el catalogo

@@ -27,11 +27,13 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Panel;
 import org.zkoss.zul.Progressmeter;
-import org.zkoss.zul.api.Combobox;
-import org.zkoss.zul.api.Listbox;
-import org.zkoss.zul.api.Panel;
-import org.zkoss.zul.api.Window;
+import org.zkoss.zul.Window;
 
 import servicio.interfaz.IServicioActividad;
 import servicio.interfaz.IServicioComisionActividad;
@@ -46,11 +48,17 @@ import servicio.interfaz.IServicioResultadoActividad;
 import servicio.interfaz.IServicioTareaActividad;
 import servicio.interfaz.IServicioTareaActividadPlanificada;
 
+import comun.MensajeMostrar;
 import comun.TipoDatoBasico;
 
 import controlador.general.CntrlFrmAgendaLogistica;
 
 public class CntrlResultadosActividadComplementaria extends GenericForwardComposer {
+
+	/**
+	 * Una clase que controla los procesos referentes a el registo de los
+	 * resultados de las actividades complementaria
+	 */
 
 	Actividad actividad = new Actividad();
 	PlanificacionActividad planificacionActividad = new PlanificacionActividad();
@@ -70,6 +78,8 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 	String Observacion;
 	EstadoActividad estadoActividadFinal = new EstadoActividad();
 
+	// Variables Asociadas a los servicios
+
 	IServicioActividad servicioActividad;
 	IServicioPlanificacionActividad servicioPlanificacionActividad;
 	IServicioPersonalActividad servicioPersonalActividad;
@@ -83,6 +93,8 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 	IServicioResultadoActividad servicioResultadoActividad;
 	IServicioEstadoActividad servicioEstadoActividad;
 
+	// Listas que contienen diversos objetos implementados
+
 	List<ComisionActividad> listadoCA;
 	List<TareaActividad> tareasPlanificadas;
 	List<MaterialActividadPlanificada> materialesPlanificados;
@@ -92,15 +104,28 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 	List<DatoBasico> listadoEstados;
 	List<ResultadoActividad> listadosEstados2 = new ArrayList<ResultadoActividad>();
 
+	// Variables asociadas al formulario
+
 	Component frmResultadosActividadComplementaria;
 	AnnotateDataBinder binder;
-
-	Button btnAgregarResponsable, btnAgregarPersonal, btnEjecutada, btnGuardar, btnSalir, btnDescartarTarea;
+	Button btnAgregarResponsable, btnSuspender, btnAgregarPersonal, btnAgregarTarea, btnEjecutada, btnGuardar, btnSalir, btnDescartarTarea,
+			btnAgregarComision, btnAgregarMaterial, btnGuardarFinal;
 	Combobox cmbEstados;
 	Panel panel1, panel2;
-	Listbox lboxlistadocomision, lboxPersonalComision, lboxtareas;
-	Window frmCatPerComision;
+	Listbox lboxlistadocomision, lboxPersonalComision, lboxtareas, lboxListadoMateriales;
+	Window frmCatPerComision, ejecucionActividadComplementaria;
 	Progressmeter barraProgreso;
+	Listitem litemcomision;
+	boolean sw = false;
+
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -109,25 +134,52 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		frmResultadosActividadComplementaria = comp;
 	}
 
-	public void onCreate$ejecucionActividadComplementaria() {
-		this.prueba();
+	/**
+	 * Este metodo onCreate$ejecucionActividadComplementaria() se carga
+	 * automticamente al momento de que se instancia el formulario sirve para
+	 * cargar los datos como tareas ya planificadas, comisiones y materiales
+	 * cargados previamente
+	 */
 
-		System.out.println(actividad);
+	public void onCreate$ejecucionActividadComplementaria() {
+		this.cargarPlanificacion();
 
 		this.listadoCA = this.servicioComisionActividad.listar(actividad);
 		this.tareasPlanificadas = servicioActividad.listar(actividad);
 		materialesPlanificados = servicioMaterialActividadPlanificada.listarMateriales(actividad.getPlanificacionActividad());
 		this.cargarEstados();
 		cargarBarraProgreso();
-
-		System.out.println(listadoCA);
-
 		binder.loadAll();
+
+		EstadoActividad au = new EstadoActividad();
+		au = servicioEstadoActividad.buscar2(actividad);
+		if (au != null) {
+
+			this.btnAgregarComision.setDisabled(true);
+			this.btnAgregarTarea.setDisabled(true);
+			btnAgregarMaterial.setDisabled(true);
+			this.btnSuspender.setDisabled(true);
+			this.btnGuardar.setDisabled(true);
+			sw = true;
+
+		}
+
 	}
 
+	/**
+	 * Este metodo cargarEstados() carga los posibles estados de ejecucion de
+	 * una actividad en una lista para luego ser mostrados en un combo por el
+	 * formulario
+	 */
 	public void cargarEstados() {
 		listadoEstados = servicioDatoBasico.buscar(TipoDatoBasico.ESTADOS);
 	}
+
+	/**
+	 * Este metodo cargarBarraProgreso() llena la barra de progreso pasandole
+	 * como parametro un entero este entero se calcula de acuerdo a las tareas
+	 * ejecutadas en la activiad
+	 */
 
 	public void cargarBarraProgreso() {
 		int inactivos = 0;
@@ -146,31 +198,51 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		this.barraProgreso.setValue(total);
 	}
 
+	/**
+	 * Este proceso onClick$btnAgregarComision() agrega una comision en un
+	 * listado de comisiones gregadas, para luego mostrarlo en pantalla
+	 */
+
 	public void onClick$btnAgregarComision() {
 
-		Component catalogoComision = Executions.createComponents("/Logistica/Vistas/frmCatalogoComisiones2.zul", null, null);
+		Component catalogoComision = Executions.createComponents("/Logistica/Vistas/frmCatalogoComisiones.zul", null, null);
 
-		catalogoComision.setVariable("frmResultadosActividadComplementaria", this.frmResultadosActividadComplementaria, false);
+		catalogoComision.setVariable("frmPadre", this.frmResultadosActividadComplementaria, false);
 
-		this.frmResultadosActividadComplementaria.addEventListener("onCatalogoComisionCerrado2", new EventListener() {
+		List<DatoBasico> listaComisiones = new ArrayList<DatoBasico>();
+
+		for (ComisionActividad datoBasico : listadoCA) {
+			listaComisiones.add(datoBasico.getDatoBasico());
+		}
+
+		catalogoComision.setVariable("comision", listaComisiones, false);
+
+		this.frmResultadosActividadComplementaria.addEventListener("onCatalogoComisionCerrado", new EventListener() {
 
 			public void onEvent(Event arg0) throws Exception {
-				DatoBasico Comision = new DatoBasico();
-				Comision = (DatoBasico) frmResultadosActividadComplementaria.getVariable("comision", false);
+				List<DatoBasico> c = new ArrayList<DatoBasico>();
+				c = (List<DatoBasico>) frmResultadosActividadComplementaria.getVariable("listaComision", false);
+				for (DatoBasico datoBasico : c) {
+					comisionA = new ComisionActividad();
+					comisionA.setDatoBasico(datoBasico);
+					int num = servicioComisionActividad.listar().size() + 1;
+					comisionA.setCodigoComisionActividad(num);
+					comisionA.setActividad(actividad);
+					listadoCA.add(comisionA);
+					servicioComisionActividad.agregar(comisionA);
+				}
 
-				comisionA = new ComisionActividad();
-				comisionA.setDatoBasico(Comision);
-				int num = servicioComisionActividad.listar().size() + 1;
-				comisionA.setCodigoComisionActividad(num);
-				comisionA.setActividad(actividad);
-				listadoCA.add(comisionA);
-				servicioComisionActividad.agregar(comisionA);
 				binder.loadAll();
 				arg0.stopPropagation();
 			}
 
 		});
 	}
+
+	/**
+	 * Este proceso onClick$btnAgregarTarea() agrega una tarea a un listado de
+	 * tareas asignadas, luego se muestran en pantalla
+	 */
 
 	public void onClick$btnAgregarTarea() {
 		Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmListarTareas.zul", null, null);
@@ -199,6 +271,10 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		this.binder.loadAll();
 	}
 
+	/**
+	 * Este proceso onClick$btnDescartarTarea() descarta una tarea, y coloca su
+	 * estado como descartado, ademas de imhabilitarlo a nivel de pantalla
+	 */
 	public void onClick$btnDescartarTarea() {
 		estadoTarea = servicioDatoBasico.buscarPorCodigo(416);
 		this.tareaActividad.setDatoBasicoByEstadoTarea(estadoTarea);
@@ -208,17 +284,23 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		cargarBarraProgreso();
 	}
 
+	/**
+	 * Este proceso onClick$btnAgregarResponsable() agrega un reponsable a una
+	 * tara seleccionada, este responsable viene por parte de una comision
+	 */
 	public void onClick$btnAgregarResponsable() {
 
-		final Component catalogoResponsable = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonalComision.zul", null, null);
-
-		catalogoResponsable.setVariable("General", actividad, false);
-
-		catalogoResponsable.addEventListener("onCatalogoResponsableCerrado", new EventListener() {
+		final Component catalogoPersonal = Executions.createComponents("/Logistica/Vistas/frmCatalogoPersonal.zul", null, null);
+		catalogoPersonal.setVariable("frmPadre", this.frmResultadosActividadComplementaria, false);
+		int numero = 1;
+		catalogoPersonal.setVariable("numero", numero, false);
+		int aux = 2;
+		catalogoPersonal.setVariable("aux", aux, false);
+		catalogoPersonal.addEventListener("onCatalogoCerradoResponsable", new EventListener() {
 
 			public void onEvent(Event arg0) throws Exception {
 				Persona perso = new Persona();
-				perso = (Persona) catalogoResponsable.getVariable("General", false);
+				perso = (Persona) catalogoPersonal.getVariable("persona", false);
 				personaComision = perso;
 				comisionFamiliar = servicioComisionFamiliar.buscar(personaComision.getCedulaRif());
 				tareaActividad.setComisionFamiliar(comisionFamiliar);
@@ -231,6 +313,11 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		});
 	}
 
+	/**
+	 * Estos dos procesos agregarPersonal(Persona p) y
+	 * onClick$btnAgregarPersonal() agregan un personal como responsable de una
+	 * tarea, este responsable viene por parte de la organizacion
+	 */
 	public void agregarPersonal(Persona p) {
 		PersonalActividad pa = new PersonalActividad();
 		pa = servicioPersonalActividad.Buscar(p);
@@ -272,6 +359,11 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		});
 	}
 
+	/**
+	 * Este proceso onClick$btnAgregarMaterial() solicita un material,
+	 * mostrandolo en un listado en pantalla.
+	 */
+
 	public void onClick$btnAgregarMaterial() {
 
 		final Component catalogoMaterial = Executions.createComponents("/Logistica/Vistas/frmCatalogoMaterialA.zul", null, null);
@@ -302,6 +394,11 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 
 	}
 
+	/**
+	 * Este proceso onClick$btnMostrarMaterialesAprobados() muestra un listado
+	 * de materiales ya aprobados en pantalla
+	 */
+
 	public void onClick$btnMostrarMaterialesAprobados() {
 
 		Component ListadoMaterialesAprobados = Executions.createComponents("/Logistica/Vistas/frmListadoMaterialesAprobados.zul", null, null);
@@ -309,7 +406,13 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 
 	}
 
+	/**
+	 * Este proceso onClick$btnAgregarEstadoActividad() agrega un estado de una
+	 * activiad, asi como una observacion. Y eso por cada actividad
+	 */
+
 	public void onClick$btnAgregarEstadoActividad() {
+		btnGuardarFinal.setDisabled(false);
 		if (this.cmbEstados.getSelectedIndex() != -1) {
 			resultadoActividad = new ResultadoActividad();
 			resultadoActividadId = new ResultadoActividadId();
@@ -328,6 +431,11 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		}
 	}
 
+	/**
+	 * Este proceso buscarEnLista() verifica que no se repitan varios estados en
+	 * una misma actividad
+	 */
+
 	public boolean buscarEnLista() {
 		boolean respuesta = false;
 		for (int i = 0; i < listadosEstados2.size(); i++) {
@@ -338,20 +446,33 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		return respuesta;
 	}
 
+	/**
+	 * Este proceso onSelect$lboxtareas() habilita o deshabilita componentes al
+	 * seleccionar una tarea para poder realizar el proceso de ejecucion o
+	 * descarte, asi como tambien la asignacion de personal
+	 */
+
 	public void onSelect$lboxtareas() {
 
-		if (this.tareaActividad.getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 414) {
-			this.btnAgregarPersonal.setDisabled(false);
-			this.btnAgregarResponsable.setDisabled(false);
-			this.btnEjecutada.setDisabled(false);
-			this.btnDescartarTarea.setDisabled(false);
-		} else {
-			this.btnAgregarPersonal.setDisabled(true);
-			this.btnAgregarResponsable.setDisabled(true);
-			this.btnEjecutada.setDisabled(true);
-			this.btnDescartarTarea.setDisabled(true);
+		if (!sw) {
+			if (this.tareaActividad.getDatoBasicoByEstadoTarea().getCodigoDatoBasico() == 414) {
+				this.btnAgregarPersonal.setDisabled(false);
+				this.btnAgregarResponsable.setDisabled(false);
+				this.btnEjecutada.setDisabled(false);
+				this.btnDescartarTarea.setDisabled(false);
+			} else {
+				this.btnAgregarPersonal.setDisabled(true);
+				this.btnAgregarResponsable.setDisabled(true);
+				this.btnEjecutada.setDisabled(true);
+				this.btnDescartarTarea.setDisabled(true);
+			}
 		}
 	}
+
+	/**
+	 * Este proceso onClick$btnEjecutada() pone en ejecucion una tarea y la
+	 * deshabilita luego
+	 */
 
 	public void onClick$btnEjecutada() {
 		estadoTarea = servicioDatoBasico.buscarPorCodigo(415);
@@ -362,9 +483,14 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		this.onSelect$lboxtareas();
 	}
 
-	public void prueba() {
+	/**
+	 * este proceso es el encargado de cargar una acitividad y una
+	 * planificacion, de tal manera que se puedan realizar todas las operaciones
+	 * correspondientes con el
+	 */
+
+	public void cargarPlanificacion() {
 		this.planificacionActividad = (PlanificacionActividad) frmResultadosActividadComplementaria.getVariable("planificacionActividad", false);
-		System.out.println(planificacionActividad.getCodigoPlanificacionActividad());
 		this.planificacionActividad.setCodigoPlanificacionActividad(planificacionActividad.getCodigoPlanificacionActividad());
 
 		this.actividad.setPlanificacionActividad(planificacionActividad);
@@ -575,6 +701,11 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		Observacion = observacion;
 	}
 
+	/**
+	 * Este proceso onClick$btnGuardar() lleva a la interfaz final para procesar
+	 * los resultados de la actividad
+	 */
+
 	public void onClick$btnGuardar() {
 		this.panel1.setOpen(false);
 		this.panel1.setCollapsible(false);
@@ -583,11 +714,15 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		this.panel2.setOpen(true);
 	}
 
-	public void onClick$btnGuardarFinal() {
+	/**
+	 * Este proceso onClick$btnGuardarFinal() guarda los estados de una
+	 * acitividad con sus respesctivas observaciones de forma definitiva
+	 */
+
+	public void onClick$btnGuardarFinal() throws InterruptedException {
 
 		estadoActividadFinal = new EstadoActividad();
 		this.estadoActividadFinal = servicioEstadoActividad.buscar(actividad);
-		System.out.println(estadoActividadFinal);
 		this.estadoActividadFinal.setEstatus('E');
 		servicioEstadoActividad.actualizar(estadoActividadFinal);
 
@@ -600,8 +735,10 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
 		servicioEstadoActividad.agregar(estadoActividadFinal);
 		this.frmResultadosActividadComplementaria.detach();
-		alert("Actividad Terminada");
 
+		Messagebox.show("Actividad Terminada", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
+
+		// Actualiza el color del evento en el calendario
 		SimpleCalendarEvent sce = (SimpleCalendarEvent) frmResultadosActividadComplementaria.getVariable("esc", false);
 		sce.setHeaderColor("#FDD017");
 		sce.setContentColor("#FDD017");
@@ -610,10 +747,15 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		agenda.recargarModelo(sce);
 	}
 
-	public void onClick$btnSuspender() {
+	/**
+	 * este proceso onClick$btnSuspender() suspende una actividad de forma
+	 * definitiva
+	 * 
+	 */
+
+	public void onClick$btnSuspender() throws InterruptedException {
 		estadoActividadFinal = new EstadoActividad();
 		this.estadoActividadFinal = servicioEstadoActividad.buscar(actividad);
-		System.out.println(estadoActividadFinal);
 		this.estadoActividadFinal.setEstatus('E');
 		servicioEstadoActividad.actualizar(estadoActividadFinal);
 
@@ -626,7 +768,17 @@ public class CntrlResultadosActividadComplementaria extends GenericForwardCompos
 		estadoActividadFinal.setCodigoEstadoActividad(servicioEstadoActividad.listar().size() + 1);
 		servicioEstadoActividad.agregar(estadoActividadFinal);
 		this.frmResultadosActividadComplementaria.detach();
-		alert("Actividad Suspendida");
+
+		Messagebox.show("Actividad Suspendida", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);
+
+		// Actualiza el color del evento en el calendario
+		SimpleCalendarEvent sce = (SimpleCalendarEvent) frmResultadosActividadComplementaria.getVariable("esc", false);
+		sce.setHeaderColor("#f13616");
+		sce.setContentColor("#f13616");
+
+		CntrlFrmAgendaLogistica agenda = (CntrlFrmAgendaLogistica) frmResultadosActividadComplementaria.getVariable("agenda", false);
+		agenda.recargarModelo(sce);
+
 	}
 
 }

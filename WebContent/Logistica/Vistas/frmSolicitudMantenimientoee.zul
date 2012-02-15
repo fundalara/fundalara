@@ -57,10 +57,10 @@
 					</rows>
 				</grid>
 				<div width="100%" align="right">
-					<button label="Solicitar Mantenimiento"
+					<button label="Solicitar Mantenimiento" image="/Recursos/Imagenes/aceptar.ico"
 						id="btnSolicitarMantenimiento">
 					</button>
-					<button label="Salir" id="btnSalir"></button>
+					<button label="Salir" id="btnSalir" image="/Recursos/Imagenes/salir.png"></button>
 				</div>
 			</panelchildren>
 		</panel>

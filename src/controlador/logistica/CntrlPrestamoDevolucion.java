@@ -71,6 +71,7 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	Button btnGuardarSolicitud;
 	Button btnGuardarDevolucion;
 	Component formRequisicion;
+	Window formRequisicionW;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -258,9 +259,6 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 */
 	public void onClick$btnGuardarDevolucion() throws InterruptedException {
 
-		System.out.println(materialActividadD.getCantidadEntregada());
-		System.out.println(materialActividadD.getCantidadDevuelta());
-		System.out.println(cantidadMalEstado);
 		if (materialActividadD.getCantidadDevuelta() <= materialActividadD.getCantidadEntregada()) {
 			if (cantidadMalEstado <= materialActividadD.getCantidadEntregada()) {
 				if (cantidadMalEstado + materialActividadD.getCantidadDevuelta() <= materialActividadD.getCantidadEntregada()) {
@@ -342,10 +340,13 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 	 * amigable
 	 * 
 	 * @return true.
+	 * @throws InterruptedException
 	 */
-	public void onClick$btnRequisicion() {
+	public void onClick$btnRequisicion() throws InterruptedException {
 
-		formRequisicion = Executions.createComponents("/Logistica/Vistas/frmGenerarRequisicion.zul", null, null);
+		formRequisicionW = (Window) Executions.createComponents("/Logistica/Vistas/frmGenerarRequisicion.zul", null, null);
+		formRequisicionW.setMode("modal");
+		formRequisicion = (Component) formRequisicionW;
 
 		// ((Listbox) formRequisicion.getFellow("lsbxGenerarR")).setModel(new
 		// Bin)
@@ -360,6 +361,7 @@ public class CntrlPrestamoDevolucion extends GenericForwardComposer {
 		// materialActividad.getMaterial().setCantidadDisponible(
 		// cantidadDisponible - cantidadNecesitada);
 		materialActividad.setCodigoMaterialActividad(servicioMaterialActividad.listar().size() + 1);
+		materialActividad.setEstatus('x');
 
 		formRequisicion.setVariable("material", materialActividad, false);
 

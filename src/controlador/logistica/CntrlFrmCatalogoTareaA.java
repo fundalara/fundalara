@@ -15,6 +15,8 @@ import org.zkoss.zul.Messagebox;
 
 import servicio.interfaz.IServicioDatoBasico;
 
+import comun.MensajeMostrar;
+
 public class CntrlFrmCatalogoTareaA extends GenericForwardComposer {
 
 	IServicioDatoBasico servicioDatoBasico;
@@ -62,7 +64,7 @@ public class CntrlFrmCatalogoTareaA extends GenericForwardComposer {
 			catalogoTarea.detach();
 
 		} else {
-			Messagebox.show("Seleccione una tarea ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una tarea ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 

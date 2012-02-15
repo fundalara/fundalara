@@ -7,13 +7,12 @@
 		apply="controlador.logistica.CntrlCatalogoRepresentante"
 		border="normal" mode="modal" closable="true" width="60%">
 		<hbox width="100%">
-			<label value="Nombre"></label>
-			<textbox></textbox>
-			<label value="Apellido"></label>
-			<textbox></textbox>
-		</hbox>
-		<listbox id="lboxRepresentante" width="100%" height="100%"
-			mold="paging" pageSize="10"
+			<label value="Nombre"  ></label>
+			<textbox id="txtNombre" onChanging="filtrar(event)" style='text-transform:uppercase;'></textbox>
+			<label value="Apellido" ></label>
+			<textbox id="txtApellido"  onChanging="filtrar(event)" style='text-transform:uppercase;' ></textbox>
+		</hbox >
+		<listbox id="lboxRepresentante" width="100%" height="100%" mold="paging" pageSize="10"
 			model="@{cntrl.listaComisionFamiliar, load-after='frmCatRepresentante.onCreate'}"
 			selectedItem="@{cntrl.comisionFamiliar}" checkmark="true">
 			<listhead>
@@ -28,14 +27,23 @@
 					label="@{cf.getFamiliarJugador.getFamiliar.getPersonaNatural.getPrimerApellido}">
 				</listcell>
 			</listitem>
+
 		</listbox>
 		<hbox width="100%">
-			<div align="right">
-				<button id="btnGuardar" label="Seleccionar"
-					image="/Recursos/Imagenes/guardar.ico" />
-				<button id="btnSalir" label="Salir"
-					image="/Recursos/Imagenes/salir.png" />
-			</div>
+		<div align="right">
+			<button id="btnGuardar" label="Seleccionar"
+				image="/Recursos/Imagenes/aceptar.ico" />
+			<button id="btnSalir" label="Salir"
+				image="/Recursos/Imagenes/salir.png" />
+		</div>
 		</hbox>
 	</window>
+
+<zscript><![CDATA[
+	public void filtrar(Event event) {
+		((Textbox) event.getTarget())
+				.setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+	}
+]]></zscript>
+	
 </zk>

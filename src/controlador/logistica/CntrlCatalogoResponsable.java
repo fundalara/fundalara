@@ -17,6 +17,8 @@ import org.zkoss.zul.Messagebox;
 import servicio.interfaz.IServicioPersona;
 import servicio.interfaz.IServicioPersonalActividadPlanificada;
 
+import comun.MensajeMostrar;
+
 public class CntrlCatalogoResponsable extends GenericForwardComposer {
 
 	Component catalogoPersonal;
@@ -45,8 +47,6 @@ public class CntrlCatalogoResponsable extends GenericForwardComposer {
 
 	public void onClick$btnGuardar() throws InterruptedException {
 
-		System.out.println(persona.getPersonaNatural().getPrimerNombre());
-
 		// Se comprueba que se haya seleccionado un elemento de la lista
 		if (lboxPersonal.getSelectedIndex() != -1) {
 
@@ -67,7 +67,7 @@ public class CntrlCatalogoResponsable extends GenericForwardComposer {
 			catalogoPersonal.detach();
 
 		} else {
-			Messagebox.show("Seleccione una plantilla ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione una plantilla ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 

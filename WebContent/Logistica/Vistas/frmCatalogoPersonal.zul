@@ -3,15 +3,15 @@
 <?init  class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="frmCatPersonal"?>
 <?page title="Personal de Mantenimiento" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Personal" id="frmCatPersonal" border="normal"
-		mode="modal" width="50%"
+	<window title="Personal" id="frmCatPersonal"
+		border="normal" mode="modal" width="50%"
 		apply="controlador.logistica.CntrlFrmCatalogoPersonal">
 		<hbox width="100%">
-			<label value="Nombre"></label>
-			<textbox></textbox>
-			<label value="Apellido"></label>
-			<textbox></textbox>
-		</hbox>
+		  <label value="Nombre"  ></label>
+			<textbox id="txtNombre" onChanging="filtrar(event)" style='text-transform:uppercase;'></textbox>
+			<label value="Apellido" ></label>
+			<textbox id="txtApellido"  onChanging="filtrar(event)" style='text-transform:uppercase;' ></textbox>
+		</hbox >
 		<listbox id="lboxPersonal" mold="paging" pageSize="10"
 			model="@{cntrl.listaPersona}" selectedItem="@{cntrl.persona}"
 			checkmark="true">
@@ -26,11 +26,19 @@
 					label="@{pm.getPersonalActividadPlanificada.getPersonal.getPersonaNatural.getPrimerApellido}" />
 			</listitem>
 		</listbox>
+
 		<div align="right">
 			<button id="btnGuardar" label="Seleccionar"
-				image="/Recursos/Imagenes/guardar.ico" />
+				image="/Recursos/Imagenes/agregar.ico" />
+
 			<button id="btnSalir" label="Salir"
 				image="/Recursos/Imagenes/salir.png" />
 		</div>
 	</window>
+	<zscript><![CDATA[
+	public void filtrar(Event event) {
+		((Textbox) event.getTarget())
+				.setValue(((org.zkoss.zk.ui.event.InputEvent) event).getValue());
+	}
+]]></zscript>
 </zk>

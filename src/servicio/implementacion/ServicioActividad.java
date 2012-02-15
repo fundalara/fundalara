@@ -8,6 +8,9 @@ import modelo.Actividad;
 import modelo.PlanificacionActividad;
 import modelo.TareaActividad;
 import servicio.interfaz.IServicioActividad;
+
+import comun.TipoDatoBasico;
+
 import dao.general.DaoActividad;
 
 public class ServicioActividad implements IServicioActividad {
@@ -66,8 +69,10 @@ public class ServicioActividad implements IServicioActividad {
 		List<Actividad> lista1 = daoActividad.listarActivos(Actividad.class);
 		List<Actividad> lista2 = new ArrayList<Actividad>();
 		for (int i = 0; i < lista1.size(); i++) {
-			if (lista1.get(i).getFechaInicio().after(fechaInicio) && lista1.get(i).getFechaCulminacion().before(fechaFin)
-					&& (lista1.get(i).getPlanificacionActividad().getDatoBasico().getCodigoDatoBasico() == 500)) {
+			if (lista1.get(i).getFechaInicio().after(fechaInicio)
+					&& lista1.get(i).getFechaCulminacion().before(fechaFin)
+					&& (lista1.get(i).getPlanificacionActividad().getDatoBasico().getDatoBasico().getCodigoDatoBasico() != TipoDatoBasico.ACTIVIDADES_COMPLEMENTARIAS
+							.getCodigo())) {
 				lista2.add(lista1.get(i));
 			}
 		}
@@ -78,12 +83,26 @@ public class ServicioActividad implements IServicioActividad {
 		List<Actividad> lista1 = daoActividad.listarActivos(Actividad.class);
 		List<Actividad> lista2 = new ArrayList<Actividad>();
 		for (int i = 0; i < lista1.size(); i++) {
-			if (lista1.get(i).getFechaInicio().after(fechaInicio) && lista1.get(i).getFechaCulminacion().before(fechaFin)
-					&& (lista1.get(i).getPlanificacionActividad().getDatoBasico().getCodigoDatoBasico() != 500)) {
+			if (lista1.get(i).getFechaInicio().after(fechaInicio)
+					&& lista1.get(i).getFechaCulminacion().before(fechaFin)
+					&& (lista1.get(i).getPlanificacionActividad().getDatoBasico().getDatoBasico().getCodigoDatoBasico() == TipoDatoBasico.ACTIVIDADES_COMPLEMENTARIAS
+							.getCodigo())) {
 				lista2.add(lista1.get(i));
 			}
 		}
 		return lista2;
+	}
+
+	public List<Actividad> listarComplementarias() {
+		List<Actividad> todas = daoActividad.listarActivos(Actividad.class);
+		List<Actividad> complementarias = new ArrayList<Actividad>();
+		for (int i = 0; i < todas.size(); i++) {
+			if (todas.get(i).getPlanificacionActividad().getDatoBasico().getDatoBasico().getCodigoDatoBasico() == TipoDatoBasico.ACTIVIDADES_COMPLEMENTARIAS
+					.getCodigo()) {
+				complementarias.add(todas.get(i));
+			}
+		}
+		return complementarias;
 	}
 
 }

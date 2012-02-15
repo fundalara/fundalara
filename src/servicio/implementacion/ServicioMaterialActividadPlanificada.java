@@ -3,17 +3,16 @@ package servicio.implementacion;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.general.DaoMaterialActividadPlanificada;
+import modelo.Material;
 import modelo.MaterialActividadPlanificada;
 import modelo.PlanificacionActividad;
-import modelo.Sesion;
 import servicio.interfaz.IServicioMaterialActividadPlanificada;
+import dao.general.DaoMaterialActividadPlanificada;
 
-public class ServicioMaterialActividadPlanificada implements
-		IServicioMaterialActividadPlanificada {
+public class ServicioMaterialActividadPlanificada implements IServicioMaterialActividadPlanificada {
 
 	DaoMaterialActividadPlanificada daoMaterialActividadPlanificada;
-	
+
 	@Override
 	public void eliminar(MaterialActividadPlanificada map) {
 		// TODO Auto-generated method stub
@@ -31,61 +30,49 @@ public class ServicioMaterialActividadPlanificada implements
 		// TODO Auto-generated method stub
 		daoMaterialActividadPlanificada.actualizar(map);
 	}
-	
+
 	public List<MaterialActividadPlanificada> listar() {
-		return daoMaterialActividadPlanificada
-				.listar(MaterialActividadPlanificada.class);
+		return daoMaterialActividadPlanificada.listar(MaterialActividadPlanificada.class);
 	}
 
-	public MaterialActividadPlanificada buscarParaCantidadNecesaria(
-			MaterialActividadPlanificada m) {
+	public MaterialActividadPlanificada buscarParaCantidadNecesaria(MaterialActividadPlanificada m) {
 		return daoMaterialActividadPlanificada.buscarPorCantidad(m);
 	}
 
-	public List<MaterialActividadPlanificada> listarPorPrestar(
-			PlanificacionActividad a) {
+	public List<MaterialActividadPlanificada> listarPorPrestar(PlanificacionActividad a) {
 		return daoMaterialActividadPlanificada.listarMateriales(a);
 	}
 
-	public List<MaterialActividadPlanificada> listarPorPrestarCompetencia(
-			PlanificacionActividad a) {
-		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada
-				.listarMateriales(a);
+	public List<MaterialActividadPlanificada> listarPorPrestarCompetencia(PlanificacionActividad a) {
+		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada.listarMateriales(a);
 		List<MaterialActividadPlanificada> lista2 = new ArrayList<MaterialActividadPlanificada>();
 
 		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getPlanificacionActividad().getDatoBasico()
-					.getCodigoDatoBasico() == 503) {
+			if (lista.get(i).getPlanificacionActividad().getDatoBasico().getCodigoDatoBasico() == 503) {
 				lista2.add(lista.get(i));
 			}
 		}
 		return lista2;
 	}
 
-	public List<MaterialActividadPlanificada> listarPorPrestarEntrenamiento(
-			PlanificacionActividad a) {
-		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada
-				.listarMateriales(a);
+	public List<MaterialActividadPlanificada> listarPorPrestarEntrenamiento(PlanificacionActividad a) {
+		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada.listarMateriales(a);
 		List<MaterialActividadPlanificada> lista2 = new ArrayList<MaterialActividadPlanificada>();
 
 		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getPlanificacionActividad().getDatoBasico()
-					.getCodigoDatoBasico() == 502) {
+			if (lista.get(i).getPlanificacionActividad().getDatoBasico().getCodigoDatoBasico() == 502) {
 				lista2.add(lista.get(i));
 			}
 		}
 		return lista2;
 	}
 
-	public List<MaterialActividadPlanificada> listarPorPrestarEvento(
-			PlanificacionActividad a) {
-		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada
-				.listarMateriales(a);
+	public List<MaterialActividadPlanificada> listarPorPrestarEvento(PlanificacionActividad a) {
+		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada.listarMateriales(a);
 		List<MaterialActividadPlanificada> lista2 = new ArrayList<MaterialActividadPlanificada>();
 
 		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getPlanificacionActividad().getDatoBasico()
-					.getCodigoDatoBasico() == 501) {
+			if (lista.get(i).getPlanificacionActividad().getDatoBasico().getCodigoDatoBasico() == 501) {
 				lista2.add(lista.get(i));
 			}
 		}
@@ -93,15 +80,12 @@ public class ServicioMaterialActividadPlanificada implements
 
 	}
 
-	public List<MaterialActividadPlanificada> listarPorPrestarMantenimiento(
-			PlanificacionActividad a) {
-		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada
-				.listarMateriales(a);
+	public List<MaterialActividadPlanificada> listarPorPrestarMantenimiento(PlanificacionActividad a) {
+		List<MaterialActividadPlanificada> lista = daoMaterialActividadPlanificada.listarMateriales(a);
 		List<MaterialActividadPlanificada> lista2 = new ArrayList<MaterialActividadPlanificada>();
 
 		for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getPlanificacionActividad().getDatoBasico()
-					.getCodigoDatoBasico() == 500) {
+			if (lista.get(i).getPlanificacionActividad().getDatoBasico().getCodigoDatoBasico() == 500) {
 				lista2.add(lista.get(i));
 			}
 		}
@@ -109,8 +93,7 @@ public class ServicioMaterialActividadPlanificada implements
 	}
 
 	@Override
-	public List<MaterialActividadPlanificada> listarMateriales(
-			PlanificacionActividad planActividad) {
+	public List<MaterialActividadPlanificada> listarMateriales(PlanificacionActividad planActividad) {
 		// TODO Auto-generated method stub
 		return daoMaterialActividadPlanificada.listarMateriales(planActividad);
 	}
@@ -119,16 +102,21 @@ public class ServicioMaterialActividadPlanificada implements
 		return daoMaterialActividadPlanificada;
 	}
 
-	public void setDaoMaterialActividadPlanificada(
-			DaoMaterialActividadPlanificada daoMaterialActividadPlanificada) {
+	public void setDaoMaterialActividadPlanificada(DaoMaterialActividadPlanificada daoMaterialActividadPlanificada) {
 		this.daoMaterialActividadPlanificada = daoMaterialActividadPlanificada;
 	}
-	
-	public List<MaterialActividadPlanificada> buscarPorSesion(Sesion sesion){
-		return daoMaterialActividadPlanificada.buscarPorSesion(sesion);
-	}
 
-	public int generarCodigo(){
-		return daoMaterialActividadPlanificada.generarCodigo(MaterialActividadPlanificada.class);
+	@Override
+	public MaterialActividadPlanificada buscarPorActividad(PlanificacionActividad plantilla, Material material) {
+		List<MaterialActividadPlanificada> a = daoMaterialActividadPlanificada.listar(MaterialActividadPlanificada.class);
+		MaterialActividadPlanificada b = new MaterialActividadPlanificada();
+		for (int i = 0; i < a.size(); i++) {
+			if (a.get(i).getMaterial().getCodigoMaterial() == material.getCodigoMaterial()
+					&& a.get(i).getPlanificacionActividad().getCodigoPlanificacionActividad() == plantilla.getCodigoPlanificacionActividad()) {
+				b = a.get(i);
+			}
+		}
+
+		return b;
 	}
 }

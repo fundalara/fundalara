@@ -21,12 +21,8 @@ import servicio.interfaz.IServicioSolicitudMantenimiento;
 
 import comun.TipoDatoBasico;
 
-//import servicio.interfaz.IServicioSolicitudMantenimientoID;
-
 public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
-	// SolicitudMantenimientoId solicitudMantenimientoId = new
-	// SolicitudMantenimientoId();
 	SolicitudMantenimiento solicitudMantenimiento = new SolicitudMantenimiento();
 	Actividad actividad = new Actividad();
 	PlanificacionActividad planificacionActividad = new PlanificacionActividad();
@@ -39,7 +35,6 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 	List<DatoBasico> prioridades;
 	List<InstalacionUtilizada> instalaciones;
 
-	// IServicioSolicitudMantenimientoID servicioSolicitudMantenimientoID;
 	IServicioSolicitudMantenimiento servicioSolicitudMantenimiento;
 	IServicioActividad servicioActividad;
 	IServicioPlanificacionActividad servicioPlanificacionActividad;
@@ -56,15 +51,6 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 		instalaciones = servicioInstalacionUtilizada.listarInstalacionDisponible();
 
 	}
-
-	// public SolicitudMantenimientoId getSolicitudMantenimientoId() {
-	// return solicitudMantenimientoId;
-	// }
-	//
-	// public void setSolicitudMantenimientoId(
-	// SolicitudMantenimientoId solicitudMantenimientoId) {
-	// this.solicitudMantenimientoId = solicitudMantenimientoId;
-	// }
 
 	public SolicitudMantenimiento getSolicitudMantenimiento() {
 		return solicitudMantenimiento;
@@ -186,8 +172,6 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 
 	public void onClick$btnAceptar() {
 
-		System.out.println(this.datoBasico.getNombre());
-
 		if (this.actividad.getFechaInicio() == null || this.actividad.getFechaCulminacion() == null) {
 			alert("Debe incluir las fechas");
 			return;
@@ -217,7 +201,6 @@ public class CntrlSolicitudMantenimiento extends GenericForwardComposer {
 				alert("Debe Elegir una Actividad");
 				return;
 			} else {
-				System.out.println("LLegamos a la final pues");
 				this.Guardar();
 				this.Cancelar();
 				return;

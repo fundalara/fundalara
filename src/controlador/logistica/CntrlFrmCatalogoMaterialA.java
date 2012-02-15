@@ -7,8 +7,6 @@ import modelo.DatoBasico;
 import modelo.Material;
 import modelo.TipoDato;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -20,6 +18,8 @@ import org.zkoss.zul.Messagebox;
 
 import servicio.interfaz.IServicioDatoBasico;
 import servicio.interfaz.IServicioMaterial;
+
+import comun.MensajeMostrar;
 
 public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 
@@ -35,7 +35,6 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 	DatoBasico tipoMaterial;
 	List<Material> listaMaterial;
 
-	BeanFactory beanFactory;
 	Component catalogoMaterial;
 	Component frmPlanificarActividad;
 	Listbox lboxMaterial;
@@ -43,34 +42,60 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 	Combobox cmbClase;
 	Intbox txtCantidad;
 
+	/**
+	 * El metodo doAfterCompose se encarga de enviar las acciones,metodos y
+	 * eventos desde el controlador java hasta el componente Zk
+	 * 
+	 * @param comp
+	 * @exception super
+	 *                .doAfterCompose(comp)
+	 */
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 
 		catalogoMaterial = comp;
-		beanFactory = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 
 		TipoDato td = new TipoDato();
-
+		cmbTipo.setValue("--SELECCIONE--");
+		cmbClase.setValue("--SELECCIONE--");
 		td.setCodigoTipoDato(106);
 		td.setEstatus('A');
 		tiposMaterial = servicioDatoBasico.buscarPorTipoDato(td);
 	}
 
+	/**
+	 * El metodo: onSelect$cmbTipo() se ejecuta cuando se selecciona un item en
+	 * el ComboBox cmbTipo, en el se carga todas las clasificacion de ese tipo
+	 * en el combobox clase
+	 * 
+	 */
 	public void onSelect$cmbTipo() {
 		clasificacionMaterial = servicioDatoBasico.buscarDatosPorRelacion(tipoMaterial);
+		cmbClase.open();
 	}
 
+	/**
+	 * El metodo: onSelect$cmbClase() se ejecuta cuando se selecciona un item en
+	 * el ComboBox cmbClase, en el se carga todas los materiales de esa
+	 * clasificacion
+	 * 
+	 */
 	public void onSelect$cmbClase() {
 		listaMaterial = servicioMaterial.listarMaterialPorTipo(claseMaterial);
 	}
 
+	/**
+	 * El metodo: onClick$btnGuardar() se ejecuta cuando se selecciona un
+	 * material con su respectiva cantidad, retorna el material al formulario
+	 * que lo ha llamado
+	 */
 	public void onClick$btnGuardar() throws InterruptedException {
 
 		// Se comprueba que se haya seleccionado un elemento de la lista
 		if ((lboxMaterial.getSelectedIndex() != -1)) {
 
-			if ((txtCantidad.getValue() != 0)) {
+			if ((txtCantidad.getValue() != 0 || !txtCantidad.getText().isEmpty())) {
 				// se obtiene la tarea seleccionada
 				material = listaMaterial.get(lboxMaterial.getSelectedIndex());
 
@@ -92,15 +117,23 @@ public class CntrlFrmCatalogoMaterialA extends GenericForwardComposer {
 				catalogoMaterial.detach();
 
 			} else {
-				Messagebox.show("Seleccione una cantidad ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+				Messagebox.show("Seleccione una cantidad ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 				txtCantidad.focus();
 
 			}
 		} else {
-			Messagebox.show("Seleccione un material ", "Mensaje", Messagebox.YES, Messagebox.INFORMATION);
+			Messagebox.show("Seleccione un material ", MensajeMostrar.TITULO + "Información", Messagebox.YES, Messagebox.INFORMATION);
 
 		}
 
+	}
+
+	/**
+	 * El metodo: onClick$btnSalir() se ejecuta cuando se le da click al boton
+	 * salir, cierra el formulario
+	 */
+	public void onClick$btnSalir() {
+		catalogoMaterial.detach();
 	}
 
 	public DatoBasico getClaseMaterial() {
