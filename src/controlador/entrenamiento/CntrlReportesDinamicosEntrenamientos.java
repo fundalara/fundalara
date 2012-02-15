@@ -15,6 +15,7 @@ import modelo.ActividadEntrenamiento;
 import modelo.Categoria;
 import modelo.DatoBasico;
 import modelo.Equipo;
+import modelo.InstalacionUtilizada;
 import modelo.Jugador;
 import modelo.Personal;
 import modelo.PersonalCargo;
@@ -47,8 +48,12 @@ import org.zkoss.zul.Window;
 
 import comun.ConeccionBD;
 import servicio.implementacion.ServicioActividadCalendario;
+import servicio.implementacion.ServicioActividadEntrenamiento;
 import servicio.implementacion.ServicioCategoria;
 import servicio.implementacion.ServicioEquipo;
+import servicio.implementacion.ServicioEscalaMedicion;
+import servicio.implementacion.ServicioIndicadorActividadEscala;
+import servicio.implementacion.ServicioInstalacionUtilizada;
 import servicio.implementacion.ServicioRoster;
 
 public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer {
@@ -60,10 +65,15 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 	ServicioEquipo servicioEquipo;
 	ServicioRoster servicioRoster;
 	ServicioActividadCalendario servicioActividadCalendario;
+	ServicioInstalacionUtilizada servicioInstalacionUtilizada;
+	ServicioActividadEntrenamiento servicioActividadEntrenamiento;
+	ServicioIndicadorActividadEscala servicioIndicadorActividadEscala;
+	ServicioEscalaMedicion servicioEscalaMedicion;
 	List<Roster> listRoster;
 	List<Equipo> listEquipo;
 	List<Categoria> listCategoria;
 	List<ActividadCalendario> listActividadCalendario;
+	List<InstalacionUtilizada> listInstalacionUtilizada;
 	
 	AnnotateDataBinder binder;
 	Categoria categoria = new Categoria();
@@ -102,12 +112,31 @@ public class CntrlReportesDinamicosEntrenamientos extends GenericForwardComposer
 	public void onChange$cmbEstatus(){
 		if (cmbClases.getSelectedItem().getValue()=="4"){
 			Character pos = estatusAC[(Integer)cmbEstatus.getSelectedItem().getValue()];
-			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarUnCampo(ActividadCalendario.class, "estatus",pos );
+			listActividadCalendario = servicioActividadCalendario.getDaoActividadCalendario().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
 			lboxDatos.getItems().clear();
 			for (int i = 0; i < listActividadCalendario.size(); i++) {
 				llenarListbox(lboxDatos, listActividadCalendario.get(i).getDescripcion(), listActividadCalendario.get(i).getFechaInicio()+"", listActividadCalendario.get(i).getCodigoActividadCalendario());		
 			}
 		}
+		
+		if (cmbClases.getSelectedItem().getValue()=="5"){
+			Character pos = estatusI[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			lboxDatos.getItems().clear();
+			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
+				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
+			}
+		}
+		
+		if (cmbClases.getSelectedItem().getValue()=="1"){
+			Character pos = estatusRC[(Integer)cmbEstatus.getSelectedItem().getValue()];
+			listInstalacionUtilizada =  servicioInstalacionUtilizada.getDaoInstalacionUtilizada().listarDinamico(dtbox1.getValue(), dtbox2.getValue(), pos);
+			lboxDatos.getItems().clear();
+			for (int i = 0; i < listInstalacionUtilizada.size(); i++) {
+				llenarListbox(lboxDatos, listInstalacionUtilizada.get(i).getInstalacion().getDescripcion(), listInstalacionUtilizada.get(i).getFechaInicio()+"", listInstalacionUtilizada.get(i).getCodigoInstalacionUtilizada());		
+			}
+		}
+		
 		
 		
 		
