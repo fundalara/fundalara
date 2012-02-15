@@ -109,7 +109,6 @@ public class FileLoader {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("test");
 		return imagenByte;
 	}
 
