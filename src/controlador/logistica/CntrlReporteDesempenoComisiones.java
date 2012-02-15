@@ -90,7 +90,7 @@ public class CntrlReporteDesempenoComisiones extends GenericForwardComposer {
 
 			final AMedia amedia = new AMedia("reporteDesempeñoComision.pdf", "pdf", "application/pdf", archivo);
 
-			Component visor = Executions.createComponents("General/" + "frmVisorDocumento.zul", null, null);
+			Component visor = Executions.createComponents("../General/" + "frmVisorDocumento.zul", null, null);
 			visor.setVariable("archivo", amedia, false);
 		} else {
 			Messagebox.show("Seleccione una actividad", MensajeMostrar.TITULO + "Información", Messagebox.OK, Messagebox.INFORMATION);

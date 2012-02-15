@@ -715,7 +715,26 @@
 														open="false">
 														<treerow>
 															<treecell
-																label=" " />
+																label="Materiales por Almacén"
+																onClick='enlace("../Logistica/Reportes/frmReporteMaterialesAlmacen.zul")' />
+														</treerow>
+													</treeitem>
+
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Mantenimientos Instalaciones"
+																onClick='enlace("../Logistica/Reportes/frmReporteMantenimientos.zul")' />
+														</treerow>
+													</treeitem>
+
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Estimación de Materiales"
+																onClick='enlace("../Logistica/Reportes/frmReporteEstimacionMateriales.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -789,30 +808,33 @@
 														label="Entrenamientos" />
 												</treerow>
 												<treechildren>
-													<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Promedio por Acitividad"
-													onClick='enlace("/Entrenamiento/Reportes/frmReportePromedioActividad.zul")' />
-											</treerow>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Promedio por Acitividad"
+																onClick='enlace("/Entrenamiento/Reportes/frmReportePromedioActividad.zul")' />
+														</treerow>
 
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Jugadores Destacados"
-													onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
-											</treerow>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Jugadores Destacados"
+																onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
+														</treerow>
 
-										</treeitem>
-										<treeitem open="false">
-											<treerow>
-												<treecell
-													label="Control de Asistencias"
-													onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
-											</treerow>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Control de Asistencias"
+																onClick='enlace("/Entrenamiento/Reportes/frmReporteJugadoresDestacados.zul")' />
+														</treerow>
 
-										</treeitem>
+													</treeitem>
 												</treechildren>
 											</treeitem>
 
@@ -843,7 +865,26 @@
 														open="false">
 														<treerow>
 															<treecell
-																label=" " />
+																label="Progreso por Actividad"
+																onClick='enlace("../Logistica/Reportes/frmReporteProgresoActividad.zul")' />
+														</treerow>
+													</treeitem>
+
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Ejecución de Actividades"
+																onClick='enlace("../Logistica/Reportes/frmReporteEstadoActividad.zul")' />
+														</treerow>
+													</treeitem>
+
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Desempeño de Comisiones"
+																onClick='enlace("../Logistica/Reportes/frmReporteDesempenoComisiones.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
