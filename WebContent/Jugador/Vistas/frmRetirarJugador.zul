@@ -1,0 +1,127 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"   root="winRetirarJugador" ?>
+<?page title="Retirar Jugador" ?>
+<zk>
+	<zscript><![CDATA[
+	//@IMPORT
+	import controlador.jugador.converter.*;
+]]></zscript>
+
+	<window title="Retirar Jugador" border="normal" width="670px"
+		id="winRetirarJugador"
+		apply="controlador.jugador.CntrlRetirarJugador">
+
+
+		<groupbox closable="false" style="border-color:orange">
+			<caption label="Jugador" />
+			<grid style="border:none;" oddRowSclass="none">
+				<columns>
+					<column width="85%" />
+					<column width="15%" />
+				</columns>
+				<rows>
+					<row style="border:none">
+						<grid style="border:none;"
+							oddRowSclass="none">
+							<columns style="border:none">
+								<column width="22%" />
+								<column width="28%" />
+								<column width="22%" />
+								<column width="28%" />
+							</columns>
+							<rows style="border:none">
+								<row spans="1,3" style="border:none">
+									<label value="Cédula" />
+									<div>
+										<textbox id="txtNacionalidad" value="-" width="4%" readonly="true"/>
+										<textbox id="txtCedula" width="28%" readonly="true"/>
+										<button id="btnCatalogoJugador"
+											focus="true" tooltiptext="Consultar Jugador"
+											image="../../Recursos/Imagenes/consultar.ico" />
+									</div>
+								</row>
+								<row style="border:none">
+									<label value="Primer Nombre" />
+									<textbox id="txtPrimerNombre"
+										maxlength="40" width="95%" readonly="true" />
+									<label value="Segundo Nombre" />
+									<textbox id="txtSegundoNombre"
+										maxlength="40" width="95%" readonly="true" />
+								</row>
+								<row style="border:none">
+									<label value="Primer Apellido" />
+									<textbox id="txtPrimerApellido"
+										maxlength="40" width="95%" readonly="true" />
+									<label value="Segundo Apellido" />
+									<textbox id="txtSegundoApellido"
+										maxlength="40" width="95%" readonly="true" />
+								</row>
+								<row style="border:none">
+									<label value="Fecha Ingreso" />
+									<textbox id="txtFechaIngreso"
+										maxlength="25" width="95%" readonly="true"/>									
+									<label value="Categoría Actual" />
+									<textbox id="txtCategoriaActual"
+										maxlength="25" width="95%" readonly="true"
+										value="@{controller.roster.equipo.categoria.nombre}" />
+								</row>
+								<row style="border:none">
+									<label value="Género" />
+									<textbox id="txtGenero" width="95%" readonly="true"/>
+								</row>
+								<row spans="1,3" style="border:none;">
+									<label value="Motivo" />
+									<div>
+										<combobox id="cmbMotivo"
+											readonly="true" value="--Seleccione--" width="65%"
+											model="@{winRetirarJugador$composer.retiros}"
+											selectedItem="@{controller.retiroJugador.datoBasicoByCodigoMotivoRetiro}">
+											<comboitem
+												self="@{each='ret'}" label="@{ret.nombre}" />
+										</combobox>
+										<label value="(*)"
+											style="color:red" />
+
+									</div>
+								</row>
+							</rows>
+						</grid>
+
+						<grid align="right" style="border:none;"
+							oddRowSclass="none">
+							<columns style="border:none">
+								<column />
+							</columns>
+							<rows>
+								<row height="80%" align="center"
+									valign="middle" style="border:none;">
+									<groupbox mold="3d"
+										style="border:none">
+										<image id="imgJugador"
+											height="80px" width="80px" />
+									</groupbox>
+								</row>
+							</rows>
+						</grid>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<div align="right">
+			<button id="btnVerExpediente" label="Ver Expediente"
+				image="../../Recursos/Imagenes/reporte.ico" />
+			<button label="Retirar" id="btnRetirar"
+				image="../../Recursos/Imagenes/editar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnCancelar" label="Cancelar"
+				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnSalir" label="Salir"
+				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
+
+		</div>
+		<include id="cuerpo" />
+	</window>
+</zk>

@@ -1,11 +1,9 @@
 <?page title="Médicos"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winConfigurarMedico"?>
-
 <zk>
-<div   align="center">
-	<window id="winConfigurarMedico" title="Médicos"
-		border="normal" width="645px" closable="true" style="text-align:left"
+	<window id="winConfigurarMedico" title="Registro de Médico"
+		border="normal" width="500px" closable="true"
 		apply="controlador.jugador.CntrlConfigurarMedico">
 		<space></space>
 		<grid style="border:none;" oddRowSclass="none">
@@ -29,25 +27,24 @@
 								<row style="border:none;">
 									<label value="  Número Colegio" />
 									<div>
-										<textbox id="txtNumcol"
-											width="45%" maxlength="6"
-											value="@{controller.medico.numeroColegio}"
-											style='text-transform:uppercase;' constraint="/[0-9]+/:Introduzca solo Numeros"/>
+										<textbox id="txtNumcol" width="45%"
+											maxlength="5" value="@{controller.medico.numeroColegio}"/>
+										<button id="btnBuscar"
+											image="../../Recursos/Imagenes/consultar.ico" />
 									</div>
 									<label value="Matrícula" />
 									<div>
 										<textbox width="45%"
-											id="txtMatricula" maxlength="6"
-											value="@{controller.medico.matricula}"
-											style='text-transform:uppercase;' constraint="/[0-9]+/:Introduzca solo Numeros" />
+											maxlength="5" value="@{controller.medico.matricula}" />
 									</div>
 								</row>
 								<row style="border:none;">
 									<label value="Especialidad" />
 									<div>
 										<combobox id="cmbEspecialidad"
-											readonly="true" value="--Seleccione--" width="90%"
-											model="@{controller.especialidades}">
+											readonly="true" value="--Seleccione--"
+											 width="90%"
+											model="@{controller.especialidades}" >
 											<comboitem
 												self="@{each='especialidad'}"
 												label="@{especialidad.nombre}" />
@@ -76,56 +73,58 @@
 									<label value="Cédula" />
 									<div>
 										<combobox id="cmbNacionalidad"
-											readonly="true" value="-" width="9%" focus="true">
+											readonly="true" value="-" width="9%" focus="true"
+											>
 											<comboitem label="V"
 												value="V" />
 											<comboitem label="E"
 												value="E" />
+											<comboitem label="R"
+												value="R" />
 										</combobox>
 										<textbox id="txtCedula"
-											width="60%" maxlength="8" style='text-transform:uppercase;' constraint="/[0-9]+/:Introduzca solo Numeros"/>
+											width="60%" maxlength="8" />
 									</div>
+
 								</row>
 								<row style="border:none;">
 									<label value="  Nombres" />
 									<div>
-										<textbox id="txtNombre" width="88%"
-											maxlength="40" value="@{controller.medico.nombre}"
-											style='text-transform:uppercase;' constraint="/[A-Z,a-z, ]+/:Introduzca solo Caracteres Alfanumericos"/>
+										<textbox width="85%"
+											maxlength="40" value="@{controller.medico.nombre}"/>
 									</div>
 									<label value="Apellidos" />
 									<div>
 										<textbox id="txtApellido"
-											width="88%" maxlength="40"
-											value="@{controller.medico.apellido}"
-											style='text-transform:uppercase;' constraint="/[A-Z,a-z, ]+/:Introduzca solo Caracteres Alfanumericos"/>
+											width="85%" maxlength="40"
+											value="@{controller.medico.apellido}" />
 									</div>
+
 								</row>
 								<row style="border:none;">
 									<label value="Telefono Oficina" />
 									<div>
 										<combobox readonly="true"
-											id="cmbCodArea" value="--" width="20%"
+											id="cmbCodArea" value="--" width="25%"
 											model="@{controller.codigosArea}">
 											<comboitem
 												self="@{each='codAJug'}" label="@{codAJug.nombre}" />
 										</combobox>
 										<textbox
-											id="txtTelefonoHabitacion" maxlength="7" width="55%"
-											style='text-transform:uppercase;' constraint="/[0-9]+/:Introduzca solo Numeros" />
+											id="txtTelefonoHabitacion" maxlength="7"
+											width="85%" />
 									</div>
 									<label value="Telefono Celular" />
 									<div>
 										<combobox readonly="true"
-											id="cmbCodCelular" value="--" width="20%"
+											id="cmbCodCelular" value="--" width="25%"
 											model="@{controller.codigosCelular}">
 											<comboitem
 												self="@{each='codCJug'}" label="@{codCJug.nombre}"
 												value="@{codCJug.codigoDatoBasico}" />
 										</combobox>
-										<textbox width="55%"
-											maxlength="7" id="txtTelefonoCelular"
-											style='text-transform:uppercase;' constraint="/[0-9]+/:Introduzca solo Numeros"/>
+										<textbox width="85%"
+											maxlength="7" id="txtTelefonoCelular" />
 									</div>
 								</row>
 							</rows>
@@ -135,59 +134,24 @@
 			</rows>
 		</grid>
 
-		<grid style="border:none;">
-			<columns>
-				<column width="90%" />
-				<column width="10%" />
-			</columns>
-			<rows>
-				<row style="border:none;">
-					<listbox id="listmedico" mold="paging" pageSize="5"
-						model="@{controller.medicos}"
-						selectedItem="@{winBuscarjugador$composer.medico}"
-						width="590px">
-						<listhead>
-							<listheader width="18%" align="center" label="Número Colegio"/>
-							<listheader width="15%" align="center" label="Matrícula"/>
-							<listheader width="29%" label="Nombre"/>
-							<listheader width="29%" label="Apellido"/>
-							<listheader width="15%" tooltiptext="A=Habilitado E=Deshabilitado" label="Estado"/>
-						</listhead>
-						<listitem self="@{each='medico'}"
-							value="@{medico}">
-							<listcell label="@{medico.numeroColegio}" />
-							<listcell label="@{medico.matricula}" />
-							<listcell label="@{medico.nombre}" />
-							<listcell label="@{medico.apellido}" />
-							<listcell label="@{medico.estatus}"
-								tooltiptext="A=Habilitado E=Deshabilitado" />
-						</listitem>
-					</listbox>
-					<div>
-						<button id="btnGuardar"
-							image="../../Recursos/Imagenes/agregar.ico" />
-						<separator height="5px" />
-						<button id="btnModificar"
-							image="../../Recursos/Imagenes/editar.ico" />
-						<separator height="5px" />
-						<button id="btnEliminar"
-							image="../../Recursos/Imagenes/quitar.ico" />
-					</div>
-				</row>
-			</rows>
-		</grid>
-
+		<space></space>
 		<div align="right">
- 			<button id="btnImprimir" label="Generar"
- 				image="/Recursos/Imagenes/reporte.ico"  orient="horizontal" 
- 				width="100px" />
+			<button id="btnGuardar" label="Guardar"
+				image="/Recursos/Imagenes/guardar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnModificar" label="Actualizar"
+				image="/Recursos/Imagenes/editar.ico" orient="horizontal"
+				width="100px" />
+			<button id="btnEliminar" label="Eliminar"
+				image="/Recursos/Imagenes/eliminar.ico" orient="horizontal"
+				width="100px" />
 			<button id="btnCancelar" label="Cancelar"
-				image="../../Recursos/Imagenes/cancelar.ico" orient="horizontal"
+				image="/Recursos/Imagenes/cancelar.ico" orient="horizontal"
 				width="100px" />
 			<button id="btnSalir" label="Salir"
-				image="../../Recursos/Imagenes/salir.png" orient="horizontal"
-				width="100px"/>
+				image="/Recursos/Imagenes/salir.png" orient="horizontal"
+				width="100px" />
 		</div>
+
 	</window>
-	</div>
 </zk>

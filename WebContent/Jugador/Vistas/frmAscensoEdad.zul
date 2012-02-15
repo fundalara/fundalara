@@ -1,7 +1,6 @@
 <?page title="Ascenso por Edad"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
-
 <zk>
 	<window id="winAscensoEdad" border="none" width="670px"
 		closable="true" apply="controlador.jugador.CntrlAscensoEdad">
@@ -60,17 +59,16 @@
 							<space />
 							<label value="Categoría" />
 						</div>
-						<combobox id="cmbCategoriaAsc" disabled="true"
-							width="65%">
-							<comboitem label="JUNIOR" />
-						</combobox>
+						<combobox id="cmbCategoriaAsc" disabled="true" 
+							width="65%" >
+							<comboitem />
+							</combobox>
 						<div>
 							<space />
 							<label value="Equipo" />
 						</div>
 						<combobox id="cmbEquipoAsc" disabled="true">
-							<comboitem label="JUNIOR A" />
-							<comboitem label="JUNIOR B" />
+							<comboitem />
 						</combobox>
 
 					</row>
@@ -78,15 +76,15 @@
 			</grid>
 		</groupbox>
 		<space height="10px" />
-		<listbox id="listJugadores" mold="paging" pageSize="5"
-			multiple="true" checkmark="true"
+		<listbox id="listJugadores" fixedLayout="true" multiple="true"
+			checkmark="true" mold="paging" pageSize="5"
 			model="@{winAscensoEdad$composer.jugadores, load-after='cmbEquipo.onChange'}"
 			selectedItem="@{winAscensoEdad$composer.jugador}">
 			<listhead>
 				<listheader width="20%" label="Cédula" />
 				<listheader width="25%" label="Nombre" />
 				<listheader width="25%" label="Apellido" />
-				<listheader width="12%" align="center" label="Número" />
+			    <listheader width="12%" align="center" label="Número" />
 			</listhead>
 			<listitem self="@{each='jugador'}" value="@{jugador}">
 				<listcell label="@{jugador.cedulaRif}" />
@@ -94,13 +92,13 @@
 					label="@{jugador.personaNatural.primerNombre}" />
 				<listcell
 					label="@{jugador.personaNatural.primerApellido}" />
-				<listcell label="@{jugador.numero}" />
-				<listcell />
+			    <listcell label="@{jugador.numero}" />
 			</listitem>
 		</listbox>
 
+
 		<div align="right">
-			<button id="btnAscender" label="Ascender"
+			<button id="btnGuardar" label="Guardar"
 				image="../../Recursos/Imagenes/guardar.ico" orient="horizontal"
 				width="100px" />
 			<button id="btnCancelar" label="Cancelar"

@@ -62,10 +62,9 @@ public class CntrlAscenderJugador extends GenericForwardComposer {
 
 	// Para cargar el combo
 	public List<DatoBasico> getAscensos() {
-		DatoBasico a = servicioDatoBasico.buscarTipo(TipoDatoBasico.PROCESO,"ASCENSO");
-		return servicioDatoBasico.buscarDatosPorRelacion(a);		
+		return servicioDatoBasico.buscar(TipoDatoBasico.ASCENSO);
 	}
-	
+
 	// Evento
 	public void onChange$cmbTipoAscenso() {
 		String src = "";
@@ -80,5 +79,4 @@ public class CntrlAscenderJugador extends GenericForwardComposer {
 		incCuerpo.setDynamicProperty("tipoAscenso", tipoAscenso);
 		enlace.insertarContenido(incCuerpo, src);
 	}
-	
 }

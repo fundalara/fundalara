@@ -40,9 +40,12 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
+
+import com.jaspersoft.jasperserver.api.metadata.xml.domain.impl.ListItem;
 
 import servicio.implementacion.ServicioActividadCalendario;
 import servicio.implementacion.ServicioAsistenciaJugador;
@@ -67,12 +70,13 @@ import java.util.Date;
 import java.util.List;
 
 public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
-	Window wDesempeno_Atleta;
+	Window desempenoJugador;
 	Button btnSalir,btnCancelar, btnGuardar, btnImprimir;
 	Combobox cmbFase, cmbActividad, cmbMaterial, cmbCantidad;
 	Listitem lst2;
 	Intbox ibTiempo;
 	Listbox lbActividades, lista;
+	Textbox txtFec;
 	Datebox dtbox1, dtbox2;
 	Checkbox chcGeneral;
 	ListenerCheck escuchador;
@@ -105,14 +109,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		sesionEjecutada = servicioSesionEjecutada.buscarPorSesionEquipoFecha(actividadCalendario.getSesion(),actividadCalendario.getSesion().getEquipo() , actividadCalendario.getFechaInicio());
 		equipo= actividadCalendario.getSesion().getEquipo();
 		lapsoDeportivo = actividadCalendario.getSesion().getPlanEntrenamiento().getPlanTemporada().getLapsoDeportivo();
-		combos= new ArrayList<Combobox>();
-		escuchadorCombo = new ListenerCombo(lista);
-		cargarCabecera();
-		escuchador = new ListenerCheck(lista,chcGeneral);
-		cargarRostrer();
-		chcGeneral.addEventListener("onCheck",escuchador);
-		ocultarCabeceras();
-		
+		inicializar();
 	}
 	
 	
@@ -148,7 +145,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 				combo.setButtonVisible(true);
 				combo.setWidth("50px");
 				combo.addEventListener("onChange", escuchadorCombo);
-				combo.setId(""+id);
+				combo.setAttribute("index",id);
 				id++;
 				ah = new Auxheader();
 				ah.setAlign("left");
@@ -231,6 +228,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		else
 			c = new Checkbox("   "+numero);
 		c.setWidth("20px");
+		c.setChecked(true);
 		c.addEventListener("onCheck", escuchador);
 		registro.add(c);
 		registro.add(jugador.getPersonaNatural().getPrimerNombre()+" "+jugador.getPersonaNatural().getPrimerApellido());
@@ -278,14 +276,15 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 
 
 	public void onClick$btnSalir() {
-		wDesempeno_Atleta.detach();
+		desempenoJugador.detach();
 	}
 	
 	
 	public Object obtenerComponenteListcell(int indexItem,int indexListCell) {
 		return ((Listcell)lista.getItemAtIndex(indexItem).getChildren().get(indexListCell)).getChildren().get(0);
 	}
-	public void onClick$btnGuardar() {
+	
+	public void onClick$btnGuardar() throws InterruptedException {
 		AsistenciaJugador asistenciaJugador;
 		Checkbox checkAsistencia,checkLesionado,checkSancionado;
 		Textbox txtObservacion;
@@ -332,7 +331,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 						puntuacionJugador.setId(new PuntuacionJugadorId(desempennoJugador.getCodigoDesempennoJugador(), indicadorActividadEscala.getCodigoIndicadorActividadEscala()));
 						puntuacionJugador.setEstatus('A');
 						puntuacionJugador.setPuntuacion(""+comboActividad.getSelectedItem().getLabel());
-						servicioPuntuacionJugador.guardar(puntuacionJugador);
+						servicioPuntuacionJugador.agregar(puntuacionJugador);
 					}
 				}
 			}
@@ -341,41 +340,67 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		servicioSesionEjecutada.actualizar(sesionEjecutada);
 		actividadCalendario.setEstatus('F');		
 		servicioActividadCalendario.actualizar(actividadCalendario);
-//		eventoSimpleCalendario.setContentColor(cntrlFrmAgendaEntrenamiento.colorActividades('F'));
 		cntrlFrmAgendaEntrenamiento.reiniciarModelo();
-		
-		wDesempeno_Atleta.detach();
+		Messagebox
+		.show("Resultados Guardados Exitosamente",
+				"Olimpo - Informacion", Messagebox.OK,
+				Messagebox.INFORMATION);
+		desempenoJugador.detach();
 	}
 	
 	public void inicializar() {
-		cmbFase.setDisabled(true);
-		cmbActividad.setDisabled(true);
-		ibTiempo.setDisabled(true);
-		cmbMaterial.setDisabled(true);
-		cmbCantidad.setDisabled(true);
-		btnGuardar.setDisabled(true);
-		btnImprimir.setDisabled(true);
-
+		desempenoJugador.setTitle("Rendimiento del Jugador - "+actividadCalendario.getSesion().getEquipo().getNombre()+" - "+actividadCalendario.getSesion().getEquipo().getCategoria().getNombre());
+		txtFec.setValue(new SimpleDateFormat("dd/MM/yyyy").format(actividadCalendario.getFechaInicio()));
+		combos= new ArrayList<Combobox>();
+		escuchadorCombo = new ListenerCombo(lista);
+		cargarCabecera();
+		escuchador = new ListenerCheck(lista,chcGeneral);
+		chcGeneral.addEventListener("onCheck",escuchador);
+		chcGeneral.setChecked(true);
+		ocultarCabeceras();
+		int cant = lista.getItemCount();
+		for (int i = 0; i < cant; i++) {
+			lista.removeItemAt(0);
+		}
+		System.gc();
+		cargarRostrer();
 	}
 
-	public void limpiar1() {
-		cmbFase.setSelectedIndex(-1);
-		cmbFase.setValue(cmbFase.getValue().valueOf("--Seleccione--"));
-		cmbActividad.setSelectedIndex(-1);
-		cmbActividad.setValue(cmbFase.getValue().valueOf("--Seleccione--"));
-		ibTiempo.setValue(0);
+	public void limpiar() {
+		for (int i = 0; i < lista.getItemCount(); i++) {
+			Listitem  listitem =lista.getItemAtIndex(i);
+			if (listitem.getChildren().size()<=1)
+				continue;
+			Checkbox checkAsistencia = (Checkbox)((Listcell)listitem.getChildren().get(0)).getChildren().get(0);
+			Checkbox checkSancionado = (Checkbox)((Listcell)listitem.getChildren().get(listitem.getChildren().size()-1)).getChildren().get(0);
+			Checkbox checkLesionado = (Checkbox)((Listcell)listitem.getChildren().get(listitem.getChildren().size()-2)).getChildren().get(0);
+			Textbox txtObservacion = (Textbox)((Listcell)listitem.getChildren().get(listitem.getChildren().size()-3)).getChildren().get(0);
+			checkAsistencia.setChecked(true);
+			checkLesionado.setChecked(false);
+			checkSancionado.setChecked(false);
+			txtObservacion.setValue("");
+			checkAsistencia.setDisabled(false);
+			checkLesionado.setDisabled(false);
+			checkSancionado.setDisabled(false);
+			txtObservacion.setDisabled(false);
+			for (int j = 2; j < (listitem.getChildren().size()-3); j++) {
+				Combobox combo =(Combobox)((Listcell)listitem.getChildren().get(j)).getChildren().get(0);
+				combo.setSelectedIndex(0);
+				combo.setDisabled(false);
+			}
+			listitem.setDisabled(false);
+		}
+		chcGeneral.setChecked(true);
+		System.out.println(auxCabecera.getChildren()+" "+auxCabecera.getChildren().size());
+		for (int j = 1; j < (auxCabecera.getChildren().size()-3); j++) {
+			Auxheader auxheader = (Auxheader) auxCabecera.getChildren().get(j);
+			Combobox combo =(Combobox) auxheader.getChildren().get(0);
+			combo.setSelectedIndex(0);
+			System.out.println(combo);
+		}
 	}
 
 	public void onClick$btnCancelar() {
-//		limpiar1();
-//		dtbox1.setValue(null);
-//		dtbox2.setValue(null);
-//
-//		
-//		int contador = lbActividades.getItemCount();
-//		for (int A = 0; A < contador; A++) {
-//			lbActividades.removeItemAt(0);
-//		}
-//		inicializar();
+		limpiar();
 	}
 }
