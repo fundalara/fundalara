@@ -1,26 +1,22 @@
 package controlador.jugador;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
-import modelo.Categoria;
 
-import modelo.Equipo;
 import modelo.Familiar;
-import modelo.Jugador;
-import modelo.Roster;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zul.*;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
-import servicio.implementacion.ServicioCategoria;
-import servicio.implementacion.ServicioEquipo;
 import servicio.implementacion.ServicioFamiliar;
-import servicio.implementacion.ServicioRoster;
 
 /**
  * Clase controladora de los eventos de la vista de igual nombre, el presente
@@ -32,41 +28,62 @@ import servicio.implementacion.ServicioRoster;
  * @version 1.0 29/12/2011
  * 
  * */
-
 public class CntrlBuscarFamiliar extends GenericForwardComposer {
 	
 	ServicioFamiliar servicioFamiliar;
 
 
 	private Familiar familiar = new Familiar();
-	List<Familiar> familiares=new ArrayList<Familiar>();
+	private List<Familiar> familiares;
 	
-    Button btnSeleccionar;
+	private Button btnSeleccionar;
 
-	Textbox filter2;
-	Textbox filter1;
-	Textbox filter3;
-	Listbox listFamiliar;
+    private Window winBuscarfamiliar;
+    private Textbox filter2;
+    private Textbox filter1;
+    private Textbox filter3;
+    private Listbox listFamiliar;
 
-	Component catalogo;
+	public int estatus;
+	private Component catalogo;
 	private AnnotateDataBinder binder;
 
-
-	public void onChanging$filter2(){
+	public void onBlur$filter2(){
 		binder.loadAll();
-		
 	}
 	
-	public void onChanging$filter1(){
+	public void onBlur$filter1(){
 		binder.loadAll();
-		
 	}
 	
-	public void onChanging$filter3(){
+	public void onBlur$filter3(){
 		binder.loadAll();
-		
 	}
 
+	public void onCreate$winBuscarfamiliar(){
+		estatus = (Integer) catalogo.getVariable("estatus",false);
+		if(estatus==1){
+			familiares=servicioFamiliar.filtrar(1,filter1.getValue().toString().toUpperCase(), filter2.getValue().toString().toUpperCase(), filter3.getValue().toString().toUpperCase());
+		}
+		else{
+			familiares=servicioFamiliar.filtrar(2,filter1.getValue().toString().toUpperCase(), filter2.getValue().toString().toUpperCase(), filter3.getValue().toString().toUpperCase());
+		}
+		determinarTitulo(estatus);
+	    binder.loadAll();
+	}
+	
+	public void determinarTitulo(int estatus) {
+		Window w = (Window) catalogo;
+		switch (estatus) {
+		    
+		case 1:
+			w.setTitle("Cat·logo Representantes");
+			break;
+		case 2:
+			w.setTitle("Cat·logo Familiares");
+			break;
+		}
+	}
 	
 	@Override
 	public void doAfterCompose(Component c) throws Exception {
@@ -74,41 +91,44 @@ public class CntrlBuscarFamiliar extends GenericForwardComposer {
 		c.setVariable("controller", this, true);
 		// se guarda la referencia al catalogo
 		catalogo = c;
-		
-		
 	}
 
+	public void onClick$btnSalir(){
+		winBuscarfamiliar.detach();
+	}
 	
-	public void onClick$btnSeleccionar() throws InterruptedException{
-		//Se comprueba que se haya seleccionado un elemento de la lista
+	public void onClick$btnSeleccionar() throws InterruptedException {
+		// Se comprueba que se haya seleccionado un elemento de la lista
 
 		if (listFamiliar.getSelectedIndex() != -1) {
-			//se obtiene la divisa seleccionada
-			Familiar d = (Familiar) listFamiliar.getSelectedItem().getValue();
-			//se obtiene la referencia del formulario
-			Component formulario = (Component) catalogo.getVariable("formulario",false);
-	        //se le asigna el objeto divisa al formulario
-			formulario.setVariable("familiar", d,false);
-			//se le envia una se√±al al formulario indicado que el formulario se cerro y que los datos se han enviado
-			Events.sendEvent(new Event("onCatalogoCerrado",formulario));          
-			//se cierra el catalogo
+			Familiar d = familiares.get(listFamiliar.getSelectedIndex());
+			Component formulario = (Component) catalogo.getVariable(
+					"formulario", false);
+			formulario.setVariable("familiar", d, false);
+			Events.sendEvent(new Event("onCatalogoBuscarFamiliarCerrado",
+					formulario));
 			catalogo.detach();
-			
+
 		} else {
-			Messagebox.show("Seleccione un Familiar", "Mensaje", Messagebox.YES,
-					Messagebox.INFORMATION);
-
+			Messagebox.show("Seleccione un Familiar", "Mensaje",
+					Messagebox.YES, Messagebox.INFORMATION);
 		}
-		
-		}
-
-	
-	
-	public List<Familiar> getFamiliares() {
-		familiares=servicioFamiliar.listar();
-		return servicioFamiliar.listar();
 	}
 
-	
+	public Familiar getFamiliar() {
+		return familiar;
+	}
 
+	public void setFamiliar(Familiar familiar) {
+		this.familiar = familiar;
+	}
+
+	public List<Familiar> getFamiliares() {
+		return familiares;
+	}
+
+	public void setFamiliares(List<Familiar> familiares) {
+		this.familiares = familiares;
+	}
+	
 }
