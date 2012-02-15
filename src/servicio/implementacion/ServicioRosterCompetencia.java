@@ -5,6 +5,7 @@ import java.util.List;
 import dao.general.DaoRosterCompetencia;
 
 import modelo.Constante;
+import modelo.Equipo;
 import modelo.RosterCompetencia;
 import servicio.interfaz.IServicioConstante;
 import servicio.interfaz.IServicioRosterCompetencia;
@@ -45,4 +46,8 @@ public class ServicioRosterCompetencia implements IServicioRosterCompetencia {
 		return null;
 	}
 
+	public List<RosterCompetencia> listarPorEquipo(Equipo e){
+		return daoRosterCompetencia.listarPorEquipo(e);
+		
+	}
 }

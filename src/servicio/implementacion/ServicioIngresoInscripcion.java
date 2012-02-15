@@ -41,7 +41,7 @@ public class ServicioIngresoInscripcion implements IServicioIngresoInscripcion {
 	}
 	
 	public List<IngresoInscripcion> listarIngresoInscripcion(DatoBasico tipoInscripcion){
-		return daoIngresoInscripcion.listarTipoInscrpcion(tipoInscripcion);
+		return daoIngresoInscripcion.listarTipoInscripcion(tipoInscripcion);
 	}
 }
 
