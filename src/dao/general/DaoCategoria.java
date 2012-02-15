@@ -112,5 +112,19 @@ public class DaoCategoria extends GenericDao {
 		return (Categoria) criteria.uniqueResult();
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
