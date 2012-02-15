@@ -14,35 +14,20 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Panel;
-import org.zkoss.zul.SimpleTreeModel;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Tree;
-import org.zkoss.zul.Treecell;
-import org.zkoss.zul.Treechildren;
-import org.zkoss.zul.Treeitem;
-import org.zkoss.zul.Treerow;
-import org.zkoss.zul.Window;
 
 import comun.MensajeMostrar;
 
-import modelo.DocumentoAcreedor;
 import modelo.Grupo;
 import modelo.GrupoUsuario;
-import modelo.GrupoUsuarioId;
 import modelo.Rol;
 import modelo.RolGrupo;
 import modelo.RolGrupoId;
-import modelo.Usuario;
 import servicio.implementacion.ServicioGrupo;
-import servicio.implementacion.ServicioGrupoUsuario;
 import servicio.implementacion.ServicioRol;
-import servicio.implementacion.ServicioRolGrupo;
-import servicio.implementacion.ServicioUsuario;
 import dao.general.DaoRolGrupo;
 
 public class CntrlGestionarGrupos extends GenericForwardComposer {
@@ -71,9 +56,7 @@ public class CntrlGestionarGrupos extends GenericForwardComposer {
 	Component formulario;
 	boolean flag = false;
 	// Tree arbolMenu, arbolMenuSin;
-	Treechildren treeChildren = new Treechildren();
-	Treechildren treeChildren2 = new Treechildren();
-
+	
 	// ---------------------------------------------------------------------------------------------------
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);

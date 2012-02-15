@@ -905,7 +905,7 @@
 													<treeitem>
 														<treerow>
 															<treecell
-																label="Control de Grupos" onClick='enlace("/Seguridad/frmGrupos.zul")' />
+																label="Perfiles de Usuarios" />
 														</treerow>
 													</treeitem>
 													<treeitem>

@@ -7,11 +7,11 @@ import modelo.IngresoInscripcion;
 
 public interface IServicioIngresoInscripcion {
 	
-	public abstract void eliminar(DocumentoConducta c);
+	public abstract void eliminar(IngresoInscripcion c);
 
-	public abstract void agregar(DocumentoConducta c);
+	public abstract void agregar(IngresoInscripcion c);
 
-	public abstract void actualizar(DocumentoConducta c);
+	public abstract void actualizar(IngresoInscripcion c);
 
 	public abstract List<IngresoInscripcion> listar();
 
