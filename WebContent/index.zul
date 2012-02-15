@@ -253,29 +253,29 @@
 																onClick='enlace("/Logistica/Vistas/frmPlantillaMantenimiento.zul")' />
 														</treerow>
 													</treeitem>
-
+													
 													<treeitem>
-														<treerow>
-															<treecell
-																label="Actualizar Compromisos"
-																onClick='enlace("Administracion/Vistas/frmActualizarCompromisos.zul")' />
-														</treerow>
-													</treeitem>
-													<treeitem>
-														<treerow>
-															<treecell
-																label="Paquetes"
-																onClick='enlace("Administracion/Vistas/frmConfigurarPaquete.zul")' />
-														</treerow>
-													</treeitem>
-													<treeitem>
-														<treerow>
-															<treecell
-																label="Uniformes"
-																onClick='enlace("Administracion/Vistas/frmActualizarIndumentaria.zul")' />
-														</treerow>
-													</treeitem>
-
+													<treerow>
+														<treecell
+															label="Actualizar Compromisos"
+															onClick='enlace("Administracion/Vistas/frmActualizarCompromisos.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Paquetes"
+															onClick='enlace("Administracion/Vistas/frmConfigurarPaquete.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Uniformes"
+															onClick='enlace("Administracion/Vistas/frmActualizarIndumentaria.zul")' />
+													</treerow>
+												</treeitem>
+													
 												</treechildren>
 											</treeitem>
 											<treeitem open="false">
@@ -801,7 +801,7 @@
 											<treeitem open="false">
 												<treerow>
 													<treecell
-														label="Actividades Complementarias" />
+														label="Operacionales" />
 												</treerow>
 												<treechildren>
 													<treeitem
@@ -813,24 +813,6 @@
 													</treeitem>
 												</treechildren>
 											</treeitem>
-
-											<treeitem open="false">
-												<treerow>
-													<treecell
-														label="Actividades de Mantenimiento" />
-												</treerow>
-												<treechildren>
-													<treeitem
-														open="false">
-														<treerow>
-															<treecell
-																label=" " />
-														</treerow>
-													</treeitem>
-												</treechildren>
-											</treeitem>
-
-
 											<treeitem open="false">
 												<treerow>
 													<treecell
