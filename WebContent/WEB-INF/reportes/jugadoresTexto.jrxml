@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jugadoresTexto" language="groovy" pageWidth="1500" pageHeight="20" orientation="Landscape" columnWidth="1500" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="909"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1"/>
+	<parameter name="categoria" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="equipo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+j.cedula_rif AS Cedula,
+pnj.primer_nombre||' '||pnj.primer_apellido AS Jugador,
+to_char( pnj.fecha_nacimiento, 'dd/mm/yyyy')  AS Fecha_de_Nacimiento,
+to_char( pj.fecha_ingreso, 'dd/mm/yyyy') AS Fecha_de_Ingreso,
+pnf.primer_nombre||' '||pnf.primer_apellido AS Representante,
+c.nombre AS Categoria,
+e.nombre AS Equipo
+
+FROM
+jugador j,
+persona_natural pnj,
+persona pj,
+familiar f,
+persona_natural pnf,
+familiar_jugador fj,
+categoria c,
+equipo e,
+roster r
+
+WHERE
+j.cedula_rif = pnj.cedula_rif
+AND pnj.cedula_rif = pj.cedula_rif
+AND j.cedula_rif = fj.cedula_rif
+AND f.cedula_rif = fj.cedula_familiar
+AND pnf.cedula_rif = f.cedula_rif
+AND fj.representante_actual = true
+AND j.cedula_rif = r.cedula_rif
+AND r.codigo_equipo = e.codigo_equipo
+AND e.codigo_categoria = c.codigo_categoria
+AND c.nombre like $P{categoria}
+AND e.nombre like $P{equipo}
+
+-- estatus
+AND j.estatus = 'A'
+AND pnj.estatus = 'A'
+AND pj.estatus = 'A'
+AND f.estatus = 'A'
+AND fj.estatus = 'A'
+AND pnf.estatus = 'A'
+AND c.estatus = 'A'
+AND e.estatus = 'A'
+AND r.estatus = 'A'
+
+ORDER BY Fecha_de_Nacimiento ASC;]]>
+	</queryString>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="jugador" class="java.lang.String"/>
+	<field name="fecha_de_nacimiento" class="java.lang.String"/>
+	<field name="fecha_de_ingreso" class="java.lang.String"/>
+	<field name="representante" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="equipo" class="java.lang.String"/>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="1500" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cedula}+";"+$F{jugador}+";"+$F{fecha_de_nacimiento}+";"+$F{fecha_de_ingreso}+";"+$F{representante}+";"+$F{categoria}+";"+$F{equipo}+";"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

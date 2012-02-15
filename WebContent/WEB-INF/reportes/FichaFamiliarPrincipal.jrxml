@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaFamiliarPrincipal" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="511"/>
+	<parameter name="CEDULA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["G:\\Users\\Miguel Bastidas\\Documents\\Reportes Jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select jugador.cedula_rif,persona_natural.primer_nombre,persona_natural.segundo_nombre,persona_natural.primer_apellido,persona_natural.segundo_apellido,persona_natural.fecha_nacimiento,jugador.tipo_de_sangre,categoria.nombre,divisa.nombre as "divisa",(select dato_basico.nombre from dato_basico where dato_basico.codigo_dato_basico=(select dato_basico.parent_codigo_dato_basico from dato_basico where dato_basico.codigo_dato_basico=(select dato_basico.parent_codigo_dato_basico from dato_basico,jugador,persona where dato_basico.codigo_dato_basico=persona.codigo_parroquia and jugador.cedula_rif=$P{CEDULA} and jugador.cedula_rif=persona.cedula_rif))) as "Entidad",institucion.nombre as "institucion",(select dato_basico.nombre from dato_basico,dato_academico where (dato_academico.codigo_curso=dato_basico.codigo_dato_basico) and dato_academico.cedula_rif=$P{CEDULA} and dato_academico.estatus='A') as "grado",institucion.direccion from jugador,persona_natural,equipo,roster,categoria,divisa,dato_academico,institucion where jugador.cedula_rif=$P{CEDULA} and jugador.cedula_rif=persona_natural.cedula_rif and jugador.cedula_rif=roster.cedula_rif and roster.codigo_equipo=equipo.codigo_equipo and equipo.codigo_categoria=categoria.codigo_categoria and equipo.codigo_divisa=divisa.codigo_divisa and equipo.estatus='A' and jugador.cedula_rif=dato_academico.cedula_rif and institucion.codigo_institucion=dato_academico.codigo_institucion and dato_academico.estatus='A' and roster.estatus='A']]>
+	</queryString>
+	<field name="cedula_rif" class="java.lang.String"/>
+	<field name="primer_nombre" class="java.lang.String"/>
+	<field name="segundo_nombre" class="java.lang.String"/>
+	<field name="primer_apellido" class="java.lang.String"/>
+	<field name="segundo_apellido" class="java.lang.String"/>
+	<field name="fecha_nacimiento" class="java.sql.Date"/>
+	<field name="tipo_de_sangre" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="divisa" class="java.lang.String"/>
+	<field name="Entidad" class="java.lang.String"/>
+	<field name="institucion" class="java.lang.String"/>
+	<field name="grado" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="266" splitType="Stretch">
+			<image>
+				<reportElement x="28" y="1" width="351" height="76"/>
+				<imageExpression><![CDATA["LogoCriollitos.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="222" y="4" width="340" height="20"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[COORPORACION CRIOLLITOS DE VENEZUELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="24" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[FUNDADA EN 1962]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="302" y="36" width="175" height="20"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[DIRECTORIO NACIONAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="291" y="50" width="266" height="31"/>
+				<textElement>
+					<font size="24" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[FICHA FAMILIAR]]></text>
+			</staticText>
+			<image>
+				<reportElement x="656" y="1" width="180" height="83"/>
+				<imageExpression><![CDATA["LogoIND.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="1" y="-60" width="332" height="12" forecolor="#FFFFFF" backcolor="#FF9933"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="1" y="-182" width="224" height="10" forecolor="#FFFFFF" backcolor="#FF9933"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="-183" width="1" height="115"/>
+			</line>
+			<line>
+				<reportElement x="224" y="-183" width="1" height="80"/>
+			</line>
+			<staticText>
+				<reportElement x="-10" y="-182" width="223" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[INFORMACION DEL JUGADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="-171" width="113" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="-171" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="-154" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedula_rif}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="114" y="-172" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-172" width="752" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-157" width="751" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-138" width="751" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-183" width="224" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="224" y="-171" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1ER. NOMBRE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="225" y="-154" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primer_nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="-171" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2DO. NOMBRE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="-154" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{segundo_nombre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="334" y="-172" width="1" height="104"/>
+			</line>
+			<line>
+				<reportElement x="444" y="-172" width="1" height="104"/>
+			</line>
+			<staticText>
+				<reportElement x="445" y="-172" width="147" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1ER. APELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="594" y="-171" width="159" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2DO. APELLIDO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="-154" width="147" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primer_apellido}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="593" y="-154" width="159" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{segundo_apellido}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="592" y="-172" width="1" height="34"/>
+			</line>
+			<line>
+				<reportElement x="752" y="-171" width="1" height="103"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="-137" width="113" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[FECHA NACIMIENTO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="-103" width="751" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="114" y="-137" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[GRUPO SANGUINEO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="-138" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[CATEGORIA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="-122" width="750" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="335" y="-138" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[DIVISA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="-137" width="306" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[LIGA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="-119" width="114" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="115" y="-119" width="109" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_de_sangre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="226" y="-119" width="109" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="336" y="-119" width="109" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{divisa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="-103" width="113" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[ENTIDAD FEDERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="-103" width="306" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[DIRECCION DE INSTITUCION DONDE CURSA ESTUDIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="-103" width="220" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[INSTITUCION DONDE CURSA ESTUDIOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="-87" width="751" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="337" y="-103" width="110" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[GRADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="-68" width="752" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="-84" width="113" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Entidad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="113" y="-84" width="219" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="334" y="-84" width="109" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="-84" width="307" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="-61" width="332" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="173" y="-47" width="61" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[FOLIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="-47" width="113" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[FECHA DE REGISTRO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="-32" width="751" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="332" y="-48" width="167" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[OFICINA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="113" y="-49" width="1" height="36"/>
+			</line>
+			<staticText>
+				<reportElement x="234" y="-48" width="98" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[NUMERO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="-13" width="751" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="499" y="-47" width="251" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[ENTIDAD FEDERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="-61" width="332" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[INFORMACION DE LA PARTIDA DE NACIMIENTO DEL JUGADOR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="-49" width="751" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="113" y="-47" width="60" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[TOMO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="-60" width="1" height="47"/>
+			</line>
+			<line>
+				<reportElement x="172" y="-49" width="1" height="36"/>
+			</line>
+			<line>
+				<reportElement x="233" y="-49" width="1" height="36"/>
+			</line>
+			<line>
+				<reportElement x="332" y="-61" width="1" height="48"/>
+			</line>
+			<line>
+				<reportElement x="499" y="-49" width="1" height="36"/>
+			</line>
+			<line>
+				<reportElement x="751" y="-49" width="1" height="36"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="-28" width="112" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ /         /  ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="84" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="753" height="82"/>
+				<subreportParameter name="CEDULA">
+					<subreportParameterExpression><![CDATA[$P{CEDULA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["FichaFamiliarPrincipal_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="154">
+			<subreport>
+				<reportElement x="0" y="0" width="751" height="70"/>
+				<subreportParameter name="CEDULA">
+					<subreportParameterExpression><![CDATA[$P{CEDULA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["FichaFamiliarPrincipal_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="484" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="17" width="749" height="430"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[
+
+
+Mediante la suscripción de la presente acta, el representante del niño, niña y/o adolescente que ingresa a la Corporación Criollitos de Venezuela a través del Equipo y/o Divisa, reconoce y acepta expresamente lo siguiente: PRIMERO: Que doy mi consentimiento para que mi hijo y/o representado, ingrese a la Corporación Criollitos de Venezuela. SEGUNDO: Que Yo y mi representado quedamos obligados a cumplir estrictamente lo prescrito en la normativa Interna de la Corporación, establecida dentro de los límites de sus atribuciones legales, TERCERO: Que el objetivo de la Corporación se centra en la labor que se realiza con el fin de ayudar a formar ciudadanos honestos, hijos respetuosos de sus padres, semejantes y excelentes compañeros, cuyo propósito es enseñarle a los niños, niñas y adolescente a utilizar el tiempo libre, en una sana actividad organizada para que aprendan que la práctica repetida y constante de un deporte, mejora el rendimiento físico y mental, produce logros y se alcanzan metas. Que se quiere, que los padres tengan un lenguaje y una oportunidad para comunicarse con sus hijos, por lo que acontece alrededor del juego y en las actividades, debe ser una vivencia para ambos. Los Representantes deben participar en las actividades del equipo: el juego, las prácticas y otros eventos como Inauguraciones, alojamiento de niños visitantes, reuniones, etc. CUARTO: Que en todo caso, en las actividades de la Corporación, los adultos son el entorno y no el centro; que el deporte es un medio y no un fin y que las normas de la Corporación son un camino para facilitar la convivencia entre todos. QUINTO: Que a la Corporación le importa mucho, partir de los grandes ideales que la rigen para adaptarlos a las edades del niño, niña y del adolescente. Por esta razón es que con base en los principios pedagógicos, es que deben canalizarse las relaciones entre jugadores, técnicos, árbitros, representantes, espectadores y dirigentes de la Corporación. SEXTO: Que el principal objetivo de la reglamentación de la Corporación, es proporcionar a los dirigentes, técnicos, árbitros, anotadores, entrenadores y representantes, unas normas y condiciones que deben ser utilizadas con intención educativa, orientadora y formativa. En ningún caso deben ser interpretadas y/o aplicadas con fines legalistas, o artificiosos que pudieran lesionar o alterar el proceso educativo o ' formativo de los niños y jóvenes que hacen vida deportiva dentro de la Corporación. SÉPTIMO: Que el Instructivo General se constituye en el principal texto de orientación para la labor deportiva, en tal sentido, su conocimiento, acatamiento y divulgación debe ser una tarea importante de lodo directivo, técnico, representante y niño, niña y adolescente que sea miembro activo de la Corporación. OCTAVO: Que las instancias dentro de la Corporación Criollitos de Venezuela son las siguientes, a) Directorio de Liga y Consejo de Honor, b) Junta Directiva del Directorio Regional y Consejo de Honor c) junta Directiva del Directorio Nacional y Consejo de Honor. NOVENO: Que para el logro del objetivo de la Corporación de ayudar a formar niños, niñas y adolescentes de manera integral, a través, de la práctica organizada del deporte, dentro de los valores de lealtad a un equipo y de compañerismo para con los otros jugadores, se requiere de un prudente equilibrio entre los distintos equipos, por lo que no se permite para su conformación, configurar conjuntos más tuertas cambiando directa o solapadamente a jugadores de un equipo a otro equipo. A largo plazo, lo que da vida a la Corporación es la sana competencia entre buenos equipos y no un campeonato entre una selección de estrellas y muchos jugadores de menores condiciones. DECIMO: Que otro objetivo es propiciar el compañerismo prolongando, la permanencia del jugador el mayor tiempo posible dentro de un equipo. También se busca desalentar al representante que desea cambiar de equipo, divisa o liga. Por el bien común que está en toda agrupación por encima del interés particular, se establece y así lo acepta expresamente cada representante al dejar participar a su representado en las actividades de la Corporación, que un jugador desde que ingresa a la Corporación, en la categoría Preparatoria, es reserva, de la divisa hasta la categoría Prejunior y de la liga hasta la categoría Júnior, inclusive. Es decir, en principio todo jugador, luego de inscribirse libremente en un equipo debe continuar jugando en él y si las circunstancias lo refrieren, puede inscribirse en otro equipo de la misma divisa hasta transitar completamente la categoría Prejunior. Posteriormente, en la categoría Júnior, puede cambiar de divisa dentro de la misma liga. Ei jugador que desee cambiar de liga puede hacerlo al ingresar a la categoría juvenil. DECIMO PRIMERO: Que la Firma del representante en la ficha familiar, nómina de jugadores (roster) y ficha colectiva, lo obliga expresamente a: a) Autorizar a su representado a participar en cualquier actividad propia, organizada por la CORPORACIÓN (Directorio Nacional, Directorios Regionales, Ligas, Divisas y Equipos, b) Conocer y aceptar la normativa de la Corporación, (Estatutos. Instructivos, Reglamentos. Código de Responsabilidades y Sanciones, y demás Resoluciones), en todo su alcance, así como la obligación de aplicar la filosofía que fundamenta esta normativa. En caso de incumplimiento podrán ser sancionados, según el grado de responsabilidad, tanto el representante como su representado, c) Libera a la CORPORACIÓN CRIOLLITOS DE VENEZUELA de toda responsabilidad en caso de cualquier accidente ocurrido antes, durante y después del desarrollo de un evento deportivo. DECIMO SEGUNDO: Que la obligación alimentaria establecida en el artículo 365 de la L.O.P.N.A., contiene el derecho de recreación y deportes, requeridos por el niño y el adolescente, por lo que el cumplimiento de la obligación corresponde por efecto de la filiación legal o judicialmente establecida, al padre y a la madre del niño, niña y adolescente, en consecuencia, no puede pretender el representante transferir dicha obligación en la persona de la Corporación, en perjuicio del bien común. DECIMO TERCERO: Que en todo caso el representante está obligado personal y directamente a cumplir con todas las obligaciones que asuma para con la Corporación, en beneficio del bien común. DECIMO CUARTO: Que en todo caso el representante es responsable de los gastos judiciales y/o extra judiciales que se ocasionaren por su libre actuación ante instancia externas, cuyo reclamo ponga en entredicho el honor y la dignidad de los otros miembros de la Corporación, sin perjuicio de las costas procésales que resultare del juicio o procedimiento que se incoare contra la Corporación.
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="447" width="468" height="20"/>
+				<textElement/>
+				<text><![CDATA[FIRMA DEL REPRESENTANTE			FIRMA DEL NIÑO. NIÑA y/o ADOLESCENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="19" width="604" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[ ACTA MANIFESTACIÓN DE VOLUNTAD AL INGRESO COMO MIEMBRO ACTIVO DELA CORPORACIÓN CRIOLLITOS DE VENEZUELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="389" width="752" height="68"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[YO,_________________________________, mayor de edad, civilmente     hábil,     titular     de    la     Cédula     de     Identidad     Nro:____________ , domiciliado(a) en:_______________________________________________, declaro: Que acepto todo lo' antes expuesto y me constituyo en Representante Legal de:_______________________________________________________,  titular de  la Cédula  de Identidad Nro: ____________________________ ante la CORPORACIÓN CRIOLLITOS DE VENEZUELA. Y YO ya Identificado (a), declaro: Que estoy conforme con todo lo declarado y aceptado por mi representante. Documento suscrito en:______________________________, Estado:__________ a los ____ días del mes de _______________ del año.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

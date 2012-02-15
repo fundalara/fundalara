@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanillaInscripcion" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFA500">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE9BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1"/>
+	<subDataset name="comisiones">
+		<parameter name="cedulaFamiliar" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT  dato_basico.nombre AS comision,
+dato_basico.descripcion AS descripcion
+FROM comision_familiar
+INNER JOIN familiar_jugador ON
+comision_familiar.codigo_familiar_jugador=familiar_jugador.codigo_familiar_jugador
+INNER JOIN dato_basico ON dato_basico.codigo_dato_basico =
+comision_familiar.codigo_comision
+WHERE familiar_jugador.cedula_familiar=$P{cedulaFamiliar}
+AND comision_familiar.estatus='A'
+AND dato_basico.estatus='A']]>
+		</queryString>
+		<field name="comision" class="java.lang.String"/>
+		<field name="descripcion" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="cedulaJugador" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="foto" class="java.lang.Object">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Documents and Settings\\Antonietta\\Escritorio\\planilla cl 05-02-12\\Planilla\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT pn1.cedula_rif,
+       pn1.primer_nombre,
+       pn1.primer_apellido,
+       to_char(pn1.fecha_nacimiento, 'dd/mm/yyyy') AS fecha_nac,
+       to_char(age (CURRENT_DATE,pn1.fecha_nacimiento),'YY años') AS edad,
+       p1.direccion,
+       categoria.nombre,
+       familiar_jugador.cedula_familiar,
+       pn2.primer_nombre AS nombre_familiar,
+       pn2.primer_apellido AS apellido_familiar,
+       p2.direccion AS direccion_familiar,
+       p2.telefono_habitacion AS telefono_familiar,
+       p2.correo_electronico
+FROM persona_natural pn1
+LEFT JOIN persona p1 ON p1.cedula_rif = pn1.cedula_rif
+LEFT JOIN roster ON roster.cedula_rif=pn1.cedula_rif
+LEFT JOIN equipo ON equipo.codigo_equipo=roster.codigo_equipo
+LEFT JOIN categoria ON categoria.codigo_categoria=equipo.codigo_categoria
+LEFT JOIN familiar_jugador ON familiar_jugador.cedula_rif= pn1.cedula_rif
+LEFT JOIN persona_natural pn2 ON pn2.cedula_rif=familiar_jugador.cedula_familiar
+LEFT JOIN persona p2 ON p2.cedula_rif=pn2.cedula_rif
+WHERE pn1.cedula_rif=$P{cedulaJugador}
+AND pn1.estatus='A'
+AND roster.estatus='A'
+AND equipo.estatus='A'
+AND categoria.estatus='A'
+AND familiar_jugador.representante_actual= TRUE
+AND pn2.estatus='A'
+AND p2.estatus='A']]>
+	</queryString>
+	<field name="cedula_rif" class="java.lang.String"/>
+	<field name="primer_nombre" class="java.lang.String"/>
+	<field name="primer_apellido" class="java.lang.String"/>
+	<field name="fecha_nac" class="java.lang.String"/>
+	<field name="edad" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="cedula_familiar" class="java.lang.String"/>
+	<field name="nombre_familiar" class="java.lang.String"/>
+	<field name="apellido_familiar" class="java.lang.String"/>
+	<field name="direccion_familiar" class="java.lang.String"/>
+	<field name="telefono_familiar" class="java.lang.String"/>
+	<field name="correo_electronico" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="673" splitType="Stretch">
+			<rectangle>
+				<reportElement x="450" y="171" width="89" height="103"/>
+				<graphicElement>
+					<pen lineWidth="2.5" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="29" y="145" width="519" height="18" backcolor="#FBC186"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#FF6600"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="188" y="119" width="226" height="28"/>
+				<textElement>
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Planilla de Inscripción]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="3" width="552" height="118"/>
+				<imageExpression><![CDATA["Encabezado.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-5" y="-1" width="579" height="4" backcolor="#FABF84"/>
+				<graphicElement>
+					<pen lineWidth="6.0" lineStyle="Double" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-2" y="-3" width="2" height="675"/>
+				<graphicElement>
+					<pen lineWidth="5.0" lineStyle="Double" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="573" y="0" width="1" height="672"/>
+				<graphicElement>
+					<pen lineWidth="5.0" lineStyle="Double" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="230" y="147" width="142" height="17"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del Jugador]]></text>
+			</staticText>
+			<line>
+				<reportElement x="29" y="320" width="519" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="548" y="145" width="1" height="177"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="29" y="146" width="1" height="175"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="547" y="331" width="1" height="155"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="29" y="330" width="1" height="155"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement mode="Opaque" x="29" y="330" width="520" height="18" backcolor="#FBC186"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#FF6600"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="29" y="485" width="519" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="152" y="330" width="320" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del Representante Legal del Jugador]]></text>
+			</staticText>
+			<line>
+				<reportElement x="546" y="495" width="1" height="155"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="29" y="649" width="518" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="669" width="575" height="1" backcolor="#FABF84"/>
+				<graphicElement>
+					<pen lineWidth="6.0" lineStyle="Double" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="34" y="169" width="109" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cédula de Identidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="189" width="48" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="252" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fecha_nac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="229" width="60" height="17"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="163" y="297" width="188" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="249" width="109" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Nacimiento:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="164" y="189" width="168" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{primer_nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="297" width="60" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="273" width="34" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="210" width="168" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{primer_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="230" width="282" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="170" width="168" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cedula_rif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="275" width="56" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="209" width="48" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido:]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="453" y="173" width="84" height="100"/>
+				<imageExpression><![CDATA[$P{foto}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="35" y="443" width="47" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="399" width="188" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apellido_familiar}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="164" y="466" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{telefono_familiar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="353" width="112" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cédula de Identidad:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="165" y="444" width="344" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{correo_electronico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="466" width="130" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono de Habitación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="422" width="59" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="376" width="47" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="422" width="371" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{direccion_familiar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="399" width="47" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="377" width="188" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombre_familiar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="354" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cedula_familiar}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="28" y="495" width="1" height="155"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#FFBB6E"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement mode="Opaque" x="29" y="495" width="518" height="18" backcolor="#FBC186"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#FF6600"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="138" y="495" width="332" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comisión en la que participa el Representante ]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 1" mode="Opaque" x="33" y="517" width="264" height="80" forecolor="#FFFFFF"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="comisiones">
+						<datasetParameter name="cedulaFamiliar">
+							<datasetParameterExpression><![CDATA[$F{cedula_familiar}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="323">
+						<jr:detailCell style="table 1_TD" height="28" rowSpan="1">
+							<box>
+								<pen lineColor="#FFFFFF"/>
+								<topPen lineColor="#FFFFFF"/>
+								<leftPen lineColor="#FFFFFF"/>
+								<bottomPen lineColor="#FFFFFF"/>
+								<rightPen lineColor="#FFFFFF"/>
+							</box>
+							<textField>
+								<reportElement x="15" y="1" width="276" height="27"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Arial" isUnderline="false" isStrikeThrough="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{comision}]]></textFieldExpression>
+							</textField>
+							<staticText>
+								<reportElement x="0" y="4" width="15" height="23"/>
+								<textElement>
+									<font fontName="Arial" size="17" isBold="true"/>
+								</textElement>
+								<text><![CDATA[>]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+		<band height="704">
+			<staticText>
+				<reportElement x="2" y="39" width="572" height="28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+					<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+				</textElement>
+				<text><![CDATA[ACTA MANIFESTACIÓN DE VOLUNTAD AL INGRESO O PERMANENCIA COMO MIEMBRO
+ACTIVO DE LA ESCUELA DE BEISBOL MENOR FUNDALARA (EBMF).
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="73" width="570" height="495"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Mediante la suscripción de la presente acta, el representante de! niño, niña y/o adolescente que ingresa a la divisa EBMF, reconoce y acepta expresamente lo siguiente: DE LA CORPORACIÓN CRÍOLLITOS DE VENEZUELA:
+PRIMERO: Que doy mi consentimiento para que mi hijo y/o representado, ingrese a la Corporación Criollitos de Venezuela,
+SEGUNDO: Que yo y mi representado quedamos obligados a cumplir estrictamente lo prescrito en la normativa interna de la corporación, establecida dentro de los límites de sus atribuciones legales. TERCERO: Que el objetivo de la Corporación se centra en la labor que se realiza con el fin de ayudar a formar ciudadanos honestos, hijos respetuosos de sus padres, semejantes y excelentes compañeros. Cuyo propósito es enseñarle a los niños, niñas y adolescentes a utilizar el tiempo libre, en una sana actividad organizada para que aprendan que la practica repetida y constante de un deporte, mejora el rendimiento físico y mental, produce logros y se alcanzan metas. Que se quiere que los padres tengan un lenguaje y una oportunidad para comunicarse con sus hijos, por lo que acontece alrededor del juego y en las actividades, debe ser una vivencia para ambos. Los representantes deben participar en las actividades del equipo: al jueqo, las prácticas y otros eventos como, ALOJAMIENTO DE LOS NIÑOS VISITANTES, reuniones, etc. CUARTO: Que en todo caso, en las actividades de la corporación, los adultos son el entorno y no el centro: Que el deporte es un medio y no un fin y que las normas de la Corporación son un camino para facilitar la convivencia entre todos. QUINTO: Que a la Corporación le importa mucho, partir de los grandes ideales que la rigen para adaptarlos a las edades del niño, niña y del adolescente. Por esta razón es que con base en los principios pedagógicos, es que deben canalizarse las relaciones entre jugadores, técnicos y dirigentes de la Corporación. SEXTO: Que el principal objetivo de la reglamentación de la Corporación, es proporcionar dirigentes, técnicos, árbitros, anotadores, entrenadores y representantes, unas normas y condiciones que deben ser utilizadas con intención educativa, orientadora y formativa. En ningún caso deben ser interpretadas y/o aplicadas con fines legalistas, o artificios que pudiera lesionar o alterar el proceso educativo o formativo de los niños y jóvenes que hacen vida deportiva dentro de la corporación. SEPTIMO: Que el instructivo General se constituye en el principal texto de orientación para la labor deportiva, en tal sentido, su conocimiento, acatamiento y divulgación debe ser una tarea importante de todo directivo, técnico, representante y niño, niña y adolescente que sea miembro activo de ¡a Corporación.
+OCTAVO: Que para el logro del objetivo de la corporación de ayudar a formar niños, niñas y adolescentes de manera integral, a través de la práctica organizada del deporte, dentro de los valores de lealtad a un equipo y de compañerismo para con los otros jugadores, se requiere de un prudente equilibrio entre los distintos equipos. A largo plazo, lo que le da vida a la corporación es ¡a sana competencia entre buenos equipos y no un campeonato entre una selección de estrellas y muchos jugadores de menores condiciones. DE LOS ESTATUTOS DE LA ESCUELA DE BEISBOL MENOR FUNDALARA CAPITULO III. DE LOS PADRES Y REPRESENTANTES: Art. 18.- Cada representante deberá asistir a los juegos donde participe su representado. Art. 18.- LOS PADRES Y REPRESENTANTES DEBERAN PAGAR LA MENSUALIDAD DE LA EBMF LOS PRIMEROS (5) CINCO DÍAS DE CADA MES, EN CASO DE ATRASO DE DOS (2) O MAS MESES LA" ACTIVIDAD DE SU REPRESENTADO SERA INTERRUMPIDA. ART. 20.-Todo representante deberá evitar entremeterse en las decisiones técnicas de los manager y coachs, así como, en los procedimientos disciplinarios aplicados a sus representados, durante el desarrollo de juegos y prácticas.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="568" width="18" height="15"/>
+				<textElement/>
+				<text><![CDATA[YO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="23" y="568" width="140" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_familiar}+" "+ $F{apellido_familiar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="162" y="569" width="349" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[,mayor de edad, civilmente hábil, titular de la Cédula de identidad Nro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="511" y="569" width="60" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedula_familiar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="582" width="102" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[domiciliado (a) en:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="97" y="583" width="309" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion_familiar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="406" y="582" width="168" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[declaro: Que acepto todo lo antes ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="595" width="263" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[expuesto y me constituyo en representante legal de:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="263" y="595" width="126" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{primer_nombre}+ " " +$F{primer_apellido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="596" width="185" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[titular de la Cédula de Identidad Nro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="610" width="66" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedula_rif}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="68" y="610" width="241" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[, ante la Escuela de Béisbol Menor Fundalara.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="624" width="80" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Barquisimeto  ]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="74" y="624" width="100" height="14"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="116" y="687" width="351" height="16"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIRMA DEL REPRESENTANTE______________________________]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19">
+			<textField>
+				<reportElement x="458" y="-1" width="78" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="-1" width="40" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="1" width="100" height="17"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sistema Olimpo]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
