@@ -12,6 +12,30 @@
 	<!-- <property name="daoConceptoNomina" ref="daoConceptoNomina"></property> -->
 	<!-- </bean> -->
 	
+	<bean id="daoGrupo" class="dao.general.DaoGrupo">
+	</bean>
+	<bean id="servicioGrupo" class="servicio.implementacion.ServicioGrupo">
+		<property name="daoGrupo" ref="daoGrupo"></property>
+	</bean>
+
+	<bean id="daoRol" class="dao.general.DaoRol">
+	</bean>
+	<bean id="servicioRol" class="servicio.implementacion.ServicioRol">
+		<property name="daoRol" ref="daoRol"></property>
+	</bean>
+
+	<bean id="daoRolGrupo" class="dao.general.DaoRolGrupo">
+	</bean>
+	<bean id="servicioRolGrupo" class="servicio.implementacion.ServicioRolGrupo">
+		<property name="daoRolGrupo" ref="daoRolGrupo"></property>
+	</bean>
+	
+	<bean id="daoGrupoUsuario" class="dao.general.DaoGrupoUsuario">
+	</bean>
+	<bean id="servicioGrupoUsuario" class="servicio.implementacion.ServicioGrupoUsuario">
+		<property name="daoGrupoUsuario" ref="daoGrupoUsuario"></property>
+	</bean>
+	
 	<bean id="daoComisionActividadPlanificada" class="dao.general.DaoComisionActividadPlanificada">
 	</bean>
 
