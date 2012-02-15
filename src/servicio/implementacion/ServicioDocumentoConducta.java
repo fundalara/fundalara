@@ -19,11 +19,10 @@ public class ServicioDocumentoConducta implements IServicioDocumentoConducta {
 	public void setDaoDocumentoConducta(DaoDocumentoConducta daoDocumentoConducta) {
 		this.daoDocumentoConducta = daoDocumentoConducta;
 	}
-
+	
 	@Override
 	public void eliminar(DocumentoConducta c) {
 		daoDocumentoConducta.eliminar(c);
-
 	}
 
 	@Override
@@ -34,12 +33,10 @@ public class ServicioDocumentoConducta implements IServicioDocumentoConducta {
 	@Override
 	public void actualizar(DocumentoConducta c) {
 		daoDocumentoConducta.actualizar(c);
-
 	}
 
 	@Override
 	public List<DocumentoConducta> listar() {
 		return daoDocumentoConducta.listar( DocumentoConducta.class);
 	}
-
 }

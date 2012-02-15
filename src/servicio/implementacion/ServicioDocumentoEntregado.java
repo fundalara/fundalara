@@ -20,27 +20,27 @@ public class ServicioDocumentoEntregado implements IServicioDocumentoEntregado {
 		this.daoDocumentoEntregado = daoDocumentoEntregado;
 	}
 
+	
 	@Override
 	public void eliminar(DocumentoEntregado c) {
 		daoDocumentoEntregado.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(DocumentoEntregado c) {
 		daoDocumentoEntregado.guardar(c);
-
 	}
 
 	@Override
 	public void actualizar(DocumentoEntregado c) {
 		daoDocumentoEntregado.actualizar(c);
-
 	}
 
 	@Override
 	public List<DocumentoEntregado> listar() {
 		return daoDocumentoEntregado.listar( DocumentoEntregado.class);
 	}
+	
+	
 
 }
