@@ -83,4 +83,7 @@ public class ServicioFamiliarJugador implements IServicioFamiliarJugador {
 		return daoFamiliarJugador.buscarRepresentanteActual(cedulaJugador);
 	}
 	
+	public FamiliarJugador buscarRepresentante(Jugador jugador){
+		return daoFamiliarJugador.buscarRepresentante(jugador);
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.general.DaoRosterPlan;
 
+import modelo.Equipo;
 import modelo.JugadorPlan;
 import modelo.RosterPlan;
 import servicio.interfaz.IServicioRosterPlan;
@@ -50,6 +51,11 @@ public class ServicioRosterPlan implements IServicioRosterPlan {
 
 	public void retirar(JugadorPlan jugador) {
 		daoRosterPlan.retirarJugador(jugador);
+	}
+	
+	public List<RosterPlan> listarPorEquipo(Equipo e){
+		return daoRosterPlan.listarPorEquipo(e);
+		
 	}
 	
 }
