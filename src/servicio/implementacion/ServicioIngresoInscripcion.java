@@ -20,18 +20,18 @@ public class ServicioIngresoInscripcion implements IServicioIngresoInscripcion {
 	}
 
 	@Override
-	public void eliminar(DocumentoConducta c) {
+	public void eliminar(IngresoInscripcion c) {
 		daoIngresoInscripcion.eliminar(c);
 	}
 
 	@Override
-	public void agregar(DocumentoConducta c) {
+	public void agregar(IngresoInscripcion c) {
 		daoIngresoInscripcion.guardar(c);
 
 	}
 
 	@Override
-	public void actualizar(DocumentoConducta c) {
+	public void actualizar(IngresoInscripcion c) {
 		daoIngresoInscripcion.actualizar(c);
 
 	}

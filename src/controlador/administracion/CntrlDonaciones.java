@@ -95,7 +95,7 @@ public class CntrlDonaciones extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onChange$cmbTipoMaterial() {
-		listaMateriales = servicioMaterial.listarPorTipoMaterial(tipoMaterial
+		listaMateriales = servicioMaterial.listarMaterialPorTipo(tipoMaterial
 				.get(cmbTipoMaterial.getSelectedIndex()));
 		binder.loadComponent(cmbCodigoMaterial);
 	}
