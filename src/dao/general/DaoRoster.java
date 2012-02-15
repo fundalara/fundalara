@@ -1,21 +1,19 @@
 package dao.general;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import dao.generico.GenericDao;
-import dao.generico.SessionManager;
 
 import modelo.Equipo;
+import modelo.Jugador;
 import modelo.Roster;
-import modelo.SesionEjecutada;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -32,12 +30,11 @@ import org.hibernate.criterion.Restrictions;
 public class DaoRoster extends GenericDao {
 	public static String SECUENCIA ="roster_codigo_roster_seq1";
 	
-	public List buscarJugadores(Equipo equipo, String filtro2, String filtro3,
+	public List buscarJugadores(String filtro2, String filtro3,
 			String filtro4, String filtro1) {
 		Session session = getSession();
 		org.hibernate.Transaction tx = session.beginTransaction();
 		Criteria c = session.createCriteria(Roster.class)
-				.add(Restrictions.eq("equipo", equipo))
 				.add(Restrictions.eq("estatus", 'A'))
 				.add(Restrictions.like("jugador.cedulaRif", filtro2 + "%"))
 				.createCriteria("jugador");
@@ -71,7 +68,7 @@ public class DaoRoster extends GenericDao {
 	/**
 	 * Busca el registro del roster al que pertenece un jugador
 	 * 
-	 * @param Nro de Cï¿½dula del jugador
+	 * @param Nro de Cédula del jugador
 	 * @return Un objeto Roster sino null
 	 */
 	public Roster buscarRoster(String ced) {
@@ -82,7 +79,62 @@ public class DaoRoster extends GenericDao {
 				.add(Restrictions.eq("estatus", 'A'));
 		return (Roster) c.uniqueResult();
 	}
-
+	
+	 /**
+	  * Guarda los datos de roster
+	 * @param o objeto roster
+	 */
+	public void guardar(Roster o) {		
+			Session session = getSession();
+			Transaction tx =  session.beginTransaction();
+			session.save(o);
+			tx.commit();		
+		}
+	
+	public List<Roster> buscarEquipo(Jugador jugador, Date fecha) {
+		Session session = this.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Roster.class).addOrder(
+				Order.desc("fechaIngreso"));
+		c.add(Restrictions.eq("jugador", jugador));
+		if (c.list().size() == 0)
+			return null;
+		else
+			return c.list();
+	}
+	
+	/**
+	 * Busca los jugadores que estan en un equipo
+	 * 
+	 * @param Objeto Equipo 
+	 * @return Lista de jugadores en ese equipo sino null
+	 */
+	public List listarJugadores(Equipo equipo) {
+		Session session = getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Roster.class)
+				.add(Restrictions.eq("equipo", equipo))
+				.add(Restrictions.eq("estatus", 'A'));
+		List<Roster> lista = c.list();
+		return lista;
+	}
+	
+	public Roster buscarRosterPendiente(Jugador jugador){
+		Session session = this.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		Criteria c = session.createCriteria(Roster.class)
+				.add(Restrictions.eq("jugador", jugador))
+				.add(Restrictions.eq("estatus", 'P'));
+		return (Roster) c.uniqueResult();
+	}
+	
+	public void confirmarRoster(Roster roster){
+		Session session = this.getSession();
+		org.hibernate.Transaction tx = session.beginTransaction();
+		roster.setEstatus('A');
+		session.update(roster);
+		tx.commit();	
+	}
 	
 	public List<Roster> listarCedxEquipo(Class o, int codigo){
 		Session session = getSession(); 
