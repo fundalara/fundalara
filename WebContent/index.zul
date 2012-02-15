@@ -376,7 +376,7 @@
 											<treeitem open="false">
 												<treerow>
 													<treecell
-														label="Planificar Entrenamiento" visible="${sec:isAnyGranted('56')}"
+														label="Planificar Entrenamiento" visible="${sec:isAnyGranted('55')}"
 														onClick='enlace("/Entrenamiento/Vistas/frmPlanEntrenamiento.zul")' />
 												</treerow>
 											</treeitem>
