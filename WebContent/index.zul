@@ -1142,7 +1142,7 @@
 											<treeitem>
 												<treerow>
 													<treecell
-														label="Redes Sociales" visible="${sec:isAnyGranted('137')}"/>
+														label="Redes Sociales" onClick='enlace("/General/frmRedesSociales.zul")' visible="${sec:isAnyGranted('137')}"/>
 												</treerow>
 											</treeitem>
 										</treechildren>

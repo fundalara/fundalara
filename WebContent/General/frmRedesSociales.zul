@@ -1,0 +1,126 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="wndRedesSociales"?>
+<?page title="Redes Sociales" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Redes Sociales" border="normal" width="600px" id="wndRedesSociales" apply="controlador.general.CntrlFrmRedesSociales">
+		<grid>
+			<columns sizable="true">
+				<column align="left" />
+			</columns>
+			<rows>
+				<row>
+					<panel>
+						<panelchildren>
+							<grid>
+								<columns>
+									<column width="115px" />
+									<column width="160px" />
+									<column width="130px" />
+									<column />
+								</columns>
+								<rows>
+									<row>
+										<label value="Categoria" />
+										<combobox id="cmbCategoria"
+											value="--Seleccione--" model="@{ctrl.listCategoria}"
+											readonly="true" width="160px">
+											<comboitem
+												self="@{each=categoria}" label="@{categoria.nombre}"
+												value="@{categoria}" />
+										</combobox>
+										<label value=" Equipo" />
+										<combobox id="cmbEquipo"
+											value="--Seleccione--" model="@{ctrl.listEquipo}"
+											readonly="true" disabled="true">
+											<comboitem
+												self="@{each=equipo}" label="@{equipo.nombre}"
+												value="@{equipo}" />
+										</combobox>
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>
+				<row>
+					<panel>
+						<panelchildren>
+							<grid>
+								<columns>
+									<column width="300px" />
+									<column width="300px" />
+								</columns>
+								<rows>
+									<row>
+										<tabbox id="tbxPestanas" height="285px"
+											width="295px" >
+											<tabs>
+												<tab
+													image="/Recursos/Imagenes/facebook.png" label="Facebook" />
+												<tab
+													image="/Recursos/Imagenes/twitter.png" label="Twitter" />
+												<tab
+													image="/Recursos/Imagenes/emailButton.png" label="Email" />
+											</tabs>
+											<tabpanels>
+												<tabpanel>
+													<textbox
+														id="txtFacebook"
+														multiline="true" height="135px" width="255px" />
+													<vbox align="center"
+														width="270px">
+														<button
+															image="/Recursos/Imagenes/aceptar.ico"
+															id="btnEnviarFacebook" />
+													</vbox>
+												</tabpanel>
+												<tabpanel>
+													<textbox
+														id="txtTwitter"
+														multiline="true" height="135px" width="255px" />
+													<vbox align="center"
+														width="270px">
+														<button
+															image="/Recursos/Imagenes/aceptar.ico"
+															id="btnEnviarTwitter" />
+													</vbox>
+												</tabpanel>
+												<tabpanel>
+													<hbox>
+														<label
+															value="Asunto: " />
+														<textbox id="txtAsunto"/>
+													</hbox>
+													<hbox>
+														<label
+															value="Mensaje: " />
+													</hbox>
+													<textbox
+														id="txtEmail"
+														multiline="true" height="135px" width="255px" />
+													<vbox align="center"
+														width="270px">
+														<button
+															image="/Recursos/Imagenes/aceptar.ico"
+															id="btnEnviarEmail" />
+													</vbox>
+												</tabpanel>
+											</tabpanels>
+										</tabbox>
+										<listbox id="lbxDestinatario"
+											mold="paging" pageSize="10" height="285px" width="260px" checkmark="true" multiple="true" >
+											<listhead>
+												<listheader
+													label="Destinatarios" sort="none" height="" width="300px" />
+											</listhead>
+										</listbox>
+									</row>
+								</rows>
+							</grid>
+						</panelchildren>
+					</panel>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>
