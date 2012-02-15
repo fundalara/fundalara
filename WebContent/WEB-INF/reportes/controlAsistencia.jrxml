@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportPrueba" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="459"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DS_controlAsistencia">
+		<parameter name="fecha_i" class="java.lang.String"/>
+		<parameter name="fecha_f" class="java.lang.String"/>
+		<parameter name="categoria" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[select D.nombre as nombre_equipo,
+C.total_jugadores,
+cast((A.total_asistencia*100/B.total)as decimal(12,2)) as porcentaje_asistencia,
+cast((B.total-A.total_asistencia)*100/B.total as decimal(12,2))as porcentaje_inasistencia
+from
+(
+select codigo_equipo, cast(count(codigo_equipo) as decimal) as total_asistencia
+from sesion_ejecutada A, asistencia_jugador B
+where A.codigo_sesion_ejecutada= B.codigo_sesion_ejecutada
+and B.asistencia='t'
+and A.fecha>=to_date($P{fecha_i},'dd/mm/yyyy')
+and A.fecha<=to_date($P{fecha_f},'dd/mm/yyyy')
+group by codigo_equipo
+) A,
+(
+select codigo_equipo, cast (count(codigo_equipo) as decimal)  as total
+from sesion_ejecutada A, asistencia_jugador B
+where A.codigo_sesion_ejecutada= B.codigo_sesion_ejecutada
+and A.fecha>=to_date($P{fecha_i},'dd/mm/yyyy')
+and A.fecha<=to_date($P{fecha_f},'dd/mm/yyyy')
+group by codigo_equipo
+) B,
+(
+select codigo_equipo, count(cedula_rif) as total_jugadores
+from roster
+group by codigo_equipo
+) C,
+equipo D,
+categoria E
+where
+A.codigo_equipo=B.codigo_equipo
+and A.codigo_equipo=C.codigo_equipo
+and A.codigo_equipo=D.codigo_equipo
+and D.codigo_categoria=E.codigo_categoria
+and E.codigo_categoria=$P{categoria}]]>
+		</queryString>
+		<field name="nombre_equipo" class="java.lang.String"/>
+		<field name="total_jugadores" class="java.lang.Long"/>
+		<field name="porcentaje_asistencia" class="java.math.BigDecimal"/>
+		<field name="porcentaje_inasistencia" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="fecha_inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="categoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[5]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select D.nombre as nombre_equipo,
+C.total_jugadores,
+cast((A.total_asistencia*100/B.total)as decimal(12,2)) as porcentaje_asistencia,
+cast((B.total-A.total_asistencia)*100/B.total as decimal(12,2))as porcentaje_inasistencia
+from
+(
+select codigo_equipo, cast(count(codigo_equipo) as decimal) as total_asistencia
+from sesion_ejecutada A, asistencia_jugador B
+where A.codigo_sesion_ejecutada= B.codigo_sesion_ejecutada
+and B.asistencia='t'
+and A.fecha>=to_date($P{fecha_inicio},'dd/mm/yyyy')
+and A.fecha<=to_date($P{fecha_fin},'dd/mm/yyyy')
+group by codigo_equipo
+) A,
+(
+select codigo_equipo, cast (count(codigo_equipo) as decimal)  as total
+from sesion_ejecutada A, asistencia_jugador B
+where A.codigo_sesion_ejecutada= B.codigo_sesion_ejecutada
+and A.fecha>=to_date($P{fecha_inicio},'dd/mm/yyyy')
+and A.fecha<=to_date($P{fecha_fin},'dd/mm/yyyy')
+group by codigo_equipo
+) B,
+(
+select codigo_equipo, count(cedula_rif) as total_jugadores
+from roster
+group by codigo_equipo
+) C,
+equipo D,
+categoria E
+where
+A.codigo_equipo=B.codigo_equipo
+and A.codigo_equipo=C.codigo_equipo
+and A.codigo_equipo=D.codigo_equipo
+and D.codigo_categoria=E.codigo_categoria
+and E.codigo_categoria=$P{categoria}]]>
+	</queryString>
+	<field name="nombre_equipo" class="java.lang.String"/>
+	<field name="total_jugadores" class="java.lang.Long"/>
+	<field name="porcentaje_asistencia" class="java.math.BigDecimal"/>
+	<field name="porcentaje_inasistencia" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="272" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="164" width="548" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Control de Asistencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="204" width="45" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Desde]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="193" y="204" width="91" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="204" width="40" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Hasta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="326" y="204" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_fin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="173" y="243" width="84" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="124" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="452" y="124" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="243" width="134" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{categoria}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="453" y="144" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="402" y="144" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<image>
+				<reportElement x="24" y="0" width="535" height="144"/>
+				<imageExpression><![CDATA["../classes/Encabezado.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<lastPageFooter>
+		<band height="134">
+			<textField>
+				<reportElement x="236" y="108" width="72" height="19"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="308" y="108" width="99" height="19"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement positionType="FixRelativeToBottom" x="11" y="0" width="528" height="80"/>
+				<imageExpression><![CDATA["../classes/PieDePagina.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="324" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="92" y="0" width="360" height="50"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DS_controlAsistencia">
+						<datasetParameter name="fecha_i">
+							<datasetParameterExpression><![CDATA[$P{fecha_inicio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fecha_f">
+							<datasetParameterExpression><![CDATA[$P{fecha_fin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="categoria">
+							<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="131">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="131" height="40"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Equipo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="131" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{nombre_equipo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="40"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Jugadores]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{total_jugadores}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="40"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Porcentaje de Asistencia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{porcentaje_asistencia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="40" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="40"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Porcentaje de Inasitencia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{porcentaje_inasistencia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<bar3DChart>
+				<chart isShowLegend="false">
+					<reportElement x="1" y="138" width="270" height="174"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Equipo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombre_equipo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{porcentaje_asistencia}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+			<bar3DChart>
+				<chart isShowLegend="false">
+					<reportElement x="302" y="138" width="271" height="174"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Equipo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombre_equipo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{porcentaje_inasistencia}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+				</bar3DPlot>
+			</bar3DChart>
+			<staticText>
+				<reportElement x="2" y="118" width="269" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porcentaje de Asistencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="118" width="269" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porcentaje de Inasistencia]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

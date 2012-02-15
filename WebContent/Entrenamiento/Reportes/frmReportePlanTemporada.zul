@@ -1,0 +1,61 @@
+<?page title="Reporte Plan Temporada"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
+<div align="center">
+	<separator height="15px" />
+	<window id="win" title="Plan de Temporada" border="normal"
+		width="400px" closable="true"
+
+		apply="controlador.entrenamiento.CntrlReportePlanTemporada">
+		<grid>
+			<columns>
+				<column width="100px" align="center" />
+				<column width="125px" align="left" />
+				
+			</columns>
+			<rows>
+				<row height="30px" align="center">
+					<label value="Lapso Deportivo" />
+					<combobox id="cmblapsodeportivo" width="150px"
+						model="@{ctrl.listLapsoDeportivo}" readonly="true"
+						value="--Seleccione--">
+						<comboitem self="@{each=lapsoDeportivo}"
+							label="@{lapsoDeportivo.nombre}" value="@{lapsoDeportivo}" />
+					</combobox>
+				</row>
+				<row height="30px">
+					<label value="Categoria:" width="120px" />
+					<combobox id="cmbcategoria" value="--Seleccione--"
+						disabled="true" model="@{ctrl.listCategoria}" readonly="true"
+						width="150px">
+						<comboitem self="@{each=categoria}"
+							label="@{categoria.nombre}" value="@{categoria}" />
+					</combobox>
+					
+				</row>
+				<row>
+				<label value="Equipo:" width="120px" />
+					<combobox id="cmbequipo" value="--Seleccione--"
+						disabled="true" model="@{ctrl.listEquipo}" readonly="true"
+						width="150px">
+						<comboitem self="@{each=equipo}"
+							label="@{equipo.nombre}" value="@{equipo}" />
+					</combobox>
+				
+				</row>
+
+			</rows>
+
+		</grid>
+		<iframe id="ifReport" height="10px"/>
+		<grid height="50px">
+			<rows>
+				<row align="right" height="">
+					<button id="btnimprimir"
+						image="../Recursos/Imagenes/imprimir.ico" label="Generar"
+						width="95px" disabled="true" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</div>
