@@ -48,6 +48,7 @@ import org.zkoss.zul.Window;
 import com.jaspersoft.jasperserver.api.metadata.xml.domain.impl.ListItem;
 
 import servicio.implementacion.ServicioActividadCalendario;
+import servicio.implementacion.ServicioActividadesEjecutadas;
 import servicio.implementacion.ServicioAsistenciaJugador;
 import servicio.implementacion.ServicioDesempennoJugador;
 import servicio.implementacion.ServicioLapsoDeportivo;
@@ -94,6 +95,7 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 	ServicioPuntuacionJugador servicioPuntuacionJugador;
 	ServicioValorEscala servicioValorEscala;
 	ServicioActividadCalendario servicioActividadCalendario;
+	ServicioActividadesEjecutadas servicioActividadesEjecutadas;
 	List<Combobox> combos;
 	ListenerCombo escuchadorCombo;
 	CntrlFrmAgendaEntrenamiento cntrlFrmAgendaEntrenamiento;
@@ -136,7 +138,8 @@ public class CntrlFrmDesempennoJugador extends GenericForwardComposer {
 		Comboitem item;
 		Auxheader ah;
 		int id = 2;
-		for (ActividadEjecutada ejecutadas: sesionEjecutada.getActividadEjecutadas()) {
+		alert("Tamano de las actividades es "+servicioActividadesEjecutadas.buscarPorSesionEjecutada(sesionEjecutada).size());
+		for (ActividadEjecutada ejecutadas: servicioActividadesEjecutadas.buscarPorSesionEjecutada(sesionEjecutada)) {
 			ActividadEntrenamiento ae=ejecutadas.getActividadEntrenamiento();
 			lh = new Listheader(ae.getNombre());
 				lh.setWidth(((ae.getDatoBasico().getNombre().length() * 10)) + "px");

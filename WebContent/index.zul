@@ -168,27 +168,46 @@
 														label="Administrativos" />
 												</treerow>
 												<treechildren>
+
+
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label="Personal Remunerado"
-																onClick='enlace("/Administracion/Vistas/FrmRegistrarPersonal.zul")' />
+																label="Personal" />
 														</treerow>
+														<treechildren>
+															<treeitem
+																open="false">
+																<treerow>
+																	<treecell
+																		label="Ad Honorem"
+																		onClick='enlace("Administracion/Vistas/frmPersonalAdHonorem.zul")' />
+																</treerow>
+															</treeitem>
+															<treeitem>
+																<treerow>
+																	<treecell
+																		label="Remunerado"
+																		onClick='enlace("Administracion/Vistas/FrmRegistrarPersonal.zul")' />
+																</treerow>
+															</treeitem>
+															<treeitem>
+																<treerow>
+																	<treecell
+																		label="Actualizar Cargos"
+																		onClick='enlace("Administracion/Vistas/frmActualizarCargoEmpleado.zul")' />
+																</treerow>
+															</treeitem>
+														</treechildren>
 													</treeitem>
-													<treeitem
-														open="false">
-														<treerow>
-															<treecell
-																label="Personal Ad Honorem"
-																onClick='enlace("/Administracion/Vistas/FrmRegistrarPersonal.zul")' />
-														</treerow>
-													</treeitem>
+
+
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Proveedores"
-																onClick='enlace("/Administracion/Vistas/FrmProveedores.zul")' />
+																onClick='enlace("Administracion/Vistas/FrmProveedores.zul")' />
 
 														</treerow>
 													</treeitem>
@@ -196,16 +215,7 @@
 														<treerow>
 															<treecell
 																label="Clientes"
-																onClick='enlace("/Administracion/Vistas/FrmClientes.zul")' />
-														</treerow>
-													</treeitem>
-
-
-													<treeitem>
-														<treerow>
-															<treecell
-																label="Benefactores"
-																onClick='enlace("/Administracion/Vistas/FrmBenefactor.zul")' />
+																onClick='enlace("Administracion/Vistas/FrmClientes.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
@@ -243,6 +253,29 @@
 																onClick='enlace("/Logistica/Vistas/frmPlantillaMantenimiento.zul")' />
 														</treerow>
 													</treeitem>
+													
+													<treeitem>
+													<treerow>
+														<treecell
+															label="Actualizar Compromisos"
+															onClick='enlace("Administracion/Vistas/frmActualizarCompromisos.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Paquetes"
+															onClick='enlace("Administracion/Vistas/frmConfigurarPaquete.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem>
+													<treerow>
+														<treecell
+															label="Uniformes"
+															onClick='enlace("Administracion/Vistas/frmActualizarIndumentaria.zul")' />
+													</treerow>
+												</treeitem>
+													
 												</treechildren>
 											</treeitem>
 											<treeitem open="false">
@@ -418,53 +451,90 @@
 												label="Administración" />
 										</treerow>
 										<treechildren>
-											<treeitem open="false">
-												<treerow>
-													<treecell
-														label="Compromisos de Pago" />
-												</treerow>
-											</treeitem>
-											<treeitem open="false">
-												<treerow>
-													<treecell
-														label="Generar Requisiciones"
-														onClick='enlace("/Logistica/Vistas/frmGenerarRequisicion.zul")' />
-												</treerow>
-											</treeitem>
+
+
 											<treeitem>
 												<treerow>
 													<treecell
-														label="Registrar Incidencias del Personal" />
-												</treerow>
-											</treeitem>
-											<treeitem>
-												<treerow>
-													<treecell
-														label="Calcular Nómina" />
-												</treerow>
-											</treeitem>
-											<treeitem>
-												<treerow>
-													<treecell
-														label="Pagar Nómina"
-														onClick='enlace("/Administracion/Vistas/FrmCompras.zul")' />
+														label="Generar Compromisos"
+														onClick='enlace("Administracion/Vistas/frmCompromisos.zul")' />
 												</treerow>
 											</treeitem>
 											<treeitem open="false">
 												<treerow>
 													<treecell
-														label="Tipo de Ingresos"
-														onClick='enlace("/Administracion/Vistas/FrmTipoIngreso.zul")' />
+														label="Solicitar Uniformes"
+														onClick='enlace("Administracion/Vistas/frmSolicitudUniforme.zul")' />
 												</treerow>
 											</treeitem>
 											<treeitem open="false">
 												<treerow>
 													<treecell
-														label="Tipo de Egresos"
-														onClick='enlace("/Administracion/Vistas/FrmTipoEgreso.zul")' />
+														label="Registrar Compras"
+														onClick='enlace("Administracion/Vistas/frmRegistrarFactura.zul")' />
 												</treerow>
 											</treeitem>
+
+											<treeitem open="false">
+
+												<treerow>
+													<treecell
+														label="Ingresos" />
+												</treerow>
+
+												<treechildren>
+													<treeitem>
+														<treerow>
+															<treecell
+																label="Cobros"
+																onClick='enlace("Administracion/Vistas/frmPagoRepre.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem>
+														<treerow>
+															<treecell
+																label="Donaciones"
+																onClick='enlace("Administracion/Vistas/frmDonacion.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem>
+														<treerow>
+															<treecell
+																label="Otros"
+																onClick='enlace("Administracion/Vistas/frmIngresoExtraordinario.zul")' />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Egresos" />
+												</treerow>
+
+												<treechildren>
+													<treeitem>
+														<treerow>
+															<treecell
+																label="Pagar Compras"
+																onClick='enlace("Administracion/Vistas/frmPagarFactura.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem>
+														<treerow>
+															<treecell
+																label="Otros Pagos"
+																onClick='enlace("Administracion/Vistas/frmPagoServicio.zul")' />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+
+
+
 										</treechildren>
+
+
 									</treeitem>
 									<treeitem open="false">
 										<treerow>
@@ -640,11 +710,33 @@
 														label="Administrativos" />
 												</treerow>
 												<treechildren>
+
 													<treeitem
 														open="false">
 														<treerow>
 															<treecell
-																label=" " />
+																label="Control de Morosidad"
+																onClick='enlace("Administracion/Reportes/frmMorosidadGeneral.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+
+
+															<treecell
+																label="Estado de Ingresos y Egresos"
+																onClick='enlace("Administracion/Reportes/FrmEstadoFinanciero.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+
+
+															<treecell
+																label="Control de Deudas"
+																onClick='enlace("Administracion/Reportes/FrmControlPagos.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -660,9 +752,92 @@
 										<treechildren>
 											<treeitem open="false">
 												<treerow>
-													<treecell label=" " />
+													<treecell
+														label="Jugadores" />
 												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
 											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Entrenamientos" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+
+
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Competencias" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Desempeño Deportivo"
+																onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Operacionales" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label=" " />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+											<treeitem open="false">
+												<treerow>
+													<treecell
+														label="Administrativos" />
+												</treerow>
+												<treechildren>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Cuentas por Cobrar"
+																onClick='enlace("Administracion/Reportes/FrmGeneralCobros.zul")' />
+														</treerow>
+													</treeitem>
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Cuentas por Pagar"
+																onClick='enlace("Administracion/Reportes/FrmGeneralPagos.zul")' />
+														</treerow>
+													</treeitem>
+												</treechildren>
+											</treeitem>
+
 										</treechildren>
 									</treeitem>
 
@@ -799,8 +974,7 @@
 					</tabpanels>
 				</tabbox>
 			</div>
-			<div id="divCuerpo" style="display:inline">
-			</div>
+			<div id="divCuerpo" style="display:inline"></div>
 		</div>
 	</window>
 </zk>
