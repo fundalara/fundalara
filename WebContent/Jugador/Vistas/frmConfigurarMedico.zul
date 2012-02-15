@@ -1,5 +1,7 @@
 <?page title="Médicos"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver" ?>
+<?xel-method prefix="sec" name="isAnyGranted"
+  class="org.zkoss.spring.security.SecurityUtil" signature="java.lang.Boolean isAnyGranted(java.lang.String)"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="winConfigurarMedico"?>
 
 <zk>
@@ -164,13 +166,13 @@
 						</listitem>
 					</listbox>
 					<div>
-						<button id="btnGuardar"
+						<button id="btnGuardar" visible="${sec:isAnyGranted('163')}"
 							image="../../Recursos/Imagenes/agregar.ico" />
 						<separator height="5px" />
-						<button id="btnModificar"
+						<button id="btnModificar" visible="${sec:isAnyGranted('164')}"
 							image="../../Recursos/Imagenes/editar.ico" />
 						<separator height="5px" />
-						<button id="btnEliminar"
+						<button id="btnEliminar" visible="${sec:isAnyGranted('165')}"
 							image="../../Recursos/Imagenes/quitar.ico" />
 					</div>
 				</row>
