@@ -183,21 +183,21 @@
 																<treerow>
 																	<treecell
 																		label="Ad Honorem" visible="${sec:isAnyGranted('26')}"
-																		onClick='enlace("Administracion/Vistas/frmPersonalAdHonorem.zul")' />
+																		onClick='enlace("/Administracion/Vistas/frmPersonalAdHonorem.zul")' />
 																</treerow>
 															</treeitem>
 															<treeitem>
 																<treerow>
 																	<treecell
 																		label="Remunerado" visible="${sec:isAnyGranted('27')}"
-																		onClick='enlace("Administracion/Vistas/FrmRegistrarPersonal.zul")' />
+																		onClick='enlace("/Administracion/Vistas/FrmRegistrarPersonal.zul")' />
 																</treerow>
 															</treeitem>
 															<treeitem>
 																<treerow>
 																	<treecell
 																		label="Actualizar Cargos" visible="${sec:isAnyGranted('28')}"
-																		onClick='enlace("Administracion/Vistas/frmActualizarCargoEmpleado.zul")' />
+																		onClick='enlace("/Administracion/Vistas/frmActualizarCargoEmpleado.zul")' />
 																</treerow>
 															</treeitem>
 														</treechildren>
@@ -206,21 +206,21 @@
 														<treerow>
 															<treecell
 																label="Proveedores" visible="${sec:isAnyGranted('29')}"
-																onClick='enlace("Administracion/Vistas/FrmProveedores.zul")' />
+																onClick='enlace("/Administracion/Vistas/FrmProveedores.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Clientes" visible="${sec:isAnyGranted('32')}"
-																onClick='enlace("Administracion/Vistas/FrmClientes.zul")' />
+																onClick='enlace("/Administracion/Vistas/FrmClientes.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Benefactores" visible="${sec:isAnyGranted('33')}"
-																onClick='enlace("Administracion/Vistas/FrmBenefactor.zul")' />
+																onClick='enlace("/Administracion/Vistas/FrmBenefactor.zul")' />
 														</treerow>
 													</treeitem>													
 													<treeitem>
@@ -262,21 +262,21 @@
 														<treerow>
 															<treecell
 																label="Actualizar Compromisos" visible="${sec:isAnyGranted('41')}"
-																onClick='enlace("Administracion/Vistas/frmActualizarCompromisos.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmActualizarCompromisos.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Paquetes de Inscripcion" visible="${sec:isAnyGranted('42')}"
-																onClick='enlace("Administracion/Vistas/frmConfigurarPaquete.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmConfigurarPaquete.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Uniformes" visible="${sec:isAnyGranted('43')}"
-																onClick='enlace("Administracion/Vistas/frmActualizarIndumentaria.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmActualizarIndumentaria.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -455,21 +455,21 @@
 												<treerow>
 													<treecell
 														label="Generar Compromisos" visible="${sec:isAnyGranted('65')}"
-														onClick='enlace("Administracion/Vistas/frmCompromisos.zul")' />
+														onClick='enlace("/Administracion/Vistas/frmCompromisos.zul")' />
 												</treerow>
 											</treeitem>
 											<treeitem open="false">
 												<treerow>
 													<treecell
 														label="Solicitar Uniformes" visible="${sec:isAnyGranted('66')}"
-														onClick='enlace("Administracion/Vistas/frmSolicitudUniforme.zul")' />
+														onClick='enlace("/Administracion/Vistas/frmSolicitudUniforme.zul")' />
 												</treerow>
 											</treeitem>
 											<treeitem open="false">
 												<treerow>
 													<treecell
 														label="Registrar Compras" visible="${sec:isAnyGranted('67')}"
-														onClick='enlace("Administracion/Vistas/frmRegistrarFactura.zul")' />
+														onClick='enlace("/Administracion/Vistas/frmRegistrarFactura.zul")' />
 												</treerow>
 											</treeitem>
 											<treeitem open="false">
@@ -482,21 +482,21 @@
 														<treerow>
 															<treecell
 																label="Cobros" visible="${sec:isAnyGranted('70')}"
-																onClick='enlace("Administracion/Vistas/frmPagoRepre.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmPagoRepre.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Donaciones" visible="${sec:isAnyGranted('71')}"
-																onClick='enlace("Administracion/Vistas/frmDonacion.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmDonacion.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Otros" visible="${sec:isAnyGranted('72')}"
-																onClick='enlace("Administracion/Vistas/frmIngresoExtraordinario.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmIngresoExtraordinario.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -511,14 +511,14 @@
 														<treerow>
 															<treecell
 																label="Pagar Compras" visible="${sec:isAnyGranted('73')}"
-																onClick='enlace("Administracion/Vistas/frmPagarFactura.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmPagarFactura.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem>
 														<treerow>
 															<treecell
 																label="Otros Pagos" visible="${sec:isAnyGranted('74')}"
-																onClick='enlace("Administracion/Vistas/frmPagoServicio.zul")' />
+																onClick='enlace("/Administracion/Vistas/frmPagoServicio.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -723,7 +723,7 @@
 														<treerow>
 															<treecell
 																label="Control de Morosidad" visible="${sec:isAnyGranted('97')}"
-																onClick='enlace("Administracion/Reportes/frmMorosidadGeneral.zul")' />
+																onClick='enlace("/Administracion/Reportes/frmMorosidadGeneral.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem
@@ -733,7 +733,7 @@
 
 															<treecell
 																label="Estado de Ingresos y Egresos" visible="${sec:isAnyGranted('98')}"
-																onClick='enlace("Administracion/Reportes/FrmEstadoFinanciero.zul")' />
+																onClick='enlace("/Administracion/Reportes/FrmEstadoFinanciero.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem
@@ -743,7 +743,7 @@
 
 															<treecell
 																label="Control de Deudas" visible="${sec:isAnyGranted('310')}"
-																onClick='enlace("Administracion/Reportes/FrmControlPagos.zul")' />
+																onClick='enlace("/Administracion/Reportes/FrmControlPagos.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -817,7 +817,7 @@
 														<treerow>
 															<treecell
 																label="Desempeño Deportivo" visible="${sec:isAnyGranted('313')}"
-																onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
+																onClick='enlace("/Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
 														</treerow>
 													</treeitem>
 													
@@ -857,7 +857,7 @@
 														<treerow>
 															<treecell
 																label="Cuentas por Cobrar" visible="${sec:isAnyGranted('110')}"
-																onClick='enlace("Administracion/Reportes/FrmGeneralCobros.zul")' />
+																onClick='enlace("/Administracion/Reportes/FrmGeneralCobros.zul")' />
 														</treerow>
 													</treeitem>
 													<treeitem
@@ -865,7 +865,7 @@
 														<treerow>
 															<treecell
 																label="Cuentas por Pagar" visible="${sec:isAnyGranted('111')}"
-																onClick='enlace("Administracion/Reportes/FrmGeneralPagos.zul")' />
+																onClick='enlace("/Administracion/Reportes/FrmGeneralPagos.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
