@@ -53,6 +53,15 @@ public class DaoFamiliarJugador extends GenericDao {
 		}
 		return elemento;
 	}
+	
+	public List<FamiliarJugador> buscarPorJugador(Jugador jugador) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria cri = session.createCriteria(FamiliarJugador.class);
+		cri.add(Restrictions.eq("jugador",jugador));
+	    return cri.list();
+	}
 
 	/**
 	 * Guarda/actualiza las asociaciones de un jugador con una lista de
@@ -213,4 +222,12 @@ public class DaoFamiliarJugador extends GenericDao {
 			return c.list();
 	}
 	
+	public FamiliarJugador buscarRepresentante(Jugador atleta){
+		Session session = getSession();
+		Transaction tx =  session.beginTransaction();
+		Criteria c = getSession().createCriteria(FamiliarJugador.class);
+		c.add(Restrictions.eq("jugador", atleta));
+		c.add(Restrictions.eq("estatus", 'A')).add(Restrictions.eq("representanteActual", true));
+		return  (FamiliarJugador) c.uniqueResult();
+	}
 }

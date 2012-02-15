@@ -626,9 +626,26 @@
 														open="false">
 														<treerow>
 															<treecell
-																label=" " visible="${sec:isAnyGranted('92')}"/>
+																label="Anuario" visible="${sec:isAnyGranted('92')}"
+																onClick='enlace("Jugador/Reportes/frmConsultarAnuario.zul")' 
+																/>
+																
 														</treerow>
 													</treeitem>
+													
+													<treeitem
+														open="false">
+														<treerow>
+															<treecell
+																label="Expediente" visible="${sec:isAnyGranted('93')}"
+																onClick='enlace("Jugador/Reportes/frmExpedienteJugador.zul")'
+																/>
+																
+														</treerow>
+													</treeitem>
+													
+													
+													
 												</treechildren>
 											</treeitem>
 
@@ -700,13 +717,34 @@
 														label="Operacionales"  visible="${sec:isAnyGranted('89')}"/>
 												</treerow>
 												<treechildren>
-													<treeitem
-														open="false">
-														<treerow>
-															<treecell
-																label=" " visible="${sec:isAnyGranted('96')}"/>
-														</treerow>
-													</treeitem>
+												
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Materiales por Almacén" visible="${sec:isAnyGranted('96')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteMaterialesAlmacen.zul")' />
+													</treerow>
+												</treeitem>																								
+												
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Mantenimientos Instalaciones" visible="${sec:isAnyGranted('96')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteMantenimientos.zul")' />
+													</treerow>
+												</treeitem>
+												
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Estimación de Materiales" visible="${sec:isAnyGranted('96')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteEstimacionMateriales.zul")' />
+													</treerow>
+												</treeitem>	
+																							
 												</treechildren>
 											</treeitem>
 
@@ -844,14 +882,36 @@
 													<treecell
 														label="Operacionales" visible="${sec:isAnyGranted('102')}"/>
 												</treerow>
-												<treechildren>
+												<treechildren>												
+													
 													<treeitem
-														open="false">
-														<treerow>
-															<treecell
-																label=" " visible="${sec:isAnyGranted('108')}"/>
-														</treerow>
-													</treeitem>
+													open="false">
+													<treerow>
+														<treecell
+															label="Progreso por Actividad" visible="${sec:isAnyGranted('108')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteProgresoActividad.zul")' />
+													</treerow>
+												</treeitem>
+											
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Ejecución de Actividades" visible="${sec:isAnyGranted('108')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteEstadoActividad.zul")' />
+													</treerow>
+												</treeitem>												
+												
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Desempeño de Comisiones" visible="${sec:isAnyGranted('108')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteDesempenoComisiones.zul")' />
+													</treerow>
+												</treeitem>	
+													
+													
 												</treechildren>
 											</treeitem>
 											<treeitem open="false">
@@ -886,13 +946,104 @@
 										<treerow>
 											<treecell label="Dinámicos" visible="${sec:isAnyGranted('85')}"/>
 										</treerow>
+										
 										<treechildren>
-											<treeitem open="false">
-												<treerow>
-													<treecell label=" " visible="${sec:isAnyGranted('112')}"/>
-												</treerow>
-											</treeitem>
-										</treechildren>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Jugadores" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label=" " />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Entrenamientos" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label=" " />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Competencias" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Desempeño Deportivo"
+															onClick='enlace("Competencias/Reportes/FrmReporteDesempenoJugadorLLENA.zul")' />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Operacionales" />
+											</treerow>
+											<treechildren>												
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Consulta de Actividades" visible="${sec:isAnyGranted('112')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteDinamicoActividad.zul")' />
+													</treerow>
+												</treeitem>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Seguimiento Representantes" visible="${sec:isAnyGranted('112')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteComisiones.zul")' />
+													</treerow>
+												</treeitem>
+												
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label="Consulta Mantenimientos" visible="${sec:isAnyGranted('112')}"
+															onClick='enlace("/Logistica/Reportes/frmReporteMantenimientosInstalacion.zul")' />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+					
+										<treeitem open="false">
+											<treerow>
+												<treecell
+													label="Administrativos" />
+											</treerow>
+											<treechildren>
+												<treeitem
+													open="false">
+													<treerow>
+														<treecell
+															label=" " />
+													</treerow>
+												</treeitem>
+											</treechildren>
+										</treeitem>
+									</treechildren>
 
 									</treeitem>
 								</treechildren>
@@ -999,7 +1150,7 @@
 											<treeitem>
 												<treerow>
 													<treecell
-														label="Redes Sociales" visible="${sec:isAnyGranted('137')}"/>
+														label="Redes Sociales" onClick='enlace("/General/frmRedesSociales.zul")' visible="${sec:isAnyGranted('137')}"/>
 												</treerow>
 											</treeitem>
 										</treechildren>

@@ -1,10 +1,14 @@
 package controlador.administracion;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +21,10 @@ import modelo.AfeccionPersonal;
 import modelo.ConceptoNomina;
 import modelo.DatoAcademicoPersonal;
 import modelo.DatoBasico;
+import modelo.Ingreso;
+import modelo.IngresoDocumentoAcreedor;
+import modelo.IngresoDocumentoAcreedorId;
+import modelo.IngresoFormaPagoId;
 import modelo.Persona;
 import modelo.PersonaNatural;
 import modelo.Personal;
@@ -30,7 +38,9 @@ import org.zkoss.zul.Image;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Comboitem;
@@ -42,6 +52,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import comun.FileLoader;
 
@@ -71,7 +82,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	PersonalContrato personalContrato = new PersonalContrato();
 	PersonalTipoNomina personalTipoNomina = new PersonalTipoNomina();
 	DatoAcademicoPersonal datoAcademicoPersonal = new DatoAcademicoPersonal();
-	AfeccionPersonal afeccionPersonal;
+	AfeccionPersonal afeccionPersonal = new AfeccionPersonal();
 	PersonalConceptoNomina personalConceptoNomina = new PersonalConceptoNomina();
 	ConceptoNomina conceptoNomina = new ConceptoNomina();
 	PersonalCargo personalCargo = new PersonalCargo();
@@ -116,7 +127,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	Combobox cmbCed, cmbGenero, cmbEdoCivil, cmbCodArea, cmbCodOper, cmbEdo,
 			cmbMunicipio, cmbParroquia, cmbGrupSanguineo, cmbFactor,
 			cmbAlergia, cmbCargo, cmbHoraTrab, cmbHorario, cmbAsignacion,
-			cmbDeduccion;
+			cmbDeduccion, Alergia;
 
 	/* Instancias de los datebox a Utilizar */
 
@@ -153,14 +164,14 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	Image imgPersonal;
 
 	/* Instancias de los Grid a Utilizar */
-	Listbox gridAlergia;
+	Listbox gridAlergia, lbxAlergia;
 	Listitem colAlergias;
 	Listbox gridDatoAcademicos;
 	Listitem colDatAcad;
 
-	AnnotateDataBinder binder;
+	AnnotateDataBinder binderP;
 	Component formulario, formularioRegPers;
-
+	Window RegPers;
 	byte[] foto;
 
 	/* Desarrollo de los Metodos y Funciones del Controlador */
@@ -169,14 +180,16 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		comp.setVariable("cntrl", this, true);
 		formulario = comp;
-		formulario.setId("frmPersonas");
-		formulario.setAttribute("padre", "PERSONAL REMUNERADO");
+		datoBasico = new DatoBasico();
 		cmbParroquia.setDisabled(true);
 		cmbMunicipio.setDisabled(true);
 		this.llenarCmbEstadoCivil();
 		this.llenarCmbGenero();
 		this.llenarCmbEstadoVenezuela();
-		this.llenarCmbAlergia();
+		/* this.llenarCmbAlergia(); */
+		tipoDato = servicioTipoDato.buscarTipo("AFECCION");
+		alergias = servicioDatoBasico.buscarPorTipoDato(tipoDato);
+		System.out.println(alergias.size() + "alergias");
 		this.llenarCmbGrupoSanguineo();
 		this.llenarCmbFactorSanguineo();
 		this.llenarcmbHorario();
@@ -184,7 +197,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		this.llenarCmbCargo();
 		this.llenarCmbCodArea();
 		this.llenarCmbCodCel();
-		limpiarFormulario();
+		// limpiarFormulario();
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -317,7 +330,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 					Integer.parseInt(cmbEdo.getSelectedItem().getValue()
 							.toString()));
 			cmbMunicipio.setDisabled(false);
-			binder.loadComponent(cmbMunicipio);
+			binderP.loadComponent(cmbMunicipio);
 		} catch (Exception e) {
 			// -----------
 		}
@@ -333,7 +346,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 					"PARROQUIA",
 					Integer.parseInt(cmbMunicipio.getSelectedItem().getValue()
 							.toString()));
-			binder.loadComponent(cmbParroquia);
+			binderP.loadComponent(cmbParroquia);
 		} catch (Exception e) {
 			// -----------
 		}
@@ -350,24 +363,19 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	}
 
 	// ------------------------------------------------------------------------------------------------------
-	public void llenarCmbAlergia() {
-		cmbAlergia.getItems().clear();
-		tipoDato = servicioTipoDato.buscarTipo("AFECCION");
-		alergias = servicioDatoBasico.buscarPorTipoDato(tipoDato);
-
-		if (alergias.equals(null)) {
-			alert("No se encontro");
-		} else {
-			for (int i = 0; i < alergias.size(); i++) {
-				Comboitem item = new Comboitem();
-
-				item.setLabel(alergias.get(i).getNombre().toString());
-				item.setValue(alergias.get(i).getCodigoDatoBasico());
-
-				cmbAlergia.appendChild(item);
-			}
-		}
-	}
+	/*
+	 * public void llenarCmbAlergia() { cmbAlergia.getItems().clear(); tipoDato
+	 * = servicioTipoDato.buscarTipo("AFECCION"); alergias =
+	 * servicioDatoBasico.buscarPorTipoDato(tipoDato);
+	 * 
+	 * if (alergias.equals(null)) { alert("No se encontro"); } else { for (int i
+	 * = 0; i < alergias.size(); i++) { Comboitem item = new Comboitem();
+	 * 
+	 * item.setLabel(alergias.get(i).getNombre().toString());
+	 * item.setValue(alergias.get(i).getCodigoDatoBasico());
+	 * 
+	 * cmbAlergia.appendChild(item); } } }
+	 */
 
 	// ------------------------------------------------------------------------------------------------------
 	public void llenarCmbGrupoSanguineo() {
@@ -452,99 +460,66 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregarAlerg() {
-
-		if (gridAlergia.getItemCount() == 0) {
-			colAlergias = new Listitem();
-			colAlergias.appendChild(new Listcell(this.cmbAlergia
-					.getSelectedItem().getLabel()));
-			colAlergias.appendChild(new Listcell(this.txtObsAlergias.getValue()
-					.toString()));
-			gridAlergia.appendChild(colAlergias);
-		} else {
-
-			int i = 0;
-			do {
-				colAlergias = gridAlergia.getItemAtIndex(i);
-				Listcell celda0 = (Listcell) colAlergias.getChildren().get(0);
-				Listcell celda1 = (Listcell) colAlergias.getChildren().get(1);
-				if (this.cmbAlergia.getSelectedItem().getLabel()
-						.equals(celda0.getLabel())) {
-
-					alert("Esta Alergia ya ha sido incluida.");
-					return;
-				}
-				i++;
-			} while (i < gridAlergia.getItemCount());
-
-			colAlergias = new Listitem();
-			colAlergias.appendChild(new Listcell(this.cmbAlergia
-					.getSelectedItem().getLabel()));
-			colAlergias.appendChild(new Listcell(this.txtObsAlergias.getValue()
-					.toString().toUpperCase()));
-			gridAlergia.appendChild(colAlergias);
+		if (this.Alergia.getSelectedIndex() == -1) {
+			throw new WrongValueException(Alergia,
+					"Debe Seleccionar una Afección");
 		}
+		
 
-		cmbAlergia.setValue("--Seleccione--");
-		txtObsAlergias.setValue(null);
+		
+		AfeccionPersonal afeccionPersonal = new AfeccionPersonal();
+
+		afeccionPersonal.setDatoBasico((DatoBasico) Alergia.getSelectedItem()
+				.getValue());
+		afeccionPersonal.setObservacion(txtObsAlergias.getValue());
+		afeccionPersonal.setEstatus('A');
+
+		afeccionPersonales.add(afeccionPersonal);
+		binderP.loadComponent(lbxAlergia);
+
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnQuitarAlerg() {
-		if (gridAlergia.getItemCount() == 0) {
+		if (Alergia.getItemCount() == 0) {
 			alert("No hay Alergias agregadas.");
 		} else {
-			if (gridAlergia.getSelectedIndex() == -1) {
+			if (Alergia.getSelectedIndex() == -1) {
 				alert("Debe Seleccionar una Alergia.");
 			} else {
-				gridAlergia.removeItemAt(gridAlergia.getSelectedIndex());
+				Alergia.removeItemAt(Alergia.getSelectedIndex());
 			}
 		}
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnAgregarDatAcad() {
-
-		if (gridDatoAcademicos.getItemCount() == 0) {
-			colDatAcad = new Listitem();
-			colDatAcad.appendChild(new Listcell(this.txtInstituto.getValue()
-					.toString().toUpperCase()));
-			colDatAcad.appendChild(new Listcell(this.txtTituloObt.getValue()
-					.toString().toUpperCase()));
-			colDatAcad.appendChild(new Listcell(this.dtFechaEgreso.getValue()
-					.toString()));
-			gridDatoAcademicos.appendChild(colDatAcad);
-		} else {
-			int i = 0;
-			do {
-				colDatAcad = gridDatoAcademicos.getItemAtIndex(i);
-				Listcell celda0 = (Listcell) colDatAcad.getChildren().get(0);
-				Listcell celda1 = (Listcell) colDatAcad.getChildren().get(1);
-				Listcell celda2 = (Listcell) colDatAcad.getChildren().get(2);
-				if (this.txtInstituto.getValue().toString().toUpperCase()
-						.equals(celda0.getLabel())
-						&& this.txtTituloObt.getValue().toString()
-								.toUpperCase().equals(celda1.getLabel())
-						&& this.dtFechaEgreso.getValue().toString()
-								.equals(celda2.getLabel())) {
-
-					alert("Esta Alergia ya ha sido incluida.");
-					return;
-				}
-				i++;
-			} while (i < gridDatoAcademicos.getItemCount());
-
-			colDatAcad = new Listitem();
-			colDatAcad.appendChild(new Listcell(this.txtInstituto.getValue()
-					.toString().toUpperCase()));
-			colDatAcad.appendChild(new Listcell(this.txtTituloObt.getValue()
-					.toString().toUpperCase()));
-			colDatAcad.appendChild(new Listcell(this.dtFechaEgreso.getValue()
-					.toString()));
-			gridDatoAcademicos.appendChild(colDatAcad);
+		if (this.txtInstituto.getText()=="") {
+			throw new WrongValueException(txtInstituto,
+					"Debe Escribir el Instituto");
 		}
-		txtInstituto.setText("");
-		txtTituloObt.setText("");
-		dtFechaEgreso.setText("");
+		if (this.txtTituloObt.getText()=="") {
+			throw new WrongValueException(txtTituloObt,
+					"Debe Escribir el Titulo Obtenido");
+		}
+		if (this.dtFechaEgreso.getText()=="") {
+			throw new WrongValueException(dtFechaEgreso,
+					"Debe Escribir el Titulo Obtenido");
+		}
+		datoAcademicoPersonal = new DatoAcademicoPersonal();
+		Date fecha = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		fecha.parse("" + fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/"
+				+ (fecha.getYear() + 1900));
+
+		datoAcademicoPersonal.setEstatus('A');
+
+		datoAcademicoPersonal.setInstituto(txtInstituto.getValue());
+		datoAcademicoPersonal.setTitulo(txtTituloObt.getValue());
+		datoAcademicoPersonal.setFechaEgreso(fecha);
+		datoAcademicosP.add(datoAcademicoPersonal);
+		binderP.loadComponent(gridDatoAcademicos);
+
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -565,179 +540,328 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	// ------------------------------------------------------------------------------------------------------
 
 	public void onClick$btnFoto() {
+		System.out.println("entro");
 		FileLoader fl = new FileLoader();
+
 		foto = fl.cargarImagenEnBean(imgPersonal);
-		System.out.print(foto);
+
+		personaNatural.setFoto(foto);
+
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnGuardar() {
-		Integer n = 0;
-		String cedula = cmbCed.getValue().toString()
-				+ txtCed.getValue().toString();
-		String telefono = cmbCodArea.getValue().toString()
-				+ txtTelfHab.getValue().toString();
-		String celular = cmbCodOper.getValue().toString()
-				+ txtTelfCel.getValue().toString();
-
-		persona = new Persona();
-		persona.setCedulaRif(cedula);
-		persona.setFechaIngreso(dtFechaIngresoEsc.getValue());
-		persona.setDireccion(txtDir.getValue().toUpperCase());
-		persona.setTelefonoHabitacion(telefono);
-		persona.setCorreoElectronico(txtCorreo.getValue().toUpperCase());
-		persona.setTwitter(txtTwitter.getValue().toUpperCase());
-		datoBasico = servicioDatoBasico.buscarPorString(cmbParroquia
-				.getSelectedItem().getLabel());
-		persona.setDatoBasicoByCodigoParroquia(datoBasico);
-		datoBasico = servicioDatoBasico.buscarPorString("PERSONAL REMUNERADO");
-		persona.setDatoBasicoByCodigoTipoPersona(datoBasico);
-		persona.setEstatus('A');
-		servicioPersona.agregar(persona);
-
-		personaNatural = new PersonaNatural();
-		personaNatural.setPersona(persona);
-		personaNatural.setCelular(celular);
-		personaNatural.setPrimerNombre(txtPrimNombre.getValue().toUpperCase());
-		personaNatural.setSegundoNombre(txtSegNombre.getValue().toUpperCase());
-		personaNatural.setPrimerApellido(txtPrimApellido.getValue()
-				.toUpperCase());
-		personaNatural.setSegundoApellido(txtSegApellido.getValue()
-				.toUpperCase());
-
-		if (cmbGenero.getValue().equals("MASCULINO")) {
-			personaNatural.setDatoBasico(servicioDatoBasico
-					.buscarPorString("MASCULINO"));
-		} else if (cmbGenero.getValue().equals("FEMENINO")) {
-			personaNatural.setDatoBasico(servicioDatoBasico
-					.buscarPorString("FEMENINO"));
+		if (this.cmbCed.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbCed, "Debe Seleccionar una opción");
 		}
-		personaNatural.setFechaNacimiento(dtFechaNac.getValue());
-		if (foto != null) {
-			personaNatural.setFoto(foto);
-			System.out.print("entro");
+		if (this.txtCed.getText() == "") {
+			throw new WrongValueException(txtCed,
+					"Debe Escribir una Cedula o seleccionar una persona del catálogo");
 		}
-		personaNatural.setEstatus('A');
-		personaNatural.setFoto(null);
-		servicioPersonaNatural.agregar(personaNatural);
-
-		personal = new Personal();
-		personal.setPersonaNatural(personaNatural);
-		personal.setCantidadHijos(spNroHijos.getValue());
-		personal.setEstatus('A');
-		personal.setDatoBasico(servicioDatoBasico.buscarPorString(cmbEdoCivil
-				.getSelectedItem().getLabel()));
-
-		String tipoSangre = cmbGrupSanguineo.getValue() + "-"
-				+ cmbFactor.getValue();
-		personal.setTipoSangre(tipoSangre);
-		servicioPersonal.agregar(personal);
-
-		personalCargo = new PersonalCargo();
-		personalCargos = servicioPersonalCargo.listarActivos();
-		n = personalCargos.size();
-		n++;
-		personalCargo.setCodigoPersonalCargo(n);
-		datoBasico = servicioDatoBasico.buscarPorString(cmbCargo
-				.getSelectedItem().getLabel());
-		personalCargo.setDatoBasico(datoBasico);
-		personalCargo.setPersonal(personal);
-		personalCargo.setFechaFin(dtFechaEgresoEsc.getValue());
-		personalCargo.setFechaInicio(dtFechaCargo.getValue());
-		personalCargo.setEstatus('A');
-		servicioPersonalCargo.agregar(personalCargo);
-
-		personalContrato = new PersonalContrato();
-		personalContratos = servicioPersonalContrato.listar();
-		n = personalContratos.size();
-		n++;
-		personalContrato.setCodigoPersonalContrato(n);
-		personalContrato.setFechaInicio(dtFechaIngresoEsc.getValue());
-		personalContrato.setPersonal(personal);
-		personalContrato.setFechaFin(dtFechaEgresoEsc.getValue());
-		personalContrato.setDatoBasicoByCodigoModalidad(servicioDatoBasico
-				.buscarPorString("TIEMPO COMPLETO")); // OJO CUAL ES LA
-														// MODALIDAD DEL
-														// CONTRATO?
-		personalContrato.setDatoBasicoByCodigoHorario(servicioDatoBasico
-				.buscarPorString(cmbHorario.getText().toString()));
-		personalContrato.setEstatus('A');
-		servicioPersonalContrato.agregar(personalContrato);
-
-		tipoDato = servicioTipoDato.buscarTipo("AFECCION");
-		alergias = servicioDatoBasico.buscarPorTipoDato(tipoDato);
-
-		afeccionPersonal = new AfeccionPersonal();
-		binder.loadComponent(gridAlergia);
-		for (int i = 0; i < gridAlergia.getItemCount(); i++) {
-
-			System.out.print("esta entrando al for");
-
-			colAlergias = gridAlergia.getItemAtIndex(i);
-			Listcell celda1 = (Listcell) colAlergias.getChildren().get(0);
-			Listcell celda2 = (Listcell) colAlergias.getChildren().get(1);
-
-			afeccionPersonal.setCodigoAfeccionPersonal(servicioAfeccionPersonal
-					.listar().size() + 1);
-			afeccionPersonal.setPersonal(personal);
-			afeccionPersonal.setDatoBasico(servicioDatoBasico
-					.buscarPorString(celda1.getLabel().toString()));
-			afeccionPersonal.setObservacion(celda2.getLabel().toString());
-			afeccionPersonal.setEstatus('A');
-			servicioAfeccionPersonal.agregar(afeccionPersonal);
+		if (this.txtPrimNombre.getText() == "") {
+			throw new WrongValueException(txtPrimNombre,
+					"Debe Escribir el Nombre");
+		}
+		if (this.txtPrimApellido.getText() == "") {
+			throw new WrongValueException(txtPrimApellido,
+					"Debe Escribir el Apellido");
+		}
+		if (this.dtFechaNac.getText() == "") {
+			throw new WrongValueException(dtFechaNac,
+					"Debe Seleccionar una fecha");
+		}
+		if (this.cmbGenero.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbGenero,
+					"Debe Seleccionar una Género");
+		}
+		if (this.cmbEdoCivil.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbEdoCivil,
+					"Debe Seleccionar una Estado Civil");
+		}
+		if (this.cmbEdo.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbEdo, "Debe Seleccionar una Estado");
+		}
+		if (this.cmbMunicipio.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbMunicipio,
+					"Debe Seleccionar un Municipio");
+		}
+		if (this.cmbParroquia.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbParroquia,
+					"Debe Seleccionar una Parroquia");
+		}
+		if (this.txtDir.getText() == "") {
+			throw new WrongValueException(txtDir, "Debe Escribir la Direccción");
+		}
+		if (this.cmbGrupSanguineo.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbGrupSanguineo,
+					"Debe Seleccionar un Grupo Sanguíneo");
+		}
+		if (this.cmbFactor.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbFactor,
+					"Debe Seleccionar un Factor");
+		}
+		if (datoAcademicosP.size() == 0) {
+			throw new WrongValueException(gridDatoAcademicos,
+					"No ha registrado ningún Dato Académico");
+		}
+		if (this.cmbCargo.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbCargo, "Debe Seleccionar un Cargo");
+		}
+		if (this.dtFechaCargo.getText() == "") {
+			throw new WrongValueException(dtFechaCargo,
+					"Debe Seleccionar la fecha del cargo");
+		}
+		if (this.cmbHorario.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbHorario,
+					"Debe Seleccionar un Horario");
+		}
+		if (this.dtFechaIngresoEsc.getText() == "") {
+			throw new WrongValueException(dtFechaIngresoEsc,
+					"Debe Seleccionar la fecha de Ingreso a la Escuela");
 		}
 
-		/*
-		 * datoAcademicosP = servicioDatoAcademicoPersonal.listarActivos(); n =
-		 * datoAcademicosP.size(); n++;
-		 */
-		binder.loadComponent(gridDatoAcademicos);
-		for (int i = 0; i < gridDatoAcademicos.getItemCount(); i++) {
+		try {
+			Messagebox.show("¿Desea guardar los cambios?", "Importante",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+					new EventListener() {
+						@Override
+						public void onEvent(Event arg0)
+								throws InterruptedException {
+							if (arg0.getName().toString() == "onOK") {
+								Integer n = 0;
+								String cedula = cmbCed.getValue().toString()
+										+ txtCed.getValue().toString();
+								String telefono = cmbCodArea.getValue()
+										.toString()
+										+ txtTelfHab.getValue().toString();
+								String celular = cmbCodOper.getValue()
+										.toString()
+										+ txtTelfCel.getValue().toString();
 
-			colDatAcad = gridDatoAcademicos.getItemAtIndex(i);
-			Listcell celda1 = (Listcell) colDatAcad.getChildren().get(0);
-			Listcell celda2 = (Listcell) colDatAcad.getChildren().get(1);
-			Listcell celda3 = (Listcell) colDatAcad.getChildren().get(2);
+								persona = new Persona();
+								persona.setCedulaRif(cedula);
+								persona.setFechaIngreso(dtFechaIngresoEsc
+										.getValue());
+								persona.setDireccion(txtDir.getValue()
+										.toUpperCase());
+								if (cmbCodOper.getSelectedIndex() == -1) {
+									persona.setTelefonoHabitacion(null);
+								} else {
+									persona.setTelefonoHabitacion(telefono);
+								}
+								persona.setCorreoElectronico(txtCorreo
+										.getValue().toUpperCase());
+								persona.setTwitter(txtTwitter.getValue()
+										.toUpperCase());
+								datoBasico = servicioDatoBasico
+										.buscarPorString(cmbParroquia
+												.getSelectedItem().getLabel());
+								persona.setDatoBasicoByCodigoParroquia(datoBasico);
+								datoBasico = servicioDatoBasico
+										.buscarPorString("PERSONAL REMUNERADO");
+								persona.setDatoBasicoByCodigoTipoPersona(datoBasico);
+								persona.setEstatus('A');
+								servicioPersona.agregar(persona);
 
-			Date fecha = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fecha.parse("" + fecha.getDate() + "/" + (fecha.getMonth() + 1)
-					+ "/" + (fecha.getYear() + 1900));
-			System.out.println(fecha.toString());
-			datoAcademicoPersonal
-					.setCodigoDatoAcademico(servicioDatoAcademicoPersonal
-							.listar().size() + 1);
-			datoAcademicoPersonal.setPersonal(personal);
-			datoAcademicoPersonal.setEstatus('A');
+								personaNatural = new PersonaNatural();
+								personaNatural.setPersona(persona);
+								if (cmbCodOper.getSelectedIndex() == -1) {
+									personaNatural.setCelular(null);
+								} else {
+									personaNatural.setCelular(celular);
+								}
+								personaNatural.setPrimerNombre(txtPrimNombre
+										.getValue().toUpperCase());
+								personaNatural.setSegundoNombre(txtSegNombre
+										.getValue().toUpperCase());
+								personaNatural
+										.setPrimerApellido(txtPrimApellido
+												.getValue().toUpperCase());
+								personaNatural
+										.setSegundoApellido(txtSegApellido
+												.getValue().toUpperCase());
 
-			datoAcademicoPersonal.setInstituto(celda1.getLabel().toString()
-					.toUpperCase());
-			datoAcademicoPersonal.setTitulo(celda2.getLabel().toString()
-					.toUpperCase());
-			datoAcademicoPersonal.setFechaEgreso(fecha);
+								if (cmbGenero.getValue().equals("MASCULINO")) {
+									personaNatural.setDatoBasico(servicioDatoBasico
+											.buscarPorString("MASCULINO"));
+								} else if (cmbGenero.getValue().equals(
+										"FEMENINO")) {
+									personaNatural.setDatoBasico(servicioDatoBasico
+											.buscarPorString("FEMENINO"));
+								}
+								personaNatural.setFechaNacimiento(dtFechaNac
+										.getValue());
+								if (foto != null) {
+									personaNatural.setFoto(foto);
+									System.out.print("entro");
+								}
+								personaNatural.setEstatus('A');
+								personaNatural.setFoto(null);
+								servicioPersonaNatural.agregar(personaNatural);
 
-			servicioDatoAcademicoPersonal.agregar(datoAcademicoPersonal);
+								personal = new Personal();
+								personal.setPersonaNatural(personaNatural);
+								personal.setCantidadHijos(spNroHijos.getValue());
+								personal.setEstatus('A');
+								personal.setDatoBasico(servicioDatoBasico
+										.buscarPorString(cmbEdoCivil
+												.getSelectedItem().getLabel()));
 
+								String tipoSangre = cmbGrupSanguineo.getValue()
+										+ "-" + cmbFactor.getValue();
+								personal.setTipoSangre(tipoSangre);
+								servicioPersonal.agregar(personal);
+
+								personalCargo = new PersonalCargo();
+								personalCargos = servicioPersonalCargo
+										.listarActivos();
+								n = personalCargos.size();
+								n++;
+								personalCargo.setCodigoPersonalCargo(n);
+								datoBasico = servicioDatoBasico
+										.buscarPorString(cmbCargo
+												.getSelectedItem().getLabel());
+								personalCargo.setDatoBasico(datoBasico);
+								personalCargo.setPersonal(personal);
+								personalCargo.setFechaFin(dtFechaEgresoEsc
+										.getValue());
+								personalCargo.setFechaInicio(dtFechaCargo
+										.getValue());
+								personalCargo.setEstatus('A');
+								servicioPersonalCargo.agregar(personalCargo);
+
+								personalContrato = new PersonalContrato();
+								personalContratos = servicioPersonalContrato
+										.listar();
+								n = personalContratos.size();
+								n++;
+								personalContrato.setCodigoPersonalContrato(n);
+								personalContrato
+										.setFechaInicio(dtFechaIngresoEsc
+												.getValue());
+								personalContrato.setPersonal(personal);
+								personalContrato.setFechaFin(dtFechaEgresoEsc
+										.getValue());
+								personalContrato
+										.setDatoBasicoByCodigoModalidad(servicioDatoBasico
+												.buscarPorString("TIEMPO COMPLETO")); // OJO
+																						// CUAL
+																						// ES
+																						// LA
+																						// MODALIDAD
+																						// DEL
+																						// CONTRATO?
+								personalContrato
+										.setDatoBasicoByCodigoHorario(servicioDatoBasico
+												.buscarPorString(cmbHorario
+														.getText().toString()));
+								personalContrato.setEstatus('A');
+								servicioPersonalContrato
+										.agregar(personalContrato);
+
+								tipoDato = servicioTipoDato
+										.buscarTipo("AFECCION");
+								alergias = servicioDatoBasico
+										.buscarPorTipoDato(tipoDato);
+
+								// binder.loadComponent(gridAlergia);
+								for (int i = 0; i < afeccionPersonales.size(); i++) {
+									AfeccionPersonal auxAfeccion = new AfeccionPersonal();
+									auxAfeccion
+											.setDatoBasico(afeccionPersonales
+													.get(i).getDatoBasico());
+									auxAfeccion.setEstatus('A');
+									auxAfeccion
+											.setObservacion(afeccionPersonales
+													.get(i).getObservacion());
+
+									auxAfeccion.setPersonal(personal);
+									System.out
+											.print(personal.getPersonaNatural()
+													.getCedulaRif());
+									auxAfeccion
+											.setCodigoAfeccionPersonal(servicioAfeccionPersonal
+													.listar().size() + 1);
+
+									servicioAfeccionPersonal
+											.agregar(auxAfeccion);
+								}
+
+								for (int i = 0; i < datoAcademicosP.size(); i++) {
+									datoAcademicoPersonal
+											.setCodigoDatoAcademico(servicioDatoAcademicoPersonal
+													.listar().size() + 1);
+									datoAcademicoPersonal.setPersonal(personal);
+
+									servicioDatoAcademicoPersonal
+											.agregar(datoAcademicoPersonal);
+
+								}
+
+								limpiarFormulario();
+
+								try {
+									Messagebox.show("Guardado Exitosamente",
+											"Información", Messagebox.OK,
+											Messagebox.INFORMATION);
+								} catch (Exception e) {
+								}
+
+							}
+						}
+					});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-
-		/*
-		 * persona = new Persona(); personaNatural = new PersonaNatural();
-		 * 
-		 * personal = new Personal();
-		 * 
-		 * personalCargo = new PersonalCargo(); personalContrato = new
-		 * PersonalContrato(); personalTipoNomina = new PersonalTipoNomina();
-		 * afeccionPersonal = new AfeccionPersonal(); datoAcademicoPersonal =
-		 * new DatoAcademicoPersonal();
-		 */
-		limpiarFormulario();
-		alert("Guardado");
 
 	}
 
 	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnCancelar() {
-		limpiarFormulario();
+		try {
+			Messagebox.show("¿Está seguro que desea cancelar?", "Importante",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+					new EventListener() {
+						@Override
+						public void onEvent(Event arg0)
+								throws InterruptedException {
+							if (arg0.getName().toString() == "onOK") {
+								
+								limpiarFormulario();
+									
+								
+								
+							}
+						}
+					});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
+	public void onClick$btnSalir() {
+		try {
+			Messagebox.show("¿Está seguro que desea salir?", "Importante",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+					new EventListener() {
+						@Override
+						public void onEvent(Event arg0)
+								throws InterruptedException {
+							if (arg0.getName().toString() == "onOK") {
+								
+									limpiarFormulario();
+									RegPers.detach();
+								
+								
+							}
+						}
+					});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -761,9 +885,9 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		dtFechaIngresoEsc.setText("");
 		dtFechaEgresoEsc.setText("");
 
-		int n = gridAlergia.getItemCount();
+		int n = Alergia.getItemCount();
 		for (int i = 0; i < n; i++) {
-			gridAlergia.removeItemAt(0);
+			Alergia.removeItemAt(0);
 		}
 		int m = gridDatoAcademicos.getItemCount();
 		for (int j = 0; j < m; j++) {
@@ -800,9 +924,9 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		cmbFactor.setText("");
 		cmbFactor.setSelectedIndex(-1);
 		cmbFactor.setValue("Seleccione--");
-		cmbAlergia.setText("");
-		cmbAlergia.setSelectedIndex(-1);
-		cmbAlergia.setValue("--Seleccione--");
+		Alergia.setText("");
+		Alergia.setSelectedIndex(-1);
+		Alergia.setValue("--Seleccione--");
 		cmbCargo.setText("");
 		cmbCargo.setSelectedIndex(-1);
 		cmbCargo.setValue("--Seleccione--");
@@ -838,6 +962,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 		Map params = new HashMap();
 		params.put("padre", "PERSONAL REMUNERADO");
+		params.put("formulario", formulario);
 		Executions.createComponents(
 				"/Administracion/Vistas/frmCatalogoPersonasNaturales.zul",
 				null, params);
@@ -855,7 +980,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 				if (persona.getPersonaNatural().getSegundoNombre() != null)
 					segundoN = persona.getPersonaNatural().getSegundoNombre();
 
-				if (persona.getPersonaNatural().getSegundoNombre() != null)
+				if (persona.getPersonaNatural().getSegundoApellido() != null)
 					segundoA = persona.getPersonaNatural().getSegundoApellido();
 
 				txtPrimNombre.setText(persona.getPersonaNatural()
@@ -947,35 +1072,30 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 							cadena.length()));
 				}
 
-				afeccionPersonales = new ArrayList<AfeccionPersonal>();
+				/*
+				 * afeccionPersonales = new ArrayList<AfeccionPersonal>();
+				 * afeccionPersonales = servicioAfeccionPersonal
+				 * .listarPorCedula(persona.getCedulaRif());
+				 * 
+				 * for (int i = 0; i < afeccionPersonales.size(); i++) {
+				 * 
+				 * colAlergias = new Listitem(); colAlergias.appendChild(new
+				 * Listcell(afeccionPersonales
+				 * .get(i).getDatoBasico().getNombre().toString()));
+				 * colAlergias.appendChild(new Listcell(afeccionPersonales
+				 * .get(i).getObservacion().toString()));
+				 * gridAlergia.appendChild(colAlergias); }
+				 */
 				afeccionPersonales = servicioAfeccionPersonal
 						.listarPorCedula(persona.getCedulaRif());
 
-				for (int i = 0; i < afeccionPersonales.size(); i++) {
+				binderP.loadComponent(lbxAlergia);
 
-					colAlergias = new Listitem();
-					colAlergias.appendChild(new Listcell(afeccionPersonales
-							.get(i).getDatoBasico().getNombre().toString()));
-					colAlergias.appendChild(new Listcell(afeccionPersonales
-							.get(i).getObservacion().toString()));
-					gridAlergia.appendChild(colAlergias);
-				}
-
-				datoAcademicosP = new ArrayList<DatoAcademicoPersonal>();
+				// datoAcademicosP = new ArrayList<DatoAcademicoPersonal>();
 				datoAcademicosP = servicioDatoAcademicoPersonal
 						.listarPorCedula(persona.getCedulaRif());
 
-				for (int i = 0; i < datoAcademicosP.size(); i++) {
-
-					colDatAcad = new Listitem();
-					colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i)
-							.getInstituto().toString()));
-					colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i)
-							.getTitulo().toString()));
-					colDatAcad.appendChild(new Listcell(datoAcademicosP.get(i)
-							.getFechaEgreso().toString()));
-					gridDatoAcademicos.appendChild(colDatAcad);
-				}
+				binderP.loadComponent(gridDatoAcademicos);
 
 				personalCargo = servicioPersonalCargo.buscarCargoActual(persona
 						.getPersonaNatural().getPersonal());
@@ -987,10 +1107,10 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 				cmbHorario.setText(personalContrato
 						.getDatoBasicoByCodigoHorario().getNombre());
 
-				dtFechaIngresoEsc.setValue(persona.getFechaIngreso());
-				dtFechaEgresoEsc.setValue(persona.getFechaEgreso());
+				dtFechaIngresoEsc.setValue(personalContrato.getFechaInicio());
+				dtFechaEgresoEsc.setValue(personalContrato.getFechaFin());
 
-				binder.loadAll();
+				binderP.loadAll();
 
 				// Inhabilitar();
 				txtTelfHab.setDisabled(false);
@@ -1004,7 +1124,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 				dtFechaEgreso.setDisabled(false);
 				dtFechaCargo.setDisabled(false);
 
-				cmbAlergia.setDisabled(false);
+				Alergia.setDisabled(false);
 
 				cmbEdoCivil.setDisabled(false);
 				cmbCodArea.setDisabled(false);
@@ -1012,7 +1132,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 				cmbEdo.setDisabled(false);
 				cmbMunicipio.setDisabled(false);
 				cmbParroquia.setDisabled(false);
-				cmbAlergia.setDisabled(false);
+				Alergia.setDisabled(false);
 				cmbCargo.setDisabled(false);
 				cmbHorario.setDisabled(false);
 
@@ -1053,7 +1173,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		dtFechaIngresoEsc.setDisabled(true);
 		dtFechaEgresoEsc.setDisabled(true);
 
-		gridAlergia.setDisabled(true);
+		lbxAlergia.setDisabled(true);
 		gridDatoAcademicos.setDisabled(true);
 
 		cmbCed.setDisabled(true);
@@ -1067,7 +1187,7 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		 */
 		cmbGrupSanguineo.setDisabled(true);
 		cmbFactor.setDisabled(true);
-		cmbAlergia.setDisabled(true);
+		Alergia.setDisabled(true);
 		cmbCargo.setDisabled(true);
 		cmbHorario.setDisabled(true);
 
@@ -1086,160 +1206,248 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 		btnAgregarDatAcad.setDisabled(true);
 		btnBuscarCed.setDisabled(true);
 
-	}
+	} // ------------------------------------------------------------------------------------------------------
 
-	// ------------------------------------------------------------------------------------------------------
 	public void onClick$btnModificar() {
-
-		Integer n = 0;
-		String cedula = cmbCed.getValue().toString()
-				+ txtCed.getValue().toString();
-		String telefono = cmbCodArea.getValue().toString()
-				+ txtTelfHab.getValue().toString();
-		String celular = cmbCodOper.getValue().toString()
-				+ txtTelfCel.getValue().toString();
-
-		persona = new Persona();
-		persona.setCedulaRif(cedula);
-		persona.setFechaIngreso(dtFechaIngresoEsc.getValue());
-		persona.setDireccion(txtDir.getValue().toUpperCase());
-		persona.setTelefonoHabitacion(telefono);
-		persona.setCorreoElectronico(txtCorreo.getValue().toUpperCase());
-		persona.setTwitter(txtTwitter.getValue().toUpperCase());
-		datoBasico = servicioDatoBasico.buscarPorString(cmbParroquia.getText());
-		persona.setDatoBasicoByCodigoParroquia(datoBasico);
-		datoBasico = servicioDatoBasico.buscarPorString("PERSONAL REMUNERADO");
-		persona.setDatoBasicoByCodigoTipoPersona(datoBasico);
-		persona.setEstatus('A');
-		servicioPersona.actualizar(persona);
-
-		personaNatural = new PersonaNatural();
-		personaNatural.setPersona(persona);
-		personaNatural.setCelular(celular);
-		personaNatural.setPrimerNombre(txtPrimNombre.getValue().toUpperCase());
-		personaNatural.setSegundoNombre(txtSegNombre.getValue().toUpperCase());
-		personaNatural.setPrimerApellido(txtPrimApellido.getValue()
-				.toUpperCase());
-		personaNatural.setSegundoApellido(txtSegApellido.getValue()
-				.toUpperCase());
-
-		if (cmbGenero.getValue().equals("MASCULINO")) {
-			personaNatural.setDatoBasico(servicioDatoBasico
-					.buscarPorString("MASCULINO"));
-		} else if (cmbGenero.getValue().equals("FEMENINO")) {
-			personaNatural.setDatoBasico(servicioDatoBasico
-					.buscarPorString("FEMENINO"));
+		if (this.cmbCed.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbCed, "Debe Seleccionar una opción");
 		}
-		personaNatural.setFechaNacimiento(dtFechaNac.getValue());
-		if (foto != null) {
-			personaNatural.setFoto(foto);
-			System.out.print("entro");
+		if (this.txtCed.getText() == "") {
+			throw new WrongValueException(txtCed,
+					"Debe Escribir una Cedula o seleccionar una persona del catálogo");
 		}
-		personaNatural.setEstatus('A');
-		personaNatural.setFoto(null);
-		servicioPersonaNatural.agregar(personaNatural);
-
-		personal = new Personal();
-		personal.setPersonaNatural(personaNatural);
-		personal.setCantidadHijos(spNroHijos.getValue());
-		personal.setEstatus('A');
-		personal.setDatoBasico(servicioDatoBasico.buscarPorString(cmbEdoCivil
-				.getSelectedItem().getLabel()));
-
-		String tipoSangre = cmbGrupSanguineo.getValue() + "-"
-				+ cmbFactor.getValue();
-		personal.setTipoSangre(tipoSangre);
-		servicioPersonal.agregar(personal);
-
-		personalCargo = new PersonalCargo();
-		personalCargos = servicioPersonalCargo.listarActivos();
-		n = personalCargos.size();
-		n++;
-		personalCargo.setCodigoPersonalCargo(n);
-		datoBasico = servicioDatoBasico.buscarPorString(cmbCargo
-				.getSelectedItem().getLabel());
-		personalCargo.setDatoBasico(datoBasico);
-		personalCargo.setPersonal(personal);
-		personalCargo.setFechaFin(dtFechaEgresoEsc.getValue());
-		personalCargo.setFechaInicio(dtFechaCargo.getValue());
-		personalCargo.setEstatus('A');
-		servicioPersonalCargo.agregar(personalCargo);
-
-		personalContrato = new PersonalContrato();
-		personalContratos = servicioPersonalContrato.listar();
-		n = personalContratos.size();
-		n++;
-		personalContrato.setCodigoPersonalContrato(n);
-		personalContrato.setFechaInicio(dtFechaIngresoEsc.getValue());
-		personalContrato.setPersonal(personal);
-		personalContrato.setFechaFin(dtFechaEgresoEsc.getValue());
-		personalContrato.setDatoBasicoByCodigoModalidad(servicioDatoBasico
-				.buscarPorString("TIEMPO COMPLETO")); // OJO CUAL ES LA
-														// MODALIDAD DEL
-														// CONTRATO?
-		personalContrato.setDatoBasicoByCodigoHorario(servicioDatoBasico
-				.buscarPorString(cmbHorario.getText().toString()));
-		personalContrato.setEstatus('A');
-		servicioPersonalContrato.agregar(personalContrato);
-
-		tipoDato = servicioTipoDato.buscarTipo("AFECCION");
-		alergias = servicioDatoBasico.buscarPorTipoDato(tipoDato);
-
-		afeccionPersonal = new AfeccionPersonal();
-		binder.loadComponent(gridAlergia);
-		for (int i = 0; i < gridAlergia.getItemCount(); i++) {
-
-			System.out.print("esta entrando al for");
-
-			colAlergias = gridAlergia.getItemAtIndex(i);
-			Listcell celda1 = (Listcell) colAlergias.getChildren().get(0);
-			Listcell celda2 = (Listcell) colAlergias.getChildren().get(1);
-
-			afeccionPersonal.setCodigoAfeccionPersonal(servicioAfeccionPersonal
-					.listar().size() + 1);
-			afeccionPersonal.setPersonal(personal);
-			afeccionPersonal.setDatoBasico(servicioDatoBasico
-					.buscarPorString(celda1.getLabel().toString()));
-			afeccionPersonal.setObservacion(celda2.getLabel().toString());
-			afeccionPersonal.setEstatus('A');
-			servicioAfeccionPersonal.agregar(afeccionPersonal);
+		if (this.txtPrimNombre.getText() == "") {
+			throw new WrongValueException(txtPrimNombre,
+					"Debe Escribir el Nombre");
+		}
+		if (this.txtPrimApellido.getText() == "") {
+			throw new WrongValueException(txtPrimApellido,
+					"Debe Escribir el Apellido");
+		}
+		if (this.dtFechaNac.getText() == "") {
+			throw new WrongValueException(dtFechaNac,
+					"Debe Seleccionar una fecha");
+		}
+		if (this.cmbGenero.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbGenero,
+					"Debe Seleccionar una Género");
+		}
+		if (this.cmbEdoCivil.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbEdoCivil,
+					"Debe Seleccionar una Estado Civil");
+		}
+		if (this.cmbEdo.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbEdo, "Debe Seleccionar una Estado");
+		}
+		if (this.cmbMunicipio.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbMunicipio,
+					"Debe Seleccionar un Municipio");
+		}
+		if (this.cmbParroquia.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbParroquia,
+					"Debe Seleccionar una Parroquia");
+		}
+		if (this.txtDir.getText() == "") {
+			throw new WrongValueException(txtDir, "Debe Escribir la Direccción");
+		}
+		if (this.cmbGrupSanguineo.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbGrupSanguineo,
+					"Debe Seleccionar un Grupo Sanguíneo");
+		}
+		if (this.cmbFactor.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbFactor,
+					"Debe Seleccionar un Factor");
+		}
+		if (datoAcademicosP.size() == 0) {
+			throw new WrongValueException(gridDatoAcademicos,
+					"No ha registrado ningún Dato Académico");
+		}
+		if (this.cmbCargo.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbCargo, "Debe Seleccionar un Cargo");
+		}
+		if (this.dtFechaCargo.getText() == "") {
+			throw new WrongValueException(dtFechaCargo,
+					"Debe Seleccionar la fecha del cargo");
+		}
+		if (this.cmbHorario.getSelectedIndex() == -1) {
+			throw new WrongValueException(cmbHorario,
+					"Debe Seleccionar un Horario");
+		}
+		if (this.dtFechaIngresoEsc.getText() == "") {
+			throw new WrongValueException(dtFechaIngresoEsc,
+					"Debe Seleccionar la fecha de Ingreso a la Escuela");
 		}
 
-		/*
-		 * datoAcademicosP = servicioDatoAcademicoPersonal.listarActivos(); n =
-		 * datoAcademicosP.size(); n++;
-		 */
-		binder.loadComponent(gridDatoAcademicos);
-		for (int i = 0; i < gridDatoAcademicos.getItemCount(); i++) {
+		try {
+			Messagebox.show("¿Desea guardar los cambios?", "Importante",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+					new EventListener() {
+						@Override
+						public void onEvent(Event arg0)
+								throws InterruptedException {
+							if (arg0.getName().toString() == "onOK") {
+								Integer n = 0;
+								String cedula = cmbCed.getValue().toString()
+										+ txtCed.getValue().toString();
+								String telefono = cmbCodArea.getValue()
+										.toString()
+										+ txtTelfHab.getValue().toString();
+								String celular = cmbCodOper.getValue()
+										.toString()
+										+ txtTelfCel.getValue().toString();
 
-			colDatAcad = gridDatoAcademicos.getItemAtIndex(i);
-			Listcell celda1 = (Listcell) colDatAcad.getChildren().get(0);
-			Listcell celda2 = (Listcell) colDatAcad.getChildren().get(1);
-			Listcell celda3 = (Listcell) colDatAcad.getChildren().get(2);
+								persona = new Persona();
+								persona.setCedulaRif(cedula);
+								persona.setFechaIngreso(dtFechaIngresoEsc
+										.getValue());
+								persona.setDireccion(txtDir.getValue()
+										.toUpperCase());
+								persona.setTelefonoHabitacion(telefono);
+								persona.setCorreoElectronico(txtCorreo
+										.getValue().toUpperCase());
+								persona.setTwitter(txtTwitter.getValue()
+										.toUpperCase());
+								datoBasico = servicioDatoBasico
+										.buscarPorString(cmbParroquia.getText());
+								persona.setDatoBasicoByCodigoParroquia(datoBasico);
+								datoBasico = servicioDatoBasico
+										.buscarPorString("PERSONAL REMUNERADO");
+								persona.setDatoBasicoByCodigoTipoPersona(datoBasico);
+								persona.setEstatus('A');
+								servicioPersona.actualizar(persona);
 
-			Date fecha = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fecha.parse("" + fecha.getDate() + "/" + (fecha.getMonth() + 1)
-					+ "/" + (fecha.getYear() + 1900));
-			System.out.println(fecha.toString());
-			datoAcademicoPersonal
-					.setCodigoDatoAcademico(servicioDatoAcademicoPersonal
-							.listar().size() + 1);
-			datoAcademicoPersonal.setPersonal(personal);
-			datoAcademicoPersonal.setEstatus('A');
+								personaNatural = new PersonaNatural();
+								personaNatural.setPersona(persona);
+								personaNatural.setCelular(celular);
+								personaNatural.setPrimerNombre(txtPrimNombre
+										.getValue().toUpperCase());
+								personaNatural.setSegundoNombre(txtSegNombre
+										.getValue().toUpperCase());
+								personaNatural
+										.setPrimerApellido(txtPrimApellido
+												.getValue().toUpperCase());
+								personaNatural
+										.setSegundoApellido(txtSegApellido
+												.getValue().toUpperCase());
 
-			datoAcademicoPersonal.setInstituto(celda1.getLabel().toString()
-					.toUpperCase());
-			datoAcademicoPersonal.setTitulo(celda2.getLabel().toString()
-					.toUpperCase());
-			datoAcademicoPersonal.setFechaEgreso(fecha);
+								if (cmbGenero.getValue().equals("MASCULINO")) {
+									personaNatural.setDatoBasico(servicioDatoBasico
+											.buscarPorString("MASCULINO"));
+								} else if (cmbGenero.getValue().equals(
+										"FEMENINO")) {
+									personaNatural.setDatoBasico(servicioDatoBasico
+											.buscarPorString("FEMENINO"));
+								}
+								personaNatural.setFechaNacimiento(dtFechaNac
+										.getValue());
+								if (foto != null) {
+									personaNatural.setFoto(foto);
+									System.out.print("entro");
+								}
+								personaNatural.setEstatus('A');
+								personaNatural.setFoto(null);
+								servicioPersonaNatural.agregar(personaNatural);
 
-			servicioDatoAcademicoPersonal.agregar(datoAcademicoPersonal);
+								personal = new Personal();
+								personal.setPersonaNatural(personaNatural);
+								personal.setCantidadHijos(spNroHijos.getValue());
+								personal.setEstatus('A');
+								personal.setDatoBasico(servicioDatoBasico
+										.buscarPorString(cmbEdoCivil
+												.getSelectedItem().getLabel()));
 
+								String tipoSangre = cmbGrupSanguineo.getValue()
+										+ "-" + cmbFactor.getValue();
+								personal.setTipoSangre(tipoSangre);
+								servicioPersonal.agregar(personal);
+
+								personalCargo = new PersonalCargo();
+								personalCargos = servicioPersonalCargo
+										.listarActivos();
+								n = personalCargos.size();
+								n++;
+								personalCargo.setCodigoPersonalCargo(n);
+								datoBasico = servicioDatoBasico
+										.buscarPorString(cmbCargo
+												.getSelectedItem().getLabel());
+								personalCargo.setDatoBasico(datoBasico);
+								personalCargo.setPersonal(personal);
+								personalCargo.setFechaFin(dtFechaEgresoEsc
+										.getValue());
+								personalCargo.setFechaInicio(dtFechaCargo
+										.getValue());
+								personalCargo.setEstatus('A');
+								servicioPersonalCargo.agregar(personalCargo);
+
+								personalContrato = new PersonalContrato();
+								personalContratos = servicioPersonalContrato
+										.listar();
+								n = personalContratos.size();
+								n++;
+								personalContrato.setCodigoPersonalContrato(n);
+								personalContrato
+										.setFechaInicio(dtFechaIngresoEsc
+												.getValue());
+								personalContrato.setPersonal(personal);
+								personalContrato.setFechaFin(dtFechaEgresoEsc
+										.getValue());
+								personalContrato
+										.setDatoBasicoByCodigoModalidad(servicioDatoBasico
+												.buscarPorString("TIEMPO COMPLETO")); // OJO
+																						// CUAL
+																						// ES
+																						// LA
+																						// MODALIDAD
+																						// DEL
+																						// CONTRATO?
+								personalContrato
+										.setDatoBasicoByCodigoHorario(servicioDatoBasico
+												.buscarPorString(cmbHorario
+														.getText().toString()));
+								personalContrato.setEstatus('A');
+								servicioPersonalContrato
+										.agregar(personalContrato);
+
+								tipoDato = servicioTipoDato
+										.buscarTipo("AFECCION");
+								alergias = servicioDatoBasico
+										.buscarPorTipoDato(tipoDato);
+
+								afeccionPersonal = new AfeccionPersonal();
+								for (int i = 0; i < afeccionPersonales.size(); i++) {
+									afeccionPersonal.setPersonal(personal);
+									afeccionPersonal
+											.setCodigoAfeccionPersonal(servicioAfeccionPersonal
+													.listar().size() + 1);
+									servicioAfeccionPersonal
+											.agregar(afeccionPersonal);
+								}
+
+								for (int i = 0; i < datoAcademicosP.size(); i++) {
+									datoAcademicoPersonal
+											.setCodigoDatoAcademico(servicioDatoAcademicoPersonal
+													.listar().size() + 1);
+									datoAcademicoPersonal.setPersonal(personal);
+
+									servicioDatoAcademicoPersonal
+											.agregar(datoAcademicoPersonal);
+
+								}
+
+								limpiarFormulario();
+								try {
+									Messagebox.show("Modificado Exitosamente",
+											"Información", Messagebox.OK,
+											Messagebox.INFORMATION);
+								} catch (Exception e) {
+								}
+
+							}
+						}
+					});
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		
-		limpiarFormulario();
-		alert("Registro modificado exitosamente");
 
 	}
 
@@ -1475,11 +1683,11 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 	}
 
 	public AnnotateDataBinder getBinder() {
-		return binder;
+		return binderP;
 	}
 
 	public void setBinder(AnnotateDataBinder binder) {
-		this.binder = binder;
+		this.binderP = binder;
 	}
 
 	public Component getFormulario() {
@@ -1496,5 +1704,69 @@ public class CntrlRegistrarPersonal extends GenericForwardComposer {
 
 	public void setBtnBuscarCed(Button btnBuscarCed) {
 		this.btnBuscarCed = btnBuscarCed;
+	}
+
+	public List<DatoBasico> getCargos() {
+		return cargos;
+	}
+
+	public void setCargos(List<DatoBasico> cargos) {
+		this.cargos = cargos;
+	}
+
+	public List<DatoAcademicoPersonal> getDatoAcademicosP() {
+		return datoAcademicosP;
+	}
+
+	public List<DatoBasico> getGrupoSanguineo() {
+		return GrupoSanguineo;
+	}
+
+	public void setGrupoSanguineo(List<DatoBasico> grupoSanguineo) {
+		GrupoSanguineo = grupoSanguineo;
+	}
+
+	public List<DatoBasico> getHorario() {
+		return horario;
+	}
+
+	public void setHorario(List<DatoBasico> horario) {
+		this.horario = horario;
+	}
+
+	public Image getImgPersonal() {
+		return imgPersonal;
+	}
+
+	public void setImgPersonal(Image imgPersonal) {
+		this.imgPersonal = imgPersonal;
+	}
+
+	public Listbox getGridAlergia() {
+		return gridAlergia;
+	}
+
+	public void setGridAlergia(Listbox gridAlergia) {
+		this.gridAlergia = gridAlergia;
+	}
+
+	public Listbox getGridDatoAcademicos() {
+		return gridDatoAcademicos;
+	}
+
+	public void setGridDatoAcademicos(Listbox gridDatoAcademicos) {
+		this.gridDatoAcademicos = gridDatoAcademicos;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+	public void setDatoAcademicosP(List<DatoAcademicoPersonal> datoAcademicosP) {
+		this.datoAcademicosP = datoAcademicosP;
 	}
 }

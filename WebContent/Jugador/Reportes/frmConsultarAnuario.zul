@@ -58,7 +58,7 @@
 		</div>
 		
 		<div align="right">
-			<button id="btnGenerar" label="Generar"
+			<button id="btnGenerar" label="Generar" visible="${sec:isAnyGranted('ANUARIO - GENERAR')}"
 				image="../../Recursos/Imagenes/reporte.ico" orient="horizontal"
 				width="100px" />
 			<button id="btnSalir" label="Salir"

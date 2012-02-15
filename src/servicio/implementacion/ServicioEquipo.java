@@ -118,5 +118,9 @@ public class ServicioEquipo implements IServicioEquipo {
 		return daoEquipo.buscarEquiposDisponibles(categoria, lapsoDeportivo);
 	}
 
+
+	public List<Equipo> listarPorTipo(Integer i){
+		return daoEquipo.listarPorTipo(i);
+	}
 	
 }
