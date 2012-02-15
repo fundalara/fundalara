@@ -2,9 +2,11 @@ package servicio.interfaz;
 
 import java.util.List;
 
+import modelo.DatoBasico;
 import modelo.DesempennoIndividual;
 import modelo.IndicadorCategoriaCompetencia;
 import modelo.LineUp;
+import modelo.Roster;
 
 
 
@@ -20,5 +22,7 @@ public interface IServicioDesempennoIndividual {
 	public abstract DesempennoIndividual obtenerDesempennoPorIndicador(IndicadorCategoriaCompetencia icc,LineUp lineUp);
 	
 	public abstract List<DesempennoIndividual> obtenerDesempennoJugador(LineUp lineUp);
+
+	List<Object> calcularDesempenno(DatoBasico datoBasico, Roster r);
 
 }

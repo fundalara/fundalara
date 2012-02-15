@@ -27,27 +27,24 @@ public class ServicioDatoSocial implements IServicioDatoSocial {
 		this.daoDatoSocial = daoDatoSocial;
 	}
 
+	
 	@Override
 	public void eliminar(DatoSocial c) {
 		daoDatoSocial.eliminar(c);
-
 	}
 
 	@Override
 	public void agregar(DatoSocial c) {
 		daoDatoSocial.guardar(c);
-
 	}
 
 	public void agregar(List<DatoSocial> datos) {
 		daoDatoSocial.guardar(datos);
-
 	}
 
 	@Override
 	public void actualizar(DatoSocial c) {
 		daoDatoSocial.actualizar(c);
-
 	}
 	
 	public void actualizar(List<DatoSocial> datos, Jugador jugador){
@@ -58,5 +55,8 @@ public class ServicioDatoSocial implements IServicioDatoSocial {
 	public List<DatoSocial> listar() {
 		return daoDatoSocial.listar(DatoSocial.class);
 	}
-
+	
+	public List<DatoSocial> buscarPorJugador(Jugador jugador){
+		return daoDatoSocial.buscarPorJugador(jugador);
+	}
 }

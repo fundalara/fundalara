@@ -40,6 +40,7 @@ public class ServicioDatoDeportivo implements IServicioDatoDeportivo {
 	@Override
 	public List<DatoDeportivo> listar() {
 		return daoDatoDeportivo.listar( DatoDeportivo.class);
-	}
-
+	}	
+	
+	
 }
