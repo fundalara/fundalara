@@ -10,17 +10,16 @@ import modelo.Almacen;
 import modelo.DatoBasico;
 import modelo.Material;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
 
+import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -169,8 +168,18 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 	}
 
 	public void onSelect$lboxMateriales() throws InterruptedException {
+
+		DatoBasico clasificacion = material.getDatoBasicoByCodigoTipoMaterial();
+
 		tipoMaterial = material.getDatoBasicoByCodigoTipoMaterial().getDatoBasico();
 		spExistencia.setDisabled(true);
+
+		for (int i = 0; i < clasificacionesMateriales.size(); i++) {
+			if (clasificacionesMateriales.get(i).getNombre().equals(clasificacion.getNombre())) {
+				cmbClasificaciones.setSelectedIndex(i);
+				break;
+			}
+		}
 		binder.loadAll();
 	}
 
@@ -218,20 +227,13 @@ public class CntrlRegistrarMaterial extends GenericForwardComposer {
 		formato.applyPattern("hh:mm");
 		parameters.put("HORA", formato.format(fecha));
 
-		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteListadoMateriales.jrxml");
+		String rutaReporte = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/reportes/ReporteListadoMateriales.jrxml");
 		JasperReport report = JasperCompileManager.compileReport(rutaReporte);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters, ds);
 
-		// Exporta el informe a PDF
-		String rutaExportar = Sessions.getCurrent().getWebApp().getRealPath("/WEB-INF/Reportes/Logistica/ReporteListadoMateriales.pdf");
-		JRExporter exporter = new JRPdfExporter();
-
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, new java.io.File(rutaExportar));
-
-		exporter.exportReport();
-
-		// Para visualizar el pdf con el visor de Jasper
-		JasperViewer.viewReport(print, false);
+		byte[] archivo = JasperExportManager.exportReportToPdf(print);
+		final AMedia amedia = new AMedia("ReporteListadoMateriales.pdf", "pdf", "application/pdf", archivo);
+		Component visor = Executions.createComponents("../General/" + "frmVisorDocumento.zul", null, null);
+		visor.setVariable("archivo", amedia, false);
 	}
 }
