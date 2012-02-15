@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.DatoAcademicoPersonal;
 import modelo.DocumentoAcreedor;
+import modelo.Persona;
 
 public interface IServicioDocumentoAcreedor {
 	
@@ -19,6 +20,6 @@ public abstract void eliminar(DocumentoAcreedor c);
 	
 	public abstract  DocumentoAcreedor  buscarPorCodigo (DocumentoAcreedor  d);
 
-	public abstract Object buscarPorTipoIngreso(String tipo);
+	public abstract List<DocumentoAcreedor> buscarPendientesPorRif(Persona td);
 
 }
