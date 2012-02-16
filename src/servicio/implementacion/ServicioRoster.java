@@ -43,11 +43,27 @@ public class ServicioRoster implements IServicioRoster {
 		return daoRoster.listar( Roster.class);
 	}
 
+	
 	@Override
-	public List<Jugador> buscarJugadores(Equipo equipo, String filtro2, String filtro3, String filtro4, String filtro1){
+	public List<Roster> listar(int codigo) {
+		// TODO Auto-generated method stub
+		return daoRoster.listarCedxEquipo(Roster.class, codigo);
+	}
+	
+	public List<Roster> buscarPorEquipo(Equipo equipo){
+		return daoRoster.listarUnCampoActivos(Roster.class, "equipo", equipo);		
+	}
+
+	@Override
+	public List<Roster> listarxDivisaxCategoria(int codigocat, int codigoeq) {
+		// TODO Auto-generated method stub
+		return daoRoster.listarJugadoresDivisa(codigocat, codigoeq);
+	}
+	
+	public List<Jugador> buscarJugadores(String filtro2, String filtro3, String filtro4, String filtro1){
 		List<Jugador> jugad = new ArrayList<Jugador>();
 		List<Roster> rosters = new ArrayList<Roster>();
-		rosters=daoRoster.buscarJugadores(equipo, filtro2, filtro3, filtro4, filtro1);
+		rosters=daoRoster.buscarJugadores(filtro2, filtro3, filtro4, filtro1);
 		for (int i = 0; i < rosters.size(); i++) {
 			jugad.add(rosters.get(i).getJugador());
 		}		
@@ -64,20 +80,23 @@ public class ServicioRoster implements IServicioRoster {
 		return daoRoster.buscarRoster(ced);
 	}
 	
-	@Override
-	public List<Roster> listar(int codigo) {
-		// TODO Auto-generated method stub
-		return daoRoster.listarCedxEquipo(Roster.class, codigo);
+	public List<Jugador> listarJugadores(Equipo equipo){
+		List<Jugador> jugad = new ArrayList<Jugador>();
+		List<Roster> rosters = new ArrayList<Roster>();
+		rosters=daoRoster.listarJugadores(equipo);
+		for (int i = 0; i < rosters.size(); i++) {
+			jugad.add(rosters.get(i).getJugador());
+		}		
+		return jugad;
 	}
 	
-	public List<Roster> buscarPorEquipo(Equipo equipo){
-		return daoRoster.listarUnCampoActivos(Roster.class, "equipo", equipo);		
+	
+	public Roster buscarRosterPendiente(Jugador jugador){
+		return daoRoster.buscarRosterPendiente(jugador);
 	}
-
-	@Override
-	public List<Roster> listarxDivisaxCategoria(int codigocat, int codigoeq) {
-		// TODO Auto-generated method stub
-		return daoRoster.listarJugadoresDivisa(codigocat, codigoeq);
+	
+	public void confirmarRoster(Roster roster){
+		daoRoster.confirmarRoster(roster);
 	}
 
 }

@@ -8,8 +8,8 @@ package comun;
  * 
  */
 public enum Ruta {
-    JUGADOR("Jugador/Vistas/", "Jugador/Reportes/"), 
-    GENERAL("General/", "General/");
+    JUGADOR("../Jugador/Vistas/", "../Jugador/Reportes/"), 
+    GENERAL("../General/", "../General/");
     
     private String rutaVista;
     private String rutaReporte;

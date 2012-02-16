@@ -628,7 +628,7 @@
 														<treerow>
 															<treecell
 																label="Anuario" visible="${sec:isAnyGranted('92')}"
-																onClick='enlace("Jugador/Reportes/frmConsultarAnuario.zul")' 
+																onClick='enlace("/Jugador/Reportes/frmConsultarAnuario.zul")' 
 																/>
 																
 														</treerow>
@@ -639,12 +639,18 @@
 														<treerow>
 															<treecell
 																label="Expediente" visible="${sec:isAnyGranted('93')}"
-																onClick='enlace("Jugador/Reportes/frmExpedienteJugador.zul")'
+																onClick='enlace("/Jugador/Reportes/frmExpedienteJugador.zul")'
 																/>
 																
 														</treerow>
 													</treeitem>
-													
+													<treeitem open="false">
+													<treerow>
+														<treecell
+															label="Ficha Familiar" visible="${sec:isAnyGranted('320')}"
+															onClick='enlace("/Jugador/Reportes/frmFichaFamiliarJugador.zul")' />
+													</treerow>
+												</treeitem>
 													
 													
 												</treechildren>
@@ -806,7 +812,8 @@
 														open="false">
 														<treerow>
 															<treecell
-																label="Inscritos Retirados" visible="${sec:isAnyGranted('105')}"/>
+																label="Inscritos Retirados" visible="${sec:isAnyGranted('105')}"
+																onClick='enlace("/Jugador/Reportes/frmReporteInscritosRetirados.zul")' />
 														</treerow>
 													</treeitem>
 												</treechildren>
@@ -959,7 +966,9 @@
 													open="false">
 													<treerow>
 														<treecell
-															label=" " />
+															label="Jugadores Inscritos"
+															visible="${sec:isAnyGranted('321')}"
+															onClick='enlace("/Jugador/Reportes/frmConsultarJugador.zul")' />
 													</treerow>
 												</treeitem>
 											</treechildren>
@@ -1080,7 +1089,7 @@
 												<treerow>
 													<treecell
 														label="Cambiar Cedula Jugador" visible="${sec:isAnyGranted('166')}"
-														onClick='' />
+														onClick='enlace("/Jugador/Vistas/frmCambiarCedula.zul")' />
 												</treerow>
 											</treeitem>
 											<treeitem>
